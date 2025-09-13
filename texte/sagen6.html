@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐉 Der ultimative Sagen-Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f4ff 0%, #fff0f8 50%, #fdf8ff 100%);
+            color: #000;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #ffffff;
+            border: 2px solid #d8a8d8;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(216, 168, 216, 0.2);
+            color: #000;
+        }
+        
+        .section {
+            background: #ffffff;
+            border: 1px solid #e6c6d6;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(216, 168, 216, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(45deg, #d8a8d8, #f4c2c2);
+            color: #000;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-header:hover {
+            background: linear-gradient(45deg, #c888c8, #f0a0a0);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+        
+        .section-content {
+            padding: 20px;
+            display: none;
+            color: #000;
+        }
+        
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .example-box {
+            background: #fdf8ff;
+            border-left: 5px solid #d8a8d8;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #000;
+        }
+        
+        .good-bad {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .good {
+            background: #f8f0ff;
+            border: 2px solid #d8a8d8;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .bad {
+            background: #fff5f5;
+            border: 2px solid #f4c2c2;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .checklist {
+            background: #f8f0ff;
+            border-radius: 10px;
+            padding: 20px;
+            color: #000;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .checklist label {
+            cursor: pointer;
+            display: block;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background 0.2s ease;
+            color: #000;
+        }
+        
+        .checklist label:hover {
+            background: rgba(216, 168, 216, 0.1);
+        }
+        
+        .word-bank {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .word-tag {
+            background: linear-gradient(45deg, #e8d0e8, #f8e0e0);
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 5px;
+            display: block;
+        }
+        
+        .word-tag:active {
+            transform: scale(0.95);
+            background: linear-gradient(45deg, #d8a8d8, #f4c2c2);
+        }
+        
+        .word-tag.synonym-visible {
+            background: linear-gradient(45deg, #d8a8d8, #f4c2c2);
+        }
+        
+        .synonyms-display {
+            background: #4a2454;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 5px 0;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .synonyms-display.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .timer-section {
+            background: linear-gradient(45deg, #e8d0e8, #f8e0e0);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .timer-display {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #000;
+        }
+        
+        .timer-controls button {
+            background: rgba(216, 168, 216, 0.3);
+            color: #000;
+            border: 2px solid #d8a8d8;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .timer-controls button:hover {
+            background: rgba(216, 168, 216, 0.5);
+        }
+        
+        .practice-area {
+            background: #fdf8ff;
+            border: 2px solid #e8d0e8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            color: #000;
+        }
+        
+        .practice-area textarea {
+            width: 100%;
+            height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(45deg, #d8a8d8, #f4c2c2);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .secret-tip {
+            background: linear-gradient(45deg, #d8a8d8, #f4c2c2);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .secret-tip::before {
+            content: "🔥";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+        }
+        
+        .highlight {
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #000;
+        }
+        
+        p, li, span, div {
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .good-bad {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐉 Der ultimative Sagen-Guide für die 6. Schulstufe</h1>
+            <h2>Wie du eine SEHR GUT Note bei deiner Sage bekommst!</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <p><span id="completedSections">0</span> von <span id="totalSections">11</span> Abschnitten bearbeitet</p>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🌟 Was macht eine Sage magisch?
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p>Eine Sage ist wie ein Fenster in die Vergangenheit - sie erklärt, warum Berge so schroff sind, warum Seen so tief sind oder warum der Wind manchmal so unheimlich heult. <strong>Sagen sind die Antworten unserer Vorfahren auf die Geheimnisse der Natur!</strong></p>
+                
+                <h3>Die Seele einer Sage:</h3>
+                <div class="example-box">
+                    <p>🏔️ <strong>Naturgewalt wird zur Figur</strong> (Lawine → Drache, Sturm → Geist)</p>
+                    <p>⚔️ <strong>Mut gegen das Unbekannte</strong> (Held kämpft gegen übermächtige Kräfte)</p>
+                    <p>🔮 <strong>Wahrheit hinter dem Wunder</strong> (Erklärung für Naturphänomene)</p>
+                    <p>📚 <strong>Lehre für die Gemeinschaft</strong> (Was lernen wir daraus?)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ⏰ 50-Minuten-Strategie für 300 Wörter
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="timer-section">
+                    <h3>Schreib-Timer</h3>
+                    <div class="timer-display" id="timerDisplay">00:00</div>
+                    <div class="timer-controls">
+                        <button onclick="startTimer(5)">5 Min Planung</button>
+                        <button onclick="startTimer(35)">35 Min Schreiben</button>
+                        <button onclick="startTimer(10)">10 Min Kontrolle</button>
+                        <button onclick="stopTimer()">Stop</button>
+                    </div>
+                </div>
+                
+                <h3>Zeitaufteilung:</h3>
+                <div class="example-box">
+                    <p><strong>5 Min</strong> → Blitz-Planung</p>
+                    <p><strong>35 Min</strong> → Schreiben ohne Stopp</p>
+                    <p><strong>10 Min</strong> → Feinschliff & Kontrolle</p>
+                </div>
+                
+                <h3>Wort-Verteilung:</h3>
+                <div class="example-box">
+                    <p><strong>Einleitung:</strong> 50-70 Wörter (Setting + Figuren)</p>
+                    <p><strong>Hauptteil:</strong> 180-200 Wörter (Konflikt + Höhepunkt + Lösung)</p>
+                    <p><strong>Schluss:</strong> 30-50 Wörter (Erklärung + Moral)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎭 Charaktere zum Leben erwecken
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Der perfekte Held/die perfekte Heldin:</h3>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Langweilig:</h4>
+                        <p>"Er war stark"</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Lebendig:</h4>
+                        <p>"In seinen wettergebräunten Händen lag die Kraft von zehn Männern"</p>
+                    </div>
+                </div>
+                
+                <h3>Mächtige Held-Wörter (antippen für Synonyme):</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        schritt
+                        <div class="synonyms-display">marschierte, wandelte, ging</div>
+                    </div>
+                    <div class="word-tag">
+                        eilte
+                        <div class="synonyms-display">hastete, rannte, sprintete</div>
+                    </div>
+                    <div class="word-tag">
+                        stürmte
+                        <div class="synonyms-display">preschte vor, drängte, raste</div>
+                    </div>
+                    <div class="word-tag">
+                        wagte
+                        <div class="synonyms-display">riskierte, traute sich, erdreistete sich</div>
+                    </div>
+                    <div class="word-tag">
+                        trotzte
+                        <div class="synonyms-display">widerstand, stellte sich entgegen</div>
+                    </div>
+                    <div class="word-tag">
+                        widerstand
+                        <div class="synonyms-display">hielt stand, kämpfte dagegen an</div>
+                    </div>
+                    <div class="word-tag">
+                        unerschütterlich
+                        <div class="synonyms-display">fest, beständig, unbeugsam</div>
+                    </div>
+                    <div class="word-tag">
+                        standhaft
+                        <div class="synonyms-display">beharrlich, fest, mutig</div>
+                    </div>
+                </div>
+                
+                <h3>Ungeheuer & Naturwesen:</h3>
+                <div class="example-box">
+                    <p><strong>Drachen:</strong> "Seine Schuppen glänzten wie flüssiges Metall im Mondlicht"</p>
+                    <p><strong>Geister:</strong> "Eine Gestalt, die mehr Schatten als Mensch war"</p>
+                    <p><strong>Naturgeister:</strong> "Die Baumwipfel neigten sich, als sie vorüberschritt"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🏰 Atmosphäre schaffen - Die 5 Sinne
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Sehen (das Wichtigste!) - antippen für Synonyme:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        fahles Mondlicht
+                        <div class="synonyms-display">blasses, schwaches, trübes</div>
+                    </div>
+                    <div class="word-tag">
+                        gleißende Flammen
+                        <div class="synonyms-display">helle, lodernde, züngelnde</div>
+                    </div>
+                    <div class="word-tag">
+                        gespenstisches Glühen
+                        <div class="synonyms-display">unheimliches, geisterhaftes, schauriges</div>
+                    </div>
+                    <div class="word-tag">
+                        blutrot
+                        <div class="synonyms-display">scharlachrot, purpurrot, karmesinrot</div>
+                    </div>
+                    <div class="word-tag">
+                        düster grün
+                        <div class="synonyms-display">finster, dunkel, schwermütig</div>
+                    </div>
+                    <div class="word-tag">
+                        golden schimmernd
+                        <div class="synonyms-display">strahlend, leuchtend, glitzernd</div>
+                    </div>
+                </div>
+                
+                <h3>Hören:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        schauerliches Heulen
+                        <div class="synonyms-display">grauenhaftes, furchtbares, entsetzliches</div>
+                    </div>
+                    <div class="word-tag">
+                        gespenstisches Flüstern
+                        <div class="synonyms-display">geisterhaftes, geheimnisvolles, leises</div>
+                    </div>
+                    <div class="word-tag">
+                        dumpfes Grollen
+                        <div class="synonyms-display">tiefes, hohles, donnerndes</div>
+                    </div>
+                    <div class="word-tag">
+                        Äste knackten
+                        <div class="synonyms-display">brachen, zerbarsten, splitterten</div>
+                    </div>
+                    <div class="word-tag">
+                        Wind pfiff
+                        <div class="synonyms-display">heulte, sauste, brauste</div>
+                    </div>
+                    <div class="word-tag">
+                        Echo hallte wider
+                        <div class="synonyms-display">klang wieder, tönte zurück, schallte</div>
+                    </div>
+                </div>
+                
+                <h3>Fühlen:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        eisiger Hauch
+                        <div class="synonyms-display">frostiger, kalter, schneidender</div>
+                    </div>
+                    <div class="word-tag">
+                        Schauer lief über den Rücken
+                        <div class="synonyms-display">Gänsehaut, Frösteln, kalter Schauer</div>
+                    </div>
+                    <div class="word-tag">
+                        Herz hämmerte
+                        <div class="synonyms-display">pochte, klopfte, schlug wild</div>
+                    </div>
+                    <div class="word-tag">
+                        Atem stockte
+                        <div class="synonyms-display">blieb stehen, setzte aus, erstarrte</div>
+                    </div>
+                    <div class="word-tag">
+                        Hände zitterten
+                        <div class="synonyms-display">bebten, zuckten, vibrierten</div>
+                    </div>
+                </div>
+                
+                <div class="practice-area">
+                    <h4>🎯 Übung: Beschreibe eine gruselige Höhle mit allen 5 Sinnen!</h4>
+                    <textarea placeholder="Die Höhle war... (nutze mindestens 3 verschiedene Sinne)"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📖 Geniale Einstiege - Vergiss "Es war einmal"!
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Zeit-Einstiege:</h3>
+                <div class="example-box">
+                    <p>"Vor undenklichen Zeiten, als die Welt noch jung war..."</p>
+                    <p>"In jenen Tagen, da die Menschen noch glaubten..."</p>
+                    <p>"Lange bevor die erste Kirche in diesem Tal erbaut wurde..."</p>
+                    <p>"Als noch Riesen durch die Berge wandelten..."</p>
+                </div>
+                
+                <h3>Orts-Einstiege:</h3>
+                <div class="example-box">
+                    <p>"Hoch oben in den schroffen Klippen der Kärntner Alpen..."</p>
+                    <p>"Tief im Herzen des düsteren Waldes..."</p>
+                    <p>"Am Ufer des geheimnisvollen Sees..."</p>
+                    <p>"Dort, wo der Nebel nie ganz weicht..."</p>
+                </div>
+                
+                <h3>Stimmungs-Einstiege:</h3>
+                <div class="example-box">
+                    <p>"Ein Schauer lief durch das Dorf..."</p>
+                    <p>"Niemand wagte es, nach Sonnenuntergang..."</p>
+                    <p>"Die Angst hatte das Tal fest im Griff..."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ⚡ Spannung aufbauen - Schritt für Schritt
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>1. Das Problem einführen:</h3>
+                <div class="example-box">
+                    <p>"Seit Wochen verschwanden die Herden..."</p>
+                    <p>"Jede Nacht hörte man das furchtbare Heulen..."</p>
+                    <p>"Kein Reisender kehrte aus dem Wald zurück..."</p>
+                </div>
+                
+                <h3>2. Die Spannung steigern:</h3>
+                <div class="example-box">
+                    <p>"Doch dann geschah etwas noch Schrecklicheres..."</p>
+                    <p>"Aber das war erst der Anfang..."</p>
+                    <p>"Was nun folgte, übertraf alle Befürchtungen..."</p>
+                </div>
+                
+                <h3>3. Der Höhepunkt:</h3>
+                <div class="example-box">
+                    <p>"In diesem Augenblick..."</p>
+                    <p>"Plötzlich..."</p>
+                    <p>"Da erhob sich..."</p>
+                    <p>"Mit einem Mal..."</p>
+                </div>
+                
+                <h3>4. Die Wende:</h3>
+                <div class="example-box">
+                    <p>"Doch der Held hatte nicht mit... gerechnet"</p>
+                    <p>"Aber dann erinnerte er sich an..."</p>
+                    <p>"In letzter Sekunde..."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Direkte Rede - Wenig, aber wirkungsvoll
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Perfekte Helden-Sprüche:</h3>
+                <div class="example-box">
+                    <p>"Bei meiner Ehre - dieses Ungeheuer wird fallen!"</p>
+                    <p>"Für mein Volk werde ich kämpfen, auch wenn es mein Leben kostet!"</p>
+                    <p>"Weiche von hier, düstere Kreatur!"</p>
+                </div>
+                
+                <h3>Unheimliche Gegner-Worte:</h3>
+                <div class="example-box">
+                    <p>"Kein Sterblicher kann mich bezwingen!"</p>
+                    <p>"Du wagst es, mein Reich zu betreten?"</p>
+                    <p>"Deine Seele gehört nun mir!"</p>
+                </div>
+                
+                <h3>Weise Ratgeber:</h3>
+                <div class="example-box">
+                    <p>"Nur mit reinem Herzen kannst du bestehen."</p>
+                    <p>"Hüte dich vor der dritten Stunde nach Mitternacht!"</p>
+                    <p>"Das Schwert allein wird nicht genügen..."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🌊 Naturgewalten beschreiben
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Sturm & Unwetter:</h3>
+                <div class="example-box">
+                    <p>"Der Himmel zerriss wie ein schwarzes Tuch"</p>
+                    <p>"Blitze zuckten wie die Peitschenhiebe der Götter"</p>
+                    <p>"Der Wind heulte wie tausend verlorene Seelen"</p>
+                </div>
+                
+                <h3>Berge & Felsen:</h3>
+                <div class="example-box">
+                    <p>"Die Klippen ragten wie Grabsteine in den Himmel"</p>
+                    <p>"Felsbrocken donnerten ins Tal hinab"</p>
+                    <p>"Der Berg ächzte unter der Last des Fluches"</p>
+                </div>
+                
+                <h3>Wasser & Nebel:</h3>
+                <div class="example-box">
+                    <p>"Der See lag schwarz und undurchdringlich da"</p>
+                    <p>"Nebelschwaden krochen wie gespenstische Finger"</p>
+                    <p>"Das Wasser brodelte wie in einem Hexenkessel"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🏆 Der perfekte Schluss
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die Erklärung:</h3>
+                <div class="example-box">
+                    <p>"Und so entstand der tiefe Riss in der Felswand..."</p>
+                    <p>"Deshalb führt der See noch heute diesen Namen..."</p>
+                    <p>"Seit jenem Tag hört man in stürmischen Nächten..."</p>
+                </div>
+                
+                <h3>Die Moral:</h3>
+                <div class="example-box">
+                    <p>"Die Menschen lernten, dass Mut stärker ist als jede Angst"</p>
+                    <p>"Von da an respektierten sie die Macht der Natur"</p>
+                    <p>"So wurde ihnen bewusst, dass..."</p>
+                </div>
+                
+                <h3>Der Nachhall:</h3>
+                <div class="example-box">
+                    <p>"Noch heute erzählen sich die Alten..."</p>
+                    <p>"Wanderer berichten, dass sie manchmal..."</p>
+                    <p>"Und wenn der Wind durch die Berge pfeift..."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✅ Checkliste für SEHR GUT
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="checklist">
+                    <h3>Sprache & Stil:</h3>
+                    <label><input type="checkbox"> Durchgehend Präteritum (Vergangenheit)</label>
+                    <label><input type="checkbox"> Direkte Rede mit korrekten Anführungszeichen</label>
+                    <label><input type="checkbox"> Mindestens 5 starke Adjektive</label>
+                    <label><input type="checkbox"> Abwechslungsreiche Satzanfänge</label>
+                    <label><input type="checkbox"> Keine Wiederholungen</label>
+                    
+                    <h3>Aufbau & Inhalt:</h3>
+                    <label><input type="checkbox"> Spannender Einstieg (nicht "Es war einmal")</label>
+                    <label><input type="checkbox"> Klarer Konflikt</label>
+                    <label><input type="checkbox"> Dramatischer Höhepunkt</label>
+                    <label><input type="checkbox"> Befriedigende Lösung</label>
+                    <label><input type="checkbox"> Erklärung für Naturphänomen</label>
+                    <label><input type="checkbox"> Absätze bei Szenenwechsel</label>
+                    
+                    <h3>Formales:</h3>
+                    <label><input type="checkbox"> Passende Überschrift</label>
+                    <label><input type="checkbox"> Saubere Handschrift</label>
+                    <label><input type="checkbox"> Korrekte Rechtschreibung</label>
+                    <label><input type="checkbox"> Richtige Satzzeichen</label>
+                    <label><input type="checkbox"> Ca. 300 Wörter</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎪 Übungen für zuhause
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Warm-up (5 Minuten täglich):</h3>
+                <div class="practice-area">
+                    <p><strong>1. Adjektiv-Training:</strong> Beschreibe 3 Gegenstände mit je 3 ungewöhnlichen Adjektiven</p>
+                    <textarea placeholder="Beispiel: Mein Handy - schimmernd, geheimnisvoll, verlockend"></textarea>
+                </div>
+                
+                <div class="practice-area">
+                    <p><strong>2. Sinnes-Training:</strong> Beschreibe dein Zimmer nur mit Geräuschen, Gerüchen, Gefühlen</p>
+                    <textarea placeholder="In meinem Zimmer höre ich... rieche ich... fühle ich..."></textarea>
+                </div>
+                
+                <h3>Große Übung (1x pro Woche):</h3>
+                <div class="example-box">
+                    <p>Nimm die Kärntner Lindwurm-Sage und erzähle sie in genau 250 Wörtern nach</p>
+                    <p><strong>Fokus:</strong> Warum entstanden Lawinen? (Drache schlägt mit Schwanz)</p>
+                </div>
+                
+                <h3>Kreativ-Challenge:</h3>
+                <div class="example-box">
+                    <p>Erfinde eine Mini-Sage (100 Wörter) darüber, warum:</p>
+                    <ul>
+                        <li>Bergseen so kalt sind</li>
+                        <li>Manche Höhlen so tief sind</li>
+                        <li>Der Wind manchmal pfeift</li>
+                        <li>Bestimmte Steine so glatt sind</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="secret-tip">
+            <h2>🔥 GEHEIMTIPP für den Extra-Punkt:</h2>
+            <p><strong>Verwende einmal pro Sage einen "Präsens-Blitz" für den Höhepunkt:</strong></p>
+            <div class="good-bad">
+                <div class="bad">
+                    <h4>Normal:</h4>
+                    <p>"Der Drache griff an"</p>
+                </div>
+                <div class="good">
+                    <h4>Präsens-Blitz:</h4>
+                    <p>"Der Held zog sein Schwert... und plötzlich <span class="highlight">steht</span> der riesige Drache vor ihm!"</p>
+                </div>
+            </div>
+            <p>Dieser kleine Trick lässt den dramatischsten Moment aus der Erzählung herausspringen!</p>
+        </div>
+
+        <div class="header">
+            <h2>🌟 Denk daran:</h2>
+            <p>Eine gute Sage lässt die Leser das Ungeheuer fürchten, den Helden bewundern und die Naturgewalt verstehen. Du erschaffst eine Welt, in der das Unmögliche möglich wird!</p>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+        let timeLeft = 0;
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const totalSections = document.querySelectorAll('.section').length;
+            const activeSections = document.querySelectorAll('.section-content.active').length;
+            const progressPercent = (activeSections / totalSections) * 100;
+            
+            document.getElementById('progressBar').style.width = progressPercent + '%';
+            document.getElementById('completedSections').textContent = activeSections;
+            document.getElementById('totalSections').textContent = totalSections;
+        }
+
+        function startTimer(minutes) {
+            stopTimer();
+            timeLeft = minutes * 60;
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    alert('Zeit ist um! 🎉');
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timerDisplay').textContent = display;
+        }
+
+        // Checkbox-Interaktivität - Text bleibt lesbar, nur Hintergrund ändert sich
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = 'rgba(216, 168, 216, 0.2)';
+                        // Text bleibt normal lesbar - kein durchstreichen!
+                    } else {
+                        this.parentElement.style.background = '';
+                    }
+                });
+            });
+
+            // Synonyme für Handy - Touch-Events statt Hover
+            const wordTags = document.querySelectorAll('.word-tag');
+            wordTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const synonymsDiv = this.querySelector('.synonyms-display');
+                    const isVisible = synonymsDiv.classList.contains('visible');
+                    
+                    // Alle anderen Synonyme verstecken
+                    document.querySelectorAll('.synonyms-display.visible').forEach(div => {
+                        div.classList.remove('visible');
+                    });
+                    document.querySelectorAll('.word-tag.synonym-visible').forEach(tag => {
+                        tag.classList.remove('synonym-visible');
+                    });
+                    
+                    // Dieses ein- oder ausblenden
+                    if (!isVisible) {
+                        synonymsDiv.classList.add('visible');
+                        this.classList.add('synonym-visible');
+                    }
+                });
+            });
+
+            // Textarea Wort-Zähler
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const counter = document.createElement('div');
+                counter.style.textAlign = 'right';
+                counter.style.marginTop = '5px';
+                counter.style.fontSize = '12px';
+                counter.style.color = '#666';
+                textarea.parentNode.appendChild(counter);
+
+                textarea.addEventListener('input', function() {
+                    const wordCount = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    counter.textContent = `${wordCount} Wörter`;
+                    
+                    if (wordCount >= 50) {
+                        counter.style.color = '#4a2454';
+                        counter.style.fontWeight = 'bold';
+                    } else {
+                        counter.style.color = '#666';
+                        counter.style.fontWeight = 'normal';
+                    }
+                });
+            });
+        });
+
+        // Tastatur-Shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                const activeTextarea = document.activeElement;
+                if (activeTextarea.tagName === 'TEXTAREA') {
+                    activeTextarea.style.background = '#f8f0ff';
+                    setTimeout(() => {
+                        activeTextarea.style.background = '';
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
