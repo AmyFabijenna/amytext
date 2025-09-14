@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texte schreiben mit Amy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e6c3f7 0%, #e1bee7 25%, #ffb347 50%, #ffc0cb 75%, #dda0dd 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #9966cc, #dda0dd);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro-text {
+            background: linear-gradient(135deg, #f8f4ff, #fff0f5);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #9966cc;
+            text-align: center;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #e6c3f7, #dda0dd);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-title {
+            font-size: 1.8em;
+            color: #663399;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .example-text {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #333;
+            border-left: 4px solid #9966cc;
+        }
+
+        .exercise-title {
+            font-size: 1.8em;
+            color: #663399;
+            text-align: center;
+            margin: 40px 0 20px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .exercise-box {
+            background: linear-gradient(135deg, #fff0f5, #f8f4ff);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .exercise-subtitle {
+            font-size: 1.4em;
+            color: #9966cc;
+            margin: 20px 0 15px 0;
+            border-bottom: 2px solid #dda0dd;
+            padding-bottom: 5px;
+        }
+
+        .exercise-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .resource-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .resource-button {
+            background: linear-gradient(135deg, #dda0dd, #e6c3f7);
+            color: #333;
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .resource-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #e6c3f7, #ffb347);
+        }
+
+        .about-text {
+            background: linear-gradient(135deg, #f8f4ff, #fff0f5);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0 25px 0;
+            border-left: 5px solid #9966cc;
+            font-size: 1.05em;
+            color: #444;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .whatsapp-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .whatsapp-button {
+            background: linear-gradient(135deg, #25d366, #20c158);
+            color: white;
+            padding: 20px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            cursor: pointer;
+            min-width: 280px;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #20c158, #1ea854);
+        }
+
+        .whatsapp-button small {
+            font-size: 0.85em;
+            margin-top: 5px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #9966cc, #dda0dd);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .resource-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Texte schreiben mit Amy</h1>
+            <p>Deutsch Trainerin mit 20 Jahren Erfahrung</p>
+        </header>
+
+        <main class="content">
+            <div class="intro-text">
+                <strong>Willkommen zu meinen Schreibhilfen!</strong><br>
+                Hier findest du Anleitungen und Hilfestellungen für verschiedene Textarten. 
+                Lerne anhand von Beispielen und Übungen, wie du professionell schreibst.
+            </div>
+
+            <div class="example-box">
+                <h2 class="example-title">Beispielmärchen "Der arme Junge"</h2>
+                <div class="example-text">
+                    <p><strong>Der arme Junge</strong></p>
+                    <p>Es war einmal ein armer Junge. Er lebte mit seiner kranken Mutter in einer kleinen Hütte am Rand von einem großen Wald. Sie hatten fast nichts zu essen. Aber der Junge war freundlich und hilfsbereit.</p>
+                    <p>Eines Tages hörte er von einem Zauber-Brunnen. Der Brunnen war tief im Wald versteckt. Wer ihn fand, durfte sich etwas wünschen. Der Junge wünschte sich nur eins: Gesundheit für seine Mutter. So ging he los.</p>
+                    <p>Im Wald traf er zuerst eine alte Frau. Sie konnte ihr Bündel nicht mehr tragen. Der Junge half ihr sofort. Als Dank gab sie ihm einen goldenen Schlüssel und sagte: „Er wird dir dreimal helfen, wenn dein Herz gut ist."</p>
+                    <p>Wenig später kam ein wilder Wolf. Doch der Junge hatte keine Angst und sprach ruhig mit dem Tier. Der Wolf ging zur Seite. Dann kam er zu einem großen Stein mit einer Schrift: „Was ist stärker als Gold und weicher als Wasser?" Der Junge dachte nach und sagte: „Die Liebe." Der Stein öffnete sich.</p>
+                    <p>Hinter dem Stein fand er ein großes Eisentor. Er steckte den goldenen Schlüssel hinein. Das Tor ging auf. Dahinter war ein klarer Brunnen mit goldenem Wasser. Der Junge wünschte sich Gesundheit für seine Mutter.</p>
+                    <p>Als er nach Hause kam, war seine Mutter gesund. Von da an lebten sie glücklich und zufrieden. Und wenn sie nicht gestorben sind, dann leben sie noch heute.</p>
+                </div>
+            </div>
+
+            <h2 class="exercise-title">Märchen Übungen</h2>
+            
+            <div class="resource-buttons">
+                <a href="maerchen_mehr/maerchen_guide.html" target="_blank" class="resource-button">
+                    Der ultimative Märchen-Guide
+                </a>
+                
+                <a href="maerchen_mehr/maerchen_schreibguide.html" target="_blank" class="resource-button">
+                    Wie schreibe ich ein Märchen - eine Anleitung
+                </a>
+                
+                <a href="maerchen_mehr/bessermaerchen.pdf" target="_blank" class="resource-button">
+                    Märchen besser schreiben
+                </a>
+                
+                <a href="maerchen_mehr/maerchenintensiv.pdf" target="_blank" class="resource-button">
+                    Märchen Intensivtraining
+                </a>
+                
+                <a href="maerchen_mehr/maerchenschreiben.pdf" target="_blank" class="resource-button">
+                    Märchen schreiben üben
+                </a>
+            </div>
+            
+            <div class="exercise-box">
+                <h3 class="exercise-subtitle">Märchen-Übungsblatt 2</h3>
+                <div class="exercise-content">
+                    <h4>1. Märchen-Bausteine mischen</h4>
+                    <p>Wähle aus jeder Spalte ein Element und baue daraus ein kurzes Märchen:</p>
+                    <table>
+                        <tr>
+                            <th>Hauptfigur</th>
+                            <th>Eigenschaft</th>
+                            <th>Gegenspieler</th>
+                            <th>Problem</th>
+                            <th>Helfer</th>
+                            <th>Magisches Objekt</th>
+                        </tr>
+                        <tr>
+                            <td>Mädchen</td>
+                            <td>mutig</td>
+                            <td>Hexe</td>
+                            <td>Schwester retten</td>
+                            <td>Fuchs</td>
+                            <td>Zauberspiegel</td>
+                        </tr>
+                        <tr>
+                            <td>Junge</td>
+                            <td>klug</td>
+                            <td>Riese</td>
+                            <td>Schatz finden</td>
+                            <td>Rabe</td>
+                            <td>Goldene Flöte</td>
+                        </tr>
+                        <tr>
+                            <td>Prinzessin</td>
+                            <td>freundlich</td>
+                            <td>Drache</td>
+                            <td>Zauber brechen</td>
+                            <td>Wölfe</td>
+                            <td>Magischer Ring</td>
+                        </tr>
+                        <tr>
+                            <td>Ziegenhirt</td>
+                            <td>geschickt</td>
+                            <td>Troll</td>
+                            <td>Rätsel lösen</td>
+                            <td>Eule</td>
+                            <td>Zauberhut</td>
+                        </tr>
+                        <tr>
+                            <td>Fischerkind</td>
+                            <td>neugierig</td>
+                            <td>Zauberer</td>
+                            <td>Verloren im Wald</td>
+                            <td>Schildkröte</td>
+                            <td>Wunschstein</td>
+                        </tr>
+                    </table>
+
+                    <h4>2. Märchen-Memory</h4>
+                    <p>Verbinde die typischen Märchenanfänge mit ihren passenden Enden:</p>
+                    <p><strong>Anfänge:</strong></p>
+                    <ol>
+                        <li>Es war einmal ein kluges Mädchen...</li>
+                        <li>Vor langer Zeit lebte ein mutiger Junge...</li>
+                        <li>In einem fernen Königreich wohnte eine Prinzessin...</li>
+                        <li>Tief im Wald stand ein kleines Häuschen...</li>
+                        <li>An der Meeresküste lebte ein armer Fischer...</li>
+                    </ol>
+                    <p><strong>Enden:</strong></p>
+                    <ol type="A">
+                        <li>...und sie teilten von nun an ihren Reichtum mit allen Armen im Land.</li>
+                        <li>...und wenn sie nicht gestorben sind, dann leben sie noch heute.</li>
+                        <li>...so wurde aus Feindschaft eine tiefe Freundschaft, die niemals endete.</li>
+                        <li>...seitdem feierte man jedes Jahr ein großes Fest zu Ehren der tapferen Heldin.</li>
+                        <li>...und die Lehre dieser Geschichte war: Teile dein Glück mit anderen.</li>
+                    </ol>
+
+                    <h4>3. Vom Stichpunkt zum Märchen</h4>
+                    <p>Erweitere diese Stichpunkte zu einem vollständigen Märchen (ca. 250 Wörter):</p>
+                    <ul>
+                        <li>Fischerssohn Tom lebt am Meer</li>
+                        <li>Sturm zerstört alle Fischerboote</li>
+                        <li>Dorf hungert</li>
+                        <li>Tom trifft sprechende Möwe</li>
+                        <li>Möwe führt ihn zu versunkenem Schiff</li>
+                        <li>Magische Perle auf dem Meeresgrund</li>
+                        <li>Tom muss drei Wasserprüfungen bestehen</li>
+                        <li>Perle bringt Glück und reiche Fischgründe</li>
+                        <li>Dorfbewohner werden wieder glücklich</li>
+                    </ul>
+
+                    <h4>4. Märchen-Detektiv: Was fehlt hier?</h4>
+                    <p>In diesen Märchen-Kurztexten fehlt jeweils ein wichtiges Märchenmerkmal. Finde es heraus!</p>
+                    <p><strong>Text 1:</strong><br>
+                    Ein Mädchen zog in den Wald, um Beeren zu sammeln. Als es dunkel wurde, verirrte sie sich. Sie traf drei Zwerge, die ihr den Weg nach Hause zeigten. Zur Belohnung gaben sie ihr einen Korb voller Gold. Damit kaufte sich ihre Familie ein neues Haus.</p>
+                    
+                    <p><strong>Text 2:</strong><br>
+                    Es war einmal ein Prinz, der eine Prinzessin heiraten wollte. Er musste drei schwere Aufgaben lösen. Mit Hilfe seiner Freunde bestand er alle Prüfungen. Die Prinzessin und er heirateten.</p>
+                    
+                    <p><strong>Text 3:</strong><br>
+                    Die böse Hexe sperrte den Jungen in einen Käfig. Er war sehr schlau und überlistete die Hexe. Er floh aus dem Hexenhaus und rannte nach Hause. Seine Eltern waren sehr froh, ihn wiederzusehen.</p>
+
+                    <h4>5. Märchen umschreiben</h4>
+                    <p>Hier ist ein sehr kurzes Märchen. Erweitere es auf 250 Wörter und füge alle wichtigen Märchenelemente ein:</p>
+                    <p>Ein armes Mädchen half einer alten Frau. Die Frau schenkte ihr drei Wünsche. Das Mädchen wünschte sich, dass ihre kranke Mutter gesund wird. Dann wünschte sie sich genug zu essen für alle im Dorf. Mit dem dritten Wunsch machte sie den bösen Gutsherrn freundlich.</p>
+
+                    <h4>6. Märchen aus Bildern</h4>
+                    <p>Schreibe ein Märchen zu dieser Bildergeschichte:</p>
+                    <ol>
+                        <li>Ein Junge sitzt traurig vor einer Hütte</li>
+                        <li>Er trifft im Wald ein sprechendes Reh</li>
+                        <li>Sie kommen gemeinsam zu einem Berg mit einer Höhle</li>
+                        <li>In der Höhle finden sie eine leuchtende Blume</li>
+                        <li>Als sie die Blume nach Hause bringen, verwandelt sich die ganze Gegend</li>
+                    </ol>
+
+                    <h4>7. Märchen mit vorgegebenen Wörtern</h4>
+                    <p>Schreibe ein Märchen (ca. 250 Wörter) und verwende alle folgenden Wörter:</p>
+                    <ul>
+                        <li>Zauberer</li>
+                        <li>Wanderschaft</li>
+                        <li>goldener Schlüssel</li>
+                        <li>drei Raben</li>
+                        <li>blaue Blume</li>
+                        <li>Sturm</li>
+                        <li>Sonnenaufgang</li>
+                        <li>verwandeln</li>
+                    </ul>
+
+                    <h4>8. Märchen umdrehen</h4>
+                    <p>Schreibe eine neue Version von "Das kluge Mädchen und die drei Aufgaben", aber diesmal:</p>
+                    <ul>
+                        <li>Ist die Stiefmutter am Anfang gut und wird durch einen Zauber böse</li>
+                        <li>Muss Lilia sie retten</li>
+                        <li>Helfen ihr dabei nicht Tiere, sondern Elemente (Wasser, Feuer, Wind)</li>
+                        <li>Ist am Ende die wichtige Botschaft anders</li>
+                    </ul>
+
+                    <h4>9. Märchen-Merkmale-Quiz</h4>
+                    <p>Kreuze an, welche Merkmale typisch für Märchen sind:</p>
+                    <ul style="list-style: none;">
+                        <li>□ Es gibt oft magische Zahlen (3, 7, 12)</li>
+                        <li>□ Die Handlung spielt in der Zukunft</li>
+                        <li>□ Tiere können sprechen</li>
+                        <li>□ Es gibt immer ein Happy End</li>
+                        <li>□ Die Hauptfigur muss schwierige Aufgaben lösen</li>
+                        <li>□ Die Geschwister sind immer böse</li>
+                        <li>□ Es gibt oft eine Moral oder Lehre</li>
+                        <li>□ Alle Märchen sind sehr kurz</li>
+                        <li>□ Es gibt oft magische Gegenstände</li>
+                        <li>□ Die Hauptfigur ist immer arm</li>
+                    </ul>
+
+                    <h4>10. Märchen für heute</h4>
+                    <p>Schreibe ein modernes Märchen, das in der heutigen Zeit spielt. Welche Märchenelemente kannst du in unsere Zeit übertragen? (ca. 300 Wörter)</p>
+                </div>
+            </div>
+
+            <h3 class="exercise-subtitle">Märchenschlüsse schreiben üben</h3>
+            <div class="exercise-content">
+                <h4>1. Märchenanfang mit offenem Ende</h4>
+                <p><strong>Anfang:</strong><br>
+                Es war einmal ein Mädchen namens Lina, das in einem kleinen Dorf am Rande eines großen Waldes lebte. Eines Tages hörte sie von einer geheimnisvollen goldenen Blume, die tief im Wald wachsen sollte. Wer diese Blume fand, konnte einen Wunsch frei haben. Lina wünschte sich nichts sehnlicher, als dass ihre kranke Großmutter wieder gesund werden möge. Also machte sie sich mutig auf den Weg...</p>
+                <p>Schreibe drei verschiedene Schlüsse für dieses Märchen (je 50-80 Wörter).</p>
+
+                <h4>2. Märchen ohne Ende</h4>
+                <p><strong>Märchen:</strong><br>
+                Vor langer Zeit lebte ein Junge namens Finn, der mit seinem Vater in einer kleinen Hütte am Meer wohnte. Eines Tages fand Finn am Strand eine geheimnisvolle Flaschenpost. In der Flasche war eine Karte, die den Weg zu einem versteckten Schatz zeigte. Finn beschloss, sich auf die Suche zu machen. Nach einer langen Reise über das Meer erreichte er eine unbekannte Insel. Dort traf er auf einen alten Mann, der ihm drei Rätsel aufgab. Als Finn alle Rätsel löste, führte ihn der Mann zu einer Höhle...</p>
+                <p>Schreibe zwei verschiedene Enden für dieses Märchen (je 80-100 Wörter).</p>
+
+                <h4>3. Märchen mit vorgegebenem Schluss-Satz</h4>
+                <p><strong>Anfang:</strong><br>
+                In einem fernen Königreich herrschte große Traurigkeit, denn die Prinzessin war von einer bösen Fee verzaubert worden. Sie schlief einen tiefen Schlaf, aus dem sie nur erweckt werden konnte, wenn jemand das Lied der goldenen Nachtigall fand und sang. Viele hatten es bereits versucht, aber alle waren gescheitert. Da meldete sich ein einfacher Gärtnerjunge namens Leo...</p>
+                <p>Beende das Märchen so, dass es mit diesem Satz endet: <em>"Und so lernten alle im Königreich, dass wahre Freundschaft stärker ist als jeder Zauber."</em></p>
+
+                <h4>4. Verschiedene Schluss-Typen</h4>
+                <p>Schreibe für diesen Märchenanfang vier verschiedene Schlüsse, die zu diesen Typen passen:</p>
+                <p><strong>Anfang:</strong><br>
+                Tief im Wald lebte ein einsamer Holzfäller, der jeden Tag Bäume fällte. Eines Tages entdeckte er zwischen den Wurzeln einer uralten Eiche eine kleine, zitternde Fee. Ihre Flügel waren verletzt und sie konnte nicht fliegen. Der Holzfäller nahm sie mit nach Hause und pflegte sie gesund...</p>
+                <p><strong>Schlusstypen:</strong></p>
+                <ol type="a">
+                    <li>Ein klassisches Happy End mit Belohnung</li>
+                    <li>Ein Ende mit einer Moral oder Lehre</li>
+                    <li>Ein überraschendes oder unerwartetes Ende</li>
+                    <li>Ein offenes Ende, das Raum für Fantasie lässt</li>
+                </ol>
+
+                <h4>5. Schlechtes Ende verbessern</h4>
+                <p>Hier ist ein Märchen mit einem schwachen Ende. Schreibe drei bessere Alternativen:</p>
+                <p><strong>Märchen:</strong><br>
+                Ein Mädchen namens Mara lebte mit ihrer Stiefmutter und zwei Stiefschwestern, die sie schlecht behandelten. Eines Tages hörte Mara von einem Ball im Schloss. Sie wünschte sich nichts mehr, als auch hingehen zu können. Eine gute Fee erschien und verwandelte ein Kürbis in eine Kutsche, Mäuse in Pferde und Maras Lumpen in ein wunderschönes Kleid. Auf dem Ball verliebte sich der Prinz in Mara, aber um Mitternacht musste sie fliehen und verlor einen Glasschuh. Der Prinz suchte im ganzen Land nach dem Mädchen, dem der Schuh passte. Er fand Mara und sie heirateten.</p>
+                <p><strong>Altes Ende:</strong><br>
+                "Dann lebten sie glücklich bis ans Ende ihrer Tage."</p>
+                <p>Schreibe drei kreativere, aussagekräftigere Schlüsse!</p>
+
+                <h4>6. Märchen mit doppeltem Schluss</h4>
+                <p>Schreibe für dieses Märchen zwei komplett verschiedene Schlüsse - einen glücklichen und einen traurigen:</p>
+                <p><strong>Märchen:</strong><br>
+                In einem Dorf am Fuße eines Berges lebte ein Junge namens Ben, der besonders gut mit Tieren umgehen konnte. Eines Tages kam ein gefährlicher Bär in die Nähe des Dorfes und alle hatten Angst. Ben bot an, mit dem Bären zu sprechen und herauszufinden, warum er so aggressiv war. Er folgte den Spuren des Bären tief in den Wald hinein...</p>
+
+                <h4>7. Schluss-Bausteine kombinieren</h4>
+                <p>Wähle aus jeder Spalte ein Element und kombiniere sie zu einem kreativen Märchenschluss:</p>
+                <table>
+                    <tr>
+                        <th>Wie endet es?</th>
+                        <th>Wer wird belohnt/bestraft?</th>
+                        <th>Welche Moral hat die Geschichte?</th>
+                        <th>Magisches Element</th>
+                    </tr>
+                    <tr>
+                        <td>Hochzeit</td>
+                        <td>Der/die Hilfsbereite</td>
+                        <td>Güte wird belohnt</td>
+                        <td>Zauberstab</td>
+                    </tr>
+                    <tr>
+                        <td>Rückkehr nach Hause</td>
+                        <td>Der/die Neidische</td>
+                        <td>Wahre Freundschaft ist wertvoll</td>
+                        <td>Magischer Spiegel</td>
+                    </tr>
+                    <tr>
+                        <td>Neuanfang</td>
+                        <td>Der/die Faule</td>
+                        <td>Mut lohnt sich</td>
+                        <td>Sprechender Baum</td>
+                    </tr>
+                    <tr>
+                        <td>Versöhnung</td>
+                        <td>Der/die Lügner/in</td>
+                        <td>Ehrlichkeit währt am längsten</td>
+                        <td>Goldene Harfe</td>
+                    </tr>
+                </table>
+
+                <h4>8. Märchen-Schluss-Quiz</h4>
+                <p>Verbinde die Märchenanfänge mit den passenden Schlüssen:</p>
+                <p><strong>Anfänge:</strong></p>
+                <ol>
+                    <li>Es war einmal ein armer Junge, der jeden Tag Holz sammelte...</li>
+                    <li>In einem Schloss hoch oben in den Bergen lebte eine einsame Prinzessin...</li>
+                    <li>Tief im Wald wohnte eine alte Frau, die von allen gefürchtet wurde...</li>
+                    <li>An einem kalten Wintertag fand ein Mädchen einen erfrorenen Vogel...</li>
+                </ol>
+                <p><strong>Schlüsse:</strong></p>
+                <ol type="A">
+                    <li>...und sie erkannte, dass man niemals nach dem Äußeren urteilen sollte.</li>
+                    <li>...und teilte von da an seinen Reichtum mit allen Bedürftigen.</li>
+                    <li>...und pflegte ihn gesund. Der Vogel entpuppte sich als verwunschene Fee.</li>
+                    <li>...bis eines Tages ein wandernder Sänger ihr Herz erwärmte.</li>
+                </ol>
+
+                <h4>9. Kreativer Abschlusssatz</h4>
+                <p>Erfinde 5 verschiedene kreative Abschlusssätze für Märchen (nicht den klassischen "Und wenn sie nicht gestorben sind...").</p>
+
+                <h4>10. Märchen mit modernem Schluss</h4>
+                <p>Schreibe für dieses traditionelle Märchen einen modernen, überraschenden Schluss:</p>
+                <p><strong>Märchen:</strong><br>
+                Ein Müller behauptete, seine Tochter könne Stroh zu Gold spinnen. Der König sperrte das Mädchen ein und befahl ihr, eine ganze Kammer voll Stroh über Nacht zu Gold zu spinnen, sonst würde sie sterben. Ein kleines Männchen erschien und half ihr - aber forderte dafür ihren ersten Sohn. Als die Müllerstochter später Königin wurde und ihr erstes Child bekam, kam das Männchen zurück, um sein Versprechen einzufordern...</p>
+            </div>
+
+            <div class="about-text">
+                Du möchtest mehr über das Schreiben lernen?<br>
+                Ich biete individuelle Unterstützung für Schülerinnen und Schüler aller Klassenstufen.
+            </div>
+
+            <div class="whatsapp-container">
+                <a href="https://wa.me/49123456789" class="whatsapp-button" target="_blank">
+                    Schreib mir auf WhatsApp
+                    <small>Für Fragen und Anmeldungen</small>
+                </a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>© 2023 Texte schreiben mit Amy | Deutsch Trainerin</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Märchen-Schreibguide NMS 1. Klasse</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Fredoka', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #6a0dad, #ff1493, #ffd700, #00ced1);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(106, 13, 173, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #6a0dad, #ff1493, #ffd700);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '🏰';
+            position: absolute;
+            font-size: 35px;
+            animation: sparkle 3s infinite;
+            top: 15px;
+            left: 40px;
+        }
+        
+        .header::after {
+            content: '🌟';
+            position: absolute;
+            font-size: 30px;
+            animation: sparkle 3s infinite 1.5s;
+            top: 25px;
+            right: 50px;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.7; transform: scale(1.3) rotate(180deg); }
+        }
+        
+        .main-title {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 3px 3px 0 #6a0dad, 6px 6px 0 #ff1493;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.4em;
+            color: #fff;
+            margin: 10px 0 0 0;
+            text-shadow: 2px 2px 0 #6a0dad;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(106, 13, 173, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #6a0dad, #ff1493, #ffd700, #00ced1);
+            border-radius: 23px;
+            z-index: -1;
+        }
+        
+        .section-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #6a0dad;
+            text-shadow: 2px 2px 0 #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .subsection-title {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: #ff1493;
+            text-shadow: 1px 1px 0 #ffd700;
+            margin: 20px 0 15px 0;
+            border-bottom: 3px solid #ffd700;
+            padding-bottom: 5px;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #fff, #f0f8ff);
+            border: 3px solid #00ced1;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 206, 209, 0.3);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #6a0dad, #ff1493);
+            color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 2px;
+            margin: 20px 0;
+        }
+        
+        .table th {
+            background: linear-gradient(45deg, #6a0dad, #ff1493);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+        }
+        
+        .table td {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .example {
+            background: linear-gradient(135deg, rgba(0, 206, 209, 0.2), rgba(255, 215, 0, 0.2));
+            border-left: 5px solid #6a0dad;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            font-weight: 500;
+        }
+        
+        .wichtig {
+            background: linear-gradient(135deg, #ff1493, #6a0dad);
+            color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #00ced1;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 206, 209, 0.2);
+        }
+        
+        .word-counter {
+            background: linear-gradient(135deg, #ffd700, #ff1493);
+            color: #fff;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+            text-align: center;
+            font-size: 1.3em;
+        }
+        
+        strong {
+            color: #6a0dad;
+            text-shadow: 1px 1px 0 #ffd700;
+        }
+        
+        em {
+            color: #ff1493;
+            font-weight: 600;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+            font-weight: 500;
+        }
+        
+        .structure-box {
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), rgba(255, 215, 0, 0.1));
+            border: 2px solid #6a0dad;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #00ced1, #ffd700);
+            color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">MÄRCHEN SCHREIBEN</h1>
+            <p class="subtitle">NMS 1. Klasse Nachprüfung - Kompletter Schreibguide</p>
+        </div>
+        
+        <div class="content">
+            <!-- Was ist ein Märchen -->
+            <div class="section">
+                <h2 class="section-title">🏰 Was ist ein Märchen?</h2>
+                
+                <div class="info-box">
+                    <p><strong>Märchen</strong> sind <em>fantastische Erzählungen</em> mit magischen Elementen.</p>
+                    <p>Sie spielen in einer <strong>unwirklichen Welt</strong>, wo Unmögliches möglich wird.</p>
+                    <p><strong>Zweck:</strong> Sie sollen unterhalten, lehren und zum Träumen einladen.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Typische Märchen-Anfänge:</h3>
+                    <ul>
+                        <li>"Es war einmal..."</li>
+                        <li>"Vor langer, langer Zeit..."</li>
+                        <li>"In einem fernen Königreich..."</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Typische Märchen-Enden:</h3>
+                    <ul>
+                        <li>"...und sie lebten glücklich bis ans Ende ihrer Tage."</li>
+                        <li>"...und wenn sie nicht gestorben sind, dann leben sie noch heute."</li>
+                        <li>"...und das Gute siegte über das Böse."</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Märchenmerkmale -->
+            <div class="section">
+                <h2 class="section-title">✨ Die 7 wichtigsten Märchenmerkmale</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4><strong>1. 🧙‍♀️ Magische Wesen:</strong></h4>
+                        <ul>
+                            <li>Feen, Hexen, Zauberer</li>
+                            <li>Sprechende Tiere</li>
+                            <li>Riesen, Zwerge, Kobolde</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Die sieben Zwerge bei Schneewittchen
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>2. 🪄 Zaubersprüche & Magie:</strong></h4>
+                        <ul>
+                            <li>Verwandlungen</li>
+                            <li>Zaubertränke</li>
+                            <li>Magische Gegenstände</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Der Zauberspiegel: "Spieglein, Spieglein an der Wand..."
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>3. 👑 Königliche Figuren:</strong></h4>
+                        <ul>
+                            <li>Prinzen und Prinzessinnen</li>
+                            <li>Könige und Königinnen</li>
+                            <li>Schlösser und Paläste</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Aschenputtel heiratet den Prinzen
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>4. ⚡ Gut gegen Böse:</strong></h4>
+                        <ul>
+                            <li>Klare Helden und Schurken</li>
+                            <li>Das Gute siegt immer</li>
+                            <li>Gerechte Bestrafung</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Die böse Stiefmutter wird bestraft
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>5. 🎯 Dreiergruppen:</strong></h4>
+                        <ul>
+                            <li>3 Wünsche, 3 Aufgaben</li>
+                            <li>3 Söhne/Töchter</li>
+                            <li>3 Versuche</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Schneewittchen beißt dreimal in den Apfel
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>6. 🌟 Belohnung & Bestrafung:</strong></h4>
+                        <ul>
+                            <li>Gute werden belohnt</li>
+                            <li>Böse werden bestraft</li>
+                            <li>Gerechtigkeit siegt</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Aschenputtel wird Königin, Stiefschwestern bleiben arm
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wichtig">
+                    <strong>MERKE:</strong> Ein gutes Märchen braucht mindestens 4-5 dieser Merkmale!
+                </div>
+            </div>
+            
+            <!-- Märchen-Aufbau -->
+            <div class="section">
+                <h2 class="section-title">📚 Der perfekte Märchen-Aufbau</h2>
+                
+                <div class="structure-box">
+                    <h3 class="subsection-title">1. Einleitung (ca. 50 Wörter)</h3>
+                    <ul>
+                        <li><strong>Märchen-Anfang:</strong> "Es war einmal..."</li>
+                        <li><strong>Hauptfigur vorstellen:</strong> Name, Aussehen, Situation</li>
+                        <li><strong>Ort und Zeit:</strong> Wo und wann spielt das Märchen?</li>
+                        <li><strong>Problem aufzeigen:</strong> Was ist das Grundproblem?</li>
+                    </ul>
+                    
+                    <div class="example">
+                        <strong>Beispiel:</strong><br>
+                        "Es war einmal ein armes Mädchen namens Rosa, das bei ihrer bösen Stiefmutter leben musste. Sie wohnte in einer kleinen Hütte am Waldrand und musste täglich harte Arbeit verrichten, während ihre Stiefschwester faul im Bett lag."
+                    </div>
+                </div>
+                
+                <div class="structure-box">
+                    <h3 class="subsection-title">2. Hauptteil (ca. 150 Wörter)</h3>
+                    <ul>
+                        <li><strong>Magisches Element einführen:</strong> Fee, Zauberer, sprechendes Tier</li>
+                        <li><strong>Aufgaben/Prüfungen:</strong> Was muss die Hauptfigur tun?</li>
+                        <li><strong>Höhepunkt:</strong> Die größte Gefahr oder schwierigste Aufgabe</li>
+                        <li><strong>Wendepunkt:</strong> Wie löst sich das Problem?</li>
+                    </ul>
+                    
+                    <div class="example">
+                        <strong>Beispiel:</strong><br>
+                        "Eines Tages begegnete Rosa einer alten Frau im Wald, die in Wahrheit eine gute Fee war. Die Fee gab Rosa drei magische Nüsse und sagte: 'Wenn du in großer Not bist, öffne eine Nuss.' Als die Stiefmutter Rosa in den dunklen Keller sperrte, öffnete sie die erste Nuss..."
+                    </div>
+                </div>
+                
+                <div class="structure-box">
+                    <h3 class="subsection-title">3. Schluss (ca. 50 Wörter)</h3>
+                    <ul>
+                        <li><strong>Glückliches Ende:</strong> Wie wird alles gut?</li>
+                        <li><strong>Belohnung für Gute:</strong> Was bekommt der Held?</li>
+                        <li><strong>Bestrafung für Böse:</strong> Was passiert mit dem Schurken?</li>
+                        <li><strong>Märchen-Ende:</strong> "...und sie lebten glücklich..."</li>
+                    </ul>
+                    
+                    <div class="example">
+                        <strong>Beispiel:</strong><br>
+                        "Rosa heiratete den Prinzen und wurde Königin. Die böse Stiefmutter wurde für immer aus dem Königreich verbannt. Und sie lebten glücklich bis ans Ende ihrer Tage."
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wörter zählen -->
+            <div class="section">
+                <h2 class="section-title">🔢 Genau 250 Wörter schreiben</h2>
+                
+                <div class="word-counter">
+                    <h3>📏 WICHTIG: Genau 250 Wörter!</h3>
+                    <p>Nicht mehr, nicht weniger!</p>
+                </div>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4><strong>Wörter richtig zählen:</strong></h4>
+                        <ul>
+                            <li>Jedes Wort einzeln zählen</li>
+                            <li>Auch "ein", "der", "und" zählen</li>
+                            <li>Zusammengesetzte Wörter = 1 Wort</li>
+                            <li>Namen = 1 Wort pro Name</li>
+                        </ul>
+                        
+                        <div class="example">
+                            <strong>Beispiel:</strong><br>
+                            "Es war einmal" = 3 Wörter<br>
+                            "Schneewittchen" = 1 Wort<br>
+                            "Anna-Maria" = 2 Wörter
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>Tricks für die richtige Länge:</strong></h4>
+                        <ul>
+                            <li><strong>Zu kurz?</strong> Mehr Details und Adjektive</li>
+                            <li><strong>Zu lang?</strong> Unwichtige Wörter streichen</li>
+                            <li><strong>Tipp:</strong> Alle 50 Wörter einen Strich machen</li>
+                            <li><strong>Kontrolle:</strong> Am Ende nochmal alles zählen!</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="wichtig">
+                    <strong>PRÜFUNGSTIPP:</strong> Schreibe zuerst dein Märchen, dann zähle die Wörter und passe an!
+                </div>
+            </div>
+            
+            <!-- Figuren erschaffen -->
+            <div class="section">
+                <h2 class="section-title">👥 Märchenfiguren erschaffen</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4><strong>🌟 Der Held/die Heldin:</strong></h4>
+                        <ul>
+                            <li><strong>Eigenschaften:</strong> mutig, freundlich, hilfsbereit</li>
+                            <li><strong>Situation:</strong> oft arm, benachteiligt</li>
+                            <li><strong>Ziel:</strong> will etwas Gutes erreichen</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Die arme, aber fleißige Magd Elsa
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>😈 Der Bösewicht:</strong></h4>
+                        <ul>
+                            <li><strong>Eigenschaften:</strong> gemein, gierig, neidisch</li>
+                            <li><strong>Rolle:</strong> macht dem Helden das Leben schwer</li>
+                            <li><strong>Ende:</strong> wird bestraft</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Die eifersüchtige Hexe Morgana
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🧙‍♂️ Der Helfer:</strong></h4>
+                        <ul>
+                            <li><strong>Wer:</strong> Fee, Zauberer, sprechendes Tier</li>
+                            <li><strong>Aufgabe:</strong> hilft dem Helden</li>
+                            <li><strong>Mittel:</strong> Magie, Rat, Geschenke</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Der weise Rabe, der sprechen kann
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>💖 Weitere Figuren:</strong></h4>
+                        <ul>
+                            <li>Prinz/Prinzessin (Liebesinteresse)</li>
+                            <li>König/Königin (Autoritätsperson)</li>
+                            <li>Nebenfiguren (Freunde, Familie)</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> Der königliche Gärtner, der ein Geheimnis hat
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magische Elemente -->
+            <div class="section">
+                <h2 class="section-title">🪄 Magische Elemente</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4><strong>🎭 Magische Gegenstände:</strong></h4>
+                        <ul>
+                            <li>Zauberstab, Zauberspiegel</li>
+                            <li>Magische Lampe, Ring</li>
+                            <li>Verwunschene Schuhe, Kleid</li>
+                            <li>Heilende Kräuter, Tränke</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🔮 Zaubersprüche:</strong></h4>
+                        <ul>
+                            <li>"Abrakadabra, sim sala bim!"</li>
+                            <li>"Hokuspokus, Fidibus!"</li>
+                            <li>"Verwandle dich..."</li>
+                            <li>Eigene Sprüche erfinden!</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🦄 Magische Wesen:</strong></h4>
+                        <ul>
+                            <li>Einhorn, Drache, Phönix</li>
+                            <li>Sprechende Tiere</li>
+                            <li>Geister, Feen, Trolle</li>
+                            <li>Verwandelte Menschen</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🌟 Verwandlungen:</strong></h4>
+                        <ul>
+                            <li>Mensch ↔ Tier</li>
+                            <li>Schön ↔ hässlich</li>
+                            <li>Arm ↔ reich</li>
+                            <li>Objekt ↔ Lebewesen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Märchen-Orte -->
+            <div class="section">
+                <h2 class="section-title">🏔️ Märchen-Schauplätze</h2>
+                
+                <div class="highlight-box">
+                    <h3>Beliebte Märchen-Orte:</h3>
+                </div>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4><strong>🏰 Königliche Orte:</strong></h4>
+                        <ul>
+                            <li>Glänzende Paläste</li>
+                            <li>Hohe Türme</li>
+                            <li>Thronsäle</li>
+                            <li>Königliche Gärten</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🌲 Zauberhafte Natur:</strong></h4>
+                        <ul>
+                            <li>Geheimnisvolle Wälder</li>
+                            <li>Verzauberte Seen</li>
+                            <li>Magische Berge</li>
+                            <li>Blühende Wiesen</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🏚️ Bescheidene Orte:</strong></h4>
+                        <ul>
+                            <li>Kleine Hütten</li>
+                            <li>Dorfplätze</li>
+                            <li>Bauernhöfe</li>
+                            <li>Mühlen</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🌟 Magische Orte:</strong></h4>
+                        <ul>
+                            <li>Feenreiche</li>
+                            <li>Hexenhäuser</li>
+                            <li>Drachenhöhlen</li>
+                            <li>Verzauberte Inseln</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Schreibtipps -->
+            <div class="section">
+                <h2 class="section-title">📝 Schreibtipps für dein Märchen</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4><strong>✍️ Sprache und Stil:</strong></h4>
+                        <ul>
+                            <li><strong>Einfache Sätze</strong> verwenden</li>
+                            <li><strong>Lebendige Adjektive:</strong> wunderschön, schrecklich</li>
+                            <li><strong>Märchen-Wörter:</strong> einst, dereinst, alsbald</li>
+                            <li><strong>Direkte Rede</strong> einbauen</li>
+                        </ul>
+                        
+                        <div class="example">
+                            <strong>Gut:</strong> "Die wunderschöne Prinzessin weinte bitterlich."<br>
+                            <strong>Schlecht:</strong> "Die Prinzessin war traurig."
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4><strong>🎯 Spannung erzeugen:</strong></h4>
+                        <ul>
+                            <li><strong>Cliffhanger:</strong> "Plötzlich hörte sie..."</li>
+                            <li><strong>Geheimnisse:</strong> Was verbirgt die Fee?</li>
+                            <li><strong>Zeitdruck:</strong> "Nur noch drei Tage..."</li>
+                            <li><strong>Unerwartete Wendungen</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class
