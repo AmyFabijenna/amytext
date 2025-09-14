@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramme lesen - Deutschunterricht Klasse 10</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8e8e8 0%, #e8d5d5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            color: #8b4a6b;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #a05d71;
+            font-size: 1.8em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #d4a5b8;
+        }
+        
+        h3 {
+            color: #8b4a6b;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+        
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #4a4a4a;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f0d4e0 0%, #e8c5d2 100%);
+            border-left: 5px solid #8b4a6b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .example-diagram {
+            background: white;
+            border: 2px solid #d4a5b8;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-bar {
+            display: inline-block;
+            width: 40px;
+            margin: 0 10px;
+            background: linear-gradient(to top, #8b4a6b, #d4a5b8);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: bold;
+            color: #8b4a6b;
+        }
+        
+        .exercise-box {
+            background: linear-gradient(135deg, #ffe8f0 0%, #f5d9e2 100%);
+            border: 2px dashed #8b4a6b;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exercise-box::before {
+            content: "Übung";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #8b4a6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .exercise-box h3 {
+            margin-top: 20px;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #e8f0ff 0%, #d9e8f5 100%);
+            border-left: 5px solid #4a90e2;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .tip-box::before {
+            content: "Tipp";
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        ul {
+            margin-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .diagram-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .diagram-type {
+            background: linear-gradient(135deg, #f8f0f5 0%, #f0e8ed 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #d4a5b8;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .diagram-type:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-counter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #8b4a6b;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .checklist {
+            background: linear-gradient(135deg, #f0fff0 0%, #e8f5e8 100%);
+            border: 2px solid #4caf50;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .checklist h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .sample-text {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .sample-text::before {
+            content: "Formulierungen";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #666;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .diagram-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diagramme lesen im Deutschunterricht</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #8b4a6b; margin-bottom: 40px;">
+            <strong>Ein umfassender Guide für die 10. Klasse</strong>
+        </p>
+
+        <div class="highlight-box">
+            <h3>Was sind nichtlineare Texte?</h3>
+            <p>Nichtlineare Texte sind Texte, die nicht von Anfang bis Ende gelesen werden, sondern bei denen der Leser selbst entscheidet, in welcher Reihenfolge er die Informationen aufnimmt. Dazu gehören: Diagramme und Schaubilder, Tabellen, Karten, Infografiken, Mindmaps, Websites und Lexikoneinträge.</p>
+        </div>
+
+        <h2>1. Was ist ein Diagramm?</h2>
+        <p>Ein Diagramm ist eine grafische Darstellung von Daten und Informationen. Es macht Zahlen, Entwicklungen und Zusammenhänge visuell sichtbar und leichter verständlich als reine Textformen.</p>
+
+        <h3>Hauptfunktionen von Diagrammen:</h3>
+        <ul>
+            <li><strong>Informieren:</strong> Vermittlung von Fakten und Daten</li>
+            <li><strong>Veranschaulichen:</strong> Komplexe Sachverhalte werden vereinfacht dargestellt</li>
+            <li><strong>Vergleichen:</strong> Verschiedene Werte werden gegenübergestellt</li>
+            <li><strong>Entwicklungen zeigen:</strong> Veränderungen über Zeit werden sichtbar</li>
+        </ul>
+
+        <h2>2. Arten von Diagrammen und ihre Funktionen</h2>
+        <div class="diagram-types">
+            <div class="diagram-type">
+                <h3>Säulendiagramm (Balkendiagramm)</h3>
+                <p><strong>Zweck:</strong> Vergleich von Mengen oder Häufigkeiten</p>
+                <p><strong>Beispiel:</strong> Verkaufszahlen verschiedener Produkte im Jahresvergleich</p>
+                <p><strong>Aufbau:</strong></p>
+                <ul>
+                    <li>X-Achse: Kategorien (z.B. Monate, Produkte)</li>
+                    <li>Y-Achse: Werte/Mengen</li>
+                    <li>Säulen: Höhe entspricht dem Wert</li>
+                </ul>
+                
+                <div class="example-diagram">
+                    <h4>Lieblingsfächer der 10. Klasse</h4>
+                    <div style="display: flex; justify-content: center; align-items: end; height: 150px; margin: 20px 0;">
+                        <div class="chart-bar" style="height: 80px;">
+                            <span class="bar-value">25</span>
+                            <span class="bar-label">Deutsch</span>
+                        </div>
+                        <div class="chart-bar" style="height: 120px;">
+                            <span class="bar-value">35</span>
+                            <span class="bar-label">Mathe</span>
+                        </div>
+                        <div class="chart-bar" style="height: 60px;">
+                            <span class="bar-value">18</span>
+                            <span class="bar-label">Englisch</span>
+                        </div>
+                        <div class="chart-bar" style="height: 100px;">
+                            <span class="bar-value">30</span>
+                            <span class="bar-label">Sport</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Kreisdiagramm (Tortendiagramm)</h3>
+                <p><strong>Zweck:</strong> Darstellung von Anteilen an einem Ganzen (100%)</p>
+                <p><strong>Beispiel:</strong> Verteilung der Stimmen bei einer Wahl</p>
+                <p><strong>Aufbau:</strong></p>
+                <ul>
+                    <li>Kreis = 100% des Ganzen</li>
+                    <li>Kreissegmente = prozentuale Anteile</li>
+                    <li>Oft farbkodiert mit Legende</li>
+                </ul>
+                
+                <div class="example-diagram">
+                    <h4>Freizeitaktivitäten Jugendlicher</h4>
+                    <svg width="200" height="200" style="margin: 20px 0;">
+                        <circle cx="100" cy="100" r="80" fill="#8b4a6b" stroke="white" stroke-width="2"/>
+                        <path d="M 100,100 L 100,20 A 80,80 0 0,1 156,56 Z" fill="#d4a5b8" stroke="white" stroke-width="2"/>
+                        <path d="M 100,100 L 156,56 A 80,80 0 0,1 144,144 Z" fill="#f0d4e0" stroke="white" stroke-width="2"/>
+                        <path d="M 100,100 L 144,144 A 80,80 0 0,1 100,20 Z" fill="#e8c5d2" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <div style="font-size: 12px;">
+                        <span style="color: #8b4a6b;">■ </span> Gaming (40%) |
+                        <span style="color: #d4a5b8;">■ </span> Social Media (25%) |
+                        <span style="color: #f0d4e0;">■ </span> Sport (20%) |
+                        <span style="color: #e8c5d2;">■ </span> Lesen (15%)
+                    </div>
+                </div>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Liniendiagramm</h3>
+                <p><strong>Zweck:</strong> Entwicklung/Verlauf über Zeit darstellen</p>
+                <p><strong>Beispiel:</strong> Temperaturverlauf über ein Jahr, Aktienkurse</p>
+                <p><strong>Aufbau:</strong></p>
+                <ul>
+                    <li>X-Achse: Zeit (Tage, Monate, Jahre)</li>
+                    <li>Y-Achse: Messwerte</li>
+                    <li>Linie verbindet die Datenpunkte</li>
+                </ul>
+                
+                <div class="example-diagram">
+                    <h4>Smartphone-Nutzung Jugendlicher (2020-2024)</h4>
+                    <svg width="300" height="150" style="margin: 20px 0;">
+                        <polyline points="50,120 100,100 150,80 200,60 250,40" 
+                                  stroke="#8b4a6b" stroke-width="3" fill="none"/>
+                        <circle cx="50" cy="120" r="4" fill="#8b4a6b"/>
+                        <circle cx="100" cy="100" r="4" fill="#8b4a6b"/>
+                        <circle cx="150" cy="80" r="4" fill="#8b4a6b"/>
+                        <circle cx="200" cy="60" r="4" fill="#8b4a6b"/>
+                        <circle cx="250" cy="40" r="4" fill="#8b4a6b"/>
+                        <text x="50" y="140" text-anchor="middle" font-size="12">2020</text>
+                        <text x="100" y="140" text-anchor="middle" font-size="12">2021</text>
+                        <text x="150" y="140" text-anchor="middle" font-size="12">2022</text>
+                        <text x="200" y="140" text-anchor="middle" font-size="12">2023</text>
+                        <text x="250" y="140" text-anchor="middle" font-size="12">2024</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Flächendiagramm</h3>
+                <p><strong>Zweck:</strong> Mengenentwicklung über Zeit mit Betonung der Gesamtmenge</p>
+                <p><strong>Beispiel:</strong> Energieverbrauch verschiedener Quellen über Jahre</p>
+                
+                <div class="example-diagram">
+                    <h4>Energiequellen über Zeit</h4>
+                    <svg width="300" height="150" style="margin: 20px 0;">
+                        <polygon points="50,120 100,110 150,100 200,90 250,80 250,120 50,120" 
+                                 fill="#8b4a6b" opacity="0.7"/>
+                        <polygon points="50,120 100,110 150,100 200,90 250,80 250,100 200,110 150,120 100,130 50,140" 
+                                 fill="#d4a5b8" opacity="0.7"/>
+                        <text x="50" y="140" text-anchor="middle" font-size="12">2020</text>
+                        <text x="150" y="140" text-anchor="middle" font-size="12">2022</text>
+                        <text x="250" y="140" text-anchor="middle" font-size="12">2024</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Streudiagramm (Punktdiagramm)</h3>
+                <p><strong>Zweck:</strong> Zusammenhang zwischen zwei Variablen zeigen</p>
+                <p><strong>Beispiel:</strong> Korrelation zwischen Körpergröße und Gewicht</p>
+                
+                <div class="example-diagram">
+                    <h4>Größe vs. Gewicht</h4>
+                    <svg width="250" height="150" style="margin: 20px 0;">
+                        <circle cx="60" cy="110" r="3" fill="#8b4a6b"/>
+                        <circle cx="80" cy="100" r="3" fill="#8b4a6b"/>
+                        <circle cx="100" cy="85" r="3" fill="#8b4a6b"/>
+                        <circle cx="120" cy="75" r="3" fill="#8b4a6b"/>
+                        <circle cx="140" cy="65" r="3" fill="#8b4a6b"/>
+                        <circle cx="160" cy="55" r="3" fill="#8b4a6b"/>
+                        <circle cx="180" cy="45" r="3" fill="#8b4a6b"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <h2>3. Systematisches Vorgehen beim Analysieren</h2>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">1</span>Überblick verschaffen</h3>
+            <ul>
+                <li>Titel und Quelle lesen</li>
+                <li>Achsenbeschriftungen beachten</li>
+                <li>Zeitraum/Zeitpunkt erfassen</li>
+                <li>Legende verstehen</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">2</span>Auffälligkeiten erkennen</h3>
+            <ul>
+                <li>Höchste/niedrigste Werte</li>
+                <li>Trends und Entwicklungen</li>
+                <li>Besonderheiten und Ausreißer</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">3</span>Zusammenhänge verstehen</h3>
+            <ul>
+                <li>Ursache-Wirkungs-Beziehungen</li>
+                <li>Vergleiche zwischen Kategorien</li>
+                <li>Entwicklungstendenzen</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">4</span>Bewertung und Interpretation</h3>
+            <ul>
+                <li>Was bedeuten die Daten?</li>
+                <li>Welche Schlüsse lassen sich ziehen?</li>
+                <li>Was könnte die Ursache für bestimmte Entwicklungen sein?</li>
+            </ul>
+        </div>
+
+        <h2>4. Häufige Fehlerquellen</h2>
+
+        <div class="tip-box">
+            <strong>1. Skalierung übersehen:</strong><br>
+            Beginnt die Y-Achse bei 0 oder einem anderen Wert? Dadurch können kleine Unterschiede größer wirken, als sie tatsächlich sind.
+        </div>
+
+        <div class="tip-box">
+            <strong>2. Zeitraum ignorieren:</strong><br>
+            Über welchen Zeitraum erstrecken sich die Daten? Ein Diagramm über 100 Jahre zeigt andere Trends als eines über 1 Jahr.
+        </div>
+
+        <div class="tip-box">
+            <strong>3. Einheiten verwechseln:</strong><br>
+            Absolute Zahlen vs. Prozentangaben - "50% mehr" kann bei kleinen Ausgangswerten wenig bedeuten.
+        </div>
+
+        <div class="tip-box">
+            <strong>4. Kontext vernachlässigen:</strong><br>
+            Externe Faktoren nicht berücksichtigen - was könnte die Ursache für bestimmte Entwicklungen sein?
+        </div>
+
+        <h2>5. Formulierungshilfen für die Diagrammanalyse</h2>
+
+        <h3>Einleitende Formulierungen</h3>
+        <div class="sample-text">
+            <strong>Beschreibung des Diagramms:</strong><br>
+            "Das vorliegende Säulendiagramm zeigt..." | "Die Grafik stellt ... dar" | "Aus dem Kreisdiagramm geht hervor, dass..." | "Das Liniendiagramm verdeutlicht die Entwicklung von..." | "Die Darstellung basiert auf Daten aus dem Zeitraum..." | "Laut der Statistik/dem Schaubild..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Zeitbezug herstellen:</strong><br>
+            "Im Zeitraum von ... bis ..." | "Zwischen ... und ... zeigt sich..." | "Im Jahr ... / In den Jahren ..." | "Zu Beginn des Betrachtungszeitraums..." | "Am Ende der dargestellten Periode..."
+        </div>
+
+        <h3>Beschreibung von Werten und Mengen</h3>
+        <div class="sample-text">
+            <strong>Genaue Werte benennen:</strong><br>
+            "Der Wert beträgt exakt..." | "Mit ... liegt der Anteil bei..." | "... erreicht einen Höchstwert von..." | "Der niedrigste Wert liegt bei..." | "Insgesamt summieren sich die Werte auf..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Ungefähre Werte ausdrücken:</strong><br>
+            "Der Wert liegt bei etwa/circa/rund..." | "Ungefähr ... der Befragten..." | "Knapp die Hälfte..." | "Mehr als drei Viertel..." | "Nahezu/beinahe alle..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Anteile und Prozentangaben:</strong><br>
+            "... macht einen Anteil von ... % aus" | "Der Anteil von ... beläuft sich auf..." | "Mit ... % stellt ... den größten Teil dar" | "Lediglich ... % entfallen auf..." | "Immerhin ... % der..."
+        </div>
+
+        <h3>Vergleiche und Rangfolgen</h3>
+        <div class="sample-text">
+            <strong>Vergleichende Formulierungen:</strong><br>
+            "Im Vergleich zu ... ist ... deutlich höher/niedriger" | "Während ... bei ... liegt, erreicht ... nur..." | "... übertrifft ... um das Doppelte/Dreifache" | "Gegenüber ... zeigt ... einen Rückgang/Anstieg von..." | "... liegt sowohl über/unter dem Durchschnitt als auch über/unter..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Rangfolgen beschreiben:</strong><br>
+            "An der Spitze steht ... mit..." | "Den zweiten Platz belegt..." | "... rangiert an letzter Stelle" | "In der Rangfolge folgt..." | "... nimmt eine Mittelposition ein"
+        </div>
+
+        <div class="sample-text">
+            <strong>Relationen ausdrücken:</strong><br>
+            "... ist doppelt/dreimal so hoch wie..." | "... entspricht etwa der Hälfte von..." | "Das Verhältnis zwischen ... und ... beträgt..." | "... überwiegt gegenüber ... deutlich"
+        </div>
+
+        <h3>Entwicklungen und Trends beschreiben</h3>
+        <div class="sample-text">
+            <strong>Anstiege beschreiben:</strong><br>
+            "... steigt kontinuierlich/stetig an" | "Ein deutlicher/rapider/dramatischer Anstieg ist bei ... zu verzeichnen" | "... nimmt sukzessive/schrittweise zu" | "... wächst exponentiell/überproportional" | "Ein sprunghafter Anstieg zeigt sich..." | "... verzeichnet einen Aufwärtstrend"
+        </div>
+
+        <div class="sample-text">
+            <strong>Rückgänge formulieren:</strong><br>
+            "... sinkt kontinuierlich/stetig" | "Ein deutlicher Rückgang ist bei ... erkennbar" | "... nimmt ab/geht zurück" | "... fällt drastisch/erheblich" | "Ein Abwärtstrend zeichnet sich ab bei..." | "... bricht dramatisch ein"
+        </div>
+
+        <div class="sample-text">
+            <strong>Stagnation und Konstanz:</strong><br>
+            "... bleibt konstant/unverändert" | "... stagniert auf dem Niveau von..." | "Keine nennenswerten Veränderungen zeigen sich bei..." | "... pendelt zwischen ... und ..." | "... verharrt bei..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Schwankungen beschreiben:</strong><br>
+            "... unterliegt starken Schwankungen" | "... schwankt zwischen ... und ..." | "Erhebliche Fluktuationen sind bei ... erkennbar" | "... zeigt einen wellenförmigen Verlauf" | "... oszilliert um den Wert..."
+        </div>
+
+        <h3>Besonderheiten und Auffälligkeiten</h3>
+        <div class="sample-text">
+            <strong>Extreme Werte:</strong><br>
+            "Bemerkenswert ist der Spitzenwert von..." | "Auffällig ist der extrem niedrige Wert bei..." | "... stellt einen deutlichen Ausreißer dar" | "Hervorzuheben ist..." | "Beachtenswert erscheint..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Unerwartete Entwicklungen:</strong><br>
+            "Überraschend ist die Entwicklung bei..." | "Entgegen dem allgemeinen Trend..." | "Wider Erwarten..." | "Ungewöhnlich erscheint..." | "Gegen die Erwartung..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Wendepunkte:</strong><br>
+            "Ein Wendepunkt ist bei ... erkennbar" | "Ab ... ändert sich die Tendenz" | "... markiert eine Trendwende" | "Ein Richtungswechsel vollzieht sich bei..."
+        </div>
+
+        <h2>6. Interpretation und Schlussfolgerungen</h2>
+
+        <div class="sample-text">
+            <strong>Ursachen benennen:</strong><br>
+            "Diese Entwicklung lässt sich möglicherweise dadurch erklären, dass..." | "Als Ursache für ... kommt ... in Betracht" | "... könnte auf ... zurückzuführen sein" | "Vermutlich führte ... zu..." | "Ein Grund für ... könnte ... sein"
+        </div>
+
+        <div class="sample-text">
+            <strong>Konsequenzen ableiten:</strong><br>
+            "Daraus ergibt sich..." | "Dies hat zur Folge, dass..." | "Infolgedessen..." | "Die Auswirkungen zeigen sich in..." | "Dies führt zu..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Bewertende Formulierungen:</strong><br>
+            "Positiv zu bewerten ist..." | "Bedenklich erscheint..." | "Erfreulich entwickelt sich..." | "Problematisch ist..." | "Als Erfolg kann ... gewertet werden"
+        </div>
+
+        <div class="sample-text">
+            <strong>Prognosen und Ausblicke:</strong><br>
+            "Setzt sich dieser Trend fort, so..." | "Für die Zukunft ist zu erwarten..." | "Die Entwicklung deutet darauf hin, dass..." | "Langfristig könnte sich ... ergeben" | "Die Tendenz spricht für..."
+        </div>
+
+        <h2>7. Abschließende Formulierungen</h2>
+
+        <div class="sample-text">
+            <strong>Zusammenfassung:</strong><br>
+            "Zusammenfassend lässt sich feststellen..." | "Insgesamt zeigt die Darstellung..." | "Das Diagramm verdeutlicht im Überblick..." | "Als Fazit ergibt sich..." | "Die wesentlichen Erkenntnisse sind..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Kritische Einordnung:</strong><br>
+            "Kritisch anzumerken ist..." | "Zu berücksichtigen ist jedoch..." | "Einschränkend muss gesagt werden..." | "Die Daten sind vor dem Hintergrund ... zu sehen" | "Relativierend wirkt..."
+        </div>
+
+        <h3>Beispielbeschreibung:</h3>
+        <div class="sample-text">
+            "Das Säulendiagramm stellt die beliebtesten Freizeitaktivitäten Jugendlicher im Jahr 2024 dar. Mit 35% führt Gaming deutlich vor Social Media (28%) und Sport (22%). Lesen bildet mit nur 15% das Schlusslicht. Auffällig ist der hohe Anteil digitaler Aktivitäten (Gaming + Social Media = 63%), während traditionelle Beschäftigungen wie Lesen deutlich weniger Zuspruch finden. Dies spiegelt den digitalen Wandel in der Freizeitgestaltung Jugendlicher wider."
+        </div>
+
+        <h2>8. Übungen zum Selbsttest</h2>
+
+        <div class="exercise-box">
+            <h3>Übung 1: Diagramm-Memory</h3>
+            <p>Ordne die Diagrammart dem passenden Verwendungszweck zu:</p>
+            <ul>
+                <li>Säulendiagramm → ?</li>
+                <li>Liniendiagramm → ?</li>
+                <li>Kreisdiagramm → ?</li>
+                <li>Streudiagramm → ?</li>
+                <li>Flächendiagramm → ?</li>
+            </ul>
+            <p><strong>Mögliche Verwendungen:</strong> Entwicklung über Zeit | Vergleich von Kategorien | Anteile am Ganzen | Zusammenhang zwischen Variablen | Mengenentwicklung mit Gesamtbetonung</p>
+        </div>
+
+        <div class="exercise-box">
+            <h3>Übung 2: Diagramm erstellen</h3>
+            <p>Erstelle aus folgenden Daten ein passendes Diagramm:</p>
+            <p><strong>Umfrage "Lieblings-Streaming-Dienst" (100 Schüler):</strong></p>
+            <ul>
+                <li>Netflix: 45 Schüler</li>
+                <li>Amazon Prime: 25 Schüler</li>
+                <li>Disney+: 20 Schüler</li>
+                <li>Andere: 10 Schüler</li>
+            </ul>
+            <p><em>Welche Diagrammart würdest du wählen und warum?</em></p>
+        </div>
+
+        <div class="exercise-box">
+            <h3>Übung 3: Fehler finden</h3>
+            <p>Was ist problematisch an folgender Aussage?</p>
+            <div class="sample-text">
+                "Das Liniendiagramm zeigt, dass die Internetnutzung von Jugendlichen von 2020 bis 2024 von 3,2 auf 3,8 Stunden täglich angestiegen ist. Dies bedeutet eine dramatische Verdopplung der Nutzungszeit!"
+            </div>
+            <p><em>Tipp: Achte auf die konkreten Zahlen und deren Verhältnis zueinander.</em></p>
+        </div>
+
+        <div class="exercise-box">
+            <h3>Übung 4: Beschreibung schreiben</h3>
+            <p>Beschreibe das Säulendiagramm "Lieblingsfächer" aus Abschnitt 2 in 3-4 Sätzen. Verwende dabei die Formulierungshilfen aus dem Guide.</p>
+        </div>
+
+        <h2>9. Checkliste für die Diagrammanalyse</h2>
+
+        <div class="checklist">
+            <h3>Vor der Analyse - Das solltest du beachten:</h3>
+            <ul>
+                <li>Titel und Untertitel vollständig gelesen</li>
+                <li>Quelle und Erhebungsjahr notiert</li>
+                <li>Diagrammart identifiziert</li>
+                <li>Achsenbeschriftungen verstanden</li>
+                <li>Legende/Farbkodierung beachtet</li>
+                <li>Skalierung und Einheiten geprüft</li>
+            </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>Bei der Beschreibung - Das gehört hinein:</h3>
+            <ul>
+                <li>Einleitungssatz mit Thema und Diagrammart</li>
+                <li>Höchste und niedrigste Werte genannt</li>
+                <li>Trends und Entwicklungen beschrieben</li>
+                <li>Besonderheiten und Auffälligkeiten erwähnt</li>
+                <li>Interpretation oder Schlussfolgerung formuliert</li>
+                <li>Fachsprachlich korrekte Formulierungen verwendet</li>
+            </ul>
+        </div>
+
+        <h2>10. Tipps für die Klassenarbeit</h2>
+
+        <div class="checklist">
+            <h3>Struktur für die Klassenarbeit:</h3>
+            <ul>
+                <li><strong>Struktur einhalten:</strong> Beschreibung → Analyse → Interpretation</li>
+                <li><strong>Fachsprache verwenden:</strong> Präzise Formulierungen statt umgangssprachlicher Ausdrücke</li>
+                <li><strong>Vollständigkeit:</strong> Alle wichtigen Aspekte ansprechen</li>
+                <li><strong>Belege:</strong> Konkrete Zahlen und Werte nennen</li>
+                <li><strong>Objektivität:</strong> Sachlich bleiben, eigene Meinungen als solche kennzeichnen</li>
+            </ul>
+        </div>
+
+        <div class="tip-box">
+            <strong>Für die Klassenarbeit:</strong><br>
+            Nimm dir ausreichend Zeit für die Diagrammanalyse. Lies zuerst alle Informationen gründlich, bevor du mit dem Schreiben beginnst. Eine systematische Herangehensweise bringt dir mehr Punkte als hastige Oberflächlichkeit.
+        </div>
+
+        <div class="tip-box">
+            <strong>Im Alltag:</strong><br>
+            Übe das Diagrammlesen auch außerhalb des Unterrichts. Zeitungen, Nachrichtensendungen und Online-Artikel enthalten viele Diagramme. Je mehr du übst, desto sicherer wirst du.
+        </div>
+
+        <div class="tip-box">
+            <strong>Kritisches Denken:</strong><br>
+            Frage dich immer: Wer hat das Diagramm erstellt? Welche Absicht könnte dahinterstehen? Manchmal werden Diagramme bewusst so gestaltet, dass sie eine bestimmte Botschaft verstärken.
+        </div>
+
+        <div class="highlight-box" style="text-align: center; margin-top: 50px;">
+            <h3>Erfolgreich zum Diagramm-Profi!</h3>
+            <p>Mit diesem Guide hast du alle wichtigen Grundlagen zum Lesen und Interpretieren von Diagrammen gelernt. Übung macht den Meister – nutze jede Gelegenheit, um deine Fähigkeiten zu verbessern!</p>
+            <p style="font-style: italic; color: #8b4a6b; margin-top: 20px;">Viel Erfolg in deinen Deutschstunden!</p>
+        </div>
+    </div>
+</body>
+</html>
