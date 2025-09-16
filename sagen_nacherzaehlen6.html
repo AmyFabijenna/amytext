@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitfaden: Von null auf "Sehr gut" - Nacherzählung von Sagen meistern</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e6c3f7 0%, #e1bee7 25%, #ffb347 50%, #ffc0cb 75%, #dda0dd 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .top-navigation {
+            background: #34495e;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .top-nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+        
+        .home-link {
+            background: #ffc107;
+            color: #333 !important;
+        }
+        
+        .home-link:hover {
+            background: #e0a800;
+        }
+        
+        .nav-link {
+            background: #5d6d7e;
+        }
+        
+        .nav-link:hover {
+            background: #4a5c6b;
+        }
+
+        .pdf-link {
+            background: #e74c3c;
+        }
+        
+        .pdf-link:hover {
+            background: #c0392b;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f8f4ff, #fff0f5);
+            color: #333;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 3px solid #9966cc;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #5d6d7e;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .toc {
+            background: linear-gradient(135deg, #f8f4ff, #fff0f5);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #9966cc;
+        }
+
+        .toc h2 {
+            color: #9966cc;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .toc ol {
+            padding-left: 30px;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+            break-inside: avoid;
+        }
+
+        .toc a {
+            color: #5d6d7e;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #9966cc;
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #dda0dd;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            color: #9966cc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dda0dd;
+        }
+
+        .section h3 {
+            color: #7d4b99;
+            margin: 25px 0 15px 0;
+        }
+
+        .section h4 {
+            color: #5d6d7e;
+            margin: 20px 0 10px 0;
+        }
+
+        .section ul, .section ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .example {
+            background: #f9f9f9;
+            border-left: 4px solid #9966cc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .correct {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .checklist {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .checklist h3 {
+            margin-top: 0;
+        }
+
+        .checklist-item {
+            margin-bottom: 10px;
+        }
+
+        .tension-chart {
+            text-align: center;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+
+        .tension-chart div {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+
+        .tension-peak {
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+
+        .tension-up {
+            color: #3498db;
+        }
+
+        .tension-down {
+            color: #2ecc71;
+        }
+
+        .back-to-top {
+            display: block;
+            text-align: right;
+            margin-top: 20px;
+            color: #9966cc;
+            text-decoration: none;
+        }
+
+        .back-to-top:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .toc ol {
+                columns: 1;
+            }
+            
+            .top-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .top-nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .section ul, .section ol {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Obere Navigation -->
+        <div class="top-navigation">
+            <div class="top-nav-links">
+                <a href="https://amyfabijenna.github.io/amylang-deutsch" class="home-link">Amy Lang, Deutsch-Trainerin</a>
+                <a href="index.html" class="nav-link">Zurück zur Übersicht</a>
+                <a href="sagen_nacherzaehlen.pdf" class="pdf-link" download>📄 Sagen nacherzählen (PDF)</a>
+            </div>
+        </div>
+        
+        <header class="header">
+            <h1>Leitfaden: Von null auf "Sehr gut"</h1>
+            <p>Nacherzählung von Sagen meistern</p>
+        </header>
+
+        <main class="content">
+            <div class="toc">
+                <h2>Inhaltsverzeichnis</h2>
+                <ol>
+                    <li><a href="#section1">Was ist eine Nacherzählung?</a></li>
+                    <li><a href="#section2">Der Aufbau einer Nacherzählung</a></li>
+                    <li><a href="#section3">Die Sprache der Nacherzählung</a></li>
+                    <li><a href="#section4">Schritt-für-Schritt Anleitung</a></li>
+                    <li><a href="#section5">Übungen zum Textaufbau</a></li>
+                    <li><a href="#section6">Übungen zur Sprache</a></li>
+                    <li><a href="#section7">Spannungsbogen in Sagen</a></li>
+                    <li><a href="#section8">Musteranalyse und Vergleich</a></li>
+                    <li><a href="#section9">Checkliste für die Schularbeit</a></li>
+                    <li><a href="#section10">Abschlussübung</a></li>
+                </ol>
+            </div>
+
+            <div id="section1" class="section">
+                <h2>1. Was ist eine Nacherzählung?</h2>
+                
+                <h3>Definition</h3>
+                <p>Eine Nacherzählung ist die Wiedergabe eines Textes in eigenen Worten. Du erzählst die Geschichte noch einmal, aber:</p>
+                <ul>
+                    <li><strong>Kürzer als das Original</strong></li>
+                    <li>Mit eigenen Worten (nicht abschreiben!)</li>
+                    <li><strong>Vollständig (nichts Wichtiges vergessen)</strong></li>
+                    <li><strong>Logisch geordnet (richtige Reihenfolge)</strong></li>
+                </ul>
+                
+                <h3>Der Unterschied zur Inhaltsangabe</h3>
+                <ul>
+                    <li><strong>Inhaltsangabe:</strong> Sachlich, nüchtern, Präsens</li>
+                    <li><strong>Nacherzählung:</strong> Lebendig, spannend, meist Präteritum (Vergangenheit)</li>
+                </ul>
+                
+                <div class="example">
+                    <p><strong>Beispiel Inhaltsangabe:</strong> "Ein Drache tötet Tiere. Ein Bursche tötet den Drachen."</p>
+                    <p><strong>Beispiel Nacherzählung:</strong> "In der geheimnisvollen Drachenhöhle hauste ein gefährliches Ungeheuer, bis ein mutiger Bursche es mit einer klugen List besiegte."</p>
+                </div>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section2" class="section">
+                <h2>2. Der Aufbau einer Nacherzählung</h2>
+                
+                <h3>Die vier Teile einer Nacherzählung</h3>
+                
+                <h4>EINLEITUNG (1-2 Sätze)</h4>
+                <ul>
+                    <li>Wo spielt die Geschichte?</li>
+                    <li>Wann (falls wichtig)?</li>
+                    <li>Wer sind die Hauptfiguren?</li>
+                    <li>Was ist das Thema?</li>
+                </ul>
+                <div class="example">
+                    <p><strong>Beispiel:</strong> "In der Steiermark, nahe dem Ort Mixnitz, erzählt man sich seit langer Zeit eine geheimnisvolle Sage über einen gefährlichen Drachen."</p>
+                </div>
+                
+                <h4>HAUPTTEIL/THEMA (längster Teil)</h4>
+                <ul>
+                    <li>Das Problem wird erklärt</li>
+                    <li>Die Ausgangssituation</li>
+                    <li>Alle wichtigen Ereignisse in der richtigen Reihenfolge</li>
+                </ul>
+                <div class="example">
+                    <p><strong>Beispiel:</strong> "In der sogenannten 'Drachenhöhle' hauste einst ein riesiger Drache... Das Ungeheuer brachte großes Unglück..."</p>
+                </div>
+                
+                <h4>WENDUNG/HÖHEPUNKT</h4>
+                <ul>
+                    <li>Der spannendste Moment</li>
+                    <li>Die Lösung des Problems</li>
+                    <li>Der Kampf/die entscheidende Handlung</li>
+                </ul>
+                <div class="example">
+                    <p><strong>Beispiel:</strong> "Als der Drache am nächsten Tag aus seiner Höhle kam und zur gewohnten Rinne wollte, rissen die scharfen Werkzeuge seinen Bauch auf."</p>
+                </div>
+                
+                <h4>SCHLUSS/BEDEUTUNG (1-2 Sätze)</h4>
+                <ul>
+                    <li>Was lernen wir aus der Geschichte?</li>
+                    <li>Welche Botschaft hat die Sage?</li>
+                    <li>Manchmal: Wie ist es heute?</li>
+                </ul>
+                <div class="example">
+                    <p><strong>Beispiel:</strong> "Diese Sage zeigt uns, dass Mut und Klugheit oft stärker sind als rohe Gewalt."</p>
+                </div>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section3" class="section">
+                <h2>3. Die Sprache der Nacherzählung</h2>
+                
+                <h3>Zeitform: Präteritum (Vergangenheit)</h3>
+                <p><span class="correct">✅ "Der Drache hauste in der Höhle."</span></p>
+                <p><span class="incorrect">❌ "Der Drache haust in der Höhle."</span></p>
+                
+                <h3>Erzählperspektive: 3. Person</h3>
+                <p><span class="correct">✅ "Er grub eine Rinne."</span></p>
+                <p><span class="incorrect">❌ "Ich grub eine Rinne."</span></p>
+                
+                <h3>Sprachstil: Lebendig und spannend</h3>
+                <p><span class="correct">✅ "Das gefährliche Ungeheuer zerriss alles"</span></p>
+                <p><span class="incorrect">❌ "Der Drache tötete Tiere"</span></p>
+                
+                <h3>Wichtige Wörter für Sagen:</h3>
+                <ul>
+                    <li><strong>Für den Ort:</strong> einst, damals, vor langer Zeit, in einem fernen Land</li>
+                    <li><strong>Für Spannung:</strong> plötzlich, da, doch, jedoch, schließlich</li>
+                    <li><strong>Für Figuren:</strong> der mutige Held, das gefährliche Ungeheuer, der kluge Bursche</li>
+                    <li><strong>Für Gefühle:</strong> furchtbar, geheimnisvoll, schrecklich, wundersam</li>
+                </ul>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section4" class="section">
+                <h2>4. Schritt-für-Schritt Anleitung</h2>
+                
+                <h3>SCHRITT 1: Den Text verstehen</h3>
+                <ol>
+                    <li>Lies den Text 2-3 Mal gründlich</li>
+                    <li>Markiere wichtige Personen, Orte, Ereignisse</li>
+                    <li>Unterstreiche unbekannte Wörter und kläre sie</li>
+                </ol>
+                
+                <h3>SCHRITT 2: Die Struktur finden</h3>
+                <ol>
+                    <li>Teile den Text in die 4 Bereiche ein:
+                        <ul>
+                            <li>Wo ist die Einleitung?</li>
+                            <li>Wo beginnt das Problem?</li>
+                            <li>Wo ist der Höhepunkt?</li>
+                            <li>Was ist die Botschaft?</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h3>SCHRITT 3: Stichworte sammeln</h3>
+                <p>Erstelle eine Tabelle:</p>
+                <table>
+                    <tr>
+                        <th>Einleitung</th>
+                        <th>Hauptteil</th>
+                        <th>Wendung</th>
+                        <th>Schluss</th>
+                    </tr>
+                    <tr>
+                        <td>Wo? Wann? Wer?</td>
+                        <td>Problem? Ereignisse?</td>
+                        <td>Höhepunkt? Lösung?</td>
+                        <td>Botschaft?</td>
+                    </tr>
+                </table>
+                
+                <h3>SCHRITT 4: Eigene Worte finden</h3>
+                <p>Verwandle die Stichworte in ganze Sätze</p>
+                <ul>
+                    <li>Nicht abschreiben!</li>
+                    <li>Synonyme verwenden</li>
+                    <li>Sätze verbinden</li>
+                </ul>
+                
+                <h3>SCHRITT 5: Schreiben und überprüfen</h3>
+                <ol>
+                    <li>Schreibe die Nacherzählung</li>
+                    <li>Lies sie laut vor</li>
+                    <li>Überprüfe: Ist alles da? Klingt es spannend?</li>
+                </ol>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section5" class="section">
+                <h2>5. Übungen zum Textaufbau</h2>
+                
+                <h3>ÜBUNG 1: Textteile erkennen</h3>
+                <p><strong>Aufgabe:</strong> Lies den Text "Die Drachenhöhle bei Mixnitz" und markiere mit verschiedenen Farben:</p>
+                <ul>
+                    <li><strong>BLAU:</strong> Einleitung (Wo? Wann? Wer?)</li>
+                    <li><strong>GELB:</strong> Hauptteil (Das Problem)</li>
+                    <li><strong>ROT:</strong> Wendung (Der Höhepunkt)</li>
+                    <li><strong>GRÜN:</strong> Was wir daraus lernen können</li>
+                </ul>
+                
+                <h3>ÜBUNG 2: Stichworte sammeln</h3>
+                <p><strong>Aufgabe:</strong> Fülle diese Tabelle für "Die Drachenhöhle bei Mixnitz" aus:</p>
+                <table>
+                    <tr>
+                        <th>Einleitung</th>
+                        <th>Hauptteil</th>
+                        <th>Wendung</th>
+                        <th>Schluss</th>
+                    </tr>
+                    <tr>
+                        <td>Mixnitz, Steiermark, Drachenhöhle, Röthelstein</td>
+                        <td>Riesiger Drache, tötet Menschen und Tiere, Bauer verliert Rinder, Angst wächst</td>
+                        <td>Bursche plant List, gräbt Rinne mit scharfen Werkzeugen, Drache stirbt</td>
+                        <td>Mut und Klugheit siegen über Gewalt</td>
+                    </tr>
+                </table>
+                
+                <h3>ÜBUNG 3: Sätze aus Stichworten bilden</h3>
+                <p><strong>Aufgabe:</strong> Verwandle diese Stichworte in einen spannenden Einleitungssatz:</p>
+                <p><strong>Stichworte:</strong> Mixnitz - Steiermark - Drachenhöhle - gefährliche Sage - lange Zeit</p>
+                <p><strong>Dein Satz:</strong> _________________________________</p>
+                <div class="example">
+                    <p><strong>Musterlösung:</strong> "In der Steiermark, nahe dem Ort Mixnitz, erzählt man sich seit langer Zeit eine geheimnisvolle Sage über einen gefährlichen Drachen."</p>
+                </div>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section6" class="section">
+                <h2>6. Übungen zur Sprache</h2>
+                
+                <h3>ÜBUNG 4: Langweilig → Spannend</h3>
+                <p><strong>Aufgabe:</strong> Mache diese langweiligen Sätze spannend:</p>
+                <ol>
+                    <li>"Es gab einen Drachen." → "____________________________________"</li>
+                    <li>"Der Bursche tötete ihn." → "____________________________________"</li>
+                    <li>"Die Leute hatten Angst." → "____________________________________"</li>
+                </ol>
+                <div class="example">
+                    <p><strong>Musterlösungen:</strong></p>
+                    <ol>
+                        <li>"In der dunklen Höhle hauste ein gefährliches Ungeheuer."</li>
+                        <li>"Mit einer klugen List besiegte der mutige Bursche das Monster."</li>
+                        <li>"Schreckliche Furcht ergriff alle Bewohner des Dorfes."</li>
+                    </ol>
+                </div>
+                
+                <h3>ÜBUNG 5: Zeitformen korrigieren</h3>
+                <p><strong>Aufgabe:</strong> Korrigiere diese Sätze (sie stehen im Präsens, sollen aber im Präteritum stehen):</p>
+                <ol>
+                    <li>"Der Drache lebt in einer Höhle." → "Der Drache ______ in einer Höhle."</li>
+                    <li>"Er frisst Menschen und Tiere." → "Er ______ Menschen und Tiere."</li>
+                    <li>"Der Bursche hat einen Plan." → "Der Bursche ______ einen Plan."</li>
+                </ol>
+                <div class="example">
+                    <p><strong>Lösungen:</strong> lebte, fraß, hatte</p>
+                </div>
+                
+                <h3>ÜBUNG 6: Synonyme finden</h3>
+                <p><strong>Aufgabe:</strong> Finde andere Wörter für:</p>
+                <ul>
+                    <li><strong>Drache:</strong> _____________, _____________, _____________</li>
+                    <li><strong>Bursche:</strong> _____________, _____________, _____________</li>
+                    <li><strong>Angst:</strong> _____________, _____________, _____________</li>
+                    <li><strong>töten:</strong> _____________, _____________, _____________</li>
+                </ul>
+                <div class="example">
+                    <p><strong>Mögliche Lösungen:</strong></p>
+                    <ul>
+                        <li><strong>Drache:</strong> Ungeheuer, Monster, Untier</li>
+                        <li><strong>Bursche:</strong> junger Mann, Held, Kämpfer</li>
+                        <li><strong>Angst:</strong> Furcht, Schrecken, Panik</li>
+                        <li><strong>töten:</strong> vernichten, besiegen, erlegen</li>
+                    </ul>
+                </div>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section7" class="section">
+                <h2>7. Spannungsbogen in Sagen</h2>
+                
+                <h3>Was ist ein Spannungsbogen?</h3>
+                <p>Ein Spannungsbogen ist wie eine Brücke:</p>
+                
+                <div class="tension-chart">
+                    <div class="tension-peak">HÖHEPUNKT</div>
+                    <div class="tension-up">/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</div>
+                    <div class="tension-up">/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</div>
+                    <div class="tension-up">/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</div>
+                    <div>EINLEITUNG /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ SCHLUSS</div>
+                    <div>(ruhig) /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ (entspannt)</div>
+                    <div>/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</div>
+                    <div>PROBLEM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LÖSUNG</div>
+                    <div>(Spannung steigt)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Spannung fällt)</div>
+                </div>
+                
+                <h3>Spannungswörter für jeden Teil:</h3>
+                <ul>
+                    <li><strong>EINLEITUNG:</strong> "Einst...", "Vor langer Zeit...", "Es war einmal..."</li>
+                    <li><strong>PROBLEM:</strong> "Doch dann...", "Plötzlich...", "Eines Tages..."</li>
+                    <li><strong>HÖHEPUNKT:</strong> "Da...", "In diesem Moment...", "Schließlich..."</li>
+                    <li><strong>LÖSUNG:</strong> "Endlich...", "Von da an...", "Seitdem..."</li>
+                </ul>
+                
+                <h3>ÜBUNG 7: Spannungsbogen erkennen</h3>
+                <p><strong>Aufgabe:</strong> Zeichne den Spannungsbogen für "Die Drachenhöhle bei Mixnitz":</p>
+                <ol>
+                    <li>Einleitung (niedrige Spannung): _________________________</li>
+                    <li>Problem (Spannung steigt): _________________________</li>
+                    <li>Höhepunkt (höchste Spannung): _________________________</li>
+                    <li>Lösung (Spannung fällt): _________________________</li>
+                </ol>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section8" class="section">
+                <h2>8. Musteranalyse und Vergleich</h2>
+                
+                <h3>Warum ist die Musternacherzählung gut?</h3>
+                
+                <h4>EINLEITUNG ✅</h4>
+                <ul>
+                    <li>Nennt Ort (Steiermark, Mixnitz)</li>
+                    <li>Macht neugierig ("geheimnisvolle Sage")</li>
+                    <li>Führt das Thema ein (Drachen)</li>
+                </ul>
+                
+                <h4>HAUPTTEIL ✅</h4>
+                <ul>
+                    <li>Beschreibt den Drachen lebendig ("riesiger Drache mit dickem Schuppenpanzer")</li>
+                    <li>Zeigt das Problem klar (bringt Unglück, tötet Tiere)</li>
+                    <li>Erklärt die Ausgangssituation (Bauer verliert Tiere, Angst wächst)</li>
+                </ul>
+                
+                <h4>WENDUNG ✅</h4>
+                <ul>
+                    <li>Baut Spannung auf ("In den Abendstunden grub der Bursche heimlich...")</li>
+                    <li>Beschreibt die Lösung spannend (scharfe Werkzeuge, aufgerissener Bauch)</li>
+                    <li>Zeigt die Konsequenzen (Drache stirbt)</li>
+                </ul>
+                
+                <h4>SCHLUSS ✅</h4>
+                <ul>
+                    <li>Erklärt die Bedeutung der Sage</li>
+                    <li>Macht eine allgemeine Aussage über Mut und Klugheit</li>
+                </ul>
+                
+                <h3>ÜBUNG 8: Fehler finden</h3>
+                <p><strong>Aufgabe:</strong> Diese Nacherzählung hat viele Fehler. Finde und korrigiere sie:</p>
+                <div class="example">
+                    <p>"Bei Mixnitz gibt es eine Höhle. Da wohnt ein Drache. Er tötet Tiere. Ein Bursche tötet ihn. Ende."</p>
+                </div>
+                <p><strong>Was ist falsch?</strong></p>
+                <div class="example">
+                    <p><strong>Musterlösung:</strong></p>
+                    <ul>
+                        <li>Zu kurz und langweilig</li>
+                        <li>Keine spannende Sprache</li>
+                        <li>Kein richtiger Aufbau</li>
+                        <li>Keine Bedeutung am Schluss</li>
+                        <li>Falsche Zeitform (Präsens statt Präteritum)</li>
+                    </ul>
+                </div>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section9" class="section">
+                <h2>9. Checkliste für die Schularbeit</h2>
+                
+                <div class="checklist">
+                    <h3>VOR dem Schreiben ✓</h3>
+                    <div class="checklist-item">□ Text 2-3 Mal gelesen</div>
+                    <div class="checklist-item">□ Wichtige Stellen markiert</div>
+                    <div class="checklist-item">□ Unbekannte Wörter geklärt</div>
+                    <div class="checklist-item">□ Stichworte-Tabelle ausgefüllt</div>
+                    <div class="checklist-item">□ Aufbau geplant</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>WÄHREND dem Schreiben ✓</h3>
+                    <div class="checklist-item">□ Einleitung: Ort, Zeit, Personen genannt?</div>
+                    <div class="checklist-item">□ Hauptteil: Problem erklärt? Alle wichtigen Ereignisse?</div>
+                    <div class="checklist-item">□ Wendung: Höhepunkt spannend beschrieben?</div>
+                    <div class="checklist-item">□ Schluss: Bedeutung der Sage erklärt?</div>
+                    <div class="checklist-item">□ Sprache: Präteritum? 3. Person? Spannende Wörter?</div>
+                </div>
+                
+                <div class="checklist">
+                    <h3>NACH dem Schreiben ✓</h3>
+                    <div class="checklist-item">□ Text laut gelesen (klingt es gut?)</div>
+                    <div class="checklist-item">□ Rechtschreibung überprüft</div>
+                    <div class="checklist-item">□ Satzzeichen kontrolliert</div>
+                    <div class="checklist-item">□ Nichts Wichtiges vergessen?</div>
+                </div>
+                
+                <h3>Zeitplan für 50 Minuten:</h3>
+                <ul>
+                    <li>10 Minuten: Text lesen und verstehen</li>
+                    <li>5 Minuten: Stichworte sammeln</li>
+                    <li>30 Minuten: Nacherzählung schreiben</li>
+                    <li>5 Minuten: Überprüfen und korrigieren</li>
+                </ul>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+
+            <div id="section10" class="section">
+                <h2>10. Abschlussübung</h2>
+                
+                <h3>ÜBUNG 9: Komplette Nacherzählung</h3>
+                <p><strong>Aufgabe:</strong> Schreibe eine komplette Nacherzählung zu einer der Sagen von der Website amyfabijenna.github.io/amytext/main/texte/sagen6.html</p>
+                
+                <h3>Bewertungskriterien (wie in der Schularbeit):</h3>
+                <p><strong>SEHR GUT erreicht man durch:</strong></p>
+                <ul>
+                    <li>✅ Vollständiger, logischer Aufbau (Einleitung-Hauptteil-Wendung-Schluss)</li>
+                    <li>✅ Spannende, lebendige Sprache</li>
+                    <li>✅ Richtige Zeitform (Präteritum) und Person (3. Person)</li>
+                    <li>✅ Eigene Worte (nicht abgeschrieben)</li>
+                    <li>✅ Alle wichtigen Inhalte erfasst</li>
+                    <li>✅ Bedeutung der Sage erklärt</li>
+                    <li>✅ Wenige oder keine Rechtschreibfehler</li>
+                </ul>
+                
+                <h3>Vorgehen:</h3>
+                <ol>
+                    <li>Wähle eine Sage aus</li>
+                    <li>Arbeite mit der Stichworte-Tabelle</li>
+                    <li>Schreibe die Nacherzählung (ca. 200-300 Wörter)</li>
+                    <li>Überprüfe mit der Checkliste</li>
+                </ol>
+                
+                <h3>Zusätzliche Tipps für den Erfolg</h3>
+                
+                <h4>Typische Fehler vermeiden:</h4>
+                <ul>
+                    <li>❌ Abschreiben statt eigene Worte verwenden</li>
+                    <li>❌ Präsens statt Präteritum verwenden</li>
+                    <li>❌ Zu kurz oder wichtige Teile vergessen</li>
+                    <li>❌ Langweilige Sprache ohne spannende Wörter</li>
+                    <li>❌ Keine Struktur (alles durcheinander)</li>
+                </ul>
+                
+                <h4>So wird es SEHR GUT:</h4>
+                <ul>
+                    <li>✅ Plane deine Nacherzählung vor dem Schreiben</li>
+                    <li>✅ Verwende spannende Wörter und Ausdrücke</li>
+                    <li>✅ Baue einen Spannungsbogen auf</li>
+                    <li>✅ Achte auf die richtige Zeitform</li>
+                    <li>✅ Erkläre am Schluss, was die Sage bedeutet</li>
+                </ul>
+                
+                <h4>Notfall-Plan bei Zeitproblem:</h4>
+                <p>Wenn die Zeit knapp wird:</p>
+                <ol>
+                    <li>Schreibe auf jeden Fall einen Schluss</li>
+                    <li>Erkläre die Bedeutung in 1-2 Sätzen</li>
+                    <li>Lieber kürzer aber vollständig als lange aber unfertig</li>
+                </ol>
+                
+                <p style="margin-top: 30px; font-weight: bold; text-align: center;">
+                    Viel Erfolg bei deiner Schularbeit! Mit diesem Leitfaden und ausreichend Übung schaffst du garantiert eine sehr gute Nacherzählung!
+                </p>
+                
+                <a href="#" class="back-to-top">↑ Nach oben</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Der ultimative Erlebniserzählung-Guide - 5. Schulstufe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFB6C1 25%, #FFA07A 50%, #FF69B4 75%, #FF1493 100%);
+            color: #000;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #ffffff;
+            border: 3px solid #FF69B4;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            color: #000;
+        }
+        
+        .section {
+            background: #ffffff;
+            border: 2px solid #FF8C69;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(255, 140, 105, 0.2);
+        }
+        
+        .section-header {
+            background: linear-gradient(45deg, #FFB6C1, #FFA07A);
+            color: #000;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-header:hover {
+            background: linear-gradient(45deg, #FF69B4, #FF8C69);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+        
+        .section-content {
+            padding: 20px;
+            display: none;
+            color: #000;
+        }
+        
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .example-box {
+            background: #FFF0F5;
+            border-left: 5px solid #FF69B4;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #000;
+        }
+        
+        .good-bad {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .good {
+            background: #F0FFF0;
+            border: 2px solid #32CD32;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .bad {
+            background: #FFEEEE;
+            border: 2px solid #FF6B6B;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .timer-section {
+            background: linear-gradient(45deg, #FFE4E1, #FFB6C1);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .timer-display {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #000;
+        }
+        
+        .timer-controls button {
+            background: rgba(255, 105, 180, 0.3);
+            color: #000;
+            border: 2px solid #FF69B4;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .timer-controls button:hover {
+            background: rgba(255, 105, 180, 0.5);
+        }
+        
+        .word-bank {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .word-tag {
+            background: linear-gradient(45deg, #FFCCCB, #FFB6C1);
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 5px;
+            display: block;
+        }
+        
+        .word-tag:active {
+            transform: scale(0.95);
+            background: linear-gradient(45deg, #FF69B4, #FF8C69);
+        }
+        
+        .word-tag.synonym-visible {
+            background: linear-gradient(45deg, #FF69B4, #FF8C69);
+        }
+        
+        .synonyms-display {
+            background: #8B008B;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 5px 0;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .synonyms-display.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .practice-area {
+            background: #FFF0F5;
+            border: 2px solid #FFB6C1;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            color: #000;
+        }
+        
+        .practice-area textarea {
+            width: 100%;
+            height: 120px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+        
+        .checklist {
+            background: #FFF0F5;
+            border-radius: 10px;
+            padding: 20px;
+            color: #000;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .checklist label {
+            cursor: pointer;
+            display: block;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background 0.2s ease;
+            color: #000;
+        }
+        
+        .checklist label:hover {
+            background: rgba(255, 105, 180, 0.1);
+        }
+        
+        .secret-tip {
+            background: linear-gradient(45deg, #FF69B4, #FF8C69);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .secret-tip::before {
+            content: "💡";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+        }
+        
+        .highlight {
+            background: #FFFF00;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .wichtig {
+            background: #FFCCCB;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #FF6B6B;
+            margin: 10px 0;
+        }
+        
+        .wichtig::before {
+            content: "⚠️ ";
+            font-size: 1.2em;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #000;
+        }
+        
+        p, li, span, div {
+            color: #000;
+        }
+        
+        .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .good-bad {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 Der ultimative Erlebniserzählung-Guide für die 5. Schulstufe</h1>
+            <h2>Wie du in 50 Minuten eine perfekte 250-Wörter-Erlebniserzählung für Note 1 schreibst!</h2>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Was ist eine Erlebniserzählung und warum ist sie wichtig?
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p>Eine Erlebniserzählung ist wie ein <strong>spannender Film in Worten</strong> - du erzählst von etwas, das dir wirklich passiert ist und dabei starke Gefühle ausgelöst hat!</p>
+                
+                <div class="example-box">
+                    <h3>Das macht eine gute Erlebniserzählung aus:</h3>
+                    <p>🎪 <strong>Wahres Erlebnis:</strong> Es ist dir wirklich passiert</p>
+                    <p>❤️ <strong>Starke Gefühle:</strong> Du hattest Angst, Freude, Überraschung...</p>
+                    <p>📖 <strong>Spannender Aufbau:</strong> Wie ein gutes Buch mit Höhepunkt</p>
+                    <p>👁️ <strong>Lebendige Beschreibungen:</strong> Der Leser soll alles "sehen" können</p>
+                </div>
+
+                <div class="wichtig">
+                    <strong>Warum 250 Wörter in 50 Minuten?</strong><br>
+                    Das ist genau die richtige Länge, um eine spannende Geschichte zu erzählen, ohne sich zu verzetteln. Und 50 Minuten geben dir genug Zeit zum Planen, Schreiben und Kontrollieren!
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ⏰ Die 50-Minuten-Strategie für deine perfekte Note 1
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="timer-section">
+                    <h3>Erlebniserzählung-Timer</h3>
+                    <div class="timer-display" id="timerDisplay">00:00</div>
+                    <div class="timer-controls">
+                        <button onclick="startTimer(5)">5 Min Thema wählen</button>
+                        <button onclick="startTimer(10)">10 Min Planung</button>
+                        <button onclick="startTimer(30)">30 Min Schreiben</button>
+                        <button onclick="startTimer(5)">5 Min Kontrolle</button>
+                        <button onclick="stopTimer()">Stop</button>
+                    </div>
+                </div>
+                
+                <h3>Die 4 Schritte zum Erfolg:</h3>
+                <div class="example-box">
+                    <p><strong>Schritt 1 (5 Min):</strong> Erlebnis auswählen - was war besonders aufregend?</p>
+                    <p><strong>Schritt 2 (10 Min):</strong> Geschichte planen - Einleitung, Hauptteil, Schluss</p>
+                    <p><strong>Schritt 3 (30 Min):</strong> Erlebniserzählung schreiben</p>
+                    <p><strong>Schritt 4 (5 Min):</strong> Kontrollieren, korrigieren, verbessern</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎪 Schritt 1: Das perfekte Erlebnis auswählen
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Welche Erlebnisse eignen sich perfekt?</h3>
+                
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Erste Male
+                        <div class="synonyms-display">Erster Schultag, erstes Mal schwimmen, erste Fahrt ohne Stützräder</div>
+                    </div>
+                    <div class="word-tag">
+                        Aufregende Momente
+                        <div class="synonyms-display">Sturz vom Rad, Gewitter-Erlebnis, verlorenes Haustier</div>
+                    </div>
+                    <div class="word-tag">
+                        Überraschungen
+                        <div class="synonyms-display">Unerwarteter Besuch, Überraschungsparty, Fund von etwas Besonderem</div>
+                    </div>
+                    <div class="word-tag">
+                        Ängstliche Situationen
+                        <div class="synonyms-display">Allein zu Hause, Stromausfall, Referat vor der Klasse</div>
+                    </div>
+                    <div class="word-tag">
+                        Glückliche Ereignisse
+                        <div class="synonyms-display">Toller Geburtstag, gelungene Überraschung, neuer Freund</div>
+                    </div>
+                    <div class="word-tag">
+                        Abenteuer
+                        <div class="synonyms-display">Wanderung, Zelten, Ausflug mit Hindernissen</div>
+                    </div>
+                </div>
+
+                <div class="good-bad">
+                    <div class="good">
+                        <h4>✅ Perfekte Erlebnisse:</h4>
+                        <p>• Du hattest starke Gefühle<br>
+                        • Es gab einen spannenden Moment<br>
+                        • Du erinnerst dich genau<br>
+                        • Es hat dich verändert</p>
+                    </div>
+                    <div class="bad">
+                        <h4>❌ Ungeeignete Erlebnisse:</h4>
+                        <p>• Alltägliche Routinen<br>
+                        • Langweilige Ereignisse<br>
+                        • Zu private Sachen<br>
+                        • Erfundene Geschichten</p>
+                    </div>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Finde dein perfektes Erlebnis!</h4>
+                    <p>Schreibe 3 Erlebnisse auf, die dir passiert sind und bei denen du starke Gefühle hattest:</p>
+                    <textarea placeholder="1. Erlebnis: ...
+2. Erlebnis: ...
+3. Erlebnis: ...
+
+Wähle dann das spannendste aus!"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🏗️ Schritt 2: Die perfekte Struktur planen
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Der 3-Teile-Aufbau (wie bei jedem guten Film!):</h3>
+                
+                <div class="example-box">
+                    <p><strong>Einleitung (50 Wörter):</strong> Wo? Wann? Wer? Was ist passiert?</p>
+                    <p><strong>Hauptteil (150 Wörter):</strong> Das spannende Erlebnis mit Höhepunkt</p>
+                    <p><strong>Schluss (50 Wörter):</strong> Wie ging es aus? Was hast du gelernt?</p>
+                </div>
+
+                <h3>Die W-Fragen für deine Einleitung:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        WER?
+                        <div class="synonyms-display">Ich, meine Familie, Freunde, Klassenkameraden</div>
+                    </div>
+                    <div class="word-tag">
+                        WO?
+                        <div class="synonyms-display">Zu Hause, in der Schule, im Park, am See</div>
+                    </div>
+                    <div class="word-tag">
+                        WANN?
+                        <div class="synonyms-display">Letzten Sommer, an einem Freitag, nachmittags</div>
+                    </div>
+                    <div class="word-tag">
+                        WAS?
+                        <div class="synonyms-display">Kurze Vorschau auf das Erlebnis</div>
+                    </div>
+                </div>
+
+                <h3>Der Hauptteil - so baust du Spannung auf:</h3>
+                <div class="example-box">
+                    <p><span class="highlight">1. Spannungsaufbau:</span> "Allmählich wurde mir mulmig..."</p>
+                    <p><span class="highlight">2. Höhepunkt:</span> "Plötzlich passierte es..."</p>
+                    <p><span class="highlight">3. Lösung:</span> "Zum Glück konnte ich..."</p>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Plane deine Geschichte!</h4>
+                    <p>Plane deinen gewählten Erlebnis in drei Teilen:</p>
+                    <textarea placeholder="EINLEITUNG (50 Wörter):
+- Wer: 
+- Wo: 
+- Wann: 
+- Was: 
+
+HAUPTTEIL (150 Wörter):
+- Spannungsaufbau: 
+- Höhepunkt: 
+- Lösung: 
+
+SCHLUSS (50 Wörter):
+- Wie ging es aus: 
+- Was habe ich gelernt: "></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                💖 Gefühle und Körperempfindungen lebendig beschreiben
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Gefühle richtig ausdrücken - antippen für Beispiele:</h3>
+                
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Angst zeigen
+                        <div class="synonyms-display">Mir klopfte das Herz, kalter Schweiß lief mir den Rücken runter, meine Knie zitterten</div>
+                    </div>
+                    <div class="word-tag">
+                        Freude ausdrücken
+                        <div class="synonyms-display">Ich strahlte über das ganze Gesicht, mein Herz hüpfte vor Freude, ich konnte mein Glück kaum fassen</div>
+                    </div>
+                    <div class="word-tag">
+                        Aufregung beschreiben
+                        <div class="synonyms-display">Schmetterlinge im Bauch, vor Spannung fast geplatzt, konnte kaum stillsitzen</div>
+                    </div>
+                    <div class="word-tag">
+                        Erleichterung zeigen
+                        <div class="synonyms-display">Mir fiel ein Stein vom Herzen, ich atmete tief durch, endlich konnte ich entspannen</div>
+                    </div>
+                    <div class="word-tag">
+                        Überraschung darstellen
+                        <div class="synonyms-display">Mir blieb der Mund offen stehen, ich traute meinen Augen nicht, war völlig perplex</div>
+                    </div>
+                    <div class="word-tag">
+                        Wut beschreiben
+                        <div class="synonyms-display">Mir kochte das Blut, ich wurde knallrot im Gesicht, ärgerte mich schwarz</div>
+                    </div>
+                </div>
+
+                <h3>Die 5 Sinne einsetzen:</h3>
+                <div class="example-box">
+                    <p><strong>👁️ Sehen:</strong> "Die dunklen Wolken türmten sich bedrohlich auf"</p>
+                    <p><strong>👂 Hören:</strong> "Ein ohrenbetäubender Knall erschreckte mich"</p>
+                    <p><strong>👃 Riechen:</strong> "Der süße Duft von frisch gebackenen Keksen"</p>
+                    <p><strong>👅 Schmecken:</strong> "Der bittere Geschmack der Angst im Mund"</p>
+                    <p><strong>✋ Fühlen:</strong> "Die raue Rinde des Baumes unter meinen Händen"</p>
+                </div>
+
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Langweilig:</h4>
+                        <p>"Ich hatte Angst."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Lebendig:</h4>
+                        <p>"Mein Herz hämmerte so laut gegen meine Rippen, dass ich dachte, alle könnten es hören."</p>
+                    </div>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Gefühle lebendig machen!</h4>
+                    <p>Verwandle diese langweiligen Sätze in lebendige Beschreibungen:</p>
+                    <textarea placeholder="Langweilig: 'Ich war sehr glücklich.'
+Lebendig: 'Mein Herz...'
+
+Langweilig: 'Es war sehr laut.'
+Lebendig: 'Ein...'
+
+Langweilig: 'Ich war müde.'
+Lebendig: 'Meine Augen...'"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ⚡ Spannung aufbauen wie ein Profi
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Spannungswörter - deine Geheimwaffen:</h3>
+                
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Plötzlich-Wörter
+                        <div class="synonyms-display">Plötzlich, auf einmal, urplötzlich, von einer Sekunde zur anderen</div>
+                    </div>
+                    <div class="word-tag">
+                        Langsam-Wörter
+                        <div class="synonyms-display">Allmählich, langsam aber sicher, Schritt für Schritt, immer mehr</div>
+                    </div>
+                    <div class="word-tag">
+                        Zeit-Wörter
+                        <div class="synonyms-display">In diesem Moment, sekunden später, währenddessen, gleichzeitig</div>
+                    </div>
+                    <div class="word-tag">
+                        Gegensatz-Wörter
+                        <div class="synonyms-display">Aber, jedoch, doch, trotzdem, andererseits</div>
+                    </div>
+                </div>
+
+                <h3>Kurze Sätze für mehr Spannung:</h3>
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Wenig spannend:</h4>
+                        <p>"Ich ging zur Tür und öffnete sie und dann sah ich, dass draußen jemand stand."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Sehr spannend:</h4>
+                        <p>"Ich schlich zur Tür. Vorsichtig öffnete ich sie. Draußen stand jemand. Mein Herz blieb stehen."</p>
+                    </div>
+                </div>
+
+                <h3>Wörtliche Rede macht alles lebendiger:</h3>
+                <div class="example-box">
+                    <p>Statt: "Meine Mutter sagte, ich solle vorsichtig sein."</p>
+                    <p>Besser: "Sei vorsichtig!", rief meine Mutter besorgt.</p>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Spannung erzeugen!</h4>
+                    <p>Baue in diesen langweiligen Text Spannung ein:</p>
+                    <textarea placeholder="Langweilig: 'Ich ging in den Keller und es war dunkel und dann hörte ich ein Geräusch.'
+
+Spannend: 'Vorsichtig stieg ich...'"Schreibe den Text spannender!"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✍️ Die wichtigsten Schreibregeln
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die goldenen Regeln der Erlebniserzählung:</h3>
+                
+                <div class="example-box">
+                    <p><strong>📝 Ich-Form:</strong> Immer "Ich ging...", nie "Man ging..."</p>
+                    <p><strong>⏰ Vergangenheit:</strong> "Ich ging", "Es war", "Ich hatte"</p>
+                    <p><strong>📖 Chronologisch:</strong> Erzähle der Reihe nach</p>
+                    <p><strong>💭 Wahres Erlebnis:</strong> Keine erfundenen Geschichten</p>
+                    <p><strong>🎭 Lebendige Sprache:</strong> Nicht nur "gut" und "schön"</p>
+                </div>
+
+                <h3>Abwechslungsreiche Satzanfänge:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Zeit-Anfänge
+                        <div class="synonyms-display">Zuerst, danach, schließlich, währenddessen, mittlerweile</div>
+                    </div>
+                    <div class="word-tag">
+                        Ort-Anfänge
+                        <div class="synonyms-display">Dort, hier, oben, unten, nebenan, ringsum</div>
+                    </div>
+                    <div class="word-tag">
+                        Gefühl-Anfänge
+                        <div class="synonyms-display">Erleichtert, erschrocken, überglücklich, verwirrt</div>
+                    </div>
+                    <div class="word-tag">
+                        Aktion-Anfänge
+                        <div class="synonyms-display">Vorsichtig, schnell, leise, hastig, zögernd</div>
+                    </div>
+                </div>
+
+                <div class="wichtig">
+                    <strong>Häufiger Fehler:</strong> Vermeide es, jeden Satz mit "Ich" zu beginnen! Nutze die verschiedenen Satzanfänge für Abwechslung.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✅ Die Note-1-Checkliste
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="checklist">
+                    <h3>Inhalt & Aufbau (prüfe nach dem Schreiben!):</h3>
+                    <label><input type="checkbox"> Ungefähr 250 Wörter geschrieben</label>
+                    
+                    <h3>Sprache & Stil:</h3>
+                    <label><input type="checkbox"> Durchgehend Ich-Form verwendet</label>
+                    <label><input type="checkbox"> Hauptsächlich Vergangenheit (war, ging, hatte)</label>
+                    <label><input type="checkbox"> Gefühle und Körperempfindungen beschrieben</label>
+                    <label><input type="checkbox"> Alle 5 Sinne eingesetzt (sehen, hören, riechen...)</label>
+                    <label><input type="checkbox"> Spannungswörter verwendet (plötzlich, allmählich...)</label>
+                    <label><input type="checkbox"> Abwechslungsreiche Satzanfänge</label>
+                    <label><input type="checkbox"> Wörtliche Rede eingebaut</label>
+                    <label><input type="checkbox"> Kurze Sätze für spannende Stellen</label>
+                    
+                    <h3>Rechtschreibung & Form:</h3>
+                    <label><input type="checkbox"> Rechtschreibung kontrolliert</label>
+                    <label><input type="checkbox"> Satzzeichen richtig gesetzt</label>
+                    <label><input type="checkbox"> Absätze bei Einleitung, Hauptteil, Schluss</label>
+                    <label><input type="checkbox"> Saubere Handschrift</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🚨 Häufige Fehler und wie du sie vermeidest
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die 7 häufigsten Fehler:</h3>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 1: Langweiliger Einstieg</h4>
+                        <p>"Ich erzähle euch von einem Erlebnis."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Es war ein sonniger Samstag, als alles begann."</p>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 2: Keine Gefühle</h4>
+                        <p>"Ich ging in den Wald und sah einen Bären."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Mein Herz blieb stehen, als ich den riesigen Bären erblickte."</p>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 3: Kein Höhepunkt</h4>
+                        <p>Die Geschichte plätschert gleichmäßig dahin.</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>Baue einen klaren spannenden Höhepunkt ein!</p>
+                    </div>
+                </div>
+                
+                <h3>Weitere wichtige Fehlerquellen:</h3>
+                <div class="example-box">
+                    <p>❌ <strong>Zu viele Details:</strong> Jede Kleinigkeit beschreiben</p>
+                    <p>❌ <strong>Erfundene Geschichten:</strong> Es muss dir wirklich passiert sein</p>
+                    <p>❌ <strong>Falsches Ende:</strong> "Das war mein Erlebnis" ist kein guter Schluss</p>
+                    <p>❌ <strong>Monotone Satzanfänge:</strong> Jeder Satz beginnt mit "Ich"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📝 Übungen für zu Hause
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Tägliches 10-Minuten-Training:</h3>
+                
+                <div class="practice-area">
+                    <p><strong>Montag - Gefühle-Training:</strong></p>
+                    <p>Beschreibe 5 verschiedene Gefühlszustände mit Körperempfindungen:</p>
+                    <textarea placeholder="Angst: Mein Herz...
+Freude: Mein Gesicht...
+Aufregung: Mein Bauch...
+Wut: Meine Hände...
+Trauer: Meine Kehle..."></textarea>
+                </div>
+                
+                <div class="practice-area">
+                    <p><strong>Dienstag - Sinne-Training:</strong></p>
+                    <p>Beschreibe einen Ort mit allen 5 Sinnen:</p>
+                    <textarea placeholder="Mein Zimmer:
+Sehen: 
+Hören: 
+Riechen: 
+Schmecken: 
+Fühlen: "></textarea>
+                </div>
+                
+                <div class="practice-area">
+                    <p><strong>Mittwoch - Spannung-Training:</strong></p>
+                    <p>Verwandle diese 3 langweiligen Sätze in spannende:</p>
+                    <textarea placeholder="Langweilig: 'Ich öffnete die Tür.'
+Spannend: 
+
+Langweilig: 'Es regnete.'
+Spannend: 
+
+Langweilig: 'Der Hund bellte.'
+Spannend: "></textarea>
+                </div>
+                
+                <h3>Wochenend-Challenge:</h3>
+                <div class="example-box">
+                    <p>📝 <strong>Samstag:</strong> Schreibe eine komplette Erlebniserzählung in 50 Minuten</p>
+                    <p>📖 <strong>Sonntag:</strong> Lies deine Geschichte und verbessere sie mit der Checkliste</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🌟 Musterbeispiele für perfekte Erlebniserzählungen
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Beispiel 1: "Mein erstes Mal allein zu Hause" (248 Wörter)</h3>
+                <div class="example-box">
+                    <p><strong>Einleitung:</strong><br>
+                    "Es war ein verregneter Mittwochnachmittag im November, als meine Eltern mich zum ersten Mal allein zu Hause ließen. Sie mussten zu einem wichtigen Termin und ich sollte auf meinen kleinen Bruder aufpassen."</p>
+                    
+                    <p><strong>Hauptteil:</strong><br>
+                    "Zuerst war alles noch ganz normal. Mein Bruder spielte friedlich mit seinen Bauklötzen und ich schaute fern. Doch allmählich wurde es draußen dunkler und das Haus wirkte plötzlich riesig und unheimlich. Jedes kleine Geräusch ließ mich zusammenzucken. Die Heizung knackte, der Wind heulte ums Haus und die Äste kratzten an den Fenstern.
+                    
+                    Auf einmal klingelte es an der Haustür. Mein Herz schlug bis zum Hals. 'Wer konnte das sein?', dachte ich panisch. Vorsichtig schlich ich zur Tür und spähte durch den Türspion. Draußen stand ein fremder Mann mit einer großen Tasche. 'Paket!', rief er laut. Meine Hände zitterten, als ich die Tür einen Spalt öffnete."</p>
+                    
+                    <p><strong>Schluss:</strong><br>
+                    "Zum Glück war es nur der Postbote mit einem Paket für meine Mutter. Erleichtert atmete ich durch. Als meine Eltern zurückkamen, war ich stolz, dass ich alles so gut gemeistert hatte. Seitdem fühle ich mich viel erwachsener."</p>
+                </div>
+
+                <h3>Was macht dieses Beispiel so gut?</h3>
+                <div class="example-box">
+                    <p>✅ Klare Struktur mit allen drei Teilen</p>
+                    <p>✅ Gefühle werden körperlich beschrieben ("Herz schlug bis zum Hals")</p>
+                    <p>✅ Alle Sinne eingesetzt (hören: knackte, heulte, kratzte)</p>
+                    <p>✅ Spannungsaufbau durch "allmählich", "plötzlich", "auf einmal"</p>
+                    <p>✅ Wörtliche Rede macht es lebendig</p>
+                    <p>✅ Abwechslungsreiche Satzanfänge</p>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Analysiere das Beispiel!</h4>
+                    <p>Finde in dem Beispiel:</p>
+                    <textarea placeholder="3 Gefühlsbeschreibungen:
+1.
+2. 
+3.
+
+3 Spannungswörter:
+1.
+2.
+3.
+
+2 Sinneswahrnehmungen:
+1.
+2."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="secret-tip">
+            <h2>💡 GEHEIMTIPP für den Extra-Punkt:</h2>
+            <p><strong>Der "Zeitlupe-Trick":</strong></p>
+            <div class="good-bad">
+                <div class="bad">
+                    <h4>Normal:</h4>
+                    <p>"Ich fiel vom Baum."</p>
+                </div>
+                <div class="good">
+                    <h4>Profi-Trick:</h4>
+                    <p>"Ich spürte, wie meine Hände abrutschten. Sekunde um Sekunde fiel ich tiefer. Die Äste rauschten an mir vorbei. Der Boden kam immer näher. <span class="highlight">Beschreibe spannende Momente in Zeitlupe!</span>"</p>
+                </div>
+            </div>
+            <p>So wird aus einem normalen Ereignis ein fesselnder Höhepunkt, den der Leser nie vergisst!</p>
+        </div>
+
+        <div class="header">
+            <h2>🌟 Dein Weg zur Note 1:</h2>
+            <p>Eine perfekte Erlebniserzählung ist wie ein spannendes Buch - sie fesselt den Leser von der ersten bis zur letzten Zeile. Mit dieser Anleitung hast du alle Werkzeuge, um deine Lehrer zu begeistern. Vergiss nicht: Übung macht den Meister!</p>
+            
+            <div class="example-box">
+                <strong>Letzter Tipp:</strong><br>
+                Lies deine Geschichte am Ende noch einmal laut vor. Klingt sie spannend? Kannst du dir alles bildlich vorstellen? Dann hast du alles richtig gemacht!
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let timerInterval;
+        let timeLeft = 0;
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        function startTimer(minutes) {
+            stopTimer();
+            timeLeft = minutes * 60;
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    alert('Zeit ist um! 🎉');
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const timerDisplay = document.getElementById('timerDisplay');
+            if (timerDisplay) {
+                timerDisplay.textContent = display;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Checkbox-Funktionalität für die Checkliste
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = 'rgba(255, 105, 180, 0.2)';
+                        this.parentElement.style.fontWeight = 'bold';
+                    } else {
+                        this.parentElement.style.background = '';
+                        this.parentElement.style.fontWeight = 'normal';
+                    }
+                });
+            });
+
+            // Word-Tag Funktionalität
+            const wordTags = document.querySelectorAll('.word-tag');
+            wordTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const synonymsDiv = this.querySelector('.synonyms-display');
+                    const isVisible = synonymsDiv.classList.contains('visible');
+                    
+                    // Alle anderen schließen
+                    document.querySelectorAll('.synonyms-display.visible').forEach(div => {
+                        div.classList.remove('visible');
+                    });
+                    document.querySelectorAll('.word-tag.synonym-visible').forEach(tag => {
+                        tag.classList.remove('synonym-visible');
+                    });
+                    
+                    // Dieses öffnen, wenn es geschlossen war
+                    if (!isVisible) {
+                        synonymsDiv.classList.add('visible');
+                        this.classList.add('synonym-visible');
+                    }
+                });
+            });
+
+            // Wörter-Zähler für Textareas
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const counter = document.createElement('div');
+                counter.style.textAlign = 'right';
+                counter.style.marginTop = '5px';
+                counter.style.fontSize = '12px';
+                counter.style.color = '#666';
+                textarea.parentNode.appendChild(counter);
+
+                textarea.addEventListener('input', function() {
+                    const wordCount = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    counter.textContent = `${wordCount} Wörter`;
+                    
+                    // Farbe ändern je nach Wortanzahl
+                    if (wordCount >= 250) {
+                        counter.style.color = '#32CD32';
+                        counter.style.fontWeight = 'bold';
+                        counter.textContent += ' ✅ Perfekte Länge!';
+                    } else if (wordCount >= 200) {
+                        counter.style.color = '#FF8C69';
+                        counter.style.fontWeight = 'bold';
+                        counter.textContent += ' 📝 Fast geschafft!';
+                    } else {
+                        counter.style.color = '#666';
+                        counter.style.fontWeight = 'normal';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> Echtes Erlebnis mit starken Gefühlen gewählt</label>
+                    <label><input type="checkbox"> Einleitung beantwortet: Wer? Wo? Wann? Was?</label>
+                    <label><input type="checkbox"> Hauptteil hat Spannungsaufbau → Höhepunkt → Lösung</label>
+                    <label><input type="checkbox"> Schluss zeigt, wie es ausging und was ich gelernt habe</label>
+                    <label><input type="checkbox">

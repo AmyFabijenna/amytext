@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Der ultimative Zusammenfassungs-Guide - Teil 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f8ff 0%, #fff5ee 50%, #f8f0ff 100%);
+            color: #000;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #ffffff;
+            border: 2px solid #87ceeb;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(135, 206, 235, 0.2);
+            color: #000;
+        }
+        
+        .section {
+            background: #ffffff;
+            border: 1px solid #b0c4de;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(135, 206, 235, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+            color: #000;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-header:hover {
+            background: linear-gradient(45deg, #6bb6e6, #9fd3e1);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+        
+        .section-content {
+            padding: 20px;
+            display: none;
+            color: #000;
+        }
+        
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .example-box {
+            background: #f0f8ff;
+            border-left: 5px solid #87ceeb;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #000;
+        }
+        
+        .good-bad {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .good {
+            background: #f0fff0;
+            border: 2px solid #90ee90;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .bad {
+            background: #fff5f5;
+            border: 2px solid #ffa0a0;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .checklist {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            color: #000;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .checklist label {
+            cursor: pointer;
+            display: block;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background 0.2s ease;
+            color: #000;
+        }
+        
+        .checklist label:hover {
+            background: rgba(135, 206, 235, 0.1);
+        }
+        
+        .word-bank {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .word-tag {
+            background: linear-gradient(45deg, #e6f3ff, #f0f8ff);
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 5px;
+            display: block;
+        }
+        
+        .word-tag:active {
+            transform: scale(0.95);
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+        }
+        
+        .word-tag.synonym-visible {
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+        }
+        
+        .synonyms-display {
+            background: #1e3a8a;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 5px 0;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .synonyms-display.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .practice-area {
+            background: #f0f8ff;
+            border: 2px solid #b0c4de;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            color: #000;
+        }
+        
+        .practice-area textarea {
+            width: 100%;
+            height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+        
+        .secret-tip {
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .secret-tip::before {
+            content: "💡";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+        }
+        
+        .highlight {
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .book-reference {
+            background: #e6f7ff;
+            border: 2px solid #40a9ff;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .book-reference::before {
+            content: "📚 ";
+            font-weight: bold;
+        }
+        
+        .navigation-button {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            color: white;
+            padding: 25px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 600px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .navigation-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(76, 175, 80, 0.4);
+            background: linear-gradient(45deg, #45a049, #5bb85c);
+        }
+        
+        h1, h2, h3, h4 {
+            color: #000;
+        }
+        
+        p, li, span, div {
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .good-bad {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="zusammenfassungen6.html" class="navigation-button">
+            ⬅️ Hier geht es zum 1. Teil des Zusammenfassungs-Guides!
+            <br><small>Grundlagen, 40-Minuten-Strategie, Lesen, Strukturieren, Einstieg & Verbindungswörter</small>
+        </a>
+
+        <div class="header">
+            <h1>📝 Der ultimative Zusammenfassungs-Guide für die 6. Schulstufe</h1>
+            <h2>Wie du jede Textzusammenfassung perfekt meisterst! - Teil 2</h2>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📝 Schritt 6: Präsens verwenden - immer!
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die goldene Regel: Zusammenfassungen stehen IMMER im Präsens!</h3>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Seite 76:</strong> "Schreibe im Präsens" - das ist die wichtigste Regel!
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Falsch (Vergangenheit):</h4>
+                        <p>"Der Autor <u>erklärte</u>, dass Australien <u>hatte</u> große Probleme."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Richtig (Präsens):</h4>
+                        <p>"Der Autor <u>erklärt</u>, dass Australien große Probleme <u>hat</u>."</p>
+                    </div>
+                </div>
+
+                <h3>Typische Präsens-Verben für Zusammenfassungen:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        berichtet
+                        <div class="synonyms-display">erzählt, schildert, beschreibt</div>
+                    </div>
+                    <div class="word-tag">
+                        erklärt
+                        <div class="synonyms-display">erläutert, verdeutlicht, zeigt auf</div>
+                    </div>
+                    <div class="word-tag">
+                        stellt dar
+                        <div class="synonyms-display">präsentiert, zeigt, veranschaulicht</div>
+                    </div>
+                    <div class="word-tag">
+                        betont
+                        <div class="synonyms-display">unterstreicht, hebt hervor, macht deutlich</div>
+                    </div>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Korrigiere die Zeitform!</h4>
+                    <p>Korrigiere diese Sätze ins Präsens:</p>
+                    <textarea placeholder="Falsch: 'Der Bergsteiger war sehr erfahren und hatte schon viele Gipfel bestiegen.'
+Richtig: 'Der Bergsteiger...'"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🏁 Schritt 7: Der perfekte Schluss
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Schluss-Formulierungen, die immer funktionieren:</h3>
+                
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Zusammenfassend
+                        <div class="synonyms-display">Abschließend, Insgesamt, Alles in allem</div>
+                    </div>
+                    <div class="word-tag">
+                        Der Autor kommt zu dem Schluss
+                        <div class="synonyms-display">stellt fest, macht deutlich, betont</div>
+                    </div>
+                    <div class="word-tag">
+                        Das Hauptproblem ist
+                        <div class="synonyms-display">Die zentrale Herausforderung, Das wichtigste Thema</div>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="good">
+                        <h4>✅ Guter Schluss:</h4>
+                        <p>"Zusammenfassend macht der Autor deutlich, dass die Klimaerwärmung Australien vor große Herausforderungen stellt."</p>
+                    </div>
+                    <div class="bad">
+                        <h4>❌ Schlechter Schluss:</h4>
+                        <p>"Das war ein interessanter Text über Australien."</p>
+                    </div>
+                </div>
+
+                <h3>Was gehört NICHT in den Schluss:</h3>
+                <div class="example-box">
+                    <p>❌ Deine persönliche Meinung ("Ich finde...")</p>
+                    <p>❌ Neue Informationen, die nicht im Text stehen</p>
+                    <p>❌ Bewertungen ("Das war gut/schlecht...")</p>
+                    <p>❌ Eigene Erfahrungen ("Bei uns ist das anders...")</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Die perfekte Länge - wieviele Wörter?
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die Faustregel:</h3>
+                <div class="example-box">
+                    <p>📏 <strong>1/3 bis 1/4 des Originaltextes</strong></p>
+                    <p>📄 <strong>Originaltext 400 Wörter</strong> → Zusammenfassung 100-130 Wörter</p>
+                    <p>📄 <strong>Originaltext 800 Wörter</strong> → Zusammenfassung 200-270 Wörter</p>
+                </div>
+
+                <h3>Verteilung der Wörter:</h3>
+                <div class="example-box">
+                    <p><strong>Einstieg:</strong> 20-30 Wörter (Titel, Autor, Thema)</p>
+                    <p><strong>Hauptteil:</strong> 70-80% der Zusammenfassung</p>
+                    <p><strong>Schluss:</strong> 15-25 Wörter (wichtigste Aussage)</p>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Wörter zählen!</h4>
+                    <p>Schreibe eine 80-Wörter-Zusammenfassung zu diesem kurzen Text:</p>
+                    <p><em>"Die Sahara ist die größte Wüste der Welt. Sie erstreckt sich über 9 Millionen Quadratkilometer. Früher war die Sahara grün und von Flüssen durchzogen. Vor 6000 Jahren wandelte sich das Klima. Heute leben nur wenige Menschen dort, hauptsächlich Nomaden."</em></p>
+                    <textarea placeholder="Deine 80-Wörter-Zusammenfassung..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✅ Die Checkliste für SEHR GUT
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="checklist">
+                    <h3>Inhalt & Aufbau:</h3>
+                    <label><input type="checkbox"> Überschrift enthält Titel und "Textzusammenfassung"</label>
+                    <label><input type="checkbox"> Einstieg nennt Titel, Autor und Thema</label>
+                    <label><input type="checkbox"> Nur wichtige Informationen enthalten</label>
+                    <label><input type="checkbox"> Logische Reihenfolge der Informationen</label>
+                    <label><input type="checkbox"> Schluss fasst Hauptaussage zusammen</label>
+                    <label><input type="checkbox"> Keine persönliche Meinung</label>
+                    
+                    <h3>Sprache & Stil:</h3>
+                    <label><input type="checkbox"> Durchgehend Präsens verwendet</label>
+                    <label><input type="checkbox"> Eigene Worte (nicht abgeschrieben)</label>
+                    <label><input type="checkbox"> Sinnvolle Verbindungswörter</label>
+                    <label><input type="checkbox"> Abwechslungsreiche Satzanfänge</label>
+                    <label><input type="checkbox"> Sachliche Sprache</label>
+                    
+                    <h3>Formales:</h3>
+                    <label><input type="checkbox"> Richtige Länge (1/3 des Originals)</label>
+                    <label><input type="checkbox"> Korrekte Rechtschreibung</label>
+                    <label><input type="checkbox"> Richtige Satzzeichen</label>
+                    <label><input type="checkbox"> Saubere Handschrift/Formatierung</label>
+                    <label><input type="checkbox"> Absätze bei längeren Texten</label>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Aufgabe 34 (Seite 76):</strong> Nutze die Checkliste zur Überarbeitung - genau wie im Buch!
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                💡 Häufige Fehler und wie du sie vermeidest
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die 7 häufigsten Fehler:</h3>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 1: Abschreiben</h4>
+                        <p>"Australien ist der kleinste Kontinent der Erde."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Australien gilt als der kleinste der sieben Kontinente."</p>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 2: Vergangenheitsform</h4>
+                        <p>"Der Autor schrieb über Probleme."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Der Autor schreibt über Probleme."</p>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 3: Persönliche Meinung</h4>
+                        <p>"Ich denke, dass die Probleme sehr schlimm sind."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Der Autor betont die Schwere der Probleme."</p>
+                    </div>
+                </div>
+                
+                <h3>Weitere wichtige Fehlerquellen:</h3>
+                <div class="example-box">
+                    <p>❌ <strong>Zu viele Details:</strong> Nebensächliche Beispiele gehören nicht rein</p>
+                    <p>❌ <strong>Zu kurz:</strong> Wichtige Informationen fehlen</p>
+                    <p>❌ <strong>Zu lang:</strong> Unwichtige Details sind enthalten</p>
+                    <p>❌ <strong>Keine Struktur:</strong> Informationen durcheinander</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🏋️ Übungen für zu Hause
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Tägliches 10-Minuten-Training:</h3>
+                
+                <div class="practice-area">
+                    <p><strong>Montag - Schlüsselwörter-Training:</strong></p>
+                    <p>Lies einen kurzen Zeitungsartikel und markiere nur die 10 wichtigsten Wörter.</p>
+                    <textarea placeholder="Welche 10 Wörter hast du markiert?"></textarea>
+                </div>
+                
+                <div class="practice-area">
+                    <p><strong>Dienstag - Umformulierungs-Training:</strong></p>
+                    <p>Nimm 5 Sätze aus einem Text und schreibe sie in deinen eigenen Worten um.</p>
+                    <textarea placeholder="Originalsatz → Umformulierung"></textarea>
+                </div>
+                
+                <div class="practice-area">
+                    <p><strong>Mittwoch - Einstiegs-Training:</strong></p>
+                    <p>Schreibe 3 verschiedene Einstiege für denselben Text.</p>
+                    <textarea placeholder="Einstieg 1: Im Text...
+Einstieg 2: Der Autor...
+Einstieg 3: In dem Artikel..."></textarea>
+                </div>
+                
+                <h3>Wochenend-Challenge:</h3>
+                <div class="example-box">
+                    <p>📰 <strong>Samstag:</strong> Fasse einen Artikel aus der Zeitung zusammen (150 Wörter)</p>
+                    <p>📺 <strong>Sonntag:</strong> Fasse eine Dokumentation zusammen, die du gesehen hast</p>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Weitere Übung:</strong> Nutze die Texte aus deinem Buch (Seiten 66-75) und schreibe zu jedem eine Kurzzusammenfassung von 80 Wörtern.
+                </div>
+            </div>
+        </div>
+
+        <div class="secret-tip">
+            <h2>💡 GEHEIMTIPP für den Extra-Punkt:</h2>
+            <p><strong>Der "Roter-Faden-Trick":</strong></p>
+            <div class="good-bad">
+                <div class="bad">
+                    <h4>Normal:</h4>
+                    <p>Jeder Absatz steht für sich</p>
+                </div>
+                <div class="good">
+                    <h4>Profi-Trick:</h4>
+                    <p>"Nicht nur... sondern auch", "Während...", "Einerseits... andererseits" - <span class="highlight">verbinde die Absätze miteinander!</span></p>
+                </div>
+            </div>
+            <p>Beispiel: "Während der Tourismus Geld bringt, <strong>gleichzeitig</strong> schadet er aber auch der Umwelt." - So zeigst du, dass du den ganzen Text verstanden hast!</p>
+        </div>
+
+        <div class="header">
+            <h2>🌟 Denk daran:</h2>
+            <p>Eine perfekte Zusammenfassung ist wie ein guter Trailer zu einem Film - sie verrät genau das Richtige, macht neugierig aufs Original, aber spoilert nicht zu viel. Du bist der Regisseur deiner Zusammenfassung!</p>
+            
+            <div class="book-reference">
+                <strong>Vollständige Buchbezüge:</strong><br>
+                • Aufgaben 28-34 (Seiten 75-76) - komplette Übungssequenz<br>
+                • Checkliste Seite 76 - zur Kontrolle<br>
+                • Beispieltexte Seiten 66-75 - zum Üben
+            </div>
+        </div>
+
+        <a href="zusammenfassungen6.html" class="navigation-button">
+            ⬅️ Zurück zum 1. Teil des Zusammenfassungs-Guides!
+            <br><small>Grundlagen, 40-Minuten-Strategie, Lesen, Strukturieren, Einstieg & Verbindungswörter</small>
+        </a>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = 'rgba(135, 206, 235, 0.2)';
+                    } else {
+                        this.parentElement.style.background = '';
+                    }
+                });
+            });
+
+            const wordTags = document.querySelectorAll('.word-tag');
+            wordTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const synonymsDiv = this.querySelector('.synonyms-display');
+                    const isVisible = synonymsDiv.classList.contains('visible');
+                    
+                    document.querySelectorAll('.synonyms-display.visible').forEach(div => {
+                        div.classList.remove('visible');
+                    });
+                    document.querySelectorAll('.word-tag.synonym-visible').forEach(tag => {
+                        tag.classList.remove('synonym-visible');
+                    });
+                    
+                    if (!isVisible) {
+                        synonymsDiv.classList.add('visible');
+                        this.classList.add('synonym-visible');
+                    }
+                });
+            });
+
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const counter = document.createElement('div');
+                counter.style.textAlign = 'right';
+                counter.style.marginTop = '5px';
+                counter.style.fontSize = '12px';
+                counter.style.color = '#666';
+                textarea.parentNode.appendChild(counter);
+
+                textarea.addEventListener('input', function() {
+                    const wordCount = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    counter.textContent = `${wordCount} Wörter`;
+                    
+                    if (wordCount >= 50) {
+                        counter.style.color = '#1e3a8a';
+                        counter.style.fontWeight = 'bold';
+                    } else {
+                        counter.style.color = '#666';
+                        counter.style.fontWeight = 'normal';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
