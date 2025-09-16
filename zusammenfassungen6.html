@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Der ultimative Zusammenfassungs-Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f8ff 0%, #fff5ee 50%, #f8f0ff 100%);
+            color: #000;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #ffffff;
+            border: 2px solid #87ceeb;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(135, 206, 235, 0.2);
+            color: #000;
+        }
+        
+        .section {
+            background: #ffffff;
+            border: 1px solid #b0c4de;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(135, 206, 235, 0.15);
+        }
+        
+        .section-header {
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+            color: #000;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-header:hover {
+            background: linear-gradient(45deg, #6bb6e6, #9fd3e1);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+        
+        .section-content {
+            padding: 20px;
+            display: none;
+            color: #000;
+        }
+        
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .example-box {
+            background: #f0f8ff;
+            border-left: 5px solid #87ceeb;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #000;
+        }
+        
+        .good-bad {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .good {
+            background: #f0fff0;
+            border: 2px solid #90ee90;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .bad {
+            background: #fff5f5;
+            border: 2px solid #ffa0a0;
+            border-radius: 10px;
+            padding: 15px;
+            color: #000;
+        }
+        
+        .checklist {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            color: #000;
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .checklist label {
+            cursor: pointer;
+            display: block;
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background 0.2s ease;
+            color: #000;
+        }
+        
+        .checklist label:hover {
+            background: rgba(135, 206, 235, 0.1);
+        }
+        
+        .word-bank {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .word-tag {
+            background: linear-gradient(45deg, #e6f3ff, #f0f8ff);
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 5px;
+            display: block;
+        }
+        
+        .word-tag:active {
+            transform: scale(0.95);
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+        }
+        
+        .word-tag.synonym-visible {
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+        }
+        
+        .synonyms-display {
+            background: #1e3a8a;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 5px 0;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .synonyms-display.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .timer-section {
+            background: linear-gradient(45deg, #e6f3ff, #f0f8ff);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .timer-display {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #000;
+        }
+        
+        .timer-controls button {
+            background: rgba(135, 206, 235, 0.3);
+            color: #000;
+            border: 2px solid #87ceeb;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .timer-controls button:hover {
+            background: rgba(135, 206, 235, 0.5);
+        }
+        
+        .practice-area {
+            background: #f0f8ff;
+            border: 2px solid #b0c4de;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            color: #000;
+        }
+        
+        .practice-area textarea {
+            width: 100%;
+            height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+        
+        .secret-tip {
+            background: linear-gradient(45deg, #87ceeb, #add8e6);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .secret-tip::before {
+            content: "💡";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2em;
+        }
+        
+        .highlight {
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .book-reference {
+            background: #e6f7ff;
+            border: 2px solid #40a9ff;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .book-reference::before {
+            content: "📚 ";
+            font-weight: bold;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #000;
+        }
+        
+        p, li, span, div {
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .good-bad {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Der ultimative Zusammenfassungs-Guide für die 6. Schulstufe</h1>
+            <h2>Wie du jede Textzusammenfassung perfekt meisterst!</h2>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Was ist eine Zusammenfassung und warum ist sie wichtig?
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p>Eine Zusammenfassung ist wie ein <strong>Röntgenbild eines Textes</strong> - sie zeigt nur das Wichtigste und lässt alles Unwichtige weg. Du hilfst anderen (oder dir selbst später), einen langen Text schnell zu verstehen!</p>
+                
+                <div class="book-reference">
+                    <strong>Im Buch Seite 76:</strong> Eine Zusammenfassung informiert andere über einen unbekannten Text und gibt nur wichtige Informationen wieder.
+                </div>
+                
+                <h3>Die goldene Regel: Zusammenfassungen stehen IMMER im Präsens!</h3>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Seite 76:</strong> "Schreibe im Präsens" - das ist die wichtigste Regel!
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Falsch (Vergangenheit):</h4>
+                        <p>"Der Autor <u>erklärte</u>, dass Australien <u>hatte</u> große Probleme."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Richtig (Präsens):</h4>
+                        <p>"Der Autor <u>erklärt</u>, dass Australien große Probleme <u>hat</u>."</p>
+                    </div>
+                </div>
+
+                <h3>Typische Präsens-Verben für Zusammenfassungen:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        berichtet
+                        <div class="synonyms-display">erzählt, schildert, beschreibt</div>
+                    </div>
+                    <div class="word-tag">
+                        erklärt
+                        <div class="synonyms-display">erläutert, verdeutlicht, zeigt auf</div>
+                    </div>
+                    <div class="word-tag">
+                        stellt dar
+                        <div class="synonyms-display">präsentiert, zeigt, veranschaulicht</div>
+                    </div>
+                    <div class="word-tag">
+                        betont
+                        <div class="synonyms-display">unterstreicht, hebt hervor, macht deutlich</div>
+                    </div>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Korrigiere die Zeitform!</h4>
+                    <p>Korrigiere diese Sätze ins Präsens:</p>
+                    <textarea placeholder="Falsch: 'Der Bergsteiger war sehr erfahren und hatte schon viele Gipfel bestiegen.'
+Richtig: 'Der Bergsteiger...'"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🏁 Schritt 7: Der perfekte Schluss
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Schluss-Formulierungen, die immer funktionieren:</h3>
+                
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Zusammenfassend
+                        <div class="synonyms-display">Abschließend, Insgesamt, Alles in allem</div>
+                    </div>
+                    <div class="word-tag">
+                        Der Autor kommt zu dem Schluss
+                        <div class="synonyms-display">stellt fest, macht deutlich, betont</div>
+                    </div>
+                    <div class="word-tag">
+                        Das Hauptproblem ist
+                        <div class="synonyms-display">Die zentrale Herausforderung, Das wichtigste Thema</div>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="good">
+                        <h4>✅ Guter Schluss:</h4>
+                        <p>"Zusammenfassend macht der Autor deutlich, dass die Klimaerwärmung Australien vor große Herausforderungen stellt."</p>
+                    </div>
+                    <div class="bad">
+                        <h4>❌ Schlechter Schluss:</h4>
+                        <p>"Das war ein interessanter Text über Australien."</p>
+                    </div>
+                </div>
+
+                <h3>Was gehört NICHT in den Schluss:</h3>
+                <div class="example-box">
+                    <p>❌ Deine persönliche Meinung ("Ich finde...")</p>
+                    <p>❌ Neue Informationen, die nicht im Text stehen</p>
+                    <p>❌ Bewertungen ("Das war gut/schlecht...")</p>
+                    <p>❌ Eigene Erfahrungen ("Bei uns ist das anders...")</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Die perfekte Länge - wieviele Wörter?
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die Faustregel:</h3>
+                <div class="example-box">
+                    <p>📏 <strong>1/3 bis 1/4 des Originaltextes</strong></p>
+                    <p>📄 <strong>Originaltext 400 Wörter</strong> → Zusammenfassung 100-130 Wörter</p>
+                    <p>📄 <strong>Originaltext 800 Wörter</strong> → Zusammenfassung 200-270 Wörter</p>
+                </div>
+
+                <h3>Verteilung der Wörter:</h3>
+                <div class="example-box">
+                    <p><strong>Einstieg:</strong> 20-30 Wörter (Titel, Autor, Thema)</p>
+                    <p><strong>Hauptteil:</strong> 70-80% der Zusammenfassung</p>
+                    <p><strong>Schluss:</strong> 15-25 Wörter (wichtigste Aussage)</p>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Wörter zählen!</h4>
+                    <p>Schreibe eine 80-Wörter-Zusammenfassung zu diesem kurzen Text:</p>
+                    <p><em>"Die Sahara ist die größte Wüste der Welt. Sie erstreckt sich über 9 Millionen Quadratkilometer. Früher war die Sahara grün und von Flüssen durchzogen. Vor 6000 Jahren wandelte sich das Klima. Heute leben nur wenige Menschen dort, hauptsächlich Nomaden."</em></p>
+                    <textarea placeholder="Deine 80-Wörter-Zusammenfassung..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✅ Die Checkliste für SEHR GUT
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="checklist">
+                    <h3>Inhalt & Aufbau:</h3>
+                    <label><input type="checkbox"> Überschrift enthält Titel und "Textzusammenfassung"</label>
+                    <label><input type="checkbox"> Einstieg nennt Titel, Autor und Thema</label>
+                    <label><input type="checkbox"> Nur wichtige Informationen enthalten</label>
+                    <label><input type="checkbox"> Logische Reihenfolge der Informationen</label>
+                    <label><input type="checkbox"> Schluss fasst Hauptaussage zusammen</label>
+                    <label><input type="checkbox"> Keine persönliche Meinung</label>
+                    
+                    <h3>Sprache & Stil:</h3>
+                    <label><input type="checkbox"> Durchgehend Präsens verwendet</label>
+                    <label><input type="checkbox"> Eigene Worte (nicht abgeschrieben)</label>
+                    <label><input type="checkbox"> Sinnvolle Verbindungswörter</label>
+                    <label><input type="checkbox"> Abwechslungsreiche Satzanfänge</label>
+                    <label><input type="checkbox"> Sachliche Sprache</label>
+                    
+                    <h3>Formales:</h3>
+                    <label><input type="checkbox"> Richtige Länge (1/3 des Originals)</label>
+                    <label><input type="checkbox"> Korrekte Rechtschreibung</label>
+                    <label><input type="checkbox"> Richtige Satzzeichen</label>
+                    <label><input type="checkbox"> Saubere Handschrift/Formatierung</label>
+                    <label><input type="checkbox"> Absätze bei längeren Texten</label>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Aufgabe 34 (Seite 76):</strong> Nutze die Checkliste zur Überarbeitung - genau wie im Buch!
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                💡 Häufige Fehler und wie du sie vermeidest
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die 7 häufigsten Fehler:</h3>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 1: Abschreiben</h4>
+                        <p>"Australien ist der kleinste Kontinent der Erde."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Australien gilt als der kleinste der sieben Kontinente."</p>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 2: Vergangenheitsform</h4>
+                        <p>"Der Autor schrieb über Probleme."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Der Autor schreibt über Probleme."</p>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Fehler 3: Persönliche Meinung</h4>
+                        <p>"Ich denke, dass die Probleme sehr schlimm sind."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Besser:</h4>
+                        <p>"Der Autor betont die Schwere der Probleme."</p>
+                    </div>
+                </div>
+                
+                <h3>Weitere wichtige Fehlerquellen:</h3>
+                <div class="example-box">
+                    <p>❌ <strong>Zu viele Details:</strong> Nebensächliche Beispiele gehören nicht rein</p>
+                    <p>❌ <strong>Zu kurz:</strong> Wichtige Informationen fehlen</p>
+                    <p>❌ <strong>Zu lang:</strong> Unwichtige Details sind enthalten</p>
+                    <p>❌ <strong>Keine Struktur:</strong> Informationen durcheinander</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🏋️ Übungen für zu Hause
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Tägliches 10-Minuten-Training:</h3>
+                
+                <div class="practice-area">
+                    <p><strong>Montag - Schlüsselwörter-Training:</strong></p>
+                    <p>Lies einen kurzen Zeitungsartikel und markiere nur die 10 wichtigsten Wörter.</p>
+                    <textarea placeholder="Welche 10 Wörter hast du markiert?"></textarea>
+                </div>
+                
+                <div class="practice-area">
+                    <p><strong>Dienstag - Umformulierungs-Training:</strong></p>
+                    <p>Nimm 5 Sätze aus einem Text und schreibe sie in deinen eigenen Worten um.</p>
+                    <textarea placeholder="Originalsatz → Umformulierung"></textarea>
+                </div>
+                
+                <div class="practice-area">
+                    <p><strong>Mittwoch - Einstiegs-Training:</strong></p>
+                    <p>Schreibe 3 verschiedene Einstiege für denselben Text.</p>
+                    <textarea placeholder="Einstieg 1: Im Text...
+Einstieg 2: Der Autor...
+Einstieg 3: In dem Artikel..."></textarea>
+                </div>
+                
+                <h3>Wochenend-Challenge:</h3>
+                <div class="example-box">
+                    <p>📰 <strong>Samstag:</strong> Fasse einen Artikel aus der Zeitung zusammen (150 Wörter)</p>
+                    <p>📺 <strong>Sonntag:</strong> Fasse eine Dokumentation zusammen, die du gesehen hast</p>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Weitere Übung:</strong> Nutze die Texte aus deinem Buch (Seiten 66-75) und schreibe zu jedem eine Kurzzusammenfassung von 80 Wörtern.
+                </div>
+            </div>
+        </div>
+
+        <div class="secret-tip">
+            <h2>💡 GEHEIMTIPP für den Extra-Punkt:</h2>
+            <p><strong>Der "Roter-Faden-Trick":</strong></p>
+            <div class="good-bad">
+                <div class="bad">
+                    <h4>Normal:</h4>
+                    <p>Jeder Absatz steht für sich</p>
+                </div>
+                <div class="good">
+                    <h4>Profi-Trick:</h4>
+                    <p>"Nicht nur... sondern auch", "Während...", "Einerseits... andererseits" - <span class="highlight">verbinde die Absätze miteinander!</span></p>
+                </div>
+            </div>
+            <p>Beispiel: "Während der Tourismus Geld bringt, <strong>gleichzeitig</strong> schadet er aber auch der Umwelt." - So zeigst du, dass du den ganzen Text verstanden hast!</p>
+        </div>
+
+        <div class="header">
+            <h2>🌟 Denk daran:</h2>
+            <p>Eine perfekte Zusammenfassung ist wie ein guter Trailer zu einem Film - sie verrät genau das Richtige, macht neugierig aufs Original, aber spoilert nicht zu viel. Du bist der Regisseur deiner Zusammenfassung!</p>
+            
+            <div class="book-reference">
+                <strong>Vollständige Buchbezüge:</strong><br>
+                • Aufgaben 28-34 (Seiten 75-76) - komplette Übungssequenz<br>
+                • Checkliste Seite 76 - zur Kontrolle<br>
+                • Beispieltexte Seiten 66-75 - zum Üben
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+        let timeLeft = 0;
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        function startTimer(minutes) {
+            stopTimer();
+            timeLeft = minutes * 60;
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    alert('Zeit ist um! 🎉');
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const timerDisplay = document.getElementById('timerDisplay');
+            if (timerDisplay) {
+                timerDisplay.textContent = display;
+            }
+        }
+
+        // Checkbox-Interaktivität
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.style.background = 'rgba(135, 206, 235, 0.2)';
+                    } else {
+                        this.parentElement.style.background = '';
+                    }
+                });
+            });
+
+            // Synonyme für Mobile - Touch-Events
+            const wordTags = document.querySelectorAll('.word-tag');
+            wordTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const synonymsDiv = this.querySelector('.synonyms-display');
+                    const isVisible = synonymsDiv.classList.contains('visible');
+                    
+                    // Alle anderen Synonyme verstecken
+                    document.querySelectorAll('.synonyms-display.visible').forEach(div => {
+                        div.classList.remove('visible');
+                    });
+                    document.querySelectorAll('.word-tag.synonym-visible').forEach(tag => {
+                        tag.classList.remove('synonym-visible');
+                    });
+                    
+                    // Dieses ein- oder ausblenden
+                    if (!isVisible) {
+                        synonymsDiv.classList.add('visible');
+                        this.classList.add('synonym-visible');
+                    }
+                });
+            });
+
+            // Textarea Wort-Zähler
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                const counter = document.createElement('div');
+                counter.style.textAlign = 'right';
+                counter.style.marginTop = '5px';
+                counter.style.fontSize = '12px';
+                counter.style.color = '#666';
+                textarea.parentNode.appendChild(counter);
+
+                textarea.addEventListener('input', function() {
+                    const wordCount = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                    counter.textContent = `${wordCount} Wörter`;
+                    
+                    if (wordCount >= 50) {
+                        counter.style.color = '#1e3a8a';
+                        counter.style.fontWeight = 'bold';
+                    } else {
+                        counter.style.color = '#666';
+                        counter.style.fontWeight = 'normal';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>Das Ziel einer Zusammenfassung:</h3>
+                <div class="example-box">
+                    <p>🎯 <strong>Schneller Überblick:</strong> Jeder soll sofort verstehen, worum es geht</p>
+                    <p>📋 <strong>Nur das Wichtigste:</strong> Keine Details, keine persönlichen Meinungen</p>
+                    <p>⏰ <strong>Zeit sparen:</strong> In 5 Minuten lesen, was im Original 30 Minuten dauert</p>
+                    <p>🎪 <strong>Neutral bleiben:</strong> Du berichtest, du bewertest nicht</p>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)" style="font-size: 1em; background: #f0f8ff; margin: 10px 0;">
+                        📖 Für Schüler ohne Buch: Was steht im Schulbuch?
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content" style="padding: 15px; background: #f8f9fa;">
+                        <p><strong>Definition aus dem Buch:</strong> Mit einer Zusammenfassung informierst du andere über einen unbekannten Text. Du gibst nur wichtige Informationen in eigenen Worten wieder und vermittelst keine persönliche Meinung. Schreibe im Präsens.</p>
+                        
+                        <p><strong>Struktur der Überschrift:</strong> Die Überschrift sollte den Titel des Textes, der zusammengefasst wird, und die Textsorte enthalten.</p>
+                        
+                        <p><strong>Anfang:</strong> Am Beginn sollten noch einmal der Titel des Textes, die Verfasserin/der Verfasser sowie das Thema genannt werden.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ⏰ Die 40-Minuten-Strategie für perfekte Zusammenfassungen
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="timer-section">
+                    <h3>Zusammenfassungs-Timer</h3>
+                    <div class="timer-display" id="timerDisplay">00:00</div>
+                    <div class="timer-controls">
+                        <button onclick="startTimer(10)">10 Min Lesen & Verstehen</button>
+                        <button onclick="startTimer(5)">5 Min Planung</button>
+                        <button onclick="startTimer(20)">20 Min Schreiben</button>
+                        <button onclick="startTimer(5)">5 Min Kontrolle</button>
+                        <button onclick="stopTimer()">Stop</button>
+                    </div>
+                </div>
+                
+                <h3>Die 4 Schritte zum Erfolg:</h3>
+                <div class="example-box">
+                    <p><strong>Schritt 1 (10 Min):</strong> Text 2x lesen, Schlüsselwörter markieren</p>
+                    <p><strong>Schritt 2 (5 Min):</strong> Wichtigste Punkte notieren, Struktur planen</p>
+                    <p><strong>Schritt 3 (20 Min):</strong> Zusammenfassung schreiben</p>
+                    <p><strong>Schritt 4 (5 Min):</strong> Kontrollieren und verbessern</p>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug:</strong> Die Aufgaben 25-27 (Seite 74) zeigen dir, wie du Schritt für Schritt vorgehst.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📖 Schritt 1: Richtig lesen und markieren
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Das 2-Phasen-Lesen:</h3>
+                
+                <div class="good-bad">
+                    <div class="good">
+                        <h4>✅ 1. Durchgang:</h4>
+                        <p>Lies einmal komplett durch - verstehe den Gesamtinhalt. Nicht markieren!</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ 2. Durchgang:</h4>
+                        <p>Jetzt markierst du Schlüsselwörter und wichtige Informationen.</p>
+                    </div>
+                </div>
+                
+                <h3>Was markieren? - antippen für Details:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Zahlen & Fakten
+                        <div class="synonyms-display">Jahreszahlen, Mengenangaben, Prozente, Größen</div>
+                    </div>
+                    <div class="word-tag">
+                        Hauptpersonen
+                        <div class="synonyms-display">Namen, Titel, wichtige Charaktere</div>
+                    </div>
+                    <div class="word-tag">
+                        Orte
+                        <div class="synonyms-display">Länder, Städte, geografische Angaben</div>
+                    </div>
+                    <div class="word-tag">
+                        Ursachen
+                        <div class="synonyms-display">Weil, deshalb, aufgrund, durch</div>
+                    </div>
+                    <div class="word-tag">
+                        Folgen
+                        <div class="synonyms-display">Dadurch, folglich, infolgedessen, bewirkt</div>
+                    </div>
+                    <div class="word-tag">
+                        Probleme
+                        <div class="synonyms-display">Schwierigkeiten, Herausforderungen, Konflikte</div>
+                    </div>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Aufgabe 29 (Seite 75):</strong> Lies den Text und markiere beim genauen Lesen Schlüsselwörter - genau wie in der Übung!
+                </div>
+                
+                <div class="practice-area">
+                    <h4>🎯 Übung: Markiere die wichtigen Stellen!</h4>
+                    <p><strong>Beispieltext:</strong> "Australien ist der kleinste Kontinent der Erde. Aufgrund der Klimaerwärmung herrschen dort extreme Temperaturen von über 40 Grad. Dies führt zu großer Trockenheit. Infolgedessen entstehen häufig Buschbrände, die tausende Häuser zerstören."</p>
+                    <textarea placeholder="Schreibe die Schlüsselwörter heraus, die du markiert hättest..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🗂️ Schritt 2: Informationen ordnen und strukturieren
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die W-Fragen - dein Kompass:</h3>
+                <div class="example-box">
+                    <p><strong>WER?</strong> Welche Personen sind wichtig?</p>
+                    <p><strong>WAS?</strong> Was ist das Hauptthema/Problem?</p>
+                    <p><strong>WO?</strong> Welche Orte sind relevant?</p>
+                    <p><strong>WANN?</strong> Welche Zeiten/Daten sind wichtig?</p>
+                    <p><strong>WARUM?</strong> Was sind die Ursachen?</p>
+                    <p><strong>WELCHE FOLGEN?</strong> Was passiert dadurch?</p>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Aufgabe 25 (Seite 74):</strong> Die Zwischenüberschriften helfen dir, die Struktur zu erkennen.
+                </div>
+                
+                <h3>Informationen nach Wichtigkeit ordnen:</h3>
+                <div class="good-bad">
+                    <div class="good">
+                        <h4>✅ SEHR WICHTIG:</h4>
+                        <p>Hauptthema, zentrale Personen, wichtigste Fakten, Hauptproblem, wichtigste Lösung</p>
+                    </div>
+                    <div class="bad">
+                        <h4>❌ UNWICHTIG:</h4>
+                        <p>Nebensächliche Details, Beispiele, persönliche Meinungen des Autors, Wiederholungen</p>
+                    </div>
+                </div>
+                
+                <div class="practice-area">
+                    <h4>🎯 Übung: Ordne nach Wichtigkeit!</h4>
+                    <p>Aus dem Text über Australien - ordne von 1 (sehr wichtig) bis 5 (unwichtig):</p>
+                    <textarea placeholder="□ Australien ist der kleinste Kontinent
+□ Temperaturen über 40 Grad durch Klimaerwärmung  
+□ Ein bestimmter Farmer verlor sein Haus
+□ Buschbrände zerstören tausende Häuser
+□ Trockenheit als Folge der Hitze"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✍️ Schritt 3: Der perfekte Einstieg
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die Einstiegsformel (IMMER so beginnen!):</h3>
+                <div class="example-box">
+                    <p><strong>Im Text "[Titel]" von [Autor] geht es um...</strong></p>
+                    <p><strong>Der Autor/Die Autorin [Name] beschreibt in seinem/ihrem Text "[Titel]"...</strong></p>
+                    <p><strong>In dem Text "[Titel]" befasst sich [Autor] mit...</strong></p>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Seite 76:</strong> Am Beginn der Zusammenfassung sollten noch einmal der Titel des Textes, die Verfasserin/der Verfasser sowie das Thema genannt werden.
+                </div>
+                
+                <h3>Konkrete Einstiegsbeispiele:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Für Sachtexte
+                        <div class="synonyms-display">beschreibt, erklärt, berichtet über, stellt dar, informiert über</div>
+                    </div>
+                    <div class="word-tag">
+                        Für Problemtexte
+                        <div class="synonyms-display">behandelt das Problem, schildert die Schwierigkeiten, zeigt auf</div>
+                    </div>
+                    <div class="word-tag">
+                        Für Reiseberichte
+                        <div class="synonyms-display">erzählt von seiner Reise, berichtet über, schildert seine Erlebnisse</div>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="good">
+                        <h4>✅ Guter Einstieg:</h4>
+                        <p>"In dem Text 'Australien - ein Kontinent ächzt unter der Klimaerwärmung' von Andreas Erlacher geht es um die Folgen des Klimawandels für Australien."</p>
+                    </div>
+                    <div class="bad">
+                        <h4>❌ Schlechter Einstieg:</h4>
+                        <p>"Dieser Text ist sehr interessant und handelt von Australien."</p>
+                    </div>
+                </div>
+                
+                <div class="book-reference">
+                    <strong>Buchbezug Aufgabe 32 (Seite 76):</strong> Nutze die Formulierungen aus der Box für deinen Einstieg.
+                </div>
+                
+                <div class="practice-area">
+                    <h4>🎯 Übung: Schreibe 3 verschiedene Einstiege!</h4>
+                    <p>Für einen fiktiven Text: "Das Dach der Welt" von Berg Steiger über den Mount Everest</p>
+                    <textarea placeholder="1. Im Text...
+2. Der Autor...
+3. In dem Text..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🔗 Schritt 4: Sätze geschickt verbinden
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Verbindungswörter - deine unsichtbaren Helfer:</h3>
+                
+                <h4>Reihenfolge zeigen:</h4>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Zuerst/Zunächst
+                        <div class="synonyms-display">Am Anfang, Zu Beginn, Anfangs</div>
+                    </div>
+                    <div class="word-tag">
+                        Dann/Danach
+                        <div class="synonyms-display">Anschließend, Daraufhin, Im Anschluss</div>
+                    </div>
+                    <div class="word-tag">
+                        Schließlich/Zuletzt
+                        <div class="synonyms-display">Abschließend, Zum Schluss, Letztendlich</div>
+                    </div>
+                </div>
+                
+                <h4>Ursache und Wirkung:</h4>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Deshalb/Daher
+                        <div class="synonyms-display">Folglich, Infolgedessen, Somit</div>
+                    </div>
+                    <div class="word-tag">
+                        Weil/Da
+                        <div class="synonyms-display">Aufgrund der Tatsache, Denn</div>
+                    </div>
+                    <div class="word-tag">
+                        Dadurch
+                        <div class="synonyms-display">Durch diese Maßnahme, Hierdurch</div>
+                    </div>
+                </div>
+                
+                <h4>Gegensätze zeigen:</h4>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        Jedoch/Aber
+                        <div class="synonyms-display">Allerdings, Dennoch, Trotzdem</div>
+                    </div>
+                    <div class="word-tag">
+                        Im Gegensatz dazu
+                        <div class="synonyms-display">Hingegen, Dagegen, Andererseits</div>
+                    </div>
+                </div>
+                
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Langweilig ohne Verbindungen:</h4>
+                        <p>"Australien ist sehr heiß. Es gibt Buschbrände. Die Häuser werden zerstört."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Flüssig mit Verbindungen:</h4>
+                        <p>"Da Australien sehr heiß ist, entstehen häufig Buschbrände. Infolgedessen werden tausende Häuser zerstört."</p>
+                    </div>
+                </div>
+                
+                <div class="practice-area">
+                    <h4>🎯 Übung: Verbinde die Sätze geschickt!</h4>
+                    <p>Verbinde diese Sätze mit passenden Verbindungswörtern:</p>
+                    <textarea placeholder="Das Himalaya-Gebirge ist sehr hoch. Viele Touristen wollen den Mount Everest besteigen. Die Besteigung ist gefährlich. Jedes Jahr sterben Menschen dabei.
+
+Verbinde die Sätze mit: obwohl, deshalb, dennoch..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎨 Schritt 5: In eigenen Worten schreiben
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Die Kunst des Umformulierens:</h3>
+                <p>Du darfst <strong>NIE</strong> ganze Sätze aus dem Text abschreiben! Du musst alles in deinen eigenen Worten sagen.</p>
+                
+                <h3>Umformulierungs-Tricks - antippen für Alternativen:</h3>
+                <div class="word-bank">
+                    <div class="word-tag">
+                        "sehr groß"
+                        <div class="synonyms-display">riesig, gewaltig, enorm, gigantisch</div>
+                    </div>
+                    <div class="word-tag">
+                        "viele Menschen"
+                        <div class="synonyms-display">zahlreiche Personen, eine Vielzahl von Leuten</div>
+                    </div>
+                    <div class="word-tag">
+                        "es gibt Probleme"
+                        <div class="synonyms-display">Schwierigkeiten entstehen, Herausforderungen treten auf</div>
+                    </div>
+                    <div class="word-tag">
+                        "passiert oft"
+                        <div class="synonyms-display">ereignet sich häufig, kommt regelmäßig vor</div>
+                    </div>
+                    <div class="word-tag">
+                        "ist wichtig"
+                        <div class="synonyms-display">spielt eine bedeutende Rolle, hat große Bedeutung</div>
+                    </div>
+                </div>
+                
+                <h3>Satzumstellungen:</h3>
+                <div class="good-bad">
+                    <div class="bad">
+                        <h4>❌ Original:</h4>
+                        <p>"Die Klimaerwärmung ist in Australien besonders spürbar."</p>
+                    </div>
+                    <div class="good">
+                        <h4>✅ Umformuliert:</h4>
+                        <p>"Australien leidet stark unter dem Klimawandel."</p>
+                    </div>
+                </div>
+                
+                <div class="practice-area">
+                    <h4>🎯 Übung: Formuliere um!</h4>
+                    <p>Originaltext: "Der Mount Everest ist mit 8.848 Metern der höchste Berg der Welt. Jährlich versuchen etwa 500 Bergsteiger den Gipfel zu erreichen."</p>
+                    <textarea placeholder="Schreibe den Satz in deinen eigenen Worten um..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📝 Schritt 6: Präsens verwenden - immer!
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>
