@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fachbegriffe - Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -90,18 +89,18 @@
             background: linear-gradient(135deg, #2c3e50, #34495e);
         }
 
-        .accordion-content {
-            background: white;
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-        }
+.panel {
+    background: white;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+}
 
-        .accordion-content.active {
-            max-height: 1000px;
-            padding: 20px;
-        }
+.panel.active {
+    max-height: 1000px;
+    padding: 20px;
+}
 
         .term-grid {
             display: grid;
@@ -213,7 +212,7 @@
                             Metapher
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Bildlicher Ausdruck, bei dem ein Wort aus seinem eigentlichen Bedeutungszusammenhang in einen anderen übertragen wird.</p>
                             <p><strong>Wirkung:</strong> Veranschaulichung, Verstärkung, emotionale Aufladung</p>
                             <div class="example-box">
@@ -227,7 +226,7 @@
                             Vergleich
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Gegenüberstellung von zwei Dingen mit Hilfe von Vergleichspartikeln (wie, als, gleichsam).</p>
                             <p><strong>Wirkung:</strong> Veranschaulichung, Konkretisierung</p>
                             <div class="example-box">
@@ -241,7 +240,7 @@
                             Personifikation
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Zuschreibung menschlicher Eigenschaften oder Handlungen zu unbelebten Dingen, Tieren oder abstrakten Begriffen.</p>
                             <p><strong>Wirkung:</strong> Veranschaulichung, Emotionalisierung, lebendigere Darstellung</p>
                             <div class="example-box">
@@ -255,7 +254,7 @@
                             Hyperbel
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Übertreibung, um etwas besonders eindringlich darzustellen.</p>
                             <p><strong>Wirkung:</strong> Verstärkung, Dramatisierung, Betonung</p>
                             <div class="example-box">
@@ -269,7 +268,7 @@
                             Anapher
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Wiederholung eines Wortes oder einer Wortgruppe am Anfang aufeinanderfolgenden Sätzen oder Verse.</p>
                             <p><strong>Wirkung:</strong> Rhythmisierung, Betonung, Steigerung</p>
                             <div class="example-box">
@@ -283,7 +282,7 @@
                             Rhetorische Frage
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Frage, die keine Antwort erwartet, sondern eine Aussage verstärken oder den Leser zum Nachdenken anregen soll.</p>
                             <p><strong>Wirkung:</strong> Appell, Betonung, gedankliche Beteiligung des Lesers</p>
                             <div class="example-box">
@@ -297,7 +296,7 @@
                             Ironie
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Aussage, bei der das Gesagte nicht dem Gemeinten entspricht, oft mit kritischer oder spöttischer Absicht.</p>
                             <p><strong>Wirkung:</strong> Kritik, Spott, humorvolle Distanzierung</p>
                             <div class="example-box">
@@ -311,7 +310,7 @@
                             Oxymoron
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p><strong>Definition:</strong> Verbindung zweier sich widersprechender Begriffe zu einer neuen Einheit.</p>
                             <p><strong>Wirkung:</strong> Spannung, Paradoxie, gedankliche Herausforderung</p>
                             <div class="example-box">
@@ -516,7 +515,7 @@
             const icon = header.querySelector('.accordion-icon');
             
             // Schließe alle anderen Accordions
-            const allContents = document.querySelectorAll('.accordion-content');
+            const allContents = document.querySelectorAll('.panel');
             const allIcons = document.querySelectorAll('.accordion-icon');
             
             allContents.forEach(item => {
@@ -557,7 +556,7 @@
 
         // Schließe alle Accordions beim Laden der Seite
         document.addEventListener('DOMContentLoaded', function() {
-            const accordionContents = document.querySelectorAll('.accordion-content');
+            const accordionContents = document.querySelectorAll('.panel');
             accordionContents.forEach(content => {
                 content.classList.remove('active');
             });

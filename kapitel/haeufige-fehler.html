@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Häufige Fehler - Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -253,13 +252,13 @@
             align-items: center;
         }
 
-        .accordion-content {
-            display: none;
-            padding: 15px;
-            background: white;
-            border-radius: 0 0 5px 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+.panel {
+    display: none;
+    padding: 15px;
+    background: white;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
         @media (max-width: 768px) {
             .content-body {
@@ -434,7 +433,7 @@
                         <span>Übungen: Fehler erkennen und korrigieren</span>
                         <span class="accordion-icon">▼</span>
                     </div>
-                    <div class="accordion-content">
+                    <div class="panel">
                         <div class="exercise-container">
                             <h4>Übung 1: Formale Fehler korrigieren</h4>
                             <p>Korrigieren Sie die folgenden fehlerhaften Einleitungssätze:</p>
@@ -504,7 +503,7 @@
                         <span>Checkliste zur Fehlervermeidung</span>
                         <span class="accordion-icon">▼</span>
                     </div>
-                    <div class="accordion-content">
+                    <div class="panel">
                         <div class="progress-section">
                             <h3>Vor der Abgabe überprüfen:</h3>
                             <ul>
@@ -534,7 +533,7 @@
         // Accordions standardmäßig geschlossen halten
         document.addEventListener('DOMContentLoaded', function() {
             // Alle Accordion-Inhalte ausblenden
-            const accordionContents = document.querySelectorAll('.accordion-content');
+            const accordionContents = document.querySelectorAll('.panel');
             accordionContents.forEach(content => {
                 content.style.display = 'none';
             });

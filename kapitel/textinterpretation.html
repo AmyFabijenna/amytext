@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Textinterpretation - Deutschmatura Handbuch</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -146,7 +145,7 @@
         }
 
         /* Zusätzliche Styles für Textinterpretation */
-        .collapsible {
+        .accordion {
             background-color: #f8f9fa;
             color: #2c3e50;
             cursor: pointer;
@@ -163,7 +162,7 @@
             position: relative;
         }
 
-        .collapsible::after {
+        .accordion::after {
             content: '\002B'; /* Pluszeichen */
             color: #2c3e50;
             font-weight: bold;
@@ -177,11 +176,11 @@
             transform: rotate(0deg);
         }
 
-        .active, .collapsible:hover {
+        .active, .accordion:hover {
             background-color: #e9ecef;
         }
 
-        .collapsible-content {
+        .panel {
             padding: 0 18px;
             max-height: 0;
             overflow: hidden;
@@ -268,8 +267,8 @@
                     <p>Die Textinterpretation ist ein zentraler Bestandteil der Deutschmatura. Hier lernst du, wie du literarische Texte systematisch analysierst und interpretierst - von der Einleitung bis zum Schluss, mit allen wichtigen Arbeitsschritten, Formulierungshilfen und Übungen.</p>
                 </div>
 
-                <button class="collapsible">1. Struktur einer Textinterpretation</button>
-                <div class="collapsible-content">
+                <button class="accordion">1. Struktur einer Textinterpretation</button>
+                <div class="panel">
                     <h3>Aufbau einer gelungenen Interpretation</h3>
                     <p>Eine Textinterpretation folgt einer klaren Struktur:</p>
                     
@@ -329,8 +328,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible">2. Die Einleitung verfassen</button>
-                <div class="collapsible-content">
+                <button class="accordion">2. Die Einleitung verfassen</button>
+                <div class="panel">
                     <h3>Elemente einer guten Einleitung</h3>
                     <p>Die Einleitung einer Textinterpretation sollte folgende Informationen enthalten:</p>
                     <ul>
@@ -378,8 +377,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible">3. Die Inhaltsangabe</button>
-                <div class="collapsible-content">
+                <button class="accordion">3. Die Inhaltsangabe</button>
+                <div class="panel">
                     <h3>Merkmale einer guten Inhaltsangabe</h3>
                     <p>Eine gelungene Inhaltsangabe für eine Interpretation sollte:</p>
                     <ul>
@@ -409,8 +408,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible">4. Die Analyse</button>
-                <div class="collapsible-content">
+                <button class="accordion">4. Die Analyse</button>
+                <div class="panel">
                     <h3>Analyseaspekte nach Textgattungen</h3>
                     <p>Je nach Textgattung stehen unterschiedliche Analyseaspekte im Vordergrund:</p>
                     
@@ -459,8 +458,8 @@
                     </ul>
                 </div>
 
-                <button class="collapsible">5. Die Interpretation/Deutung</button>
-                <div class="collapsible-content">
+                <button class="accordion">5. Die Interpretation/Deutung</button>
+                <div class="panel">
                     <h3>Deutungshypothese formulieren</h3>
                     <p>Eine gute Deutungshypothese sollte:</p>
                     <ul>
@@ -500,8 +499,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible">6. Der Schluss</button>
-                <div class="collapsible-content">
+                <button class="accordion">6. Der Schluss</button>
+                <div class="panel">
                     <h3>Elemente eines gelungenen Schlusses</h3>
                     <p>Der Schluss einer Textinterpretation sollte folgende Elemente enthalten:</p>
                     <ul>
@@ -524,8 +523,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible">7. Checkliste für die Textinterpretation</button>
-                <div class="collapsible-content">
+                <button class="accordion">7. Checkliste für die Textinterpretation</button>
+                <div class="panel">
                     <h3>Selbstüberprüfung vor der Abgabe</h3>
                     <p>Überprüfe deine fertige Textinterpretation anhand dieser Checkliste:</p>
                     
@@ -569,7 +568,7 @@
 
     <script>
         // Funktion für aufklappbare Bereiche
-        const coll = document.getElementsByClassName("collapsible");
+        const coll = document.getElementsByClassName("accordion");
         for (let i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function() {
                 this.classList.toggle("active");
@@ -639,7 +638,7 @@
             }
         }
 
-        // Alle Collapsibles standardmäßig geschlossen lassen
+        // Alle accordions standardmäßig geschlossen lassen
         window.onload = function() {
             // Kein automatisches Öffnen des ersten Kapitels
         };

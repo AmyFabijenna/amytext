@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulierungshilfen: Einleitung & Schluss | Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -186,7 +185,7 @@
             }
         }
 
-        .collapsible {
+        .accordion {
             background: #34495e;
             color: white;
             cursor: pointer;
@@ -202,7 +201,7 @@
             position: relative;
         }
 
-        .collapsible:after {
+        .accordion:after {
             content: '\002B'; /* Pluszeichen */
             color: white;
             font-weight: bold;
@@ -214,11 +213,11 @@
             content: "\2212"; /* Minuszeichen */
         }
 
-        .active, .collapsible:hover {
+        .active, .accordion:hover {
             background: #2c3e50;
         }
 
-        .collapsible-content {
+        .panel {
             padding: 0 18px;
             max-height: 0;
             overflow: hidden;
@@ -240,8 +239,8 @@
                 <div class="section">
                     <h2 class="section-title">Einleitungen formulieren</h2>
                     
-                    <button type="button" class="collapsible">Formale Textangaben</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Formale Textangaben</button>
+                    <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Standardformulierungen für Textangaben</h3>
                             <ul class="formulierung-list">
@@ -261,8 +260,8 @@
                         </div>
                     </div>
 
-                    <button type="button" class="collapsible">Thematische Einführung</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Thematische Einführung</button>
+                    <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Einführung in das Textthema</h3>
                             <ul class="formulierung-list">
@@ -286,8 +285,8 @@
                         </div>
                     </div>
 
-                    <button type="button" class="collapsible">Beispiele für vollständige Einleitungen</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Beispiele für vollständige Einleitungen</button>
+                    <div class="panel">
                         <div class="example-box">
                             <div class="example-title">Beispiel 1: Sachtextanalyse</div>
                             <div class="example-content">
@@ -307,8 +306,8 @@
                 <div class="section">
                     <h2 class="section-title">Schlüsse formulieren</h2>
                     
-                    <button type="button" class="collapsible">Zusammenfassende Schlüsse</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Zusammenfassende Schlüsse</button>
+                    <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Ergebnisse zusammenfassen</h3>
                             <ul class="formulierung-list">
@@ -328,8 +327,8 @@
                         </div>
                     </div>
 
-                    <button type="button" class="collapsible">Bewertende Schlüsse</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Bewertende Schlüsse</button>
+                    <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Text bewerten und einordnen</h3>
                             <ul class="formulierung-list">
@@ -353,8 +352,8 @@
                         </div>
                     </div>
 
-                    <button type="button" class="collapsible">Persönliche Stellungnahmen</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Persönliche Stellungnahmen</button>
+                    <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Eigene Position formulieren</h3>
                             <ul class="formulierung-list">
@@ -378,8 +377,8 @@
                         </div>
                     </div>
 
-                    <button type="button" class="collapsible">Beispiele für vollständige Schlüsse</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Beispiele für vollständige Schlüsse</button>
+                    <div class="panel">
                         <div class="example-box">
                             <div class="example-title">Beispiel 1: Sachtextanalyse</div>
                             <div class="example-content">
@@ -445,10 +444,10 @@
             }
         }
 
-        // Collapsible Bereiche - standardmäßig geschlossen
-        const coll = document.getElementsByClassName("collapsible");
+        // accordion Bereiche - standardmäßig geschlossen
+        const coll = document.getElementsByClassName("accordion");
         for (let i = 0; i < coll.length; i++) {
-            // Setze alle Collapsible-Inhalte auf geschlossen
+            // Setze alle accordion-Inhalte auf geschlossen
             coll[i].nextElementSibling.style.maxHeight = null;
             
             coll[i].addEventListener("click", function() {

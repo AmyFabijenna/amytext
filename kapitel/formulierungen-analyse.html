@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulierungshilfen für die Textanalyse - Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -83,7 +82,7 @@
             margin-bottom: 15px;
         }
 
-        .collapsible {
+        .accordion {
             background-color: #eee;
             color: #444;
             cursor: pointer;
@@ -98,11 +97,11 @@
             margin-bottom: 10px;
         }
 
-        .active, .collapsible:hover {
+        .active, .accordion:hover {
             background-color: #ddd;
         }
 
-        .collapsible:after {
+        .accordion:after {
             content: '\002B';
             color: #777;
             font-weight: bold;
@@ -207,7 +206,7 @@
                 <div class="section">
                     <h2 id="sprachliche-mittel">Formulierungen für sprachliche Mittel</h2>
                     
-                    <button class="collapsible">Metaphern und Vergleiche</button>
+                    <button class="accordion">Metaphern und Vergleiche</button>
                     <div class="content">
                         <p>Metaphern und Vergleiche sind zentrale Stilmittel, die Texte bildhaft und anschaulich machen.</p>
                         
@@ -225,7 +224,7 @@
                         </div>
                     </div>
                     
-                    <button class="collapsible">Wiederholungen und Parallelismen</button>
+                    <button class="accordion">Wiederholungen und Parallelismen</button>
                     <div class="content">
                         <p>Wiederholungen und Parallelismen strukturieren Texte und verstärken Aussagen.</p>
                         
@@ -242,7 +241,7 @@
                         </div>
                     </div>
                     
-                    <button class="collapsible">Rhetorische Fragen</button>
+                    <button class="accordion">Rhetorische Fragen</button>
                     <div class="content">
                         <p>Rhetorische Fragen zielen nicht auf eine Antwort, sondern auf die Reflexion der Lesenden.</p>
                         
@@ -263,7 +262,7 @@
                 <div class="section">
                     <h2 id="argumentationsanalyse">Formulierungen für die Argumentationsanalyse</h2>
                     
-                    <button class="collapsible">Argumentationsstruktur beschreiben</button>
+                    <button class="accordion">Argumentationsstruktur beschreiben</button>
                     <div class="content">
                         <p>Die Analyse der Argumentationsstruktur untersucht den Aufbau und die Logik der Argumentation.</p>
                         
@@ -281,7 +280,7 @@
                         </div>
                     </div>
                     
-                    <button class="collapsible">Argumentationstypen benennen</button>
+                    <button class="accordion">Argumentationstypen benennen</button>
                     <div class="content">
                         <p>Argumente lassen sich verschiedenen Typen zuordnen, die unterschiedlich überzeugend wirken.</p>
                         
@@ -299,7 +298,7 @@
                         </div>
                     </div>
                     
-                    <button class="collapsible">Argumentationsmuster erkennen</button>
+                    <button class="accordion">Argumentationsmuster erkennen</button>
                     <div class="content">
                         <p>Argumentationsmuster zeigen typische Strategien der Überzeugungsarbeit.</p>
                         
@@ -321,7 +320,7 @@
                 <div class="section">
                     <h2 id="textstruktur">Formulierungen für Textstruktur und Komposition</h2>
                     
-                    <button class="collapsible">Textaufbau beschreiben</button>
+                    <button class="accordion">Textaufbau beschreiben</button>
                     <div class="content">
                         <p>Die Analyse des Textaufbaus untersucht die Gliederung und Anordnung der Textteile.</p>
                         
@@ -339,7 +338,7 @@
                         </div>
                     </div>
                     
-                    <button class="collapsible">Übergänge und Verknüpfungen</button>
+                    <button class="accordion">Übergänge und Verknüpfungen</button>
                     <div class="content">
                         <p>Übergänge und Verknüpfungen sorgen für Kohärenz und Verständlichkeit.</p>
                         
@@ -361,7 +360,7 @@
                 <div class="section">
                     <h2 id="wirkungsanalyse">Formulierungen für die Wirkungsanalyse</h2>
                     
-                    <button class="collapsible">Wirkung auf Lesende</button>
+                    <button class="accordion">Wirkung auf Lesende</button>
                     <div class="content">
                         <p>Die Wirkungsanalyse untersucht, wie der Text auf die Rezipienten wirkt.</p>
                         
@@ -379,7 +378,7 @@
                         </div>
                     </div>
                     
-                    <button class="collapsible">Intentionale Wirkung</button>
+                    <button class="accordion">Intentionale Wirkung</button>
                     <div class="content">
                         <p>Die intentionale Wirkung beschreibt die beabsichtigte Wirkung des Textes.</p>
                         
@@ -445,8 +444,8 @@
     </main>
 
     <script>
-        // Collapsible functionality - start with all closed
-        var coll = document.getElementsByClassName("collapsible");
+        // accordion functionality - start with all closed
+        var coll = document.getElementsByClassName("accordion");
         var i;
 
         for (i = 0; i < coll.length; i++) {

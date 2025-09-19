@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Überarbeitungstechniken - Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -172,14 +171,14 @@
             background: #e9ecef;
         }
 
-        .accordion-content {
+        .panel {
             padding: 0;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out, padding 0.3s ease;
         }
 
-        .accordion-content.active {
+        .panel.active {
             padding: 15px;
             max-height: 1000px;
         }
@@ -272,7 +271,7 @@
                             Grundlagen der Textüberarbeitung
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <h3>Warum Überarbeitung so wichtig ist</h3>
                             <p>Die Überarbeitung ist der Prozess, bei dem du deinen Text kritisch prüfst und verbesserst. Dabei geht es nicht nur um Rechtschreibung und Grammatik, sondern vor allem um Inhalt, Struktur und sprachliche Präzision.</p>
                             
@@ -292,7 +291,7 @@
                             Checkliste zur Textüberarbeitung
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <h3>Persönliche Checkliste erstellen</h3>
                             <p>Erstelle eine persönliche Checkliste für die Überarbeitung deiner Textanalysen. Berücksichtige dabei verschiedene Aspekte wie Inhalt, Struktur, Sprache und Formalia.</p>
                             
@@ -379,7 +378,7 @@
                             Übung: Gezielte Textüberarbeitung
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <div class="exercise">
                                 <h4>Übung 1: Fehlerhafte Textanalyse überarbeiten</h4>
                                 <p><strong>Aufgabe:</strong> Überarbeite den folgenden fehlerhaften Textanalyseabschnitt. Identifiziere und korrigiere Probleme in Bezug auf Inhalt, Struktur, Sprache und Formalia.</p>
@@ -420,7 +419,7 @@
                             Peer-Review-Simulation
                             <span class="accordion-icon">+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <div class="exercise">
                                 <h4>Übung 2: Textanalyse bewerten und kommentieren</h4>
                                 <p><strong>Aufgabe:</strong> Stelle dir vor, du bist Lehrer/in und sollst die folgende Textanalyse korrigieren und kommentieren. Bewerte den Text nach folgenden Kriterien:</p>
@@ -526,7 +525,7 @@
 
         // Beim Laden der Seite alle Accordion-Elemente schließen
         document.addEventListener('DOMContentLoaded', function() {
-            const accordionContents = document.querySelectorAll('.accordion-content');
+            const accordionContents = document.querySelectorAll('.panel');
             const accordionIcons = document.querySelectorAll('.accordion-icon');
             
             accordionContents.forEach(content => {

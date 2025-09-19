@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argumentationsanalyse - Deutschmatura Handbuch</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -111,7 +110,7 @@
             color: #856404;
         }
 
-        .collapsible {
+        .accordion {
             background-color: #eee;
             color: #444;
             cursor: pointer;
@@ -126,11 +125,11 @@
             border-radius: 5px;
         }
 
-        .active, .collapsible:hover {
+        .active, .accordion:hover {
             background-color: #ccc;
         }
 
-        .collapsible-content {
+        .panel {
             padding: 0 18px;
             display: none;
             overflow: hidden;
@@ -214,8 +213,8 @@
                         </ul>
                     </div>
                     
-                    <button class="collapsible">Beispiel: Argumentationsbausteine identifizieren</button>
-                    <div class="collapsible-content">
+                    <button class="accordion">Beispiel: Argumentationsbausteine identifizieren</button>
+                    <div class="panel">
                         <p><strong>Textbeispiel:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</p>
                         
                         <p><strong>Analyse:</strong></p>
@@ -263,8 +262,8 @@
                         </table>
                     </div>
                     
-                    <button class="collapsible">Visualisierung von Argumentationsstrukturen</button>
-                    <div class="collapsible-content">
+                    <button class="accordion">Visualisierung von Argumentationsstrukturen</button>
+                    <div class="panel">
                         <p>Argumentationsstrukturen können grafisch dargestellt werden, um sie besser zu verstehen:</p>
                         
                         <p><strong>Beispiel:</strong> "Die Lektüre literarischer Klassiker sollte auch im digitalen Zeitalter ein zentraler Bestandteil des Schulunterrichts bleiben."</p>
@@ -339,8 +338,8 @@ Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
                         </ul>
                     </div>
                     
-                    <button class="collapsible">Übung: Argumentationsmuster erkennen und bewerten</button>
-                    <div class="collapsible-content">
+                    <button class="accordion">Übung: Argumentationsmuster erkennen und bewerten</button>
+                    <div class="panel">
                         <p><strong>Aufgabe:</strong> Identifiziere in den folgenden Textpassagen die verwendeten Argumentationsmuster und bewerten ihre Überzeugungskraft.</p>
                         
                         <ol>
@@ -479,9 +478,9 @@ Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
             }
         }
 
-        // Korrigierte Collapsible-Funktionalität
+        // Korrigierte accordion-Funktionalität
         document.addEventListener('DOMContentLoaded', function() {
-            const coll = document.getElementsByClassName("collapsible");
+            const coll = document.getElementsByClassName("accordion");
             
             for (let i = 0; i < coll.length; i++) {
                 // Initial alle Inhalte ausblenden

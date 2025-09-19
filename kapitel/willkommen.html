@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Willkommen - Deutschmatura Handbuch</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -192,14 +191,14 @@
             background: #e9ecef;
         }
 
-        .accordion-content {
+        .panel {
             padding: 0;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out, padding 0.3s ease;
         }
 
-        .accordion-content.active {
+        .panel.active {
             padding: 15px;
             max-height: 1000px;
         }
@@ -351,7 +350,7 @@
                             Wie viel Zeit sollte ich für die Vorbereitung einplanen?
                             <span>+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p>Für eine gründliche Vorbereitung empfehlen wir:</p>
                             <ul>
                                 <li><strong>6-8 Wochen vor der Prüfung:</strong> 2-3 Stunden pro Woche für die Grundlagen</li>
@@ -368,7 +367,7 @@
                             Welche Textsorten kommen in der Matura am häufigsten vor?
                             <span>+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p>Die häufigsten Textsorten in der Deutschmatura sind:</p>
                             <ol>
                                 <li><strong>Kommentare und Essays</strong> (ca. 30%)</li>
@@ -386,7 +385,7 @@
                             Wie kann ich meine Argumentation verbessern?
                             <span>+</span>
                         </div>
-                        <div class="accordion-content">
+                        <div class="panel">
                             <p>Für eine überzeugende Argumentation:</p>
                             <ul>
                                 <li>Nutze das <a href="kapitel/argumentationsanalyse.html">Argumentationsschema</a> für klare Struktur</li>
@@ -458,7 +457,7 @@
         
         // Alle Accordion-Inhalte standardmäßig schließen
         document.addEventListener('DOMContentLoaded', function() {
-            const accordionContents = document.querySelectorAll('.accordion-content');
+            const accordionContents = document.querySelectorAll('.panel');
             accordionContents.forEach(content => {
                 content.classList.remove('active');
             });

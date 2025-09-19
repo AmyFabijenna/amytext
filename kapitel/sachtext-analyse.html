@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beispiel: Sachtext analysieren | Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -164,7 +163,7 @@
             border-bottom: 1px solid #e9ecef;
         }
 
-        .collapsible {
+        .accordion {
             background-color: #34495e;
             color: white;
             cursor: pointer;
@@ -179,11 +178,11 @@
             transition: background-color 0.3s;
         }
 
-        .active, .collapsible:hover {
+        .active, .accordion:hover {
             background-color: #2c3e50;
         }
 
-        .collapsible-content {
+        .panel {
             padding: 0 18px;
             max-height: 0;
             overflow: hidden;
@@ -278,8 +277,8 @@
                     </div>
                 </div>
 
-                <button type="button" class="collapsible">Schritt 1: Einleitung und kurze Inhaltsangabe</button>
-                <div class="collapsible-content">
+                <button type="button" class="accordion">Schritt 1: Einleitung und kurze Inhaltsangabe</button>
+                <div class="panel">
                     <div class="analysis-section">
                         <h4>Ziel dieser Phase</h4>
                         <p>Den Text einordnen und seinen wesentlichen Inhalt knapp zusammenfassen.</p>
@@ -305,8 +304,8 @@
                     </div>
                 </div>
 
-                <button type="button" class="collapsible">Schritt 2: Stilanalyse</button>
-                <div class="collapsible-content">
+                <button type="button" class="accordion">Schritt 2: Stilanalyse</button>
+                <div class="panel">
                     <div class="analysis-section">
                         <h4>Ziel dieser Phase</h4>
                         <p>Die sprachlichen und strukturellen Merkmale des Textes untersuchen und ihre Wirkung analysieren.</p>
@@ -343,8 +342,8 @@
                     </div>
                 </div>
 
-                <button type="button" class="collapsible">Schritt 3: Bewertung und Ausblick/Schluss</button>
-                <div class="collapsible-content">
+                <button type="button" class="accordion">Schritt 3: Bewertung und Ausblick/Schluss</button>
+                <div class="panel">
                     <div class="analysis-section">
                         <h4>Ziel dieser Phase</h4>
                         <p>Den Text kritisch würdigen und eigene Gedanken zum Thema entwickeln.</p>
@@ -395,8 +394,8 @@
                         <li>Formuliere eine kritische Bewertung des Textausschnitts.</li>
                     </ol>
                     
-                    <button type="button" class="collapsible">Lösungsvorschlag anzeigen</button>
-                    <div class="collapsible-content">
+                    <button type="button" class="accordion">Lösungsvorschlag anzeigen</button>
+                    <div class="panel">
                         <div class="solution">
                             <h4>Lösungsvorschlag für die Übung</h4>
                             <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
@@ -433,7 +432,7 @@
     <script>
         // JavaScript für aufklappbare Bereiche
         document.addEventListener('DOMContentLoaded', function() {
-            const coll = document.getElementsByClassName("collapsible");
+            const coll = document.getElementsByClassName("accordion");
             
             for (let i = 0; i < coll.length; i++) {
                 // Initial alle Inhalte ausblenden

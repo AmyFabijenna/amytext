@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Textanalyse - Grundlagen</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -66,7 +65,7 @@
             margin-bottom: 20px;
         }
 
-        .collapsible {
+        .accordion {
             background: #34495e;
             color: white;
             cursor: pointer;
@@ -86,28 +85,28 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .collapsible:hover {
+        .accordion:hover {
             background: #2c3e50;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        .collapsible.active {
+        .accordion.active {
             background: #2c3e50;
         }
 
-        .collapsible:after {
+        .accordion:after {
             content: '+';
             font-size: 20px;
             font-weight: bold;
             transition: transform 0.3s;
         }
 
-        .collapsible.active:after {
+        .accordion.active:after {
             content: '−';
         }
 
-        .section-content {
+        .panel {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-out;
@@ -115,7 +114,7 @@
             border-radius: 0 0 10px 10px;
         }
 
-        .section-content.active {
+        .panel.active {
             max-height: 8000px;
         }
 
@@ -123,24 +122,24 @@
             padding: 30px;
         }
 
-        .section-content h3 {
+        .panel h3 {
             color: #2c3e50;
             margin: 25px 0 15px 0;
             border-bottom: 2px solid #34495e;
             padding-bottom: 10px;
         }
 
-        .section-content h4 {
+        .panel h4 {
             color: #34495e;
             margin: 20px 0 10px 0;
         }
 
-        .section-content ul, .section-content ol {
+        .panel ul, .panel ol {
             margin-left: 25px;
             margin-bottom: 15px;
         }
 
-        .section-content li {
+        .panel li {
             margin-bottom: 8px;
         }
 
@@ -345,7 +344,7 @@
                 padding: 20px;
             }
             
-            .collapsible {
+            .accordion {
                 padding: 15px;
                 font-size: 1em;
             }
@@ -404,8 +403,8 @@
             <button class="expand-all-btn" onclick="toggleAll()">Alle Bereiche aufklappen</button>
 
             <!-- Verstehen des Textes -->
-            <button class="collapsible" id="verstehen">1. Verstehen des Textes</button>
-            <div class="section-content">
+            <button class="accordion" id="verstehen">1. Verstehen des Textes</button>
+            <div class="panel">
                 <div class="section-inner">
                     <h3>Bevor du mit der Analyse beginnst</h3>
                     
@@ -482,8 +481,8 @@
             </div>
 
             <!-- Aufbau der Textanalyse -->
-            <button class="collapsible" id="aufbau">2. Aufbau der Textanalyse</button>
-            <div class="section-content">
+            <button class="accordion" id="aufbau">2. Aufbau der Textanalyse</button>
+            <div class="panel">
                 <div class="section-inner">
                     <h3>Eine gute Analyse besteht aus Einleitung, Hauptteil und Schluss</h3>
 
@@ -587,8 +586,8 @@
             </div>
 
             <!-- Textsorten erkennen -->
-            <button class="collapsible" id="textsorten">3. Textsorten erkennen und analysieren</button>
-            <div class="section-content">
+            <button class="accordion" id="textsorten">3. Textsorten erkennen und analysieren</button>
+            <div class="panel">
                 <div class="section-inner">
                     <h3>Wichtige Textsorten für die Deutschmatura</h3>
 
@@ -707,8 +706,8 @@
             </div>
 
             <!-- Argumentationsanalyse -->
-            <button class="collapsible" id="argumentation">4. Argumentationsanalyse</button>
-            <div class="section-content">
+            <button class="accordion" id="argumentation">4. Argumentationsanalyse</button>
+            <div class="panel">
                 <div class="section-inner">
                     <h3>Argumentationsstrukturen verstehen</h3>
                     
@@ -812,8 +811,8 @@
             </div>
 
             <!-- Sprachanalyse -->
-            <button class="collapsible" id="sprache">5. Sprachanalyse</button>
-            <div class="section-content">
+            <button class="accordion" id="sprache">5. Sprachanalyse</button>
+            <div class="panel">
                 <div class="section-inner">
                     <h3>Sprachliche Ebenen analysieren</h3>
 
@@ -910,8 +909,8 @@
             </div>
 
             <!-- Übungen -->
-            <button class="collapsible" id="uebungen">6. Übungen und Praxisbeispiele</button>
-            <div class="section-content">
+            <button class="accordion" id="uebungen">6. Übungen und Praxisbeispiele</button>
+            <div class="panel">
                 <div class="section-inner">
                     <h3>Textanalyse üben mit Beispieltexten</h3>
 
@@ -981,11 +980,11 @@
     </div>
 
     <script>
-        // JavaScript für die Collapsible-Funktionalität
-        var coll = document.getElementsByClassName("collapsible");
+        // JavaScript für die accordion-Funktionalität
+        var coll = document.getElementsByClassName("accordion");
         var i;
 
-        // Alle Collapsibles standardmäßig schließen
+        // Alle accordions standardmäßig schließen
         for (i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function() {
                 this.classList.toggle("active");
@@ -1005,7 +1004,7 @@
             content.classList.remove("active");
         }
 
-        // Funktion zum Öffnen/Schließen aller Collapsibles
+        // Funktion zum Öffnen/Schließen aller accordions
         function toggleAll() {
             var allOpen = true;
             

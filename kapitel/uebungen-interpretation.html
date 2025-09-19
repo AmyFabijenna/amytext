@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interpretationsübungen - Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -471,4 +470,100 @@
                         <h3>Übung 8: Checkliste für die Textinterpretation</h3>
                         <span>+</span>
                     </div>
-                    <div
+                    <div><div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Überprüfe deine Textinterpretation mit dieser Checkliste:</p>
+                        <form id="checkliste-form">
+                            <h4>Einleitung:</h4>
+                            <label><input type="checkbox"> Titel, Autor, Erscheinungsjahr genannt</label><br>
+                            <label><input type="checkbox"> Textgattung bestimmt</label><br>
+                            <label><input type="checkbox"> Thema kurz genannt</label><br>
+                            <label><input type="checkbox"> Epocheneinordnung vorgenommen</label><br>
+                            
+                            <h4>Hauptteil - Inhaltsangabe:</h4>
+                            <label><input type="checkbox"> Präsens verwendet</label><br>
+                            <label><input type="checkbox"> Sachliche Darstellung ohne Wertung</label><br>
+                            <label><input type="checkbox"> Chronologische Reihenfolge</label><br>
+                            <label><input type="checkbox"> Konzentration auf das Wesentliche</label><br>
+                            
+                            <h4>Hauptteil - Analyse:</h4>
+                            <label><input type="checkbox"> Formale Aspekte untersucht</label><br>
+                            <label><input type="checkbox"> Sprachliche Mittel analysiert</label><br>
+                            <label><input type="checkbox"> Wirkung der Stilmittel erläutert</label><br>
+                            <label><input type="checkbox"> Textbelege verwendet</label><br>
+                            
+                            <h4>Hauptteil - Interpretation:</h4>
+                            <label><input type="checkbox"> Deutungshypothese formuliert</label><br>
+                            <label><input type="checkbox"> Intention des Autors erschlossen</label><br>
+                            <label><input type="checkbox"> Zusammenhang zwischen Form und Inhalt hergestellt</label><br>
+                            
+                            <h4>Schluss:</h4>
+                            <label><input type="checkbox"> Wichtigste Ergebnisse zusammengefasst</label><br>
+                            <label><input type="checkbox"> Deutungshypothese bestätigt/korrigiert</label><br>
+                            <label><input type="checkbox"> Persönliche Meinung geäußert</label><br>
+                            <label><input type="checkbox"> Gegenwartsbezug hergestellt</label><br>
+                        </form>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Tipps zur Verbesserung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Tipps zur Verbesserung:</strong></p>
+                            <ul>
+                                <li>Falls Punkte fehlen: Ergänze diese in einer Überarbeitung</li>
+                                <li>Achte auf einen schlüssigen roten Faden durch alle Teile</li>
+                                <li>Verwende Übergänge zwischen den Abschnitten</li>
+                                <li>Belege deine Interpretationsansätze immer mit Textstellen</li>
+                                <li>Vermeide zu oberflächliche Analysen - gehe in die Tiefe</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Abschließender Tipp:</strong> Eine gute Textinterpretation entsteht durch systematisches Vorgehen und gründliche Vorbereitung. Übe regelmäßig mit verschiedenen Textsorten und nutze diese Übungen als Grundlage für deine eigenen Interpretationen.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleExercise(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('span');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                content.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                content.classList.add('active');
+                content.style.display = 'block';
+                icon.textContent = '−';
+            }
+        }
+
+        function toggleSolution(button) {
+            const solution = button.nextElementSibling;
+            if (solution.classList.contains('active')) {
+                solution.classList.remove('active');
+                solution.style.display = 'none';
+                button.textContent = 'Lösung anzeigen';
+            } else {
+                solution.classList.add('active');
+                solution.style.display = 'block';
+                button.textContent = 'Lösung ausblenden';
+            }
+        }
+
+        // Alle Übungen initial geschlossen halten
+        document.addEventListener('DOMContentLoaded', function() {
+            const exercises = document.querySelectorAll('.exercise-content');
+            exercises.forEach(exercise => {
+                exercise.style.display = 'none';
+            });
+            
+            const solutions = document.querySelectorAll('.solution');
+            solutions.forEach(solution => {
+                solution.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

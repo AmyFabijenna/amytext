@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interpretations-Formulierungen - Deutschmatura</title>
-    <script src="fix-collapsibles.js"></script>
     <style>
         * {
             margin: 0;
@@ -137,7 +136,7 @@
             color: #856404;
         }
 
-        .collapsible {
+        .accordion {
             background-color: #f8f9fa;
             color: #2c3e50;
             cursor: pointer;
@@ -153,11 +152,11 @@
             transition: background-color 0.3s;
         }
 
-        .active, .collapsible:hover {
+        .active, .accordion:hover {
             background-color: #e9ecef;
         }
 
-        .collapsible:after {
+        .accordion:after {
             content: '\002B';
             color: #2c3e50;
             font-weight: bold;
@@ -169,7 +168,7 @@
             content: "\2212";
         }
 
-        .collapsible-content {
+        .panel {
             padding: 0 18px;
             max-height: 0;
             overflow: hidden;
@@ -257,8 +256,8 @@
                     <p>Auf dieser Seite finden Sie umfassende Formulierungshilfen für alle Teile einer Textinterpretation. Nutzen Sie diese Musterformulierungen als Inspiration für Ihre eigenen Interpretationen und passen Sie sie an den jeweiligen Text an.</p>
                 </div>
 
-                <button class="collapsible" id="einleitung">Einleitungsformulierungen</button>
-                <div class="collapsible-content">
+                <button class="accordion" id="einleitung">Einleitungsformulierungen</button>
+                <div class="panel">
                     <h3>Formulierungen für die Einleitung einer Interpretation</h3>
                     <ul class="formulation-list">
                         <li>"Der vorliegende Text '[Titel]' von [Autor], erschienen im Jahr [Jahr], thematisiert..."</li>
@@ -274,8 +273,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible" id="deutungshypothese">Deutungshypothesen formulieren</button>
-                <div class="collapsible-content">
+                <button class="accordion" id="deutungshypothese">Deutungshypothesen formulieren</button>
+                <div class="panel">
                     <h3>Formulierungen für Deutungshypothesen</h3>
                     <ul class="formulation-list">
                         <li>"Die vorliegende Interpretation geht davon aus, dass der Autor mit dem Text beabsichtigt, [Aussage]."</li>
@@ -291,8 +290,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible" id="textbelege">Textbelege einbinden</button>
-                <div class="collapsible-content">
+                <button class="accordion" id="textbelege">Textbelege einbinden</button>
+                <div class="panel">
                     <h3>Formulierungen zum Einbinden von Textbelegen</h3>
                     <ul class="formulation-list">
                         <li>"Diese Interpretation wird gestützt durch die Textstelle '...' (Z. X), die zeigt, dass..."</li>
@@ -309,8 +308,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible" id="interpretation">Interpretationsformulierungen</button>
-                <div class="collapsible-content">
+                <button class="accordion" id="interpretation">Interpretationsformulierungen</button>
+                <div class="panel">
                     <h3>Formulierungen für die Interpretation</h3>
                     <ul class="formulation-list">
                         <li>"Auf einer Metacbene könnte der Text als Kritik an... verstanden werden."</li>
@@ -330,8 +329,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible" id="schluss">Schlussformulierungen</button>
-                <div class="collapsible-content">
+                <button class="accordion" id="schluss">Schlussformulierungen</button>
+                <div class="panel">
                     <h3>Formulierungen für den Schluss einer Interpretation</h3>
                     <ul class="formulation-list">
                         <li>"In der Gesamtbetrachtung erweist sich der Text als vielschichtiges Werk, das..."</li>
@@ -352,8 +351,8 @@
                     </div>
                 </div>
 
-                <button class="collapsible" id="uebungen">Übungen zu Interpretationsformulierungen</button>
-                <div class="collapsible-content">
+                <button class="accordion" id="uebungen">Übungen zu Interpretationsformulierungen</button>
+                <div class="panel">
                     <h3>Übungen mit Lösungen</h3>
                     
                     <div class="exercise-box">
@@ -411,8 +410,8 @@
     </main>
 
     <script>
-        // Collapsible functionality
-        var coll = document.getElementsByClassName("collapsible");
+        // accordion functionality
+        var coll = document.getElementsByClassName("accordion");
         var i;
 
         for (i = 0; i < coll.length; i++) {
@@ -427,9 +426,9 @@
             });
         }
 
-        // Ensure all collapsibles are closed by default
+        // Ensure all accordions are closed by default
         window.onload = function() {
-            var contents = document.getElementsByClassName("collapsible-content");
+            var contents = document.getElementsByClassName(.panel);
             for (i = 0; i < contents.length; i++) {
                 contents[i].style.maxHeight = null;
             }
