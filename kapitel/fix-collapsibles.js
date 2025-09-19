@@ -1,31 +1,80 @@
-// fix-collapsibles.js - Optimierte Version für Ihre Struktur
+// JavaScript für die Collapsible-Funktionalität
 document.addEventListener('DOMContentLoaded', function() {
-    // Deaktiviere die vorhandene toggleChecklist-Funktion
-    const headers = document.querySelectorAll('.checklist-header');
-    
-    headers.forEach(header => {
-        // Entferne das onclick-Attribut
-        header.removeAttribute('onclick');
-        
-        // Füge neuen Event-Listener hinzu
-        header.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            const icon = this.querySelector('.toggle-icon');
-            
-            // Umschalten des Inhalts
-            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    // Alle Collapsibles standardmäßig schließen und Event Listener hinzufügen
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
                 content.style.maxHeight = null;
-                if (icon) icon.textContent = '▼';
+                content.classList.remove("active");
             } else {
                 content.style.maxHeight = content.scrollHeight + "px";
-                if (icon) icon.textContent = '▲';
+                content.classList.add("active");
             }
-            
-            // Umschalten der active-Klasse
-            this.classList.toggle('active');
-            content.classList.toggle('active');
         });
-    });
-    
-    console.log('Collapsible-Script erfolgreich geladen und angepasst');
+        
+        // Standardmäßig schließen
+        var content = coll[i].nextElementSibling;
+        content.style.maxHeight = null;
+        content.classList.remove("active");
+    }
 });
+
+// Funktion zum Öffnen/Schließen aller Collapsibles
+function toggleAll() {
+    var coll = document.getElementsByClassName("collapsible");
+    var allOpen = true;
+    var i;
+    
+    // Prüfen, ob alle bereits geöffnet sind
+    for (i = 0; i < coll.length; i++) {
+        var content = coll[i].nextElementSibling;
+        if (!content.style.maxHeight) {
+            allOpen = false;
+            break;
+        }
+    }
+    
+    // Alle öffnen oder schließen
+    for (i = 0; i < coll.length; i++) {
+        var content = coll[i].nextElementSibling;
+        
+        if (allOpen) {
+            // Alle schließen
+            coll[i].classList.remove("active");
+            content.style.maxHeight = null;
+            content.classList.remove("active");
+        } else {
+            // Alle öffnen
+            coll[i].classList.add("active");
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.classList.add("active");
+        }
+    }
+    
+    // Text des Buttons ändern
+    var btn = document.querySelector('.expand-all-btn');
+    if (btn) {
+        btn.textContent = allOpen ? 'Alle Bereiche aufklappen' : 'Alle Bereiche zuklappen';
+    }
+}
+
+// Funktion zum Anzeigen/Verbergen von Lösungen
+function toggleSolution(id) {
+    var solution = document.getElementById(id);
+    if (solution) {
+        solution.classList.toggle("active");
+        
+        // Button-Text ändern
+        var btn = event.target;
+        if (solution.classList.contains("active")) {
+            btn.textContent = 'Lösung ausblenden';
+        } else {
+            btn.textContent = 'Lösung anzeigen';
+        }
+    }
+}
