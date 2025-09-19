@@ -1,40 +1,84 @@
-// Funktion zum Ein- und Ausklappen der Collapsibles
-function setupCollapsibles() {
-  // Warten, bis das DOM vollständig geladen ist
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCollapsibles);
-  } else {
-    initCollapsibles();
-  }
-  
-  function initCollapsibles() {
-    // Alle Collapsible-Buttons finden
-    const collapsibles = document.querySelectorAll('.collapsible');
+// fix-collapsibles.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Collapsible-Funktionalität
+    var coll = document.getElementsByClassName("collapsible");
     
-    // Event-Listener für jedes Collapsible hinzufügen
-    collapsibles.forEach(coll => {
-      // Sicherstellen, dass nicht bereits ein Listener vorhanden ist
-      coll.onclick = null;
-      coll.addEventListener('click', function() {
-        this.classList.toggle('active');
-        const content = this.nextElementSibling;
-        if (content.style.display === 'block') {
-          content.style.display = 'none';
-        } else {
-          content.style.display = 'block';
-        }
-      });
-    });
+    for (var i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
     
-    // Eventuell standardmäßig erste Collapsibles öffnen
-    const firstCollapsibles = document.querySelectorAll('.collapsible:first-child');
-    firstCollapsibles.forEach(coll => {
-      coll.classList.add('active');
-      const content = coll.nextElementSibling;
-      content.style.display = 'block';
-    });
-  }
-}
-
-// Funktion aufrufen
-setupCollapsibles();
+    // CSS für Collapsibles hinzufügen, falls nicht vorhanden
+    if (!document.querySelector('style[data-collapsible-css]')) {
+        var style = document.createElement('style');
+        style.setAttribute('data-collapsible-css', 'true');
+        style.textContent = `
+            .collapsible {
+                background-color: #34495e;
+                color: white;
+                cursor: pointer;
+                padding: 15px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 16px;
+                margin: 5px 0;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+                position: relative;
+            }
+            
+            .collapsible:after {
+                content: '\\002B';
+                color: white;
+                font-weight: bold;
+                position: absolute;
+                right: 15px;
+                font-size: 18px;
+            }
+            
+            .collapsible.active:after {
+                content: "\\2212";
+            }
+            
+            .collapsible:hover {
+                background-color: #2c3e50;
+            }
+            
+            .collapsible.active {
+                background-color: #2c3e50;
+                border-radius: 4px 4px 0 0;
+            }
+            
+            .collapsible-content {
+                padding: 0 18px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+                background-color: #f9f9f9;
+                border-radius: 0 0 4px 4px;
+                margin-bottom: 10px;
+            }
+            
+            .collapsible-content-inner {
+                padding: 15px;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Erstes Element standardmäßig öffnen
+    if (coll.length > 0) {
+        setTimeout(function() {
+            coll[0].click();
+        }, 100);
+    }
+});
