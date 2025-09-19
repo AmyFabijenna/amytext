@@ -1,40 +1,68 @@
-// Funktion zum Ein- und Ausklappen der Collapsibles
-function setupCollapsibles() {
-  // Warten, bis das DOM vollständig geladen ist
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCollapsibles);
-  } else {
-    initCollapsibles();
-  }
-  
-  function initCollapsibles() {
-    // Alle Collapsible-Buttons finden
-    const collapsibles = document.querySelectorAll('.collapsible');
+// Universelle Collapsible-Lösung für alle Unterseiten
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Universelles Collapsible-Script geladen');
     
-    // Event-Listener für jedes Collapsible hinzufügen
-    collapsibles.forEach(coll => {
-      // Sicherstellen, dass nicht bereits ein Listener vorhanden ist
-      coll.onclick = null;
-      coll.addEventListener('click', function() {
-        this.classList.toggle('active');
-        const content = this.nextElementSibling;
-        if (content.style.display === 'block') {
-          content.style.display = 'none';
-        } else {
-          content.style.display = 'block';
+    // Funktion für Checklisten-Header
+    function initChecklistCollapsibles() {
+        var headers = document.querySelectorAll('.checklist-header');
+        console.log('Checklist-Header gefunden:', headers.length);
+        
+        for (var i = 0; i < headers.length; i++) {
+            // Entferne vorhandene onclick-Handler
+            headers[i].removeAttribute('onclick');
+            
+            // Füge neuen Eventlistener hinzu
+            headers[i].addEventListener('click', function() {
+                console.log('Checklist-Header geklickt');
+                var content = this.nextElementSibling;
+                var icon = this.querySelector('.toggle-icon');
+                
+                // Toggle der active-Klasse
+                if (content.classList.contains('active')) {
+                    content.classList.remove('active');
+                    content.style.maxHeight = null;
+                    if (icon) icon.textContent = '▼';
+                } else {
+                    content.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    if (icon) icon.textContent = '▲';
+                }
+            });
         }
-      });
-    });
+    }
     
-    // Eventuell standardmäßig erste Collapsibles öffnen
-    const firstCollapsibles = document.querySelectorAll('.collapsible:first-child');
-    firstCollapsibles.forEach(coll => {
-      coll.classList.add('active');
-      const content = coll.nextElementSibling;
-      content.style.display = 'block';
-    });
-  }
-}
-
-// Funktion aufrufen
-setupCollapsibles();
+    // Funktion für Lösungsknöpfe
+    function initSolutionButtons() {
+        var buttons = document.querySelectorAll('.solution-btn');
+        console.log('Solution-Buttons gefunden:', buttons.length);
+        
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function() {
+                var solutionId = this.getAttribute('onclick').replace("toggleSolution('", "").replace("')", "");
+                var solution = document.getElementById(solutionId);
+                
+                if (solution.style.display === 'block') {
+                    solution.style.display = 'none';
+                    this.textContent = 'Lösung anzeigen';
+                } else {
+                    solution.style.display = 'block';
+                    this.textContent = 'Lösung ausblenden';
+                }
+            });
+        }
+    }
+    
+    // Initialisiere alle Funktionalitäten
+    initChecklistCollapsibles();
+    initSolutionButtons();
+    
+    // Öffne das erste Collapsible
+    var firstHeader = document.querySelector('.checklist-header');
+    if (firstHeader) {
+        setTimeout(function() {
+            firstHeader.click();
+        }, 500);
+    }
+    
+    console.log('Collapsible-Initialisierung abgeschlossen');
+});
