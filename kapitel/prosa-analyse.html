@@ -20,82 +20,8 @@
             display: flex;
         }
 
-        .sidebar {
-            width: 280px;
-            background: rgba(52, 73, 94, 0.95);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-header h1 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-header p {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .nav-menu {
-            padding: 15px 0;
-        }
-
-        .nav-item {
-            margin: 2px 0;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-            font-size: 0.95em;
-        }
-
-        .nav-link:hover {
-            background: rgba(255,255,255,0.1);
-            border-left-color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            background: rgba(52, 152, 219, 0.2);
-            border-left-color: #3498db;
-            font-weight: bold;
-        }
-
-        .nav-section {
-            margin-bottom: 15px;
-        }
-
-        .nav-section-title {
-            padding: 8px 20px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #bdc3c7;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 5px;
-        }
-
         .main-content {
-            margin-left: 280px;
+            margin: 0 auto;
             flex: 1;
             padding: 20px;
         }
@@ -277,90 +203,13 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                width: 250px;
-                transform: translateX(-250px);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
             .content-body {
                 padding: 20px;
-            }
-        }
-
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
             }
         }
     </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
-    
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>Deutschmatura</h1>
-            <p>Prosa-Analyse</p>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="nav-section">
-                <div class="nav-section-title">Navigation</div>
-                <div class="nav-item">
-                    <a href="textanalyse12.html" class="nav-link">Zurück zur Hauptseite</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Inhalte</div>
-                <div class="nav-item">
-                    <a href="#einleitung" class="nav-link" onclick="scrollToSection('einleitung')">Einleitung</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#erzaehlperspektive" class="nav-link" onclick="scrollToSection('erzaehlperspektive')">Erzählperspektive</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#figurenanalyse" class="nav-link" onclick="scrollToSection('figurenanalyse')">Figurenanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#erzaehlverhalten" class="nav-link" onclick="scrollToSection('erzaehlverhalten')">Erzählverhalten</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#textstruktur" class="nav-link" onclick="scrollToSection('textstruktur')">Textstruktur</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#sprachliche-mittel" class="nav-link" onclick="scrollToSection('sprachliche-mittel')">Sprachliche Mittel</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#uebungen" class="nav-link" onclick="scrollToSection('uebungen')">Übungen</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <main class="main-content">
         <div class="content-container">
             <header class="content-header">
@@ -372,7 +221,7 @@
                 <section id="einleitung" class="section">
                     <h2>Einführung in die Prosa-Analyse</h2>
                     <div class="card">
-                        <p>Die Analyse prosaischer Texte (Romane, Novellen, Kurzgeschichten, Erzählungen) erfordert ein systematisches Vorgehen. Im Gegensatz zur Lyrik oder zum Drama weist Prosa spezifische Merkmale auf, die einer besonderen Betrachtung bedürfen.</p>
+                        <p>Die Analyse prosaischer Texte (Romane, Novellen, Kurzgeschichten, Erzählungen) erfordert ein systematisches Vorgehen. Im Gegensatz zur Lyrik oder zum Drama weist Prosa spezifische Merkmale auf, die einer besonderer Betrachtung bedürfen.</p>
                     </div>
                     
                     <button class="collapsible">Was ist Prosa?</button>
@@ -440,7 +289,7 @@
                         <p>Der neutrale Erzähler beschreibt nur das äußere Geschehen, ohne in die Figuren hineinzuschauen oder zu kommentieren.</p>
                         <div class="example">
                             <h4>Beispiel:</h4>
-                            <p>"Die Frau öffnete die Tür und betrat den Raum. Sie blieb stehen, atmete tief ein und blickte sich um."</p>
+                            <p>"Die Frau öffnete die Tür và betrat den Raum. Sie blieb stehen, atmete tief ein und blickte sich um."</p>
                             <p><strong>Wirkung:</strong> Wirkt sachlich und distanziert, überlässt dem Leser die Interpretation.</p>
                         </div>
                     </div>
@@ -548,13 +397,13 @@
                     
                     <button class="collapsible">Erzählzeit und erzählte Zeit</button>
                     <div class="content">
-                        <p>Ein wichtiges Merkmal des Erzählverhaltens ist das Verhältnis zwischen Erzählzeit (Zeit, die zum Erzählen benötigt wird) und erzählter Zeit (Zeit, die in der Geschichte vergeht).</p>
+                        <p>Ein wichtiges Merkmal des Erzählverhaltens ist das Verhältnis zwischen Erzählzeit (Zeit, die zum Erzählen benötigt wird) und erzählte Zeit (Zeit, die in der Geschichte vergeht).</p>
                         
                         <h4>Mögliche Verhältnisse:</h4>
                         <ul>
                             <li><strong>Zeitdeckung:</strong> Erzählzeit ≈ erzählte Zeit (häufig in Dialogen)</li>
                             <li><strong>Zeitdehnung:</strong> Erzählzeit > erzählte Zeit (ausführliche Beschreibungen)</li>
-                            <li><strong>Zeitraffung:</strong> Erzählzeit < erzählte Zeit (Zeitsprünge, Zusammenfassungen)</li>
+                            <li><strong>Zeitraffung:</strong> Erzähltime < erzählte Zeit (Zeitsprünge, Zusammenfassungen)</li>
                         </ul>
                     </div>
                     
@@ -754,4 +603,43 @@
                     
                     <div class="exercise">
                         <h4>Übung 3: Spannungsaufbau analysieren</h4>
-                        <p>Analysiere den Spannungsaufbau in "Die Nachbarn". Unterteile die Handlung in Exposition, Steigerung, Höhe
+                        <p>Analysiere den Spannungsaufbau in "Die Nachbarn". Unterteile die Handlung in Exposition, Steigerung, Höhepunkt und Lösung.</p>
+                        <button class="btn" onclick="toggleSolution('solution4')">Lösung anzeigen</button>
+                        <div id="solution4" class="solution">
+                            <p><strong>Spannungsaufbau in "Die Nachbarn":</strong></p>
+                            <p><strong>Exposition:</strong> Julia stellt sich und ihre Beobachtungsgewohnheiten vor, beschreibt das Aussehen und die täglichen Routinen der Nachbarn.</p>
+                            <p><strong>Steigerung:</strong> Julia bemerkt Unregelmäßigkeiten (Weinen, blaue Flecken), wird neugieriger und beginnt, sich Sorgen zu machen.</p>
+                            <p><strong>Höhepunkt:</strong> Julia steht am Fenster und muss die Entscheidung treffen, ob sie eingreifen soll oder nicht.</p>
+                            <p><strong>Lösung:</strong> Julia entscheidet sich zum Handeln und greift zum Telefonhörer.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSolution(id) {
+            var solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
+        }
+    </script>
+</body>
+</html>

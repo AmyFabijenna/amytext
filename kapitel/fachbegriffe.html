@@ -17,92 +17,15 @@
             min-height: 100vh;
             line-height: 1.6;
             color: #333;
-            display: flex;
-        }
-
-        .sidebar {
-            width: 280px;
-            background: rgba(52, 73, 94, 0.95);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-header h1 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-header p {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .nav-menu {
-            padding: 15px 0;
-        }
-
-        .nav-item {
-            margin: 2px 0;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-            font-size: 0.95em;
-        }
-
-        .nav-link:hover {
-            background: rgba(255,255,255,0.1);
-            border-left-color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            background: rgba(52, 152, 219, 0.2);
-            border-left-color: #3498db;
-            font-weight: bold;
-        }
-
-        .nav-section {
-            margin-bottom: 15px;
-        }
-
-        .nav-section-title {
-            padding: 8px 20px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #bdc3c7;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 5px;
         }
 
         .main-content {
-            margin-left: 280px;
-            flex: 1;
+            margin: 0 auto;
             padding: 20px;
+            max-width: 1200px;
         }
 
         .content-container {
-            max-width: 1200px;
-            margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -262,20 +185,6 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                width: 250px;
-                transform: translateX(-250px);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
             .content-body {
                 padding: 20px;
             }
@@ -284,69 +193,9 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-        }
     </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
-    
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>Deutschmatura</h1>
-            <p>Fachbegriffe</p>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="nav-section">
-                <div class="nav-section-title">Navigation</div>
-                <div class="nav-item">
-                    <a href="textanalyse12.html" class="nav-link">Zurück zur Hauptseite</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Fachbegriffe</div>
-                <div class="nav-item">
-                    <a href="#stilmittel" class="nav-link" onclick="scrollToSection('stilmittel')">Stilmittel</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#textanalyse" class="nav-link" onclick="scrollToSection('textanalyse')">Textanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#interpretation" class="nav-link" onclick="scrollToSection('interpretation')">Interpretation</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#textsorten" class="nav-link" onclick="scrollToSection('textsorten')">Textsorten</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#argumentation" class="nav-link" onclick="scrollToSection('argumentation')">Argumentation</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#uebungen" class="nav-link" onclick="scrollToSection('uebungen')">Übungen</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <main class="main-content">
         <div class="content-container">
             <header class="content-header">
@@ -420,7 +269,7 @@
                             <span class="accordion-icon">+</span>
                         </div>
                         <div class="accordion-content">
-                            <p><strong>Definition:</strong> Wiederholung eines Wortes oder einer Wortgruppe am Anfang aufeinanderfolgender Sätze oder Verse.</p>
+                            <p><strong>Definition:</strong> Wiederholung eines Wortes oder einer Wortgruppe am Anfang aufeinanderfolgenden Sätzen oder Verse.</p>
                             <p><strong>Wirkung:</strong> Rhythmisierung, Betonung, Steigerung</p>
                             <div class="example-box">
                                 <strong>Beispiel:</strong> "Er lachte nicht. Er weinte nicht. Er sprach nicht." (Wiederholung von "Er" am Satzanfang)
@@ -660,11 +509,6 @@
     </main>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-
         function scrollToSection(sectionId) {
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
@@ -686,19 +530,6 @@
             const solution = document.getElementById(solutionId);
             solution.classList.toggle('active');
         }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (window.innerWidth <= 768 && 
-                sidebar.classList.contains('active') && 
-                !sidebar.contains(event.target) && 
-                !menuToggle.contains(event.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>

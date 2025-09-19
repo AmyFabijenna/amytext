@@ -20,82 +20,8 @@
             display: flex;
         }
 
-        .sidebar {
-            width: 280px;
-            background: rgba(52, 73, 94, 0.95);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-header h1 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-header p {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .nav-menu {
-            padding: 15px 0;
-        }
-
-        .nav-item {
-            margin: 2px 0;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-            font-size: 0.95em;
-        }
-
-        .nav-link:hover {
-            background: rgba(255,255,255,0.1);
-            border-left-color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            background: rgba(52, 152, 219, 0.2);
-            border-left-color: #3498db;
-            font-weight: bold;
-        }
-
-        .nav-section {
-            margin-bottom: 15px;
-        }
-
-        .nav-section-title {
-            padding: 8px 20px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #bdc3c7;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 5px;
-        }
-
         .main-content {
-            margin-left: 280px;
+            margin: 0 auto;
             flex: 1;
             padding: 20px;
         }
@@ -262,84 +188,13 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                width: 250px;
-                transform: translateX(-250px);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
             .content-body {
                 padding: 20px;
-            }
-        }
-
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
             }
         }
     </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
-    
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>Deutschmatura</h1>
-            <p>Komplettes Handbuch</p>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="nav-section">
-                <div class="nav-section-title">Navigation</div>
-                <div class="nav-item">
-                    <a href="textanalyse12.html" class="nav-link">Zurück zur Hauptseite</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#" class="nav-link active">Zeitmanagement</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Inhaltsverzeichnis</div>
-                <div class="nav-item">
-                    <a href="#grundlagen" class="nav-link">1. Grundlagen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#zeitplanung" class="nav-link">2. Zeitplanung</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#uebungen" class="nav-link">3. Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#notfalltipps" class="nav-link">4. Notfall-Tipps</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <main class="main-content">
         <div class="content-container">
             <header class="content-header">
@@ -466,7 +321,7 @@
                         
                         <button class="accordion">Timeboxing für Prüfungssituationen</button>
                         <div class="panel">
-                            <p>Timeboxing hilft, den Fokus zu behalten:</p>
+                            <p>Timeboxing hilft, den Focus zu behalten:</p>
                             <ul>
                                 <li>Definiere klare Zeitblöcke für jede Aufgabe</li>
                                 <li>Stoppe die Zeit für jede Phase</li>
@@ -558,7 +413,7 @@
                                 <p><strong>Musteranalyse:</strong></p>
                                 <p><strong>Einleitung:</strong> Der vorliegende Text "Verantwortung in Zeiten des Klimawandels" von [fiktiver Autor] erschien 2023 in der Zeitschrift [fiktive Quelle]. Er thematisiert das Spannungsverhältnis zwischen individueller und kollektiver Verantwortung im Kontext der globalen Klimakrise.</p>
                                 
-                                <p><strong>Zusammenfassung:</strong> Der Text diskutiert die Frage, inwieweit Einzelpersonen zum Klimaschutz beitragen können und sollen. Der Autor erkennt die verbreitete Resignation angesichts der Größe des Problems an, argumentiert jedoch, dass auch kleine individuelle Handlungen in ihrer Summe bedeutsam sind. Gleichzeitig betont er die Notwendigkeit struktureller Veränderungen auf politischer und wirtschaftlicher Ebene. Als Lösung schlägt er eine "doppelte Strategie" vor, die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet.</p>
+                                <p><strong>Zusammenfassung:</strong> Der Text diskutiert die Frage, inwieweit Einzelpersonen zum Klimaschutz beitragen können und sollen. Der Autor erkennt die verbreitete Resignation angesichts der Größe des Probleme an, argumentiert jedoch, dass auch kleine individuelle Handlungen in ihrer Summe bedeutsam sind. Gleichzeitig betont er die Notwendigkeit struktureller Veränderungen auf politischer und wirtschaftlicher Ebene. Als Lösung schlägt er eine "doppelte Strategie" vor, die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet.</p>
                                 
                                 <p><strong>Analyse sprachlicher Mittel:</strong></p>
                                 <ol>
@@ -637,11 +492,6 @@
     </main>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-
         function toggleSolution(id) {
             const solution = document.getElementById(id);
             if (solution.style.display === 'block') {
@@ -664,19 +514,6 @@
                 }
             });
         }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (window.innerWidth <= 768 && 
-                sidebar.classList.contains('active') && 
-                !sidebar.contains(event.target) && 
-                !menuToggle.contains(event.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>

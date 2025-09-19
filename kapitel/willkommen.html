@@ -20,82 +20,8 @@
             display: flex;
         }
 
-        .sidebar {
-            width: 280px;
-            background: rgba(52, 73, 94, 0.95);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-header h1 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-header p {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .nav-menu {
-            padding: 15px 0;
-        }
-
-        .nav-item {
-            margin: 2px 0;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-            font-size: 0.95em;
-        }
-
-        .nav-link:hover {
-            background: rgba(255,255,255,0.1);
-            border-left-color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            background: rgba(52, 152, 219, 0.2);
-            border-left-color: #3498db;
-            font-weight: bold;
-        }
-
-        .nav-section {
-            margin-bottom: 15px;
-        }
-
-        .nav-section-title {
-            padding: 8px 20px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #bdc3c7;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 5px;
-        }
-
         .main-content {
-            margin-left: 280px;
+            margin: 0 auto;
             flex: 1;
             padding: 20px;
         }
@@ -303,20 +229,6 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                width: 250px;
-                transform: translateX(-250px);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
             .content-body {
                 padding: 20px;
             }
@@ -329,156 +241,9 @@
                 margin-left: 0;
             }
         }
-
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-        }
     </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
-    
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>Deutschmatura</h1>
-            <p>Komplettes Handbuch</p>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="nav-section">
-                <div class="nav-section-title">Grundlagen</div>
-                <div class="nav-item">
-                    <a href="willkommen.html" class="nav-link active">Willkommen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Textanalyse</div>
-                <div class="nav-item">
-                    <a href="kapitel/textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/argumentationsanalyse.html" class="nav-link">Argumentationsanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/sprachanalyse.html" class="nav-link">Sprachanalyse</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Textinterpretation</div>
-                <div class="nav-item">
-                    <a href="kapitel/textinterpretation.html" class="nav-link">Textinterpretation</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/literarische-epochen.html" class="nav-link">Literarische Epochen</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Textsorten</div>
-                <div class="nav-item">
-                    <a href="kapitel/textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/prosa-analyse.html" class="nav-link">Prosa analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/drama-analyse.html" class="nav-link">Drama analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Praxisbeispiele</div>
-                <div class="nav-item">
-                    <a href="kapitel/beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/musterloesungen.html" class="nav-link">Musterlösungen</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Formulierungshilfen</div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/fachbegriffe.html" class="nav-link">Fachbegriffe</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Übungen</div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Prüfungsvorbereitung</div>
-                <div class="nav-item">
-                    <a href="kapitel/zeitmanagement.html" class="nav-link">Zeitmanagement</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/checklisten.html" class="nav-link">Checklisten</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <main class="main-content">
         <div class="content-container">
             <header class="content-header">
@@ -530,7 +295,7 @@
                                 <p>Optimiere deine Prüfungsleistung und vermeide typische Fehler:</p>
                                 <ol>
                                     <li><a href="kapitel/zeitmanagement.html" class="module-link">Zeitmanagement</a> - Lerne, deine Zeit optimal einzuteilen</li>
-                                    <li><a href="kapitel/checklisten.html" class="module-link">Checklisten</a> - Überprüfe deine Arbeiten systematisch</li>
+                                    <li><a href="kapitel/checklists.html" class="module-link">Checklisten</a> - Überprüfe deine Arbeiten systematisch</li>
                                     <li><a href="kapitel/haeufige-fehler.html" class="module-link">Häufige Fehler</a> - Vermeide typische Fallstricke</li>
                                     <li><a href="kapitel/uebungen-eroerterung.html" class="module-link">Erörterungs-Übungen</a> - Simuliere Prüfungssituationen</li>
                                 </ol>
@@ -677,11 +442,6 @@
     </main>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-
         function toggleAccordion(element) {
             const content = element.nextElementSibling;
             const icon = element.querySelector('span');
@@ -694,19 +454,6 @@
                 icon.textContent = '+';
             }
         }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (window.innerWidth <= 768 && 
-                sidebar.classList.contains('active') && 
-                !sidebar.contains(event.target) && 
-                !menuToggle.contains(event.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>

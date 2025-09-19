@@ -20,82 +20,8 @@
             display: flex;
         }
 
-        .sidebar {
-            width: 280px;
-            background: rgba(52, 73, 94, 0.95);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-header h1 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-header p {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .nav-menu {
-            padding: 15px 0;
-        }
-
-        .nav-item {
-            margin: 2px 0;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-            font-size: 0.95em;
-        }
-
-        .nav-link:hover {
-            background: rgba(255,255,255,0.1);
-            border-left-color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            background: rgba(52, 152, 219, 0.2);
-            border-left-color: #3498db;
-            font-weight: bold;
-        }
-
-        .nav-section {
-            margin-bottom: 15px;
-        }
-
-        .nav-section-title {
-            padding: 8px 20px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #bdc3c7;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 5px;
-        }
-
         .main-content {
-            margin-left: 280px;
+            margin: 0 auto;
             flex: 1;
             padding: 20px;
         }
@@ -347,35 +273,7 @@
             border-radius: 0 8px 8px 0;
         }
 
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
         @media (max-width: 768px) {
-            .sidebar {
-                width: 250px;
-                transform: translateX(-250px);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
             .content-body {
                 padding: 20px;
             }
@@ -400,141 +298,10 @@
             .content-header p {
                 font-size: 1em;
             }
-
-            .menu-toggle {
-                display: block;
-            }
         }
     </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
-    
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>Deutschmatura</h1>
-            <p>Komplettes Handbuch</p>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="nav-section">
-                <div class="nav-section-title">Grundlagen</div>
-                <div class="nav-item">
-                    <a href="willkommen.html" class="nav-link">Willkommen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/eroerterung-grundlagen.html" class="nav-link active">Textgebundene Erörterung</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Textanalyse</div>
-                <div class="nav-item">
-                    <a href="kapitel/textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/argumentationsanalyse.html" class="nav-link">Argumentationsanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/sprachanalyse.html" class="nav-link">Sprachanalyse</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Textinterpretation</div>
-                <div class="nav-item">
-                    <a href="kapitel/textinterpretation.html" class="nav-link">Textinterpretation</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/literarische-epochen.html" class="nav-link">Literarische Epochen</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Textsorten</div>
-                <div class="nav-item">
-                    <a href="kapitel/textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/prosa-analyse.html" class="nav-link">Prosa analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/drama-analyse.html" class="nav-link">Drama analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Praxisbeispiele</div>
-                <div class="nav-item">
-                    <a href="kapitel/beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/musterloesungen.html" class="nav-link">Musterlösungen</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Formulierungshilfen</div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/fachbegriffe.html" class="nav-link">Fachbegriffe</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Übungen</div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Prüfungsvorbereitung</div>
-                <div class="nav-item">
-                    <a href="kapitel/zeitmanagement.html" class="nav-link">Zeitmanagement</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/checklisten.html" class="nav-link">Checklisten</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <main class="main-content">
         <div class="content-container">
             <header class="content-header">
@@ -807,7 +574,7 @@
                                 <li><strong>Zu persönlich:</strong> "Ich finde das Thema sehr interessant..."</li>
                                 <li><strong>Zu lang:</strong> Einleitung über 100 Wörter</li>
                                 <li><strong>Unvollständige Textangabe:</strong> Autor oder Jahr fehlen</li>
-                                <li><strong>Vage Thesenwiedergabe:</strong> "Der Autor ist der Meinung, dass..."</li>
+                                <li><strong>Vague Thesenwiedergabe:</strong> "Der Autor ist der Meinung, dass..."</li>
                             </ul>
                         </div>
                     </div>
@@ -1058,133 +825,107 @@
                 <button class="collapsible">8. Formulierungshilfen und sprachliche Gestaltung</button>
                 <div class="section-content">
                     <div class="section-inner">
-                        <h3>Wissenschaftlicher Sprachgebrauch</h3>
-                        <p>Eine Erörterung erfordert eine sachliche, präzise Sprache.</p>
+                        <h3>Wissenschaftliche Sprache</h3>
+                        <p>Eine textgebundene Erörterung erfordert einen sachlichen, präzisen Sprachstil.</p>
 
-                        <h4>Verben der Meinungsäußerung</h4>
-                        
+                        <h4>Nominalstil vs. Verbalstil</h4>
+                        <div class="example-box">
+                            <strong>Verbalstil (eher vermeiden):</strong> "Der Autor meint, dass..."<br>
+                            <strong>Nominalstil (besser):</strong> "Der Autor vertritt die Auffassung..."
+                        </div>
+
+                        <h4>Präzise Formulierungen</h4>
                         <table>
                             <tr>
-                                <th>Stärke</th>
-                                <th>Verben</th>
+                                <th>Vermeiden</th>
+                                <th>Besser</th>
                             </tr>
                             <tr>
-                                <td><strong>Neutral</strong></td>
-                                <td>äußern, feststellen, darlegen, ausführen</td>
+                                <td>Der Autor sagt...</td>
+                                <td>Der Autor behauptet/argumentiert/vertritt...</td>
                             </tr>
                             <tr>
-                                <td><strong>Zustimmend</strong></td>
-                                <td>betonen, unterstreichen, bekräftigen, bestätigen</td>
+                                <td>Der Autor denkt...</td>
+                                <td>Der Autor ist der Ansicht/Meinung...</td>
                             </tr>
                             <tr>
-                                <td><strong>Zweifelnd</strong></td>
-                                <td>hinterfragen, bezweifeln, infrage stellen, relativieren</td>
+                                <td>Das ist gut/schlecht</td>
+                                <td>Das überzeugt/nicht überzeugt, weil...</td>
                             </tr>
                             <tr>
-                                <td><strong>Ablehnend</strong></td>
-                                <td>widerlegen, entkräften, zurückweisen, kritisieren</td>
+                                <td>Ich finde...</td>
+                                <td>Die Analyse zeigt/legt nahe...</td>
                             </tr>
                         </table>
 
-                        <h4>Formulierungshilfen für die Analyse</h4>
+                        <h3>Überleitungstechniken</h3>
 
+                        <h4>Innerhalb von Absätzen:</h4>
                         <div class="example-box">
-                            <strong>Textwiedergabe:</strong>
+                            <strong>Beispiele:</strong>
                             <ul>
-                                <li>"Der Autor führt aus, dass..."</li>
-                                <li>"Laut Mustermann..."</li>
-                                <li>"Wie der Verfasser darlegt..."</li>
-                                <li>"Mustermann zufolge..."</li>
+                                <li>"Darüber hinaus..."</li>
+                                <li>"Ein weiterer Aspekt ist..."</li>
+                                <li>"Dies führt zu..."</li>
+                                <li>"In diesem Zusammenhang..."</li>
                             </ul>
                         </div>
 
+                        <h4>Zwischen Absätzen:</h4>
                         <div class="example-box">
-                            <strong>Argumentationsbeschreibung:</strong>
+                            <strong>Beispiele:</strong>
                             <ul>
-                                <li>"Zur Untermauerung dieser These führt der Autor an..."</li>
+                                <li>"Nach der Analyse der Argumentation soll nun..."</li>
+                                <li>"Im Gegensatz dazu steht..."</li>
+                                <li>"Dies wirft die Frage auf, ob..."</li>
+                                <li>"Vor diesem Hintergrund..."</li>
+                            </ul>
+                        </div>
+
+                        <h3>Analysesprache</h3>
+
+                        <h4>Textwiedergabe:</h4>
+                        <div class="example-box">
+                            <strong>Formulierungshilfen:</strong>
+                            <ul>
+                                <li>"Der Autor führt an, dass..."</li>
                                 <li>"Als Beleg dient..."</li>
-                                <li>"Dies wird gestützt durch..."</li>
-                                <li>"Zur Veranschaulichung..."</li>
+                                <li>"Zur Untermauerung dieser These..."</li>
+                                <li>"An einer Stelle argumentiert er..."</li>
                             </ul>
                         </div>
 
+                        <h4>Bewertung:</h4>
                         <div class="example-box">
-                            <strong>Sprachanalyse:</strong>
+                            <strong>Formulierungshilfen:</strong>
                             <ul>
-                                <li>"Auffällig ist die Verwendung von..."</li>
-                                <li>"Durch... erzeugt der Autor..."</li>
-                                <li>"Die metaphorische Sprache..."</li>
-                                <li>"Der wiederholte Gebrauch von..."</li>
+                                <li>"Dieses Argument überzeugt, weil..."</li>
+                                <li>"Problematisch ist hier..."</li>
+                                <li>"Die Schlussfolgerung erscheint fragwürdig, da..."</li>
+                                <li>"Positiv hervorzuheben ist..."</li>
                             </ul>
                         </div>
 
-                        <h4>Formulierungshilfen für die Stellungnahme</h4>
-
+                        <h3>Modalverben der Bewertung</h3>
                         <div class="example-box">
-                            <strong>Zustimmung:</strong>
+                            <strong>Abstufungen der Gewissheit:</strong>
                             <ul>
-                                <li>"Überzeugend ist..."</li>
-                                <li>"Trifft zu, weil..."</li>
-                                <li>"Berechtigterweise weist der Autor auf..."</li>
-                                <li>"In der Tat..."</li>
+                                <li><strong>sicher:</strong> muss, kann nicht</li>
+                                <li><strong>wahrscheinlich:</strong> dürfte, müsste</li>
+                                <li><strong>möglich:</strong> könnte, kann</li>
+                                <li><strong>unsicher:</strong> mag, möchte</li>
                             </ul>
                         </div>
 
-                        <div class="example-box">
-                            <strong>Kritik:</strong>
-                            <ul>
-                                <li>"Problematisch erscheint..."</li>
-                                <li>"Fragwürdig ist..."</li>
-                                <li>"Übersehen wird..."</li>
-                                <li>"Nicht nachvollziehbar ist..."</li>
-                            </ul>
-                        </div>
-
-                        <div class="example-box">
-                            <strong>Abwägung:</strong>
-                            <ul>
-                                <li>"Einerseits... andererseits..."</li>
-                                <li>"Zwar... aber..."</li>
-                                <li>"Obwohl... so doch..."</li>
-                                <li>"Trotz... muss bedacht werden..."</li>
-                            </ul>
-                        </div>
-
-                        <h3>Sprachliche Qualität</h3>
-
-                        <h4>Präzision</h4>
-                        <p>Vermeide vage Formulierungen:</p>
-                        
-                        <div class="example-box">
-                            <span class="incorrect">"Der Autor sagt irgendwas über Medien"</span><br>
-                            <span class="correct">"Der Autor kritisiert die exzessive Nutzung sozialer Medien"</span>
-                        </div>
-
-                        <h4>Variation</h4>
-                        <p>Vermeide Wiederholungen:</p>
-                        
-                        <div class="example-box">
-                            <span class="incorrect">"Der Autor meint... Der Autor sagt... Der Autor findet..."</span><br>
-                            <span class="correct">"Der Autor vertritt die Auffassung... Er argumentiert... Seine Position ist..."</span>
-                        </div>
-
-                        <h4>Objektivität</h4>
-                        <p>Vermeide subjektive Wertungen:</p>
-                        
-                        <div class="example-box">
-                            <span class="incorrect">"Das ist total blöd, was der Autor sagt"</span><br>
-                            <span class="correct">"Die Argumentation des Autors überzeugt nicht, weil..."</span>
-                        </div>
-
-                        <h3>Typische Formulierungsfehler</h3>
+                        <h3>Häufige sprachliche Fehler</h3>
                         <div class="warning-box">
                             <strong>Vermeide:</strong>
                             <ul>
-                                <li><strong>Umgangssprache:</strong> "Der Text geht voll ab"</li>
-                                <li><strong>Wertende Adjektive:</strong> "super", "toll", "schrecklich"</li>
-                                <li><strong>Unpräzise Bezüge:</strong> "das", "es", "welches"</li>
-                                <li><strong>Passiv-Überfluss:</strong> "Es wird gesagt, dass..."</li>
-                                <li><strong>Nominalstil:</strong> "Die Durchführung einer Analyse"</li>
+                                <li><strong>Umgangssprache:</strong> "Das ist total wichtig"</li>
+                                <li><strong>Wertende Adjektive:</strong> "super", "furchtbar"</li>
+                                <li><strong>Vage Formulierungen:</strong> "irgendwie", "man"</li>
+                                <li><strong>Wiederholungen:</strong> Immer dieselben Satzanfänge</li>
+                                <li><strong>Rechtschreibfehler:</strong> Besonders bei Fachbegriffen</li>
                             </ul>
                         </div>
                     </div>
@@ -1194,7 +935,7 @@
                 <button class="collapsible">9. Zeitmanagement und Überarbeitung</button>
                 <div class="section-content">
                     <div class="section-inner">
-                        <h3>Zeitplan für 90 Minuten</h3>
+                        <h3>Zeiteinteilung (180 Minuten)</h3>
                         
                         <table>
                             <tr>
@@ -1204,267 +945,245 @@
                             </tr>
                             <tr>
                                 <td><strong>1. Lesen & Verstehen</strong></td>
+                                <td>20 Min</td>
+                                <td>Text mehrmals lesen, Markierungen</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Strukturplanung</strong></td>
                                 <td>15 Min</td>
-                                <td>
-                                    • Text zweimal lesen<br>
-                                    • Kernaussage erfassen<br>
-                                    • Wichtiges markieren
-                                </td>
+                                <td>Gliederung erstellen, Hauptargumente</td>
                             </tr>
                             <tr>
-                                <td><strong>2. Strukturieren</strong></td>
-                                <td>10 Min</td>
-                                <td>
-                                    • Gliederung erstellen<br>
-                                    • Argumente ordnen<br>
-                                    • Thesen formulieren
-                                </td>
+                                <td><strong>3. Einleitung</strong></td>
+                                <td>15 Min</td>
+                                <td>Hinführung, Textangabe, Überleitung</td>
                             </tr>
                             <tr>
-                                <td><strong>3. Schreiben</strong></td>
+                                <td><strong>4. Hauptteil A</strong></td>
+                                <td>40 Min</td>
+                                <td>Textanalyse, Argumentationsstruktur</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Hauptteil B</strong></td>
                                 <td>50 Min</td>
-                                <td>
-                                    • Einleitung (10 Min)<br>
-                                    • Hauptteil (30 Min)<br>
-                                    • Schluss (10 Min)
-                                </td>
+                                <td>Eigene Stellungnahme, Argumentation</td>
                             </tr>
                             <tr>
-                                <td><strong>4. Überarbeiten</strong></td>
+                                <td><strong>6. Schluss</strong></td>
                                 <td>15 Min</td>
-                                <td>
-                                    • Rechtschreibung prüfen<br>
-                                    • Logik überprüfen<br>
-                                    • Formulierungen verbessern
-                                </td>
+                                <td>Zusammenfassung, Fazit, Ausblick</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7. Überarbeitung</strong></td>
+                                <td>25 Min</td>
+                                <td>Korrekturlesen, Fehler verbessern</td>
                             </tr>
                         </table>
 
                         <h3>Überarbeitungscheckliste</h3>
                         
                         <div class="checklist">
-                            <h4>Inhalt</h4>
+                            <h4>Inhaltliche Prüfung:</h4>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check1">
-                                <label for="check1">Ist die Textangabe vollständig?</label>
+                                <input type="checkbox"> Ist die Textangabe vollständig?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check2">
-                                <label for="check2">Wurde die Kernthese richtig erfasst?</label>
+                                <input type="checkbox"> Wurde die Hauptthese korrekt wiedergegeben?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check3">
-                                <label for="check3">Sind alle Argumente berücksichtigt?</label>
+                                <input type="checkbox"> Sind alle Argumente analysiert?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check4">
-                                <label for="check4">Ist die eigene Position klar?</label>
-                            </div>
-
-                            <h4>Struktur</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check5">
-                                <label for="check5">Klare Gliederung erkennbar?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check6">
-                                <label for="check6">Logischer Gedankenfluss?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check7">
-                                <label for="check7">Gute Überleitungen?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check8">
-                                <label for="check8">Angemessener Umfang?</label>
-                            </div>
-
-                            <h4>Sprache</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check9">
-                                <label for="check9">Rechtschreibung korrekt?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check10">
-                                <label for="check10">Satzbau variiert?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check11">
-                                <label for="check11">Fachbegriffe richtig verwendet?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check12">
-                                <label for="check12">Objektive Sprache?</label>
+                                <input type="checkbox"> Ist die eigene Position klar?
                             </div>
                         </div>
 
-                        <h3>Typische Zeitfallen</h3>
+                        <div class="checklist">
+                            <h4>Sprachliche Prüfung:</h4>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Wissenschaftlicher Sprachstil?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Abwechslungsreiche Formulierungen?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Korrekte Grammatik und Rechtschreibung?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Flüssige Übergänge?
+                            </div>
+                        </div>
+
+                        <div class="checklist">
+                            <h4>Formale Prüfung:</h4>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Korrekte Zitierweise?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Angemessener Umfang?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Klare Absatzgliederung?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Leserliche Schrift?
+                            </div>
+                        </div>
+
+                        <h3>Typische Fehlerquellen</h3>
                         <div class="warning-box">
-                            <strong>Vermeide:</strong>
+                            <strong>Achte besonders auf:</strong>
                             <ul>
-                                <li><strong>Zu langes Lesen:</strong> Maximal 15 Minuten für Textverständnis</li>
-                                <li><strong>Perfektionismus:</strong> Erster Entwurf muss nicht perfekt sein</li>
-                                <li><strong>Ausschweifungen:</strong> Beim Thema bleiben</li>
-                                <li><strong>Zu spätes Schreiben:</strong> Nach 25 Minuten solltest du schreiben</li>
-                                <li><strong>Keine Zeit für Korrektur:</strong> Mindestens 10 Minuten einplanen</li>
+                                <li><strong>Zeitformen:</strong> Einheitliches Tempus (meist Präsens)</li>
+                                <li><strong>Kommasetzung:</strong> Bei Aufzählungen, Nebensätzen</li>
+                                <li><strong>Wortwiederholungen:</strong> Synonyme verwenden</li>
+                                <li><strong>Logikbrüche:</strong> Argumentation nachvollziehbar?</li>
+                                <li><strong>Textbezug:</strong> Immer beim Text bleiben</li>
                             </ul>
                         </div>
 
-                        <h3>Notfallplan bei Zeitknappheit</h3>
-                        <ol>
-                            <li><strong>Priorisieren:</strong> Wichtigste Argumente zuerst</li>
-                            <li><strong>Kürzen:</strong> Bei Einleitung und Schluss sparen</li>
-                            <li><strong>Struktur bewahren:</strong> Trotzdem vollständige Gliederung</li>
-                            <li><strong>Schluss schreiben:</strong> Lieber kürzer als gar nicht</li>
-                        </ol>
+                        <h3>Letzte Kontrolle</h3>
+                        <p>Bevor du abgibst:</p>
+                        <ul>
+                            <li>Laut vorlesen (hört sich das flüssig an?)</li>
+                            <li>Rechtschreibprüfung nutzen</li>
+                            <li>Nochmal auf die Aufgabenstellung schauen</li>
+                            <li>Name und Klasse nicht vergessen</li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Kapitel 10 -->
-                <button class="collapsible">10. Checkliste zur Selbstkontrolle</button>
+                <button class="collapsible">10. Checkliste für die perfekte Erörterung</button>
                 <div class="section-content">
                     <div class="section-inner">
-                        <h3>Vor dem Abgeben kontrollieren</h3>
+                        <h3>Vor dem Schreiben</h3>
                         
                         <div class="checklist">
-                            <h4>Allgemeines</h4>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check13">
-                                <label for="check13">Name und Datum nicht vergessen?</label>
+                                <input type="checkbox"> Text mindestens zweimal gelesen?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check14">
-                                <label for="check14">Leserliche Handschrift?</label>
+                                <input type="checkbox"> Unbekannte Wörter nachgeschlagen?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check15">
-                                <label for="check15">Seitenzahl angegeben?</label>
-                            </div>
-
-                            <h4>Einleitung</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check16">
-                                <label for="check16">Interessanter Einstieg?</label>
+                                <input type="checkbox"> Hauptthese identifiziert?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check17">
-                                <label for="check17">Vollständige Textangabe?</label>
+                                <input type="checkbox"> Argumentationsstruktur erkannt?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check18">
-                                <label for="check18">Kernthese genannt?</label>
+                                <input type="checkbox"> Sprachliche Mittel markiert?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check19">
-                                <label for="check19">Überleitung zum Hauptteil?</label>
-                            </div>
-
-                            <h4>Hauptteil</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check20">
-                                <label for="check20">Analyse der Argumentationsstruktur?</label>
+                                <input type="checkbox"> Eigene Position überlegt?
                             </div>
                             <div class="checklist-item">
-                                <input type="checkbox" id="check21">
-                                <label for="check21">Sprachanalyse?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check22">
-                                <label for="check22">Eigene Stellungnahme?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check23">
-                                <label for="check23">Abwägende Argumentation?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check24">
-                                <label for="check24">Belege und Beispiele?</label>
-                            </div>
-
-                            <h4>Schluss</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check25">
-                                <label for="check25">Zusammenfassung der Hauptpunkte?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check26">
-                                <label for="check26">Eigenes Fazit?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check27">
-                                <label for="check27">Ausblick oder Perspektive?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check28">
-                                <label for="check28">Keine neuen Argumente?</label>
-                            </div>
-
-                            <h4>Sprache</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check29">
-                                <label for="check29">Wissenschaftlicher Stil?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check30">
-                                <label for="check30">Variierter Wortschatz?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check31">
-                                <label for="check31">Korrekte Zitierweise?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check32">
-                                <label for="check32">Rechtschreibung geprüft?</label>
+                                <input type="checkbox"> Gliederung erstellt?
                             </div>
                         </div>
 
-                        <h3>Bewertungskriterien verstehen</h3>
-                        <p>Die Note setzt sich zusammen aus:</p>
-                        
-                        <table>
-                            <tr>
-                                <th>Bereich</th>
-                                <th>Gewichtung</th>
-                                <th>Was wird bewertet?</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Inhalt</strong></td>
-                                <td>40%</td>
-                                <td>
-                                    • Textverständnis<br>
-                                    • Analysequalität<br>
-                                    • Argumentationsfähigkeit
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Aufbau</strong></td>
-                                <td>30%</td>
-                                <td>
-                                    • Struktur<br>
-                                    • Logik<br>
-                                    • Kohärenz
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Sprache</strong></td>
-                                <td>30%</td>
-                                <td>
-                                    • Ausdruck<br>
-                                    • Stil<br>
-                                    • Formale Korrektheit
-                                </td>
-                            </tr>
-                        </table>
+                        <h3>Einleitung</h3>
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox"> Interessante Hinführung?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Vollständige Textangabe?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Kernthese korrekt wiedergegeben?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Überleitung zum Hauptteil?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Nicht zu lang (max. 100 Wörter)?
+                            </div>
+                        </div>
+
+                        <h3>Hauptteil - Textanalyse</h3>
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox"> Argumentationsstruktur analysiert?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Sprachliche Mittel beschrieben?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Belege und Beispiele untersucht?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Überzeugungskraft bewertet?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Textbezug gewahrt (Zitate)?
+                            </div>
+                        </div>
+
+                        <h3>Hauptteil - Stellungnahme</h3>
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox"> Eigene Position klar?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Pro- und Contra-Argumente?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Eigene Argumente eingebracht?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Abwägende Betrachtung?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Logisch nachvollziehbar?
+                            </div>
+                        </div>
+
+                        <h3>Schluss</h3>
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox"> Zusammenfassung der Hauptpunkte?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Eigenes Fazit?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Ausblick oder weiterführender Gedanke?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Keine neuen Argumente?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Abgerundet und stimmig?
+                            </div>
+                        </div>
+
+                        <h3>Sprache und Form</h3>
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox"> Wissenschaftlicher Sprachstil?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Abwechslungsreiche Formulierungen?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Korrekte Rechtschreibung?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Klare Absatzgliederung?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Flüssige Übergänge?
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox"> Angemessener Umfang?
+                            </div>
+                        </div>
 
                         <div class="success-box">
-                            <strong>Erfolgsgaranten:</strong>
-                            <ul>
-                                <li>Tiefes Textverständnis zeigen</li>
-                                <li>Differenzierte Analyse bieten</li>
-                                <li>Eigene Position begründen</li>
-                                <li>Klare Struktur einhalten</li>
-                                <li>Sorgfältige Sprache verwenden</li>
-                            </ul>
+                            <strong>Wenn du alle Punkte abhaken kannst:</strong><br>
+                            Herzlichen Glückwunsch! Du hast eine ausgezeichnete textgebundene Erörterung verfasst.
                         </div>
                     </div>
                 </div>
@@ -1473,60 +1192,61 @@
     </main>
 
     <script>
-        // JavaScript für die Collapsible Sections
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
+        // Collapsible Sections
+        const coll = document.getElementsByClassName("collapsible");
+        
+        for (let i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function() {
                 this.classList.toggle("active");
-                var content = this.nextElementSibling;
+                const content = this.nextElementSibling;
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
+                    content.classList.remove("active");
                 } else {
                     content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.add("active");
                 }
             });
         }
 
-        // Funktion zum Öffnen/Schließen aller Sections
+        // Expand/Collapse All
         function toggleAll() {
-            var allContent = document.getElementsByClassName("section-content");
-            var allButtons = document.getElementsByClassName("collapsible");
-            var isAnyOpen = false;
+            const allContent = document.getElementsByClassName("section-content");
+            const allButtons = document.getElementsByClassName("collapsible");
+            const expandBtn = document.querySelector(".expand-all-btn");
             
-            // Prüfen, ob mindestens eine Section geöffnet ist
-            for (var i = 0; i < allContent.length; i++) {
-                if (allContent[i].style.maxHeight) {
-                    isAnyOpen = true;
+            // Check if any section is collapsed
+            let allExpanded = true;
+            for (let i = 0; i < allContent.length; i++) {
+                if (!allContent[i].style.maxHeight) {
+                    allExpanded = false;
                     break;
                 }
             }
             
-            // Alle öffnen oder schließen
-            for (var i = 0; i < allContent.length; i++) {
-                if (isAnyOpen) {
-                    // Alle schließen
+            // Toggle all sections
+            for (let i = 0; i < allContent.length; i++) {
+                if (allExpanded) {
+                    // Collapse all
                     allContent[i].style.maxHeight = null;
+                    allContent[i].classList.remove("active");
                     allButtons[i].classList.remove("active");
                 } else {
-                    // Alle öffnen
+                    // Expand all
                     allContent[i].style.maxHeight = allContent[i].scrollHeight + "px";
+                    allContent[i].classList.add("active");
                     allButtons[i].classList.add("active");
                 }
             }
+            
+            // Update button text
+            expandBtn.textContent = allExpanded ? "Alle Kapitel aufklappen" : "Alle Kapitel zuklappen";
         }
 
-        // Funktion für die Sidebar auf mobilen Geräten
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("active");
-        }
-
-        // Automatisch die erste Section öffnen
+        // Auto-expand first section
         window.onload = function() {
-            if (window.innerWidth > 768) {
-                document.getElementsByClassName("collapsible")[0].click();
+            if (coll.length > 0) {
+                coll[0].click();
             }
         };
     </script>

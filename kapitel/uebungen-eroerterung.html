@@ -20,82 +20,8 @@
             display: flex;
         }
 
-        .sidebar {
-            width: 280px;
-            background: rgba(52, 73, 94, 0.95);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-header h1 {
-            font-size: 1.4em;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-header p {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .nav-menu {
-            padding: 15px 0;
-        }
-
-        .nav-item {
-            margin: 2px 0;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-            font-size: 0.95em;
-        }
-
-        .nav-link:hover {
-            background: rgba(255,255,255,0.1);
-            border-left-color: #3498db;
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            background: rgba(52, 152, 219, 0.2);
-            border-left-color: #3498db;
-            font-weight: bold;
-        }
-
-        .nav-section {
-            margin-bottom: 15px;
-        }
-
-        .nav-section-title {
-            padding: 8px 20px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #bdc3c7;
-            font-weight: bold;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 5px;
-        }
-
         .main-content {
-            margin-left: 280px;
+            margin: 0 auto;
             flex: 1;
             padding: 20px;
         }
@@ -217,84 +143,13 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                width: 250px;
-                transform: translateX(-250px);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
             .content-body {
                 padding: 20px;
-            }
-        }
-
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
             }
         }
     </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
-    
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>Deutschmatura</h1>
-            <p>Komplettes Handbuch</p>
-        </div>
-        
-        <div class="nav-menu">
-            <div class="nav-section">
-                <div class="nav-section-title">Grundlagen</div>
-                <div class="nav-item">
-                    <a href="textanalyse12.html" class="nav-link">Willkommen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-title">Übungen</div>
-                <div class="nav-item">
-                    <a href="uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="uebungen-eroerterung.html" class="nav-link active">Erörterungs-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <main class="main-content">
         <div class="content-container">
             <header class="content-header">
@@ -394,7 +249,7 @@
                             <h4>Digitale Bildung – Chance oder Risiko?</h4>
                             <p>Die Digitalisierung des Bildungswesens wird heute vielfach als Allheilmittel für die Probleme unserer Schulen gepriesen. Tablets statt Schulbücher, Online-Kurse statt Frontalunterricht, Lern-Apps statt Arbeitsblätter – so lautet die Devise. Befürworter argumentieren, dass die digitale Transformation unaufhaltsam sei und Schulen die Schüler auf eine digitalisierte Arbeitswelt vorbereiten müssten.</p>
                             <p>Doch bei aller Begeisterung für die neuen Möglichkeiten werden die Risiken oft übersehen. Studien zeigen, dass die intensive Nutzung digitaler Medien die Konzentrationsfähigkeit beeinträchtigen kann. Zudem verleitet die Informationsflut im Internet zu oberflächlichem Denken und erschwert das vertiefte Verstehen komplexer Zusammenhänge.</p>
-                            <p>Besonders problematisch ist auch die wachsende Abhängigkeit von Technologiekonzernen, die ihre kommerziellen Interessen verfolgen. Schulen geraten in Gefahr, zu Absatzmärkten für Hard- und Software zu werden, ohne dass der pädagogische Mehrwert immer gegeben ist.</p>
+                            <p>Besonders problematisch ist auch die wachsende Abhängigkeit von Technologiekonzernen, die ihre kommerziellen Interessen verfolgen. Schulen geraten in Gefahr, zu Absatzmärkten für Hard- und Software zu werden, ohne dass der pädagogischer Mehrwert immer gegeben ist.</p>
                             <p>Statt einem blinden Digitalisierungshype zu folgen, sollten wir einen ausgewogenen Ansatz wählen. Digitale Werkzeuge können den Unterricht bereichern, wenn sie gezielt und reflektiert eingesetzt werden. Sie sollten jedoch traditionelle Lernformen nicht vollständig ersetzen, sondern ergänzen. Letztlich kommt es nicht auf die Quantität der eingesetzten Technologie an, sondern auf die Qualität der pädagogischen Konzepte.</p>
                         </div>
                         
@@ -453,11 +308,6 @@
     </main>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-        
         function toggleSolution(id) {
             const solution = document.getElementById(id);
             if (solution.style.display === 'block') {
@@ -468,19 +318,6 @@
                 event.target.textContent = 'Lösung ausblenden';
             }
         }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (window.innerWidth <= 768 && 
-                sidebar.classList.contains('active') && 
-                !sidebar.contains(event.target) && 
-                !menuToggle.contains(event.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
