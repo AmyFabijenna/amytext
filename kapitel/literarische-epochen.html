@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Literarische Epochen - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .epoche-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+
+        .epoche-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .epoche-header h3 {
+            color: #2c3e50;
+            font-size: 1.3em;
+        }
+
+        .epoche-content {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .epoche-content.active {
+            display: block;
+        }
+
+        .epoche-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .epoche-info-item {
+            margin-bottom: 10px;
+        }
+
+        .epoche-info-item strong {
+            color: #2c3e50;
+        }
+
+        .vertreter-liste, .werke-liste {
+            list-style-type: none;
+        }
+
+        .vertreter-liste li, .werke-liste li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .beispiel-text {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .uebung-box {
+            background: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .uebung-box h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .loesung-button {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .loesung {
+            display: none;
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .loesung.active {
+            display: block;
+        }
+
+        .timeline {
+            display: flex;
+            overflow-x: auto;
+            margin: 30px 0;
+            padding: 15px 0;
+        }
+
+        .timeline-item {
+            flex: 0 0 auto;
+            width: 200px;
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .timeline-item h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+
+            .epoche-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="willkommen.html" class="nav-link">Willkommen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textanalyse</div>
+                <div class="nav-item">
+                    <a href="textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
+                </div>
+                <div class="nav-item">
+                    <a href="argumentationsanalyse.html" class="nav-link">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sprachanalyse.html" class="nav-link">Sprachanalyse</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textinterpretation</div>
+                <div class="nav-item">
+                    <a href="textinterpretation.html" class="nav-link">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="literarische-epochen.html" class="nav-link active">Literarische Epochen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textsorten</div>
+                <div class="nav-item">
+                    <a href="textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
+                </div>
+                <div class="nav-item">
+                    <a href="lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="prosa-analyse.html" class="nav-link">Prosa analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="drama-analyse.html" class="nav-link">Drama analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Praxisbeispiele</div>
+                <div class="nav-item">
+                    <a href="beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
+                </div>
+                <div class="nav-item">
+                    <a href="beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
+                </div>
+                <div class="nav-item">
+                    <a href="musterloesungen.html" class="nav-link">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="fachbegriffe.html" class="nav-link">Fachbegriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Prüfungsvorbereitung</div>
+                <div class="nav-item">
+                    <a href="zeitmanagement.html" class="nav-link">Zeitmanagement</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
+                </div>
+                <div class="nav-item">
+                    <a href="checklists.html" class="nav-link">Checklisten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Literarische Epochen</h1>
+                <p>Überblick und Merkmale der wichtigsten Literaturepochen</p>
+            </header>
+
+            <div class="content-body">
+                <div class="epoche-card">
+                    <div class="epoche-header" onclick="toggleEpoche('aufklaerung')">
+                        <h3>Aufklärung (1720-1785)</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="epoche-content" id="aufklaerung">
+                        <div class="epoche-info">
+                            <div>
+                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1720-1785</div>
+                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Rationalismus, Vernunftdenken, Emanzipation des Bürgertums</div>
+                                <div class="epoche-info-item"><strong>Weltbild:</strong> Vernunft als höchste Instanz, Fortschrittsglaube, Toleranz</div>
+                            </div>
+                            <div>
+                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                                    <ul>
+                                        <li>Vernunftbetontheit</li>
+                                        <li>Didaktischer Charakter</li>
+                                        <li>Klare, nüchterne Sprache</li>
+                                        <li>Moralische Belehrung</li>
+                                        <li>Emanzipation des Bürgertums</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4>Wichtige Vertreter und Werke:</h4>
+                        <div class="epoche-info">
+                            <div>
+                                <ul class="vertreter-liste">
+                                    <li>Gotthold Ephraim Lessing</li>
+                                    <li>Christoph Martin Wieland</li>
+                                    <li>Immanuel Kant</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="werke-liste">
+                                    <li>Nathan der Weise (Lessing)</li>
+                                    <li>Emilia Galotti (Lessing)</li>
+                                    <li>Geschichte des Agathon (Wieland)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="beispiel-text">
+                            <p>"Der vornehmste Vorzug der Religion besteht in der Übung der Tugend. Die Tugend aber ist das Einzige, was den Menschen vor allen andern Geschöpfen auszeichnet." (Aus: Nathan der Weise)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="epoche-card">
+                    <div class="epoche-header" onclick="toggleEpoche('sturm-und-drang')">
+                        <h3>Sturm und Drang (1765-1785)</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="epoche-content" id="sturm-und-drang">
+                        <div class="epoche-info">
+                            <div>
+                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1765-1785</div>
+                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Gegenbewegung zur Aufklärung, Geniezeit</div>
+                                <div class="epoche-info-item"><strong>Weltbild:</strong> Gefühl vor Vernunft, Naturverehrung, Geniekult</div>
+                            </div>
+                            <div>
+                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                                    <ul>
+                                        <li>Gefühlsbetontheit</li>
+                                        <li>Geniekult</li>
+                                        <li>Naturverehrung</li>
+                                        <li>Rebellion gegen Autoritäten</li>
+                                        <li>Ausdrucksstarke, emotionale Sprache</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4>Wichtige Vertreter und Werke:</h4>
+                        <div class="epoche-info">
+                            <div>
+                                <ul class="vertreter-liste">
+                                    <li>Johann Wolfgang von Goethe</li>
+                                    <li>Friedrich Schiller</li>
+                                    <li>Jakob Michael Reinhold Lenz</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="werke-liste">
+                                    <li>Die Leiden des jungen Werthers (Goethe)</li>
+                                    <li>Götz von Berlichingen (Goethe)</li>
+                                    <li>Die Räuber (Schiller)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="beispiel-text">
+                            <p>"Ach, wenn's nur einmal so recht aus dem Herzen weggeschrieben wäre! Ich habe manchmal einen solchen Druck auf dem Herzen, und dann kann ich nicht schreiben, nicht einmal denken." (Aus: Die Leiden des jungen Werthers)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="epoche-card">
+                    <div class="epoche-header" onclick="toggleEpoche('weimarer-klassik')">
+                        <h3>Weimarer Klassik (1786-1805)</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="epoche-content" id="weimarer-klassik">
+                        <div class="epoche-info">
+                            <div>
+                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1786-1805</div>
+                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Französische Revolution, Humanitätsideal</div>
+                                <div class="epoche-info-item"><strong>Weltbild:</strong> Harmonie, Humanität, ästhetische Erziehung</div>
+                            </div>
+                            <div>
+                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                                    <ul>
+                                        <li>Streben nach Harmonie und Vollendung</li>
+                                        <li>Humanitätsideal</li>
+                                        <li>Antikenrezeption</li>
+                                        <li>Formenstrenge</li>
+                                        <li>Veredelung der Sprache</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4>Wichtige Vertreter und Werke:</h4>
+                        <div class="epoche-info">
+                            <div>
+                                <ul class="vertreter-liste">
+                                    <li>Johann Wolfgang von Goethe</li>
+                                    <li>Friedrich Schiller</li>
+                                    <li>Christoph Martin Wieland</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="werke-liste">
+                                    <li>Iphigenie auf Tauris (Goethe)</li>
+                                    <li>Wilhelm Meisters Lehrjahre (Goethe)</li>
+                                    <li>Don Carlos (Schiller)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="beispiel-text">
+                            <p>"Edel sei der Mensch, hilfreich und gut! Denn das allein unterscheidet ihn von allen Wesen, die wir kennen." (Aus: Das Göttliche von Goethe)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="epoche-card">
+                    <div class="epoche-header" onclick="toggleEpoche('romantik')">
+                        <h3>Romantik (1795-1835)</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="epoche-content" id="romantik">
+                        <div class="epoche-info">
+                            <div>
+                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1795-1835</div>
+                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Napoleonische Kriege, Industrialisierung</div>
+                                <div class="epoche-info-item"><strong>Weltbild:</strong> Sehnsucht, Mystik, Übernatürliches</div>
+                            </div>
+                            <div>
+                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                                    <ul>
+                                        <li>Sehnsucht und Schwermut</li>
+                                        <li>Hinwendung zum Mittelalter</li>
+                                        <li>Naturmystik</li>
+                                        <li>Volkspoesie</li>
+                                        <li>Ironie und Fragmentcharakter</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4>Wichtige Vertreter und Werke:</h4>
+                        <div class="epoche-info">
+                            <div>
+                                <ul class="vertreter-liste">
+                                    <li>Novalis</li>
+                                    <li>E.T.A. Hoffmann</li>
+                                    <li>Joseph von Eichendorff</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="werke-liste">
+                                    <li>Heinrich von Ofterdingen (Novalis)</li>
+                                    <li>Der goldne Topf (Hoffmann)</li>
+                                    <li>Aus dem Leben eines Taugenichts (Eichendorff)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="beispiel-text">
+                            <p>"Es waren schöne, glänzende Sterne am Himmel, unten schlugen die Wellen des Meeres an den Felsen, und in der Ferne hörte man das dumpfe Rollen eines Gewitters." (Aus: Aus dem Leben eines Taugenichts)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="epoche-card">
+                    <div class="epoche-header" onclick="toggleEpoche('realismus')">
+                        <h3>Realismus (1848-1890)</h3>
+                        <span>▼</span>
+                    </div>
+                    <div class="epoche-content" id="realismus">
+                        <div class="epoche-info">
+                            <div>
+                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1848-1890</div>
+                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Industrielle Revolution, Märzrevolution 1848</div>
+                                <div class="epoche-info-item"><strong>Weltbild:</strong> Nüchterne Wirklichkeitsdarstellung, Objektivität</div>
+                            </div>
+                            <div>
+                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                                    <ul>
+                                        <li>Wirklichkeitstreue</li>
+                                        <li>Detailgenaue Schilderungen</li>
+                                        <li>Psychologische Vertiefung</li>
+                                        <li>Objektive Erzählhaltung</li>
+                                        <li>Bürgerlicher Alltag als Thema</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4>Wichtige Vertreter und Werke:</h4>
+                        <div class="epoche-info">
+                            <div>
+                                <ul class="vertreter-liste">
+                                    <li>Theodor Fontane</li>
+                                    <li>Gottfried Keller</li>
+                                    <li>Theodor Storm</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="werke-liste">
+                                    <li>Effi Briest (Fontane)</li>
+                                    <li>Der grüne Heinrich (Keller)</li>
+                                    <li>Der Schimmelreiter (Storm)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="beispiel-text">
+                            <p>"Es ist ein eigenes Ding um die sogenannte gute Gesellschaft. Man verkehrt Jahre lang miteinander, man ist höflich, man ist zuvorkommend, man lobt einander, und im Grunde weiß man nichts voneinander." (Aus: Effi Briest)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Aufklärung</h4>
+                        <p>1720-1785</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Sturm und Drang</h4>
+                        <p>1765-1785</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Weimarer Klassik</h4>
+                        <p>1786-1805</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Romantik</h4>
+                        <p>1795-1835</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Realismus</h4>
+                        <p>1848-1890</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Naturalismus</h4>
+                        <p>1880-1900</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Expressionismus</h4>
+                        <p>1910-1925</p>
+                    </div>
+                </div>
+
+                <div class="uebung-box">
+                    <h4>Übung: Epochenzuordnung</h4>
+                    <p>Ordnen Sie die folgenden Textausschnitte den richtigen Literaturepochen zu:</p>
+                    <ol>
+                        <li>"Die Natur allein ist unendlich reich, und sie allein bildet den großen Künstler."</li>
+                        <li>"Der Mensch ist frei geschaffen, ist frei, und würd' er in Ketten geboren."</li>
+                        <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, was nicht notwendig geschehen müsste."</li>
+                    </ol>
+                    <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-1')">Lösung anzeigen</button>
+                    <div class="loesung" id="epochen-uebung-1">
+                        <p><strong>Lösungen:</strong></p>
+                        <ol>
+                            <li>Sturm und Drang (Naturverehrung, Geniekult)</li>
+                            <li>Weimarer Klassik (Freiheitspathos, Humanitätsideal)</li>
+                            <li>Aufklärung (Determinismus, Vernunftdenken)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="uebung-box">
+                    <h4>Übung: Epochenmerkmale erkennen</h4>
+                    <p>Analysieren Sie den folgenden Textausschnitt und bestimmen Sie, aus welcher Literaturepoche er stammt. Begründen Sie Ihre Entscheidung mit mindestens drei Merkmalen:</p>
+                    <div class="beispiel-text">
+                        <p>"Die Nacht war sternenklar und kalt. Ich stand am Fenster und blickte hinauf zu den unzähligen Funken, die am Firmament glitzerten. Eine tiefe Wehmut ergriff mich, eine Sehnsucht nach etwas, das ich nicht benennen konnte, das aber weit, weit entfernt war, jenseits dieser kalten, einsamen Nacht."</p>
+                    </div>
+                    <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-2')">Lösung anzeigen</button>
+                    <div class="loesung" id="epochen-uebung-2">
+                        <p><strong>Lösung:</strong></p>
+                        <p>Der Textausschnitt stammt aus der Romantik. Merkmale:</p>
+                        <ol>
+                            <li>Naturbeschreibung mit emotionaler Aufladung (sterneklare, kalte Nacht)</li>
+                            <li>Betontes Gefühlsleben (Wehmut, Sehnsucht)</li>
+                            <li>Unbestimmte, transzendente Sehnsucht ("etwas, das ich nicht benennen konnte")</li>
+                            <li>Einsamkeitsmotiv ("einsame Nacht")</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleEpoche(epocheId) {
+            const content = document.getElementById(epocheId);
+            content.classList.toggle('active');
+            
+            // Ändere den Pfeil je nach Zustand
+            const header = content.previousElementSibling;
+            const arrow = header.querySelector('span');
+            arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+        }
+
+        function toggleLoesung(loesungId) {
+            const loesung = document.getElementById(loesungId);
+            loesung.classList.toggle('active');
+            
+            // Ändere den Button-Text
+            const button = loesung.previousElementSibling;
+            button.textContent = loesung.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

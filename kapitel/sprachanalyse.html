@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprachanalyse - Sprachliche Mittel und ihre Wirkung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin: 25px 0 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #34495e;
+        }
+
+        .card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .example-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .example-box p {
+            margin: 5px 0;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .accordion {
+            background: #f8f9fa;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .active, .accordion:hover {
+            background-color: #e9ecef;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            margin-bottom: 15px;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .exercise {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .exercise h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .solution {
+            background: #d4edda;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .solution h4 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .btn:hover {
+            background: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="textanalyse12.html" class="nav-link">Willkommen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textanalyse</div>
+                <div class="nav-item">
+                    <a href="textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
+                </div>
+                <div class="nav-item">
+                    <a href="argumentationsanalyse.html" class="nav-link">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active">Sprachanalyse</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textinterpretation</div>
+                <div class="nav-item">
+                    <a href="textinterpretation.html" class="nav-link">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="literarische-epochen.html" class="nav-link">Literarische Epochen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textsorten</div>
+                <div class="nav-item">
+                    <a href="textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
+                </div>
+                <div class="nav-item">
+                    <a href="lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="prosa-analyse.html" class="nav-link">Prosa analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="drama-analyse.html" class="nav-link">Drama analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Praxisbeispiele</div>
+                <div class="nav-item">
+                    <a href="beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
+                </div>
+                <div class="nav-item">
+                    <a href="beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
+                </div>
+                <div class="nav-item">
+                    <a href="musterloesungen.html" class="nav-link">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="fachbegriffe.html" class="nav-link">Fachbegriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Prüfungsvorbereitung</div>
+                <div class="nav-item">
+                    <a href="zeitmanagement.html" class="nav-link">Zeitmanagement</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
+                </div>
+                <div class="nav-item">
+                    <a href="checklisten.html" class="nav-link">Checklisten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Sprachanalyse</h1>
+                <p>Sprachliche Mittel und ihre Wirkung erkennen und analysieren</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section">
+                    <h2>Einführung in die Sprachanalyse</h2>
+                    <p>Die Sprachanalyse ist ein zentraler Bestandteil der Textanalyse. Sie untersucht, wie Sprache gezielt eingesetzt wird, um bestimmte Wirkungen zu erzielen. Dabei geht es nicht nur darum, Stilmittel zu identifizieren, sondern auch ihre Funktion im Textzusammenhang zu verstehen.</p>
+                    
+                    <button class="accordion">Warum ist Sprachanalyse wichtig?</button>
+                    <div class="panel">
+                        <p>Die Sprachanalyse hilft uns zu verstehen, wie Autoren durch bewusst gewählte sprachliche Mittel:</p>
+                        <ul>
+                            <li>Bestimmte Emotionen beim Leser hervorrufen</li>
+                            <li>Argumente verstärken oder abschwächen</li>
+                            <li>Bilder und Vorstellungen erzeugen</li>
+                            <li>Die Aufmerksamkeit des Lesers lenken</li>
+                            <li>Eine bestimmte Atmosphäre schaffen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Sprachliche Mittel und ihre Wirkung</h2>
+                    
+                    <button class="accordion">Bildhafte Ausdrucksweisen</button>
+                    <div class="panel">
+                        <div class="card">
+                            <h4>Metapher</h4>
+                            <p><strong>Definition:</strong> Übertragene Bedeutung ohne Vergleichswort</p>
+                            <div class="example-box">
+                                <p class="example-title">Beispiel:</p>
+                                <p>"Das Licht der Erkenntnis durchflutete seinen Verstand."</p>
+                                <p><strong>Wirkung:</strong> Veranschaulicht abstrakte Konzepte, macht komplexe Zusammenhänge begreifbar</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>Vergleich</h4>
+                            <p><strong>Definition:</strong> Gegenüberstellung mit Vergleichswort (wie, als)</p>
+                            <div class="example-box">
+                                <p class="example-title">Beispiel:</p>
+                                <p>"Schwarz wie die Nacht war sein Umhang."</p>
+                                <p><strong>Wirkung:</strong> Verstärkt Vorstellbarkeit, betont Eigenschaften</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>Personifikation</h4>
+                            <p><strong>Definition:</strong> Belebung von Gegenständen oder Abstrakta</p>
+                            <div class="example-box">
+                                <p class="example-title">Beispiel:</p>
+                                <p>"Die blühenden Bäume tanzten im Frühlingswind."</p>
+                                <p><strong>Wirkung:</strong> Erzeugt Nähe und Emotionalität, macht Unbelebtes greifbar</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="accordion">Wiederholungsfiguren</button>
+                    <div class="panel">
+                        <div class="card">
+                            <h4>Anapher</h4>
+                            <p><strong>Definition:</strong> Wiederholung von Wörtern am Satzanfang</p>
+                            <div class="example-box">
+                                <p class="example-title">Beispiel:</p>
+                                <p>"Leise, langsam, lautlos schlich sie durch den dunklen Flur."</p>
+                                <p><strong>Wirkung:</strong> Erzeugt Rhythmus, verstärkt Aussagen, sorgt für Eindringlichkeit</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>Klimax</h4>
+                            <p><strong>Definition:</strong> Steigernde Wiederholung</p>
+                            <div class="example-box">
+                                <p class="example-title">Beispiel:</p>
+                                <p>"Die sozialen Medien haben unsere Gesellschaft nicht nur verändert, sondern zerschnitten, zersplittert und zerstückelt."</p>
+                                <p><strong>Wirkung:</strong> Steigert Intensität, unterstreicht Dramatik</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="accordion">Satzfiguren und Strukturen</button>
+                    <div class="panel">
+                        <div class="card">
+                            <h4>Rhetorische Frage</h4>
+                            <p><strong>Definition:</strong> Frage, die keine Antwort erwartet</p>
+                            <div class="example-box">
+                                <p class="example-title">Beispiel:</p>
+                                <p>"Was ist schon normal in dieser verrückten Welt?"</p>
+                                <p><strong>Wirkung:</strong> Bindet Leser ein, appelliert, provoziert Nachdenken</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>Ellipse</h4>
+                            <p><strong>Definition:</strong> Auslassung von Satzteilen</p>
+                            <div class="example-box">
+                                <p class="example-title">Beispiel:</p>
+                                <p>"Schweigen. Warten. Hoffen. Mehr konnten sie nicht tun."</p>
+                                <p><strong>Wirkung:</strong> Erzeugt Spannung, Dynamik, Dramatik</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Wortwahl und Sprachregister</h2>
+                    
+                    <div class="card">
+                        <h4>Fachsprache vs. Alltagssprache</h4>
+                        <p>Die Wahl zwischen Fachbegriffen und alltäglicher Sprache beeinflusst die Wirkung eines Textes erheblich:</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Sprachregister</th>
+                                <th>Wirkung</th>
+                                <th>Beispiel</th>
+                            </tr>
+                            <tr>
+                                <td>Fachsprache</td>
+                                <td>Vermittelt Kompetenz, Autorität, Präzision</td>
+                                <td>"kognitive Dissonanz", "soziale Interaktion"</td>
+                            </tr>
+                            <tr>
+                                <td>Alltagssprache</td>
+                                <td>Schafft Nähe, Verständlichkeit, Emotionalität</td>
+                                <td>"innerer Zwiespalt", "zwischenmenschlicher Umgang"</td>
+                            </tr>
+                            <tr>
+                                <td>Emotionale Sprache</td>
+                                <td>Erzeugt Betroffenheit, appelliert, polarisiert</td>
+                                <td>"herzzerreißend", "unerträglich"</td>
+                            </tr>
+                            <tr>
+                                <td>Sachliche Sprache</td>
+                                <td>Vermittelt Objektivität, Rationalität, Distanz</td>
+                                <td>"empirisch belegt", "statistisch signifikant"</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <button class="accordion">Tonfall und Atmosphäre</button>
+                    <div class="panel">
+                        <p>Der Tonfall eines Textes wird durch verschiedene sprachliche Mittel erzeugt:</p>
+                        
+                        <div class="example-box">
+                            <p class="example-title">Dramatischer Tonfall:</p>
+                            <p>"Der Wind heulte um die Ecken des alten Hauses. Die Fensterläden klapperten unruhig, als wollten sie eine Warnung aussprechen."</p>
+                            <p><strong>Erzeugt durch:</strong> Personifikation, emotionale Verben, bildhafte Adjektive</p>
+                        </div>
+                        
+                        <div class="example-box">
+                            <p class="example-title">Appellativer Tonfall:</p>
+                            <p>"Warum schweigen wir? Warum schauen wir weg? Warum akzeptieren wir das Unakzeptable?"</p>
+                            <p><strong>Erzeugt durch:</strong> Rhetorische Fragen, Wiederholungen, emotional aufgeladene Begriffe</p>
+                        </div>
+                        
+                        <div class="example-box">
+                            <p class="example-title">Reflektierender Tonfall:</p>
+                            <p>"Die Erinnerung ist ein verschlungener Pfad durch einen dichten Wald. Manche Wege sind breit und sonnendurchflutet, andere schmal und dunkel."</p>
+                            <p><strong>Erzeugt durch:</strong> Metaphern, Gegensätze, bildhafte Sprache</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Übungen zur Sprachanalyse</h2>
+                    
+                    <div class="exercise">
+                        <h4>Übung 1: Stilmittel erkennen</h4>
+                        <p>Identifiziere die Stilmittel in den folgenden Sätzen:</p>
+                        <ol>
+                            <li>"Tausend Träume träumte er träge."</li>
+                            <li>"Das Leben ist kein Ponyhof."</li>
+                            <li>"Der Berg der Probleme wuchs von Tag zu Tag."</li>
+                            <li>"Die Mauern haben Ohren."</li>
+                            <li>"Er ist so arm wie eine Kirchenmaus – doch sein Herz ist reich."</li>
+                        </ol>
+                        <button class="btn" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        
+                        <div class="solution" id="solution1">
+                            <h4>Lösung:</h4>
+                            <ol>
+                                <li>Alliteration (Wiederholung des Anlauts "tr")</li>
+                                <li>Metapher (übertragene Bedeutung)</li>
+                                <li>Metapher (Problem = Berg) und Hyperbel (Übertreibung)</li>
+                                <li>Personifikation (Mauern "haben Ohren")</li>
+                                <li>Vergleich ("wie eine Kirchenmaus") und Antithese (Gegenüberstellung von arm und reich)</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Übung 2: Wirkungsanalyse</h4>
+                        <p>Analysiere die Wirkung der sprachlichen Mittel in den folgenden Textauszügen:</p>
+                        
+                        <div class="example-box">
+                            <p class="example-title">Textauszug 1:</p>
+                            <p>"Der Wind heulte um die Ecken des alten Hauses. Die Fensterläden klapperten unruhig, als wollten sie eine Warnung aussprechen. Im Kamin knisterte das letzte Holzscheit, und die Schatten tanzten an den Wänden wie ruhelose Geister."</p>
+                        </div>
+                        
+                        <div class="example-box">
+                            <p class="example-title">Textauszug 2:</p>
+                            <p>"Warum schweigen wir? Warum schauen wir weg? Warum akzeptieren wir das Unakzeptable? Es ist an der Zeit, unsere Stimme zu erheben, unsere Augen zu öffnen und für das einzustehen, was richtig ist!"</p>
+                        </div>
+                        
+                        <button class="btn" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                        
+                        <div class="solution" id="solution2">
+                            <h4>Lösung:</h4>
+                            <p><strong>Textauszug 1:</strong></p>
+                            <ul>
+                                <li>Personifikation ("Wind heulte", "Fensterläden klapperten", "Schatten tanzten") - erzeugt eine unheimliche, bedrohliche Atmosphäre</li>
+                                <li>Vergleich ("wie ruhelose Geister") - verstärkt das Unheimliche, Unruhige</li>
+                                <li>Emotionale Verben ("heulte", "klapperten", "knistern") - erzeugen akustische Bilder und Spannung</li>
+                                <li>Insgesamt: Schafft eine düstere, unheimliche Stimmung</li>
+                            </ul>
+                            
+                            <p><strong>Textauszug 2:</strong></p>
+                            <ul>
+                                <li>Rhetorische Fragen ("Warum schweigen wir?") - appellieren an den Leser, provozieren Nachdenken</li>
+                                <li>Anapher ("Warum... Warum... Warum") - verstärkt den Appell, erzeugt Rhythmus</li>
+                                <li>Metaphern ("Stimme erheben", "Augen öffnen") - machen abstrakte Konzepte bildhaft</li>
+                                <li>Klimax ("schweigen - wegschauen - akzeptieren") - steigert die Intensität der Kritik</li>
+                                <li>Insgesamt: Appellativ, aufrüttelnd, motivierend</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Übung 3: Eigene Textanalyse</h4>
+                        <p>Analysiere die sprachlichen Mittel im folgenden Textauszug und beschreibe ihre Wirkung:</p>
+                        
+                        <div class="example-box">
+                            <p>"In einer Welt, in der Authentizität zunehmend an Wert gewinnt, erscheint das Streben nach Perfektion paradox. Täglich werden wir mit makellosen Bildern in sozialen Medien konfrontiert – perfekte Körper, perfekte Häuser, perfekte Leben. Doch hinter dieser glänzenden Fassade verbirgt sich oft eine tiefe Unsicherheit. Die Kluft zwischen Schein und Sein wächst, während die digitalen Filter immer ausgefeilter werden. Wir inszenieren eine Version unserer selbst, die kaum noch Berührungspunkte mit der Realität hat."</p>
+                        </div>
+                        
+                        <button class="btn" onclick="toggleSolution('solution3')">Musterlösung anzeigen</button>
+                        
+                        <div class="solution" id="solution3">
+                            <h4>Musterlösung:</h4>
+                            <p><strong>Sprachliche Mittel und ihre Wirkung:</strong></p>
+                            <ul>
+                                <li><strong>Antithese:</strong> "Authentizität" vs. "Perfektion", "Schein" vs. "Sein" - verdeutlicht den zentralen Gegensatz des Textes</li>
+                                <li><strong>Wiederholung:</strong> "perfekte Körper, perfekte Häuser, perfekte Leben" - unterstreicht die Allgegenwart des Perfektionsstrebens, wirkt übertrieben und kritisch</li>
+                                <li><strong>Metapher:</strong> "glänzende Fassade" - veranschaulicht die Oberflächlichkeit und den Trugschluss der perfekten Darstellung</li>
+                                <li><strong>Metapher:</strong> "Kluft zwischen Schein und Sein" - visualisiert die zunehmende Diskrepanz zwischen Darstellung und Realität</li>
+                                <li><strong>Personifikation:</strong> "digitale Filter werden ausgefeilter" - verleiht der Technologie eine aktive, fast bedrohliche Rolle</li>
+                                <li><strong>Wortfeld der Inszenierung:</strong> "makellose Bilder", "Fassade", "inszenieren" - betont die Künstlichkeit der Darstellung</li>
+                            </ul>
+                            <p><strong>Gesamtwirkung:</strong> Der Text kritisiert durch den gezielten Einsatz sprachlicher Mittel die Diskrepanz zwischen authentischem Sein und inszeniertem Schein in der digitalen Welt. Die antithetische Struktur und die metaphorische Sprache machen das Problem anschaulich und regen zur Reflexion an.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Tipps für die Sprachanalyse in der Matura</h2>
+                    
+                    <div class="card">
+                        <h4>Vorgehensweise bei der Sprachanalyse</h4>
+                        <ol>
+                            <li><strong>Erkennen:</strong> Identifiziere auffällige sprachliche Mittel</li>
+                            <li><strong>Benennen:</strong> Verwende den korrekten Fachbegriff</li>
+                            <li><strong>Zitieren:</strong> Belege mit konkreten Textstellen</li>
+                            <li><strong>Wirkung beschreiben:</strong> Erkläre, welche Funktion das Stilmittel im Text hat</li>
+                            <li><strong>Zusammenhang herstellen:</strong> Zeige, wie die sprachliche Gestaltung die Gesamtaussage unterstützt</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Häufige Fehler vermeiden</h4>
+                        <ul>
+                            <li>Stilmittel nur aufzählen ohne Wirkungsbeschreibung</li>
+                            <li>Unpräzise Formulierungen ("der Text ist schön geschrieben")</li>
+                            <li>Keine Textbelege für die Analyse</li>
+                            <li>Wirkungsbeschreibung ohne Bezug zum Textzusammenhang</li>
+                            <li>Verwechslung von ähnlichen Stilmitteln (z.B. Metapher und Vergleich)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Accordion functionality
+        const acc = document.getElementsByClassName("accordion");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Toggle solution visibility
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

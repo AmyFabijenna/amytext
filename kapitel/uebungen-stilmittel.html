@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stilmittel-Übungen - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .exercise-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .exercise-content {
+            margin-bottom: 20px;
+        }
+
+        .toggle-button {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            display: block;
+            width: 100%;
+            text-align: left;
+            position: relative;
+        }
+
+        .toggle-button:hover {
+            background: #2c3e50;
+        }
+
+        .toggle-button::after {
+            content: "▼";
+            position: absolute;
+            right: 15px;
+            transition: transform 0.3s;
+        }
+
+        .toggle-button.active::after {
+            transform: rotate(180deg);
+        }
+
+        .toggle-content {
+            display: none;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #3498db;
+        }
+
+        .toggle-content.active {
+            display: block;
+        }
+
+        .solution-box {
+            background: #e8f4f8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .solution-title {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .tip-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .tip-box strong {
+            color: #155724;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="textanalyse12.html" class="nav-link">Willkommen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textanalyse</div>
+                <div class="nav-item">
+                    <a href="textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
+                </div>
+                <div class="nav-item">
+                    <a href="argumentationsanalyse.html" class="nav-link">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sprachanalyse.html" class="nav-link">Sprachanalyse</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textinterpretation</div>
+                <div class="nav-item">
+                    <a href="textinterpretation.html" class="nav-link">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="literarische-epochen.html" class="nav-link">Literarische Epochen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textsorten</div>
+                <div class="nav-item">
+                    <a href="textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
+                </div>
+                <div class="nav-item">
+                    <a href="lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="prosa-analyse.html" class="nav-link">Prosa analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="drama-analyse.html" class="nav-link">Drama analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Praxisbeispiele</div>
+                <div class="nav-item">
+                    <a href="beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
+                </div>
+                <div class="nav-item">
+                    <a href="beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
+                </div>
+                <div class="nav-item">
+                    <a href="musterloesungen.html" class="nav-link">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="fachbegriffe.html" class="nav-link">Fachbegriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="uebungen-stilmittel.html" class="nav-link active">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Prüfungsvorbereitung</div>
+                <div class="nav-item">
+                    <a href="zeitmanagement.html" class="nav-link">Zeitmanagement</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
+                </div>
+                <div class="nav-item">
+                    <a href="checklisten.html" class="nav-link">Checklisten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Stilmittel-Übungen</h1>
+                <p>Erkennung und Wirkungsanalyse rhetorischer Figuren</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section">
+                    <h2 class="section-title">Übungen zur Stilmittel-Erkennung</h2>
+                    
+                    <div class="exercise-card">
+                        <h3 class="exercise-title">Übung 1: Stilmittel erkennen</h3>
+                        <div class="exercise-content">
+                            <p>Identifiziere die Stilmittel in den folgenden Textbeispielen:</p>
+                            <ol>
+                                <li>"Die blühenden Bäume tanzten im Frühlingswind."</li>
+                                <li>"Tausend Träume träumte er träge."</li>
+                                <li>"Das Licht der Erkenntnis durchflutete seinen Verstand."</li>
+                                <li>"Das Leben ist kein Ponyhof."</li>
+                                <li>"Leise, langsam, lautlos schlich sie durch den dunklen Flur."</li>
+                                <li>"Der Berg der Probleme wuchs von Tag zu Tag."</li>
+                                <li>"Schwarz wie die Nacht war sein Umhang."</li>
+                                <li>"Die Mauern haben Ohren."</li>
+                                <li>"Er ist so arm wie eine Kirchenmaus – doch sein Herz ist reich."</li>
+                                <li>"Was ist schon normal in dieser verrückten Welt?"</li>
+                                <li>"Das Blut in meinen Adern gefror zu Eis."</li>
+                                <li>"Meine Seele trinkt den Klang der Töne."</li>
+                            </ol>
+                        </div>
+                        <button class="toggle-button" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                        <div class="toggle-content">
+                            <div class="solution-box">
+                                <h4 class="solution-title">Lösungen:</h4>
+                                <ol>
+                                    <li>Personifikation ("tanzten")</li>
+                                    <li>Alliteration ("Tausend Träume träumte er träge")</li>
+                                    <li>Metapher ("Licht der Erkenntnis")</li>
+                                    <li>Vergleich ("ist kein Ponyhof")</li>
+                                    <li>Alliteration ("Leise, langsam, lautlos")</li>
+                                    <li>Metapher ("Berg der Probleme")</li>
+                                    <li>Vergleich ("Schwarz wie die Nacht")</li>
+                                    <li>Personifikation ("Mauern haben Ohren")</li>
+                                    <li>Antithese ("arm wie eine Kirchenmaus" vs. "Herz ist reich")</li>
+                                    <li>Rhetorische Frage ("Was ist schon normal...")</li>
+                                    <li>Hyperbel/Metapher ("Blut gefror zu Eis")</li>
+                                    <li>Synästhesie/Metapher ("Seele trinkt den Klang")</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card">
+                        <h3 class="exercise-title">Übung 2: Wirkungsanalyse</h3>
+                        <div class="exercise-content">
+                            <p>Analysiere die Wirkung der Stilmittel in den folgenden Sätzen:</p>
+                            <ol>
+                                <li>"Die Politik ist ein wildes Meer; die Wellen schlagen hoch, die Stürme toben, und das Staatsschiff taumelt zwischen den Klippen."</li>
+                                <li>"Die sozialen Medien haben unsere Gesellschaft nicht nur verändert, sondern zerschnitten, zersplittert und zerstückelt."</li>
+                                <li>"Schweigen. Warten. Hoffen. Mehr konnten sie nicht tun."</li>
+                            </ol>
+                        </div>
+                        <button class="toggle-button" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                        <div class="toggle-content">
+                            <div class="solution-box">
+                                <h4 class="solution-title">Lösungen:</h4>
+                                <ol>
+                                    <li><strong>Metapher/Allegorie:</strong> Die Politik wird als unberechenbare Naturgewalt dargestellt, was Dramatik und Gefahr vermittelt. Das "Staatsschiff" erscheint als fragiles Gefährt, das der Gewalt ausgeliefert ist.</li>
+                                    <li><strong>Klimax (Steigerung):</strong> Die Verben "zerschnitten, zersplittert und zerstückelt" intensivieren die negative Bewertung. Die Vorsilbe "zer-" betont Zerstörung und Auflösung.</li>
+                                    <li><strong>Ellipse/Parataxe:</strong> Die verkürzten Sätze ohne Verb erzeugen einen abgehackten, reduzierten Sprachstil, der die beschränkten Handlungsmöglichkeiten und das Ausgeliefertsein widerspiegelt.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card">
+                        <h3 class="exercise-title">Übung 3: Stilmittel-Portfolio</h3>
+                        <div class="exercise-content">
+                            <p>Lies den folgenden Textauszug und erstelle eine Tabelle mit den enthaltenen Stilmitteln, ihrer Benennung und ihrer Wirkung:</p>
+                            <div class="example-box">
+                                <p>"Die Digitalisierung hat wie ein Tsunami unsere Lebensrealität überschwemmt. Wo früher Briefe geschrieben wurden, tippen wir heute hastige Nachrichten. Wo früher Begegnungen stattfanden, starren wir heute auf leuchtende Bildschirme. Ist das der Fortschritt, den wir uns erhofft haben? Ist das die Zukunft, die wir uns erträumt haben? Die Technologie sollte unser Diener sein, nicht unser Herr. Doch nun sind wir zu Sklaven unserer Geräte geworden: stets erreichbar, stets verfügbar, stets bereit zu antworten – wie Pawlowsche Hunde, die beim Klingeln des Smartphones reflexartig reagieren."</p>
+                            </div>
+                        </div>
+                        <button class="toggle-button" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                        <div class="toggle-content">
+                            <div class="solution-box">
+                                <h4 class="solution-title">Lösung:</h4>
+                                <table>
+                                    <tr>
+                                        <th>Textstelle</th>
+                                        <th>Stilmittel</th>
+                                        <th>Wirkung</th>
+                                    </tr>
+                                    <tr>
+                                        <td>"wie ein Tsunami überschwemmt"</td>
+                                        <td>Vergleich</td>
+                                        <td>Dramatisierung, vermittelt Überwältigung und Unkontrollierbarkeit der Digitalisierung</td>
+                                    </tr>
+                                    <tr>
+                                        <td>"Wo früher... Wo früher..."</td>
+                                        <td>Anapher/Parallelismus</td>
+                                        <td>Strukturierung, betont den Kontrast zwischen Vergangenheit und Gegenwart</td>
+                                    </tr>
+                                    <tr>
+                                        <td>"Briefe vs. hastige Nachrichten", "Begegnungen vs. Bildschirme"</td>
+                                        <td>Antithese</td>
+                                        <td>Verdeutlicht den Wandel, stellt Verlust von Qualität dar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>"Ist das der Fortschritt...?", "Ist das die Zukunft...?"</td>
+                                        <td>Rhetorische Fragen</td>
+                                        <td>Regen zur kritischen Reflexion an, implizieren negative Bewertung</td>
+                                    </tr>
+                                    <tr>
+                                        <td>"Technologie sollte unser Diener sein, nicht unser Herr"</td>
+                                        <td>Antithese</td>
+                                        <td>Warnung vor Kontrollverlust, Umkehrung der Machtverhältnisse</td>
+                                    </tr>
+                                    <tr>
+                                        <td>"Sklaven unserer Geräte"</td>
+                                        <td>Metapher</td>
+                                        <td>Verstärkt das Bild der Abhängigkeit und des Kontrollverlusts</td>
+                                    </tr>
+                                    <tr>
+                                        <td>"wie Pawlowsche Hunde"</td>
+                                        <td>Vergleich</td>
+                                        <td>Reduziert menschliches Verhalten auf konditionierte Reflexe, entmenschlichend</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Wirkungsanalyse sprachlicher Mittel</h2>
+                    
+                    <div class="exercise-card">
+                        <h3 class="exercise-title">Übung 4: Wirkungsanalyse</h3>
+                        <div class="exercise-content">
+                            <p>Analysiere die sprachlichen Mittel in den folgenden Textauszügen und beschreibe präzise ihre Wirkung:</p>
+                            <ol>
+                                <li>"Der Wind heulte um die Ecken des alten Hauses. Die Fensterläden klapperten unruhig, als wollten sie eine Warnung aussprechen. Im Kamin knisterte das letzte Holzscheit, und die Schatten tanzten an den Wänden wie ruhelose Geister."</li>
+                                <li>"Warum schweigen wir? Warum schauen wir weg? Warum akzeptieren wir das Unakzeptable? Es ist an der Zeit, unsere Stimme zu erheben, unsere Augen zu öffnen und für das einzustehen, was richtig ist!"</li>
+                                <li>"Die Erinnerung ist ein verschlungener Pfad durch einen dichten Wald. Manche Wege sind breit und sonnendurchflutet, andere schmal und dunkel. Manchmal verirren wir uns, manchmal finden wir unerwartete Lichtungen. Und immer wieder stoßen wir auf Abzweigungen, an denen wir entscheiden müssen, welcher Version unserer Geschichte wir folgen wollen."</li>
+                            </ol>
+                        </div>
+                        <button class="toggle-button" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                        <div class="toggle-content">
+                            <div class="solution-box">
+                                <h4 class="solution-title">Lösungen:</h4>
+                                <ol>
+                                    <li><strong>Personifikationen ("heulte", "klapperten unruhig", "Schatten tanzten") und Vergleich ("wie ruhelose Geister"):</strong> Erzeugen eine unheimliche, bedrohliche Atmosphäre. Das Haus wird als lebendiges Wesen dargestellt, das Unheil ankündigt. Die Wirkung ist dramatisch und spannungssteigernd.</li>
+                                    <li><strong>Rhetorische Fragen und Klimax:</strong> Die rhetorischen Fragen appellieren an das Gewissen des Lesers und schaffen eine emotionale Betroffenheit. Die Klimax ("Stimme erheben, Augen öffnen, für das Richtige einstehen") steigert die emotionale Intensität und mündet in einen Appell zur Handlung.</li>
+                                    <li><strong>Metapher ("Erinnerung ist ein verschlungener Pfad") und Antithesen ("breit/schmal", "sonnendurchflutet/dunkel"):</strong> Veranschaulichen die Komplexität und Widersprüchlichkeit von Erinnerungen. Die Metapher macht abstrakte psychologische Prozesse greifbar. Die Wirkung ist reflektierend und lädt zur Selbstbetrachtung ein.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Bonus-Übung: Eigene Textpassage verfassen</h2>
+                    
+                    <div class="exercise-card">
+                        <h3 class="exercise-title">Übung 5: Stilmittel bewusst einsetzen</h3>
+                        <div class="exercise-content">
+                            <p>Verfasse eine kurze Textpassage (ca. 150 Wörter) in einer der folgenden Textsorten. Setze dabei bewusst mindestens fünf verschiedene Stilmittel ein und markiere diese anschließend.</p>
+                            <ol>
+                                <li>Ein innerer Monolog einer Person in einer Entscheidungssituation</li>
+                                <li>Eine atmosphärische Beschreibung einer verlassenen Stadt</li>
+                                <li>Ein appellativer Text zum Thema "Zivilcourage im Alltag"</li>
+                                <li>Eine dialogische Szene mit unterschwelliger Spannung zwischen den Sprechenden</li>
+                            </ol>
+                        </div>
+                        <button class="toggle-button" onclick="toggleSolution(this)">Tipps anzeigen</button>
+                        <div class="toggle-content">
+                            <div class="tip-box">
+                                <strong>Tipps für die Umsetzung:</strong><br>
+                                <ul>
+                                    <li>Überlege dir zuerst, welche Wirkung du erzielen möchtest (dramatisch, appellativ, beschreibend, etc.)</li>
+                                    <li>Wähle Stilmittel, die zu deiner gewählten Textsorte passen</li>
+                                    <li>Setze Stilmittel gezielt ein, um bestimmte Effekte zu erzielen</li>
+                                    <li>Achte darauf, dass die Stilmittel natürlich in den Textfluss integriert sind</li>
+                                    <li>Markiere nach dem Schreiben die verwendeten Stilmittel und begründe ihre Wirkung</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Checkliste zur Selbstüberprüfung</h2>
+                    
+                    <div class="exercise-card">
+                        <h3 class="exercise-title">Checkliste für Stilmittel-Übungen</h3>
+                        <div class="exercise-content">
+                            <p>Überprüfe deine Lösungen anhand dieser Checkliste:</p>
+                            <ul>
+                                <li>Habe ich alle Stilmittel korrekt identifiziert?</li>
+                                <li>Habe ich die Wirkung der Stilmittel präzise beschrieben?</li>
+                                <li>Habe ich bei der Wirkungsanalyse den Kontext berücksichtigt?</li>
+                                <li>Habe ich Fachbegriffe korrekt verwendet?</li>
+                                <li>Habe ich bei der eigenen Textproduktion Stilmittel bewusst und gezielt eingesetzt?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleSolution(button) {
+            button.classList.toggle('active');
+            const content = button.nextElementSibling;
+            content.classList.toggle('active');
+            
+            // Ändere den Button-Text
+            if (button.classList.contains('active')) {
+                button.textContent = button.textContent.replace('anzeigen', 'ausblenden');
+            } else {
+                button.textContent = button.textContent.replace('ausblenden', 'anzeigen');
+            }
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

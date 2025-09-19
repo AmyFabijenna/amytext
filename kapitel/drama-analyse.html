@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drama-Analyse - Deutschmatura Handbuch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #2c3e50;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .subsection {
+            margin-bottom: 30px;
+        }
+
+        .subsection-title {
+            color: #34495e;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .accordion {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .accordion-content.active {
+            padding: 15px;
+            max-height: 1000px;
+        }
+
+        .example-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .exercise-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .exercise-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .solution-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .solution-toggle:hover {
+            background: #2c3e50;
+        }
+
+        .solution-content {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f4f8;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .solution-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .content-body {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+            }
+            
+            .subsection-title {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <header class="content-header">
+            <h1>Drama-Analyse</h1>
+            <p>Gesprächsanalyse, Szenenaufbau, Figurenkonstellation und Konflikte</p>
+        </header>
+
+        <div class="content-body">
+            <a href="textanalyse12.html" class="back-button">← Zurück zur Übersicht</a>
+
+            <div class="section">
+                <h2 class="section-title">Grundlagen der Dramenanalyse</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Was ist ein Drama?</h3>
+                    <p>Das Drama ist eine der drei literarischen Gattungen neben Lyrik und Epik. Es zeichnet sich durch Dialoge, Handlung und Konflikte aus, die direkt dargestellt werden, ohne vermittelnden Erzähler.</p>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Dramatische Textsorten
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Tragödie:</strong> Ernstes Drama mit unglücklichem Ausgang</li>
+                                <li><strong>Komödie:</strong> Heiteres Drama mit glücklichem Ende</li>
+                                <li><strong>Schauspiel:</strong> Mischform zwischen Tragödie und Komödie</li>
+                                <li><strong>Lehrstück:</strong> Didaktisches Drama mit belehrender Absicht</li>
+                                <li><strong>Episches Theater:</strong> Brechts Verfremdungseffekte zur Reflexion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Aufbau eines Dramas</h3>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Fünf-Akt-Schema nach Gustav Freytag
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <table>
+                                <tr>
+                                    <th>Akt</th>
+                                    <th>Bezeichnung</th>
+                                    <th>Funktion</th>
+                                </tr>
+                                <tr>
+                                    <td>1. Akt</td>
+                                    <td>Exposition</td>
+                                    <td>Einführung von Figuren, Ort, Zeit und Konflikt</td>
+                                </tr>
+                                <tr>
+                                    <td>2. Akt</td>
+                                    <td>Steigende Handlung</td>
+                                    <td>Entwicklung und Verschärfung des Konflikts</td>
+                                </tr>
+                                <tr>
+                                    <td>3. Akt</td>
+                                    <td>Höhepunkt / Peripetie</td>
+                                    <td>Wendepunkt der Handlung, entscheidende Entwicklung</td>
+                                </tr>
+                                <tr>
+                                    <td>4. Akt</td>
+                                    <td>Fallende Handlung</td>
+                                    <td>Vorbereitung der Katastrophe oder Lösung</td>
+                                </tr>
+                                <tr>
+                                    <td>5. Akt</td>
+                                    <td>Katastrophe / Lösung</td>
+                                    <td>Auflösung des Konflikts (tragisch oder komisch)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Gesprächsanalyse im Drama</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Dialoganalyse</h3>
+                    <p>Die Analyse von Dialogen ist zentral für das Verständnis eines Dramas. Dabei werden folgende Aspekte untersucht:</p>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Gesprächsformen im Drama
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Dialog:</strong> Gespräch zwischen zwei oder mehr Figuren</li>
+                                <li><strong>Monolog:</strong> Selbstgespräch einer Figur, oft zur Darstellung innerer Konflikte</li>
+                                <li><strong>Soliloquium:</strong> Besondere Form des Monologs, bei dem die Figur allein auf der Bühne ist</li>
+                                <li><strong>Beiseitesprechen:</strong> Äußerung, die nur für das Publikum bestimmt ist</li>
+                                <li><strong>Stichomythie:</strong> Schneller Wechsel kurzer Repliken, oft in Konfliktsituationen</li>
+                            </ul>
+                            
+                            <div class="example-box">
+                                <div class="example-title">Beispiel: Stichomythie aus "Maria Stuart" (Friedrich Schiller)</div>
+                                <p>ELISABETH: Ihr habt mich angeklagt?<br>
+                                MARIA: Ich habe Euch angeklagt!<br>
+                                ELISABETH: Und Ihr wagt es, mir ins Antlitz zu sagen?<br>
+                                MARIA: Ich wagt' es, Euch die Wahrheit zu sagen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Sprechakte und Kommunikation</h3>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Sprachliche Mittel im Dialog
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Bei der Dialoganalyse werden verschiedene Aspekte der Kommunikation untersucht:</p>
+                            <ul>
+                                <li><strong>Sprechakte:</strong> Was bewirken die Äußerungen? (Auffordern, Fragen, Behaupten...)</li>
+                                <li><strong>Kommunikationsstrategien:</strong> Wie versuchen Figuren, andere zu überzeugen oder zu manipulieren?</li>
+                                <li><strong>Sprachregister:</strong> Verwenden Figuren verschiedene Sprachstile (formell, informell, vulgär)?</li>
+                                <li><strong>Nonverbale Kommunikation:</strong> Regieanweisungen zu Gestik, Mimik und Bewegung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h3 class="exercise-title">Übung: Dialoganalyse</h3>
+                    <p>Analysiere den folgenden Dialogauszug aus Friedrich Schillers "Wilhelm Tell", Akt IV, Szene 3:</p>
+                    <div class="example-box">
+                        <p>TELL: Der See geht unruhig, wir müssen achtgeben, Fischer.<br>
+                        FISCHER: Es zieht zu gewittern, Herr.<br>
+                        TELL: Die Wogen des Abgrunds und die des Himmels, die gehen zusammen. Gib dein Ruder her, Fischer, nimm meinen Bogen.<br>
+                        FISCHER: Was wollt Ihr tun, Herr?<br>
+                        TELL: Das Steuer loslassen - schnell! Ich rette uns oder wir gehen zusammen.</p>
+                    </div>
+                    <p><strong>Aufgabe:</strong> Analysiere die Kommunikationssituation und die Sprechakte. Welche Machtverhältnisse werden deutlich?</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                    <div class="solution-content">
+                        <p><strong>Lösungsvorschlag:</strong></p>
+                        <p>In diesem Dialog herrscht ein klares Machtgefälle zwischen Tell und dem Fischer. Tell gibt Befehle ("Gib dein Ruder her", "Das Steuer loslassen - schnell!"), während der Fischer eher unsicher und nachfragend agiert ("Was wollt Ihr tun, Herr?").</p>
+                        <p>Tell übernimmt die Führungsrolle in der Gefahrensituation, was sich in seinen imperativischen Sprechakten zeigt. Der Fischer hingegen reagiert mit informativen Äußerungen ("Es zieht zu gewittern") und Fragen, was seine untergeordnete Position verdeutlicht.</p>
+                        <p>Die Kommunikation ist von Dringlichkeit geprägt, was sich in kurzen, prägnanten Sätzen und Ausrufen zeigt. Tell handelt entschlossen und übernimmt Verantwortung ("Ich rette uns oder wir gehen zusammen"), was seinen heroischen Charakter unterstreicht.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Figurenkonstellation und Konflikte</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Figurenanalyse</h3>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Methoden der Figurenanalyse
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Bei der Analyse von Dramenfiguren können verschiedene Aspekte untersucht werden:</p>
+                            <ul>
+                                <li><strong>Äußere Merkmale:</strong> Name, Alter, Aussehen, sozialer Status</li>
+                                <li><strong>Innere Merkmale:</strong> Charaktereigenschaften, Wertvorstellungen, Motivationen</li>
+                                <li><strong>Beziehungen:</strong> Zu anderen Figuren, zur Gesellschaft, zu sich selbst</li>
+                                <li><strong>Entwicklung:</strong> Veränderung der Figur im Laufe des Dramas</li>
+                                <li><strong>Sprache:</strong> Sprachlicher Ausdruck, Redeweise, Wortwahl</li>
+                            </ul>
+                            
+                            <div class="example-box">
+                                <div class="example-title">Beispiel: Faust (Goethe)</div>
+                                <p>Faust wird als Gelehrter dargestellt, der trotz seines Wissens unzufrieden ist und nach absoluter Erkenntnis strebt. Seine Sprache ist oft komplex und reflektiert, zeigt aber auch emotionale Ausbrüche. Seine Beziehung zu Mephisto ist ambivalent: Einerseits ist Mephisto sein Verführer, andererseits sein Weg zu neuen Erfahrungen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Konfliktanalyse</h3>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Konflikttypen im Drama
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Konflikte sind der Motor der dramatischen Handlung. Man unterscheidet:</p>
+                            <ul>
+                                <li><strong>Äußerer Konflikt:</strong> Zwischen Figuren oder zwischen Figur und Gesellschaft</li>
+                                <li><strong>Innerer Konflikt:</strong> In der Figur selbst (Gewissenskonflikt, Entscheidungszwang)</li>
+                                <li><strong>Personenkonflikt:</strong> Zwischen einzelnen Figuren</li>
+                                <li><strong>Gesellschaftskonflikt:</strong> Zwischen Individuum und Gesellschaftsordnung</li>
+                                <li><strong>Wertekonflikt:</strong> Zwischen unterschiedlichen Wertvorstellungen</li>
+                            </ul>
+                            
+                            <div class="example-box">
+                                <div class="example-title">Beispiel: "Kabale und Liebe" (Schiller)</div>
+                                <p>In Schillers Drama gibt es mehrere Konflikte: Den Standeskonflikt zwischen Ferdinand (Adel) und Luise (Bürgertum), den Generationenkonflikt zwischen Ferdinand und seinem Vater, sowie den inneren Konflikt Luises zwischen ihrer Liebe zu Ferdinand und ihrer Loyalität gegenüber ihrer Familie.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h3 class="exercise-title">Übung: Figurenkonstellation</h3>
+                    <p>Analysiere die Figurenkonstellation in Lessings "Emilia Galotti":</p>
+                    <div class="example-box">
+                        <p>Die Hauptfiguren sind:<br>
+                        - Emilia Galotti: Bürgertochter<br>
+                        - Der Prinz Hettore Gonzaga: Herrscher von Guastalla<br>
+                        - Odoardo Galotti: Emilias Vater<br>
+                        - Claudia Galotti: Emilias Mutter<br>
+                        - Marinelli: Kammerherr des Prinzen</p>
+                    </div>
+                    <p><strong>Aufgabe:</strong> Erstelle eine Figurenkonstellation und analysiere die wichtigsten Beziehungen und Konflikte zwischen den Figuren.</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                    <div class="solution-content">
+                        <p><strong>Lösungsvorschlag:</strong></p>
+                        <p>Die Figurenkonstellation in "Emilia Galotti" ist von klaren Gegensätzen und Konflikten geprägt:</p>
+                        <ul>
+                            <li><strong>Prinz vs. Galotti-Familie:</strong> Standeskonflikt zwischen Adel und Bürgertum</li>
+                            <li><strong>Prinz vs. Odoardo:</strong> Konflikt um Emilia, Wertekonflikt (Macht vs. Moral)</li>
+                            <li><strong>Emilia vs. Prinz:</strong> Unerwiderte Liebe des Prinzen, Emilias Widerstand</li>
+                            <li><strong>Marinelli vs. alle:</strong> Marinelli als intriganter Manipulator, der die Handlung vorantreibt</li>
+                            <li><strong>Odoardo vs. Claudia:</strong> Unterschiedliche Haltung gegenüber der Bedrohung durch den Prinzen</li>
+                        </ul>
+                        <p>Der zentrale Konflikt ist der zwischen der moralischen Integrität der bürgerlichen Galotti-Familie und der machtvollen, aber moralisch fragwürdigen Position des Prinzen. Dieser Konflikt eskaliert und führt zur Katastrophe am Ende des Dramas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Szenenaufbau und dramatische Techniken</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Szenenanalyse</h3>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Elemente der Szenenanalyse
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Bei der Analyse einer Dramenszene werden folgende Aspekte untersucht:</p>
+                            <ul>
+                                <li><strong>Ort und Zeit:</strong> Wo und wann spielt die Szene?</li>
+                                <li><strong>Personen:</strong> Welche Figuren sind anwesend?</li>
+                                <li><strong>Handlungsverlauf:</strong> Wie entwickelt sich die Szene?</li>
+                                <li><strong>Sprache und Dialoge:</strong> Welche sprachlichen Mittel werden verwendet?</li>
+                                <li><strong>Regieanweisungen:</strong> Was steht über Gestik, Mimik und Bewegung?</li>
+                                <li><strong>Dramatische Funktion:</strong> Welche Bedeutung hat die Szene für das gesamte Drama?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Dramatische Techniken</h3>
+                    
+                    <div class="accordion">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Wichtige dramatische Techniken
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><strong>Exposition:</strong> Einführung in Handlung, Figuren und Konflikt</li>
+                                <li><strong>Peripetie:</strong> Umschwung, Wendepunkt der Handlung</li>
+                                <li><strong>Retardierendes Moment:</strong> Verzögerung der Handlung zur Steigerung der Spannung</li>
+                                <li><strong>Katharsis:</strong> Reinigung durch Mitleid und Furcht (bei Tragödien)</li>
+                                <li><strong>Dramatische Ironie:</strong> Das Publikum weiß mehr als die Figuren</li>
+                                <li><strong>Verfremdungseffekt:</strong> Bei Brecht: Unterbrechung der Illusion zur Reflexion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <h3 class="exercise-title">Übung: Szenenanalyse</h3>
+                    <p>Analysiere die erste Szene aus Goethes "Faust I" ("Nacht"):</p>
+                    <div class="example-box">
+                        <p>FAUST (allein am Pulte):<br>
+                        Habe nun, ach! Philosophie,<br>
+                        Juristerei und Medizin,<br>
+                        Und leider auch Theologie<br>
+                        Durchaus studiert, mit heißem Bemühn.<br>
+                        Da steh ich nun, ich armer Tor!<br>
+                        Und bin so klug als wie zuvor...</p>
+                    </div>
+                    <p><strong>Aufgabe:</strong> Analysiere die Funktion dieser Eingangsszene als Exposition. Welche Informationen erhalten wir über Faust?</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                    <div class="solution-content">
+                        <p><strong>Lösungsvorschlag:</strong></p>
+                        <p>Die Eingangsszene "Nacht" dient als Exposition, die Fausts grundlegende Situation und seinen Charakter vorstellt:</p>
+                        <ul>
+                            <li>Faust wird als Gelehrter eingeführt, der alle Wissenschaften studiert hat</li>
+                            <li>Seine tiefe Unzufriedenheit mit dem erreichten Wissen wird deutlich ("Und bin so klug als wie zuvor")</li>
+                            <li>Seine Verzweiflung und sein Streben nach absoluter Erkenntnis werden etabliert</li>
+                            <li>Der Monolog zeigt Fausts reflexive, selbstkritische Natur</li>
+                            <li>Die Szene legt den Grundkonflikt des Dramas dar: Die Suche nach Sinn und Erkenntnis</li>
+                        </ul>
+                        <p>Sprachlich ist der Monolog durch emotionale Ausdrücke ("ach!", "leider") und eine klagende Tonlage geprägt, die Fausts Verzweiflung unterstreichen. Die Aufzählung der Studienfächer zeigt die Breite seines Wissens, das ihn dennoch unbefriedigt lässt.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Checkliste für die Dramenanalyse</h2>
+                
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        Checkliste zur Überprüfung der Dramenanalyse
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>✓ Ist die Textsorte (Tragödie, Komödie etc.) korrekt bestimmt?</li>
+                            <li>✓ Wurde der dramatische Aufbau (Akte, Szenen) analysiert?</li>
+                            <li>✓ Sind die Figuren und ihre Konstellationen beschrieben?</li>
+                            <li>✓ Wurden die zentralen Konflikte identifiziert und analysiert?</li>
+                            <li>✓ Sind die Dialoge und Gesprächsformen untersucht?</li>
+                            <li>✓ Wurde die Sprache der Figuren analysiert?</li>
+                            <li>✓ Sind Regieanweisungen und ihre Funktion berücksichtigt?</li>
+                            <li>✓ Wurde die dramatische Technik (Spannungsaufbau, Peripetie etc.) beschrieben?</li>
+                            <li>✓ Ist die Interpretation durch Textbelege gestützt?</li>
+                            <li>✓ Wurde die gesellschaftliche/historische Einordnung vorgenommen?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            
+            content.classList.toggle('active');
+            
+            if (content.classList.contains('active')) {
+                icon.textContent = '-';
+            } else {
+                icon.textContent = '+';
+            }
+        }
+        
+        function toggleSolution(button) {
+            const content = button.nextElementSibling;
+            content.classList.toggle('active');
+            
+            if (content.classList.contains('active')) {
+                button.textContent = 'Lösung ausblenden';
+            } else {
+                button.textContent = 'Lösung anzeigen';
+            }
+        }
+        
+        // Automatisch erste Accordions öffnen
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstAccordions = document.querySelectorAll('.accordion:first-child .accordion-header');
+            firstAccordions.forEach(header => {
+                toggleAccordion(header);
+            });
+        });
+    </script>
+</body>
+</html>

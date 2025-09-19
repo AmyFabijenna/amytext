@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Überarbeitungstechniken - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #34495e;
+        }
+
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #34495e;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .feature-link {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .feature-link:hover {
+            background: #2c3e50;
+        }
+
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .progress-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .accordion-content.active {
+            padding: 15px;
+            max-height: 1000px;
+        }
+
+        /* Exercise Styles */
+        .exercise {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .exercise h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .solution-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .solution {
+            background: #e8f4f8;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .solution.active {
+            display: block;
+        }
+
+        /* Checklist Styles */
+        .checklist {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('willkommen')">Willkommen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('eroerterung-grundlagen')">Textgebundene Erörterung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textanalyse</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('textanalyse-grundlagen')">Grundlagen der Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('stilmittel-rhetorik')">Stilmittel & Rhetorik</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('argumentationsanalyse')">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('sprachanalyse')">Sprachanalyse</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textinterpretation</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('textinterpretation')">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('literarische-epochen')">Literarische Epochen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textsorten</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('textsorten-uebersicht')">Textsorten-Übersicht</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('lyrik-analyse')">Lyrik analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('prosa-analyse')">Prosa analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('drama-analyse')">Drama analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('sachtext-analyse')">Sachtext analysieren</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Praxisbeispiele</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('beispiel-kolumne')">Beispiel: Kolumne</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('beispiel-sachtext')">Beispiel: Sachtext</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('musterloesungen')">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('formulierungen-einleitung')">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('formulierungen-analyse')">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('formulierungen-interpretation')">Interpretations-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('fachbegriffe')">Fachbegriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-stilmittel')">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-analyse')">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-eroerterung')">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-interpretation')">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Prüfungsvorbereitung</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('zeitmanagement')">Zeitmanagement</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" onclick="loadContent('ueberarbeitung')">Überarbeitungstechniken</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('checklisten')">Checklisten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('haeufige-fehler')">Häufige Fehler</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Überarbeitungstechniken</h1>
+                <p>Deine Texte von gut zu ausgezeichnet verbessern</p>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <div class="welcome-section">
+                    <h2>Effektive Überarbeitungstechniken für Textanalysen</h2>
+                    <p>Die Überarbeitung ist ein entscheidender Teil des Schreibprozesses. Sie ermöglicht es, Fehler zu korrigieren, Gedanken zu schärfen und die Qualität des Textes insgesamt zu verbessern. Hier lernst du systematische Strategien für eine effektive Überarbeitung deiner Textanalysen.</p>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Grundlagen der Textüberarbeitung
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <h3>Warum Überarbeitung so wichtig ist</h3>
+                            <p>Die Überarbeitung ist der Prozess, bei dem du deinen Text kritisch prüfst und verbesserst. Dabei geht es nicht nur um Rechtschreibung und Grammatik, sondern vor allem um Inhalt, Struktur und sprachliche Präzision.</p>
+                            
+                            <h4>Effektive Überarbeitungsstrategien:</h4>
+                            <ol>
+                                <li><strong>Hierarchische Überarbeitung:</strong> Beginne mit der inhaltlichen und strukturellen Überarbeitung, bevor du dich mit sprachlichen Details befasst.</li>
+                                <li><strong>Mehrere Durchgänge:</strong> Fokussiere dich in jedem Durchgang auf einen anderen Aspekt (Inhalt, Struktur, Sprache, Rechtschreibung).</li>
+                                <li><strong>Distanz schaffen:</strong> Wenn möglich, lege eine kurze Pause ein, bevor du mit der Überarbeitung beginnst.</li>
+                                <li><strong>Laut lesen:</strong> Das Vorlesen hilft, unnatürliche Formulierungen und Fehler zu entdecken.</li>
+                                <li><strong>Perspektivwechsel:</strong> Versuche, deinen Text aus der Perspektive eines kritischen Lesers zu betrachten.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Checkliste zur Textüberarbeitung
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <h3>Persönliche Checkliste erstellen</h3>
+                            <p>Erstelle eine persönliche Checkliste für die Überarbeitung deiner Textanalysen. Berücksichtige dabei verschiedene Aspekte wie Inhalt, Struktur, Sprache und Formalia.</p>
+                            
+                            <div class="checklist">
+                                <h4>Checkliste für die Textüberarbeitung</h4>
+                                
+                                <h5>Inhalt</h5>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check1">
+                                    <label for="check1">Habe ich das Hauptthema und die zentralen Aussagen des Textes korrekt erfasst?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check2">
+                                    <label for="check2">Sind meine Interpretationen durch Textstellen belegt?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check3">
+                                    <label for="check3">Habe ich alle relevanten Aspekte des Textes berücksichtigt?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check4">
+                                    <label for="check4">Ist meine eigene Stellungnahme differenziert und begründet?</label>
+                                </div>
+                                
+                                <h5>Struktur</h5>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check5">
+                                    <label for="check5">Enthält meine Einleitung die notwendigen Informationen zum Text?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check6">
+                                    <label for="check6">Folgt meine Analyse einem logischen Aufbau?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check7">
+                                    <label for="check7">Sind die Übergänge zwischen den Absätzen flüssig und sinnvoll?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check8">
+                                    <label for="check8">Gibt es einen erkennbaren roten Faden durch meine gesamte Analyse?</label>
+                                </div>
+                                
+                                <h5>Sprache</h5>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check9">
+                                    <label for="check9">Verwende ich eine angemessene Fachsprache für die Textanalyse?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check10">
+                                    <label for="check10">Vermeide ich Wiederholungen und verwende ich abwechslungsreiche Formulierungen?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check11">
+                                    <label for="check11">Sind meine Sätze klar und verständlich formuliert?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check12">
+                                    <label for="check12">Habe ich umgangssprachliche Wendungen vermieden?</label>
+                                </div>
+                                
+                                <h5>Formalia</h5>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check13">
+                                    <label for="check13">Sind alle Zitate korrekt gekennzeichnet und belegt?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check14">
+                                    <label for="check14">Habe ich auf korrekte Rechtschreibung, Grammatik und Zeichensetzung geachtet?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check15">
+                                    <label for="check15">Ist mein Text in sinnvolle Absätze gegliedert?</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check16">
+                                    <label for="check16">Entspricht meine Analyse dem geforderten Umfang?</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Übung: Gezielte Textüberarbeitung
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="exercise">
+                                <h4>Übung 1: Fehlerhafte Textanalyse überarbeiten</h4>
+                                <p><strong>Aufgabe:</strong> Überarbeite den folgenden fehlerhaften Textanalyseabschnitt. Identifiziere und korrigiere Probleme in Bezug auf Inhalt, Struktur, Sprache und Formalia.</p>
+                                
+                                <div class="tip-box">
+                                    <strong>Originaltext:</strong><br>
+                                    "In dem Text geht es um das Thema Klimawandel. Der Autor sagt, dass der Klimawandel schlimm ist und wir was tun müssen. Er benutzt viele sprachliche Mittel. Zum Beispiel Metaphern und rhetorische Fragen. Diese machen den Text gut. Der Autor argumentiert, dass wir alle zusammen den Klimawandel bekämpfen müssen, weil einer allein nichts machen kann. Das finde ich auch. Außerdem sagt er, dass Politik und Wirtschaft mehr machen muss. Der Text ist also über Verantwortung. Am Ende sagt der Author, dass wir eine doppelte Strategie brauchen. Das finde ich gut. Man kann sonst nicht wirklich was gegen den Klimawandel machen, wenn man nicht an allen Ecken und Enden was verändert und alle mitmachen."
+                                </div>
+                                
+                                <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                                
+                                <div class="solution" id="solution1">
+                                    <h5>Überarbeitete Version:</h5>
+                                    <p>"Der vorliegende Text thematisiert die Verantwortung des Einzelnen und der Gesellschaft im Kontext des Klimawandels. Der Autor argumentiert differenziert, dass die globale Klimakrise sowohl individuelles Handeln als auch strukturelle Veränderungen erfordert.</p>
+                                    
+                                    <p>Als sprachliche Mittel setzt der Verfasser unter anderem ein direktes Zitat ein ("Was kann ich schon tun?"), um die verbreitete Resignation vieler Menschen authentisch darzustellen. Zudem verwendet er die Metapher des "ökologischen Fußabdrucks", die abstrakte Umweltauswirkungen veranschaulicht und seine These unterstützt, dass auch kleine individuelle Entscheidungen in ihrer Summe bedeutsam sind.</p>
+                                    
+                                    <p>In seiner Argumentationsstruktur entwickelt der Autor zunächst die These der scheinbaren Machtlosigkeit des Einzelnen, stellt dieser dann die Bedeutung vieler kleiner Handlungen entgegen und führt schließlich zur Synthese, dass sowohl individuelle als auch kollektive Maßnahmen notwendig sind. Diese dialektische Struktur ermöglicht eine ausgewogene Betrachtung der Verantwortungsfrage.</p>
+                                    
+                                    <p>Am Ende plädiert der Autor für eine "doppelte Strategie", die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet. Diese Schlussfolgerung erscheint angesichts der vielschichtigen Herausforderungen des Klimawandels überzeugend, da sie weder in Fatalismus verfällt noch die Komplexität des Problems unterschätzt."</p>
+                                    
+                                    <h5>Verbesserungen im Überblick:</h5>
+                                    <ul>
+                                        <li>Präzisere Formulierungen statt umgangssprachlicher Wendungen</li>
+                                        <li>Fachsprachliche Begriffe eingefügt (dialektische Struktur, Metapher, These-Antithese-Synthese)</li>
+                                        <li>Konkrete Textbelege eingefügt</li>
+                                        <li>Subjektive Bewertungen ("Das finde ich gut") durch sachliche Argumentation ersetzt</li>
+                                        <li>Rechtschreibfehler korrigiert ("Author" → "Autor")</li>
+                                        <li>Struktur und Lesefluss verbessert</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            Peer-Review-Simulation
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="exercise">
+                                <h4>Übung 2: Textanalyse bewerten und kommentieren</h4>
+                                <p><strong>Aufgabe:</strong> Stelle dir vor, du bist Lehrer/in und sollst die folgende Textanalyse korrigieren und kommentieren. Bewerte den Text nach folgenden Kriterien:</p>
+                                <ol>
+                                    <li>Inhaltliche Erfassung des Textes</li>
+                                    <li>Analyse der sprachlichen Mittel</li>
+                                    <li>Untersuchung der Argumentationsstruktur</li>
+                                    <li>Sprachliche Angemessenheit</li>
+                                    <li>Formale Korrektheit</li>
+                                </ol>
+                                
+                                <div class="tip-box">
+                                    <strong>Textanalyse: "Die Macht der Gewohnheit"</strong><br><br>
+                                    "Der Text 'Die Macht der Gewohnheit' von Thomas Meyer thematisiert, wie unsere alltäglichen Routinen unser Leben beeinflussen. Der Autor erklärt, dass Gewohnheiten uns einerseits Sicherheit und Effizienz bieten, anderseits aber auch zur Falle werden können, wenn sie uns daran hindern, uns weiterzuentwickeln.<br><br>
+                                    
+                                    In seiner Argumentation beginnt Meyer mit einer Definition von Gewohnheiten als 'unbewusste Automatismen, die unser tägliches Handeln steuern'. Er verwendet hier eine Metapher, indem er Gewohnheiten als 'unsichtbare Schienen' bezeichnet, auf denen unser Leben verläuft. Dies verdeutlicht die lenkende und begrenzende Funktion von Routinen.<br><br>
+                                    
+                                    Der Autor nutzt verschiedene Beispiele aus dem Alltag, um seine These zu stützen, dass Gewohnheiten zwiespältig sind. Er schreibt: 'Die morgendliche Kaffeeroutine spart wertvolle Zeit und mentale Energie, doch das jahrelange Festhalten an einem ineffizienten Arbeitsweg kostet genau diese Ressourcen.' Diese Gegenüberstellung zeigt die Ambivalenz von Routinen.<br><br>
+                                    
+                                    Außerdem baut Meyer in seinen Text rhetorische Fragen ein, wie 'Wann haben Sie zuletzt Ihre Gewohnheiten hinterfragt?' Diese regen den Leser zum Nachdenken an und machen den Text interaktiver. Der Autor übertreibt manchmal ein bisschen, z.B. wenn er schreibt, dass 'Gewohnheiten uns zu Sklaven machen können'. Dies ist eine Hyperbel, die die negativen Aspekte stark betont.<br><br>
+                                    
+                                    Die Argumentation des Textes ist gut aufgebaut. Meyer beginnt mit den positiven Aspekten von Gewohnheiten, geht dann zu den problematischen Seiten über und schließt mit Vorschlägen, wie man bewusster mit seinen Routinen umgehen kann. Dies schafft einen logischen Bogen.<br><br>
+                                    
+                                    Was ich an dem Text gut finde, ist seine Ausgewogenheit. Er verteuffelt Gewohnheiten nicht völlig, sondern zeigt ihre verschiedenen Seiten auf. Allerdings hätte der Autor noch mehr wissenschaftliche Erkenntnisse einbringen können, um seine Argumente zu stützen. Auch finde ich, dass er manchmal zu allgemein bleibt und konkreter werden könnte.<br><br>
+                                    
+                                    Zusammenfassend ist der Text 'Die Macht der Gewohnheit' eine informative Betrachtung über die Rolle von Routinen in unserem Leben, die durch anschauliche Beispiele und bildhafte Sprache überzeugt."
+                                </div>
+                                
+                                <button class="solution-toggle" onclick="toggleSolution('solution2')">Musterbewertung anzeigen</button>
+                                
+                                <div class="solution" id="solution2">
+                                    <h5>Musterbewertung:</h5>
+                                    
+                                    <h6>1. Inhaltliche Erfassung des Textes:</h6>
+                                    <p><strong>(+)</strong> Das zentrale Thema des Textes (Ambivalenz von Gewohnheiten) wurde klar erfasst.<br>
+                                    <strong>(+)</strong> Die Hauptaussagen des Autors werden präzise wiedergegeben.<br>
+                                    <strong>(-)</strong> Die zusammenfassende Darstellung könnte etwas ausführlicher sein und mehr auf die spezifischen Argumente des Autors eingehen.</p>
+                                    
+                                    <h6>2. Analyse der sprachlichen Mittel:</h6>
+                                    <p><strong>(+)</strong> Mehrere sprachliche Mittel werden identifiziert: Metapher ("unsichtbare Schienen"), rhetorische Fragen, Hyperbel.<br>
+                                    <strong>(+)</strong> Die Wirkung der sprachlichen Mittel wird meist gut erläutert.<br>
+                                    <strong>(-)</strong> Die Analyse könnte durch weitere Beispiele aus dem Text angereichert werden.<br>
+                                    <strong>(-)</strong> Die Wirkungsanalyse der Hyperbel bleibt etwas oberflächlich.</p>
+                                    
+                                    <h6>3. Untersuchung der Argumentationsstruktur:</h6>
+                                    <p><strong>(+)</strong> Die grundlegende Struktur des Textes wird erkannt und benannt.<br>
+                                    <strong>(+)</strong> Der logische Aufbau der Argumentation wird nachvollziehbar beschrieben.<br>
+                                    <strong>(-)</strong> Die Analyse könnte die Argumentationstechniken des Autors genauer untersuchen (z.B. Einsatz von Beispielen, Autoritätsargumenten).</p>
+                                    
+                                    <h6>4. Sprachliche Angemessenheit:</h6>
+                                    <p><strong>(+)</strong> Insgesamt angemessene und klare Ausdrucksweise.<br>
+                                    <strong>(+)</strong> Gute Verwendung von Fachbegriffen zur Beschreibung sprachlicher Mittel.<br>
+                                    <strong>(-)</strong> Einige umgangssprachliche Wendungen ("übertreibt manchmal ein bisschen", "verteufelt nicht völlig") sollten durch präzisere, sachlichere Formulierungen ersetzt werden.</p>
+                                    
+                                    <h6>5. Formale Korrektheit:</h6>
+                                    <p><strong>(+)</strong> Der Text ist weitgehend fehlerfrei.<br>
+                                    <strong>(+)</strong> Die Absatzstruktur ist logisch und unterstützt die Lesbarkeit.<br>
+                                    <strong>(-)</strong> Einige Sätze könnten prägnanter formuliert werden.</p>
+                                    
+                                    <h6>Verbesserungshinweise:</h6>
+                                    <ol>
+                                        <li>Verwende mehr direkte Zitate aus dem Originaltext, um deine Analysen zu belegen.</li>
+                                        <li>Vermeide subjektive Wertungen wie "Was ich an dem Text gut finde..." - formuliere stattdessen objektivere Aussagen.</li>
+                                        <li>Vertiefe die Analyse der sprachlichen Mittel, indem du ihre Wirkung genauer beschreibst und im Kontext der Gesamtargumentation interpretierst.</li>
+                                        <li>Achte auf eine durchgehend sachliche Ausdrucksweise ohne umgangssprachliche Wendungen.</li>
+                                        <li>Ergänze deine Analyse um eine kurze Betrachtung des kulturellen oder gesellschaftlichen Kontexts, in dem der Text steht.</li>
+                                    </ol>
+                                    
+                                    <h6>Gesamtbewertung:</h6>
+                                    <p>Die Textanalyse zeigt ein gutes Verständnis des Originaltextes und seiner wichtigsten Merkmale. Die Struktur der Analyse ist klar und nachvollziehbar. Besonders gelungen ist die Identifikation verschiedener sprachlicher Mittel und der Grundstruktur der Argumentation. Für eine noch bessere Analyse solltest du deine Be

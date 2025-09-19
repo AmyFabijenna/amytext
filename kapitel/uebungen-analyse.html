@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textanalyse-Übungen - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .exercise-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .exercise-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .exercise-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .exercise-text {
+            background: #f1f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .exercise-question {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .solution-toggle {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .solution-toggle:hover {
+            background: #2980b9;
+        }
+
+        .solution-content {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f4f8;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+        }
+
+        .solution-content.show {
+            display: block;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-stilmittel')">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" onclick="loadContent('uebungen-analyse')">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-eroerterung')">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-interpretation')">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <!-- Weitere Navigationsabschnitte hier -->
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Textanalyse-Übungen</h1>
+                <p>Praktische Übungen mit Musterlösungen für die Deutschmatura</p>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <div class="welcome-section">
+                    <h2>Übungen zur Textanalyse</h2>
+                    <p>Hier findest du verschiedene Übungen zur Textanalyse, die dir helfen, deine Fähigkeiten für die Deutschmatura zu verbessern. Jede Übung enthält einen Textausschnitt, Aufgabenstellungen und eine Musterlösung, die du ein- und ausblenden kannst.</p>
+                </div>
+
+                <div class="exercise-section">
+                    <h2>Übung 1: Sprachliche Mittel identifizieren</h2>
+                    
+                    <div class="exercise-card">
+                        <h3>Aufgabe 1.1: Stilmittel erkennen</h3>
+                        <div class="exercise-text">
+                            <p>Identifiziere in den folgenden Textausschnitten die verwendeten sprachlichen Mittel:</p>
+                            <ol>
+                                <li>"Die Entscheidung fiel schwer wie Blei."</li>
+                                <li>"Die Straßen der Stadt schliefen noch, während die ersten Sonnenstrahlen über die Dächer krochen."</li>
+                                <li>"Rasend schnell, mit hungrigen Augen, Feuer und Flamme – so stürzte er sich in die neue Aufgabe."</li>
+                                <li>"Ist es nicht an der Zeit, dass wir unsere Verantwortung wahrnehmen? Müssen wir nicht endlich handeln?"</li>
+                            </ol>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution1-1')">Lösung anzeigen/verbergen</button>
+                        <div class="solution-content" id="solution1-1">
+                            <h4>Lösung:</h4>
+                            <ol>
+                                <li><strong>Vergleich</strong>: "schwer wie Blei" - Die Entscheidung wird mit einem sehr schweren Material verglichen.</li>
+                                <li><strong>Personifikation</strong>: "Die Straßen schliefen" und "Sonnenstrahlen krochen" - Unbelebten Dingen werden menschliche Eigenschaften zugeschrieben.</li>
+                                <li><strong>Aufzählung/Akkumulation</strong>: Mehrere Ausdrücke werden aneinandergereiht, um Intensität zu erzeugen. Zudem enthält "Feuer und Flamme" eine Redewendung/Metapher.</li>
+                                <li><strong>Rhetorische Fragen</strong>: Fragen, die keine Antwort erwarten, sondern eine bestimmte Antwort nahelegen.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card">
+                        <h3>Aufgabe 1.2: Wirkungsanalyse</h3>
+                        <div class="exercise-text">
+                            <p>Analysiere die Wirkung der folgenden sprachlichen Mittel:</p>
+                            <ol>
+                                <li>"Die Politik ist ein wildes Meer; die Wellen schlagen hoch, die Stürme toben, und das Staatsschiff taumelt zwischen den Klippen."</li>
+                                <li>"Die sozialen Medien haben unsere Gesellschaft nicht nur verändert, sondern zerschnitten, zersplittert und zerstückelt."</li>
+                            </ol>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution1-2')">Lösung anzeigen/verbergen</button>
+                        <div class="solution-content" id="solution1-2">
+                            <h4>Lösung:</h4>
+                            <ol>
+                                <li>Die ausgedehnte <strong>Metapher</strong> (auch: Allegorie) vom "wilden Meer" für die Politik erzeugt ein Bild von Gefahr, Unberechenbarkeit und Chaos. Die Politik wird als unkontrollierbare Naturgewalt dargestellt, während das "Staatsschiff" als fragiles Gefährt erscheint. Die Wirkung ist dramatisierend und vermittelt ein Gefühl der Bedrohung und Instabilität.</li>
+                                <li>Die <strong>Klimax</strong> (Steigerung) mit den drei Verben "zerschnitten, zersplittert und zerstückelt" intensiviert die negative Bewertung der sozialen Medien. Alle drei Verben beginnen mit der Vorsilbe "zer-", was Zerstörung und Auflösung betont. Die Alliteration (gleicher Anlaut) verstärkt den Rhythmus und die Eindringlichkeit der Aussage. Die Wirkung ist anklagend und alarmierend.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-section">
+                    <h2>Übung 2: Argumentationsstrukturen erkennen</h2>
+                    
+                    <div class="exercise-card">
+                        <h3>Aufgabe 2.1: Argumentationsbausteine identifizieren</h3>
+                        <div class="exercise-text">
+                            <p>Lies den folgenden Textausschnitt und identifiziere:</p>
+                            <ul>
+                                <li>Die Hauptthese</li>
+                                <li>Untergeordnete Thesen/Behauptungen</li>
+                                <li>Argumente und Belege</li>
+                                <li>Schlussfolgerungen</li>
+                            </ul>
+                            <p>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel. Besonders alarmierend ist, dass viele dieser Entwicklungen sich selbst verstärken können. Wenn etwa das arktische Eis schmilzt, reflektiert weniger weiße Oberfläche das Sonnenlicht, und die Erwärmung beschleunigt sich. Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert. Doch die Kosten des Nichthandelns übersteigen bei weitem die Investitionen, die jetzt nötig wären. Es ist daher nicht nur eine ökologische, sondern auch eine ökonomische Notwendigkeit, den CO₂-Ausstoß drastisch zu reduzieren und auf erneuerbare Energien umzusteigen."</p>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution2-1')">Lösung anzeigen/verbergen</button>
+                        <div class="solution-content" id="solution2-1">
+                            <h4>Lösung:</h4>
+                            <ul>
+                                <li><strong>Hauptthese</strong>: Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln.</li>
+                                <li><strong>Untergeordnete Thesen/Behauptungen</strong>:
+                                    <ul>
+                                        <li>Die globalen Temperaturen steigen nachweislich.</li>
+                                        <li>Die Folgen sind bereits spürbar.</li>
+                                        <li>Viele Entwicklungen können sich selbst verstärken.</li>
+                                        <li>Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert.</li>
+                                        <li>Die Kosten des Nichthandelns übersteigen die nötigen Investitionen.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Argumente und Belege</strong>:
+                                    <ul>
+                                        <li>Faktischer Beleg: Laut Weltklimarat haben sich die Temperaturen seit der vorindustriellen Zeit um mehr als ein Grad Celsius erhöht.</li>
+                                        <li>Beispiele für Folgen: Schmelzende Polkappen, Extremwetterereignisse, steigende Meeresspiegel.</li>
+                                        <li>Beispiel für selbstverstärkende Effekte: Schmelzendes arktisches Eis reduziert die Reflexion von Sonnenlicht.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Schlussfolgerung</strong>: Es ist eine ökologische und ökonomische Notwendigkeit, den CO₂-Ausstoß zu reduzieren und auf erneuerbare Energien umzusteigen.</li>
+                            </ul>
+                            <p>Der Text folgt einer kausalen Argumentationskette: Ausgangsproblem (Klimawandel) → Belege für das Problem → Ursachen → Konsequenzen des Nichthandelns → notwendige Maßnahmen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-section">
+                    <h2>Übung 3: Eigene Positionierung zum Text</h2>
+                    
+                    <div class="exercise-card">
+                        <h3>Aufgabe 3.1: Texte kritisch bewerten</h3>
+                        <div class="exercise-text">
+                            <p>Lies den folgenden Text und beantworte die Fragen:</p>
+                            <p><strong>Digitale Bildung – Chance oder Risiko?</strong></p>
+                            <p>"Die Digitalisierung des Bildungswesens wird heute vielfach als Allheilmittel für die Probleme unserer Schulen gepriesen. Tablets statt Schulbücher, Online-Kurse statt Frontalunterricht, Lern-Apps statt Arbeitsblätter – so lautet die Devise. Befürworter argumentieren, dass die digitale Transformation unaufhaltsam sei und Schulen die Schüler auf eine digitalisierte Arbeitswelt vorbereiten müssten.</p>
+                            <p>Doch bei aller Begeisterung für die neuen Möglichkeiten werden die Risiken oft übersehen. Studien zeigen, dass die intensive Nutzung digitaler Medien die Konzentrationsfähigkeit beeinträchtigen kann. Zudem verleitet die Informationsflut im Internet zu oberflächlichem Denken und erschwert das vertiefte Verstehen komplexer Zusammenhänge.</p>
+                            <p>Besonders problematisch ist auch die wachsende Abhängigkeit von Technologiekonzernen, die ihre kommerziellen Interessen verfolgen. Schulen geraten in Gefahr, zu Absatzmärkten für Hard- und Software zu werden, ohne dass der pädagogische Mehrwert immer gegeben ist.</p>
+                            <p>Statt einem blinden Digitalisierungshype zu folgen, sollten wir einen ausgewogenen Ansatz wählen. Digitale Werkzeuge können den Unterricht bereichern, wenn sie gezielt und reflektiert eingesetzt werden. Sie sollten jedoch traditionelle Lernformen nicht vollständig ersetzen, sondern ergänzen. Letztlich kommt es nicht auf die Quantität der eingesetzten Technologie an, sondern auf die Qualität der pädagogischen Konzepte."</p>
+                            <ol>
+                                <li>Fassen Sie die Hauptaussage des Textes kurz zusammen.</li>
+                                <li>Welche Position vertritt der Autor zur Digitalisierung in der Bildung?</li>
+                                <li>Formulieren Sie Ihre eigene Position zum Text. Stimmen Sie dem Autor zu oder nicht? Begründen Sie Ihre Antwort mit konkreten Bezügen zum Text.</li>
+                            </ol>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution3-1')">Lösung anzeigen/verbergen</button>
+                        <div class="solution-content" id="solution3-1">
+                            <h4>Lösung:</h4>
+                            <ol>
+                                <li>Der Text thematisiert die Digitalisierung im Bildungswesen und argumentiert für einen ausgewogenen Ansatz. Während die Vorteile der Digitalisierung anerkannt werden, warnt der Autor vor den Risiken wie Konzentrationsschwierigkeiten, oberflächlichem Denken und Abhängigkeit von Technologiekonzernen. Die Hauptaussage ist, dass digitale Werkzeuge den Unterricht bereichern können, wenn sie gezielt eingesetzt werden, aber traditionelle Lernformen nicht vollständig ersetzen sollten.</li>
+                                <li>Der Autor vertritt eine differenzierte, kritische Position zur Digitalisierung in der Bildung. Er erkennt ihre Vorteile an, warnt aber vor den Risiken und plädiert für einen ausgewogenen Ansatz, bei dem digitale Werkzeuge traditionelle Lernformen ergänzen, aber nicht ersetzen.</li>
+                                <li><strong>Musterantwort</strong>: Ich stimme der Position des Autors weitgehend zu. Der Text macht zurecht auf die Risiken einer unkritischen Digitalisierung des Bildungswesens aufmerksam. Besonders überzeugend finde ich die Argumentation zur wachsenden Abhängigkeit von Technologiekonzernen – ein Aspekt, der in der öffentlichen Debatte oft vernachlässigt wird. Allerdings hätte der Autor konkretere Beispiele für den pädagogischen Mehrwert digitaler Werkzeuge nennen können, um seine Forderung nach einem ausgewogenen Ansatz noch stärker zu untermauern.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für die Übungsbearbeitung:</strong><br>
+                    Versuche zunächst, die Übungen selbstständig zu bearbeiten, bevor du dir die Lösungen ansiehst. Notiere dir deine Antworten und vergleiche sie dann mit den Musterlösungen. So kannst du deine Stärken und Schwächen am besten erkennen.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function loadContent(page) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked link
+            event.target.classList.add('active');
+            
+            // Load content based on page parameter
+            const contentBody = document.getElementById('content-body');
+            
+            // Show loading message
+            contentBody.innerHTML = `
+                <div style="text-align: center; padding: 50px;">
+                    <div style="font-size: 1.2em; color: #34495e; margin-bottom: 20px;">Lade Inhalte...</div>
+                    <div style="color: #7f8c8d;">Die Seite "${page}" wird geladen. Diese Funktion wird implementiert, sobald alle externen HTML-Dateien erstellt sind.</div>
+                </div>
+            `;
+            
+            // Here you would normally load the external HTML file
+            // fetch(`kapitel/${page}.html`)
+            //     .then(response => response.text())
+            //     .then(html => contentBody.innerHTML = html)
+            //     .catch(error => contentBody.innerHTML = '<p>Fehler beim Laden der Seite.</p>');
+            
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        }
+
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

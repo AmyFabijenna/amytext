@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpretationsübungen - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #34495e;
+        }
+
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #34495e;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .feature-link {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .feature-link:hover {
+            background: #2c3e50;
+        }
+
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        /* Neue Stile für Übungen */
+        .exercise-container {
+            margin: 30px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .exercise-header {
+            background: #f5f5f5;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .exercise-header h3 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .exercise-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .exercise-content.active {
+            display: block;
+        }
+
+        .solution-toggle {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .solution {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .solution.active {
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+
+        .text-example {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #34495e;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Interpretationsübungen</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Übungsbereiche</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" onclick="scrollToSection('struktur')">Struktur verstehen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('einleitung')">Einleitung üben</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('inhaltsangabe')">Inhaltsangabe</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('analyse')">Analyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('deutung')">Deutung</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('schluss')">Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('vollstaendig')">Vollständige Interpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('selbstueberpruefung')">Selbstüberprüfung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Weitere Übungen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-stilmittel')">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-analyse')">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-eroerterung')">Erörterungs-Übungen</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Übungen zur Textinterpretation</h1>
+                <p>Struktur, Beispiele und Musterlösungen</p>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <div class="welcome-section">
+                    <h2>Textinterpretation systematisch üben</h2>
+                    <p>Diese Sammlung von Übungen hilft dir, die verschiedenen Bestandteile einer Textinterpretation zu verstehen und zu trainieren. Von der Einleitung bis zum Schluss - hier findest du Schritt-für-Schritt-Anleitungen, Beispiele und Musterlösungen.</p>
+                </div>
+
+                <!-- Übung 1: Struktur verstehen -->
+                <div class="exercise-container" id="struktur">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 1: Strukturelemente identifizieren</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Ordne die folgenden Elemente den korrekten Abschnitten einer Textinterpretation zu.</p>
+                        <ol>
+                            <li>Deutungshypothese</li>
+                            <li>Analyse des Reimschemas</li>
+                            <li>Zusammenfassung der Ergebnisse</li>
+                            <li>Einordnung des Textes in eine literarische Epoche</li>
+                            <li>Formulierung der persönlichen Meinung zum Text</li>
+                            <li>Angabe des Erscheinungsjahres</li>
+                            <li>Analyse der Figurenkonstellation</li>
+                            <li>Kurze Inhaltsangabe in korrekter zeitlicher Abfolge</li>
+                            <li>Untersuchung der sprachlichen Gestaltung</li>
+                            <li>Herstellung eines Gegenwartsbezugs</li>
+                        </ol>
+                        <p>Zuordnung zu:</p>
+                        <ul>
+                            <li>Einleitung:</li>
+                            <li>Hauptteil - Inhaltsangabe:</li>
+                            <li>Hauptteil - Analyse:</li>
+                            <li>Hauptteil - Interpretation:</li>
+                            <li>Schluss:</li>
+                        </ul>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Lösung:</strong></p>
+                            <ul>
+                                <li>Einleitung: 4, 6</li>
+                                <li>Hauptteil - Inhaltsangabe: 8</li>
+                                <li>Hauptteil - Analyse: 2, 7, 9</li>
+                                <li>Hauptteil - Interpretation: 1</li>
+                                <li>Schluss: 3, 5, 10</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Übung 2: Einleitung üben -->
+                <div class="exercise-container" id="einleitung">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 2: Einleitung verfassen</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Du sollst die Kurzgeschichte "San Salvador" von Peter Bichsel interpretieren. Recherchiere und notiere die notwendigen Informationen für die Einleitung:</p>
+                        <ul>
+                            <li>Titel des Werkes: <input type="text" placeholder="Titel"></li>
+                            <li>Autor: <input type="text" placeholder="Autor"></li>
+                            <li>Erscheinungsjahr: <input type="text" placeholder="Jahr"></li>
+                            <li>Textgattung: <input type="text" placeholder="Textgattung"></li>
+                            <li>Thema des Textes (in einem Satz): <textarea placeholder="Thema"></textarea></li>
+                            <li>Einordnung in Epoche: <input type="text" placeholder="Epoche"></li>
+                        </ul>
+                        <p>Verfasse nun eine vollständige Einleitung (ca. 50-70 Wörter):</p>
+                        <textarea placeholder="Deine Einleitung hier..."></textarea>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Musterlösung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <p>Die Kurzgeschichte "San Salvador" von Peter Bichsel, erschienen 1969, thematisiert die Entfremdung in einer Ehe und die Sehnsucht nach einem anderen Leben. Der Text lässt sich der Neuen Subjektivität der 1960er Jahre zuordnen und zeigt charakteristische Merkmale der Kurzprosa dieser Zeit.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Übung 3: Inhaltsangabe -->
+                <div class="exercise-container" id="inhaltsangabe">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 3: Kennzeichen einer guten Inhaltsangabe</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Markiere die korrekten Merkmale einer gelungenen Inhaltsangabe für eine Interpretation:</p>
+                        <form id="inhaltsangabe-form">
+                            <label><input type="checkbox"> Ausführliche Nacherzählung mit allen Details</label><br>
+                            <label><input type="checkbox"> Verwendung des Präsens als Tempus</label><br>
+                            <label><input type="checkbox"> Subjektive Bewertung des Inhalts</label><br>
+                            <label><input type="checkbox"> Korrekte zeitliche Abfolge</label><br>
+                            <label><input type="checkbox"> Nennung aller Nebenfiguren</label><br>
+                            <label><input type="checkbox"> Konzentration auf die wichtigsten Figuren</label><br>
+                            <label><input type="checkbox"> Einbau von Zitaten aus dem Text</label><br>
+                            <label><input type="checkbox"> Sachliche Darstellung ohne Wertung</label><br>
+                        </form>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Korrekte Merkmale:</strong></p>
+                            <ul>
+                                <li>Verwendung des Präsens als Tempus</li>
+                                <li>Korrekte zeitliche Abfolge</li>
+                                <li>Konzentration auf die wichtigsten Figuren</li>
+                                <li>Sachliche Darstellung ohne Wertung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Übung 4: Analyseaspekte -->
+                <div class="exercise-container" id="analyse">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 4: Analyseaspekte zuordnen</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Ordne die folgenden Analyseaspekte der passenden Textgattung zu:</p>
+                        <ol>
+                            <li>Reimschema analysieren</li>
+                            <li>Erzählperspektive bestimmen</li>
+                            <li>Aufbau der Argumentation untersuchen</li>
+                            <li>Strophenform identifizieren</li>
+                            <li>Gesprächssituation analysieren</li>
+                            <li>Erzählverhalten beschreiben</li>
+                            <li>Metrum bestimmen</li>
+                            <li>Figurenkonstellation untersuchen</li>
+                        </ol>
+                        <p>Zuordnung zu:</p>
+                        <ul>
+                            <li>Lyrikanalyse: <input type="text" placeholder="Nummern"></li>
+                            <li>Prosaanalyse: <input type="text" placeholder="Nummern"></li>
+                            <li>Dramenanalyse: <input type="text" placeholder="Nummern"></li>
+                            <li>Sachtextanalyse: <input type="text" placeholder="Nummern"></li>
+                        </ul>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Lösung:</strong></p>
+                            <ul>
+                                <li>Lyrikanalyse: 1, 4, 7</li>
+                                <li>Prosaanalyse: 2, 6, 8</li>
+                                <li>Dramenanalyse: 5, 8</li>
+                                <li>Sachtextanalyse: 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Übung 5: Deutungshypothese -->
+                <div class="exercise-container" id="deutung">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 5: Deutungshypothese formulieren</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Formuliere eine Deutungshypothese zu folgendem Textausschnitt:</p>
+                        <div class="text-example">
+                            <p>"Er stand am Fenster und blickte auf die Straße hinunter. Die Menschen eilten geschäftig vorüber, jeder in seine eigene Welt versunken. Keiner blickte auf, keiner nahm Notiz voneinander. Eine seltsame Leere erfüllte ihn, als er dies beobachtete. War dies das Leben, das er sich erträumt hatte? Diese anonyme Masse, diese Gleichgültigkeit?"</p>
+                        </div>
+                        <p>Deine Deutungshypothese sollte:</p>
+                        <ul>
+                            <li>Die Kernaussage des Textes in wenigen Sätzen wiedergeben</li>
+                            <li>Eine Vermutung zur Intention des Autors/der Autorin enthalten</li>
+                            <li>Verständlich und präzise formuliert sein</li>
+                        </ul>
+                        <textarea placeholder="Deine Deutungshypothese hier..."></textarea>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Musterlösung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <p>Der Textausschnitt thematisiert die Entfremdung des Individuums in der modernen Gesellschaft und die Anonymität des Großstadtlebens. Der Autor kritisiert vermutlich die Oberflächlichkeit zwischenmenschlicher Beziehungen in der heutigen Zeit und regt zum Nachdenken über die Qualität unserer sozialen Interaktionen an.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Übung 6: Schluss -->
+                <div class="exercise-container" id="schluss">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 6: Fazit ziehen</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Verfasse ein Fazit (ca. 100 Wörter) für eine Textinterpretation, das folgende Elemente enthält:</p>
+                        <ul>
+                            <li>Zusammenfassung der wichtigsten Erkenntnisse</li>
+                            <li>Bestätigung oder Korrektur der Deutungshypothese</li>
+                            <li>Eigene Meinung zum Text</li>
+                            <li>Herstellung eines Bezugs zur Gegenwart</li>
+                        </ul>
+                        <textarea placeholder="Dein Fazit hier..."></textarea>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Musterlösung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <p>Zusammenfassend lässt sich festhalten, dass die Analyse die anfängliche Deutungshypothese bestätigt hat. Der Text kritisiert tatsächlich die Entfremdung des modernen Menschen in der anonymen Großstadtgesellschaft. Besonders überzeugend wirken die sprachlichen Mittel, die diese Anonymität und Gleichgültigkeit verdeutlichen. Aus meiner Sicht greift der Text ein relevantes Thema auf, das auch in der heutigen Zeit, geprägt von Social Media und digitaler Kommunikation, nichts an Aktualität verloren hat. Die Frage nach Authentizität in zwischenmenschlichen Beziehungen bleibt eine bleibende Herausforderung.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Übung 7: Vollständige Interpretation -->
+                <div class="exercise-container" id="vollstaendig">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 7: Vollständige Interpretation üben</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Vervollständige die folgende Musterinterpretation, indem du die Lücken mit passenden Begriffen füllst:</p>
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
+                            <p>In der vorliegenden Textinterpretation wird das Gedicht "<input type="text" placeholder="Titel">" von <input type="text" placeholder="Autor"> aus dem Jahr <input type="text" placeholder="Jahr"> analysiert. Es handelt sich um ein <input type="text" placeholder="Textgattung">, das dem <input type="text" placeholder="Epoche"> zugeordnet werden kann.</p>
+                            
+                            <p>In der Inhaltsangabe wird deutlich, dass der Text von <input type="text" placeholder="Thema"> handelt. Die wichtigsten Figuren sind <input type="text" placeholder="Figuren">.</p>
+                            
+                            <p>Die Analyse der Form zeigt, dass der Text in <input type="text" placeholder="Anzahl"> Strophen mit jeweils <input type="text" placeholder="Anzahl"> Versen aufgebaut ist. Das Reimschema lautet <input type="text" placeholder="Reimschema">. Sprachlich fällt auf, dass der Autor vermehrt <input type="text" placeholder="sprachliche Mittel"> verwendet.</p>
+                            
+                            <p>Als Deutungshypothese lässt sich formulieren, dass der Autor mit diesem Text <input type="text" placeholder="Intention"> beabsichtigt. Diese These wird durch folgende Textbelege gestützt: <input type="text" placeholder="Beleg 1">, <input type="text" placeholder="Beleg 2"> und <input type="text" placeholder="Beleg 3">.</p>
+                            
+                            <p>Im Schluss lässt sich zusammenfassen, dass die Deutungshypothese sich als <input type="text" placeholder="bestätigt/korrigiert"> erwiesen hat. Meine persönliche Meinung zum Text ist, dass <input type="text" placeholder="Meinung">. Ein Bezug zur Gegenwart lässt sich herstellen, indem man <input type="text" placeholder="Gegenwartsbezug">.</p>
+                        </div>
+                        <button class="solution-toggle" onclick="toggleSolution(this)">Musterlösung anzeigen</button>
+                        <div class="solution">
+                            <p><strong>Musterlösung (am Beispiel von Goethes "Mailied"):</strong></p>
+                            <p>In der vorliegenden Textinterpretation wird das Gedicht "Mailied" von Johann Wolfgang von Goethe aus dem Jahr 1771 analysiert. Es handelt sich um ein Gedicht, das dem Sturm und Drang zugeordnet werden kann.</p>
+                            <p>In der Inhaltsangabe wird deutlich, dass der Text von der freudigen Wahrnehmung des Frühlings und der Liebe handelt. Die wichtigste Figur ist das lyrische Ich.</p>
+                            <p>Die Analyse der Form zeigt, dass der Text in 7 Strophen mit jeweils 4 Versen aufgebaut ist. Das Reimschema lautet Kreuzreim. Sprachlich fällt auf, dass der Autor vermehrt Ausrufe und Wiederholungen verwendet.</p>
+                            <p>Als Deutungshypothese lässt sich formulieren, dass der Autor mit diesem Text die intensive Lebensfreude und Naturverbundenheit des lyrischen Ichs ausdrücken beabsichtigt. Diese These wird durch folgende Textbelege gestützt: "Wie herrlich leuchtet mir die Natur!", "O Mädchen, Mädchen, wie lieb ich dich!" und die vielen Wiederholungen, die Begeisterung ausdrücken.</p>
+                            <p>Im Schluss lässt sich zusammenfassen, dass die Deutungshypothese sich als bestätigt erwiesen hat. Meine persönliche Meinung zum Text ist, dass er eine mitreißende Freude an der Natur und der Liebe vermittelt. Ein Bezug zur Gegenwart lässt sich herstellen, indem man die Bedeutung von Naturerlebnissen für das menschliche Wohlbefinden in einer zunehmend digitalisierten Welt betont.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Übung 8: Selbstüberprüfung -->
+                <div class="exercise-container" id="selbstueberpruefung">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>Übung 8: Checkliste für die Textinterpretation</h3>
+                        <span>+</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Aufgabe:</strong> Überprüfe deine fertige Textinterpretation anhand dieser Checkliste:</p>
+                        <form id="checklist-form">
+                            <label><input type="checkbox"> Die Einleitung enthält alle notwendigen formalen Informationen zum Text.</label><br>
+                            <label><input type="checkbox"> Die Inhaltsangabe ist knapp, sachlich und in der richtigen zeitlichen Reihenfolge.</label><br>
+                            <label><input type="checkbox"> Die Analyse untersucht sowohl inhaltliche als auch formale Aspekte des Textes.</label><br>
+                            <label><input type="checkbox"> Die Deutungshypothese ist klar formuliert und enthält eine Vermutung zur Intention des Autors.</label><br>
+                            <label><input type="checkbox"> Die Interpretation ist durch Zitate aus dem Text belegt.</label><br>
+                            <label><input type="checkbox"> Im Schluss werden die Erkenntnisse zusammengefasst und die Deutungshypothese überprüft.</label><br>
+                            <label><input type="checkbox"> Der Schluss enthält eine persönliche Meinung und einen Gegenwartsbezug.</label><br>
+                            <label><input type="checkbox"> Die Textinterpretation ist sprachlich korrekt und angemessen formuliert.</label><br>
+                            <label><input type="checkbox"> Die Zitate sind korrekt in den Text eingebunden und mit Zeilenangaben versehen.</label><br>
+                            <label><input type="checkbox"> Die Textinterpretation folgt einem logischen Aufbau.</label><br>
+                        </form>
+                        <p>Zähle deine angekreuzten Punkte: <span id="checklist-score">0</span>/10</p>
+                        <button class="solution-toggle" onclick="calculateChecklistScore()">Punkte berechnen</button>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h3>Tipps für erfolgreiche Textinterpretationen</h3>
+                    <p><strong>Zeitmanagement:</strong> Plane für eine umfassende Textinterpretation mindestens 60-90 Minuten ein. Teile dir die Zeit sinnvoll auf: 10-15 Minuten für das gründliche Lesen, 10 Minuten für die Strukturierung, 40-50 Minuten für das Schreiben und 10-15 Minuten für die Überarbeitung.</p>
+                    <p><strong>Überarbeitung:</strong> Lies deine Interpretation nach dem Schreiben kritisch durch. Achte auf logische Übergänge, eine klare Sprache und die korrekte Verwendung von Fachbegriffen.</p>
+                    <p><strong>Textbelege:</strong> Untermauere deine Interpretation immer mit konkreten Textstellen. Achte darauf, dass die Zitate relevant sind und deine Argumentation unterstützen.</p>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Wichtiger Hinweis:</strong><br>
+                    Die hier gezeigten Musterlösungen sind Beispiele für eine gelungene Textinterpretation. Es gibt oft mehrere mögliche Deutungen, solange sie durch den Text belegt werden können. Wichtig ist, dass deine Interpretation schlüssig ist und mit Textstellen belegt werden kann.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function loadContent(page) {
+            // Diese Funktion würde normalerweise externe Inhalte laden
+            console.log("Lade Seite: " + page);
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleExercise(header) {
+            const content = header.nextElementSibling;
+            const indicator = header.querySelector('span');
+            
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                indicator.textContent = '+';
+            } else {
+                content.style.display = 'block';
+                indicator.textContent = '-';
+            }
+        }
+
+        function toggleSolution(button) {
+            const solution = button.nextElementSibling;
+            solution.classList.toggle('active');
+            
+            if (solution.classList.contains('active')) {
+                button.textContent = 'Lösung ausblenden';
+            } else {
+                button.textContent = 'Lösung anzeigen';
+            }
+        }
+
+        function calculateChecklistScore() {
+            const checkboxes = document.querySelectorAll('#checklist-form input[type="checkbox"]:checked');
+            document.getElementById('checklist-score').textContent = checkboxes.length;
+        }
+
+        // Alle Übungen standardmäßig geschlossen halten
+        document.addEventListener('DOMContentLoaded', function() {
+            const exerciseContents = document.querySelectorAll('.exercise-content');
+            exerciseContents.forEach(content => {
+                content.style.display = 'none';
+            });
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

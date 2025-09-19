@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textanalyse - Grundlagen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #34495e;
+        }
+
+        .intro-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .collapsible {
+            background: #34495e;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .collapsible:hover {
+            background: #2c3e50;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .collapsible.active {
+            background: #2c3e50;
+        }
+
+        .collapsible:after {
+            content: '+';
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .collapsible.active:after {
+            content: '−';
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #f8f9fa;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .section-content.active {
+            max-height: 8000px;
+        }
+
+        .section-inner {
+            padding: 30px;
+        }
+
+        .section-content h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+        }
+
+        .section-content h4 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+        }
+
+        .section-content ul, .section-content ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section-content li {
+            margin-bottom: 8px;
+        }
+
+        .example-box {
+            background: #e8f4f8;
+            border-left: 4px solid #34495e;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .checklist h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .checklist-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .expand-all-btn {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 20px 0;
+            transition: background 0.3s;
+        }
+
+        .expand-all-btn:hover {
+            background: #2c3e50;
+        }
+
+        .step-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .step-box h4 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+
+        .practice-section {
+            background: #f0f8f0;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .practice-section h4 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .solution-toggle {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .solution-toggle:hover {
+            background: #218838;
+        }
+
+        .solution {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .solution.active {
+            display: block;
+        }
+
+        .quick-nav {
+            position: sticky;
+            top: 20px;
+            background: rgba(52, 73, 94, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quick-nav h4 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .quick-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .quick-nav li {
+            margin-bottom: 5px;
+        }
+
+        .quick-nav a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .quick-nav a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .intro-section {
+                padding: 20px;
+            }
+            
+            .section-inner {
+                padding: 20px;
+            }
+            
+            .collapsible {
+                padding: 15px;
+                font-size: 1em;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+
+            .quick-nav {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Textanalyse - Grundlagen</h1>
+            <p>Systematische Anleitung zur professionellen Textanalyse</p>
+        </header>
+
+        <main class="content">
+            <div class="quick-nav">
+                <h4>Schnellnavigation</h4>
+                <ul>
+                    <li><a href="#verstehen">1. Verstehen des Textes</a></li>
+                    <li><a href="#aufbau">2. Aufbau der Textanalyse</a></li>
+                    <li><a href="#textsorten">3. Textsorten erkennen</a></li>
+                    <li><a href="#argumentation">4. Argumentationsanalyse</a></li>
+                    <li><a href="#sprache">5. Sprachanalyse</a></li>
+                    <li><a href="#uebungen">6. Übungen</a></li>
+                </ul>
+            </div>
+
+            <div class="intro-section">
+                <h2>Was ist eine Textanalyse?</h2>
+                <p>Eine Textanalyse ist die <strong>systematische Untersuchung eines Textes</strong> nach bestimmten Kriterien. Ziel ist es, die Struktur, Sprache und Wirkung eines Textes zu verstehen und zu bewerten. Im Gegensatz zur reinen Inhaltsangabe geht die Textanalyse in die Tiefe und fragt nach dem <em>Wie</em> und <em>Warum</em>.</p>
+                
+                <div class="tip-box">
+                    <strong>Grundsatz der Textanalyse:</strong><br>
+                    Eine gute Textanalyse beschreibt nicht nur <em>was</em> im Text steht, sondern erklärt <em>wie</em> der Text funktioniert und <em>warum</em> er eine bestimmte Wirkung erzielt.
+                </div>
+
+                <h3>Die drei Ebenen der Textanalyse:</h3>
+                <ol>
+                    <li><strong>Inhaltliche Ebene:</strong> Was wird gesagt?</li>
+                    <li><strong>Strukturelle Ebene:</strong> Wie ist der Text aufgebaut?</li>
+                    <li><strong>Sprachliche Ebene:</strong> Mit welchen Mitteln wird die Wirkung erzielt?</li>
+                </ol>
+            </div>
+
+            <button class="expand-all-btn" onclick="toggleAll()">Alle Bereiche aufklappen</button>
+
+            <!-- Verstehen des Textes -->
+            <button class="collapsible" id="verstehen">1. Verstehen des Textes</button>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Bevor du mit der Analyse beginnst</h3>
+                    
+                    <div class="step-box">
+                        <h4>Schritt 1: Mehrmaliges Lesen</h4>
+                        <p>Lies den Text mindestens zweimal und markiere wichtige Stellen. Beim ersten Durchgang geht es ums Verstehen, beim zweiten um die Analyse.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <h4>Schritt 2: Grundinformationen sammeln</h4>
+                        <p>Notiere dir die <strong>Hauptaussage</strong>, <strong>Argumente</strong> und <strong>sprachlichen Besonderheiten</strong>.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <h4>Schritt 3: Intention erfassen</h4>
+                        <p>Frage dich: <strong>Welche Intention verfolgt der Autor?</strong></p>
+                    </div>
+
+                    <h3>Markierungssystem für die Textarbeit</h3>
+                    <table>
+                        <tr>
+                            <th>Farbe/Symbol</th>
+                            <th>Bedeutung</th>
+                            <th>Verwendung</th>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #e74c3c;">Rot</strong></td>
+                            <td>Hauptthesen/Kernaussagen</td>
+                            <td>Zentrale Behauptungen unterstreichen</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #3498db;">Blau</strong></td>
+                            <td>Argumente und Begründungen</td>
+                            <td>Stützende Aussagen markieren</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #f39c12;">Orange</strong></td>
+                            <td>Beispiele und Belege</td>
+                            <td>Konkrete Beispiele einkreisen</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #27ae60;">Grün</strong></td>
+                            <td>Sprachliche Mittel</td>
+                            <td>Stilmittel und Auffälligkeiten</td>
+                        </tr>
+                        <tr>
+                            <td><strong>?</strong></td>
+                            <td>Unklare Stellen</td>
+                            <td>Fragwürdige oder unverständliche Passagen</td>
+                        </tr>
+                        <tr>
+                            <td><strong>!</strong></td>
+                            <td>Wichtige Erkenntnisse</td>
+                            <td>Besonders relevante Textstellen</td>
+                        </tr>
+                    </table>
+
+                    <div class="practice-section">
+                        <h4>Übung: Markierungssystem anwenden</h4>
+                        <p>Lies den folgenden Beispieltext und wende das Markierungssystem an:</p>
+                        <div class="example-box">
+                            <p><em>"Die Digitalisierung hat unser Leben grundlegend verändert. Wo früher persönliche Gespräche den Alltag prägten, dominieren heute digitale Nachrichten unsere Kommunikation. Diese Entwicklung bringt sowohl Chancen als auch Risiken mit sich. Einerseits ermöglicht sie uns globale Vernetzung, andererseits droht sie, unsere sozialen Fähigkeiten zu verkümmern."</em></p>
+                        </div>
+                        <button class="solution-toggle" onclick="toggleSolution('solution-1')">Lösung anzeigen</button>
+                        <div class="solution" id="solution-1">
+                            <strong>Beispielhafte Markierungen:</strong><br>
+                            <span style="color: #e74c3c;"><strong>Rot:</strong></span> "Die Digitalisierung hat unser Leben grundlegend verändert" (Hauptthese)<br>
+                            <span style="color: #3498db;"><strong>Blau:</strong></span> "Wo früher... dominieren heute" (Argument mit Vergleich)<br>
+                            <span style="color: #f39c12;"><strong>Orange:</strong></span> "persönliche Gespräche" vs. "digitale Nachrichten" (konkrete Beispiele)<br>
+                            <span style="color: #27ae60;"><strong>Grün:</strong></span> "Einerseits... andererseits" (Antithese als Stilmittel)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Argumentationsanalyse -->
+            <button class="collapsible" id="argumentation">4. Argumentationsanalyse</button>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Argumentationsstrukturen verstehen</h3>
+                    
+                    <p>Argumentationsstrukturen sind die logischen Gerüste, auf denen Texte aufbauen. Sie zeigen, wie Thesen begründet und miteinander verknüpft werden.</p>
+
+                    <h3>Grundelemente der Argumentation</h3>
+
+                    <div class="step-box">
+                        <h4>These (Behauptung)</h4>
+                        <p>Eine Aussage, die bewiesen oder widerlegt werden kann.<br>
+                        <em>Beispiel:</em> "Soziale Medien schaden der Konzentrationsfähigkeit von Jugendlichen."</p>
+                    </div>
+
+                    <div class="step-box">
+                        <h4>Argument (Begründung)</h4>
+                        <p>Der Grund, warum die These stimmen soll.<br>
+                        <em>Beispiel:</em> "Weil ständige Benachrichtigungen die Aufmerksamkeit unterbrechen."</p>
+                    </div>
+
+                    <div class="step-box">
+                        <h4>Beleg (Beweis/Beispiel)</h4>
+                        <p>Konkrete Belege, die das Argument stützen.<br>
+                        <em>Beispiel:</em> "Studien der Universität Stanford zeigen, dass..."</p>
+                    </div>
+
+                    <h3>Argumentationstypen</h3>
+
+                    <table>
+                        <tr>
+                            <th>Argumenttyp</th>
+                            <th>Beschreibung</th>
+                            <th>Beispiel</th>
+                            <th>Stärke/Schwäche</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Faktenargument</strong></td>
+                            <td>Stützt sich auf überprüfbare Daten</td>
+                            <td>"80% der Jugendlichen nutzen täglich soziale Medien"</td>
+                            <td><span style="color: #27ae60;">✓</span> Objektiv und überprüfbar</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Autoritätsargument</strong></td>
+                            <td>Beruft sich auf Experten</td>
+                            <td>"Professor Schmidt warnt vor..."</td>
+                            <td><span style="color: #f39c12;">~</span> Nur so gut wie die Autorität</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Analogieargument</strong></td>
+                            <td>Zieht Vergleiche</td>
+                            <td>"Wie Alkohol kann auch Social Media süchtig machen"</td>
+                            <td><span style="color: #e74c3c;">✗</span> Analogien hinken oft</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Erfahrungsargument</strong></td>
+                            <td>Bezieht sich auf Alltagserfahrungen</td>
+                            <td>"Viele Eltern berichten von..."</td>
+                            <td><span style="color: #f39c12;">~</span> Subjektiv, aber nachvollziehbar</td>
+                        </tr>
+                    </table>
+
+                    <h3>Argumentationsstrukturen erkennen</h3>
+
+                    <h4>Lineare Argumentation</h4>
+                    <div class="example-box">
+                        Argument 1 → Argument 2 → Argument 3 → Schlussfolgerung<br>
+                        <em>Charakteristikum:</em> Argumente bauen aufeinander auf
+                    </div>
+
+                    <h4>Steigernde Argumentation</h4>
+                    <div class="example-box">
+                        Schwaches Argument → Stärkeres Argument → Stärkstes Argument<br>
+                        <em>Charakteristikum:</em> Höhepunkt am Ende
+                    </div>
+
+                    <h4>Dialektische Argumentation</h4>
+                    <div class="example-box">
+                        These → Antithese → Synthese<br>
+                        <em>Charakteristikum:</em> Pro- und Contra-Argumente werden gegenübergestellt
+                    </div>
+
+                    <div class="practice-section">
+                        <h4>Übung: Argumentationstypen identifizieren</h4>
+                        <p>Bestimme die Argumentationstypen in den folgenden Beispielen:</p>
+                        
+                        <div class="example-box">
+                            <strong>1.</strong> "Laut einer Studie der WHO leiden 25% aller Erwachsenen unter Schlafmangel."<br>
+                            <strong>2.</strong> "Der Nobelpreisträger XY betont die Bedeutung frühkindlicher Bildung."<br>
+                            <strong>3.</strong> "Wie ein Muskel wird auch das Gehirn durch Training stärker."<br>
+                            <strong>4.</strong> "Meine Großmutter ist 95 geworden - gesunde Ernährung ist das Geheimnis."
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution-4')">Lösung anzeigen</button>
+                        <div class="solution" id="solution-4">
+                            <strong>1.</strong> Faktenargument - basiert auf wissenschaftlichen Daten<br>
+                            <strong>2.</strong> Autoritätsargument - beruft sich auf Expertenstatus<br>
+                            <strong>3.</strong> Analogieargument - vergleicht Gehirn mit Muskel<br>
+                            <strong>4.</strong> Erfahrungsargument - persönliche/familiäre Erfahrung
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sprachanalyse -->
+            <button class="collapsible" id="sprache">5. Sprachanalyse</button>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Sprachliche Ebenen analysieren</h3>
+
+                    <h3>1. Wortschatz und Wortwahl</h3>
+                    <ul>
+                        <li><strong>Fachsprache vs. Alltagssprache</strong></li>
+                        <li><strong>Wertende vs. neutrale Begriffe</strong></li>
+                        <li><strong>Konkrete vs. abstrakte Begriffe</strong></li>
+                        <li><strong>Emotionale vs. sachliche Ausdrücke</strong></li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Wortfeld-Analyse:</strong><br>
+                        Sammle Wörter aus einem Bedeutungsbereich:<br>
+                        <em>Wortfeld "Bedrohung":</em> Gefahr, Risiko, Katastrophe, Verhängnis, Unheil<br>
+                        <em>Wirkung:</em> Verstärkt den bedrohlichen Charakter des beschriebenen Problems
+                    </div>
+
+                    <h3>2. Satzbau und Syntax</h3>
+
+                    <table>
+                        <tr>
+                            <th>Satztyp</th>
+                            <th>Wirkung</th>
+                            <th>Beispiel</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Kurze Sätze</strong></td>
+                            <td>Prägnant, eindringlich</td>
+                            <td>"Das ist falsch. Das muss sich ändern."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lange, komplexe Sätze</strong></td>
+                            <td>Differenziert, nachdenklich</td>
+                            <td>"Obwohl die Digitalisierung viele Vorteile bringt, die nicht von der Hand zu weisen sind, müssen wir auch die Risiken im Blick behalten..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fragesätze</strong></td>
+                            <td>Aktivierend, provokativ</td>
+                            <td>"Wollen wir das wirklich?"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ausrufesätze</strong></td>
+                            <td>Emotional, appellativ</td>
+                            <td>"Das darf nicht sein!"</td>
+                        </tr>
+                    </table>
+
+                    <h3>3. Rhetorische Mittel</h3>
+
+                    <h4>Bildsprache</h4>
+                    <ul>
+                        <li><strong>Metapher:</strong> "Die Digitalisierung ist ein zweischneidiges Schwert"</li>
+                        <li><strong>Vergleich:</strong> "Stark wie ein Löwe"</li>
+                        <li><strong>Personifikation:</strong> "Die Zeit läuft davon"</li>
+                    </ul>
+
+                    <h4>Wiederholungsfiguren</h4>
+                    <ul>
+                        <li><strong>Anapher:</strong> Wiederholung am Satzanfang</li>
+                        <li><strong>Epipher:</strong> Wiederholung am Satzende</li>
+                        <li><strong>Parallelismus:</strong> Wiederholung der Satzstruktur</li>
+                    </ul>
+
+                    <h4>Klangfiguren</h4>
+                    <ul>
+                        <li><strong>Alliteration:</strong> "Wind und Wetter"</li>
+                        <li><strong>Assonanz:</strong> Vokalwiederholung</li>
+                        <li><strong>Onomatopoesie:</strong> Lautmalerei ("Kuckuck")</li>
+                    </ul>
+
+                    <div class="practice-section">
+                        <h4>Übung: Stilmittel erkennen und analysieren</h4>
+                        <p>Identifiziere die Stilmittel im folgenden Text und beschreibe ihre Wirkung:</p>
+                        
+                        <div class="example-box">
+                            <em>"Der Sturm der Veränderung fegt über unser Land. Alte Gewissheiten brechen zusammen, neue Hoffnungen keimen auf. Sind wir bereit für diese Herausforderung? Können wir den Wandel meistern? Die Zeit des Zögerns ist vorbei - jetzt ist die Stunde des Handelns gekommen!"</em>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution-5')">Lösung anzeigen</button>
+                        <div class="solution" id="solution-5">
+                            <strong>Identifizierte Stilmittel:</strong><br>
+                            • <strong>Metapher:</strong> "Sturm der Veränderung" - dramatisiert gesellschaftlichen Wandel<br>
+                            • <strong>Personifikation:</strong> "Hoffnungen keimen auf" - macht abstrakte Begriffe lebendig<br>
+                            • <strong>Rhetorische Fragen:</strong> "Sind wir bereit...", "Können wir..." - aktivieren den Leser<br>
+                            • <strong>Antithese:</strong> "alte Gewissheiten" vs. "neue Hoffnungen" - betont Kontrast<br>
+                            • <strong>Ausrufesätze:</strong> Verleihen emotionale Eindringlichkeit<br>
+                            • <strong>Alliteration:</strong> "Stunde des Handelns" - verstärkt Prägnanz
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Übungen -->
+            <button class="collapsible" id="uebungen">6. Praktische Übungen</button>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Umfassende Textanalyse-Übungen</h3>
+
+                    <div class="practice-section">
+                        <h4>Übung 1: Schnellanalyse (5 Minuten)</h4>
+                        <p>Lies den folgenden Text und identifiziere in genau 5 Minuten:</p>
+                        <ol>
+                            <li>Hauptthema des Textes</li>
+                            <li>Zwei zentrale Aussagen</li>
+                            <li>Ein sprachliches Mittel mit Wirkung</li>
+                            <li>Die Position des Autors</li>
+                        </ol>
+                        
+                        <div class="example-box">
+                            <em>"Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung ist Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."</em>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution-6')">Musterlösung anzeigen</button>
+                        <div class="solution" id="solution-6">
+                            <strong>1. Hauptthema:</strong> Auswirkungen der digitalen Revolution auf zwischenmenschliche Kommunikation und soziale Beziehungen<br><br>
+                            
+                            <strong>2. Zentrale Aussagen:</strong><br>
+                            • Die digitale Revolution hat unsere Kommunikation grundlegend von persönlich zu virtuell verändert<br>
+                            • Die Digitalisierung bietet sowohl Chancen (weltweite Vernetzung) als auch Risiken (Verlust sozialer Fähigkeiten)<br><br>
+                            
+                            <strong>3. Sprachliches Mittel:</strong> Antithese "Fluch und Segen zugleich" - verdeutlicht die Ambivalenz der digitalen Entwicklung, indem gegensätzliche Bewertungen direkt gegenübergestellt werden<br><br>
+                            
+                            <strong>4. Position des Autors:</strong> Der Autor nimmt eine ausgewogene, differenzierte Haltung ein und plädiert für einen bewussten, ausbalancierten Umgang mit digitalen Medien, ohne sie pauschal abzulehnen oder unkritisch zu befürworten
+                        </div>
+                    </div>
+
+                    <div class="practice-section">
+                        <h4>Übung 2: Strukturierte Textanalyse (30 Minuten)</h4>
+                        <p>Analysiere den folgenden Text vollständig. Teile deine Zeit bewusst ein:</p>
+                        <ul>
+                            <li>5 Min: Text lesen und verstehen</li>
+                            <li>5 Min: Analyse planen und strukturieren</li>
+                            <li>15 Min: Textanalyse schreiben</li>
+                            <li>5 Min: Überarbeiten und korrigieren</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <em>"In einer Welt, die von Klimawandel und Umweltzerstörung bedroht ist, stellt sich die Frage nach der Verantwortung des Einzelnen mit zunehmender Dringlichkeit. Viele Menschen fühlen sich angesichts der globalen Herausforderungen machtlos. 'Was kann ich schon tun?', fragen sie sich, während die Temperaturen steigen und die Polkappen schmelzen.</em><br><br>
+                            
+                            <em>Diese Denkweise ist jedoch Teil des Problems. Die Summe vieler kleiner Handlungen kann tatsächlich einen Unterschied machen. Jede Entscheidung – sei es beim Einkaufen, beim Transport oder beim Energieverbrauch – hat Konsequenzen für unseren ökologischen Fußabdruck. Die Macht des Verbrauchers ist nicht zu unterschätzen.</em><br><br>
+                            
+                            <em>Gleichzeitig wäre es naiv zu glauben, dass individuelles Handeln allein ausreicht. Strukturelle Veränderungen sind notwendig. Politik und Wirtschaft müssen Rahmenbedingungen schaffen, die nachhaltiges Handeln fördern und belohnen. Der Wandel muss auf allen Ebenen stattfinden.</em><br><br>
+                            
+                            <em>Das Spannungsfeld zwischen individueller und kollektiver Verantwortung wird uns noch lange beschäftigen. Doch anstatt in Handlungslähmung zu verfallen, sollten wir das tun, was in unserer Macht steht, während wir gleichzeitig größere Veränderungen einfordern. Diese doppelte Strategie ist unsere beste Hoffnung für eine lebenswerte Zukunft."</em>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution-7')">Musterlösung anzeigen</button>
+                        <div class="solution" id="solution-7">
+                            <strong>Vollständige Textanalyse:</strong><br><br>
+                            
+                            <strong>Einleitung:</strong> Der vorliegende Text "Verantwortung in Zeiten des Klimawandels" von [fiktiver Autor] erschien 2023 in der Zeitschrift [fiktive Quelle]. Er thematisiert das Spannungsverhältnis zwischen individueller und kollektiver Verantwortung im Kontext der globalen Klimakrise.<br><br>
+                            
+                            <strong>Inhaltsanalyse:</strong> Der Text diskutiert die Frage, inwieweit Einzelpersonen zum Klimaschutz beitragen können und sollen. Der Autor erkennt die verbreitete Resignation angesichts der Größe des Problems an, argumentiert jedoch, dass auch kleine individuelle Handlungen in ihrer Summe bedeutsam sind. Gleichzeitig betont er die Notwendigkeit struktureller Veränderungen auf politischer und wirtschaftlicher Ebene.<br><br>
+                            
+                            <strong>Argumentationsstruktur:</strong> Der Text folgt einer dialektischen Struktur: These (individuelle Machtlosigkeit) → Antithese (kleine Handlungen sind wirksam) → Synthese (sowohl individuelle als auch systemische Maßnahmen notwendig). Diese Struktur ermöglicht eine differenzierte Positionierung.<br><br>
+                            
+                            <strong>Sprachliche Mittel:</strong> Der Autor verwendet ein direktes Zitat ("Was kann ich schon tun?"), um resignative Haltungen authentisch darzustellen. Die Metapher des "ökologischen Fußabdrucks" veranschaulicht abstrakte Umweltauswirkungen. Die "doppelte Strategie" am Ende fasst die Synthese prägnant zusammen.<br><br>
+                            
+                            <strong>Schlussfolgerung:</strong> Der Text bietet eine ausgewogene Betrachtung der Verantwortungsfrage im Klimaschutz. Besonders überzeugend ist die Verbindung von individueller und systemischer Perspektive, die weder in Fatalismus verfällt noch naive Selbstüberschätzung propagiert.
+                        </div>
+                    </div>
+
+                    <div class="practice-section">
+                        <h4>Selbsttest: Textanalyse-Kompetenz</h4>
+                        <p>Beantworte die folgenden Fragen, um dein Verständnis zu überprüfen:</p>
+                        
+                        <div class="checklist">
+                            <div class="checklist-item">
+                                <input type="checkbox" id="test1">
+                                <label for="test1">Ich kann verschiedene Textsorten anhand ihrer Merkmale unterscheiden</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="test2">
+                                <label for="test2">Ich erkenne die wichtigsten Stilmittel und kann ihre Wirkung erklären</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="test3">
+                                <label for="test3">Ich kann Argumentationsstrukturen analysieren und bewerten</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="test4">
+                                <label for="test4">Ich kann eine strukturierte Textanalyse mit Einleitung, Hauptteil und Schluss verfassen</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="test5">
+                                <label for="test5">Ich kann die Intention und Position eines Autors herausarbeiten</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="test6">
+                                <label for="test6">Ich kann sprachliche Mittel in ihrer Wirkung auf den Leser analysieren</label>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Auswertung:</strong><br>
+                            <strong>6 Punkte:</strong> Exzellent! Du beherrschst die Textanalyse sehr gut.<br>
+                            <strong>4-5 Punkte:</strong> Gut! Vertiefe einzelne Bereiche durch weitere Übung.<br>
+                            <strong>2-3 Punkte:</strong> Grundlagen vorhanden, arbeite systematisch die einzelnen Kapitel durch.<br>
+                            <strong>0-1 Punkte:</strong> Beginne mit den Grundlagen und arbeite dich Schritt für Schritt vor.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h3>Zusammenfassung: Die perfekte Textanalyse</h3>
+                <p><strong>Vorbereitung:</strong> Text mehrmals lesen, markieren, Grundinformationen sammeln</p>
+                <p><strong>Struktur:</strong> Einleitung (Textangaben) → Hauptteil (Inhalt, Argumentation, Sprache) → Schluss (Bewertung)</p>
+                <p><strong>Analyse:</strong> Nicht nur beschreiben, sondern erklären und bewerten</p>
+                <p><strong>Sprache:</strong> Fachbegriffe verwenden, aber verständlich bleiben</p>
+                <p><strong>Belege:</strong> Alle Aussagen mit konkreten Textstellen untermauern</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Toggle individual collapsible sections
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                    content.style.maxHeight = null;
+                    content.classList.remove("active");
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.add("active");
+                }
+            });
+        }
+
+        // Toggle all sections
+        function toggleAll() {
+            var allCollapsed = true;
+            var contents = document.getElementsByClassName("section-content");
+            
+            // Check if all are collapsed
+            for (var i = 0; i < contents.length; i++) {
+                if (contents[i].classList.contains("active")) {
+                    allCollapsed = false;
+                    break;
+                }
+            }
+            
+            // Toggle all sections
+            var buttons = document.getElementsByClassName("collapsible");
+            for (var i = 0; i < buttons.length; i++) {
+                var content = buttons[i].nextElementSibling;
+                if (allCollapsed) {
+                    // Expand all
+                    buttons[i].classList.add("active");
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.add("active");
+                } else {
+                    // Collapse all
+                    buttons[i].classList.remove("active");
+                    content.style.maxHeight = null;
+                    content.classList.remove("active");
+                }
+            }
+            
+            // Update button text
+            var btn = document.querySelector(".expand-all-btn");
+            btn.textContent = allCollapsed ? "Alle Bereiche zuklappen" : "Alle Bereiche aufklappen";
+        }
+
+        // Toggle solution visibility
+        function toggleSolution(solutionId) {
+            var solution = document.getElementById(solutionId);
+            solution.classList.toggle("active");
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.quick-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+            <!-- Aufbau der Textanalyse -->
+            <button class="collapsible" id="aufbau">2. Aufbau der Textanalyse</button>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Eine gute Analyse besteht aus Einleitung, Hauptteil und Schluss</h3>
+
+                    <h3>Einleitung: Einführung in die Analyse</h3>
+                    <p>Hier wird der Text kurz vorgestellt:</p>
+                    <ul>
+                        <li>Titel, Autor, Erscheinungsdatum, Quelle</li>
+                        <li>Textsorte (Kommentar, Bericht, Essay, Rede ...)</li>
+                        <li>Thema und zentrale Fragestellung</li>
+                        <li>Intention des Autors</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Beispiel einer gelungenen Einleitung:</strong><br>
+                        Der Artikel "Die Zukunft der Arbeit" von Max Mustermann, erschienen am 12. Mai 2024 in der Süddeutschen Zeitung, behandelt die Auswirkungen der Digitalisierung auf den Arbeitsmarkt. Der Autor argumentiert, dass künstliche Intelligenz zwar Arbeitsplätze ersetzt, aber auch neue Chancen schafft.
+                    </div>
+
+                    <h3>Hauptteil: Analyse des Textes</h3>
+                    <p>Hier untersuchst du <strong>Inhalt, Argumentation und Sprache</strong>.</p>
+
+                    <h4>1. Inhaltsanalyse</h4>
+                    <ul>
+                        <li>Wie ist der Text aufgebaut? (Einleitung, Argumente, Schlussfolgerung)</li>
+                        <li>Welche Hauptargumente bringt der Autor?</li>
+                        <li>Gibt es Beispiele oder Statistiken zur Unterstützung der Argumentation?</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Beispiel einer Inhaltsanalyse:</strong><br>
+                        Der Autor beginnt mit einer Schilderung der steigenden Automatisierung. Danach präsentiert er zwei Hauptargumente: Erstens könnten durch KI viele Jobs wegfallen, zweitens entstünden dadurch aber neue Berufsfelder. Er belegt dies mit Statistiken aus einer Studie des Instituts für Arbeitsforschung.
+                    </div>
+
+                    <h4>2. Argumentationsweise</h4>
+                    <ul>
+                        <li>Ist die Argumentation logisch, überzeugend oder einseitig?</li>
+                        <li>Welche Argumentationsstrategien werden verwendet? (Fakten, Emotionen, Autoritätsargumente ...)</li>
+                        <li>Werden Gegenthesen genannt oder ignoriert?</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Beispiel einer Argumentationsanalyse:</strong><br>
+                        Die Argumentation ist schlüssig, da der Autor sowohl die Risiken als auch die Chancen der Automatisierung diskutiert. Er verwendet Fakten aus wissenschaftlichen Studien und eine sachliche Sprache, was die Glaubwürdigkeit erhöht.
+                    </div>
+
+                    <h4>3. Sprachliche Mittel und Stil</h4>
+                    <ul>
+                        <li>Welche Sprache wird verwendet? (sachlich, emotional, ironisch, provokativ ...)</li>
+                        <li>Gibt es rhetorische Mittel? (Metaphern, Wiederholungen, Ironie ...)</li>
+                        <li>Welche Wirkung haben diese sprachlichen Mittel?</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Beispiel einer Sprachanalyse:</strong><br>
+                        Durch die Verwendung von Metaphern wie "die Arbeitswelt steht am Scheideweg" erzeugt der Autor Dramatik. Wiederholungen wie "Wir müssen handeln, wir müssen uns vorbereiten" verstärken den Appellcharakter.
+                    </div>
+
+                    <h3>Schluss: Bewertung und Fazit</h3>
+                    <p>Hier gibst du eine kurze Zusammenfassung und deine eigene Einschätzung.</p>
+
+                    <div class="checklist">
+                        <h4>Schlussfragen:</h4>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="schluss1">
+                            <label for="schluss1">Ist der Text überzeugend?</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="schluss2">
+                            <label for="schluss2">Sind die Argumente logisch und gut belegt?</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="schluss3">
+                            <label for="schluss3">Hat dich die Sprache oder der Stil besonders beeindruckt?</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="schluss4">
+                            <label for="schluss4">Gibt es offene Fragen oder Kritikpunkte?</label>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Beispiel eines gelungenen Schlusses:</strong><br>
+                        Der Artikel liefert eine gut strukturierte Analyse der Digitalisierung und verwendet überzeugende Argumente. Allerdings bleibt unklar, wie genau neue Jobs entstehen sollen. Insgesamt ist der Text informativ und regt zum Nachdenken an.
+                    </div>
+
+                    <div class="practice-section">
+                        <h4>Übung: Textaufbau analysieren</h4>
+                        <p>Analysiere den Aufbau des folgenden Kurztextes und bestimme Einleitung, Hauptargumente und Schluss:</p>
+                        <div class="example-box">
+                            <p><em>"Klimawandel ist real und menschengemacht. Wissenschaftliche Studien belegen eindeutig den Zusammenhang zwischen CO₂-Emissionen und der Erderwärmung. Die Folgen sind bereits spürbar: Extremwetter, schmelzende Gletscher und steigende Meeresspiegel. Dennoch zögern viele Regierungen bei konsequenten Maßnahmen. Die Zeit für halbherzige Kompromisse ist vorbei - wir brauchen jetzt mutiges politisches Handeln."</em></p>
+                        </div>
+                        <button class="solution-toggle" onclick="toggleSolution('solution-2')">Lösung anzeigen</button>
+                        <div class="solution" id="solution-2">
+                            <strong>Textaufbau-Analyse:</strong><br>
+                            <strong>Einleitung/These:</strong> "Klimawandel ist real und menschengemacht"<br>
+                            <strong>Hauptargumente:</strong> Wissenschaftliche Belege → Sichtbare Folgen → Kritik an zögerlicher Politik<br>
+                            <strong>Schluss/Forderung:</strong> "wir brauchen jetzt mutiges politisches Handeln"<br>
+                            <strong>Argumentationsstrategie:</strong> Fakten → Emotionen → Appell
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Textsorten erkennen -->
+            <button class="collapsible" id="textsorten">3. Textsorten erkennen und analysieren</button>
+            <div class="section-content">
+                <div class="section-inner">
+                    <h3>Wichtige Textsorten für die Deutschmatura</h3>
+
+                    <table>
+                        <tr>
+                            <th>Textsorte</th>
+                            <th>Merkmale</th>
+                            <th>Analyseschwerpunkte</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Kommentar</strong></td>
+                            <td>
+                                • Subjektive Meinung<br>
+                                • Aktualitätsbezug<br>
+                                • Wertende Sprache
+                            </td>
+                            <td>
+                                • Argumentationsstruktur<br>
+                                • Sprachliche Mittel<br>
+                                • Überzeugungsstrategie
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reportage</strong></td>
+                            <td>
+                                • Objektive Darstellung<br>
+                                • Vor-Ort-Bericht<br>
+                                • Detailreichtum
+                            </td>
+                            <td>
+                                • Aufbau und Struktur<br>
+                                • Perspektive<br>
+                                • Beschreibungstechniken
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Glosse</strong></td>
+                            <td>
+                                • Ironisch-satirisch<br>
+                                • Kurz und pointiert<br>
+                                • Gesellschaftskritik
+                            </td>
+                            <td>
+                                • Ironie und Sarkasmus<br>
+                                • Sprachspiele<br>
+                                • Kritikpunkte
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Essay</strong></td>
+                            <td>
+                                • Reflektierend<br>
+                                • Gedanklich komplex<br>
+                                • Persönlicher Stil
+                            </td>
+                            <td>
+                                • Gedankenführung<br>
+                                • Argumentationstiefe<br>
+                                • Stilistische Eleganz
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rede</strong></td>
+                            <td>
+                                • Mündlicher Vortrag<br>
+                                • Publikumsbezug<br>
+                                • Appellcharakter
+                            </td>
+                            <td>
+                                • Rhetorik<br>
+                                • Publikumsansprache<br>
+                                • Überzeugungsmittel
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h3>Textsorte bestimmen - Leitfragen</h3>
+                    <div class="tip-box">
+                        <strong>Fragen zur Textsortenbestimmung:</strong>
+                        <ul>
+                            <li>Wo könnte der Text erschienen sein? (Zeitung, Zeitschrift, Internet...)</li>
+                            <li>An wen richtet sich der Text? (Fachpublikum, breite Öffentlichkeit...)</li>
+                            <li>Welche Absicht verfolgt der Autor? (informieren, überzeugen, unterhalten...)</li>
+                            <li>Wie ist der Ton des Textes? (sachlich, emotional, ironisch...)</li>
+                            <li>Welche sprachlichen Mittel werden eingesetzt?</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-section">
+                        <h4>Übung: Textsorte bestimmen</h4>
+                        <p>Bestimme die Textsorte der folgenden Beispiele:</p>
+                        
+                        <div class="example-box">
+                            <strong>Text A:</strong><br>
+                            <em>"Wieder einmal stehen wir vor den Scherben einer gescheiterten Bildungsreform. Die Verantwortlichen werden wie üblich beteuern, dass alles ganz anders gemeint war. Währenddessen sitzen Schüler in überfüllten Klassenzimmern und fragen sich, ob das wirklich die Zukunft sein soll."</em>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution-3a')">Lösung Text A</button>
+                        <div class="solution" id="solution-3a">
+                            <strong>Textsorte:</strong> Kommentar/Glosse<br>
+                            <strong>Begründung:</strong> Ironischer Ton, kritische Haltung, wertende Sprache ("wieder einmal", "wie üblich"), subjektive Bewertung der Bildungsreform
+                        </div>
+
+                        <div class="example-box">
+                            <strong>Text B:</strong><br>
+                            <em>"Am Morgen des 15. März betrat ich das verlassene Fabrikgelände. Der Wind pfiff durch zerbrochene Fensterscheiben, während Unkraut durch Risse im Asphalt wuchs. Hier arbeiteten einst 2000 Menschen. Heute erinnern nur noch rostende Maschinen an die einstige Blütezeit der Textilindustrie."</em>
+                        </div>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution-3b')">Lösung Text B</button>
+                        <div class="solution" id="solution-3b">
+                            <strong>Textsorte:</strong> Reportage<br>
+                            <strong>Begründung:</strong> Persönliche Präsenz vor Ort ("ich betrat"), detaillierte Beschreibung der Atmosphäre, faktische Informationen (2000 Menschen), objektive Darstellung eines Zustands

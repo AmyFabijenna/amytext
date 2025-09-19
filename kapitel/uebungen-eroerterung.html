@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erörterungs-Übungen - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .exercise-section {
+            margin-bottom: 40px;
+        }
+
+        .exercise-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #34495e;
+        }
+
+        .exercise-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .exercise-card p {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .text-excerpt {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .toggle-button {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+        }
+
+        .toggle-button:hover {
+            background: #2c3e50;
+        }
+
+        .solution {
+            display: none;
+            background: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .solution h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="textanalyse12.html" class="nav-link">Willkommen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-eroerterung.html" class="nav-link active">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Erörterungs-Übungen</h1>
+                <p>Praktische Übungen zur textgebundenen Erörterung</p>
+            </header>
+
+            <div class="content-body">
+                <div class="exercise-section">
+                    <h2>Übungen zur Argumentationsanalyse</h2>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 1: Argumentationsbausteine identifizieren</h3>
+                        <p>Lies den folgenden Textausschnitt und identifiziere:</p>
+                        <ul>
+                            <li>Die Hauptthese</li>
+                            <li>Untergeordnete Thesen/Behauptungen</li>
+                            <li>Argumente und Belege</li>
+                            <li>Schlussfolgerungen</li>
+                        </ul>
+                        
+                        <div class="text-excerpt">
+                            <p>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel. Besonders alarmierend ist, dass viele dieser Entwicklungen sich selbst verstärken können. Wenn etwa das arktische Eis schmilzt, reflektiert weniger weiße Oberfläche das Sonnenlicht, und die Erwärmung beschleunigt sich. Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert. Doch die Kosten des Nichthandelns übersteigen bei weitem die Investitionen, die jetzt nötig wären. Es ist daher nicht nur eine ökologische, sondern auch eine ökonomische Notwendigkeit, den CO₂-Ausstoß drastisch zu reduzieren und auf erneuerbare Energien umzusteigen."</p>
+                        </div>
+                        
+                        <button class="toggle-button" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        
+                        <div class="solution" id="solution1">
+                            <h4>Musterlösung:</h4>
+                            <ul>
+                                <li><strong>Hauptthese:</strong> Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln.</li>
+                                <li><strong>Untergeordnete Thesen:</strong>
+                                    <ul>
+                                        <li>Die globalen Temperaturen steigen nachweislich.</li>
+                                        <li>Die Folgen sind bereits spürbar.</li>
+                                        <li>Viele Entwicklungen können sich selbst verstärken.</li>
+                                        <li>Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert.</li>
+                                        <li>Die Kosten des Nichthandelns übersteigen die nötigen Investitionen.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Argumente und Belege:</strong>
+                                    <ul>
+                                        <li>Faktischer Beleg: Laut Weltklimarat haben sich die Temperaturen seit der vorindustriellen Zeit um mehr als ein Grad Celsius erhöht.</li>
+                                        <li>Beispiele für Folgen: Schmelzende Polkappen, Extremwetterereignisse, steigende Meeresspiegel.</li>
+                                        <li>Beispiel für selbstverstärkende Effekte: Schmelzendes arktisches Eis reduziert die Reflexion von Sonnenlicht.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Schlussfolgerung:</strong> Es ist eine ökologische und ökonomische Notwendigkeit, den CO₂-Ausstoß zu reduzieren und auf erneuerbare Energien umzusteigen.</li>
+                            </ul>
+                            <p>Der Text folgt einer kausalen Argumentationskette: Ausgangsproblem (Klimawandel) → Belege für das Problem → Ursachen → Konsequenzen des Nichthandelns → notwendige Maßnahmen.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 2: Argumentationsmuster erkennen</h3>
+                        <p>Identifiziere in den folgenden kurzen Textpassagen die verwendeten Argumentationsmuster und bewerten Sie ihre Überzeugungskraft:</p>
+                        
+                        <div class="text-excerpt">
+                            <p>a) "Fast jeder Mensch besitzt heute ein Smartphone. Die ständige Erreichbarkeit führt nachweislich zu erhöhtem Stress. Daher sollte jeder regelmäßig bewusste Auszeiten von digitalen Geräten nehmen."</p>
+                            <p>b) "Viele erfolgreiche Unternehmer wie Steve Jobs und Bill Gates haben ihr Studium abgebrochen. Ein Universitätsabschluss ist also keine Voraussetzung für beruflichen Erfolg."</p>
+                            <p>c) "Entweder wir investieren jetzt massiv in den öffentlichen Nahverkehr, oder der Verkehrskollaps in unseren Städten wird sich weiter verschlimmern. Da niemand einen Verkehrskollaps will, bleibt nur die Option der Investitionen."</p>
+                        </div>
+                        
+                        <button class="toggle-button" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                        
+                        <div class="solution" id="solution2">
+                            <h4>Musterlösung:</h4>
+                            <p><strong>a)</strong></p>
+                            <ul>
+                                <li><strong>Argumentationsmuster:</strong> Kausale Argumentation (Wenn-Dann-Struktur)</li>
+                                <li><strong>Bewertung:</strong> Grundsätzlich logisch, aber die Prämissen sind nicht ausreichend belegt. Die Verallgemeinerung "fast jeder" ist ungenau. Der Zusammenhang zwischen Smartphone-Besitz und ständiger Erreichbarkeit wird vorausgesetzt, aber nicht bewiesen. Das "nachweislich" bleibt ohne konkreten Beleg. Die Schlussfolgerung folgt logisch, ist aber als normative Aussage ("sollte") stärker als die Prämissen rechtfertigen.</li>
+                            </ul>
+                            
+                            <p><strong>b)</strong></p>
+                            <ul>
+                                <li><strong>Argumentationsmuster:</strong> Argumentation mit Beispielen, induktives Schließen von Einzelfällen auf eine allgemeine Regel</li>
+                                <li><strong>Bewertung:</strong> Schwache Argumentation durch selektive Beispiele. Die wenigen prominenten Ausnahmen (Jobs, Gates) werden benutzt, um eine allgemeine Regel abzuleiten. Dies ist ein klassisches Beispiel für Cherry-Picking (selektive Auswahl von Belegen). Die Schlussfolgerung ist zu absolut ("keine Voraussetzung") und ignoriert, dass die Mehrheit erfolgreicher Menschen durchaus einen Abschluss hat.</li>
+                            </ul>
+                            
+                            <p><strong>c)</strong></p>
+                            <ul>
+                                <li><strong>Argumentationsmuster:</strong> Dilemma/Entweder-Oder-Argumentation, Ausschluss einer Alternative als nicht wünschenswert</li>
+                                <li><strong>Bewertung:</strong> Problematische Vereinfachung durch falsche Dichotomie. Es werden nur zwei Alternativen präsentiert (massiv investieren oder Verkehrskollaps), während es möglicherweise andere Lösungsansätze gibt. Die Argumentation nutzt zudem die allgemeine Ablehnung des "Verkehrskollaps", um die präferierte Lösung als einzig mögliche darzustellen. Rhetorisch wirksam, aber logisch anfechtbar.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-section">
+                    <h2>Übungen zur eigenen Positionierung</h2>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 3: Texte kritisch bewerten</h3>
+                        <p>Lies den folgenden Text und beantworte die Fragen:</p>
+                        
+                        <div class="text-excerpt">
+                            <h4>Digitale Bildung – Chance oder Risiko?</h4>
+                            <p>Die Digitalisierung des Bildungswesens wird heute vielfach als Allheilmittel für die Probleme unserer Schulen gepriesen. Tablets statt Schulbücher, Online-Kurse statt Frontalunterricht, Lern-Apps statt Arbeitsblätter – so lautet die Devise. Befürworter argumentieren, dass die digitale Transformation unaufhaltsam sei und Schulen die Schüler auf eine digitalisierte Arbeitswelt vorbereiten müssten.</p>
+                            <p>Doch bei aller Begeisterung für die neuen Möglichkeiten werden die Risiken oft übersehen. Studien zeigen, dass die intensive Nutzung digitaler Medien die Konzentrationsfähigkeit beeinträchtigen kann. Zudem verleitet die Informationsflut im Internet zu oberflächlichem Denken und erschwert das vertiefte Verstehen komplexer Zusammenhänge.</p>
+                            <p>Besonders problematisch ist auch die wachsende Abhängigkeit von Technologiekonzernen, die ihre kommerziellen Interessen verfolgen. Schulen geraten in Gefahr, zu Absatzmärkten für Hard- und Software zu werden, ohne dass der pädagogische Mehrwert immer gegeben ist.</p>
+                            <p>Statt einem blinden Digitalisierungshype zu folgen, sollten wir einen ausgewogenen Ansatz wählen. Digitale Werkzeuge können den Unterricht bereichern, wenn sie gezielt und reflektiert eingesetzt werden. Sie sollten jedoch traditionelle Lernformen nicht vollständig ersetzen, sondern ergänzen. Letztlich kommt es nicht auf die Quantität der eingesetzten Technologie an, sondern auf die Qualität der pädagogischen Konzepte.</p>
+                        </div>
+                        
+                        <ol>
+                            <li>Fassen Sie die Hauptaussage des Textes kurz zusammen.</li>
+                            <li>Welche Position vertritt der Autor zur Digitalisierung in der Bildung?</li>
+                            <li>Formulieren Sie Ihre eigene Position zum Text. Stimmen Sie dem Autor zu oder nicht? Begründen Sie Ihre Antwort mit konkreten Bezügen zum Text.</li>
+                            <li>Erweitern Sie Ihre Stellungnahme um einen Aspekt, der im Text nicht behandelt wird.</li>
+                        </ol>
+                        
+                        <button class="toggle-button" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        
+                        <div class="solution" id="solution3">
+                            <h4>Musterlösung:</h4>
+                            <ol>
+                                <li><strong>Zusammenfassung:</strong> Der Text setzt sich kritisch mit der Digitalisierung im Bildungswesen auseinander. Während er die Vorteile der Digitalisierung anerkennt, warnt er vor den Risiken wie Konzentrationsschwäche, oberflächlichem Denken und Abhängigkeit von Technologiekonzernen. Der Autor plädiert für einen ausgewogenen Ansatz, bei dem digitale Werkzeuge traditionelle Lernformen ergänzen, aber nicht ersetzen.</li>
+                                <li><strong>Position des Autors:</strong> Der Autor vertritt eine differenzierte, kritische Position. Er lehnt eine unreflektierte Digitalisierung ab und befürwortet einen gezielten, pädagogisch sinnvollen Einsatz digitaler Medien. Er warnt vor den Risiken und plädiert für eine Balance zwischen digitalen und traditionellen Lernformen.</li>
+                                <li><strong>Eigene Position (Beispiel):</strong> Ich stimme der Position des Autors weitgehend zu. Besonders überzeugend finde ich die Betonung der pädagogischen Qualität gegenüber der reinen Quantität der Technologie. Der Autor macht zurecht auf die Risiken der Digitalisierung aufmerksam, insbesondere auf die Abhängigkeit von kommerziellen Interessen der Technologiekonzerne. Die genannten Studien zur Beeinträchtigung der Konzentrationsfähigkeit durch digitale Medien sind ein wichtiges Argument für einen reflektierten Einsatz. Allerdings hätte der Autor konkretere Beispiele für den sinnvollen Einsatz digitaler Werkzeuge nennen können.</li>
+                                <li><strong>Erweiterung:</strong> Ein Aspekt, der im Text nicht behandelt wird, ist die Frage der digitalen Kluft (Digital Divide). Die ungleiche Verfügbarkeit und Nutzung digitaler Technologien könnte soziale Ungleichheiten im Bildungswesen verstärken, wenn Schüler aus benachteiligten Verhältnissen weniger Zugang zu digitalen Lernmitteln haben oder weniger Unterstützung bei deren Nutzung erhalten.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 4: Gegenposition entwickeln</h3>
+                        <p>Entwickeln Sie zu folgendem Textausschnitt eine differenzierte Gegenposition:</p>
+                        
+                        <div class="text-excerpt">
+                            <p>"Der öffentliche Nahverkehr sollte in allen Städten kostenlos sein. Dies würde nicht nur die Umwelt entlasten, da mehr Menschen vom Auto auf Bus und Bahn umsteigen würden, sondern auch soziale Gerechtigkeit fördern. Geringverdiener, die sich kein Auto leisten können, wären nicht länger durch hohe Ticketpreise belastet. Zudem würden die Städte lebenswerter, da weniger Autos zu weniger Lärm und besserer Luftqualität führen würden. Die Kosten könnten durch eine moderate Erhöhung der Steuern für Besserverdienende gedeckt werden."</p>
+                        </div>
+                        
+                        <button class="toggle-button" onclick="toggleSolution('solution4')">Lösung anzeigen</button>
+                        
+                        <div class="solution" id="solution4">
+                            <h4>Musterlösung:</h4>
+                            <p><strong>Gegenposition:</strong></p>
+                            <p>Während die Idee eines kostenlosen öffentlichen Nahverkehrs auf den ersten Blick verlockend erscheint, gibt es mehrere gewichtige Gegenargumente:</p>
+                            <ol>
+                                <li><strong>Finanzierungsprobleme:</strong> Die Finanzierung durch Steuererhöhungen für Besserverdienende könnte zu Widerständen führen und ist möglicherweise nicht nachhaltig. Zudem besteht die Gefahr, dass andere wichtige öffentliche Aufgaben unterfinanziert werden.</li>
+                                <li><strong>Qualitätsverlust:</strong> Erfahrungen aus Städten mit kostenlosem Nahverkehr zeigen, dass die Qualität der Dienstleistungen oft leidet, wenn keine direkten Einnahmen generiert werden. Es könnte zu überfüllten Verkehrsmitteln und weniger Investitionen in die Infrastruktur kommen.</li>
+                                <li><strong>Fehlende Lenkungswirkung:</strong> Ein komplett kostenloser Nahverkehr könnte zu einer Übernutzung führen, bei der auch kurze Strecken, die problemlos zu Fuß oder mit dem Fahrrad zurückgelegt werden könnten, mit öffentlichen Verkehrsmitteln gefahren werden.</li>
+                                <li><strong>Soziale Gerechtigkeit:</strong> Die Finanzierung durch allgemeine Steuermittel bedeutet, dass auch Menschen, die den Nahverkehr nicht nutzen (können oder wollen), für ihn bezahlen müssen. Dies könnte als ungerecht empfunden werden.</li>
+                                <li><strong>Alternativvorschlag:</strong> Statt eines vollständig kostenlosen Nahverkehrs wäre ein sozial gestaffeltes System mit ermäßigten Preisen für bestimmte Gruppen (Schüler, Studenten, Senioren, Geringverdiener) möglicherweise sinnvoller und finanzierbarer.</li>
+                            </ol>
+                            <p>Zusammenfassend lässt sich sagen, dass die Idee eines kostenlosen Nahverkehrs zwar löblich ist, aber praktische und finanzielle Herausforderungen mit sich bringt, die nicht unterschätzt werden sollten.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Tipp für die Erörterungsübungen:</strong><br>
+                    Achten Sie bei der Entwicklung Ihrer Position immer auf eine ausgewogene Argumentation. Berücksichtigen Sie sowohl Pro- als auch Contra-Argumente und belegen Sie Ihre Aussagen mit konkreten Beispielen oder Textstellen. Eine gute Erörterung zeichnet sich durch Differenziertheit und Sachlichkeit aus.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+        
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+                event.target.textContent = 'Lösung anzeigen';
+            } else {
+                solution.style.display = 'block';
+                event.target.textContent = 'Lösung ausblenden';
+            }
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

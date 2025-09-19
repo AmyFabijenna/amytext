@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeitmanagement - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #34495e;
+        }
+
+        .exercise {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .exercise h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .solution {
+            background: #d4edda;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .solution h4 {
+            color: #155724;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .btn:hover {
+            background: #2c3e50;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .active, .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            display: none;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 0 0 5px 5px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Navigation</div>
+                <div class="nav-item">
+                    <a href="textanalyse12.html" class="nav-link">Zurück zur Hauptseite</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active">Zeitmanagement</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Inhaltsverzeichnis</div>
+                <div class="nav-item">
+                    <a href="#grundlagen" class="nav-link">1. Grundlagen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#zeitplanung" class="nav-link">2. Zeitplanung</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#uebungen" class="nav-link">3. Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#notfalltipps" class="nav-link">4. Notfall-Tipps</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Zeitmanagement für die Deutschmatura</h1>
+                <p>Strategien für eine optimale Zeiteinteilung in der Prüfung</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section" id="grundlagen">
+                    <h2>1. Grundlagen des Zeitmanagements</h2>
+                    
+                    <div class="card">
+                        <h3>Warum Zeitmanagement wichtig ist</h3>
+                        <p>Effektives Zeitmanagement ist für Prüfungssituationen entscheidend. Bei einer Textanalyse hilft eine sinnvolle Zeiteinteilung, alle wichtigen Aspekte zu berücksichtigen und gleichzeitig Stress zu reduzieren.</p>
+                        
+                        <button class="accordion">Empfohlene Zeiteinteilung für eine 90-minütige Textanalyse</button>
+                        <div class="panel">
+                            <table>
+                                <tr>
+                                    <th>Phase</th>
+                                    <th>Zeit</th>
+                                    <th>Aktivität</th>
+                                </tr>
+                                <tr>
+                                    <td>Textverständnis</td>
+                                    <td>10-15 Minuten</td>
+                                    <td>Text lesen und verstehen, wichtige Textstellen markieren</td>
+                                </tr>
+                                <tr>
+                                    <td>Planung</td>
+                                    <td>5-10 Minuten</td>
+                                    <td>Gliederung und Gedanken strukturieren</td>
+                                </tr>
+                                <tr>
+                                    <td>Schreiben</td>
+                                    <td>45-50 Minuten</td>
+                                    <td>Verfassen der eigentlichen Analyse</td>
+                                </tr>
+                                <tr>
+                                    <td>Überarbeitung</td>
+                                    <td>15-20 Minuten</td>
+                                    <td>Korrekturlesen und Verbesserungen</td>
+                                </tr>
+                            </table>
+                            <p class="tip-box"><strong>Tipp:</strong> Diese Zeiteinteilung kann je nach individuellen Stärken und Schwächen angepasst werden.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Zeitmanagement für verschiedene Textsorten</h3>
+                        <p>Je nach Textsorte können sich die Zeitanteile leicht verschieben:</p>
+                        
+                        <button class="accordion">Zeiteinteilung für literarische Texte</button>
+                        <div class="panel">
+                            <ul>
+                                <li>Textverständnis: 15-20 Minuten (tiefere Lektüre erforderlich)</li>
+                                <li>Planung: 10 Minuten (komplexere Struktur)</li>
+                                <li>Schreiben: 40-45 Minuten</li>
+                                <li>Überarbeitung: 15 Minuten</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="accordion">Zeiteinteilung für Sachtexte</button>
+                        <div class="panel">
+                            <ul>
+                                <li>Textverständnis: 10 Minuten (klarere Struktur)</li>
+                                <li>Planung: 5 Minuten</li>
+                                <li>Schreiben: 50-55 Minuten (mehr Analyse erforderlich)</li>
+                                <li>Überarbeitung: 20 Minuten (genaue Prüfung der Argumentation)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" id="zeitplanung">
+                    <h2>2. Individuelle Zeitplanung</h2>
+                    
+                    <div class="card">
+                        <h3>Persönlichen Zeitplan erstellen</h3>
+                        <p>Jeder Schüler hat unterschiedliche Stärken und Schwächen. Erstelle einen persönlichen Zeitplan, der deinen Bedürfnissen entspricht.</p>
+                        
+                        <div class="exercise">
+                            <h4>Übung: Persönlichen Zeitplan erstellen</h4>
+                            <p>Erstelle einen persönlichen Zeitplan für eine 90-minütige Textanalyse. Berücksichtige dabei deine individuellen Stärken und Schwächen. Überlege:</p>
+                            <ul>
+                                <li>Für welche Phase benötigst du mehr Zeit?</li>
+                                <li>Welche Phase kannst du effizienter gestalten?</li>
+                                <li>Wie kannst du sicherstellen, dass du genügend Zeit für die Überarbeitung hast?</li>
+                            </ul>
+                            <p>Notiere konkrete Zeitangaben für jede Phase und begründe deine Entscheidungen.</p>
+                            
+                            <button class="btn" onclick="toggleSolution('solution1')">Musterlösung anzeigen</button>
+                            
+                            <div class="solution" id="solution1">
+                                <h4>Musterlösung: Individuelle Zeiteinteilung</h4>
+                                <p><strong>Beispiel für eine individuelle Zeiteinteilung:</strong></p>
+                                <ul>
+                                    <li><strong>15 Minuten:</strong> Text lesen und verstehen (etwas mehr Zeit als Standard, da gründliches Textverständnis die Basis für alles Weitere ist)</li>
+                                    <li><strong>10 Minuten:</strong> Gliederung erstellen (mehr Zeit für Planung spart später Zeit beim Schreiben)</li>
+                                    <li><strong>40 Minuten:</strong> Schreiben der Analyse (effizienter durch die gute Vorarbeit)</li>
+                                    <li><strong>25 Minuten:</strong> Überarbeitung (großzügiger Zeitpuffer für gründliche Korrektur)</li>
+                                </ul>
+                                <p><strong>Begründung:</strong> Diese Zeiteinteilung legt besonderen Wert auf das Textverständnis zu Beginn und die Überarbeitungsphase am Ende. Die ausführlichere Planungsphase führt zu einem strukturierteren Schreibprozess und ermöglicht ein schnelleres, gezielteres Schreiben. Die großzügige Überarbeitungszeit erlaubt eine gründliche inhaltliche und sprachliche Korrektur.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Zeitmanagement-Tools</h3>
+                        <p>Nutze verschiedene Techniken, um deine Zeit effektiv einzuteilen:</p>
+                        
+                        <button class="accordion">Pomodoro-Technik für Textanalysen</button>
+                        <div class="panel">
+                            <p>Die Pomodoro-Technik kann auch bei Textanalysen angewendet werden:</p>
+                            <ol>
+                                <li><strong>25 Minuten:</strong> Konzentriertes Lesen und Markieren</li>
+                                <li><strong>5 Minuten Pause:</strong> Kurze Erholung</li>
+                                <li><strong>25 Minuten:</strong> Gliederung und Schreiben des Hauptteils</li>
+                                <li><strong>5 Minuten Pause:</strong> Kurze Erholung</li>
+                                <li><strong>20 Minuten:</strong> Fertigstellung und Überarbeitung</li>
+                                <li><strong>10 Minuten:</strong> Endkorrektur</li>
+                            </ol>
+                        </div>
+                        
+                        <button class="accordion">Timeboxing für Prüfungssituationen</button>
+                        <div class="panel">
+                            <p>Timeboxing hilft, den Fokus zu behalten:</p>
+                            <ul>
+                                <li>Definiere klare Zeitblöcke für jede Aufgabe</li>
+                                <li>Stoppe die Zeit für jede Phase</li>
+                                <li>Bleibe innerhalb der vorgegebenen Zeit</li>
+                                <li>Passe dein Tempo an, wenn du merkst, dass du zu langsam bist</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" id="uebungen">
+                    <h2>3. Praktische Übungen</h2>
+                    
+                    <div class="card">
+                        <h3>Schnellanalyse unter Zeitdruck</h3>
+                        
+                        <div class="exercise">
+                            <h4>Übung: Schnellanalyse in 5 Minuten</h4>
+                            <p>Lies den folgenden Textausschnitt und nimm dir <strong>exakt 5 Minuten</strong> Zeit, um die wichtigsten Aspekte zu identifizieren. Verwende eine Stoppuhr!</p>
+                            
+                            <div class="tip-box">
+                                <strong>Textauszug:</strong><br>
+                                "Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung ist Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."
+                            </div>
+                            
+                            <p>Nach 5 Minuten notiere:</p>
+                            <ol>
+                                <li>Hauptthema des Textes</li>
+                                <li>Zwei zentrale Aussagen</li>
+                                <li>Ein sprachliches Mittel mit seiner Wirkung</li>
+                                <li>Die Position des Autors</li>
+                            </ol>
+                            
+                            <button class="btn" onclick="toggleSolution('solution2')">Musterlösung anzeigen</button>
+                            
+                            <div class="solution" id="solution2">
+                                <h4>Musterlösung: Schnellanalyse</h4>
+                                <ol>
+                                    <li><strong>Hauptthema:</strong> Auswirkungen der Digitalisierung auf zwischenmenschliche Kommunikation und soziale Beziehungen</li>
+                                    <li><strong>Zentrale Aussagen:</strong>
+                                        <ul>
+                                            <li>Die digitale Revolution hat unsere Kommunikation grundlegend von persönlich zu virtuell verändert</li>
+                                            <li>Die Digitalisierung bietet sowohl Chancen (weltweite Vernetzung) als auch Risiken (Verlust sozialer Fähigkeiten)</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Sprachliches Mittel:</strong> Antithese "Fluch und Segen zugleich" – verdeutlicht die Ambivalenz der digitalen Entwicklung, indem gegensätzliche Bewertungen direkt gegenübergestellt werden</li>
+                                    <li><strong>Position des Autors:</strong> Der Autor nimmt eine ausgewogene, differenzierte Haltung ein und plädiert für einen bewussten, ausbalancierten Umgang mit digitalen Medien, ohne sie pauschal abzulehnen oder unkritisch zu befürworten</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Strukturierte Textanalyse unter Zeitdruck</h3>
+                        
+                        <div class="exercise">
+                            <h4>Übung: Vollständige Analyse in 30 Minuten</h4>
+                            <p>Analysiere den folgenden Text in <strong>genau 30 Minuten</strong>. Teile deine Zeit bewusst ein und notiere zu Beginn, wie viele Minuten du für die einzelnen Phasen (Lesen, Planen, Schreiben) einplanst.</p>
+                            
+                            <div class="tip-box">
+                                <strong>Textauszug:</strong><br>
+                                "In einer Welt, die von Klimawandel und Umweltzerstörung bedroht ist, stellt sich die Frage nach der Verantwortung des Einzelnen mit zunehmender Dringlichkeit. Viele Menschen fühlen sich angesichts der globalen Herausforderungen machtlos. 'Was kann ich schon tun?', fragen sie sich, während die Temperaturen steigen und die Polkappen schmelzen.<br><br>
+                                Diese Denkweise ist jedoch Teil des Problems. Die Summe vieler kleiner Handlungen kann tatsächlich einen Unterschied machen. Jede Entscheidung – sei es beim Einkaufen, beim Transport oder beim Energieverbrauch – hat Konsequenzen für unseren ökologischen Fußabdruck. Die Macht des Verbrauchers ist nicht zu unterschätzen.<br><br>
+                                Gleichzeitig wäre es naiv zu glauben, dass individuelles Handeln allein ausreicht. Strukturelle Veränderungen sind notwendig. Politik und Wirtschaft müssen Rahmenbedingungen schaffen, die nachhaltiges Handeln fördern und belohnen. Der Wandel muss auf allen Ebenen stattfinden.<br><br>
+                                Das Spannungsfeld zwischen individueller und kollektiver Verantwortung wird uns noch lange beschäftigen. Doch anstatt in Handlungslähmung zu verfallen, sollten wir das tun, was in unserer Macht steht, während wir gleichzeitig größere Veränderungen einfordern. Diese doppelte Strategie ist unsere beste Hoffnung für eine lebenswerte Zukunft."
+                            </div>
+                            
+                            <p>Erstelle eine Textanalyse mit folgenden Elementen:</p>
+                            <ul>
+                                <li>Einleitung mit Textangaben (fiktiv) und Hauptthema</li>
+                                <li>Zusammenfassung des Inhalts</li>
+                                <li>Analyse von mindestens zwei sprachlichen Mitteln</li>
+                                <li>Untersuchung der Argumentationsstruktur</li>
+                                <li>Schlussfolgerung mit eigener Stellungnahme</li>
+                            </ul>
+                            
+                            <button class="btn" onclick="toggleSolution('solution3')">Musterlösung anzeigen</button>
+                            
+                            <div class="solution" id="solution3">
+                                <h4>Musterlösung: Zeitplanung und Analyse</h4>
+                                <p><strong>Empfohlene Zeiteinteilung:</strong></p>
+                                <ul>
+                                    <li>5 Minuten: Text lesen und verstehen</li>
+                                    <li>5 Minuten: Analyse planen und strukturieren</li>
+                                    <li>15 Minuten: Textanalyse schreiben</li>
+                                    <li>5 Minuten: Überarbeiten und korrigieren</li>
+                                </ul>
+                                
+                                <p><strong>Musteranalyse:</strong></p>
+                                <p><strong>Einleitung:</strong> Der vorliegende Text "Verantwortung in Zeiten des Klimawandels" von [fiktiver Autor] erschien 2023 in der Zeitschrift [fiktive Quelle]. Er thematisiert das Spannungsverhältnis zwischen individueller und kollektiver Verantwortung im Kontext der globalen Klimakrise.</p>
+                                
+                                <p><strong>Zusammenfassung:</strong> Der Text diskutiert die Frage, inwieweit Einzelpersonen zum Klimaschutz beitragen können und sollen. Der Autor erkennt die verbreitete Resignation angesichts der Größe des Problems an, argumentiert jedoch, dass auch kleine individuelle Handlungen in ihrer Summe bedeutsam sind. Gleichzeitig betont er die Notwendigkeit struktureller Veränderungen auf politischer und wirtschaftlicher Ebene. Als Lösung schlägt er eine "doppelte Strategie" vor, die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet.</p>
+                                
+                                <p><strong>Analyse sprachlicher Mittel:</strong></p>
+                                <ol>
+                                    <li>Der Autor verwendet ein direktes Zitat ("Was kann ich schon tun?"), um die resignative Haltung vieler Menschen authentisch darzustellen. Durch diese Technik werden Leser, die ähnliche Gedanken haben könnten, direkt angesprochen und in den Text eingebunden.</li>
+                                    <li>Die Metapher des "ökologischen Fußabdrucks" veranschaulicht abstrakte Umweltauswirkungen individueller Entscheidungen und macht diese greifbarer. Sie unterstützt das Argument des Autors, dass persönliche Entscheidungen durchaus relevant sind.</li>
+                                </ol>
+                                
+                                <p><strong>Argumentationsstruktur:</strong> Der Text folgt einer dialektischen Struktur:
+                                    <ul>
+                                        <li>These: Individuelle Handlungen erscheinen angesichts globaler Probleme machtlos</li>
+                                        <li>Antithese: Viele kleine Handlungen können in ihrer Summe wirksam sein</li>
+                                        <li>Synthese: Sowohl individuelle als auch kollektive/strukturelle Maßnahmen sind notwendig</li>
+                                    </ul>
+                                    Diese Struktur ermöglicht es dem Autor, eine differenzierte Position zu entwickeln, die einseitige Verantwortungszuschreibungen vermeidet.
+                                </p>
+                                
+                                <p><strong>Schlussfolgerung mit eigener Stellungnahme:</strong> Der Text bietet eine ausgewogene Betrachtung der Verantwortungsfrage im Klimaschutz. Besonders überzeugend ist die Verbindung von individueller und systemischer Perspektive, die weder in Fatalismus noch in naive Selbstüberschätzung verfällt. Ich stimme der Position des Autors zu, dass wir sowohl auf persönlicher als auch auf gesellschaftlicher Ebene handeln müssen. Allerdings hätte der Text konkreter darauf eingehen können, wie der Einzelne auch politischen Einfluss nehmen kann, etwa durch demokratische Partizipation oder zivilgesellschaftliches Engagement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" id="notfalltipps">
+                    <h2>4. Notfall-Tipps bei Zeitproblemen</h2>
+                    
+                    <div class="card">
+                        <h3>Was tun, wenn die Zeit knapp wird?</h3>
+                        
+                        <button class="accordion">Priorisieren bei Zeitmangel</button>
+                        <div class="panel">
+                            <p>Wenn du merkst, dass die Zeit knapp wird, priorisiere die wichtigsten Elemente:</p>
+                            <ol>
+                                <li><strong>Vollständige Einleitung</strong> mit allen notwendigen Informationen</li>
+                                <li><strong>Korrekte Inhaltsangabe</strong> im Präsens</li>
+                                <li><strong>Mindestens zwei sprachliche Mittel</strong> analysieren</li>
+                                <li><strong>Argumentationsstruktur</strong> kurz beschreiben</li>
+                                <li><strong>Schluss mit eigener Position</strong> (auch wenn kurz)</li>
+                            </ol>
+                            <p>Vernachlässigen kannst du bei Zeitmangel:</p>
+                            <ul>
+                                <li>Ausführliche Beschreibungen von Nebenaspekten</li>
+                                <li>Zu viele Zitate</li>
+                                <li>Perfekte Formulierungen (Inhalt vor Form)</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="accordion">Zeitfresser identifizieren und vermeiden</button>
+                        <div class="panel">
+                            <p>Häufige Zeitfresser in Textanalysen:</p>
+                            <ul>
+                                <li><strong>Zu langes Verweilen beim Lesen:</strong> Maximal 15-20% der Gesamtzeit</li>
+                                <li><strong>Perfektionismus bei Formulierungen:</strong> Erster Entwurf muss nicht perfekt sein</li>
+                                <li><strong>Zu ausführliche Einleitung:</strong> Einleitung sollte knapp und präzise sein</li>
+                                <li><strong>Übermäßiges Zitieren:</strong> Zitate sparsam und gezielt einsetzen</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="accordion">Schnellstrategien für die letzten Minuten</button>
+                        <div class="panel">
+                            <p>Wenn nur noch wenig Zeit bleibt:</p>
+                            <ul>
+                                <li><strong>Schluss schreiben:</strong> Auch ein kurzer Schluss ist besser als keiner</li>
+                                <li><strong>Überfliegen:</strong> Nochmal schnell den Text auf grobe Fehler überfliegen</li>
+                                <li><strong>Struktur prüfen:</strong> Sicherstellen, dass die Gliederung erkennbar ist</li>
+                                <li><strong>Wichtigste Punkte hervorheben:</strong> Unterstreichen oder kurze Anmerkungen am Rand</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>Wichtiger Tipp:</strong> Übe das Zeitmanagement regelmäßig unter realistischen Bedingungen. Je öfter du unter Zeitdruck arbeitest, desto besser wirst du im Einschätzen deines eigenen Tempos und desto sicherer wirst du in der Prüfungssituation.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+            } else {
+                solution.style.display = 'block';
+            }
+        }
+
+        // Accordion-Funktionalität
+        const acc = document.getElementsByClassName("accordion");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

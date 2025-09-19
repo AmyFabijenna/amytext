@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulierungshilfen: Einleitung & Schluss | Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .subsection {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #34495e;
+        }
+
+        .subsection-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .formulierung-list {
+            list-style-type: none;
+        }
+
+        .formulierung-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 3px solid #3498db;
+        }
+
+        .formulierung-text {
+            font-style: italic;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .formulierung-erklaerung {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .example-box {
+            background: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .example-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .example-content {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        .exercise-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .exercise-title {
+            color: #856404;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .btn-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn-toggle:hover {
+            background: #2c3e50;
+        }
+
+        .solution {
+            display: none;
+            background: #d4edda;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 4px solid #28a745;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        .collapsible {
+            background: #34495e;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+        }
+
+        .active, .collapsible:hover {
+            background: #2c3e50;
+        }
+
+        .collapsible-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background: #f8f9fa;
+            border-radius: 0 0 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="willkommen.html" class="nav-link">Willkommen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textanalyse</div>
+                <div class="nav-item">
+                    <a href="textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
+                </div>
+                <div class="nav-item">
+                    <a href="argumentationsanalyse.html" class="nav-link">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sprachanalyse.html" class="nav-link">Sprachanalyse</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textinterpretation</div>
+                <div class="nav-item">
+                    <a href="textinterpretation.html" class="nav-link">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="literarische-epochen.html" class="nav-link">Literarische Epochen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textsorten</div>
+                <div class="nav-item">
+                    <a href="textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
+                </div>
+                <div class="nav-item">
+                    <a href="lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="prosa-analyse.html" class="nav-link">Prosa analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="drama-analyse.html" class="nav-link">Drama analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Praxisbeispiele</div>
+                <div class="nav-item">
+                    <a href="beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
+                </div>
+                <div class="nav-item">
+                    <a href="beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
+                </div>
+                <div class="nav-item">
+                    <a href="musterloesungen.html" class="nav-link">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="formulierungen-einleitung.html" class="nav-link active">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="fachbegriffe.html" class="nav-link">Fachbegriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Prüfungsvorbereitung</div>
+                <div class="nav-item">
+                    <a href="zeitmanagement.html" class="nav-link">Zeitmanagement</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
+                </div>
+                <div class="nav-item">
+                    <a href="checklisten.html" class="nav-link">Checklisten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Formulierungshilfen: Einleitung & Schluss</h1>
+                <p>Professionelle Textanfänge und -schlüsse für Analysen und Interpretationen</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section">
+                    <h2 class="section-title">Einleitungen formulieren</h2>
+                    
+                    <button type="button" class="collapsible">Formale Textangaben</button>
+                    <div class="collapsible-content">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Standardformulierungen für Textangaben</h3>
+                            <ul class="formulierung-list">
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Der vorliegende Text [Titel] von [Autor], erschienen im Jahr [Jahr] in [Quelle], thematisiert..."</div>
+                                    <div class="formulierung-erklaerung">Standardformel für die Einordnung eines Textes mit allen notwendigen Angaben.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"In [Textsorte] [Titel] von [Autor], veröffentlicht [Erscheinungsdatum] in [Medium], setzt sich der Autor mit der Frage auseinander, inwiefern..."</div>
+                                    <div class="formulierung-erklaerung">Detaillierte Einordnung mit Fokus auf die Textsorte.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Der Text [Titel] aus der Feder von [Autor] erschien erstmals im Jahr [Jahr] und behandelt das Thema..."</div>
+                                    <div class="formulierung-erklaerung">Alternative Formulierung für literarische Texte.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="button" class="collapsible">Thematische Einführung</button>
+                    <div class="collapsible-content">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Einführung in das Textthema</h3>
+                            <ul class="formulierung-list">
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Im Fokus der Betrachtung steht die Problematik des/der..."</div>
+                                    <div class="formulierung-erklaerung">Fokussierte Einführung auf das Kernthema.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Als roter Faden zieht sich das Motiv... durch den gesamten Text."</div>
+                                    <div class="formulierung-erklaerung">Hervorhebung eines zentralen Motivs oder Themas.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Bereits der Titel lässt erahnen, dass..."</div>
+                                    <div class="formulierung-erklaerung">Einbeziehung der Titeldeutung in die Einleitung.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"In Form eines Essays/einer Kurzgeschichte/eines Kommentars greift der Autor das zeitlose Thema... auf."</div>
+                                    <div class="formulierung-erklaerung">Verbindung von Textsorte und Thema.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="button" class="collapsible">Beispiele für vollständige Einleitungen</button>
+                    <div class="collapsible-content">
+                        <div class="example-box">
+                            <div class="example-title">Beispiel 1: Sachtextanalyse</div>
+                            <div class="example-content">
+                                "Der Artikel 'Die Zukunft der Arbeit' von Max Mustermann, erschienen am 12. Mai 2024 in der Süddeutschen Zeitung, behandelt die Auswirkungen der Digitalisierung auf den Arbeitsmarkt. Der Autor argumentiert, dass künstliche Intelligenz zwar Arbeitsplätze ersetzt, aber auch neue Chancen schafft."
+                            </div>
+                        </div>
+
+                        <div class="example-box">
+                            <div class="example-title">Beispiel 2: Literarische Textanalyse</div>
+                            <div class="example-content">
+                                "Die Kurzgeschichte 'San Salvador' von Peter Bichsel, erstveröffentlicht 1963 in der Sammlung 'Eigentlich möchte Frau Blum den Milchmann kennenlernen', thematisiert die Entfremdung und innere Zerrissenheit des Protagonisten in einer als sinnentleert empfundenen Ehe. Der Autor zeichnet dabei ein eindrückliches Bild der menschlichen Einsamkeit trotz äußerer Normalität."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Schlüsse formulieren</h2>
+                    
+                    <button type="button" class="collapsible">Zusammenfassende Schlüsse</button>
+                    <div class="collapsible-content">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Ergebnisse zusammenfassen</h3>
+                            <ul class="formulierung-list">
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"In der Gesamtbetrachtung erweist sich der Text als vielschichtiges Werk, das..."</div>
+                                    <div class="formulierung-erklaerung">Zusammenfassende Bewertung der Textqualität.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Die besondere Stärke des Textes liegt in seiner..."</div>
+                                    <div class="formulierung-erklaerung">Hervorhebung der Textstärken.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Abschließend lässt sich festhalten, dass die sprachliche und inhaltliche Gestaltung den Lesenden dazu anregt,..."</div>
+                                    <div class="formulierung-erklaerung">Wirkungsorientierte Zusammenfassung.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="button" class="collapsible">Bewertende Schlüsse</button>
+                    <div class="collapsible-content">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Text bewerten und einordnen</h3>
+                            <ul class="formulierung-list">
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Die Aktualität der angesprochenen Thematik zeigt sich heute in..."</div>
+                                    <div class="formulierung-erklaerung">Gegenwartsbezug herstellen.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Der Text kann als zeitlose Reflexion über... betrachtet werden."</div>
+                                    <div class="formulierung-erklaerung">Überzeitliche Bedeutung hervorheben.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Trotz seiner Entstehung vor... Jahren hat der Text nichts an Relevanz eingebüßt, da..."</div>
+                                    <div class="formulierung-erklaerung">Historische Einordnung mit Gegenwartsbezug.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Der literarische Wert des Textes besteht vor allem in..."</div>
+                                    <div class="formulierung-erklaerung">Literarische Qualität bewerten.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="button" class="collapsible">Persönliche Stellungnahmen</button>
+                    <div class="collapsible-content">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Eigene Position formulieren</h3>
+                            <ul class="formulierung-list">
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"In meiner persönlichen Rezeption hat mich besonders... zum Nachdenken angeregt."</div>
+                                    <div class="formulierung-erklaerung">Persönliche Wirkung beschreiben.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Die Stärke des Textes zeigt sich in seiner Fähigkeit,... zu vermitteln, ohne... zu sein."</div>
+                                    <div class="formulierung-erklaerung">Differenzierte Bewertung.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Besonders überzeugend finde ich, wie der Autor/die Autorin..."</div>
+                                    <div class="formulierung-erklaerung">Positiv hervorheben.</div>
+                                </li>
+                                <li class="formulierung-item">
+                                    <div class="formulierung-text">"Kritisch anzumerken wäre jedoch, dass..."</div>
+                                    <div class="formulierung-erklaerung">Konstruktive Kritik üben.</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="button" class="collapsible">Beispiele für vollständige Schlüsse</button>
+                    <div class="collapsible-content">
+                        <div class="example-box">
+                            <div class="example-title">Beispiel 1: Sachtextanalyse</div>
+                            <div class="example-content">
+                                "Zusammenfassend lässt sich festhalten, dass der Artikel eine gut strukturierte Analyse der Digitalisierung liefert und durch überzeugende Argumente besticht. Besonders gelungen ist die Verbindung von statistischen Daten mit praktischen Beispielen, die die theoretischen Ausführungen greifbar machen. Allerdings bleibt unklar, wie genau neue Jobs entstehen sollen. Insgesamt ist der Text informativ und regt zum Nachdenken über die Zukunft der Arbeit an."
+                            </div>
+                        </div>
+
+                        <div class="example-box">
+                            <div class="example-title">Beispiel 2: Literarische Textanalyse</div>
+                            <div class="example-content">
+                                "Abschließend kann festgehalten werden, dass Bichsel mit 'San Salvador' eine eindrückliche Studie menschlicher Entfremdung gelungen ist. Die reduzierte Sprache und die präzise Figurenzeichnung verstärken die emotionale Wirkung der Erzählung. Die Kurzgeschichte verliert auch mehr als 60 Jahre nach ihrer Entstehung nichts von ihrer Aktualität, da die thematisierte Sinnsuche und innerliche Vereinsamung in modernen Beziehungen nach wie vor relevant ist. In meiner persönlichen Lektüre hat mich besonders die subtile Darstellung der nonverbalen Kommunikation zwischen den Ehepartnern beeindruckt."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Übungen mit Lösungen</h2>
+                    
+                    <div class="exercise-box">
+                        <div class="exercise-title">Übung 1: Einleitung formulieren</div>
+                        <p>Verfasse eine Einleitung für eine Textanalyse des Artikels "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger, erschienen im März 2025 im "Standard". Der Artikel kritisiert die Erwartung ständiger Erreichbarkeit durch digitale Geräte.</p>
+                        <button class="btn-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen/verbergen</button>
+                        <div id="solution1" class="solution">
+                            <p><strong>Musterlösung:</strong> "In der Kolumne 'Die Tyrannei der digitalen Erreichbarkeit', veröffentlicht im März 2025 im 'Standard', setzt sich die Autorin Maria Berger kritisch mit der Erwartungshaltung ständiger Verfügbarkeit durch digitale Medien auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger die These, dass permanente Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist, und plädiert für einen bewussteren Umgang mit Kommunikationstechnologien."</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">Übung 2: Schluss formulieren</div>
+                        <p>Verfasse einen Schluss für eine Analyse des Sachtextes "Der Wert des Analogen im digitalen Zeitalter" von Dr. Thomas Maier. Der Text beschreibt das Phänomen der Renaissance analoger Medien trotz fortschreitender Digitalisierung.</p>
+                        <button class="btn-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen/verbergen</button>
+                        <div id="solution2" class="solution">
+                            <p><strong>Musterlösung:</strong> "Zusammenfassend lässt sich festhalten, dass Maiers Artikel eine differenzierte Betrachtung des Spannungsfeldes zwischen analog und digital bietet. Besonders überzeugend ist die Verbindung von wissenschaftlichen Erkenntnissen mit alltäglichen Beobachtungen, wodurch der Text sowohl informativ als auch anschaulich wirkt. Die vorgeschlagene Balance zwischen beiden Medienwelten erscheint als zukunftsweisender Ansatz in einer Zeit, in der technologische Entwicklungen immer schneller voranschreiten, während gleichzeitig das Bedürfnis nach Entschleunigung und sinnlicher Erfahrung wächst. Der Text regt dazu an, die eigenen Mediengewohnheiten kritisch zu hinterfragen und bewusst beide Welten zu nutzen."</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">Übung 3: Fehlerhafte Formulierung verbessern</div>
+                        <p>Verbessere die folgende fehlerhafte Einleitung: "Der Text ist von Goethe und handelt von Natur. Ich finde das voll krass und so."</p>
+                        <button class="btn-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen/verbergen</button>
+                        <div id="solution3" class="solution">
+                            <p><strong>Verbesserte Version:</strong> "Das Gedicht 'Mailed' von Johann Wolfgang von Goethe, entstanden in der Epoche des Sturm und Drang, thematisiert die intensive Wahrnehmung der Natur im Frühling und die damit verbundenen Gefühle des lyrischen Ichs. Goethe verwendet dabei eine bildreiche Sprache, um die Lebendigkeit der Natur und die emotionale Intensität der Frühlingserfahrung auszudrücken."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für die Praxis:</strong><br>
+                    Baue dir aus den Formulierungshilfen eine persönliche Sammlung auf und übe regelmäßig, verschiedene Einleitungen und Schlüsse zu verfassen. Achte dabei besonders auf die korrekte Nennung aller Textangaben (Titel, Autor, Erscheinungsjahr, Textsorte) und vermeide umgangssprachliche Formulierungen.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+
+        // Collapsible Bereiche
+        const coll = document.getElementsByClassName("collapsible");
+        for (let i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beispiel: Kolumne analysieren - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .subsection {
+            margin: 25px 0;
+            padding-left: 20px;
+            border-left: 3px solid #3498db;
+        }
+
+        .subsection-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .text-example {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #34495e;
+        }
+
+        .text-example h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .collapsible {
+            background-color: #34495e;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 1.1em;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #2c3e50;
+        }
+
+        .collapsible-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .collapsible-content-inner {
+            padding: 15px;
+        }
+
+        .exercise {
+            background: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .exercise h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .solution-toggle {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .solution {
+            background: #d4edda;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .content-body {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <header class="content-header">
+            <h1>Beispiel: Kolumne analysieren</h1>
+            <p>Schritt-für-Schritt-Anleitung zur Analyse einer Kolumne</p>
+        </header>
+
+        <div class="content-body">
+            <div class="section">
+                <h2 class="section-title">Die Tyrannei der digitalen Erreichbarkeit</h2>
+                
+                <div class="text-example">
+                    <h4>Kolumne von Maria Berger, veröffentlicht in "Der Standard", März 2025</h4>
+                    <p>Neulich saß ich in einem Kaffeehaus, als mir etwas Bemerkenswertes auffiel: An einem Tisch saßen vier junge Menschen – alle mit gesenkten Köpfen, alle starr auf ihre Smartphones blickend. Sie waren anwesend und doch abwesend zugleich. Von Zeit zu Zeit zuckte einer von ihnen, als hätte er einen elektrischen Schlag bekommen, warf einen kurzen Blick auf sein Display und tippte hastig eine Antwort. Es war, als wären sie an unsichtbare Leinen gebunden, die jederzeit gezogen werden konnten.</p>
+                    <p>Was mich daran beunruhigt, ist nicht die Technologie an sich. Smartphones haben zweifellos unser Leben in vielerlei Hinsicht bereichert. Beunruhigend ist vielmehr die soziale Erwartungshaltung, die mit dieser ständigen Verbundenheit einhergeht: die Annahme, dass wir rund um die Uhr erreichbar sein müssen, dass jede Nachricht sofort beantwortet werden muss.</p>
+                    <p>Früher war es völlig normal, für Stunden oder gar Tage unerreichbar zu sein. Man ging aus dem Haus, und niemand konnte einen kontaktieren, bis man wieder zurückkam. Heute wird Nichterreichbarkeit fast als Affront gewertet. "Warum antwortest du nicht?" – diese vorwurfsvolle Frage kennen wir alle.</p>
+                    <p>Diese permanente Erreichbarkeit ist zu einer Art moderner Tyrannei geworden, einer selbst auferlegten Knechtschaft. Wir sind zu Sklaven unserer Geräte geworden, ständig in Alarmbereitschaft, immer auf dem Sprung, zu reagieren. Die psychischen Folgen sind bedenklich: chronischer Stress, Konzentrationsstörungen, die Unfähigkeit, im Moment zu leben.</p>
+                    <p>Es ist Zeit, dass wir uns von dieser digitalen Leine befreien. Nicht durch radikale Technikablehnung, sondern durch bewusstere Nutzung. Schalten Sie Ihr Handy ab und zu aus. Legen Sie es beiseite, wenn Sie mit Menschen zusammen sind. Teilen Sie Ihren Freunden mit, dass Sie nicht immer sofort antworten werden – und vor allem: Haben Sie keine Schuldgefühle deswegen.</p>
+                    <p>Freiheit bedeutet heute auch, das Recht auf Nichterreichbarkeit in Anspruch zu nehmen. Es ist ein kleiner Akt des Widerstands gegen die digitale Tyrannei unserer Zeit. Und vielleicht werden Sie überrascht sein, wie befreiend es sich anfühlt, wenn die unsichtbare Leine für eine Weile durchgeschnitten ist.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Schritt-für-Schritt-Anleitung zur Textanalyse</h2>
+                
+                <button class="collapsible">1. Einleitung und kurze Inhaltsangabe</button>
+                <div class="collapsible-content">
+                    <div class="collapsible-content-inner">
+                        <p><strong>Ziel dieser Phase:</strong> Den Text vorstellen und seinen Inhalt kurz zusammenfassen.</p>
+                        
+                        <div class="subsection">
+                            <h3 class="subsection-title">Hilfreiche Formulierungen für den Einstieg:</h3>
+                            <ul>
+                                <li>"In der Kolumne 'Die Tyrannei der digitalen Erreichbarkeit', veröffentlicht im 'Standard' (März 2025), setzt sich die Autorin Maria Berger kritisch mit..."</li>
+                                <li>"Der vorliegende Text thematisiert..."</li>
+                                <li>"Die Autorin beschäftigt sich mit dem Phänomen..."</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="subsection">
+                            <h3 class="subsection-title">Für die Inhaltsangabe:</h3>
+                            <ul>
+                                <li>Den Hauptgedanken in 2-3 Sätzen zusammenfassen</li>
+                                <li>Wichtig: Im Präsens bleiben</li>
+                                <li>Neutral formulieren (noch keine Bewertung)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-example">
+                            <h4>Beispiel für eine Einleitung:</h4>
+                            <p>In der Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger, erschienen im "Standard" im März 2025, wird das Problem der ständigen digitalen Verfügbarkeit in unserer Gesellschaft kritisch beleuchtet. Die Autorin beschreibt zunächst eine Beobachtung in einem Kaffeehaus, bei der junge Menschen trotz physischer Anwesenheit mental in ihre Smartphones vertieft waren. Ausgehend von dieser Alltagsszene entwickelt Berger ihre These, dass die permanente Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist, und plädiert für ein bewussteres Umgehen mit digitalen Kommunikationsmitteln.</p>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Übung: Verfasse eine Einleitung</h4>
+                            <p>Verfasse eine Einleitung für diese Kolumne mit allen notwendigen Elementen.</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                            <div id="solution1" class="solution">
+                                <p>In der Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger, erschienen im März 2025 in der Tageszeitung "Der Standard", setzt sich die Autorin kritisch mit den Auswirkungen der permanenten digitalen Erreichbarkeit auf unser soziales Verhalten und psychisches Wohlbefinden auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger die These, dass die ständige Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist, und appelliert an eine bewusstere Nutzung digitaler Medien.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="collapsible">2. Stilanalyse</button>
+                <div class="collapsible-content">
+                    <div class="collapsible-content-inner">
+                        <p><strong>Ziel dieser Phase:</strong> Die sprachlichen und stilistischen Mittel des Textes identifizieren und ihre Wirkung analysieren.</p>
+                        
+                        <div class="subsection">
+                            <h3 class="subsection-title">Auf folgende Aspekte achten:</h3>
+                            <ul>
+                                <li>Textsorte bestimmen (hier: Kolumne - subjektive Meinungsäußerung)</li>
+                                <li>Sprachlicher Stil (sachlich, emotional, bildreich?)</li>
+                                <li>Rhetorische Mittel (Metaphern, Vergleiche, rhetorische Fragen)</li>
+                                <li>Aufbau und Argumentation</li>
+                                <li>Wortwahl und Tonalität</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="subsection">
+                            <h3 class="subsection-title">Hilfreiche Formulierungen:</h3>
+                            <ul>
+                                <li>"Die Autorin bedient sich einer bildreichen Sprache, was besonders deutlich wird bei..."</li>
+                                <li>"Ein zentrales sprachliches Mittel ist die Metapher des/der..., die verdeutlicht, dass..."</li>
+                                <li>"Die Argumentation entwickelt sich vom Konkreten (Beobachtung im Café) zum Allgemeinen (gesellschaftliche Analyse)."</li>
+                                <li>"Auffällig ist der Einsatz von..."</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-example">
+                            <h4>Beispiel für eine Stilanalyse:</h4>
+                            <p>Sprachlich zeichnet sich Bergers Kolumne durch einen persönlichen, leicht zugänglichen Stil aus, der durch den Einstieg mit einer konkreten Alltagsbeobachtung Nähe zum Leser schafft. Die Autorin verwendet bildhafte Vergleiche wie "unsichtbare Leinen" und "elektrischer Schock", um die subtile Kontrolle zu veranschaulichen, die Smartphones über ihre Nutzer ausüben.</p>
+                            <p>Besonders wirkungsvoll ist die Metapher der "Tyrannei" und "selbst auferlegten Knechtschaft", die das zentrale Thema der eingeschränkten Freiheit untermauert. Die Wortwahl ("Sklaven", "Knechtschaft", "Tyrannei") entstammt dem Wortfeld der Unterdrückung und verstärkt die kritische Haltung der Autorin.</p>
+                            <p>Der Text folgt einem klaren Aufbau: Vom konkreten Beispiel über die Problemanalyse bis hin zu einem appellativen Schluss. Rhetorische Fragen wie "Warum antwortest du nicht?" werden eingesetzt, um typische soziale Interaktionen zu spiegeln und die Leser direkt anzusprechen.</p>
+                            <p>Der Tonfall wechselt vom beschreibenden über den analytischen bis zum appellativen Stil im letzten Absatz, wo die Autorin mit direkten Handlungsaufforderungen ("Schalten Sie Ihr Handy ab und zu aus") die Leserschaft aktivieren möchte.</p>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Übung: Analysiere die sprachlichen Mittel</h4>
+                            <p>Identifiziere mindestens drei weitere sprachliche Mittel im Text und beschreibe ihre Wirkung.</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                            <div id="solution2" class="solution">
+                                <p><strong>Weitere sprachliche Mittel und ihre Wirkung:</strong></p>
+                                <ol>
+                                    <li><strong>Antithese:</strong> "Sie waren anwesend und doch abwesend zugleich" - verdeutlicht den Widerspruch zwischen physischer Präsenz und mentaler Abwesenheit.</li>
+                                    <li><strong>Rhetorische Frage:</strong> "Warum antwortest du nicht?" - spiegelt soziale Erwartungshaltungen wider und bezieht den Leser direkt ein.</li>
+                                    <li><strong>Hyperbel:</strong> "ständig in Alarmbereitschaft, immer auf dem Sprung" - übertreibt die ständige Bereitschaft zur Reaktion, um die Belastung durch permanente Erreichbarkeit zu verdeutlichen.</li>
+                                    <li><strong>Appell:</strong> "Schalten Sie Ihr Handy ab und zu aus" - direkte Aufforderung an den Leser, das eigene Verhalten zu ändern.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="collapsible">3. Bewertung und Ausblick/Schluss</button>
+                <div class="collapsible-content">
+                    <div class="collapsible-content-inner">
+                        <p><strong>Ziel dieser Phase:</strong> Den Text kritisch würdigen und eine eigene Stellungnahme abgeben.</p>
+                        
+                        <div class="subsection">
+                            <h3 class="subsection-title">Achte auf:</h3>
+                            <ul>
+                                <li>Ausgewogene Beurteilung von Stärken und Schwächen</li>
+                                <li>Bezug zur Wirkungsabsicht des Textes</li>
+                                <li>Eigene Meinung zum Thema (mit Begründung)</li>
+                                <li>Aktuelle oder persönliche Bezüge herstellen</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="subsection">
+                            <h3 class="subsection-title">Hilfreiche Formulierungen:</h3>
+                            <ul>
+                                <li>"Die Stärke des Textes liegt vor allem in..."</li>
+                                <li>"Überzeugend wirkt die Art und Weise, wie die Autorin..."</li>
+                                <li>"Kritisch anzumerken wäre jedoch, dass..."</li>
+                                <li>"Aus meiner Sicht greift der Text einen wichtigen Aspekt unserer Gegenwart auf, indem..."</li>
+                                <li>"Abschließend lässt sich feststellen, dass..."</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-example">
+                            <h4>Beispiel für eine Bewertung und einen Schluss:</h4>
+                            <p>Bergers Kolumne überzeugt durch die gelungene Verbindung von persönlicher Beobachtung und gesellschaftlicher Analyse. Besonders wirkungsvoll ist die bildhafte Sprache, die komplexe sozialpsychologische Phänomene anschaulich macht. Die klare Struktur vom Problem zur Lösungsmöglichkeit macht den Text trotz seiner Kritik konstruktiv.</p>
+                            <p>Allerdings könnte man einwenden, dass die Autorin die positiven Aspekte der digitalen Vernetzung nur kurz streift und die Verantwortung für gesunde Nutzungsmuster etwas einseitig bei den Individuen verortet, während systemische und wirtschaftliche Faktoren (wie das bewusste "Süchtigmachen" durch App-Design) weniger Beachtung finden.</p>
+                            <p>Der Text greift ein zentrales Spannungsfeld unserer Zeit auf: den Widerspruch zwischen technologischem Fortschritt und psychischem Wohlbefinden. Die von Berger beschriebene "Tyrannei der Erreichbarkeit" ist ein Phänomen, das viele von uns aus eigener Erfahrung kennen – das Gefühl, nie wirklich abschalten zu können, ständig reagieren zu müssen.</p>
+                            <p>Abschließend lässt sich festhalten, dass die Kolumne einen wichtigen Denkanstoß gibt, wie wir unsere Beziehung zur Technologie aktiver gestalten können. In einer Zeit, in der digitale Medien immer mehr Lebensbereiche durchdringen, ist diese Reflexion über selbstbestimmte Nutzung besonders wertvoll.</p>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Übung: Verfasse eine eigene Bewertung</h4>
+                            <p>Formuliere eine eigene Bewertung der Kolumne mit mindestens einer Stärke und einem Kritikpunkt.</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                            <div id="solution3" class="solution">
+                                <p><strong>Beispiel für eine eigene Bewertung:</strong></p>
+                                <p>Die Kolumne von Maria Berger überzeugt durch ihre lebensnahe Darstellung eines alltäglichen Phänomens, das viele Leser aus eigener Erfahrung kennen werden. Besonders stark ist die bildhafte Sprache, die abstrakte Konzepte wie "digitale Erreichbarkeit" konkret und greifbar macht. Die Metapher der "unsichtbaren Leinen" verdeutlicht eindrücklich, wie sehr digitale Geräte unser Verhalten steuern können.</p>
+                                <p>Kritisch anzumerken ist jedoch, dass Berger die wirtschaftlichen Interessen hinter der permanenten Erreichbarkeit kaum thematisiert. Die Geschäftsmodelle vieler Tech-Unternehmen basieren precisely auf der Aufmerksamkeit der Nutzer, was eine systemische Dimension des Problems darstellt, die über individuelle Verhaltensänderungen hinausgeht. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
+                                <p>Insgesamt liefert die Kolumne jedoch einen wichtigen Beitrag zur aktuellen Debatte über Digitalisierung und regt zum Nachdenken über den eigenen Umgang mit digitalen Medien an.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Zusammenfassende Übung</h2>
+                
+                <div class="exercise">
+                    <h4>Komplette Textanalyse verfassen</h4>
+                    <p>Verfasse eine vollständige Textanalyse der Kolumne "Die Tyrannei der digitalen Erreichbarkeit" mit allen drei Teilen: Einleitung, Hauptteil (Analyse) und Schluss (Bewertung).</p>
+                    
+                    <div class="tip-box">
+                        <strong>Tipp:</strong> Achte auf eine ausgewogene Mischung aus allgemeinen und spezifischen Aussagen zum Text. Verwende Fachbegriffe korrekt und belege deine Analyse mit Textzitaten.
+                    </div>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('solution4')">Musterlösung anzeigen</button>
+                    <div id="solution4" class="solution">
+                        <h4>Musterlösung: Vollständige Textanalyse</h4>
+                        
+                        <h5>Einleitung</h5>
+                        <p>Die Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger erschien im März 2025 in der österreichischen Tageszeitung "Der Standard". In diesem Kommentar setzt sich die Autorin kritisch mit den Auswirkungen permanenter digitaler Erreichbarkeit auf zwischenmenschliche Beziehungen und das individuelle Wohlbefinden auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger die These, dass die ständige Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist, und plädiert für einen bewussteren Umgang mit digitalen Kommunikationsmitteln.</p>
+                        
+                        <h5>Hauptteil - Analyse</h5>
+                        <p>Sprachlich zeichnet sich die Kolumne durch einen persönlichen, zugänglichen Stil aus, der durch konkrete Beispiele und bildhafte Sprache lebendig wirkt. Gleich zu Beginn beschreibt Berger eine Szene in einem Kaffeehaus, in der vier junge Menschen "anwesend und doch abwesend zugleich" sind - eine Antithese, die den Widerspruch zwischen physischer Präsenz und mentaler Abwesenheit verdeutlicht.</p>
+                        <p>Besonders prägnant ist die Metapher der "unsichtbaren Leinen", die die subtile Kontrolle digitaler Geräte über ihre Nutzer veranschaulicht. Diese Bildsprache setzt sich throughout des Textes fort, etwa wenn Berger von "selbst auferlegter Knechtschaft" spricht oder die Leser auffordert, "die unsichtbare Leine für eine Weile durchzuschneiden".</p>
+                        <p>Die Argumentation folgt einem klaren Aufbau: Nach der einleitenden Schilderung der Problemsituation analysiert Berger die sozialen Erwartungshaltungen, die mit permanenter Erreichbarkeit verbunden sind. Dabei kontrastiert sie die heutige Situation mit früheren Zeiten, in denen "es völlig normal [war], für Stunden oder gar Tage unerreichbar zu sein". Dieser historische Vergleich dient dazu, die Selbstverständlichkeit permanenter Erreichbarkeit als gesellschaftliches Konstrukt zu entlarven.</p>
+                        <p>Im appellativen Schlussteil formuliert Berger konkrete Handlungsempfehlungen, die durch den Wechsel vom Indikativ zum Imperativ ("Schalten Sie Ihr Handy ab und zu aus") zusätzliche Dringlichkeit erhalten. Die Autorin nutzt direkte Ansprache, um die Leser persönlich zu involvieren und zur Reflexion des eigenen Verhaltens anzuregen.</p>
+                        
+                        <h5>Schluss - Bewertung</h5>
+                        <p>Bergers Kolumne überzeugt durch ihre lebensnahe Darstellung eines relevanten zeitgenössischen Themas. Die Verbindung von persönlicher Beobachtung mit gesellschaftlicher Analyse macht den Text sowohl anschaulich als auch argumentativ stark. Besonders gelungen ist der Einsatz bildhafter Sprache, die abstrakte Phänomene wie "digitale Erreichbarkeit" konkret und greifbar macht.</p>
+                        <p>Kritisch anzumerken ist allerdings die etwas einseitige Betonung individueller Verantwortung. Während Berger zu Recht auf die Bedeutung persönlicher Verhaltensänderungen hinweist, bleiben systemische Faktoren wie die wirtschaftlichen Interessen von Tech-Unternehmen oder die Gestaltung von Aufmerksamkeits-ökonomien weitgehend unberücksichtigt. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
+                        <p>Insgesamt liefert die Kolumne jedoch einen wichtigen Beitrag zur aktuellen Debatte über Digitalisierung und regt zur Reflexion über den eigenen Umgang mit digitalen Medien an. Der appellative Charakter des Textes ist angemessen, da er Leser nicht mit Schuldzuweisungen konfrontiert, sondern zu empowernden Verhaltensänderungen ermutigt.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Merke:</strong> Bei der Analyse einer Kolumne ist besonders auf die subjektive Perspektive der Autorin/des Autors zu achten. Kolumnen sind per Definition persönliche Kommentare, die eine individuelle Sichtweise auf ein Thema bieten. Achte darauf, wie diese Subjektivität sprachlich gestaltet wird und welche rhetorischen Strategien eingesetzt werden, um die Leserschaft zu überzeugen.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funktion für aufklappbare Bereiche
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
+        }
+        
+        // Funktion zum Anzeigen/Verbergen von Lösungen
+        function toggleSolution(id) {
+            var solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+                event.target.textContent = "Lösung anzeigen";
+            } else {
+                solution.style.display = "block";
+                event.target.textContent = "Lösung ausblenden";
+            }
+        }
+        
+        // Einige Bereiche standardmäßig geöffnet lassen
+        window.onload = function() {
+            // Ersten Abschnitt öffnen
+            document.getElementsByClassName("collapsible")[0].click();
+        }
+    </script>
+</body>
+</html>

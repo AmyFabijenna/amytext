@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpretations-Formulierungen - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #34495e;
+        }
+
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #34495e;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .feature-link {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .feature-link:hover {
+            background: #2c3e50;
+        }
+
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        .collapsible {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 10px 0;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #e9ecef;
+        }
+
+        .collapsible:after {
+            content: '\002B';
+            color: #2c3e50;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .formulation-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .formulation-list li {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+
+        .formulation-list li:hover {
+            background-color: #f8f9fa;
+        }
+
+        .example-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .exercise-box {
+            background-color: #e8f4f8;
+            border: 1px solid #b8d4e8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .solution-box {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .toggle-solution {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .toggle-solution:hover {
+            background-color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Interpretations-Formulierungen</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Navigation</div>
+                <div class="nav-item">
+                    <a href="textanalyse12.html" class="nav-link">Zurück zur Hauptseite</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active">Interpretations-Formulierungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Inhaltsverzeichnis</div>
+                <div class="nav-item">
+                    <a href="#einleitung" class="nav-link">Einleitungsformulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#deutungshypothese" class="nav-link">Deutungshypothesen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#textbelege" class="nav-link">Textbelege einbinden</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#interpretation" class="nav-link">Interpretationsformulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#schluss" class="nav-link">Schlussformulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#uebungen" class="nav-link">Übungen</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Interpretations-Formulierungen</h1>
+                <p>Professionelle Formulierungshilfen für Textinterpretationen</p>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <div class="welcome-section">
+                    <h2>Formulierungshilfen für Textinterpretationen</h2>
+                    <p>Auf dieser Seite finden Sie umfassende Formulierungshilfen für alle Teile einer Textinterpretation. Nutzen Sie diese Musterformulierungen als Inspiration für Ihre eigenen Interpretationen und passen Sie sie an den jeweiligen Text an.</p>
+                </div>
+
+                <button class="collapsible" id="einleitung">Einleitungsformulierungen</button>
+                <div class="content">
+                    <h3>Formulierungen für die Einleitung einer Interpretation</h3>
+                    <ul class="formulation-list">
+                        <li>"Der vorliegende Text '[Titel]' von [Autor], erschienen im Jahr [Jahr], thematisiert..."</li>
+                        <li>"In der [Textsorte] '[Titel]' aus dem Jahr [Jahr] setzt sich [Autor] mit der Problematik des/der... auseinander."</li>
+                        <li>"[Autor] veröffentlichte '[Titel]' im Jahr [Jahr] im Kontext von [historischer/gesellschaftlicher Hintergrund]."</li>
+                        <li>"Die [Textsorte] '[Titel]' lässt sich der literarischen Epoche [Epoche] zuordnen, was sich in [Merkmal] zeigt."</li>
+                        <li>"Im Mittelpunkt der [Textsorte] steht die Auseinandersetzung mit [Thema], wobei [Autor] besonders auf [Aspekt] fokussiert."</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Beispieleinleitung</h4>
+                        <p>"Die Kurzgeschichte 'San Salvador' von Peter Bichsel, erschienen im Jahr 1963, thematisiert das Schicksal einer unglücklichen Ehe und die daraus resultierende emotionale Leere und Entfremdung der Protagonisten. Der Text lässt sich in die Nachkriegsliteratur einordnen und zeigt charakteristische Merkmale dieser Epoche."</p>
+                    </div>
+                </div>
+
+                <button class="collapsible" id="deutungshypothese">Deutungshypothesen formulieren</button>
+                <div class="content">
+                    <h3>Formulierungen für Deutungshypothesen</h3>
+                    <ul class="formulation-list">
+                        <li>"Die vorliegende Interpretation geht davon aus, dass der Autor mit dem Text beabsichtigt, [Aussage]."</li>
+                        <li>"Als Deutungshypothese lässt sich formulieren, dass der Text [Kernaussage] vermitteln möchte."</li>
+                        <li>"Die These dieser Interpretation lautet, dass [Autor] mit '[Titel]' [Intention] verfolgt."</li>
+                        <li>"Es wird angenommen, dass der Text auf [gesellschaftliches Problem] aufmerksam machen will."</li>
+                        <li>"Die Interpretation basiert auf der Hypothese, dass [Text] als [Funktion, z.B. Gesellschaftskritik] zu verstehen ist."</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Beispielhafte Deutungshypothese</h4>
+                        <p>"In der vorliegenden Kurzgeschichte thematisiert der Autor die Entfremdung zweier Menschen voneinander in der Ehe und die daraus resultierende vorherrschende Traurigkeit und das Verlorensein im Alltag der gesamten Familie. Durch die Darstellung der Hauptfigur und ihrer Verwirrung wird vermutlich beabsichtigt, die Leser für die negativen Auswirkungen eines Verharrens in einer gescheiterten Ehe zu sensibilisieren und zum kritischen Nachdenken über die eigenen Beziehungen anzuregen."</p>
+                    </div>
+                </div>
+
+                <button class="collapsible" id="textbelege">Textbelege einbinden</button>
+                <div class="content">
+                    <h3>Formulierungen zum Einbinden von Textbelegen</h3>
+                    <ul class="formulation-list">
+                        <li>"Diese Interpretation wird gestützt durch die Textstelle '...' (Z. X), die zeigt, dass..."</li>
+                        <li>"Ein Beleg für diese These findet sich in Zeile X: '...'"</li>
+                        <li>"Die Aussage wird besonders deutlich in der Passage '...' (Z. X-Y), in der..."</li>
+                        <li>"Wie der Autor in Zeile X formuliert: '...', wird hier die [Aussage] verdeutlicht."</li>
+                        <li>"Diese Deutung lässt sich anhand mehrerer Textstellen belegen, beispielsweise '...' (Z. X) und '...' (Z. Y)."</li>
+                        <li>"Die metaphorische Formulierung '...' (Z. X) unterstreicht die Interpretation, dass..."</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Beispiel für Textbelege</h4>
+                        <p>"Die These von der emotionalen Leere der Protagonistin wird durch mehrere Textstellen gestützt. So beschreibt der Autor in Zeile 12 ihre 'leeren Augen, die ins Nichts starren' und in Zeile 24 ihre 'monotone Stimme, der jede Emotion fehlte'. Diese Darstellung vermittelt eindrücklich die innere Leere der Figur."</p>
+                    </div>
+                </div>
+
+                <button class="collapsible" id="interpretation">Interpretationsformulierungen</button>
+                <div class="content">
+                    <h3>Formulierungen für die Interpretation</h3>
+                    <ul class="formulation-list">
+                        <li>"Auf einer Metacbene könnte der Text als Kritik an... verstanden werden."</li>
+                        <li>"Die dargestellte Problematik lässt sich in einen größeren gesellschaftlichen/historischen Kontext einordnen, nämlich..."</li>
+                        <li>"Der Text kann als Plädoyer für... gelesen werden."</li>
+                        <li>"Eine tiefenpsychologische Deutung legt nahe, dass..."</li>
+                        <li>"Im Kontext der Entstehungszeit des Textes erscheint... besonders bedeutsam."</li>
+                        <li>"Die Symbolik des/der... verweist möglicherweise auf..."</li>
+                        <li>"Zwischen den Zeilen gelesen, deutet der Text an, dass..."</li>
+                        <li>"Die Intention des Autors/der Autorin könnte darin bestehen,... zu entlarven/zu würdigen/zu hinterfragen."</li>
+                        <li>"Die Vielschichtigkeit des Textes erlaubt verschiedene Lesarten, wie..."</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Beispiel für eine Interpretation</h4>
+                        <p>"Die Häufung von Farbadjektiven wie 'grau' (Z. 7), 'bleiern' (Z. 15) und 'düster' (Z. 22) erzeugt eine bedrückende Atmosphäre, die den emotionalen Zustand der Protagonistin widerspiegelt. Diese FarbSymbolik verweist auf ihre innere Leere und Hoffnungslosigkeit. Der Autor nutzt diese sprachliche Gestaltung, um die Auswirkungen einer gescheiterten Ebe auf die psychische Verfassung eines Menschen darzustellen."</p>
+                    </div>
+                </div>
+
+                <button class="collapsible" id="schluss">Schlussformulierungen</button>
+                <div class="content">
+                    <h3>Formulierungen für den Schluss einer Interpretation</h3>
+                    <ul class="formulation-list">
+                        <li>"In der Gesamtbetrachtung erweist sich der Text als vielschichtiges Werk, das..."</li>
+                        <li>"Die besondere Stärke des Textes liegt in seiner..."</li>
+                        <li>"Die Aktualität der angesprochenen Thematik zeigt sich heute in..."</li>
+                        <li>"Der Text kann als zeitlose Reflexion über... betrachtet werden."</li>
+                        <li>"Trotz seiner Entstehung vor... Jahren hat der Text nichts an Relevanz eingebüßt, da..."</li>
+                        <li>"Abschließend lässt sich festhalten, dass die sprachliche und inhaltliche Gestaltung den Lesenden dazu anregt,..."</li>
+                        <li>"Der literarische Wert des Textes besteht vor allem in..."</li>
+                        <li>"Der Text leistet einen wichtigen Beitrag zur Diskussion über..., indem er..."</li>
+                        <li>"In meiner persönlichen Rezeption hat mich besonders... zum Nachdenken angeregt."</li>
+                        <li>"Die Stärke des Textes zeigt sich in seiner Fähigkeit,... zu vermitteln, ohne... zu sein."</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Beispiel für einen Schluss</h4>
+                        <p>"Zusammenfassend lässt sich festhalten, dass die Deutungshypothese sich bestätigt hat: Bichsel gelingt es in 'San Salvador', die emotionalen Folgen einer gescheiterten Ebe einfühlsam und zugleich schonungslos darzustellen. Der Text regt dazu an, über die Qualität zwischenmenschlicher Beziehungen nachzudenken und die Bedeutung von Kommunikation und emotionaler Offenheit zu reflektieren. Auch heute, fast 60 Jahre nach seiner Entstehung, hat der Text nichts von seiner Aussagekraft verloren, da die Thematik der partnerschaftlichen Entfremdung nach wie vor aktuell ist."</p>
+                    </div>
+                </div>
+
+                <button class="collapsible" id="uebungen">Übungen zu Interpretationsformulierungen</button>
+                <div class="content">
+                    <h3>Übungen mit Lösungen</h3>
+                    
+                    <div class="exercise-box">
+                        <h4>Übung 1: Einleitung formulieren</h4>
+                        <p>Verfassen Sie eine Einleitung für eine Interpretation der Kurzgeschichte "Die Küchenuhr" von Wolfgang Borchert (erschienen 1947).</p>
+                        <button class="toggle-solution" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        <div class="solution-box" id="solution1">
+                            <p><strong>Musterlösung:</strong> "Die Kurzgeschichte 'Die Küchenuhr' von Wolfgang Borchert, erschienen im Jahr 1947, thematisiert die traumatischen Erfahrungen eines jungen Mannes im Zweiten Weltkrieg und den Verlust seiner Familie. Der Text lässt sich der Trümmerliteratur zuordnen und zeigt charakteristische Merkmale dieser Epoche wie Kürze, Prägnanz und die Auseinandersetzung mit den Folgen des Krieges."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Übung 2: Deutungshypothese entwickeln</h4>
+                        <p>Formulieren Sie eine Deutungshypothese für das Gedicht "Die Stadt" von Georg Heym.</p>
+                        <button class="toggle-solution" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                        <div class="solution-box" id="solution2">
+                            <p><strong>Musterlösung:</strong> "Als Deutungshypothese lässt sich formulieren, dass Georg Heym in seinem Gedicht 'Die Stadt' eine düstere Vision urbanen Lebens entwirft, die von Entfremdung, Anonymität und Bedrohung geprägt ist. Der Autor verwendet dabei intensive Bildsprache und apokalyptische Motive, um die negative Seite der Modernisierung und Verstädterung zu Beginn des 20. Jahrhunderts zu kritisieren."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Übung 3: Textbelege einbinden</h4>
+                        <p>Integrieren Sie den folgenden Textbeleg in einen Interpretationssatz: "Und über allem die Stille, die schwere, bleierne Stille" (Z. 15).</p>
+                        <button class="toggle-solution" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        <div class="solution-box" id="solution3">
+                            <p><strong>Musterlösung:</strong> "Die bedrückende Atmosphäre der Einsamkeit wird besonders deutlich in der Textstelle 'Und über allem die Stille, die schwere, bleierne Stille' (Z. 15), wo durch die Adjektive 'schwer' und 'bleiern' die Last der Isolation sinnlich erfahrbar gemacht wird."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Übung 4: Schluss formulieren</h4>
+                        <p>Verfassen Sie einen Schlussabsatz für eine Interpretation von Kafkas "Die Verwandlung", der die Deutungshypothese bestätigt und einen Gegenwartsbezug herstellt.</p>
+                        <button class="toggle-solution" onclick="toggleSolution('solution4')">Lösung anzeigen</button>
+                        <div class="solution-box" id="solution4">
+                            <p><strong>Musterlösung:</strong> "Zusammenfassend bestätigt sich die Deutungshypothese, dass Kafka in 'Die Verwandlung' die Entfremdung des modernen Menschen in einer leistungsorientierten Gesellschaft thematisiert. Die Erzählung zeigt eindrücklich, wie Identität und menschliche Würde an ökonomische Nützlichkeit geknüpft werden. Auch heute, über 100 Jahre nach der Entstehung, bleibt die Erzählung relevant, da sie Fragen nach dem Wert des Individuums in einer leistungsorientierten Gesellschaft aufwirft, die in Zeiten zunehmender Prekarisierung und Entfremdung in der Arbeitswelt aktueller denn je sind."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h3>Tipps für gelungene Interpretationen</h3>
+                    <p><strong>1. Textbelege immer einbinden:</strong> Jede interpretatorische Aussage sollte durch konkrete Textstellen belegt werden.</p>
+                    <p><strong>2. Deutungshypothese klar formulieren:</strong> Entwickeln Sie eine klare These, die Sie throughout der Interpretation verfolgen.</p>
+                    <p><strong>3. Fachsprache angemessen verwenden:</strong> Verwenden Sie Fachbegriffe präzise und erklären Sie sie bei Bedarf.</p>
+                    <p><strong>4. Interpretation von Beschreibung unterscheiden:</strong> Gehen Sie über die reine Beschreibung hinaus und entwickeln Sie eigene Deutungen.</p>
+                    <p><strong>5. Schluss konsequent gestalten:</strong> Beziehen Sie sich im Schluss auf Ihre Deutungshypothese und ziehen Sie ein Fazit.</p>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für die Matura:</strong><br>
+                    Üben Sie das Formulieren von Interpretationen an verschiedenen Textbeispielen. Nutzen Sie die hier bereitgestellten Formulierungshilfen als Gerüst und passen Sie sie an den jeweiligen Text an. Achten Sie darauf, dass Ihre Interpretation einen roten Faden hat und alle Aussagen durch Textbelege gestützt werden.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function loadContent(page) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked link
+            event.target.classList.add('active');
+            
+            // Load content based on page parameter
+            const contentBody = document.getElementById('content-body');
+            
+            // Show loading message
+            contentBody.innerHTML = `
+                <div style="text-align: center; padding: 50px;">
+                    <div style="font-size: 1.2em; color: #34495e; margin-bottom: 20px;">Lade Inhalte...</div>
+                    <div style="color: #7f8c8d;">Die Seite "${page}" wird geladen. Diese Funktion wird implementiert, sobald alle externen HTML-Dateien erstellt sind.</div>
+                </div>
+            `;
+            
+            // Here you would normally load the external HTML file
+            // fetch(`kapitel/${page}.html`)
+            //     .then(response => response.text())
+            //     .then(html => contentBody.innerHTML = html)
+            //     .catch(error => contentBody.innerHTML = '<p>Fehler beim Laden der Seite.</p>');
+            
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Collapsible functionality
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // If it's a collapsible section, open it first
+                    if (targetElement.previousElementSibling && targetElement.previousElementSibling.classList.contains('collapsible')) {
+                        targetElement.previousElementSibling.classList.add('active');
+                        targetElement.style.maxHeight = targetElement.scrollHeight + "px";
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Toggle solution boxes
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+                event.target.textContent = "Lösung anzeigen";
+            } else {
+                solution.style.display = "block";
+                event.target.textContent = "Lösung ausblenden";
+            }
+        }
+    </script>
+</body>
+</html>

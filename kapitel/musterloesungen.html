@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musterlösungen - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .subsection {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #34495e;
+        }
+
+        .subsection-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .example-box {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .example-title {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .solution-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .solution-toggle:hover {
+            background: #2c3e50;
+        }
+
+        .solution-content {
+            display: none;
+            background: #e8f4f8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Musterlösungen</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Musterlösungen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active">Start</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#stilmittel" class="nav-link">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#argumentation" class="nav-link">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#interpretation" class="nav-link">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#textanalyse" class="nav-link">Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#zeitmanagement" class="nav-link">Zeitmanagement</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Musterlösungen für die Deutschmatura</h1>
+                <p>Vollständige Lösungen zu Übungen aus allen Bereichen</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section">
+                    <h2 class="section-title">Musterlösungen für verschiedene Aufgabentypen</h2>
+                    <p>Auf dieser Seite finden Sie vollständige Musterlösungen zu Übungen aus verschiedenen Bereichen der Deutschmatura. Die Lösungen sind nach Themenbereichen geordnet und enthalten detaillierte Erklärungen.</p>
+                </div>
+
+                <div id="stilmittel" class="section">
+                    <h2 class="section-title">Stilmittel-Übungen</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Übung 1.1: Stilmittel erkennen</h3>
+                        <div class="example-box">
+                            <div class="example-title">Aufgabe:</div>
+                            <p>Identifiziere in den folgenden Textausschnitten die verwendeten sprachlichen Mittel:</p>
+                            <p>a) "Die Entscheidung fiel schwer wie Blei."</p>
+                            <p>b) "Die Straßen der Stadt schliefen noch, während die ersten Sonnenstrahlen über die Dächer krochen."</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                            <div id="solution1" class="solution-content">
+                                <p><strong>Lösung:</strong></p>
+                                <p>a) Vergleich: "schwer wie Blei" - Die Entscheidung wird mit einem sehr schweren Material verglichen.</p>
+                                <p>b) Personifikation: "Die Straßen schliefen" und "Sonnenstrahlen krochen" - Unbelebten Dingen werden menschliche Eigenschaften zugeschrieben.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Übung 1.2: Wirkungsanalyse</h3>
+                        <div class="example-box">
+                            <div class="example-title">Aufgabe:</div>
+                            <p>Analysiere die Wirkung des sprachlichen Mittels im folgenden Satz:</p>
+                            <p>"Die Politik ist ein wildes Meer; die Wellen schlagen hoch, die Stürme toben, und das Staatsschiff taumelt zwischen den Klippen."</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                            <div id="solution2" class="solution-content">
+                                <p><strong>Lösung:</strong></p>
+                                <p>Die ausgedehnte Metapher (auch: Allegorie) vom "wilden Meer" für die Politik erzeugt ein Bild von Gefahr, Unberechenbarkeit und Chaos. Die Politik wird als unkontrollierbare Naturgewalt dargestellt, während das "Staatsschiff" als fragiles Gefährt erscheint. Die Wirkung ist dramatisierend und vermittelt ein Gefühl der Bedrohung und Instabilität. Der Autor könnte damit die Unsicherheit politischer Entscheidungsprozesse oder eine konkrete politische Krise veranschaulichen wollen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="argumentation" class="section">
+                    <h2 class="section-title">Argumentationsanalyse</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Übung 2.1: Argumentationsbausteine identifizieren</h3>
+                        <div class="example-box">
+                            <div class="example-title">Aufgabe:</div>
+                            <p>Lies den folgenden Textausschnitt und identifiziere:</p>
+                            <ul>
+                                <li>Die Hauptthese</li>
+                                <li>Untergeordnete Thesen/Behauptungen</li>
+                                <li>Argumente und Belege</li>
+                                <li>Schlussfolgerungen</li>
+                            </ul>
+                            <p>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel. Besonders alarmierend ist, dass viele dieser Entwicklungen sich selbst verstärken können. Wenn etwa das arktische Eis schmilzt, reflektiert weniger weiße Oberfläche das Sonnenlicht, und die Erwärmung beschleunigt sich. Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert. Doch die Kosten des Nichthandelns übersteigen bei weitem die Investitionen, die jetzt nötig wären. Es ist daher nicht nur eine ökologische, sondern auch eine ökonomische Notwendigkeit, den CO₂-Ausstoß drastisch zu reduzieren und auf erneuerbare Energien umzusteigen."</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                            <div id="solution3" class="solution-content">
+                                <p><strong>Lösung:</strong></p>
+                                <ul>
+                                    <li><strong>Hauptthese:</strong> Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln.</li>
+                                    <li><strong>Untergeordnete Thesen/Behauptungen:</strong>
+                                        <ul>
+                                            <li>Die globalen Temperaturen steigen nachweislich.</li>
+                                            <li>Die Folgen sind bereits spürbar.</li>
+                                            <li>Viele Entwicklungen können sich selbst verstärken.</li>
+                                            <li>Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert.</li>
+                                            <li>Die Kosten des Nichthandelns übersteigen die nötigen Investitionen.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Argumente und Belege:</strong>
+                                        <ul>
+                                            <li>Faktischer Beleg: Laut Weltklimarat haben sich die Temperaturen seit der vorindustriellen Zeit um mehr als ein Grad Celsius erhöht.</li>
+                                            <li>Beispiele für Folgen: Schmelzende Polkappen, Extremwetterereignisse, steigende Meeresspiegel.</li>
+                                            <li>Beispiel für selbstverstärkende Effekte: Schmelzendes arktisches Eis reduziert die Reflexion von Sonnenlicht.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Schlussfolgerung:</strong> Es ist eine ökologische und ökonomische Notwendigkeit, den CO₂-Ausstoß zu reduzieren und auf erneuerbare Energien umzusteigen.</li>
+                                </ul>
+                                <p>Der Text folgt einer kausalen Argumentationskette: Ausgangsproblem (Klimawandel) → Belege für das Problem → Ursachen → Konsequenzen des Nichthandelns → notwendige Maßnahmen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="interpretation" class="section">
+                    <h2 class="section-title">Textinterpretation</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Musterinterpretation: "San Salvador" von Peter Bichsel</h3>
+                        <div class="example-box">
+                            <div class="example-title">Aufgabe:</div>
+                            <p>Verfasse eine vollständige Interpretation der Kurzgeschichte "San Salvador" von Peter Bichsel.</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution4')">Musterlösung anzeigen</button>
+                            <div id="solution4" class="solution-content">
+                                <p><strong>Musterlösung:</strong></p>
+                                <p><strong>Einleitung:</strong> Die Kurzgeschichte "San Salvador" von Peter Bichsel, erschienen 1963, thematisiert das Schicksal einer unglücklichen Ehe und die daraus resultierende vorherrschende Traurigkeit und das Verlorensein im Alltag der gesamten Familie. Durch die Darstellung der Hauptfigur und ihrer Verwirrung wird vermutlich beabsichtigt, die Leser für die negativen Auswirkungen eines Verharrens in einer gescheiterten Ehe zu sensibilisieren und zum kritischen Nachdenken über die eigenen Beziehungen anzuregen.</p>
+                                
+                                <p><strong>Inhaltsangabe:</strong> Die Geschichte handelt von einem Ehepaar, das in einer tiefen emotionalen Krise steckt. Die Protagonistin, eine Frau mittleren Alters, führt eine scheinbar normale Ehe, doch innerlich ist sie zutiefst unglücklich und fühlt sich gefangen. Sie träumt von San Salvador als einem Ort der Erlösung und Freiheit, während ihr Ehemann in seiner eigenen Welt lebt, ohne ihre emotionalen Bedürfnisse zu erkennen. Die Handlung zeigt einen typischen Tag im Leben der Familie, an dem die innere Leere und Entfremdung besonders deutlich werden.</p>
+                                
+                                <p><strong>Analyse:</strong> Bichsel verwendet eine schlichte, aber präzise Sprache, die die emotionale Kälte und Leere der Beziehung widerspiegelt. Die kurzen, abgehackten Sätze unterstreichen die Kommunikationslosigkeit zwischen den Ehepartnern. Auffällig ist der Kontrast zwischen der äußerlichen Normalität und der inneren Zerrissenheit der Protagonistin. Die Wiederholung des Ortsnamens "San Salvador" fungiert als Leitmotiv und symbolisiert die Sehnsucht nach einem besseren Leben.</p>
+                                
+                                <p><strong>Interpretation:</strong> Die Geschichte kann als Kritik an bürgerlichen Ehevorstellungen und der damit verbundenen emotionalen Unterdrückung gelesen werden. San Salvador steht metaphorisch für die unerfüllten Träume und Sehnsüchte der Protagonistin. Bichsel zeigt, wie gesellschaftliche Konventionen Menschen in unglücklichen Lebenssituationen gefangen halten können. Die offene Schlussszene, in der die Protagonistin ihren Ehemann anschaut, "als sähe sie ihn zum ersten Mal", deutet auf eine mögliche innere Befreiung oder zumindest auf ein Erkennen der realen Situation hin.</p>
+                                
+                                <p><strong>Schluss:</strong> "San Salvador" ist eine eindringliche Studie über die innere Leere in scheinbar intakten bürgerlichen Verhältnissen. Bichsel gelingt es, mit einfachen sprachlichen Mitteln die komplexe emotionale Landschaft einer gescheiterten Ehe zu zeichnen. Die Geschichte regt dazu an, über die Diskrepanz zwischen äußerer Fassade und innerem Erleben nachzudenken und die eigenen Lebensentscheidungen kritisch zu hinterfragen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="textanalyse" class="section">
+                    <h2 class="section-title">Textanalyse</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Musteranalyse: "Die Tyrannei der digitalen Erreichbarkeit"</h3>
+                        <div class="example-box">
+                            <div class="example-title">Aufgabe:</div>
+                            <p>Analysiere die Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger.</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution5')">Musterlösung anzeigen</button>
+                            <div id="solution5" class="solution-content">
+                                <p><strong>Musterlösung:</strong></p>
+                                <p><strong>Einleitung:</strong> In der Kolumne "Die Tyrannei der digitalen Erreichbarkeit", veröffentlicht im "Standard" (März 2025), setzt sich die Autorin Maria Berger kritisch mit den Auswirkungen der ständigen digitalen Verfügbarkeit auf zwischenmenschliche Beziehungen und die psychische Gesundheit auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger ihre These, dass die permanente Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist.</p>
+                                
+                                <p><strong>Inhaltsangabe:</strong> Die Autorin beginnt mit einer Schilderung einer Szene in einem Kaffeehaus, in der vier junge Menschen physisch anwesend, aber mental in ihre Smartphones vertieft sind. Sie beschreibt, wie diese ständige digitale Verbundenheit zu einer sozialen Erwartungshaltung führt, die Erreichbarkeit rund um die Uhr voraussetzt. Berger identifiziert diese Entwicklung als "moderne Tyrannei" und "selbst auferlegte Knechtschaft", die zu chronischem Stress und der Unfähigkeit führt, im Moment zu leben. Abschließend plädiert sie für einen bewussteren Umgang mit digitalen Medien und das Recht auf Nichterreichbarkeit.</p>
+                                
+                                <p><strong>Sprachanalyse:</strong> Sprachlich zeichnet sich Bergers Kolumne durch einen persönlichen, leicht zugänglichen Stil aus. Die Autorin verwendet bildhafte Vergleiche wie "unsichtbare Leinen" und "elektrischer Schock", um die subtile Kontrolle zu veranschaulichen, die Smartphones über ihre Nutzer ausüben. Besonders wirkungsvoll ist die Metapher der "Tyrannei" und "selbst auferlegten Knechtschaft", die das zentrale Thema der eingeschränkten Freiheit untermauert. Die Wortwahl ("Sklaven", "Knechtschaft", "Tyrannei") entstammt dem Wortfeld der Unterdrückung und verstärkt die kritische Haltung der Autorin.</p>
+                                
+                                <p><strong>Argumentationsanalyse:</strong> Der Text folgt einem klaren Aufbau: Vom konkreten Beispiel über die Problemanalyse bis hin zu einem appellativen Schluss. Berger verwendet rhetorische Fragen wie "Warum antwortest du nicht?", um typische soziale Interaktionen zu spiegeln und die Leser direkt anzusprechen. Ihre Argumentation stützt sich auf Alltagsbeobachtungen und psychologische Folgen (chronischer Stress, Konzentrationsstörungen), ohne jedoch empirische Studien zu zitieren.</p>
+                                
+                                <p><strong>Schluss:</strong> Bergers Kolumne überzeugt durch die gelungene Verbindung von persönlicher Beobachtung und gesellschaftlicher Analyse. Besonders wirkungsvoll ist die bildhafte Sprache, die komplexe sozialpsychologische Phänomene anschaulich macht. Allerdings könnte man einwenden, dass die Autorin die positiven Aspekte der digitalen Vernetzung nur kurz streift und die Verantwortung für gesunde Nutzungsmuster etwas einseitig bei den Individuen verortet. Insgesamt liefert der Text einen wichtigen Denkanstoß für einen bewussteren Umgang mit digitalen Medien.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="zeitmanagement" class="section">
+                    <h2 class="section-title">Zeitmanagement</h2>
+                    
+                    <div class="subsection">
+                        <h3 class="subsection-title">Übung 1.2: Schnellanalyse eines Textes</h3>
+                        <div class="example-box">
+                            <div class="example-title">Aufgabe:</div>
+                            <p>Lies den folgenden Textausschnitt und nimm dir exakt 5 Minuten Zeit, um die wichtigsten Aspekte zu identifizieren:</p>
+                            <p>"Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung ist Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."</p>
+                            <button class="solution-toggle" onclick="toggleSolution('solution6')">Musterlösung anzeigen</button>
+                            <div id="solution6" class="solution-content">
+                                <p><strong>Musterlösung (5-Minuten-Analyse):</strong></p>
+                                <ol>
+                                    <li><strong>Hauptthema:</strong> Auswirkungen der Digitalisierung auf zwischenmenschliche Kommunikation und soziale Beziehungen</li>
+                                    <li><strong>Zentrale Aussagen:</strong>
+                                        <ul>
+                                            <li>Die digitale Revolution hat unsere Kommunikation grundlegend von persönlich zu virtuell verändert</li>
+                                            <li>Die Digitalisierung bietet sowohl Chancen (weltweite Vernetzung) als auch Risiken (Verlust sozialer Fähigkeiten)</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Sprachliches Mittel:</strong> Antithese "Fluch und Segen zugleich" – verdeutlicht die Ambivalenz der digitalen Entwicklung, indem gegensätzliche Bewertungen direkt gegenübergestellt werden</li>
+                                    <li><strong>Position des Autors:</strong> Der Autor nimmt eine ausgewogene, differenzierte Haltung ein und plädiert für einen bewussten, ausbalancierten Umgang mit digitalen Medien, ohne sie pauschal abzulehnen oder unkritisch zu befürworten</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für die Prüfung:</strong><br>
+                    Nutzen Sie Musterlösungen nicht nur zum Ablesen, sondern analysieren Sie deren Struktur und Argumentationsweise. Achten Sie besonders auf die Verknüpfung von Textbelegen mit Interpretationen und die Verwendung von Fachsprache.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+                event.target.textContent = 'Lösung anzeigen';
+            } else {
+                solution.style.display = 'block';
+                event.target.textContent = 'Lösung ausblenden';
+            }
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close sidebar on mobile after selection
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('sidebar').classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

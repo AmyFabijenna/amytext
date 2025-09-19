@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklisten - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .checklist-section {
+            margin-bottom: 40px;
+        }
+
+        .checklist-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .checklist-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .checklist-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checklist-header h3 {
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        .checklist-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .checklist-content.active {
+            padding: 20px;
+            max-height: 1000px;
+        }
+
+        .checklist-list {
+            list-style-type: none;
+        }
+
+        .checklist-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .checklist-list li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-list input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+
+        .checklist-list label {
+            flex: 1;
+        }
+
+        .exercise-box {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .exercise-box h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .solution {
+            background: #d4edda;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .solution-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .solution-btn:hover {
+            background: #218838;
+        }
+
+        @media (max-width: 768px) {
+            .content-body {
+                padding: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <header class="content-header">
+            <h1>Checklisten für die Deutschmatura</h1>
+            <p>Systematische Selbstüberprüfung für alle Textsorten</p>
+        </header>
+
+        <div class="content-body">
+            <div class="checklist-section">
+                <h2>Allgemeine Textanalyse-Checklisten</h2>
+                
+                <div class="checklist-item">
+                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                        <h3>Textanalyse-Grundcheckliste</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="checklist-content">
+                        <ul class="checklist-list">
+                            <li><input type="checkbox" id="check1"><label for="check1">Habe ich das Hauptthema und die zentralen Aussagen des Textes korrekt erfasst?</label></li>
+                            <li><input type="checkbox" id="check2"><label for="check2">Sind meine Interpretationen durch Textstellen belegt?</label></li>
+                            <li><input type="checkbox" id="check3"><label for="check3">Habe ich alle relevanten Aspekte des Textes berücksichtigt?</label></li>
+                            <li><input type="checkbox" id="check4"><label for="check4">Ist meine eigene Stellungnahme differenziert und begründet?</label></li>
+                            <li><input type="checkbox" id="check5"><label for="check5">Enthält meine Einleitung die notwendigen Informationen zum Text (Titel, Autor, Erscheinungsjahr, Textsorte, Thema)?</label></li>
+                            <li><input type="checkbox" id="check6"><label for="check6">Folgt meine Analyse einem logischen Aufbau?</label></li>
+                            <li><input type="checkbox" id="check7"><label for="check7">Sind die Übergänge zwischen den Absätzen flüssig und sinnvoll?</label></li>
+                            <li><input type="checkbox" id="check8"><label for="check8">Gibt es einen erkennbaren roten Faden durch meine gesamte Analyse?</label></li>
+                            <li><input type="checkbox" id="check9"><label for="check9">Habe ich mindestens drei relevante sprachliche Mittel identifiziert und ihre Wirkung erläutert?</label></li>
+                            <li><input type="checkbox" id="check10"><label for="check10">Ist meine Analyse der Argumentationsstruktur nachvollziehbar?</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                        <h3>Sprachliche Gestaltung</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="checklist-content">
+                        <ul class="checklist-list">
+                            <li><input type="checkbox" id="check11"><label for="check11">Verwende ich eine angemessene Fachsprache für die Textanalyse?</label></li>
+                            <li><input type="checkbox" id="check12"><label for="check12">Vermeide ich Wiederholungen und verwende ich abwechslungsreiche Formulierungen?</label></li>
+                            <li><input type="checkbox" id="check13"><label for="check13">Sind meine Sätze klar und verständlich formuliert?</label></li>
+                            <li><input type="checkbox" id="check14"><label for="check14">Habe ich umgangssprachliche Wendungen vermieden?</label></li>
+                            <li><input type="checkbox" id="check15"><label for="check15">Sind alle Zitate korrekt gekennzeichnet und belegt?</label></li>
+                            <li><input type="checkbox" id="check16"><label for="check16">Habe ich auf korrekte Rechtschreibung, Grammatik und Zeichensetzung geachtet?</label></li>
+                            <li><input type="checkbox" id="check17"><label for="check17">Ist mein Text in sinnvolle Absätze gegliedert?</label></li>
+                            <li><input type="checkbox" id="check18"><label for="check18">Entspricht meine Analyse dem geforderten Umfang?</label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-section">
+                <h2>Textsortenspezifische Checklisten</h2>
+                
+                <div class="checklist-item">
+                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                        <h3>Lyrik-Analyse</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="checklist-content">
+                        <ul class="checklist-list">
+                            <li><input type="checkbox" id="check19"><label for="check19">Habe ich das Reimschema korrekt analysiert?</label></li>
+                            <li><input type="checkbox" id="check20"><label for="check20">Habe ich das Metrum (Versmaß) bestimmt?</label></li>
+                            <li><input type="checkbox" id="check21"><label for="check21">Habe ich die Strophenform identifiziert?</label></li>
+                            <li><input type="checkbox" id="check22"><label for="check22">Habe ich auf Enjambements und Zäsuren geachtet?</label></li>
+                            <li><input type="checkbox" id="check23"><label for="check23">Habe ich die sprachlichen Bilder (Metaphern, Symbole) analysiert?</label></li>
+                            <li><input type="checkbox" id="check24"><label for="check24">Habe ich die Klanggestaltung (Alliteration, Assonanz) berücksichtigt?</label></li>
+                            <li><input type="checkbox" id="check25"><label for="check25">Habe ich das Gedicht in die richtige literarische Epoche eingeordnet?</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                        <h3>Prosa-Analyse</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="checklist-content">
+                        <ul class="checklist-list">
+                            <li><input type="checkbox" id="check26"><label for="check26">Habe ich die Erzählperspektive bestimmt?</label></li>
+                            <li><input type="checkbox" id="check27"><label for="check27">Habe ich das Erzählverhalten beschrieben?</label></li>
+                            <li><input type="checkbox" id="check28"><label for="check28">Habe ich die Figurenkonstellation analysiert?</label></li>
+                            <li><input type="checkbox" id="check29"><label for="check29">Habe ich die Raum- und Zeitgestaltung berücksichtigt?</label></li>
+                            <li><input type="checkbox" id="check30"><label for="check30">Habe ich die Handlungsstruktur erfasst?</label></li>
+                            <li><input type="checkbox" id="check31"><label for="check31">Habe ich Motive und Symbole identifiziert?</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                        <h3>Drama-Analyse</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="checklist-content">
+                        <ul class="checklist-list">
+                            <li><input type="checkbox" id="check32"><label for="check32">Habe ich die Gesprächssituation analysiert?</label></li>
+                            <li><input type="checkbox" id="check33"><label for="check33">Habe ich den Szenenaufbau beschrieben?</label></li>
+                            <li><input type="checkbox" id="check34"><label for="check34">Habe ich die Figurenkonstellation untersucht?</label></li>
+                            <li><input type="checkbox" id="check35"><label for="check35">Habe ich die Konflikte identifiziert?</label></li>
+                            <li><input type="checkbox" id="check36"><label for="check36">Habe ich auf sprachliche Besonderheiten im Dialog geachtet?</label></li>
+                            <li><input type="checkbox" id="check37"><label for="check37">Habe ich die dramatische Wirkung analysiert?</label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="checklist-item">
+                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                        <h3>Sachtext-Analyse</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="checklist-content">
+                        <ul class="checklist-list">
+                            <li><input type="checkbox" id="check38"><label for="check38">Habe ich die Argumentationsstruktur untersucht?</label></li>
+                            <li><input type="checkbox" id="check39"><label for="check39">Habe ich die Argumentationsweise (deduktiv, induktiv) erkannt?</label></li>
+                            <li><input type="checkbox" id="check40"><label for="check40">Habe ich die verwendeten Argumenttypen identifiziert?</label></li>
+                            <li><input type="checkbox" id="check41"><label for="check41">Habe ich die Position des Autors bestimmt?</label></li>
+                            <li><input type="checkbox" id="check42"><label for="check42">Habe ich auf Objektivität vs. Subjektivität geachtet?</label></li>
+                            <li><input type="checkbox" id="check43"><label for="check43">Habe ich die Intention des Textes erfasst?</label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-section">
+                <h2>Textinterpretation</h2>
+                
+                <div class="checklist-item">
+                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                        <h3>Interpretations-Checkliste</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="checklist-content">
+                        <ul class="checklist-list">
+                            <li><input type="checkbox" id="check44"><label for="check44">Die Einleitung enthält alle notwendigen formalen Informationen zum Text.</label></li>
+                            <li><input type="checkbox" id="check45"><label for="check45">Die Inhaltsangabe ist knapp, sachlich und in der richtigen zeitlichen Reihenfolge.</label></li>
+                            <li><input type="checkbox" id="check46"><label for="check46">Die Analyse untersucht sowohl inhaltliche als auch formale Aspekte des Textes.</label></li>
+                            <li><input type="checkbox" id="check47"><label for="check47">Die Deutungshypothese ist klar formuliert und enthält eine Vermutung zur Intention des Autors.</label></li>
+                            <li><input type="checkbox" id="check48"><label for="check48">Die Interpretation ist durch Zitate aus dem Text belegt.</label></li>
+                            <li><input type="checkbox" id="check49"><label for="check49">Im Schluss werden die Erkenntnisse zusammengefasst und die Deutungshypothese überprüft.</label></li>
+                            <li><input type="checkbox" id="check50"><label for="check50">Der Schluss enthält eine persönliche Meinung und einen Gegenwartsbezug.</label></li>
+                            <li><input type="checkbox" id="check51"><label for="check51">Die Textinterpretation ist sprachlich korrekt und angemessen formuliert.</label></li>
+                            <li><input type="checkbox" id="check52"><label for="check52">Die Zitate sind korrekt in den Text eingebunden und mit Zeilenangaben versehen.</label></li>
+                            <li><input type="checkbox" id="check53"><label for="check53">Die Textinterpretation folgt einem logischen Aufbau.</label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-section">
+                <h2>Übungen mit Lösungen</h2>
+                
+                <div class="exercise-box">
+                    <h4>Übung: Textüberarbeitung</h4>
+                    <p>Überarbeite den folgenden fehlerhaften Textanalyseabschnitt. Identifiziere und korrigiere Probleme in Bezug auf Inhalt, Struktur, Sprache und Formalia.</p>
+                    <p><em>"In dem Text geht es um das Thema Klimawandel. Der Autor sagt, dass der Klimawandel schlimm ist und wir was tun müssen. Er benutzt viele sprachliche Mittel. Zum Beispiel Metaphern und rhetorische Fragen. Diese machen den Text gut. Der Autor argumentiert, dass wir alle zusammen den Klimawandel bekämpfen müssen, weil einer allein nichts machen kann. Das finde ich auch. Außerdem sagt er, dass Politik und Wirtschaft mehr machen muss. Der Text ist also über Verantwortung. Am Ende sagt der Author, dass wir eine doppelte Strategie brauchen. Das finde ich gut. Man kann sonst nicht wirklich was gegen den Klimawandel machen, wenn man nicht an allen Ecken und Enden was verändert und alle mitmachen."</em></p>
+                    
+                    <button class="solution-btn" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                    
+                    <div id="solution1" class="solution">
+                        <p><strong>Überarbeitete Version:</strong></p>
+                        <p>"Der vorliegende Text thematisiert die Verantwortung des Einzelnen und der Gesellschaft im Kontext des Klimawandels. Der Autor argumentiert differenziert, dass die globale Klimakrise sowohl individuelles Handeln als auch strukturelle Veränderungen erfordert.</p>
+                        <p>Als sprachliche Mittel setzt der Verfasser unter anderem ein direktes Zitat ein ("Was kann ich schon tun?"), um die verbreitete Resignation vieler Menschen authentisch darzustellen. Zudem verwendet er die Metapher des "ökologischen Fußabdrucks", die abstrakte Umweltauswirkungen veranschaulicht und seine These unterstützt, dass auch kleine individuelle Entscheidungen in ihrer Summe bedeutsam sind.</p>
+                        <p>In seiner Argumentationsstruktur entwickelt der Autor zunächst die These der scheinbaren Machtlosigkeit des Einzelnen, stellt dieser dann die Bedeutung vieler kleiner Handlungen entgegen und führt schließlich zur Synthese, dass sowohl individuelle als auch kollektive Maßnahmen notwendig sind. Diese dialektische Struktur ermöglicht eine ausgewogene Betrachtung der Verantwortungsfrage.</p>
+                        <p>Am Ende plädiert der Autor für eine "doppelte Strategie", die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet. Diese Schlussfolgerung erscheint angesichts der vielschichtigen Herausforderungen des Klimawandels überzeugend, da sie weder in Fatalismus verfällt noch die Komplexität des Problems unterschätzt."</p>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4>Übung: Peer-Review-Simulation</h4>
+                    <p>Stelle dir vor, du bist Lehrer/in und sollst die folgende Textanalyse korrigieren und kommentieren. Bewerte den Text nach folgenden Kriterien:</p>
+                    <ol>
+                        <li>Inhaltliche Erfassung des Textes</li>
+                        <li>Analyse der sprachlichen Mittel</li>
+                        <li>Untersuchung der Argumentationsstruktur</li>
+                        <li>Sprachliche Angemessenheit</li>
+                        <li>Formale Korrektheit</li>
+                    </ol>
+                    
+                    <button class="solution-btn" onclick="toggleSolution('solution2')">Musterbewertung anzeigen</button>
+                    
+                    <div id="solution2" class="solution">
+                        <p><strong>Musterbewertung:</strong></p>
+                        <p>1. <strong>Inhaltliche Erfassung des Textes:</strong> (+) Das zentrale Thema des Textes wurde klar erfasst. (+) Die Hauptaussagen des Autors werden präzise wiedergegeben. (-) Die zusammenfassende Darstellung könnte etwas ausführlicher sein.</p>
+                        <p>2. <strong>Analyse der sprachlichen Mittel:</strong> (+) Mehrere sprachliche Mittel werden identifiziert. (+) Die Wirkung der sprachlichen Mittel wird meist gut erläutert. (-) Die Analyse könnte durch weitere Beispiele angereichert werden.</p>
+                        <p>3. <strong>Untersuchung der Argumentationsstruktur:</strong> (+) Die grundlegende Struktur des Textes wird erkannt und benannt. (+) Der logische Aufbau der Argumentation wird nachvollziehbar beschrieben. (-) Die Analyse könnte die Argumentationstechniken genauer untersuchen.</p>
+                        <p>4. <strong>Sprachliche Angemessenheit:</strong> (+) Insgesamt angemessene und klare Ausdrucksweise. (+) Gute Verwendung von Fachbegriffen. (-) Einige umgangssprachliche Wendungen sollten durch präzisere Formulierungen ersetzt werden.</p>
+                        <p>5. <strong>Formale Korrektheit:</strong> (+) Der Text ist weitgehend fehlerfrei. (+) Die Absatzstruktur ist logisch. (-) Einige Sätze könnten prägnanter formuliert werden.</p>
+                        <p><strong>Verbesserungshinweise:</strong></p>
+                        <ul>
+                            <li>Verwende mehr direkte Zitate aus dem Originaltext, um deine Analysen zu belegen.</li>
+                            <li>Vermeide subjektive Wertungen wie "Was ich an dem Text gut finde..." - formuliere stattdessen objektivere Aussagen.</li>
+                            <li>Vertiefe die Analyse der sprachlichen Mittel, indem du ihre Wirkung genauer beschreibst.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleChecklist(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('.toggle-icon');
+            
+            content.classList.toggle('active');
+            
+            if (content.classList.contains('active')) {
+                icon.textContent = '▲';
+            } else {
+                icon.textContent = '▼';
+            }
+        }
+
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            const button = solution.previousElementSibling;
+            
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+                button.textContent = 'Lösung anzeigen';
+            } else {
+                solution.style.display = 'block';
+                button.textContent = 'Lösung ausblenden';
+            }
+        }
+
+        // Alle Checklisten standardmäßig öffnen
+        window.onload = function() {
+            document.querySelectorAll('.checklist-header').forEach(header => {
+                toggleChecklist(header);
+            });
+        };
+    </script>
+</body>
+</html>

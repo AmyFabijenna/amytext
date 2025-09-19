@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textinterpretation - Deutschmatura Handbuch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #34495e;
+        }
+
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #34495e;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .feature-link {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .feature-link:hover {
+            background: #2c3e50;
+        }
+
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .progress-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        /* Zusätzliche Styles für Textinterpretation */
+        .collapsible {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #e9ecef;
+        }
+
+        .collapsible-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .exercise {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .solution {
+            background: #e8f4f8;
+            border-left: 4px solid #2ecc71;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+
+        .toggle-solution {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .toggle-solution:hover {
+            background: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Textinterpretation</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('literarische-epochen')">Literarische Epochen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Navigation</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('willkommen')">Zurück zur Startseite</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Textinterpretation</h1>
+                <p>Struktur, Methoden und Übungen für die Deutschmatura</p>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <div class="welcome-section">
+                    <h2>Textinterpretation verstehen und anwenden</h2>
+                    <p>Die Textinterpretation ist ein zentraler Bestandteil der Deutschmatura. Hier lernst du, wie du literarische Texte systematisch analysierst und interpretierst - von der Einleitung bis zum Schluss, mit allen wichtigen Arbeitsschritten, Formulierungshilfen und Übungen.</p>
+                </div>
+
+                <button class="collapsible">1. Struktur einer Textinterpretation</button>
+                <div class="collapsible-content">
+                    <h3>Aufbau einer gelungenen Interpretation</h3>
+                    <p>Eine Textinterpretation folgt einer klaren Struktur:</p>
+                    
+                    <table>
+                        <tr>
+                            <th>Abschnitt</th>
+                            <th>Inhalt</th>
+                            <th>Beispielformulierungen</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Einleitung</strong></td>
+                            <td>Text vorstellen, Thema nennen, Deutungshypothese aufstellen</td>
+                            <td>"In der vorliegenden Kurzgeschichte [Titel] von [Autor], erschienen im Jahr [Jahr], geht es um..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hauptteil - Inhaltsangabe</strong></td>
+                            <td>Knappe, sachliche Zusammenfassung der Handlung</td>
+                            <td>"Die Handlung beginnt mit...", "Im weiteren Verlauf..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hauptteil - Analyse</strong></td>
+                            <td>Untersuchung von Sprache, Form, Aufbau, Figuren</td>
+                            <td>"Sprachlich fällt auf, dass...", "Die Figurenkonstellation zeigt..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hauptteil - Interpretation</strong></td>
+                            <td>Deutung des Textes basierend auf der Analyse</td>
+                            <td>"Dies lässt sich so deuten, dass...", "Der Autor möchte damit zeigen..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Schluss</strong></td>
+                            <td>Zusammenfassung, Bewertung, Gegenwartsbezug</td>
+                            <td>"Zusammenfassend lässt sich sagen...", "Die Deutungshypothese hat sich bestätigt..."</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="exercise">
+                        <h4>Übung 1: Strukturelemente identifizieren</h4>
+                        <p>Ordne die folgenden Elemente den korrekten Abschnitten einer Textinterpretation zu:</p>
+                        <ol>
+                            <li>Deutungshypothese</li>
+                            <li>Analyse des Reimschemas</li>
+                            <li>Zusammenfassung der Ergebnisse</li>
+                            <li>Einordnung des Textes in eine literarische Epoche</li>
+                            <li>Formulierung der persönlichen Meinung zum Text</li>
+                        </ol>
+                        <button class="toggle-solution" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        <div id="solution1" class="solution">
+                            <p><strong>Lösung:</strong></p>
+                            <ul>
+                                <li>Einleitung: 4 (Einordnung in Epoche)</li>
+                                <li>Hauptteil - Analyse: 2 (Reimschema)</li>
+                                <li>Hauptteil - Interpretation: 1 (Deutungshypothese)</li>
+                                <li>Schluss: 3, 5 (Zusammenfassung, persönliche Meinung)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="collapsible">2. Die Einleitung verfassen</button>
+                <div class="collapsible-content">
+                    <h3>Elemente einer guten Einleitung</h3>
+                    <p>Die Einleitung einer Textinterpretation sollte folgende Informationen enthalten:</p>
+                    <ul>
+                        <li>Titel des Werkes</li>
+                        <li>Autor/in</li>
+                        <li>Erscheinungsjahr</li>
+                        <li>Textgattung (Kurzgeschichte, Gedicht, Drama etc.)</li>
+                        <li>Thema des Textes (in einem Satz)</li>
+                        <li>Einordnung in die literarische Epoche (wenn bekannt)</li>
+                        <li>Deutungshypothese (vorläufige Deutung des Textes)</li>
+                    </ul>
+                    
+                    <div class="exercise">
+                        <h4>Übung 2: Informationen für die Einleitung sammeln</h4>
+                        <p>Du sollst die Kurzgeschichte "San Salvador" von Peter Bichsel interpretieren. Recherchiere und notiere die notwendigen Informationen für die Einleitung:</p>
+                        <ul>
+                            <li>Titel des Werkes: <input type="text" placeholder="Titel eingeben"></li>
+                            <li>Autor: <input type="text" placeholder="Autor eingeben"></li>
+                            <li>Erscheinungsjahr: <input type="text" placeholder="Jahr eingeben"></li>
+                            <li>Textgattung: <input type="text" placeholder="Textgattung eingeben"></li>
+                            <li>Thema des Textes (in einem Satz): <textarea placeholder="Thema beschreiben"></textarea></li>
+                        </ul>
+                        <button class="toggle-solution" onclick="toggleSolution('solution2')">Musterlösung anzeigen</button>
+                        <div id="solution2" class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <ul>
+                                <li>Titel des Werkes: San Salvador</li>
+                                <li>Autor: Peter Bichsel</li>
+                                <li>Erscheinungsjahr: 1963</li>
+                                <li>Textgattung: Kurzgeschichte</li>
+                                <li>Thema: Die Kurzgeschichte handelt von einer unglücklichen Ehe und dem Gefühl der Entfremdung zwischen den Partnern.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Übung 3: Eine Einleitung verfassen</h4>
+                        <p>Verfasse eine Einleitung (ca. 50-70 Wörter) für eine Interpretation von "San Salvador". Achte darauf, alle formalen Merkmale der Einleitung zu berücksichtigen.</p>
+                        <textarea placeholder="Deine Einleitung hier..." rows="5" style="width: 100%; margin: 10px 0;"></textarea>
+                        <button class="toggle-solution" onclick="toggleSolution('solution3')">Musterlösung anzeigen</button>
+                        <div id="solution3" class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <p>"Die Kurzgeschichte 'San Salvador' von Peter Bichsel aus dem Jahr 1963 thematisiert das Schicksal einer unglücklichen Ehe. Die Geschichte, die der Trümmerliteratur zugerechnet werden kann, zeigt die Entfremdung zweier Menschen voneinander und die daraus resultierende Traurigkeit und Hoffnungslosigkeit im Alltag der Familie."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="collapsible">3. Die Inhaltsangabe</button>
+                <div class="collapsible-content">
+                    <h3>Merkmale einer guten Inhaltsangabe</h3>
+                    <p>Eine gelungene Inhaltsangabe für eine Interpretation sollte:</p>
+                    <ul>
+                        <li>Im Präsens verfasst sein</li>
+                        <li>Die korrekte zeitliche Abfolge einhalten</li>
+                        <li>Sich auf die wichtigsten Figuren konzentrieren</li>
+                        <li>Sachlich und ohne Wertung formuliert sein</li>
+                        <li>Knapp und präzise sein (ca. 80-100 Wörter)</li>
+                        <li>Keine ausführliche Nacherzählung mit allen Details sein</li>
+                        <li>Keine Zitate aus dem Text enthalten</li>
+                    </ul>
+                    
+                    <div class="exercise">
+                        <h4>Übung 4: Kennzeichen einer guten Inhaltsangabe</h4>
+                        <p>Markiere die korrekten Merkmale einer gelungenen Inhaltsangabe für eine Interpretation:</p>
+                        <form id="content-summary-quiz">
+                            <label><input type="checkbox"> Ausführliche Nacherzählung mit allen Details</label><br>
+                            <label><input type="checkbox" class="correct"> Verwendung des Präsens als Tempus</label><br>
+                            <label><input type="checkbox"> Subjektive Bewertung des Inhalts</label><br>
+                            <label><input type="checkbox" class="correct"> Korrekte zeitliche Abfolge</label><br>
+                            <label><input type="checkbox"> Nennung aller Nebenfiguren</label><br>
+                            <label><input type="checkbox" class="correct"> Konzentration auf die wichtigsten Figuren</label><br>
+                            <label><input type="checkbox"> Einbau von Zitaten aus dem Text</label><br>
+                            <label><input type="checkbox" class="correct"> Sachliche Darstellung ohne Wertung</label><br>
+                        </form>
+                        <button class="toggle-solution" onclick="checkQuiz('content-summary-quiz')">Lösung überprüfen</button>
+                    </div>
+                </div>
+
+                <button class="collapsible">4. Die Analyse</button>
+                <div class="collapsible-content">
+                    <h3>Analyseaspekte nach Textgattungen</h3>
+                    <p>Je nach Textgattung stehen unterschiedliche Analyseaspekte im Vordergrund:</p>
+                    
+                    <table>
+                        <tr>
+                            <th>Textgattung</th>
+                            <th>Analyseaspekte</th>
+                        </tr>
+                        <tr>
+                            <td>Lyrik</td>
+                            <td>Reimschema analysieren, Strophenform identifizieren, Metrum bestimmen</td>
+                        </tr>
+                        <tr>
+                            <td>Prosa</td>
+                            <td>Erzählperspektive bestimmen, Erzählverhalten beschreiben, Figurenkonstellation untersuchen</td>
+                        </tr>
+                        <tr>
+                            <td>Drama</td>
+                            <td>Gesprächssituation analysieren, Figurenkonstellation untersuchen, Bühnenanweisungen interpretieren</td>
+                        </tr>
+                        <tr>
+                            <td>Sachtext</td>
+                            <td>Aufbau der Argumentation untersuchen, Argumentationsstrategien identifizieren</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="exercise">
+                        <h4>Übung 5: Analyseaspekte zuordnen</h4>
+                        <p>Ordne die folgenden Analyseaspekte der passenden Textgattung zu:</p>
+                        <ol>
+                            <li>Reimschema analysieren → <input type="text" placeholder="Textgattung" class="answer" data-answer="Lyrik"></li>
+                            <li>Erzählperspektive bestimmen → <input type="text" placeholder="Textgattung" class="answer" data-answer="Prosa"></li>
+                            <li>Aufbau der Argumentation untersuchen → <input type="text" placeholder="Textgattung" class="answer" data-answer="Sachtext"></li>
+                            <li>Gesprächssituation analysieren → <input type="text" placeholder="Textgattung" class="answer" data-answer="Drama"></li>
+                        </ol>
+                        <button class="toggle-solution" onclick="checkAnswers()">Lösung überprüfen</button>
+                    </div>
+                    
+                    <h3>Sprachliche Analyse</h3>
+                    <p>Bei der sprachlichen Analyse solltest du folgende Aspekte berücksichtigen:</p>
+                    <ul>
+                        <li>Art der Sprache (Fachsprache, Alltagssprache, Dialekt, Hochsprache)</li>
+                        <li>Rhetorische Stilmittel (Metaphern, Vergleiche, Personifikationen etc.)</li>
+                        <li>Besondere sprachliche Auffälligkeiten (Wortwiederholungen, Satzlängen, Syntax)</li>
+                        <li>Wortwahl und Tonfall</li>
+                    </ul>
+                </div>
+
+                <button class="collapsible">5. Die Interpretation/Deutung</button>
+                <div class="collapsible-content">
+                    <h3>Deutungshypothese formulieren</h3>
+                    <p>Eine gute Deutungshypothese sollte:</p>
+                    <ul>
+                        <li>Die Kernaussage des Textes in wenigen Sätzen wiedergeben</li>
+                        <li>Eine Vermutung zur Intention des Autors/der Autorin enthalten</li>
+                        <li>Verständlich und präzise formuliert sein</li>
+                        <li>Später im Hauptteil durch Textbelege gestützt werden können</li>
+                    </ul>
+                    
+                    <div class="exercise">
+                        <h4>Übung 6: Eine Deutungshypothese formulieren</h4>
+                        <p>Formuliere eine Deutungshypothese zu folgendem Textausschnitt aus "San Salvador":</p>
+                        <blockquote>
+                            "Herr Andermatt hatte einen Globus. Er zeigte seiner Frau San Salvador. 'Hier', sagte Herr Andermatt, 'ist San Salvador.' Da sagte Frau Andermatt: 'Ach.'"
+                        </blockquote>
+                        <textarea placeholder="Deine Deutungshypothese hier..." rows="4" style="width: 100%; margin: 10px 0;"></textarea>
+                        <button class="toggle-solution" onclick="toggleSolution('solution6')">Musterlösung anzeigen</button>
+                        <div id="solution6" class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <p>"Die Textstelle zeigt die tiefe Kommunikationslosigkeit zwischen den Ehepartnern. Während Herr Andermatt versucht, mit seiner Frau in Kontakt zu treten, indem er ihr San Salvador auf dem Globus zeigt, reagiert sie nur mit einem gleichgültigen 'Ach'. Dies deutet darauf hin, dass der Autor die Entfremdung und emotionale Distanz in Beziehungen thematisieren möchte, die durch Alltagsroutine und mangelnde Kommunikation entstehen kann."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Übung 7: Deutungshypothese mit Textbelegen stützen</h4>
+                        <p>Notiere zu deiner Deutungshypothese aus Übung 6 mindestens drei Textbelege, die deine Interpretation stützen. Erkläre jeweils kurz, warum der Textbeleg deine Hypothese unterstützt.</p>
+                        <textarea placeholder="Deine Textbelege hier..." rows="6" style="width: 100%; margin: 10px 0;"></textarea>
+                        <button class="toggle-solution" onclick="toggleSolution('solution7')">Musterlösung anzeigen</button>
+                        <div id="solution7" class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <ol>
+                                <li>"Herr Andermatt hatte einen Globus." - Das Possessivpronomen "einen" deutet auf Besitz und Distanz hin, nicht auf gemeinsames Eigentum.</li>
+                                <li>"Er zeigte seiner Frau San Salvador." - Die Formulierung "seiner Frau" betont die Besitzverhältnisse und die hierarchische Beziehung.</li>
+                                <li>"Da sagte Frau Andermatt: 'Ach.'" - Die knappe, emotionslose Antwort zeigt die Gleichgültigkeit und mangelnde Anteilnahme.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="collapsible">6. Der Schluss</button>
+                <div class="collapsible-content">
+                    <h3>Elemente eines gelungenen Schlusses</h3>
+                    <p>Der Schluss einer Textinterpretation sollte folgende Elemente enthalten:</p>
+                    <ul>
+                        <li>Zusammenfassung der wichtigsten Erkenntnisse</li>
+                        <li>Bestätigung oder Korrektur der Deutungshypothese</li>
+                        <li>Eigene Meinung zum Text (begründet)</li>
+                        <li>Herstellung eines Bezugs zur Gegenwart</li>
+                        <li>Mögliche weiterführende Fragen oder Überlegungen</li>
+                    </ul>
+                    
+                    <div class="exercise">
+                        <h4>Übung 8: Fazit ziehen</h4>
+                        <p>Verfasse ein Fazit (ca. 100 Wörter) für eine Textinterpretation von "San Salvador", das folgende Elemente enthält:</p>
+                        <textarea placeholder="Dein Fazit hier..." rows="6" style="width: 100%; margin: 10px 0;"></textarea>
+                        <button class="toggle-solution" onclick="toggleSolution('solution8')">Musterlösung anzeigen</button>
+                        <div id="solution8" class="solution">
+                            <p><strong>Musterlösung:</strong></p>
+                            <p>"Zusammenfassend lässt sich sagen, dass sich die Deutungshypothese bestätigt hat: Bichsel thematisiert in 'San Salvador' die Entfremdung und Kommunikationslosigkeit in einer Ehe. Die Analyse der sprachlichen Mittel und der Figurenkonstellation hat gezeigt, wie der Autor diese Thematik eindrücklich vermittelt. Aus meiner Sicht gelingt es Bichsel hervorragend, die stumme Verzweiflung der Figuren darzustellen. Ein Bezug zur Gegenwart lässt sich herstellen, indem man die dargestellte Kommunikationslosigkeit mit modernen Beziehungsproblemen in Verbindung bringt, die trotz oder gerade wegen der digitalen Vernetzung entstehen können."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="collapsible">7. Checkliste für die Textinterpretation</button>
+                <div class="collapsible-content">
+                    <h3>Selbstüberprüfung vor der Abgabe</h3>
+                    <p>Überprüfe deine fertige Textinterpretation anhand dieser Checkliste:</p>
+                    
+                    <form id="checklist">
+                        <label><input type="checkbox"> Die Einleitung enthält alle notwendigen formalen Informationen zum Text.</label><br>
+                        <label><input type="checkbox"> Die Inhaltsangabe ist knapp, sachlich und in der richtigen zeitlichen Reihenfolge.</label><br>
+                        <label><input type="checkbox"> Die Analyse untersucht sowohl inhaltliche als auch formale Aspekte des Textes.</label><br>
+                        <label><input type="checkbox"> Die Deutungshypothese ist klar formuliert und enthält eine Vermutung zur Intention des Autors.</label><br>
+                        <label><input type="checkbox"> Die Interpretation ist durch Zitate aus dem Text belegt.</label><br>
+                        <label><input type="checkbox"> Im Schluss werden die Erkenntnisse zusammengefasst und die Deutungshypothese überprüft.</label><br>
+                        <label><input type="checkbox"> Der Schluss enthält eine persönliche Meinung und einen Gegenwartsbezug.</label><br>
+                        <label><input type="checkbox"> Die Textinterpretation ist sprachlich korrekt und angemessen formuliert.</label><br>
+                        <label><input type="checkbox"> Die Zitate sind korrekt in den Text eingebunden und mit Zeilenangaben versehen.</label><br>
+                        <label><input type="checkbox"> Die Textinterpretation folgt einem logischen Aufbau.</label><br>
+                    </form>
+                    
+                    <div class="tip-box">
+                        <strong>Tipp:</strong> Gehe diese Checkliste Punkt für Punkt durch, bevor du deine Interpretation abgibst. So vermeidest du häufige Fehler und verbesserst deine Note.
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h3>Zusammenfassung: Schritt-für-Schritt zur gelungenen Interpretation</h3>
+                    <ol>
+                        <li><strong>Text gründlich lesen:</strong> Mehrfaches Lesen, unbekannte Wörter klären, erste Eindrücke notieren</li>
+                        <li><strong>Einleitung verfassen:</strong> Alle formalen Angaben, Thema nennen, Deutungshypothese aufstellen</li>
+                        <li><strong>Inhaltsangabe schreiben:</strong> Knapp und sachlich im Präsens, Handlung chronologisch zusammenfassen</li>
+                        <li><strong>Analyse durchführen:</strong> Form, Sprache, Aufbau, Figuren und ihre Beziehungen untersuchen</li>
+                        <li><strong>Interpretation entwickeln:</strong> Deutungshypothese mit Textbelegen stützen, Bedeutungsebenen erschließen</li>
+                        <li><strong>Schluss formulieren:</strong> Ergebnisse zusammenfassen, Hypothese überprüfen, Bezug zur Gegenwart herstellen</li>
+                        <li><strong>Überarbeitung:</strong> Rechtschreibung prüfen, Logik überprüfen, Checkliste anwenden</li>
+                    </ol>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für die Prüfung:</strong> Teile dir deine Zeit gut ein! Für eine 90-minütige Interpretation empfehle ich: 15 Minuten für Textverständnis und Gliederung, 50 Minuten für das Schreiben, 25 Minuten für Überarbeitung und Fehlerkorrektur.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Funktionen für klickbare Elemente
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function loadContent(page) {
+            // Diese Funktion würde normalerweise externe Inhalte laden
+            console.log("Lade Seite: " + page);
+            // Für diese Demo zeigen wir einfach eine Meldung an
+            alert("Diese Funktion würde normalerweise die Seite '" + page + "' laden. In dieser Demo ist sie nicht implementiert.");
+        }
+
+        // Funktion für aufklappbare Bereiche
+        const coll = document.getElementsByClassName("collapsible");
+        for (let i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+
+        // Funktion zum Anzeigen/Verstecken von Lösungen
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+
+        // Funktion zum Überprüfen der Quiz-Antworten
+        function checkQuiz(quizId) {
+            const quiz = document.getElementById(quizId);
+            const checkboxes = quiz.querySelectorAll('input[type="checkbox"]');
+            let allCorrect = true;
+            
+            checkboxes.forEach(checkbox => {
+                const shouldBeChecked = checkbox.classList.contains('correct');
+                if (checkbox.checked !== shouldBeChecked) {
+                    allCorrect = false;
+                    checkbox.parentElement.style.color = 'red';
+                } else {
+                    checkbox.parentElement.style.color = 'green';
+                }
+            });
+            
+            if (allCorrect) {
+                alert('Gut gemacht! Alle Antworten sind richtig.');
+            } else {
+                alert('Einige Antworten sind nicht korrekt. Die falschen Antworten sind rot markiert.');
+            }
+        }
+
+        // Funktion zum Überprüfen der Textantworten
+        function checkAnswers() {
+            const answers = document.querySelectorAll('.answer');
+            let allCorrect = true;
+            
+            answers.forEach(answer => {
+                const userAnswer = answer.value.trim().toLowerCase();
+                const correctAnswer = answer.getAttribute('data-answer').toLowerCase();
+                
+                if (userAnswer === correctAnswer) {
+                    answer.style.backgroundColor = '#d4edda';
+                } else {
+                    answer.style.backgroundColor = '#f8d7da';
+                    allCorrect = false;
+                }
+            });
+            
+            if (allCorrect) {
+                alert('Gut gemacht! Alle Antworten sind richtig.');
+            } else {
+                alert('Einige Antworten sind nicht korrekt. Die falschen Antworten sind rot markiert, die richtigen grün.');
+            }
+        }
+
+        // Öffne das erste Kapitel automatisch
+        window.onload = function() {
+            document.querySelector('.collapsible').click();
+        };
+    </script>
+</body>
+</html>

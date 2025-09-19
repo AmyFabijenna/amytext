@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulierungshilfen für die Textanalyse - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .subsection {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .subsection h3 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .collapsible {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #ddd;
+        }
+
+        .collapsible:after {
+            content: '\002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: white;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .example-box {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .exercise-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .solution-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .toggle-solution {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-solution:hover {
+            background: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Navigation</div>
+                <div class="nav-item">
+                    <a href="textanalyse12.html" class="nav-link">Zurück zur Hauptseite</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Inhaltsverzeichnis</div>
+                <div class="nav-item">
+                    <a href="#sprachliche-mittel" class="nav-link">Sprachliche Mittel</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#argumentationsanalyse" class="nav-link">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#textstruktur" class="nav-link">Textstruktur</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#wirkungsanalyse" class="nav-link">Wirkungsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#uebungen" class="nav-link">Übungen</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Formulierungshilfen für die Textanalyse</h1>
+                <p>Professionelle Formulierungen für eine überzeugende Analyse</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section">
+                    <h2 id="sprachliche-mittel">Formulierungen für sprachliche Mittel</h2>
+                    
+                    <button class="collapsible">Metaphern und Vergleiche</button>
+                    <div class="content">
+                        <p>Metaphern und Vergleiche sind zentrale Stilmittel, die Texte bildhaft und anschaulich machen.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Die Metapher '...' veranschaulicht, dass..."</li>
+                            <li>"Durch den Vergleich '...' wird deutlich, dass..."</li>
+                            <li>"Das Bild des/der '...' steht symbolisch für..."</li>
+                            <li>"Die bildhafte Sprache erzeugt eine ... Stimmung."</li>
+                            <li>"Die Metapher verleiht dem Text eine besondere Anschaulichkeit, indem sie..."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Die Metapher 'Die Digitalisierung hat wie ein Tsunami unsere Lebensrealität überschwemmt' veranschaulicht die überwältigende und unaufhaltsame Kraft der digitalen Entwicklung."
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Wiederholungen und Parallelismen</button>
+                    <div class="content">
+                        <p>Wiederholungen und Parallelismen strukturieren Texte und verstärken Aussagen.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Die Wiederholung von '...' unterstreicht die Bedeutung dieses Aspekts."</li>
+                            <li>"Durch den parallelen Satzbau wird die Gleichwertigkeit der Aussagen betont."</li>
+                            <li>"Die anaphorische Wiederholung am Anfang mehrerer Sätze verstärkt den ... Charakter."</li>
+                            <li>"Die epiphore Wiederholung am Satzende erzeugt einen rhythmischen Effekt."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Die anaphorische Wiederholung 'Wo früher... Wo früher...' betont den Kontrast zwischen Vergangenheit und Gegenwart und strukturiert den Text gleichzeitig."
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Rhetorische Fragen</button>
+                    <div class="content">
+                        <p>Rhetorische Fragen zielen nicht auf eine Antwort, sondern auf die Reflexion der Lesenden.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Die rhetorische Frage '...' regt die Lesenden zum Nachdenken an."</li>
+                            <li>"Durch die rhetorische Frage wird die Aufmerksamkeit auf ... gelenkt."</li>
+                            <li>"Die Frage erwartet keine Antwort, sondern soll ... bewirken."</li>
+                            <li>"Die rhetorische Frage dient dazu, die Leserschaft in den Text einzubeziehen."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Die rhetorischen Fragen 'Ist das der Fortschritt, den wir uns erhofft haben? Ist das die Zukunft, die wir uns erträumt haben?' fordern die Lesenden heraus, die digitale Entwicklung kritisch zu hinterfragen."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 id="argumentationsanalyse">Formulierungen für die Argumentationsanalyse</h2>
+                    
+                    <button class="collapsible">Argumentationsstruktur beschreiben</button>
+                    <div class="content">
+                        <p>Die Analyse der Argumentationsstruktur untersucht den Aufbau und die Logik der Argumentation.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Die Argumentation folgt einer deduktiven/induktiven Struktur, indem..."</li>
+                            <li>"Der Autor beginnt mit ..., entwickelt dann ... und kommt schließlich zu ..."</li>
+                            <li>"Die Argumentationskette baut logisch aufeinander auf, weil..."</li>
+                            <li>"Als Hauptthese lässt sich identifizieren, dass..."</li>
+                            <li>"Zur Untermauerung seiner These führt der Autor folgende Argumente an: ..."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Die Argumentation folgt einer dialektischen Struktur: Zunächst wird die These der scheinbaren Machtlosigkeit des Einzelnen entwickelt, dann die Antithese der Bedeutung vieler kleiner Handlungen formuliert und schließlich zur Synthese gelangt, dass sowohl individuelle als auch kollektive Maßnahmen notwendig sind."
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Argumentationstypen benennen</button>
+                    <div class="content">
+                        <p>Argumente lassen sich verschiedenen Typen zuordnen, die unterschiedlich überzeugend wirken.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Der Autor verwendet ein Autoritätsargument, indem er/sie ... zitiert."</li>
+                            <li>"Das Beispielargument veranschaulicht ... anhand eines konkreten Falls."</li>
+                            <li>"Durch das Kausalargument wird ein Ursache-Wirkungs-Zusammenhang hergestellt."</li>
+                            <li>"Das Analogieargument überträgt Erkenntnisse aus einem Bereich auf einen anderen."</li>
+                            <li>"Das Wertargument appelliert an ethische Grundsätze wie ..."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Der Autor stützt seine These mit einem Autoritätsargument, indem er auf Studien des Weltklimarats verweist, die den Temperaturanstieg belegen."
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Argumentationsmuster erkennen</button>
+                    <div class="content">
+                        <p>Argumentationsmuster zeigen typische Strategien der Überzeugungsarbeit.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Der Text arbeitet mit einer Mischung aus sachlichen und emotionalen Argumenten."</li>
+                            <li>"Die Argumentation folgt dem Muster der Steigerung (Klimax)."</li>
+                            <li>"Durch das Entweder-Oder-Schema werden Alternativen vereinfacht dargestellt."</li>
+                            <li>"Der Autor antizipiert mögliche Einwände und entkräftet sie durch ..."</li>
+                            <li>"Die Gegenüberstellung von ... und ... (Antithese) verdeutlicht den Kontrast."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Der Autor verwendet ein Entweder-Oder-Schema ('Entweder wir investieren jetzt massiv... oder der Verkehrskollaps...'), das die Komplexität des Problems vereinfacht, aber rhetorisch wirksam ist."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 id="textstruktur">Formulierungen für Textstruktur und Komposition</h2>
+                    
+                    <button class="collapsible">Textaufbau beschreiben</button>
+                    <div class="content">
+                        <p>Die Analyse des Textaufbaus untersucht die Gliederung und Anordnung der Textteile.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Der Text ist in ... Abschnitte gegliedert, die ... Funktion erfüllen."</li>
+                            <li>"Die Einleitung dient dazu, ..."</li>
+                            <li>"Im Hauptteil werden ... Argumente entfaltet."</li>
+                            <li>"Der Schluss fasst die Ergebnisse zusammen und/oder gibt einen Ausblick."</li>
+                            <li>"Die Textkomposition weist eine Dreiteilung auf, die ... symbolisiert."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Der Text folgt einem klaren Aufbau: Vom konkreten Beispiel über die Problemanalyse bis hin zu einem appellativen Schluss."
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Übergänge und Verknüpfungen</button>
+                    <div class="content">
+                        <p>Übergänge und Verknüpfungen sorgen für Kohärenz und Verständlichkeit.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Die Absätze sind durch ... miteinander verbunden."</li>
+                            <li>"Der Übergang zwischen ... und ... wird hergestellt durch ..."</li>
+                            <li>"Konnektoren wie ... verknüpfen die Argumente logisch."</li>
+                            <li>"Der Text weist eine hohe Kohärenz auf, weil ..."</li>
+                            <li>"Durch Parallelszenen wird die Verbindung zwischen ... und ... hergestellt."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Die Absätze sind durch konsekutive Konnektoren wie 'daher', 'deshalb' und 'folglich' miteinander verknüpft, was die logische Abfolge der Argumentation unterstreicht."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 id="wirkungsanalyse">Formulierungen für die Wirkungsanalyse</h2>
+                    
+                    <button class="collapsible">Wirkung auf Lesende</button>
+                    <div class="content">
+                        <p>Die Wirkungsanalyse untersucht, wie der Text auf die Rezipienten wirkt.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Der Text erzeugt eine ... Stimmung/Atmosphäre."</li>
+                            <li>"Die Lesenden werden emotional angesprochen durch ..."</li>
+                            <li>"Durch ... wird Spannung/Anteilnahme/Betroffenheit erzeugt."</li>
+                            <li>"Der Autor appelliert an ... (Verstand, Gefühl, Moral)"</li>
+                            <li>"Die direkte Anrede schafft Nähe zum Publikum."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Durch die bildhafte Schilderung der Kaffeehaus-Szene zu Beginn des Textes erzeugt die Autorin eine unmittelbare Anschaulichkeit, die Lesende emotional anspricht und Identifikationsmöglichkeiten bietet."
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Intentionale Wirkung</button>
+                    <div class="content">
+                        <p>Die intentionale Wirkung beschreibt die beabsichtigte Wirkung des Textes.</p>
+                        
+                        <h4>Formulierungshilfen:</h4>
+                        <ul>
+                            <li>"Der Text zielt darauf ab, ... zu bewirken."</li>
+                            <li>"Die Intention des Autors/der Autorin scheint zu sein, ..."</li>
+                            <li>"Durch ... soll die Leserschaft zu ... angeregt werden."</li>
+                            <li>"Der appellative Charakter des Textes zielt auf ... ab."</li>
+                            <li>"Der Text verfolgt das Ziel, ... zu hinterfragen/zu kritisieren/zu befürworten."</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Die Intention der Autorin scheint zu sein, die Lesenden für die negativen Auswirkungen permanenter digitaler Erreichbarkeit zu sensibilisieren und zu einem bewussteren Umgang mit digitalen Medien anzuregen."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 id="uebungen">Übungen mit Lösungen</h2>
+                    
+                    <div class="exercise-box">
+                        <h3>Übung 1: Formulierungstraining</h3>
+                        <p>Formuliere eine Analyse der folgenden Textstelle mit Hilfe der gelernten Formulierungshilfen:</p>
+                        <p><em>"Die sozialen Medien haben unsere Gesellschaft nicht nur verändert, sondern zerschnitten, zersplittert und zerstückelt."</em></p>
+                        
+                        <button class="toggle-solution" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        
+                        <div id="solution1" class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            <p>"Der Autor verwendet eine Klimax mit den drei Verben 'zerschnitten, zersplittert und zerstückelt', um die negative Wirkung der sozialen Medien zu steigern. Alle drei Verben beginnen mit der Vorsilbe 'zer-', was Zerstörung und Auflösung betont. Die Alliteration (gleicher Anlaut) verstärkt den Rhythmus und die Eindringlichkeit der Aussage. Die Wirkung ist anklagend und alarmierend, der Autor positioniert sich klar kritisch gegenüber sozialen Medien."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h3>Übung 2: Wirkungsanalyse</h3>
+                        <p>Analysiere die Wirkung der folgenden Textstelle:</p>
+                        <p><em>"Schweigen. Warten. Hoffen. Mehr konnten sie nicht tun."</em></p>
+                        
+                        <button class="toggle-solution" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                        
+                        <div id="solution2" class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            <p>"Die Ellipsen (verkürzte Sätze ohne Verb) erzeugen einen abgehackten, reduzierten Sprachstil. Die Parataxe (Aneinanderreihung kurzer, gleichrangiger Sätze) spiegelt die beschriebene Situation wider: eingeschränkte Handlungsmöglichkeiten, Passivität, Warten. Der Stil vermittelt Einsamkeit und Ausgeliefertsein. Der abschließende vollständige Satz wirkt wie ein Kommentar, der die Hoffnungslosigkeit der Situation unterstreicht."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h3>Übung 3: Argumentationsanalyse</h3>
+                        <p>Analysiere die Argumentationsstruktur des folgenden Textausschnitts:</p>
+                        <p><em>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</em></p>
+                        
+                        <button class="toggle-solution" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        
+                        <div id="solution3" class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            <p>"Der Text beginnt mit einer klaren Hauptthese: 'Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln.' Diese These wird durch zwei Argumenttypen untermauert: Ein wissenschaftliches Autoritätsargument ('Laut Weltklimarat...') und ein Beispielargument mit konkreten Folgen ('schmelzende Polkappen, zunehmende Extremwetterereignisse...'). Die Argumentation folgt einer kausalen Struktur: Ausgehend von der Ursache (Temperaturanstieg) werden die Folgen beschrieben, was die Dringlichkeit der Forderung nach Handeln unterstreicht."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Collapsible functionality
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Toggle solution visibility
+        function toggleSolution(id) {
+            var solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+                event.target.textContent = "Lösung anzeigen";
+            } else {
+                solution.style.display = "block";
+                event.target.textContent = "Lösung ausblenden";
+            }
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close sidebar on mobile after selection
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('sidebar').classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

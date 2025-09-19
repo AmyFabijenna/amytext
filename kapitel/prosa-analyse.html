@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prosa-Analyse - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin: 25px 0 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #34495e;
+        }
+
+        .card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .collapsible {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #e9ecef;
+        }
+
+        .collapsible:after {
+            content: '\002B';
+            color: #2c3e50;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .example {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .exercise {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .exercise h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .solution {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #dee2e6;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Prosa-Analyse</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Navigation</div>
+                <div class="nav-item">
+                    <a href="textanalyse12.html" class="nav-link">Zurück zur Hauptseite</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Inhalte</div>
+                <div class="nav-item">
+                    <a href="#einleitung" class="nav-link" onclick="scrollToSection('einleitung')">Einleitung</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#erzaehlperspektive" class="nav-link" onclick="scrollToSection('erzaehlperspektive')">Erzählperspektive</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#figurenanalyse" class="nav-link" onclick="scrollToSection('figurenanalyse')">Figurenanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#erzaehlverhalten" class="nav-link" onclick="scrollToSection('erzaehlverhalten')">Erzählverhalten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#textstruktur" class="nav-link" onclick="scrollToSection('textstruktur')">Textstruktur</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#sprachliche-mittel" class="nav-link" onclick="scrollToSection('sprachliche-mittel')">Sprachliche Mittel</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#uebungen" class="nav-link" onclick="scrollToSection('uebungen')">Übungen</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Prosa-Analyse</h1>
+                <p>Erzählperspektive, Figurenanalyse, Erzählverhalten und Textstrukturen</p>
+            </header>
+
+            <div class="content-body">
+                <section id="einleitung" class="section">
+                    <h2>Einführung in die Prosa-Analyse</h2>
+                    <div class="card">
+                        <p>Die Analyse prosaischer Texte (Romane, Novellen, Kurzgeschichten, Erzählungen) erfordert ein systematisches Vorgehen. Im Gegensatz zur Lyrik oder zum Drama weist Prosa spezifische Merkmale auf, die einer besonderen Betrachtung bedürfen.</p>
+                    </div>
+                    
+                    <button class="collapsible">Was ist Prosa?</button>
+                    <div class="content">
+                        <p>Prosa bezeichnet alle Texte, die nicht in Versform verfasst sind. Sie umfasst verschiedene Textsorten wie Romane, Novellen, Kurzgeschichten, Märchen, Fabeln und Essays. Im Gegensatz zur gebundenen Sprache der Lyrik folgt Prosa den natürlichen Sprachmustern.</p>
+                        <p>Für die Analyse ist es wichtig, zwischen fiktionaler und nicht-fiktionaler Prosa zu unterscheiden:</p>
+                        <ul>
+                            <li><strong>Fiktionale Prosa:</strong> Erfundene Geschichten (Romane, Kurzgeschichten)</li>
+                            <li><strong>Nicht-fiktionale Prosa:</strong> Sachtexte (Essays, Berichte, Biografien)</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="collapsible">Ziele der Prosa-Analyse</button>
+                    <div class="content">
+                        <p>Die Analyse prosaischer Texte verfolgt mehrere Ziele:</p>
+                        <ol>
+                            <li>Erfassen der inhaltlichen Aussage und Thematik</li>
+                            <li>Untersuchen der Erzählstruktur und -technik</li>
+                            <li>Analyse der Figuren und ihrer Beziehungen</li>
+                            <li>Erkennen und Deuten sprachlicher Gestaltungsmittel</li>
+                            <li>Einordnen in den historischen und literarischen Kontext</li>
+                            <li>Erfassen der Autorintention und Wirkung auf den Leser</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="erzaehlperspektive" class="section">
+                    <h2>Erzählperspektive</h2>
+                    <div class="card">
+                        <p>Die Erzählperspektive ist eines der wichtigsten Merkmale prosaischer Texte. Sie bestimmt, aus welcher Sicht die Geschichte erzählt wird und welchen Wissensstand der Erzähler hat.</p>
+                    </div>
+                    
+                    <button class="collapsible">Personale Erzählperspektive</button>
+                    <div class="content">
+                        <p>Bei der personalen Erzählperspektive erleben wir die Geschichte durch die Augen einer Figur. Der Erzähler beschränkt sich auf das, was diese Figur wahrnimmt, denkt und fühlt.</p>
+                        <div class="example">
+                            <h4>Beispiel:</h4>
+                            <p>"Sie öffnete die Tür und betrat den Raum. Ein seltsamer Geruch schlug ihr entgegen. Was mochte das sein? Sie spürte, wie ihr Herz schneller schlug."</p>
+                            <p><strong>Wirkung:</strong> Schafft Nähe zur Figur, ermöglicht Identifikation, begrenzt aber das Wissen auf die Perspektive dieser Figur.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Auktoriale Erzählperspektive</button>
+                    <div class="content">
+                        <p>Der auktoriale Erzähler steht über der Handlung, kennt alle Figuren, ihre Gedanken und sogar die Zukunft. Er kommentiert und wertet oft das Geschehen.</p>
+                        <div class="example">
+                            <h4>Beispiel:</h4>
+                            <p>"Während Maria ahnungslos den Raum betrat, wusste der Leser bereits, welches Schicksal sie dort erwartete. Doch davon ahnte sie in diesem Moment noch nichts."</p>
+                            <p><strong>Wirkung:</strong> Vermittelt Überblick, ermöglicht Kommentare, kann aber Distanz zur Handlung schaffen.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Ich-Erzählperspektive</button>
+                    <div class="content">
+                        <p>Die Geschichte wird aus der Sicht einer Figur in der ersten Person erzählt. Der Erzähler ist zugleich handelnde Figur.</p>
+                        <div class="example">
+                            <h4>Beispiel:</h4>
+                            <p>"Ich öffnete die Tür und betrat den Raum. Ein seltsamer Geruch schlug mir entgegen. Was mochte das sein? Ich spürte, wie mein Herz schneller schlug."</p>
+                            <p><strong>Wirkung:</strong> Schafft große subjektive Nähe, begrenzt aber die Perspektive auf das Ich.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Neutrale Erzählperspektive</button>
+                    <div class="content">
+                        <p>Der neutrale Erzähler beschreibt nur das äußere Geschehen, ohne in die Figuren hineinzuschauen oder zu kommentieren.</p>
+                        <div class="example">
+                            <h4>Beispiel:</h4>
+                            <p>"Die Frau öffnete die Tür und betrat den Raum. Sie blieb stehen, atmete tief ein und blickte sich um."</p>
+                            <p><strong>Wirkung:</strong> Wirkt sachlich und distanziert, überlässt dem Leser die Interpretation.</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Übung: Erzählperspektiven erkennen</h3>
+                    <div class="exercise">
+                        <h4>Bestimme die Erzählperspektive der folgenden Textausschnitte:</h4>
+                        <ol>
+                            <li>"Er wusste nicht, dass ihn in diesem Moment jemand beobachtete. Hätte er es gewusst, wäre er vorsichtiger gewesen."</li>
+                            <li>"Ich ging die Straße entlang und überlegte, was ich tun sollte. Die Entscheidung fiel mir schwer."</li>
+                            <li>"Der Mann betrat das Café. Er setzte sich an einen Tisch in der Ecke und bestellte einen Kaffee."</li>
+                            <li>"Sie öffnete den Brief und begann zu lesen. Mit jedem Wort wurde ihr klarer, dass sich ihr Leben ändern würde."</li>
+                        </ol>
+                        <button class="btn" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        <div id="solution1" class="solution">
+                            <ol>
+                                <li><strong>Auktoriale Perspektive:</strong> Der Erzähler weiß mehr als die Figur ("Er wusste nicht...") und kommentiert ("Hätte er es gewusst...").</li>
+                                <li><strong>Ich-Perspektive:</strong> Die Geschichte wird aus der Sicht einer Figur in der ersten Person erzählt.</li>
+                                <li><strong>Neutrale Perspektive:</strong> Es wird nur das äußere Geschehen beschrieben, ohne Einblick in Gedanken oder Gefühle.</li>
+                                <li><strong>Personale Perspektive:</strong> Die Geschichte wird aus der Sicht einer Figur erzählt ("ihr wurde klarer"), aber in der dritten Person.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="figurenanalyse" class="section">
+                    <h2>Figurenanalyse</h2>
+                    <div class="card">
+                        <p>Figuren sind Träger der Handlung in prosaischen Texten. Ihre Analyse umfasst äußere und innere Merkmale, Entwicklung und Beziehungen zu anderen Figuren.</p>
+                    </div>
+                    
+                    <button class="collapsible">Figurenkonstellation</button>
+                    <div class="content">
+                        <p>Die Figurenkonstellation beschreibt das Beziehungsgeflecht zwischen den Figuren eines Textes. Sie kann grafisch dargestellt werden und zeigt Machtverhältnisse, Konflikte und emotionale Bindungen.</p>
+                        
+                        <h4>Typische Konstellationen:</h4>
+                        <ul>
+                            <li><strong>Protagonist vs. Antagonist:</strong> Hauptfigur und ihr Gegenspieler</li>
+                            <li><strong>Dreieckskonstellation:</strong> Drei Figuren in komplexen Beziehungen</li>
+                            <li><strong>Isolierte Figur:</strong> Eine Figur ohne enge Bindungen</li>
+                        </ul>
+                        
+                        <div class="example">
+                            <h4>Beispiel aus "Die Nachbarn":</h4>
+                            <p>In der Kurzgeschichte "Die Nachbarn" besteht die Figurenkonstellation aus Julia (Protagonistin), Herrn Müller und Frau Müller (Antagonisten oder Opfer?). Die Beziehung ist durch Distanz und ein Geheimnis geprägt.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="collapsible">Figurencharakterisierung</button>
+                    <div class="content">
+                        <p>Figuren können auf verschiedene Weise charakterisiert werden:</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Art der Charakterisierung</th>
+                                <th>Beschreibung</th>
+                                <th>Beispiel</th>
+                            </tr>
+                            <tr>
+                                <td>Direkte Charakterisierung</td>
+                                <td>Der Erzähler beschreibt explizit Eigenschaften der Figur</td>
+                                <td>"Er war ein ängstlicher Mensch, der sich vor jeder Veränderung fürchtete."</td>
+                            </tr>
+                            <tr>
+                                <td>Indirekte Charakterisierung</td>
+                                <td>Eigenschaften werden durch Handlungen, Dialoge oder Gedanken deutlich</td>
+                                <td>"Er zögerte, bevor er die Tür öffnete, atmete tief durch und trat dann zögerlich ein."</td>
+                            </tr>
+                            <tr>
+                                <td>Selbstcharakterisierung</td>
+                                <td>Die Figur beschreibt sich selbst</td>
+                                <td>"Ich bin nun mal so, ich kann nicht anders."</td>
+                            </tr>
+                            <tr>
+                                <td>Fremdcharakterisierung</td>
+                                <td>Andere Figuren beschreiben die Figur</td>
+                                <td>"Du bist immer so ungeduldig", sagte sie zu ihm.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <button class="collapsible">Figurenentwicklung</button>
+                    <div class="content">
+                        <p>Viele Figuren durchlaufen im Laufe einer Erzählung eine Entwicklung. Diese kann psychologischer, moralischer oder sozialer Natur sein.</p>
+                        
+                        <h4>Arten der Figurenentwicklung:</h4>
+                        <ul>
+                            <li><strong>Positive Entwicklung:</strong> Die Figur lernt dazu, wird reifer oder besser</li>
+                            <li><strong>Negative Entwicklung:</strong> Die Figur verfällt oder wird schlechter</li>
+                            <li><strong>Keine Entwicklung:</strong> Die Figur bleibt statisch (häufig bei Nebenfiguren)</li>
+                        </ul>
+                        
+                        <div class="example">
+                            <h4>Beispiel aus "Die Nachbarn":</h4>
+                            <p>Julia durchläuft eine Entwicklung von der passiven Beobachterin zur aktiv Handelnden. Am Anfang beobachtet sie nur, am Ende entscheidet sie sich zu handeln ("Sie wusste, dass dieser Anruf alles verändern würde").</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="erzaehlverhalten" class="section">
+                    <h2>Erzählverhalten</h2>
+                    <div class="card">
+                        <p>Das Erzählverhalten beschreibt, wie der Erzähler mit der erzählten Zeit umgeht, welche Erzähltempo gewählt wird und wie die Ereignisse angeordnet sind.</p>
+                    </div>
+                    
+                    <button class="collapsible">Erzählzeit und erzählte Zeit</button>
+                    <div class="content">
+                        <p>Ein wichtiges Merkmal des Erzählverhaltens ist das Verhältnis zwischen Erzählzeit (Zeit, die zum Erzählen benötigt wird) und erzählter Zeit (Zeit, die in der Geschichte vergeht).</p>
+                        
+                        <h4>Mögliche Verhältnisse:</h4>
+                        <ul>
+                            <li><strong>Zeitdeckung:</strong> Erzählzeit ≈ erzählte Zeit (häufig in Dialogen)</li>
+                            <li><strong>Zeitdehnung:</strong> Erzählzeit > erzählte Zeit (ausführliche Beschreibungen)</li>
+                            <li><strong>Zeitraffung:</strong> Erzählzeit < erzählte Zeit (Zeitsprünge, Zusammenfassungen)</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="collapsible">Erzähltempo</button>
+                    <div class="content">
+                        <p>Das Erzähltempo kann variieren und beeinflusst die Wirkung auf den Leser:</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Erzähltempo</th>
+                                <th>Wirkung</th>
+                                <th>Beispiel</th>
+                            </tr>
+                            <tr>
+                                <td>Langsam</td>
+                                <td>Spannung, Detailreichtum, intensive Beschreibung</td>
+                                <td>Ausführliche Schilderung einer Landschaft</td>
+                            </tr>
+                            <tr>
+                                <td>Schnell</td>
+                                <td>Dynamik, Handlungsorientierung, Überblick</td>
+                                <td>"Jahre vergingen, ohne dass sich etwas änderte."</td>
+                            </tr>
+                            <tr>
+                                <td>Wechselnd</td>
+                                <td>Abwechslung, Betonung wichtiger Passagen</td>
+                                <td>Langsame Beschreibung einer Entscheidung, dann Zeitsprung</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <button class="collapsible">Anachronie (Zeitbrüche)</button>
+                    <div class="content">
+                        <p>Anachronie bezeichnet Abweichungen von der chronologischen Erzählfolge:</p>
+                        
+                        <ul>
+                            <li><strong>Rückblende (Analepse):</strong> Sprung in die Vergangenheit</li>
+                            <li><strong>Vorausdeutung (Prolepse):</strong> Hinweis auf zukünftige Ereignisse</li>
+                            <li><strong>Innerer Monolog:</strong> Gedankenstrom einer Figur</li>
+                            <li><strong>Bewusstseinsstrom:</strong> Assoziatives Springen zwischen Gedanken</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="textstruktur" class="section">
+                    <h2>Textstruktur</h2>
+                    <div class="card">
+                        <p>Die Struktur eines Prosatextes umfasst den Aufbau, die Gliederung und die Kompositionstechniken.</p>
+                    </div>
+                    
+                    <button class="collapsible">Aufbauformen</button>
+                    <div class="content">
+                        <p>Prosatexte können unterschiedlich aufgebaut sein:</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Aufbauform</th>
+                                <th>Beschreibung</th>
+                                <th>Beispiel</th>
+                            </tr>
+                            <tr>
+                                <td>Linear-chronologisch</td>
+                                <td>Ereignisse folgen der zeitlichen Abfolge</td>
+                                <td>Viele Abenteuerromane, Märchen</td>
+                            </tr>
+                            <tr>
+                                <td>Rahmenerzählung</td>
+                                <td>Eine Geschichte umschließt eine oder mehrere Binnengeschichten</td>
+                                <td>Decamerone, Frankenstein</td>
+                            </tr>
+                            <tr>
+                                <td>Episodenhaft</td>
+                                <td>Lockere Aneinanderreihung von Episoden</td>
+                                <td>Don Quijote, Simplicissimus</td>
+                            </tr>
+                            <tr>
+                                <td>Montagetechnik</td>
+                                <td>Verschiedene Erzählstränge werden zusammengefügt</td>
+                                <td>Berlin Alexanderplatz, Ulysses</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <button class="collapsible">Spannungsaufbau</button>
+                    <div class="content">
+                        <p>Der Spannungsaufbau ist ein zentrales Element vieler Prosatexte:</p>
+                        
+                        <h4>Elemente des Spannungsaufbaus:</h4>
+                        <ul>
+                            <li><strong>Exposition:</strong> Einführung in Setting, Figuren und Ausgangssituation</li>
+                            <li><strong>Steigerung:</strong> Entwicklung von Konflikten und Spannung</li>
+                            <li><strong>Höhepunkt/Klimax:</strong> Höhepunkt der Spannung, entscheidende Wendung</li>
+                            <li><strong>Lösung/Katastrophe:</strong> Auflösung des Konflikts (positiv oder negativ)</li>
+                        </ul>
+                        
+                        <div class="example">
+                            <h4>Beispiel aus "Die Nachbarn":</h4>
+                            <p><strong>Exposition:</strong> Julia beobachtet die Nachbarn, beschreibt ihre Gewohnheiten.<br>
+                            <strong>Steigerung:</strong> Julia bemerkt seltsames Verhalten, hört Weinen, sieht einen blauen Fleck.<br>
+                            <strong>Höhepunkt:</strong> Julia steht am Fenster und überlegt, was sie tun soll.<br>
+                            <strong>Lösung:</strong> Julia greift zum Telefon, entscheidet sich zum Handeln.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sprachliche-mittel" class="section">
+                    <h2>Sprachliche Mittel in der Prosa</h2>
+                    <div class="card">
+                        <p>Prosatexte verwenden spezifische sprachliche Mittel zur Gestaltung von Atmosphäre, Figuren und Handlung.</p>
+                    </div>
+                    
+                    <button class="collapsible">Wichtige Stilmittel</button>
+                    <div class="content">
+                        <p>Für die Prosa-Analyse besonders relevante Stilmittel:</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Stilmittel</th>
+                                <th>Beschreibung</th>
+                                <th>Beispiel</th>
+                                <th>Wirkung</th>
+                            </tr>
+                            <tr>
+                                <td>Metapher</td>
+                                <td>Bildhafter Ausdruck, Übertragung</td>
+                                <td>"Die Zeit ist ein Fluss."</td>
+                                <td>Veranschaulichung, Emotionalisierung</td>
+                            </tr>
+                            <tr>
+                                <td>Vergleich</td>
+                                <td>Gegenüberstellung mit wie/als</td>
+                                <td>"Sie war blass wie die Wand."</td>
+                                <td>Verdeutlichung, Veranschaulichung</td>
+                            </tr>
+                            <tr>
+                                <td>Personifikation</td>
+                                <td>Vermenschlichung</td>
+                                <td>"Der Wind heulte."</td>
+                                <td>Verlebendigung, Emotionalisierung</td>
+                            </tr>
+                            <tr>
+                                <td>Symbol</td>
+                                <td>Gegenstand mit tieferer Bedeutung</td>
+                                <td>Weiße Taube = Frieden</td>
+                                <td>Tiefere Bedeutungsebene</td>
+                            </tr>
+                            <tr>
+                                <td>Ironie</td>
+                                <td>Gegenteilige Aussage</td>
+                                <td>"Das ist ja großartig!" (bei Misserfolg)</td>
+                                <td>Kritik, Humor, Distanzierung</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <button class="collapsible">Sprachliche Register</button>
+                    <div class="content">
+                        <p>Prosatexte können verschiedene Sprachregister verwenden:</p>
+                        
+                        <ul>
+                            <li><strong>Gehobene Sprache:</strong> Komplexe Sätze, Fremdwörter, literarischer Stil</li>
+                            <li><strong>Umgangssprache:</strong> Alltägliche Ausdrucksweise, oft in Dialogen</li>
+                            <li><strong>Fachsprache:</strong> Terminologie bestimmter Bereiche</li>
+                            <li><strong>Dialekt:</strong> Regionale Sprachfärbung zur Charakterisierung</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="uebungen" class="section">
+                    <h2>Übungen zur Prosa-Analyse</h2>
+                    
+                    <div class="exercise">
+                        <h4>Übung 1: Erzählperspektive bestimmen</h4>
+                        <p>Analysiere die Erzählperspektive im folgenden Textauszug aus "Die Nachbarn":</p>
+                        <div class="example">
+                            <p>"Sie beobachtete sie jeden Tag. Morgens um sieben Uhr dreißig verließ er das Haus, immer im gleichen grauen Anzug, immer mit der gleichen braunen Aktentasche. Sie blieb zurück, eine schlanke Gestalt hinter den Spitzengardinen."</p>
+                        </div>
+                        <button class="btn" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                        <div id="solution2" class="solution">
+                            <p><strong>Erzählperspektive:</strong> Personale Erzählperspektive aus Julias Sicht. Die Geschichte wird durch ihre Augen erzählt ("Sie beobachtete"), aber in der dritten Person. Der Erzähler beschränkt sich auf das, was Julia wahrnimmt, ohne die Gedanken der beobachteten Figuren zu kennen.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Übung 2: Figurenanalyse</h4>
+                        <p>Analysiere die Figurenkonstellation in "Die Nachbarn". Erstelle eine Grafik der Beziehungen und beschreibe sie kurz.</p>
+                        <button class="btn" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        <div id="solution3" class="solution">
+                            <p><strong>Figurenkonstellation:</strong></p>
+                            <p>Julia (Protagonistin) → beobachtet → Herr und Frau Müller</p>
+                            <p>Herr Müller → verlässt täglich das Haus → distanziertes Verhältnis zu Julia</p>
+                            <p>Frau Müller → bleibt zu Hause, wirkt unglücklich → distanziertes Verhältnis zu Julia</p>
+                            <p>Zwischen Herr und Frau Müller → vermutlich problematische Beziehung (Weinen, blauer Fleck)</p>
+                            <p><strong>Beschreibung:</strong> Die Konstellation ist durch Distanz und ein Geheimnis geprägt. Julia steht außerhalb der Familie Müller, beobachtet aber deren problematische Beziehung. Die Müllers sind nach außen hin abgeschlossen, was Neugier und Besorgnis bei Julia auslöst.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Übung 3: Spannungsaufbau analysieren</h4>
+                        <p>Analysiere den Spannungsaufbau in "Die Nachbarn". Unterteile die Handlung in Exposition, Steigerung, Höhe

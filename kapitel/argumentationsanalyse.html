@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argumentationsanalyse - Deutschmatura Handbuch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin: 25px 0 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 4px solid #34495e;
+        }
+
+        .theory-card {
+            background: #f8f9fa;
+            border-left-color: #3498db;
+        }
+
+        .example-card {
+            background: #e8f4f8;
+            border-left-color: #2ecc71;
+        }
+
+        .exercise-card {
+            background: #fff3cd;
+            border-left-color: #f39c12;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        .collapsible {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #ccc;
+        }
+
+        .collapsible-content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .solution-toggle {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .solution {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f4f8;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="willkommen.html" class="nav-link">Willkommen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="eroerterung-grundlagen.html" class="nav-link">Textgebundene Erörterung</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textanalyse</div>
+                <div class="nav-item">
+                    <a href="textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sprachanalyse.html" class="nav-link">Sprachanalyse</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textinterpretation</div>
+                <div class="nav-item">
+                    <a href="textinterpretation.html" class="nav-link">Textinterpretation</a>
+                </div>
+                <div class="nav-item">
+                    <a href="literarische-epochen.html" class="nav-link">Literarische Epochen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textsorten</div>
+                <div class="nav-item">
+                    <a href="textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
+                </div>
+                <div class="nav-item">
+                    <a href="lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="prosa-analyse.html" class="nav-link">Prosa analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="drama-analyse.html" class="nav-link">Drama analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Praxisbeispiele</div>
+                <div class="nav-item">
+                    <a href="beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
+                </div>
+                <div class="nav-item">
+                    <a href="beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
+                </div>
+                <div class="nav-item">
+                    <a href="musterloesungen.html" class="nav-link">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="fachbegriffe.html" class="nav-link">Fachbegriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Prüfungsvorbereitung</div>
+                <div class="nav-item">
+                    <a href="zeitmanagement.html" class="nav-link">Zeitmanagement</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
+                </div>
+                <div class="nav-item">
+                    <a href="checklisten.html" class="nav-link">Checklisten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Argumentationsanalyse</h1>
+                <p>Argumentationsstrukturen erkennen und bewerten</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section">
+                    <h2>Grundlagen der Argumentationsanalyse</h2>
+                    
+                    <div class="card theory-card">
+                        <h3>Was ist Argumentationsanalyse?</h3>
+                        <p>Die Argumentationsanalyse untersucht die logischen Strukturen, auf denen Texte aufbauen. Sie zeigt, wie Thesen begründet und miteinander verknüpft werden. Die Fähigkeit, diese Strukturen zu erkennen, ist entscheidend für das kritische Textverständnis.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Bausteine einer Argumentation</h3>
+                        <p>Jede Argumentation besteht aus folgenden Elementen:</p>
+                        <ul>
+                            <li><strong>These/Hauptbehauptung:</strong> Die zentrale Aussage, die begründet werden soll</li>
+                            <li><strong>Argumente:</strong> Begründungen, die die These stützen</li>
+                            <li><strong>Belege:</strong> Konkrete Beispiele, Fakten oder Zitate, die die Argumente untermauern</li>
+                            <li><strong>Schlussfolgerung:</strong> Die abschließende Zusammenfassung oder Handlungsaufforderung</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="collapsible">Beispiel: Argumentationsbausteine identifizieren</button>
+                    <div class="collapsible-content">
+                        <p><strong>Textbeispiel:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</p>
+                        
+                        <p><strong>Analyse:</strong></p>
+                        <ul>
+                            <li><strong>These:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln."</li>
+                            <li><strong>Argument:</strong> "Die globalen Temperaturen steigen nachweislich."</li>
+                            <li><strong>Beleg:</strong> "Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht."</li>
+                            <li><strong>Weiteres Argument:</strong> "Die Folgen sind bereits spürbar."</li>
+                            <li><strong>Belege:</strong> "schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Argumentationsstrukturen und -muster</h2>
+                    
+                    <div class="card">
+                        <h3>Typische Argumentationsmuster</h3>
+                        <table>
+                            <tr>
+                                <th>Muster</th>
+                                <th>Beschreibung</th>
+                                <th>Beispiel</th>
+                            </tr>
+                            <tr>
+                                <td>Lineare Argumentation</td>
+                                <td>Einzelne Argumente werden nacheinander aufgeführt und führen zur Schlussfolgerung</td>
+                                <td>"A, deshalb B, deshalb C"</td>
+                            </tr>
+                            <tr>
+                                <td>Dialektische Argumentation</td>
+                                <td>These und Antithese werden gegenübergestellt, um zu einer Synthese zu gelangen</td>
+                                <td>"Einerseits A, andererseits B, daher C"</td>
+                            </tr>
+                            <tr>
+                                <td>Kausale Argumentation</td>
+                                <td>Ursache-Wirkungs-Beziehungen werden dargestellt</td>
+                                <td>"Weil A, deshalb B"</td>
+                            </tr>
+                            <tr>
+                                <td>Analytische Argumentation</td>
+                                <td>Ein Problem wird in seine Bestandteile zerlegt und analysiert</td>
+                                <td>"Das Problem besteht aus X, Y und Z"</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <button class="collapsible">Visualisierung von Argumentationsstrukturen</button>
+                    <div class="collapsible-content">
+                        <p>Argumentationsstrukturen können grafisch dargestellt werden, um sie besser zu verstehen:</p>
+                        
+                        <p><strong>Beispiel:</strong> "Die Lektüre literarischer Klassiker sollte auch im digitalen Zeitalter ein zentraler Bestandteil des Schulunterrichts bleiben."</p>
+                        
+                        <p><strong>Grafische Darstellung:</strong></p>
+                        <pre>
+Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
+|
+|--- Argument 1: Klassiker haben zeitlosen kulturellen Wert
+|    | — Beleg: Goethes "Faust" behandelt universelle Themen
+|
+|--- Argument 2: Förderung wichtiger Kompetenzen
+|    | — Beleg: Studien zeigen Förderung des kritischen Denkens
+|
+|--- Einwand (implizit): Klassiker könnten schwer zugänglich sein
+|    | — Gegenargument: Moderne Vermittlungsmethoden können helfen
+|    | — Beispiele: Einsatz digitaler Medien, Bezüge zur Lebenswelt
+|
+|--- Schlussfolgerung: Integration von klassischer Literatur und digitalen Medien
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Argumentationstypen und ihre Bewertung</h2>
+                    
+                    <div class="card">
+                        <h3>Typen von Argumenten</h3>
+                        <table>
+                            <tr>
+                                <th>Argumenttyp</th>
+                                <th>Beschreibung</th>
+                                <th>Beispiel</th>
+                            </tr>
+                            <tr>
+                                <td>Faktenargument</td>
+                                <td>Beruht auf nachprüfbaren Tatsachen und Daten</td>
+                                <td>"Studien zeigen, dass..."</td>
+                            </tr>
+                            <tr>
+                                <td>Autoritätsargument</td>
+                                <td>Bezieht sich auf anerkannte Expert:innen oder Quellen</td>
+                                <td>"Laut Professor Müller von der Universität Wien..."</td>
+                            </tr>
+                            <tr>
+                                <td>Normatives Argument</td>
+                                <td>Bezieht sich auf Werte, Normen oder moralische Prinzipien</td>
+                                <td>"Aus Gründen der Gerechtigkeit sollte..."</td>
+                            </tr>
+                            <tr>
+                                <td>Analogisierendes Argument</td>
+                                <td>Zieht einen Vergleich zu einem ähnlichen Fall</td>
+                                <td>"Ähnlich wie in Schweden könnten wir..."</td>
+                            </tr>
+                            <tr>
+                                <td>Konsequenzargument</td>
+                                <td>Argumentiert mit den Folgen einer Handlung oder Entscheidung</td>
+                                <td>"Wenn wir nicht handeln, werden die Kosten steigen."</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Typische Argumentationsfehler erkennen</h3>
+                        <p>In Argumentationen können verschiedene Fehler auftreten:</p>
+                        <ul>
+                            <li><strong>Strohmann-Argument:</strong> Der Gegenposition wird eine schwächere oder falsche Version unterstellt</li>
+                            <li><strong>Falsches Dilemma:</strong> Es werden nur zwei Alternativen präsentiert, obwohl mehr existieren</li>
+                            <li><strong>Ad hominem:</strong> Angriff auf die Person statt auf deren Argumente</li>
+                            <li><strong>Scheinkorrelation:</strong> Zwei Ereignisse werden fälschlicherweise in Ursache-Wirkungs-Beziehung gesetzt</li>
+                            <li><strong>Cherry-Picking:</strong> Selektive Auswahl von Belegen, die die eigene Position stützen</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="collapsible">Übung: Argumentationsmuster erkennen und bewerten</button>
+                    <div class="collapsible-content">
+                        <p><strong>Aufgabe:</strong> Identifiziere in den folgenden Textpassagen die verwendeten Argumentationsmuster und bewerten ihre Überzeugungskraft.</p>
+                        
+                        <ol>
+                            <li>"Fast jeder Mensch besitzt heute ein Smartphone. Die ständige Erreichbarkeit führt nachweislich zu erhöhtem Stress. Daher sollte jeder regelmäßig bewusste Auszeiten von digitalen Geräten nehmen."</li>
+                            <li>"Viele erfolgreiche Unternehmer wie Steve Jobs und Bill Gates haben ihr Studium abgebrochen. Ein Universitätsabschluss ist also keine Voraussetzung für beruflichen Erfolg."</li>
+                            <li>"Entweder wir investieren jetzt massiv in den öffentlichen Nahverkehr, oder der Verkehrskollaps in unseren Städten wird sich weiter verschlimmern. Da niemand einen Verkehrskollaps will, bleibt nur die Option der Investitionen."</li>
+                        </ol>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen/verbergen</button>
+                        
+                        <div id="solution1" class="solution">
+                            <p><strong>Lösungen:</strong></p>
+                            <ol>
+                                <li><strong>Argumentationsmuster:</strong> Kausale Argumentation (Wenn-Dann-Struktur). <strong>Bewertung:</strong> Grundsätzlich logisch, aber die Prämissen sind nicht ausreichend belegt. Die Verallgemeinerung "fast jeder" ist ungenau. Der Zusammenhang zwischen Smartphone-Besitz und ständiger Erreichbarkeit wird vorausgesetzt, aber nicht bewiesen.</li>
+                                <li><strong>Argumentationsmuster:</strong> Argumentation mit Beispielen, induktives Schließen. <strong>Bewertung:</strong> Schwache Argumentation durch selektive Beispiele (Cherry-Picking). Die wenigen prominenten Ausnahmen werden benutzt, um eine allgemeine Regel abzuleiten. Die Schlussfolgerung ist zu absolut und ignoriert, dass die Mehrheit erfolgreicher Menschen durchaus einen Abschluss hat.</li>
+                                <li><strong>Argumentationsmuster:</strong> Dilemma/Entweder-Oder-Argumentation. <strong>Bewertung:</strong> Problematische Vereinfachung durch falsche Dichotomie. Es werden nur zwei Alternativen präsentiert, während es möglicherweise andere Lösungsansätze gibt. Rhetorisch wirksam, aber logisch anfechtbar.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Analyse der Argumentationsstrategie</h2>
+                    
+                    <div class="card">
+                        <h3>Fragen zur Analyse der Argumentationsstrategie</h3>
+                        <p>Bei der Analyse einer Argumentation sollten folgende Fragen beantwortet werden:</p>
+                        <ol>
+                            <li>Welche Hauptthese vertritt der Autor/die Autorin?</li>
+                            <li>Mit welchen Argumenten wird diese These gestützt?</li>
+                            <li>Welche Arten von Argumenten werden verwendet (Fakten, Autoritäten, normative Argumente)?</li>
+                            <li>Wie ist die Argumentation aufgebaut (linear, dialektisch, kausal)?</li>
+                            <li>Werden Gegenargumente berücksichtigt und widerlegt?</li>
+                            <li>Ist die Argumentation logisch schlüssig und nachvollziehbar?</li>
+                            <li>Sind die Belege und Beispiele überzeugend und relevant?</li>
+                            <li>Welche rhetorischen Mittel werden eingesetzt, um die Argumentation zu stützen?</li>
+                            <li>Zielt die Argumentation primär auf Logik (Logos), Emotionen (Pathos) oder Glaubwürdigkeit (Ethos)?</li>
+                            <li>Wie überzeugend ist die Argumentation insgesamt?</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>Tipp:</strong><br>
+                        Achte besonders auf implizite Prämissen (Voraussetzungen, die nicht explizit genannt werden) und auf die Verknüpfungen zwischen den Argumenten. Oft liegt die Schwäche einer Argumentation nicht in den einzelnen Argumenten, sondern in ihrer Verknüpfung.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Praxisteil: Übungen zur Argumentationsanalyse</h2>
+                    
+                    <div class="card exercise-card">
+                        <h3>Übung 1: Argumentationsbausteine identifizieren</h3>
+                        <p><strong>Aufgabe:</strong> Lies den folgenden Textausschnitt und identifiziere:</p>
+                        <ul>
+                            <li>Die Hauptthese</li>
+                            <li>Untergeordnete Thesen/Behauptungen</li>
+                            <li>Argumente und Belege</li>
+                            <li>Schlussfolgerungen</li>
+                        </ul>
+                        
+                        <p><strong>Text:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel. Besonders alarmierend ist, dass viele dieser Entwicklungen sich selbst verstärken können. Wenn etwa das arktische Eis schmilzt, reflektiert weniger weiße Oberfläche das Sonnenlicht, und die Erwärmung beschleunigt sich. Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert. Doch die Kosten des Nichthandelns übersteigen bei weitem die Investitionen, die jetzt nötig wären. Es ist daher nicht nur eine ökologische, sondern auch eine ökonomische Notwendigkeit, den CO₂-Ausstoß drastisch zu reduzieren und auf erneuerbare Energien umzusteigen."</p>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen/verbergen</button>
+                        
+                        <div id="solution2" class="solution">
+                            <p><strong>Lösung:</strong></p>
+                            <ul>
+                                <li><strong>Hauptthese:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln."</li>
+                                <li><strong>Untergeordnete Thesen/Behauptungen:</strong>
+                                    <ul>
+                                        <li>"Die globalen Temperaturen steigen nachweislich."</li>
+                                        <li>"Die Folgen sind bereits spürbar."</li>
+                                        <li>"Viele Entwicklungen können sich selbst verstärken."</li>
+                                        <li>"Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert."</li>
+                                        <li>"Die Kosten des Nichthandelns übersteigen die nötigen Investitionen."</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Argumente und Belege:</strong>
+                                    <ul>
+                                        <li>Faktischer Beleg: "Laut Weltklimarat haben sich die Temperaturen seit der vorindustriellen Zeit um mehr als ein Grad Celsius erhöht."</li>
+                                        <li>Beispiele für Folgen: "Schmelzende Polkappen, Extremwetterereignisse, steigende Meeresspiegel."</li>
+                                        <li>Beispiel für selbstverstärkende Effekte: "Schmelzendes arktisches Eis reduziert die Reflexion von Sonnenlicht."</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Schlussfolgerung:</strong> "Es ist eine ökologische und ökonomische Notwendigkeit, den CO₂-Ausstoß zu reduzieren und auf erneuerbare Energien umzusteigen."</li>
+                            </ul>
+                            <p>Der Text folgt einer kausalen Argumentationskette: Ausgangsproblem (Klimawandel) → Belege für das Problem → Ursachen → Konsequenzen des Nichthandelns → notwendige Maßnahmen.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card exercise-card">
+                        <h3>Übung 2: Argumentationsstruktur visualisieren</h3>
+                        <p><strong>Aufgabe:</strong> Stelle die Argumentationsstruktur des folgenden Textes grafisch dar (z.B. als Baumdiagramm oder Mind-Map):</p>
+                        
+                        <p><strong>Text:</strong> "Die Lektüre literarischer Klassiker sollte auch im digitalen Zeitalter ein zentraler Bestandteil des Schulunterrichts bleiben. Klassiker haben sich über Generationen als kulturell wertvoll erwiesen und bieten zeitlose Einsichten in die menschliche Natur. Goethes 'Faust' etwa behandelt fundamentale Fragen nach dem Sinn des Lebens und den Grenzen menschlichen Strebens – Themen, die auch heutige Jugendliche beschäftigen. Zudem vermittelt die Auseinandersetzung mit anspruchsvoller Literatur wichtige sprachliche und analytische Kompetenzen. Studien belegen, dass regelmäßiges Lesen komplexer Texte das kritische Denken fördert und den Wortschatz erweitert. Allerdings müssen Lehrkräfte neue Wege finden, um diese Werke für die digitale Generation zugänglich zu machen. Der Einsatz moderner Medien und die Herstellung von Bezügen zur Lebenswelt der Schülerinnen und Schüler können dabei helfen. Letztlich geht es nicht darum, zwischen klassischer Literatur und digitalen Medien zu wählen, sondern darum, beides sinnvoll zu verbinden."</p>
+                        
+                        <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen/verbergen</button>
+                        
+                        <div id="solution3" class="solution">
+                            <p><strong>Lösung:</strong> Eine mögliche grafische Darstellung der Argumentationsstruktur:</p>
+                            <pre>
+Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
+|
+|--- Argument 1: Klassiker haben zeitlosen kulturellen Wert
+|    | — Beleg: Goethes "Faust" behandelt universelle Themen
+|
+|--- Argument 2: Förderung wichtiger Kompetenzen
+|    | — Beleg: Studien zeigen Förderung des kritischen Denkens und Wortschatzerweiterung
+|
+|--- Einwand (implizit): Klassiker könnten für heutige Schüler schwer zugänglich sein
+|    | — Gegenargument: Moderne Vermittlungsmethoden können helfen
+|    | — Beispiele: Einsatz digitaler Medien, Bezüge zur Lebenswelt
+|
+|--- Schlussfolgerung: Integration von klassischer Literatur und digitalen Medien
+                            </pre>
+                            <p>Die Argumentation folgt dem Muster: These → Begründungen → Antizipation möglicher Einwände → modifizierte Schlussfolgerung. Diese Struktur ist typisch für eine ausgewogene, differenzierte Argumentation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Zusammenfassung:</strong><br>
+                    Die Argumentationsanalyse ist ein zentraler Bestandteil der Textanalyse. Sie hilft dir, die logische Struktur eines Textes zu erkennen und zu bewerten. Achte auf die verschiedenen Argumentationsmuster, die Typen von Argumenten und mögliche Argumentationsfehler. Mit Übung wirst du immer besser darin, die Überzeugungskraft von Argumentationen einzuschätzen.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+
+        // Collapsible functionality
+        const coll = document.getElementsByClassName("collapsible");
+        for (let i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
