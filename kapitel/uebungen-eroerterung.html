@@ -117,12 +117,16 @@
         }
 
         .solution {
-            display: none;
+            display: none; /* Standardmäßig ausgeblendet */
             background: #e8f4f8;
             border-radius: 8px;
             padding: 20px;
             margin-top: 15px;
             border-left: 4px solid #3498db;
+        }
+
+        .solution.show {
+            display: block; /* Wird durch JavaScript eingeblendet */
         }
 
         .solution h4 {
@@ -310,12 +314,14 @@
     <script>
         function toggleSolution(id) {
             const solution = document.getElementById(id);
-            if (solution.style.display === 'block') {
-                solution.style.display = 'none';
-                event.target.textContent = 'Lösung anzeigen';
+            const button = event.target;
+            
+            if (solution.classList.contains('show')) {
+                solution.classList.remove('show');
+                button.textContent = 'Lösung anzeigen';
             } else {
-                solution.style.display = 'block';
-                event.target.textContent = 'Lösung ausblenden';
+                solution.classList.add('show');
+                button.textContent = 'Lösung ausblenden';
             }
         }
     </script>

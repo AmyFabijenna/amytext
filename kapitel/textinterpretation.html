@@ -159,6 +159,21 @@
             border-radius: 8px;
             margin: 10px 0;
             transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .collapsible::after {
+            content: '\002B'; /* Pluszeichen */
+            color: #2c3e50;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s;
+        }
+
+        .active::after {
+            content: "\2212"; /* Minuszeichen */
+            transform: rotate(0deg);
         }
 
         .active, .collapsible:hover {
@@ -623,9 +638,9 @@
             }
         }
 
-        // Öffne das erste Kapitel automatisch
+        // Alle Collapsibles standardmäßig geschlossen lassen
         window.onload = function() {
-            document.querySelector('.collapsible').click();
+            // Kein automatisches Öffnen des ersten Kapitels
         };
     </script>
 </body>

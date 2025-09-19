@@ -385,7 +385,7 @@
                                 <strong>Falsch:</strong> "Der Autor benutzt viele sprachliche Mittel."
                             </div>
                             <div class="example-correct">
-                                <strong>Richtig:</strong> "Der Autor setzt gezielt rhetorische Fragen ein, um die Leser zur Selbstreflexion anzuregen, und verwendet Metaphern aus dem Bereich der Unterdrückung ('Tyrannei', 'Knechtschaft'), um die negativen Aspekte der Digitalisierung zu betonen."
+                                <strong>Richtig:</strong> "Der Autor setzt gezielt rhetorische Fragen eins, um die Leser zur Selbstreflexion anzuregen, und verwendet Metaphern aus dem Bereich der Unterdrückung ('Tyrannei', 'Knechtschaft'), um die negativen Aspekte der Digitalisierung zu betonen."
                             </div>
                         </div>
                     </div>
@@ -530,6 +530,21 @@
     </main>
 
     <script>
+        // Accordions standardmäßig geschlossen halten
+        document.addEventListener('DOMContentLoaded', function() {
+            // Alle Accordion-Inhalte ausblenden
+            const accordionContents = document.querySelectorAll('.accordion-content');
+            accordionContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Alle Lösungen standardmäßig ausblenden
+            const solutions = document.querySelectorAll('.solution-content');
+            solutions.forEach(solution => {
+                solution.style.display = 'none';
+            });
+        });
+
         function toggleAccordion(element) {
             const content = element.nextElementSibling;
             const icon = element.querySelector('.accordion-icon');

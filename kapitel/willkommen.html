@@ -454,6 +454,14 @@
                 icon.textContent = '+';
             }
         }
+        
+        // Alle Accordion-Inhalte standardmäßig schließen
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionContents = document.querySelectorAll('.accordion-content');
+            accordionContents.forEach(content => {
+                content.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>

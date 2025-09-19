@@ -579,11 +579,11 @@
                         <h4>Übung 1: Erzählperspektive bestimmen</h4>
                         <p>Analysiere die Erzählperspektive im folgenden Textauszug aus "Die Nachbarn":</p>
                         <div class="example">
-                            <p>"Sie beobachtete sie jeden Tag. Morgens um sieben Uhr dreißig verließ er das Haus, immer im gleichen grauen Anzug, immer mit der gleichen braunen Aktentasche. Sie blieb zurück, eine schlanke Gestalt hinter den Spitzengardinen."</p>
+                            <p>"Sie beobachtete sie jeden Abend. Punkt sieben Uhr zog sie die Vorhänge zu, und das Licht im Wohnzimmer erlosch. Was mochte der Grund für diese seltsame Gewohnheit sein?"</p>
                         </div>
                         <button class="btn" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
                         <div id="solution2" class="solution">
-                            <p><strong>Erzählperspektive:</strong> Personale Erzählperspektive aus Julias Sicht. Die Geschichte wird durch ihre Augen erzählt ("Sie beobachtete"), aber in der dritten Person. Der Erzähler beschränkt sich auf das, was Julia wahrnimmt, ohne die Gedanken der beobachteten Figuren zu kennen.</p>
+                            <p><strong>Erzählperspektive:</strong> Personale Erzählperspektive. Die Geschichte wird aus der Sicht einer beobachtenden Figur erzählt ("Sie beobachtete"), die sich Gedanken über das Gesehene macht ("Was mochte der Grund sein?").</p>
                         </div>
                     </div>
                     
@@ -628,18 +628,26 @@
             }
         }
 
-        var coll = document.getElementsByClassName("collapsible");
-        for (var i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } 
-            });
-        }
+        // Alle Collapsibles standardmäßig geschlossen lassen
+        document.addEventListener('DOMContentLoaded', function() {
+            var coll = document.getElementsByClassName("collapsible");
+            for (var i = 0; i < coll.length; i++) {
+                // Setze max-height auf 0 für alle Inhalte
+                var content = coll[i].nextElementSibling;
+                content.style.maxHeight = null;
+                
+                // Event-Listener für Klick hinzufügen
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } 
+                });
+            }
+        });
     </script>
 </body>
 </html>

@@ -398,7 +398,7 @@
                             <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
                             <div class="solution">
                                 <p>Reimschema: aabb (Paarreim)</p>
-                                <p>Hinweis: "hin" и "Sinn" bilden einen Reim, "stehn" und "schön" bilden einen Reim.</p>
+                                <p>Hinweis: "hin" und "Sinn" bilden einen Reim, "stehn" und "schön" bilden einen Reim.</p>
                             </div>
                         </div>
                     </div>
@@ -572,12 +572,13 @@
             button.textContent = solution.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
         }
 
-        // Automatisch das erste Accordion öffnen
+        // Alle Accordions sind standardmäßig geschlossen
         document.addEventListener('DOMContentLoaded', function() {
-            const firstAccordion = document.querySelector('.accordion-header');
-            if (firstAccordion) {
-                toggleAccordion(firstAccordion);
-            }
+            // Setze alle Accordion-Icons auf '+'
+            const accordionIcons = document.querySelectorAll('.accordion-icon');
+            accordionIcons.forEach(icon => {
+                icon.textContent = '+';
+            });
         });
     </script>
 </body>

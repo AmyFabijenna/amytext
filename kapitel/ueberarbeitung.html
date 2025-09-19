@@ -398,7 +398,7 @@
                                     
                                     <p>In seiner Argumentationsstruktur entwickelt der Autor zunächst die These der scheinbaren Machtlosigkeit des Einzelnen, stellt dieser dann die Bedeutung vieler kleiner Handlungen entgegen und führt schließlich zur Synthese, dass sowohl individuelle als auch kollektive Maßnahmen notwendien sind. Diese dialektische Struktur ermöglicht eine ausgewogene Betrachtung der Verantwortungsfrage.</p>
                                     
-                                    <p>Am Ende plädiert der Autor für eine "doppelte Strategie", die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet. Diese Schlussfolgerung erscheint angesichts der vielschichtigen Herausforderungen des Klimawandels überzeugend, da sie weder in Fatalismus verfällt noch die Komplexität des Problems unterschätzt."</p>
+                                    <p>Am Ende plädiert der Autor für eine "doppelte Strategie", die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet. Diese Schlussfolgerung erscheint angesichts der vielschichtigen Herausforderungen des Klimawandels überzeugend, da sie weder in Fatalismus verfällt noch die Komplexität des Probleme unterschätzt."</p>
                                     
                                     <h5>Verbesserungen im Überblick:</h5>
                                     <ul>
@@ -465,7 +465,7 @@
                                     <strong>(-)</strong> Die Wirkungsanalyse der Hyperbel bleibt etwas oberflächlich.</p>
                                     
                                     <h6>3. Untersuchung der Argumentationsstruktur:</h6>
-                                    <p><strong>(+)</strong> Die grundlegende Struktur des Textes wird erkannt und benannt.<br>
+                                    <p><strong>(+)</strong> Die grundlegende Struktur des Textes wird erkannt и benannt.<br>
                                     <strong>(+)</strong> Der logische Aufbau der Argumentation wird nachvollziehbar beschrieben.<br>
                                     <strong>(-)</strong> Die Analyse könnte die Argumentationstechniken des Autors genauer untersuchen (z.B. Einsatz von Beispielen, Autoritätsargumenten).</p>
                                     
@@ -489,7 +489,7 @@
                                     </ol>
                                     
                                     <h6>Gesamtbewertung:</h6>
-                                    <p>Die Textanalyse zeigt ein gutes Verständnis des Originaltextes und seiner wichtigsten Merkmale. Die Struktur der Analyse ist klar und nachvollziehbar. Besonders gelungen ist die Identifikation verschiedener sprachlicher Mittel und der Grundstruktur der Argumentation. Für eine noch bessere Analyse solltest du deine Be
+                                    <p>Die Textanalyse zeigt ein gutes Verständnis des Originaltextes und seiner wichtigsten Merkmale. Die Struktur der Analyse ist klar und nachvollziehbar. Besonders gelungen ist die Identifikation verschiedener sprachlicher Mittel und der Grundstruktur der Argumentation. Für eine noch bessere Analyse solltest du deine Belege mit direkten Zitaten untermauern und die Wirkung der sprachlichen Mittel noch detaillierter analysieren.</p>
                                 </div>
                             </div>
                         </div>
@@ -500,6 +500,7 @@
     </main>
 
     <script>
+        // Funktion zum Öffnen und Schließen der Accordion-Elemente
         function toggleAccordion(element) {
             const content = element.nextElementSibling;
             const icon = element.querySelector('.accordion-icon');
@@ -508,10 +509,33 @@
             icon.textContent = content.classList.contains('active') ? '−' : '+';
         }
 
+        // Funktion zum Anzeigen/Verbergen der Lösungen
         function toggleSolution(id) {
             const solution = document.getElementById(id);
             solution.classList.toggle('active');
+            
+            // Button-Text ändern
+            const button = solution.previousElementSibling;
+            if (solution.classList.contains('active')) {
+                button.textContent = 'Lösung ausblenden';
+            } else {
+                button.textContent = 'Lösung anzeigen';
+            }
         }
+
+        // Beim Laden der Seite alle Accordion-Elemente schließen
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionContents = document.querySelectorAll('.accordion-content');
+            const accordionIcons = document.querySelectorAll('.accordion-icon');
+            
+            accordionContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            accordionIcons.forEach(icon => {
+                icon.textContent = '+';
+            });
+        });
     </script>
 </body>
 </html>

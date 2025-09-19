@@ -118,6 +118,7 @@
             margin-bottom: 10px;
             border-radius: 5px;
             font-weight: bold;
+            position: relative;
         }
 
         .active, .accordion:hover {
@@ -128,8 +129,8 @@
             content: '\002B';
             color: #777;
             font-weight: bold;
-            float: right;
-            margin-left: 5px;
+            position: absolute;
+            right: 18px;
         }
 
         .active:after {
@@ -509,9 +510,12 @@
         // Accordion functionality
         const acc = document.getElementsByClassName("accordion");
         for (let i = 0; i < acc.length; i++) {
+            // Standardmäßig alle Panels geschlossen halten
+            const panel = acc[i].nextElementSibling;
+            panel.style.maxHeight = null;
+            
             acc[i].addEventListener("click", function() {
                 this.classList.toggle("active");
-                const panel = this.nextElementSibling;
                 if (panel.style.maxHeight) {
                     panel.style.maxHeight = null;
                 } else {

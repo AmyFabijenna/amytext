@@ -338,7 +338,7 @@
                             <ol>
                                 <li>"Der Wind heulte um die Ecken des alten Hauses. Die Fensterläden klapperten unruhig, als wollten sie eine Warnung aussprechen. Im Kamin knisterte das letzte Holzscheit, und die Schatten tanzten an den Wänden wie ruhelose Geister."</li>
                                 <li>"Warum schweigen wir? Warum schauen wir weg? Warum akzeptieren wir das Unakzeptable? Es ist an der Zeit, unsere Stimme zu erheben, unsere Augen zu öffnen und für das einzustehen, was richtig ist!"</li>
-                                <li>"Die Erinnerung ist ein verschlungener Pfad durch einen dichten Wald. Manche Wege sind breit und sonnendurchflutet, andere schmal und dunkel. Manchmal verirren wir uns, manchmal finden wir unerwartete Lichtungen. Und immer wieder stoßen wir auf Abzweigungen, an denen wir entscheiden müssen, welcher Version unserer Geschichte wir folgen wollen."</li>
+                                <li>"Die Erinnerung ist ein verschlungener Pfad durch einen dichten Wald. Manche Wege sind breit und sonnendurchflutet, andere schmal und dunkel. Manchmal verirren wir uns, manchmal finden wir unerwartete Lichtungen. And immer wieder stoßen wir auf Abzweigungen, an denen wir entscheiden müssen, welcher Version unserer Geschichte wir folgen wollen."</li>
                             </ol>
                         </div>
                         <button class="toggle-button" onclick="toggleSolution(this)">Lösung anzeigen</button>
@@ -407,6 +407,7 @@
     </main>
 
     <script>
+        // Funktion zum Umschalten der Lösungsabschnitte
         function toggleSolution(button) {
             button.classList.toggle('active');
             const content = button.nextElementSibling;
@@ -419,6 +420,17 @@
                 button.textContent = button.textContent.replace('ausblenden', 'anzeigen');
             }
         }
+        
+        // Stelle sicher, dass alle Lösungsabschnitte beim Laden der Seite geschlossen sind
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-button');
+            toggleButtons.forEach(button => {
+                button.classList.remove('active');
+                const content = button.nextElementSibling;
+                content.classList.remove('active');
+                button.textContent = button.textContent.replace('ausblenden', 'anzeigen');
+            });
+        });
     </script>
 </body>
 </html>

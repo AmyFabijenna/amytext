@@ -392,7 +392,7 @@
                         </ul>
                         
                         <div class="example-box">
-                            <strong>Beispiel:</strong> "Die Intention der Autorin scheint zu sein, die Lesenden für die negativen Auswirkungen permanenter digitaler Erreichbarkeit zu sensibilisieren und zu einem bewussteren Umgang mit digitalen Medien anzuregen."
+                            <strong>Beispiel:</strong> "Die Intention der Autorin scheint zu sein, die Lesenden für die negativen Auswirkungen permanenter digitale Erreichbarkeit zu sensibilisieren und zu einem bewussteren Umgang mit digitalen Medien anzuregen."
                         </div>
                     </div>
                 </div>
@@ -444,11 +444,15 @@
     </main>
 
     <script>
-        // Collapsible functionality
+        // Collapsible functionality - start with all closed
         var coll = document.getElementsByClassName("collapsible");
         var i;
 
         for (i = 0; i < coll.length; i++) {
+            // Start with all content closed
+            var content = coll[i].nextElementSibling;
+            content.style.maxHeight = null;
+            
             coll[i].addEventListener("click", function() {
                 this.classList.toggle("active");
                 var content = this.nextElementSibling;

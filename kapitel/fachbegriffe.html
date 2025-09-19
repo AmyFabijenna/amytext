@@ -509,14 +509,28 @@
     </main>
 
     <script>
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
+        // Funktion zum Öffnen und Schließen der Accordions
         function toggleAccordion(header) {
             const content = header.nextElementSibling;
             const icon = header.querySelector('.accordion-icon');
             
+            // Schließe alle anderen Accordions
+            const allContents = document.querySelectorAll('.accordion-content');
+            const allIcons = document.querySelectorAll('.accordion-icon');
+            
+            allContents.forEach(item => {
+                if (item !== content && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            allIcons.forEach(item => {
+                if (item !== icon && item.textContent === '-') {
+                    item.textContent = '+';
+                }
+            });
+            
+            // Öffne oder schließe das aktuelle Accordion
             content.classList.toggle('active');
             
             if (content.classList.contains('active')) {
@@ -526,10 +540,27 @@
             }
         }
 
+        // Funktion zum Anzeigen der Lösungen
         function toggleSolution(solutionId) {
             const solution = document.getElementById(solutionId);
             solution.classList.toggle('active');
+            
+            // Ändere den Text des Buttons
+            const button = solution.previousElementSibling;
+            if (solution.classList.contains('active')) {
+                button.textContent = 'Lösung ausblenden';
+            } else {
+                button.textContent = 'Lösung anzeigen';
+            }
         }
+
+        // Schließe alle Accordions beim Laden der Seite
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionContents = document.querySelectorAll('.accordion-content');
+            accordionContents.forEach(content => {
+                content.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>

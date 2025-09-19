@@ -71,8 +71,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 0;
             cursor: pointer;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .epoche-header:hover {
+            background-color: #f5f5f5;
+            border-radius: 5px;
         }
 
         .epoche-header h3 {
@@ -83,6 +90,7 @@
         .epoche-content {
             display: none;
             margin-top: 15px;
+            padding: 10px;
         }
 
         .epoche-content.active {
@@ -485,7 +493,7 @@
                     <ol>
                         <li>"Die Natur allein ist unendlich reich, und sie allein bildet den großen Künstler."</li>
                         <li>"Der Mensch ist frei geschaffen, ist frei, und würd' er in Ketten geboren."</li>
-                        <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, was nicht notwendig geschehen müsste."</li>
+                        <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, что nicht notwendig geschehen müsste."</li>
                     </ol>
                     <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-1')">Lösung anzeigen</button>
                     <div class="loesung" id="epochen-uebung-1">
@@ -539,6 +547,14 @@
             const button = loesung.previousElementSibling;
             button.textContent = loesung.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
         }
+
+        // Alle Epochen-Cards standardmäßig schließen
+        document.addEventListener('DOMContentLoaded', function() {
+            const allEpochen = document.querySelectorAll('.epoche-content');
+            allEpochen.forEach(epoche => {
+                epoche.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>

@@ -296,7 +296,23 @@
         function toggleSolution(id) {
             const solution = document.getElementById(id);
             solution.classList.toggle('show');
+            
+            // Button-Text ändern
+            const button = solution.previousElementSibling;
+            if (solution.classList.contains('show')) {
+                button.textContent = 'Lösung verbergen';
+            } else {
+                button.textContent = 'Lösung anzeigen';
+            }
         }
+        
+        // Alle Lösungsabschnitte standardmäßig ausblenden
+        document.addEventListener('DOMContentLoaded', function() {
+            const solutions = document.querySelectorAll('.solution-content');
+            solutions.forEach(solution => {
+                solution.classList.remove('show');
+            });
+        });
     </script>
 </body>
 </html>

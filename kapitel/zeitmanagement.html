@@ -172,6 +172,21 @@
             margin-bottom: 10px;
             border-radius: 5px;
             font-weight: bold;
+            position: relative;
+        }
+
+        .accordion:after {
+            content: '\002B'; /* Pluszeichen */
+            color: #777;
+            font-weight: bold;
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .active:after {
+            content: "\2212"; /* Minuszeichen */
         }
 
         .active, .accordion:hover {
@@ -344,7 +359,7 @@
                             
                             <div class="tip-box">
                                 <strong>Textauszug:</strong><br>
-                                "Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung ist Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."
+                                "Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung is Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."
                             </div>
                             
                             <p>Nach 5 Minuten notiere:</p>
@@ -501,9 +516,14 @@
             }
         }
 
-        // Accordion-Funktionalität
+        // Accordion-Funktionalität - standardmäßig geschlossen
         const acc = document.getElementsByClassName("accordion");
         for (let i = 0; i < acc.length; i++) {
+            // Setze alle Panels standardmäßig auf "none" (geschlossen)
+            const panel = acc[i].nextElementSibling;
+            panel.style.display = "none";
+            
+            // Event-Listener für Klick-Ereignisse
             acc[i].addEventListener("click", function() {
                 this.classList.toggle("active");
                 const panel = this.nextElementSibling;

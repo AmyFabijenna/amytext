@@ -114,12 +114,16 @@
         }
 
         .solution-content {
-            display: none;
+            display: none; /* Standardmäßig ausgeblendet */
             background: #e8f4f8;
             border-radius: 8px;
             padding: 15px;
             margin-top: 15px;
             border-left: 3px solid #3498db;
+        }
+
+        .solution-content.show {
+            display: block; /* Wird angezeigt, wenn die Klasse 'show' hinzugefügt wird */
         }
 
         .tip-box {
@@ -165,7 +169,7 @@
                             <p>Identifiziere in den folgenden Textausschnitten die verwendeten sprachlichen Mittel:</p>
                             <p>a) "Die Entscheidung fiel schwer wie Blei."</p>
                             <p>b) "Die Straßen der Stadt schliefen noch, während die ersten Sonnenstrahlen über die Dächer krochen."</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                            <button class="solution-toggle" onclick="toggleSolution('solution1', this)">Lösung anzeigen</button>
                             <div id="solution1" class="solution-content">
                                 <p><strong>Lösung:</strong></p>
                                 <p>a) Vergleich: "schwer wie Blei" - Die Entscheidung wird mit einem sehr schweren Material verglichen.</p>
@@ -180,7 +184,7 @@
                             <div class="example-title">Aufgabe:</div>
                             <p>Analysiere die Wirkung des sprachlichen Mittels im folgenden Satz:</p>
                             <p>"Die Politik ist ein wildes Meer; die Wellen schlagen hoch, die Stürme toben, und das Staatsschiff taumelt zwischen den Klippen."</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                            <button class="solution-toggle" onclick="toggleSolution('solution2', this)">Lösung anzeigen</button>
                             <div id="solution2" class="solution-content">
                                 <p><strong>Lösung:</strong></p>
                                 <p>Die ausgedehnte Metapher (auch: Allegorie) vom "wilden Meer" für die Politik erzeugt ein Bild von Gefahr, Unberechenbarkeit und Chaos. Die Politik wird als unkontrollierbare Naturgewalt dargestellt, während das "Staatsschiff" als fragiles Gefährt erscheint. Die Wirkung ist dramatisierend und vermittelt ein Gefühl der Bedrohung und Instabilität. Der Autor könnte damit die Unsicherheit politischer Entscheidungsprozesse oder eine konkrete politicale Krise veranschaulichen wollen.</p>
@@ -204,7 +208,7 @@
                                 <li>Schlussfolgerungen</li>
                             </ul>
                             <p>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel. Besonders alarmierend ist, dass viele dieser Entwicklungen sich selbst verstärken können. Wenn etwa das arktische Eis schmilzt, reflektiert weniger weiße Oberfläche das Sonnenlicht, und die Erwärmung beschleunigt sich. Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert. Doch die Kosten des Nichthandelns übersteigen bei weitem die Investitionen, die jetzt nötig wären. Es ist daher nicht nur eine ökologische, sondern auch eine ökonomische Notwendigkeit, den CO₂-Ausstoß drastisch zu reduzieren und auf erneuerbare Energien umzusteigen."</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                            <button class="solution-toggle" onclick="toggleSolution('solution3', this)">Lösung anzeigen</button>
                             <div id="solution3" class="solution-content">
                                 <p><strong>Lösung:</strong></p>
                                 <ul>
@@ -241,7 +245,7 @@
                         <div class="example-box">
                             <div class="example-title">Aufgabe:</div>
                             <p>Verfasse eine vollständige Interpretation der Kurzgeschichte "San Salvador" von Peter Bichsel.</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution4')">Musterlösung anzeigen</button>
+                            <button class="solution-toggle" onclick="toggleSolution('solution4', this)">Musterlösung anzeigen</button>
                             <div id="solution4" class="solution-content">
                                 <p><strong>Musterlösung:</strong></p>
                                 <p><strong>Einleitung:</strong> Die Kurzgeschichte "San Salvador" von Peter Bichsel, erschienen 1963, thematisiert das Schicksal einer unglücklichen Ehe und die daraus resultierende vorherrschende Traurigkeit und das Verlorensein im Alltag der gesamten Familie. Durch die Darstellung der Hauptfigur und ihrer Verwirrung wird vermutlich beabsichtigt, die Leser für die negativen Auswirkungen eines Verharrens in einer gescheiterten Ehe zu sensibilisieren und zum kritischen Nachdenken über die eigenen Beziehungen anzuregen.</p>
@@ -266,7 +270,7 @@
                         <div class="example-box">
                             <div class="example-title">Aufgabe:</div>
                             <p>Analysiere die Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger.</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution5')">Musterlösung anzeigen</button>
+                            <button class="solution-toggle" onclick="toggleSolution('solution5', this)">Musterlösung anzeigen</button>
                             <div id="solution5" class="solution-content">
                                 <p><strong>Musterlösung:</strong></p>
                                 <p><strong>Einleitung:</strong> In der Kolumne "Die Tyrannei der digitalen Erreichbarkeit", veröffentlicht im "Standard" (März 2025), setzt sich die Autorin Maria Berger kritisch mit den Auswirkungen der ständigen digitalen Verfügbarkeit auf zwischenmenschliche Beziehungen und die psychische Gesundheit auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger ihre These, dass die permanente Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist.</p>
@@ -292,7 +296,7 @@
                             <div class="example-title">Aufgabe:</div>
                             <p>Lies den folgenden Textausschnitt und nimm dir exakt 5 Minuten Zeit, um die wichtigsten Aspekte zu identifizieren:</p>
                             <p>"Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung ist Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution6')">Musterlösung anzeigen</button>
+                            <button class="solution-toggle" onclick="toggleSolution('solution6', this)">Musterlösung anzeigen</button>
                             <div id="solution6" class="solution-content">
                                 <p><strong>Musterlösung (5-Minuten-Analyse):</strong></p>
                                 <ol>
@@ -320,14 +324,14 @@
     </main>
 
     <script>
-        function toggleSolution(id) {
+        function toggleSolution(id, button) {
             const solution = document.getElementById(id);
-            if (solution.style.display === 'block') {
-                solution.style.display = 'none';
-                event.target.textContent = 'Lösung anzeigen';
+            if (solution.classList.contains('show')) {
+                solution.classList.remove('show');
+                button.textContent = 'Lösung anzeigen';
             } else {
-                solution.style.display = 'block';
-                event.target.textContent = 'Lösung ausblenden';
+                solution.classList.add('show');
+                button.textContent = 'Lösung ausblenden';
             }
         }
     </script>

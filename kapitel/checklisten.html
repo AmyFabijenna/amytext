@@ -333,7 +333,7 @@
                         <p><strong>Überarbeitete Version:</strong></p>
                         <p>"Der vorliegende Text thematisiert die Verantwortung des Einzelnen und der Gesellschaft im Kontext des Klimawandels. Der Autor argumentiert differenziert, dass die globale Klimakrise sowohl individuelles Handeln als auch strukturelle Veränderungen erfordert.</p>
                         <p>Als sprachliche Mittel setzt der Verfasser unter anderem ein direktes Zitat ein ("Was kann ich schon tun?"), um die verbreitete Resignation vieler Menschen authentisch darzustellen. Zudem verwendet er die Metapher des "ökologischen Fußabdrucks", die abstrakte Umweltauswirkungen veranschaulicht und seine These unterstützt, dass auch kleine individuelle Entscheidungen in ihrer Summe bedeutsam sind.</p>
-                        <p>In seiner Argumentationsstruktur entwickelt der Autor zunächst die These der scheinbaren Machtlosigkeit des Einzelnen, stellt dieser dann die Bedeutung vieler kleinen Handlungen entgegen und führt schließlich zur Synthese, dass sowohl individuelle als auch kollektive Maßnahmen notwendig sind. Diese dialektische Struktur ermöglicht eine ausgewogene Betrachtung der Verantwortungsfrage.</p>
+                        <p>In seiner Argumentationsstruktur entwickelt der Autor zunächst die These der scheinbaren Machtlosigkeit des Einzelnen, stellt dieser dann die Bedeutung vieler kleinen Handlungen entgegen und führt schließlich zur Synthese, dass sowohl individuelle als auch kollektive Maßnahmen notwendien sind. Diese dialektische Struktur ermöglicht eine ausgewogene Betrachtung der Verantwortungsfrage.</p>
                         <p>Am Ende plädiert der Autor für eine "doppelte Strategie", die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet. Diese Schlussfolgerung erscheint angesichts der vielschichtigen Herausforderungen des Klimawandels überzeugend, da sie weder in Fatalismus verfällt noch die Komplexität des Problem unterschätzt."</p>
                     </div>
                 </div>
@@ -371,38 +371,31 @@
     </div>
 
     <script>
-        function toggleChecklist(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('.toggle-icon');
-            
-            content.classList.toggle('active');
-            
-            if (content.classList.contains('active')) {
-                icon.textContent = '▲';
-            } else {
-                icon.textContent = '▼';
-            }
+    function toggleChecklist(element) {
+        const content = element.nextElementSibling;
+        const icon = element.querySelector('.toggle-icon');
+        
+        content.classList.toggle('active');
+        
+        if (content.classList.contains('active')) {
+            icon.textContent = '▲';
+        } else {
+            icon.textContent = '▼';
         }
+    }
 
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            const button = solution.previousElementSibling;
-            
-            if (solution.style.display === 'block') {
-                solution.style.display = 'none';
-                button.textContent = 'Lösung anzeigen';
-            } else {
-                solution.style.display = 'block';
-                button.textContent = 'Lösung ausblenden';
-            }
+    function toggleSolution(id) {
+        const solution = document.getElementById(id);
+        const button = solution.previousElementSibling;
+        
+        if (solution.style.display === 'block') {
+            solution.style.display = 'none';
+            button.textContent = 'Lösung anzeigen';
+        } else {
+            solution.style.display = 'block';
+            button.textContent = 'Lösung ausblenden';
         }
-
-        // Alle Checklisten standardmäßig öffnen
-        window.onload = function() {
-            document.querySelectorAll('.checklist-header').forEach(header => {
-                toggleChecklist(header);
-            });
-        };
+    }
     </script>
 </body>
 </html>

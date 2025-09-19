@@ -176,6 +176,19 @@
             margin: 10px 0;
             border-radius: 5px;
             transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .collapsible::after {
+            content: '\002B'; /* Pluszeichen */
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            right: 15px;
+        }
+
+        .collapsible.active::after {
+            content: "\2212"; /* Minuszeichen */
         }
 
         .active, .collapsible:hover {
@@ -434,6 +447,13 @@
         var coll = document.getElementsByClassName("collapsible");
         var i;
 
+        // Initialisiere alle Collapsibles als geschlossen
+        for (i = 0; i < coll.length; i++) {
+            var content = coll[i].nextElementSibling;
+            content.style.maxHeight = null;
+        }
+
+        // Event-Listener für Klick
         for (i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function() {
                 this.classList.toggle("active");

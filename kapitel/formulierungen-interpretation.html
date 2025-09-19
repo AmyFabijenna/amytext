@@ -168,7 +168,7 @@
             content: "\2212";
         }
 
-        .content {
+        .collapsible-content {
             padding: 0 18px;
             max-height: 0;
             overflow: hidden;
@@ -257,7 +257,7 @@
                 </div>
 
                 <button class="collapsible" id="einleitung">Einleitungsformulierungen</button>
-                <div class="content">
+                <div class="collapsible-content">
                     <h3>Formulierungen für die Einleitung einer Interpretation</h3>
                     <ul class="formulation-list">
                         <li>"Der vorliegende Text '[Titel]' von [Autor], erschienen im Jahr [Jahr], thematisiert..."</li>
@@ -274,7 +274,7 @@
                 </div>
 
                 <button class="collapsible" id="deutungshypothese">Deutungshypothesen formulieren</button>
-                <div class="content">
+                <div class="collapsible-content">
                     <h3>Formulierungen für Deutungshypothesen</h3>
                     <ul class="formulation-list">
                         <li>"Die vorliegende Interpretation geht davon aus, dass der Autor mit dem Text beabsichtigt, [Aussage]."</li>
@@ -291,7 +291,7 @@
                 </div>
 
                 <button class="collapsible" id="textbelege">Textbelege einbinden</button>
-                <div class="content">
+                <div class="collapsible-content">
                     <h3>Formulierungen zum Einbinden von Textbelegen</h3>
                     <ul class="formulation-list">
                         <li>"Diese Interpretation wird gestützt durch die Textstelle '...' (Z. X), die zeigt, dass..."</li>
@@ -299,7 +299,7 @@
                         <li>"Die Aussage wird besonders deutlich in der Passage '...' (Z. X-Y), in der..."</li>
                         <li>"Wie der Autor in Zeile X formuliert: '...', wird hier die [Aussage] verdeutlicht."</li>
                         <li>"Diese Deutung lässt sich anhand mehrerer Textstellen belegen, beispielsweise '...' (Z. X) und '...' (Z. Y)."</li>
-                        <li>"Die metaphoricale Formulierung '...' (Z. X) unterstreicht die Interpretation, dass..."</li>
+                        <li>"Die metaphoricale Formulierung '...' (Z. X) understreicht die Interpretation, dass..."</li>
                     </ul>
                     
                     <div class="example-box">
@@ -309,7 +309,7 @@
                 </div>
 
                 <button class="collapsible" id="interpretation">Interpretationsformulierungen</button>
-                <div class="content">
+                <div class="collapsible-content">
                     <h3>Formulierungen für die Interpretation</h3>
                     <ul class="formulation-list">
                         <li>"Auf einer Metacbene könnte der Text als Kritik an... verstanden werden."</li>
@@ -330,7 +330,7 @@
                 </div>
 
                 <button class="collapsible" id="schluss">Schlussformulierungen</button>
-                <div class="content">
+                <div class="collapsible-content">
                     <h3>Formulierungen für den Schluss einer Interpretation</h3>
                     <ul class="formulation-list">
                         <li>"In der Gesamtbetrachtung erweist sich der Text als vielschichtiges Werk, das..."</li>
@@ -352,7 +352,7 @@
                 </div>
 
                 <button class="collapsible" id="uebungen">Übungen zu Interpretationsformulierungen</button>
-                <div class="content">
+                <div class="collapsible-content">
                     <h3>Übungen mit Lösungen</h3>
                     
                     <div class="exercise-box">
@@ -426,29 +426,13 @@
             });
         }
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // If it's a collapsible section, open it first
-                    if (targetElement.previousElementSibling && targetElement.previousElementSibling.classList.contains('collapsible')) {
-                        targetElement.previousElementSibling.classList.add('active');
-                        targetElement.style.maxHeight = targetElement.scrollHeight + "px";
-                    }
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 20,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+        // Ensure all collapsibles are closed by default
+        window.onload = function() {
+            var contents = document.getElementsByClassName("collapsible-content");
+            for (i = 0; i < contents.length; i++) {
+                contents[i].style.maxHeight = null;
+            }
+        };
 
         // Toggle solution boxes
         function toggleSolution(id) {

@@ -155,6 +155,11 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s;
+        }
+
+        .exercise-header:hover {
+            background-color: #e8e8e8;
         }
 
         .exercise-header h3 {
@@ -180,6 +185,11 @@
             cursor: pointer;
             margin-top: 15px;
             font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+
+        .solution-toggle:hover {
+            background: #2980b9;
         }
 
         .solution {
@@ -460,89 +470,4 @@
                         <h3>Übung 8: Checkliste für die Textinterpretation</h3>
                         <span>+</span>
                     </div>
-                    <div class="exercise-content">
-                        <p><strong>Aufgabe:</strong> Überprüfe deine fertige Textinterpretation anhand dieser Checkliste:</p>
-                        <form id="checklist-form">
-                            <label><input type="checkbox"> Die Einleitung enthält alle notwendigen formalen Informationen zum Text.</label><br>
-                            <label><input type="checkbox"> Die Inhaltsangabe ist knapp, sachlich und in der richtigen zeitlichen Reihenfolge.</label><br>
-                            <label><input type="checkbox"> Die Analyse untersucht sowohl inhaltliche als auch formale Aspekte des Textes.</label><br>
-                            <label><input type="checkbox"> Die Deutungshypothese ist klar formuliert und enthält eine Vermutung zur Intention des Autors.</label><br>
-                            <label><input type="checkbox"> Die Interpretation ist durch Zitate aus dem Text belegt.</label><br>
-                            <label><input type="checkbox"> Im Schluss werden die Erkenntnisse zusammengefasst und die Deutungshypothese überprüft.</label><br>
-                            <label><input type="checkbox"> Der Schluss enthält eine persönliche Meinung und einen Gegenwartsbezug.</label><br>
-                            <label><input type="checkbox"> Die Textinterpretation ist sprachlich korrekt und angemessen formuliert.</label><br>
-                            <label><input type="checkbox"> Die Zitate sind korrekt in den Text eingebunden und mit Zeilenangaben versehen.</label><br>
-                            <label><input type="checkbox"> Die Textinterpretation folgt einem logischen Aufbau.</label><br>
-                        </form>
-                        <p>Zähle deine angekreuzten Punkte: <span id="checklist-score">0</span>/10</p>
-                        <button class="solution-toggle" onclick="calculateChecklistScore()">Punkte berechnen</button>
-                    </div>
-                </div>
-
-                <div class="progress-section">
-                    <h3>Tipps für erfolgreiche Textinterpretationen</h3>
-                    <p><strong>Zeitmanagement:</strong> Plane für eine umfassende Textinterpretation mindestens 60-90 Minuten ein. Teile dir die Zeit sinnvoll auf: 10-15 Minuten für das gründliche Lesen, 10 Minuten für die Strukturierung, 40-50 Minuten für das Schreiben und 10-15 Minuten für die Überarbeitung.</p>
-                    <p><strong>Überarbeitung:</strong> Lies deine Interpretation nach dem Schreiben kritisch durch. Achte auf logische Übergänge, eine klare Sprache und die korrekte Verwendung von Fachbegriffen.</p>
-                    <p><strong>Textbelege:</strong> Untermauere deine Interpretation immer mit konkreten Textstellen. Achte darauf, dass die Zitate relevant sind und deine Argumentation unterstützen.</p>
-                </div>
-
-                <div class="tip-box">
-                    <strong>Wichtiger Hinweis:</strong><br>
-                    Die hier gezeigten Musterlösungen sind Beispiele für eine gelungene Textinterpretation. Es gibt oft mehrere mögliche Deutungen, solange sie durch den Text belegt werden können. Wichtig ist, dass deine Interpretation schlüssig ist und mit Textstellen belegt werden kann.
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        function loadContent(page) {
-            // Diese Funktion würde normalerweise externe Inhalte laden
-            console.log("Lade Seite: " + page);
-        }
-
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function toggleExercise(header) {
-            const content = header.nextElementSibling;
-            const indicator = header.querySelector('span');
-            
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-                indicator.textContent = '+';
-            } else {
-                content.style.display = 'block';
-                indicator.textContent = '-';
-            }
-        }
-
-        function toggleSolution(button) {
-            const solution = button.nextElementSibling;
-            solution.classList.toggle('active');
-            
-            if (solution.classList.contains('active')) {
-                button.textContent = 'Lösung ausblenden';
-            } else {
-                button.textContent = 'Lösung anzeigen';
-            }
-        }
-
-        function calculateChecklistScore() {
-            const checkboxes = document.querySelectorAll('#checklist-form input[type="checkbox"]:checked');
-            document.getElementById('checklist-score').textContent = checkboxes.length;
-        }
-
-        // Alle Übungen standardmäßig geschlossen halten
-        document.addEventListener('DOMContentLoaded', function() {
-            const exerciseContents = document.querySelectorAll('.exercise-content');
-            exerciseContents.forEach(content => {
-                content.style.display = 'none';
-            });
-        });
-    </script>
-</body>
-</html>
+                    <div

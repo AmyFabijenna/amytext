@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beispiel: Kolumne analysieren - Deutschmatura</title>
     <style>
+        /* CSS-Code unverändert lassen */
         * {
             margin: 0;
             padding: 0;
@@ -329,7 +330,7 @@
                             <div id="solution3" class="solution">
                                 <p><strong>Beispiel für eine eigene Bewertung:</strong></p>
                                 <p>Die Kolumne von Maria Berger überzeugt durch ihre lebensnahe Darstellung eines alltäglichen Phänomens, das viele Leser aus eigener Erfahrung kennen werden. Besonders stark ist die bildhafte Sprache, die abstrakte Konzepte wie "digitale Erreichbarkeit" konkret und greifbar macht. Die Metapher der "unsichtbaren Leinen" verdeutlicht eindrücklich, wie sehr digitale Geräte unser Verhalten steuern können.</p>
-                                <p>Kritisch anzumerken ist jedoch, dass Berger die wirtschaftlichen Interessen hinter der permanenten Erreichbarkeit kaum thematisiert. Die Geschäftsmodelle vieler Tech-Unternehmen basieren precisely auf der Aufmerksamkeit der Nutzer, was eine systemische Dimension des Problems darstellt, die über individuelle Verhaltensänderungen hinausgeht. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
+                                <p>Kritisch anzumerken ist jedoch, dass Berger die wirtschaftlichen Interessen hinter der permanenten Erreichbarkeit kaum thematisiert. Die Geschäftsmodelle vieler Tech-Unternehmen basieren precisely auf der Aufmerksamkeit der Nutzer, was eine systemische Dimension des Probleme darstellt, die über individuelle Verhaltensänderungen hinausgeht. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
                                 <p>Insgesamt liefert die Kolumne jedoch einen wichtigen Beitrag zur aktuellen Debatte über Digitalisierung und regt zum Nachdenken über den eigenen Umgang mit digitalen Medien an.</p>
                             </div>
                         </div>
@@ -377,37 +378,40 @@
 
     <script>
         // Funktion für aufklappbare Bereiche
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-        
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } 
-            });
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const coll = document.getElementsByClassName("collapsible");
+            
+            for (let i = 0; i < coll.length; i++) {
+                // Initial alle Inhalte ausblenden
+                const content = coll[i].nextElementSibling;
+                content.style.maxHeight = null;
+                
+                // Click-Event hinzufügen
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    const content = this.nextElementSibling;
+                    
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            }
+        });
         
         // Funktion zum Anzeigen/Verbergen von Lösungen
         function toggleSolution(id) {
-            var solution = document.getElementById(id);
+            const solution = document.getElementById(id);
+            const button = event.target;
+            
             if (solution.style.display === "block") {
                 solution.style.display = "none";
-                event.target.textContent = "Lösung anzeigen";
+                button.textContent = "Lösung anzeigen";
             } else {
                 solution.style.display = "block";
-                event.target.textContent = "Lösung ausblenden";
+                button.textContent = "Lösung ausblenden";
             }
-        }
-        
-        // Einige Bereiche standardmäßig geöffnet lassen
-        window.onload = function() {
-            // Ersten Abschnitt öffnen
-            document.getElementsByClassName("collapsible")[0].click();
         }
     </script>
 </body>

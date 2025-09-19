@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sachtext-Analyse - Deutschmatura Handbuch</title>
+    <title>Beispiel: Sachtext analysieren | Deutschmatura</title>
     <style>
         * {
             margin: 0;
@@ -139,86 +139,95 @@
             color: #856404;
         }
 
-        /* Styling für aufklappbare Bereiche */
-        .accordion {
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.4s;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .active-accordion, .accordion:hover {
-            background-color: #e9ecef;
-        }
-
-        .accordion:after {
-            content: '\002B';
-            color: #2c3e50;
-            font-weight: bold;
-            float: right;
-            margin-left: 5px;
-        }
-
-        .active-accordion:after {
-            content: "\2212";
-        }
-
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-            border-radius: 0 0 5px 5px;
-            margin-bottom: 10px;
-        }
-
-        .exercise {
+        /* Zusätzliche Stile für diese Seite */
+        .text-example {
             background: #f8f9fa;
             border-left: 4px solid #3498db;
             padding: 20px;
             margin: 20px 0;
-            border-radius: 5px;
+            font-style: italic;
         }
 
-        .solution-toggle {
-            background: #34495e;
+        .analysis-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .analysis-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .collapsible {
+            background-color: #34495e;
             color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
-            font-size: 0.9em;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #2c3e50;
+        }
+
+        .collapsible-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f8f9fa;
+            border-radius: 0 0 5px 5px;
         }
 
         .solution {
-            display: none;
+            background: #e8f5e9;
             padding: 15px;
-            background: #e8f4f8;
             border-radius: 5px;
-            margin-top: 15px;
-            border-left: 3px solid #3498db;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
         }
 
-        .example-box {
-            background: #f0f7ff;
-            border: 1px solid #cce5ff;
+        .exercise {
+            background: #e3f2fd;
+            padding: 20px;
             border-radius: 5px;
-            padding: 15px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin: 15px 0;
-            font-style: italic;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         @media (max-width: 768px) {
@@ -236,257 +245,213 @@
     <main class="main-content">
         <div class="content-container">
             <header class="content-header">
-                <h1>Sachtext-Analyse</h1>
-                <p>Argumentationsaufbau, Objektivität und Subjektivität erkennen</p>
+                <h1>Beispiel: Sachtext analysieren</h1>
+                <p>Komplette Analyse eines Sachtextes mit Schritt-für-Schritt-Anleitung</p>
             </header>
 
             <div class="content-body" id="content-body">
                 <div class="welcome-section">
-                    <h2>Sachtexte systematisch analysieren</h2>
-                    <p>Sachtexte informieren, erklären, überzeugen oder kommentieren. In dieser Lektion lernst du, wie du Sachtexte systematisch analysierst, Argumentationsstrukturen erkennst und zwischen objektiven und subjektiven Aussagen unterscheidest.</p>
+                    <h2>Sachtextanalyse: Der Wert des Analogen im digitalen Zeitalter</h2>
+                    <p>In diesem Kapitel analysieren wir einen Sachtext von Dr. Thomas Maier, der die Renaissance analoger Medien in unserer digitalen Welt thematisiert. Du lernst Schritt für Schritt, wie du einen Sachtext systematisch analysierst und interpretierst.</p>
                 </div>
 
-                <h2>Was sind Sachtexte?</h2>
-                <p>Sachtexte sind nicht-fiktionale Texte, die Informationen vermitteln, Standpunkte darlegen oder Handlungsanweisungen geben. Sie unterscheiden sich von literarischen Texten durch ihren informativen Charakter und ihre sachliche Ausrichtung.</p>
-
-                <button class="accordion">Typische Sachtextsorten</button>
-                <div class="panel">
-                    <ul>
-                        <li><strong>Kommentare</strong> - subjektive Meinungsäußerungen zu aktuellen Themen</li>
-                        <li><strong>Berichte</strong> - sachliche Darstellung von Ereignissen oder Fakten</li>
-                        <li><strong>Essays</strong> - anspruchsvolle, reflektierende Abhandlungen</li>
-                        <li><strong>Reportagen</strong> - anschauliche Schilderungen von Ereignissen</li>
-                        <li><strong>Rezensionen</strong> - kritische Besprechungen von Werken</li>
-                        <li><strong>Wissenschaftliche Texte</strong> - fachliche Abhandlungen mit Theorien und Belegen</li>
-                    </ul>
+                <div class="analysis-section">
+                    <h3>Der Sachtext: "Der Wert des Analogen im digitalen Zeitalter"</h3>
+                    <div class="text-example">
+                        <p><strong>Von Dr. Thomas Maier, veröffentlicht in "Wissen & Bildung", Januar 2025</strong></p>
+                        <p>Die Digitalisierung hat nahezu jeden Aspekt unseres Alltags erfasst. Wir lesen digitale Bücher, hören gestreamte Musik, kommunizieren über Messenger-Dienste und speichern unsere Erinnerungen als Dateien in der Cloud. Diese Entwicklung bringt unbestreitbare Vorteile: Informationen sind jederzeit und überall verfügbar, die Verbreitung von Wissen wird demokratisiert, die Kommunikation beschleunigt.</p>
+                        
+                        <p>Doch parallel zu dieser fortschreitenden Digitalisierung lässt sich ein bemerkenswertes Phänomen beobachten: die Renaissance des Analogen. Vinylschallplatten verzeichnen seit Jahren steigende Verkaufszahlen, gedruckte Bücher behaupten sich trotz E-Books am Markt, Polaroid-Kameras erfreuen sich wachsender Beliebtheit, und handgeschriebene Notizen erleben in Form des "Bullet Journaling" ein Comeback.</p>
+                        
+                        <p>Diese parallele Entwicklung wirft Fragen auf: Warum wenden sich Menschen in einer durchdigitalisierten Welt bewusst analogen Alternativen zu? Welche Qualitäten bietet das Analoge, die im Digitalen verloren gehen?</p>
+                        
+                        <p>Empirische Studien liefern erste Antworten. So zeigen Untersuchungen zur Lese- und Lernpsychologie, dass Informationen auf Papier oft besser verarbeitet und erinnert werden als auf Bildschirmen. Die räumliche Orientierung im physischen Buch – zu wissen, ob eine Information eher am Anfang oder Ende stand – unterstützt die kognitive Verarbeitung. Ähnlich verhält es sich mit handschriftlichen Notizen, die komplexere motorische und kognitive Prozesse erfordern als das Tippen und dadurch das Verständnis fördern.</p>
+                        
+                        <p>Doch über diese funktionalen Vorteile hinaus bietet das Analoge eine sinnliche Dimension, die im Digitalen oft fehlt: die Haptik eines Buches, das Rauschen einer Schallplatte, die Zufälligkeit und Unwiderruflichkeit eines Polaroid-Fotos. Diese Qualitäten schaffen eine andere Form der Aufmerksamkeit und Verbindlichkeit. Ein gedrucktes Buch lässt sich nicht nebenbei konsumieren wie ein E-Book zwischen E-Mails und Push-Nachrichten. Es fordert eine bewusstere Entscheidung, eine höhere Verbindlichkeit.</p>
+                        
+                        <p>Zudem besitzen analoge Objekte eine materielle Beständigkeit, die digitalen Inhalten fehlt. Sie altern und entwickeln eine Patina, die ihre Geschichte widerspiegelt – vom abgegriffenen Lieblingsbuch bis zur zerkratzten Schallplatte. Diese physischen Spuren des Gebrauchs erzeugen eine emotionalere Bindung und symbolische Bedeutung, die rein digitale Inhalte kaum erreichen können.</p>
+                        
+                        <p>Die Renaissance des Analogen sollte daher nicht als nostalgische Verweigerungshaltung missverstanden werden. Vielmehr zeigt sie das Bedürfnis nach einem ausgewogenen Verhältnis zwischen digitaler Effizienz und analoger Tiefe. Eine zukunftsfähige Mediennutzung wird vermutlich in der intelligenten Kombination beider Welten liegen – in der Erkenntnis, wann digitale Werkzeuge überlegen sind und wann analoge Alternativen einen Mehrwert bieten.</p>
+                        
+                        <p>Die Herausforderung besteht darin, nicht der Logik des "Entweder-oder" zu folgen, sondern die spezifischen Qualitäten beider Sphären zu würdigen. In diesem Sinne ist die Rückbesinnung auf das Analoge keine rückwärtsgewandte Bewegung, sondern eine Bereicherung unserer medial hochentwickelten Kultur.</p>
+                    </div>
                 </div>
 
-                <h2>Argumentationsstruktur in Sachtexten</h2>
-                <p>Die Analyse der Argumentationsstruktur ist zentral für das Verständnis von Sachtexten. Dabei untersuchst du, wie der Autor seine Position begründet und welche Argumentationsstrategien er verwendet.</p>
-
-                <button class="accordion">Argumentationstypen</button>
-                <div class="panel">
-                    <h3>Deduktive Argumentation</h3>
-                    <p>Vom Allgemeinen zum Besonderen: Eine allgemeine These wird durch spezifische Beispiele belegt.</p>
-                    
-                    <h3>Induktive Argumentation</h3>
-                    <p>Vom Besonderen zum Allgemeinen: Aus einzelnen Beobachtungen wird eine allgemeine Schlussfolgerung gezogen.</p>
-                    
-                    <h3>Dialektische Argumentation</h3>
-                    <p>These - Antithese - Synthese: Zunächst wird eine Position dargestellt, dann eine Gegenposition, schließlich eine vermittelnde Lösung.</p>
-                    
-                    <h3>Kausale Argumentation</h3>
-                    <p>Ursache-Wirkung-Beziehungen werden dargestellt, um Argumente zu stützen.</p>
+                <button type="button" class="collapsible">Schritt 1: Einleitung und kurze Inhaltsangabe</button>
+                <div class="collapsible-content">
+                    <div class="analysis-section">
+                        <h4>Ziel dieser Phase</h4>
+                        <p>Den Text einordnen und seinen wesentlichen Inhalt knapp zusammenfassen.</p>
+                        
+                        <h4>Hilfreiche Formulierungen für den Einstieg</h4>
+                        <ul>
+                            <li>"Der Sachtext 'Der Wert des Analogen im digitalen Zeitalter' von Dr. Thomas Maier, erschienen in 'Wissen & Bildung' (Januar 2025), behandelt..."</li>
+                            <li>"Im vorliegenden Artikel untersucht der Autor..."</li>
+                            <li>"Der Text setzt sich mit dem Phänomen auseinander, dass..."</li>
+                        </ul>
+                        
+                        <h4>Für die Inhaltsangabe</h4>
+                        <ul>
+                            <li>Thema und zentrale These des Textes nennen</li>
+                            <li>Hauptargumente in logischer Reihenfolge darstellen</li>
+                            <li>Neutral und im Präsens formulieren</li>
+                        </ul>
+                        
+                        <div class="solution">
+                            <h4>Musterlösung für die Einleitung</h4>
+                            <p>Der Sachtext "Der Wert des Analogen im digitalen Zeitalter" von Dr. Thomas Maier, veröffentlicht in der Zeitschrift "Wissen & Bildung" im Januar 2025, thematisiert die parallel zur Digitalisierung verlaufende Renaissance analoger Medien und Praktiken. Der Autor stellt zunächst die umfassende Digitalisierung unseres Alltags dar, um dann auf das gegenläufige Phänomen der wachsenden Beliebtheit analoger Alternativen wie Vinyl-Schallplatten, gedruckte Bücher und Polaroid-Fotografie einzugehen. Anhand wissenschaftlicher Erkenntnisse und phänomenologischer Betrachtungen untersucht Maier die spezifischen Qualitäten des Analogen und plädiert schließlich für eine ausgewogene Nutzung beider Medienwelten.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <button class="accordion">Argumentationsbausteine identifizieren</button>
-                <div class="panel">
-                    <p>Bei der Analyse der Argumentation solltest du folgende Elemente identifizieren:</p>
-                    <ul>
-                        <li><strong>Hauptthese</strong> - Die zentrale Aussage oder Forderung des Textes</li>
-                        <li><strong>Unterstützende Argumente</strong> - Begründungen für die Hauptthese</li>
-                        <li><strong>Belege</strong> - Fakten, Statistiken, Zitate oder Beispiele</li>
-                        <li><strong>Gegenargumente</strong> - Widerlegte Einwände gegen die Hauptthese</li>
-                        <li><strong>Schlussfolgerung</strong> - Zusammenfassung und mögliche Handlungsempfehlungen</li>
-                    </ul>
+                <button type="button" class="collapsible">Schritt 2: Stilanalyse</button>
+                <div class="collapsible-content">
+                    <div class="analysis-section">
+                        <h4>Ziel dieser Phase</h4>
+                        <p>Die sprachlichen und strukturellen Merkmale des Textes untersuchen und ihre Wirkung analysieren.</p>
+                        
+                        <h4>Auf folgende Aspekte achten</h4>
+                        <ul>
+                            <li>Textsorte (hier: Sachtext mit informierendem und argumentierendem Charakter)</li>
+                            <li>Aufbau und Argumentationsstruktur</li>
+                            <li>Sprachlicher Stil (Fachsprache, Verständlichkeit)</li>
+                            <li>Verwendete Stilmittel</li>
+                            <li>Objektivität vs. subjektive Elemente</li>
+                        </ul>
+                        
+                        <h4>Hilfreiche Formulierungen</h4>
+                        <ul>
+                            <li>"Der Text zeichnet sich durch eine klare Struktur aus, die..."</li>
+                            <li>"Die Sprache ist überwiegend sachlich, wird jedoch durch bildhafte Elemente wie... anschaulich gestaltet."</li>
+                            <li>"Typisch für einen wissenschaftlich orientierten Sachtext ist die Verwendung von..."</li>
+                            <li>"Die Argumentation entwickelt sich vom Allgemeinen zum Spezifischen, indem..."</li>
+                        </ul>
+                        
+                        <div class="solution">
+                            <h4>Musterlösung für die Stilanalyse</h4>
+                            <p>Der vorliegende Text ist ein informierender Sachtext mit argumentativen Elementen, der ein ausgewogenes Verhältnis zwischen Fachwissen und allgemeiner Verständlichkeit anstrebt. Sprachlich bewegt sich der Autor auf einem gehobenen, aber zugänglichen Niveau und vermeidet übermäßigen Fachjargon.</p>
+                            
+                            <p>Die Argumentationsstruktur ist klar aufgebaut: Ausgehend von der allgemeinen Feststellung der Digitalisierung entwickelt der Autor zunächst die Gegenthese der "Renaissance des Analogen", um dann systematisch deren Ursachen zu analysieren. Dabei verbindet er wissenschaftliche Erkenntnisse ("Empirische Studien liefern erste Antworten") mit phänomenologischen Betrachtungen zur sinnlichen Qualität analoger Objekte.</p>
+                            
+                            <p>Rhetorisch setzt der Autor auf verschiedene Strategien: Er verwendet rhetorische Fragen ("Warum wenden sich Menschen...?"), um Denkprozesse anzuregen, konkrete Beispiele (Vinyl, Bücher, Polaroid), um seine Thesen zu veranschaulichen, und kontrastierende Gegenüberstellungen von analog und digital, um Unterschiede zu verdeutlichen.</p>
+                            
+                            <p>Auffällig ist der Wechsel zwischen sachlicher Darstellung (besonders bei der Erwähnung von Studien) und wertenden Passagen, in denen die positiven Qualitäten des Analogen hervorgehoben werden. Der Autor bemüht sich jedoch um einen differenzierten Blick, indem er sowohl die Vorteile der Digitalisierung anerkennt als auch vor einer nostalgischen Verklärung des Analogen warnt.</p>
+                            
+                            <p>Die Wortwahl ist präzise und teilweise bildreich, wie bei der Erwähnung der "Patina" analoger Objekte oder der "Haptik eines Buches". Der Autor nutzt diese sensorischen Beschreibungen gezielt, um die sinnliche Dimension des Analogen zu vermitteln, die ein zentrales Argument seines Textes darstellt.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="example-box">
-                    <h3>Beispiel: Argumentationsanalyse</h3>
-                    <p><strong>Textauszug:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht."</p>
-                    <p><strong>Analyse:</strong> Hier wird eine kausale Argumentation verwendet. Die Hauptthese ("Klimawandel erfordert sofortiges Handeln") wird durch einen faktischen Beleg (Temperaturanstieg) gestützt.</p>
-                </div>
-
-                <h2>Objektivität vs. Subjektivität</h2>
-                <p>Ein wichtiger Aspekt der Sachtextanalyse ist die Unterscheidung zwischen objektiven und subjektiven Aussagen.</p>
-
-                <button class="accordion">Merkmale objektiver Texte</button>
-                <div class="panel">
-                    <ul>
-                        <li>Sachlicher, neutraler Ton</li>
-                        <li>Belege durch Fakten, Daten, Statistiken</li>
-                        <li>Nachprüfbare Quellenangaben</li>
-                        <li>Vermeidung von wertenden Adjektiven</li>
-                        <li>Darstellung verschiedener Perspektiven</li>
-                        <li>Klare Trennung zwischen Fakten und Meinungen</li>
-                    </ul>
-                </div>
-
-                <button class="accordion">Merkmale subjektiver Texte</button>
-                <div class="panel">
-                    <ul>
-                        <li>Persönliche Meinung und Wertungen</li>
-                        <li>Emotionale Sprache und Ausrufe</li>
-                        <li>Wertende Adjektive und Verstärkungen</li>
-                        <li>Einseitige Darstellung</li>
-                        <li>Rhetorische Fragen und Appelle</li>
-                        <li>Persönliche Erfahrungen und Anekdoten als Belege</li>
-                    </ul>
-                </div>
-
-                <div class="example-box">
-                    <h3>Beispiel: Objektiv vs. Subjektiv</h3>
-                    <p><strong>Objektiv:</strong> "Laut einer Studie der Universität Wien verbringen Jugendliche durchschnittlich 3,5 Stunden täglich mit sozialen Medien."</p>
-                    <p><strong>Subjektiv:</strong> "Die Jugend von heute verbringt viel zu viel Zeit mit diesen schädlichen sozialen Medien!"</p>
-                </div>
-
-                <h2>Sprachliche Mittel in Sachtexten</h2>
-                <p>Sachtexte verwenden spezifische sprachliche Mittel, um ihre Wirkung zu erzielen. Diese gilt es zu erkennen und in ihrer Funktion zu analysieren.</p>
-
-                <button class="accordion">Häufige sprachliche Mittel</button>
-                <div class="panel">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <tr style="background-color: #34495e; color: white;">
-                            <th style="padding: 10px; text-align: left;">Sprachliches Mittel</th>
-                            <th style="padding: 10px; text-align: left;">Funktion</th>
-                            <th style="padding: 10px; text-align: left;">Beispiel</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 10px;">Rhetorische Fragen</td>
-                            <td style="padding: 10px;">Leser zum Nachdenken anregen, Position verstärken</td>
-                            <td style="padding: 10px;">"Ist es nicht an der Zeit zu handeln?"</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 10px;">Appelle</td>
-                            <td style="padding: 10px;">Zu Handlungen auffordern</td>
-                            <td style="padding: 10px;">"Wir müssen jetzt handeln!"</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 10px;">Fachbegriffe</td>
-                            <td style="padding: 10px;">Kompetenz signalisieren, Präzision erhöhen</td>
-                            <td style="padding: 10px;">"kognitive Dissonanz", "Treibhauseffekt"</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 10px;">Vergleiche</td>
-                            <td style="padding: 10px;">Komplexe Sachverhalte veranschaulichen</td>
-                            <td style="padding: 10px;">"Das ist vergleichbar mit..."</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 10px;">Zitate</td>
-                            <td style="padding: 10px;">Autorität herstellen, Argumente stützen</td>
-                            <td style="padding: 10px;">"Wie bereits Einstein feststellte: ..."</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <h2>Übungen zur Sachtext-Analyse</h2>
-
-                <div class="exercise">
-                    <h3>Übung 1: Argumentationsstruktur erkennen</h3>
-                    <p>Analysiere den folgenden Textauszug und identifiziere die Argumentationsstruktur:</p>
-                    <p>"Die Digitalisierung des Bildungswesens wird heute vielfach als Allheilmittel für die Probleme unserer Schulen gepriesen. Tablets statt Schulbücher, Online-Kurse statt Frontalunterricht, Lern-Apps statt Arbeitsblätter – so lautet die Devise. Befürworter argumentieren, dass die digitale Transformation unaufhaltsam sei und Schulen die Schüler auf eine digitalisierte Arbeitswelt vorbereiten müssten.</p>
-                    <p>Doch bei aller Begeisterung für die neuen Möglichkeiten werden die Risiken oft übersehen. Studien zeigen, dass die intensive Nutzung digitaler Medien die Konzentrationsfähigkeit beeinträchtigen kann. Zudem verleitet die Informationsflut im Internet zu oberflächlichem Denken und erschwert das vertiefte Verstehen komplexer Zusammenhänge."</p>
-                    
-                    <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
-                    <div id="solution1" class="solution">
-                        <h4>Lösung:</h4>
-                        <p>Der Text verwendet eine dialektische Argumentationsstruktur:</p>
-                        <ol>
-                            <li><strong>These:</strong> Digitalisierung wird als Allheilmittel gepriesen (mit Beispielen: Tablets, Online-Kurse, Lern-Apps)</li>
-                            <li><strong>Antithese:</strong> Risiken werden übersehen (Konzentrationsstörungen, oberflächliches Denken)</li>
-                            <li><strong>Argumentationsweise:</strong> Der Autor stellt zunächst die verbreitete positive Sicht dar, um dann mit Gegenargumenten zu widersprechen. Es werden Studien als Belege angeführt.</li>
-                        </ol>
+                <button type="button" class="collapsible">Schritt 3: Bewertung und Ausblick/Schluss</button>
+                <div class="collapsible-content">
+                    <div class="analysis-section">
+                        <h4>Ziel dieser Phase</h4>
+                        <p>Den Text kritisch würdigen und eigene Gedanken zum Thema entwickeln.</p>
+                        
+                        <h4>Achte auf</h4>
+                        <ul>
+                            <li>Ausgewogenes Urteil zu Stärken und Schwächen des Textes</li>
+                            <li>Einordnung in größere Zusammenhänge</li>
+                            <li>Persönliche Stellungnahme zum Thema (mit Begründung)</li>
+                            <li>Aktuelle Bezüge oder Zukunftsperspektiven</li>
+                        </ul>
+                        
+                        <h4>Hilfreiche Formulierungen</h4>
+                        <ul>
+                            <li>"Der Text überzeugt durch seine differenzierte Betrachtung des Phänomens..."</li>
+                            <li>"Besonders gelungen ist die Art, wie der Autor..."</li>
+                            <li>"Eine kritische Betrachtung legt nahe, dass..."</li>
+                            <li>"Aus meiner Sicht spricht der Autor einen wichtigen Aspekt an, wenn er..."</li>
+                            <li>"Zusammenfassend kann man sagen, dass..."</li>
+                        </ul>
+                        
+                        <div class="solution">
+                            <h4>Musterlösung für die Bewertung und den Schluss</h4>
+                            <p>Der Text von Dr. Maier überzeugt durch seine differenzierte und ausgewogene Darstellung des Spannungsfeldes zwischen analog und digital. Statt einer einseitigen Verherrlichung des Analogen oder einer unkritischen Technikbegeisterung gelingt es dem Autor, die spezifischen Qualitäten beider Medienwelten herauszuarbeiten. Besonders überzeugend ist die Verbindung von wissenschaftlichen Erkenntnissen mit alltäglichen Beobachtungen, wodurch der Text sowohl informativ als auch anschaulich wirkt.</p>
+                            
+                            <p>Allerdings bleibt der Text in einigen Bereichen etwas vage. So werden die "empirischen Studien" zwar erwähnt, aber nicht näher benannt oder in ihrem Umfang beschrieben. Hier hätten konkretere Quellenangaben die Argumentation noch stärker untermauern können. Zudem werden soziale und ökonomische Faktoren der analogen Renaissance – etwa Fragen der Exklusivität oder des Status – kaum thematisiert.</p>
+                            
+                            <p>Das von Maier beschriebene Phänomen lässt sich tatsächlich in vielen Bereichen unseres Alltags beobachten. Die wachsende Beliebtheit von Vinylschallplatten, das Überleben gedruckter Bücher trotz digitaler Alternativen oder der Trend zu handgeschriebenen Notizen zeigen, dass digitale Lösungen nicht automatisch analoge Praktiken verdrängen. Es scheint, als würden Menschen intuitiv spüren, wann die Qualitäten des Analogen – Haptik, Beständigkeit, sinnliche Erfahrung – einen Mehrwert bieten.</p>
+                            
+                            <p>Abschließend lässt sich festhalten, dass der Text einen wichtigen Beitrag zur aktuellen Mediendiskussion leistet, indem er über die oft polarisierende Gegenüberstellung von analog und digital hinausgeht. Die vorgeschlagene Balance zwischen beiden Welten erscheint als zukunftsweisender Ansatz in einer Zeit, in der technologische Entwicklungen immer schneller voranschreiten, während gleichzeitig das Bedürfnis nach Entschleunigung und sinnlicher Erfahrung wächst.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="exercise">
-                    <h3>Übung 2: Objektivität und Subjektivität unterscheiden</h3>
-                    <p>Markiere in folgendem Textauszug subjektive Aussagen:</p>
-                    <p>"Die sozialen Medien haben unsere Gesellschaft <span class="highlight">leider</span> nicht nur verändert, sondern <span class="highlight">zerschnitten, zersplittert und zerstückelt</span>. Es ist <span class="highlight">erschreckend</span> zu sehen, wie <span class="highlight">oberflächlich</span> die Kommunikation geworden ist. <span class="highlight">Jeder</span> gibt nur noch seine Meinung kund, ohne <span class="highlight">jemals</span> zuzuhören. <span class="highlight">Eigentlich</span> sollten diese Plattformen uns doch verbinden, aber <span class="highlight">in Wirklichkeit</span> tun sie das Gegenteil."</p>
+                    <h3>Übung: Eigene Sachtextanalyse</h3>
+                    <p><strong>Aufgabe:</strong> Analysiere den folgenden Sachtextauszug nach dem gelernten Schema.</p>
                     
-                    <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
-                    <div id="solution2" class="solution">
-                        <h4>Lösung:</h4>
-                        <p>Subjektive Aussagen sind:</p>
-                        <ul>
-                            <li>"leider" (wertendes Adverb)</li>
-                            <li>"zerschnitten, zersplittert und zerstückelt" (emotional aufgeladene Verben)</li>
-                            <li>"erschreckend" (wertendes Adjektiv)</li>
-                            <li>"oberflächlich" (wertendes Adjektiv)</li>
-                            <li>"Jeder" und "jemals" (Verallgemeinerungen)</li>
-                            <li>"Eigentlich" und "in Wirklichkeit" (subjektive Gegenüberstellung)</li>
-                        </ul>
-                        <p>Der Text ist stark subjektiv geprägt durch wertende Adjektive, Verallgemeinerungen und emotionale Ausdrücke.</p>
+                    <div class="text-example">
+                        <p><strong>Auszug aus: "Die Zukunft der Arbeit" von Max Mustermann</strong></p>
+                        <p>Die Digitalisierung der Arbeitswelt schreitet unaufhaltsam voran. Künstliche Intelligenz und Automatisierung verändern nicht nur einzelne Berufsbilder, sondern das gesamte Konzept von Arbeit. Während viele vor den Risiken warnen – Jobverlust, soziale Ungleichheit, Entfremdung –, werden die Chancen oft übersehen. Automatisierung kann uns von monotonen Tätigkeiten befreien und Raum für kreative, sinnstiftende Arbeit schaffen. Die Herausforderung besteht nicht darin, den technologischen Fortschritt aufzuhalten, sondern ihn menschlich zu gestalten.</p>
                     </div>
-                </div>
-
-                <div class="exercise">
-                    <h3>Übung 3: Vollständige Sachtext-Analyse</h3>
-                    <p>Analysiere den folgenden Sachtextauszug vollständig nach den gelernten Kriterien:</p>
-                    <p>"Die Renaissance des Analogen im digitalen Zeitalter ist ein bemerkenswertes Phänomen. Parallel zur fortschreitenden Digitalisierung lässt sich ein Trend zurück zu analogen Medien und Praktiken beobachten: Vinylschallplatten verzeichnen steigende Verkaufszahlen, gedruckte Bücher behaupten sich trotz E-Books, handgeschriebene Notizen erleben ein Comeback.</p>
-                    <p>Empirische Studien liefern Erklärungen für diesen Trend. Untersuchungen zur Lese- und Lernpsychologie zeigen, dass Informationen auf Papier oft besser verarbeitet und erinnert werden als auf Bildschirmen. Die räumliche Orientierung im physischen Buch unterstützt die kognitive Verarbeitung. Ähnlich verhält es sich mit handschriftlichen Notizen, die komplexere motorische und kognitive Prozesse erfordern als das Tippen und dadurch das Verständnis fördern.</p>
-                    <p>Doch über diese funktionalen Vorteile hinaus bietet das Analoge eine sinnliche Dimension, die im Digitalen oft fehlt: die Haptik eines Buches, das Rauschen einer Schallplatte, die Zufälligkeit eines Polaroid-Fotos. Diese Qualitäten schaffen eine andere Form der Aufmerksamkeit und Verbindlichkeit."</p>
                     
-                    <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
-                    <div id="solution3" class="solution">
-                        <h4>Musterlösung:</h4>
-                        <p><strong>Textsorte:</strong> Sachtext mit informierendem und argumentierendem Charakter</p>
-                        <p><strong>Thema:</strong> Die Renaissance analoger Medien im digitalen Zeitalter</p>
-                        <p><strong>Argumentationsstruktur:</strong></p>
-                        <ul>
-                            <li>These: Analoge Medien erleben eine Renaissance (mit Beispielen: Vinyl, Bücher, handgeschriebene Notizen)</li>
-                            <li>Argument 1: Empirische Studien belegen bessere kognitive Verarbeitung analoger Medien</li>
-                            <li>Argument 2: Analoge Medien bieten eine sinnliche Dimension, die digitale Medien nicht haben</li>
-                            <li>Schlussfolgerung: Analoge Medien haben spezifische Qualitäten, die ihren Wert begründen</li>
-                        </ul>
-                        <p><strong>Sprachliche Mittel:</strong></p>
-                        <ul>
-                            <li>Fachbegriffe: "empirische Studien", "kognitive Verarbeitung"</li>
-                            <li>Beispiele: Vinylschallplatten, gedruckte Bücher, handgeschriebene Notizen</li>
-                            <li>Vergleiche: Analog vs. digital</li>
-                            <li>Sinnliche Beschreibungen: "Haptik eines Buches", "Rauschen einer Schallplatte"</li>
-                        </ul>
-                        <p><strong>Objektivität/Subjektivität:</strong> Überwiegend objektiv durch Verweis auf Studien und sachliche Beschreibung. Leicht wertend in Begriffen wie "bemerkenswertes Phänomen" und "sinnliche Dimension".</p>
-                    </div>
-                </div>
-
-                <div class="progress-section">
-                    <h3>Zusammenfassung: Sachtext-Analyse</h3>
-                    <p>Bei der Analyse von Sachtexten solltest du folgende Schritte beachten:</p>
+                    <p><strong>Arbeitsaufträge:</strong></p>
                     <ol>
-                        <li>Textsorte und Thema bestimmen</li>
-                        <li>Argumentationsstruktur analysieren (These, Argumente, Belege, Schlussfolgerung)</li>
-                        <li>Sprachliche Mittel und ihre Wirkung untersuchen</li>
-                        <li>Objektivität und Subjektivität unterscheiden</li>
-                        <li>Intention des Autors ermitteln</li>
-                        <li>Eigene positionierte Stellungnahme verfassen</li>
+                        <li>Verfasse eine Einleitung mit Textangaben und Inhaltszusammenfassung.</li>
+                        <li>Analysiere die Argumentationsstruktur und sprachlichen Mittel.</li>
+                        <li>Formuliere eine kritische Bewertung des Textausschnitts.</li>
                     </ol>
+                    
+                    <button type="button" class="collapsible">Lösungsvorschlag anzeigen</button>
+                    <div class="collapsible-content">
+                        <div class="solution">
+                            <h4>Lösungsvorschlag für die Übung</h4>
+                            <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
+                            
+                            <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionaler Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
+                            
+                            <p><strong>3. Bewertung:</strong> Der Textausschnitt bietet eine ausgewogene Perspektive auf ein komplexes Thema. Die Gegenüberstellung von Risiken und Chancen ist gelungen, allerdings bleiben die Aussagen recht allgemein. Konkrete Beispiele oder Studien würden die Argumentation stärken. Die Schlussforderung nach einer "menschlichen Gestaltung" ist appellativ, aber etwas vague formuliert.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tip-box">
-                    <strong>Tipp für die Praxis:</strong><br>
-                    Übe das Erkennen von Argumentationsmustern an verschiedenen Textsorten (Kommentare, Berichte, Essays). Achte besonders auf Signalwörter wie "erstens", "zweitens", "einerseits", "andererseits", "folglich", "zusammenfassend", die dir helfen, die Argumentationsstruktur zu erkennen.
+                    <strong>Tipp für die Sachtextanalyse:</strong><br>
+                    Achte besonders auf die Argumentationsstruktur und die Verhältnismäßigkeit der Argumente. Sachtexte zielen oft auf Überzeugung ab – identifiziere die Strategien, die der Autor verwendet, um seine Leser zu überzeugen.
+                </div>
+
+                <div class="progress-section">
+                    <h3>Checkliste für die Sachtextanalyse</h3>
+                    <ul>
+                        <li>✓ Textart und Textsorte korrekt bestimmt</li>
+                        <li>✓ Einleitung mit allen notwendigen Textangaben</li>
+                        <li>✓ Inhalt präzise und neutral zusammengefasst</li>
+                        <li>✓ Argumentationsstruktur analysiert</li>
+                        <li>✓ Sprachliche Mittel identifiziert und ihre Wirkung beschrieben</li>
+                        <li>✓ Autorposition und Intention herausgearbeitet</li>
+                        <li>✓ Eigene kritische Bewertung formuliert</li>
+                        <li>✓ Bezug zur Gegenwart hergestellt</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        // Funktion für aufklappbare Bereiche
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active-accordion");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
-            });
-        }
-
-        // Funktion zum Anzeigen/Verbergen von Lösungen
-        function toggleSolution(id) {
-            var solution = document.getElementById(id);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
-            } else {
-                solution.style.display = "block";
+        // JavaScript für aufklappbare Bereiche
+        document.addEventListener('DOMContentLoaded', function() {
+            const coll = document.getElementsByClassName("collapsible");
+            
+            for (let i = 0; i < coll.length; i++) {
+                // Initial alle Inhalte ausblenden
+                const content = coll[i].nextElementSibling;
+                content.style.maxHeight = null;
+                
+                // Click-Event hinzufügen
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    const content = this.nextElementSibling;
+                    
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
             }
-        }
+        });
     </script>
 </body>
 </html>
