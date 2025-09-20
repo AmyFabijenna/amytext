@@ -191,6 +191,10 @@
             border-radius: 0 0 5px 5px;
         }
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         .solution {
             background: #e8f5e9;
             padding: 15px;
@@ -430,28 +434,16 @@
     </main>
 
     <script>
-        // JavaScript für aufklappbare Bereiche
         document.addEventListener('DOMContentLoaded', function() {
-            const coll = document.getElementsByClassName("accordion");
-            
-            for (let i = 0; i < coll.length; i++) {
-                // Initial alle Inhalte ausblenden
-                const content = coll[i].nextElementSibling;
-                content.style.maxHeight = null;
-                
-                // Click-Event hinzufügen
-                coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    const content = this.nextElementSibling;
-                    
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
-            }
+    var accordions = document.getElementsByClassName("accordion");
+    for (var i = 0; i < accordions.length; i++) {
+        accordions[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            panel.classList.toggle("active");
         });
+    }
+});
     </script>
 </body>
 </html>

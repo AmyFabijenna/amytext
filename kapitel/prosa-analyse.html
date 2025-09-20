@@ -58,6 +58,16 @@
             padding: 40px;
         }
 
+        .content ol {
+    margin-left: 40px;
+    padding-left: 20px;
+}
+
+.content ul {
+    margin-left: 40px;
+    padding-left: 20px;
+}
+
         .section {
             margin-bottom: 40px;
         }
@@ -117,19 +127,23 @@
             margin-left: 5px;
         }
 
-        .active:after {
-            content: "\2212";
-        }
+.accordion.active:after {
+    content: "▼";
+}
 
-        .content {
-            padding: 0 18px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-            background-color: white;
-            border-radius: 0 0 8px 8px;
-        }
+.content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+}
 
+.content.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         .example {
             background: #e8f4f8;
             border-left: 4px solid #3498db;
@@ -619,35 +633,26 @@
     </main>
 
     <script>
-        function toggleSolution(id) {
-            var solution = document.getElementById(id);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
-            } else {
-                solution.style.display = "block";
-            }
-        }
+function toggleSolution(id) {
+    var solution = document.getElementById(id);
+    if (solution.style.display === "block") {
+        solution.style.display = "none";
+    } else {
+        solution.style.display = "block";
+    }
+}
 
-        // Alle accordions standardmäßig geschlossen lassen
-        document.addEventListener('DOMContentLoaded', function() {
-            var coll = document.getElementsByClassName("accordion");
-            for (var i = 0; i < coll.length; i++) {
-                // Setze max-height auf 0 für alle Inhalte
-                var content = coll[i].nextElementSibling;
-                content.style.maxHeight = null;
-                
-                // Event-Listener für Klick hinzufügen
-                coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var content = this.nextElementSibling;
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    } 
-                });
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    var accordions = document.getElementsByClassName("accordion");
+    
+    for (var i = 0; i < accordions.length; i++) {
+        accordions[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            content.classList.toggle("active");
         });
-    </script>
+    }
+});
+</script>
 </body>
 </html>

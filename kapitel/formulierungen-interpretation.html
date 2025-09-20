@@ -176,7 +176,10 @@
             background-color: white;
             border-radius: 0 0 8px 8px;
         }
-
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         .formulation-list {
             list-style-type: none;
             padding: 0;
@@ -410,41 +413,16 @@
     </main>
 
     <script>
-        // accordion functionality
-        var coll = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight){
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } 
-            });
-        }
-
-        // Ensure all accordions are closed by default
-        window.onload = function() {
-            var contents = document.getElementsByClassName(.panel);
-            for (i = 0; i < contents.length; i++) {
-                contents[i].style.maxHeight = null;
-            }
-        };
-
-        // Toggle solution boxes
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
-                event.target.textContent = "Lösung anzeigen";
-            } else {
-                solution.style.display = "block";
-                event.target.textContent = "Lösung ausblenden";
-            }
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    var accordions = document.getElementsByClassName("accordion");
+    for (var i = 0; i < accordions.length; i++) {
+        accordions[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            panel.classList.toggle("active");
+        });
+    }
+});
     </script>
 </body>
 </html>

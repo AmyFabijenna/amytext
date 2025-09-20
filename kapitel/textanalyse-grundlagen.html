@@ -980,78 +980,16 @@
     </div>
 
     <script>
-        // JavaScript für die accordion-Funktionalität
-        var coll = document.getElementsByClassName("accordion");
-        var i;
-
-        // Alle accordions standardmäßig schließen
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    content.classList.remove("active");
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    content.classList.add("active");
-                }
-            });
-            
-            // Standardmäßig schließen
-            var content = coll[i].nextElementSibling;
-            content.style.maxHeight = null;
-            content.classList.remove("active");
-        }
-
-        // Funktion zum Öffnen/Schließen aller accordions
-        function toggleAll() {
-            var allOpen = true;
-            
-            // Prüfen, ob alle bereits geöffnet sind
-            for (i = 0; i < coll.length; i++) {
-                var content = coll[i].nextElementSibling;
-                if (!content.style.maxHeight) {
-                    allOpen = false;
-                    break;
-                }
-            }
-            
-            // Alle öffnen oder schließen
-            for (i = 0; i < coll.length; i++) {
-                var content = coll[i].nextElementSibling;
-                
-                if (allOpen) {
-                    // Alle schließen
-                    coll[i].classList.remove("active");
-                    content.style.maxHeight = null;
-                    content.classList.remove("active");
-                } else {
-                    // Alle öffnen
-                    coll[i].classList.add("active");
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    content.classList.add("active");
-                }
-            }
-            
-            // Text des Buttons ändern
-            var btn = document.querySelector('.expand-all-btn');
-            btn.textContent = allOpen ? 'Alle Bereiche aufklappen' : 'Alle Bereiche zuklappen';
-        }
-
-        // Funktion zum Anzeigen/Verbergen von Lösungen
-        function toggleSolution(id) {
-            var solution = document.getElementById(id);
-            solution.classList.toggle("active");
-            
-            // Button-Text ändern
-            var btn = event.target;
-            if (solution.classList.contains("active")) {
-                btn.textContent = 'Lösung ausblenden';
-            } else {
-                btn.textContent = 'Lösung anzeigen';
-            }
-        }
+   document.addEventListener('DOMContentLoaded', function() {
+    var accordions = document.getElementsByClassName("accordion");
+    for (var i = 0; i < accordions.length; i++) {
+        accordions[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            panel.classList.toggle("active");
+        });
+    }
+});
     </script>
 </body>
 </html>

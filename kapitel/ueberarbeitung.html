@@ -500,42 +500,13 @@
     </main>
 
     <script>
-        // Funktion zum Öffnen und Schließen der Accordion-Elemente
-        function toggleAccordion(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('.accordion-icon');
-            
-            content.classList.toggle('active');
-            icon.textContent = content.classList.contains('active') ? '−' : '+';
-        }
-
-        // Funktion zum Anzeigen/Verbergen der Lösungen
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            solution.classList.toggle('active');
-            
-            // Button-Text ändern
-            const button = solution.previousElementSibling;
-            if (solution.classList.contains('active')) {
-                button.textContent = 'Lösung ausblenden';
-            } else {
-                button.textContent = 'Lösung anzeigen';
-            }
-        }
-
-        // Beim Laden der Seite alle Accordion-Elemente schließen
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordionContents = document.querySelectorAll('.panel');
-            const accordionIcons = document.querySelectorAll('.accordion-icon');
-            
-            accordionContents.forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            accordionIcons.forEach(icon => {
-                icon.textContent = '+';
-            });
-        });
+function toggleAccordion(element) {
+    var panel = element.nextElementSibling;
+    var icon = element.querySelector('.accordion-icon');
+    
+    panel.classList.toggle('active');
+    icon.textContent = panel.classList.contains('active') ? '-' : '+';
+}
     </script>
 </body>
 </html>

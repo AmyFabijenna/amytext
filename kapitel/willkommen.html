@@ -191,11 +191,16 @@
             background: #e9ecef;
         }
 
+        .accordion-header.active {
+            background: #e9ecef;
+        }
+
         .panel {
             padding: 0;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background: white;
         }
 
         .panel.active {
@@ -346,9 +351,9 @@
                     <h2>Häufig gestellte Fragen</h2>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Wie viel Zeit sollte ich für die Vorbereitung einplanen?
-                            <span>+</span>
+                            <span class="accordion-icon">+</span>
                         </div>
                         <div class="panel">
                             <p>Für eine gründliche Vorbereitung empfehlen wir:</p>
@@ -363,9 +368,9 @@
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Welche Textsorten kommen in der Matura am häufigsten vor?
-                            <span>+</span>
+                            <span class="accordion-icon">+</span>
                         </div>
                         <div class="panel">
                             <p>Die häufigsten Textsorten in der Deutschmatura sind:</p>
@@ -381,9 +386,9 @@
                     </div>
                     
                     <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Wie kann ich meine Argumentation verbessern?
-                            <span>+</span>
+                            <span class="accordion-icon">+</span>
                         </div>
                         <div class="panel">
                             <p>Für eine überzeugende Argumentation:</p>
@@ -442,24 +447,26 @@
     </main>
 
     <script>
-        function toggleAccordion(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('span');
-            
-            content.classList.toggle('active');
-            
-            if (content.classList.contains('active')) {
-                icon.textContent = '−';
-            } else {
-                icon.textContent = '+';
-            }
-        }
-        
-        // Alle Accordion-Inhalte standardmäßig schließen
         document.addEventListener('DOMContentLoaded', function() {
-            const accordionContents = document.querySelectorAll('.panel');
-            accordionContents.forEach(content => {
-                content.classList.remove('active');
+            var accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(function(header) {
+                header.addEventListener('click', function() {
+                    var panel = this.nextElementSibling;
+                    var icon = this.querySelector('.accordion-icon');
+                    
+                    // Toggle panel
+                    panel.classList.toggle('active');
+                    
+                    // Toggle icon
+                    if (panel.classList.contains('active')) {
+                        icon.textContent = '−';
+                        this.classList.add('active');
+                    } else {
+                        icon.textContent = '+';
+                        this.classList.remove('active');
+                    }
+                });
             });
         });
     </script>
