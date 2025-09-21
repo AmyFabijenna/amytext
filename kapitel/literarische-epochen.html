@@ -540,17 +540,20 @@
     </main>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            this.classList.toggle('active');
-            const panel = this.nextElementSibling;
-            panel.classList.toggle('active');
-        });
-    });
-});
+function toggleEpoche(epocheId) {
+    const content = document.getElementById(epocheId);
+    content.classList.toggle('active');
+    const header = content.previousElementSibling;
+    const arrow = header.querySelector('span');
+    arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+}
+
+function toggleLoesung(loesungId) {
+    const loesung = document.getElementById(loesungId);
+    loesung.classList.toggle('active');
+    const button = loesung.previousElementSibling;
+    button.textContent = loesung.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
+}
     </script>
 </body>
 </html>
