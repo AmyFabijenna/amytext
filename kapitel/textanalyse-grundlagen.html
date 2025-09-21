@@ -980,200 +980,38 @@
     </div>
 
     <script>
-// Universelles JavaScript für alle Deutschmatura-Dateien
-// Funktioniert mit allen verwendeten HTML-Strukturen
-
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Deutschmatura JavaScript geladen');
-});
-
-// Funktion für uebungen-stilmittel.html und uebungen-eroerterung.html
-function toggleSolution(element) {
-    let solutionDiv;
-    
-    // Wenn ein String (ID) übergeben wurde
-    if (typeof element === 'string') {
-        solutionDiv = document.getElementById(element);
-    } 
-    // Wenn ein Element übergeben wurde
-    else {
-        // Suche nach dem nächsten .toggle-content oder .solution
-        solutionDiv = element.parentNode.querySelector('.toggle-content') || 
-                     element.parentNode.querySelector('.solution') ||
-                     element.nextElementSibling;
-    }
-    
-    if (solutionDiv) {
-        // Toggle zwischen verschiedenen Klassen
-        if (solutionDiv.classList.contains('active')) {
-            solutionDiv.classList.remove('active');
-            if (element.textContent) {
-                element.textContent = element.textContent.replace('ausblenden', 'anzeigen').replace('verbergen', 'anzeigen');
-            }
-        } else {
-            solutionDiv.classList.add('active');
-            if (element.textContent) {
-                element.textContent = element.textContent.replace('anzeigen', 'ausblenden').replace('LÃ¶sung', 'LÃ¶sung ausblenden');
-            }
-        }
-        
-        // Fallback für show-Klasse
-        solutionDiv.classList.toggle('show');
-    }
-}
-
-// Funktion für uebungen-interpretation.html
-function toggleExercise(element) {
-    const exerciseContent = element.nextElementSibling;
-    const icon = element.querySelector('span');
-    
-    if (exerciseContent) {
-        if (exerciseContent.classList.contains('active')) {
-            exerciseContent.classList.remove('active');
-            if (icon) icon.textContent = '+';
-        } else {
-            exerciseContent.classList.add('active');
-            if (icon) icon.textContent = '-';
-        }
-        
-        // Zusätzliche CSS-Klassen für Kompatibilität
-        exerciseContent.style.display = exerciseContent.classList.contains('active') ? 'block' : 'none';
-    }
-}
-
-// Funktion für ueberarbeitung.html
-function toggleAccordion(element) {
-    const panel = element.nextElementSibling;
-    const icon = element.querySelector('.accordion-icon');
-    
-    if (panel) {
-        panel.classList.toggle('active');
-        
-        if (icon) {
-            icon.textContent = panel.classList.contains('active') ? '-' : '+';
-        }
-        
-        // Arrow rotation für andere Icons
-        const arrow = element.querySelector('span:not(.accordion-icon)');
-        if (arrow && arrow.textContent.includes('▼')) {
-            arrow.textContent = panel.classList.contains('active') ? '▲' : '▼';
-        }
-    }
-}
-
-// Universelle Funktion für alle Accordion-ähnlichen Strukturen
-function togglePanel(element) {
-    let panel = element.nextElementSibling;
-    
-    // Suche nach verschiedenen Panel-Strukturen
-    if (!panel || (!panel.classList.contains('panel') && 
-                   !panel.classList.contains('toggle-content') && 
-                   !panel.classList.contains('exercise-content') &&
-                   !panel.classList.contains('solution'))) {
-        panel = element.parentNode.querySelector('.panel') ||
-                element.parentNode.querySelector('.toggle-content') ||
-                element.parentNode.querySelector('.exercise-content') ||
-                element.parentNode.querySelector('.solution');
-    }
-    
-    if (panel) {
-        panel.classList.toggle('active');
-        
-        // Icon updates
-        const icon = element.querySelector('span');
-        if (icon) {
-            if (icon.textContent === '+') icon.textContent = '-';
-            else if (icon.textContent === '-') icon.textContent = '+';
-            else if (icon.textContent === '▼') icon.textContent = '▲';
-            else if (icon.textContent === '▲') icon.textContent = '▼';
-        }
-        
-        // Button text updates
-        if (element.textContent && element.tagName === 'BUTTON') {
-            if (element.textContent.includes('anzeigen')) {
-                element.textContent = element.textContent.replace('anzeigen', 'ausblenden');
-            } else if (element.textContent.includes('ausblenden')) {
-                element.textContent = element.textContent.replace('ausblenden', 'anzeigen');
-            }
-        }
-    }
-}
-
-// Event-Listener für alle möglichen Selektoren (Fallback)
-document.addEventListener('click', function(e) {
-    // Für Accordion-Header
-    if (e.target.classList.contains('accordion-header') || 
-        e.target.parentNode.classList.contains('accordion-header')) {
-        const element = e.target.classList.contains('accordion-header') ? e.target : e.target.parentNode;
-        toggleAccordion(element);
-    }
-    
-    // Für Exercise-Header
-    if (e.target.classList.contains('exercise-header') || 
-        e.target.parentNode.classList.contains('exercise-header')) {
-        const element = e.target.classList.contains('exercise-header') ? e.target : e.target.parentNode;
-        toggleExercise(element);
-    }
-    
-    // Für Toggle-Buttons ohne onclick
-    if (e.target.classList.contains('toggle-button') && !e.target.onclick) {
-        toggleSolution(e.target);
-    }
-    
-    // Für Solution-Toggle-Buttons ohne onclick
-    if (e.target.classList.contains('solution-toggle') && !e.target.onclick) {
-        toggleSolution(e.target);
-    }
-});
-
-// Legacy-Support für falsche Selektoren
-document.addEventListener('DOMContentLoaded', function() {
-    // Wenn Accordion-Klassen existieren, aber falsch implementiert sind
     const accordions = document.querySelectorAll('.accordion');
     accordions.forEach(function(accordion) {
-        if (!accordion.onclick) {
-            accordion.addEventListener('click', function() {
-                togglePanel(this);
-            });
-        }
-    });
-    
-    // Zusätzlicher Fallback für häufige Strukturen
-    const headers = document.querySelectorAll('.accordion-header, .exercise-header');
-    headers.forEach(function(header) {
-        if (!header.onclick) {
-            header.addEventListener('click', function() {
-                togglePanel(this);
-            });
-        }
-    });
-    
-    const buttons = document.querySelectorAll('.toggle-button, .solution-toggle');
-    buttons.forEach(function(button) {
-        if (!button.onclick) {
-            button.addEventListener('click', function() {
-                toggleSolution(this);
-            });
-        }
+        accordion.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const panel = this.nextElementSibling;
+            panel.classList.toggle('active');
+        });
     });
 });
 
-// Zusätzliche Utility-Funktionen
-function showAllSolutions() {
-    const solutions = document.querySelectorAll('.solution, .toggle-content');
-    solutions.forEach(sol => sol.classList.add('active', 'show'));
-}
-
-function hideAllSolutions() {
-    const solutions = document.querySelectorAll('.solution, .toggle-content');
-    solutions.forEach(sol => sol.classList.remove('active', 'show'));
+function toggleSolution(elementId) {
+    const solution = document.getElementById(elementId);
+    if (solution) {
+        solution.classList.toggle('active');
+    }
 }
 
 function toggleAll() {
-    const panels = document.querySelectorAll('.panel, .solution, .toggle-content, .exercise-content');
+    const panels = document.querySelectorAll('.panel');
+    const accordions = document.querySelectorAll('.accordion');
     const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
     
-    panels.forEach(panel => {
+    accordions.forEach(function(accordion) {
+        if (allOpen) {
+            accordion.classList.remove('active');
+        } else {
+            accordion.classList.add('active');
+        }
+    });
+    
+    panels.forEach(function(panel) {
         if (allOpen) {
             panel.classList.remove('active');
         } else {

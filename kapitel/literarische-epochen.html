@@ -540,19 +540,61 @@
     </main>
 
     <script>
+// Universelles JavaScript für alle Deutschmatura-Dateien
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Deutschmatura JavaScript geladen');
+    
+    // Initialisiere alle Accordion-Funktionen
+    initializeAccordions();
+});
+
 function toggleEpoche(epocheId) {
     const content = document.getElementById(epocheId);
-    content.classList.toggle('active');
-    const header = content.previousElementSibling;
-    const arrow = header.querySelector('span');
-    arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+    if (content) {
+        content.classList.toggle('active');
+        const header = content.previousElementSibling;
+        const arrow = header.querySelector('span');
+        if (arrow) {
+            arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+        }
+    }
 }
 
 function toggleLoesung(loesungId) {
     const loesung = document.getElementById(loesungId);
-    loesung.classList.toggle('active');
-    const button = loesung.previousElementSibling;
-    button.textContent = loesung.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
+    if (loesung) {
+        loesung.classList.toggle('active');
+        const button = loesung.previousElementSibling;
+        if (button && button.textContent) {
+            button.textContent = loesung.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
+        }
+    }
+}
+
+function initializeAccordions() {
+    // Epoche-Header
+    document.querySelectorAll('.epoche-header').forEach(function(header) {
+        if (!header.onclick) {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                if (content && content.id) {
+                    toggleEpoche(content.id);
+                }
+            });
+        }
+    });
+    
+    // Lösung-Buttons
+    document.querySelectorAll('.loesung-button').forEach(function(button) {
+        if (!button.onclick) {
+            button.addEventListener('click', function() {
+                const loesung = this.nextElementSibling;
+                if (loesung && loesung.id) {
+                    toggleLoesung(loesung.id);
+                }
+            });
+        }
+    });
 }
     </script>
 </body>
