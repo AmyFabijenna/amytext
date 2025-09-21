@@ -597,22 +597,86 @@
     </main>
 
     <script>
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
     const accordions = document.querySelectorAll('.accordion');
+    
     accordions.forEach(function(accordion) {
         accordion.addEventListener('click', function() {
-            this.classList.toggle('active-accordion');
+            // Active-Klasse für das Accordion togglen
+            this.classList.toggle('active');
+            
+            // Panel finden und togglen
             const panel = this.nextElementSibling;
-            panel.classList.toggle('active');
+            if (panel) {
+                panel.classList.toggle('active');
+            }
         });
     });
 });
 
+// Lösungen ein-/ausblenden
 function toggleSolution(elementId) {
-    const solution = document.getElementById(elementId);
-    if (solution) {
-        solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
+    const element = document.getElementById(elementId);
+    if (element) {
+        if (element.style.display === 'block') {
+            element.style.display = 'none';
+        } else {
+            element.style.display = 'block';
+        }
     }
+}
+
+// Alle Panels auf einmal öffnen/schließen
+function toggleAll() {
+    const accordions = document.querySelectorAll('.accordion');
+    const panels = document.querySelectorAll('.panel');
+    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
+    
+    accordions.forEach(function(acc) {
+        if (allOpen) {
+            acc.classList.remove('active');
+        } else {
+            acc.classList.add('active');
+        }
+    });
+    
+    panels.forEach(function(panel) {
+        if (allOpen) {
+            panel.classList.remove('active');
+        } else {
+            panel.classList.add('active');
+        }
+    });
+}
+
+// Quiz-Funktionen für textinterpretation.html
+function checkQuiz(quizId) {
+    const quiz = document.getElementById(quizId);
+    if (!quiz) return;
+    
+    const checkboxes = quiz.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        const label = checkbox.nextElementSibling;
+        if (checkbox.classList.contains('correct')) {
+            label.style.color = checkbox.checked ? '#27ae60' : '#e74c3c';
+        } else {
+            label.style.color = checkbox.checked ? '#e74c3c' : '#27ae60';
+        }
+    });
+}
+
+function checkAnswers() {
+    const answers = document.querySelectorAll('.answer');
+    answers.forEach(function(answer) {
+        const correctAnswer = answer.getAttribute('data-answer');
+        if (answer.value.toLowerCase() === correctAnswer.toLowerCase()) {
+            answer.style.backgroundColor = '#d4edda';
+        } else {
+            answer.style.backgroundColor = '#f8d7da';
+        }
+    });
 }
     </script>
 </body>
