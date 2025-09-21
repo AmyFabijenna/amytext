@@ -130,11 +130,16 @@
         }
 
 .panel {
-    display: none;
-    padding: 18px;
-    background-color: #f9f9f9;
+    max-height: 0;
     overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: #f9f9f9;
     border-radius: 0 0 5px 5px;
+}
+
+.panel.active {
+    max-height: 3000px;
+    padding: 18px;
 }
 
         .solution-toggle {
@@ -469,37 +474,17 @@ Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
     </main>
 
     <script>
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
-            } else {
-                solution.style.display = "block";
-            }
-        }
-
-        // Korrigierte accordion-Funktionalität
-        document.addEventListener('DOMContentLoaded', function() {
-            const coll = document.getElementsByClassName("accordion");
-            
-            for (let i = 0; i < coll.length; i++) {
-                // Initial alle Inhalte ausblenden
-                const content = coll[i].nextElementSibling;
-                content.style.display = 'none';
-                
-                // Click-Event hinzufügen
-                coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    const content = this.nextElementSibling;
-                    
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                    } else {
-                        content.style.display = "block";
-                    }
-                });
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const panel = this.nextElementSibling;
+            panel.classList.toggle('active');
         });
+    });
+});
     </script>
 </body>
 </html>

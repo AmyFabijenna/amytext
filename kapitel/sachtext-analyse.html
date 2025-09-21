@@ -183,17 +183,18 @@
         }
 
 .panel {
-    display: none;
-    padding: 18px;
-    background-color: #f9f9f9;
+    max-height: 0;
     overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: #f9f9f9;
     border-radius: 0 0 5px 5px;
 }
 
 .panel.active {
-    max-height: 1000px;
+    max-height: 3000px;
     padding: 18px;
 }
+
         .solution {
             background: #e8f5e9;
             padding: 15px;
@@ -434,26 +435,20 @@
 
     <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const accordions = document.querySelectorAll('.accordion');
+    var acc = document.getElementsByClassName("accordion");
     
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function(e) {
-            e.preventDefault();
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
             
-            // Toggle active class auf dem Button
-            this.classList.toggle('active');
-            
-            // Finde das nächste Panel
-            const panel = this.nextElementSibling;
-            
-            // Toggle display
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
             } else {
-                panel.style.display = 'block';
+                panel.style.display = "block";
             }
         });
-    });
+    }
 });
     </script>
 </body>

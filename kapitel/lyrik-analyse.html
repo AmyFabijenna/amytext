@@ -168,18 +168,17 @@
         }
 
 .panel {
-    display: none;
-    padding: 18px;
-    background-color: #f9f9f9;
+    max-height: 0;
     overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: #f9f9f9;
     border-radius: 0 0 5px 5px;
 }
 
-        .panel.active {
-            max-height: 2000px;
-            padding: 20px;
-        }
-
+.panel.active {
+    max-height: 3000px;
+    padding: 18px;
+}
         .example-box {
             background: #f8f9fa;
             border-left: 4px solid #3498db;
@@ -558,33 +557,22 @@
     </main>
 
     <script>
-function initializeAccordions() {
-    const accordions = document.querySelectorAll('.accordion');
+document.addEventListener('DOMContentLoaded', function() {
+    var acc = document.getElementsByClassName("accordion");
     
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Toggle active class
-            this.classList.toggle('active');
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
             
-            // Get the panel
-            const panel = this.nextElementSibling;
-            
-            // Simple toggle approach that works everywhere
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
             } else {
-                panel.style.display = 'block';
+                panel.style.display = "block";
             }
         });
-    });
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeAccordions);
-} else {
-    initializeAccordions();
-}
+    }
+});
     </script>
 </body>
 </html>
