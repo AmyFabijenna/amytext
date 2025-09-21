@@ -168,48 +168,61 @@
             text-align: left;
             border: none;
             outline: none;
-            transition: 0.4s;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            transition: all 0.4s ease;
+            margin-bottom: 0;
+            border-radius: 5px 5px 0 0;
             font-weight: bold;
             position: relative;
+            font-size: 16px;
         }
 
         .accordion:after {
-            content: '\002B'; /* Pluszeichen */
+            content: '+';
             color: #777;
             font-weight: bold;
+            font-size: 18px;
             position: absolute;
             right: 18px;
             top: 50%;
             transform: translateY(-50%);
+            transition: transform 0.3s ease;
         }
 
-        .active:after {
-            content: "\2212"; /* Minuszeichen */
+        .accordion.active:after {
+            content: '−';
+            transform: translateY(-50%) rotate(0deg);
         }
 
-        .active, .accordion:hover {
+        .accordion.active, .accordion:hover {
             background-color: #ccc;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            padding: 0 18px;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
-
+        .panel.show {
+            max-height: 2000px;
+            padding: 18px;
+        }
 
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+                font-size: 14px;
             }
         }
     </style>
@@ -259,7 +272,7 @@
                                     <td>Korrekturlesen und Verbesserungen</td>
                                 </tr>
                             </table>
-                            <p class="tip-box"><strong>Tipp:</strong> Diese Zeiteinteilung kann je nach individuellen Stärken und Schwächen angepasst werden.</p>
+                            <div class="tip-box"><strong>Tipp:</strong> Diese Zeiteinteilung kann je nach individuellen Stärken und Schwächen angepasst werden.</div>
                         </div>
                     </div>
                     
@@ -364,7 +377,7 @@
                             
                             <div class="tip-box">
                                 <strong>Textauszug:</strong><br>
-                                "Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung is Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."
+                                "Die digitale Revolution hat unser Leben grundlegend verändert. Wo früher persönliche Begegnungen den Alltag prägten, dominieren heute virtuelle Kontakte unsere Kommunikation. Ein kurzer Blick auf unser Smartphone ersetzt lange Gespräche, ein Like auf Social Media ersetzt eine herzliche Umarmung. Diese Entwicklung ist Fluch und Segen zugleich: Einerseits ermöglicht sie uns, mit Menschen auf der ganzen Welt in Kontakt zu bleiben, andererseits droht sie, unsere unmittelbaren sozialen Fähigkeiten verkümmern zu lassen. Die Frage ist nicht, ob wir diese Entwicklung aufhalten können – sie ist längst in vollem Gange. Vielmehr müssen wir lernen, einen gesunden Umgang mit der Digitalisierung zu finden, der uns die Vorteile nutzen lässt, ohne dass wir unsere Menschlichkeit verlieren."
                             </div>
                             
                             <p>Nach 5 Minuten notiere:</p>
@@ -433,7 +446,7 @@
                                 <p><strong>Musteranalyse:</strong></p>
                                 <p><strong>Einleitung:</strong> Der vorliegende Text "Verantwortung in Zeiten des Klimawandels" von [fiktiver Autor] erschien 2023 in der Zeitschrift [fiktive Quelle]. Er thematisiert das Spannungsverhältnis zwischen individueller und kollektiver Verantwortung im Kontext der globalen Klimakrise.</p>
                                 
-                                <p><strong>Zusammenfassung:</strong> Der Text diskutiert die Frage, inwieweit Einzelpersonen zum Klimaschutz beitragen können und sollen. Der Autor erkennt die verbreitete Resignation angesichts der Größe des Probleme an, argumentiert jedoch, dass auch kleine individuelle Handlungen in ihrer Summe bedeutsam sind. Gleichzeitig betont er die Notwendigkeit struktureller Veränderungen auf politischer und wirtschaftlicher Ebene. Als Lösung schlägt er eine "doppelte Strategie" vor, die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet.</p>
+                                <p><strong>Zusammenfassung:</strong> Der Text diskutiert die Frage, inwieweit Einzelpersonen zum Klimaschutz beitragen können und sollen. Der Autor erkennt die verbreitete Resignation angesichts der Größe des Problems an, argumentiert jedoch, dass auch kleine individuelle Handlungen in ihrer Summe bedeutsam sind. Gleichzeitig betont er die Notwendigkeit struktureller Veränderungen auf politischer und wirtschaftlicher Ebene. Als Lösung schlägt er eine "doppelte Strategie" vor, die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet.</p>
                                 
                                 <p><strong>Analyse sprachlicher Mittel:</strong></p>
                                 <ol>
@@ -441,14 +454,13 @@
                                     <li>Die Metapher des "ökologischen Fußabdrucks" veranschaulicht abstrakte Umweltauswirkungen individueller Entscheidungen und macht diese greifbarer. Sie unterstützt das Argument des Autors, dass persönliche Entscheidungen durchaus relevant sind.</li>
                                 </ol>
                                 
-                                <p><strong>Argumentationsstruktur:</strong> Der Text folgt einer dialektischen Struktur:
-                                    <ul>
-                                        <li>These: Individuelle Handlungen erscheinen angesichts globaler Probleme machtlos</li>
-                                        <li>Antithese: Viele kleine Handlungen können in ihrer Summe wirksam sein</li>
-                                        <li>Synthese: Sowohl individuelle als auch kollektive/strukturelle Maßnahmen sind notwendig</li>
-                                    </ul>
-                                    Diese Struktur ermöglicht es dem Autor, eine differenzierte Position zu entwickeln, die einseitige Verantwortungszuschreibungen vermeidet.
-                                </p>
+                                <p><strong>Argumentationsstruktur:</strong> Der Text folgt einer dialektischen Struktur:</p>
+                                <ul>
+                                    <li>These: Individuelle Handlungen erscheinen angesichts globaler Probleme machtlos</li>
+                                    <li>Antithese: Viele kleine Handlungen können in ihrer Summe wirksam sein</li>
+                                    <li>Synthese: Sowohl individuelle als auch kollektive/strukturelle Maßnahmen sind notwendig</li>
+                                </ul>
+                                <p>Diese Struktur ermöglicht es dem Autor, eine differenzierte Position zu entwickeln, die einseitige Verantwortungszuschreibungen vermeidet.</p>
                                 
                                 <p><strong>Schlussfolgerung mit eigener Stellungnahme:</strong> Der Text bietet eine ausgewogene Betrachtung der Verantwortungsfrage im Klimaschutz. Besonders überzeugend ist die Verbindung von individueller und systemischer Perspektive, die weder in Fatalismus noch in naive Selbstüberschätzung verfällt. Ich stimme der Position des Autors zu, dass wir sowohl auf persönlicher als auch auf gesellschaftlicher Ebene handeln müssen. Allerdings hätte der Text konkreter darauf eingehen können, wie der Einzelne auch politischen Einfluss nehmen kann, etwa durch demokratische Partizipation oder zivilgesellschaftliches Engagement.</p>
                             </div>
@@ -510,9 +522,10 @@
             </div>
         </div>
     </main>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
+    // Accordion-Funktionalität
     const accordions = document.querySelectorAll('.accordion');
     
     accordions.forEach(function(accordion) {
@@ -522,8 +535,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Panel finden und togglen
             const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            if (panel && panel.classList.contains('panel')) {
+                panel.classList.toggle('show');
             }
         });
     });
@@ -532,10 +545,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function toggleSolution(elementId) {
     const element = document.getElementById(elementId);
     if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
+        if (element.style.display === 'none' || element.style.display === '') {
             element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
         }
     }
 }
@@ -543,7 +556,7 @@ function toggleSolution(elementId) {
 function toggleAll() {
     const accordions = document.querySelectorAll('.accordion');
     const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
+    const allOpen = Array.from(panels).every(panel => panel.classList.contains('show'));
     
     accordions.forEach(function(acc) {
         if (allOpen) {
@@ -555,12 +568,10 @@ function toggleAll() {
     
     panels.forEach(function(panel) {
         if (allOpen) {
-            panel.classList.remove('active');
+            panel.classList.remove('show');
         } else {
-            panel.classList.add('active');
+            panel.classList.add('show');
         }
     });
 }
-</script>
-</body>
-</html>
+            

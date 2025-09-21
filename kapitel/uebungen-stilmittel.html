@@ -125,10 +125,22 @@
             border-radius: 5px;
             margin-top: 10px;
             border-left: 3px solid #3498db;
+            animation: slideDown 0.3s ease-out;
         }
 
         .toggle-content.active {
             display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .solution-box {
@@ -165,6 +177,15 @@
             color: #155724;
         }
 
+        .tip-box ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .tip-box li {
+            margin-bottom: 5px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -185,22 +206,27 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .exercise-content ul, .exercise-content ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .exercise-content li {
+            margin-bottom: 5px;
+        }
 
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+            
+            .content-header p {
+                font-size: 1em;
             }
         }
     </style>
@@ -350,7 +376,7 @@
                             <ol>
                                 <li>"Der Wind heulte um die Ecken des alten Hauses. Die Fensterläden klapperten unruhig, als wollten sie eine Warnung aussprechen. Im Kamin knisterte das letzte Holzscheit, und die Schatten tanzten an den Wänden wie ruhelose Geister."</li>
                                 <li>"Warum schweigen wir? Warum schauen wir weg? Warum akzeptieren wir das Unakzeptable? Es ist an der Zeit, unsere Stimme zu erheben, unsere Augen zu öffnen und für das einzustehen, was richtig ist!"</li>
-                                <li>"Die Erinnerung ist ein verschlungener Pfad durch einen dichten Wald. Manche Wege sind breit und sonnendurchflutet, andere schmal und dunkel. Manchmal verirren wir uns, manchmal finden wir unerwartete Lichtungen. And immer wieder stoßen wir auf Abzweigungen, an denen wir entscheiden müssen, welcher Version unserer Geschichte wir folgen wollen."</li>
+                                <li>"Die Erinnerung ist ein verschlungener Pfad durch einen dichten Wald. Manche Wege sind breit und sonnendurchflutet, andere schmal und dunkel. Manchmal verirren wir uns, manchmal finden wir unerwartete Lichtungen. Und immer wieder stoßen wir auf Abzweigungen, an denen wir entscheiden müssen, welcher Version unserer Geschichte wir folgen wollen."</li>
                             </ol>
                         </div>
                         <button class="toggle-button" onclick="toggleSolution(this)">Lösung anzeigen</button>
@@ -360,7 +386,7 @@
                                 <ol>
                                     <li><strong>Personifikationen ("heulte", "klapperten unruhig", "Schatten tanzten") und Vergleich ("wie ruhelose Geister"):</strong> Erzeugen eine unheimliche, bedrohliche Atmosphäre. Das Haus wird als lebendiges Wesen dargestellt, das Unheil ankündigt. Die Wirkung ist dramatisch und spannungssteigernd.</li>
                                     <li><strong>Rhetorische Fragen und Klimax:</strong> Die rhetorischen Fragen appellieren an das Gewissen des Lesers und schaffen eine emotionale Betroffenheit. Die Klimax ("Stimme erheben, Augen öffnen, für das Richtige einstehen") steigert die emotionale Intensität und mündet in einen Appell zur Handlung.</li>
-                                    <li><strong>Metapher ("Erinnerung ist ein verschlungener Pfad") и Antithesen ("breit/schmal", "sonnendurchflutet/dunkel"):</strong> Veranschaulichen die Komplexität und Widersprüchlichkeit von Erinnerungen. Die Metapher macht abstrakte psychologische Prozesse greifbar. Die Wirkung ist reflektierend und lädt zur Selbstbetrachtung ein.</li>
+                                    <li><strong>Metapher ("Erinnerung ist ein verschlungener Pfad") und Antithesen ("breit/schmal", "sonnendurchflutet/dunkel"):</strong> Veranschaulichen die Komplexität und Widersprüchlichkeit von Erinnerungen. Die Metapher macht abstrakte psychologische Prozesse greifbar. Die Wirkung ist reflektierend und lädt zur Selbstbetrachtung ein.</li>
                                 </ol>
                             </div>
                         </div>
@@ -384,7 +410,7 @@
                         <button class="toggle-button" onclick="toggleSolution(this)">Tipps anzeigen</button>
                         <div class="toggle-content">
                             <div class="tip-box">
-                                <strong>Tipps für die Umsetzung:</strong><br>
+                                <strong>Tipps für die Umsetzung:</strong>
                                 <ul>
                                     <li>Überlege dir zuerst, welche Wirkung du erzielen möchtest (dramatisch, appellativ, beschreibend, etc.)</li>
                                     <li>Wähle Stilmittel, die zu deiner gewählten Textsorte passen</li>
@@ -418,57 +444,34 @@
         </div>
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        function toggleSolution(button) {
+            // Toggle active class on button
+            button.classList.toggle('active');
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            // Find the corresponding toggle content
+            const toggleContent = button.nextElementSibling;
+            
+            if (toggleContent && toggleContent.classList.contains('toggle-content')) {
+                // Toggle the display of the content
+                toggleContent.classList.toggle('active');
             }
+        }
+
+        // Initialize all toggle buttons on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure all toggle contents are initially hidden
+            const toggleContents = document.querySelectorAll('.toggle-content');
+            toggleContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Ensure all toggle buttons are initially inactive
+            const toggleButtons = document.querySelectorAll('.toggle-button');
+            toggleButtons.forEach(button => {
+                button.classList.remove('active');
+            });
         });
-    });
-});
-
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
+    </script>
 </body>
 </html>

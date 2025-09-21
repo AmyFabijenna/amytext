@@ -104,24 +104,34 @@
             justify-content: space-between;
             align-items: center;
             transition: background 0.3s;
+            user-select: none;
         }
 
         .accordion-header:hover {
             background: #e9ecef;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .accordion-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .accordion.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f9f9f9;
+        }
+
+        .panel.active {
+            max-height: 3000px;
+            padding: 18px;
+        }
 
         .example-box {
             background: #e8f4f8;
@@ -232,7 +242,7 @@
                     <p>Das Drama ist eine der drei literarischen Gattungen neben Lyrik und Epik. Es zeichnet sich durch Dialoge, Handlung und Konflikte aus, die direkt dargestellt werden, ohne vermittelnden Erzähler.</p>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Dramatische Textsorten
                             <span class="accordion-icon">+</span>
                         </div>
@@ -252,7 +262,7 @@
                     <h3 class="subsection-title">Aufbau eines Dramas</h3>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Fünf-Akt-Schema nach Gustav Freytag
                             <span class="accordion-icon">+</span>
                         </div>
@@ -302,7 +312,7 @@
                     <p>Die Analyse von Dialogen ist zentral für das Verständnis eines Dramas. Dabei werden folgende Aspekte untersucht:</p>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Gesprächsformen im Drama
                             <span class="accordion-icon">+</span>
                         </div>
@@ -330,7 +340,7 @@
                     <h3 class="subsection-title">Sprechakte und Kommunikation</h3>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Sprachliche Mittel im Dialog
                             <span class="accordion-icon">+</span>
                         </div>
@@ -358,7 +368,7 @@
                     </div>
                     <p><strong>Aufgabe:</strong> Analysiere die Kommunikationssituation und die Sprechakte. Welche Machtverhältnisse werden deutlich?</p>
                     
-                    <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                    <button class="solution-toggle">Lösung anzeigen</button>
                     <div class="solution-content">
                         <p><strong>Lösungsvorschlag:</strong></p>
                         <p>In diesem Dialog herrscht ein klares Machtgefälle zwischen Tell und dem Fischer. Tell gibt Befehle ("Gib dein Ruder her", "Das Steuer loslassen - schnell!"), während der Fischer eher unsicher und nachfragend agiert ("Was wollt Ihr tun, Herr?").</p>
@@ -375,7 +385,7 @@
                     <h3 class="subsection-title">Figurenanalyse</h3>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Methoden der Figurenanalyse
                             <span class="accordion-icon">+</span>
                         </div>
@@ -401,7 +411,7 @@
                     <h3 class="subsection-title">Konfliktanalyse</h3>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Konflikttypen im Drama
                             <span class="accordion-icon">+</span>
                         </div>
@@ -436,7 +446,7 @@
                     </div>
                     <p><strong>Aufgabe:</strong> Erstelle eine Figurenkonstellation und analysiere die wichtigsten Beziehungen und Konflikte zwischen den Figuren.</p>
                     
-                    <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                    <button class="solution-toggle">Lösung anzeigen</button>
                     <div class="solution-content">
                         <p><strong>Lösungsvorschlag:</strong></p>
                         <p>Die Figurenkonstellation in "Emilia Galotti" ist von klaren Gegensätzen und Konflikten geprägt:</p>
@@ -459,7 +469,7 @@
                     <h3 class="subsection-title">Szenenanalyse</h3>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Elemente der Szenenanalyse
                             <span class="accordion-icon">+</span>
                         </div>
@@ -481,7 +491,7 @@
                     <h3 class="subsection-title">Dramatische Techniken</h3>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
                             Wichtige dramatische Techniken
                             <span class="accordion-icon">+</span>
                         </div>
@@ -512,7 +522,7 @@
                     </div>
                     <p><strong>Aufgabe:</strong> Analysiere die Funktion dieser Eingangsszene als Exposition. Welche Informationen erhalten wir über Faust?</p>
                     
-                    <button class="solution-toggle" onclick="toggleSolution(this)">Lösung anzeigen</button>
+                    <button class="solution-toggle">Lösung anzeigen</button>
                     <div class="solution-content">
                         <p><strong>Lösungsvorschlag:</strong></p>
                         <p>Die Eingangsszene "Nacht" dient als Exposition, die Fausts grundlegende Situation und seinen Charakter vorstellt:</p>
@@ -532,7 +542,7 @@
                 <h2 class="section-title">Checkliste für die Dramenanalyse</h2>
                 
                 <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-header">
                         Checkliste zur Überprüfung der Dramenanalyse
                         <span class="accordion-icon">+</span>
                     </div>
@@ -554,57 +564,37 @@
             </div>
         </div>
     </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion-Funktionalität
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
-            }
-        });
-    });
-});
-
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
-</body>
-</html>
+            accordionHeaders.forEach(function(header) {
+                header.addEventListener('click', function() {
+                    const accordion = this.parentElement;
+                    const panel = this.nextElementSibling;
+                    
+                    // Toggle active state
+                    accordion.classList.toggle('active');
+                    panel.classList.toggle('active');
+                });
+            });
+            
+            // Solution-Toggle-Funktionalität
+            const solutionToggles = document.querySelectorAll('.solution-toggle');
+            
+            solutionToggles.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const solutionContent = this.nextElementSibling;
+                    
+                    if (solutionContent.classList.contains('active')) {
+                        solutionContent.classList.remove('active');
+                        this.textContent = 'Lösung anzeigen';
+                    } else {
+                        solutionContent.classList.add('active');
+                        this.textContent = 'Lösung verbergen';
+                    }
+                });
+            });
+        

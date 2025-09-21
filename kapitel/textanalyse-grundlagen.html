@@ -106,18 +106,20 @@
             content: '−';
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            background: white;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .panel.active {
+            max-height: 2000px;
+            opacity: 1;
+            padding: 18px;
+        }
+
         .section-inner {
             padding: 30px;
         }
@@ -276,6 +278,7 @@
             cursor: pointer;
             font-size: 0.9em;
             margin-top: 10px;
+            transition: background-color 0.2s;
         }
 
         .solution-toggle:hover {
@@ -289,10 +292,16 @@
             border-radius: 5px;
             padding: 15px;
             margin-top: 10px;
+            animation: fadeIn 0.3s ease-in;
         }
 
         .solution.active {
             display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .quick-nav {
@@ -389,7 +398,7 @@
                 
                 <div class="tip-box">
                     <strong>Grundsatz der Textanalyse:</strong><br>
-                    Eine gute Textanalyse beschreibt nicht nur <em>was</em> im Text steht, sondern erklärt <em>how</em> der Text funktioniert und <em>warum</em> er eine bestimmte Wirkung erzielt.
+                    Eine gute Textanalyse beschreibt nicht nur <em>was</em> im Text steht, sondern erklärt <em>wie</em> der Text funktioniert und <em>warum</em> er eine bestimmte Wirkung erzielt.
                 </div>
 
                 <h3>Die drei Ebenen der Textanalyse:</h3>
@@ -627,7 +636,7 @@
                             <td><strong>Glosse</strong></td>
                             <td>
                                 • Ironisch-satirisch<br>
-                                • Kurz и pointiert<br>
+                                • Kurz und pointiert<br>
                                 • Gesellschaftskritik
                             </td>
                             <td>
@@ -980,56 +989,67 @@
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+        function toggleSolution(elementId) {
+            const element = document.getElementById(elementId);
+            const button = document.querySelector(`[onclick="toggleSolution('${elementId}')"]`);
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            if (element) {
+                element.classList.toggle('active');
+                
+                // Change button text
+                if (element.classList.contains('active')) {
+                    button.textContent = button.textContent.replace('anzeigen', 'ausblenden');
+                } else {
+                    button.textContent = button.textContent.replace('ausblenden', 'anzeigen');
+                }
             }
+        }
+
+        function toggleAll() {
+            const accordions = document.querySelectorAll('.accordion');
+            const panels = document.querySelectorAll('.panel');
+            const button = document.querySelector('.expand-all-btn');
+            const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
+            
+            accordions.forEach(function(acc) {
+                if (allOpen) {
+                    acc.classList.remove('active');
+                } else {
+                    acc.classList.add('active');
+                }
+            });
+            
+            panels.forEach(function(panel) {
+                if (allOpen) {
+                    panel.classList.remove('active');
+                } else {
+                    panel.classList.add('active');
+                }
+            });
+
+            // Update button text
+            if (allOpen) {
+                button.textContent = 'Alle Bereiche aufklappen';
+            } else {
+                button.textContent = 'Alle Bereiche zuklappen';
+            }
+        }
+
+        // Accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordions = document.querySelectorAll('.accordion');
+            
+            accordions.forEach(function(accordion) {
+                accordion.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    
+                    const panel = this.nextElementSibling;
+                    if (panel) {
+                        panel.classList.toggle('active');
+                    }
+                });
+            });
         });
-    });
-});
-
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
+    </script>
 </body>
 </html>

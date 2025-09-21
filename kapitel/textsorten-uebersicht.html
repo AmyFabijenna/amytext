@@ -86,6 +86,14 @@
             align-items: center;
             margin-bottom: 15px;
             cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .textsorte-header:hover {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 10px;
+            margin: -10px -10px 15px -10px;
         }
 
         .textsorte-header h3 {
@@ -93,13 +101,29 @@
             font-size: 1.3em;
         }
 
+        .textsorte-header .toggle-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .textsorte-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
         .textsorte-content {
             display: none;
             margin-top: 15px;
+            animation: fadeIn 0.3s ease-in;
         }
 
         .textsorte-content.active {
             display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .textsorte-info {
@@ -154,6 +178,11 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .loesung-button:hover {
+            background: #2c3e50;
         }
 
         .loesung {
@@ -162,6 +191,7 @@
             padding: 15px;
             border-radius: 5px;
             margin-top: 15px;
+            animation: fadeIn 0.3s ease-in;
         }
 
         .loesung.active {
@@ -200,18 +230,7 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -240,7 +259,7 @@
                 <div class="textsorte-card">
                     <div class="textsorte-header" onclick="toggleTextsorte('kommentar')">
                         <h3>Kommentar</h3>
-                        <span>▼</span>
+                        <span class="toggle-icon">▼</span>
                     </div>
                     <div class="textsorte-content" id="kommentar">
                         <div class="textsorte-info">
@@ -287,7 +306,7 @@
                 <div class="textsorte-card">
                     <div class="textsorte-header" onclick="toggleTextsorte('glosse')">
                         <h3>Glosse</h3>
-                        <span>▼</span>
+                        <span class="toggle-icon">▼</span>
                     </div>
                     <div class="textsorte-content" id="glosse">
                         <div class="textsorte-info">
@@ -318,7 +337,7 @@
                         </ul>
                         
                         <div class="beispiel-text">
-                            <p>"Es ist wieder soweit: Die alljährliche Heerschau der Gartenzwerge hat begonnen. In deutschen Vorgärten versammeln sich die pointy-hattigen Gesellen zu ihrer stillen Demonstration gegen guten Geschmack. Wer braucht schon ästhetisch ansprechende Gartengestaltung, wenn man stattdessen 37 grinsende Männchen mit roten Mützzen aufstellen kann?"</p>
+                            <p>"Es ist wieder soweit: Die alljährliche Heerschau der Gartenzwerge hat begonnen. In deutschen Vorgärten versammeln sich die pointy-hattigen Gesellen zu ihrer stillen Demonstration gegen guten Geschmack. Wer braucht schon ästhetisch ansprechende Gartengestaltung, wenn man stattdessen 37 grinsende Männchen mit roten Mützen aufstellen kann?"</p>
                         </div>
                         
                         <h4>Analysefokus:</h4>
@@ -334,7 +353,7 @@
                 <div class="textsorte-card">
                     <div class="textsorte-header" onclick="toggleTextsorte('reportage')">
                         <h3>Reportage</h3>
-                        <span>▼</span>
+                        <span class="toggle-icon">▼</span>
                     </div>
                     <div class="textsorte-content" id="reportage">
                         <div class="textsorte-info">
@@ -381,7 +400,7 @@
                 <div class="textsorte-card">
                     <div class="textsorte-header" onclick="toggleTextsorte('essay')">
                         <h3>Essay</h3>
-                        <span>▼</span>
+                        <span class="toggle-icon">▼</span>
                     </div>
                     <div class="textsorte-content" id="essay">
                         <div class="textsorte-info">
@@ -412,7 +431,7 @@
                         </ul>
                         
                         <div class="beispiel-text">
-                            <p>"Was bedeutet Heimat in einer globalisierten Welt? Ist es der Ort, an dem wir aufgewachsen sind, oder der, den wir nous selbst geschaffen haben? Vielleicht ist Heimat weniger ein geografischer Begriff als ein emotionaler Zustand - ein Gefühl der Zugehörigkeit, das unabhängig von Ländergrenzen existiert."</p>
+                            <p>"Was bedeutet Heimat in einer globalisierten Welt? Ist es der Ort, an dem wir aufgewachsen sind, oder der, den wir uns selbst geschaffen haben? Vielleicht ist Heimat weniger ein geografischer Begriff als ein emotionaler Zustand - ein Gefühl der Zugehörigkeit, das unabhängig von Ländergrenzen existiert."</p>
                         </div>
                         
                         <h4>Analysefokus:</h4>
@@ -428,7 +447,7 @@
                 <div class="textsorte-card">
                     <div class="textsorte-header" onclick="toggleTextsorte('rede')">
                         <h3>Rede</h3>
-                        <span>▼</span>
+                        <span class="toggle-icon">▼</span>
                     </div>
                     <div class="textsorte-content" id="rede">
                         <div class="textsorte-info">
@@ -460,7 +479,7 @@
                         </ul>
                         
                         <div class="beispiel-text">
-                            <p>"Meine Damen und Herren, liebe Freundinnen und Freunde! Wir stehen heute vor einer historischen Entscheidung. Sollen wir den bequemen Weg des Gewohnten gehen oder den mutigen Pfad des Fortschritts wählen? Ich sagen Ihnen: Wir müssen uns für den Fortschritt entscheiden! Für eine Zukunft, in der unsere Kinder in einer sauberen Umwelt aufwachsen können. Für eine Gesellschaft, die niemanden zurücklässt. Für ein Land, das seiner Verantwortung gerecht wird!"</p>
+                            <p>"Meine Damen und Herren, liebe Freundinnen und Freunde! Wir stehen heute vor einer historischen Entscheidung. Sollen wir den bequemen Weg des Gewohnten gehen oder den mutigen Pfad des Fortschritts wählen? Ich sage Ihnen: Wir müssen uns für den Fortschritt entscheiden! Für eine Zukunft, in der unsere Kinder in einer sauberen Umwelt aufwachsen können. Für eine Gesellschaft, die niemanden zurücklässt. Für ein Land, das seiner Verantwortung gerecht wird!"</p>
                         </div>
                         
                         <h4>Analysefokus:</h4>
@@ -476,7 +495,7 @@
                 <div class="textsorte-card">
                     <div class="textsorte-header" onclick="toggleTextsorte('kurzgeschichte')">
                         <h3>Kurzgeschichte</h3>
-                        <span>▼</span>
+                        <span class="toggle-icon">▼</span>
                     </div>
                     <div class="textsorte-content" id="kurzgeschichte">
                         <div class="textsorte-info">
@@ -612,57 +631,57 @@
         </div>
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        function toggleTextsorte(id) {
+            const content = document.getElementById(id);
+            const header = content.previousElementSibling;
+            const icon = header.querySelector('.toggle-icon');
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            // Toggle content visibility
+            content.classList.toggle('active');
+            header.classList.toggle('active');
+            
+            // Rotate icon
+            if (content.classList.contains('active')) {
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
             }
-        });
-    });
-});
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleLoesung(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('active');
+                
+                // Change button text
+                const button = element.previousElementSibling;
+                if (element.classList.contains('active')) {
+                    button.textContent = 'Lösung ausblenden';
+                } else {
+                    button.textContent = 'Lösung anzeigen';
+                }
+            }
         }
-    }
-}
 
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
+        // Optional: Close other sections when opening a new one (accordion behavior)
+        function toggleTextsorteAccordion(id) {
+            // First close all other sections
+            const allContents = document.querySelectorAll('.textsorte-content');
+            const allHeaders = document.querySelectorAll('.textsorte-header');
+            const allIcons = document.querySelectorAll('.toggle-icon');
+            
+            allContents.forEach((content, index) => {
+                if (content.id !== id && content.classList.contains('active')) {
+                    content.classList.remove('active');
+                    allHeaders[index].classList.remove('active');
+                    allIcons[index].style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Then toggle the clicked section
+            toggleTextsorte(id);
         }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
+    </script>
 </body>
 </html>

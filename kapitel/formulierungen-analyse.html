@@ -122,6 +122,11 @@
             border-radius: 0 0 5px 5px;
         }
 
+        .content.active {
+            max-height: 1000px;
+            padding: 18px;
+        }
+
         .example-box {
             background: #e8f4f8;
             border-left: 4px solid #3498db;
@@ -147,6 +152,10 @@
             display: none;
         }
 
+        .solution-box.show {
+            display: block;
+        }
+
         .toggle-solution {
             display: inline-block;
             background: #28a745;
@@ -157,6 +166,7 @@
             font-size: 0.9em;
             margin-top: 10px;
             cursor: pointer;
+            border: none;
         }
 
         .toggle-solution:hover {
@@ -186,22 +196,32 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        ul, ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        h4 {
+            color: #2c3e50;
+            margin: 15px 0 10px 0;
+        }
 
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+            
+            .content-header p {
+                font-size: 1em;
             }
         }
     </style>
@@ -455,57 +475,43 @@
         </div>
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            if (solution) {
+                if (solution.classList.contains('show')) {
+                    solution.classList.remove('show');
+                } else {
+                    solution.classList.add('show');
+                }
             }
+        }
+
+        // Accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordions = document.querySelectorAll('.accordion');
+            
+            accordions.forEach(function(accordion) {
+                accordion.addEventListener('click', function() {
+                    // Toggle active class on accordion
+                    this.classList.toggle('active');
+                    
+                    // Get the next sibling element (the content)
+                    const content = this.nextElementSibling;
+                    
+                    if (content) {
+                        content.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Initialize all solutions as hidden
+            const solutions = document.querySelectorAll('.solution-box');
+            solutions.forEach(solution => {
+                solution.classList.remove('show');
+            });
         });
-    });
-});
-
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
+    </script>
 </body>
 </html>

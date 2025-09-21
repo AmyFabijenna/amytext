@@ -144,7 +144,6 @@
             color: #856404;
         }
 
-        /* Zusätzliche Styles für Textinterpretation */
         .accordion {
             background-color: #f8f9fa;
             color: #2c3e50;
@@ -163,7 +162,7 @@
         }
 
         .accordion::after {
-            content: '\002B'; /* Pluszeichen */
+            content: '\002B';
             color: #2c3e50;
             font-weight: bold;
             position: absolute;
@@ -171,28 +170,26 @@
             transition: transform 0.3s;
         }
 
-        .active::after {
-            content: "\2212"; /* Minuszeichen */
-            transform: rotate(0deg);
+        .accordion.active::after {
+            content: "▼";
         }
 
         .active, .accordion:hover {
             background-color: #e9ecef;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
-
+        .panel.active {
+            max-height: 3000px;
+            padding: 18px;
+        }
 
         .exercise {
             background: #f8f9fa;
@@ -247,13 +244,47 @@
             background-color: #f2f2f2;
         }
 
+        input, textarea {
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            margin: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        blockquote {
+            background: #f9f9f9;
+            border-left: 4px solid #ccc;
+            margin: 15px 0;
+            padding: 10px 20px;
+            font-style: italic;
+        }
+
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
             }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
 
             .feature-grid {
                 grid-template-columns: 1fr;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                margin: 2px 0;
             }
         }
     </style>
@@ -266,7 +297,7 @@
                 <p>Struktur, Methoden und Übungen für die Deutschmatura</p>
             </header>
 
-            <div class="content-body" id="content-body">
+            <div class="content-body">
                 <div class="welcome-section">
                     <h2>Textinterpretation verstehen und anwenden</h2>
                     <p>Die Textinterpretation ist ein zentraler Bestandteil der Deutschmatura. Hier lernst du, wie du literarische Texte systematisch analysierst und interpretierst - von der Einleitung bis zum Schluss, mit allen wichtigen Arbeitsschritten, Formulierungshilfen und Übungen.</p>
@@ -324,10 +355,9 @@
                         <div id="solution1" class="solution">
                             <p><strong>Lösung:</strong></p>
                             <ul>
-                                <li>Einleitung: 4 (Einordnung in Epoche)</li>
+                                <li>Einleitung: 1 (Deutungshypothese), 4 (Einordnung in Epoche)</li>
                                 <li>Hauptteil - Analyse: 2 (Reimschema)</li>
-                                <li>Hauptteil - Interpretation: 1 (Deutungshypothese)</li>
-                                <li>Schluss: 3, 5 (Zusammenfassung, persönliche Meinung)</li>
+                                <li>Schluss: 3 (Zusammenfassung), 5 (persönliche Meinung)</li>
                             </ul>
                         </div>
                     </div>
@@ -355,7 +385,7 @@
                             <li>Autor: <input type="text" placeholder="Autor eingeben"></li>
                             <li>Erscheinungsjahr: <input type="text" placeholder="Jahr eingeben"></li>
                             <li>Textgattung: <input type="text" placeholder="Textgattung eingeben"></li>
-                            <li>Thema des Textes (in einem Satz): <textarea placeholder="Thema beschreiben"></textarea></li>
+                            <li>Thema des Textes (in einem Satz): <textarea placeholder="Thema beschreiben" rows="2" style="width: 100%;"></textarea></li>
                         </ul>
                         <button class="toggle-solution" onclick="toggleSolution('solution2')">Musterlösung anzeigen</button>
                         <div id="solution2" class="solution">
@@ -410,6 +440,7 @@
                             <label><input type="checkbox" class="correct"> Sachliche Darstellung ohne Wertung</label><br>
                         </form>
                         <button class="toggle-solution" onclick="checkQuiz('content-summary-quiz')">Lösung überprüfen</button>
+                        <div id="quiz-result" style="display: none; margin-top: 10px;"></div>
                     </div>
                 </div>
 
@@ -451,6 +482,7 @@
                             <li>Gesprächssituation analysieren → <input type="text" placeholder="Textgattung" class="answer" data-answer="Drama"></li>
                         </ol>
                         <button class="toggle-solution" onclick="checkAnswers()">Lösung überprüfen</button>
+                        <div id="answers-result" style="display: none; margin-top: 10px;"></div>
                     </div>
                     
                     <h3>Sprachliche Analyse</h3>
@@ -546,82 +578,4 @@
                         <label><input type="checkbox"> Die Textinterpretation folgt einem logischen Aufbau.</label><br>
                     </form>
                     
-                    <div class="tip-box">
-                        <strong>Tipp:</strong> Gehe diese Checkliste Punkt für Punkt durch, bevor du deine Interpretation abgibst. So vermeidest du häufige Fehler und verbesserst deine Note.
-                    </div>
-                </div>
-
-                <div class="progress-section">
-                    <h3>Zusammenfassung: Schritt-für-Schritt zur gelungenen Interpretation</h3>
-                    <ol>
-                        <li><strong>Text gründlich lesen:</strong> Mehrfaches Lesen, unbekannte Wörter klären, erste Eindrücke notieren</li>
-                        <li><strong>Einleitung verfassen:</strong> Alle formalen Angaben, Thema nennen, Deutungshypothese aufstellen</li>
-                        <li><strong>Inhaltsangabe schreiben:</strong> Knapp und sachlich im Präsens, Handlung chronologisch zusammenfassen</li>
-                        <li><strong>Analyse durchführen:</strong> Form, Sprache, Aufbau, Figuren und ihre Beziehungen untersuchen</li>
-                        <li><strong>Interpretation entwickeln:</strong> Deutungshypothese mit Textbelegen stützen, Bedeutungsebenen erschließen</li>
-                        <li><strong>Schluss formulieren:</strong> Ergebnisse zusammenfassen, Hypothese überprüfen, Bezug zur Gegenwart herstellen</li>
-                        <li><strong>Überarbeitung:</strong> Rechtschreibung prüfen, Logik überprüfen, Checkliste anwenden</li>
-                    </ol>
-                </div>
-
-                <div class="tip-box">
-                    <strong>Tipp für die Prüfung:</strong> Teile dir deine Zeit gut ein! Für eine 90-minütige Interpretation empfehle ich: 15 Minuten für Textverständnis und Gliederung, 50 Minuten für das Schreiben, 25 Minuten für Überarbeitung und Fehlerkorrektur.
-                </div>
-            </div>
-        </div>
-    </main>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
-            
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
-            }
-        });
-    });
-});
-
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
-</body>
-</html>
+                

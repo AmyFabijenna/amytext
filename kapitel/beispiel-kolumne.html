@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beispiel: Kolumne analysieren - Deutschmatura</title>
     <style>
-        /* CSS-Code unverändert lassen */
         * {
             margin: 0;
             padding: 0;
@@ -102,27 +101,42 @@
             margin: 10px 0;
             border-radius: 5px;
             transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
         }
 
-        .active, .accordion:hover {
+        .accordion:hover,
+        .accordion.active {
             background-color: #2c3e50;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .accordion-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .accordion.active .accordion-icon {
+            transform: rotate(45deg);
+        }
 
-        .panel-inner {
-            padding: 15px;
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .panel.active {
+            max-height: 3000px;
+            padding: 18px;
+        }
+
+        .accordion-content-inner {
+            padding: 0;
         }
 
         .exercise {
@@ -145,6 +159,11 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .solution-toggle:hover {
+            background: #2980b9;
         }
 
         .solution {
@@ -153,6 +172,10 @@
             padding: 15px;
             margin-top: 15px;
             display: none;
+        }
+
+        .solution.active {
+            display: block;
         }
 
         .tip-box {
@@ -203,7 +226,10 @@
             <div class="section">
                 <h2 class="section-title">Schritt-für-Schritt-Anleitung zur Textanalyse</h2>
                 
-                <button class="accordion">1. Einleitung und kurze Inhaltsangabe</button>
+                <div class="accordion">
+                    1. Einleitung und kurze Inhaltsangabe
+                    <span class="accordion-icon">+</span>
+                </div>
                 <div class="panel">
                     <div class="accordion-content-inner">
                         <p><strong>Ziel dieser Phase:</strong> Den Text vorstellen und seinen Inhalt kurz zusammenfassen.</p>
@@ -234,7 +260,7 @@
                         <div class="exercise">
                             <h4>Übung: Verfasse eine Einleitung</h4>
                             <p>Verfasse eine Einleitung für diese Kolumne mit allen notwendigen Elementen.</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                            <button class="solution-toggle" data-target="solution1">Lösung anzeigen</button>
                             <div id="solution1" class="solution">
                                 <p>In der Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger, erschienen im März 2025 in der Tageszeitung "Der Standard", setzt sich die Autorin kritisch mit den Auswirkungen der permanenten digitalen Erreichbarkeit auf unser soziales Verhalten und psychisches Wohlbefinden auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger die These, dass die ständige Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist, und appelliert an eine bewusstere Nutzung digitaler Medien.</p>
                             </div>
@@ -242,7 +268,10 @@
                     </div>
                 </div>
 
-                <button class="accordion">2. Stilanalyse</button>
+                <div class="accordion">
+                    2. Stilanalyse
+                    <span class="accordion-icon">+</span>
+                </div>
                 <div class="panel">
                     <div class="accordion-content-inner">
                         <p><strong>Ziel dieser Phase:</strong> Die sprachlichen und stilistischen Mittel des Textes identifizieren und ihre Wirkung analysieren.</p>
@@ -279,7 +308,7 @@
                         <div class="exercise">
                             <h4>Übung: Analysiere die sprachlichen Mittel</h4>
                             <p>Identifiziere mindestens drei weitere sprachliche Mittel im Text und beschreibe ihre Wirkung.</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                            <button class="solution-toggle" data-target="solution2">Lösung anzeigen</button>
                             <div id="solution2" class="solution">
                                 <p><strong>Weitere sprachliche Mittel und ihre Wirkung:</strong></p>
                                 <ol>
@@ -293,7 +322,10 @@
                     </div>
                 </div>
 
-                <button class="accordion">3. Bewertung und Ausblick/Schluss</button>
+                <div class="accordion">
+                    3. Bewertung und Ausblick/Schluss
+                    <span class="accordion-icon">+</span>
+                </div>
                 <div class="panel">
                     <div class="accordion-content-inner">
                         <p><strong>Ziel dieser Phase:</strong> Den Text kritisch würdigen und eine eigene Stellungnahme abgeben.</p>
@@ -323,18 +355,18 @@
                             <h4>Beispiel für eine Bewertung und einen Schluss:</h4>
                             <p>Bergers Kolumne überzeugt durch die gelungene Verbindung von persönlicher Beobachtung und gesellschaftlicher Analyse. Besonders wirkungsvoll ist die bildhafte Sprache, die komplexe sozialpsychologische Phänomene anschaulich macht. Die klare Struktur vom Problem zur Lösungsmöglichkeit macht den Text trotz seiner Kritik konstruktiv.</p>
                             <p>Allerdings könnte man einwenden, dass die Autorin die positiven Aspekte der digitalen Vernetzung nur kurz streift und die Verantwortung für gesunde Nutzungsmuster etwas einseitig bei den Individuen verortet, während systemische und wirtschaftliche Faktoren (wie das bewusste "Süchtigmachen" durch App-Design) weniger Beachtung finden.</p>
-                            <p>Der Text greift ein zentrales Spannungsfeld unserer Zeit auf: den Widerspruch zwischen technologischem Fortschritt und psychischem Wohlbefinden. Die von Berger beschriebene "Tyrannei der Erreichbarkeit" ist ein Phänomen, das viele von us aus eigener Erfahrung kennen – das Gefühl, nie wirklich abschalten zu können, ständig reagieren zu müssen.</p>
+                            <p>Der Text greift ein zentrales Spannungsfeld unserer Zeit auf: den Widerspruch zwischen technologischem Fortschritt und psychischem Wohlbefinden. Die von Berger beschriebene "Tyrannei der Erreichbarkeit" ist ein Phänomen, das viele von uns aus eigener Erfahrung kennen – das Gefühl, nie wirklich abschalten zu können, ständig reagieren zu müssen.</p>
                             <p>Abschließend lässt sich festhalten, dass die Kolumne einen wichtigen Denkanstoß gibt, wie wir unsere Beziehung zur Technologie aktiver gestalten können. In einer Zeit, in der digitale Medien immer mehr Lebensbereiche durchdringen, ist diese Reflexion über selbstbestimmte Nutzung besonders wertvoll.</p>
                         </div>
                         
                         <div class="exercise">
                             <h4>Übung: Verfasse eine eigene Bewertung</h4>
                             <p>Formuliere eine eigene Bewertung der Kolumne mit mindestens einer Stärke und einem Kritikpunkt.</p>
-                            <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                            <button class="solution-toggle" data-target="solution3">Lösung anzeigen</button>
                             <div id="solution3" class="solution">
                                 <p><strong>Beispiel für eine eigene Bewertung:</strong></p>
                                 <p>Die Kolumne von Maria Berger überzeugt durch ihre lebensnahe Darstellung eines alltäglichen Phänomens, das viele Leser aus eigener Erfahrung kennen werden. Besonders stark ist die bildhafte Sprache, die abstrakte Konzepte wie "digitale Erreichbarkeit" konkret und greifbar macht. Die Metapher der "unsichtbaren Leinen" verdeutlicht eindrücklich, wie sehr digitale Geräte unser Verhalten steuern können.</p>
-                                <p>Kritisch anzumerken ist jedoch, dass Berger die wirtschaftlichen Interessen hinter der permanenten Erreichbarkeit kaum thematisiert. Die Geschäftsmodelle vieler Tech-Unternehmen basieren precisely auf der Aufmerksamkeit der Nutzer, was eine systemische Dimension des Probleme darstellt, die über individuelle Verhaltensänderungen hinausgeht. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
+                                <p>Kritisch anzumerken ist jedoch, dass Berger die wirtschaftlichen Interessen hinter der permanenten Erreichbarkeit kaum thematisiert. Die Geschäftsmodelle vieler Tech-Unternehmen basieren precisely auf der Aufmerksamkeit der Nutzer, was eine systemische Dimension des Problems darstellt, die über individuelle Verhaltensänderungen hinausgeht. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
                                 <p>Insgesamt liefert die Kolumne jedoch einen wichtigen Beitrag zur aktuellen Debatte über Digitalisierung und regt zum Nachdenken über den eigenen Umgang mit digitalen Medien an.</p>
                             </div>
                         </div>
@@ -353,7 +385,7 @@
                         <strong>Tipp:</strong> Achte auf eine ausgewogene Mischung aus allgemeinen und spezifischen Aussagen zum Text. Verwende Fachbegriffe korrekt und belege deine Analyse mit Textzitaten.
                     </div>
                     
-                    <button class="solution-toggle" onclick="toggleSolution('solution4')">Musterlösung anzeigen</button>
+                    <button class="solution-toggle" data-target="solution4">Musterlösung anzeigen</button>
                     <div id="solution4" class="solution">
                         <h4>Musterlösung: Vollständige Textanalyse</h4>
                         
@@ -368,7 +400,7 @@
                         
                         <h5>Schluss - Bewertung</h5>
                         <p>Bergers Kolumne überzeugt durch ihre lebensnahe Darstellung eines relevanten zeitgenössischen Themas. Die Verbindung von persönlicher Beobachtung mit gesellschaftlicher Analyse macht den Text sowohl anschaulich als auch argumentativ stark. Besonders gelungen ist der Einsatz bildhafter Sprache, die abstrakte Phänomene wie "digitale Erreichbarkeit" konkret und greifbar macht.</p>
-                        <p>Kritisch anzumerken ist allerdings die etwas einseitige Betonung individueller Verantwortung. Während Berger zu Recht auf die Bedeutung persönlicher Verhaltensänderungen hinweist, bleiben systemische Faktoren wie die wirtschaftlichen Interessen von Tech-Unternehmen oder die Gestaltung von Aufmerksamkeits-ökonomien weitgehend unberücksichtigt. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
+                        <p>Kritisch anzumerken ist allerdings die etwas einseitige Betonung individueller Verantwortung. Während Berger zu Recht auf die Bedeutung persönlicher Verhaltensänderungen hinweist, bleiben systemische Faktoren wie die wirtschaftlichen Interessen von Tech-Unternehmen oder die Gestaltung von Aufmerksamkeits-Ökonomien weitgehend unberücksichtigt. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
                         <p>Insgesamt liefert die Kolumne jedoch einen wichtigen Beitrag zur aktuellen Debatte über Digitalisierung und regt zur Reflexion über den eigenen Umgang mit digitalen Medien an. Der appellative Charakter des Textes ist angemessen, da er Leser nicht mit Schuldzuweisungen konfrontiert, sondern zu empowernden Verhaltensänderungen ermutigt.</p>
                     </div>
                 </div>
@@ -380,57 +412,110 @@
         </div>
     </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion-Funktionalität
+            const accordions = document.querySelectorAll('.accordion');
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
-            }
+            accordions.forEach(function(accordion) {
+                accordion.addEventListener('click', function() {
+                    const panel = this.nextElementSibling;
+                    const icon = this.querySelector('.accordion-icon');
+                    
+                    // Toggle active state
+                    this.classList.toggle('active');
+                    panel.classList.toggle('active');
+                });
+            });
+            
+            // Solution-Toggle-Funktionalität
+            const solutionToggles = document.querySelectorAll('.solution-toggle');
+            
+            solutionToggles.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const solutionContent = document.getElementById(targetId);
+                    
+                    if (solutionContent.classList.contains('active')) {
+                        solutionContent.classList.remove('active');
+                        this.textContent = 'Lösung anzeigen';
+                    } else {
+                        solutionContent.classList.add('active');
+                        this.textContent = 'Lösung verbergen';
+                    }
+                });
+            });
+            
+            // Keyboard navigation für Accordions
+            accordions.forEach(function(accordion) {
+                accordion.setAttribute('tabindex', '0');
+                accordion.setAttribute('role', 'button');
+                accordion.setAttribute('aria-expanded', 'false');
+                
+                accordion.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+            
+            // Aria-Attribute aktualisieren
+            const updateAriaAttributes = function() {
+                accordions.forEach(function(accordion) {
+                    const isExpanded = accordion.classList.contains('active');
+                    accordion.setAttribute('aria-expanded', isExpanded.toString());
+                });
+            };
+            
+            // Initial aria attributes setzen
+            updateAriaAttributes();
+            
+            // Aria attributes bei clicks aktualisieren
+            accordions.forEach(function(accordion) {
+                accordion.addEventListener('click', function() {
+                    setTimeout(updateAriaAttributes, 10);
+                });
+            });
+            
+            // Smooth scrolling für Anker-Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Utility-Funktionen für erweiterte Funktionalität
+            window.toggleAll = function() {
+                const accordions = document.querySelectorAll('.accordion');
+                const panels = document.querySelectorAll('.panel');
+                const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
+                
+                accordions.forEach(function(acc) {
+                    if (allOpen) {
+                        acc.classList.remove('active');
+                    } else {
+                        acc.classList.add('active');
+                    }
+                });
+                
+                panels.forEach(function(panel) {
+                    if (allOpen) {
+                        panel.classList.remove('active');
+                    } else {
+                        panel.classList.add('active');
+                    }
+                });
+            };
         });
-    });
-});
-
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
+    </script>
 </body>
 </html>
+                

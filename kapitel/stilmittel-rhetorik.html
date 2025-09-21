@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stilmittel & Rhetorik - Deutschmatura</title>
-     <style>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -139,58 +139,55 @@
             color: #856404;
         }
 
-        /* Stilmittel-Spezifische Styles */
         .accordion {
             background-color: #f8f9fa;
-            color: #444;
+            color: #2c3e50;
             cursor: pointer;
             padding: 18px;
             width: 100%;
             text-align: left;
             border: none;
             outline: none;
-            transition: 0.4s;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            font-weight: bold;
             font-size: 1.1em;
-            border-left: 4px solid #3498db;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
             position: relative;
+            border-left: 4px solid #3498db;
         }
 
         .accordion:after {
-            content: '\002B'; /* Pluszeichen */
-            color: #777;
+            content: '\002B';
+            color: #2c3e50;
             font-weight: bold;
-            position: absolute;
-            right: 18px;
-            transition: transform 0.3s;
+            float: right;
+            margin-left: 5px;
         }
 
-        .active-accordion:after {
-            content: "\2212"; /* Minuszeichen */
-            transform: rotate(0deg);
+        .accordion.active:after {
+            content: "▼";
         }
 
-        .active-accordion, .accordion:hover {
+        .active, .accordion:hover {
             background-color: #e9ecef;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .panel.active {
+            max-height: 3000px;
+            padding: 18px;
+        }
 
         .panel-content {
-            padding: 20px;
+            padding: 0;
         }
 
         .stilmittel-grid {
@@ -277,6 +274,10 @@
             .content-body {
                 padding: 20px;
             }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
 
             .feature-grid, .stilmittel-grid {
                 grid-template-columns: 1fr;
@@ -292,7 +293,7 @@
                 <p>Sprachliche Gestaltungsmittel erkennen und ihre Wirkung analysieren</p>
             </header>
 
-            <div class="content-body" id="content-body">
+            <div class="content-body">
                 <div class="welcome-section">
                     <h2>Stilmittel und rhetorische Figuren in der Textanalyse</h2>
                     <p>Stilmittel (auch rhetorische Figuren genannt) sind bewusst eingesetzte sprachliche Gestaltungselemente, die einem Text besondere Wirkung verleihen. Für die Textanalyse ist es wichtig, nicht nur die Stilmittel zu erkennen, sondern auch ihre Funktion im Kontext des Textes zu verstehen.</p>
@@ -360,7 +361,7 @@
                                 <h4>Epipher</h4>
                                 <p><strong>Definition:</strong> Wiederholung von Wörtern am Satzende</p>
                                 <div class="example-box">
-                                    <strong>Beispiel:</strong> "Ich will Freiheit. Er want Freiheit. Wir alle wollen Freiheit." (Wiederholung von "Freiheit")
+                                    <strong>Beispiel:</strong> "Ich will Freiheit. Er will Freiheit. Wir alle wollen Freiheit." (Wiederholung von "Freiheit")
                                 </div>
                                 <p><strong>Wirkung:</strong> Verstärkung, Rhythmisierung, Eindringlichkeit</p>
                             </div>
@@ -394,7 +395,7 @@
                                 <h4>Oxymoron</h4>
                                 <p><strong>Definition:</strong> Verbindung widersprüchlicher Begriffe</p>
                                 <div class="example-box">
-                                    <strong>Beispiel:</strong> " bittersüß", "alter Knabe"
+                                    <strong>Beispiel:</strong> "bittersüß", "alter Knabe"
                                 </div>
                                 <p><strong>Wirkung:</strong> Spannung, Paradoxie, gedankliche Herausforderung</p>
                             </div>
@@ -478,7 +479,7 @@
                             
                             <div class="stilmittel-card">
                                 <h4>Ironie</h4>
-                                <p><strong>Definition:</strong> Das Gegenteil von dem sagen, wie es gemeint ist</p>
+                                <p><strong>Definition:</strong> Das Gegenteil von dem sagen, was gemeint ist</p>
                                 <div class="example-box">
                                     <strong>Beispiel:</strong> "Das hast du ja toll gemacht!" (wenn etwas misslungen ist)
                                 </div>
@@ -595,57 +596,36 @@
             </div>
         </div>
     </main>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Alle Accordion-Elemente finden und Event-Listener hinzufügen
+            const accordions = document.querySelectorAll('.accordion');
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
-            }
+            accordions.forEach(function(accordion) {
+                accordion.addEventListener('click', function() {
+                    // Active-Klasse für das Accordion togglen
+                    this.classList.toggle('active');
+                    
+                    // Panel finden und togglen
+                    const panel = this.nextElementSibling;
+                    if (panel && panel.classList.contains('panel')) {
+                        panel.classList.toggle('active');
+                    }
+                });
+            });
         });
-    });
-});
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleSolution(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                if (element.style.display === 'block') {
+                    element.style.display = 'none';
+                } else {
+                    element.style.display = 'block';
+                }
+            }
         }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
+    </script>
 </body>
 </html>
