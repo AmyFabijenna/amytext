@@ -500,7 +500,7 @@
         </div>
     </main>
 
-    <script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     // Alle Accordion-Elemente finden und Event-Listener hinzufügen
     const accordions = document.querySelectorAll('.accordion');
@@ -519,7 +519,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Lösungen ein-/ausblenden
 function toggleSolution(elementId) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -531,7 +530,6 @@ function toggleSolution(elementId) {
     }
 }
 
-// Alle Panels auf einmal öffnen/schließen
 function toggleAll() {
     const accordions = document.querySelectorAll('.accordion');
     const panels = document.querySelectorAll('.panel');
@@ -553,34 +551,6 @@ function toggleAll() {
         }
     });
 }
-
-// Quiz-Funktionen für textinterpretation.html
-function checkQuiz(quizId) {
-    const quiz = document.getElementById(quizId);
-    if (!quiz) return;
-    
-    const checkboxes = quiz.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox) {
-        const label = checkbox.nextElementSibling;
-        if (checkbox.classList.contains('correct')) {
-            label.style.color = checkbox.checked ? '#27ae60' : '#e74c3c';
-        } else {
-            label.style.color = checkbox.checked ? '#e74c3c' : '#27ae60';
-        }
-    });
-}
-
-function checkAnswers() {
-    const answers = document.querySelectorAll('.answer');
-    answers.forEach(function(answer) {
-        const correctAnswer = answer.getAttribute('data-answer');
-        if (answer.value.toLowerCase() === correctAnswer.toLowerCase()) {
-            answer.style.backgroundColor = '#d4edda';
-        } else {
-            answer.style.backgroundColor = '#f8d7da';
-        }
-    });
-}
-    </script>
+</script>
 </body>
 </html>
