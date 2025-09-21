@@ -90,11 +90,11 @@
         }
 
 .panel {
-    background: white;
-    padding: 0;
-    max-height: 0;
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
     overflow: hidden;
-    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    border-radius: 0 0 5px 5px;
 }
 
 .panel.active {
@@ -509,58 +509,33 @@
     </main>
 
     <script>
-        // Funktion zum Öffnen und Schließen der Accordions
-        function toggleAccordion(header) {
-            const content = header.nextElementSibling;
-            const icon = header.querySelector('.accordion-icon');
+ function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            // Schließe alle anderen Accordions
-            const allContents = document.querySelectorAll('.panel');
-            const allIcons = document.querySelectorAll('.accordion-icon');
+            // Get the panel
+            const panel = this.nextElementSibling;
             
-            allContents.forEach(item => {
-                if (item !== content && item.classList.contains('active')) {
-                    item.classList.remove('active');
-                }
-            });
-            
-            allIcons.forEach(item => {
-                if (item !== icon && item.textContent === '-') {
-                    item.textContent = '+';
-                }
-            });
-            
-            // Öffne oder schließe das aktuelle Accordion
-            content.classList.toggle('active');
-            
-            if (content.classList.contains('active')) {
-                icon.textContent = '-';
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
             } else {
-                icon.textContent = '+';
+                panel.style.display = 'block';
             }
-        }
-
-        // Funktion zum Anzeigen der Lösungen
-        function toggleSolution(solutionId) {
-            const solution = document.getElementById(solutionId);
-            solution.classList.toggle('active');
-            
-            // Ändere den Text des Buttons
-            const button = solution.previousElementSibling;
-            if (solution.classList.contains('active')) {
-                button.textContent = 'Lösung ausblenden';
-            } else {
-                button.textContent = 'Lösung anzeigen';
-            }
-        }
-
-        // Schließe alle Accordions beim Laden der Seite
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordionContents = document.querySelectorAll('.panel');
-            accordionContents.forEach(content => {
-                content.classList.remove('active');
-            });
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

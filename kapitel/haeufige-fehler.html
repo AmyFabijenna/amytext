@@ -254,10 +254,10 @@
 
 .panel {
     display: none;
-    padding: 15px;
-    background: white;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
     border-radius: 0 0 5px 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
         @media (max-width: 768px) {
@@ -530,42 +530,33 @@
     </main>
 
     <script>
-        // Accordions standardmäßig geschlossen halten
-        document.addEventListener('DOMContentLoaded', function() {
-            // Alle Accordion-Inhalte ausblenden
-            const accordionContents = document.querySelectorAll('.panel');
-            accordionContents.forEach(content => {
-                content.style.display = 'none';
-            });
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            // Alle Lösungen standardmäßig ausblenden
-            const solutions = document.querySelectorAll('.solution-content');
-            solutions.forEach(solution => {
-                solution.style.display = 'none';
-            });
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
         });
+    });
+}
 
-        function toggleAccordion(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('.accordion-icon');
-            
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-                icon.textContent = '▼';
-            } else {
-                content.style.display = 'block';
-                icon.textContent = '▲';
-            }
-        }
-
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            if (solution.style.display === 'block') {
-                solution.style.display = 'none';
-            } else {
-                solution.style.display = 'block';
-            }
-        }
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

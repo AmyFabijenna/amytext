@@ -145,7 +145,18 @@
         .tip-box strong {
             color: #856404;
         }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -312,18 +323,33 @@
     </main>
 
     <script>
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            const button = event.target;
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            if (solution.classList.contains('show')) {
-                solution.classList.remove('show');
-                button.textContent = 'Lösung anzeigen';
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
             } else {
-                solution.classList.add('show');
-                button.textContent = 'Lösung ausblenden';
+                panel.style.display = 'block';
             }
-        }
+        });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

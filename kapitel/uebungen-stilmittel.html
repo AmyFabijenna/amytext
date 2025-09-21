@@ -185,7 +185,18 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -407,30 +418,33 @@
     </main>
 
     <script>
-        // Funktion zum Umschalten der Lösungsabschnitte
-        function toggleSolution(button) {
-            button.classList.toggle('active');
-            const content = button.nextElementSibling;
-            content.classList.toggle('active');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            // Ändere den Button-Text
-            if (button.classList.contains('active')) {
-                button.textContent = button.textContent.replace('anzeigen', 'ausblenden');
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
             } else {
-                button.textContent = button.textContent.replace('ausblenden', 'anzeigen');
+                panel.style.display = 'block';
             }
-        }
-        
-        // Stelle sicher, dass alle Lösungsabschnitte beim Laden der Seite geschlossen sind
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleButtons = document.querySelectorAll('.toggle-button');
-            toggleButtons.forEach(button => {
-                button.classList.remove('active');
-                const content = button.nextElementSibling;
-                content.classList.remove('active');
-                button.textContent = button.textContent.replace('ausblenden', 'anzeigen');
-            });
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

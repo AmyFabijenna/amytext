@@ -195,14 +195,13 @@
             background-color: #2c3e50;
         }
 
-        .panel {
-            padding: 0 18px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-            background-color: #f8f9fa;
-            border-radius: 0 0 5px 5px;
-        }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
         .solution {
             background: #e8f5e9;
@@ -443,28 +442,33 @@
     </main>
 
     <script>
-        // JavaScript für aufklappbare Bereiche
-        var coll = document.getElementsByClassName("accordion");
-        var i;
+ function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
+            
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
+        });
+    });
+}
 
-        // Initialisiere alle accordions als geschlossen
-        for (i = 0; i < coll.length; i++) {
-            var content = coll[i].nextElementSibling;
-            content.style.maxHeight = null;
-        }
-
-        // Event-Listener für Klick
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } 
-            });
-        }
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

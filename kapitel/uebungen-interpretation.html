@@ -221,7 +221,18 @@
             margin: 15px 0;
             font-style: italic;
         }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -524,46 +535,33 @@
     </main>
 
     <script>
-        function toggleExercise(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('span');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                content.style.display = 'none';
-                icon.textContent = '+';
-            } else {
-                content.classList.add('active');
-                content.style.display = 'block';
-                icon.textContent = '−';
-            }
-        }
-
-        function toggleSolution(button) {
-            const solution = button.nextElementSibling;
-            if (solution.classList.contains('active')) {
-                solution.classList.remove('active');
-                solution.style.display = 'none';
-                button.textContent = 'Lösung anzeigen';
-            } else {
-                solution.classList.add('active');
-                solution.style.display = 'block';
-                button.textContent = 'Lösung ausblenden';
-            }
-        }
-
-        // Alle Übungen initial geschlossen halten
-        document.addEventListener('DOMContentLoaded', function() {
-            const exercises = document.querySelectorAll('.exercise-content');
-            exercises.forEach(exercise => {
-                exercise.style.display = 'none';
-            });
+            // Get the panel
+            const panel = this.nextElementSibling;
             
-            const solutions = document.querySelectorAll('.solution');
-            solutions.forEach(solution => {
-                solution.style.display = 'none';
-            });
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

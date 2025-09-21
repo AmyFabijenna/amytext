@@ -186,7 +186,18 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -444,54 +455,33 @@
     </main>
 
     <script>
-        // accordion functionality - start with all closed
-        var coll = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
-            // Start with all content closed
-            var content = coll[i].nextElementSibling;
-            content.style.maxHeight = null;
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } 
-            });
-        }
-
-        // Toggle solution visibility
-        function toggleSolution(id) {
-            var solution = document.getElementById(id);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
-                event.target.textContent = "Lösung anzeigen";
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
             } else {
-                solution.style.display = "block";
-                event.target.textContent = "Lösung ausblenden";
+                panel.style.display = 'block';
             }
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

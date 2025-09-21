@@ -171,17 +171,18 @@
             background: #e9ecef;
         }
 
-        .panel {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-        }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
-        .panel.active {
-            padding: 15px;
-            max-height: 1000px;
-        }
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
 
         /* Exercise Styles */
         .exercise {
@@ -500,12 +501,32 @@
     </main>
 
     <script>
-function toggleAccordion(element) {
-    var panel = element.nextElementSibling;
-    var icon = element.querySelector('.accordion-icon');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
     
-    panel.classList.toggle('active');
-    icon.textContent = panel.classList.contains('active') ? '-' : '+';
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
+            
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
+        });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
 }
     </script>
 </body>

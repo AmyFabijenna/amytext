@@ -200,7 +200,18 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -602,27 +613,33 @@
     </main>
 
     <script>
-        function toggleTextsorte(id) {
-            const content = document.getElementById(id);
-            content.classList.toggle('active');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            // Pfeil umdrehen
-            const header = content.previousElementSibling;
-            const arrow = header.querySelector('span');
-            arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
-        }
-
-        function toggleLoesung(id) {
-            const loesung = document.getElementById(id);
-            loesung.classList.toggle('active');
+            // Get the panel
+            const panel = this.nextElementSibling;
             
-            // Button-Text ändern
-            const button = loesung.previousElementSibling;
-            button.textContent = loesung.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
-        }
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
+        });
+    });
+}
 
-        // Alle Textsorten-Karten standardmäßig geschlossen lassen
-        // (Keine automatische Öffnung beim Laden der Seite)
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

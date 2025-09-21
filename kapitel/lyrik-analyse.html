@@ -167,13 +167,13 @@
             font-size: 1.1em;
         }
 
-        .panel {
-            background: white;
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-        }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
         .panel.active {
             max-height: 2000px;
@@ -558,28 +558,33 @@
     </main>
 
     <script>
-        function toggleAccordion(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('.accordion-icon');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            content.classList.toggle('active');
-            icon.textContent = content.classList.contains('active') ? '-' : '+';
-        }
-
-        function toggleSolution(button) {
-            const solution = button.nextElementSibling;
-            solution.classList.toggle('active');
-            button.textContent = solution.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
-        }
-
-        // Alle Accordions sind standardmäßig geschlossen
-        document.addEventListener('DOMContentLoaded', function() {
-            // Setze alle Accordion-Icons auf '+'
-            const accordionIcons = document.querySelectorAll('.accordion-icon');
-            accordionIcons.forEach(icon => {
-                icon.textContent = '+';
-            });
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

@@ -137,15 +137,18 @@
             content: "\2212";
         }
 
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-            margin-bottom: 15px;
-            border-radius: 0 0 5px 5px;
-        }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
+
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
 
         .exercise {
             background: #e8f4f8;
@@ -507,32 +510,33 @@
     </main>
 
     <script>
-        // Accordion functionality
-        const acc = document.getElementsByClassName("accordion");
-        for (let i = 0; i < acc.length; i++) {
-            // Standardmäßig alle Panels geschlossen halten
-            const panel = acc[i].nextElementSibling;
-            panel.style.maxHeight = null;
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
-            });
-        }
-
-        // Toggle solution visibility
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
             } else {
-                solution.style.display = "block";
+                panel.style.display = 'block';
             }
-        }
+        });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

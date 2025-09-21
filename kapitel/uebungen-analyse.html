@@ -139,7 +139,18 @@
         .tip-box strong {
             color: #856404;
         }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -293,26 +304,33 @@
     </main>
 
     <script>
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            solution.classList.toggle('show');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            // Button-Text ändern
-            const button = solution.previousElementSibling;
-            if (solution.classList.contains('show')) {
-                button.textContent = 'Lösung verbergen';
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
             } else {
-                button.textContent = 'Lösung anzeigen';
+                panel.style.display = 'block';
             }
-        }
-        
-        // Alle Lösungsabschnitte standardmäßig ausblenden
-        document.addEventListener('DOMContentLoaded', function() {
-            const solutions = document.querySelectorAll('.solution-content');
-            solutions.forEach(solution => {
-                solution.classList.remove('show');
-            });
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

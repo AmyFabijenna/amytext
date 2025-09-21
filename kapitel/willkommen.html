@@ -195,18 +195,18 @@
             background: #e9ecef;
         }
 
-        .panel {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-            background: white;
-        }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
-        .panel.active {
-            padding: 15px;
-            max-height: 1000px;
-        }
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
 
         .progress-section {
             background: #e8f4f8;
@@ -447,28 +447,33 @@
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var accordionHeaders = document.querySelectorAll('.accordion-header');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            accordionHeaders.forEach(function(header) {
-                header.addEventListener('click', function() {
-                    var panel = this.nextElementSibling;
-                    var icon = this.querySelector('.accordion-icon');
-                    
-                    // Toggle panel
-                    panel.classList.toggle('active');
-                    
-                    // Toggle icon
-                    if (panel.classList.contains('active')) {
-                        icon.textContent = '−';
-                        this.classList.add('active');
-                    } else {
-                        icon.textContent = '+';
-                        this.classList.remove('active');
-                    }
-                });
-            });
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

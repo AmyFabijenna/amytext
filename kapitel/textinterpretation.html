@@ -180,14 +180,18 @@
             background-color: #e9ecef;
         }
 
-        .panel {
-            padding: 0 18px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-            background-color: white;
-            border-radius: 0 0 8px 8px;
-        }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
+
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
 
         .exercise {
             background: #f8f9fa;
@@ -567,81 +571,33 @@
     </main>
 
     <script>
-        // Funktion für aufklappbare Bereiche
-        const coll = document.getElementsByClassName("accordion");
-        for (let i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                const content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            });
-        }
-
-        // Funktion zum Anzeigen/Verstecken von Lösungen
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
+            
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
             } else {
-                solution.style.display = "block";
+                panel.style.display = 'block';
             }
-        }
+        });
+    });
+}
 
-        // Funktion zum Überprüfen der Quiz-Antworten
-        function checkQuiz(quizId) {
-            const quiz = document.getElementById(quizId);
-            const checkboxes = quiz.querySelectorAll('input[type="checkbox"]');
-            let allCorrect = true;
-            
-            checkboxes.forEach(checkbox => {
-                const shouldBeChecked = checkbox.classList.contains('correct');
-                if (checkbox.checked !== shouldBeChecked) {
-                    allCorrect = false;
-                    checkbox.parentElement.style.color = 'red';
-                } else {
-                    checkbox.parentElement.style.color = 'green';
-                }
-            });
-            
-            if (allCorrect) {
-                alert('Gut gemacht! Alle Antworten sind richtig.');
-            } else {
-                alert('Einige Antworten sind nicht korrekt. Die falschen Antworten sind rot markiert.');
-            }
-        }
-
-        // Funktion zum Überprüfen der Textantworten
-        function checkAnswers() {
-            const answers = document.querySelectorAll('.answer');
-            let allCorrect = true;
-            
-            answers.forEach(answer => {
-                const userAnswer = answer.value.trim().toLowerCase();
-                const correctAnswer = answer.getAttribute('data-answer').toLowerCase();
-                
-                if (userAnswer === correctAnswer) {
-                    answer.style.backgroundColor = '#d4edda';
-                } else {
-                    answer.style.backgroundColor = '#f8d7da';
-                    allCorrect = false;
-                }
-            });
-            
-            if (allCorrect) {
-                alert('Gut gemacht! Alle Antworten sind richtig.');
-            } else {
-                alert('Einige Antworten sind nicht korrekt. Die falschen Antworten sind rot markiert, die richtigen grün.');
-            }
-        }
-
-        // Alle accordions standardmäßig geschlossen lassen
-        window.onload = function() {
-            // Kein automatisches Öffnen des ersten Kapitels
-        };
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

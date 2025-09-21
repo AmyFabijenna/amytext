@@ -190,7 +190,18 @@
             font-size: 0.9em;
             color: #666;
         }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
+.panel.active {
+    max-height: 1000px;
+    padding: 18px;
+}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -529,32 +540,33 @@
     </main>
 
     <script>
-        function toggleEpoche(epocheId) {
-            const content = document.getElementById(epocheId);
-            content.classList.toggle('active');
+function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            // Ändere den Pfeil je nach Zustand
-            const header = content.previousElementSibling;
-            const arrow = header.querySelector('span');
-            arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
-        }
-
-        function toggleLoesung(loesungId) {
-            const loesung = document.getElementById(loesungId);
-            loesung.classList.toggle('active');
+            // Get the panel
+            const panel = this.nextElementSibling;
             
-            // Ändere den Button-Text
-            const button = loesung.previousElementSibling;
-            button.textContent = loesung.classList.contains('active') ? 'Lösung ausblenden' : 'Lösung anzeigen';
-        }
-
-        // Alle Epochen-Cards standardmäßig schließen
-        document.addEventListener('DOMContentLoaded', function() {
-            const allEpochen = document.querySelectorAll('.epoche-content');
-            allEpochen.forEach(epoche => {
-                epoche.classList.remove('active');
-            });
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+            }
         });
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>

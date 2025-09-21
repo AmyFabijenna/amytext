@@ -108,14 +108,13 @@
             background-color: #2c3e50;
         }
 
-        .panel {
-            padding: 0 18px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-            background-color: #f1f1f1;
-            border-radius: 0 0 5px 5px;
-        }
+.panel {
+    display: none;
+    padding: 18px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+}
 
         .panel-inner {
             padding: 15px;
@@ -377,42 +376,33 @@
     </div>
 
     <script>
-        // Funktion für aufklappbare Bereiche
-        document.addEventListener('DOMContentLoaded', function() {
-            const coll = document.getElementsByClassName("accordion");
+ function initializeAccordions() {
+    const accordions = document.querySelectorAll('.accordion');
+    
+    accordions.forEach(function(accordion) {
+        accordion.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
             
-            for (let i = 0; i < coll.length; i++) {
-                // Initial alle Inhalte ausblenden
-                const content = coll[i].nextElementSibling;
-                content.style.maxHeight = null;
-                
-                // Click-Event hinzufügen
-                coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    const content = this.nextElementSibling;
-                    
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
+            // Get the panel
+            const panel = this.nextElementSibling;
+            
+            // Simple toggle approach that works everywhere
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
             }
         });
-        
-        // Funktion zum Anzeigen/Verbergen von Lösungen
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            const button = event.target;
-            
-            if (solution.style.display === "block") {
-                solution.style.display = "none";
-                button.textContent = "Lösung anzeigen";
-            } else {
-                solution.style.display = "block";
-                button.textContent = "Lösung ausblenden";
-            }
-        }
+    });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAccordions);
+} else {
+    initializeAccordions();
+}
     </script>
 </body>
 </html>
