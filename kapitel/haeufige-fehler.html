@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Häufige Fehler - Deutschmatura</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .main-content {
+            margin: 0 auto;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .accordion-header {
+            background: #34495e;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            position: relative;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #2c3e50;
+        }
+
+        .accordion-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .accordion-header.active .accordion-icon:after {
+            content: '▲';
+        }
+
+        .accordion-header:not(.active) .accordion-icon:after {
+            content: '▼';
+        }
+
+        .panel {
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+            padding: 18px;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
+        }
+
+        .solution-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .solution-toggle:hover {
+            background: #2c3e50;
+        }
+
+        .solution-content {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 3px solid #2ecc71;
+        }
+
+        .solution-content.active {
+            display: block;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #34495e;
+        }
+
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .error-category {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .error-category h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .error-category h3:before {
+            content: "⚠️";
+            margin-right: 10px;
+        }
+
+        .error-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .error-item h4 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .example-container {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 3px solid #3498db;
+        }
+
+        .example-container h5 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .example-false {
+            background: #ffeaea;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            border-left: 3px solid #e74c3c;
+        }
+
+        .example-correct {
+            background: #eaffea;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            border-left: 3px solid #2ecc71;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        .exercise-container {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .exercise-container h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        @media (max-width: 768px) {
+            .content-body {
+                padding: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Häufige Fehler in der Textanalyse</h1>
+                <p>Typische Probleme erkennen und vermeiden</p>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <button type="button" class="btn-toggle-all" id="toggle-all-btn">Alle Bereiche öffnen/schließen</button>
+
+                <div class="welcome-section">
+                    <h2>Typische Fehlerquellen in Textanalysen</h2>
+                    <p>In diesem Kapitel lernen Sie die häufigsten Fehler kennen, die bei Textanalysen und Interpretationen gemacht werden. Für jeden Fehler finden Sie Erklärungen, Beispiele und konkrete Tipps zur Vermeidung. Nutzen Sie die Übungen, um Ihr Verständnis zu überprüfen.</p>
+                </div>
+
+                <div class="error-category">
+                    <h3>1. Formale Fehler</h3>
+                    
+                    <div class="error-item">
+                        <h4>Fehlende oder unvollständige Textangaben</h4>
+                        <p>Viele Schüler vergessen, den Text korrekt vorzustellen oder machen unvollständige Angaben.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiele:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "In dem Text geht es um Digitalisierung..."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "In dem Kommentar 'Die Tyrannei der digitalen Erreichbarkeit' von Maria Berger, erschienen im März 2025 im 'Standard', setzt sich die Autorin kritisch mit den Auswirkungen permanenter digitaler Verfügbarkeit auseinander."
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Tipp:</strong> Verwenden Sie die W-Fragen: Wer? (Autor), Was? (Titel), Wo? (Publikation), Wann? (Erscheinungsdatum), Welche Textsorte?
+                        </div>
+                    </div>
+                </div>
+
+                <div class="error-category">
+                    <h3>2. Inhaltliche Fehler</h3>
+                    
+                    <div class="error-item">
+                        <h4>Zusammenfassung statt Analyse</h4>
+                        <p>Eine reine Nacherzählung des Textinhalts ohne analytische Betrachtung.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiele:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Zuerst beschreibt der Autor eine Szene im Café, dann sagt er, dass Smartphones problematisch sind, und am Ende rät er, das Handy öfter auszuschalten."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Der Autor analysiert die sozialen Auswirkungen permanenter Erreichbarkeit, indem er zunächst eine Alltagsszene beschreibt, dann die problematischen Konsequenzen darlegt und schließlich Lösungsvorschläge unterbreitet."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-header">
+                    <span>Übungen: Fehler erkennen und korrigieren</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <div class="exercise-container">
+                        <h4>Übung 1: Formale Fehler korrigieren</h4>
+                        <p>Korrigieren Sie die folgenden fehlerhaften Einleitungssätze:</p>
+                        <ol>
+                            <li>"In dem Text von irgendeinem Autor geht es um Klimawandel."</li>
+                            <li>"Der Autor hat 2020 was über Digitalisierung geschrieben."</li>
+                            <li>"Ich finde den Text gut, weil er interessant ist."</li>
+                        </ol>
+                        
+                        <button class="solution-toggle" data-target="solution1">Lösung anzeigen</button>
+                        <div class="solution-content" id="solution1">
+                            <p><strong>Korrekte Versionen:</strong></p>
+                            <ol>
+                                <li>"In dem Essay 'Verantwortung in Zeiten des Klimawandels' von [Autor], erschienen 2023 in [Zeitschrift], setzt sich der Autor mit der Frage nach individueller und kollektiver Verantwortung auseinander."</li>
+                                <li>"In seinem Kommentar 'Die Zukunft der Digitalisierung', erschienen 2020 in der Süddeutschen Zeitung, analysiert Autor [Name] die gesellschaftlichen Auswirkungen technologischen Wandels."</li>
+                                <li>"Der Text überzeugt durch seine klare Argumentationsstruktur und die anschauliche Verwendung von Beispielen, die das Thema für die Leser greifbar machen."</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-header">
+                    <span>Checkliste zur Fehlervermeidung</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <div class="progress-section">
+                        <h3>Vor der Abgabe überprüfen:</h3>
+                        <ul>
+                            <li>✓ Enthält die Einleitung alle notwendigen Textangaben (Autor, Titel, Erscheinungsort, -datum, Textsorte)?</li>
+                            <li>✓ Ist die Inhaltsangabe im Präsens verfasst und auf das Wesentliche beschränkt?</li>
+                            <li>✓ Werden Behauptungen durch konkrete Textbelege gestützt?</li>
+                            <li>✓ Ist die Sprache präzise und fachlich angemessen?</li>
+                            <li>✓ Werden subjektive Wertungen vermieden?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für die Praxis:</strong><br>
+                    Lassen Sie Ihre Textanalyse nach dem Verfassen immer von jemand anderem gegenlesen. Frische Augen entdecken oft Fehler, die man selbst übersieht.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Warten, bis das DOM vollständig geladen ist
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            // Event-Listener für Akkordeon-Header
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    console.log('Accordion clicked');
+                    const panel = this.nextElementSibling;
+                    
+                    if (panel && panel.classList.contains('panel')) {
+                        // Toggle active class on header
+                        this.classList.toggle('active');
+                        
+                        // Toggle active class on panel
+                        panel.classList.toggle('active');
+                    }
+                });
+            });
+            
+            // Event-Listener für Lösungs-Buttons
+            const solutionButtons = document.querySelectorAll('.solution-toggle');
+            solutionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Solution button clicked');
+                    const targetId = this.getAttribute('data-target');
+                    const solution = document.getElementById(targetId);
+                    
+                    if (solution) {
+                        solution.classList.toggle('active');
+                        
+                        // Button-Text ändern
+                        if (solution.classList.contains('active')) {
+                            this.textContent = 'Lösung ausblenden';
+                        } else {
+                            this.textContent = 'Lösung anzeigen';
+                        }
+                    }
+                });
+            });
+            
+            // Event-Listener für "Alle öffnen/schließen"-Button
+            const toggleAllBtn = document.getElementById('toggle-all-btn');
+            if (toggleAllBtn) {
+                toggleAllBtn.addEventListener('click', function() {
+                    console.log('Toggle all clicked');
+                    toggleAll();
+                });
+            }
+            
+            // Funktion zum Öffnen/Schließen aller Akkordeons
+            function toggleAll() {
+                const accordions = document.querySelectorAll('.accordion-header');
+                const panels = document.querySelectorAll('.panel');
+                
+                // Prüfen, ob alle geöffnet sind
+                const allOpen = Array.from(panels).every(panel => 
+                    panel.classList.contains('active')
+                );
+                
+                // Alle umschalten
+                accordions.forEach((accordion, index) => {
+                    if (allOpen) {
+                        accordion.classList.remove('active');
+                        if (panels[index]) {
+                            panels[index].classList.remove('active');
+                        }
+                    } else {
+                        accordion.classList.add('active');
+                        if (panels[index]) {
+                            panels[index].classList.add('active');
+                        }
+                    }
+                });
+                
+                // Button-Text aktualisieren
+                if (toggleAllBtn) {
+                    toggleAllBtn.textContent = allOpen ? 
+                        'Alle Bereiche öffnen' : 
+                        'Alle Bereiche schließen';
+                }
+            }
+            
+            console.log('Event listeners set up successfully');
+        });
+    </script>
+</body>
+</html>
