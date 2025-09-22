@@ -447,56 +447,6 @@
             </div>
         </div>
     </main>
-
-    <script>
-        // Accordion functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordions = document.querySelectorAll('.accordion');
-            
-            accordions.forEach(function(accordion) {
-                accordion.addEventListener('click', function() {
-                    // Toggle active class on accordion
-                    this.classList.toggle('active');
-                    
-                    // Get the next sibling element (the panel)
-                    const panel = this.nextElementSibling;
-                    
-                    if (panel && panel.classList.contains('panel')) {
-                        panel.classList.toggle('active');
-                    }
-                });
-            });
-
-            // Initialize all panels as closed
-            const panels = document.querySelectorAll('.panel');
-            panels.forEach(panel => {
-                panel.classList.remove('active');
-            });
-
-            // Initialize all accordions as inactive
-            const accordionElements = document.querySelectorAll('.accordion');
-            accordionElements.forEach(accordion => {
-                accordion.classList.remove('active');
-            });
-
-            // Initialize all solutions as hidden
-            const solutions = document.querySelectorAll('.solution-box');
-            solutions.forEach(solution => {
-                solution.classList.remove('show');
-            });
-        });
-
-        function toggleSolution(solutionId) {
-            const solution = document.getElementById(solutionId);
-            
-            if (solution) {
-                if (solution.classList.contains('show')) {
-                    solution.classList.remove('show');
-                } else {
-                    solution.classList.add('show');
-                }
-            }
-        }
-    </script>
+<script src="script.js"></script>
 </body>
 </html>

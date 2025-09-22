@@ -116,7 +116,6 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 0.9em;
-            transition: background 0.3s;
             border: none;
             cursor: pointer;
             margin: 10px 0;
@@ -124,6 +123,22 @@
 
         .btn:hover {
             background: #2c3e50;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
         }
 
         .tip-box {
@@ -168,12 +183,12 @@
             text-align: left;
             border: none;
             outline: none;
-            transition: all 0.4s ease;
             margin-bottom: 0;
             border-radius: 5px 5px 0 0;
             font-weight: bold;
             position: relative;
             font-size: 16px;
+            display: block;
         }
 
         .accordion:after {
@@ -185,12 +200,10 @@
             right: 18px;
             top: 50%;
             transform: translateY(-50%);
-            transition: transform 0.3s ease;
         }
 
         .accordion.active:after {
-            content: '−';
-            transform: translateY(-50%) rotate(0deg);
+            content: '-';
         }
 
         .accordion.active, .accordion:hover {
@@ -198,16 +211,15 @@
         }
 
         .panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            display: none;
             background-color: #f9f9f9;
             border-radius: 0 0 5px 5px;
-            padding: 0 18px;
+            padding: 0;
+            margin-bottom: 10px;
         }
 
-        .panel.show {
-            max-height: 2000px;
+        .panel.active {
+            display: block;
             padding: 18px;
         }
 
@@ -236,6 +248,8 @@
             </header>
 
             <div class="content-body">
+                <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+
                 <div class="section" id="grundlagen">
                     <h2>1. Grundlagen des Zeitmanagements</h2>
                     
@@ -243,7 +257,7 @@
                         <h3>Warum Zeitmanagement wichtig ist</h3>
                         <p>Effektives Zeitmanagement ist für Prüfungssituationen entscheidend. Bei einer Textanalyse hilft eine sinnvolle Zeiteinteilung, alle wichtigen Aspekte zu berücksichtigen und gleichzeitig Stress zu reduzieren.</p>
                         
-                        <button class="accordion">Empfohlene Zeiteinteilung für eine 90-minütige Textanalyse</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Empfohlene Zeiteinteilung für eine 90-minütige Textanalyse</button>
                         <div class="panel">
                             <table>
                                 <tr>
@@ -280,7 +294,7 @@
                         <h3>Zeitmanagement für verschiedene Textsorten</h3>
                         <p>Je nach Textsorte können sich die Zeitanteile leicht verschieben:</p>
                         
-                        <button class="accordion">Zeiteinteilung für literarische Texte</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Zeiteinteilung für literarische Texte</button>
                         <div class="panel">
                             <ul>
                                 <li>Textverständnis: 15-20 Minuten (tiefere Lektüre erforderlich)</li>
@@ -290,7 +304,7 @@
                             </ul>
                         </div>
                         
-                        <button class="accordion">Zeiteinteilung für Sachtexte</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Zeiteinteilung für Sachtexte</button>
                         <div class="panel">
                             <ul>
                                 <li>Textverständnis: 10 Minuten (klarere Struktur)</li>
@@ -339,7 +353,7 @@
                         <h3>Zeitmanagement-Tools</h3>
                         <p>Nutze verschiedene Techniken, um deine Zeit effektiv einzuteilen:</p>
                         
-                        <button class="accordion">Pomodoro-Technik für Textanalysen</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Pomodoro-Technik für Textanalysen</button>
                         <div class="panel">
                             <p>Die Pomodoro-Technik kann auch bei Textanalysen angewendet werden:</p>
                             <ol>
@@ -352,9 +366,9 @@
                             </ol>
                         </div>
                         
-                        <button class="accordion">Timeboxing für Prüfungssituationen</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Timeboxing für Prüfungssituationen</button>
                         <div class="panel">
-                            <p>Timeboxing hilft, den Focus zu behalten:</p>
+                            <p>Timeboxing hilft, den Fokus zu behalten:</p>
                             <ul>
                                 <li>Definiere klare Zeitblöcke für jede Aufgabe</li>
                                 <li>Stoppe die Zeit für jede Phase</li>
@@ -474,7 +488,7 @@
                     <div class="card">
                         <h3>Was tun, wenn die Zeit knapp wird?</h3>
                         
-                        <button class="accordion">Priorisieren bei Zeitmangel</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Priorisieren bei Zeitmangel</button>
                         <div class="panel">
                             <p>Wenn du merkst, dass die Zeit knapp wird, priorisiere die wichtigsten Elemente:</p>
                             <ol>
@@ -492,7 +506,7 @@
                             </ul>
                         </div>
                         
-                        <button class="accordion">Zeitfresser identifizieren und vermeiden</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Zeitfresser identifizieren und vermeiden</button>
                         <div class="panel">
                             <p>Häufige Zeitfresser in Textanalysen:</p>
                             <ul>
@@ -503,7 +517,7 @@
                             </ul>
                         </div>
                         
-                        <button class="accordion">Schnellstrategien für die letzten Minuten</button>
+                        <button class="accordion" onclick="toggleAccordion(this)">Schnellstrategien für die letzten Minuten</button>
                         <div class="panel">
                             <p>Wenn nur noch wenig Zeit bleibt:</p>
                             <ul>
@@ -516,62 +530,4 @@
                     </div>
                     
                     <div class="tip-box">
-                        <strong>Wichtiger Tipp:</strong> Übe das Zeitmanagement regelmäßig unter realistischen Bedingungen. Je öfter du unter Zeitdruck arbeitest, desto besser wirst du im Einschätzen deines eigenen Tempos und desto sicherer wirst du in der Prüfungssituation.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Accordion-Funktionalität
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
-            
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel && panel.classList.contains('panel')) {
-                panel.classList.toggle('show');
-            }
-        });
-    });
-});
-
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'none' || element.style.display === '') {
-            element.style.display = 'block';
-        } else {
-            element.style.display = 'none';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('show'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('show');
-        } else {
-            panel.classList.add('show');
-        }
-    });
-}
-            
+                        <strong>Wichtiger Tipp:</strong> Übe das Zeitmanagement regelmäßig unter realistischen Bedingungen. Je öfter du unter Zeitdruck arbeitest, desto besser wirst du im Einschätzen deines eigenen Tempos und desto sicherer wirst du in der

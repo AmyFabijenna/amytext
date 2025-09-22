@@ -83,7 +83,6 @@
             border-radius: 10px;
             padding: 25px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
             border-left: 4px solid #34495e;
         }
 
@@ -112,7 +111,6 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 0.9em;
-            transition: background 0.3s;
         }
 
         .feature-link:hover {
@@ -157,37 +155,37 @@
             font-weight: bold;
             border-radius: 8px;
             margin: 10px 0;
-            transition: background-color 0.3s;
             position: relative;
+            display: block;
         }
 
         .accordion::after {
-            content: '\002B';
+            content: '+';
             color: #2c3e50;
             font-weight: bold;
             position: absolute;
             right: 20px;
-            transition: transform 0.3s;
+            font-size: 1.2em;
+            line-height: 1;
         }
 
         .accordion.active::after {
-            content: "▼";
+            content: '-';
         }
 
-        .active, .accordion:hover {
+        .accordion.active, .accordion:hover {
             background-color: #e9ecef;
         }
 
         .panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            display: none;
             background-color: white;
             border-radius: 0 0 8px 8px;
+            margin-bottom: 10px;
         }
 
         .panel.active {
-            max-height: 3000px;
+            display: block;
             padding: 18px;
         }
 
@@ -220,6 +218,22 @@
         }
 
         .toggle-solution:hover {
+            background: #2980b9;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
             background: #2980b9;
         }
 
@@ -298,12 +312,14 @@
             </header>
 
             <div class="content-body">
+                <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+
                 <div class="welcome-section">
                     <h2>Textinterpretation verstehen und anwenden</h2>
                     <p>Die Textinterpretation ist ein zentraler Bestandteil der Deutschmatura. Hier lernst du, wie du literarische Texte systematisch analysierst und interpretierst - von der Einleitung bis zum Schluss, mit allen wichtigen Arbeitsschritten, Formulierungshilfen und Übungen.</p>
                 </div>
 
-                <button class="accordion">1. Struktur einer Textinterpretation</button>
+                <button class="accordion" onclick="toggleAccordion(this)">1. Struktur einer Textinterpretation</button>
                 <div class="panel">
                     <h3>Aufbau einer gelungenen Interpretation</h3>
                     <p>Eine Textinterpretation folgt einer klaren Struktur:</p>
@@ -363,7 +379,7 @@
                     </div>
                 </div>
 
-                <button class="accordion">2. Die Einleitung verfassen</button>
+                <button class="accordion" onclick="toggleAccordion(this)">2. Die Einleitung verfassen</button>
                 <div class="panel">
                     <h3>Elemente einer guten Einleitung</h3>
                     <p>Die Einleitung einer Textinterpretation sollte folgende Informationen enthalten:</p>
@@ -412,7 +428,7 @@
                     </div>
                 </div>
 
-                <button class="accordion">3. Die Inhaltsangabe</button>
+                <button class="accordion" onclick="toggleAccordion(this)">3. Die Inhaltsangabe</button>
                 <div class="panel">
                     <h3>Merkmale einer guten Inhaltsangabe</h3>
                     <p>Eine gelungene Inhaltsangabe für eine Interpretation sollte:</p>
@@ -444,7 +460,7 @@
                     </div>
                 </div>
 
-                <button class="accordion">4. Die Analyse</button>
+                <button class="accordion" onclick="toggleAccordion(this)">4. Die Analyse</button>
                 <div class="panel">
                     <h3>Analyseaspekte nach Textgattungen</h3>
                     <p>Je nach Textgattung stehen unterschiedliche Analyseaspekte im Vordergrund:</p>
@@ -495,7 +511,7 @@
                     </ul>
                 </div>
 
-                <button class="accordion">5. Die Interpretation/Deutung</button>
+                <button class="accordion" onclick="toggleAccordion(this)">5. Die Interpretation/Deutung</button>
                 <div class="panel">
                     <h3>Deutungshypothese formulieren</h3>
                     <p>Eine gute Deutungshypothese sollte:</p>
@@ -536,7 +552,7 @@
                     </div>
                 </div>
 
-                <button class="accordion">6. Der Schluss</button>
+                <button class="accordion" onclick="toggleAccordion(this)">6. Der Schluss</button>
                 <div class="panel">
                     <h3>Elemente eines gelungenen Schlusses</h3>
                     <p>Der Schluss einer Textinterpretation sollte folgende Elemente enthalten:</p>
@@ -560,7 +576,7 @@
                     </div>
                 </div>
 
-                <button class="accordion">7. Checkliste für die Textinterpretation</button>
+                <button class="accordion" onclick="toggleAccordion(this)">7. Checkliste für die Textinterpretation</button>
                 <div class="panel">
                     <h3>Selbstüberprüfung vor der Abgabe</h3>
                     <p>Überprüfe deine fertige Textinterpretation anhand dieser Checkliste:</p>
@@ -577,5 +593,15 @@
                         <label><input type="checkbox"> Die Zitate sind korrekt in den Text eingebunden und mit Zeilenangaben versehen.</label><br>
                         <label><input type="checkbox"> Die Textinterpretation folgt einem logischen Aufbau.</label><br>
                     </form>
-                    
-                
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für die Praxis:</strong> Eine gelungene Textinterpretation lebt davon, dass Analyse und Interpretation Hand in Hand gehen. Beschreibe nicht nur, was du siehst, sondern erkläre auch, was es bedeutet. Verbinde deine Beobachtungen immer mit der Deutung des Gesamttextes.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

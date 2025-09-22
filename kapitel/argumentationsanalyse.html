@@ -541,62 +541,7 @@ Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
             </div>
         </div>
     </main>
-
-    <script>
-        function toggleSolution(elementId) {
-            const element = document.getElementById(elementId);
-            const button = document.querySelector(`[onclick="toggleSolution('${elementId}')"]`);
-            
-            if (element) {
-                element.classList.toggle('active');
-                
-                // Change button text
-                if (element.classList.contains('active')) {
-                    button.textContent = button.textContent.replace('anzeigen', 'ausblenden');
-                } else {
-                    button.textContent = button.textContent.replace('ausblenden', 'anzeigen');
-                }
-            }
-        }
-
-        function toggleAll() {
-            const accordions = document.querySelectorAll('.accordion');
-            const panels = document.querySelectorAll('.panel');
-            const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-            
-            accordions.forEach(function(acc) {
-                if (allOpen) {
-                    acc.classList.remove('active');
-                } else {
-                    acc.classList.add('active');
-                }
-            });
-            
-            panels.forEach(function(panel) {
-                if (allOpen) {
-                    panel.classList.remove('active');
-                } else {
-                    panel.classList.add('active');
-                }
-            });
-        }
-
-        // Accordion functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordions = document.querySelectorAll('.accordion');
-            
-            accordions.forEach(function(accordion) {
-                accordion.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    
-                    const panel = this.nextElementSibling;
-                    if (panel) {
-                        panel.classList.toggle('active');
-                    }
-                });
-            });
-        });
-    </script>
+<script src="script.js"></script>
 </body>
 </html>
                 

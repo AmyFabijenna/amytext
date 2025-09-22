@@ -594,59 +594,6 @@
         </div>
     </main>
 
-    <script>
-        function toggleExercise(header) {
-            // Toggle active class on header
-            header.classList.toggle('active');
-            
-            // Find the corresponding exercise content
-            const exerciseContent = header.nextElementSibling;
-            
-            if (exerciseContent && exerciseContent.classList.contains('exercise-content')) {
-                // Toggle the display of the content
-                exerciseContent.classList.toggle('active');
-            }
-        }
-
-        function toggleSolution(button) {
-            // Toggle active class on button
-            button.classList.toggle('active');
-            
-            // Find the corresponding solution
-            const solution = button.nextElementSibling;
-            
-            if (solution && solution.classList.contains('solution')) {
-                // Toggle the display of the solution
-                solution.classList.toggle('active');
-            }
-        }
-
-        // Initialize all elements on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ensure all exercise contents are initially hidden
-            const exerciseContents = document.querySelectorAll('.exercise-content');
-            exerciseContents.forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Ensure all solutions are initially hidden
-            const solutions = document.querySelectorAll('.solution');
-            solutions.forEach(solution => {
-                solution.classList.remove('active');
-            });
-            
-            // Ensure all exercise headers are initially inactive
-            const exerciseHeaders = document.querySelectorAll('.exercise-header');
-            exerciseHeaders.forEach(header => {
-                header.classList.remove('active');
-            });
-            
-            // Ensure all solution buttons are initially inactive
-            const solutionButtons = document.querySelectorAll('.solution-toggle');
-            solutionButtons.forEach(button => {
-                button.classList.remove('active');
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

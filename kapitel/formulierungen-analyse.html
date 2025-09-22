@@ -474,44 +474,6 @@
             </div>
         </div>
     </main>
-
-    <script>
-        function toggleSolution(solutionId) {
-            const solution = document.getElementById(solutionId);
-            
-            if (solution) {
-                if (solution.classList.contains('show')) {
-                    solution.classList.remove('show');
-                } else {
-                    solution.classList.add('show');
-                }
-            }
-        }
-
-        // Accordion functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordions = document.querySelectorAll('.accordion');
-            
-            accordions.forEach(function(accordion) {
-                accordion.addEventListener('click', function() {
-                    // Toggle active class on accordion
-                    this.classList.toggle('active');
-                    
-                    // Get the next sibling element (the content)
-                    const content = this.nextElementSibling;
-                    
-                    if (content) {
-                        content.classList.toggle('active');
-                    }
-                });
-            });
-
-            // Initialize all solutions as hidden
-            const solutions = document.querySelectorAll('.solution-box');
-            solutions.forEach(solution => {
-                solution.classList.remove('show');
-            });
-        });
-    </script>
+<script src="script.js"></script>
 </body>
 </html>

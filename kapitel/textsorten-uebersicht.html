@@ -630,58 +630,6 @@
             </div>
         </div>
     </main>
-
-    <script>
-        function toggleTextsorte(id) {
-            const content = document.getElementById(id);
-            const header = content.previousElementSibling;
-            const icon = header.querySelector('.toggle-icon');
-            
-            // Toggle content visibility
-            content.classList.toggle('active');
-            header.classList.toggle('active');
-            
-            // Rotate icon
-            if (content.classList.contains('active')) {
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                icon.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        function toggleLoesung(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.classList.toggle('active');
-                
-                // Change button text
-                const button = element.previousElementSibling;
-                if (element.classList.contains('active')) {
-                    button.textContent = 'Lösung ausblenden';
-                } else {
-                    button.textContent = 'Lösung anzeigen';
-                }
-            }
-        }
-
-        // Optional: Close other sections when opening a new one (accordion behavior)
-        function toggleTextsorteAccordion(id) {
-            // First close all other sections
-            const allContents = document.querySelectorAll('.textsorte-content');
-            const allHeaders = document.querySelectorAll('.textsorte-header');
-            const allIcons = document.querySelectorAll('.toggle-icon');
-            
-            allContents.forEach((content, index) => {
-                if (content.id !== id && content.classList.contains('active')) {
-                    content.classList.remove('active');
-                    allHeaders[index].classList.remove('active');
-                    allIcons[index].style.transform = 'rotate(0deg)';
-                }
-            });
-            
-            // Then toggle the clicked section
-            toggleTextsorte(id);
-        }
-    </script>
+<script src="script.js"></script>
 </body>
 </html>

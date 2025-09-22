@@ -564,37 +564,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Accordion-Funktionalität
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            
-            accordionHeaders.forEach(function(header) {
-                header.addEventListener('click', function() {
-                    const accordion = this.parentElement;
-                    const panel = this.nextElementSibling;
-                    
-                    // Toggle active state
-                    accordion.classList.toggle('active');
-                    panel.classList.toggle('active');
-                });
-            });
-            
-            // Solution-Toggle-Funktionalität
-            const solutionToggles = document.querySelectorAll('.solution-toggle');
-            
-            solutionToggles.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const solutionContent = this.nextElementSibling;
-                    
-                    if (solutionContent.classList.contains('active')) {
-                        solutionContent.classList.remove('active');
-                        this.textContent = 'Lösung anzeigen';
-                    } else {
-                        solutionContent.classList.add('active');
-                        this.textContent = 'Lösung verbergen';
-                    }
-                });
-            });
-        
+<script src="script.js"></script>
+</body>
+</html>
