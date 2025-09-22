@@ -619,6 +619,21 @@
                 mainContent.classList.remove('sidebar-active');
             }
         });
+        // IN DIE HAUPTSDATEI - GANZ ANS ENDE DES <script> TAGS
+// Globale Funktionen für alle geladenen Seiten
+window.toggleKapitel = function(nummer) {
+    var inhalt = document.getElementById('kapitel-' + nummer);
+    if (inhalt) {
+        inhalt.classList.toggle('offen');
+    }
+};
+
+window.toggleSolution = function(id) {
+    var solution = document.getElementById(id);
+    if (solution) {
+        solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
+    }
+};
     </script>
 </body>
 </html>
