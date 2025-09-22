@@ -72,7 +72,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0;
             cursor: pointer;
             padding: 25px;
             transition: background-color 0.3s;
@@ -244,7 +243,7 @@
 
             <div class="content-body">
                 <div class="epoche-card">
-                    <div class="epoche-header">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Aufklärung (1720-1785)</h3>
                         <span class="epoche-icon">▼</span>
                     </div>
@@ -293,7 +292,7 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Sturm und Drang (1765-1785)</h3>
                         <span class="epoche-icon">▼</span>
                     </div>
@@ -342,7 +341,7 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Weimarer Klassik (1786-1805)</h3>
                         <span class="epoche-icon">▼</span>
                     </div>
@@ -391,7 +390,7 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Romantik (1795-1835)</h3>
                         <span class="epoche-icon">▼</span>
                     </div>
@@ -440,7 +439,7 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Realismus (1848-1890)</h3>
                         <span class="epoche-icon">▼</span>
                     </div>
@@ -527,7 +526,7 @@
                         <li>"Der Mensch ist frei geschaffen, ist frei, und würd' er in Ketten geboren."</li>
                         <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, was nicht notwendig geschehen müsste."</li>
                     </ol>
-                    <button class="loesung-button" data-target="epochen-uebung-1">Lösung anzeigen</button>
+                    <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-1')">Lösung anzeigen</button>
                     <div class="loesung" id="epochen-uebung-1">
                         <p><strong>Lösungen:</strong></p>
                         <ol>
@@ -544,7 +543,7 @@
                     <div class="beispiel-text">
                         <p>"Die Nacht war sternenklar und kalt. Ich stand am Fenster und blickte hinauf zu den unzähligen Funken, die am Firmament glitzerten. Eine tiefe Wehmut ergriff mich, eine Sehnsucht nach etwas, das ich nicht benennen konnte, das aber weit, weit entfernt war, jenseits dieser kalten, einsamen Nacht."</p>
                     </div>
-                    <button class="loesung-button" data-target="epochen-uebung-2">Lösung anzeigen</button>
+                    <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-2')">Lösung anzeigen</button>
                     <div class="loesung" id="epochen-uebung-2">
                         <p><strong>Lösung:</strong></p>
                         <p>Der Textausschnitt stammt aus der Romantik. Merkmale:</p>
@@ -559,6 +558,24 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        function toggleEpoche(header) {
+            var card = header.parentElement;
+            var content = header.nextElementSibling;
+            
+            card.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        function toggleLoesung(id) {
+            var element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('active');
+            }
+        }
+
+        console.log('Literarische Epochen Script loaded');
+    </script>
 </body>
 </html>

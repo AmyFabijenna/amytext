@@ -79,12 +79,15 @@
             padding: 15px 20px;
             cursor: pointer;
             font-weight: bold;
-            display: block;
-            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border: none;
+            width: 100%;
             text-align: left;
             outline: none;
             position: relative;
+            user-select: none;
         }
 
         .accordion-header:hover {
@@ -92,17 +95,20 @@
         }
 
         .accordion-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.3s ease;
         }
 
-        .accordion-header.active .accordion-icon:after {
-            content: '-';
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
         }
 
-        .accordion-header:not(.active) .accordion-icon:after {
+        .accordion-header.active .accordion-icon::after {
+            content: '−';
+        }
+
+        .accordion-header:not(.active) .accordion-icon::after {
             content: '+';
         }
 
@@ -111,11 +117,11 @@
             background-color: #f9f9f9;
             border-radius: 0 0 5px 5px;
             margin-bottom: 10px;
+            padding: 18px;
         }
 
         .panel.active {
             display: block;
-            padding: 18px;
         }
 
         .term-grid {
@@ -246,7 +252,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Metapher
+                            <span>Metapher</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -260,7 +266,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Vergleich
+                            <span>Vergleich</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -274,7 +280,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Personifikation
+                            <span>Personifikation</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -288,7 +294,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Hyperbel
+                            <span>Hyperbel</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -302,7 +308,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Anapher
+                            <span>Anapher</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -316,7 +322,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Rhetorische Frage
+                            <span>Rhetorische Frage</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -330,7 +336,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Ironie
+                            <span>Ironie</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -344,7 +350,7 @@
                     
                     <div class="accordion">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
-                            Oxymoron
+                            <span>Oxymoron</span>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="panel">
@@ -544,6 +550,43 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        function toggleAccordion(element) {
+            const panel = element.nextElementSibling;
+            element.classList.toggle('active');
+            panel.classList.toggle('active');
+        }
+
+        function toggleAll() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            const panels = document.querySelectorAll('.panel');
+            
+            const allActive = Array.from(panels).every(panel => panel.classList.contains('active'));
+            
+            accordionHeaders.forEach(header => {
+                if (allActive) {
+                    header.classList.remove('active');
+                } else {
+                    header.classList.add('active');
+                }
+            });
+            
+            panels.forEach(panel => {
+                if (allActive) {
+                    panel.classList.remove('active');
+                } else {
+                    panel.classList.add('active');
+                }
+            });
+        }
+
+        function toggleSolution(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('active');
+            }
+        }
+    </script>
 </body>
 </html>

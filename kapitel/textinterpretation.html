@@ -71,77 +71,6 @@
             margin-bottom: 20px;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-left: 4px solid #34495e;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-
-        .feature-card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .feature-card p {
-            font-size: 0.95em;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .feature-link {
-            display: inline-block;
-            background: #34495e;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-
-        .feature-link:hover {
-            background: #2c3e50;
-        }
-
-        .progress-section {
-            background: #e8f4f8;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #3498db;
-        }
-
-        .progress-section h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .tip-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .tip-box strong {
-            color: #856404;
-        }
-
         .accordion {
             background-color: #f8f9fa;
             color: #2c3e50;
@@ -156,21 +85,20 @@
             border-radius: 8px;
             margin: 10px 0;
             position: relative;
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .accordion::after {
             content: '+';
             color: #2c3e50;
             font-weight: bold;
-            position: absolute;
-            right: 20px;
             font-size: 1.2em;
-            line-height: 1;
         }
 
         .accordion.active::after {
-            content: '-';
+            content: '−';
         }
 
         .accordion.active, .accordion:hover {
@@ -182,11 +110,11 @@
             background-color: white;
             border-radius: 0 0 8px 8px;
             margin-bottom: 10px;
+            padding: 18px;
         }
 
         .panel.active {
             display: block;
-            padding: 18px;
         }
 
         .exercise {
@@ -204,6 +132,10 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
             display: none;
+        }
+
+        .solution.active {
+            display: block;
         }
 
         .toggle-solution {
@@ -292,10 +224,6 @@
                 font-size: 2em;
             }
 
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
             input[type="text"] {
                 width: 100%;
                 margin: 2px 0;
@@ -367,6 +295,7 @@
                             <li>Einordnung des Textes in eine literarische Epoche</li>
                             <li>Formulierung der persönlichen Meinung zum Text</li>
                         </ol>
+                        
                         <button class="toggle-solution" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
                         <div id="solution1" class="solution">
                             <p><strong>Lösung:</strong></p>
@@ -455,7 +384,7 @@
                             <label><input type="checkbox"> Einbau von Zitaten aus dem Text</label><br>
                             <label><input type="checkbox" class="correct"> Sachliche Darstellung ohne Wertung</label><br>
                         </form>
-                        <button class="toggle-solution" onclick="checkQuiz('content-summary-quiz')">Lösung überprüfen</button>
+                        <button class="toggle-solution" onclick="checkQuiz()">Lösung überprüfen</button>
                         <div id="quiz-result" style="display: none; margin-top: 10px;"></div>
                     </div>
                 </div>
@@ -594,14 +523,88 @@
                         <label><input type="checkbox"> Die Textinterpretation folgt einem logischen Aufbau.</label><br>
                     </form>
                 </div>
-
-                <div class="tip-box">
-                    <strong>Tipp für die Praxis:</strong> Eine gelungene Textinterpretation lebt davon, dass Analyse und Interpretation Hand in Hand gehen. Beschreibe nicht nur, was du siehst, sondern erkläre auch, was es bedeutet. Verbinde deine Beobachtungen immer mit der Deutung des Gesamttextes.
-                </div>
             </div>
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        function toggleAccordion(element) {
+            const panel = element.nextElementSibling;
+            element.classList.toggle('active');
+            panel.classList.toggle('active');
+        }
+
+        function toggleAll() {
+            const accordions = document.querySelectorAll('.accordion');
+            const panels = document.querySelectorAll('.panel');
+            
+            const allActive = Array.from(panels).every(panel => panel.classList.contains('active'));
+            
+            accordions.forEach(accordion => {
+                if (allActive) {
+                    accordion.classList.remove('active');
+                } else {
+                    accordion.classList.add('active');
+                }
+            });
+            
+            panels.forEach(panel => {
+                if (allActive) {
+                    panel.classList.remove('active');
+                } else {
+                    panel.classList.add('active');
+                }
+            });
+        }
+
+        function toggleSolution(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('active');
+            }
+        }
+
+        function checkQuiz() {
+            const form = document.getElementById('content-summary-quiz');
+            const resultDiv = document.getElementById('quiz-result');
+            const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+            let correct = 0;
+            let total = 0;
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.classList.contains('correct')) {
+                    total++;
+                    if (checkbox.checked) {
+                        correct++;
+                    }
+                } else if (checkbox.checked) {
+                    // Falsche Antwort wurde gewählt
+                }
+            });
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `<p><strong>Ergebnis:</strong> ${correct} von ${total} richtig.</p>`;
+        }
+
+        function checkAnswers() {
+            const inputs = document.querySelectorAll('.answer');
+            const resultDiv = document.getElementById('answers-result');
+            let correct = 0;
+
+            inputs.forEach(input => {
+                const userAnswer = input.value.toLowerCase().trim();
+                const correctAnswer = input.dataset.answer.toLowerCase();
+                if (userAnswer === correctAnswer) {
+                    correct++;
+                    input.style.backgroundColor = '#d4edda';
+                } else {
+                    input.style.backgroundColor = '#f8d7da';
+                }
+            });
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `<p><strong>Ergebnis:</strong> ${correct} von ${inputs.length} richtig.</p>`;
+        }
+    </script>
 </body>
 </html>

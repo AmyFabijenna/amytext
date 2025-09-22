@@ -71,74 +71,6 @@
             margin-bottom: 20px;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 4px solid #34495e;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-
-        .feature-card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .feature-card p {
-            font-size: 0.95em;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .feature-link {
-            display: inline-block;
-            background: #34495e;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: background 0.3s;
-        }
-
-        .feature-link:hover {
-            background: #2c3e50;
-        }
-
-        .progress-section {
-            background: #e8f4f8;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #3498db;
-        }
-
-        .tip-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .tip-box strong {
-            color: #856404;
-        }
-
         .accordion {
             margin: 20px 0;
             border-radius: 8px;
@@ -239,7 +171,7 @@
             border-left: 3px solid #28a745;
         }
 
-        .solution.active {
+        .solution.show {
             display: block;
         }
 
@@ -279,13 +211,29 @@
             background: #f2f2f2;
         }
 
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
             }
 
             .analysis-table {
@@ -366,8 +314,8 @@
                                 <li>König ist der Hirtenknabe</li>
                                 <li>Aus der Erde quellen Blumen</li>
                             </ol>
-                            <button class="solution-toggle">Lösung anzeigen</button>
-                            <div class="solution">
+                            <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                            <div id="solution1" class="solution">
                                 <ol>
                                     <li>Trochäus (Xx Xx Xx X)</li>
                                     <li>Jambus (xX xX xX xX)</li>
@@ -414,8 +362,8 @@
                                 <span class="poem-line">Im Schatten sah ich ein Blümlein stehn,</span>
                                 <span class="poem-line">wie Sterne blinkend, wie Äuglein schön.</span>
                             </div>
-                            <button class="solution-toggle">Lösung anzeigen</button>
-                            <div class="solution">
+                            <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                            <div id="solution2" class="solution">
                                 <p>Reimschema: aabb (Paarreim)</p>
                                 <p>Hinweis: "hin" und "Sinn" bilden einen Reim, "stehn" und "schön" bilden einen Reim.</p>
                             </div>
@@ -497,8 +445,8 @@
                                 <li>Wie wird die Zeit so ernst und lang, ich horche, ich lausche</li>
                                 <li>Es rauschten die Wasser, es säuselten die Gräser</li>
                             </ol>
-                            <button class="solution-toggle">Lösung anzeigen</button>
-                            <div class="solution">
+                            <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                            <div id="solution3" class="solution">
                                 <ol>
                                     <li>Alliteration ("goldnen Sternlein prangen")</li>
                                     <li>Parallelismus ("ich horche, ich lausche")</li>
@@ -548,8 +496,8 @@
                             </div>
                             <p>Johann Wolfgang von Goethe: "Wanderers Nachtlied"</p>
                             
-                            <button class="solution-toggle">Musterlösung anzeigen</button>
-                            <div class="solution">
+                            <button class="solution-toggle" onclick="toggleSolution('solution4')">Musterlösung anzeigen</button>
+                            <div id="solution4" class="solution">
                                 <h4>Musterlösung:</h4>
                                 <p><strong>Formanalyse</strong>: Das Gedicht besteht aus zwei Strophen mit unterschiedlicher Länge (4 und 4 Verse). Es weist kein durchgängiges Reimschema auf, jedoch finden sich vereinzelte Reime ("stillest/füllest", "müde/Friede"). Das Metrum ist überwiegend jambisch mit Unregelmäßigkeiten, die die emotionale Bewegung widerspiegeln.</p>
                                 
@@ -575,6 +523,50 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        // Globale Variable für Toggle-All Status
+        let allExpanded = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion Funktionalität
+            const accordions = document.querySelectorAll('.accordion-header');
+            
+            accordions.forEach(function(accordion) {
+                accordion.addEventListener('click', function() {
+                    toggleAccordion(this);
+                });
+            });
+        });
+
+        function toggleAccordion(element) {
+            const accordion = element.parentElement;
+            const panel = element.nextElementSibling;
+            const icon = element.querySelector('.accordion-icon');
+            
+            // Toggle active class
+            accordion.classList.toggle('active');
+            
+            // Toggle panel
+            if (panel.classList.contains('active')) {
+                panel.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                panel.classList.add('active');
+                icon.textContent = '−';
+            }
+        }
+
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            if (solution) {
+                if (solution.classList.contains('show')) {
+                    solution.classList.remove('show');
+                } else {
+                    solution.classList.add('show');
+                }
+            }
+        }
+    </script>
 </body>
 </html>

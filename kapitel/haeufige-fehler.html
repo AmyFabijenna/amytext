@@ -58,6 +58,96 @@
             padding: 40px;
         }
 
+        .accordion-header {
+            background: #34495e;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            position: relative;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #2c3e50;
+        }
+
+        .accordion-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .accordion-header.active .accordion-icon:after {
+            content: '▲';
+        }
+
+        .accordion-header:not(.active) .accordion-icon:after {
+            content: '▼';
+        }
+
+        .panel {
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+            padding: 18px;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
+        }
+
+        .solution-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .solution-toggle:hover {
+            background: #2c3e50;
+        }
+
+        .solution-content {
+            display: none;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 3px solid #2ecc71;
+        }
+
+        .solution-content.active {
+            display: block;
+        }
+
         .welcome-section {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             padding: 30px;
@@ -69,72 +159,6 @@
         .welcome-section h2 {
             color: #2c3e50;
             margin-bottom: 20px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-left: 4px solid #34495e;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-
-        .feature-card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .feature-card p {
-            font-size: 0.95em;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .feature-link {
-            display: inline-block;
-            background: #34495e;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-
-        .feature-link:hover {
-            background: #2c3e50;
-        }
-
-        .progress-section {
-            background: #e8f4f8;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #3498db;
-        }
-
-        .tip-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .tip-box strong {
-            color: #856404;
         }
 
         .error-category {
@@ -199,6 +223,18 @@
             border-left: 3px solid #2ecc71;
         }
 
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
         .exercise-container {
             background: #e8f4f8;
             padding: 20px;
@@ -211,101 +247,17 @@
             margin-bottom: 15px;
         }
 
-        .solution-toggle {
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .solution-toggle:hover {
-            background: #2c3e50;
-        }
-
-        .solution-content {
-            display: none;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border-left: 3px solid #2ecc71;
-        }
-
-        .accordion {
-            margin: 15px 0;
-        }
-
-        .accordion-header {
-            background: #34495e;
-            color: white;
-            padding: 12px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            position: relative;
-        }
-
-        .accordion-header:hover {
-            background: #2c3e50;
-        }
-
-        .accordion-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .accordion-header.active .accordion-icon:after {
-            content: '▲';
-        }
-
-        .accordion-header:not(.active) .accordion-icon:after {
-            content: '▼';
-        }
-
-        .panel {
-            display: none;
-            background-color: #f9f9f9;
-            border-radius: 0 0 5px 5px;
-            margin-bottom: 10px;
-        }
-
-        .panel.active {
-            display: block;
-            padding: 18px;
-        }
-
-        .btn-toggle-all {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 1em;
-            font-weight: bold;
-        }
-
-        .btn-toggle-all:hover {
-            background: #2980b9;
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
         }
 
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
             }
             
             .content-header h1 {
@@ -351,21 +303,6 @@
                             <strong>Tipp:</strong> Verwenden Sie die W-Fragen: Wer? (Autor), Was? (Titel), Wo? (Publikation), Wann? (Erscheinungsdatum), Welche Textsorte?
                         </div>
                     </div>
-                    
-                    <div class="error-item">
-                        <h4>Falsche Zeitform</h4>
-                        <p>Bei Inhaltsangaben und Textanalysen wird das Präsens verwendet, nicht das Präteritum.</p>
-                        
-                        <div class="example-container">
-                            <h5>Beispiele:</h5>
-                            <div class="example-false">
-                                <strong>Falsch:</strong> "Der Autor beschrieb die Probleme der Digitalisierung..."
-                            </div>
-                            <div class="example-correct">
-                                <strong>Richtig:</strong> "Der Autor beschreibt die Probleme der Digitalisierung..."
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="error-category">
@@ -385,194 +322,111 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="error-item">
-                        <h4>Fehlende Textbelege</h4>
-                        <p>Behauptungen werden aufgestellt ohne konkrete Textstellen zu zitieren oder zu belegen.</p>
-                        
-                        <div class="example-container">
-                            <h5>Beispiele:</h5>
-                            <div class="example-false">
-                                <strong>Falsch:</strong> "Der Autor verwendet viele Metaphern."
-                            </div>
-                            <div class="example-correct">
-                                <strong>Richtig:</strong> "Der Autor verwendet bildhafte Metaphern wie 'unsichtbare Leinen' (Z. 4) und 'moderne Tyrannei' (Z. 15), um die subtile Kontrolle der Digitalisierung zu veranschaulichen."
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="error-category">
-                    <h3>3. Sprachliche und stilistische Fehler</h3>
-                    
-                    <div class="error-item">
-                        <h4>Umgangssprachliche Formulierungen</h4>
-                        <p>Verwendung von Alltagssprache statt angemessener Fachsprache.</p>
-                        
-                        <div class="example-container">
-                            <h5>Beispiele:</h5>
-                            <div class="example-false">
-                                <strong>Falsch:</strong> "Der Text ist voll krass und macht echt nachdenklich."
-                            </div>
-                            <div class="example-correct">
-                                <strong>Richtig:</strong> "Der Text zeichnet sich durch eine eindringliche Darstellung aus, die zur Reflexion anregt."
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="error-item">
-                        <h4>Vage und unpräzise Formulierungen</h4>
-                        <p>Verwaschener Ausdruck ohne konkrete Aussagekraft.</p>
-                        
-                        <div class="example-container">
-                            <h5>Beispiele:</h5>
-                            <div class="example-false">
-                                <strong>Falsch:</strong> "Der Autor benutzt viele sprachliche Mittel."
-                            </div>
-                            <div class="example-correct">
-                                <strong>Richtig:</strong> "Der Autor setzt gezielt rhetorische Fragen ein, um die Leser zur Selbstreflexion anzuregen, und verwendet Metaphern aus dem Bereich der Unterdrückung ('Tyrannei', 'Knechtschaft'), um die negativen Aspekte der Digitalisierung zu betonen."
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="error-item">
-                        <h4>Subjektive Wertungen</h4>
-                        <p>Persönliche Meinungen in der Analyse statt objektiver Betrachtung.</p>
-                        
-                        <div class="example-container">
-                            <h5>Beispiele:</h5>
-                            <div class="example-false">
-                                <strong>Falsch:</strong> "Ich finde den Text langweilig und der Autor hat keine Ahnung."
-                            </div>
-                            <div class="example-correct">
-                                <strong>Richtig:</strong> "Die Argumentation des Autors wirkt an manchen Stellen nicht vollständig belegt, da statistische Daten zur Untermauerung der These fehlen."
-                            </div>
-                        </div>
-                    </div>
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Übungen: Fehler erkennen und korrigieren</span>
+                    <span class="accordion-icon"></span>
                 </div>
-
-                <div class="error-category">
-                    <h3>4. Strukturelle Fehler</h3>
-                    
-                    <div class="error-item">
-                        <h4>Fehlender roter Faden</h4>
-                        <p>Die Analyse wirkt zusammenhanglos, ohne logische Abfolge.</p>
+                <div class="panel">
+                    <div class="exercise-container">
+                        <h4>Übung 1: Formale Fehler korrigieren</h4>
+                        <p>Korrigieren Sie die folgenden fehlerhaften Einleitungssätze:</p>
+                        <ol>
+                            <li>"In dem Text von irgendeinem Autor geht es um Klimawandel."</li>
+                            <li>"Der Autor hat 2020 was über Digitalisierung geschrieben."</li>
+                            <li>"Ich finde den Text gut, weil er interessant ist."</li>
+                        </ol>
                         
-                        <div class="tip-box">
-                            <strong>Tipp:</strong> Arbeiten Sie mit einer klaren Gliederung: Einleitung → Inhaltsangabe → Analyse sprachlicher Mittel → Analyse der Argumentation → Interpretation → Schluss/Fazit.
-                        </div>
-                    </div>
-                    
-                    <div class="error-item">
-                        <h4>Unausgewogenes Verhältnis</h4>
-                        <p>Manche Textaspekte werden übermäßig detailliert behandelt, andere vernachlässigt.</p>
-                        
-                        <div class="tip-box">
-                            <strong>Tipp:</strong> Achten Sie auf eine ausgewogene Gewichtung der Analyseaspekte. Zeitmanagement ist hier entscheidend.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Übungen: Fehler erkennen und korrigieren</span>
-                        <span class="accordion-icon"></span>
-                    </button>
-                    <div class="panel">
-                        <div class="exercise-container">
-                            <h4>Übung 1: Formale Fehler korrigieren</h4>
-                            <p>Korrigieren Sie die folgenden fehlerhaften Einleitungssätze:</p>
+                        <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        <div class="solution-content" id="solution1">
+                            <p><strong>Korrekte Versionen:</strong></p>
                             <ol>
-                                <li>"In dem Text von irgendeinem Autor geht es um Klimawandel."</li>
-                                <li>"Der Autor hat 2020 was über Digitalisierung geschrieben."</li>
-                                <li>"Ich finde den Text gut, weil er interessant ist."</li>
+                                <li>"In dem Essay 'Verantwortung in Zeiten des Klimawandels' von [Autor], erschienen 2023 in [Zeitschrift], setzt sich der Autor mit der Frage nach individueller und kollektiver Verantwortung auseinander."</li>
+                                <li>"In seinem Kommentar 'Die Zukunft der Digitalisierung', erschienen 2020 in der Süddeutschen Zeitung, analysiert Autor [Name] die gesellschaftlichen Auswirkungen technologischen Wandels."</li>
+                                <li>"Der Text überzeugt durch seine klare Argumentationsstruktur und die anschauliche Verwendung von Beispielen, die das Thema für die Leser greifbar machen."</li>
                             </ol>
-                            
-                            <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
-                            <div class="solution-content" id="solution1">
-                                <p><strong>Korrekte Versionen:</strong></p>
-                                <ol>
-                                    <li>"In dem Essay 'Verantwortung in Zeiten des Klimawandels' von [Autor], erschienen 2023 in [Zeitschrift], setzt sich der Autor mit der Frage nach individueller und kollektiver Verantwortung auseinander."</li>
-                                    <li>"In seinem Kommentar 'Die Zukunft der Digitalisierung', erschienen 2020 in der Süddeutschen Zeitung, analysiert Autor [Name] die gesellschaftlichen Auswirkungen technologischen Wandels."</li>
-                                    <li>"Der Text überzeugt durch seine klare Argumentationsstruktur und die anschauliche Verwendung von Beispielen, die das Thema für die Leser greifbar machen."</li>
-                                </ol>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise-container">
-                            <h4>Übung 2: Analyse vs. Zusammenfassung</h4>
-                            <p>Identifizieren Sie, welche der folgenden Aussagen analysieren und welche nur zusammenfassen:</p>
-                            <ol>
-                                <li>"Der Autor beschreibt eine Szene im Café, in der alle auf ihre Handys starren."</li>
-                                <li>"Durch die Schilderung der Café-Szene zu Beginn des Textes schafft der Autor eine lebendige Ausgangssituation, die viele Leser aus eigener Erfahrung kennen und die somit Identifikation ermöglicht."</li>
-                                <li>"Am Ende empfiehlt der Autor, das Handy öfter auszuschalten."</li>
-                                <li>"Der appellative Charakter des Schlusses wird durch imperative Formulierungen ('Schalten Sie Ihr Handy ab') und die direkte Ansprache des Lesers verstärkt."</li>
-                            </ol>
-                            
-                            <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
-                            <div class="solution-content" id="solution2">
-                                <p><strong>Lösung:</strong></p>
-                                <ol>
-                                    <li>Zusammenfassung (nur Inhalt)</li>
-                                    <li>Analyse (Wirkung und Funktion)</li>
-                                    <li>Zusammenfassung (nur Inhalt)</li>
-                                    <li>Analyse (sprachliche Gestaltung und Wirkung)</li>
-                                </ol>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise-container">
-                            <h4>Übung 3: Fachsprachliche Formulierung</h4>
-                            <p>Formulieren Sie die folgenden umgangssprachlichen Aussagen fachsprachlich um:</p>
-                            <ol>
-                                <li>"Der Autor übertreibt voll und der Text ist übertrieben emotional."</li>
-                                <li>"Der Text hat viele Wiederholungen und das ist nervig."</li>
-                                <li>"Ich check nicht, was der Autor damit sagen will."</li>
-                            </ol>
-                            
-                            <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
-                            <div class="solution-content" id="solution3">
-                                <p><strong>Korrekte Versionen:</strong></p>
-                                <ol>
-                                    <li>"Der Autor verwendet hyperbolische Darstellungen und einen emotionalisierenden Sprachstil, was die Persuasionsabsicht des Textes unterstreicht."</li>
-                                    <li>"Der repetitive Charakter der Argumentation dient der Verstärkung der Kernaussage, könnte aber auch als redundant wahrgenommen werden."</li>
-                                    <li>"Die Intention des Autors bleibt an manchen Stellen implizit und erfordert eine intensive Textanalyse."</li>
-                                </ol>
-                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="accordion">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Checkliste zur Fehlervermeidung</span>
-                        <span class="accordion-icon"></span>
-                    </button>
-                    <div class="panel">
-                        <div class="progress-section">
-                            <h3>Vor der Abgabe überprüfen:</h3>
-                            <ul>
-                                <li>✓ Enthält die Einleitung alle notwendigen Textangaben (Autor, Titel, Erscheinungsort, -datum, Textsorte)?</li>
-                                <li>✓ Ist die Inhaltsangabe im Präsens verfasst und auf das Wesentliche beschränkt?</li>
-                                <li>✓ Werden Behauptungen durch konkrete Textbelege gestützt?</li>
-                                <li>✓ Ist die Sprache präzise und fachlich angemessen?</li>
-                                <li>✓ Werden subjektive Wertungen vermieden bzw. nur im Schluss als persönliche Stellungnahme formuliert?</li>
-                                <li>✓ Ist die Analyse ausgewogen (Inhalt, Sprache, Argumentation, ggf. literarische Aspekte)?</li>
-                                <li>✓ Folgt die Analyse einem roten Faden und einer logischen Struktur?</li>
-                                <li>✓ Enthält der Schluss eine Zusammenfassung der Ergebnisse, eine Überprüfung der Deutungshypothese und eine persönliche Stellungnahme?</li>
-                                <li>✓ Sind Rechtschreibung, Grammatik und Zeichensetzung korrekt?</li>
-                            </ul>
-                        </div>
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Checkliste zur Fehlervermeidung</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <div class="progress-section">
+                        <h3>Vor der Abgabe überprüfen:</h3>
+                        <ul>
+                            <li>✓ Enthält die Einleitung alle notwendigen Textangaben (Autor, Titel, Erscheinungsort, -datum, Textsorte)?</li>
+                            <li>✓ Ist die Inhaltsangabe im Präsens verfasst und auf das Wesentliche beschränkt?</li>
+                            <li>✓ Werden Behauptungen durch konkrete Textbelege gestützt?</li>
+                            <li>✓ Ist die Sprache präzise und fachlich angemessen?</li>
+                            <li>✓ Werden subjektive Wertungen vermieden?</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="tip-box">
                     <strong>Tipp für die Praxis:</strong><br>
-                    Lassen Sie Ihre Textanalyse nach dem Verfassen immer von jemand anderem gegenlesen. Frische Augen entdecken oft Fehler, die man selbst übersieht. Nehmen Sie sich außerdem Zeit für die Überarbeitung – planen Sie dafür mindestens 15-20 Minuten ein.
+                    Lassen Sie Ihre Textanalyse nach dem Verfassen immer von jemand anderem gegenlesen. Frische Augen entdecken oft Fehler, die man selbst übersieht.
                 </div>
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        function toggleAccordion(element) {
+            console.log('toggleAccordion called');
+            if (!element) return;
+            
+            var panel = element.nextElementSibling;
+            
+            if (!panel) return;
+            
+            // Toggle active class on header
+            element.classList.toggle('active');
+            
+            // Toggle active class on panel
+            panel.classList.toggle('active');
+        }
+
+        function toggleSolution(elementId) {
+            console.log('toggleSolution called for:', elementId);
+            var element = document.getElementById(elementId);
+            if (!element) return;
+            
+            element.classList.toggle('active');
+        }
+
+        function toggleAll() {
+            console.log('toggleAll called');
+            var accordions = document.querySelectorAll('.accordion-header');
+            var panels = document.querySelectorAll('.panel');
+            
+            // Check if all are open
+            var allOpen = true;
+            for (var i = 0; i < panels.length; i++) {
+                if (!panels[i].classList.contains('active')) {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Toggle all
+            for (var i = 0; i < accordions.length; i++) {
+                if (allOpen) {
+                    accordions[i].classList.remove('active');
+                    panels[i].classList.remove('active');
+                } else {
+                    accordions[i].classList.add('active');
+                    panels[i].classList.add('active');
+                }
+            }
+        }
+
+        // Test if script is loaded
+        console.log('Script loaded successfully');
+    </script>
 </body>
 </html>
