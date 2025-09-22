@@ -76,26 +76,48 @@
             color: white;
             padding: 15px 20px;
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: block;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            position: relative;
+        }
+
+        .checklist-header:hover {
+            background: linear-gradient(135deg, #2980b9, #2471a3);
         }
 
         .checklist-header h3 {
             font-size: 1.1em;
             margin: 0;
+            display: inline-block;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+
+        .checklist-header.active .toggle-icon:after {
+            content: '▲';
+        }
+
+        .checklist-header:not(.active) .toggle-icon:after {
+            content: '▼';
         }
 
         .checklist-content {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            display: none;
+            padding: 20px;
+            background: #f9f9f9;
         }
 
         .checklist-content.active {
-            padding: 20px;
-            max-height: 1000px;
+            display: block;
         }
 
         .checklist-list {
@@ -120,6 +142,7 @@
 
         .checklist-list label {
             flex: 1;
+            cursor: pointer;
         }
 
         .exercise-box {
@@ -151,24 +174,27 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
-            transition: background 0.3s;
         }
 
         .solution-btn:hover {
             background: #218838;
         }
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
+        }
 
         @media (max-width: 768px) {
             .content-body {
@@ -189,14 +215,16 @@
         </header>
 
         <div class="content-body">
+            <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+
             <div class="checklist-section">
                 <h2>Allgemeine Textanalyse-Checklisten</h2>
                 
                 <div class="checklist-item">
-                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                    <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Textanalyse-Grundcheckliste</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
+                        <span class="toggle-icon"></span>
+                    </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
                             <li><input type="checkbox" id="check1"><label for="check1">Habe ich das Hauptthema und die zentralen Aussagen des Textes korrekt erfasst?</label></li>
@@ -214,10 +242,10 @@
                 </div>
 
                 <div class="checklist-item">
-                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                    <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Sprachliche Gestaltung</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
+                        <span class="toggle-icon"></span>
+                    </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
                             <li><input type="checkbox" id="check11"><label for="check11">Verwende ich eine angemessene Fachsprache für die Textanalyse?</label></li>
@@ -237,10 +265,10 @@
                 <h2>Textsortenspezifische Checklisten</h2>
                 
                 <div class="checklist-item">
-                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                    <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Lyrik-Analyse</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
+                        <span class="toggle-icon"></span>
+                    </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
                             <li><input type="checkbox" id="check19"><label for="check19">Habe ich das Reimschema korrekt analysiert?</label></li>
@@ -255,10 +283,10 @@
                 </div>
 
                 <div class="checklist-item">
-                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                    <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Prosa-Analyse</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
+                        <span class="toggle-icon"></span>
+                    </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
                             <li><input type="checkbox" id="check26"><label for="check26">Habe ich die Erzählperspektive bestimmt?</label></li>
@@ -272,10 +300,10 @@
                 </div>
 
                 <div class="checklist-item">
-                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                    <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Drama-Analyse</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
+                        <span class="toggle-icon"></span>
+                    </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
                             <li><input type="checkbox" id="check32"><label for="check32">Habe ich die Gesprächssituation analysiert?</label></li>
@@ -289,10 +317,10 @@
                 </div>
 
                 <div class="checklist-item">
-                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                    <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Sachtext-Analyse</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
+                        <span class="toggle-icon"></span>
+                    </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
                             <li><input type="checkbox" id="check38"><label for="check38">Habe ich die Argumentationsstruktur untersucht?</label></li>
@@ -310,10 +338,10 @@
                 <h2>Textinterpretation</h2>
                 
                 <div class="checklist-item">
-                    <div class="checklist-header" onclick="toggleChecklist(this)">
+                    <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Interpretations-Checkliste</h3>
-                        <span class="toggle-icon">▼</span>
-                    </div>
+                        <span class="toggle-icon"></span>
+                    </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
                             <li><input type="checkbox" id="check44"><label for="check44">Die Einleitung enthält alle notwendigen formalen Informationen zum Text.</label></li>
@@ -345,8 +373,8 @@
                         <p><strong>Überarbeitete Version:</strong></p>
                         <p>"Der vorliegende Text thematisiert die Verantwortung des Einzelnen und der Gesellschaft im Kontext des Klimawandels. Der Autor argumentiert differenziert, dass die globale Klimakrise sowohl individuelles Handeln als auch strukturelle Veränderungen erfordert.</p>
                         <p>Als sprachliche Mittel setzt der Verfasser unter anderem ein direktes Zitat ein ("Was kann ich schon tun?"), um die verbreitete Resignation vieler Menschen authentisch darzustellen. Zudem verwendet er die Metapher des "ökologischen Fußabdrucks", die abstrakte Umweltauswirkungen veranschaulicht und seine These unterstützt, dass auch kleine individuelle Entscheidungen in ihrer Summe bedeutsam sind.</p>
-                        <p>In seiner Argumentationsstruktur entwickelt der Autor zunächst die These der scheinbaren Machtlosigkeit des Einzelnen, stellt dieser dann die Bedeutung vieler kleinen Handlungen entgegen und führt schließlich zur Synthese, dass sowohl individuelle als auch kollektive Maßnahmen notwendien sind. Diese dialektische Struktur ermöglicht eine ausgewogene Betrachtung der Verantwortungsfrage.</p>
-                        <p>Am Ende plädiert der Autor für eine "doppelte Strategie", die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet. Diese Schlussfolgerung erscheint angesichts der vielschichtigen Herausforderungen des Klimawandels überzeugend, da sie weder in Fatalismus verfällt noch die Komplexität des Problem unterschätzt."</p>
+                        <p>In seiner Argumentationsstruktur entwickelt der Autor zunächst die These der scheinbaren Machtlosigkeit des Einzelnen, stellt dieser dann die Bedeutung vieler kleinen Handlungen entgegen und führt schließlich zur Synthese, dass sowohl individuelle als auch kollektive Maßnahmen notwendig sind. Diese dialektische Struktur ermöglicht eine ausgewogene Betrachtung der Verantwortungsfrage.</p>
+                        <p>Am Ende plädiert der Autor für eine "doppelte Strategie", die individuelles Handeln mit der Forderung nach systemischen Veränderungen verbindet. Diese Schlussfolgerung erscheint angesichts der vielschichtigen Herausforderungen des Klimawandels überzeugend, da sie weder in Fatalismus verfällt noch die Komplexität des Problems unterschätzt."</p>
                     </div>
                 </div>
 
@@ -382,57 +410,111 @@
         </div>
     </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        // Einfache, browser-kompatible JavaScript-Funktionen
+        function toggleChecklist(element) {
+            if (!element) return;
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            var content = element.nextElementSibling || element.nextSibling;
+            while (content && content.nodeType !== 1) {
+                content = content.nextSibling;
             }
-        });
-    });
-});
+            
+            if (!content) return;
+            
+            // Toggle active class für Button
+            if (element.className.indexOf('active') > -1) {
+                element.className = element.className.replace(' active', '').replace('active', '');
+            } else {
+                element.className += ' active';
+            }
+            
+            // Toggle active class für Content
+            if (content.className.indexOf('active') > -1) {
+                content.className = content.className.replace(' active', '').replace('active', '');
+            } else {
+                content.className += ' active';
+            }
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleSolution(elementId) {
+            var element = document.getElementById(elementId);
+            if (!element) return;
+            
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
         }
-    }
-}
 
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
+        function toggleAll() {
+            var headers = document.getElementsByClassName('checklist-header');
+            var contents = document.getElementsByClassName('checklist-content');
+            
+            if (!headers || !contents) return;
+            
+            // Prüfen ob alle offen sind
+            var allOpen = true;
+            for (var i = 0; i < contents.length; i++) {
+                if (contents[i].className.indexOf('active') === -1) {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Alle öffnen oder schließen
+            for (var i = 0; i < headers.length; i++) {
+                if (allOpen) {
+                    headers[i].className = headers[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (headers[i].className.indexOf('active') === -1) {
+                        headers[i].className += ' active';
+                    }
+                }
+            }
+            
+            for (var i = 0; i < contents.length; i++) {
+                if (allOpen) {
+                    contents[i].className = contents[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (contents[i].className.indexOf('active') === -1) {
+                        contents[i].className += ' active';
+                    }
+                }
+            }
         }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
+
+        // Alternative für ältere Browser ohne addEventListener
+        function addEvent(element, event, fn) {
+            if (element.addEventListener) {
+                element.addEventListener(event, fn, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + event, fn);
+            }
         }
-    });
-}
-</script>
+
+        // Initialisierung für maximale Browser-Kompatibilität
+        function initPage() {
+            // Zusätzliche Initialisierung falls nötig
+        }
+
+        // Page Load Event für alle Browser
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', initPage, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function() {
+                if (document.readyState === 'complete') {
+                    initPage();
+                }
+            });
+        } else {
+            if (window.addEventListener) {
+                window.addEventListener('load', initPage, false);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', initPage);
+            }
+        }
+    </script>
 </body>
 </html>

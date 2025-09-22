@@ -151,11 +151,26 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
-            transition: background 0.3s;
         }
 
         .btn-toggle:hover {
             background: #2c3e50;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
         }
 
         .solution {
@@ -179,12 +194,7 @@
             color: #856404;
         }
 
-        @media (max-width: 768px) {
-            .content-body {
-                padding: 20px;
-            }
-        }
-
+        /* Accordion Styles - Einfache Version für maximale Kompatibilität */
         .accordion {
             background: #34495e;
             color: white;
@@ -196,39 +206,53 @@
             outline: none;
             font-size: 1.1em;
             border-radius: 5px;
-            margin-bottom: 10px;
-            transition: background 0.3s;
+            margin-bottom: 2px;
             position: relative;
+            display: block;
         }
 
-        .accordion:after {
-            content: '\002B'; /* Pluszeichen */
-            color: white;
-            font-weight: bold;
-            float: right;
-            margin-left: 5px;
-        }
-
-        .active:after {
-            content: "\2212"; /* Minuszeichen */
-        }
-
-        .active, .accordion:hover {
+        .accordion:hover {
             background: #2c3e50;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .accordion:after {
+            content: '+';
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 1.2em;
+            line-height: 1;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .accordion.active:after {
+            content: '-';
+        }
+
+        .panel {
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        .panel.active {
+            display: block;
+            padding: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .content-body {
+                padding: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -240,10 +264,12 @@
             </header>
 
             <div class="content-body">
+                <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+                
                 <div class="section">
                     <h2 class="section-title">Einleitungen formulieren</h2>
                     
-                    <button type="button" class="accordion">Formale Textangaben</button>
+                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Formale Textangaben</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Standardformulierungen für Textangaben</h3>
@@ -264,7 +290,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion">Thematische Einführung</button>
+                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Thematische Einführung</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Einführung in das Textthema</h3>
@@ -289,7 +315,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion">Beispiele für vollständige Einleitungen</button>
+                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Beispiele für vollständige Einleitungen</button>
                     <div class="panel">
                         <div class="example-box">
                             <div class="example-title">Beispiel 1: Sachtextanalyse</div>
@@ -310,7 +336,7 @@
                 <div class="section">
                     <h2 class="section-title">Schlüsse formulieren</h2>
                     
-                    <button type="button" class="accordion">Zusammenfassende Schlüsse</button>
+                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Zusammenfassende Schlüsse</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Ergebnisse zusammenfassen</h3>
@@ -331,7 +357,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion">Bewertende Schlüsse</button>
+                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Bewertende Schlüsse</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Text bewerten und einordnen</h3>
@@ -356,7 +382,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion">Persönliche Stellungnahmen</button>
+                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Persönliche Stellungnahmen</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Eigene Position formulieren</h3>
@@ -381,7 +407,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion">Beispiele für vollständige Schlüsse</button>
+                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Beispiele für vollständige Schlüsse</button>
                     <div class="panel">
                         <div class="example-box">
                             <div class="example-title">Beispiel 1: Sachtextanalyse</div>
@@ -425,7 +451,7 @@
                         <p>Verbessere die folgende fehlerhafte Einleitung: "Der Text ist von Goethe und handelt von Natur. Ich finde das voll krass und so."</p>
                         <button class="btn-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen/verbergen</button>
                         <div id="solution3" class="solution">
-                            <p><strong>Verbesserte Version:</strong> "Das Gedicht 'Mailed' von Johann Wolfgang von Goethe, entstanden in der Epoche des Sturm und Drang, thematisiert die intensive Wahrnehmung der Natur im Frühling und die damit verbundenen Gefühle des lyrischen Ichs. Goethe verwendet dabei eine bildreiche Sprache, um die Lebendigkeit der Natur und die emotionalen Intensität der Frühlingserfahrung auszudrücken."</p>
+                            <p><strong>Verbesserte Version:</strong> "Das Gedicht 'Mailied' von Johann Wolfgang von Goethe, entstanden in der Epoche des Sturm und Drang, thematisiert die intensive Wahrnehmung der Natur im Frühling und die damit verbundenen Gefühle des lyrischen Ichs. Goethe verwendet dabei eine bildreiche Sprache, um die Lebendigkeit der Natur und die emotionale Intensität der Frühlingserfahrung auszudrücken."</p>
                         </div>
                     </div>
                 </div>
@@ -438,57 +464,112 @@
         </div>
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        // Einfache, browser-kompatible JavaScript-Funktionen
+        function toggleAccordion(element) {
+            // Alle notwendigen Checks für maximale Kompatibilität
+            if (!element) return;
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            var panel = element.nextElementSibling || element.nextSibling;
+            while (panel && panel.nodeType !== 1) {
+                panel = panel.nextSibling;
             }
-        });
-    });
-});
+            
+            if (!panel) return;
+            
+            // Toggle active class für Button
+            if (element.className.indexOf('active') > -1) {
+                element.className = element.className.replace(' active', '').replace('active', '');
+            } else {
+                element.className += ' active';
+            }
+            
+            // Toggle active class für Panel
+            if (panel.className.indexOf('active') > -1) {
+                panel.className = panel.className.replace(' active', '').replace('active', '');
+            } else {
+                panel.className += ' active';
+            }
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleSolution(elementId) {
+            var element = document.getElementById(elementId);
+            if (!element) return;
+            
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
         }
-    }
-}
 
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
+        function toggleAll() {
+            var accordions = document.getElementsByClassName('accordion');
+            var panels = document.getElementsByClassName('panel');
+            
+            if (!accordions || !panels) return;
+            
+            // Prüfen ob alle offen sind
+            var allOpen = true;
+            for (var i = 0; i < panels.length; i++) {
+                if (panels[i].className.indexOf('active') === -1) {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Alle öffnen oder schließen
+            for (var i = 0; i < accordions.length; i++) {
+                if (allOpen) {
+                    accordions[i].className = accordions[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (accordions[i].className.indexOf('active') === -1) {
+                        accordions[i].className += ' active';
+                    }
+                }
+            }
+            
+            for (var i = 0; i < panels.length; i++) {
+                if (allOpen) {
+                    panels[i].className = panels[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (panels[i].className.indexOf('active') === -1) {
+                        panels[i].className += ' active';
+                    }
+                }
+            }
         }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
+
+        // Alternative für ältere Browser ohne addEventListener
+        function addEvent(element, event, fn) {
+            if (element.addEventListener) {
+                element.addEventListener(event, fn, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + event, fn);
+            }
         }
-    });
-}
-</script>
+
+        // Initialisierung für maximale Browser-Kompatibilität
+        function initPage() {
+            // Zusätzliche Initialisierung falls nötig
+        }
+
+        // Page Load Event für alle Browser
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', initPage, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function() {
+                if (document.readyState === 'complete') {
+                    initPage();
+                }
+            });
+        } else {
+            if (window.addEventListener) {
+                window.addEventListener('load', initPage, false);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', initPage);
+            }
+        }
+    </script>
 </body>
 </html>

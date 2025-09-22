@@ -83,7 +83,6 @@
             border-radius: 10px;
             padding: 25px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
             border-left: 4px solid #34495e;
         }
 
@@ -112,7 +111,6 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 0.9em;
-            transition: background 0.3s;
         }
 
         .feature-link:hover {
@@ -221,7 +219,6 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
-            transition: background 0.3s;
         }
 
         .solution-toggle:hover {
@@ -247,23 +244,61 @@
             padding: 12px 15px;
             border-radius: 5px;
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: block;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            position: relative;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .accordion-header:hover {
+            background: #2c3e50;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .accordion-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .accordion-header.active .accordion-icon:after {
+            content: '▲';
+        }
+
+        .accordion-header:not(.active) .accordion-icon:after {
+            content: '▼';
+        }
+
+        .panel {
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        .panel.active {
+            display: block;
+            padding: 18px;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
+        }
+
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -271,6 +306,10 @@
 
             .feature-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
             }
         }
     </style>
@@ -284,6 +323,8 @@
             </header>
 
             <div class="content-body" id="content-body">
+                <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+
                 <div class="welcome-section">
                     <h2>Typische Fehlerquellen in Textanalysen</h2>
                     <p>In diesem Kapitel lernen Sie die häufigsten Fehler kennen, die bei Textanalysen und Interpretationen gemacht werden. Für jeden Fehler finden Sie Erklärungen, Beispiele und konkrete Tipps zur Vermeidung. Nutzen Sie die Übungen, um Ihr Verständnis zu überprüfen.</p>
@@ -332,7 +373,7 @@
                     
                     <div class="error-item">
                         <h4>Zusammenfassung statt Analyse</h4>
-                        <p>Eine reine Nacherzählung del Textinhalts ohne analytische Betrachtung.</p>
+                        <p>Eine reine Nacherzählung des Textinhalts ohne analytische Betrachtung.</p>
                         
                         <div class="example-container">
                             <h5>Beispiele:</h5>
@@ -389,7 +430,7 @@
                                 <strong>Falsch:</strong> "Der Autor benutzt viele sprachliche Mittel."
                             </div>
                             <div class="example-correct">
-                                <strong>Richtig:</strong> "Der Autor setzt gezielt rhetorische Fragen eins, um die Leser zur Selbstreflexion anzuregen, und verwendet Metaphern aus dem Bereich der Unterdrückung ('Tyrannei', 'Knechtschaft'), um die negativen Aspekte der Digitalisierung zu betonen."
+                                <strong>Richtig:</strong> "Der Autor setzt gezielt rhetorische Fragen ein, um die Leser zur Selbstreflexion anzuregen, und verwendet Metaphern aus dem Bereich der Unterdrückung ('Tyrannei', 'Knechtschaft'), um die negativen Aspekte der Digitalisierung zu betonen."
                             </div>
                         </div>
                     </div>
@@ -418,7 +459,7 @@
                         <p>Die Analyse wirkt zusammenhanglos, ohne logische Abfolge.</p>
                         
                         <div class="tip-box">
-                            <strong>Tipp:</strong> Arbeiten Sie mit einer klare Gliederung: Einleitung → Inhaltsangabe → Analyse sprachlicher Mittel → Analyse der Argumentation → Interpretation → Schluss/Fazit.
+                            <strong>Tipp:</strong> Arbeiten Sie mit einer klaren Gliederung: Einleitung → Inhaltsangabe → Analyse sprachlicher Mittel → Analyse der Argumentation → Interpretation → Schluss/Fazit.
                         </div>
                     </div>
                     
@@ -433,10 +474,10 @@
                 </div>
 
                 <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
                         <span>Übungen: Fehler erkennen und korrigieren</span>
-                        <span class="accordion-icon">▼</span>
-                    </div>
+                        <span class="accordion-icon"></span>
+                    </button>
                     <div class="panel">
                         <div class="exercise-container">
                             <h4>Übung 1: Formale Fehler korrigieren</h4>
@@ -493,7 +534,7 @@
                             <div class="solution-content" id="solution3">
                                 <p><strong>Korrekte Versionen:</strong></p>
                                 <ol>
-                                    <li>"Der Autor verwendet hyperbolische Darstellungen und einen emotionalisierenden Sprachstil, was die Persuationsabsicht des Textes unterstreicht."</li>
+                                    <li>"Der Autor verwendet hyperbolische Darstellungen und einen emotionalisierenden Sprachstil, was die Persuasionsabsicht des Textes unterstreicht."</li>
                                     <li>"Der repetitive Charakter der Argumentation dient der Verstärkung der Kernaussage, könnte aber auch als redundant wahrgenommen werden."</li>
                                     <li>"Die Intention des Autors bleibt an manchen Stellen implizit und erfordert eine intensive Textanalyse."</li>
                                 </ol>
@@ -503,10 +544,10 @@
                 </div>
 
                 <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
                         <span>Checkliste zur Fehlervermeidung</span>
-                        <span class="accordion-icon">▼</span>
-                    </div>
+                        <span class="accordion-icon"></span>
+                    </button>
                     <div class="panel">
                         <div class="progress-section">
                             <h3>Vor der Abgabe überprüfen:</h3>
@@ -532,57 +573,112 @@
             </div>
         </div>
     </main>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+
+    <script>
+        // Einfache, browser-kompatible JavaScript-Funktionen
+        function toggleAccordion(element) {
+            if (!element) return;
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            var panel = element.nextElementSibling || element.nextSibling;
+            while (panel && panel.nodeType !== 1) {
+                panel = panel.nextSibling;
             }
-        });
-    });
-});
+            
+            if (!panel) return;
+            
+            // Toggle active class für Button
+            if (element.className.indexOf('active') > -1) {
+                element.className = element.className.replace(' active', '').replace('active', '');
+            } else {
+                element.className += ' active';
+            }
+            
+            // Toggle active class für Panel
+            if (panel.className.indexOf('active') > -1) {
+                panel.className = panel.className.replace(' active', '').replace('active', '');
+            } else {
+                panel.className += ' active';
+            }
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleSolution(elementId) {
+            var element = document.getElementById(elementId);
+            if (!element) return;
+            
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
         }
-    }
-}
 
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
+        function toggleAll() {
+            var accordions = document.getElementsByClassName('accordion-header');
+            var panels = document.getElementsByClassName('panel');
+            
+            if (!accordions || !panels) return;
+            
+            // Prüfen ob alle offen sind
+            var allOpen = true;
+            for (var i = 0; i < panels.length; i++) {
+                if (panels[i].className.indexOf('active') === -1) {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Alle öffnen oder schließen
+            for (var i = 0; i < accordions.length; i++) {
+                if (allOpen) {
+                    accordions[i].className = accordions[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (accordions[i].className.indexOf('active') === -1) {
+                        accordions[i].className += ' active';
+                    }
+                }
+            }
+            
+            for (var i = 0; i < panels.length; i++) {
+                if (allOpen) {
+                    panels[i].className = panels[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (panels[i].className.indexOf('active') === -1) {
+                        panels[i].className += ' active';
+                    }
+                }
+            }
         }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
+
+        // Alternative für ältere Browser ohne addEventListener
+        function addEvent(element, event, fn) {
+            if (element.addEventListener) {
+                element.addEventListener(event, fn, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + event, fn);
+            }
         }
-    });
-}
-</script>
+
+        // Initialisierung für maximale Browser-Kompatibilität
+        function initPage() {
+            // Zusätzliche Initialisierung falls nötig
+        }
+
+        // Page Load Event für alle Browser
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', initPage, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function() {
+                if (document.readyState === 'complete') {
+                    initPage();
+                }
+            });
+        } else {
+            if (window.addEventListener) {
+                window.addEventListener('load', initPage, false);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', initPage);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -58,6 +58,19 @@
             padding: 40px;
         }
 
+        .welcome-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .welcome-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
         .exercise-section {
             margin-bottom: 40px;
             padding: 25px;
@@ -108,7 +121,6 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
-            transition: background 0.3s;
         }
 
         .solution-toggle:hover {
@@ -139,21 +151,34 @@
         .tip-box strong {
             color: #856404;
         }
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
+        }
+
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+            
+            .exercise-section {
+                padding: 15px;
             }
         }
     </style>
@@ -167,6 +192,8 @@
             </header>
 
             <div class="content-body" id="content-body">
+                <button type="button" class="btn-toggle-all" onclick="toggleAllSolutions()">Alle Lösungen öffnen/schließen</button>
+
                 <div class="welcome-section">
                     <h2>Übungen zur Textanalyse</h2>
                     <p>Hier findest du verschiedene Übungen zur Textanalyse, die dir helfen, deine Fähigkeiten für die Deutschmatura zu verbessern. Jede Übung enthält einen Textausschnitt, Aufgabenstellungen und eine Musterlösung, die du ein- und ausblenden kannst.</p>
@@ -303,57 +330,72 @@
         </div>
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        // Einfache, browser-kompatible JavaScript-Funktionen
+        function toggleSolution(elementId) {
+            var element = document.getElementById(elementId);
+            if (!element) return;
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
             }
-        });
-    });
-});
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleAllSolutions() {
+            var solutions = document.getElementsByClassName('solution-content');
+            if (!solutions) return;
+            
+            // Prüfen ob alle offen sind
+            var allOpen = true;
+            for (var i = 0; i < solutions.length; i++) {
+                if (solutions[i].style.display !== 'block') {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Alle öffnen oder schließen
+            for (var i = 0; i < solutions.length; i++) {
+                if (allOpen) {
+                    solutions[i].style.display = 'none';
+                } else {
+                    solutions[i].style.display = 'block';
+                }
+            }
         }
-    }
-}
 
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
+        // Alternative für ältere Browser ohne addEventListener
+        function addEvent(element, event, fn) {
+            if (element.addEventListener) {
+                element.addEventListener(event, fn, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + event, fn);
+            }
         }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
+
+        // Initialisierung für maximale Browser-Kompatibilität
+        function initPage() {
+            // Zusätzliche Initialisierung falls nötig
         }
-    });
-}
-</script>
+
+        // Page Load Event für alle Browser
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', initPage, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function() {
+                if (document.readyState === 'complete') {
+                    initPage();
+                }
+            });
+        } else {
+            if (window.addEventListener) {
+                window.addEventListener('load', initPage, false);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', initPage);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -79,28 +79,45 @@
             padding: 15px 20px;
             cursor: pointer;
             font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
+            display: block;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            position: relative;
         }
 
         .accordion-header:hover {
             background: linear-gradient(135deg, #2c3e50, #34495e);
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .accordion-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .accordion-header.active .accordion-icon:after {
+            content: '-';
+        }
+
+        .accordion-header:not(.active) .accordion-icon:after {
+            content: '+';
+        }
+
+        .panel {
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        .panel.active {
+            display: block;
+            padding: 18px;
+        }
+
         .term-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -164,10 +181,25 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.3s;
         }
 
         .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
             background: #2980b9;
         }
 
@@ -191,6 +223,10 @@
             .term-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
@@ -203,14 +239,16 @@
             </header>
 
             <div class="content-body">
+                <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+
                 <section id="stilmittel" class="section">
                     <h2 class="section-title">Stilmittel und rhetorische Figuren</h2>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Metapher
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
                             <p><strong>Definition:</strong> Bildlicher Ausdruck, bei dem ein Wort aus seinem eigentlichen Bedeutungszusammenhang in einen anderen übertragen wird.</p>
                             <p><strong>Wirkung:</strong> Veranschaulichung, Verstärkung, emotionale Aufladung</p>
@@ -221,10 +259,10 @@
                     </div>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Vergleich
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
                             <p><strong>Definition:</strong> Gegenüberstellung von zwei Dingen mit Hilfe von Vergleichspartikeln (wie, als, gleichsam).</p>
                             <p><strong>Wirkung:</strong> Veranschaulichung, Konkretisierung</p>
@@ -235,10 +273,10 @@
                     </div>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Personifikation
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
                             <p><strong>Definition:</strong> Zuschreibung menschlicher Eigenschaften oder Handlungen zu unbelebten Dingen, Tieren oder abstrakten Begriffen.</p>
                             <p><strong>Wirkung:</strong> Veranschaulichung, Emotionalisierung, lebendigere Darstellung</p>
@@ -249,10 +287,10 @@
                     </div>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Hyperbel
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
                             <p><strong>Definition:</strong> Übertreibung, um etwas besonders eindringlich darzustellen.</p>
                             <p><strong>Wirkung:</strong> Verstärkung, Dramatisierung, Betonung</p>
@@ -263,12 +301,12 @@
                     </div>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Anapher
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
-                            <p><strong>Definition:</strong> Wiederholung eines Wortes oder einer Wortgruppe am Anfang aufeinanderfolgenden Sätzen oder Verse.</p>
+                            <p><strong>Definition:</strong> Wiederholung eines Wortes oder einer Wortgruppe am Anfang aufeinanderfolgender Sätze oder Verse.</p>
                             <p><strong>Wirkung:</strong> Rhythmisierung, Betonung, Steigerung</p>
                             <div class="example-box">
                                 <strong>Beispiel:</strong> "Er lachte nicht. Er weinte nicht. Er sprach nicht." (Wiederholung von "Er" am Satzanfang)
@@ -277,10 +315,10 @@
                     </div>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Rhetorische Frage
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
                             <p><strong>Definition:</strong> Frage, die keine Antwort erwartet, sondern eine Aussage verstärken oder den Leser zum Nachdenken anregen soll.</p>
                             <p><strong>Wirkung:</strong> Appell, Betonung, gedankliche Beteiligung des Lesers</p>
@@ -291,10 +329,10 @@
                     </div>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Ironie
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
                             <p><strong>Definition:</strong> Aussage, bei der das Gesagte nicht dem Gemeinten entspricht, oft mit kritischer oder spöttischer Absicht.</p>
                             <p><strong>Wirkung:</strong> Kritik, Spott, humorvolle Distanzierung</p>
@@ -305,15 +343,15 @@
                     </div>
                     
                     <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
                             Oxymoron
-                            <span class="accordion-icon">+</span>
-                        </div>
+                            <span class="accordion-icon"></span>
+                        </button>
                         <div class="panel">
                             <p><strong>Definition:</strong> Verbindung zweier sich widersprechender Begriffe zu einer neuen Einheit.</p>
                             <p><strong>Wirkung:</strong> Spannung, Paradoxie, gedankliche Herausforderung</p>
                             <div class="example-box">
-                                <strong>Beispiel:</strong> " bittersüß", "alter Knabe", "hastiges Warten"
+                                <strong>Beispiel:</strong> "bittersüß", "alter Knabe", "hastiges Warten"
                             </div>
                         </div>
                     </div>
@@ -507,57 +545,111 @@
         </div>
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        // Einfache, browser-kompatible JavaScript-Funktionen
+        function toggleAccordion(element) {
+            if (!element) return;
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            var panel = element.nextElementSibling || element.nextSibling;
+            while (panel && panel.nodeType !== 1) {
+                panel = panel.nextSibling;
             }
-        });
-    });
-});
+            
+            if (!panel) return;
+            
+            // Toggle active class für Button
+            if (element.className.indexOf('active') > -1) {
+                element.className = element.className.replace(' active', '').replace('active', '');
+            } else {
+                element.className += ' active';
+            }
+            
+            // Toggle active class für Panel
+            if (panel.className.indexOf('active') > -1) {
+                panel.className = panel.className.replace(' active', '').replace('active', '');
+            } else {
+                panel.className += ' active';
+            }
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleSolution(elementId) {
+            var element = document.getElementById(elementId);
+            if (!element) return;
+            
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
         }
-    }
-}
 
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
+        function toggleAll() {
+            var accordions = document.getElementsByClassName('accordion-header');
+            var panels = document.getElementsByClassName('panel');
+            
+            if (!accordions || !panels) return;
+            
+            // Prüfen ob alle offen sind
+            var allOpen = true;
+            for (var i = 0; i < panels.length; i++) {
+                if (panels[i].className.indexOf('active') === -1) {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Alle öffnen oder schließen
+            for (var i = 0; i < accordions.length; i++) {
+                if (allOpen) {
+                    accordions[i].className = accordions[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (accordions[i].className.indexOf('active') === -1) {
+                        accordions[i].className += ' active';
+                    }
+                }
+            }
+            
+            for (var i = 0; i < panels.length; i++) {
+                if (allOpen) {
+                    panels[i].className = panels[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (panels[i].className.indexOf('active') === -1) {
+                        panels[i].className += ' active';
+                    }
+                }
+            }
         }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
+
+        // Alternative für ältere Browser ohne addEventListener
+        function addEvent(element, event, fn) {
+            if (element.addEventListener) {
+                element.addEventListener(event, fn, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + event, fn);
+            }
         }
-    });
-}
-</script>
+
+        // Initialisierung für maximale Browser-Kompatibilität
+        function initPage() {
+            // Zusätzliche Initialisierung falls nötig
+        }
+
+        // Page Load Event für alle Browser
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', initPage, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function() {
+                if (document.readyState === 'complete') {
+                    initPage();
+                }
+            });
+        } else {
+            if (window.addEventListener) {
+                window.addEventListener('load', initPage, false);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', initPage);
+            }
+        }
+    </script>
 </body>
 </html>

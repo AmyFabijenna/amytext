@@ -114,42 +114,42 @@
             text-align: left;
             border: none;
             outline: none;
-            transition: 0.4s;
             margin-bottom: 10px;
             border-radius: 5px;
             font-weight: bold;
             position: relative;
+            display: block;
         }
 
-        .active, .accordion:hover {
+        .accordion:hover {
             background-color: #e9ecef;
         }
 
         .accordion:after {
-            content: '\002B';
+            content: '+';
             color: #777;
             font-weight: bold;
             position: absolute;
             right: 18px;
+            font-size: 1.2em;
+            line-height: 1;
         }
 
-        .active:after {
-            content: "\2212";
+        .accordion.active:after {
+            content: '-';
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .panel {
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
-
+        .panel.active {
+            display: block;
+            padding: 18px;
+        }
 
         .exercise {
             background: #e8f4f8;
@@ -184,7 +184,6 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 0.9em;
-            transition: background 0.3s;
             border: none;
             cursor: pointer;
             margin: 10px 0;
@@ -192,6 +191,22 @@
 
         .btn:hover {
             background: #2c3e50;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
         }
 
         table {
@@ -219,6 +234,10 @@
             .content-body {
                 padding: 20px;
             }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
@@ -231,11 +250,13 @@
             </header>
 
             <div class="content-body">
+                <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+
                 <div class="section">
                     <h2>Einführung in die Sprachanalyse</h2>
                     <p>Die Sprachanalyse ist ein zentraler Bestandteil der Textanalyse. Sie untersucht, wie Sprache gezielt eingesetzt wird, um bestimmte Wirkungen zu erzielen. Dabei geht es nicht nur darum, Stilmittel zu identifizieren, sondern auch ihre Funktion im Textzusammenhang zu verstehen.</p>
                     
-                    <button class="accordion">Warum ist Sprachanalyse wichtig?</button>
+                    <button class="accordion" onclick="toggleAccordion(this)">Warum ist Sprachanalyse wichtig?</button>
                     <div class="panel">
                         <p>Die Sprachanalyse hilft uns zu verstehen, wie Autoren durch bewusst gewählte sprachliche Mittel:</p>
                         <ul>
@@ -251,7 +272,7 @@
                 <div class="section">
                     <h2>Sprachliche Mittel und ihre Wirkung</h2>
                     
-                    <button class="accordion">Bildhafte Ausdrucksweisen</button>
+                    <button class="accordion" onclick="toggleAccordion(this)">Bildhafte Ausdrucksweisen</button>
                     <div class="panel">
                         <div class="card">
                             <h4>Metapher</h4>
@@ -284,7 +305,7 @@
                         </div>
                     </div>
 
-                    <button class="accordion">Wiederholungsfiguren</button>
+                    <button class="accordion" onclick="toggleAccordion(this)">Wiederholungsfiguren</button>
                     <div class="panel">
                         <div class="card">
                             <h4>Anapher</h4>
@@ -307,7 +328,7 @@
                         </div>
                     </div>
 
-                    <button class="accordion">Satzfiguren und Strukturen</button>
+                    <button class="accordion" onclick="toggleAccordion(this)">Satzfiguren und Strukturen</button>
                     <div class="panel">
                         <div class="card">
                             <h4>Rhetorische Frage</h4>
@@ -367,7 +388,7 @@
                         </table>
                     </div>
                     
-                    <button class="accordion">Tonfall und Atmosphäre</button>
+                    <button class="accordion" onclick="toggleAccordion(this)">Tonfall und Atmosphäre</button>
                     <div class="panel">
                         <p>Der Tonfall eines Textes wird durch verschiedene sprachliche Mittel erzeugt:</p>
                         
@@ -509,57 +530,112 @@
             </div>
         </div>
     </main>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+
+    <script>
+        // Einfache, browser-kompatible JavaScript-Funktionen
+        function toggleAccordion(element) {
+            if (!element) return;
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            var panel = element.nextElementSibling || element.nextSibling;
+            while (panel && panel.nodeType !== 1) {
+                panel = panel.nextSibling;
             }
-        });
-    });
-});
+            
+            if (!panel) return;
+            
+            // Toggle active class für Button
+            if (element.className.indexOf('active') > -1) {
+                element.className = element.className.replace(' active', '').replace('active', '');
+            } else {
+                element.className += ' active';
+            }
+            
+            // Toggle active class für Panel
+            if (panel.className.indexOf('active') > -1) {
+                panel.className = panel.className.replace(' active', '').replace('active', '');
+            } else {
+                panel.className += ' active';
+            }
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
+        function toggleSolution(elementId) {
+            var element = document.getElementById(elementId);
+            if (!element) return;
+            
+            if (element.style.display === 'block') {
+                element.style.display = 'none';
+            } else {
+                element.style.display = 'block';
+            }
         }
-    }
-}
 
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
+        function toggleAll() {
+            var accordions = document.getElementsByClassName('accordion');
+            var panels = document.getElementsByClassName('panel');
+            
+            if (!accordions || !panels) return;
+            
+            // Prüfen ob alle offen sind
+            var allOpen = true;
+            for (var i = 0; i < panels.length; i++) {
+                if (panels[i].className.indexOf('active') === -1) {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Alle öffnen oder schließen
+            for (var i = 0; i < accordions.length; i++) {
+                if (allOpen) {
+                    accordions[i].className = accordions[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (accordions[i].className.indexOf('active') === -1) {
+                        accordions[i].className += ' active';
+                    }
+                }
+            }
+            
+            for (var i = 0; i < panels.length; i++) {
+                if (allOpen) {
+                    panels[i].className = panels[i].className.replace(' active', '').replace('active', '');
+                } else {
+                    if (panels[i].className.indexOf('active') === -1) {
+                        panels[i].className += ' active';
+                    }
+                }
+            }
         }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
+
+        // Alternative für ältere Browser ohne addEventListener
+        function addEvent(element, event, fn) {
+            if (element.addEventListener) {
+                element.addEventListener(event, fn, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + event, fn);
+            }
         }
-    });
-}
-</script>
+
+        // Initialisierung für maximale Browser-Kompatibilität
+        function initPage() {
+            // Zusätzliche Initialisierung falls nötig
+        }
+
+        // Page Load Event für alle Browser
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', initPage, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function() {
+                if (document.readyState === 'complete') {
+                    initPage();
+                }
+            });
+        } else {
+            if (window.addEventListener) {
+                window.addEventListener('load', initPage, false);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', initPage);
+            }
+        }
+    </script>
 </body>
 </html>
