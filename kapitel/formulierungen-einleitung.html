@@ -182,6 +182,10 @@
             border-left: 4px solid #28a745;
         }
 
+        .solution.show {
+            display: block;
+        }
+
         .tip-box {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -194,7 +198,7 @@
             color: #856404;
         }
 
-        /* Accordion Styles - Einfache Version für maximale Kompatibilität */
+        /* Accordion Styles - Robuste Version */
         .accordion {
             background: #34495e;
             color: white;
@@ -209,6 +213,7 @@
             margin-bottom: 2px;
             position: relative;
             display: block;
+            transition: background-color 0.3s ease;
         }
 
         .accordion:hover {
@@ -222,10 +227,16 @@
             float: right;
             font-size: 1.2em;
             line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.active {
+            background: #2c3e50;
         }
 
         .accordion.active:after {
             content: '-';
+            transform: rotate(180deg);
         }
 
         .panel {
@@ -233,11 +244,25 @@
             background-color: #f9f9f9;
             border-radius: 0 0 5px 5px;
             margin-bottom: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .panel.active {
+        .panel.show {
             display: block;
             padding: 18px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 1000px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -269,7 +294,7 @@
                 <div class="section">
                     <h2 class="section-title">Einleitungen formulieren</h2>
                     
-                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Formale Textangaben</button>
+                    <button type="button" class="accordion">Formale Textangaben</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Standardformulierungen für Textangaben</h3>
@@ -290,7 +315,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Thematische Einführung</button>
+                    <button type="button" class="accordion">Thematische Einführung</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Einführung in das Textthema</h3>
@@ -315,7 +340,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Beispiele für vollständige Einleitungen</button>
+                    <button type="button" class="accordion">Beispiele für vollständige Einleitungen</button>
                     <div class="panel">
                         <div class="example-box">
                             <div class="example-title">Beispiel 1: Sachtextanalyse</div>
@@ -336,7 +361,7 @@
                 <div class="section">
                     <h2 class="section-title">Schlüsse formulieren</h2>
                     
-                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Zusammenfassende Schlüsse</button>
+                    <button type="button" class="accordion">Zusammenfassende Schlüsse</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Ergebnisse zusammenfassen</h3>
@@ -357,7 +382,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Bewertende Schlüsse</button>
+                    <button type="button" class="accordion">Bewertende Schlüsse</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Text bewerten und einordnen</h3>
@@ -382,7 +407,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Persönliche Stellungnahmen</button>
+                    <button type="button" class="accordion">Persönliche Stellungnahmen</button>
                     <div class="panel">
                         <div class="subsection">
                             <h3 class="subsection-title">Eigene Position formulieren</h3>
@@ -407,7 +432,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="accordion" onclick="toggleAccordion(this)">Beispiele für vollständige Schlüsse</button>
+                    <button type="button" class="accordion">Beispiele für vollständige Schlüsse</button>
                     <div class="panel">
                         <div class="example-box">
                             <div class="example-title">Beispiel 1: Sachtextanalyse</div>
@@ -454,6 +479,24 @@
                             <p><strong>Verbesserte Version:</strong> "Das Gedicht 'Mailied' von Johann Wolfgang von Goethe, entstanden in der Epoche des Sturm und Drang, thematisiert die intensive Wahrnehmung der Natur im Frühling und die damit verbundenen Gefühle des lyrischen Ichs. Goethe verwendet dabei eine bildreiche Sprache, um die Lebendigkeit der Natur und die emotionale Intensität der Frühlingserfahrung auszudrücken."</p>
                         </div>
                     </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">Übung 4: Vollständige Analyse-Einleitung</div>
+                        <p>Schreibe eine Einleitung für die Analyse der Kurzgeschichte "Ein netter Kerl" von Gabriele Wohmann (1978). Die Geschichte handelt von einer Familie beim Abendessen, die über einen Bekannten spricht.</p>
+                        <button class="btn-toggle" onclick="toggleSolution('solution4')">Lösung anzeigen/verbergen</button>
+                        <div id="solution4" class="solution">
+                            <p><strong>Musterlösung:</strong> "Die Kurzgeschichte 'Ein netter Kerl' von Gabriele Wohmann aus dem Jahr 1978 thematisiert die Oberflächlichkeit zwischenmenschlicher Beziehungen und die Scheinheiligkeit bürgerlicher Konventionen. Anhand einer Familienszene beim Abendessen, in der über einen abwesenden Bekannten gesprochen wird, entlarvt die Autorin die Diskrepanz zwischen freundlichen Worten und tatsächlichen Gefühlen. Wohmann nutzt dabei geschickt die Technik des personalen Erzählens aus der Perspektive der Tochter, um die Verlogenheit der Erwachsenenwelt zu demaskieren."</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">Übung 5: Schluss mit persönlicher Stellungnahme</div>
+                        <p>Formuliere einen Schluss für eine Gedichtanalyse von Erich Kästners "Sachliche Romanze" (1929), der sowohl eine Zusammenfassung als auch eine persönliche Einschätzung enthält.</p>
+                        <button class="btn-toggle" onclick="toggleSolution('solution5')">Lösung anzeigen/verbergen</button>
+                        <div id="solution5" class="solution">
+                            <p><strong>Musterlösung:</strong> "Zusammenfassend zeigt Kästners 'Sachliche Romanze' durch ihre paradoxe Verbindung von nüchterner Sprache und emotionalem Inhalt die Entfremdung in modernen Liebesbeziehungen auf. Die bewusst sachliche Darstellung des Beziehungsendes verstärkt ironisch die Tragik der Situation und macht das Gedicht zu einem zeitlosen Kommentar über menschliche Gefühlskälte. Besonders beeindruckend ist die Art, wie Kästner durch den Kontrast zwischen Form und Inhalt die Sprachlosigkeit der Protagonisten verdeutlicht. In meiner persönlichen Rezeption wirkt das Gedicht auch heute noch erschreckend aktuell, da es die Tendenz zur Emotionslosigkeit in zwischenmenschlichen Beziehungen unserer Zeit vorwegnimmt."</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tip-box">
@@ -463,6 +506,69 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        // Globale Variable für den Toggle-All Status
+        let allExpanded = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion Funktionalität
+            const accordions = document.querySelectorAll('.accordion');
+            
+            accordions.forEach(function(accordion, index) {
+                accordion.addEventListener('click', function() {
+                    toggleAccordion(this);
+                });
+            });
+        });
+
+        function toggleAccordion(element) {
+            const panel = element.nextElementSibling;
+            
+            // Toggle active class für Button
+            element.classList.toggle('active');
+            
+            // Toggle show class für Panel
+            if (panel.classList.contains('show')) {
+                panel.classList.remove('show');
+            } else {
+                panel.classList.add('show');
+            }
+        }
+
+        function toggleAll() {
+            const accordions = document.querySelectorAll('.accordion');
+            const panels = document.querySelectorAll('.panel');
+            
+            allExpanded = !allExpanded;
+            
+            accordions.forEach(function(accordion) {
+                if (allExpanded) {
+                    accordion.classList.add('active');
+                } else {
+                    accordion.classList.remove('active');
+                }
+            });
+            
+            panels.forEach(function(panel) {
+                if (allExpanded) {
+                    panel.classList.add('show');
+                } else {
+                    panel.classList.remove('show');
+                }
+            });
+        }
+
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            if (solution) {
+                if (solution.classList.contains('show')) {
+                    solution.classList.remove('show');
+                } else {
+                    solution.classList.add('show');
+                }
+            }
+        }
+    </script>
 </body>
 </html>

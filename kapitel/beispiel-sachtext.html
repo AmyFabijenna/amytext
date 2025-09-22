@@ -71,82 +71,6 @@
             margin-bottom: 20px;
         }
 
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 4px solid #34495e;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-
-        .feature-card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .feature-card p {
-            font-size: 0.95em;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .feature-link {
-            display: inline-block;
-            background: #34495e;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: background 0.3s;
-        }
-
-        .feature-link:hover {
-            background: #2c3e50;
-        }
-
-        .progress-section {
-            background: #e8f4f8;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #3498db;
-        }
-
-        .tip-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .tip-box strong {
-            color: #856404;
-        }
-
-        .text-example {
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 20px;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
         .analysis-section {
             margin: 30px 0;
             padding: 20px;
@@ -166,7 +90,7 @@
             background-color: #34495e;
             color: white;
             cursor: pointer;
-            padding: 15px;
+            padding: 15px 20px;
             width: 100%;
             border: none;
             text-align: left;
@@ -210,12 +134,25 @@
             padding: 18px;
         }
 
+        .text-example {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
         .solution {
             background: #e8f5e9;
             padding: 15px;
             border-radius: 5px;
             margin: 15px 0;
             border-left: 4px solid #4caf50;
+            display: none;
+        }
+
+        .solution.active {
+            display: block;
         }
 
         .exercise {
@@ -225,37 +162,43 @@
             margin: 20px 0;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
         }
 
-        table, th, td {
-            border: 1px solid #ddd;
+        .tip-box strong {
+            color: #856404;
         }
 
-        th, td {
-            padding: 12px;
-            text-align: left;
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
         }
 
-        th {
-            background-color: #34495e;
+        .solution-btn {
+            background: #28a745;
             color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .solution-btn:hover {
+            background: #218838;
         }
 
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -296,8 +239,8 @@
                     </div>
                 </div>
 
-                <div class="accordion">
-                    Schritt 1: Einleitung und kurze Inhaltsangabe
+                <div class="accordion" onclick="toggleAccordion(this)">
+                    <span>Schritt 1: Einleitung und kurze Inhaltsangabe</span>
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="panel">
@@ -326,8 +269,8 @@
                     </div>
                 </div>
 
-                <div class="accordion">
-                    Schritt 2: Stilanalyse
+                <div class="accordion" onclick="toggleAccordion(this)">
+                    <span>Schritt 2: Stilanalyse</span>
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="panel">
@@ -367,8 +310,8 @@
                     </div>
                 </div>
 
-                <div class="accordion">
-                    Schritt 3: Bewertung und Ausblick/Schluss
+                <div class="accordion" onclick="toggleAccordion(this)">
+                    <span>Schritt 3: Bewertung und Ausblick/Schluss</span>
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="panel">
@@ -422,8 +365,8 @@
                         <li>Formuliere eine kritische Bewertung des Textausschnitts.</li>
                     </ol>
                     
-                    <div class="accordion">
-                        Lösungsvorschlag anzeigen
+                    <div class="accordion" onclick="toggleAccordion(this)">
+                        <span>Lösungsvorschlag anzeigen</span>
                         <span class="accordion-icon">+</span>
                     </div>
                     <div class="panel">
@@ -431,7 +374,7 @@
                             <h4>Lösungsvorschlag für die Übung</h4>
                             <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
                             
-                            <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionaler Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
+                            <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionale Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
                             
                             <p><strong>3. Bewertung:</strong> Der Textausschnitt bietet eine ausgewogene Perspektive auf ein komplexes Thema. Die Gegenüberstellung von Risiken und Chancen ist gelungen, allerdings bleiben die Aussagen recht allgemein. Konkrete Beispiele oder Studien würden die Argumentation stärken. Die Schlussforderung nach einer "menschlichen Gestaltung" ist appellativ, aber etwas vage formuliert.</p>
                         </div>
@@ -459,6 +402,17 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        function toggleAccordion(element) {
+            const panel = element.nextElementSibling;
+            const icon = element.querySelector('.accordion-icon');
+            
+            element.classList.toggle('active');
+            panel.classList.toggle('active');
+            
+            icon.textContent = icon.textContent === '+' ? '−' : '+';
+        }
+    </script>
 </body>
 </html>

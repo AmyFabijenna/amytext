@@ -61,25 +61,26 @@
         .epoche-card {
             background: white;
             border-radius: 10px;
-            padding: 25px;
+            padding: 0;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             margin-bottom: 25px;
             border-left: 4px solid #3498db;
+            overflow: hidden;
         }
 
         .epoche-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0;
             cursor: pointer;
-            padding: 10px;
+            padding: 25px;
             transition: background-color 0.3s;
+            background: white;
+            user-select: none;
         }
 
         .epoche-header:hover {
             background-color: #f5f5f5;
-            border-radius: 5px;
         }
 
         .epoche-header h3 {
@@ -87,14 +88,26 @@
             font-size: 1.3em;
         }
 
+        .epoche-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .epoche-card.active .epoche-icon {
+            transform: rotate(180deg);
+        }
+
         .epoche-content {
-            display: none;
-            margin-top: 15px;
-            padding: 10px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f9f9f9;
         }
 
         .epoche-content.active {
-            display: block;
+            max-height: 2000px;
+            padding: 25px;
         }
 
         .epoche-info {
@@ -127,6 +140,7 @@
             border-radius: 5px;
             margin: 15px 0;
             font-style: italic;
+            border-left: 3px solid #3498db;
         }
 
         .uebung-box {
@@ -134,6 +148,7 @@
             border-radius: 8px;
             padding: 20px;
             margin: 20px 0;
+            border-left: 4px solid #3498db;
         }
 
         .uebung-box h4 {
@@ -149,6 +164,11 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .loesung-button:hover {
+            background: #2c3e50;
         }
 
         .loesung {
@@ -157,6 +177,7 @@
             padding: 15px;
             border-radius: 5px;
             margin-top: 15px;
+            border-left: 3px solid #28a745;
         }
 
         .loesung.active {
@@ -168,6 +189,7 @@
             overflow-x: auto;
             margin: 30px 0;
             padding: 15px 0;
+            gap: 15px;
         }
 
         .timeline-item {
@@ -176,32 +198,22 @@
             background: white;
             border-radius: 8px;
             padding: 15px;
-            margin-right: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-align: center;
+            border-top: 3px solid #3498db;
         }
 
         .timeline-item h4 {
             color: #2c3e50;
             margin-bottom: 5px;
+            font-size: 1.1em;
         }
 
         .timeline-item p {
             font-size: 0.9em;
             color: #666;
         }
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
         @media (max-width: 768px) {
             .content-body {
                 padding: 20px;
@@ -209,6 +221,14 @@
 
             .epoche-info {
                 grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                justify-content: flex-start;
+            }
+
+            .timeline-item {
+                width: 180px;
             }
         }
     </style>
@@ -223,11 +243,11 @@
 
             <div class="content-body">
                 <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche('aufklaerung')">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Aufklärung (1720-1785)</h3>
-                        <span>▼</span>
+                        <span class="epoche-icon">▼</span>
                     </div>
-                    <div class="epoche-content" id="aufklaerung">
+                    <div class="epoche-content">
                         <div class="epoche-info">
                             <div>
                                 <div class="epoche-info-item"><strong>Zeitraum:</strong> 1720-1785</div>
@@ -272,11 +292,11 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche('sturm-und-drang')">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Sturm und Drang (1765-1785)</h3>
-                        <span>▼</span>
+                        <span class="epoche-icon">▼</span>
                     </div>
-                    <div class="epoche-content" id="sturm-und-drang">
+                    <div class="epoche-content">
                         <div class="epoche-info">
                             <div>
                                 <div class="epoche-info-item"><strong>Zeitraum:</strong> 1765-1785</div>
@@ -321,11 +341,11 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche('weimarer-klassik')">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Weimarer Klassik (1786-1805)</h3>
-                        <span>▼</span>
+                        <span class="epoche-icon">▼</span>
                     </div>
-                    <div class="epoche-content" id="weimarer-klassik">
+                    <div class="epoche-content">
                         <div class="epoche-info">
                             <div>
                                 <div class="epoche-info-item"><strong>Zeitraum:</strong> 1786-1805</div>
@@ -370,11 +390,11 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche('romantik')">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Romantik (1795-1835)</h3>
-                        <span>▼</span>
+                        <span class="epoche-icon">▼</span>
                     </div>
-                    <div class="epoche-content" id="romantik">
+                    <div class="epoche-content">
                         <div class="epoche-info">
                             <div>
                                 <div class="epoche-info-item"><strong>Zeitraum:</strong> 1795-1835</div>
@@ -419,11 +439,11 @@
                 </div>
 
                 <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche('realismus')">
+                    <div class="epoche-header" onclick="toggleEpoche(this)">
                         <h3>Realismus (1848-1890)</h3>
-                        <span>▼</span>
+                        <span class="epoche-icon">▼</span>
                     </div>
-                    <div class="epoche-content" id="realismus">
+                    <div class="epoche-content">
                         <div class="epoche-info">
                             <div>
                                 <div class="epoche-info-item"><strong>Zeitraum:</strong> 1848-1890</div>
@@ -504,7 +524,7 @@
                     <ol>
                         <li>"Die Natur allein ist unendlich reich, und sie allein bildet den großen Künstler."</li>
                         <li>"Der Mensch ist frei geschaffen, ist frei, und würd' er in Ketten geboren."</li>
-                        <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, что nicht notwendig geschehen müsste."</li>
+                        <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, was nicht notwendig geschehen müsste."</li>
                     </ol>
                     <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-1')">Lösung anzeigen</button>
                     <div class="loesung" id="epochen-uebung-1">
@@ -521,7 +541,7 @@
                     <h4>Übung: Epochenmerkmale erkennen</h4>
                     <p>Analysieren Sie den folgenden Textausschnitt und bestimmen Sie, aus welcher Literaturepoche er stammt. Begründen Sie Ihre Entscheidung mit mindestens drei Merkmalen:</p>
                     <div class="beispiel-text">
-                        <p>"Die Nacht war sternenklar und kalt. Ich stood am Fenster und blickte hinauf zu den unzähligen Funken, die am Firmament glitzerten. Eine tiefe Wehmut ergriff mich, eine Sehnsucht nach etwas, das ich nicht benennen konnte, das aber weit, weit entfernt war, jenseits dieser kalten, einsamen Nacht."</p>
+                        <p>"Die Nacht war sternenklar und kalt. Ich stand am Fenster und blickte hinauf zu den unzähligen Funken, die am Firmament glitzerten. Eine tiefe Wehmut ergriff mich, eine Sehnsucht nach etwas, das ich nicht benennen konnte, das aber weit, weit entfernt war, jenseits dieser kalten, einsamen Nacht."</p>
                     </div>
                     <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-2')">Lösung anzeigen</button>
                     <div class="loesung" id="epochen-uebung-2">
@@ -539,57 +559,23 @@
         </div>
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alle Accordion-Elemente finden und Event-Listener hinzufügen
-    const accordions = document.querySelectorAll('.accordion');
-    
-    accordions.forEach(function(accordion) {
-        accordion.addEventListener('click', function() {
-            // Active-Klasse für das Accordion togglen
-            this.classList.toggle('active');
+    <script>
+        function toggleEpoche(header) {
+            var card = header.parentElement;
+            var content = header.nextElementSibling;
             
-            // Panel finden und togglen
-            const panel = this.nextElementSibling;
-            if (panel) {
-                panel.classList.toggle('active');
+            card.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        function toggleLoesung(id) {
+            var element = document.getElementById(id);
+            if (element) {
+                element.classList.toggle('active');
             }
-        });
-    });
-});
+        }
 
-function toggleSolution(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        if (element.style.display === 'block') {
-            element.style.display = 'none';
-        } else {
-            element.style.display = 'block';
-        }
-    }
-}
-
-function toggleAll() {
-    const accordions = document.querySelectorAll('.accordion');
-    const panels = document.querySelectorAll('.panel');
-    const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
-    
-    accordions.forEach(function(acc) {
-        if (allOpen) {
-            acc.classList.remove('active');
-        } else {
-            acc.classList.add('active');
-        }
-    });
-    
-    panels.forEach(function(panel) {
-        if (allOpen) {
-            panel.classList.remove('active');
-        } else {
-            panel.classList.add('active');
-        }
-    });
-}
-</script>
+        console.log('Literarische Epochen Script loaded');
+    </script>
 </body>
 </html>

@@ -69,6 +69,11 @@
             border-bottom: 2px solid #3498db;
         }
 
+        .section h3 {
+            color: #34495e;
+            margin: 25px 0 15px;
+        }
+
         .subsection {
             background: #f8f9fa;
             border-radius: 10px;
@@ -83,18 +88,19 @@
         }
 
         .accordion {
-            background-color: #eee;
+            background: #eee;
             color: #444;
             cursor: pointer;
             padding: 18px;
             width: 100%;
-            border: none;
             text-align: left;
+            border: none;
             outline: none;
             font-size: 15px;
             transition: 0.4s;
             border-radius: 5px;
             margin-bottom: 10px;
+            position: relative;
         }
 
         .active, .accordion:hover {
@@ -113,7 +119,7 @@
             content: "\2212";
         }
 
-        .content {
+        .panel {
             padding: 0 18px;
             max-height: 0;
             overflow: hidden;
@@ -122,7 +128,7 @@
             border-radius: 0 0 5px 5px;
         }
 
-        .content.active {
+        .panel.show {
             max-height: 1000px;
             padding: 18px;
         }
@@ -132,7 +138,7 @@
             border-left: 4px solid #3498db;
             padding: 15px;
             margin: 15px 0;
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
         .exercise-box {
@@ -239,7 +245,7 @@
                     <h2 id="sprachliche-mittel">Formulierungen für sprachliche Mittel</h2>
                     
                     <button class="accordion">Metaphern und Vergleiche</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Metaphern und Vergleiche sind zentrale Stilmittel, die Texte bildhaft und anschaulich machen.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -252,12 +258,12 @@
                         </ul>
                         
                         <div class="example-box">
-                            <strong>Beispiel:</strong> "Die Metapher 'Die Digitalisierung hat wie ein Tsunami unsere Lebensrealität überschwemmt' veranschaulicht die überwältigende und unaufhaltsame Kraft der digitale Entwicklung."
+                            <strong>Beispiel:</strong> "Die Metapher 'Die Digitalisierung hat wie ein Tsunami unsere Lebensrealität überschwemmt' veranschaulicht die überwältigende und unaufhaltsame Kraft der digitalen Entwicklung."
                         </div>
                     </div>
                     
                     <button class="accordion">Wiederholungen und Parallelismen</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Wiederholungen und Parallelismen strukturieren Texte und verstärken Aussagen.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -274,7 +280,7 @@
                     </div>
                     
                     <button class="accordion">Rhetorische Fragen</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Rhetorische Fragen zielen nicht auf eine Antwort, sondern auf die Reflexion der Lesenden.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -295,7 +301,7 @@
                     <h2 id="argumentationsanalyse">Formulierungen für die Argumentationsanalyse</h2>
                     
                     <button class="accordion">Argumentationsstruktur beschreiben</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Die Analyse der Argumentationsstruktur untersucht den Aufbau und die Logik der Argumentation.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -313,7 +319,7 @@
                     </div>
                     
                     <button class="accordion">Argumentationstypen benennen</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Argumente lassen sich verschiedenen Typen zuordnen, die unterschiedlich überzeugend wirken.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -331,7 +337,7 @@
                     </div>
                     
                     <button class="accordion">Argumentationsmuster erkennen</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Argumentationsmuster zeigen typische Strategien der Überzeugungsarbeit.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -344,7 +350,7 @@
                         </ul>
                         
                         <div class="example-box">
-                            <strong>Beispiel:</strong> "Der Autor verwendet ein Entweder-Oder-Schema ('Entweder wir investieren jetzt massiv... oder der Verkehrskollaps...'), das die Komplexität das Problems vereinfacht, aber rhetorisch wirksam ist."
+                            <strong>Beispiel:</strong> "Der Autor verwendet ein Entweder-Oder-Schema ('Entweder wir investieren jetzt massiv... oder der Verkehrskollaps...'), das die Komplexität des Problems vereinfacht, aber rhetorisch wirksam ist."
                         </div>
                     </div>
                 </div>
@@ -353,7 +359,7 @@
                     <h2 id="textstruktur">Formulierungen für Textstruktur und Komposition</h2>
                     
                     <button class="accordion">Textaufbau beschreiben</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Die Analyse des Textaufbaus untersucht die Gliederung und Anordnung der Textteile.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -371,7 +377,7 @@
                     </div>
                     
                     <button class="accordion">Übergänge und Verknüpfungen</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Übergänge und Verknüpfungen sorgen für Kohärenz und Verständlichkeit.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -393,7 +399,7 @@
                     <h2 id="wirkungsanalyse">Formulierungen für die Wirkungsanalyse</h2>
                     
                     <button class="accordion">Wirkung auf Lesende</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Die Wirkungsanalyse untersucht, wie der Text auf die Rezipienten wirkt.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -411,7 +417,7 @@
                     </div>
                     
                     <button class="accordion">Intentionale Wirkung</button>
-                    <div class="content">
+                    <div class="panel">
                         <p>Die intentionale Wirkung beschreibt die beabsichtigte Wirkung des Textes.</p>
                         
                         <h4>Formulierungshilfen:</h4>
@@ -424,7 +430,7 @@
                         </ul>
                         
                         <div class="example-box">
-                            <strong>Beispiel:</strong> "Die Intention der Autorin scheint zu sein, die Lesenden für die negativen Auswirkungen permanenter digitale Erreichbarkeit zu sensibilisieren und zu einem bewussteren Umgang mit digitalen Medien anzuregen."
+                            <strong>Beispiel:</strong> "Die Intention der Autorin scheint zu sein, die Lesenden für die negativen Auswirkungen permanenter digitaler Erreichbarkeit zu sensibilisieren und zu einem bewussteren Umgang mit digitalen Medien anzuregen."
                         </div>
                     </div>
                 </div>
@@ -447,33 +453,150 @@
                     
                     <div class="exercise-box">
                         <h3>Übung 2: Wirkungsanalyse</h3>
-                        <p>Analysiere die Wirkung der folgenden Textstelle:</p>
-                        <p><em>"Schweigen. Warten. Hoffen. Mehr konnten sie nicht tun."</em></p>
+                        <p>Analysiere die Wirkung der sprachlichen Mittel in den folgenden Textauszügen:</p>
+                        
+                        <div class="example-box">
+                            <p><strong>Textauszug 1:</strong> "Der Wind heulte um die Ecken des alten Hauses. Die Fensterläden klapperten unruhig, als wollten sie eine Warnung aussprechen. Im Kamin knisterte das letzte Holzscheit, und die Schatten tanzten an den Wänden wie ruhelose Geister."</p>
+                        </div>
+                        
+                        <div class="example-box">
+                            <p><strong>Textauszug 2:</strong> "Warum schweigen wir? Warum schauen wir weg? Warum akzeptieren wir das Unakzeptable? Es ist an der Zeit, unsere Stimme zu erheben, unsere Augen zu öffnen und für das einzustehen, was richtig ist!"</p>
+                        </div>
                         
                         <button class="toggle-solution" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
                         
                         <div id="solution2" class="solution-box">
+                            <h4>Lösung:</h4>
+                            <p><strong>Textauszug 1:</strong></p>
+                            <ul>
+                                <li>Personifikation ("Wind heulte", "Fensterläden klapperten", "Schatten tanzten") - erzeugt eine unheimliche, bedrohliche Atmosphäre</li>
+                                <li>Vergleich ("wie ruhelose Geister") - verstärkt das Unheimliche, Unruhige</li>
+                                <li>Emotionale Verben ("heulte", "klapperten", "knistern") - erzeugen akustische Bilder und Spannung</li>
+                                <li>Insgesamt: Schafft eine düstere, unheimliche Stimmung</li>
+                            </ul>
+                            
+                            <p><strong>Textauszug 2:</strong></p>
+                            <ul>
+                                <li>Rhetorische Fragen ("Warum schweigen wir?") - appellieren an den Leser, provozieren Nachdenken</li>
+                                <li>Anapher ("Warum... Warum... Warum") - verstärkt den Appell, erzeugt Rhythmus</li>
+                                <li>Metaphern ("Stimme erheben", "Augen öffnen") - machen abstrakte Konzepte bildhaft</li>
+                                <li>Klimax ("schweigen - wegschauen - akzeptieren") - steigert die Intensität der Kritik</li>
+                                <li>Insgesamt: Appellativ, aufrüttelnd, motivierend</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h3>Übung 3: Stilmittelanalyse</h3>
+                        <p>Analysiere die Wirkung der folgenden Textstelle:</p>
+                        <p><em>"Schweigen. Warten. Hoffen. Mehr konnten sie nicht tun."</em></p>
+                        
+                        <button class="toggle-solution" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        
+                        <div id="solution3" class="solution-box">
                             <h4>Musterlösung:</h4>
                             <p>"Die Ellipsen (verkürzte Sätze ohne Verb) erzeugen einen abgehackten, reduzierten Sprachstil. Die Parataxe (Aneinanderreihung kurzer, gleichrangiger Sätze) spiegelt die beschriebene Situation wider: eingeschränkte Handlungsmöglichkeiten, Passivität, Warten. Der Stil vermittelt Einsamkeit und Ausgeliefertsein. Der abschließende vollständige Satz wirkt wie ein Kommentar, der die Hoffnungslosigkeit der Situation unterstreicht."</p>
                         </div>
                     </div>
                     
                     <div class="exercise-box">
-                        <h3>Übung 3: Argumentationsanalyse</h3>
+                        <h3>Übung 4: Argumentationsanalyse</h3>
                         <p>Analysiere die Argumentationsstruktur des folgenden Textausschnitts:</p>
                         <p><em>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</em></p>
                         
-                        <button class="toggle-solution" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        <button class="toggle-solution" onclick="toggleSolution('solution4')">Lösung anzeigen</button>
                         
-                        <div id="solution3" class="solution-box">
+                        <div id="solution4" class="solution-box">
                             <h4>Musterlösung:</h4>
                             <p>"Der Text beginnt mit einer klaren Hauptthese: 'Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln.' Diese These wird durch zwei Argumenttypen untermauert: Ein wissenschaftliches Autoritätsargument ('Laut Weltklimarat...') und ein Beispielargument mit konkreten Folgen ('schmelzende Polkappen, zunehmende Extremwetterereignisse...'). Die Argumentation folgt einer kausalen Struktur: Ausgehend von der Ursache (Temperaturanstieg) werden die Folgen beschrieben, was die Dringlichkeit der Forderung nach Handeln unterstreicht."</p>
                         </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h3>Übung 5: Eigene Textanalyse</h3>
+                        <p>Analysiere die sprachlichen Mittel im folgenden Textauszug und beschreibe ihre Wirkung:</p>
+                        
+                        <div class="example-box">
+                            <p>"In einer Welt, in der Authentizität zunehmend an Wert gewinnt, erscheint das Streben nach Perfektion paradox. Täglich werden wir mit makellosen Bildern in sozialen Medien konfrontiert – perfekte Körper, perfekte Häuser, perfekte Leben. Doch hinter dieser glänzenden Fassade verbirgt sich oft eine tiefe Unsicherheit. Die Kluft zwischen Schein und Sein wächst, während die digitalen Filter immer ausgefeilter werden. Wir inszenieren eine Version unserer selbst, die kaum noch Berührungspunkte mit der Realität hat."</p>
+                        </div>
+                        
+                        <button class="toggle-solution" onclick="toggleSolution('solution5')">Musterlösung anzeigen</button>
+                        
+                        <div id="solution5" class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            <p><strong>Sprachliche Mittel und ihre Wirkung:</strong></p>
+                            <ul>
+                                <li><strong>Antithese:</strong> "Authentizität" vs. "Perfektion", "Schein" vs. "Sein" - verdeutlicht den zentralen Gegensatz des Textes</li>
+                                <li><strong>Wiederholung:</strong> "perfekte Körper, perfekte Häuser, perfekte Leben" - unterstreicht die Allgegenwart des Perfektionsstrebens, wirkt übertrieben und kritisch</li>
+                                <li><strong>Metapher:</strong> "glänzende Fassade" - veranschaulicht die Oberflächlichkeit und den Trugschluss der perfekten Darstellung</li>
+                                <li><strong>Metapher:</strong> "Kluft zwischen Schein und Sein" - visualisiert die zunehmende Diskrepanz zwischen Darstellung und Realität</li>
+                                <li><strong>Personifikation:</strong> "digitale Filter werden ausgefeilter" - verleiht der Technologie eine aktive, fast bedrohliche Rolle</li>
+                                <li><strong>Wortfeld der Inszenierung:</strong> "makellose Bilder", "Fassade", "inszenieren" - betont die Künstlichkeit der Darstellung</li>
+                            </ul>
+                            <p><strong>Gesamtwirkung:</strong> Der Text kritisiert durch den gezielten Einsatz sprachlicher Mittel die Diskrepanz zwischen authentischem Sein und inszeniertem Schein in der digitalen Welt. Die antithetische Struktur und die metaphorische Sprache machen das Problem anschaulich und regen zur Reflexion an.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Tipps für die Sprachanalyse in der Matura</h2>
+                    
+                    <div class="subsection">
+                        <h4>Vorgehensweise bei der Sprachanalyse</h4>
+                        <ol>
+                            <li><strong>Erkennen:</strong> Identifiziere auffällige sprachliche Mittel</li>
+                            <li><strong>Benennen:</strong> Verwende den korrekten Fachbegriff</li>
+                            <li><strong>Zitieren:</strong> Belege mit konkreten Textstellen</li>
+                            <li><strong>Wirkung beschreiben:</strong> Erkläre, welche Funktion das Stilmittel im Text hat</li>
+                            <li><strong>Zusammenhang herstellen:</strong> Zeige, wie die sprachliche Gestaltung die Gesamtaussage unterstützt</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4>Häufige Fehler vermeiden</h4>
+                        <ul>
+                            <li>Stilmittel nur aufzählen ohne Wirkungsbeschreibung</li>
+                            <li>Unpräzise Formulierungen ("der Text ist schön geschrieben")</li>
+                            <li>Keine Textbelege für die Analyse</li>
+                            <li>Wirkungsbeschreibung ohne Bezug zum Textzusammenhang</li>
+                            <li>Verwechslung von ähnlichen Stilmitteln (z.B. Metapher und Vergleich)</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion Funktionalität
+            const accordions = document.getElementsByClassName("accordion");
+            
+            for (let i = 0; i < accordions.length; i++) {
+                accordions[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    const panel = this.nextElementSibling;
+                    
+                    if (panel.classList.contains("show")) {
+                        panel.classList.remove("show");
+                    } else {
+                        panel.classList.add("show");
+                    }
+                });
+            }
+        });
+
+        // Solution Toggle Funktionalität
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            if (solution) {
+                if (solution.classList.contains("show")) {
+                    solution.classList.remove("show");
+                } else {
+                    solution.classList.add("show");
+                }
+            }
+        }
+    </script>
 </body>
 </html>
