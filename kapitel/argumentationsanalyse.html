@@ -417,7 +417,7 @@ Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
 </div>
 
 <script>
-// EINFACHSTER MÖGLICHER CODE
+// Hauptfunktion für Kapitel
 function toggleKapitel(nummer) {
     var inhalt = document.getElementById('kapitel-' + nummer);
     if (inhalt.classList.contains('offen')) {
@@ -427,6 +427,12 @@ function toggleKapitel(nummer) {
     }
 }
 
+// Fallback für toggleAccordion falls benötigt
+function toggleAccordion(nummer) {
+    toggleKapitel(nummer);
+}
+
+// Funktion für Lösungen
 function toggleSolution(id) {
     var solution = document.getElementById(id);
     if (solution.style.display === 'block') {
