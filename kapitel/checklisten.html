@@ -416,41 +416,6 @@
     </div>
 
     <script>
-        function toggleChecklist(element) {
-            const content = element.nextElementSibling;
-            element.classList.toggle('active');
-            content.classList.toggle('active');
-        }
-
-        function toggleAll() {
-            const headers = document.querySelectorAll('.checklist-header');
-            const contents = document.querySelectorAll('.checklist-content');
-            
-            const allActive = Array.from(contents).every(content => content.classList.contains('active'));
-            
-            headers.forEach(header => {
-                if (allActive) {
-                    header.classList.remove('active');
-                } else {
-                    header.classList.add('active');
-                }
-            });
-            
-            contents.forEach(content => {
-                if (allActive) {
-                    content.classList.remove('active');
-                } else {
-                    content.classList.add('active');
-                }
-            });
-        }
-
-        function toggleSolution(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.classList.toggle('active');
-            }
-        }
     </script>
 </body>
 </html>

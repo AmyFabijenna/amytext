@@ -455,31 +455,6 @@
     </main>
 
     <script>
-        // Accordion-Funktionalität
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', function() {
-                    // Toggle active class for this header
-                    this.classList.toggle('active');
-                    
-                    // Get the next element (the panel)
-                    const panel = this.nextElementSibling;
-                    
-                    // Toggle the panel
-                    panel.classList.toggle('active');
-                    
-                    // Close other open accordions (optional)
-                    accordionHeaders.forEach(otherHeader => {
-                        if (otherHeader !== header) {
-                            otherHeader.classList.remove('active');
-                            otherHeader.nextElementSibling.classList.remove('active');
-                        }
-                    });
-                });
-            });
-        });
     </script>
 </body>
 </html>

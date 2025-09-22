@@ -543,51 +543,6 @@
     </main>
 
     <script>
-        // Alle fehlenden JavaScript-Funktionen
-        function toggleAccordion(element) {
-            element.classList.toggle('active');
-            const panel = element.nextElementSibling;
-            panel.classList.toggle('active');
-        }
-
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            solution.classList.toggle('active');
-        }
-
-        function toggleAll() {
-            const allPanels = document.querySelectorAll('.panel, .solution');
-            const allButtons = document.querySelectorAll('.accordion');
-            
-            const anyOpen = Array.from(allPanels).some(panel => panel.classList.contains('active'));
-            
-            allPanels.forEach(panel => {
-                if (anyOpen) {
-                    panel.classList.remove('active');
-                } else {
-                    panel.classList.add('active');
-                }
-            });
-            
-            allButtons.forEach(button => {
-                if (anyOpen) {
-                    button.classList.remove('active');
-                } else {
-                    button.classList.add('active');
-                }
-            });
-        }
-
-        // Event-Listener für bessere Browser-Kompatibilität
-        document.addEventListener('DOMContentLoaded', function() {
-            // Zusätzliche Sicherheit: Event-Listener für Touch-Geräte
-            document.querySelectorAll('.accordion').forEach(button => {
-                button.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    toggleAccordion(this);
-                });
-            });
-        });
     </script>
 </body>
 </html>

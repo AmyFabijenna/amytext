@@ -331,29 +331,6 @@
     </main>
 
     <script>
-        // Funktion zum Ein-/Ausblenden einzelner Lösungen
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            solution.classList.toggle('show');
-        }
-
-        // Funktion zum Ein-/Ausblenden aller Lösungen
-        function toggleAllSolutions() {
-            const solutions = document.querySelectorAll('.solution-content');
-            const allHidden = Array.from(solutions).every(solution => !solution.classList.contains('show'));
-            
-            solutions.forEach(solution => {
-                if (allHidden) {
-                    solution.classList.add('show');
-                } else {
-                    solution.classList.remove('show');
-                }
-            });
-            
-            // Button-Text aktualisieren
-            const button = document.querySelector('.btn-toggle-all');
-            button.textContent = allHidden ? 'Alle Lösungen schließen' : 'Alle Lösungen öffnen';
-        }
     </script>
 </body>
 </html>

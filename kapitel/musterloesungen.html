@@ -345,45 +345,6 @@
     </main>
 
     <script>
-        // Funktion zum Umschalten einzelner Lösungen
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            solution.classList.toggle('show');
-            
-            // Button-Text ändern
-            const button = solution.previousElementSibling;
-            if (solution.classList.contains('show')) {
-                button.textContent = 'Lösung ausblenden';
-            } else {
-                button.textContent = 'Lösung anzeigen';
-            }
-        }
-        
-        // Funktion zum Umschalten aller Lösungen
-        function toggleAllSolutions() {
-            const solutions = document.querySelectorAll('.solution-content');
-            const allVisible = Array.from(solutions).every(solution => solution.classList.contains('show'));
-            
-            solutions.forEach(solution => {
-                if (allVisible) {
-                    solution.classList.remove('show');
-                    const button = solution.previousElementSibling;
-                    button.textContent = 'Lösung anzeigen';
-                } else {
-                    solution.classList.add('show');
-                    const button = solution.previousElementSibling;
-                    button.textContent = 'Lösung ausblenden';
-                }
-            });
-            
-            // Button-Text ändern
-            const toggleButton = document.querySelector('.btn-toggle-all');
-            if (allVisible) {
-                toggleButton.textContent = 'Alle Lösungen öffnen';
-            } else {
-                toggleButton.textContent = 'Alle Lösungen schließen';
-            }
-        }
     </script>
 </body>
 </html>

@@ -408,50 +408,6 @@
     </div>
 
     <script>
-        // Funktion zum Öffnen/Schließen der Akkordeons
-        document.addEventListener('DOMContentLoaded', function() {
-            // Akkordeon-Funktionalität
-            const accordions = document.querySelectorAll('.accordion');
-            
-            accordions.forEach(accordion => {
-                accordion.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    const panel = this.nextElementSibling;
-                    const icon = this.querySelector('.accordion-icon');
-                    
-                    if (panel.style.maxHeight) {
-                        panel.style.maxHeight = null;
-                        panel.classList.remove('active');
-                        icon.textContent = '+';
-                    } else {
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                        panel.classList.add('active');
-                        icon.textContent = '−';
-                    }
-                });
-            });
-            
-            // Lösung anzeigen/verbergen
-            const solutionToggles = document.querySelectorAll('.solution-toggle');
-            
-            solutionToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const solution = this.nextElementSibling;
-                    solution.classList.toggle('active');
-                    
-                    if (solution.classList.contains('active')) {
-                        this.textContent = 'Lösung ausblenden';
-                    } else {
-                        this.textContent = 'Lösung anzeigen';
-                    }
-                });
-            });
-            
-            // Standardmäßig das erste Akkordeon öffnen
-            if (accordions.length > 0) {
-                accordions[0].click();
-            }
-        });
     </script>
 </body>
 </html>

@@ -989,64 +989,6 @@
     </div>
 
     <script>
-        // Accordion-Funktionalität
-        document.addEventListener('DOMContentLoaded', function() {
-            // Accordion-Buttons
-            const accordions = document.querySelectorAll('.accordion');
-            
-            accordions.forEach(accordion => {
-                accordion.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    const panel = this.nextElementSibling;
-                    
-                    if (panel.classList.contains('active')) {
-                        panel.classList.remove('active');
-                    } else {
-                        panel.classList.add('active');
-                    }
-                });
-            });
-            
-            // "Alle Bereiche aufklappen"-Button
-            const expandAllBtn = document.getElementById('expand-all-btn');
-            let allExpanded = false;
-            
-            expandAllBtn.addEventListener('click', function() {
-                allExpanded = !allExpanded;
-                
-                accordions.forEach(accordion => {
-                    const panel = accordion.nextElementSibling;
-                    
-                    if (allExpanded) {
-                        accordion.classList.add('active');
-                        panel.classList.add('active');
-                    } else {
-                        accordion.classList.remove('active');
-                        panel.classList.remove('active');
-                    }
-                });
-                
-                this.textContent = allExpanded ? 'Alle Bereiche zuklappen' : 'Alle Bereiche aufklappen';
-            });
-            
-            // Lösungstoggle-Buttons
-            const solutionToggles = document.querySelectorAll('.solution-toggle');
-            
-            solutionToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const solution = document.getElementById(targetId);
-                    
-                    if (solution.classList.contains('active')) {
-                        solution.classList.remove('active');
-                        this.textContent = this.textContent.replace('Verbergen', 'Anzeigen');
-                    } else {
-                        solution.classList.add('active');
-                        this.textContent = this.textContent.replace('Anzeigen', 'Verbergen');
-                    }
-                });
-            });
-        });
     </script>
 </body>
 </html>

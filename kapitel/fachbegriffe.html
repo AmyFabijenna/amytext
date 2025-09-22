@@ -568,41 +568,6 @@
     </main>
 
     <script>
-        function toggleAccordion(element) {
-            const panel = element.nextElementSibling;
-            element.classList.toggle('active');
-            panel.classList.toggle('active');
-        }
-
-        function toggleAll() {
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            const panels = document.querySelectorAll('.panel');
-            
-            const allActive = Array.from(panels).every(panel => panel.classList.contains('active'));
-            
-            accordionHeaders.forEach(header => {
-                if (allActive) {
-                    header.classList.remove('active');
-                } else {
-                    header.classList.add('active');
-                }
-            });
-            
-            panels.forEach(panel => {
-                if (allActive) {
-                    panel.classList.remove('active');
-                } else {
-                    panel.classList.add('active');
-                }
-            });
-        }
-
-        function toggleSolution(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.classList.toggle('active');
-            }
-        }
     </script>
 </body>
 </html>

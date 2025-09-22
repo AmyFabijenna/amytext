@@ -599,47 +599,6 @@
     </main>
 
     <script>
-        // JavaScript für die Accordion-Funktionalität
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordions = document.getElementsByClassName('accordion');
-            
-            for (let i = 0; i < accordions.length; i++) {
-                accordions[i].addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    const panel = this.nextElementSibling;
-                    
-                    if (panel.classList.contains('active')) {
-                        panel.classList.remove('active');
-                    } else {
-                        // Schließe alle anderen Panels
-                        const allPanels = document.getElementsByClassName('panel');
-                        for (let j = 0; j < allPanels.length; j++) {
-                            allPanels[j].classList.remove('active');
-                        }
-                        
-                        // Entferne active Klasse von allen Accordions
-                        const allAccordions = document.getElementsByClassName('accordion');
-                        for (let j = 0; j < allAccordions.length; j++) {
-                            allAccordions[j].classList.remove('active');
-                        }
-                        
-                        // Öffne das aktuelle Panel
-                        this.classList.add('active');
-                        panel.classList.add('active');
-                    }
-                });
-            }
-            
-            // Funktion für die Lösungsbuttons
-            window.toggleSolution = function(solutionId) {
-                const solutionBox = document.getElementById(solutionId);
-                if (solutionBox.style.display === 'block') {
-                    solutionBox.style.display = 'none';
-                } else {
-                    solutionBox.style.display = 'block';
-                }
-            };
-        });
     </script>
 </body>
 </html>

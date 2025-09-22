@@ -566,47 +566,6 @@
     </div>
 
     <script>
-        // Funktion für das Öffnen und Schließen der Accordions
-        function toggleAccordion(element) {
-            const accordion = element.parentElement;
-            const panel = accordion.querySelector('.panel');
-            
-            // Schließe alle anderen Accordions
-            const allAccordions = document.querySelectorAll('.accordion');
-            allAccordions.forEach(acc => {
-                if (acc !== accordion) {
-                    acc.classList.remove('active');
-                    acc.querySelector('.panel').classList.remove('active');
-                }
-            });
-            
-            // Öffne/Schließe das aktuelle Accordion
-            accordion.classList.toggle('active');
-            panel.classList.toggle('active');
-        }
-        
-        // Funktion für das Anzeigen/Ausblenden der Lösungen
-        function toggleSolution(id) {
-            const solution = document.getElementById(id);
-            solution.classList.toggle('active');
-            
-            // Ändere den Text des Buttons
-            const button = solution.previousElementSibling;
-            if (solution.classList.contains('active')) {
-                button.textContent = 'Lösung ausblenden';
-            } else {
-                button.textContent = 'Lösung anzeigen';
-            }
-        }
-        
-        // Schließe alle Accordions beim Laden der Seite
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordions = document.querySelectorAll('.accordion');
-            accordions.forEach(accordion => {
-                accordion.classList.remove('active');
-                accordion.querySelector('.panel').classList.remove('active');
-            });
-        });
     </script>
 </body>
 </html>
