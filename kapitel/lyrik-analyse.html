@@ -525,46 +525,45 @@
     </main>
 
     <script>
-        // Globale Variable für Toggle-All Status
-        let allExpanded = false;
-
         document.addEventListener('DOMContentLoaded', function() {
-            // Accordion Funktionalität
-            const accordions = document.querySelectorAll('.accordion-header');
+            // Accordion Funktionalität - korrigierte Version
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
             
-            accordions.forEach(function(accordion) {
-                accordion.addEventListener('click', function() {
-                    toggleAccordion(this);
+            accordionHeaders.forEach(function(header) {
+                header.addEventListener('click', function() {
+                    const accordion = this.parentElement;
+                    const panel = this.nextElementSibling;
+                    const icon = this.querySelector('.accordion-icon');
+                    
+                    // Schließe alle anderen Accordions
+                    document.querySelectorAll('.accordion').forEach(function(otherAccordion) {
+                        if (otherAccordion !== accordion) {
+                            otherAccordion.classList.remove('active');
+                            const otherPanel = otherAccordion.querySelector('.panel');
+                            const otherIcon = otherAccordion.querySelector('.accordion-icon');
+                            if (otherPanel) otherPanel.classList.remove('active');
+                            if (otherIcon) otherIcon.textContent = '+';
+                        }
+                    });
+                    
+                    // Toggle aktuelles Accordion
+                    accordion.classList.toggle('active');
+                    panel.classList.toggle('active');
+                    
+                    // Icon aktualisieren
+                    if (panel.classList.contains('active')) {
+                        icon.textContent = '−';
+                    } else {
+                        icon.textContent = '+';
+                    }
                 });
             });
         });
 
-        function toggleAccordion(element) {
-            const accordion = element.parentElement;
-            const panel = element.nextElementSibling;
-            const icon = element.querySelector('.accordion-icon');
-            
-            // Toggle active class
-            accordion.classList.toggle('active');
-            
-            // Toggle panel
-            if (panel.classList.contains('active')) {
-                panel.classList.remove('active');
-                icon.textContent = '+';
-            } else {
-                panel.classList.add('active');
-                icon.textContent = '−';
-            }
-        }
-
         function toggleSolution(solutionId) {
             const solution = document.getElementById(solutionId);
             if (solution) {
-                if (solution.classList.contains('show')) {
-                    solution.classList.remove('show');
-                } else {
-                    solution.classList.add('show');
-                }
+                solution.classList.toggle('show');
             }
         }
     </script>

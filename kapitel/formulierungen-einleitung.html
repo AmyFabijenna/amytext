@@ -246,11 +246,13 @@
             margin-bottom: 10px;
             overflow: hidden;
             transition: all 0.3s ease;
+            max-height: 0;
         }
 
         .panel.show {
             display: block;
             padding: 18px;
+            max-height: 1000px;
             animation: slideDown 0.3s ease;
         }
 
@@ -516,6 +518,10 @@
             const accordions = document.querySelectorAll('.accordion');
             
             accordions.forEach(function(accordion, index) {
+                // Setze initialen Zustand für alle Panels (geschlossen)
+                const panel = accordion.nextElementSibling;
+                panel.style.maxHeight = '0';
+                
                 accordion.addEventListener('click', function() {
                     toggleAccordion(this);
                 });
@@ -531,8 +537,10 @@
             // Toggle show class für Panel
             if (panel.classList.contains('show')) {
                 panel.classList.remove('show');
+                panel.style.maxHeight = '0';
             } else {
                 panel.classList.add('show');
+                panel.style.maxHeight = panel.scrollHeight + 'px';
             }
         }
 
@@ -553,8 +561,10 @@
             panels.forEach(function(panel) {
                 if (allExpanded) {
                     panel.classList.add('show');
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
                 } else {
                     panel.classList.remove('show');
+                    panel.style.maxHeight = '0';
                 }
             });
         }
