@@ -119,6 +119,7 @@
             font-weight: bold;
             position: relative;
             display: block;
+            transition: background-color 0.3s;
         }
 
         .accordion:hover {
@@ -140,15 +141,18 @@
         }
 
         .panel {
-            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
             background-color: #f9f9f9;
             border-radius: 0 0 5px 5px;
             margin-bottom: 10px;
         }
 
         .panel.active {
-            display: block;
+            max-height: 2000px;
             padding: 18px;
+            transition: max-height 0.5s ease-in;
         }
 
         .exercise {
@@ -168,7 +172,14 @@
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
-            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .solution.active {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
         }
 
         .solution h4 {
@@ -530,6 +541,53 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        // Alle fehlenden JavaScript-Funktionen
+        function toggleAccordion(element) {
+            element.classList.toggle('active');
+            const panel = element.nextElementSibling;
+            panel.classList.toggle('active');
+        }
+
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('active');
+        }
+
+        function toggleAll() {
+            const allPanels = document.querySelectorAll('.panel, .solution');
+            const allButtons = document.querySelectorAll('.accordion');
+            
+            const anyOpen = Array.from(allPanels).some(panel => panel.classList.contains('active'));
+            
+            allPanels.forEach(panel => {
+                if (anyOpen) {
+                    panel.classList.remove('active');
+                } else {
+                    panel.classList.add('active');
+                }
+            });
+            
+            allButtons.forEach(button => {
+                if (anyOpen) {
+                    button.classList.remove('active');
+                } else {
+                    button.classList.add('active');
+                }
+            });
+        }
+
+        // Event-Listener für bessere Browser-Kompatibilität
+        document.addEventListener('DOMContentLoaded', function() {
+            // Zusätzliche Sicherheit: Event-Listener für Touch-Geräte
+            document.querySelectorAll('.accordion').forEach(button => {
+                button.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    toggleAccordion(this);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

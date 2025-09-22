@@ -409,7 +409,7 @@
                 </ol>
             </div>
 
-            <button class="expand-all-btn" onclick="toggleAll()">Alle Bereiche aufklappen</button>
+            <button class="expand-all-btn" id="expand-all-btn">Alle Bereiche aufklappen</button>
 
             <!-- Verstehen des Textes -->
             <button class="accordion" id="verstehen">1. Verstehen des Textes</button>
@@ -477,7 +477,7 @@
                         <div class="example-box">
                             <p><em>"Die Digitalisierung hat unser Leben grundlegend verändert. Wo früher persönliche Gespräche den Alltag prägten, dominieren heute digitale Nachrichten unsere Kommunikation. Diese Entwicklung bringt sowohl Chancen als auch Risiken mit sich. Einerseits ermöglicht sie uns globale Vernetzung, andererseits droht sie, unsere sozialen Fähigkeiten zu verkümmern."</em></p>
                         </div>
-                        <button class="solution-toggle" onclick="toggleSolution('solution-1')">Lösung anzeigen</button>
+                        <button class="solution-toggle" data-target="solution-1">Lösung anzeigen</button>
                         <div class="solution" id="solution-1">
                             <strong>Beispielhafte Markierungen:</strong><br>
                             <span style="color: #e74c3c;"><strong>Rot:</strong></span> "Die Digitalisierung hat unser Leben grundlegend verändert" (Hauptthese)<br>
@@ -582,7 +582,7 @@
                         <div class="example-box">
                             <p><em>"Klimawandel ist real und menschengemacht. Wissenschaftliche Studien belegen eindeutig den Zusammenhang zwischen CO₂-Emissionen und der Erderwärmung. Die Folgen sind bereits spürbar: Extremwetter, schmelzende Gletscher und steigende Meeresspiegel. Dennoch zögern viele Regierungen bei konsequenten Maßnahmen. Die Zeit für halbherzige Kompromisse ist vorbei - wir brauchen jetzt mutiges politisches Handeln."</em></p>
                         </div>
-                        <button class="solution-toggle" onclick="toggleSolution('solution-2')">Lösung anzeigen</button>
+                        <button class="solution-toggle" data-target="solution-2">Lösung anzeigen</button>
                         <div class="solution" id="solution-2">
                             <strong>Textaufbau-Analyse:</strong><br>
                             <strong>Einleitung/These:</strong> "Klimawandel ist real und menschengemacht"<br>
@@ -694,7 +694,7 @@
                             <em>"Wieder einmal stehen wir vor den Scherben einer gescheiterten Bildungsreform. Die Verantwortlichen werden wie üblich beteuern, dass alles ganz anders gemeint war. Währenddessen sitzen Schüler in überfüllten Klassenzimmern und fragen sich, ob das wirklich die Zukunft sein soll."</em>
                         </div>
                         
-                        <button class="solution-toggle" onclick="toggleSolution('solution-3a')">Lösung Text A</button>
+                        <button class="solution-toggle" data-target="solution-3a">Lösung Text A</button>
                         <div class="solution" id="solution-3a">
                             <strong>Textsorte:</strong> Kommentar/Glosse<br>
                             <strong>Begründung:</strong> Ironischer Ton, kritische Haltung, wertende Sprache ("wieder einmal", "wie üblich"), subjektive Bewertung der Bildungsreform
@@ -705,7 +705,7 @@
                             <em>"Am Morgen des 15. März betrat ich das verlassene Fabrikgelände. Der Wind pfiff durch zerbrochene Fensterscheiben, während Unkraut durch Risse im Asphalt wuchs. Hier arbeiteten einst 2000 Menschen. Heute erinnern nur noch rostende Maschinen an die einstige Blütezeit der Textilindustrie."</em>
                         </div>
                         
-                        <button class="solution-toggle" onclick="toggleSolution('solution-3b')">Lösung Text B</button>
+                        <button class="solution-toggle" data-target="solution-3b">Lösung Text B</button>
                         <div class="solution" id="solution-3b">
                             <strong>Textsorte:</strong> Reportage<br>
                             <strong>Begründung:</strong> Persönliche Präsenz vor Ort ("ich betrat"), detaillierte Beschreibung der Atmosphäre, faktische Informationen (2000 Menschen), objektive Darstellung eines Zustands
@@ -808,7 +808,7 @@
                             <strong>4.</strong> "Meine Großmutter ist 95 geworden - gesunde Ernährung ist das Geheimnis."
                         </div>
                         
-                        <button class="solution-toggle" onclick="toggleSolution('solution-4')">Lösung anzeigen</button>
+                        <button class="solution-toggle" data-target="solution-4">Lösung anzeigen</button>
                         <div class="solution" id="solution-4">
                             <strong>1.</strong> Faktenargument - basiert auf wissenschaftlichen Daten<br>
                             <strong>2.</strong> Autoritätsargument - beruft sich auf Expertenstatus<br>
@@ -906,7 +906,7 @@
                             <strong>4.</strong> "Die Stadt war ein brodelnder Hexenkessel der Ideen."
                         </div>
                         
-                        <button class="solution-toggle" onclick="toggleSolution('solution-5')">Lösung anzeigen</button>
+                        <button class="solution-toggle" data-target="solution-5">Lösung anzeigen</button>
                         <div class="solution" id="solution-5">
                             <strong>1.</strong> Wiederholung (Anapher) - "die Zeit rennt, die Eile hetzt, die Hetze treibt"<br>
                             <strong>2.</strong> Rhetorische Frage - "Ist das wirklich der Weg...?"<br>
@@ -957,7 +957,7 @@
                             </div>
                         </div>
                         
-                        <button class="solution-toggle" onclick="toggleSolution('solution-6')">Musterlösung anzeigen</button>
+                        <button class="solution-toggle" data-target="solution-6">Musterlösung anzeigen</button>
                         <div class="solution" id="solution-6">
                             <strong>Musterlösung:</strong><br>
                             <strong>Textsorte:</strong> Kommentar (subjektive Meinung, aktuelle Debatte)<br>
@@ -987,6 +987,66 @@
             </div>
         </main>
     </div>
-<script src="script.js"></script>
+
+    <script>
+        // Accordion-Funktionalität
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion-Buttons
+            const accordions = document.querySelectorAll('.accordion');
+            
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    
+                    if (panel.classList.contains('active')) {
+                        panel.classList.remove('active');
+                    } else {
+                        panel.classList.add('active');
+                    }
+                });
+            });
+            
+            // "Alle Bereiche aufklappen"-Button
+            const expandAllBtn = document.getElementById('expand-all-btn');
+            let allExpanded = false;
+            
+            expandAllBtn.addEventListener('click', function() {
+                allExpanded = !allExpanded;
+                
+                accordions.forEach(accordion => {
+                    const panel = accordion.nextElementSibling;
+                    
+                    if (allExpanded) {
+                        accordion.classList.add('active');
+                        panel.classList.add('active');
+                    } else {
+                        accordion.classList.remove('active');
+                        panel.classList.remove('active');
+                    }
+                });
+                
+                this.textContent = allExpanded ? 'Alle Bereiche zuklappen' : 'Alle Bereiche aufklappen';
+            });
+            
+            // Lösungstoggle-Buttons
+            const solutionToggles = document.querySelectorAll('.solution-toggle');
+            
+            solutionToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const solution = document.getElementById(targetId);
+                    
+                    if (solution.classList.contains('active')) {
+                        solution.classList.remove('active');
+                        this.textContent = this.textContent.replace('Verbergen', 'Anzeigen');
+                    } else {
+                        solution.classList.add('active');
+                        this.textContent = this.textContent.replace('Anzeigen', 'Verbergen');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

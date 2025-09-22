@@ -275,7 +275,7 @@
             </header>
 
             <div class="content-body" id="content-body">
-                <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+                <button type="button" class="btn-toggle-all" id="toggle-all-btn">Alle Bereiche öffnen/schließen</button>
 
                 <div class="welcome-section">
                     <h2>Typische Fehlerquellen in Textanalysen</h2>
@@ -324,7 +324,7 @@
                     </div>
                 </div>
 
-                <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
                     <span>Übungen: Fehler erkennen und korrigieren</span>
                     <span class="accordion-icon"></span>
                 </div>
@@ -338,7 +338,7 @@
                             <li>"Ich finde den Text gut, weil er interessant ist."</li>
                         </ol>
                         
-                        <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        <button class="solution-toggle" data-target="solution1">Lösung anzeigen</button>
                         <div class="solution-content" id="solution1">
                             <p><strong>Korrekte Versionen:</strong></p>
                             <ol>
@@ -350,7 +350,7 @@
                     </div>
                 </div>
 
-                <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="accordion-header">
                     <span>Checkliste zur Fehlervermeidung</span>
                     <span class="accordion-icon"></span>
                 </div>
@@ -376,57 +376,92 @@
     </main>
 
     <script>
-        function toggleAccordion(element) {
-            console.log('toggleAccordion called');
-            if (!element) return;
+        // Warten, bis das DOM vollständig geladen ist
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
             
-            var panel = element.nextElementSibling;
+            // Event-Listener für Akkordeon-Header
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    console.log('Accordion clicked');
+                    const panel = this.nextElementSibling;
+                    
+                    if (panel && panel.classList.contains('panel')) {
+                        // Toggle active class on header
+                        this.classList.toggle('active');
+                        
+                        // Toggle active class on panel
+                        panel.classList.toggle('active');
+                    }
+                });
+            });
             
-            if (!panel) return;
+            // Event-Listener für Lösungs-Buttons
+            const solutionButtons = document.querySelectorAll('.solution-toggle');
+            solutionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Solution button clicked');
+                    const targetId = this.getAttribute('data-target');
+                    const solution = document.getElementById(targetId);
+                    
+                    if (solution) {
+                        solution.classList.toggle('active');
+                        
+                        // Button-Text ändern
+                        if (solution.classList.contains('active')) {
+                            this.textContent = 'Lösung ausblenden';
+                        } else {
+                            this.textContent = 'Lösung anzeigen';
+                        }
+                    }
+                });
+            });
             
-            // Toggle active class on header
-            element.classList.toggle('active');
+            // Event-Listener für "Alle öffnen/schließen"-Button
+            const toggleAllBtn = document.getElementById('toggle-all-btn');
+            if (toggleAllBtn) {
+                toggleAllBtn.addEventListener('click', function() {
+                    console.log('Toggle all clicked');
+                    toggleAll();
+                });
+            }
             
-            // Toggle active class on panel
-            panel.classList.toggle('active');
-        }
-
-        function toggleSolution(elementId) {
-            console.log('toggleSolution called for:', elementId);
-            var element = document.getElementById(elementId);
-            if (!element) return;
-            
-            element.classList.toggle('active');
-        }
-
-        function toggleAll() {
-            console.log('toggleAll called');
-            var accordions = document.querySelectorAll('.accordion-header');
-            var panels = document.querySelectorAll('.panel');
-            
-            // Check if all are open
-            var allOpen = true;
-            for (var i = 0; i < panels.length; i++) {
-                if (!panels[i].classList.contains('active')) {
-                    allOpen = false;
-                    break;
+            // Funktion zum Öffnen/Schließen aller Akkordeons
+            function toggleAll() {
+                const accordions = document.querySelectorAll('.accordion-header');
+                const panels = document.querySelectorAll('.panel');
+                
+                // Prüfen, ob alle geöffnet sind
+                const allOpen = Array.from(panels).every(panel => 
+                    panel.classList.contains('active')
+                );
+                
+                // Alle umschalten
+                accordions.forEach((accordion, index) => {
+                    if (allOpen) {
+                        accordion.classList.remove('active');
+                        if (panels[index]) {
+                            panels[index].classList.remove('active');
+                        }
+                    } else {
+                        accordion.classList.add('active');
+                        if (panels[index]) {
+                            panels[index].classList.add('active');
+                        }
+                    }
+                });
+                
+                // Button-Text aktualisieren
+                if (toggleAllBtn) {
+                    toggleAllBtn.textContent = allOpen ? 
+                        'Alle Bereiche öffnen' : 
+                        'Alle Bereiche schließen';
                 }
             }
             
-            // Toggle all
-            for (var i = 0; i < accordions.length; i++) {
-                if (allOpen) {
-                    accordions[i].classList.remove('active');
-                    panels[i].classList.remove('active');
-                } else {
-                    accordions[i].classList.add('active');
-                    panels[i].classList.add('active');
-                }
-            }
-        }
-
-        // Test if script is loaded
-        console.log('Script loaded successfully');
+            console.log('Event listeners set up successfully');
+        });
     </script>
 </body>
 </html>

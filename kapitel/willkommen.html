@@ -195,19 +195,26 @@
             background: #e9ecef;
         }
 
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-    background-color: #f9f9f9;
-    border-radius: 0 0 5px 5px;
-}
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+        }
 
-.panel.active {
-    max-height: 3000px;
-    padding: 18px;
-}
+        .panel.active {
+            max-height: 3000px;
+            padding: 18px;
+        }
 
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
+        }
 
         .progress-section {
             background: #e8f4f8;
@@ -447,5 +454,32 @@
         </div>
     </main>
 
-<script src="script.js"></script>
+    <script>
+        // Accordion-Funktionalität
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    // Toggle active class for this header
+                    this.classList.toggle('active');
+                    
+                    // Get the next element (the panel)
+                    const panel = this.nextElementSibling;
+                    
+                    // Toggle the panel
+                    panel.classList.toggle('active');
+                    
+                    // Close other open accordions (optional)
+                    accordionHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            otherHeader.classList.remove('active');
+                            otherHeader.nextElementSibling.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
 </html>

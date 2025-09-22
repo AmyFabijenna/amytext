@@ -87,13 +87,12 @@
             margin-bottom: 15px;
             cursor: pointer;
             transition: background-color 0.2s;
+            padding: 10px;
+            border-radius: 5px;
         }
 
         .textsorte-header:hover {
             background-color: #f8f9fa;
-            border-radius: 5px;
-            padding: 10px;
-            margin: -10px -10px 15px -10px;
         }
 
         .textsorte-header h3 {
@@ -630,6 +629,46 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        // Funktion zum Ein-/Ausklappen der Textsorten-Bereiche
+        function toggleTextsorte(id) {
+            const content = document.getElementById(id);
+            const header = content.previousElementSibling;
+            
+            // Toggle für den Inhalt
+            content.classList.toggle('active');
+            
+            // Toggle für den Header (Pfeil-Drehung)
+            header.classList.toggle('active');
+        }
+        
+        // Funktion zum Ein-/Ausklappen der Lösungen
+        function toggleLoesung(id) {
+            const loesung = document.getElementById(id);
+            loesung.classList.toggle('active');
+            
+            // Button-Text ändern
+            const button = loesung.previousElementSibling;
+            if (loesung.classList.contains('active')) {
+                button.textContent = 'Lösung ausblenden';
+            } else {
+                button.textContent = 'Lösung anzeigen';
+            }
+        }
+        
+        // Alle Textsorten-Bereiche standardmäßig geschlossen halten
+        document.addEventListener('DOMContentLoaded', function() {
+            const textsortenContents = document.querySelectorAll('.textsorte-content');
+            textsortenContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const loesungen = document.querySelectorAll('.loesung');
+            loesungen.forEach(loesung => {
+                loesung.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>

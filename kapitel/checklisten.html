@@ -84,6 +84,7 @@
             text-align: left;
             outline: none;
             user-select: none;
+            transition: background 0.3s ease;
         }
 
         .checklist-header:hover {
@@ -97,28 +98,27 @@
 
         .toggle-icon {
             font-size: 1.2em;
+            transition: transform 0.3s ease;
         }
 
-        .checklist-header.active .toggle-icon::after {
-            content: '▲';
-        }
-
-        .checklist-header:not(.active) .toggle-icon::after {
-            content: '▼';
+        .checklist-header.active .toggle-icon {
+            transform: rotate(180deg);
         }
 
         .checklist-content {
-            display: none;
-            padding: 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
             background: #f9f9f9;
         }
 
         .checklist-content.active {
-            display: block;
+            max-height: 1000px; /* Ausreichend Platz für den Inhalt */
         }
 
         .checklist-list {
             list-style-type: none;
+            padding: 20px;
         }
 
         .checklist-list li {
@@ -160,11 +160,13 @@
             border-radius: 8px;
             padding: 15px;
             margin-top: 15px;
-            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
         }
 
         .solution.active {
-            display: block;
+            max-height: 1000px; /* Ausreichend Platz für den Inhalt */
         }
 
         .solution-btn {
@@ -175,6 +177,7 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background 0.3s ease;
         }
 
         .solution-btn:hover {
@@ -191,6 +194,7 @@
             margin-bottom: 20px;
             font-size: 1em;
             font-weight: bold;
+            transition: background 0.3s ease;
         }
 
         .btn-toggle-all:hover {
@@ -224,7 +228,7 @@
                 <div class="checklist-item">
                     <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Textanalyse-Grundcheckliste</h3>
-                        <span class="toggle-icon"></span>
+                        <span class="toggle-icon">▼</span>
                     </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
@@ -245,7 +249,7 @@
                 <div class="checklist-item">
                     <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Sprachliche Gestaltung</h3>
-                        <span class="toggle-icon"></span>
+                        <span class="toggle-icon">▼</span>
                     </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
@@ -268,7 +272,7 @@
                 <div class="checklist-item">
                     <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Lyrik-Analyse</h3>
-                        <span class="toggle-icon"></span>
+                        <span class="toggle-icon">▼</span>
                     </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
@@ -286,7 +290,7 @@
                 <div class="checklist-item">
                     <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Prosa-Analyse</h3>
-                        <span class="toggle-icon"></span>
+                        <span class="toggle-icon">▼</span>
                     </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
@@ -303,7 +307,7 @@
                 <div class="checklist-item">
                     <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Drama-Analyse</h3>
-                        <span class="toggle-icon"></span>
+                        <span class="toggle-icon">▼</span>
                     </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
@@ -320,7 +324,7 @@
                 <div class="checklist-item">
                     <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Sachtext-Analyse</h3>
-                        <span class="toggle-icon"></span>
+                        <span class="toggle-icon">▼</span>
                     </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">
@@ -341,7 +345,7 @@
                 <div class="checklist-item">
                     <button class="checklist-header" onclick="toggleChecklist(this)">
                         <h3>Interpretations-Checkliste</h3>
-                        <span class="toggle-icon"></span>
+                        <span class="toggle-icon">▼</span>
                     </button>
                     <div class="checklist-content">
                         <ul class="checklist-list">

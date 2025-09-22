@@ -558,6 +558,43 @@
             </div>
         </div>
     </main>
-<script src="script.js"></script>
+
+    <script>
+        // Funktion für das Accordion
+        function toggleAccordion(element) {
+            // Das übergeordnete Accordion-Element finden
+            const accordionItem = element.parentElement;
+            // Das Panel-Element finden
+            const panel = accordionItem.querySelector('.panel');
+            
+            // Aktiven Zustand umschalten
+            element.classList.toggle('active');
+            panel.classList.toggle('active');
+            
+            // Andere Accordion-Elemente schließen (optional)
+            const allAccordionItems = document.querySelectorAll('.accordion-item');
+            allAccordionItems.forEach(item => {
+                if (item !== accordionItem) {
+                    item.querySelector('.accordion-header').classList.remove('active');
+                    item.querySelector('.panel').classList.remove('active');
+                }
+            });
+        }
+        
+        // Funktion für das Anzeigen/Verbergen der Lösungen
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            const button = document.querySelector(`[onclick="toggleSolution('${solutionId}')"]`);
+            
+            solution.classList.toggle('active');
+            
+            // Button-Text ändern
+            if (solution.classList.contains('active')) {
+                button.textContent = 'Lösung ausblenden';
+            } else {
+                button.textContent = 'Lösung anzeigen';
+            }
+        }
+    </script>
 </body>
 </html>

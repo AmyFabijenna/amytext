@@ -88,6 +88,7 @@
             outline: none;
             position: relative;
             user-select: none;
+            transition: background 0.3s ease;
         }
 
         .accordion-header:hover {
@@ -101,7 +102,7 @@
         }
 
         .accordion-header.active .accordion-icon {
-            transform: rotate(45deg);
+            transform: rotate(0deg);
         }
 
         .accordion-header.active .accordion-icon::after {
@@ -118,6 +119,12 @@
             border-radius: 0 0 5px 5px;
             margin-bottom: 10px;
             padding: 18px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .panel.active {
@@ -137,6 +144,12 @@
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             border-left: 4px solid #3498db;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .term-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
         .term-card h3 {
@@ -187,6 +200,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            transition: background 0.3s ease;
         }
 
         .btn:hover {
@@ -203,6 +217,7 @@
             margin-bottom: 20px;
             font-size: 1em;
             font-weight: bold;
+            transition: background 0.3s ease;
         }
 
         .btn-toggle-all:hover {
@@ -215,6 +230,7 @@
             border-radius: 6px;
             padding: 15px;
             margin-top: 15px;
+            animation: fadeIn 0.3s ease;
         }
 
         .solution.active {

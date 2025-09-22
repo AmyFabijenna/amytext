@@ -443,7 +443,7 @@
                         <p>Formuliere eine Analyse der folgenden Textstelle mit Hilfe der gelernten Formulierungshilfen:</p>
                         <p><em>"Die sozialen Medien haben unsere Gesellschaft nicht nur verändert, sondern zerschnitten, zersplittert und zerstückelt."</em></p>
                         
-                        <button class="toggle-solution" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        <button class="toggle-solution" data-target="solution1">Lösung anzeigen</button>
                         
                         <div id="solution1" class="solution-box">
                             <h4>Musterlösung:</h4>
@@ -463,7 +463,7 @@
                             <p><strong>Textauszug 2:</strong> "Warum schweigen wir? Warum schauen wir weg? Warum akzeptieren wir das Unakzeptable? Es ist an der Zeit, unsere Stimme zu erheben, unsere Augen zu öffnen und für das einzustehen, was richtig ist!"</p>
                         </div>
                         
-                        <button class="toggle-solution" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                        <button class="toggle-solution" data-target="solution2">Lösung anzeigen</button>
                         
                         <div id="solution2" class="solution-box">
                             <h4>Lösung:</h4>
@@ -491,7 +491,7 @@
                         <p>Analysiere die Wirkung der folgenden Textstelle:</p>
                         <p><em>"Schweigen. Warten. Hoffen. Mehr konnten sie nicht tun."</em></p>
                         
-                        <button class="toggle-solution" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        <button class="toggle-solution" data-target="solution3">Lösung anzeigen</button>
                         
                         <div id="solution3" class="solution-box">
                             <h4>Musterlösung:</h4>
@@ -504,7 +504,7 @@
                         <p>Analysiere die Argumentationsstruktur des folgenden Textausschnitts:</p>
                         <p><em>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</em></p>
                         
-                        <button class="toggle-solution" onclick="toggleSolution('solution4')">Lösung anzeigen</button>
+                        <button class="toggle-solution" data-target="solution4">Lösung anzeigen</button>
                         
                         <div id="solution4" class="solution-box">
                             <h4>Musterlösung:</h4>
@@ -520,7 +520,7 @@
                             <p>"In einer Welt, in der Authentizität zunehmend an Wert gewinnt, erscheint das Streben nach Perfektion paradox. Täglich werden wir mit makellosen Bildern in sozialen Medien konfrontiert – perfekte Körper, perfekte Häuser, perfekte Leben. Doch hinter dieser glänzenden Fassade verbirgt sich oft eine tiefe Unsicherheit. Die Kluft zwischen Schein und Sein wächst, während die digitalen Filter immer ausgefeilter werden. Wir inszenieren eine Version unserer selbst, die kaum noch Berührungspunkte mit der Realität hat."</p>
                         </div>
                         
-                        <button class="toggle-solution" onclick="toggleSolution('solution5')">Musterlösung anzeigen</button>
+                        <button class="toggle-solution" data-target="solution5">Musterlösung anzeigen</button>
                         
                         <div id="solution5" class="solution-box">
                             <h4>Musterlösung:</h4>
@@ -580,23 +580,35 @@
                     if (panel.classList.contains("show")) {
                         panel.classList.remove("show");
                     } else {
+                        // Schließe alle anderen Panels
+                        const allPanels = document.querySelectorAll('.panel.show');
+                        allPanels.forEach(p => p.classList.remove('show'));
+                        
+                        // Entferne active Klasse von allen anderen Accordions
+                        const allAccordions = document.querySelectorAll('.accordion.active');
+                        allAccordions.forEach(a => {
+                            if (a !== this) a.classList.remove('active');
+                        });
+                        
+                        // Öffne das aktuelle Panel
                         panel.classList.add("show");
                     }
                 });
             }
-        });
 
-        // Solution Toggle Funktionalität
-        function toggleSolution(solutionId) {
-            const solution = document.getElementById(solutionId);
-            if (solution) {
-                if (solution.classList.contains("show")) {
-                    solution.classList.remove("show");
-                } else {
-                    solution.classList.add("show");
-                }
-            }
-        }
+            // Solution Toggle Funktionalität
+            const solutionButtons = document.querySelectorAll('.toggle-solution');
+            solutionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const solution = document.getElementById(targetId);
+                    if (solution) {
+                        solution.classList.toggle('show');
+                        this.textContent = solution.classList.contains('show') ? 'Lösung ausblenden' : 'Lösung anzeigen';
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

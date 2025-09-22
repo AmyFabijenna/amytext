@@ -17,20 +17,16 @@
             min-height: 100vh;
             line-height: 1.6;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px 0;
+            padding: 20px;
         }
 
         .content-container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            width: 100%;
         }
 
         .content-header {
@@ -199,6 +195,10 @@
             .section-title {
                 font-size: 1.5em;
             }
+            
+            body {
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -227,7 +227,7 @@
             <div class="section">
                 <h2 class="section-title">Schritt-für-Schritt-Anleitung zur Textanalyse</h2>
                 
-                <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion">
                     <span>1. Einleitung und kurze Inhaltsangabe</span>
                     <span class="accordion-icon">+</span>
                 </div>
@@ -260,14 +260,14 @@
                     <div class="exercise">
                         <h4>Übung: Verfasse eine Einleitung</h4>
                         <p>Verfasse eine Einleitung für diese Kolumne mit allen notwendigen Elementen.</p>
-                        <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
-                        <div id="solution1" class="solution">
+                        <button class="solution-toggle">Lösung anzeigen</button>
+                        <div class="solution">
                             <p>In der Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger, erschienen im März 2025 in der Tageszeitung "Der Standard", setzt sich die Autorin kritisch mit den Auswirkungen der permanenten digitalen Erreichbarkeit auf unser soziales Verhalten und psychisches Wohlbefinden auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger die These, dass die ständige Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist, und appelliert an eine bewusstere Nutzung digitaler Medien.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion">
                     <span>2. Stilanalyse</span>
                     <span class="accordion-icon">+</span>
                 </div>
@@ -297,7 +297,7 @@
                     
                     <div class="text-example">
                         <h4>Beispiel für eine Stilanalyse:</h4>
-                        <p>Sprachlich zeichnet sich Bergers Kolumne durch einen persönlichen, leicht zugänglichen Stil aus, der durch den Einstieg mit einer konkreten Alltagsbeobachtung Nähe zum Leser schafft. Die Autorin verwendet bildhafte Vergleiche wie "unsichtbare Leinen" und "elektrischer Schlag", um die subtile Kontrolle zu veranschaulichen, die Smartphones über ihre Nutzer ausüben.</p>
+                        <p>Sprachlich zeichnet sich Bergers Kolumne durch einen persönlichen, leicht zugänglichen Stil aus, der durch den Einstieg mit einer konkreten Alltagsbeobachtung Nähe zum Leser schafft. Die Autorin verwendet bildhafte Vergleiche wie "unsichtbare Leinen" und "elektrischer Schock", um die subtile Kontrolle zu veranschaulichen, die Smartphones über ihre Nutzer ausüben.</p>
                         <p>Besonders wirkungsvoll ist die Metapher der "Tyrannei" und "selbst auferlegten Knechtschaft", die das zentrale Thema der eingeschränkten Freiheit untermauert. Die Wortwahl ("Sklaven", "Knechtschaft", "Tyrannei") entstammt dem Wortfeld der Unterdrückung und verstärkt die kritische Haltung der Autorin.</p>
                         <p>Der Text folgt einem klaren Aufbau: Vom konkreten Beispiel über die Problemanalyse bis hin zu einem appellativen Schluss. Rhetorische Fragen wie "Warum antwortest du nicht?" werden eingesetzt, um typische soziale Interaktionen zu spiegeln und die Leser direkt anzusprechen.</p>
                         <p>Der Tonfall wechselt vom beschreibenden über den analytischen bis zum appellativen Stil im letzten Absatz, wo die Autorin mit direkten Handlungsaufforderungen ("Schalten Sie Ihr Handy ab und zu aus") die Leserschaft aktivieren möchte.</p>
@@ -306,8 +306,8 @@
                     <div class="exercise">
                         <h4>Übung: Analysiere die sprachlichen Mittel</h4>
                         <p>Identifiziere mindestens drei weitere sprachliche Mittel im Text und beschreibe ihre Wirkung.</p>
-                        <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
-                        <div id="solution2" class="solution">
+                        <button class="solution-toggle">Lösung anzeigen</button>
+                        <div class="solution">
                             <p><strong>Weitere sprachliche Mittel und ihre Wirkung:</strong></p>
                             <ol>
                                 <li><strong>Antithese:</strong> "Sie waren anwesend und doch abwesend zugleich" - verdeutlicht den Widerspruch zwischen physischer Präsenz und mentaler Abwesenheit.</li>
@@ -319,7 +319,7 @@
                     </div>
                 </div>
 
-                <div class="accordion" onclick="toggleAccordion(this)">
+                <div class="accordion">
                     <span>3. Bewertung und Ausblick/Schluss</span>
                     <span class="accordion-icon">+</span>
                 </div>
@@ -358,11 +358,12 @@
                     <div class="exercise">
                         <h4>Übung: Verfasse eine eigene Bewertung</h4>
                         <p>Formuliere eine eigene Bewertung der Kolumne mit mindestens einer Stärke und einem Kritikpunkt.</p>
-                        <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
-                        <div id="solution3" class="solution">
+                        <button class="solution-toggle">Lösung anzeigen</button>
+                        <div class="solution">
                             <p><strong>Beispiel für eine eigene Bewertung:</strong></p>
                             <p>Die Kolumne von Maria Berger überzeugt durch ihre lebensnahe Darstellung eines alltäglichen Phänomens, das viele Leser aus eigener Erfahrung kennen werden. Besonders stark ist die bildhafte Sprache, die abstrakte Konzepte wie "digitale Erreichbarkeit" konkret und greifbar macht. Die Metapher der "unsichtbaren Leinen" verdeutlicht eindrücklich, wie sehr digitale Geräte unser Verhalten steuern können.</p>
                             <p>Kritisch anzumerken ist jedoch, dass Berger die wirtschaftlichen Interessen hinter der permanenten Erreichbarkeit kaum thematisiert. Die Geschäftsmodelle vieler Tech-Unternehmen basieren precisely auf der Aufmerksamkeit der Nutzer, was eine systemische Dimension des Problems darstellt, die über individuelle Verhaltensänderungen hinausgeht. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
+                            <p>Insgesamt liefert die Kolumne jedoch einen wichtigen Beitrag zur aktuellen Debatte über Digitalisierung und regt zum Nachdenken über den eigenen Umgang mit digitalen Medien an.</p>
                         </div>
                     </div>
                 </div>
@@ -379,8 +380,8 @@
                         <strong>Tipp:</strong> Achte auf eine ausgewogene Mischung aus allgemeinen und spezifischen Aussagen zum Text. Verwende Fachbegriffe korrekt und belege deine Analyse mit Textzitaten.
                     </div>
                     
-                    <button class="solution-toggle" onclick="toggleSolution('solution4')">Musterlösung anzeigen</button>
-                    <div id="solution4" class="solution">
+                    <button class="solution-toggle">Musterlösung anzeigen</button>
+                    <div class="solution">
                         <h4>Musterlösung: Vollständige Textanalyse</h4>
                         
                         <h5>Einleitung</h5>
@@ -407,22 +408,50 @@
     </div>
 
     <script>
-        function toggleAccordion(element) {
-            const panel = element.nextElementSibling;
-            const icon = element.querySelector('.accordion-icon');
+        // Funktion zum Öffnen/Schließen der Akkordeons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Akkordeon-Funktionalität
+            const accordions = document.querySelectorAll('.accordion');
             
-            element.classList.toggle('active');
-            panel.classList.toggle('active');
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    const icon = this.querySelector('.accordion-icon');
+                    
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                        panel.classList.remove('active');
+                        icon.textContent = '+';
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                        panel.classList.add('active');
+                        icon.textContent = '−';
+                    }
+                });
+            });
             
-            icon.textContent = icon.textContent === '+' ? '−' : '+';
-        }
-
-        function toggleSolution(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.classList.toggle('active');
+            // Lösung anzeigen/verbergen
+            const solutionToggles = document.querySelectorAll('.solution-toggle');
+            
+            solutionToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const solution = this.nextElementSibling;
+                    solution.classList.toggle('active');
+                    
+                    if (solution.classList.contains('active')) {
+                        this.textContent = 'Lösung ausblenden';
+                    } else {
+                        this.textContent = 'Lösung anzeigen';
+                    }
+                });
+            });
+            
+            // Standardmäßig das erste Akkordeon öffnen
+            if (accordions.length > 0) {
+                accordions[0].click();
             }
-        }
+        });
     </script>
 </body>
 </html>
