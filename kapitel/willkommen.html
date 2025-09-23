@@ -461,42 +461,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Accordion-Funktionalität
-        document.addEventListener('DOMContentLoaded', function() {
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', function() {
-                    // Aktuelles Panel umschalten
-                    const panel = this.nextElementSibling;
-                    const isActive = this.classList.contains('active');
-                    
-                    // Schließe alle anderen Accordions
-                    document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
-                        if (activeHeader !== this) {
-                            activeHeader.classList.remove('active');
-                            activeHeader.nextElementSibling.classList.remove('active');
-                        }
-                    });
-                    
-                    // Aktuelles Accordion umschalten
-                    if (!isActive) {
-                        this.classList.add('active');
-                        panel.classList.add('active');
-                    } else {
-                        this.classList.remove('active');
-                        panel.classList.remove('active');
-                    }
-                });
-            });
-            
-            // Automatisches Öffnen des ersten Accordions
-            if (accordionHeaders.length > 0) {
-                accordionHeaders[0].click();
-            }
-        });
-    </script>
 </body>
 </html>

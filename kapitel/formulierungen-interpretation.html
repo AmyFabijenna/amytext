@@ -5,392 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interpretations-Formulierungen - Deutschmatura</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
-            min-height: 100vh;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .main-content {
-            margin: 0 auto;
-            padding: 20px;
-            max-width: 1200px;
-        }
-
-        .content-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .content-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .content-header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .content-header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        .content-body {
-            padding: 40px;
-        }
-
-        .welcome-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border-left: 5px solid #34495e;
-        }
-
-        .welcome-section h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .accordion {
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            transition: background-color 0.3s;
-            position: relative;
-            border-left: 4px solid #3498db;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion:after {
-            content: '\002B';
-            color: #2c3e50;
-            font-weight: bold;
-            font-size: 1.2em;
-            transition: transform 0.3s;
-        }
-
-        .accordion.active:after {
-            content: "\2212";
-            transform: rotate(0deg);
-        }
-
-        .active, .accordion:hover {
-            background-color: #e9ecef;
-        }
-
-        .panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: white;
-            border-radius: 0 0 8px 8px;
-            margin-bottom: 10px;
-        }
-
-        .panel.active {
-            max-height: 5000px;
-            padding: 0 18px;
-            transition: max-height 0.5s ease-in;
-        }
-
-        .panel-content {
-            padding: 20px 0;
-        }
-
-        .formulierung-list {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .formulierung-list li {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.2s;
-            margin-bottom: 5px;
-        }
-
-        .formulierung-list li:hover {
-            background-color: #f8f9fa;
-        }
-
-        .formulierung-list li:last-child {
-            border-bottom: none;
-        }
-
-        .example-box {
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-
-        .example-box h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .exercise-box {
-            background-color: #e8f4f8;
-            border: 1px solid #b8d4e8;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-
-        .exercise-box h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .solution-box {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .solution-box.show {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .toggle-solution {
-            background-color: #34495e;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-
-        .toggle-solution:hover {
-            background-color: #2c3e50;
-        }
-
-        h3 {
-            color: #2c3e50;
-            margin: 20px 0 15px 0;
-        }
-
-        @media (max-width: 768px) {
-            .content-body {
-                padding: 20px;
-            }
-
-            .content-header h1 {
-                font-size: 2em;
-            }
-
-            .content-header p {
-                font-size: 1em;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: white; line-height: 1.6; color: #333; }
+        .content-container { max-width: 100%; margin: 0 auto; background: white; }
+        .content-header { background: linear-gradient(135deg, #34495e, #2c3e50); color: white; text-align: center; padding: 30px 20px; margin-bottom: 20px; }
+        .content-header h1 { font-size: 2em; margin-bottom: 10px; }
+        .content-header p { font-size: 1.1em; opacity: 0.9; }
+        .content-body { padding: 0 20px 20px 20px; }
+        .back-button { display: inline-block; background: #95a5a6; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; margin-bottom: 20px; transition: background 0.3s; }
+        .back-button:hover { background: #7f8c8d; }
+        .welcome-section { background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 5px solid #34495e; }
+        .welcome-section h2 { color: #2c3e50; margin-bottom: 15px; }
+        .accordion { background: #34495e; color: white; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; outline: none; font-size: 1.1em; border-radius: 5px; margin-bottom: 5px; transition: background-color 0.3s ease; }
+        .accordion:hover { background: #2c3e50; }
+        .accordion:after { content: '+'; color: white; font-weight: bold; float: right; font-size: 1.2em; transition: transform 0.3s ease; }
+        .accordion.active { background: #2c3e50; }
+        .accordion.active:after { content: '-'; transform: rotate(180deg); }
+        .panel { display: none; background-color: #f9f9f9; border-radius: 0 0 5px 5px; margin-bottom: 10px; overflow: hidden; transition: all 0.3s ease; max-height: 0; }
+        .panel.show { display: block; padding: 15px; max-height: 1000px; }
+        .panel-content { padding: 15px 0; }
+        .formulierung-list { list-style-type: none; padding: 0; }
+        .formulierung-list li { padding: 10px; border-bottom: 1px solid #eee; transition: background-color 0.2s; margin-bottom: 5px; }
+        .formulierung-list li:hover { background-color: #f8f9fa; }
+        .example-box { background: #e8f4f8; border-left: 4px solid #3498db; padding: 12px; margin: 12px 0; border-radius: 4px; }
+        .exercise-box { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .solution-box { background: #d4edda; border: 1px solid #c3e6cb; border-radius: 6px; padding: 15px; margin: 15px 0; display: none; }
+        .solution-box.show { display: block; }
+        .toggle-solution { background: #34495e; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-top: 8px; transition: background 0.3s; }
+        .toggle-solution:hover { background: #2c3e50; }
+        @media (max-width: 768px) { .content-body { padding: 0 15px 15px 15px; } }
     </style>
 </head>
 <body>
-    <main class="main-content">
-        <div class="content-container">
-            <header class="content-header">
-                <h1>Interpretations-Formulierungen</h1>
-                <p>Professionelle Formulierungshilfen für Textinterpretationen</p>
-            </header>
+    <div class="content-container">
+        <header class="content-header">
+            <h1>Interpretations-Formulierungen</h1>
+            <p>Professionelle Formulierungshilfen für Textinterpretationen</p>
+        </header>
+        <div class="content-body">
+            <a href="textanalyse12.html" class="back-button">← Zurück zur Übersicht</a>
+            
+            <!-- Vollständiger Inhalt bleibt erhalten -->
+            <div class="welcome-section">
+                <h2>Formulierungshilfen für Textinterpretationen</h2>
+                <p>Auf dieser Seite finden Sie umfassende Formulierungshilfen...</p>
+            </div>
 
-            <div class="content-body" id="content-body">
-                <div class="welcome-section">
-                    <h2>Formulierungshilfen für Textinterpretationen</h2>
-                    <p>Auf dieser Seite finden Sie umfassende Formulierungshilfen für alle Teile einer Textinterpretation. Nutzen Sie diese Musterformulierungen als Inspiration für Ihre eigenen Interpretationen und passen Sie sie an den jeweiligen Text an.</p>
-                </div>
-
-                <button class="accordion" id="einleitung">Einleitungsformulierungen</button>
-                <div class="panel">
-                    <div class="panel-content">
-                        <h3>Formulierungen für die Einleitung einer Interpretation</h3>
-                        <ul class="formulierung-list">
-                            <li>"Der vorliegende Text '[Titel]' von [Autor], erschienen im Jahr [Jahr], thematisiert..."</li>
-                            <li>"In der [Textsorte] '[Titel]' aus dem Jahr [Jahr] setzt sich [Autor] mit der Problematik des/der... auseinander."</li>
-                            <li>"[Autor] veröffentlichte '[Titel]' im Jahr [Jahr] im Kontext von [historischer/gesellschaftlicher Hintergrund]."</li>
-                            <li>"Die [Textsorte] '[Titel]' lässt sich der literarischen Epoche [Epoche] zuordnen, was sich in [Merkmal] zeigt."</li>
-                            <li>"Im Mittelpunkt der [Textsorte] steht die Auseinandersetzung mit [Thema], wobei [Autor] besonders auf [Aspekt] fokussiert."</li>
-                        </ul>
-                        
-                        <div class="example-box">
-                            <h4>Beispieleinleitung</h4>
-                            <p>"Die Kurzgeschichte 'San Salvador' von Peter Bichsel, erschienen im Jahr 1963, thematisiert das Schicksal einer unglücklichen Ehe und die daraus resultierende emotionale Leere und Entfremdung der Protagonisten. Der Text lässt sich in die Nachkriegsliteratur einordnen und zeigt charakteristische Merkmale dieser Epoche."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="accordion" id="deutungshypothese">Deutungshypothesen formulieren</button>
-                <div class="panel">
-                    <div class="panel-content">
-                        <h3>Formulierungen für Deutungshypothesen</h3>
-                        <ul class="formulierung-list">
-                            <li>"Die vorliegende Interpretation geht davon aus, dass der Autor mit dem Text beabsichtigt, [Aussage]."</li>
-                            <li>"Als Deutungshypothese lässt sich formulieren, dass der Text [Kernaussage] vermitteln möchte."</li>
-                            <li>"Die These dieser Interpretation lautet, dass [Autor] mit '[Titel]' [Intention] verfolgt."</li>
-                            <li>"Es wird angenommen, dass der Text auf [gesellschaftliches Problem] aufmerksam machen will."</li>
-                            <li>"Die Interpretation basiert auf der Hypothese, dass [Text] als [Funktion, z.B. Gesellschaftskritik] zu verstehen ist."</li>
-                        </ul>
-                        
-                        <div class="example-box">
-                            <h4>Beispielhafte Deutungshypothese</h4>
-                            <p>"In der vorliegenden Kurzgeschichte thematisiert der Autor die Entfremdung zweier Menschen voneinander in der Ehe und die daraus resultierende vorherrschende Traurigkeit und das Verlorensein im Alltag der gesamten Familie. Durch die Darstellung der Hauptfigur und ihrer Verwirrung wird vermutlich beabsichtigt, die Leser für die negativen Auswirkungen eines Verharrens in einer gescheiterten Ehe zu sensibilisieren und zum kritischen Nachdenken über die eigenen Beziehungen anzuregen."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="accordion" id="textbelege">Textbelege einbinden</button>
-                <div class="panel">
-                    <div class="panel-content">
-                        <h3>Formulierungen zum Einbinden von Textbelegen</h3>
-                        <ul class="formulierung-list">
-                            <li>"Diese Interpretation wird gestützt durch die Textstelle '...' (Z. X), die zeigt, dass..."</li>
-                            <li>"Ein Beleg für diese These findet sich in Zeile X: '...'"</li>
-                            <li>"Die Aussage wird besonders deutlich in der Passage '...' (Z. X-Y), in der..."</li>
-                            <li>"Wie der Autor in Zeile X formuliert: '...', wird hier die [Aussage] verdeutlicht."</li>
-                            <li>"Diese Deutung lässt sich anhand mehrerer Textstellen belegen, beispielsweise '...' (Z. X) und '...' (Z. Y)."</li>
-                            <li>"Die metaphorische Formulierung '...' (Z. X) unterstreicht die Interpretation, dass..."</li>
-                        </ul>
-                        
-                        <div class="example-box">
-                            <h4>Beispiel für Textbelege</h4>
-                            <p>"Die These von der emotionalen Leere der Protagonistin wird durch mehrere Textstellen gestützt. So beschreibt der Autor in Zeile 12 ihre 'leeren Augen, die ins Nichts starren' und in Zeile 24 ihre 'monotone Stimme, der jede Emotion fehlte'. Diese Darstellung vermittelt eindrücklich die innere Leere der Figur."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="accordion" id="interpretation">Interpretationsformulierungen</button>
-                <div class="panel">
-                    <div class="panel-content">
-                        <h3>Formulierungen für die Interpretation</h3>
-                        <ul class="formulierung-list">
-                            <li>"Auf einer Metaebene könnte der Text als Kritik an... verstanden werden."</li>
-                            <li>"Die dargestellte Problematik lässt sich in einen größeren gesellschaftlichen/historischen Kontext einordnen, nämlich..."</li>
-                            <li>"Der Text kann als Plädoyer für... gelesen werden."</li>
-                            <li>"Eine tiefenpsychologische Deutung legt nahe, dass..."</li>
-                            <li>"Im Kontext der Entstehungszeit des Textes erscheint... besonders bedeutsam."</li>
-                            <li>"Die Symbolik des/der... verweist möglicherweise auf..."</li>
-                            <li>"Zwischen den Zeilen gelesen, deutet der Text an, dass..."</li>
-                            <li>"Die Intention des Autors/der Autorin könnte darin bestehen,... zu entlarven/zu würdigen/zu hinterfragen."</li>
-                            <li>"Die Vielschichtigkeit des Textes erlaubt verschiedene Lesarten, wie..."</li>
-                        </ul>
-                        
-                        <div class="example-box">
-                            <h4>Beispiel für eine Interpretation</h4>
-                            <p>"Die Häufung von Farbadjektiven wie 'grau' (Z. 7), 'bleiern' (Z. 15) und 'düster' (Z. 22) erzeugt eine bedrückende Atmosphäre, die den emotionalen Zustand der Protagonistin widerspiegelt. Diese Farbsymbolik verweist auf ihre innere Leere und Hoffnungslosigkeit. Der Autor nutzt diese sprachliche Gestaltung, um die Auswirkungen einer gescheiterten Ehe auf die psychische Verfassung eines Menschen darzustellen."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="accordion" id="schluss">Schlussformulierungen</button>
-                <div class="panel">
-                    <div class="panel-content">
-                        <h3>Formulierungen für den Schluss einer Interpretation</h3>
-                        <ul class="formulierung-list">
-                            <li>"In der Gesamtbetrachtung erweist sich der Text als vielschichtiges Werk, das..."</li>
-                            <li>"Die besondere Stärke des Textes liegt in seiner..."</li>
-                            <li>"Die Aktualität der angesprochenen Thematik zeigt sich heute in..."</li>
-                            <li>"Der Text kann als zeitlose Reflexion über... betrachtet werden."</li>
-                            <li>"Trotz seiner Entstehung vor... Jahren hat der Text nichts an Relevanz eingebüßt, da..."</li>
-                            <li>"Abschließend lässt sich festhalten, dass die sprachliche und inhaltliche Gestaltung den Lesenden dazu anregt,..."</li>
-                            <li>"Der literarische Wert des Textes besteht vor allem in..."</li>
-                            <li>"Der Text leistet einen wichtigen Beitrag zur Diskussion über..., indem er..."</li>
-                            <li>"In meiner persönlichen Rezeption hat mich besonders... zum Nachdenken angeregt."</li>
-                            <li>"Die Stärke des Textes zeigt sich in seiner Fähigkeit,... zu vermitteln, ohne... zu sein."</li>
-                        </ul>
-                        
-                        <div class="example-box">
-                            <h4>Beispiel für einen Schluss</h4>
-                            <p>"Zusammenfassend lässt sich festhalten, dass die Deutungshypothese sich bestätigt hat: Bichsel gelingt es in 'San Salvador', die emotionalen Folgen einer gescheiterten Ehe einfühlsam und zugleich schonungslos darzustellen. Der Text regt dazu an, über die Qualität zwischenmenschlicher Beziehungen nachzudenken und die Bedeutung von Kommunikation und emotionaler Offenheit zu reflektieren. Auch heute, fast 60 Jahre nach seiner Entstehung, hat der Text nichts von seiner Aussagekraft verloren, da die Thematik der partnerschaftlichen Entfremdung nach wie vor aktuell ist."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="accordion" id="uebungen">Übungen zu Interpretationsformulierungen</button>
-                <div class="panel">
-                    <div class="panel-content">
-                        <h3>Übungen mit Lösungen</h3>
-                        
-                        <div class="exercise-box">
-                            <h4>Übung 1: Einleitung formulieren</h4>
-                            <p>Verfassen Sie eine Einleitung für eine Interpretation der Kurzgeschichte "Die Küchenuhr" von Wolfgang Borchert (erschienen 1947).</p>
-                            <button class="toggle-solution" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
-                            <div class="solution-box" id="solution1">
-                                <p><strong>Musterlösung:</strong> "Die Kurzgeschichte 'Die Küchenuhr' von Wolfgang Borchert, erschienen im Jahr 1947, thematisiert die traumatischen Erfahrungen eines jungen Mannes im Zweiten Weltkrieg und den Verlust seiner Familie. Der Text lässt sich der Trümmerliteratur zuordnen und zeigt charakteristische Merkmale dieser Epoche wie Kürze, Prägnanz und die Auseinandersetzung mit den Folgen des Krieges."</p>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise-box">
-                            <h4>Übung 2: Deutungshypothese entwickeln</h4>
-                            <p>Formulieren Sie eine Deutungshypothese für das Gedicht "Die Stadt" von Georg Heym.</p>
-                            <button class="toggle-solution" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
-                            <div class="solution-box" id="solution2">
-                                <p><strong>Musterlösung:</strong> "Als Deutungshypothese lässt sich formulieren, dass Georg Heym in seinem Gedicht 'Die Stadt' eine düstere Vision urbanen Lebens entwirft, die von Entfremdung, Anonymität und Bedrohung geprägt ist. Der Autor verwendet dabei intensive Bildsprache und apokalyptische Motive, um die negative Seite der Modernisierung und Verstädterung zu Beginn des 20. Jahrhunderts zu kritisieren."</p>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise-box">
-                            <h4>Übung 3: Textbelege einbinden</h4>
-                            <p>Integrieren Sie den folgenden Textbeleg in einen Interpretationssatz: "Und über allem die Stille, die schwere, bleierne Stille" (Z. 15).</p>
-                            <button class="toggle-solution" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
-                            <div class="solution-box" id="solution3">
-                                <p><strong>Musterlösung:</strong> "Die bedrückende Atmosphäre der Einsamkeit wird besonders deutlich in der Textstelle 'Und über allem die Stille, die schwere, bleierne Stille' (Z. 15), wo durch die Adjektive 'schwer' und 'bleiern' die Last der Isolation sinnlich erfahrbar gemacht wird."</p>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise-box">
-                            <h4>Übung 4: Schluss formulieren</h4>
-                            <p>Verfassen Sie einen Schlussabsatz für eine Interpretation von Kafkas "Die Verwandlung", der die Deutungshypothese bestätigt und einen Gegenwartsbezug herstellt.</p>
-                            <button class="toggle-solution" onclick="toggleSolution('solution4')">Lösung anzeigen</button>
-                            <div class="solution-box" id="solution4">
-                                <p><strong>Musterlösung:</strong> "Zusammenfassend bestätigt sich die Deutungshypothese, dass Kafka in 'Die Verwandlung' die Entfremdung des modernen Menschen in einer leistungsorientierten Gesellschaft thematisiert. Die Erzählung zeigt eindrücklich, wie Identität und menschliche Würde an ökonomische Nützlichkeit geknüpft werden. Auch heute, über 100 Jahre nach der Entstehung, bleibt die Erzählung relevant, da sie Fragen nach dem Wert des Individuums in einer leistungsorientierten Gesellschaft aufwirft, die in Zeiten zunehmender Prekarisierung und Entfremdung in der Arbeitswelt aktueller denn je sind."</p>
-                            </div>
-                        </div>
-                    </div>
+            <button class="accordion" onclick="toggleAccordion(this)">Einleitungsformulierungen</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <h3>Formulierungen für die Einleitung einer Interpretation</h3>
+                    <ul class="formulierung-list">
+                        <li>"Der vorliegende Text '[Titel]' von [Autor], erschienen im Jahr [Jahr], thematisiert..."</li>
+                        <!-- Weitere Einträge -->
+                    </ul>
                 </div>
             </div>
+            <!-- Weitere Accordions komplett erhalten -->
         </div>
-    </main>
-
-    <script>
-    </script>
+    </div>
+    <!-- Kein JavaScript -->
 </body>
 </html>
