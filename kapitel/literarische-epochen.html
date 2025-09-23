@@ -5,59 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Literarische Epochen - Deutschmatura</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
-            min-height: 100vh;
-            line-height: 1.6;
-            color: #333;
-            display: flex;
-        }
-
-        .main-content {
-            margin: 0 auto;
-            flex: 1;
-            padding: 20px;
-        }
-
-        .content-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .content-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .content-header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .content-header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        .content-body {
-            padding: 40px;
-        }
-
         .epoche-card {
             background: white;
             border-radius: 10px;
@@ -215,10 +162,6 @@
         }
 
         @media (max-width: 768px) {
-            .content-body {
-                padding: 20px;
-            }
-
             .epoche-info {
                 grid-template-columns: 1fr;
             }
@@ -234,332 +177,325 @@
     </style>
 </head>
 <body>
-    <main class="main-content">
-        <div class="content-container">
-            <header class="content-header">
-                <h1>Literarische Epochen</h1>
-                <p>Überblick und Merkmale der wichtigsten Literaturepochen</p>
-            </header>
+    <div class="content-body">
+        <div class="welcome-section">
+            <h2>Literarische Epochen</h2>
+            <p>Überblick und Merkmale der wichtigsten Literaturepochen von der Aufklärung bis zum Realismus.</p>
+        </div>
 
-            <div class="content-body">
-                <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche(this)">
-                        <h3>Aufklärung (1720-1785)</h3>
-                        <span class="epoche-icon">▼</span>
+        <div class="epoche-card">
+            <div class="epoche-header" onclick="toggleKapitel(1)">
+                <h3>Aufklärung (1720-1785)</h3>
+                <span class="epoche-icon">▼</span>
+            </div>
+            <div class="epoche-content" id="kapitel-1">
+                <div class="epoche-info">
+                    <div>
+                        <div class="epoche-info-item"><strong>Zeitraum:</strong> 1720-1785</div>
+                        <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Rationalismus, Vernunftdenken, Emanzipation des Bürgertums</div>
+                        <div class="epoche-info-item"><strong>Weltbild:</strong> Vernunft als höchste Instanz, Fortschrittsglaube, Toleranz</div>
                     </div>
-                    <div class="epoche-content">
-                        <div class="epoche-info">
-                            <div>
-                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1720-1785</div>
-                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Rationalismus, Vernunftdenken, Emanzipation des Bürgertums</div>
-                                <div class="epoche-info-item"><strong>Weltbild:</strong> Vernunft als höchste Instanz, Fortschrittsglaube, Toleranz</div>
-                            </div>
-                            <div>
-                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
-                                    <ul>
-                                        <li>Vernunftbetontheit</li>
-                                        <li>Didaktischer Charakter</li>
-                                        <li>Klare, nüchterne Sprache</li>
-                                        <li>Moralische Belehrung</li>
-                                        <li>Emanzipation des Bürgertums</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4>Wichtige Vertreter und Werke:</h4>
-                        <div class="epoche-info">
-                            <div>
-                                <ul class="vertreter-liste">
-                                    <li>Gotthold Ephraim Lessing</li>
-                                    <li>Christoph Martin Wieland</li>
-                                    <li>Immanuel Kant</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="werke-liste">
-                                    <li>Nathan der Weise (Lessing)</li>
-                                    <li>Emilia Galotti (Lessing)</li>
-                                    <li>Geschichte des Agathon (Wieland)</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="beispiel-text">
-                            <p>"Der vornehmste Vorzug der Religion besteht in der Übung der Tugend. Die Tugend aber ist das Einzige, was den Menschen vor allen andern Geschöpfen auszeichnet." (Aus: Nathan der Weise)</p>
+                    <div>
+                        <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                            <ul>
+                                <li>Vernunftbetontheit</li>
+                                <li>Didaktischer Charakter</li>
+                                <li>Klare, nüchterne Sprache</li>
+                                <li>Moralische Belehrung</li>
+                                <li>Emanzipation des Bürgertums</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche(this)">
-                        <h3>Sturm und Drang (1765-1785)</h3>
-                        <span class="epoche-icon">▼</span>
+                
+                <h4>Wichtige Vertreter und Werke:</h4>
+                <div class="epoche-info">
+                    <div>
+                        <ul class="vertreter-liste">
+                            <li>Gotthold Ephraim Lessing</li>
+                            <li>Christoph Martin Wieland</li>
+                            <li>Immanuel Kant</li>
+                        </ul>
                     </div>
-                    <div class="epoche-content">
-                        <div class="epoche-info">
-                            <div>
-                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1765-1785</div>
-                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Gegenbewegung zur Aufklärung, Geniezeit</div>
-                                <div class="epoche-info-item"><strong>Weltbild:</strong> Gefühl vor Vernunft, Naturverehrung, Geniekult</div>
-                            </div>
-                            <div>
-                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
-                                    <ul>
-                                        <li>Gefühlsbetontheit</li>
-                                        <li>Geniekult</li>
-                                        <li>Naturverehrung</li>
-                                        <li>Rebellion gegen Autoritäten</li>
-                                        <li>Ausdrucksstarke, emotionale Sprache</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4>Wichtige Vertreter und Werke:</h4>
-                        <div class="epoche-info">
-                            <div>
-                                <ul class="vertreter-liste">
-                                    <li>Johann Wolfgang von Goethe</li>
-                                    <li>Friedrich Schiller</li>
-                                    <li>Jakob Michael Reinhold Lenz</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="werke-liste">
-                                    <li>Die Leiden des jungen Werthers (Goethe)</li>
-                                    <li>Götz von Berlichingen (Goethe)</li>
-                                    <li>Die Räuber (Schiller)</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="beispiel-text">
-                            <p>"Ach, wenn's nur einmal so recht aus dem Herzen weggeschrieben wäre! Ich habe manchmal einen solchen Druck auf dem Herzen, und dann kann ich nicht schreiben, nicht einmal denken." (Aus: Die Leiden des jungen Werthers)</p>
-                        </div>
+                    <div>
+                        <ul class="werke-liste">
+                            <li>Nathan der Weise (Lessing)</li>
+                            <li>Emilia Galotti (Lessing)</li>
+                            <li>Geschichte des Agathon (Wieland)</li>
+                        </ul>
                     </div>
                 </div>
-
-                <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche(this)">
-                        <h3>Weimarer Klassik (1786-1805)</h3>
-                        <span class="epoche-icon">▼</span>
-                    </div>
-                    <div class="epoche-content">
-                        <div class="epoche-info">
-                            <div>
-                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1786-1805</div>
-                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Französische Revolution, Humanitätsideal</div>
-                                <div class="epoche-info-item"><strong>Weltbild:</strong> Harmonie, Humanität, ästhetische Erziehung</div>
-                            </div>
-                            <div>
-                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
-                                    <ul>
-                                        <li>Streben nach Harmonie und Vollendung</li>
-                                        <li>Humanitätsideal</li>
-                                        <li>Antikenrezeption</li>
-                                        <li>Formenstrenge</li>
-                                        <li>Veredelung der Sprache</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4>Wichtige Vertreter und Werke:</h4>
-                        <div class="epoche-info">
-                            <div>
-                                <ul class="vertreter-liste">
-                                    <li>Johann Wolfgang von Goethe</li>
-                                    <li>Friedrich Schiller</li>
-                                    <li>Christoph Martin Wieland</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="werke-liste">
-                                    <li>Iphigenie auf Tauris (Goethe)</li>
-                                    <li>Wilhelm Meisters Lehrjahre (Goethe)</li>
-                                    <li>Don Carlos (Schiller)</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="beispiel-text">
-                            <p>"Edel sei der Mensch, hilfreich und gut! Denn das allein unterscheidet ihn von allen Wesen, die wir kennen." (Aus: Das Göttliche von Goethe)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche(this)">
-                        <h3>Romantik (1795-1835)</h3>
-                        <span class="epoche-icon">▼</span>
-                    </div>
-                    <div class="epoche-content">
-                        <div class="epoche-info">
-                            <div>
-                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1795-1835</div>
-                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Napoleonische Kriege, Industrialisierung</div>
-                                <div class="epoche-info-item"><strong>Weltbild:</strong> Sehnsucht, Mystik, Übernatürliches</div>
-                            </div>
-                            <div>
-                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
-                                    <ul>
-                                        <li>Sehnsucht und Schwermut</li>
-                                        <li>Hinwendung zum Mittelalter</li>
-                                        <li>Naturmystik</li>
-                                        <li>Volkspoesie</li>
-                                        <li>Ironie und Fragmentcharakter</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4>Wichtige Vertreter und Werke:</h4>
-                        <div class="epoche-info">
-                            <div>
-                                <ul class="vertreter-liste">
-                                    <li>Novalis</li>
-                                    <li>E.T.A. Hoffmann</li>
-                                    <li>Joseph von Eichendorff</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="werke-liste">
-                                    <li>Heinrich von Ofterdingen (Novalis)</li>
-                                    <li>Der goldne Topf (Hoffmann)</li>
-                                    <li>Aus dem Leben eines Taugenichts (Eichendorff)</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="beispiel-text">
-                            <p>"Es waren schöne, glänzende Sterne am Himmel, unten schlugen die Wellen des Meeres an den Felsen, und in der Ferne hörte man das dumpfe Rollen eines Gewitters." (Aus: Aus dem Leben eines Taugenichts)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="epoche-card">
-                    <div class="epoche-header" onclick="toggleEpoche(this)">
-                        <h3>Realismus (1848-1890)</h3>
-                        <span class="epoche-icon">▼</span>
-                    </div>
-                    <div class="epoche-content">
-                        <div class="epoche-info">
-                            <div>
-                                <div class="epoche-info-item"><strong>Zeitraum:</strong> 1848-1890</div>
-                                <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Industrielle Revolution, Märzrevolution 1848</div>
-                                <div class="epoche-info-item"><strong>Weltbild:</strong> Nüchterne Wirklichkeitsdarstellung, Objektivität</div>
-                            </div>
-                            <div>
-                                <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
-                                    <ul>
-                                        <li>Wirklichkeitstreue</li>
-                                        <li>Detailgenaue Schilderungen</li>
-                                        <li>Psychologische Vertiefung</li>
-                                        <li>Objektive Erzählhaltung</li>
-                                        <li>Bürgerlicher Alltag als Thema</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4>Wichtige Vertreter und Werke:</h4>
-                        <div class="epoche-info">
-                            <div>
-                                <ul class="vertreter-liste">
-                                    <li>Theodor Fontane</li>
-                                    <li>Gottfried Keller</li>
-                                    <li>Theodor Storm</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="werke-liste">
-                                    <li>Effi Briest (Fontane)</li>
-                                    <li>Der grüne Heinrich (Keller)</li>
-                                    <li>Der Schimmelreiter (Storm)</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="beispiel-text">
-                            <p>"Es ist ein eigenes Ding um die sogenannte gute Gesellschaft. Man verkehrt Jahre lang miteinander, man ist höflich, man ist zuvorkommend, man lobt einander, und im Grunde weiß man nichts voneinander." (Aus: Effi Briest)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h4>Aufklärung</h4>
-                        <p>1720-1785</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Sturm und Drang</h4>
-                        <p>1765-1785</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Weimarer Klassik</h4>
-                        <p>1786-1805</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Romantik</h4>
-                        <p>1795-1835</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Realismus</h4>
-                        <p>1848-1890</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Naturalismus</h4>
-                        <p>1880-1900</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Expressionismus</h4>
-                        <p>1910-1925</p>
-                    </div>
-                </div>
-
-                <div class="uebung-box">
-                    <h4>Übung: Epochenzuordnung</h4>
-                    <p>Ordnen Sie die folgenden Textausschnitte den richtigen Literaturepochen zu:</p>
-                    <ol>
-                        <li>"Die Natur allein ist unendlich reich, und sie allein bildet den großen Künstler."</li>
-                        <li>"Der Mensch ist frei geschaffen, ist frei, und würd' er in Ketten geboren."</li>
-                        <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, was nicht notwendig geschehen müsste."</li>
-                    </ol>
-                    <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-1')">Lösung anzeigen</button>
-                    <div class="loesung" id="epochen-uebung-1">
-                        <p><strong>Lösungen:</strong></p>
-                        <ol>
-                            <li>Sturm und Drang (Naturverehrung, Geniekult)</li>
-                            <li>Weimarer Klassik (Freiheitspathos, Humanitätsideal)</li>
-                            <li>Aufklärung (Determinismus, Vernunftdenken)</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="uebung-box">
-                    <h4>Übung: Epochenmerkmale erkennen</h4>
-                    <p>Analysieren Sie den folgenden Textausschnitt und bestimmen Sie, aus welcher Literaturepoche er stammt. Begründen Sie Ihre Entscheidung mit mindestens drei Merkmalen:</p>
-                    <div class="beispiel-text">
-                        <p>"Die Nacht war sternenklar und kalt. Ich stand am Fenster und blickte hinauf zu den unzähligen Funken, die am Firmament glitzerten. Eine tiefe Wehmut ergriff mich, eine Sehnsucht nach etwas, das ich nicht benennen konnte, das aber weit, weit entfernt war, jenseits dieser kalten, einsamen Nacht."</p>
-                    </div>
-                    <button class="loesung-button" onclick="toggleLoesung('epochen-uebung-2')">Lösung anzeigen</button>
-                    <div class="loesung" id="epochen-uebung-2">
-                        <p><strong>Lösung:</strong></p>
-                        <p>Der Textausschnitt stammt aus der Romantik. Merkmale:</p>
-                        <ol>
-                            <li>Naturbeschreibung mit emotionaler Aufladung (sterneklare, kalte Nacht)</li>
-                            <li>Betontes Gefühlsleben (Wehmut, Sehnsucht)</li>
-                            <li>Unbestimmte, transzendente Sehnsucht ("etwas, das ich nicht benennen konnte")</li>
-                            <li>Einsamkeitsmotiv ("einsame Nacht")</li>
-                        </ol>
-                    </div>
+                
+                <div class="beispiel-text">
+                    <p>"Der vornehmste Vorzug der Religion besteht in der Übung der Tugend. Die Tugend aber ist das Einzige, was den Menschen vor allen andern Geschöpfen auszeichnet." (Aus: Nathan der Weise)</p>
                 </div>
             </div>
         </div>
-    </main>
 
-    <script>
-    </script>
+        <div class="epoche-card">
+            <div class="epoche-header" onclick="toggleKapitel(2)">
+                <h3>Sturm und Drang (1765-1785)</h3>
+                <span class="epoche-icon">▼</span>
+            </div>
+            <div class="epoche-content" id="kapitel-2">
+                <div class="epoche-info">
+                    <div>
+                        <div class="epoche-info-item"><strong>Zeitraum:</strong> 1765-1785</div>
+                        <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Gegenbewegung zur Aufklärung, Geniezeit</div>
+                        <div class="epoche-info-item"><strong>Weltbild:</strong> Gefühl vor Vernunft, Naturverehrung, Geniekult</div>
+                    </div>
+                    <div>
+                        <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                            <ul>
+                                <li>Gefühlsbetontheit</li>
+                                <li>Geniekult</li>
+                                <li>Naturverehrung</li>
+                                <li>Rebellion gegen Autoritäten</li>
+                                <li>Ausdrucksstarke, emotionale Sprache</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Wichtige Vertreter und Werke:</h4>
+                <div class="epoche-info">
+                    <div>
+                        <ul class="vertreter-liste">
+                            <li>Johann Wolfgang von Goethe</li>
+                            <li>Friedrich Schiller</li>
+                            <li>Jakob Michael Reinhold Lenz</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="werke-liste">
+                            <li>Die Leiden des jungen Werthers (Goethe)</li>
+                            <li>Götz von Berlichingen (Goethe)</li>
+                            <li>Die Räuber (Schiller)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="beispiel-text">
+                    <p>"Ach, wenn's nur einmal so recht aus dem Herzen weggeschrieben wäre! Ich habe manchmal einen solchen Druck auf dem Herzen, und dann kann ich nicht schreiben, nicht einmal denken." (Aus: Die Leiden des jungen Werthers)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="epoche-card">
+            <div class="epoche-header" onclick="toggleKapitel(3)">
+                <h3>Weimarer Klassik (1786-1805)</h3>
+                <span class="epoche-icon">▼</span>
+            </div>
+            <div class="epoche-content" id="kapitel-3">
+                <div class="epoche-info">
+                    <div>
+                        <div class="epoche-info-item"><strong>Zeitraum:</strong> 1786-1805</div>
+                        <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Französische Revolution, Humanitätsideal</div>
+                        <div class="epoche-info-item"><strong>Weltbild:</strong> Harmonie, Humanität, ästhetische Erziehung</div>
+                    </div>
+                    <div>
+                        <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                            <ul>
+                                <li>Streben nach Harmonie und Vollendung</li>
+                                <li>Humanitätsideal</li>
+                                <li>Antikenrezeption</li>
+                                <li>Formenstrenge</li>
+                                <li>Veredelung der Sprache</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Wichtige Vertreter und Werke:</h4>
+                <div class="epoche-info">
+                    <div>
+                        <ul class="vertreter-liste">
+                            <li>Johann Wolfgang von Goethe</li>
+                            <li>Friedrich Schiller</li>
+                            <li>Christoph Martin Wieland</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="werke-liste">
+                            <li>Iphigenie auf Tauris (Goethe)</li>
+                            <li>Wilhelm Meisters Lehrjahre (Goethe)</li>
+                            <li>Don Carlos (Schiller)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="beispiel-text">
+                    <p>"Edel sei der Mensch, hilfreich und gut! Denn das allein unterscheidet ihn von allen Wesen, die wir kennen." (Aus: Das Göttliche von Goethe)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="epoche-card">
+            <div class="epoche-header" onclick="toggleKapitel(4)">
+                <h3>Romantik (1795-1835)</h3>
+                <span class="epoche-icon">▼</span>
+            </div>
+            <div class="epoche-content" id="kapitel-4">
+                <div class="epoche-info">
+                    <div>
+                        <div class="epoche-info-item"><strong>Zeitraum:</strong> 1795-1835</div>
+                        <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Napoleonische Kriege, Industrialisierung</div>
+                        <div class="epoche-info-item"><strong>Weltbild:</strong> Sehnsucht, Mystik, Übernatürliches</div>
+                    </div>
+                    <div>
+                        <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                            <ul>
+                                <li>Sehnsucht und Schwermut</li>
+                                <li>Hinwendung zum Mittelalter</li>
+                                <li>Naturmystik</li>
+                                <li>Volkspoesie</li>
+                                <li>Ironie und Fragmentcharakter</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Wichtige Vertreter und Werke:</h4>
+                <div class="epoche-info">
+                    <div>
+                        <ul class="vertreter-liste">
+                            <li>Novalis</li>
+                            <li>E.T.A. Hoffmann</li>
+                            <li>Joseph von Eichendorff</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="werke-liste">
+                            <li>Heinrich von Ofterdingen (Novalis)</li>
+                            <li>Der goldne Topf (Hoffmann)</li>
+                            <li>Aus dem Leben eines Taugenichts (Eichendorff)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="beispiel-text">
+                    <p>"Es waren schöne, glänzende Sterne am Himmel, unten schlugen die Wellen des Meeres an den Felsen, und in der Ferne hörte man das dumpfe Rollen eines Gewitters." (Aus: Aus dem Leben eines Taugenichts)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="epoche-card">
+            <div class="epoche-header" onclick="toggleKapitel(5)">
+                <h3>Realismus (1848-1890)</h3>
+                <span class="epoche-icon">▼</span>
+            </div>
+            <div class="epoche-content" id="kapitel-5">
+                <div class="epoche-info">
+                    <div>
+                        <div class="epoche-info-item"><strong>Zeitraum:</strong> 1848-1890</div>
+                        <div class="epoche-info-item"><strong>Historischer Hintergrund:</strong> Industrielle Revolution, Märzrevolution 1848</div>
+                        <div class="epoche-info-item"><strong>Weltbild:</strong> Nüchterne Wirklichkeitsdarstellung, Objektivität</div>
+                    </div>
+                    <div>
+                        <div class="epoche-info-item"><strong>Typische Merkmale:</strong>
+                            <ul>
+                                <li>Wirklichkeitstreue</li>
+                                <li>Detailgenaue Schilderungen</li>
+                                <li>Psychologische Vertiefung</li>
+                                <li>Objektive Erzählhaltung</li>
+                                <li>Bürgerlicher Alltag als Thema</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Wichtige Vertreter und Werke:</h4>
+                <div class="epoche-info">
+                    <div>
+                        <ul class="vertreter-liste">
+                            <li>Theodor Fontane</li>
+                            <li>Gottfried Keller</li>
+                            <li>Theodor Storm</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="werke-liste">
+                            <li>Effi Briest (Fontane)</li>
+                            <li>Der grüne Heinrich (Keller)</li>
+                            <li>Der Schimmelreiter (Storm)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="beispiel-text">
+                    <p>"Es ist ein eigenes Ding um die sogenannte gute Gesellschaft. Man verkehrt Jahre lang miteinander, man ist höflich, man ist zuvorkommend, man lobt einander, und im Grunde weiß man nichts voneinander." (Aus: Effi Briest)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Aufklärung</h4>
+                <p>1720-1785</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Sturm und Drang</h4>
+                <p>1765-1785</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Weimarer Klassik</h4>
+                <p>1786-1805</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Romantik</h4>
+                <p>1795-1835</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Realismus</h4>
+                <p>1848-1890</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Naturalismus</h4>
+                <p>1880-1900</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Expressionismus</h4>
+                <p>1910-1925</p>
+            </div>
+        </div>
+
+        <div class="uebung-box">
+            <h4>Übung: Epochenzuordnung</h4>
+            <p>Ordnen Sie die folgenden Textausschnitte den richtigen Literaturepochen zu:</p>
+            <ol>
+                <li>"Die Natur allein ist unendlich reich, und sie allein bildet den großen Künstler."</li>
+                <li>"Der Mensch ist frei geschaffen, ist frei, und würd' er in Ketten geboren."</li>
+                <li>"Alles was geschieht, geschieht notwendig, und es geschieht nichts, was nicht notwendig geschehen müsste."</li>
+            </ol>
+            <button class="loesung-button" onclick="toggleSolution('epochen-uebung-1')">Lösung anzeigen</button>
+            <div class="loesung" id="epochen-uebung-1">
+                <p><strong>Lösungen:</strong></p>
+                <ol>
+                    <li>Sturm und Drang (Naturverehrung, Geniekult)</li>
+                    <li>Weimarer Klassik (Freiheitspathos, Humanitätsideal)</li>
+                    <li>Aufklärung (Determinismus, Vernunftdenken)</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="uebung-box">
+            <h4>Übung: Epochenmerkmale erkennen</h4>
+            <p>Analysieren Sie den folgenden Textausschnitt und bestimmen Sie, aus welcher Literaturepoche er stammt. Begründen Sie Ihre Entscheidung mit mindestens drei Merkmalen:</p>
+            <div class="beispiel-text">
+                <p>"Die Nacht war sternenklar und kalt. Ich stand am Fenster und blickte hinauf zu den unzähligen Funken, die am Firmament glitzerten. Eine tiefe Wehmut ergriff mich, eine Sehnsucht nach etwas, das ich nicht benennen konnte, das aber weit, weit entfernt war, jenseits dieser kalten, einsamen Nacht."</p>
+            </div>
+            <button class="loesung-button" onclick="toggleSolution('epochen-uebung-2')">Lösung anzeigen</button>
+            <div class="loesung" id="epochen-uebung-2">
+                <p><strong>Lösung:</strong></p>
+                <p>Der Textausschnitt stammt aus der Romantik. Merkmale:</p>
+                <ol>
+                    <li>Naturbeschreibung mit emotionaler Aufladung (sterneklare, kalte Nacht)</li>
+                    <li>Betontes Gefühlsleben (Wehmut, Sehnsucht)</li>
+                    <li>Unbestimmte, transzendente Sehnsucht ("etwas, das ich nicht benennen konnte")</li>
+                    <li>Einsamkeitsmotiv ("einsame Nacht")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

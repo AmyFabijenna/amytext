@@ -3,420 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Argumentationsanalyse - Komplett neu</title>
+    <title>Argumentationsanalyse - Neue funktionierende Version</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
-            background: #f5f5f5;
-        }
-        
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         h1, h2, h3 {
             color: #2c3e50;
         }
         
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        
-        .untertitel {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        
         .kapitel {
-            margin: 30px 0;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
+            margin: 10px 0;
+            border-radius: 5px;
         }
         
         .kapitel-titel {
             background: #34495e;
             color: white;
-            padding: 20px;
-            margin: 0;
+            padding: 15px;
             cursor: pointer;
-            font-size: 1.3em;
+            margin: 0;
         }
         
         .kapitel-inhalt {
-            padding: 0 20px;
+            padding: 0 15px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
         
         .kapitel-inhalt.offen {
-            max-height: 5000px;
-            padding: 20px;
+            max-height: 2000px;
+            padding: 15px;
         }
         
-        .card {
-            background: #f8f9fa;
-            padding: 20px;
-            margin: 15px 0;
-            border-left: 4px solid #3498db;
-            border-radius: 5px;
+        .beispiel {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #3498db;
         }
         
-        .theory { border-left-color: #3498db; }
-        .example { border-left-color: #2ecc71; background: #e8f6f3; }
-        .exercise { border-left-color: #f39c12; background: #fef9e7; }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        
-        th {
-            background: #34495e;
-            color: white;
-        }
-        
-        .tip-box {
+        .uebung {
             background: #fff3cd;
-            border: 1px solid #ffeaa7;
             padding: 15px;
             margin: 15px 0;
-            border-radius: 5px;
-        }
-        
-        .btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        
-        .solution {
-            display: none;
-            background: #e8f4f8;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border-left: 4px solid #3498db;
-        }
-        
-        pre {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
+            border: 1px solid #ffeaa7;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Argumentationsanalyse</h1>
-    <p class="untertitel">Argumentationsstrukturen erkennen und bewerten</p>
+<h1>Argumentationsanalyse</h1>
+<p>Argumentationsstrukturen erkennen und bewerten</p>
 
-    <!-- KAPITEL 1 -->
-    <div class="kapitel">
-        <h2 class="kapitel-titel" onclick="toggleKapitel(1)">1. Grundlagen der Argumentationsanalyse</h2>
-        <div class="kapitel-inhalt" id="kapitel-1">
-            <div class="card theory">
-                <h3>Was ist Argumentationsanalyse?</h3>
-                <p>Die Argumentationsanalyse untersucht die logischen Strukturen, auf denen Texte aufbauen. Sie zeigt, wie Thesen begründet und miteinander verknüpft werden. Die Fähigkeit, diese Strukturen zu erkennen, ist entscheidend für das kritische Textverständnis.</p>
-            </div>
-            
-            <div class="card">
-                <h3>Bausteine einer Argumentation</h3>
-                <p>Jede Argumentation besteht aus folgenden Elementen:</p>
-                <ul>
-                    <li><strong>These/Hauptbehauptung:</strong> Die zentrale Aussage, die begründet werden soll</li>
-                    <li><strong>Argumente:</strong> Begründungen, die die These stützen</li>
-                    <li><strong>Belege:</strong> Konkrete Beispiele, Fakten oder Zitate, die die Argumente untermauern</li>
-                    <li><strong>Schlussfolgerung:</strong> Die abschließende Zusammenfassung oder Handlungsaufforderung</li>
-                </ul>
-            </div>
-            
-            <div class="card example">
-                <h3>Beispiel: Argumentationsbausteine identifizieren</h3>
-                <p><strong>Textbeispiel:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</p>
-                
-                <p><strong>Analyse:</strong></p>
-                <ul>
-                    <li><strong>These:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln."</li>
-                    <li><strong>Argument:</strong> "Die globalen Temperaturen steigen nachweislich."</li>
-                    <li><strong>Beleg:</strong> "Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht."</li>
-                    <li><strong>Weiteres Argument:</strong> "Die Folgen sind bereits spürbar."</li>
-                    <li><strong>Belege:</strong> "schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel."</li>
-                </ul>
+<!-- KAPITEL 1 -->
+<div class="kapitel">
+    <h2 class="kapitel-titel" onclick="zeigeInhalt(1)">1. Grundlagen der Argumentationsanalyse</h2>
+    <div class="kapitel-inhalt" id="inhalt-1">
+        <h3>Was ist Argumentationsanalyse?</h3>
+        <p>Die Argumentationsanalyse untersucht die logischen Strukturen, auf denen Texte aufbauen. Sie zeigt, wie Thesen begründet und miteinander verknüpft werden.</p>
+        
+        <h3>Bausteine einer Argumentation</h3>
+        <ul>
+            <li><strong>These/Hauptbehauptung:</strong> Die zentrale Aussage, die begründet werden soll</li>
+            <li><strong>Argumente:</strong> Begründungen, die die These stützen</li>
+            <li><strong>Belege:</strong> Konkrete Beispiele, Fakten oder Zitate</li>
+            <li><strong>Schlussfolgerung:</strong> Die abschließende Zusammenfassung</li>
+        </ul>
+        
+        <div class="beispiel">
+            <h4>Beispiel: Argumentationsbausteine identifizieren</h4>
+            <p><strong>Textbeispiel:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich."</p>
+            <p><strong>Analyse:</strong> These = Klimawandel als Bedrohung, Argument = Temperaturen steigen</p>
+        </div>
+    </div>
+</div>
+
+<!-- KAPITEL 2 -->
+<div class="kapitel">
+    <h2 class="kapitel-titel" onclick="zeigeInhalt(2)">2. Argumentationsstrukturen und -muster</h2>
+    <div class="kapitel-inhalt" id="inhalt-2">
+        <h3>Typische Argumentationsmuster</h3>
+        <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <tr>
+                <th>Muster</th>
+                <th>Beschreibung</th>
+                <th>Beispiel</th>
+            </tr>
+            <tr>
+                <td>Lineare Argumentation</td>
+                <td>Einzelne Argumente werden nacheinander aufgeführt</td>
+                <td>"A, deshalb B, deshalb C"</td>
+            </tr>
+            <tr>
+                <td>Dialektische Argumentation</td>
+                <td>These und Antithese werden gegenübergestellt</td>
+                <td>"Einerseits A, andererseits B"</td>
+            </tr>
+            <tr>
+                <td>Kausale Argumentation</td>
+                <td>Ursache-Wirkungs-Beziehungen werden dargestellt</td>
+                <td>"Weil A, deshalb B"</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- KAPITEL 3 -->
+<div class="kapitel">
+    <h2 class="kapitel-titel" onclick="zeigeInhalt(3)">3. Argumentationstypen und ihre Bewertung</h2>
+    <div class="kapitel-inhalt" id="inhalt-3">
+        <h3>Typen von Argumenten</h3>
+        <table border="1" cellpadding="8" cellspacing="0" width="100%">
+            <tr>
+                <th>Argumenttyp</th>
+                <th>Beschreibung</th>
+                <th>Beispiel</th>
+            </tr>
+            <tr>
+                <td>Faktenargument</td>
+                <td>Beruht auf nachprüfbaren Tatsachen</td>
+                <td>"Studien zeigen, dass..."</td>
+            </tr>
+            <tr>
+                <td>Autoritätsargument</td>
+                <td>Bezieht sich auf anerkannte Expert:innen</td>
+                <td>"Laut Professor Müller..."</td>
+            </tr>
+            <tr>
+                <td>Normatives Argument</td>
+                <td>Bezieht sich auf Werte und Normen</td>
+                <td>"Aus Gründen der Gerechtigkeit..."</td>
+            </tr>
+        </table>
+        
+        <div class="uebung">
+            <h4>Übung: Argumentationsmuster erkennen</h4>
+            <p><strong>Aufgabe:</strong> Identifiziere die verwendeten Argumentationsmuster:</p>
+            <ol>
+                <li>"Fast jeder Mensch besitzt heute ein Smartphone. Die ständige Erreichbarkeit führt zu Stress."</li>
+                <li>"Viele erfolgreiche Unternehmer haben ihr Studium abgebrochen. Ein Abschluss ist also keine Voraussetzung."</li>
+            </ol>
+            <button onclick="zeigeLoesung(1)">Lösung anzeigen</button>
+            <div id="loesung-1" style="display:none; margin-top:10px; padding:10px; background:#e8f4f8;">
+                <p><strong>Lösungen:</strong> 1. Kausale Argumentation, 2. Argumentation mit Beispielen</p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- KAPITEL 2 -->
-    <div class="kapitel">
-        <h2 class="kapitel-titel" onclick="toggleKapitel(2)">2. Argumentationsstrukturen und -muster</h2>
-        <div class="kapitel-inhalt" id="kapitel-2">
-            <div class="card">
-                <h3>Typische Argumentationsmuster</h3>
-                <table>
-                    <tr>
-                        <th>Muster</th>
-                        <th>Beschreibung</th>
-                        <th>Beispiel</th>
-                    </tr>
-                    <tr>
-                        <td>Lineare Argumentation</td>
-                        <td>Einzelne Argumente werden nacheinander aufgeführt und führen zur Schlussfolgerung</td>
-                        <td>"A, deshalb B, deshalb C"</td>
-                    </tr>
-                    <tr>
-                        <td>Dialektische Argumentation</td>
-                        <td>These und Antithese werden gegenübergestellt, um zu einer Synthese zu gelangen</td>
-                        <td>"Einerseits A, andererseits B, daher C"</td>
-                    </tr>
-                    <tr>
-                        <td>Kausale Argumentation</td>
-                        <td>Ursache-Wirkungs-Beziehungen werden dargestellt</td>
-                        <td>"Weil A, deshalb B"</td>
-                    </tr>
-                    <tr>
-                        <td>Analytische Argumentation</td>
-                        <td>Ein Problem wird in seine Bestandteile zerlegt und analysiert</td>
-                        <td>"Das Problem besteht aus X, Y und Z"</td>
-                    </tr>
-                </table>
-            </div>
-            
-            <div class="card example">
-                <h3>Visualisierung von Argumentationsstrukturen</h3>
-                <p>Argumentationsstrukturen können grafisch dargestellt werden, um sie besser zu verstehen:</p>
-                
-                <p><strong>Beispiel:</strong> "Die Lektüre literarischer Klassiker sollte auch im digitalen Zeitalter ein zentraler Bestandteil des Schulunterrichts bleiben."</p>
-                
-                <p><strong>Grafische Darstellung:</strong></p>
-                <pre>
-Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
-|
-|--- Argument 1: Klassiker haben zeitlosen kulturellen Wert
-|    |— Beleg: Goethes "Faust" behandelt universelle Themen
-|
-|--- Argument 2: Förderung wichtiger Kompetenzen
-|    |— Beleg: Studien zeigen Förderung des kritischen Denkens
-|
-|--- Einwand (implizit): Klassiker könnten schwer zugänglich sein
-|    |— Gegenargument: Moderne Vermittlungsmethoden können helfen
-|    |— Beispiele: Einsatz digitaler Medien, Bezüge zur Lebenswelt
-|
-|--- Schlussfolgerung: Integration von klassischer Literatur und digitalen Medien
-                </pre>
-            </div>
+<!-- KAPITEL 4 -->
+<div class="kapitel">
+    <h2 class="kapitel-titel" onclick="zeigeInhalt(4)">4. Analyse der Argumentationsstrategie</h2>
+    <div class="kapitel-inhalt" id="inhalt-4">
+        <h3>Fragen zur Analyse der Argumentationsstrategie</h3>
+        <ol>
+            <li>Welche Hauptthese vertritt der Autor/die Autorin?</li>
+            <li>Mit welchen Argumenten wird diese These gestützt?</li>
+            <li>Welche Arten von Argumenten werden verwendet?</li>
+            <li>Wie ist die Argumentation aufgebaut?</li>
+            <li>Ist die Argumentation logisch schlüssig?</li>
+        </ol>
+        
+        <div class="beispiel">
+            <p><strong>Tipp:</strong> Achte besonders auf implizite Prämissen und die Verknüpfungen zwischen den Argumenten.</p>
         </div>
     </div>
+</div>
 
-    <!-- KAPITEL 3 -->
-    <div class="kapitel">
-        <h2 class="kapitel-titel" onclick="toggleKapitel(3)">3. Argumentationstypen und ihre Bewertung</h2>
-        <div class="kapitel-inhalt" id="kapitel-3">
-            <div class="card">
-                <h3>Typen von Argumenten</h3>
-                <table>
-                    <tr>
-                        <th>Argumenttyp</th>
-                        <th>Beschreibung</th>
-                        <th>Beispiel</th>
-                    </tr>
-                    <tr>
-                        <td>Faktenargument</td>
-                        <td>Beruht auf nachprüfbaren Tatsachen und Daten</td>
-                        <td>"Studien zeigen, dass..."</td>
-                    </tr>
-                    <tr>
-                        <td>Autoritätsargument</td>
-                        <td>Bezieht sich auf anerkannte Expert:innen oder Quellen</td>
-                        <td>"Laut Professor Müller von der Universität Wien..."</td>
-                    </tr>
-                    <tr>
-                        <td>Normatives Argument</td>
-                        <td>Bezieht sich auf Werte, Normen oder moralische Prinzipien</td>
-                        <td>"Aus Gründen der Gerechtigkeit sollte..."</td>
-                    </tr>
-                    <tr>
-                        <td>Analogisierendes Argument</td>
-                        <td>Zieht einen Vergleich zu einem ähnlichen Fall</td>
-                        <td>"Ähnlich wie in Schweden könnten wir..."</td>
-                    </tr>
-                    <tr>
-                        <td>Konsequenzargument</td>
-                        <td>Argumentiert mit den Folgen einer Handlung oder Entscheidung</td>
-                        <td>"Wenn wir nicht handeln, werden die Kosten steigen."</td>
-                    </tr>
-                </table>
-            </div>
-            
-            <div class="card">
-                <h3>Typische Argumentationsfehler erkennen</h3>
-                <p>In Argumentationen können verschiedene Fehler auftreten:</p>
-                <ul>
-                    <li><strong>Strohmann-Argument:</strong> Der Gegenposition wird eine schwächere oder falsche Version unterstellt</li>
-                    <li><strong>Falsches Dilemma:</strong> Es werden nur zwei Alternativen präsentiert, obwohl mehr existieren</li>
-                    <li><strong>Ad hominem:</strong> Angriff auf die Person statt auf deren Argumente</li>
-                    <li><strong>Scheinkorrelation:</strong> Zwei Ereignisse werden fälschlicherweise in Ursache-Wirkungs-Beziehung gesetzt</li>
-                    <li><strong>Cherry-Picking:</strong> Selektive Auswahl von Belegen, die die eigene Position stützen</li>
-                </ul>
-            </div>
-            
-            <div class="card exercise">
-                <h3>Übung: Argumentationsmuster erkennen und bewerten</h3>
-                <p><strong>Aufgabe:</strong> Identifiziere in den folgenden Textpassagen die verwendeten Argumentationsmuster und bewerte ihre Überzeugungskraft.</p>
-                
-                <ol>
-                    <li>"Fast jeder Mensch besitzt heute ein Smartphone. Die ständige Erreichbarkeit führt nachweislich zu erhöhtem Stress. Daher sollte jeder regelmäßig bewusste Auszeiten von digitalen Geräten nehmen."</li>
-                    <li>"Viele erfolgreiche Unternehmer wie Steve Jobs und Bill Gates haben ihr Studium abgebrochen. Ein Universitätsabschluss ist also keine Voraussetzung für beruflichen Erfolg."</li>
-                    <li>"Entweder wir investieren jetzt massiv in den öffentlichen Nahverkehr, oder der Verkehrskollaps in unseren Städten wird sich weiter verschlimmern. Da niemand einen Verkehrskollaps will, bleibt nur die Option der Investitionen."</li>
-                </ol>
-                
-                <button class="btn" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
-                
-                <div id="solution1" class="solution">
-                    <p><strong>Lösungen:</strong></p>
-                    <ol>
-                        <li><strong>Argumentationsmuster:</strong> Kausale Argumentation (Wenn-Dann-Struktur). <strong>Bewertung:</strong> Grundsätzlich logisch, aber die Prämissen sind nicht ausreichend belegt. Die Verallgemeinerung "fast jeder" ist ungenau. Der Zusammenhang zwischen Smartphone-Besitz und ständiger Erreichbarkeit wird vorausgesetzt, aber nicht bewiesen.</li>
-                        <li><strong>Argumentationsmuster:</strong> Argumentation mit Beispielen, induktives Schließen. <strong>Bewertung:</strong> Schwache Argumentation durch selektive Beispiele (Cherry-Picking). Die wenigen prominenten Ausnahmen werden benutzt, um eine allgemeine Regel abzuleiten. Die Schlussfolgerung ist zu absolut und ignoriert, dass die Mehrheit erfolgreicher Menschen durchaus einen Abschluss hat.</li>
-                        <li><strong>Argumentationsmuster:</strong> Dilemma/Entweder-Oder-Argumentation. <strong>Bewertung:</strong> Problematische Vereinfachung durch falsche Dichotomie. Es werden nur zwei Alternativen präsentiert, während es möglicherweise andere Lösungsansätze gibt. Rhetorisch wirksam, aber logisch anfechtbar.</li>
-                    </ol>
-                </div>
+<!-- KAPITEL 5 -->
+<div class="kapitel">
+    <h2 class="kapitel-titel" onclick="zeigeInhalt(5)">5. Praxisteil: Übungen zur Argumentationsanalyse</h2>
+    <div class="kapitel-inhalt" id="inhalt-5">
+        <div class="uebung">
+            <h4>Übung 1: Argumentationsbausteine identifizieren</h4>
+            <p><strong>Text:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich."</p>
+            <button onclick="zeigeLoesung(2)">Lösung anzeigen</button>
+            <div id="loesung-2" style="display:none; margin-top:10px; padding:10px; background:#e8f4f8;">
+                <p><strong>Lösung:</strong> These = Klimawandel als Bedrohung, Argument = Temperaturen steigen nachweislich</p>
             </div>
         </div>
-    </div>
-
-    <!-- KAPITEL 4 -->
-    <div class="kapitel">
-        <h2 class="kapitel-titel" onclick="toggleKapitel(4)">4. Analyse der Argumentationsstrategie</h2>
-        <div class="kapitel-inhalt" id="kapitel-4">
-            <div class="card">
-                <h3>Fragen zur Analyse der Argumentationsstrategie</h3>
-                <p>Bei der Analyse einer Argumentation sollten folgende Fragen beantwortet werden:</p>
-                <ol>
-                    <li>Welche Hauptthese vertritt der Autor/die Autorin?</li>
-                    <li>Mit welchen Argumenten wird diese These gestützt?</li>
-                    <li>Welche Arten von Argumenten werden verwendet (Fakten, Autoritäten, normative Argumente)?</li>
-                    <li>Wie ist die Argumentation aufgebaut (linear, dialektisch, kausal)?</li>
-                    <li>Werden Gegenargumente berücksichtigt und widerlegt?</li>
-                    <li>Ist die Argumentation logisch schlüssig und nachvollziehbar?</li>
-                    <li>Sind die Belege und Beispiele überzeugend und relevant?</li>
-                    <li>Welche rhetorischen Mittel werden eingesetzt, um die Argumentation zu stützen?</li>
-                    <li>Zielt die Argumentation primär auf Logik (Logos), Emotionen (Pathos) oder Glaubwürdigkeit (Ethos)?</li>
-                    <li>Wie überzeugend ist die Argumentation insgesamt?</li>
-                </ol>
-            </div>
-            
-            <div class="tip-box">
-                <strong>Tipp:</strong><br>
-                Achte besonders auf implizite Prämissen (Voraussetzungen, die nicht explizit genannt werden) und auf die Verknüpfungen zwischen den Argumenten. Oft liegt die Schwäche einer Argumentation nicht in den einzelnen Argumenten, sondern in ihrer Verknüpfung.
+        
+        <div class="uebung">
+            <h4>Übung 2: Argumentationsstruktur visualisieren</h4>
+            <p><strong>Aufgabe:</strong> Stelle die Argumentationsstruktur grafisch dar.</p>
+            <button onclick="zeigeLoesung(3)">Lösung anzeigen</button>
+            <div id="loesung-3" style="display:none; margin-top:10px; padding:10px; background:#e8f4f8;">
+                <p><strong>Lösung:</strong> Baumdiagramm oder Mind-Map erstellen mit Hauptthese, Argumenten und Belegen</p>
             </div>
         </div>
-    </div>
-
-    <!-- KAPITEL 5 -->
-    <div class="kapitel">
-        <h2 class="kapitel-titel" onclick="toggleKapitel(5)">5. Praxisteil: Übungen zur Argumentationsanalyse</h2>
-        <div class="kapitel-inhalt" id="kapitel-5">
-            <div class="card exercise">
-                <h3>Übung 1: Argumentationsbausteine identifizieren</h3>
-                <p><strong>Aufgabe:</strong> Lies den folgenden Textausschnitt und identifiziere:</p>
-                <ul>
-                    <li>Die Hauptthese</li>
-                    <li>Untergeordnete Thesen/Behauptungen</li>
-                    <li>Argumente und Belege</li>
-                    <li>Schlussfolgerungen</li>
-                </ul>
-                
-                <p><strong>Text:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel. Besonders alarmierend ist, dass viele dieser Entwicklungen sich selbst verstärken können. Wenn etwa das arktische Eis schmilzt, reflektiert weniger weiße Oberfläche das Sonnenlicht, und die Erwärmung beschleunigt sich. Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert. Doch die Kosten des Nichthandelns übersteigen bei weitem die Investitionen, die jetzt nötig wären. Es ist daher nicht nur eine ökologische, sondern auch eine ökonomische Notwendigkeit, den CO₂-Ausstoß drastisch zu reduzieren und auf erneuerbare Energien umzusteigen."</p>
-                
-                <button class="btn" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
-                
-                <div id="solution2" class="solution">
-                    <p><strong>Lösung:</strong></p>
-                    <ul>
-                        <li><strong>Hauptthese:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln."</li>
-                        <li><strong>Untergeordnete Thesen/Behauptungen:</strong>
-                            <ul>
-                                <li>"Die globalen Temperaturen steigen nachweislich."</li>
-                                <li>"Die Folgen sind bereits spürbar."</li>
-                                <li>"Viele Entwicklungen können sich selbst verstärken."</li>
-                                <li>"Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert."</li>
-                                <li>"Die Kosten des Nichthandelns übersteigen die nötigen Investitionen."</li>
-                            </ul>
-                        </li>
-                        <li><strong>Argumente und Belege:</strong>
-                            <ul>
-                                <li>Faktischer Beleg: "Laut Weltklimarat haben sich die Temperaturen seit der vorindustriellen Zeit um mehr als ein Grad Celsius erhöht."</li>
-                                <li>Beispiele für Folgen: "Schmelzende Polkappen, Extremwetterereignisse, steigende Meeresspiegel."</li>
-                                <li>Beispiel für selbstverstärkende Effekte: "Schmelzendes arktisches Eis reduziert die Reflexion von Sonnenlicht."</li>
-                            </ul>
-                        </li>
-                        <li><strong>Schlussfolgerung:</strong> "Es ist eine ökologische und ökonomische Notwendigkeit, den CO₂-Ausstoß zu reduzieren und auf erneuerbare Energien umzusteigen."</li>
-                    </ul>
-                    <p>Der Text folgt einer kausalen Argumentationskette: Ausgangsproblem (Klimawandel) → Belege für das Problem → Ursachen → Konsequenzen des Nichthandelns → notwendige Maßnahmen.</p>
-                </div>
-            </div>
-            
-            <div class="card exercise">
-                <h3>Übung 2: Argumentationsstruktur visualisieren</h3>
-                <p><strong>Aufgabe:</strong> Stelle die Argumentationsstruktur des folgenden Textes grafisch dar (z.B. als Baumdiagramm oder Mind-Map):</p>
-                
-                <p><strong>Text:</strong> "Die Lektüre literarischer Klassiker sollte auch im digitalen Zeitalter ein zentraler Bestandteil des Schulunterrichts bleiben. Klassiker haben sich über Generationen als kulturell wertvoll erwiesen und bieten zeitlose Einsichten in die menschliche Natur. Goethes 'Faust' etwa behandelt fundamentale Fragen nach dem Sinn des Lebens und den Grenzen menschlichen Strebens – Themen, die auch heutige Jugendliche beschäftigen. Zudem vermittelt die Auseinandersetzung mit anspruchsvoller Literatur wichtige sprachliche und analytische Kompetenzen. Studien belegen, dass regelmäßiges Lesen komplexer Texte das kritische Denken fördert und den Wortschatz erweitert. Allerdings müssen Lehrkräfte neue Wege finden, um diese Werke für die digitale Generation zugänglich zu machen. Der Einsatz moderner Medien und die Herstellung von Bezügen zur Lebenswelt der Schülerinnen und Schüler können dabei helfen. Letztlich geht es nicht darum, zwischen klassischer Literatur und digitalen Medien zu wählen, sondern darum, beides sinnvoll zu verbinden."</p>
-                
-                <button class="btn" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
-                
-                <div id="solution3" class="solution">
-                    <p><strong>Lösung:</strong> Eine mögliche grafische Darstellung der Argumentationsstruktur:</p>
-                    <pre>
-Hauptthese: Literarische Klassiker sollten im Schulunterricht bleiben
-|
-|--- Argument 1: Klassiker haben zeitlosen kulturellen Wert
-|    |— Beleg: Goethes "Faust" behandelt universelle Themen
-|
-|--- Argument 2: Förderung wichtiger Kompetenzen
-|    |— Beleg: Studien zeigen Förderung des kritischen Denkens und Wortschatzerweiterung
-|
-|--- Einwand (implizit): Klassiker könnten für heutige Schüler schwer zugänglich sein
-|    |— Gegenargument: Moderne Vermittlungsmethoden können helfen
-|    |— Beispiele: Einsatz digitaler Medien, Bezüge zur Lebenswelt
-|
-|--- Schlussfolgerung: Integration von klassischer Literatur und digitalen Medien
-                    </pre>
-                    <p>Die Argumentation folgt dem Muster: These → Begründungen → Antizipation möglicher Einwände → modifizierte Schlussfolgerung. Diese Struktur ist typisch für eine ausgewogene, differenzierte Argumentation.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="tip-box">
-        <strong>Zusammenfassung:</strong><br>
-        Die Argumentationsanalyse ist ein zentraler Bestandteil der Textanalyse. Sie hilft dir, die logische Struktur eines Textes zu erkennen und zu bewerten. Achte auf die verschiedenen Argumentationsmuster, die Typen von Argumenten und mögliche Argumentationsfehler. Mit Übung wirst du immer besser darin, die Überzeugungskraft von Argumentationen einzuschätzen.
     </div>
 </div>
 
 <script>
+// EINFACHSTER MÖGLICHER CODE - FUNKTIONIERT GARANTIERT
+function zeigeInhalt(nummer) {
+    var inhalt = document.getElementById('inhalt-' + nummer);
+    if (inhalt.classList.contains('offen')) {
+        inhalt.classList.remove('offen');
+    } else {
+        inhalt.classList.add('offen');
+    }
+}
+
+function zeigeLoesung(nummer) {
+    var loesung = document.getElementById('loesung-' + nummer);
+    if (loesung.style.display === 'none') {
+        loesung.style.display = 'block';
+    } else {
+        loesung.style.display = 'none';
+    }
+}
 </script>
 
 </body>

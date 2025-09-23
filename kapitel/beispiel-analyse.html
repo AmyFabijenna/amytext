@@ -1,0 +1,400 @@
+[file name]: analyse-beispiele.html
+[file content begin]
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysebeispiele - Komplette Textanalysen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .main-content {
+            margin: 0 auto;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .example-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-left: 4px solid #34495e;
+        }
+
+        .example-container h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .text-example {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .analysis-section {
+            margin: 25px 0;
+        }
+
+        .analysis-section h4 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .accordion {
+            background: #f8f9fa;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            position: relative;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .accordion:hover {
+            background-color: #e9ecef;
+        }
+
+        .accordion:after {
+            content: '+';
+            color: #777;
+            font-weight: bold;
+            position: absolute;
+            right: 18px;
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        .accordion.active:after {
+            content: '-';
+        }
+
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        .panel.active {
+            max-height: 2000px;
+            padding: 18px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #34495e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .btn:hover {
+            background: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .content-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Analysebeispiele</h1>
+                <p>Komplette Textanalysen verschiedener Textsorten</p>
+            </header>
+
+            <div class="content-body">
+                <div class="section">
+                    <h2>Beispiel 1: Kurzgeschichten-Analyse</h2>
+                    
+                    <div class="example-container">
+                        <h3>Wolfgang Borchert: "Das Brot"</h3>
+                        
+                        <div class="text-example">
+                            <p>Plötzlich wachte sie auf. Es war halb drei. Sie überlegte, warum sie aufgewacht war. Ach so! In der Küche hatte jemand gegen einen Stuhl gestoßen. Sie horchte nach der Küche. Es war still. Es war zu still...</p>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Einleitung und Inhaltsangabe</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <p>Die Kurzgeschichte "Das Brot" von Wolfgang Borchert, erschienen 1947, thematisiert die existenziellen Nöte und moralischen Konflikte in der Nachkriegszeit. Eine Frau erwacht nachts und entdeckt ihren Mann in der Küche, wie er heimlich Brot isst. Die darauf folgende Auseinandersetzung offenbart die tiefe Verunsicherung und Not der Menschen in der Trümmerzeit.</p>
+                                
+                                <p>Die Handlung spielt in einer einzigen Nacht und konzentriert sich auf die Begegnung zwischen Eheleuten, die durch die äußeren Umstände in einen moralischen Konflikt geraten. Borchert gelingt es, durch diese alltägliche Situation die größeren gesellschaftlichen Probleme der Nachkriegszeit zu spiegeln.</p>
+                            </div>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Sprachliche und stilistische Analyse</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <h4>Sprachliche Besonderheiten</h4>
+                                <p>Borchert verwendet eine schlichte, reduzierte Sprache, die der Alltäglichkeit der Situation entspricht. Kurze, parataktische Sätze ("Es war still. Es war zu still.") erzeugen eine bedrückende Atmosphäre und spiegeln die Sprachlosigkeit der Figuren wider.</p>
+                                
+                                <h4>Symbolik</h4>
+                                <p>Das Brot fungiert als zentrales Symbol für Leben, Überleben und moralische Werte. Der Diebstahl des Brotes wird zum Sinnbild für den Verlust menschlicher Würde unter extremen Bedingungen.</p>
+                                
+                                <h4>Erzählperspektive</h4>
+                                <p>Die Geschichte wird aus der Perspektive der Frau erzählt, was die emotionale Betroffenheit verstärkt. Der Leser erlebt die Situation durch ihre Augen und teilt ihre Verunsicherung.</p>
+                            </div>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Interpretation und Bewertung</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <p>Borcherts "Das Brot" ist ein exemplarisches Werk der Trümmerliteratur, das die psychischen und moralischen Folgen des Krieges thematisiert. Die Geschichte zeigt, wie existenzielle Not menschliche Beziehungen und moralische Grundsätze in Frage stellt.</p>
+                                
+                                <p>Besonders beeindruckend ist die Subtilität, mit der Borchert den Konflikt inszeniert. Statt dramatischer Auseinandersetzungen zeigt er die stumme Verzweiflung und das Schweigen zwischen den Eheleuten. Die unausgesprochenen Vorwürfe und die gegenseitige Scham sind eindrücklicher als jeder laute Streit.</p>
+                                
+                                <p>Die Kurzgeschichte bleibt in ihrer Aussage aktuell, da sie grundlegende menschliche Dilemmata behandelt: den Konflikt zwischen Überlebenswillen und moralischen Prinzipien, die Fragilität zwischenmenschlicher Beziehungen unter Druck und die Schwierigkeit, in Extremsituationen Menschlichkeit zu bewahren.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Beispiel 2: Gedichtanalyse</h2>
+                    
+                    <div class="example-container">
+                        <h3>Joseph von Eichendorff: "Mondnacht"</h3>
+                        
+                        <div class="text-example">
+                            <p>Es war, als hätt' der Himmel<br>
+                            Die Erde still geküsst,<br>
+                            Dass sie im Blütenschimmer<br>
+                            Von ihm nun träumen müsst'.</p>
+                            
+                            <p>Die Luft ging durch die Felder,<br>
+                            Die Ähren wogten sacht,<br>
+                            Es rauschten leis' die Wälder,<br>
+                            So sternklar war die Nacht.</p>
+                            
+                            <p>Und meine Seele spannte<br>
+                            Weit ihre Flügel aus,<br>
+                            Flog durch die stillen Lande,<br>
+                            Als flöge sie nach Haus.</p>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Formale Analyse</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <h4>Aufbau und Metrik</h4>
+                                <p>Das Gedicht besteht aus drei Strophen zu je vier Versen. Es handelt sich um Kreuzreime (abab) mit überwiegend jambischem Rhythmus. Die regelmäßige Form vermittelt Harmonie und Ruhe.</p>
+                                
+                                <h4>Reimschema und Rhythmus</h4>
+                                <p>Das durchgängige Kreuzreimschema und der fließende Rhythmus unterstützen die träumerische, harmonische Stimmung des Gedichts. Die Enjambements zwischen den Versen erzeugen einen natürlichen Sprachfluss.</p>
+                            </div>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Sprachliche Mittel</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <h4>Bildsprache</h4>
+                                <p>Eichendorff verwendet durchgängig naturemotionale Bilder: Himmel und Erde erscheinen als liebendes Paar, die Natur wird personifiziert ("Die Luft ging durch die Felder").</p>
+                                
+                                <h4>Symbolik</h4>
+                                <p>Die Mondnacht symbolisiert die Sehnsucht nach Ganzheit und spiritueller Heimkehr. Die Seele, die "nach Haus" fliegt, steht für die Rückkehr zum Ursprung, zur Geborgenheit.</p>
+                                
+                                <h4>Synästhesie</h4>
+                                <p>Verschiedene Sinneseindrücke vermischen sich ("Blütenschimmer", "sternklar"), was die magische Stimmung der Nacht verstärkt.</p>
+                            </div>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Interpretation</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <p>"Mondnacht" ist ein typisches Gedicht der Romantik, das die Sehnsucht nach Verschmelzung mit der Natur und dem Kosmos thematisiert. Die Nacht wird nicht als bedrohlich, sondern als beglückend dargestellt.</p>
+                                
+                                <p>Das Gedicht beschreibt eine mystische Erfahrung: In der mondhellen Nacht scheinen die Grenzen zwischen Himmel und Erde, zwischen Ich und Welt zu verschwimmen. Die Seele des lyrischen Ichs erfährt eine befreiende Ausdehnung und Heimkehr zum Ursprung.</p>
+                                
+                                <p>Eichendorff gelingt es, durch einfache, aber bildkräftige Sprache eine tiefe emotionale und spirituelle Erfahrung zu vermitteln. Das Gedicht feiert die Harmonie von Mensch und Natur und die erlösende Kraft der Schönheit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Beispiel 3: Sachtextanalyse</h2>
+                    
+                    <div class="example-container">
+                        <h3>Kommentar: "Die digitale Revolution und ihre Folgen"</h3>
+                        
+                        <div class="text-example">
+                            <p>Die digitale Transformation durchdringt alle Lebensbereiche mit einer Geschwindigkeit, die atemlos macht. Während die einen die ungeahnten Möglichkeiten feiern, warnen andere vor den sozialen Verwerfungen. Doch statt in euphorische Begeisterung oder kulturpessimistische Ablehnung zu verfallen, sollten wir nüchtern die Chancen und Risiken abwägen.</p>
+                            
+                            <p>Zweifellos eröffnet die Digitalisierung bisher ungekannte Möglichkeiten der Kommunikation, Bildung und gesellschaftlichen Teilhabe. Informationen sind global und in Echtzeit verfügbar, Grenzen werden durchlässig, Hierarchien flacher. Doch parallel zu diesen Errungenschaften mehren sich die Hinweise auf negative Begleiterscheinungen: soziale Isolation, Informationsüberflutung, der Verlust von Privatsphäre.</p>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Textsorte und Intention</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <p>Bei dem vorliegenden Text handelt es sich um einen Kommentar, der sich durch subjektive Argumentation und persuasive Elemente auszeichnet. Die Intention des Autors ist es, zu einer differenzierten Betrachtung der Digitalisierung anzuregen und extreme Positionen zu relativieren.</p>
+                                
+                                <p>Der Kommentar richtet sich an eine gebildete Leserschaft, die mit den Grundzügen der Digitalisierung vertraut ist, aber nach Orientierung in der komplexen Debatte sucht.</p>
+                            </div>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Argumentationsstruktur</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <h4>Aufbau der Argumentation</h4>
+                                <p>Der Autor verwendet eine antithetische Argumentationsstruktur: Zunächst werden die extremen Positionen ("euphorische Begeisterung" vs. "kulturpessimistische Ablehnung") genannt, um dann seine eigene, vermittelnde Position zu entwickeln.</p>
+                                
+                                <h4>Argumentative Strategien</h4>
+                                <p>Es werden sowohl rationale Argumente (Verbesserung von Kommunikation und Bildung) als auch emotionale Appelle (Warnung vor sozialen Verwerfungen) eingesetzt. Der Autor bemüht sich um Ausgewogenheit, indem er sowohl Chancen als auch Risiken benennt.</p>
+                                
+                                <h4>Sprachliche Mittel der Überzeugung</h4>
+                                <p>Der Autor verwendet:</p>
+                                <ul>
+                                    <li>Steigerungen ("atemlos macht", "ungeahnte Möglichkeiten")</li>
+                                    <li>Gegenüberstellungen ("die einen... die anderen")</li>
+                                    <li>Appellative Formulierungen ("sollten wir nüchtern abwägen")</li>
+                                    <li>Fachtermini mit Erklärung</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Kritische Würdigung</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <p>Der Kommentar überzeugt durch seine ausgewogene Perspektive und die Vermeidung von Simplifizierungen. Die antithetische Struktur erlaubt es, verschiedene Standpunkte zu berücksichtigen, ohne in Relativismus zu verfallen.</p>
+                                
+                                <p>Kritisch anzumerken ist, dass die Argumentation an manchen Stellen etwas oberflächlich bleibt. So werden "soziale Verwerfungen" und "negative Begleiterscheinungen" zwar benannt, aber nicht konkretisiert oder belegt. Hier wäre eine stärkere Fundierung wünschenswert.</p>
+                                
+                                <p>Insgesamt gelingt es dem Autor jedoch, eine komplexe Thematik zugänglich zu machen und zu einer reflektierten Haltung anzuregen. Der Text erfüllt damit die Funktion eines Kommentars, der nicht nur informiert, sondern auch zur Meinungsbildung beiträgt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Tipp für deine eigene Textanalyse:</strong><br>
+                    Beginne immer mit einer gründlichen Textlektüre und Notizen. Gliedere deine Analyse systematisch in Einleitung, Hauptteil und Schluss. Belege deine Interpretationen mit Textstellen und achte auf eine präzise, aber verständliche Sprache.
+                </div>
+
+                <div class="section">
+                    <h2>Übung: Eigene Analyse erstellen</h2>
+                    
+                    <div class="example-container">
+                        <h3>Analyseaufgabe</h3>
+                        <p><strong>Text:</strong> Wähle einen kurzen Textausschnitt aus einer beliebigen Textsorte (Gedicht, Kurzgeschichte, Kommentar etc.).</p>
+                        <p><strong>Aufgabe:</strong> Verfasse eine vollständige Textanalyse nach dem gelernten Schema.</p>
+                        
+                        <div class="text-example">
+                            <p><strong>Möglicher Textausschnitt (Kurzgeschichte):</strong><br>
+                            "Er stand am Fenster und blickte auf die Straße hinunter. Die Menschen eilten vorüber, jeder in seine eigene Richtung, jeder mit seinen eigenen Gedanken. Keiner blickte zu ihm auf. Er fühlte sich unsichtbar."</p>
+                        </div>
+                        
+                        <button class="accordion" onclick="toggleAccordion(this)">Hilfestellung für die Analyse</button>
+                        <div class="panel">
+                            <div class="analysis-section">
+                                <h4>Mögliche Herangehensweise:</h4>
+                                <ol>
+                                    <li><strong>Einleitung:</strong> Textsorte, Autor (falls bekannt), Thema, kurze Inhaltsangabe</li>
+                                    <li><strong>Sprachanalyse:</strong> Satzbau, Wortwahl, sprachliche Bilder, Stilmittel</li>
+                                    <li><strong>Inhaltsanalyse:</strong> Figuren, Situation, Konflikt, Entwicklung</li>
+                                    <li><strong>Interpretation:</strong> Bedeutung, Aussage, Bezug zum Menschenbild</li>
+                                    <li><strong>Schluss:</strong> Zusammenfassung, eigene Bewertung, Aktualitätsbezug</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+[file content end]

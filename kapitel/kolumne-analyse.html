@@ -227,11 +227,11 @@
             <div class="section">
                 <h2 class="section-title">Schritt-für-Schritt-Anleitung zur Textanalyse</h2>
                 
-                <div class="accordion">
+                <div class="accordion" onclick="toggleKapitel(1)">
                     <span>1. Einleitung und kurze Inhaltsangabe</span>
                     <span class="accordion-icon">+</span>
                 </div>
-                <div class="panel">
+                <div class="panel" id="kapitel-1">
                     <p><strong>Ziel dieser Phase:</strong> Den Text vorstellen und seinen Inhalt kurz zusammenfassen.</p>
                     
                     <div class="subsection">
@@ -260,18 +260,18 @@
                     <div class="exercise">
                         <h4>Übung: Verfasse eine Einleitung</h4>
                         <p>Verfasse eine Einleitung für diese Kolumne mit allen notwendigen Elementen.</p>
-                        <button class="solution-toggle">Lösung anzeigen</button>
-                        <div class="solution">
+                        <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                        <div class="solution" id="solution1">
                             <p>In der Kolumne "Die Tyrannei der digitalen Erreichbarkeit" von Maria Berger, erschienen im März 2025 in der Tageszeitung "Der Standard", setzt sich die Autorin kritisch mit den Auswirkungen der permanenten digitalen Erreichbarkeit auf unser soziales Verhalten und psychisches Wohlbefinden auseinander. Ausgehend von einer Alltagsbeobachtung entwickelt Berger die These, dass die ständige Erreichbarkeit zu einer modernen Form der Unfreiheit geworden ist, und appelliert an eine bewusstere Nutzung digitaler Medien.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="accordion">
+                <div class="accordion" onclick="toggleKapitel(2)">
                     <span>2. Stilanalyse</span>
                     <span class="accordion-icon">+</span>
                 </div>
-                <div class="panel">
+                <div class="panel" id="kapitel-2">
                     <p><strong>Ziel dieser Phase:</strong> Die sprachlichen und stilistischen Mittel des Textes identifizieren und ihre Wirkung analysieren.</p>
                     
                     <div class="subsection">
@@ -306,8 +306,8 @@
                     <div class="exercise">
                         <h4>Übung: Analysiere die sprachlichen Mittel</h4>
                         <p>Identifiziere mindestens drei weitere sprachliche Mittel im Text und beschreibe ihre Wirkung.</p>
-                        <button class="solution-toggle">Lösung anzeigen</button>
-                        <div class="solution">
+                        <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                        <div class="solution" id="solution2">
                             <p><strong>Weitere sprachliche Mittel und ihre Wirkung:</strong></p>
                             <ol>
                                 <li><strong>Antithese:</strong> "Sie waren anwesend und doch abwesend zugleich" - verdeutlicht den Widerspruch zwischen physischer Präsenz und mentaler Abwesenheit.</li>
@@ -319,11 +319,11 @@
                     </div>
                 </div>
 
-                <div class="accordion">
+                <div class="accordion" onclick="toggleKapitel(3)">
                     <span>3. Bewertung und Ausblick/Schluss</span>
                     <span class="accordion-icon">+</span>
                 </div>
-                <div class="panel">
+                <div class="panel" id="kapitel-3">
                     <p><strong>Ziel dieser Phase:</strong> Den Text kritisch würdigen und eine eigene Stellungnahme abgeben.</p>
                     
                     <div class="subsection">
@@ -358,8 +358,8 @@
                     <div class="exercise">
                         <h4>Übung: Verfasse eine eigene Bewertung</h4>
                         <p>Formuliere eine eigene Bewertung der Kolumne mit mindestens einer Stärke und einem Kritikpunkt.</p>
-                        <button class="solution-toggle">Lösung anzeigen</button>
-                        <div class="solution">
+                        <button class="solution-toggle" onclick="toggleSolution('solution3')">Lösung anzeigen</button>
+                        <div class="solution" id="solution3">
                             <p><strong>Beispiel für eine eigene Bewertung:</strong></p>
                             <p>Die Kolumne von Maria Berger überzeugt durch ihre lebensnahe Darstellung eines alltäglichen Phänomens, das viele Leser aus eigener Erfahrung kennen werden. Besonders stark ist die bildhafte Sprache, die abstrakte Konzepte wie "digitale Erreichbarkeit" konkret und greifbar macht. Die Metapher der "unsichtbaren Leinen" verdeutlicht eindrücklich, wie sehr digitale Geräte unser Verhalten steuern können.</p>
                             <p>Kritisch anzumerken ist jedoch, dass Berger die wirtschaftlichen Interessen hinter der permanenten Erreichbarkeit kaum thematisiert. Die Geschäftsmodelle vieler Tech-Unternehmen basieren precisely auf der Aufmerksamkeit der Nutzer, was eine systemische Dimension des Problems darstellt, die über individuelle Verhaltensänderungen hinausgeht. Eine stärkere Berücksichtigung dieser Aspekte hätte die Analyse noch umfassender gemacht.</p>
@@ -380,8 +380,8 @@
                         <strong>Tipp:</strong> Achte auf eine ausgewogene Mischung aus allgemeinen und spezifischen Aussagen zum Text. Verwende Fachbegriffe korrekt und belege deine Analyse mit Textzitaten.
                     </div>
                     
-                    <button class="solution-toggle">Musterlösung anzeigen</button>
-                    <div class="solution">
+                    <button class="solution-toggle" onclick="toggleSolution('solution4')">Musterlösung anzeigen</button>
+                    <div class="solution" id="solution4">
                         <h4>Musterlösung: Vollständige Textanalyse</h4>
                         
                         <h5>Einleitung</h5>
@@ -402,12 +402,9 @@
             </div>
 
             <div class="tip-box">
-                <strong>Merke:</strong> Bei der Analyse einer Kolumne ist besonders auf die subjektive Perspektive der Autorin/des Autors zu achten. Kolumnen sind per Definition persönliche Kommentare, die eine individuelle Sichtweise auf ein Thema bieten. Achte darauf, wie diese Subjektivität sprachlich gestaltet wird und welche rhetorischen Strategien eingesetzt werden, um die Leserschaft zu überzeugen.
+                <strong>Merke:</strong> Bei der Analyse einer Kolumne ist besonders auf die subjektive Perspektive der Autorin/des Autors zu achten. Kolumnen sind per Definition persönliche Kommentare, die eine individuelle Sichtweise auf ein Thema bieten. Achte darauf, wie diese Subjektivität sprachlich gestaltet wird und welche rhetorische Strategien eingesetzt werden, um die Leserschaft zu überzeugen.
             </div>
         </div>
     </div>
-
-    <script>
-    </script>
 </body>
 </html>
