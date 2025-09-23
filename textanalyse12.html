@@ -634,6 +634,24 @@ window.toggleSolution = function(id) {
         solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
     }
 };
+// Event-Delegation für dynamisch geladene Inhalte
+document.addEventListener('click', function(e) {
+    // Accordion-Header
+    if (e.target.closest('.accordion-header')) {
+        const header = e.target.closest('.accordion-header');
+        header.classList.toggle('active');
+        header.nextElementSibling.classList.toggle('active');
+    }
+    
+    // Solution-Toggle-Buttons
+    if (e.target.classList.contains('solution-toggle')) {
+        const solution = e.target.nextElementSibling;
+        if (solution && solution.classList.contains('solution')) {
+            solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
+        }
+    }
+    
+    // L
     </script>
 </body>
 </html>
