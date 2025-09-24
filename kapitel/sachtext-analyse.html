@@ -51,7 +51,6 @@
             margin-bottom: 10px;
         }
 
-        /* Accordion Styling - kompatibel mit Mutterdatei */
         .accordion {
             margin: 30px 0;
             border: 1px solid #ddd;
@@ -61,39 +60,48 @@
         }
 
         .accordion-header {
-            background: #f8f9fa;
-            padding: 15px 20px;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 20px;
+            margin: 0;
             cursor: pointer;
+            font-size: 1.3em;
+            transition: background 0.3s;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
+            user-select: none;
         }
 
         .accordion-header:hover {
-            background: #e9ecef;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
         }
 
         .accordion-header h3 {
             margin: 0;
-            color: #2c3e50;
-            font-size: 1.1em;
+            color: white;
         }
 
-        .toggle-icon {
-            font-size: 18px;
+        .accordion-icon {
+            font-size: 1.5em;
             font-weight: bold;
-            color: #34495e;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
         }
 
         .panel {
-            display: none;
-            padding: 20px;
-            background: white;
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
         }
 
         .panel.active {
-            display: block;
+            max-height: 5000px;
+            padding: 20px;
         }
 
         .exercise {
@@ -190,8 +198,8 @@
 
     <div class="accordion">
         <div class="accordion-header">
-            <h3>Schritt 1: Einleitung und kurze Inhaltsangabe</h3>
-            <span class="toggle-icon">+</span>
+            <span>Schritt 1: Einleitung und kurze Inhaltsangabe</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <div class="analysis-section">
@@ -222,8 +230,8 @@
 
     <div class="accordion">
         <div class="accordion-header">
-            <h3>Schritt 2: Stilanalyse</h3>
-            <span class="toggle-icon">+</span>
+            <span>Schritt 2: Stilanalyse</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <div class="analysis-section">
@@ -255,7 +263,7 @@
                     
                     <p>Rhetorisch setzt der Autor auf verschiedene Strategien: Er verwendet rhetorische Fragen ("Warum wenden sich Menschen...?"), um Denkprozesse anzuregen, konkrete Beispiele (Vinyl, Bücher, Polaroid), um seine Thesen zu veranschaulichen, und kontrastierende Gegenüberstellungen von analog und digital, um Unterschiede zu verdeutlichen.</p>
                     
-                    <p>Auffällig ist der Wechsel zwischen sachlicher Darstellung (besonders bei der Erwähnung von Studien) und wertenden Passagen, in denen die positiven Qualitäten des Analogen hervorgehoben werden. Der Autor bemüht sich jedoch um einen differenzierten Blick, indem er sowohl die Vorteile der Digitalisierung anerkennt als auch vor einer nostalgischen Verklärung des Analogen warnt.</p>
+                    <p>Auffällig ist der Wechsel zwischen sachlicher Darstellung (besonders bei der Erwähnung von Studien) und wertenden Passagen, in denen die positiven Qualitäten des Analogen hervorgehunden werden. Der Autor bemüht sich jedoch um einen differenzierten Blick, indem er sowohl die Vorteile der Digitalisierung anerkennt als auch vor einer nostalgischen Verklärung des Analogen warnt.</p>
                     
                     <p>Die Wortwahl ist präzise und teilweise bildreich, wie bei der Erwähnung der "Patina" analoger Objekte oder der "Haptik eines Buches". Der Autor nutzt diese sensorischen Beschreibungen gezielt, um die sinnliche Dimension des Analogen zu vermitteln, die ein zentrales Argument seines Textes darstellt.</p>
                 </div>
@@ -265,8 +273,8 @@
 
     <div class="accordion">
         <div class="accordion-header">
-            <h3>Schritt 3: Bewertung und Ausblick/Schluss</h3>
-            <span class="toggle-icon">+</span>
+            <span>Schritt 3: Bewertung und Ausblick/Schluss</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <div class="analysis-section">
@@ -320,14 +328,21 @@
             <li>Formuliere eine kritische Bewertung des Textausschnitts.</li>
         </ol>
         
-        <button class="solution-toggle">Lösungsvorschlag anzeigen</button>
-        <div class="solution">
-            <h4>Lösungsvorschlag für die Übung</h4>
-            <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
-            
-            <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionale Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
-            
-            <p><strong>3. Bewertung:</strong> Der Textausschnitt bietet eine ausgewogene Perspektive auf ein komplexes Thema. Die Gegenüberstellung von Risiken und Chancen ist gelungen, allerdings bleiben die Aussagen recht allgemein. Konkrete Beispiele oder Studien würden die Argumentation stärken. Die Schlussforderung nach einer "menschlichen Gestaltung" ist appellativ, aber etwas vage formuliert.</p>
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>Lösungsvorschlag anzeigen</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
+                <div class="solution">
+                    <h4>Lösungsvorschlag für die Übung</h4>
+                    <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
+                    
+                    <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionale Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
+                    
+                    <p><strong>3. Bewertung:</strong> Der Textausschnitt bietet eine ausgewogene Perspektive auf ein komplexes Thema. Die Gegenüberstellung von Risiken und Chancen ist gelungen, allerdings bleiben die Aussagen recht allgemein. Konkrete Beispiele oder Studien würden die Argumentation stärken. Die Schlussforderung nach einer "menschlichen Gestaltung" ist appellativ, aber etwas vage formuliert.</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -349,6 +364,5 @@
             <li>✓ Bezug zur Gegenwart hergestellt</li>
         </ul>
     </div>
-
 </body>
 </html>

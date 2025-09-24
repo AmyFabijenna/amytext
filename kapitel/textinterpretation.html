@@ -57,10 +57,16 @@
             border-bottom: 1px solid #ddd;
             font-weight: bold;
             font-size: 1.1em;
+            transition: background 0.3s;
         }
 
         .accordion-header:hover {
             background: #e9ecef;
+        }
+
+        .accordion-header.active {
+            background: #e9ecef;
+            border-bottom: 1px solid #3498db;
         }
 
         .accordion-header h3 {
@@ -68,20 +74,26 @@
             color: #2c3e50;
         }
 
-        .toggle-icon {
+        .accordion-icon {
             font-size: 18px;
             font-weight: bold;
             color: #34495e;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
         }
 
         .panel {
-            display: block;
+            display: none;
             padding: 20px;
             background: white;
+            border-top: 1px solid #ddd;
         }
 
-        .panel.collapsed {
-            display: none;
+        .panel.active {
+            display: block;
         }
 
         /* Exercise styling */
@@ -108,6 +120,7 @@
             cursor: pointer;
             margin-top: 10px;
             font-size: 0.9em;
+            transition: background 0.3s;
         }
 
         .solution-toggle:hover {
@@ -121,6 +134,10 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
             display: none;
+        }
+
+        .solution.active {
+            display: block;
         }
 
         /* Tables */
@@ -192,6 +209,7 @@
             margin-bottom: 20px;
             font-size: 1em;
             font-weight: bold;
+            transition: background 0.3s;
         }
 
         .btn-toggle-all:hover {
@@ -238,11 +256,11 @@
     </div>
 
     <div class="accordion">
-        <div class="accordion-header">
+        <div class="accordion-header active">
             <h3>1. Struktur einer Textinterpretation</h3>
-            <span class="toggle-icon">+</span>
+            <span class="accordion-icon">+</span>
         </div>
-        <div class="panel">
+        <div class="panel active">
             <h3>Aufbau einer gelungenen Interpretation</h3>
             <p>Eine Textinterpretation folgt einer klaren Struktur:</p>
             
@@ -306,7 +324,7 @@
     <div class="accordion">
         <div class="accordion-header">
             <h3>2. Die Einleitung verfassen</h3>
-            <span class="toggle-icon">+</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <h3>Elemente einer guten Einleitung</h3>
@@ -360,7 +378,7 @@
     <div class="accordion">
         <div class="accordion-header">
             <h3>3. Die Inhaltsangabe</h3>
-            <span class="toggle-icon">+</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <h3>Merkmale einer guten Inhaltsangabe</h3>
@@ -405,7 +423,7 @@
     <div class="accordion">
         <div class="accordion-header">
             <h3>4. Die Analyse</h3>
-            <span class="toggle-icon">+</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <h3>Analyseaspekte nach Textgattungen</h3>
@@ -448,7 +466,7 @@
     <div class="accordion">
         <div class="accordion-header">
             <h3>5. Die Interpretation/Deutung</h3>
-            <span class="toggle-icon">+</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <h3>Deutungshypothese formulieren</h3>
@@ -479,7 +497,7 @@
     <div class="accordion">
         <div class="accordion-header">
             <h3>6. Der Schluss</h3>
-            <span class="toggle-icon">+</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <h3>Elemente eines gelungenen Schlusses</h3>
@@ -508,7 +526,7 @@
     <div class="accordion">
         <div class="accordion-header">
             <h3>7. Checkliste für die Textinterpretation</h3>
-            <span class="toggle-icon">+</span>
+            <span class="accordion-icon">+</span>
         </div>
         <div class="panel">
             <h3>Selbstüberprüfung vor der Abgabe</h3>
@@ -529,5 +547,51 @@
         </div>
     </div>
 
+    <script>
+        // JavaScript für die Accordion-Funktionalität
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event-Listener für Accordion-Header
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    panel.classList.toggle('active');
+                });
+            });
+            
+            // Event-Listener für Lösungstoggle-Buttons
+            document.querySelectorAll('.solution-toggle').forEach(button => {
+                button.addEventListener('click', function() {
+                    const solution = this.nextElementSibling;
+                    solution.classList.toggle('active');
+                });
+            });
+            
+            // Event-Listener für "Alle öffnen/schließen"-Button
+            document.querySelector('.btn-toggle-all').addEventListener('click', function() {
+                const headers = document.querySelectorAll('.accordion-header');
+                const panels = document.querySelectorAll('.panel');
+                
+                // Prüfen, ob alle geschlossen sind
+                const allClosed = Array.from(headers).every(header => !header.classList.contains('active'));
+                
+                headers.forEach(header => {
+                    if (allClosed) {
+                        header.classList.add('active');
+                    } else {
+                        header.classList.remove('active');
+                    }
+                });
+                
+                panels.forEach(panel => {
+                    if (allClosed) {
+                        panel.classList.add('active');
+                    } else {
+                        panel.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

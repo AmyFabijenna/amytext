@@ -35,7 +35,7 @@
             padding-bottom: 10px;
         }
 
-        /* Accordion Styling */
+        /* Accordion Styling - Kompatibel mit Hauptdatei */
         .accordion {
             margin: 20px 0;
             border: 1px solid #ddd;
@@ -51,10 +51,16 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #ddd;
+            transition: background 0.3s;
         }
 
         .accordion-header:hover {
             background: #e9ecef;
+        }
+
+        .accordion-header.active {
+            background: #e3f2fd;
+            border-bottom: 1px solid #3498db;
         }
 
         .accordion-header h3 {
@@ -62,15 +68,28 @@
             color: #2c3e50;
         }
 
-        .toggle-icon {
+        .accordion-icon {
             font-size: 18px;
             font-weight: bold;
             color: #34495e;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
         }
 
         .panel {
-            padding: 20px;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
             background: white;
+        }
+
+        .panel.active {
+            padding: 20px;
+            max-height: 5000px;
         }
 
         /* Card-like sections */
@@ -120,7 +139,7 @@
             border-bottom: none;
         }
 
-        /* Solution toggle button and solution box */
+        /* Solution toggle button and solution box - Kompatibel mit Hauptdatei */
         .solution-toggle {
             background: #28a745;
             color: white;
@@ -130,6 +149,7 @@
             cursor: pointer;
             margin-top: 10px;
             font-size: 14px;
+            transition: background 0.3s;
         }
 
         .solution-toggle:hover {
@@ -143,6 +163,10 @@
             border-radius: 8px;
             margin: 20px 0;
             display: none;
+        }
+
+        .solution.active {
+            display: block;
         }
 
         /* Lists */
@@ -168,6 +192,22 @@
             color: #856404;
         }
 
+        /* Back button */
+        .back-button {
+            display: inline-block;
+            background: #95a5a6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #7f8c8d;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             body {
@@ -182,7 +222,7 @@
                 padding: 8px 10px;
             }
             
-            .panel {
+            .panel.active {
                 padding: 15px;
             }
             
@@ -190,27 +230,11 @@
                 padding: 15px;
             }
         }
-
-        /* Accordion panels - standardmäßig sichtbar */
-        .panel {
-            display: block;
-            padding: 20px;
-            background: white;
-        }
-        
-        /* Wird von der Mutterdatei gesteuert */
-        .panel.collapsed {
-            display: none;
-        }
     </style>
-    <script>
-        // Alle JavaScript-Funktionen werden von der Mutterdatei textanalyse12.html gesteuert
-        // Die Event-Delegation in der Mutterdatei übernimmt sowohl Accordion- als auch Solution-Toggle-Steuerung
-        
-        // Keine lokalen Event-Listener erforderlich - alles läuft über die Mutterdatei
-    </script>
 </head>
 <body>
+
+<a href="#" class="back-button" onclick="loadContent('willkommen'); return false;">← Zurück zur Übersicht</a>
 
 <h1>Argumentationsanalyse</h1>
 <p>Argumentationsstrukturen erkennen und bewerten</p>
@@ -219,7 +243,7 @@
 <div class="accordion">
     <div class="accordion-header">
         <h3>1. Grundlagen der Argumentationsanalyse</h3>
-        <span class="toggle-icon">+</span>
+        <span class="accordion-icon">+</span>
     </div>
     <div class="panel">
         <h3>Was ist Argumentationsanalyse?</h3>
@@ -245,7 +269,7 @@
 <div class="accordion">
     <div class="accordion-header">
         <h3>2. Argumentationsstrukturen und -muster</h3>
-        <span class="toggle-icon">+</span>
+        <span class="accordion-icon">+</span>
     </div>
     <div class="panel">
         <h3>Typische Argumentationsmuster</h3>
@@ -278,7 +302,7 @@
 <div class="accordion">
     <div class="accordion-header">
         <h3>3. Argumentationstypen und ihre Bewertung</h3>
-        <span class="toggle-icon">+</span>
+        <span class="accordion-icon">+</span>
     </div>
     <div class="panel">
         <h3>Typen von Argumenten</h3>
@@ -324,7 +348,7 @@
 <div class="accordion">
     <div class="accordion-header">
         <h3>4. Analyse der Argumentationsstrategie</h3>
-        <span class="toggle-icon">+</span>
+        <span class="accordion-icon">+</span>
     </div>
     <div class="panel">
         <h3>Fragen zur Analyse der Argumentationsstrategie</h3>
@@ -346,7 +370,7 @@
 <div class="accordion">
     <div class="accordion-header">
         <h3>5. Praxisteil: Übungen zur Argumentationsanalyse</h3>
-        <span class="toggle-icon">+</span>
+        <span class="accordion-icon">+</span>
     </div>
     <div class="panel">
         <div class="uebung">
