@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagramme lesen - Deutschunterricht Klasse 10</title>
+    <title>Nichtlineare Texte und Diagramme - Deutschunterricht Klasse 10</title>
     <style>
         * {
             margin: 0;
@@ -238,6 +238,81 @@
             font-weight: bold;
         }
         
+        .g-level-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 3px solid #ff9800;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .g-level-box::before {
+            content: "G-Niveau Anforderungen";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #ff9800;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .g-level-box h3 {
+            margin-top: 20px;
+            color: #e65100;
+        }
+        
+        .evaluation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .evaluation-item {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #9c27b0;
+        }
+        
+        .evaluation-item h4 {
+            color: #6a1b9a;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .continue-button {
+            background: linear-gradient(135deg, #8b4a6b 0%, #a05d71 100%);
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 40px auto;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 74, 107, 0.3);
+            text-decoration: none;
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        .continue-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 74, 107, 0.4);
+            background: linear-gradient(135deg, #9d5a7b 0%, #b26d81 100%);
+        }
+        
+        .continue-button:active {
+            transform: translateY(-1px);
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -254,44 +329,86 @@
             .diagram-types {
                 grid-template-columns: 1fr;
             }
+            
+            .continue-button {
+                min-width: 250px;
+                font-size: 1.1em;
+                padding: 15px 30px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Diagramme lesen im Deutschunterricht</h1>
+        <h1>Nichtlineare Texte und Diagramme im Deutschunterricht</h1>
         <p style="text-align: center; font-size: 1.2em; color: #8b4a6b; margin-bottom: 40px;">
             <strong>Ein umfassender Guide für die 10. Klasse</strong>
         </p>
 
-        <div class="highlight-box">
-            <h3>Was sind nichtlineare Texte?</h3>
-            <p>Nichtlineare Texte sind Texte, die nicht von Anfang bis Ende gelesen werden, sondern bei denen der Leser selbst entscheidet, in welcher Reihenfolge er die Informationen aufnimmt. Dazu gehören: Diagramme und Schaubilder, Tabellen, Karten, Infografiken, Mindmaps, Websites und Lexikoneinträge.</p>
+        <div class="g-level-box">
+            <h3>G-Niveau Anforderungen für Klassenarbeiten</h3>
+            <ul>
+                <li><strong>Formulierungen lernen</strong> - Fachsprachlich korrekte Ausdrucksweise</li>
+                <li><strong>Daten aus Grafiken entnehmen können</strong> - Systematisches Ablesen von Werten</li>
+                <li><strong>Richtige und falsche Aussagen erkennen können + ggf. begründen</strong></li>
+                <li><strong>Verschiedene Arten von Diagrammen benennen können</strong></li>
+                <li><strong>Grunddaten erfassen:</strong> Quelle, Veröffentlichung, Zeitraum, Einheit, Befragte, Thema</li>
+                <li><strong>Begründete Meinung zum Thema aus Grafik verfassen können</strong></li>
+            </ul>
         </div>
 
-        <h2>1. Was ist ein Diagramm?</h2>
-        <p>Ein Diagramm ist eine grafische Darstellung von Daten und Informationen. Es macht Zahlen, Entwicklungen und Zusammenhänge visuell sichtbar und leichter verständlich als reine Textformen.</p>
+        <div class="highlight-box">
+            <h3>Was sind nichtlineare Texte?</h3>
+            <p>Nichtlineare Texte sind Texte, die nicht ausschließlich von links nach rechts und von oben nach unten gelesen werden. Sie kombinieren verschiedene Darstellungsformen wie Texte, Bilder, Grafiken, Diagramme und andere visuelle Elemente. Der Leser kann verschiedene Lesewege wählen und muss aktiv entscheiden, welche Informationen er in welcher Reihenfolge aufnimmt.</p>
+            
+            <h4>Charakteristika nichtlinearer Texte:</h4>
+            <ul>
+                <li>Kombination aus Text und visuellen Elementen</li>
+                <li>Mehrere mögliche Lesewege</li>
+                <li>Interaktive Struktur</li>
+                <li>Informationen sind räumlich angeordnet</li>
+                <li>Erfordern aktive Leseentscheidungen</li>
+                <li>Nutzen verschiedene Zeichensysteme gleichzeitig</li>
+            </ul>
+        </div>
 
-        <h3>Hauptfunktionen von Diagrammen:</h3>
-        <ul>
-            <li><strong>Informieren:</strong> Vermittlung von Fakten und Daten</li>
-            <li><strong>Veranschaulichen:</strong> Komplexe Sachverhalte werden vereinfacht dargestellt</li>
-            <li><strong>Vergleichen:</strong> Verschiedene Werte werden gegenübergestellt</li>
-            <li><strong>Entwicklungen zeigen:</strong> Veränderungen über Zeit werden sichtbar</li>
-        </ul>
+        <h2>1. Abgrenzung: Lineare vs. Nichtlineare Texte</h2>
+        
+        <div class="evaluation-grid">
+            <div class="evaluation-item">
+                <h4>Lineare Texte</h4>
+                <ul>
+                    <li>Fortlaufender Text von Anfang bis Ende</li>
+                    <li>Eindeutige Lesereihenfolge</li>
+                    <li>Hauptsächlich sprachliche Informationen</li>
+                    <li><strong>Beispiele:</strong> Romane, Zeitungsartikel, wissenschaftliche Texte</li>
+                </ul>
+            </div>
+            
+            <div class="evaluation-item">
+                <h4>Nichtlineare Texte</h4>
+                <ul>
+                    <li>Flexible Lesereihenfolge</li>
+                    <li>Kombination verschiedener Informationsträger</li>
+                    <li>Räumliche Anordnung der Elemente</li>
+                    <li><strong>Beispiele:</strong> Websites, Infografiken, Diagramme, Karten</li>
+                </ul>
+            </div>
+        </div>
 
         <h2>2. Arten von Diagrammen und ihre Funktionen</h2>
         <div class="diagram-types">
             <div class="diagram-type">
                 <h3>Säulendiagramm (Balkendiagramm)</h3>
-                <p><strong>Zweck:</strong> Vergleich von Mengen oder Häufigkeiten</p>
-                <p><strong>Beispiel:</strong> Verkaufszahlen verschiedener Produkte im Jahresvergleich</p>
+                <p><strong>Zweck:</strong> Vergleich von Mengen, Häufigkeiten oder Werten verschiedener Kategorien</p>
                 <p><strong>Aufbau:</strong></p>
                 <ul>
                     <li>X-Achse: Kategorien (z.B. Monate, Produkte)</li>
                     <li>Y-Achse: Werte/Mengen</li>
                     <li>Säulen: Höhe entspricht dem Wert</li>
+                    <li>Rechteckige Balken (horizontal oder vertikal)</li>
                 </ul>
+                <p><strong>Anwendung:</strong> Umfrageergebnisse, Verkaufszahlen, Bevölkerungsstatistiken</p>
                 
                 <div class="example-diagram">
                     <h4>Lieblingsfächer der 10. Klasse</h4>
@@ -319,13 +436,14 @@
             <div class="diagram-type">
                 <h3>Kreisdiagramm (Tortendiagramm)</h3>
                 <p><strong>Zweck:</strong> Darstellung von Anteilen an einem Ganzen (100%)</p>
-                <p><strong>Beispiel:</strong> Verteilung der Stimmen bei einer Wahl</p>
                 <p><strong>Aufbau:</strong></p>
                 <ul>
                     <li>Kreis = 100% des Ganzen</li>
                     <li>Kreissegmente = prozentuale Anteile</li>
                     <li>Oft farbkodiert mit Legende</li>
+                    <li>Alle Segmente ergeben zusammen 100%</li>
                 </ul>
+                <p><strong>Anwendung:</strong> Marktanteile, Wahlergebnisse, Budgetverteilung</p>
                 
                 <div class="example-diagram">
                     <h4>Freizeitaktivitäten Jugendlicher</h4>
@@ -346,14 +464,15 @@
 
             <div class="diagram-type">
                 <h3>Liniendiagramm</h3>
-                <p><strong>Zweck:</strong> Entwicklung/Verlauf über Zeit darstellen</p>
-                <p><strong>Beispiel:</strong> Temperaturverlauf über ein Jahr, Aktienkurse</p>
+                <p><strong>Zweck:</strong> Darstellung von Entwicklungen und Verläufen über die Zeit</p>
                 <p><strong>Aufbau:</strong></p>
                 <ul>
                     <li>X-Achse: Zeit (Tage, Monate, Jahre)</li>
                     <li>Y-Achse: Messwerte</li>
                     <li>Linie verbindet die Datenpunkte</li>
+                    <li>Punkte durch Linien verbunden</li>
                 </ul>
+                <p><strong>Anwendung:</strong> Börsenkurse, Temperaturverläufe, Bevölkerungsentwicklung</p>
                 
                 <div class="example-diagram">
                     <h4>Smartphone-Nutzung Jugendlicher (2020-2024)</h4>
@@ -411,32 +530,188 @@
                     </svg>
                 </div>
             </div>
+
+            <div class="diagram-type">
+                <h3>Flussdiagramm</h3>
+                <p><strong>Zweck:</strong> Darstellung von Prozessen und Entscheidungswegen</p>
+                <p><strong>Aufbau:</strong></p>
+                <ul>
+                    <li>Kästchen und Pfeile zeigen Abläufe</li>
+                    <li>Rechtecke (Aktionen)</li>
+                    <li>Rauten (Entscheidungen)</li>
+                    <li>Ovale (Start/Ende)</li>
+                </ul>
+                <p><strong>Anwendung:</strong> Arbeitsabläufe, Computerprogramme, Entscheidungsprozesse</p>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Mindmap</h3>
+                <p><strong>Zweck:</strong> Strukturierung und Visualisierung von Ideen</p>
+                <p><strong>Aufbau:</strong></p>
+                <ul>
+                    <li>Zentrales Thema mit verzweigten Ästen</li>
+                    <li>Hierarchisch oder vernetzt</li>
+                    <li>Verschiedene Farben und Symbole</li>
+                </ul>
+                <p><strong>Anwendung:</strong> Brainstorming, Lernhilfen, Projektplanung</p>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Organigramm</h3>
+                <p><strong>Zweck:</strong> Darstellung hierarchischer Strukturen</p>
+                <p><strong>Aufbau:</strong></p>
+                <ul>
+                    <li>Kästchen in verschiedenen Ebenen</li>
+                    <li>Linien zeigen Über- und Unterordnung</li>
+                    <li>Klare Hierarchien</li>
+                </ul>
+                <p><strong>Anwendung:</strong> Unternehmensstrukturen, Verwaltungsaufbau, Familienstammbäume</p>
+            </div>
         </div>
 
-        <h2>3. Systematisches Vorgehen beim Analysieren</h2>
+        <h2>3. Weitere nichtlineare Textformen</h2>
+        
+        <div class="diagram-types">
+            <div class="diagram-type">
+                <h3>Infografiken</h3>
+                <ul>
+                    <li>Kombination aus Grafiken, Zahlen und kurzen Texten</li>
+                    <li>Komplexe Sachverhalte werden vereinfacht dargestellt</li>
+                    <li>Oft journalistisch oder wissenschaftlich verwendet</li>
+                </ul>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Webseiten</h3>
+                <ul>
+                    <li>Hyperlinks ermöglichen verschiedene Navigationswege</li>
+                    <li>Menüstrukturen und interaktive Elemente</li>
+                    <li>Multimediale Inhalte (Text, Bild, Video, Audio)</li>
+                </ul>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Karten</h3>
+                <ul>
+                    <li>Geografische oder thematische Darstellungen</li>
+                    <li>Legende erklärt Symbole und Farben</li>
+                    <li>Maßstab gibt Größenverhältnisse an</li>
+                </ul>
+            </div>
+
+            <div class="diagram-type">
+                <h3>Tabellen</h3>
+                <ul>
+                    <li>Systematische Anordnung von Daten</li>
+                    <li>Zeilen und Spalten strukturieren Informationen</li>
+                    <li>Übersichtliche Darstellung komplexer Datenmengen</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>4. Die W-Fragen bei der Analyse nichtlinearer Texte</h2>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">1</span>Was wird dargestellt?</h3>
+            <ul>
+                <li>Hauptthema oder zentrale Aussage identifizieren</li>
+                <li>Art der dargestellten Daten bestimmen</li>
+                <li>Zusammenhänge zwischen verschiedenen Elementen erkennen</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">2</span>Wer ist die Quelle?</h3>
+            <ul>
+                <li>Autor oder Institution ermitteln</li>
+                <li>Glaubwürdigkeit der Quelle bewerten</li>
+                <li>Mögliche Interessenskonflikte berücksichtigen</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">3</span>Wann wurde es erstellt?</h3>
+            <ul>
+                <li>Aktualität der Daten prüfen</li>
+                <li>Zeitraum der dargestellten Daten erfassen</li>
+                <li>Entwicklungen über Zeit hinweg beachten</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">4</span>Wo gilt die Information?</h3>
+            <ul>
+                <li>Geografischer oder thematischer Geltungsbereich</li>
+                <li>Kultureller oder gesellschaftlicher Kontext</li>
+                <li>Übertragbarkeit auf andere Bereiche</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">5</span>Warum wurde es erstellt?</h3>
+            <ul>
+                <li>Zweck und Zielsetzung erkennen</li>
+                <li>Zielgruppe identifizieren</li>
+                <li>Mögliche Manipulation oder Verzerrung aufdecken</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">6</span>Wie sind die Daten dargestellt?</h3>
+            <ul>
+                <li>Darstellungsform analysieren</li>
+                <li>Maßstäbe und Verhältnisse prüfen</li>
+                <li>Vollständigkeit der Information bewerten</li>
+            </ul>
+        </div>
+
+        <h2>5. Technische Elemente verstehen</h2>
+
+        <div class="tip-box">
+            <strong>Maßstäbe und Einheiten:</strong><br>
+            Einheitliche Verwendung prüfen, Verhältnismäßigkeit kontrollieren, Umrechnungen nachvollziehen können
+        </div>
+
+        <div class="tip-box">
+            <strong>Legende und Symbolik:</strong><br>
+            Bedeutung aller Symbole erfassen, Farbkodierungen verstehen, Abkürzungen auflösen
+        </div>
+
+        <div class="tip-box">
+            <strong>Achsenbeschriftung:</strong><br>
+            Vollständigkeit prüfen, Einheiten beachten, Skalierung analysieren
+        </div>
+
+        <h2>6. Systematisches Vorgehen beim Analysieren</h2>
 
         <div class="highlight-box">
             <h3><span class="step-counter">1</span>Überblick verschaffen</h3>
             <ul>
-                <li>Titel und Quelle lesen</li>
+                <li>Titel und Überschrift lesen</li>
+                <li>Art der Darstellung identifizieren</li>
+                <li>Quelle und Zeitraum erfassen</li>
                 <li>Achsenbeschriftungen beachten</li>
-                <li>Zeitraum/Zeitpunkt erfassen</li>
                 <li>Legende verstehen</li>
             </ul>
         </div>
 
         <div class="highlight-box">
-            <h3><span class="step-counter">2</span>Auffälligkeiten erkennen</h3>
+            <h3><span class="step-counter">2</span>Details erfassen</h3>
             <ul>
+                <li>Achsenbeschriftungen studieren</li>
+                <li>Legende verstehen</li>
+                <li>Maßstäbe und Einheiten beachten</li>
                 <li>Höchste/niedrigste Werte</li>
-                <li>Trends und Entwicklungen</li>
                 <li>Besonderheiten und Ausreißer</li>
             </ul>
         </div>
 
         <div class="highlight-box">
-            <h3><span class="step-counter">3</span>Zusammenhänge verstehen</h3>
+            <h3><span class="step-counter">3</span>Daten ablesen und Zusammenhänge verstehen</h3>
             <ul>
+                <li>Genaue Werte bestimmen</li>
+                <li>Trends und Entwicklungen erkennen</li>
+                <li>Auffälligkeiten notieren</li>
                 <li>Ursache-Wirkungs-Beziehungen</li>
                 <li>Vergleiche zwischen Kategorien</li>
                 <li>Entwicklungstendenzen</li>
@@ -444,24 +719,27 @@
         </div>
 
         <div class="highlight-box">
-            <h3><span class="step-counter">4</span>Bewertung und Interpretation</h3>
+            <h3><span class="step-counter">4</span>Daten interpretieren und bewerten</h3>
             <ul>
+                <li>Zusammenhänge herstellen</li>
+                <li>Ursachen vermuten</li>
                 <li>Was bedeuten die Daten?</li>
                 <li>Welche Schlüsse lassen sich ziehen?</li>
                 <li>Was könnte die Ursache für bestimmte Entwicklungen sein?</li>
+                <li>Bedeutung für Zielgruppe bewerten</li>
             </ul>
         </div>
 
-        <h2>4. Häufige Fehlerquellen</h2>
+        <h2>7. Häufige Fehlerquellen erkennen</h2>
 
         <div class="tip-box">
             <strong>1. Skalierung übersehen:</strong><br>
-            Beginnt die Y-Achse bei 0 oder einem anderen Wert? Dadurch können kleine Unterschiede größer wirken, als sie tatsächlich sind.
+            Beginnt die Y-Achse bei 0 oder einem anderen Wert? Dadurch können kleine Unterschiede größer wirken, als sie tatsächlich sind. Sind die Abstände gleichmäßig? Wird durch Skalierung manipuliert?
         </div>
 
         <div class="tip-box">
             <strong>2. Zeitraum ignorieren:</strong><br>
-            Über welchen Zeitraum erstrecken sich die Daten? Ein Diagramm über 100 Jahre zeigt andere Trends als eines über 1 Jahr.
+            Über welchen Zeitraum erstrecken sich die Daten? Ein Diagramm über 100 Jahre zeigt andere Trends als eines über 1 Jahr. Sind alle relevanten Zeiträume erfasst?
         </div>
 
         <div class="tip-box">
@@ -471,26 +749,199 @@
 
         <div class="tip-box">
             <strong>4. Kontext vernachlässigen:</strong><br>
-            Externe Faktoren nicht berücksichtigen - was könnte die Ursache für bestimmte Entwicklungen sein?
+            Externe Faktoren nicht berücksichtigen - was könnte die Ursache für bestimmte Entwicklungen sein? Fehlen wichtige Kategorien?
         </div>
 
-        <h2>5. Formulierungshilfen für die Diagrammanalyse</h2>
+        <div class="tip-box">
+            <strong>5. Verzerrte Darstellung:</strong><br>
+            Sind 3D-Effekte irreführend? Werden Proportionen korrekt wiedergegeben? Stimmen Bildgrößen mit Datenwerten überein?
+        </div>
+
+        <h2>8. Richtige und falsche Aussagen erkennen</h2>
+
+        <h3>Prüfstrategien</h3>
+        <div class="evaluation-grid">
+            <div class="evaluation-item">
+                <h4>Zahlenvergleich</h4>
+                <ul>
+                    <li>Exakte Werte aus der Grafik ablesen</li>
+                    <li>Berechnungen nachprüfen</li>
+                    <li>Prozentangaben überprüfen</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Trendanalyse</h4>
+                <ul>
+                    <li>Entwicklungsrichtung bestimmen (steigend/fallend)</li>
+                    <li>Geschwindigkeit der Veränderung bewerten</li>
+                    <li>Kontinuität oder Schwankungen erkennen</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Vollständigkeitsprüfung</h4>
+                <ul>
+                    <li>Alle genannten Kategorien in der Grafik vorhanden?</li>
+                    <li>Zeiträume korrekt angegeben?</li>
+                    <li>Quellenangaben nachvollziehbar?</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Typische Fehlerarten in Aussagen</h3>
+
+        <div class="sample-text">
+            <strong>Zahlenverzerrung:</strong><br>
+            ❌ Falsch: "Die Hälfte aller Befragten..." (wenn es 48% sind)<br>
+            ✅ Richtig: "Knapp die Hälfte..." oder "48% der Befragten..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Zeitliche Ungenauigkeit:</strong><br>
+            ❌ Falsch: "In den letzten Jahren..." (bei Daten von 2018-2020)<br>
+            ✅ Richtig: "Zwischen 2018 und 2020..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Übertreibung:</strong><br>
+            ❌ Falsch: "dramatischer Anstieg" (bei 5% Zunahme)<br>
+            ✅ Richtig: "leichter Anstieg" oder "Zunahme um 5%"
+        </div>
+
+        <div class="sample-text">
+            <strong>Falsche Kausalität:</strong><br>
+            ❌ Falsch: "A führt zu B" (wenn nur Korrelation gezeigt wird)<br>
+            ✅ Richtig: "A und B entwickeln sich parallel"
+        </div>
+
+        <h3>Bewertungskriterien für Aussagen</h3>
+
+        <div class="evaluation-grid">
+            <div class="evaluation-item" style="border-color: #4caf50; background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);">
+                <h4 style="color: #2e7d32;">Eindeutig richtig</h4>
+                <ul>
+                    <li>Entspricht exakt den Grafik-Daten</li>
+                    <li>Korrekte Zahlenangaben</li>
+                    <li>Präzise Zeiträume</li>
+                    <li>Angemessene Formulierung</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item" style="border-color: #f44336; background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);">
+                <h4 style="color: #c62828;">Eindeutig falsch</h4>
+                <ul>
+                    <li>Widerspricht den Daten</li>
+                    <li>Falsche Zahlen oder Trends</li>
+                    <li>Unzutreffende Zeitangaben</li>
+                    <li>Übertreibte Darstellung</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item" style="border-color: #ff9800; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                <h4 style="color: #e65100;">Nicht eindeutig bestimmbar</h4>
+                <ul>
+                    <li>Information nicht in der Grafik enthalten</li>
+                    <li>Interpretation ohne Datenbasis</li>
+                    <li>Zukunftsprognosen</li>
+                    <li>Ursache-Wirkungs-Zusammenhänge ohne Beleg</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>9. Begründete Meinung zu einem Thema entwickeln</h2>
+
+        <h3>Strukturiertes Vorgehen</h3>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">1</span>These formulieren</h3>
+            <ul>
+                <li>Klare Positionierung zum Thema</li>
+                <li>Präzise und überprüfbare Aussage</li>
+                <li>Bezug zu den vorliegenden Daten</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">2</span>Argumente sammeln</h3>
+            <ul>
+                <li>Pro-Argumente für die eigene Position</li>
+                <li>Contra-Argumente berücksichtigen</li>
+                <li>Daten als Belege verwenden</li>
+                <li>Logische Verknüpfungen herstellen</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">3</span>Begründung ausarbeiten</h3>
+            <ul>
+                <li>Jedes Argument mit Beispielen belegen</li>
+                <li>Auf Grafik-Daten Bezug nehmen</li>
+                <li>Ursache-Wirkungs-Zusammenhänge erklären</li>
+                <li>Alternative Sichtweisen erwähnen</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="step-counter">4</span>Fazit ziehen</h3>
+            <ul>
+                <li>Position bestätigen oder modifizieren</li>
+                <li>Ausblick oder Handlungsempfehlung</li>
+                <li>Offene Fragen benennen</li>
+            </ul>
+        </div>
+
+        <h3>Argumentationsstrategien</h3>
+
+        <div class="evaluation-grid">
+            <div class="evaluation-item">
+                <h4>Datenbasierte Argumentation</h4>
+                <ul>
+                    <li>Konkrete Zahlen als Belege nutzen</li>
+                    <li>Trends und Entwicklungen einbeziehen</li>
+                    <li>Vergleiche zwischen verschiedenen Bereichen</li>
+                    <li>Statistische Signifikanz beachten</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Logische Argumentation</h4>
+                <ul>
+                    <li>Schlüssige Folgerungen ziehen</li>
+                    <li>Widersprüche in Gegenpositionen aufzeigen</li>
+                    <li>Analogien und Beispiele verwenden</li>
+                    <li>Schritt-für-Schritt-Beweisführung</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Ethische Argumentation</h4>
+                <ul>
+                    <li>Moralische Aspekte berücksichtigen</li>
+                    <li>Gerechtigkeit und Fairness thematisieren</li>
+                    <li>Auswirkungen auf verschiedene Gruppen</li>
+                    <li>Langfristige Konsequenzen bedenken</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>10. Formulierungshilfen für die Diagrammanalyse</h2>
 
         <h3>Einleitende Formulierungen</h3>
         <div class="sample-text">
             <strong>Beschreibung des Diagramms:</strong><br>
-            "Das vorliegende Säulendiagramm zeigt..." | "Die Grafik stellt ... dar" | "Aus dem Kreisdiagramm geht hervor, dass..." | "Das Liniendiagramm verdeutlicht die Entwicklung von..." | "Die Darstellung basiert auf Daten aus dem Zeitraum..." | "Laut der Statistik/dem Schaubild..."
+            "Das vorliegende Säulendiagramm zeigt..." | "Die Grafik stellt ... dar" | "Aus dem Kreisdiagramm geht hervor, dass..." | "Das Liniendiagramm verdeutlicht die Entwicklung von..." | "Die Darstellung basiert auf Daten aus dem Zeitraum..." | "Laut der Statistik/dem Schaubild..." | "Die vorliegende Infografik zeigt..." | "Das Diagramm stellt dar..." | "Aus der Tabelle geht hervor..." | "Die Mindmap veranschaulicht..." | "Das Flussdiagramm verdeutlicht..."
         </div>
 
         <div class="sample-text">
-            <strong>Zeitbezug herstellen:</strong><br>
-            "Im Zeitraum von ... bis ..." | "Zwischen ... und ... zeigt sich..." | "Im Jahr ... / In den Jahren ..." | "Zu Beginn des Betrachtungszeitraums..." | "Am Ende der dargestellten Periode..."
+            <strong>Thema einführen:</strong><br>
+            "Im Mittelpunkt steht..." | "Schwerpunkt der Darstellung ist..." | "Es wird die Entwicklung von... gezeigt" | "Verglichen werden die Bereiche..." | "Zwischen ... und ... zeigt sich..." | "Im Jahr ... / In den Jahren ..." | "Zu Beginn des Betrachtungszeitraums..." | "Am Ende der dargestellten Periode..."
         </div>
 
         <h3>Beschreibung von Werten und Mengen</h3>
         <div class="sample-text">
             <strong>Genaue Werte benennen:</strong><br>
-            "Der Wert beträgt exakt..." | "Mit ... liegt der Anteil bei..." | "... erreicht einen Höchstwert von..." | "Der niedrigste Wert liegt bei..." | "Insgesamt summieren sich die Werte auf..."
+            "Der Wert beträgt exakt..." | "Mit ... liegt der Anteil bei..." | "... erreicht einen Höchstwert von..." | "Der niedrigste Wert liegt bei..." | "Insgesamt summieren sich die Werte auf..." | "Den höchsten Wert erreicht..." | "Am niedrigsten ist der Anteil bei..." | "Der Durchschnitt beträgt..." | "Die Mehrheit der..."
         </div>
 
         <div class="sample-text">
@@ -506,7 +957,7 @@
         <h3>Vergleiche und Rangfolgen</h3>
         <div class="sample-text">
             <strong>Vergleichende Formulierungen:</strong><br>
-            "Im Vergleich zu ... ist ... deutlich höher/niedriger" | "Während ... bei ... liegt, erreicht ... nur..." | "... übertrifft ... um das Doppelte/Dreifache" | "Gegenüber ... zeigt ... einen Rückgang/Anstieg von..." | "... liegt sowohl über/unter dem Durchschnitt als auch über/unter..."
+            "Im Vergleich zu ... ist ... deutlich höher/niedriger" | "Während ... bei ... liegt, erreicht ... nur..." | "... übertrifft ... um das Doppelte/Dreifache" | "Gegenüber ... zeigt ... einen Rückgang/Anstieg von..." | "... liegt sowohl über/unter dem Durchschnitt als auch über/unter..." | "Während... ansteigt, sinkt..." | "Gegenüber dem Vorjahr hat sich... verdoppelt"
         </div>
 
         <div class="sample-text">
@@ -522,33 +973,33 @@
         <h3>Entwicklungen und Trends beschreiben</h3>
         <div class="sample-text">
             <strong>Anstiege beschreiben:</strong><br>
-            "... steigt kontinuierlich/stetig an" | "Ein deutlicher/rapider/dramatischer Anstieg ist bei ... zu verzeichnen" | "... nimmt sukzessive/schrittweise zu" | "... wächst exponentiell/überproportional" | "Ein sprunghafter Anstieg zeigt sich..." | "... verzeichnet einen Aufwärtstrend"
+            "... steigt kontinuierlich/stetig an" | "Ein deutlicher/rapider/dramatischer Anstieg ist bei ... zu verzeichnen" | "... nimmt sukzessive/schrittweise zu" | "... wächst exponentiell/überproportional" | "Ein sprunghafter Anstieg zeigt sich..." | "... verzeichnet einen Aufwärtstrend" | "Es ist ein kontinuierlicher Anstieg zu erkennen"
         </div>
 
         <div class="sample-text">
             <strong>Rückgänge formulieren:</strong><br>
-            "... sinkt kontinuierlich/stetig" | "Ein deutlicher Rückgang ist bei ... erkennbar" | "... nimmt ab/geht zurück" | "... fällt drastisch/erheblich" | "Ein Abwärtstrend zeichnet sich ab bei..." | "... bricht dramatisch ein"
+            "... sinkt kontinuierlich/stetig" | "Ein deutlicher Rückgang ist bei ... erkennbar" | "... nimmt ab/geht zurück" | "... fällt drastisch/erheblich" | "Ein Abwärtstrend zeichnet sich ab bei..." | "... bricht dramatisch ein" | "Der Wert fällt drastisch ab"
         </div>
 
         <div class="sample-text">
             <strong>Stagnation und Konstanz:</strong><br>
-            "... bleibt konstant/unverändert" | "... stagniert auf dem Niveau von..." | "Keine nennenswerten Veränderungen zeigen sich bei..." | "... pendelt zwischen ... und ..." | "... verharrt bei..."
+            "... bleibt konstant/unverändert" | "... stagniert auf dem Niveau von..." | "Keine nennenswerten Veränderungen zeigen sich bei..." | "... pendelt zwischen ... und ..." | "... verharrt bei..." | "Zwischen... und... stagniert die Entwicklung"
         </div>
 
         <div class="sample-text">
             <strong>Schwankungen beschreiben:</strong><br>
-            "... unterliegt starken Schwankungen" | "... schwankt zwischen ... und ..." | "Erhebliche Fluktuationen sind bei ... erkennbar" | "... zeigt einen wellenförmigen Verlauf" | "... oszilliert um den Wert..."
+            "... unterliegt starken Schwankungen" | "... schwankt zwischen ... und ..." | "Erhebliche Fluktuationen sind bei ... erkennbar" | "... zeigt einen wellenförmigen Verlauf" | "... oszilliert um den Wert..." | "Die Kurve verläuft wellenförmig"
         </div>
 
         <h3>Besonderheiten und Auffälligkeiten</h3>
         <div class="sample-text">
             <strong>Extreme Werte:</strong><br>
-            "Bemerkenswert ist der Spitzenwert von..." | "Auffällig ist der extrem niedrige Wert bei..." | "... stellt einen deutlichen Ausreißer dar" | "Hervorzuheben ist..." | "Beachtenswert erscheint..."
+            "Bemerkenswert ist der Spitzenwert von..." | "Auffällig ist der extrem niedrige Wert bei..." | "... stellt einen deutlichen Ausreißer dar" | "Hervorzuheben ist..." | "Beachtenswert erscheint..." | "Besonders auffällig ist..." | "Bemerkenswert erscheint..."
         </div>
 
         <div class="sample-text">
             <strong>Unerwartete Entwicklungen:</strong><br>
-            "Überraschend ist die Entwicklung bei..." | "Entgegen dem allgemeinen Trend..." | "Wider Erwarten..." | "Ungewöhnlich erscheint..." | "Gegen die Erwartung..."
+            "Überraschend ist die Entwicklung bei..." | "Entgegen dem allgemeinen Trend..." | "Wider Erwarten..." | "Ungewöhnlich erscheint..." | "Gegen die Erwartung..." | "Als Ausnahme zeigt sich..."
         </div>
 
         <div class="sample-text">
@@ -556,16 +1007,16 @@
             "Ein Wendepunkt ist bei ... erkennbar" | "Ab ... ändert sich die Tendenz" | "... markiert eine Trendwende" | "Ein Richtungswechsel vollzieht sich bei..."
         </div>
 
-        <h2>6. Interpretation und Schlussfolgerungen</h2>
+        <h3>Interpretation und Schlussfolgerungen</h3>
 
         <div class="sample-text">
-            <strong>Ursachen benennen:</strong><br>
-            "Diese Entwicklung lässt sich möglicherweise dadurch erklären, dass..." | "Als Ursache für ... kommt ... in Betracht" | "... könnte auf ... zurückzuführen sein" | "Vermutlich führte ... zu..." | "Ein Grund für ... könnte ... sein"
+            <strong>Zusammenhänge erklären:</strong><br>
+            "Dies lässt sich dadurch erklären, dass..." | "Ein möglicher Grund könnte sein..." | "Ursächlich hierfür ist..." | "Dies steht im Zusammenhang mit..." | "Als Ursache für ... kommt ... in Betracht" | "... könnte auf ... zurückzuführen sein" | "Vermutlich führte ... zu..." | "Ein Grund für ... könnte ... sein"
         </div>
 
         <div class="sample-text">
-            <strong>Konsequenzen ableiten:</strong><br>
-            "Daraus ergibt sich..." | "Dies hat zur Folge, dass..." | "Infolgedessen..." | "Die Auswirkungen zeigen sich in..." | "Dies führt zu..."
+            <strong>Bewerten und interpretieren:</strong><br>
+            "Die Daten deuten darauf hin, dass..." | "Daraus lässt sich schließen..." | "Dies könnte bedeuten, dass..." | "Kritisch zu betrachten ist..." | "Daraus ergibt sich..." | "Dies hat zur Folge, dass..." | "Infolgedessen..." | "Die Auswirkungen zeigen sich in..." | "Dies führt zu..."
         </div>
 
         <div class="sample-text">
@@ -578,11 +1029,26 @@
             "Setzt sich dieser Trend fort, so..." | "Für die Zukunft ist zu erwarten..." | "Die Entwicklung deutet darauf hin, dass..." | "Langfristig könnte sich ... ergeben" | "Die Tendenz spricht für..."
         </div>
 
-        <h2>7. Abschließende Formulierungen</h2>
+        <h3>Sprachliche Gestaltung der Argumentation</h3>
 
         <div class="sample-text">
-            <strong>Zusammenfassung:</strong><br>
-            "Zusammenfassend lässt sich feststellen..." | "Insgesamt zeigt die Darstellung..." | "Das Diagramm verdeutlicht im Überblick..." | "Als Fazit ergibt sich..." | "Die wesentlichen Erkenntnisse sind..."
+            <strong>Meinungsäußerung:</strong><br>
+            "Meiner Ansicht nach..." | "Ich bin der Überzeugung, dass..." | "Die Daten sprechen dafür, dass..." | "Aus meiner Sicht ist..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Begründung:</strong><br>
+            "Dies wird durch folgende Tatsachen belegt:" | "Ein weiteres Argument ist..." | "Hinzu kommt, dass..." | "Darüber hinaus zeigt sich..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Relativierung:</strong><br>
+            "Allerdings muss berücksichtigt werden..." | "Eine andere Sichtweise wäre..." | "Kritisch anzumerken ist..." | "Einschränkend ist zu sagen..."
+        </div>
+
+        <div class="sample-text">
+            <strong>Abschließende Formulierungen:</strong><br>
+            "Zusammenfassend lässt sich feststellen..." | "Insgesamt zeigt die Darstellung..." | "Das Diagramm verdeutlicht im Überblick..." | "Als Fazit ergibt sich..." | "Die wesentlichen Erkenntnisse sind..." | "Die Analyse führt zu dem Ergebnis..." | "Daraus folgt meiner Meinung nach..." | "Abschließend ist zu sagen..."
         </div>
 
         <div class="sample-text">
@@ -590,112 +1056,185 @@
             "Kritisch anzumerken ist..." | "Zu berücksichtigen ist jedoch..." | "Einschränkend muss gesagt werden..." | "Die Daten sind vor dem Hintergrund ... zu sehen" | "Relativierend wirkt..."
         </div>
 
-        <h3>Beispielbeschreibung:</h3>
+<h3>Beispielbeschreibung:</h3>
         <div class="sample-text">
             "Das Säulendiagramm stellt die beliebtesten Freizeitaktivitäten Jugendlicher im Jahr 2024 dar. Mit 35% führt Gaming deutlich vor Social Media (28%) und Sport (22%). Lesen bildet mit nur 15% das Schlusslicht. Auffällig ist der hohe Anteil digitaler Aktivitäten (Gaming + Social Media = 63%), während traditionelle Beschäftigungen wie Lesen deutlich weniger Zuspruch finden. Dies spiegelt den digitalen Wandel in der Freizeitgestaltung Jugendlicher wider."
         </div>
 
-        <h2>8. Übungen zum Selbsttest</h2>
+        <h2>11. Weiterführende Informationen und Übungen</h2>
 
-        <div class="exercise-box">
-            <h3>Übung 1: Diagramm-Memory</h3>
-            <p>Ordne die Diagrammart dem passenden Verwendungszweck zu:</p>
+        <div class="highlight-box">
+            <h3>Vertiefende Analyse und Praxis</h3>
+            <p>Die folgenden Aspekte gehen über die Grundlagen hinaus und bieten zusätzliche Herausforderungen für interessierte Schüler:</p>
             <ul>
-                <li>Säulendiagramm → ?</li>
-                <li>Liniendiagramm → ?</li>
-                <li>Kreisdiagramm → ?</li>
-                <li>Streudiagramm → ?</li>
-                <li>Flächendiagramm → ?</li>
+                <li><strong>Kritische Medienanalyse:</strong> Quellenkritik, Intentionsanalyse, Darstellungsanalyse</li>
+                <li><strong>Vergleichende Analyse:</strong> Datenvergleich, Quellenvergleich, Methodenvergleich</li>
+                <li><strong>Komplexe Diagrammtypen:</strong> Kombinierte Diagramme, interaktive Visualisierungen</li>
+                <li><strong>Statistische Grundlagen:</strong> Mittelwerte, Korrelationen, Signifikanz</li>
             </ul>
-            <p><strong>Mögliche Verwendungen:</strong> Entwicklung über Zeit | Vergleich von Kategorien | Anteile am Ganzen | Zusammenhang zwischen Variablen | Mengenentwicklung mit Gesamtbetonung</p>
         </div>
 
-        <div class="exercise-box">
-            <h3>Übung 2: Diagramm erstellen</h3>
-            <p>Erstelle aus folgenden Daten ein passendes Diagramm:</p>
-            <p><strong>Umfrage "Lieblings-Streaming-Dienst" (100 Schüler):</strong></p>
-            <ul>
-                <li>Netflix: 45 Schüler</li>
-                <li>Amazon Prime: 25 Schüler</li>
-                <li>Disney+: 20 Schüler</li>
-                <li>Andere: 10 Schüler</li>
-            </ul>
-            <p><em>Welche Diagrammart würdest du wählen und warum?</em></p>
-        </div>
 
-        <div class="exercise-box">
-            <h3>Übung 3: Fehler finden</h3>
-            <p>Was ist problematisch an folgender Aussage?</p>
-            <div class="sample-text">
-                "Das Liniendiagramm zeigt, dass die Internetnutzung von Jugendlichen von 2020 bis 2024 von 3,2 auf 3,8 Stunden täglich angestiegen ist. Dies bedeutet eine dramatische Verdopplung der Nutzungszeit!"
+        
+
+        <h3>PISA-Framework für nichtlineare Texte</h3>
+        <div class="evaluation-grid">
+            <div class="evaluation-item">
+                <h4>Lokalisieren von Informationen</h4>
+                <ul>
+                    <li>Gezieltes Suchen nach spezifischen Daten</li>
+                    <li>Navigation zwischen verschiedenen Textelementen</li>
+                    <li>Verwendung von Inhaltsverzeichnissen und Legenden</li>
+                </ul>
             </div>
-            <p><em>Tipp: Achte auf die konkreten Zahlen und deren Verhältnis zueinander.</em></p>
+
+            <div class="evaluation-item">
+                <h4>Verstehen der Gesamtbedeutung</h4>
+                <ul>
+                    <li>Hauptaussage des Textes erfassen</li>
+                    <li>Zusammenhänge zwischen verschiedenen Elementen</li>
+                    <li>Zweck und Zielgruppe identifizieren</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Interpretieren und Integrieren</h4>
+                <ul>
+                    <li>Schlussfolgerungen aus den Daten ziehen</li>
+                    <li>Implizite Informationen erschließen</li>
+                    <li>Verschiedene Informationsquellen kombinieren</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Reflektieren und Bewerten</h4>
+                <ul>
+                    <li>Qualität der Informationen beurteilen</li>
+                    <li>Glaubwürdigkeit der Quelle prüfen</li>
+                    <li>Vollständigkeit und Objektivität hinterfragen</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>12. Klausurstrategien und Bewertungskriterien</h2>
+
+        <div class="highlight-box">
+            <h3>Klausurstrategien</h3>
+            <ul>
+                <li><strong>Zeitmanagement:</strong> Überblick verschaffen, Schwierigkeitsgrad einschätzen, Zeit einplanen</li>
+                <li><strong>Systematische Bearbeitung:</strong> Aufgabenstellung genau lesen, relevante Textteile markieren, strukturiert formulieren</li>
+                <li><strong>Kontrolle und Korrektur:</strong> Vollständigkeit prüfen, Rechtschreibung kontrollieren, Bezug überprüfen</li>
+            </ul>
+        </div>
+
+        <div class="g-level-box">
+            <h3>Bewertungskriterien für Klassenarbeiten</h3>
+            <ul>
+                <li><strong>Vollständigkeit (25%):</strong> Alle relevanten Aspekte erfasst, wichtige Details nicht übersehen</li>
+                <li><strong>Richtigkeit (25%):</strong> Korrekte Datenablesung, zutreffende Interpretationen</li>
+                <li><strong>Tiefe der Analyse (25%):</strong> Zusammenhänge erkannt und erklärt, kritische Bewertung</li>
+                <li><strong>Eigenständigkeit (25%):</strong> Begründete eigene Meinung, kreative Lösungsansätze</li>
+            </ul>
+        </div>
+
+        <h3>Sprachliche Bewertung</h3>
+        <div class="evaluation-grid">
+            <div class="evaluation-item">
+                <h4>Fachsprache (20%)</h4>
+                <ul>
+                    <li>Angemessene Verwendung von Fachbegriffen</li>
+                    <li>Präzise und eindeutige Formulierungen</li>
+                    <li>Korrekte statistische Begriffe</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Struktur und Aufbau (20%)</h4>
+                <ul>
+                    <li>Logische Gliederung der Antworten</li>
+                    <li>Klare Argumentation</li>
+                    <li>Nachvollziehbare Gedankenführung</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Sprachrichtigkeit (20%)</h4>
+                <ul>
+                    <li>Korrekte Rechtschreibung und Grammatik</li>
+                    <li>Vollständige und verständliche Sätze</li>
+                    <li>Angemessener Stil</li>
+                </ul>
+            </div>
+
+            <div class="evaluation-item">
+                <h4>Ausdrucksvermögen (40%)</h4>
+                <ul>
+                    <li>Abwechslungsreicher Wortschatz</li>
+                    <li>Treffende Formulierungen</li>
+                    <li>Überzeugende Darstellung</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>13. Typische Aufgabenstellungen in Klassenarbeiten</h2>
+
+        <div class="exercise-box">
+            <h3>Aufgabentyp 1: Beschreibung</h3>
+            <p><strong>"Beschreiben Sie die Entwicklung von... anhand der Grafik"</strong></p>
+            <ul>
+                <li>Systematische Beschreibung aller relevanten Aspekte</li>
+                <li>Verwendung angemessener Fachsprache</li>
+                <li>Strukturierte Darstellung (Einleitung - Hauptteil - Schluss)</li>
+            </ul>
         </div>
 
         <div class="exercise-box">
-            <h3>Übung 4: Beschreibung schreiben</h3>
-            <p>Beschreibe das Säulendiagramm "Lieblingsfächer" aus Abschnitt 2 in 3-4 Sätzen. Verwende dabei die Formulierungshilfen aus dem Guide.</p>
-        </div>
-
-        <h2>9. Checkliste für die Diagrammanalyse</h2>
-
-        <div class="checklist">
-            <h3>Vor der Analyse - Das solltest du beachten:</h3>
+            <h3>Aufgabentyp 2: Richtig/Falsch-Bewertung</h3>
+            <p><strong>"Bewerten Sie die folgenden Aussagen als richtig oder falsch und begründen Sie"</strong></p>
             <ul>
-                <li>Titel und Untertitel vollständig gelesen</li>
-                <li>Quelle und Erhebungsjahr notiert</li>
-                <li>Diagrammart identifiziert</li>
-                <li>Achsenbeschriftungen verstanden</li>
-                <li>Legende/Farbkodierung beachtet</li>
-                <li>Skalierung und Einheiten geprüft</li>
+                <li>Jede Aussage einzeln prüfen</li>
+                <li>Konkrete Bezüge zur Grafik herstellen</li>
+                <li>Eindeutige Begründungen formulieren</li>
             </ul>
         </div>
 
-        <div class="checklist">
-            <h3>Bei der Beschreibung - Das gehört hinein:</h3>
+        <div class="exercise-box">
+            <h3>Aufgabentyp 3: Interpretation</h3>
+            <p><strong>"Interpretieren Sie die dargestellten Daten und ziehen Sie Schlussfolgerungen"</strong></p>
             <ul>
-                <li>Einleitungssatz mit Thema und Diagrammart</li>
-                <li>Höchste und niedrigste Werte genannt</li>
-                <li>Trends und Entwicklungen beschrieben</li>
-                <li>Besonderheiten und Auffälligkeiten erwähnt</li>
-                <li>Interpretation oder Schlussfolgerung formuliert</li>
-                <li>Fachsprachlich korrekte Formulierungen verwendet</li>
+                <li>Über die reine Beschreibung hinausgehen</li>
+                <li>Zusammenhänge und Ursachen erklären</li>
+                <li>Begründete Schlussfolgerungen ziehen</li>
             </ul>
         </div>
 
-        <h2>10. Tipps für die Klassenarbeit</h2>
-
-        <div class="checklist">
-            <h3>Struktur für die Klassenarbeit:</h3>
+        <div class="exercise-box">
+            <h3>Aufgabentyp 4: Position entwickeln</h3>
+            <p><strong>"Entwickeln Sie eine begründete Position zu..."</strong></p>
             <ul>
-                <li><strong>Struktur einhalten:</strong> Beschreibung → Analyse → Interpretation</li>
-                <li><strong>Fachsprache verwenden:</strong> Präzise Formulierungen statt umgangssprachlicher Ausdrücke</li>
-                <li><strong>Vollständigkeit:</strong> Alle wichtigen Aspekte ansprechen</li>
-                <li><strong>Belege:</strong> Konkrete Zahlen und Werte nennen</li>
-                <li><strong>Objektivität:</strong> Sachlich bleiben, eigene Meinungen als solche kennzeichnen</li>
+                <li>Klare These formulieren</li>
+                <li>Argumente mit Grafik-Daten belegen</li>
+                <li>Gegenargumente berücksichtigen</li>
             </ul>
         </div>
 
-        <div class="tip-box">
-            <strong>Für die Klassenarbeit:</strong><br>
-            Nimm dir ausreichend Zeit für die Diagrammanalyse. Lies zuerst alle Informationen gründlich, bevor du mit dem Schreiben beginnst. Eine systematische Herangehensweise bringt dir mehr Punkte als hastige Oberflächlichkeit.
-        </div>
-
-        <div class="tip-box">
-            <strong>Im Alltag:</strong><br>
-            Übe das Diagrammlesen auch außerhalb des Unterrichts. Zeitungen, Nachrichtensendungen und Online-Artikel enthalten viele Diagramme. Je mehr du übst, desto sicherer wirst du.
-        </div>
-
-        <div class="tip-box">
-            <strong>Kritisches Denken:</strong><br>
-            Frage dich immer: Wer hat das Diagramm erstellt? Welche Absicht könnte dahinterstehen? Manchmal werden Diagramme bewusst so gestaltet, dass sie eine bestimmte Botschaft verstärken.
+        <div class="exercise-box">
+            <h3>Aufgabentyp 5: Vergleich</h3>
+            <p><strong>"Vergleichen Sie die Entwicklung in verschiedenen Bereichen"</strong></p>
+            <ul>
+                <li>Gemeinsamkeiten und Unterschiede herausarbeiten</li>
+                <li>Vergleichskriterien definieren</li>
+                <li>Erklärungen für Unterschiede finden</li>
+            </ul>
         </div>
 
         <div class="highlight-box" style="text-align: center; margin-top: 50px;">
             <h3>Erfolgreich zum Diagramm-Profi!</h3>
-            <p>Mit diesem Guide hast du alle wichtigen Grundlagen zum Lesen und Interpretieren von Diagrammen gelernt. Übung macht den Meister – nutze jede Gelegenheit, um deine Fähigkeiten zu verbessern!</p>
-            <p style="font-style: italic; color: #8b4a6b; margin-top: 20px;">Viel Erfolg in deinen Deutschstunden!</p>
+            <p>Mit diesem Guide hast du alle wichtigen Grundlagen zum Lesen und Interpretieren von nichtlinearen Texten und Diagrammen gelernt. Übung macht den Meister – nutze jede Gelegenheit, um deine Fähigkeiten zu verbessern!</p>
+            <p style="font-style: italic; color: #8b4a6b; margin-top: 20px;">Viel Erfolg in deinen Deutschstunden und Klassenarbeiten!</p>
         </div>
+
+  <a href="diagrammeweiter10.html" class="continue-button">Weiterführende Informationen zu Nichtlinearen-Texten / Diagrammen</a>
     </div>
 </body>
 </html>
