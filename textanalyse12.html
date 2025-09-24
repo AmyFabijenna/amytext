@@ -560,7 +560,9 @@
             });
             
             // Add active class to clicked link
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
             
             // Load content based on page parameter
             const contentBody = document.getElementById('content-body');
@@ -619,39 +621,74 @@
                 mainContent.classList.remove('sidebar-active');
             }
         });
-        // IN DIE HAUPTSDATEI - GANZ ANS ENDE DES <script> TAGS
-// Globale Funktionen für alle geladenen Seiten
-window.toggleKapitel = function(nummer) {
-    var inhalt = document.getElementById('kapitel-' + nummer);
-    if (inhalt) {
-        inhalt.classList.toggle('offen');
-    }
-};
 
-window.toggleSolution = function(id) {
-    var solution = document.getElementById(id);
-    if (solution) {
-        solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
-    }
-};
-// Event-Delegation für dynamisch geladene Inhalte
-document.addEventListener('click', function(e) {
-    // Accordion-Header
-    if (e.target.closest('.accordion-header')) {
-        const header = e.target.closest('.accordion-header');
-        header.classList.toggle('active');
-        header.nextElementSibling.classList.toggle('active');
-    }
-    
-    // Solution-Toggle-Buttons
-    if (e.target.classList.contains('solution-toggle')) {
-        const solution = e.target.nextElementSibling;
-        if (solution && solution.classList.contains('solution')) {
-            solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
-        }
-    }
-    
-    // L
+        // Globale Funktionen für alle geladenen Seiten
+        window.toggleKapitel = function(nummer) {
+            var inhalt = document.getElementById('kapitel-' + nummer);
+            if (inhalt) {
+                inhalt.classList.toggle('offen');
+            }
+        };
+
+        window.toggleSolution = function(id) {
+            var solution = document.getElementById(id);
+            if (solution) {
+                solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
+            }
+        };
+
+        // Event-Delegation für dynamisch geladene Inhalte
+        document.addEventListener('click', function(e) {
+            // Accordion-Header
+            if (e.target.closest('.accordion-header')) {
+                const header = e.target.closest('.accordion-header');
+                header.classList.toggle('active');
+                const panel = header.nextElementSibling;
+                if (panel && panel.classList.contains('panel')) {
+                    panel.classList.toggle('active');
+                }
+            }
+            
+            // Solution-Toggle-Buttons
+            if (e.target.classList.contains('solution-toggle')) {
+                const solution = e.target.nextElementSibling;
+                if (solution && solution.classList.contains('solution')) {
+                    solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
+                }
+            }
+            
+            // Toggle-All-Button
+            if (e.target.classList.contains('btn-toggle-all')) {
+                const panels = document.querySelectorAll('.panel');
+                const headers = document.querySelectorAll('.accordion-header');
+                const allOpen = Array.from(panels).every(panel => panel.classList.contains('active'));
+                
+                panels.forEach(panel => {
+                    if (allOpen) {
+                        panel.classList.remove('active');
+                    } else {
+                        panel.classList.add('active');
+                    }
+                });
+                
+                headers.forEach(header => {
+                    if (allOpen) {
+                        header.classList.remove('active');
+                    } else {
+                        header.classList.add('active');
+                    }
+                });
+            }
+        });
+
+        // Initial load - show welcome page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set welcome as default active
+            const welcomeLink = document.querySelector('.nav-link[onclick="loadContent(\'willkommen\')"]');
+            if (welcomeLink) {
+                welcomeLink.classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>
