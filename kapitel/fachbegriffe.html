@@ -5,256 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fachbegriffe - Deutschmatura</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: white;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .content-container {
-            max-width: 100%;
-            margin: 0 auto;
-            background: white;
-            border-radius: 0;
-            box-shadow: none;
-            overflow: hidden;
-        }
-
-        .content-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-bottom: 20px;
-        }
-
-        .content-header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .content-header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .content-body {
-            padding: 0 20px 20px 20px;
-        }
-
-        .back-button {
-            display: inline-block;
-            background: #95a5a6;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: background 0.3s;
-        }
-
-        .back-button:hover {
-            background: #7f8c8d;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #3498db;
-            font-size: 1.5em;
-        }
-
-        .accordion {
-            margin-bottom: 10px;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .accordion-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white;
-            padding: 12px 15px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: none;
-            width: 100%;
-            text-align: left;
-            outline: none;
-            position: relative;
-            user-select: none;
-            transition: background 0.3s ease;
-            font-size: 0.95em;
-        }
-
-        .accordion-header:hover {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-        }
-
-        .accordion-icon {
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active .accordion-icon::after {
-            content: '−';
-        }
-
-        .accordion-header:not(.active) .accordion-icon::after {
-            content: '+';
-        }
-
-        .panel {
-            display: none;
-            background-color: #f9f9f9;
-            border-radius: 0 0 5px 5px;
-            margin-bottom: 10px;
-            padding: 15px;
-        }
-
-        .panel.active {
-            display: block;
-        }
-
-        .term-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .term-card {
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 15px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-left: 4px solid #3498db;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            font-size: 0.9em;
-        }
-
-        .term-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-        }
-
-        .term-card h3 {
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        .example-box {
-            background: #e8f4f8;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 10px 0;
-            font-style: italic;
-            font-size: 0.9em;
-        }
-
-        .exercise {
-            background: #f9f9f9;
-            border-radius: 6px;
-            padding: 15px;
-            margin: 15px 0;
-            border: 1px solid #e0e0e0;
-        }
-
-        .exercise h3 {
-            color: #2c3e50;
-            margin-bottom: 12px;
-            font-size: 1.2em;
-        }
-
-        .exercise-question {
-            margin-bottom: 12px;
-        }
-
-        .exercise-options {
-            margin-left: 15px;
-        }
-
-        .exercise-options label {
-            display: block;
-            margin-bottom: 6px;
-            cursor: pointer;
-        }
-
-        .btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s ease;
-            font-size: 0.9em;
-        }
-
-        .btn:hover {
-            background: #2980b9;
-        }
-
-        .btn-toggle-all {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-
-        .btn-toggle-all:hover {
-            background: #2980b9;
-        }
-
-        .solution {
-            display: none;
-            background: #d4edda;
-            border-radius: 4px;
-            padding: 12px;
-            margin-top: 12px;
-        }
-
-        .solution.active {
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .content-body {
-                padding: 0 15px 15px 15px;
-            }
-
-            .term-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .content-header h1 {
-                font-size: 1.7em;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: white; line-height: 1.6; color: #333; }
+        .content-container { max-width: 100%; margin: 0 auto; background: white; }
+        .content-header { background: linear-gradient(135deg, #34495e, #2c3e50); color: white; text-align: center; padding: 30px 20px; margin-bottom: 20px; }
+        .content-header h1 { font-size: 2em; margin-bottom: 10px; }
+        .content-header p { font-size: 1.1em; opacity: 0.9; }
+        .content-body { padding: 0 20px 20px 20px; }
+        .back-button { display: inline-block; background: #95a5a6; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; margin-bottom: 20px; transition: background 0.3s; }
+        .back-button:hover { background: #7f8c8d; }
+        .section { margin-bottom: 30px; }
+        .section-title { color: #2c3e50; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #3498db; font-size: 1.5em; }
+        .btn-toggle-all { background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; margin-bottom: 15px; font-size: 0.9em; font-weight: bold; transition: background 0.3s ease; }
+        .btn-toggle-all:hover { background: #2980b9; }
+        .accordion-header { background: linear-gradient(135deg, #34495e, #2c3e50); color: white; padding: 12px 15px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border: none; width: 100%; text-align: left; outline: none; position: relative; user-select: none; transition: background 0.3s ease; font-size: 0.95em; border-radius: 6px; margin-bottom: 5px; }
+        .accordion-header:hover { background: linear-gradient(135deg, #2c3e50, #34495e); }
+        .accordion-header.active { background: linear-gradient(135deg, #2c3e50, #34495e); }
+        .accordion-header .accordion-icon::after { content: '+'; font-size: 1.1em; font-weight: bold; transition: transform 0.3s ease; }
+        .accordion-header.active .accordion-icon::after { content: '-'; }
+        .panel { display: none; background-color: #f9f9f9; border-radius: 0 0 5px 5px; margin-bottom: 10px; padding: 15px; }
+        .panel.active { display: block; }
+        .term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin: 15px 0; }
+        .term-card { background: #f8f9fa; border-radius: 6px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #3498db; transition: transform 0.2s ease, box-shadow 0.2s ease; font-size: 0.9em; }
+        .term-card:hover { transform: translateY(-2px); box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
+        .term-card h3 { color: #2c3e50; margin-bottom: 8px; font-size: 1.1em; }
+        .example-box { background: #e8f4f8; border-radius: 4px; padding: 10px; margin: 10px 0; font-style: italic; font-size: 0.9em; }
+        .exercise { background: #f9f9f9; border-radius: 6px; padding: 15px; margin: 15px 0; border: 1px solid #e0e0e0; }
+        .exercise h3 { color: #2c3e50; margin-bottom: 12px; font-size: 1.2em; }
+        .exercise-question { margin-bottom: 12px; }
+        .exercise-options { margin-left: 15px; }
+        .exercise-options label { display: block; margin-bottom: 6px; cursor: pointer; }
+        .btn { background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s ease; font-size: 0.9em; }
+        .btn:hover { background: #2980b9; }
+        .solution { display: none; background: #d4edda; border-radius: 4px; padding: 12px; margin-top: 12px; }
+        .solution.active { display: block; }
+        @media (max-width: 768px) { .content-body { padding: 0 15px 15px 15px; } .term-grid { grid-template-columns: 1fr; } .content-header h1 { font-size: 1.7em; } }
     </style>
 </head>
 <body>
@@ -265,35 +50,293 @@
         </header>
 
         <div class="content-body">
-            <a href="textanalyse12.html" class="back-button">← Zurück zur Übersicht</a>
-            <button type="button" class="btn-toggle-all" onclick="toggleAll()">Alle Bereiche öffnen/schließen</button>
+            <button type="button" class="btn-toggle-all">Alle Bereiche öffnen/schließen</button>
 
             <section id="stilmittel" class="section">
                 <h2 class="section-title">Stilmittel und rhetorische Figuren</h2>
                 
-                <div class="accordion">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Metapher</span>
-                        <span class="accordion-icon"></span>
-                    </button>
-                    <div class="panel">
-                        <p><strong>Definition:</strong> Bildlicher Ausdruck, bei dem ein Wort aus seinem eigentlichen Bedeutungszusammenhang in einen anderen übertragen wird.</p>
-                        <p><strong>Wirkung:</strong> Veranschaulichung, Verstärkung, emotionale Aufladung</p>
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Das Feuer der Liebe" (Liebe wird mit Feuer verglichen, ohne dass ein expliziter Vergleich verwendet wird)
-                        </div>
+                <div class="accordion-header">
+                    <span>Metapher</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Bildlicher Ausdruck, bei dem ein Wort aus seinem eigentlichen Bedeutungszusammenhang in einen anderen übertragen wird.</p>
+                    <p><strong>Wirkung:</strong> Veranschaulichung, Verstärkung, emotionale Aufladung</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "Das Feuer der Liebe" (Liebe wird mit Feuer verglichen, ohne dass ein expliziter Vergleich verwendet wird)
                     </div>
                 </div>
                 
-                <!-- Alle weiteren Accordions bleiben erhalten (Metapher, Vergleich, Personifikation, etc.) -->
+                <div class="accordion-header">
+                    <span>Vergleich</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Gegenüberstellung von zwei Dingen mit Hilfe von Vergleichspartikeln (wie, als, gleichsam).</p>
+                    <p><strong>Wirkung:</strong> Veranschaulichung, Konkretisierung</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "Sie kämpfte wie eine Löwin" (Der Vergleich mit einer Löwin veranschaulicht die Intensität des Kampfes)
+                    </div>
+                </div>
                 
+                <div class="accordion-header">
+                    <span>Personifikation</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Zuschreibung menschlicher Eigenschaften oder Handlungen zu unbelebten Dingen, Tieren oder abstrakten Begriffen.</p>
+                    <p><strong>Wirkung:</strong> Veranschaulichung, Emotionalisierung, lebendigere Darstellung</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "Die Sonne lachte vom Himmel" (Der Sonne wird die menschliche Eigenschaft des Lachens zugeschrieben)
+                    </div>
+                </div>
+                
+                <div class="accordion-header">
+                    <span>Hyperbel</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Übertreibung, um etwas besonders eindringlich darzustellen.</p>
+                    <p><strong>Wirkung:</strong> Verstärkung, Dramatisierung, Betonung</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "Ich habe dir das schon tausendmal gesagt" (Die Zahl tausend wird übertrieben verwendet, um die Häufigkeit zu betonen)
+                    </div>
+                </div>
+                
+                <div class="accordion-header">
+                    <span>Anapher</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Wiederholung eines Wortes oder einer Wortgruppe am Anfang aufeinanderfolgender Sätze oder Verse.</p>
+                    <p><strong>Wirkung:</strong> Rhythmisierung, Betonung, Steigerung</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "Er lachte nicht. Er weinte nicht. Er sprach nicht." (Wiederholung von "Er" am Satzanfang)
+                    </div>
+                </div>
+                
+                <div class="accordion-header">
+                    <span>Rhetorische Frage</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Frage, die keine Antwort erwartet, sondern eine Aussage verstärken oder den Leser zum Nachdenken anregen soll.</p>
+                    <p><strong>Wirkung:</strong> Appell, Betonung, gedankliche Beteiligung des Lesers</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "Soll das etwa gerecht sein?" (Es wird keine Antwort erwartet, sondern die Ungerechtigkeit betont)
+                    </div>
+                </div>
+                
+                <div class="accordion-header">
+                    <span>Ironie</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Aussage, bei der das Gesagte nicht dem Gemeinten entspricht, oft mit kritischer oder spöttischer Absicht.</p>
+                    <p><strong>Wirkung:</strong> Kritik, Spott, humorvolle Distanzierung</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "Das hast du aber toll gemacht!" (wenn jemand etwas versehentlich kaputt gemacht hat)
+                    </div>
+                </div>
+                
+                <div class="accordion-header">
+                    <span>Oxymoron</span>
+                    <span class="accordion-icon"></span>
+                </div>
+                <div class="panel">
+                    <p><strong>Definition:</strong> Verbindung zweier sich widersprechender Begriffe zu einer neuen Einheit.</p>
+                    <p><strong>Wirkung:</strong> Spannung, Paradoxie, gedankliche Herausforderung</p>
+                    <div class="example-box">
+                        <strong>Beispiel:</strong> "bittersüß", "alter Knabe", "hastiges Warten"
+                    </div>
+                </div>
             </section>
 
-            <!-- Weitere Sections bleiben erhalten -->
-            
+            <section id="textanalyse" class="section">
+                <h2 class="section-title">Textanalyse</h2>
+                
+                <div class="term-grid">
+                    <div class="term-card">
+                        <h3>Erzählperspektive</h3>
+                        <p>Die Position, aus der eine Geschichte erzählt wird (personal, auktorial, neutral, Ich-Erzähler).</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Sprachregister</h3>
+                        <p>Die sprachliche Varietät, die je nach Situation, Thema und Gesprächspartner gewählt wird (formell, informell, Fachsprache).</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Syntax</h3>
+                        <p>Lehre vom Satzbau; untersucht die Anordnung und Beziehung von Wörtern im Satz.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Semantik</h3>
+                        <p>Lehre von der Bedeutung sprachlicher Zeichen und ihrer Beziehungen zueinander.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Tempus</h3>
+                        <p>Zeitform des Verbs (Präsens, Präteritum, Perfekt, Plusquamperfekt, Futur I/II).</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Modus</h3>
+                        <p>Aussageweise des Verbs (Indikativ, Konjunktiv, Imperativ).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="interpretation" class="section">
+                <h2 class="section-title">Interpretation</h2>
+                
+                <div class="term-grid">
+                    <div class="term-card">
+                        <h3>Deutungshypothese</h3>
+                        <p>Vorläufige Annahme über die Bedeutung oder Aussageabsicht eines Textes, die im Verlauf der Interpretation überprüft wird.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Symbol</h3>
+                        <p>Zeichen, das über seine unmittelbare Bedeutung hinaus auf etwas Allgemeineres, Abstrakteres verweist.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Motiv</h3>
+                        <p>Wiederkehrendes inhaltliches oder formales Element in einem oder mehreren literarischen Werken.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Leitmotiv</h3>
+                        <p>Ein sich wiederholendes Motiv, das mit einer bestimmten Person, Situation oder Idee verbunden ist.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="textsorten" class="section">
+                <h2 class="section-title">Textsorten</h2>
+                
+                <div class="term-grid">
+                    <div class="term-card">
+                        <h3>Lyrik</h3>
+                        <p>Dichtung in Versform; Gedichte, Balladen, Sonette.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Epik</h3>
+                        <p>Erzählende Dichtung; Romane, Novellen, Kurzgeschichten, Fabeln.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Dramatik</h3>
+                        <p>Dichtung für die Bühne; Tragödien, Komödien, Dramen.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Sachtext</h3>
+                        <p>Informierender Text; Kommentare, Reportagen, Essays, wissenschaftliche Texte.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="argumentation" class="section">
+                <h2 class="section-title">Argumentation</h2>
+                
+                <div class="term-grid">
+                    <div class="term-card">
+                        <h3>These</h3>
+                        <p>Behauptung oder aufgestellter Gedanke, der begründet werden soll.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Argument</h3>
+                        <p>Begründung oder Beweis für eine These.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Beleg</h3>
+                        <p>Konkretes Beispiel, Zitat oder empirischer Nachweis für ein Argument.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Schlussfolgerung</h3>
+                        <p>Logische Konsequenz aus den vorangegangenen Argumenten.</p>
+                    </div>
+                    
+                    <div class="term-card">
+                        <h3>Appell</h3>
+                        <p>Aufforderung an den Leser oder Zuhörer, etwas zu tun oder zu denken.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="uebungen" class="section">
+                <h2 class="section-title">Übungen</h2>
+                
+                <div class="exercise">
+                    <h3>Übung 1: Stilmittel erkennen</h3>
+                    <div class="exercise-question">
+                        <p>Erkennen Sie die Stilmittel in den folgenden Sätzen:</p>
+                        <ol>
+                            <li>"Die Zeit rennt wie ein gejagtes Reh."</li>
+                            <li>"Der Wind sang sein trauriges Lied."</li>
+                            <li>"Ich warte hier schon eine Ewigkeit."</li>
+                            <li>"Du fragst mich, warum? Du fragst mich, wozu? Du fragst mich, wieso?"</li>
+                        </ol>
+                    </div>
+                    
+                    <button class="btn solution-toggle">Lösung anzeigen</button>
+                    
+                    <div class="solution">
+                        <ol>
+                            <li>Vergleich ("wie ein gejagtes Reh")</li>
+                            <li>Personifikation ("sang sein trauriges Lied")</li>
+                            <li>Hyperbel ("eine Ewigkeit")</li>
+                            <li>Anapher ("Du fragst mich")</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <h3>Übung 2: Fachbegriffe zuordnen</h3>
+                    <div class="exercise-question">
+                        <p>Ordnen Sie die folgenden Begriffe den richtigen Kategorien zu:</p>
+                        <p>Metapher, These, Erzählperspektive, Symbol, Lyrik, Argument, Beleg, Motiv, Dramatik, Epik</p>
+                        
+                        <div class="exercise-options">
+                            <label>
+                                <input type="checkbox"> Stilmittel
+                            </label>
+                            <label>
+                                <input type="checkbox"> Textanalyse
+                            </label>
+                            <label>
+                                <input type="checkbox"> Interpretation
+                            </label>
+                            <label>
+                                <input type="checkbox"> Textsorten
+                            </label>
+                            <label>
+                                <input type="checkbox"> Argumentation
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn solution-toggle">Lösung anzeigen</button>
+                    
+                    <div class="solution">
+                        <ul>
+                            <li><strong>Stilmittel:</strong> Metapher</li>
+                            <li><strong>Textanalyse:</strong> Erzählperspektive</li>
+                            <li><strong>Interpretation:</strong> Symbol, Motiv</li>
+                            <li><strong>Textsorten:</strong> Lyrik, Dramatik, Epik</li>
+                            <li><strong>Argumentation:</strong> These, Argument, Beleg</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-
-    <!-- KEIN JAVASCRIPT HIER - wird von der Mutterdatei gesteuert -->
 </body>
 </html>
