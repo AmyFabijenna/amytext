@@ -3,298 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stilmittel & Rhetorik - Deutschmatura/Abitur</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            padding: 20px;
-            margin: 0;
-        }
+    <title>Übungsaufgaben - Deutschmatura</title>
+   <style>
+.exercise-section {
+    margin-bottom: 40px;
+}
 
-        .welcome-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border-left: 5px solid #34495e;
-        }
+.exercise-section h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
 
-        .welcome-section h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
+.exercise-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-left: 4px solid #3498db;
+}
 
-        h2 {
-            color: #2c3e50;
-            margin: 30px 0 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
+.exercise-title {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
 
-        h3 {
-            color: #34495e;
-            margin: 25px 0 15px;
-        }
+.exercise-content {
+    margin-bottom: 20px;
+}
 
-        h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
+.solution-area {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    border: 2px dashed #dee2e6;
+}
 
-        /* Accordion Styling - kompatibel mit Mutterdatei */
-        .accordion {
-            margin: 20px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
+.accordion {
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
 
-        .accordion-header {
-            background: #f8f9fa;
-            padding: 15px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-        }
+.accordion-header {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    color: white;
+    padding: 15px 20px;
+    margin: 0;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
 
-        .accordion-header:hover {
-            background: #e9ecef;
-        }
+.accordion-header:hover {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+}
 
-        .accordion-header h3 {
-            margin: 0;
-            color: #2c3e50;
-            font-size: 1.1em;
-        }
+.accordion-icon {
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
 
-        .toggle-icon {
-            font-size: 18px;
-            font-weight: bold;
-            color: #34495e;
-        }
+.accordion-header.active .accordion-icon {
+    transform: rotate(45deg);
+}
 
-        .panel {
-            display: none;
-            padding: 20px;
-            background: white;
-        }
+.panel {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
 
-        .panel.active {
-            display: block;
-        }
+.panel.active {
+    max-height: 5000px;
+    padding: 20px;
+}
 
-        /* Card styling */
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            border-left: 4px solid #34495e;
-        }
+.difficulty-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 10px;
+}
 
-        .card h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
+.easy {
+    background: #d4edda;
+    color: #155724;
+}
 
-        /* Example boxes */
-        .example-box {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 10px 0;
-            border-left: 3px solid #3498db;
-        }
+.medium {
+    background: #fff3cd;
+    color: #856404;
+}
 
-        .example-title {
-            font-weight: bold;
-            color: #2c3e50;
-        }
+.hard {
+    background: #f8d7da;
+    color: #721c24;
+}
 
-        /* Exercise styling */
-        .exercise {
-            background: #e8f4f8;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
+.exercise-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #666;
+}
 
-        .exercise h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
+.time-estimate {
+    background: #e9ecef;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
 
-        /* Solution boxes */
-        .solution-toggle {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+.btn-toggle-all {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 1em;
+    font-weight: bold;
+}
 
-        .solution-toggle:hover {
-            background: #218838;
-        }
+.btn-toggle-all:hover {
+    background: #2980b9;
+}
 
-        .solution {
-            background: #d4edda;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            display: none;
-        }
-
-        .solution h4 {
-            color: #155724;
-            margin-bottom: 15px;
-        }
-
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #34495e;
-            color: white;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        /* Tip boxes */
-        .tip-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .tip-box strong {
-            color: #856404;
-        }
-
-        /* Progress section */
-        .progress-section {
-            background: #e8f4f8;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #3498db;
-        }
-    </style>
+@media (max-width: 768px) {
+    .exercise-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+</style>
 </head>
 <body>
+    <div class="content-body">
+        <div class="welcome-section">
+            <h2>Übungsaufgaben für die Deutschmatura</h2>
+            <p>Vielfältige Übungen zu allen prüfungsrelevanten Themenbereichen</p>
+        </div>
 
-<div class="welcome-section">
-    <h2>Stilmittel & Rhetorik</h2>
-    <p>Lerne die wichtigsten sprachlichen Mittel kennen und verstehe, wie sie in Texten wirken. Von Metapher über Anapher bis zur Ironie - hier findest du alle wichtigen Stilmittel mit Beispielen und Erklärungen.</p>
-</div>
+        <button type="button" class="btn-toggle-all">Alle Lösungen öffnen/schließen</button>
 
-<h2>Die wichtigsten Stilmittel</h2>
+        <div class="exercise-section">
+            <h2>Stilmittel erkennen und analysieren</h2>
+            
+            <div class="exercise-card">
+                <div class="exercise-meta">
+                    <span class="difficulty-badge easy">Einfach</span>
+                    <span class="time-estimate">⏱️ 10 Minuten</span>
+                </div>
+                <h3 class="exercise-title">Übung 1: Stilmittel identifizieren</h3>
+                <div class="exercise-content">
+                    <p>Identifiziere die folgenden sprachlichen Mittel und erkläre ihre Wirkung:</p>
+                    <ol>
+                        <li>"Die Zeit rennt."</li>
+                        <li>"Sie kämpfte wie eine Löwin."</li>
+                        <li>"Das ist ja großartig! Wirklich großartig!"</li>
+                        <li>"Die Stadt ist ein brodelnder Kessel."</li>
+                        <li>"Sein Lachen war Musik in meinen Ohren."</li>
+                    </ol>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Lösung anzeigen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p><strong>Lösungen:</strong></p>
+                        <ol>
+                            <li><strong>Personifikation:</strong> Der Zeit werden menschliche Eigenschaften (rennen) zugeschrieben. Wirkung: Dynamisierung, Betonung der Schnelligkeit.</li>
+                            <li><strong>Vergleich:</strong> Der Kampf wird mit dem einer Löwin verglichen. Wirkung: Veranschaulichung der Intensität und Wildheit.</li>
+                            <li><strong>Wiederholung:</strong> Das Wort "großartig" wird wiederholt. Wirkung: Verstärkung, emotionale Betonung.</li>
+                            <li><strong>Metapher:</strong> Die Stadt wird mit einem brodelnden Kessel verglichen. Wirkung: Bildhafte Darstellung von Lebendigkeit, Unruhe, Hitze.</li>
+                            <li><strong>Metapher:</strong> Das Lachen wird mit Musik verglichen. Wirkung: Positive emotionale Aufladung, Betonung der angenehmen Wirkung.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
 
-<div class="accordion">
-    <div class="accordion-header">
-        <h3>Bildhafte Stilmittel</h3>
-        <span class="toggle-icon">+</span>
-    </div>
-    <div class="panel">
-        <div class="card">
-            <h4>Metapher</h4>
-            <p><strong>Definition:</strong> Übertragene Bedeutung ohne Vergleichswort</p>
-            <div class="example-box">
-                <p class="example-title">Beispiel:</p>
-                <p>"Das Feuer der Liebe" (Liebe wird mit Feuer verglichen)</p>
-                <p><strong>Wirkung:</strong> Veranschaulicht abstrakte Begriffe, erzeugt bildhafte Vorstellungen</p>
+            <div class="exercise-card">
+                <div class="exercise-meta">
+                    <span class="difficulty-badge medium">Mittel</span>
+                    <span class="time-estimate">⏱️ 15 Minuten</span>
+                </div>
+                <h3 class="exercise-title">Übung 2: Textanalyse mit Stilmitteln</h3>
+                <div class="exercise-content">
+                    <p>Analysiere den folgenden Textausschnitt auf verwendete Stilmittel und beschreibe ihre Wirkung:</p>
+                    <blockquote>
+                        "Die Nacht senkte sich wie ein schwerer Mantel über die Stadt. In den Straßen herrschte eine gespenstische Stille, nur unterbrochen vom leisen Flüstern des Windes. Die Schatten tanzten ihr mystisches Ballett an den Hauswänden, während der Mond sein silbernes Licht über die schlafenden Dächer goss."
+                    </blockquote>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Lösung anzeigen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p><strong>Lösung:</strong></p>
+                        <ul>
+                            <li><strong>Vergleich:</strong> "wie ein schwerer Mantel" - Veranschaulicht die Last und Undurchdringlichkeit der Nacht.</li>
+                            <li><strong>Adjektiv:</strong> "gespenstische Stille" - Erzeugt eine unheimliche, bedrohliche Atmosphäre.</li>
+                            <li><strong>Personifikation:</strong> "Flüstern des Windes" - Verleiht dem Wind menschliche Eigenschaften, macht ihn geheimnisvoll.</li>
+                            <li><strong>Personifikation/Metapher:</strong> "Schatten tanzten ihr mystisches Ballett" - Verlebendigung der Schatten, Betonung der geheimnisvollen Atmosphäre.</li>
+                            <li><strong>Personifikation/Metapher:</strong> "Mond goss sein silbernes Licht" - Poetische Verlebendigung, erzeugt ein magisches Bild.</li>
+                        </ul>
+                        <p><strong>Gesamtwirkung:</strong> Der Text erzeugt durch die Häufung von bildhaften Stilmitteln eine mystische, fast märchenhafte Atmosphäre. Die Nacht wird als lebendige, geheimnisvolle Kraft dargestellt.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="card">
-            <h4>Vergleich</h4>
-            <p><strong>Definition:</strong> Gegenüberstellung mit Vergleichswort (wie, als)</p>
-            <div class="example-box">
-                <p class="example-title">Beispiel:</p>
-                <p>"Stark wie ein Löwe"</p>
-                <p><strong>Wirkung:</strong> Verstärkt Eigenschaften, macht anschaulich</p>
+
+        <div class="exercise-section">
+            <h2>Argumentation und Textanalyse</h2>
+            
+            <div class="exercise-card">
+                <div class="exercise-meta">
+                    <span class="difficulty-badge medium">Mittel</span>
+                    <span class="time-estimate">⏱️ 20 Minuten</span>
+                </div>
+                <h3 class="exercise-title">Übung 3: Argumentationsstruktur analysieren</h3>
+                <div class="exercise-content">
+                    <p>Analysiere die Argumentationsstruktur des folgenden Textes:</p>
+                    <blockquote>
+                        "Die Digitalisierung des Unterrichts ist unvermeidlich und notwendig. Erstens leben wir in einer digitalen Welt, und die Schule muss die Schüler auf diese Realität vorbereiten. Zweitens bieten digitale Medien völlig neue Möglichkeiten des Lernens, die traditionelle Methoden ergänzen können. Drittens zeigen Studien, dass der richtige Einsatz von Technologie die Lernmotivation steigern kann. Allerdings darf die Digitalisierung nicht zum Selbstzweck werden. Sie muss pädagogisch sinnvoll eingesetzt werden und die soziale Interaktion im Unterricht nicht ersetzen, sondern bereichern."
+                    </blockquote>
+                    <p>Arbeitsaufträge:</p>
+                    <ol>
+                        <li>Identifiziere die Hauptthese</li>
+                        <li>Nenne die unterstützenden Argumente</li>
+                        <li>Erkläre die argumentative Strategie</li>
+                        <li>Beurteile die Überzeugungskraft</li>
+                    </ol>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Lösung anzeigen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p><strong>Lösung:</strong></p>
+                        <ol>
+                            <li><strong>Hauptthese:</strong> Die Digitalisierung des Unterrichts ist unvermeidlich und notwendig.</li>
+                            <li><strong>Unterstützende Argumente:</strong>
+                                <ul>
+                                    <li>Vorbereitung auf die digitale Welt</li>
+                                    <li>Neue Lernmöglichkeiten</li>
+                                    <li>Steigerung der Lernmotivation (durch Studien belegt)</li>
+                                    <li>Einschränkung: Digitalisierung nicht zum Selbstzweck, pädagogisch sinnvoller Einsatz erforderlich</li>
+                                </ul>
+                            </li>
+                            <li><strong>Argumentative Strategie:</strong> Der Text verwendet eine abwägende Argumentation. Zuerst werden positive Aspekte genannt (Pro-Argumente), dann wird eine wichtige Einschränkung gemacht (Gegenargument entkräftet). Dies macht die Argumentation ausgewogen und glaubwürdig.</li>
+                            <li><strong>Überzeugungskraft:</strong> Die Argumentation ist überzeugend, weil sie sowohl die Notwendigkeit der Digitalisierung betont als auch auf mögliche Gefahren hinweist. Die Verweise auf Studien und die konkrete Benennung von Vorteilen stärken die Argumentation.</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="card">
-            <h4>Personifikation</h4>
-            <p><strong>Definition:</strong> Belebung von Gegenständen oder Abstrakta</p>
-            <div class="example-box">
-                <p class="example-title">Beispiel:</p>
-                <p>"Die Sonne lachte" (Sonne erhält menschliche Eigenschaft)</p>
-                <p><strong>Wirkung:</strong> Emotionalisierung, Veranschaulichung</p>
+
+        <div class="exercise-section">
+            <h2>Kreatives Schreiben</h2>
+            
+            <div class="exercise-card">
+                <div class="exercise-meta">
+                    <span class="difficulty-badge hard">Schwierig</span>
+                    <span class="time-estimate">⏱️ 25 Minuten</span>
+                </div>
+                <h3 class="exercise-title">Übung 4: Textproduktion mit Stilmitteln</h3>
+                <div class="exercise-content">
+                    <p>Verfasse eine kurze Beschreibung (etwa 150 Wörter) eines Gewitters, in der du mindestens fünf verschiedene Stilmittel verwendest. Markiere anschließend die verwendeten Stilmittel und erkläre ihre Wirkung.</p>
+                    <div class="solution-area">
+                        <p><em>Hier deinen Text schreiben...</em></p>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Beispiellösung anzeigen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p><strong>Beispiellösung:</strong></p>
+                        <blockquote>
+                            "Das Gewitter brach mit elementarer Gewalt über die Landschaft herein. <strong>Blitze zuckten</strong> wie nervöse Gedanken am Horizont. <strong>Der Donner brüllte</strong> sein urzeitliches Lied, während <strong>Regen prasselte</strong> – ein Trommelfeuer auf den Dächern. Die Bäume <strong>tanzten einen wilden Tanz</strong> im Sturm, ihre Äste <strong>fuchtelten verzweifelt</strong> im Wind. Plötzlich ein <strong>blendend weißer Blitz</strong>, gefolgt von einem <strong>ohrenbetäubenden Donnerschlag</strong>. Die Natur zeigte sich von ihrer machtvollsten Seite – <strong>schön und schrecklich zugleich</strong>."
+                        </blockquote>
+                        <p><strong>Verwendete Stilmittel:</strong></p>
+                        <ul>
+                            <li><strong>Personifikation:</strong> "Donner brüllte", "Bäume tanzten" - Verlebendigung der Naturgewalten</li>
+                            <li><strong>Vergleich:</strong> "wie nervöse Gedanken" - Veranschaulichung der Unberechenbarkeit</li>
+                            <li><strong>Metapher:</strong> "Trommelfeuer", "urzeitliches Lied" - Steigerung der Intensität</li>
+                            <li><strong>Adjektiv:</strong> "elementare Gewalt", "ohrenbetäubend" - Verstärkung der Wirkung</li>
+                            <li><strong>Oxymoron:</strong> "schön und schrecklich zugleich" - Darstellung der Ambivalenz</li>
+                            <li><strong>Wiederholung:</strong> "Blitze zuckten", "blendend weißer Blitz" - Betonung der Hauptelemente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise-section">
+            <h2>Textinterpretation</h2>
+            
+            <div class="exercise-card">
+                <div class="exercise-meta">
+                    <span class="difficulty-badge hard">Schwierig</span>
+                    <span class="time-estimate">⏱️ 30 Minuten</span>
+                </div>
+                <h3 class="exercise-title">Übung 5: Gedichtinterpretation</h3>
+                <div class="exercise-content">
+                    <p>Interpretiere das folgende Gedicht von Joseph von Eichendorff:</p>
+                    <blockquote>
+                        "Mondnacht<br>
+                        Es war, als hätt' der Himmel<br>
+                        Die Erde still geküsst,<br>
+                        Dass sie im Blütenschimmer<br>
+                        Von ihm nun träumen müsst.<br><br>
+                        
+                        Die Luft ging durch die Felder,<br>
+                        Die Ähren wogten sacht,<br>
+                        Es rauschten leis' die Wälder,<br>
+                        So sternklar war die Nacht."
+                    </blockquote>
+                    <p>Analysiere besonders:</p>
+                    <ul>
+                        <li>Sprachliche Bilder und Stilmittel</li>
+                        <li>Atmosphäre und Stimmung</li>
+                        <li>Aussage des Gedichts</li>
+                    </ul>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Lösungsvorschlag anzeigen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p><strong>Lösungsvorschlag:</strong></p>
+                        <p><strong>Sprachliche Bilder und Stilmittel:</strong></p>
+                        <ul>
+                            <li><strong>Personifikation:</strong> Der Himmel küsst die Erde - Darstellung einer innigen Verbindung zwischen Himmel und Erde</li>
+                            <li><strong>Metapher:</strong> "Blütenschimmer" - Symbol für Schönheit und Zartheit</li>
+                            <li><strong>Synästhesie:</strong> Verbindung von visuellen ("Blütenschimmer", "sternklar") und akustischen Elementen ("rauschten leis'")</li>
+                            <li><strong>Alliteration:</strong> "still geküsst", "wogten sacht" - Schaffung eines melodischen Rhythmus</li>
+                        </ul>
+                        
+                        <p><strong>Atmosphäre und Stimmung:</strong><br>
+                        Das Gedicht erzeugt eine stille, traumhafte Atmosphäre. Die Nacht wird als friedvoll und harmonisch dargestellt, in der Natur und Kosmos in Einklang stehen. Die leisen Geräusche (Rauschen, Wogen) unterstreichen die Stille rather than sie zu stören.</p>
+                        
+                        <p><strong>Aussage des Gedichts:</strong><br>
+                        Eichendorff stellt die Natur als einen Raum der Harmonie und Sehnsucht dar. Die Verbindung von Himmel und Erde symbolisiert eine transzendente Einheit. Das Gedicht vermittelt eine romantische Weltsicht, in der die Natur beseelt ist und der Mensch Teil eines größeren Ganzen wird.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Weitere Accordion-Sektionen hier einfügen... -->
-
-<h2>Übungen zu Stilmitteln</h2>
-
-<div class="exercise">
-    <h4>Übung 1: Stilmittel erkennen</h4>
-    <p>Identifiziere die Stilmittel in folgenden Sätzen:</p>
-    <ol>
-        <li>"Mein Auto ist eine alte Schüssel."</li>
-        <li>"Er rennt so schnell wie der Wind."</li>
-        <li>"Die Bäume flüstern im Wind."</li>
-        <li>"Sie kämpfte wie eine Löwin für ihre Kinder."</li>
-        <li>"Das ist ja ein richtiger Berg von Arbeit!"</li>
-    </ol>
-    <button class="solution-toggle">Lösung anzeigen</button>
-    
-    <div class="solution">
-        <h4>Lösung:</h4>
-        <ol>
-            <li>Metapher (Auto = Schüssel)</li>
-            <li>Vergleich (mit "wie")</li>
-            <li>Personifikation (Bäume "flüstern")</li>
-            <li>Vergleich und Metapher ("kämpfte wie eine Löwin")</li>
-            <li>Hyperbel (Übertreibung) und Metapher (Arbeit = Berg)</li>
-        </ol>
-    </div>
-</div>
-
-<div class="tip-box">
-    <strong>Tipp für die Prüfung:</strong><br>
-    Achte darauf, nicht nur das Stilmittel zu benennen, sondern auch seine Wirkung im konkreten Textzusammenhang zu beschreiben. Die Wirkung ist oft wichtiger als die reine Benennung!
-</div>
-
-<div class="progress-section">
-    <h3>Lernfortschritt Stilmittel</h3>
-    <ul>
-        <li>✓ Bildhafte Stilmittel verstanden</li>
-        <li>✓ Wiederholende Stilmittel kennengelernt</li>
-        <li>✓ Satztechnische Stilmittel erarbeitet</li>
-        <li>✓ Klangfiguren identifiziert</li>
-        <li>✓ Argumentative Stilmittel analysiert</li>
-        <li>✓ Übungen erfolgreich bearbeitet</li>
-    </ul>
-</div>
-
+    <script>
+        // Accordion-Funktionalität
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            const toggleAllButton = document.querySelector('.btn-toggle-all');
+            
+            // Einzelne Accordions
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const panel = this.nextElementSibling;
+                    const icon = this.querySelector('.accordion-icon');
+                    
+                    // Aktiven Zustand umschalten
+                    this.classList.toggle('active');
+                    panel.classList.toggle('active');
+                    
+                    // Panel-Höhe animieren
+                    if (panel.classList.contains('active')) {
+                        panel.style.maxHeight = panel.scrollHeight + 'px';
+                    } else {
+                        panel.style.maxHeight = '0';
+                    }
+                });
+            });
+            
+            // Alle öffnen/schließen Button
+            if (toggleAllButton) {
+                toggleAllButton.addEventListener('click', function() {
+                    const allPanels = document.querySelectorAll('.panel');
+                    const allHeaders = document.querySelectorAll('.accordion-header');
+                    const anyActive = Array.from(allPanels).some(panel => panel.classList.contains('active'));
+                    
+                    allHeaders.forEach(header => {
+                        const panel = header.nextElementSibling;
+                        
+                        if (anyActive) {
+                            // Alle schließen
+                            header.classList.remove('active');
+                            panel.classList.remove('active');
+                            panel.style.maxHeight = '0';
+                        } else {
+                            // Alle öffnen
+                            header.classList.add('active');
+                            panel.classList.add('active');
+                            panel.style.maxHeight = panel.scrollHeight + 'px';
+                        }
+                    });
+                    
+                    // Button-Text aktualisieren
+                    this.textContent = anyActive ? 'Alle Lösungen öffnen' : 'Alle Lösungen schließen';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
