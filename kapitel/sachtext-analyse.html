@@ -13,29 +13,6 @@
             margin: 0;
         }
 
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin: 30px 0 20px 0;
-        }
-
-        h3 {
-            color: #34495e;
-            margin: 20px 0 15px 0;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        /* Welcome section */
         .welcome-section {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             padding: 30px;
@@ -49,28 +26,44 @@
             margin-bottom: 20px;
         }
 
-        /* Analysis sections */
-        .analysis-section {
-            margin: 30px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .section {
+            margin-bottom: 40px;
         }
 
-        /* Accordion styling - kompatibel mit Mutterdatei */
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .text-example {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #34495e;
+        }
+
+        .text-example h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* Accordion Styling - kompatibel mit Mutterdatei */
         .accordion {
-            margin: 20px 0;
+            margin: 30px 0;
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
+            background: white;
         }
 
         .accordion-header {
-            background: #34495e;
-            color: white;
-            cursor: pointer;
+            background: #f8f9fa;
             padding: 15px 20px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -78,73 +71,66 @@
         }
 
         .accordion-header:hover {
-            background: #2c3e50;
+            background: #e9ecef;
         }
 
         .accordion-header h3 {
             margin: 0;
-            color: white;
+            color: #2c3e50;
             font-size: 1.1em;
         }
 
         .toggle-icon {
             font-size: 18px;
             font-weight: bold;
-            color: white;
+            color: #34495e;
         }
 
         .panel {
-            display: block;
-            padding: 18px;
-            background: #f9f9f9;
-        }
-
-        .panel.collapsed {
             display: none;
-        }
-
-        /* Text examples */
-        .text-example {
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
             padding: 20px;
-            margin: 20px 0;
-            font-style: italic;
+            background: white;
         }
 
-        /* Exercise styling */
+        .panel.active {
+            display: block;
+        }
+
         .exercise {
-            background: #e3f2fd;
+            background: #e8f4f8;
+            border-radius: 8px;
             padding: 20px;
-            border-radius: 5px;
             margin: 20px 0;
         }
 
-        /* Solution styling */
+        .exercise h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
         .solution-toggle {
-            background: #28a745;
+            background: #3498db;
             color: white;
             border: none;
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            transition: background 0.3s;
         }
 
         .solution-toggle:hover {
-            background: #218838;
+            background: #2980b9;
         }
 
         .solution {
-            background: #e8f5e9;
-            padding: 15px;
+            background: #d4edda;
             border-radius: 5px;
-            margin: 15px 0;
-            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin-top: 15px;
             display: none;
         }
 
-        /* Tip boxes */
         .tip-box {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -157,7 +143,14 @@
             color: #856404;
         }
 
-        /* Progress section */
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+
         .progress-section {
             background: #e8f4f8;
             border-radius: 10px;
@@ -165,49 +158,9 @@
             margin: 30px 0;
             border-left: 4px solid #3498db;
         }
-
-        /* Lists */
-        ul, ol {
-            margin-left: 20px;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        /* Buttons */
-        .btn-toggle-all {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 1em;
-            font-weight: bold;
-        }
-
-        .btn-toggle-all:hover {
-            background: #2980b9;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            
-            .panel {
-                padding: 15px;
-            }
-        }
     </style>
 </head>
 <body>
-    <button type="button" class="btn-toggle-all">Alle Bereiche öffnen/schließen</button>
-
     <div class="welcome-section">
         <h2>Sachtextanalyse: Der Wert des Analogen im digitalen Zeitalter</h2>
         <p>In diesem Kapitel analysieren wir einen Sachtext von Dr. Thomas Maier, der die Renaissance analoger Medien in unserer digitalen Welt thematisiert. Du lernst Schritt für Schritt, wie du einen Sachtext systematisch analysierst und interpretierst.</p>

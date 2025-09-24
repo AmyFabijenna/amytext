@@ -49,49 +49,54 @@
             margin-bottom: 20px;
         }
 
-        /* Accordion styling - kompatibel mit Mutterdatei */
-        .accordion {
-            margin: 20px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
+        /* Accordion styling - KOMPATIBEL mit Mutterdatei */
         .accordion-header {
             background: #f8f9fa;
-            padding: 15px 20px;
+            padding: 12px;
             cursor: pointer;
+            font-weight: bold;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
-            font-weight: bold;
-            font-size: 1.1em;
+            transition: background 0.3s;
+            user-select: none;
+            font-size: 0.95em;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 5px;
         }
 
         .accordion-header:hover {
             background: #e9ecef;
         }
 
-        .accordion-header h3 {
-            margin: 0;
-            color: #2c3e50;
+        .accordion-header.active {
+            background: #e9ecef;
         }
 
-        .toggle-icon {
-            font-size: 18px;
-            font-weight: bold;
-            color: #34495e;
+        .accordion-header .accordion-icon::after {
+            content: '+';
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon::after {
+            content: '-';
         }
 
         .panel {
-            display: block;
-            padding: 20px;
-            background: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            margin-bottom: 10px;
         }
 
-        .panel.collapsed {
-            display: none;
+        .panel.active {
+            max-height: 3000px;
+            padding: 15px;
         }
 
         /* Card styling */
@@ -112,72 +117,75 @@
         }
 
         /* Example boxes */
-        .example {
+        .example-box {
             background: #e8f4f8;
             border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 15px 0;
+            padding: 12px;
+            margin: 12px 0;
             border-radius: 4px;
+            font-size: 0.9em;
         }
 
-        .example h4 {
+        .example-title {
+            font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        /* Exercise styling */
-        .exercise {
+        /* Exercise styling - KOMPATIBEL */
+        .exercise-box {
             background: #f8f9fa;
             border: 1px solid #dee2e6;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
         }
 
-        .exercise h4 {
+        .exercise-title {
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
         }
 
-        /* Solution styling */
         .solution-toggle {
             background: #34495e;
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
             border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
+            transition: background 0.3s;
+            font-size: 0.9em;
         }
 
         .solution-toggle:hover {
             background: #2c3e50;
         }
 
-        .solution {
-            display: none;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            padding: 15px;
-            margin-top: 15px;
+        .solution-content {
+            margin-top: 12px;
+            padding: 12px;
+            background: #e8f4f8;
             border-radius: 4px;
+            display: none;
+        }
+
+        .solution-content.active {
+            display: block;
         }
 
         /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
-        }
-
-        table, th, td {
-            border: 1px solid #dee2e6;
+            margin: 12px 0;
+            font-size: 0.9em;
         }
 
         th, td {
-            padding: 12px;
+            border: 1px solid #dee2e6;
+            padding: 10px;
             text-align: left;
         }
 
@@ -223,11 +231,7 @@
                 padding: 15px;
             }
             
-            .panel {
-                padding: 15px;
-            }
-            
-            .card, .exercise {
+            .card, .exercise-box {
                 padding: 15px;
             }
             
@@ -243,40 +247,36 @@
 
     <div class="welcome-section">
         <h2>Einführung in die Prosa-Analyse</h2>
-        <p>Die Analyse prosaischer Texte (Romane, Novellen, Kurzgeschichten, Erzählungen) erfordert ein systematisches Vorgehen. Im Gegensatz zur Lyrik oder zum Drama weist Prosa spezifische Merkmale auf, die einer besonderen Betrachtung bedürfen.</p>
+        <p>Die Analyse prosaischer Texte (Romane, Novellen, Kurzgeschichten, Erzählungen) erfordert ein systematisches Vorgehen. Im Gegensatz zur Lyrik oder zum Drama weist Prosa spezifische Merkmale, die einer besonderen Betrachtung bedürfen.</p>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Was ist Prosa?</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Prosa bezeichnet alle Texte, die nicht in Versform verfasst sind. Sie umfasst verschiedene Textsorten wie Romane, Novellen, Kurzgeschichten, Märchen, Fabeln und Essays. Im Gegensatz zur gebundenen Sprache der Lyrik folgt Prosa den natürlichen Sprachmustern.</p>
-            <p>Für die Analyse ist es wichtig, zwischen fiktionaler und nicht-fiktionaler Prosa zu unterscheiden:</p>
-            <ul>
-                <li><strong>Fiktionale Prosa:</strong> Erfundene Geschichten (Romane, Kurzgeschichten)</li>
-                <li><strong>Nicht-fiktionale Prosa:</strong> Sachtexte (Essays, Berichte, Biografien)</li>
-            </ul>
-        </div>
+    <div class="accordion-header">
+        <span>Was ist Prosa?</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Prosa bezeichnet alle Texte, die nicht in Versform verfasst sind. Sie umfasst verschiedene Textsorten wie Romane, Novellen, Kurzgeschichten, Märchen, Fabeln und Essays. Im Gegensatz zur gebundenen Sprache der Lyrik folgt Prosa den natürlichen Sprachmustern.</p>
+        <p>Für die Analyse ist es wichtig, zwischen fiktionaler und nicht-fiktionaler Prosa zu unterscheiden:</p>
+        <ul>
+            <li><strong>Fiktionale Prosa:</strong> Erfundene Geschichten (Romane, Kurzgeschichten)</li>
+            <li><strong>Nicht-fiktionale Prosa:</strong> Sachtexte (Essays, Berichte, Biografien)</li>
+        </ul>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Ziele der Prosa-Analyse</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Die Analyse prosaischer Texte verfolgt mehrere Ziele:</p>
-            <ol>
-                <li>Erfassen der inhaltlichen Aussage und Thematik</li>
-                <li>Untersuchen der Erzählstruktur und -technik</li>
-                <li>Analyse der Figuren und ihrer Beziehungen</li>
-                <li>Erkennen und Deuten sprachlicher Gestaltungsmittel</li>
-                <li>Einordnen in den historischen und literarischen Kontext</li>
-                <li>Erfassen der Autorintention und Wirkung auf den Leser</li>
-            </ol>
-        </div>
+    <div class="accordion-header">
+        <span>Ziele der Prosa-Analyse</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Die Analyse prosaischer Texte verfolgt mehrere Ziele:</p>
+        <ol>
+            <li>Erfassen der inhaltlichen Aussage und Thematik</li>
+            <li>Untersuchen der Erzählstruktur und -technik</li>
+            <li>Analyse der Figuren und ihrer Beziehungen</li>
+            <li>Erkennen und Deuten sprachlicher Gestaltungsmittel</li>
+            <li>Einordnen in den historischen und literarischen Kontext</li>
+            <li>Erfassen der Autorintention und Wirkung auf den Leser</li>
+        </ol>
     </div>
 
     <h2>Erzählperspektive</h2>
@@ -284,409 +284,331 @@
         <p>Die Erzählperspektive ist eines der wichtigsten Merkmale prosaischer Texte. Sie bestimmt, aus welcher Sicht die Geschichte erzählt wird und welchen Wissensstand der Erzähler hat.</p>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Personale Erzählperspektive</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Bei der personalen Erzählperspektive erleben wir die Geschichte durch die Augen einer Figur. Der Erzähler beschränkt sich auf das, was diese Figur wahrnimmt, denkt und fühlt.</p>
-            <div class="example">
-                <h4>Beispiel:</h4>
-                <p>"Sie öffnete die Tür und betrat den Raum. Ein seltsamer Geruch schlug ihr entgegen. Was mochte das sein? Sie spürte, wie ihr Herz schneller schlug."</p>
-                <p><strong>Wirkung:</strong> Schafft Nähe zur Figur, ermöglicht Identifikation, begrenzt aber das Wissen auf die Perspektive dieser Figur.</p>
-            </div>
+    <div class="accordion-header">
+        <span>Personale Erzählperspektive</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Bei der personalen Erzählperspektive erleben wir die Geschichte durch die Augen einer Figur. Der Erzähler beschränkt sich auf das, was diese Figur wahrnimmt, denkt und fühlt.</p>
+        <div class="example-box">
+            <div class="example-title">Beispiel:</div>
+            <p>"Sie öffnete die Tür und betrat den Raum. Ein seltsamer Geruch schlug ihr entgegen. Was mochte das sein? Sie spürte, wie ihr Herz schneller schlug."</p>
+            <p><strong>Wirkung:</strong> Schafft Nähe zur Figur, ermöglicht Identifikation, begrenzt aber das Wissen auf die Perspektive dieser Figur.</p>
         </div>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Auktoriale Erzählperspektive</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Der auktoriale Erzähler steht über der Handlung, kennt alle Figuren, ihre Gedanken und sogar die Zukunft. Er kommentiert und wertet oft das Geschehen.</p>
-            <div class="example">
-                <h4>Beispiel:</h4>
-                <p>"Während Maria ahnungslos den Raum betrat, wusste der Leser bereits, welches Schicksal sie dort erwartete. Doch davon ahnte sie in diesem Moment noch nichts."</p>
-                <p><strong>Wirkung:</strong> Vermittelt Überblick, ermöglicht Kommentare, kann aber Distanz zur Handlung schaffen.</p>
-            </div>
+    <div class="accordion-header">
+        <span>Auktoriale Erzählperspektive</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Der auktoriale Erzähler steht über der Handlung, kennt alle Figuren, ihre Gedanken und sogar die Zukunft. Er kommentiert und wertet oft das Geschehen.</p>
+        <div class="example-box">
+            <div class="example-title">Beispiel:</div>
+            <p>"Während Maria ahnungslos den Raum betrat, wusste der Leser bereits, welches Schicksal sie dort erwartete. Doch davon ahnte sie in diesem Moment noch nichts."</p>
+            <p><strong>Wirkung:</strong> Vermittelt Überblick, ermöglicht Kommentare, kann aber Distanz zur Handlung schaffen.</p>
         </div>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Ich-Erzählperspektive</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Die Geschichte wird aus der Sicht einer Figur in der ersten Person erzählt. Der Erzähler ist zugleich handelnde Figur.</p>
-            <div class="example">
-                <h4>Beispiel:</h4>
-                <p>"Ich öffnete die Tür und betrat den Raum. Ein seltsamer Geruch schlug mir entgegen. Was mochte das sein? Ich spürte, wie mein Herz schneller schlug."</p>
-                <p><strong>Wirkung:</strong> Schafft große subjektive Nähe, begrenzt aber die Perspektive auf das Ich.</p>
-            </div>
+    <div class="accordion-header">
+        <span>Ich-Erzählperspektive</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Die Geschichte wird aus der Sicht einer Figur in der ersten Person erzählt. Der Erzähler ist zugleich handelnde Figur.</p>
+        <div class="example-box">
+            <div class="example-title">Beispiel:</div>
+            <p>"Ich öffnete die Tür und betrat den Raum. Ein seltsamer Geruch schlug mir entgegen. Was mochte das sein? Ich spürte, wie mein Herz schneller schlug."</p>
+            <p><strong>Wirkung:</strong> Schafft große subjektive Nähe, begrenzt aber die Perspektive auf das Ich.</p>
         </div>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Neutrale Erzählperspektive</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Der neutrale Erzähler beschreibt nur das äußere Geschehen, ohne in die Figuren hineinzuschauen oder zu kommentieren.</p>
-            <div class="example">
-                <h4>Beispiel:</h4>
-                <p>"Die Frau öffnete die Tür und betrat den Raum. Sie blieb stehen, atmete tief ein und blickte sich um."</p>
-                <p><strong>Wirkung:</strong> Wirkt sachlich und distanziert, überlässt dem Leser die Interpretation.</p>
-            </div>
+    <div class="accordion-header">
+        <span>Neutrale Erzählperspektive</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Der neutrale Erzähler beschreibt nur das äußere Geschehen, ohne in die Figuren hineinzuschauen oder zu kommentieren.</p>
+        <div class="example-box">
+            <div class="example-title">Beispiel:</div>
+            <p>"Die Frau öffnete die Tür und betrat den Raum. Sie blieb stehen, atmete tief ein und blickte sich um."</p>
+            <p><strong>Wirkung:</strong> Wirkt sachlich und distanziert, überlässt dem Leser die Interpretation.</p>
         </div>
     </div>
 
-    <div class="exercise">
-        <h4>Übung: Erzählperspektiven erkennen</h4>
+    <div class="exercise-box">
+        <h3 class="exercise-title">Übung: Erzählperspektiven erkennen</h3>
         <p>Bestimme die Erzählperspektive der folgenden Textausschnitte:</p>
         <ol>
             <li>"Er wusste nicht, dass ihn in diesem Moment jemand beobachtete. Hätte er es gewusst, wäre er vorsichtiger gewesen."</li>
             <li>"Ich ging die Straße entlang und überlegte, was ich tun sollte. Die Entscheidung fiel mir schwer."</li>
-            <li>"Der Mann betrat das Café. Er setzte sich an einen Tisch in der Ecke und bestellte einen Kaffee."</li>
-            <li>"Sie öffnete den Brief und begann zu lesen. Mit jedem Wort wurde ihr klarer, dass sich ihr Leben ändern würde."</li>
+            <li>"Sie betrat den Raum. Ihr Blick fiel sofort auf den Brief auf dem Tisch."</li>
         </ol>
         <button class="solution-toggle">Lösung anzeigen</button>
-        <div class="solution">
+        <div class="solution-content">
+            <p><strong>Lösungen:</strong></p>
             <ol>
-                <li><strong>Auktoriale Perspektive:</strong> Der Erzähler weiß mehr als die Figur ("Er wusste nicht...") und kommentiert ("Hätte er es gewusst...").</li>
-                <li><strong>Ich-Perspektive:</strong> Die Geschichte wird aus der Sicht einer Figur in der ersten Person erzählt.</li>
-                <li><strong>Neutrale Perspektive:</strong> Es wird nur das äußere Geschehen beschrieben, ohne Einblick in Gedanken oder Gefühle.</li>
-                <li><strong>Personale Perspektive:</strong> Die Geschichte wird aus der Sicht einer Figur erzählt ("ihr wurde klarer"), aber in der dritten Person.</li>
+                <li>Auktoriale Erzählperspektive (der Erzähler weiß mehr als die Figur)</li>
+                <li>Ich-Erzählperspektive (Erzähler ist handelnde Figur)</li>
+                <li>Personale Erzählperspektive (Beschränkung auf Wahrnehmung der Figur)</li>
+            </ol>
+        </div>
+    </div>
+
+    <h2>Erzähltechniken und Zeitgestaltung</h2>
+    <div class="card">
+        <p>Die Art und Weise, wie eine Geschichte erzählt wird, beeinflusst maßgeblich ihre Wirkung. Besonders wichtig ist die Gestaltung der Zeit.</p>
+    </div>
+
+    <div class="accordion-header">
+        <span>Erzählzeit und erzählte Zeit</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Das Verhältnis zwischen Erzählzeit (Zeit, die zum Erzählen benötigt wird) und erzählter Zeit (Zeit, die in der Geschichte vergeht) ist entscheidend für das Erzähltempo.</p>
+        <table>
+            <tr>
+                <th>Technik</th>
+                <th>Beschreibung</th>
+                <th>Wirkung</th>
+            </tr>
+            <tr>
+                <td>Zeitdeckung</td>
+                <td>Erzählzeit = erzählte Zeit (z.B. Dialoge)</td>
+                <td>Unmittelbarkeit, Spannung</td>
+            </tr>
+            <tr>
+                <td>Zeitdehnung</td>
+                <td>Erzählzeit > erzählte Zeit</td>
+                <td>Verlangsamung, Betonung</td>
+            </tr>
+            <tr>
+                <td>Zeitraffung</td>
+                <td>Erzählzeit < erzählte Zeit</td>
+                <td>Beschleunigung, Überblick</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="accordion-header">
+        <span>Erzählordnung</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Die Reihenfolge, in der Ereignisse erzählt werden, kann von ihrer tatsächlichen zeitlichen Abfolge abweichen.</p>
+        <ul>
+            <li><strong>Chronologisch:</strong> Ereignisse in ihrer natürlichen Reihenfolge</li>
+            <li><strong>Analepse (Rückblende):</strong> Nachträgliche Einfügung vergangener Ereignisse</li>
+            <li><strong>Prolepse (Vorausdeutung):</strong> Vorwegnahme zukünftiger Ereignisse</li>
+        </ul>
+    </div>
+
+    <div class="exercise-box">
+        <h3 class="exercise-title">Übung: Zeitgestaltung analysieren</h3>
+        <p>Analysiere die Zeitgestaltung im folgenden Textausschnitt:</p>
+        <div class="example-box">
+            <p>"Die nächsten Jahre vergingen wie im Flug. Aus dem kleinen Jungen wurde ein junger Mann, der die Welt entdecken wollte. Doch an jenem Tag im Frühling, als er zum ersten Mal das Meer sah, blieb die Zeit für einen Augenblick stehen."</p>
+        </div>
+        <button class="solution-toggle">Lösung anzeigen</button>
+        <div class="solution-content">
+            <p><strong>Lösung:</strong></p>
+            <p>Der Text zeigt verschiedene Zeitgestaltungstechniken:</p>
+            <ol>
+                <li><strong>Zeitraffung:</strong> "Die nächsten Jahre vergingen wie im Flug" - lange Zeit wird kurz zusammengefasst</li>
+                <li><strong>Zeitdehnung:</strong> "blieb die Zeit für einen Augenblick stehen" - ein kurzer Moment wird ausführlich beschrieben</li>
+                <li><strong>Chronologische Erzählung:</strong> Die Ereignisse folgen der natürlichen zeitlichen Abfolge</li>
             </ol>
         </div>
     </div>
 
     <h2>Figurenanalyse</h2>
     <div class="card">
-        <p>Figuren sind Träger der Handlung in prosaischen Texten. Ihre Analyse umfasst äußere und innere Merkmale, Entwicklung und Beziehungen zu anderen Figuren.</p>
+        <p>Die Analyse der Figuren ist zentral für das Verständnis prosaischer Texte. Dabei werden verschiedene Aspekte betrachtet.</p>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Figurenkonstellation</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Die Figurenkonstellation beschreibt das Beziehungsgeflecht zwischen den Figuren eines Textes. Sie kann grafisch dargestellt werden und zeigt Machtverhältnisse, Konflikte und emotionale Bindungen.</p>
-            
-            <h4>Typische Konstellationen:</h4>
-            <ul>
-                <li><strong>Protagonist vs. Antagonist:</strong> Hauptfigur und ihr Gegenspieler</li>
-                <li><strong>Dreieckskonstellation:</strong> Drei Figuren in komplexen Beziehungen</li>
-                <li><strong>Isolierte Figur:</strong> Eine Figur ohne enge Bindungen</li>
-            </ul>
-            
-            <div class="example">
-                <h4>Beispiel aus "Die Nachbarn":</h4>
-                <p>In der Kurzgeschichte "Die Nachbarn" besteht die Figurenkonstellation aus Julia (Protagonistin), Herrn Müller und Frau Müller (Antagonisten oder Opfer?). Die Beziehung ist durch Distanz und ein Geheimnis geprägt.</p>
-            </div>
-        </div>
+    <div class="accordion-header">
+        <span>Figurenkonstellation</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Die Beziehungen zwischen den Figuren und ihre Positionen zueinander sind entscheidend für die Handlungsdynamik.</p>
+        <ul>
+            <li><strong>Protagonist vs. Antagonist</strong></li>
+            <li><strong>Haupt- vs. Nebenfiguren</strong></li>
+            <li><strong>Statische vs. dynamische Figuren</strong></li>
+            <li><strong>Figurenkonstellation als Konfliktmodell</strong></li>
+        </ul>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Figurencharakterisierung</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Figuren können auf verschiedene Weise charakterisiert werden:</p>
-            
-            <table>
-                <tr>
-                    <th>Art der Charakterisierung</th>
-                    <th>Beschreibung</th>
-                    <th>Beispiel</th>
-                </tr>
-                <tr>
-                    <td>Direkte Charakterisierung</td>
-                    <td>Der Erzähler beschreibt explizit Eigenschaften der Figur</td>
-                    <td>"Er war ein ängstlicher Mensch, der sich vor jeder Veränderung fürchtete."</td>
-                </tr>
-                <tr>
-                    <td>Indirekte Charakterisierung</td>
-                    <td>Eigenschaften werden durch Handlungen, Dialoge oder Gedanken deutlich</td>
-                    <td>"Er zögerte, bevor er die Tür öffnete, atmete tief durch und trat dann zögerlich ein."</td>
-                </tr>
-                <tr>
-                    <td>Selbstcharakterisierung</td>
-                    <td>Die Figur beschreibt sich selbst</td>
-                    <td>"Ich bin nun mal so, ich kann nicht anders."</td>
-                </tr>
-                <tr>
-                    <td>Fremdcharakterisierung</td>
-                    <td>Andere Figuren beschreiben die Figur</td>
-                    <td>"Du bist immer so ungeduldig", sagte sie zu ihm.</td>
-                </tr>
-            </table>
-        </div>
+    <div class="accordion-header">
+        <span>Charakterisierungstechniken</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Figuren werden auf verschiedene Weise charakterisiert:</p>
+        <table>
+            <tr>
+                <th>Technik</th>
+                <th>Beschreibung</th>
+                <th>Beispiel</th>
+            </tr>
+            <tr>
+                <td>Direkte Charakterisierung</td>
+                <td>Explizite Beschreibung durch Erzähler</td>
+                <td>"Er war ein mutiger Mann."</td>
+            </tr>
+            <tr>
+                <td>Indirekte Charakterisierung</td>
+                <td>Charakter zeigt sich durch Handeln, Sprechen</td>
+                <td>"Ohne zu zögern sprang er ins Wasser."</td>
+            </tr>
+            <tr>
+                <td>Selbstcharakterisierung</td>
+                <td>Figur beschreibt sich selbst</td>
+                <td>"Ich bin immer vorsichtig gewesen."</td>
+            </tr>
+            <tr>
+                <td>Fremdcharakterisierung</td>
+                <td>Andere Figuren beschreiben die Figur</td>
+                <td>"Sie ist die Klügste, die ich kenne."</td>
+            </tr>
+        </table>
     </div>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Figurenentwicklung</h3>
-            <span class="toggle-icon">+</span>
+    <div class="exercise-box">
+        <h3 class="exercise-title">Übung: Figurenanalyse</h3>
+        <p>Analysiere die Charakterisierung im folgenden Textausschnitt:</p>
+        <div class="example-box">
+            <p>"Herr Müller betrat das Büro mit festen Schritten. Seine Mitarbeiter senkten sofort den Blick. 'Die Berichte liegen auf Ihrem Schreibtisch, Herr Müller', sagte die Sekretärin mit zitternder Stimme. Er nickte knapp, ohne sie anzusehen, und verschwand in seinem Zimmer."</p>
         </div>
-        <div class="panel">
-            <p>Viele Figuren durchlaufen im Laufe einer Erzählung eine Entwicklung. Diese kann psychologischer, moralischer oder sozialer Natur sein.</p>
-            
-            <h4>Arten der Figurenentwicklung:</h4>
-            <ul>
-                <li><strong>Positive Entwicklung:</strong> Die Figur lernt dazu, wird reifer oder besser</li>
-                <li><strong>Negative Entwicklung:</strong> Die Figur verfällt oder wird schlechter</li>
-                <li><strong>Keine Entwicklung:</strong> Die Figur bleibt statisch (häufig bei Nebenfiguren)</li>
-            </ul>
-            
-            <div class="example">
-                <h4>Beispiel aus "Die Nachbarn":</h4>
-                <p>Julia durchläuft eine Entwicklung von der passiven Beobachterin zur aktiv Handelnden. Am Anfang beobachtet sie nur, am Ende entscheidet sie sich zu handeln ("Sie wusste, dass dieser Anruf alles verändern würde").</p>
-            </div>
-        </div>
-    </div>
-
-    <h2>Erzählverhalten</h2>
-    <div class="card">
-        <p>Das Erzählverhalten beschreibt, wie der Erzähler mit der erzählten Zeit umgeht, welches Erzähltempo gewählt wird und wie die Ereignisse angeordnet sind.</p>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Erzählzeit und erzählte Zeit</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Ein wichtiges Merkmal des Erzählverhaltens ist das Verhältnis zwischen Erzählzeit (Zeit, die zum Erzählen benötigt wird) und erzählte Zeit (Zeit, die in der Geschichte vergeht).</p>
-            
-            <h4>Mögliche Verhältnisse:</h4>
-            <ul>
-                <li><strong>Zeitdeckung:</strong> Erzählzeit ≈ erzählte Zeit (häufig in Dialogen)</li>
-                <li><strong>Zeitdehnung:</strong> Erzählzeit > erzählte Zeit (ausführliche Beschreibungen)</li>
-                <li><strong>Zeitraffung:</strong> Erzählzeit < erzählte Zeit (Zeitsprünge, Zusammenfassungen)</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Erzähltempo</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Das Erzähltempo kann variieren und beeinflusst die Wirkung auf den Leser:</p>
-            
-            <table>
-                <tr>
-                    <th>Erzähltempo</th>
-                    <th>Wirkung</th>
-                    <th>Beispiel</th>
-                </tr>
-                <tr>
-                    <td>Langsam</td>
-                    <td>Spannung, Detailreichtum, intensive Beschreibung</td>
-                    <td>Ausführliche Schilderung einer Landschaft</td>
-                </tr>
-                <tr>
-                    <td>Schnell</td>
-                    <td>Dynamik, Handlungsorientierung, Überblick</td>
-                    <td>"Jahre vergingen, ohne dass sich etwas änderte."</td>
-                </tr>
-                <tr>
-                    <td>Wechselnd</td>
-                    <td>Abwechslung, Betonung wichtiger Passagen</td>
-                    <td>Langsame Beschreibung einer Entscheidung, dann Zeitsprung</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Anachronie (Zeitbrüche)</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Anachronie bezeichnet Abweichungen von der chronologischen Erzählfolge:</p>
-            
-            <ul>
-                <li><strong>Rückblende (Analepse):</strong> Sprung in die Vergangenheit</li>
-                <li><strong>Vorausdeutung (Prolepse):</strong> Hinweis auf zukünftige Ereignisse</li>
-                <li><strong>Innerer Monolog:</strong> Gedankenstrom einer Figur</li>
-                <li><strong>Bewusstseinsstrom:</strong> Assoziatives Springen zwischen Gedanken</li>
-            </ul>
-        </div>
-    </div>
-
-    <h2>Textstruktur</h2>
-    <div class="card">
-        <p>Die Struktur eines Prosatextes umfasst den Aufbau, die Gliederung und die Kompositionstechniken.</p>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Aufbauformen</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Prosatexte können unterschiedlich aufgebaut sein:</p>
-            
-            <table>
-                <tr>
-                    <th>Aufbauform</th>
-                    <th>Beschreibung</th>
-                    <th>Beispiel</th>
-                </tr>
-                <tr>
-                    <td>Linear-chronologisch</td>
-                    <td>Ereignisse folgen der zeitlichen Abfolge</td>
-                    <td>Viele Abenteuerromane, Märchen</td>
-                </tr>
-                <tr>
-                    <td>Rahmenerzählung</td>
-                    <td>Eine Geschichte umschließt eine oder mehrere Binnengeschichten</td>
-                    <td>Decamerone, Frankenstein</td>
-                </tr>
-                <tr>
-                    <td>Episodenhaft</td>
-                    <td>Lockere Aneinanderreihung von Episoden</td>
-                    <td>Don Quijote, Simplicissimus</td>
-                </tr>
-                <tr>
-                    <td>Montagetechnik</td>
-                    <td>Verschiedene Erzählstränge werden zusammengefügt</td>
-                    <td>Berlin Alexanderplatz, Ulysses</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Spannungsaufbau</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Der Spannungsaufbau ist ein zentrales Element vieler Prosatexte:</p>
-            
-            <h4>Elemente des Spannungsaufbaus:</h4>
-            <ul>
-                <li><strong>Exposition:</strong> Einführung in Setting, Figuren und Ausgangssituation</li>
-                <li><strong>Steigerung:</strong> Entwicklung von Konflikten und Spannung</li>
-                <li><strong>Höhepunkt/Klimax:</strong> Höhepunkt der Spannung, entscheidende Wendung</li>
-                <li><strong>Lösung/Katastrophe:</strong> Auflösung des Konflikts (positiv oder negativ)</li>
-            </ul>
-            
-            <div class="example">
-                <h4>Beispiel aus "Die Nachbarn":</h4>
-                <p><strong>Exposition:</strong> Julia beobachtet die Nachbarn, beschreibt ihre Gewohnheiten.<br>
-                <strong>Steigerung:</strong> Julia bemerkt seltsames Verhalten, hört Weinen, sieht einen blauen Fleck.<br>
-                <strong>Höhepunkt:</strong> Julia steht am Fenster und überlegt, was sie tun soll.<br>
-                <strong>Lösung:</strong> Julia greift zum Telefon, entscheidet sich zum Handeln.</p>
-            </div>
-        </div>
-    </div>
-
-    <h2>Sprachliche Mittel in der Prosa</h2>
-    <div class="card">
-        <p>Prosatexte verwenden spezifische sprachliche Mittel zur Gestaltung von Atmosphäre, Figuren und Handlung.</p>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Wichtige Stilmittel</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Für die Prosa-Analyse besonders relevante Stilmittel:</p>
-            
-            <table>
-                <tr>
-                    <th>Stilmittel</th>
-                    <th>Beschreibung</th>
-                    <th>Beispiel</th>
-                    <th>Wirkung</th>
-                </tr>
-                <tr>
-                    <td>Metapher</td>
-                    <td>Bildhafter Ausdruck, Übertragung</td>
-                    <td>"Die Zeit ist ein Fluss."</td>
-                    <td>Veranschaulichung, Emotionalisierung</td>
-                </tr>
-                <tr>
-                    <td>Vergleich</td>
-                    <td>Gegenüberstellung mit wie/als</td>
-                    <td>"Sie war blass wie die Wand."</td>
-                    <td>Verdeutlichung, Veranschaulichung</td>
-                </tr>
-                <tr>
-                    <td>Personifikation</td>
-                    <td>Vermenschlichung</td>
-                    <td>"Der Wind heulte."</td>
-                    <td>Verlebendigung, Emotionalisierung</td>
-                </tr>
-                <tr>
-                    <td>Symbol</td>
-                    <td>Gegenstand mit tieferer Bedeutung</td>
-                    <td>Weiße Taube = Frieden</td>
-                    <td>Tiefere Bedeutungsebene</td>
-                </tr>
-                <tr>
-                    <td>Ironie</td>
-                    <td>Gegenteilige Aussage</td>
-                    <td>"Das ist ja großartig!" (bei Misserfolg)</td>
-                    <td>Kritik, Humor, Distanzierung</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <h3>Sprachliche Register</h3>
-            <span class="toggle-icon">+</span>
-        </div>
-        <div class="panel">
-            <p>Prosatexte können verschiedene Sprachregister verwenden:</p>
-            
-            <ul>
-                <li><strong>Gehobene Sprache:</strong> Komplexe Sätze, Fremdwörter, literarischer Stil</li>
-                <li><strong>Umgangssprache:</strong> Alltägliche Ausdrucksweise, oft in Dialogen</li>
-                <li><strong>Fachsprache:</strong> Terminologie bestimmter Bereiche</li>
-                <li><strong>Dialekt:</strong> Regionale Sprachfärbung zur Charakterisierung</li>
-            </ul>
-        </div>
-    </div>
-
-<div class="exercise">
-        <h4>Übung 2: Figurenanalyse</h4>
-        <p>Analysiere die Figurenkonstellation in "Die Nachbarn". Erstelle eine Grafik der Beziehungen und beschreibe sie kurz.</p>
         <button class="solution-toggle">Lösung anzeigen</button>
-        <div class="solution">
-            <p><strong>Figurenkonstellation:</strong></p>
-            <p>Julia (Protagonistin) → beobachtet → Herr und Frau Müller</p>
-            <p>Herr Müller → verlässt täglich das Haus → distanziertes Verhältnis zu Julia</p>
-            <p>Frau Müller → bleibt zu Hause, wirkt unglücklich → distanziertes Verhältnis zu Julia</p>
-            <p>Zwischen Herr und Frau Müller → vermutlich problematische Beziehung (Weinen, blauer Fleck)</p>
-            <p><strong>Beschreibung:</strong> Die Konstellation ist durch Distanz und ein Geheimnis geprägt. Julia steht außerhalb der Familie Müller, beobachtet aber deren problematische Beziehung. Die Müllers sind nach außen hin abgeschlossen, was Neugier und Besorgnis bei Julia auslöst.</p>
+        <div class="solution-content">
+            <p><strong>Lösung:</strong></p>
+            <p>Die Figur des Herrn Müller wird indirekt charakterisiert durch:</p>
+            <ol>
+                <li><strong>Handeln:</strong> "feste Schritte", "nickte knapp", "verschwand" - zeigt Entschlossenheit und Distanz</li>
+                <li><strong>Wirkung auf andere:</strong> "Mitarbeiter senkten den Blick", "zitternde Stimme" - zeigt Autorität und Furcht</li>
+                <li><strong>Körpersprache:</strong> "ohne sie anzusehen" - zeigt mangelnde Wertschätzung</li>
+            </ol>
+            <p>Es entsteht das Bild einer autoritären, distanzierten Führungspersönlichkeit.</p>
         </div>
     </div>
-    
-    <div class="exercise">
-        <h4>Übung 3: Spannungsaufbau analysieren</h4>
-        <p>Analysiere den Spannungsaufbau in "Die Nachbarn". Unterteile die Handlung in Exposition, Steigerung, Höhepunkt und Lösung.</p>
+
+    <h2>Sprachliche Gestaltungsmittel</h2>
+    <div class="card">
+        <p>Die sprachliche Gestaltung trägt wesentlich zur Wirkung prosaischer Texte bei. Besondere Aufmerksamkeit verdienen stilistische Mittel und Satzbau.</p>
+    </div>
+
+    <div class="accordion-header">
+        <span>Wichtige Stilmittel in der Prosa</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <table>
+            <tr>
+                <th>Stilmittel</th>
+                <th>Funktion</th>
+                <th>Beispiel</th>
+            </tr>
+            <tr>
+                <td>Metapher</td>
+                <td>Bildhafter Ausdruck, Übertragung</td>
+                <td>"Ein Meer aus Tränen"</td>
+            </tr>
+            <tr>
+                <td>Vergleich</td>
+                <td>Gegenüberstellung mit "wie" oder "als"</td>
+                <td>"Schnell wie der Blitz"</td>
+            </tr>
+            <tr>
+                <td>Symbol</td>
+                <td>Gegenstand mit tieferer Bedeutung</td>
+                <td>Weiße Taube als Friedenssymbol</td>
+            </tr>
+            <tr>
+                <td>Ironie</td>
+                <td>Gegensatz zwischen Aussage und Bedeutung</td>
+                <td>"Das ist ja ein tolles Wetter!" (bei Regen)</td>
+            </tr>
+            <tr>
+                <td>Wiederholung</td>
+                <td>Betonung, Rhythmisierung</td>
+                <td>"Immer wieder, immer wieder"</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="accordion-header">
+        <span>Satzbau und Syntax</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <p>Die Satzstruktur beeinflusst das Lesetempo und die Wirkung:</p>
+        <ul>
+            <li><strong>Parataxe:</strong> Aneinanderreihung von Hauptsätzen (wirkt sachlich, dynamisch)</li>
+            <li><strong>Hypotaxe:</strong> Verschachtelung von Haupt- und Nebensätzen (wirkt komplex, reflektiert)</li>
+            <li><strong>Ellipse:</strong> Auslassung von Satzteilen (wirkt dynamisch, emotional)</li>
+            <li><strong>Parallelismus:</strong> Gleichartiger Satzbau (wirkt rhythmisch, betonend)</li>
+        </ul>
+    </div>
+
+    <div class="exercise-box">
+        <h3 class="exercise-title">Übung: Stilmittel erkennen</h3>
+        <p>Erkenne die Stilmittel in den folgenden Sätzen:</p>
+        <ol>
+            <li>"Die Zeit rinnt wie Sand durch die Finger."</li>
+            <li>"Er kam, sah und siegte."</li>
+            <li>"Diese Prüfung wird ein Spaziergang werden."</li>
+        </ol>
         <button class="solution-toggle">Lösung anzeigen</button>
-        <div class="solution">
-            <p><strong>Spannungsaufbau in "Die Nachbarn":</strong></p>
-            <p><strong>Exposition:</strong> Julia stellt sich und ihre Beobachtungsgewohnheiten vor, beschreibt das Aussehen und die täglichen Routinen der Nachbarn.</p>
-            <p><strong>Steigerung:</strong> Julia bemerkt Unregelmäßigkeiten (Weinen, blaue Flecken), wird neugieriger und beginnt, sich Sorgen zu machen.</p>
-            <p><strong>Höhepunkt:</strong> Julia steht am Fenster und muss die Entscheidung treffen, ob sie eingreifen soll oder nicht.</p>
-            <p><strong>Lösung:</strong> Julia entscheidet sich zum Handeln und greift zum Telefonhörer.</p>
+        <div class="solution-content">
+            <p><strong>Lösungen:</strong></p>
+            <ol>
+                <li>Vergleich ("wie Sand") und Metapher ("rinnt")</li>
+                <li>Parallelismus (dreigliedrige Struktur)</li>
+                <li>Ironie (Prüfung als "Spaziergang" bezeichnet)</li>
+            </ol>
+        </div>
+    </div>
+
+    <h2>Analyseleitfaden</h2>
+    <div class="card">
+        <p>Ein systematischer Aufbau hilft bei der vollständigen Analyse prosaischer Texte.</p>
+    </div>
+
+    <div class="accordion-header">
+        <span>Schritte der Textanalyse</span>
+        <span class="accordion-icon"></span>
+    </div>
+    <div class="panel">
+        <ol>
+            <li><strong>Erstlektüre:</strong> Gesamteindruck, grobes Verständnis</li>
+            <li><strong>Äußere Form:</strong> Textart, Gliederung, Umfang</li>
+            <li><strong>Inhalt:</strong> Handlung, Thema, Kernaussage</li>
+            <li><strong>Aufbau:</strong> Erzählstruktur, Spannungsbogen</li>
+            <li><strong>Erzähltechnik:</strong> Perspektive, Zeitgestaltung</li>
+            <li><strong>Figuren:</strong> Charakterisierung, Beziehungen</li>
+            <li><strong>Sprache:</strong> Stilmittel, Satzbau, Wortwahl</li>
+            <li><strong>Interpretation:</strong> Bedeutung, Aussage, Wirkung</li>
+            <li><strong>Kontext:</strong> Epoche, Autor, historischer Hintergrund</li>
+        </ol>
+    </div>
+
+    <div class="exercise-box">
+        <h3 class="exercise-title">Abschlussübung: Komplette Analyse</h3>
+        <p>Analysiere den folgenden Textausschnitt unter Berücksichtigung aller besprochenen Aspekte:</p>
+        <div class="example-box">
+            <p>"Der alte Mann saß jeden Tag auf derselben Bank. Die Jahre hatten ihre Spuren hinterlassen, nicht nur auf seinem Gesicht, sondern auch in seiner Seele. Während die Kinder auf dem Spielplatz lachten, erinnerte er sich an seine eigene Jugend - eine Zeit, die ihm jetzt fern erschien wie ein Traum. Die Sonne ging langsam unter und malte den Himmel in Orange- und Rottönen. Für einen Moment fühlte er sich wieder jung."</p>
+        </div>
+        <button class="solution-toggle">Lösung anzeigen</button>
+        <div class="solution-content">
+            <p><strong>Musterlösung:</strong></p>
+            <p><strong>Inhalt:</strong> Ein alter Mann reflektiert über sein Leben und erlebt eine kurze Verjüngung.</p>
+            <p><strong>Erzählperspektive:</strong> Auktorial (Erzähler kennt Gedanken und Gefühle)</p>
+            <p><strong>Zeitgestaltung:</strong> Zeitdehnung (Augenblick wird ausführlich beschrieben), Analepse (Rückblende)</p>
+            <p><strong>Figuren:</strong> Protagonist als Reflektierender, Kontrast zwischen Alter und Jugend</p>
+            <p><strong>Sprache:</strong> Metaphorik ("Spuren", "wie ein Traum"), bildhafte Beschreibung, melancholischer Ton</p>
+            <p><strong>Interpretation:</strong> Thema der Vergänglichkeit, Sehnsucht nach verlorener Jugend</p>
         </div>
     </div>
 
