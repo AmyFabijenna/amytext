@@ -17,28 +17,50 @@
             color: #2c3e50;
         }
         
-        .kapitel {
+        .accordion {
             border: 1px solid #ddd;
             margin: 10px 0;
             border-radius: 5px;
         }
         
-        .kapitel-titel {
+        .accordion-header {
             background: #34495e;
             color: white;
             padding: 15px;
             cursor: pointer;
             margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #2c3e50;
+        }
+
+        .accordion-header h3 {
+            margin: 0;
+            color: white;
+        }
+
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active .toggle-icon {
+            transform: rotate(45deg);
         }
         
-        .kapitel-inhalt {
+        .panel {
             padding: 0 15px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
         
-        .kapitel-inhalt.offen {
+        .panel.active {
             max-height: 2000px;
             padding: 15px;
         }
@@ -56,6 +78,29 @@
             margin: 15px 0;
             border: 1px solid #ffeaa7;
         }
+
+        .solution-toggle {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .solution-toggle:hover {
+            background: #2980b9;
+        }
+
+        .solution {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f4f8;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -64,9 +109,12 @@
 <p>Argumentationsstrukturen erkennen und bewerten</p>
 
 <!-- KAPITEL 1 -->
-<div class="kapitel">
-    <h2 class="kapitel-titel" onclick="zeigeInhalt(1)">1. Grundlagen der Argumentationsanalyse</h2>
-    <div class="kapitel-inhalt" id="inhalt-1">
+<div class="accordion">
+    <div class="accordion-header">
+        <h3>1. Grundlagen der Argumentationsanalyse</h3>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="panel">
         <h3>Was ist Argumentationsanalyse?</h3>
         <p>Die Argumentationsanalyse untersucht die logischen Strukturen, auf denen Texte aufbauen. Sie zeigt, wie Thesen begründet und miteinander verknüpft werden.</p>
         
@@ -87,9 +135,12 @@
 </div>
 
 <!-- KAPITEL 2 -->
-<div class="kapitel">
-    <h2 class="kapitel-titel" onclick="zeigeInhalt(2)">2. Argumentationsstrukturen und -muster</h2>
-    <div class="kapitel-inhalt" id="inhalt-2">
+<div class="accordion">
+    <div class="accordion-header">
+        <h3>2. Argumentationsstrukturen und -muster</h3>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="panel">
         <h3>Typische Argumentationsmuster</h3>
         <table border="1" cellpadding="8" cellspacing="0" width="100%">
             <tr>
@@ -117,9 +168,12 @@
 </div>
 
 <!-- KAPITEL 3 -->
-<div class="kapitel">
-    <h2 class="kapitel-titel" onclick="zeigeInhalt(3)">3. Argumentationstypen und ihre Bewertung</h2>
-    <div class="kapitel-inhalt" id="inhalt-3">
+<div class="accordion">
+    <div class="accordion-header">
+        <h3>3. Argumentationstypen und ihre Bewertung</h3>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="panel">
         <h3>Typen von Argumenten</h3>
         <table border="1" cellpadding="8" cellspacing="0" width="100%">
             <tr>
@@ -151,8 +205,8 @@
                 <li>"Fast jeder Mensch besitzt heute ein Smartphone. Die ständige Erreichbarkeit führt zu Stress."</li>
                 <li>"Viele erfolgreiche Unternehmer haben ihr Studium abgebrochen. Ein Abschluss ist also keine Voraussetzung."</li>
             </ol>
-            <button onclick="zeigeLoesung(1)">Lösung anzeigen</button>
-            <div id="loesung-1" style="display:none; margin-top:10px; padding:10px; background:#e8f4f8;">
+            <button class="solution-toggle">Lösung anzeigen</button>
+            <div class="solution">
                 <p><strong>Lösungen:</strong> 1. Kausale Argumentation, 2. Argumentation mit Beispielen</p>
             </div>
         </div>
@@ -160,9 +214,12 @@
 </div>
 
 <!-- KAPITEL 4 -->
-<div class="kapitel">
-    <h2 class="kapitel-titel" onclick="zeigeInhalt(4)">4. Analyse der Argumentationsstrategie</h2>
-    <div class="kapitel-inhalt" id="inhalt-4">
+<div class="accordion">
+    <div class="accordion-header">
+        <h3>4. Analyse der Argumentationsstrategie</h3>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="panel">
         <h3>Fragen zur Analyse der Argumentationsstrategie</h3>
         <ol>
             <li>Welche Hauptthese vertritt der Autor/die Autorin?</li>
@@ -179,14 +236,17 @@
 </div>
 
 <!-- KAPITEL 5 -->
-<div class="kapitel">
-    <h2 class="kapitel-titel" onclick="zeigeInhalt(5)">5. Praxisteil: Übungen zur Argumentationsanalyse</h2>
-    <div class="kapitel-inhalt" id="inhalt-5">
+<div class="accordion">
+    <div class="accordion-header">
+        <h3>5. Praxisteil: Übungen zur Argumentationsanalyse</h3>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="panel">
         <div class="uebung">
             <h4>Übung 1: Argumentationsbausteine identifizieren</h4>
             <p><strong>Text:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich."</p>
-            <button onclick="zeigeLoesung(2)">Lösung anzeigen</button>
-            <div id="loesung-2" style="display:none; margin-top:10px; padding:10px; background:#e8f4f8;">
+            <button class="solution-toggle">Lösung anzeigen</button>
+            <div class="solution">
                 <p><strong>Lösung:</strong> These = Klimawandel als Bedrohung, Argument = Temperaturen steigen nachweislich</p>
             </div>
         </div>
@@ -194,8 +254,8 @@
         <div class="uebung">
             <h4>Übung 2: Argumentationsstruktur visualisieren</h4>
             <p><strong>Aufgabe:</strong> Stelle die Argumentationsstruktur grafisch dar.</p>
-            <button onclick="zeigeLoesung(3)">Lösung anzeigen</button>
-            <div id="loesung-3" style="display:none; margin-top:10px; padding:10px; background:#e8f4f8;">
+            <button class="solution-toggle">Lösung anzeigen</button>
+            <div class="solution">
                 <p><strong>Lösung:</strong> Baumdiagramm oder Mind-Map erstellen mit Hauptthese, Argumenten und Belegen</p>
             </div>
         </div>
