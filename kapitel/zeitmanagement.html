@@ -73,6 +73,22 @@
             background: #2c3e50;
         }
 
+        .solution-toggle {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .solution-toggle:hover {
+            background: #2c3e50;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -95,36 +111,67 @@
         }
 
         .accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.4s;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            font-weight: bold;
+            margin: 20px 0;
         }
 
-        .active, .accordion:hover {
-            background-color: #ccc;
+        .accordion-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .accordion-header.active {
+            background: #e9ecef;
+        }
+
+        .accordion-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
         }
 
         .panel {
-            padding: 0 18px;
-            background-color: white;
-            display: none;
+            max-height: 0;
             overflow: hidden;
-            margin-bottom: 20px;
+            transition: max-height 0.4s ease-out;
+            background-color: white;
             border-radius: 0 0 5px 5px;
         }
 
         .panel.active {
-            display: block;
+            max-height: 3000px;
             padding: 18px;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
         }
     </style>
 </head>
@@ -136,36 +183,41 @@
             <h3>Warum Zeitmanagement wichtig ist</h3>
             <p>Effektives Zeitmanagement ist für Prüfungssituationen entscheidend. Bei einer Textanalyse hilft eine sinnvolle Zeiteinteilung, alle wichtigen Aspekte zu berücksichtigen und gleichzeitig Stress zu reduzieren.</p>
             
-            <button class="accordion">Empfohlene Zeiteinteilung für eine 90-minütige Textanalyse</button>
-            <div class="panel">
-                <table>
-                    <tr>
-                        <th>Phase</th>
-                        <th>Zeit</th>
-                        <th>Aktivität</th>
-                    </tr>
-                    <tr>
-                        <td>Textverständnis</td>
-                        <td>10-15 Minuten</td>
-                        <td>Text lesen und verstehen, wichtige Textstellen markieren</td>
-                    </tr>
-                    <tr>
-                        <td>Planung</td>
-                        <td>5-10 Minuten</td>
-                        <td>Gliederung und Gedanken strukturieren</td>
-                    </tr>
-                    <tr>
-                        <td>Schreiben</td>
-                        <td>45-50 Minuten</td>
-                        <td>Verfassen der eigentlichen Analyse</td>
-                    </tr>
-                    <tr>
-                        <td>Überarbeitung</td>
-                        <td>15-20 Minuten</td>
-                        <td>Korrekturlesen und Verbesserungen</td>
-                    </tr>
-                </table>
-                <p class="tip-box"><strong>Tipp:</strong> Diese Zeiteinteilung kann je nach individuellen Stärken und Schwächen angepasst werden.</p>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Empfohlene Zeiteinteilung für eine 90-minütige Textanalyse
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="panel">
+                    <table>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Zeit</th>
+                            <th>Aktivität</th>
+                        </tr>
+                        <tr>
+                            <td>Textverständnis</td>
+                            <td>10-15 Minuten</td>
+                            <td>Text lesen und verstehen, wichtige Textstellen markieren</td>
+                        </tr>
+                        <tr>
+                            <td>Planung</td>
+                            <td>5-10 Minuten</td>
+                            <td>Gliederung und Gedanken strukturieren</td>
+                        </tr>
+                        <tr>
+                            <td>Schreiben</td>
+                            <td>45-50 Minuten</td>
+                            <td>Verfassen der eigentlichen Analyse</td>
+                        </tr>
+                        <tr>
+                            <td>Überarbeitung</td>
+                            <td>15-20 Minuten</td>
+                            <td>Korrekturlesen und Verbesserungen</td>
+                        </tr>
+                    </table>
+                    <div class="tip-box"><strong>Tipp:</strong> Diese Zeiteinteilung kann je nach individuellen Stärken und Schwächen angepasst werden.</div>
+                </div>
             </div>
         </div>
         
@@ -173,24 +225,34 @@
             <h3>Zeitmanagement für verschiedene Textsorten</h3>
             <p>Je nach Textsorte können sich die Zeitanteile leicht verschieben:</p>
             
-            <button class="accordion">Zeiteinteilung für literarische Texte</button>
-            <div class="panel">
-                <ul>
-                    <li>Textverständnis: 15-20 Minuten (tiefere Lektüre erforderlich)</li>
-                    <li>Planung: 10 Minuten (komplexere Struktur)</li>
-                    <li>Schreiben: 40-45 Minuten</li>
-                    <li>Überarbeitung: 15 Minuten</li>
-                </ul>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Zeiteinteilung für literarische Texte
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="panel">
+                    <ul>
+                        <li>Textverständnis: 15-20 Minuten (tiefere Lektüre erforderlich)</li>
+                        <li>Planung: 10 Minuten (komplexere Struktur)</li>
+                        <li>Schreiben: 40-45 Minuten</li>
+                        <li>Überarbeitung: 15 Minuten</li>
+                    </ul>
+                </div>
             </div>
             
-            <button class="accordion">Zeiteinteilung für Sachtexte</button>
-            <div class="panel">
-                <ul>
-                    <li>Textverständnis: 10 Minuten (klarere Struktur)</li>
-                    <li>Planung: 5 Minuten</li>
-                    <li>Schreiben: 50-55 Minuten (mehr Analyse erforderlich)</li>
-                    <li>Überarbeitung: 20 Minuten (genaue Prüfung der Argumentation)</li>
-                </ul>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Zeiteinteilung für Sachtexte
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="panel">
+                    <ul>
+                        <li>Textverständnis: 10 Minuten (klarere Struktur)</li>
+                        <li>Planung: 5 Minuten</li>
+                        <li>Schreiben: 50-55 Minuten (mehr Analyse erforderlich)</li>
+                        <li>Überarbeitung: 20 Minuten (genaue Prüfung der Argumentation)</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -212,9 +274,9 @@
                 </ul>
                 <p>Notiere konkrete Zeitangaben für jede Phase und begründe deine Entscheidungen.</p>
                 
-                <button class="btn solution-toggle">Musterlösung anzeigen</button>
+                <button class="solution-toggle">Musterlösung anzeigen</button>
                 
-                <div class="solution">
+                <div class="solution" style="display:none;">
                     <h4>Musterlösung: Individuelle Zeiteinteilung</h4>
                     <p><strong>Beispiel für eine individuelle Zeiteinteilung:</strong></p>
                     <ul>
@@ -232,28 +294,38 @@
             <h3>Zeitmanagement-Tools</h3>
             <p>Nutze verschiedene Techniken, um deine Zeit effektiv einzuteilen:</p>
             
-            <button class="accordion">Pomodoro-Technik für Textanalysen</button>
-            <div class="panel">
-                <p>Die Pomodoro-Technik kann auch bei Textanalysen angewendet werden:</p>
-                <ol>
-                    <li><strong>25 Minuten:</strong> Konzentriertes Lesen und Markieren</li>
-                    <li><strong>5 Minuten Pause:</strong> Kurze Erholung</li>
-                    <li><strong>25 Minuten:</strong> Gliederung und Schreiben des Hauptteils</li>
-                    <li><strong>5 Minuten Pause:</strong> Kurze Erholung</li>
-                    <li><strong>20 Minuten:</strong> Fertigstellung und Überarbeitung</li>
-                    <li><strong>10 Minuten:</strong> Endkorrektur</li>
-                </ol>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Pomodoro-Technik für Textanalysen
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="panel">
+                    <p>Die Pomodoro-Technik kann auch bei Textanalysen angewendet werden:</p>
+                    <ol>
+                        <li><strong>25 Minuten:</strong> Konzentriertes Lesen und Markieren</li>
+                        <li><strong>5 Minuten Pause:</strong> Kurze Erholung</li>
+                        <li><strong>25 Minuten:</strong> Gliederung und Schreiben des Hauptteils</li>
+                        <li><strong>5 Minuten Pause:</strong> Kurze Erholung</li>
+                        <li><strong>20 Minuten:</strong> Fertigstellung und Überarbeitung</li>
+                        <li><strong>10 Minuten:</strong> Endkorrektur</li>
+                    </ol>
+                </div>
             </div>
             
-            <button class="accordion">Timeboxing für Prüfungssituationen</button>
-            <div class="panel">
-                <p>Timeboxing hilft, den Fokus zu behalten:</p>
-                <ul>
-                    <li>Definiere klare Zeitblöcke für jede Aufgabe</li>
-                    <li>Stoppe die Zeit für jede Phase</li>
-                    <li>Bleibe innerhalb der vorgegebenen Zeit</li>
-                    <li>Passe dein Tempo an, wenn du merkst, dass du zu langsam bist</li>
-                </ul>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Timeboxing für Prüfungssituationen
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="panel">
+                    <p>Timeboxing hilft, den Fokus zu behalten:</p>
+                    <ul>
+                        <li>Definiere klare Zeitblöcke für jede Aufgabe</li>
+                        <li>Stoppe die Zeit für jede Phase</li>
+                        <li>Bleibe innerhalb der vorgegebenen Zeit</li>
+                        <li>Passe dein Tempo an, wenn du merkst, dass du zu langsam bist</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -281,9 +353,9 @@
                     <li>Die Position des Autors</li>
                 </ol>
                 
-                <button class="btn solution-toggle">Musterlösung anzeigen</button>
+                <button class="solution-toggle">Musterlösung anzeigen</button>
                 
-                <div class="solution">
+                <div class="solution" style="display:none;">
                     <h4>Musterlösung: Schnellanalyse</h4>
                     <ol>
                         <li><strong>Hauptthema:</strong> Auswirkungen der Digitalisierung auf zwischenmenschliche Kommunikation und soziale Beziehungen</li>
@@ -307,33 +379,43 @@
         <div class="card">
             <h3>Was tun, wenn die Zeit knapp wird?</h3>
             
-            <button class="accordion">Priorisieren bei Zeitmangel</button>
-            <div class="panel">
-                <p>Wenn du merkst, dass die Zeit knapp wird, priorisiere die wichtigsten Elemente:</p>
-                <ol>
-                    <li><strong>Vollständige Einleitung</strong> mit allen notwendigen Informationen</li>
-                    <li><strong>Korrekte Inhaltsangabe</strong> im Präsens</li>
-                    <li><strong>Mindestens zwei sprachliche Mittel</strong> analysieren</li>
-                    <li><strong>Argumentationsstruktur</strong> kurz beschreiben</li>
-                    <li><strong>Schluss mit eigener Position</strong> (auch wenn kurz)</li>
-                </ol>
-                <p>Vernachlässigen kannst du bei Zeitmangel:</p>
-                <ul>
-                    <li>Ausführliche Beschreibungen von Nebenaspekten</li>
-                    <li>Zu viele Zitate</li>
-                    <li>Perfekte Formulierungen (Inhalt vor Form)</li>
-                </ul>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Priorisieren bei Zeitmangel
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="panel">
+                    <p>Wenn du merkst, dass die Zeit knapp wird, priorisiere die wichtigsten Elemente:</p>
+                    <ol>
+                        <li><strong>Vollständige Einleitung</strong> mit allen notwendigen Informationen</li>
+                        <li><strong>Korrekte Inhaltsangabe</strong> im Präsens</li>
+                        <li><strong>Mindestens zwei sprachliche Mittel</strong> analysieren</li>
+                        <li><strong>Argumentationsstruktur</strong> kurz beschreiben</li>
+                        <li><strong>Schluss mit eigener Position</strong> (auch wenn kurz)</li>
+                    </ol>
+                    <p>Vernachlässigen kannst du bei Zeitmangel:</p>
+                    <ul>
+                        <li>Ausführliche Beschreibungen von Nebenaspekten</li>
+                        <li>Zu viele Zitate</li>
+                        <li>Perfekte Formulierungen (Inhalt vor Form)</li>
+                    </ul>
+                </div>
             </div>
             
-            <button class="accordion">Zeitfresser identifizieren und vermeiden</button>
-            <div class="panel">
-                <p>Häufige Zeitfresser in Textanalysen:</p>
-                <ul>
-                    <li><strong>Zu langes Verweilen beim Lesen:</strong> Maximal 15-20% der Gesamtzeit</li>
-                    <li><strong>Perfektionismus bei Formulierungen:</strong> Erster Entwurf muss nicht perfekt sein</li>
-                    <li><strong>Zu ausführliche Einleitung:</strong> Einleitung sollte knapp und präzise sein</li>
-                    <li><strong>Übermäßiges Zitieren:</strong> Zitate sparsam und gezielt einsetzen</li>
-                </ul>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Zeitfresser identifizieren und vermeiden
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="panel">
+                    <p>Häufige Zeitfresser in Textanalysen:</p>
+                    <ul>
+                        <li><strong>Zu langes Verweilen beim Lesen:</strong> Maximal 15-20% der Gesamtzeit</li>
+                        <li><strong>Perfektionismus bei Formulierungen:</strong> Erster Entwurf muss nicht perfekt sein</li>
+                        <li><strong>Zu ausführliche Einleitung:</strong> Einleitung sollte knapp und präzise sein</li>
+                        <li><strong>Übermäßiges Zitieren:</strong> Zitate sparsam und gezielt einsetzen</li>
+                    </ul>
+                </div>
             </div>
         </div>
         

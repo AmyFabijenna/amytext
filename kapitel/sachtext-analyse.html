@@ -5,22 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beispiel: Sachtext analysieren | Deutschmatura</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-        }
-
-        .content {
             padding: 20px;
+            margin: 0;
         }
 
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin: 30px 0 20px 0;
+        }
+
+        h3 {
+            color: #34495e;
+            margin: 20px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        /* Welcome section */
         .welcome-section {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             padding: 30px;
@@ -34,6 +49,7 @@
             margin-bottom: 20px;
         }
 
+        /* Analysis sections */
         .analysis-section {
             margin: 30px 0;
             padding: 20px;
@@ -42,67 +58,81 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .analysis-section h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e9ecef;
+        /* Accordion styling - kompatibel mit Mutterdatei */
+        .accordion {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        .accordion {
-            background-color: #34495e;
+        .accordion-header {
+            background: #34495e;
             color: white;
             cursor: pointer;
             padding: 15px 20px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 1.1em;
-            margin: 10px 0;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            user-select: none;
+            border-bottom: 1px solid #ddd;
         }
 
-        .accordion:hover,
-        .accordion.active {
-            background-color: #2c3e50;
+        .accordion-header:hover {
+            background: #2c3e50;
         }
 
-        .accordion-icon {
-            font-size: 1.2em;
+        .accordion-header h3 {
+            margin: 0;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        .toggle-icon {
+            font-size: 18px;
             font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion.active .accordion-icon {
-            transform: rotate(45deg);
+            color: white;
         }
 
         .panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background-color: #f9f9f9;
-            border-radius: 0 0 5px 5px;
-        }
-
-        .panel.active {
-            max-height: 3000px;
+            display: block;
             padding: 18px;
+            background: #f9f9f9;
         }
 
+        .panel.collapsed {
+            display: none;
+        }
+
+        /* Text examples */
         .text-example {
             background: #f8f9fa;
             border-left: 4px solid #3498db;
             padding: 20px;
             margin: 20px 0;
             font-style: italic;
+        }
+
+        /* Exercise styling */
+        .exercise {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        /* Solution styling */
+        .solution-toggle {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .solution-toggle:hover {
+            background: #218838;
         }
 
         .solution {
@@ -114,17 +144,7 @@
             display: none;
         }
 
-        .solution.active {
-            display: block;
-        }
-
-        .exercise {
-            background: #e3f2fd;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-
+        /* Tip boxes */
         .tip-box {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -137,6 +157,7 @@
             color: #856404;
         }
 
+        /* Progress section */
         .progress-section {
             background: #e8f4f8;
             border-radius: 10px;
@@ -145,20 +166,7 @@
             border-left: 4px solid #3498db;
         }
 
-        .solution-btn {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .solution-btn:hover {
-            background: #218838;
-        }
-
+        /* Lists */
         ul, ol {
             margin-left: 20px;
             padding-left: 20px;
@@ -168,45 +176,69 @@
             margin-bottom: 8px;
         }
 
+        /* Buttons */
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .content {
+            body {
+                padding: 15px;
+            }
+            
+            .panel {
                 padding: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <div class="welcome-section">
-            <h2>Sachtextanalyse: Der Wert des Analogen im digitalen Zeitalter</h2>
-            <p>In diesem Kapitel analysieren wir einen Sachtext von Dr. Thomas Maier, der die Renaissance analoger Medien in unserer digitalen Welt thematisiert. Du lernst Schritt für Schritt, wie du einen Sachtext systematisch analysierst und interpretierst.</p>
-        </div>
+    <button type="button" class="btn-toggle-all">Alle Bereiche öffnen/schließen</button>
 
-        <div class="analysis-section">
-            <h3>Der Sachtext: "Der Wert des Analogen im digitalen Zeitalter"</h3>
-            <div class="text-example">
-                <p><strong>Von Dr. Thomas Maier, veröffentlicht in "Wissen & Bildung", Januar 2025</strong></p>
-                <p>Die Digitalisierung hat nahezu jeden Aspekt unseres Alltags erfasst. Wir lesen digitale Bücher, hören gestreamte Musik, kommunizieren über Messenger-Dienste und speichern unsere Erinnerungen als Dateien in der Cloud. Diese Entwicklung bringt unbestreitbare Vorteile: Informationen sind jederzeit und überall verfügbar, die Verbreitung von Wissen wird demokratisiert, die Kommunikation beschleunigt.</p>
-                
-                <p>Doch parallel zu dieser fortschreitenden Digitalisierung lässt sich ein bemerkenswertes Phänomen beobachten: die Renaissance des Analogen. Vinylschallplatten verzeichnen seit Jahren steigende Verkaufszahlen, gedruckte Bücher behaupten sich trotz E-Books am Markt, Polaroid-Kameras erfreuen sich wachsender Beliebtheit, und handgeschriebene Notizen erleben in Form des "Bullet Journaling" ein Comeback.</p>
-                
-                <p>Diese parallele Entwicklung wirft Fragen auf: Warum wenden sich Menschen in einer durchdigitalisierten Welt bewusst analogen Alternativen zu? Welche Qualitäten bietet das Analoge, die im Digitalen verloren gehen?</p>
-                
-                <p>Empirische Studien liefern erste Antworten. So zeigen Untersuchungen zur Lese- und Lernpsychologie, dass Informationen auf Papier oft besser verarbeitet und erinnert werden als auf Bildschirmen. Die räumliche Orientierung im physischen Buch – zu wissen, ob eine Information eher am Anfang oder Ende stand – unterstützt die kognitive Verarbeitung. Ähnlich verhält es sich mit handschriftlichen Notizen, die komplexere motorische und kognitive Prozesse erfordern als das Tippen und dadurch das Verständnis fördern.</p>
-                
-                <p>Doch über diese funktionalen Vorteile hinaus bietet das Analoge eine sinnliche Dimension, die im Digitalen oft fehlt: die Haptik eines Buches, das Rauschen einer Schallplatte, die Zufälligkeit und Unwiderruflichkeit eines Polaroid-Fotos. Diese Qualitäten schaffen eine andere Form der Aufmerksamkeit und Verbindlichkeit. Ein gedrucktes Buch lässt sich nicht nebenbei konsumieren wie ein E-Book zwischen E-Mails und Push-Nachrichten. Es fordert eine bewusstere Entscheidung, eine höhere Verbindlichkeit.</p>
-                
-                <p>Zudem besitzen analoge Objekte eine materielle Beständigkeit, die digitalen Inhalten fehlt. Sie altern und entwickeln eine Patina, die ihre Geschichte widerspiegelt – vom abgegriffenen Lieblingsbuch bis zur zerkratzten Schallplatte. Diese physischen Spuren des Gebrauchs erzeugen eine emotionalere Bindung und symbolische Bedeutung, die rein digitale Inhalte kaum erreichen können.</p>
-                
-                <p>Die Renaissance des Analogen sollte daher nicht als nostalgische Verweigerungshaltung missverstanden werden. Vielmehr zeigt sie das Bedürfnis nach einem ausgewogenen Verhältnis zwischen digitaler Effizienz und analoger Tiefe. Eine zukunftsfähige Mediennutzung wird vermutlich in der intelligenten Kombination beider Welten liegen – in der Erkenntnis, wann digitale Werkzeuge überlegen sind und wann analoge Alternativen einen Mehrwert bieten.</p>
-                
-                <p>Die Herausforderung besteht darin, nicht der Logik des "Entweder-oder" zu folgen, sondern die spezifischen Qualitäten beider Sphären zu würdigen. In diesem Sinne ist die Rückbesinnung auf das Analoge keine rückwärtsgewandte Bewegung, sondern eine Bereicherung unserer medial hochentwickelten Kultur.</p>
-            </div>
-        </div>
+    <div class="welcome-section">
+        <h2>Sachtextanalyse: Der Wert des Analogen im digitalen Zeitalter</h2>
+        <p>In diesem Kapitel analysieren wir einen Sachtext von Dr. Thomas Maier, der die Renaissance analoger Medien in unserer digitalen Welt thematisiert. Du lernst Schritt für Schritt, wie du einen Sachtext systematisch analysierst und interpretierst.</p>
+    </div>
 
-        <div class="accordion">
-            <span>Schritt 1: Einleitung und kurze Inhaltsangabe</span>
-            <span class="accordion-icon">+</span>
+    <div class="analysis-section">
+        <h3>Der Sachtext: "Der Wert des Analogen im digitalen Zeitalter"</h3>
+        <div class="text-example">
+            <p><strong>Von Dr. Thomas Maier, veröffentlicht in "Wissen & Bildung", Januar 2025</strong></p>
+            <p>Die Digitalisierung hat nahezu jeden Aspekt unseres Alltags erfasst. Wir lesen digitale Bücher, hören gestreamte Musik, kommunizieren über Messenger-Dienste und speichern unsere Erinnerungen als Dateien in der Cloud. Diese Entwicklung bringt unbestreitbare Vorteile: Informationen sind jederzeit und überall verfügbar, die Verbreitung von Wissen wird demokratisiert, die Kommunikation beschleunigt.</p>
+            
+            <p>Doch parallel zu dieser fortschreitenden Digitalisierung lässt sich ein bemerkenswertes Phänomen beobachten: die Renaissance des Analogen. Vinylschallplatten verzeichnen seit Jahren steigende Verkaufszahlen, gedruckte Bücher behaupten sich trotz E-Books am Markt, Polaroid-Kameras erfreuen sich wachsender Beliebtheit, und handgeschriebene Notizen erleben in Form des "Bullet Journaling" ein Comeback.</p>
+            
+            <p>Diese parallele Entwicklung wirft Fragen auf: Warum wenden sich Menschen in einer durchdigitalisierten Welt bewusst analogen Alternativen zu? Welche Qualitäten bietet das Analoge, die im Digitalen verloren gehen?</p>
+            
+            <p>Empirische Studien liefern erste Antworten. So zeigen Untersuchungen zur Lese- und Lernpsychologie, dass Informationen auf Papier oft besser verarbeitet und erinnert werden als auf Bildschirmen. Die räumliche Orientierung im physischen Buch – zu wissen, ob eine Information eher am Anfang oder Ende stand – unterstützt die kognitive Verarbeitung. Ähnlich verhält es sich mit handschriftlichen Notizen, die komplexere motorische und kognitive Prozesse erfordern als das Tippen und dadurch das Verständnis fördern.</p>
+            
+            <p>Doch über diese funktionalen Vorteile hinaus bietet das Analoge eine sinnliche Dimension, die im Digitalen oft fehlt: die Haptik eines Buches, das Rauschen einer Schallplatte, die Zufälligkeit und Unwiderruflichkeit eines Polaroid-Fotos. Diese Qualitäten schaffen eine andere Form der Aufmerksamkeit und Verbindlichkeit. Ein gedrucktes Buch lässt sich nicht nebenbei konsumieren wie ein E-Book zwischen E-Mails und Push-Nachrichten. Es fordert eine bewusstere Entscheidung, eine höhere Verbindlichkeit.</p>
+            
+            <p>Zudem besitzen analoge Objekte eine materielle Beständigkeit, die digitalen Inhalten fehlt. Sie altern und entwickeln eine Patina, die ihre Geschichte widerspiegelt – vom abgegriffenen Lieblingsbuch bis zur zerkratzten Schallplatte. Diese physischen Spuren des Gebrauchs erzeugen eine emotionalere Bindung und symbolische Bedeutung, die rein digitale Inhalte kaum erreichen können.</p>
+            
+            <p>Die Renaissance des Analogen sollte daher nicht als nostalgische Verweigerungshaltung missverstanden werden. Vielmehr zeigt sie das Bedürfnis nach einem ausgewogenen Verhältnis zwischen digitaler Effizienz und analoger Tiefe. Eine zukunftsfähige Mediennutzung wird vermutlich in der intelligenten Kombination beider Welten liegen – in der Erkenntnis, wann digitale Werkzeuge überlegen sind und wann analoge Alternativen einen Mehrwert bieten.</p>
+            
+            <p>Die Herausforderung besteht darin, nicht der Logik des "Entweder-oder" zu folgen, sondern die spezifischen Qualitäten beider Sphären zu würdigen. In diesem Sinne ist die Rückbesinnung auf das Analoge keine rückwärtsgewandte Bewegung, sondern eine Bereicherung unserer medial hochentwickelten Kultur.</p>
+        </div>
+    </div>
+
+    <div class="accordion">
+        <div class="accordion-header">
+            <h3>Schritt 1: Einleitung und kurze Inhaltsangabe</h3>
+            <span class="toggle-icon">+</span>
         </div>
         <div class="panel">
             <div class="analysis-section">
@@ -233,10 +265,12 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="accordion">
-            <span>Schritt 2: Stilanalyse</span>
-            <span class="accordion-icon">+</span>
+    <div class="accordion">
+        <div class="accordion-header">
+            <h3>Schritt 2: Stilanalyse</h3>
+            <span class="toggle-icon">+</span>
         </div>
         <div class="panel">
             <div class="analysis-section">
@@ -274,10 +308,12 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="accordion">
-            <span>Schritt 3: Bewertung und Ausblick/Schluss</span>
-            <span class="accordion-icon">+</span>
+    <div class="accordion">
+        <div class="accordion-header">
+            <h3>Schritt 3: Bewertung und Ausblick/Schluss</h3>
+            <span class="toggle-icon">+</span>
         </div>
         <div class="panel">
             <div class="analysis-section">
@@ -313,57 +349,53 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="exercise">
-            <h3>Übung: Eigene Sachtextanalyse</h3>
-            <p><strong>Aufgabe:</strong> Analysiere den folgenden Sachtextauszug nach dem gelernten Schema.</p>
-            
-            <div class="text-example">
-                <p><strong>Auszug aus: "Die Zukunft der Arbeit" von Max Mustermann</strong></p>
-                <p>Die Digitalisierung der Arbeitswelt schreitet unaufhaltsam voran. Künstliche Intelligenz und Automatisierung verändern nicht nur einzelne Berufsbilder, sondern das gesamte Konzept von Arbeit. Während viele vor den Risiken warnen – Jobverlust, soziale Ungleichheit, Entfremdung –, werden die Chancen oft übersehen. Automatisierung kann uns von monotonen Tätigkeiten befreien und Raum für kreative, sinnstiftende Arbeit schaffen. Die Herausforderung besteht nicht darin, den technologischen Fortschritt aufzuhalten, sondern ihn menschlich zu gestalten.</p>
-            </div>
-            
-            <p><strong>Arbeitsaufträge:</strong></p>
-            <ol>
-                <li>Verfasse eine Einleitung mit Textangaben und Inhaltszusammenfassung.</li>
-                <li>Analysiere die Argumentationsstruktur und sprachlichen Mittel.</li>
-                <li>Formuliere eine kritische Bewertung des Textausschnitts.</li>
-            </ol>
-            
-            <div class="accordion">
-                <span>Lösungsvorschlag anzeigen</span>
-                <span class="accordion-icon">+</span>
-            </div>
-            <div class="panel">
-                <div class="solution">
-                    <h4>Lösungsvorschlag für die Übung</h4>
-                    <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
-                    
-                    <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionale Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
-                    
-                    <p><strong>3. Bewertung:</strong> Der Textausschnitt bietet eine ausgewogene Perspektive auf ein komplexes Thema. Die Gegenüberstellung von Risiken und Chancen ist gelungen, allerdings bleiben die Aussagen recht allgemein. Konkrete Beispiele oder Studien würden die Argumentation stärken. Die Schlussforderung nach einer "menschlichen Gestaltung" ist appellativ, aber etwas vage formuliert.</p>
-                </div>
-            </div>
+    <div class="exercise">
+        <h3>Übung: Eigene Sachtextanalyse</h3>
+        <p><strong>Aufgabe:</strong> Analysiere den folgenden Sachtextauszug nach dem gelernten Schema.</p>
+        
+        <div class="text-example">
+            <p><strong>Auszug aus: "Die Zukunft der Arbeit" von Max Mustermann</strong></p>
+            <p>Die Digitalisierung der Arbeitswelt schreitet unaufhaltsam voran. Künstliche Intelligenz und Automatisierung verändern nicht nur einzelne Berufsbilder, sondern das gesamte Konzept von Arbeit. Während viele vor den Risiken warnen – Jobverlust, soziale Ungleichheit, Entfremdung –, werden die Chancen oft übersehen. Automatisierung kann uns von monotonen Tätigkeiten befreien und Raum für kreative, sinnstiftende Arbeit schaffen. Die Herausforderung besteht nicht darin, den technologischen Fortschritt aufzuhalten, sondern ihn menschlich zu gestalten.</p>
         </div>
-
-        <div class="tip-box">
-            <strong>Tipp für die Sachtextanalyse:</strong><br>
-            Achte besonders auf die Argumentationsstruktur und die Verhältnismäßigkeit der Argumente. Sachtexte zielen oft auf Überzeugung ab – identifiziere die Strategien, die der Autor verwendet, um seine Leser zu überzeugen.
-        </div>
-
-        <div class="progress-section">
-            <h3>Checkliste für die Sachtextanalyse</h3>
-            <ul>
-                <li>✓ Textart und Textsorte korrekt bestimmt</li>
-                <li>✓ Einleitung mit allen notwendigen Textangaben</li>
-                <li>✓ Inhalt präzise und neutral zusammengefasst</li>
-                <li>✓ Argumentationsstruktur analysiert</li>
-                <li>✓ Sprachliche Mittel identifiziert und ihre Wirkung beschrieben</li>
-                <li>✓ Autorposition und Intention herausgearbeitet</li>
-                <li>✓ Eigene kritische Bewertung formuliert</li>
-                <li>✓ Bezug zur Gegenwart hergestellt</li>
-            </ul>
+        
+        <p><strong>Arbeitsaufträge:</strong></p>
+        <ol>
+            <li>Verfasse eine Einleitung mit Textangaben und Inhaltszusammenfassung.</li>
+            <li>Analysiere die Argumentationsstruktur und sprachlichen Mittel.</li>
+            <li>Formuliere eine kritische Bewertung des Textausschnitts.</li>
+        </ol>
+        
+        <button class="solution-toggle">Lösungsvorschlag anzeigen</button>
+        <div class="solution">
+            <h4>Lösungsvorschlag für die Übung</h4>
+            <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
+            
+            <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionale Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
+            
+            <p><strong>3. Bewertung:</strong> Der Textausschnitt bietet eine ausgewogene Perspektive auf ein komplexes Thema. Die Gegenüberstellung von Risiken und Chancen ist gelungen, allerdings bleiben die Aussagen recht allgemein. Konkrete Beispiele oder Studien würden die Argumentation stärken. Die Schlussforderung nach einer "menschlichen Gestaltung" ist appellativ, aber etwas vage formuliert.</p>
         </div>
     </div>
+
+    <div class="tip-box">
+        <strong>Tipp für die Sachtextanalyse:</strong><br>
+        Achte besonders auf die Argumentationsstruktur und die Verhältnismäßigkeit der Argumente. Sachtexte zielen oft auf Überzeugung ab – identifiziere die Strategien, die der Autor verwendet, um seine Leser zu überzeugen.
+    </div>
+
+    <div class="progress-section">
+        <h3>Checkliste für die Sachtextanalyse</h3>
+        <ul>
+            <li>✓ Textart und Textsorte korrekt bestimmt</li>
+            <li>✓ Einleitung mit allen notwendigen Textangaben</li>
+            <li>✓ Inhalt präzise und neutral zusammengefasst</li>
+            <li>✓ Argumentationsstruktur analysiert</li>
+            <li>✓ Sprachliche Mittel identifiziert und ihre Wirkung beschrieben</li>
+            <li>✓ Autorposition und Intention herausgearbeitet</li>
+            <li>✓ Eigene kritische Bewertung formuliert</li>
+            <li>✓ Bezug zur Gegenwart hergestellt</li>
+        </ul>
+    </div>
+
 </body>
 </html>

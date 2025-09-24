@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textgebundene Erörterung - Grundlagen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+        }
+
+        .main-content {
+            margin: 0 auto;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #34495e;
+        }
+
+        .intro-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .accordion {
+            background: #34495e;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .accordion:hover {
+            background: #2c3e50;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .accordion.active {
+            background: #2c3e50;
+        }
+
+        .accordion::after {
+            content: '+';
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+
+        .accordion.active::after {
+            content: '−';
+            transform: rotate(0deg);
+        }
+
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 10px 10px;
+            padding: 0 18px;
+        }
+
+        .panel.active {
+            max-height: 5000px;
+            padding: 18px;
+        }
+
+        .section-inner {
+            padding: 30px 0;
+        }
+
+        .panel h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+        }
+
+        .panel h4 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+        }
+
+        .panel ul, .panel ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .panel li {
+            margin-bottom: 8px;
+        }
+
+        .example-box {
+            background: #e8f4f8;
+            border-left: 4px solid #34495e;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .checklist h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .checklist-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        .expand-all-btn {
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 20px 0;
+            transition: background 0.3s ease;
+        }
+
+        .expand-all-btn:hover {
+            background: #2c3e50;
+        }
+
+        .formula-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            border-radius: 0 8px 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            .content-body {
+                padding: 20px;
+            }
+
+            .intro-section {
+                padding: 20px;
+            }
+            
+            .section-inner {
+                padding: 20px 0;
+            }
+            
+            .accordion {
+                padding: 15px;
+                font-size: 1em;
+            }
+            
+            .content-header h1 {
+                font-size: 2em;
+            }
+            
+            .content-header p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Textgebundene Erörterung</h1>
+                <p>Umfassendes Handbuch für die 9. Schulstufe - Von der Grundlage zur Note SEHR GUT</p>
+            </header>
+
+            <div class="content-body">
+                <div class="intro-section">
+                    <h2>Was ist eine textgebundene Erörterung?</h2>
+                    <p>Eine textgebundene Erörterung ist eine <strong>kritische Auseinandersetzung mit einem Ausgangstext</strong>. Du analysierst nicht nur den Inhalt, sondern bewertest die Argumentation des Autors und entwickelst eine eigene, begründete Position zu dem behandelten Thema.</p>
+                    
+                    <div class="tip-box">
+                        <strong>Zentrale Unterscheidung:</strong><br>
+                        <strong>Inhaltsangabe:</strong> Wiedergabe des Textinhalts (WAS steht im Text?)<br>
+                        <strong>Erörterung:</strong> Kritische Bewertung (WIE überzeugend ist der Text? WARUM stimme ich zu oder nicht?)
+                    </div>
+
+                    <h3>Die drei Säulen einer gelungenen Erörterung:</h3>
+                    <ol>
+                        <li><strong>Textverständnis:</strong> Du zeigst, dass du den Text vollständig verstanden hast</li>
+                        <li><strong>Analyse:</strong> Du untersuchst die Argumentation systematisch</li>
+                        <li><strong>Bewertung:</strong> Du entwickelst eine eigene, begründete Position</li>
+                    </ol>
+                </div>
+
+                <button class="expand-all-btn" onclick="toggleAll()">Alle Kapitel aufklappen</button>
+
+                <!-- Kapitel 1 -->
+                <button class="accordion">1. Grundlagen der Argumentation verstehen</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Was ist ein Argument?</h3>
+                        <p>Ein Argument besteht aus drei Teilen:</p>
+                        
+                        <div class="formula-box">
+                            <strong>Argumentationsschema:</strong><br>
+                            1. <strong>These:</strong> Eine Behauptung (z.B. "Soziale Medien sind schädlich")<br>
+                            2. <strong>Begründung:</strong> Warum diese Behauptung stimmt (z.B. "weil sie süchtig machen")<br>
+                            3. <strong>Beleg:</strong> Beweis oder Beispiel (z.B. "Studien zeigen 3h tägliche Nutzung bei Jugendlichen")
+                        </div>
+
+                        <h3>Argumentationstypen erkennen</h3>
+                        
+                        <h4>Faktenargument</h4>
+                        <div class="example-box">
+                            Stützt sich auf überprüfbare Daten<br>
+                            <em>Beispiel:</em> "Laut Statistik nutzen 80% der Jugendlichen täglich soziale Medien"
+                        </div>
+
+                        <h4>Autoritätsargument</h4>
+                        <div class="example-box">
+                            Beruft sich auf Experten<br>
+                            <em>Beispiel:</em> "Professor Müller von der Universität Wien warnt vor..."
+                        </div>
+
+                        <h4>Erfahrungsargument</h4>
+                        <div class="example-box">
+                            Bezieht sich auf alltägliche Beobachtungen<br>
+                            <em>Beispiel:</em> "Viele Eltern berichten von Konzentrationsproblemen ihrer Kinder"
+                        </div>
+
+                        <h4>Analogieargument</h4>
+                        <div class="example-box">
+                            Zieht Vergleiche<br>
+                            <em>Beispiel:</em> "Wie Alkohol kann auch Social Media abhängig machen"
+                        </div>
+
+                        <h3>Schwächen von Argumenten identifizieren</h3>
+                        <ul>
+                            <li><strong>Pauschalisierung:</strong> "Alle Jugendlichen sind handysüchtig"</li>
+                            <li><strong>Fehlende Belege:</strong> Behauptungen ohne Beweise</li>
+                            <li><strong>Emotionale Manipulation:</strong> Angstmache statt sachlicher Argumentation</li>
+                            <li><strong>Einseitigkeit:</strong> Nur eine Perspektive berücksichtigt</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kapitel 2 -->
+                <button class="accordion">2. Systematische Textanalyse</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Schritt 1: Ersten Überblick gewinnen</h3>
+                        <p>Beim ersten Lesen:</p>
+                        <ul>
+                            <li>Worum geht es grundsätzlich?</li>
+                            <li>Was ist die zentrale These des Autors?</li>
+                            <li>Welche Grundhaltung hat der Autor (befürwortend, kritisch, neutral)?</li>
+                        </ul>
+
+                        <h3>Schritt 2: Strukturanalyse</h3>
+                        <div class="tip-box">
+                            <strong>Markierungssystem entwickeln:</strong>
+                            <ul>
+                                <li><strong>Rot:</strong> Hauptthese unterstreichen</li>
+                                <li><strong>Blau:</strong> Pro-Argumente markieren</li>
+                                <li><strong>Gelb:</strong> Contra-Argumente markieren</li>
+                                <li><strong>Grün:</strong> Beispiele und Belege einkreisen</li>
+                                <li><strong>Orange:</strong> Rhetorische Mittel notieren</li>
+                            </ul>
+                        </div>
+
+                        <h3>Schritt 3: Argumentationsstruktur erfassen</h3>
+                        <p>Fragen zur Struktur:</p>
+                        <ul>
+                            <li>Wie ist der Text aufgebaut?</li>
+                            <li>Welche Argumente führt der Autor in welcher Reihenfolge an?</li>
+                            <li>Gibt es eine Steigerung oder einen roten Faden?</li>
+                            <li>Wie verknüpft der Autor seine Argumente?</li>
+                        </ul>
+
+                        <h3>Schritt 4: Sprachanalyse</h3>
+                        
+                        <h4>Tonfall identifizieren:</h4>
+                        <ul>
+                            <li>Sachlich-neutral vs. emotional-wertend</li>
+                            <li>Fachsprache vs. Alltagssprache</li>
+                            <li>Objektiv vs. subjektiv</li>
+                        </ul>
+
+                        <h4>Rhetorische Mittel erkennen:</h4>
+                        <ul>
+                            <li>Metaphern und Vergleiche</li>
+                            <li>Rhetorische Fragen</li>
+                            <li>Ironie oder Sarkasmus</li>
+                            <li>Wiederholungen zur Betonung</li>
+                        </ul>
+
+                        <h3>Schritt 5: Bewertung der Argumente</h3>
+                        <div class="checklist">
+                            <h4>Qualitätskriterien:</h4>
+                            <ul>
+                                <li>Sind die Argumente logisch?</li>
+                                <li>Sind die Belege glaubwürdig?</li>
+                                <li>Werden Gegenargumente berücksichtigt?</li>
+                                <li>Ist die Schlussfolgerung nachvollziehbar?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 3 -->
+                <button class="accordion">3. Aufbau und Struktur meistern</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Gesamtstruktur (500-600 Wörter)</h3>
+                        
+                        <table>
+                            <tr>
+                                <th>Textteil</th>
+                                <th>Umfang</th>
+                                <th>Inhalt</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Einleitung</strong></td>
+                                <td>80-100 Wörter</td>
+                                <td>
+                                    • Hinführung zum Thema<br>
+                                    • Textangabe (Autor, Titel, Jahr, Medium)<br>
+                                    • Zentrale These des Autors<br>
+                                    • Überleitung zum Hauptteil
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hauptteil A: Textanalyse</strong></td>
+                                <td>150-180 Wörter</td>
+                                <td>
+                                    • Argumentationsstruktur<br>
+                                    • Sprachliche Mittel<br>
+                                    • Bewertung der Überzeugungskraft
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hauptteil B: Stellungnahme</strong></td>
+                                <td>200-220 Wörter</td>
+                                <td>
+                                    • Pro-Argumente für die Autorenposition<br>
+                                    • Contra-Argumente und Kritikpunkte<br>
+                                    • Eigene Position mit Begründung
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Schluss</strong></td>
+                                <td>100-120 Wörter</td>
+                                <td>
+                                    • Zusammenfassung der wichtigsten Erkenntnisse<br>
+                                    • Persönliches Fazit<br>
+                                    • Ausblick oder weiterführende Gedanken
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h3>Absatzgliederung</h3>
+                        <p>Jeder Absatz sollte:</p>
+                        <ul>
+                            <li>Eine zentrale Idee behandeln</li>
+                            <li>Mit einem Themensatz beginnen</li>
+                            <li>Durch Beispiele gestützt werden</li>
+                            <li>Zum nächsten Absatz überleiten</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <strong>Beispiel für Absatzaufbau:</strong><br>
+                            1. <strong>Themensatz:</strong> "Ein schwerwiegender Kritikpunkt an Mustermannns Argumentation ist..."<br>
+                            2. <strong>Erläuterung:</strong> "Der Autor übersieht dabei..."<br>
+                            3. <strong>Beispiel:</strong> "So zeigt sich etwa..."<br>
+                            4. <strong>Schlussfolgerung:</strong> "Dies führt dazu, dass..."<br>
+                            5. <strong>Überleitung:</strong> "Darüber hinaus..."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 4 -->
+                <button class="accordion">4. Die perfekte Einleitung</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Aufgaben der Einleitung</h3>
+                        <ol>
+                            <li><strong>Interesse wecken:</strong> Den Leser ins Thema hineinführen</li>
+                            <li><strong>Orientierung geben:</strong> Textangabe und Kernthese</li>
+                            <li><strong>Vorschau bieten:</strong> Was wird im Hauptteil behandelt?</li>
+                        </ol>
+
+                        <h3>Vier-Sätze-Struktur</h3>
+
+                        <h4>Satz 1: Problemstellung</h4>
+                        <p>Führe in das Thema ein, ohne den Text zu erwähnen.</p>
+                        <div class="example-box">
+                            <strong>Varianten:</strong>
+                            <ul>
+                                <li>"In einer Zeit, da... wird intensiv diskutiert..."</li>
+                                <li>"Während manche..., argumentieren andere..."</li>
+                                <li>"Das Thema... beschäftigt zunehmend..."</li>
+                                <li>"Die Frage, ob... spaltet die Gesellschaft"</li>
+                            </ul>
+                        </div>
+
+                        <h4>Satz 2: Textangabe</h4>
+                        <p>Vollständige Quellenangabe mit Kernthese.</p>
+                        <div class="formula-box">
+                            <strong>Formel:</strong> "[Autor] [Textsorte] '[Titel]' ([Jahr/Medium]) [Hauptaussage]"
+                        </div>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Max Mustermann behandelt in seinem Kommentar 'Digitale Demenz?' (Die Zeit, 2024) die umstrittene Frage nach den Auswirkungen digitaler Medien auf die Denkfähigkeit von Jugendlichen und kommt zu dem Schluss, dass intensive Smartphone-Nutzung die Konzentrationsfähigkeit nachhaltig schädigt."
+                        </div>
+
+                        <h4>Satz 3: Präzisierung der These</h4>
+                        <p>Konkretisiere die Position des Autors.</p>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Dabei stützt er sich hauptsächlich auf neurobiologische Studien und warnt vor einer 'Generation der Zerstreuten'."
+                        </div>
+
+                        <h4>Satz 4: Überleitung</h4>
+                        <p>Kündige deine Analyse an.</p>
+                        <div class="example-box">
+                            <strong>Varianten:</strong>
+                            <ul>
+                                <li>"Im Folgenden soll diese Argumentation kritisch analysiert werden."</li>
+                                <li>"Die Überzeugungskraft dieser Position gilt es zu hinterfragen."</li>
+                                <li>"Dabei stellt sich die Frage, ob diese Einschätzung der Komplexität des Themas gerecht wird."</li>
+                            </ul>
+                        </div>
+
+                        <h3>Häufige Einleitungsfehler vermeiden</h3>
+                        <div class="warning-box">
+                            <strong>Vermeide:</strong>
+                            <ul>
+                                <li><strong>Zu allgemein:</strong> "Seit es Menschen gibt, diskutieren sie über..."</li>
+                                <li><strong>Zu persönlich:</strong> "Ich finde das Thema sehr interessant..."</li>
+                                <li><strong>Zu lang:</strong> Einleitung über 100 Wörter</li>
+                                <li><strong>Unvollständige Textangabe:</strong> Autor oder Jahr fehlen</li>
+                                <li><strong>Vague Thesenwiedergabe:</strong> "Der Autor ist der Meinung, dass..."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 5 -->
+                <button class="accordion">5. Textanalyse im Detail</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Systematisches Vorgehen</h3>
+                        <p>Die Textanalyse ist das Herzstück deiner Erörterung. Hier zeigst du, dass du den Text nicht nur verstanden, sondern auch durchschaut hast.</p>
+
+                        <h3>Argumentationsanalyse</h3>
+
+                        <h4>Schritt 1: Hauptthese identifizieren</h4>
+                        <p>Die Hauptthese ist die zentrale Behauptung des Autors. Sie steht oft am Anfang oder Ende des Textes, manchmal auch im Titel.</p>
+                        
+                        <div class="example-box">
+                            <strong>Formulierungshilfen:</strong>
+                            <ul>
+                                <li>"Die zentrale These lautet..."</li>
+                                <li>"Der Autor vertritt die Position, dass..."</li>
+                                <li>"Kern der Argumentation ist die Behauptung..."</li>
+                            </ul>
+                        </div>
+
+                        <h4>Schritt 2: Argumentationsstrategie erkennen</h4>
+                        <p>Wie baut der Autor seine Argumentation auf?</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Strategie</th>
+                                <th>Beschreibung</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Induktiv</strong></td>
+                                <td>Von Beispielen zur allgemeinen Regel</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Deduktiv</strong></td>
+                                <td>Von der Regel zu konkreten Fällen</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Steigernd</strong></td>
+                                <td>Schwache zu starken Argumenten</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Antithetisch</strong></td>
+                                <td>These-Antithese-Synthese</td>
+                            </tr>
+                        </table>
+
+                        <h4>Schritt 3: Einzelargumente bewerten</h4>
+                        <p>Für jedes Argument prüfst du:</p>
+                        <ul>
+                            <li>Ist es logisch nachvollziehbar?</li>
+                            <li>Ist es ausreichend belegt?</li>
+                            <li>Berücksichtigt es Gegenargumente?</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <strong>Beispielanalyse:</strong> "Mustermannns erstes Argument stützt sich auf eine Studie der Universität München, die bei 500 Jugendlichen verminderte Konzentrationsfähigkeit nach intensiver Smartphone-Nutzung feststellte. Diese Studie ist methodisch solide, jedoch ist die Stichprobe möglicherweise zu klein, um generelle Aussagen über alle Jugendlichen zu treffen. Zudem wird nicht berücksichtigt, dass Konzentrationsschwächen auch andere Ursachen haben können."
+                        </div>
+
+                        <h3>Sprachanalyse</h3>
+
+                        <h4>Registeranalyse:</h4>
+                        <ul>
+                            <li>Fachsprache vs. Alltagssprache</li>
+                            <li>Formell vs. informell</li>
+                            <li>Objektiv vs. subjektiv</li>
+                        </ul>
+
+                        <h4>Rhetorische Mittel identifizieren:</h4>
+                        
+                        <div class="example-box">
+                            <strong>Metaphern und Vergleiche:</strong> "Der Autor spricht von einer 'digitalen Lawine', die über die Jugend hereinbreche. Diese Metapher suggeriert eine unkontrollierbare Naturgewalt und verstärkt den Eindruck einer bedrohlichen Entwicklung."
+                        </div>
+
+                        <div class="example-box">
+                            <strong>Rhetorische Fragen:</strong> "Mit der Frage 'Wollen wir eine Generation von Bildschirmzombies?' appelliert der Autor an die Ängste der Eltern und versucht, emotionale Zustimmung zu erzeugen, ohne ein sachliches Argument zu liefern."
+                        </div>
+
+                        <h3>Adressatenanalyse</h3>
+                        <p>An wen richtet sich der Text?</p>
+                        <ul>
+                            <li>Fachpublikum oder Laien?</li>
+                            <li>Welches Vorwissen wird vorausgesetzt?</li>
+                            <li>Welche Werte und Einstellungen werden angesprochen?</li>
+                        </ul>
+
+                        <h3>Gesamtbewertung</h3>
+                        <p>Zusammenfassende Einschätzung der Überzeugungskraft:</p>
+                        
+                        <div class="checklist">
+                            <h4>Bewertungskriterien:</h4>
+                            <ul>
+                                <li>Logische Konsistenz der Argumentation</li>
+                                <li>Qualität der Belege</li>
+                                <li>Berücksichtigung von Gegenargumenten</li>
+                                <li>Angemessenheit der Sprache</li>
+                                <li>Fairness in der Darstellung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 6 -->
+                <button class="accordion">6. Eigene Stellungnahme entwickeln</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Von der Analyse zur eigenen Position</h3>
+                        <p>Die Stellungnahme ist deine Chance, zu zeigen, dass du nicht nur den Text verstanden hast, sondern dir auch eine fundierte Meinung bilden kannst.</p>
+
+                        <h3>Argumentationstechniken</h3>
+
+                        <h4>Pro-Argumente für die Autorenposition</h4>
+                        <p>Welche Argumente des Autors sind besonders überzeugend?</p>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Mustermanns Verweis auf die neurobiologischen Studien ist insofern berechtigt, als tatsächlich nachgewiesen wurde, dass intensive Bildschirmnutzung die Aufmerksamkeitsspanne verkürzen kann. Die von ihm zitierten Langzeitstudien liefern hierfür empirische Evidenz."
+                        </div>
+
+                        <h4>Contra-Argumente und Kritikpunkte</h4>
+                        <p>Wo liegen Schwächen in der Argumentation?</p>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Problematisch ist jedoch Mustermanns pauschale Verurteilung aller digitalen Medien. Er unterscheidet nicht zwischen sinnvoller und sinnloser Nutzung und ignoriert Studien, die positive Effekte von digitalem Lernen belegen."
+                        </div>
+
+                        <h4>Eigene Argumente einbringen</h4>
+                        <p>Ergänze die Diskussion mit eigenen Gedanken.</p>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Darüber hinaus wäre zu bedenken, dass nicht die Technologie selbst das Problem ist, sondern der Umgang mit ihr. Anstatt digitale Medien generell zu verdammen, sollte die Diskussion über sinnvolle Nutzungsregeln und Medienkompetenz geführt werden."
+                        </div>
+
+                        <h3>Perspektivenwechsel</h3>
+                        <p>Betrachte das Thema aus verschiedenen Blickwinkeln:</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Perspektive</th>
+                                <th>Fragestellungen</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Individuell</strong></td>
+                                <td>Wie wirkt sich das Thema auf Einzelne aus?</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gesellschaftlich</strong></td>
+                                <td>Welche Auswirkungen hat es auf die Gemeinschaft?</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ethisch</strong></td>
+                                <td>Welche Werte und Normen sind betroffen?</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Zukunftsorientiert</strong></td>
+                                <td>Welche langfristigen Folgen sind zu erwarten?</td>
+                            </tr>
+                        </table>
+
+                        <h3>Abwägende Argumentation</h3>
+                        <p>Zeige, dass du verschiedene Aspekte berücksichtigst:</p>
+                        
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Einerseits ist Mustermanns Warnung vor exzessiver Nutzung berechtigt, da tatsächlich Suchtpotential besteht. Andererseits übersieht er die Chancen digitaler Bildung. Letztlich kommt es auf eine ausgewogene Betrachtung an, die sowohl Risiken als auch Potenziale berücksichtigt."
+                        </div>
+
+                        <h3>Eigene Position formulieren</h3>
+                        <p>Deine Schlussfolgerung sollte:</p>
+                        <ul>
+                            <li>Aus der Analyse hervorgehen</li>
+                            <li>Durch Argumente gestützt sein</li>
+                            <li>Differenziert und nachvollziehbar sein</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Zusammenfassend lässt sich sagen, dass Mustermann wichtige Probleme benennt, aber zu einseitig argumentiert. Digitale Medien sind weder ausschließlich schädlich noch uneingeschränkt positiv zu bewerten. Entscheidend ist ein reflektierter Umgang, der sowohl die Risiken minimiert als auch die Chancen nutzt."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 7 -->
+                <button class="accordion">7. Der überzeugende Schluss</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Aufgaben des Schlusses</h3>
+                        <ol>
+                            <li><strong>Zusammenfassen:</strong> Wichtigste Erkenntnisse bündeln</li>
+                            <li><strong>Abrunden:</strong> Gedankengang abschließen</li>
+                            <li><strong>Perspektive eröffnen:</strong> Weiterführende Gedanken anbieten</li>
+                        </ol>
+
+                        <h3>Drei-Sätze-Struktur</h3>
+
+                        <h4>Satz 1: Zusammenfassung</h4>
+                        <p>Fasse deine Hauptargumente knapp zusammen.</p>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Die Analyse hat gezeigt, dass Mustermanns Argumentation zwar auf valide Studien zurückgreift, aber durch pauschale Urteile und Einseitigkeit an Überzeugungskraft verliert."
+                        </div>
+
+                        <h4>Satz 2: Eigenes Fazit</h4>
+                        <p>Formuliere deine abschließende Bewertung.</p>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Insgesamt erscheint eine differenziertere Betrachtung notwendig, die sowohl die Risiken als auch die Bildungschancen digitaler Medien ernst nimmt."
+                        </div>
+
+                        <h4>Satz 3: Ausblick</h4>
+                        <p>Biete eine Perspektive über den Text hinaus.</p>
+                        <div class="example-box">
+                            <strong>Varianten:</strong>
+                            <ul>
+                                <li>"Die Diskussion wird weitergehen, insbesondere..."</li>
+                                <li>"Künftig sollte stärker berücksichtigt werden..."</li>
+                                <li>"Offen bleibt die Frage..."</li>
+                                <li>"Es wäre wünschenswert, wenn..."</li>
+                            </ul>
+                        </div>
+
+                        <h3>Häufige Schlussfehler vermeiden</h3>
+                        <div class="warning-box">
+                            <strong>Vermeide:</strong>
+                            <ul>
+                                <li><strong>Neue Argumente:</strong> Im Schluss nichts Neues einführen</li>
+                                <li><strong>Zu persönlich:</strong> "Ich hoffe, ich habe überzeugt"</li>
+                                <li><strong>Zu allgemein:</strong> "Das war alles zum Thema"</li>
+                                <li><strong>Unverbunden:</strong> Plötzlicher Themenwechsel</li>
+                                <li><strong>Zu lang:</strong> Ausufernde Wiederholungen</li>
+                            </ul>
+                        </div>
+
+                        <h3>Wirkungsvolle Schlusssätze</h3>
+                        <div class="example-box">
+                            <strong>Beispiele:</strong>
+                            <ul>
+                                <li>"Letztlich zeigt die Auseinandersetzung mit Mustermanns Text, dass..."</li>
+                                <li>"Die Komplexität des Themas erfordert..."</li>
+                                <li>"Abschließend lässt sich festhalten, dass..."</li>
+                                <li>"Die Diskussion um... wird uns weiter beschäftigen, denn..."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 8 -->
+                <button class="accordion">8. Formulierungshilfen und sprachliche Qualität</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Übergänge und Verknüpfungen</h3>
+                        <p>Geschickte Übergänge machen deinen Text flüssig und leicht lesbar.</p>
+
+                        <h4>Für die Textanalyse:</h4>
+                        <div class="example-box">
+                            <ul>
+                                <li>"Der Autor stützt seine These durch..."</li>
+                                <li>"Als weiteres Argument führt er an..."</li>
+                                <li>"Rhetorisch setzt der Verfasser auf..."</li>
+                                <li>"Sprachlich fällt auf, dass..."</li>
+                                <li>"Die Argumentation wird gestützt durch..."</li>
+                            </ul>
+                        </div>
+
+                        <h4>Für die Stellungnahme:</h4>
+                        <div class="example-box">
+                            <ul>
+                                <li>"Dieser Einschätzung ist zuzustimmen, weil..."</li>
+                                <li>"Kritisch zu hinterfragen ist jedoch..."</li>
+                                <li>"Ein gewichtiger Einwand gegen diese Position wäre..."</li>
+                                <li>"Ergänzend ist zu bedenken, dass..."</li>
+                                <li>"Aus meiner Sicht übersieht der Autor..."</li>
+                            </ul>
+                        </div>
+
+                        <h4>Abwägende Formulierungen:</h4>
+                        <div class="example-box">
+                            <ul>
+                                <li>"Einerseits... andererseits..."</li>
+                                <li>"Während... muss jedoch berücksichtigt werden..."</li>
+                                <li>"Zwar..., dennoch..."</li>
+                                <li>"Trotz... bleibt festzuhalten..."</li>
+                                <li>"Wenngleich..., so ist doch..."</li>
+                            </ul>
+                        </div>
+
+                        <h3>Wissenschaftliches Schreiben</h3>
+                        <p>Deine Erörterung sollte sachlich und präzise formuliert sein.</p>
+
+                        <h4>Vermeide umgangssprachliche Ausdrücke:</h4>
+                        <table>
+                            <tr>
+                                <th>Statt</th>
+                                <th>Besser</th>
+                            </tr>
+                            <tr>
+                                <td>total krass</td>
+                                <td>äußerst bemerkenswert</td>
+                            </tr>
+                            <tr>
+                                <td>Der Autor meint</td>
+                                <td>Der Autor argumentiert/vertritt die These</td>
+                            </tr>
+                            <tr>
+                                <td>Das ist nicht so gut</td>
+                                <td>Dies erweist sich als problematisch</td>
+                            </tr>
+                            <tr>
+                                <td>voll richtig</td>
+                                <td>durchaus zutreffend</td>
+                            </tr>
+                        </table>
+
+                        <h3>Tempus und Modus</h3>
+                        <div class="tip-box">
+                            <strong>Grundregel:</strong>
+                            <ul>
+                                <li><strong>Präsens:</strong> Für die Textanalyse ("Der Autor argumentiert...")</li>
+                                <li><strong>Konjunktiv I:</strong> Für indirekte Rede ("Der Autor behauptet, dass soziale Medien schädlich seien")</li>
+                                <li><strong>Präsens:</strong> Für eigene Stellungnahme ("Diese Argumentation überzeugt nicht")</li>
+                            </ul>
+                        </div>
+
+                        <h3>Satzlänge und Klarheit</h3>
+                        <ul>
+                            <li>Verwende Haupt- und Nebensätze abwechselnd</li>
+                            <li>Vermeide zu lange Schachtelsätze</li>
+                            <li>Ein Gedanke pro Satz</li>
+                            <li>Aktiv statt Passiv (wo möglich)</li>
+                        </ul>
+
+                        <div class="warning-box">
+                            <strong>Häufige Sprachfehler:</strong>
+                            <ul>
+                                <li><strong>Modalverben übernutzen:</strong> "könnte, sollte, würde" sparsam verwenden</li>
+                                <li><strong>Füllwörter:</strong> "eigentlich, irgendwie, halt" vermeiden</li>
+                                <li><strong>Wiederholungen:</strong> Synonyme verwenden für Abwechslung</li>
+                                <li><strong>Nominalstil:</strong> Nicht alles zu Hauptwörtern machen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 9 -->
+                <button class="accordion">9. Musterlösung: Komplette Erörterung</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Aufgabenstellung</h3>
+                        <div class="example-box">
+                            <strong>Text:</strong> "Smartphones machen dumm" von Dr. Lisa Weber (Kommentar in der Süddeutschen Zeitung, März 2024)<br><br>
+                            <strong>Aufgabe:</strong> Analysieren Sie Dr. Webers Argumentation und nehmen Sie zu ihrer These kritisch Stellung. (550-600 Wörter)
+                        </div>
+
+                        <h3>Musterlösung</h3>
+                        <div class="success-box">
+                            <h4>Einleitung (95 Wörter)</h4>
+                            <p>Die zunehmende Digitalisierung des Alltags wirft immer wieder die Frage nach den Auswirkungen moderner Technologien auf unsere geistigen Fähigkeiten auf. Dr. Lisa Weber behandelt in ihrem Kommentar "Smartphones machen dumm" (Süddeutsche Zeitung, März 2024) die umstrittene These, dass intensive Smartphone-Nutzung die kognitiven Fähigkeiten von Jugendlichen nachhaltig beeinträchtigt. Dabei stützt sie sich hauptsächlich auf neurowissenschaftliche Studien und warnt vor einer "Generation der permanent Abgelenkten". Die Überzeugungskraft dieser zugespitzten Position und ihre wissenschaftliche Fundierung gilt es kritisch zu hinterfragen.</p>
+
+                            <h4>Hauptteil A: Textanalyse (175 Wörter)</h4>
+                            <p>Weber entwickelt ihre Argumentation systematisch von allgemeinen Beobachtungen zu konkreten wissenschaftlichen Belegen. Zunächst schildert sie alltägliche Szenen überforderter Jugendlicher, um dann ihre zentrale These durch neurobiologische Studien zu untermauern. Als Hauptargument führt sie eine Langzeitstudie der Universität Stanford an, die bei intensiven Smartphone-Nutzern verminderte Konzentrationsfähigkeit und schwächere Gedächtnisleistungen dokumentiert.</p>
+                            
+                            <p>Rhetorisch setzt die Autorin auf emotionale Ansprache: Mit Begriffen wie "digitale Demenz" und "Aufmerksamkeits-Kollaps" erzeugt sie Dramatik und appelliert an die Sorgen der Eltern. Gleichzeitig verleiht sie ihrer Argumentation durch den Verweis auf wissenschaftliche Autorität Glaubwürdigkeit. Sprachlich bewegt sich Weber zwischen sachlicher Darstellung der Studien und wertender Kommentierung, wobei ihre ablehnende Haltung gegenüber intensiver Smartphone-Nutzung deutlich wird. Die Struktur ist klar nachvollziehbar, allerdings berücksichtigt sie kaum Gegenargumente oder differenzierende Aspekte.</p>
+
+                            <h4>Hauptteil B: Stellungnahme (220 Wörter)</h4>
+                            <p>Webers Verweis auf neurobiologische Forschung ist durchaus berechtigt, da tatsächlich nachgewiesen wurde, dass exzessive Bildschirmnutzung Aufmerksamkeitsspannen verkürzen kann. Die Stanford-Studie ist methodisch solide und liefert empirische Evidenz für negative Auswirkungen intensiver Smartphone-Nutzung. Besonders überzeugend ist ihr Hinweis auf die Plastizität des Gehirns, die sowohl positive als auch negative Veränderungen ermöglicht.</p>
+                            
+                            <p>Problematisch ist jedoch Webers pauschale Verurteilung aller digitalen Medien. Sie unterscheidet nicht zwischen sinnvoller und problematischer Nutzung und ignoriert Studien, die positive Effekte von digitalen Lerntools belegen. Zudem übersieht sie, dass Konzentrationsschwächen auch andere Ursachen haben können – von Schlafmangel bis zu gesellschaftlichem Druck.</p>
+                            
+                            <p>Darüber hinaus wäre zu bedenken, dass nicht die Technologie selbst das Problem darstellt, sondern der Umgang mit ihr. Anstatt Smartphones generell zu verteufeln, sollte die Diskussion über Medienkompetenz und sinnvolle Nutzungsregeln geführt werden. Digitale Medien bieten auch Chancen für individualisiertes Lernen und kreative Ausdrucksformen, die Weber völlig ausblendet.</p>
+
+                            <h4>Schluss (110 Wörter)</h4>
+                            <p>Die Analyse zeigt, dass Weber wichtige Probleme benennt und sich auf valide wissenschaftliche Studien stützt, jedoch durch ihre einseitige Darstellung an Überzeugungskraft verliert. Ihre dramatisierenden Formulierungen verstärken zwar die emotionale Wirkung, schaden aber der sachlichen Diskussion.</p>
+                            
+                            <p>Insgesamt erscheint eine differenziertere Betrachtung notwendig, die sowohl Risiken als auch Potenziale digitaler Medien ernst nimmt. Statt pauschaler Verdammung braucht es einen reflektierten Umgang, der die Vorteile nutzt und die Gefahren minimiert. Die Diskussion um den Einfluss digitaler Medien wird uns weiter beschäftigen, denn sie berührt grundlegende Fragen unserer sich wandelnden Gesellschaft.</p>
+                        </div>
+
+                        <h3>Bewertung der Musterlösung</h3>
+                        <div class="checklist">
+                            <h4>Stärken:</h4>
+                            <ul>
+                                <li>✓ Klare Struktur und richtige Proportionen</li>
+                                <li>✓ Vollständige Textangabe</li>
+                                <li>✓ Systematische Argumentationsanalyse</li>
+                                <li>✓ Ausgewogene Pro-/Contra-Betrachtung</li>
+                                <li>✓ Eigene Position mit Begründung</li>
+                                <li>✓ Angemessene Sprache</li>
+                                <li>✓ Gelungener Bezug zur Gegenwart</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kapitel 10 -->
+                <button class="accordion">10. Häufige Fehler und wie du sie vermeidest</button>
+                <div class="panel">
+                    <div class="section-inner">
+                        <h3>Die größten Stolperfallen</h3>
+
+                        <h4>1. Inhaltsangabe statt Erörterung</h4>
+                        <div class="warning-box">
+                            <strong>Falsch:</strong> "Der Autor sagt, dass Smartphones schlecht sind. Dann erklärt er, warum sie schlecht sind. Zum Schluss meint er, dass man sie nicht benutzen soll."<br><br>
+                            <strong>Richtig:</strong> "Der Autor argumentiert mit neurobiologischen Studien überzeugend, übersieht jedoch die positiven Aspekte digitaler Medien..."
+                        </div>
+
+                        <h4>2. Fehlende eigene Position</h4>
+                        <div class="warning-box">
+                            <strong>Problem:</strong> Nur Zusammenfassung der Autorenposition ohne eigene Stellungnahme<br><br>
+                            <strong>Lösung:</strong> Eigene Argumente entwickeln und begründet Position beziehen
+                        </div>
+
+                        <h4>3. Unwissenschaftliche Sprache</h4>
+                        <table>
+                            <tr>
+                                <th>Problematisch</th>
+                                <th>Besser</th>
+                            </tr>
+                            <tr>
+                                <td>"Ich finde..."</td>
+                                <td>"Die Argumentation erweist sich als..."</td>
+                            </tr>
+                            <tr>
+                                <td>"Das ist Blödsinn"</td>
+                                <td>"Diese Position ist nicht haltbar"</td>
+                            </tr>
+                            <tr>
+                                <td>"Alle wissen, dass..."</td>
+                                <td>"Studien belegen, dass..."</td>
+                            </tr>
+                        </table>
+
+                        <h4>4. Strukturprobleme</h4>
+                        <div class="warning-box">
+                            <strong>Häufige Fehler:</strong>
+                            <ul>
+                                <li>Zu lange Einleitung (über 100 Wörter)</li>
+                                <li>Vermischung von Analyse und Stellungnahme</li>
+                                <li>Fehlende Übergänge zwischen Absätzen</li>
+                                <li>Zu kurzer oder fehlender Schluss</li>
+                            </ul>
+                        </div>
+
+                        <h4>5. Oberflächliche Argumentation</h4>
+                        <div class="warning-box">
+                            <strong>Problem:</strong> "Der Autor hat recht, weil ich das auch so sehe."<br><br>
+                            <strong>Lösung:</strong> Argumente mit Beispielen, Studien oder logischen Schlüssen belegen
+                        </div>
+
+                        <h3>Checkliste für die Selbstkorrektur</h3>
+                        <div class="checklist">
+                            <h4>Vor der Abgabe prüfen:</h4>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check1">
+                                <label for="check1">Vollständige Textangabe in der Einleitung</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check2">
+                                <label for="check2">Klare Trennung zwischen Analyse und Stellungnahme</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check3">
+                                <label for="check3">Mindestens 3 konkrete Argumente in der Stellungnahme</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check4">
+                                <label for="check4">Eigene Position klar formuliert</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check5">
+                                <label for="check5">Angemessene Sprache ohne Umgangssprache</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check6">
+                                <label for="check6">Richtige Wortanzahl (550-600 Wörter)</label>
+                            </div>
+                            <div class="checklist-item">
+                                <input type="checkbox" id="check7">
+                                <label for="check7">Rechtschreibung und Grammatik überprüft</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h3>📚 Zusammenfassung</h3>
+                    <p>Eine gelungene textgebundene Erörterung verbindet analytisches Denken mit argumentativer Kompetenz. Du zeigst, dass du einen Text nicht nur verstehst, sondern auch kritisch bewerten und eine eigene, begründete Position entwickeln kannst. Mit der systematischen Herangehensweise aus diesem Handbuch bist du bestens für die nächste Schularbeit gerüstet!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Verbesserte Browser-kompatible JavaScript-Funktionen
+        document.addEventListener('DOMContentLoaded', function() {
+            // Alle Accordion-Buttons finden
+            var accordions = document.querySelectorAll('.accordion');
+            
+            // Event-Listener für jeden Accordion-Button hinzufügen
+            for (var i = 0; i < accordions.length; i++) {
+                accordions[i].addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    // Active-Klasse für das geklickte Accordion togglen
+                    this.classList.toggle('active');
+                    
+                    // Das nächste Element (Panel) finden und togglen
+                    var panel = this.nextElementSibling;
+                    if (panel && panel.classList.contains('panel')) {
+                        panel.classList.toggle('active');
+                    }
+                });
+            }
+        });
+
+        // Funktion zum Auf-/Zuklappen aller Panels
+        function toggleAll() {
+            var accordions = document.querySelectorAll('.accordion');
+            var panels = document.querySelectorAll('.panel');
+            var button = document.querySelector('.expand-all-btn');
+            
+            // Prüfen, ob alle Panels geöffnet sind
+            var allOpen = true;
+            for (var i = 0; i < panels.length; i++) {
+                if (!panels[i].classList.contains('active')) {
+                    allOpen = false;
+                    break;
+                }
+            }
+            
+            // Alle Panels entsprechend auf- oder zuklappen
+            for (var i = 0; i < accordions.length; i++) {
+                if (allOpen) {
+                    accordions[i].classList.remove('active');
+                    panels[i].classList.remove('active');
+                } else {
+                    accordions[i].classList.add('active');
+                    panels[i].classList.add('active');
+                }
+            }
+            
+            // Button-Text ändern
+            if (button) {
+                button.textContent = allOpen ? 'Alle Kapitel aufklappen' : 'Alle Kapitel zuklappen';
+            }
+        }
+
+        // Hilfsfunktion für ältere Browser (IE-Kompatibilität)
+        if (!Element.prototype.matches) {
+            Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+        }
+
+        // Polyfill für classList bei älteren Browsern
+        if (!("classList" in document.documentElement)) {
+            Object.defineProperty(HTMLElement.prototype, 'classList', {
+                get: function() {
+                    var self = this;
+                    function update(fn) {
+                        return function(value) {
+                            var classes = self.className.split(/\s+/g),
+                                index = classes.indexOf(value);
+                            fn(classes, index, value);
+                            self.className = classes.join(" ");
+                        }
+                    }
+                    return {
+                        add: update(function(classes, index, value) {
+                            if (!~index) classes.push(value);
+                        }),
+                        remove: update(function(classes, index) {
+                            if (~index) classes.splice(index, 1);
+                        }),
+                        toggle: update(function(classes, index, value) {
+                            if (~index)
+                                classes.splice(index, 1);
+                            else
+                                classes.push(value);
+                        }),
+                        contains: function(value) {
+                            return !!~self.className.split(/\s+/g).indexOf(value);
+                        },
+                        item: function(i) {
+                            return self.className.split(/\s+/g)[i] || null;
+                        }
+                    };
+                }
+            });
+        }
+    </script>
+</body>
+</html>
