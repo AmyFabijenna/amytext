@@ -105,7 +105,7 @@
             margin-bottom: 15px;
         }
 
-        .toggle-solution {
+        .solution-toggle {
             background: #34495e;
             color: white;
             border: none;
@@ -116,11 +116,11 @@
             transition: background-color 0.2s;
         }
 
-        .toggle-solution:hover {
+        .solution-toggle:hover {
             background: #2c3e50;
         }
 
-        .solution-box {
+        .solution {
             background: #d4edda;
             padding: 15px;
             border-radius: 5px;
@@ -536,8 +536,8 @@
             <li>"Die Sonne brannte erbarmungslos auf das staubige Dorf nieder. Alte Männer saßen im Schatten des Cafés und beobachteten das seltene Spektakel eines vorbeifahrenden Autos."</li>
             <li>"Was ist schon Normalität? Vielleicht nichts als eine bequeme Fiktion, mit der wir die chaotische Vielfalt der Welt in erträgliche Bahnen lenken."</li>
         </ol>
-        <button class="toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
+        <button class="solution-toggle">Lösung anzeigen</button>
+        <div class="solution">
             <p><strong>Lösungen:</strong></p>
             <ol>
                 <li>Kommentar (rhetorische Frage, aktuelle Debatte, appellativer Charakter)</li>
@@ -553,8 +553,8 @@
         <div class="example-box">
             <p>"Es ist schon erstaunlich: Da wird monatelang über die Einführung neuer Parkgebühren diskutiert, Beratungen über Beratungen, Expertengutachten ohne Ende. Und was kommt dabei heraus? Eine Lösung, die niemanden zufriedenstellt und die voraussichtlich mehr Verwaltungskosten verursacht, als sie einbringen wird. Da fragt man sich doch: Haben die das eigentlich selbst geglaubt?"</p>
         </div>
-        <button class="toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
+        <button class="solution-toggle">Lösung anzeigen</button>
+        <div class="solution">
             <p><strong>Lösung:</strong></p>
             <p>Der Textausschnitt stammt aus einer Glosse. Typische Merkmale:</p>
             <ol>
@@ -570,33 +570,5 @@
     <div class="tip-box">
         <p><strong>Tipp für die Matura:</strong> Achte bei der Textsortenbestimmung nicht nur auf inhaltliche Merkmale, sondern auch auf sprachliche Besonderheiten und die erkennbare Absicht des Autors. Oft gibt bereits der erste Satz Aufschluss über die Textsorte.</p>
     </div>
-
-    <script>
-        // Event-Listener für die Toggle-Buttons der Lösungen
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleButtons = document.querySelectorAll('.toggle-solution');
-            
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const solutionBox = this.nextElementSibling;
-                    if (solutionBox && solutionBox.classList.contains('solution-box')) {
-                        solutionBox.style.display = solutionBox.style.display === 'block' ? 'none' : 'block';
-                        this.textContent = solutionBox.style.display === 'block' ? 'Lösung ausblenden' : 'Lösung anzeigen';
-                    }
-                });
-            });
-            
-            // Setze alle Accordions standardmäßig auf geschlossen
-            const panels = document.querySelectorAll('.panel');
-            panels.forEach(panel => {
-                panel.classList.remove('active');
-            });
-            
-            const headers = document.querySelectorAll('.accordion-header');
-            headers.forEach(header => {
-                header.classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>

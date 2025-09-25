@@ -157,11 +157,6 @@
 </head>
 <body>
     <div class="content-body">
-        <div class="welcome-section">
-            <h2>Übungsaufgaben für die Deutschmatura</h2>
-            <p>Vielfältige Übungen zu allen prüfungsrelevanten Themenbereichen</p>
-        </div>
-
         <button type="button" class="btn-toggle-all">Alle Lösungen öffnen/schließen</button>
 
         <div class="exercise-section">
@@ -292,7 +287,8 @@
                 <div class="exercise-content">
                     <p>Verfasse eine kurze Beschreibung (etwa 150 Wörter) eines Gewitters, in der du mindestens fünf verschiedene Stilmittel verwendest. Markiere anschließend die verwendeten Stilmittel und erkläre ihre Wirkung.</p>
                     <div class="solution-area">
-                        <p><em>Hier deinen Text schreiben...</em></p>
+                        <textarea id="gewitterText" placeholder="Hier deinen Text schreiben..." style="width: 100%; height: 150px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: inherit; resize: vertical;"></textarea>
+                        <button onclick="downloadText()" style="margin-top: 10px; background: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">📝 Text als TXT speichern</button>
                     </div>
                 </div>
                 <div class="accordion">
@@ -373,9 +369,144 @@
                 </div>
             </div>
         </div>
+
+        <div class="exercise-section">
+            <h2>Moderne Texte analysieren</h2>
+            
+            <div class="exercise-card">
+                <div class="exercise-meta">
+                    <span class="difficulty-badge medium" style="background: #ffeaa7; color: #d63031;">Mittel+</span>
+                    <span class="time-estimate">⏱️ 25 Minuten</span>
+                </div>
+                <h3 class="exercise-title">Übung 6: Stilmittel in einer Kolumne (Daniel Glattauer)</h3>
+                <div class="exercise-content">
+                    <p>Analysiere die folgende Kolumne von Daniel Glattauer aus "Kolumnen aus dem Alltag" auf verwendete Stilmittel:</p>
+                    <blockquote>
+                        <h4 style="text-align: center; margin-bottom: 15px;">Hundertmal gesagt</h4>
+                        <p>Julia R., Mutter der 14-jährigen Lara, empfiehlt uns, hier einmal zu hinterfragen, wie pädagogisch sinnvoll die stereotype Wiederholung ein und desselben unausgeführten Befehls ist. Ständig wird ja behauptet: »Das kann man gar nicht oft genug sagen.« Stimmt das? Oder hat man damit nicht bereits unterschwellig eingestanden, wie genug oft man es schon gesagt hat und wie wirkungslos es geblieben ist?</p>
+                        <p>Seit Generationen äußerst beliebt bei Eltern und Lehrern: »Habe ich dir nicht schon hundertmal gesagt, du sollst (…)?« – Naheliegende Antwort: »Ja, hundert könnte hinkommen.« Oder: »Ich weiß es nicht, ich hab nicht mitgezählt.« Unverbesserliche Pädagogen probieren es gar mit der Frage: »Wie oft soll ich dir noch sagen, du sollst (…)?« – Kinder verhalten sich in solchen Situationen eher diplomatisch und schweigen. Ehrlich wäre: »Sooft du willst, mir ist es egal, ich höre es ohnehin nicht mehr.«</p>
+                        <p>Julia R. unlängst zu ihrer Tochter: »Wie oft muss ich dir noch sagen, dass du die Schuhe wegräumen sollst?« – Tochter Lara: »Mama, hab ich dir nicht schon hundertmal gesagt: Du brauchst es überhaupt nicht mehr zu sagen. Ich muss von selbst draufkommen.«</p>
+                    </blockquote>
+                    <p>Arbeitsaufträge:</p>
+                    <ol>
+                        <li>Identifiziere mindestens 6 verschiedene Stilmittel</li>
+                        <li>Erkläre ihre jeweilige Wirkung im Kontext</li>
+                        <li>Analysiere den Humor und die Ironie des Textes</li>
+                        <li>Beschreibe den Schreibstil Glattauers</li>
+                    </ol>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Lösungsvorschlag anzeigen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p><strong>Lösungsvorschlag:</strong></p>
+                        <p><strong>1. Identifizierte Stilmittel:</strong></p>
+                        <ul>
+                            <li><strong>Rhetorische Fragen:</strong> "Stimmt das?", "Wie oft soll ich dir noch sagen..." - Regen zum Nachdenken an, wirken dialogisch</li>
+                            <li><strong>Wiederholung/Anapher:</strong> "hundertmal gesagt", "hundert könnte hinkommen" - Verstärkt das Thema der sinnlosen Wiederholung</li>
+                            <li><strong>Ironie:</strong> "äußerst beliebt bei Eltern", "Unverbesserliche Pädagogen" - Entlarvt die Widersprüche im Erziehungsverhalten</li>
+                            <li><strong>Alliteration:</strong> "sinnvoll die stereotype", "sooft du willst" - Schafft Rhythmus und Eindringlichkeit</li>
+                            <li><strong>Parenthese:</strong> "(…)" - Zeigt die Austauschbarkeit der Inhalte, Universalität des Problems</li>
+                            <li><strong>Antithese:</strong> Gegensatz zwischen pädagogischem Anspruch und tatsächlicher Wirkungslosigkeit</li>
+                            <li><strong>Klimax:</strong> Steigerung von der allgemeinen Beobachtung zum konkreten Beispiel</li>
+                            <li><strong>Wortneuschöpfung:</strong> "Unverbesserliche Pädagogen" - Humorvolle Charakterisierung</li>
+                        </ul>
+                        
+                        <p><strong>2. Wirkung der Stilmittel:</strong><br>
+                        Die rhetorischen Fragen schaffen eine dialogische Atmosphäre und beziehen den Leser aktiv ein. Die Wiederholungen verstärken ironisch das Thema der sinnlosen Repetition. Die Ironie entlarvt schonungslos die Widersprüche im Erziehungsalltag.</p>
+                        
+                        <p><strong>3. Humor und Ironie:</strong><br>
+                        Glattauer nutzt situative Ironie: Eltern beklagen die Wirkungslosigkeit ihrer Ermahnungen, wiederholen aber genau dasselbe Verhalten. Der Höhepunkt ist Laras schlagfertige Antwort, die die elterliche Logik gegen sie selbst wendet. Der Humor entsteht durch Wiedererkennung - jeder kennt solche Situationen.</p>
+                        
+                        <p><strong>4. Schreibstil Glattauers:</strong><br>
+                        Glattauer schreibt alltagsnah und beobachtungsscharf. Er nutzt einen analytischen, aber humorvollen Ton. Seine Stärke liegt darin, universelle menschliche Schwächen liebevoll zu entlarven, ohne zu verurteilen. Der Stil ist journalistisch präzise, aber literarisch ausgefeilt.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="exercise-card">
+                <div class="exercise-meta">
+                    <span class="difficulty-badge medium" style="background: #ffeaa7; color: #d63031;">Mittel+</span>
+                    <span class="time-estimate">⏱️ 30 Minuten</span>
+                </div>
+                <h3 class="exercise-title">Übung 7: Sprachkritik und Stilmittel (Daniel Glattauer)</h3>
+                <div class="exercise-content">
+                    <p>Analysiere die folgende Kolumne von Daniel Glattauer aus "Kolumnen aus dem Alltag" auf sprachliche Mittel und gesellschaftskritische Aspekte:</p>
+                    <blockquote>
+                        <h4 style="text-align: center; margin-bottom: 15px;">Okay</h4>
+                        <p>Wie viele »Okay« pro Stunde verträgt die Gesellschaft? »Okay« begnügt sich nämlich längst nicht mehr damit, das bekannteste Wort der Welt zu sein. Zusätzlich ist es seit fünfzig Jahren in Mode. Innerhalb seiner Langzeitpopularität erlebt es abwechselnd Kult- und Boom-Phasen. Und innerhalb so eines Booms bricht es im deutschsprachigen Raum gerade in alle Bedeutungsrichtungen aus.</p>
+                        <p>Es gibt praktisch keine Bemerkungen mehr, die nicht mit »Okay« erwidert werden können (außer jene, die wirklich absolut nicht okay sind). Dabei sollte »Okay« eigentlich nur »in Ordnung« heißen, »einverstanden« ersetzen und »gut so« vertreten.</p>
+                        <p>»Okay« ist aber mittlerweile auch zum Ersatz für folgende Botschaften gereift: Ich habe dir zugehört. Ich tue so, als hätte ich dir zugehört. Ich habe zu Kenntnis genommen, dass du eine Sprechpause eingelegt hast. Ich habe in solchen Fällen früher immer »mhm« gemurmel, nun erkläre ich mich unter Protest bereit, die Lippen zu öffnen. Ich bin mit dem Gesagten einverstanden oder nicht einverstanden, will mich aber (noch) nicht festlegen. Ich verstehe dich trotz schlechten Empfangs. Ich habe dazu nichts zu sagen. Reg dich nicht so auf!</p>
+                    </blockquote>
+                    <p>Arbeitsaufträge:</p>
+                    <ol>
+                        <li>Identifiziere und analysiere die verwendeten Stilmittel</li>
+                        <li>Untersuche die rhetorischen Strategien des Autors</li>
+                        <li>Analysiere die gesellschaftskritische Dimension</li>
+                        <li>Bewerte die Argumentation und den Schreibstil</li>
+                        <li>Vergleiche den Text mit der vorherigen Kolumne "Hundertmal gesagt"</li>
+                    </ol>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Lösungsvorschlag anzeigen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p><strong>Lösungsvorschlag:</strong></p>
+                        
+                        <p><strong>1. Stilmittel und ihre Analyse:</strong></p>
+                        <ul>
+                            <li><strong>Rhetorische Frage:</strong> "Wie viele »Okay« pro Stunde verträgt die Gesellschaft?" - Provokanter Einstieg, regt zum Nachdenken an</li>
+                            <li><strong>Personifikation:</strong> "»Okay« begnügt sich nicht mehr", "es bricht aus" - Das Wort wird als handelndes Subjekt dargestellt</li>
+                            <li><strong>Metapher:</strong> "Kult- und Boom-Phasen", "bricht in alle Bedeutungsrichtungen aus" - Veranschaulicht die Ausbreitung des Wortes</li>
+                            <li><strong>Ironie:</strong> "das bekannteste Wort der Welt" - Übertreibung zur Verdeutlichung der Omnipräsenz</li>
+                            <li><strong>Paradox:</strong> "einverstanden oder nicht einverstanden" - Zeigt die Widersprüchlichkeit der Wortverwendung</li>
+                            <li><strong>Aufzählung/Klimax:</strong> Die lange Liste der Bedeutungen steigert sich zur Verdeutlichung der Beliebigkeit</li>
+                            <li><strong>Parenthese:</strong> "(außer jene, die wirklich absolut nicht okay sind)" - Ironische Einschränkung</li>
+                            <li><strong>Alliteration:</strong> "Bedeutungsrichtungen aus", "Boom bricht" - Rhythmische Verstärkung</li>
+                        </ul>
+                        
+                        <p><strong>2. Rhetorische Strategien:</strong><br>
+                        Glattauer verwendet eine analytisch-humorvolle Herangehensweise. Er beginnt mit einer provokativen Frage, führt eine scheinbar sachliche Analyse durch und entlarvt dann die Absurdität des Phänomens durch eine übertriebene Auflistung. Die Strategie ist entlarvend, aber nicht anklagend.</p>
+                        
+                        <p><strong>3. Gesellschaftskritische Dimension:</strong><br>
+                        Der Text kritisiert die sprachliche Verarmung und Oberflächlichkeit moderner Kommunikation. "Okay" wird zum Symbol für Bequemlichkeit, Unverbindlichkeit und mangelnde Präzision im zwischenmenschlichen Austausch. Glattauer zeigt, wie ein Wort zur universellen Floskel degeneriert.</p>
+                        
+                        <p><strong>4. Bewertung der Argumentation:</strong><br>
+                        Die Argumentation ist überzeugend, weil sie vom Konkreten (einem Wort) zum Allgemeinen (Kommunikationsverhalten) führt. Der humorvolle Ton macht die Kritik zugänglich, ohne belehrend zu wirken. Die Beispielsammlung am Ende ist besonders wirkungsvoll.</p>
+                        
+                        <p><strong>5. Vergleich mit "Hundertmal gesagt":</strong><br>
+                        Beide Texte kritisieren kommunikative Gewohnheiten, aber unterschiedlich: "Hundertmal gesagt" fokussiert auf die Wirkungslosigkeit von Wiederholungen in der Erziehung, "Okay" auf die Bedeutungslosigkeit eines überstrapzierten Universalwortes. Beide nutzen Ironie und konkrete Beispiele, "Okay" ist aber sprachkritischer, "Hundertmal gesagt" pädagogisch orientiert.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Download-Funktion für den Textbereich
+        function downloadText() {
+            const text = document.getElementById('gewitterText').value;
+            if (text.trim() === '') {
+                alert('Bitte schreiben Sie erst einen Text, bevor Sie ihn speichern.');
+                return;
+            }
+            
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'gewitter-beschreibung.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
         // Accordion-Funktionalität
         document.addEventListener('DOMContentLoaded', function() {
             const accordionHeaders = document.querySelectorAll('.accordion-header');

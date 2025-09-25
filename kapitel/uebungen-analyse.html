@@ -1,335 +1,1477 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textanalyse Übungen - Deutschmatura</title>
-    <style>
-        .section {
-            margin-bottom: 40px;
-        }
+               
 
-        .section-title {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
 
-        .exercise-box {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 4px solid #34495e;
-        }
 
-        .exercise-title {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
+<div class="welcome-section">
+    <h2>Textanalyse-Übungen für die Deutschmatura</h2>
+    <p>Umfassende Übungen zur Textanalyse verschiedener Textsorten - vom ersten Textverständnis bis zur perfekten Matura-Analyse</p>
+</div>
 
-        .text-example {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border-left: 3px solid #3498db;
-        }
+<button type="button" class="btn-toggle-all">Alle Übungsbereiche öffnen/schließen</button>
 
-        .text-source {
-            font-style: italic;
-            color: #666;
-            margin-bottom: 10px;
-        }
+<!-- ================ GRUNDLAGEN DER TEXTANALYSE ================ -->
 
-        .requirements {
-            background: #e8f4f8;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-
-        .requirements h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .toggle-solution {
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .toggle-solution:hover {
-            background: #2c3e50;
-        }
-
-        .solution-box {
-            display: none;
-            background: #d4edda;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            border-left: 4px solid #28a745;
-        }
-
-        .solution-title {
-            color: #155724;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .btn-toggle-all {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 1em;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .btn-toggle-all:hover {
-            background: #2980b9;
-        }
-
-        /* Accordion Styles - Standardisiert */
-        .accordion-header {
-            background: #34495e;
-            color: white;
-            padding: 15px;
-            cursor: pointer;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 1.1em;
-            transition: 0.4s;
-            margin: 5px 0;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion-header:hover {
-            background: #2c3e50;
-        }
-
-        .accordion-header.active {
-            background: #2980b9;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .accordion-icon {
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-
-        .accordion-header.active .accordion-icon {
-            transform: rotate(45deg);
-        }
-
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            border-radius: 0 0 5px 5px;
-        }
-
-        .panel.active {
-            max-height: 5000px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-top: none;
-        }
-    </style>
-</head>
-<body>
-    <h2>Textanalyse Übungen</h2>
-    <p>Praktische Übungen zur Vorbereitung auf die Textanalyse in der Deutschmatura</p>
-
-    <button type="button" class="btn-toggle-all">Alle Lösungen öffnen/schließen</button>
-
-    <div class="section">
-        <h2 class="section-title">Übungen zur Textanalyse</h2>
-        <p>Diese Seite bietet Ihnen umfangreiche Übungsmöglichkeiten zur Textanalyse. Die Übungen sind nach Schwierigkeitsgrad geordnet und decken verschiedene Textsorten ab.</p>
-    </div>
-
-    <div class="accordion-header active">
-        <span>Einfache Übungen</span>
-        <span class="accordion-icon">+</span>
-    </div>
-    <div class="panel active">
-        <div class="exercise-box">
-            <h3 class="exercise-title">Übung 1: Stilmittel erkennen</h3>
-            <div class="text-example">
-                <div class="text-source">Textauszug aus einem Kommentar:</div>
-                <p>"Die Digitalisierung schreitet mit Siebenmeilenstiefeln voran und hinterlässt eine Schneise der Veränderung in unserer Gesellschaft. Sie ist ein zweischneidiges Schwert: Einerseits eröffnet sie ungeahnte Möglichkeiten, andererseits stellt sie uns vor gewaltige Herausforderungen. Die Politik scheint wie gelähmt angesichts dieser rasanten Entwicklung."</p>
-            </div>
-            
-            <div class="requirements">
-                <h4>Aufgabenstellung:</h4>
-                <ol>
-                    <li>Identifiziere drei verschiedene sprachliche Mittel im Text</li>
-                    <li>Erkläre die Wirkung jedes Stilmittels</li>
-                    <li>Formuliere, welche Absicht der Autor mit diesen Mitteln verfolgen könnte</li>
-                </ol>
-            </div>
-            
-            <button class="toggle-solution">Lösung anzeigen</button>
-            <div class="solution-box">
-                <div class="solution-title">Musterlösung:</div>
-                <ol>
-                    <li><strong>Metapher "Siebenmeilenstiefeln":</strong> Veranschaulicht die außerordentliche Geschwindigkeit der Digitalisierung.</li>
-                    <li><strong>Metapher "zweischneidiges Schwert":</strong> Zeigt die Ambivalenz der Digitalisierung (sowohl positive als auch negative Aspekte).</li>
-                    <li><strong>Vergleich "wie gelähmt":</strong> Verdeutlicht die Handlungsunfähigkeit der Politik gegenüber der raschen Entwicklung.</li>
-                </ol>
-                <p><strong>Wirkung und Absicht:</strong> Der Autor nutzt bildhafte Sprache, um komplexe Sachverhalte anschaulich zu machen. Die metaphorische Darstellung soll die Dramatik der Situation unterstreichen und die Leser emotional ansprechen. Die kritische Haltung gegenüber der Politik wird durch den Vergleich der Lähmung deutlich.</p>
-            </div>
-        </div>
-
-        <div class="exercise-box">
-            <h3 class="exercise-title">Übung 2: Argumentationsstruktur analysieren</h3>
-            <div class="text-example">
-                <div class="text-source">Auszug aus einem Leserbrief:</div>
-                <p>"Der öffentliche Nahverkehr sollte für alle Bürger kostenlos sein. Dies würde nicht nur die Umwelt entlasten, sondern auch soziale Gerechtigkeit fördern. Studien belegen, dass kostenloser ÖPNV die Nutzung um bis zu 30% steigern kann. In Städten wie Tallinn wurde dieses Modell bereits erfolgreich umgesetzt. Die anfänglichen Kosten würden sich langfristig durch geringere Verkehrs- und Umweltschäden amortisieren."</p>
-            </div>
-            
-            <div class="requirements">
-                <h4>Aufgabenstellung:</h4>
-                <ol>
-                    <li>Identifiziere die Hauptthese des Textes</li>
-                    <li>Nenne die Argumente, die zur Stützung der These angeführt werden</li>
-                    <li>Beurteile die Überzeugungskraft der Argumentation</li>
-                </ol>
-            </div>
-            
-            <button class="toggle-solution">Lösung anzeigen</button>
-            <div class="solution-box">
-                <div class="solution-title">Musterlösung:</div>
-                <p><strong>Hauptthese:</strong> Der öffentliche Nahverkehr sollte für alle Bürger kostenlos sein.</p>
-                <p><strong>Argumente:</strong></p>
-                <ul>
-                    <li>Umweltentlastung</li>
-                    <li>Förderung sozialer Gerechtigkeit</li>
-                    <li>Steigerung der Nutzung (belegt durch Studien)</li>
-                    <li>Erfolgreiche Umsetzung in anderen Städten (Tallinn als Beispiel)</li>
-                    <li>Langfristige Amortisation der Kosten</li>
-                </ul>
-                <p><strong>Beurteilung:</strong> Die Argumentation ist gut strukturiert und verwendet verschiedene Argumenttypen (ökologisch, sozial, ökonomisch). Die Verwendung von Studien und Praxisbeispielen stärkt die Glaubwürdigkeit. Allerdings fehlen konkrete Angaben zu den Studien und eine Auseinandersetzung mit möglichen Gegenargumenten (z.B. Finanzierung).</p>
-            </div>
-        </div>
-    </div>
-
+<div class="accordion-section">
     <div class="accordion-header">
-        <span>Mittelschwere Übungen</span>
-        <span class="accordion-icon">+</span>
+        <h2>Grundlagen: Systematisches Vorgehen bei der Textanalyse</h2>
     </div>
     <div class="panel">
-        <div class="exercise-box">
-            <h3 class="exercise-title">Übung 3: Komplette Textanalyse</h3>
-            <div class="text-example">
-                <div class="text-source">Kolumne: "Die Kunst des Abschaltens" (Auszug)</div>
-                <p>"In einer Welt, die von permanenter Erreichbarkeit und unendlichen Informationsströmen geprägt ist, wird die Fähigkeit zum Abschalten zur überlebenswichtigen Kompetenz. Wir sind umgeben von einer Kakophonie der Reize – Smartphones vibrieren, E-Mails häufen sich, soziale Medien fordern unsere Aufmerksamkeit. In diesem digitalen Taumel geht etwas Entscheidendes verloren: die Stille, die Muße, das ungestörte Nachdenken.</p>
-                <p>Dabei ist das Abschalten keine Flucht vor der Realität, sondern eine Voraussetzung für kreatives Denken und psychische Gesundheit. Große Ideen entstehen nicht im Lärm der Ablenkung, sondern in den stillen Momenten der Kontemplation. Die Geschichte zeigt: Von Descartes' 'Cogito ergo sum' bis zu Einsteins Relativitätstheorie – bahnbrechende Gedanken benötigen Raum zur Entfaltung.</p>
-                <p>Doch wie kultivieren wir diese Kunst in einer hypervernetzten Welt? Es beginnt mit kleinen Schritten: bewusste Handy-freie Zeiten, regelmäßige digitale Auszeiten, die Pflege analoger Hobbys. Wir müssen lernen, dass Nichtstun nicht Zeitverschwendung ist, sondern Investition in unser geistiges Wohlbefinden."</p>
-            </div>
+        <div class="methodik-section">
+            <h3>Die 5-Schritt-Methode zur perfekten Textanalyse</h3>
             
-            <div class="requirements">
-                <h4>Aufgabenstellung:</h4>
-                <p>Verfasse eine vollständige Textanalyse mit folgenden Teilen:</p>
-                <ol>
-                    <li>Einleitung (Textvorstellung und Inhaltsangabe)</li>
-                    <li>Sprachlich-stilistische Analyse</li>
-                    <li>Analyse der Argumentationsstruktur</li>
-                    <li>Eigene Stellungnahme</li>
-                </ol>
+            <div class="schritte-grid">
+                <div class="schritt-card">
+                    <h4>Schritt 1: Ersten Eindruck gewinnen</h4>
+                    <ul>
+                        <li>Text vollständig lesen ohne zu markieren</li>
+                        <li>Thema und Grundaussage erfassen</li>
+                        <li>Textsorte identifizieren</li>
+                        <li>Autor und Kontext beachten</li>
+                    </ul>
+                    <div class="zeit-info">⏱️ Zeit: 10-15 Minuten</div>
+                </div>
+
+                <div class="schritt-card">
+                    <h4>Schritt 2: Intensiv analysieren</h4>
+                    <ul>
+                        <li>Zweites Lesen mit Markierungen</li>
+                        <li>Stilmittel identifizieren und markieren</li>
+                        <li>Argumentationsstruktur erfassen</li>
+                        <li>Besonderheiten notieren</li>
+                    </ul>
+                    <div class="zeit-info">⏱️ Zeit: 15-20 Minuten</div>
+                </div>
+
+                <div class="schritt-card">
+                    <h4>Schritt 3: Struktur planen</h4>
+                    <ul>
+                        <li>Gliederung erstellen</li>
+                        <li>Hauptargumente ordnen</li>
+                        <li>Beispiele zuordnen</li>
+                        <li>Übergänge planen</li>
+                    </ul>
+                    <div class="zeit-info">⏱️ Zeit: 10 Minuten</div>
+                </div>
+
+                <div class="schritt-card">
+                    <h4>Schritt 4: Analyse schreiben</h4>
+                    <ul>
+                        <li>Einleitung formulieren</li>
+                        <li>Hauptteil systematisch abarbeiten</li>
+                        <li>Schluss mit eigener Bewertung</li>
+                        <li>Auf Zeitlimit achten</li>
+                    </ul>
+                    <div class="zeit-info">⏱️ Zeit: 45-60 Minuten</div>
+                </div>
+
+                <div class="schritt-card">
+                    <h4>Schritt 5: Korrektur</h4>
+                    <ul>
+                        <li>Rechtschreibung prüfen</li>
+                        <li>Satzbau kontrollieren</li>
+                        <li>Logik der Argumentation checken</li>
+                        <li>Fachbegriffe überprüfen</li>
+                    </ul>
+                    <div class="zeit-info">⏱️ Zeit: 10-15 Minuten</div>
+                </div>
             </div>
-            
-            <button class="toggle-solution">Musterlösung anzeigen</button>
-            <div class="solution-box">
-                <div class="solution-title">Musterlösung:</div>
-                
-                <p><strong>1. Einleitung:</strong><br>
-                Die Kolumne "Die Kunst des Abschaltens" thematisiert die Herausforderungen der digitalen Dauererreichbarkeit und plädiert für bewusste Auszeiten. Der Autor argumentiert, dass die Fähigkeit zum Abschalten in der modernen Welt zu einer überlebenswichtigen Kompetenz geworden sei.</p>
-                
-                <p><strong>2. Sprachlich-stilistische Analyse:</strong><br>
-                Der Text zeichnet sich durch eine bildhafte, teilweise dramatische Sprache aus. Metaphern wie "Kakophonie der Reize" und "digitaler Taumel" veranschaulichen die Überforderung durch die Informationsflut. Die Verwendung von Fachbegriffen ("Kontemplation") und historischen Beispielen (Descartes, Einstein) verleiht der Argumentation Tiefe und Seriosität. Der Appellcharakter wird durch rhetorische Fragen ("Doch wie kultivieren wir diese Kunst...?") und Handlungsempfehlungen unterstrichen.</p>
-                
-                <p><strong>3. Argumentationsstruktur:</strong><br>
-                Der Text folgt einer klaren Struktur: Problembeschreibung → These (Abschalten als Kompetenz) → Begründung (historische Beispiele) → Lösungsvorschläge. Die Argumentation kombiniert emotionale Appelle mit rationalen Belegen.</p>
-                
-                <p><strong>4. Eigene Stellungnahme:</strong><br>
-                Der Autor trifft einen wichtigen Punkt unserer Zeit. Die zunehmende Digitalisierung erfordert tatsächlich neue Kompetenzen im Umgang mit Technologie. Allerdings könnte die Darstellung etwas einseitig sein, da die positiven Aspekte der Vernetzung zu kurz kommen. Die praktischen Ratschläge sind jedoch nachvollziehbar und umsetzbar.</p>
+
+            <div class="erfolgs-formel">
+                <h4>Die Erfolgsformel für die Textanalyse</h4>
+                <div class="formel-box">
+                    <p><strong>Perfekte Textanalyse = </strong></p>
+                    <p><span class="formel-teil">Gründliches Textverständnis</span> + 
+                    <span class="formel-teil">Systematische Stilmittel-Analyse</span> + 
+                    <span class="formel-teil">Präzise Argumentation</span> + 
+                    <span class="formel-teil">Eigene Bewertung</span></p>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
+<!-- ================ TEXTSORTEN-SPEZIFISCHE ÜBUNGEN ================ -->
+
+<div class="accordion-section">
     <div class="accordion-header">
-        <span>Anspruchsvolle Übungen</span>
-        <span class="accordion-icon">+</span>
+        <h2>Übungen nach Textsorten</h2>
     </div>
     <div class="panel">
-        <div class="exercise-box">
-            <h3 class="exercise-title">Übung 4: Vergleichende Textanalyse</h3>
+        
+        <!-- Kommentar/Kolumne -->
+        <div class="textsorte-bereich">
+            <h3>Kommentar/Kolumne analysieren</h3>
             
-            <div class="text-example">
-                <div class="text-source">Text A: Zeitungskommentar</div>
-                <p>"Die Digitalisierung der Schulen muss endlich Fahrt aufnehmen! Während andere Länder bereits flächendeckend mit digitalen Lernplattformen arbeiten, hinkt Deutschland hinterher. Die Pandemie hat die Defizite schonungslos offengelegt. Jetzt ist die Zeit für mutige Investitionen in die Bildung der Zukunft."</p>
+            <div class="exercise-box">
+                <h4>Übung 1: Kommentar-Analyse</h4>
+                <div class="text-example">
+                    <div class="text-source">Kommentar: "Die Smartphone-Generation" (Süddeutsche Zeitung, fiktiv)</div>
+                    <div class="text-content">
+                        <p>"Sie starren auf Bildschirme, statt in den Himmel zu blicken. Sie wischen über Displays, statt Hände zu schütteln. Die Generation Z navigiert durch die Welt mit gesenktem Kopf und leuchtenden Augen – gefangen in digitalen Welten, die bunter erscheinen als die Realität.</p>
+                        
+                        <p>Doch ist diese Kritik berechtigt? Oder offenbart sie nur die Ignoranz einer älteren Generation, die den Wandel nicht verstehen will? Die jungen Menschen von heute sind nicht weniger sozial – sie sind anders sozial. Sie knüpfen Kontakte über Kontinente hinweg, organisieren Proteste via Twitter, lernen durch YouTube-Videos. Sie haben die Welt in der Hosentasche.</p>
+                        
+                        <p>Das Problem liegt nicht bei den Smartphones, sondern bei unserem Umgang mit ihnen. Die Technologie ist neutral – erst wir machen sie zum Segen oder zum Fluch. Die Kunst besteht darin, die Balance zu finden zwischen digitaler Teilhabe und analoger Achtsamkeit. Die Smartphone-Generation muss lernen, wann es Zeit ist, das Display zu dimmen und den Blick zu heben."</p>
+                    </div>
+                </div>
+
+                <div class="aufgaben-block">
+                    <h5>Detaillierte Analyseaufgaben:</h5>
+                    <div class="aufgabe-liste">
+                        <div class="aufgabe-item">
+                            <strong>A) Einleitungsanalyse:</strong> Untersuche die ersten beiden Sätze. Welche stilistischen Mittel verwendet der Autor und welche Wirkung erzielen sie?
+                        </div>
+                        <div class="aufgabe-item">
+                            <strong>B) Argumentationswendung:</strong> Analysiere den Übergang vom ersten zum zweiten Absatz. Wie vollzieht der Autor die argumentative Wende?
+                        </div>
+                        <div class="aufgabe-item">
+                            <strong>C) Sprachebenen:</strong> Vergleiche die Sprache in allen drei Absätzen. Welche Unterschiede stellst du fest?
+                        </div>
+                        <div class="aufgabe-item">
+                            <strong>D) Schlussgestaltung:</strong> Bewerte die Wirksamkeit des Schlusses. Welche Stilmittel machen ihn überzeugend?
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-toggle-area">
+                    <button class="solution-toggle">Ausführliche Musterlösung anzeigen</button>
+                    <div class="solution">
+                        <div class="loesung-teil">
+                            <h5>A) Einleitungsanalyse:</h5>
+                            <p><strong>Stilmittel:</strong></p>
+                            <ul>
+                                <li><strong>Parallelismus:</strong> "Sie starren... statt zu blicken / Sie wischen... statt zu schütteln" - schafft rhythmische Struktur</li>
+                                <li><strong>Antithese:</strong> "starren auf Bildschirme" vs. "in den Himmel blicken" - betont den Kontrast zwischen digital und analog</li>
+                                <li><strong>Metapher:</strong> "gefangen in digitalen Welten" - suggeriert Unfreiheit</li>
+                                <li><strong>Personifikation:</strong> "leuchtende Augen" - verstärkt das Bild der Faszination</li>
+                            </ul>
+                            <p><strong>Wirkung:</strong> Kritische, fast schon anklagende Grundhaltung wird etabliert. Der Leser soll emotionalen Widerstand gegen die beschriebene Situation entwickeln.</p>
+                        </div>
+
+                        <div class="loesung-teil">
+                            <h5>B) Argumentationswendung:</h5>
+                            <p><strong>Technik der Wende:</strong></p>
+                            <ul>
+                                <li><strong>Rhetorische Fragen:</strong> "Doch ist diese Kritik berechtigt?" - signalisiert Perspektivwechsel</li>
+                                <li><strong>Selbstreflexion:</strong> "Ignoranz einer älteren Generation" - Autor hinterfragt eigene Position</li>
+                                <li><strong>Gegendarstellung:</strong> "nicht weniger sozial – anders sozial" - entkräftet vorherige Kritik systematisch</li>
+                            </ul>
+                            <p><strong>Wirkung:</strong> Zeigt intellektuelle Redlichkeit und macht die Argumentation glaubwürdiger. Der Autor erscheint als reflektierter Denker, nicht als einseitiger Kritiker.</p>
+                        </div>
+
+                        <div class="loesung-teil">
+                            <h5>C) Sprachebenen:</h5>
+                            <p><strong>Absatz 1:</strong> Bildhafte, emotionale Sprache mit kritischem Unterton</p>
+                            <p><strong>Absatz 2:</strong> Analytische Sprache mit konkreten Beispielen</p>
+                            <p><strong>Absatz 3:</strong> Philosophische, ausgewogene Sprache mit Lösungsvorschlägen</p>
+                            <p><strong>Funktion:</strong> Sprachlicher Dreiklang spiegelt gedankliche Entwicklung wider: These → Antithese → Synthese</p>
+                        </div>
+
+                        <div class="loesung-teil">
+                            <h5>D) Schlussgestaltung:</h5>
+                            <p><strong>Stilmittel:</strong></p>
+                            <ul>
+                                <li><strong>Alliteration:</strong> "Display zu dimmen" - eingängige Formulierung</li>
+                                <li><strong>Metapher:</strong> "Blick heben" - steht für bewusste Wahrnehmung der Umwelt</li>
+                                <li><strong>Oxymoron:</strong> "digitale Teilhabe und analoge Achtsamkeit" - zeigt Synthese der Gegensätze</li>
+                            </ul>
+                            <p><strong>Bewertung:</strong> Wirksamer Schluss, da er keine Extreme fordert, sondern Balance. Die Metaphorik macht die Aussage einprägsam und handlungsorientiert.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Politische Rede -->
+        <div class="textsorte-bereich">
+            <h3>Politische Rede analysieren</h3>
             
-            <div class="text-example">
-                <div class="text-source">Text B: Kritischer Essay</div>
-                <p>"Bevor wir blindlings jede Schule mit Tablets ausstatten, sollten wir grundlegendere Fragen stellen: Verbessert Technologie tatsächlich das Lernen? Oder geht dabei vielleicht etwas Wesentliches verloren – die persönliche Beziehung zwischen Lehrern und Schülern, die Kunst des analogen Diskurses? Digitalisierung um der Digitalisierung willen ist kein Bildungsfortschritt."</p>
+            <div class="exercise-box">
+                <h4>Übung 2: Rede-Analyse</h4>
+                <div class="text-example">
+                    <div class="text-source">Auszug aus einer Rede zur Klimapolitik (fiktiv)</div>
+                    <div class="text-content">
+                        <p>"Meine Damen und Herren, wir stehen an einem Wendepunkt der Geschichte. Nicht in ferner Zukunft, sondern hier und heute. Die Gletscher schmelzen, die Wälder brennen, die Meere steigen. Die Natur sendet uns Warnsignale – werden wir sie hören?</p>
+                        
+                        <p>Wir haben die Wahl: Handeln oder Zuschauen. Vorangehen oder Hinterherhinken. Verantwortung übernehmen oder sie auf künftige Generationen abschieben. Diese Wahl treffen wir nicht irgendwann – wir treffen sie jetzt!</p>
+                        
+                        <p>Deutschland kann Vorreiter werden. Deutschland muss Vorreiter werden. Wir haben die Technologie, wir haben das Know-how, wir haben die wirtschaftliche Kraft. Was uns noch fehlt, ist der politische Mut. Diesen Mut können wir aufbringen – wenn wir zusammenstehen, wenn wir gemeinsam handeln, wenn wir an unsere Zukunft glauben."</p>
+                    </div>
+                </div>
+
+                <div class="rede-analyse-raster">
+                    <h5>Systematisches Analyse-Raster für Reden:</h5>
+                    <div class="analyse-kategorien">
+                        <div class="kategorie-box">
+                            <h6>1. Publikumsansprache</h6>
+                            <ul>
+                                <li>Direkte Anrede</li>
+                                <li>Inkludierende Pronomen</li>
+                                <li>Publikumsbezug</li>
+                            </ul>
+                        </div>
+                        <div class="kategorie-box">
+                            <h6>2. Emotionalisierung</h6>
+                            <ul>
+                                <li>Metaphern und Bilder</li>
+                                <li>Dramatische Sprache</li>
+                                <li>Appellcharakter</li>
+                            </ul>
+                        </div>
+                        <div class="kategorie-box">
+                            <h6>3. Strukturierung</h6>
+                            <ul>
+                                <li>Wiederholungen</li>
+                                <li>Parallelismen</li>
+                                <li>Aufzählungen</li>
+                            </ul>
+                        </div>
+                        <div class="kategorie-box">
+                            <h6>4. Überzeugung</h6>
+                            <ul>
+                                <li>Fakten und Beispiele</li>
+                                <li>Autorität und Kompetenz</li>
+                                <li>Handlungsaufforderung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-toggle-area">
+                    <button class="solution-toggle">Systematische Rede-Analyse anzeigen</button>
+                    <div class="solution">
+                        <div class="rede-loesung">
+                            <h5>Systematische Analyse der Rede:</h5>
+                            
+                            <div class="analyse-bereich">
+                                <h6>Publikumsansprache:</h6>
+                                <ul>
+                                    <li><strong>"Meine Damen und Herren":</strong> Höfliche, respektvolle Anrede schafft positive Atmosphäre</li>
+                                    <li><strong>"wir stehen", "wir haben":</strong> Inkludierende Pronomen schaffen Gemeinschaftsgefühl</li>
+                                    <li><strong>Direkte Fragen:</strong> "werden wir sie hören?" bindet Publikum aktiv ein</li>
+                                </ul>
+                            </div>
+
+                            <div class="analyse-bereich">
+                                <h6>Emotionalisierung:</h6>
+                                <ul>
+                                    <li><strong>Dramatische Metaphern:</strong> "Wendepunkt der Geschichte" schafft Dringlichkeit</li>
+                                    <li><strong>Klimax:</strong> "schmelzen, brennen, steigen" - Steigerung der Bedrohung</li>
+                                    <li><strong>Personifikation:</strong> "Natur sendet Warnsignale" macht Umwelt zu akteurin</li>
+                                </ul>
+                            </div>
+
+                            <div class="analyse-bereich">
+                                <h6>Strukturierung:</h6>
+                                <ul>
+                                    <li><strong>Anapher:</strong> "Deutschland kann... Deutschland muss" verstärkt Botschaft</li>
+                                    <li><strong>Parallelismus:</strong> "Handeln oder Zuschauen" strukturiert Alternativen</li>
+                                    <li><strong>Dreier-Rhythmus:</strong> "wenn wir zusammenstehen, wenn wir gemeinsam handeln, wenn wir an unsere Zukunft glauben"</li>
+                                </ul>
+                            </div>
+
+                            <div class="analyse-bereich">
+                                <h6>Überzeugungsstrategie:</h6>
+                                <ul>
+                                    <li><strong>Zeitdruck:</strong> "hier und heute", "jetzt!" schafft Handlungsnotwendigkeit</li>
+                                    <li><strong>Nationale Identität:</strong> Deutschland als kompetenter Akteur</li>
+                                    <li><strong>Optimistische Wendung:</strong> Von Problem zu Lösung</li>
+                                </ul>
+                            </div>
+
+                            <div class="gesamtbewertung">
+                                <h6>Gesamtbewertung:</h6>
+                                <p>Die Rede folgt einer klassischen Struktur (Problem → Lösung → Appell) und nutzt bewährte rhetorische Mittel effektiv. Die Kombination aus emotionaler Dringlichkeit und sachlicher Kompetenz macht sie überzeugend. Besonders wirkungsvoll ist die positive Wendung am Ende, die Hoffnung und Handlungsmöglichkeiten aufzeigt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Sachtext/Essay -->
+        <div class="textsorte-bereich">
+            <h3>Sachtext/Essay analysieren</h3>
             
-            <div class="requirements">
-                <h4>Aufgabenstellung:</h4>
-                <p>Analysiere und vergleiche beide Texte hinsichtlich:</p>
-                <ol>
-                    <li>Position und Grundhaltung zum Thema</li>
-                    <li>Sprachlicher Gestaltung und rhetorischer Mittel</li>
-                    <li>Argumentationsstrategien</li>
-                    <li>Adressaten und Wirkungsabsicht</li>
-                </ol>
-            </div>
-            
-            <button class="toggle-solution">Musterlösung anzeigen</button>
-            <div class="solution-box">
-                <div class="solution-title">Musterlösung:</div>
-                
-                <p><strong>1. Position und Grundhaltung:</strong><br>
-                Text A vertritt eine progressive, technikaffine Position und fordert beschleunigte Digitalisierung. Text B zeigt sich skeptisch und plädiert für reflexive Distanz gegenüber technologischen Lösungen.</p>
-                
-                <p><strong>2. Sprachliche Gestaltung:</strong><br>
-                Text A verwendet dynamische Metaphern ("Fahrt aufnehmen", "hinkt hinterher") und alarmistische Formulierungen ("schonungslos offengelegt"). Text B arbeitet mit rhetorischen Fragen und betont grundsätzliche Überlegungen ("Wesentliches verloren").</p>
-                
-                <p><strong>3. Argumentationsstrategien:</strong><br>
-                Text A argumentiert mit internationalem Vergleich und Zeitdruck ("Jetzt ist die Zeit"). Text B setzt auf grundsätzliche Skepsis und Werteargumentation (persönliche Beziehungen, analoger Diskurs).</p>
-                
-                <p><strong>4. Adressaten und Wirkungsabsicht:</strong><br>
-                Text A richtet sich an politische Entscheidungsträger und will zu schnellem Handeln bewegen. Text B adressiert eine bildungsinteressierte Öffentlichkeit und zielt auf kritische Reflexion ab.</p>
+            <div class="exercise-box">
+                <h4>Übung 3: Wissenschaftsjournalismus</h4>
+                <div class="text-example">
+                    <div class="text-source">Essay: "Die Psychologie des Prokrastinierens" (Zeit Online, fiktiv)</div>
+                    <div class="text-content">
+                        <p>"Morgen mache ich es bestimmt – diesen Satz kennt wohl jeder von uns. Prokrastination, das chronische Aufschieben von Aufgaben, ist zu einem Phänomen der modernen Gesellschaft geworden. Dabei ist sie keineswegs nur Faulheit oder mangelnde Disziplin, wie oft vermutet wird.</p>
+                        
+                        <p>Neurowissenschaftliche Studien zeigen: Prokrastination ist ein komplexer psychologischer Mechanismus. Wenn wir vor einer unangenehmen Aufgabe stehen, sendet unser limbisches System Warnsignale aus. Es empfindet die Aufgabe als Bedrohung und aktiviert Vermeidungsstrategien. Gleichzeitig kämpft der präfrontale Kortex, zuständig für rationales Denken, gegen diese emotionale Reaktion an.</p>
+                        
+                        <p>Paradoxerweise verstärkt das Aufschieben das Problem noch: Mit jeder Verzögerung wächst der Stress, mit dem Stress die Vermeidungshaltung. Ein Teufelskreis entsteht. Doch es gibt Auswege: Die 'Zwei-Minuten-Regel' besagt, dass Aufgaben unter zwei Minuten sofort erledigt werden sollten. Die 'Pomodoro-Technik' zerlegt große Projekte in kleine, bewältigbare Häppchen.</p>
+                        
+                        <p>Letztendlich geht es nicht darum, Prokrastination vollständig zu eliminieren – das ist weder möglich noch nötig. Vielmehr sollten wir lernen, sie zu verstehen und intelligent mit ihr umzugehen. Manchmal ist das scheinbar 'faule' Warten sogar kreativ wertvoll: Viele Ideen entstehen in Momenten scheinbarer Untätigkeit."</p>
+                    </div>
+                </div>
+
+                <div class="sachtext-fokus">
+                    <h5>Besondere Analyse-Aspekte für Sachtexte:</h5>
+                    <div class="fokus-bereiche">
+                        <div class="fokus-item">
+                            <h6>Wissenschaftlichkeit</h6>
+                            <p>Wie werden wissenschaftliche Erkenntnisse integriert und verständlich gemacht?</p>
+                        </div>
+                        <div class="fokus-item">
+                            <h6>Verständlichkeit</h6>
+                            <p>Welche Strategien nutzt der Autor, um komplexe Sachverhalte zugänglich zu machen?</p>
+                        </div>
+                        <div class="fokus-item">
+                            <h6>Praxisbezug</h6>
+                            <p>Wie verbindet der Text Theorie mit praktischen Lösungsansätzen?</p>
+                        </div>
+                        <div class="fokus-item">
+                            <h6>Ausgewogenheit</h6>
+                            <p>Werden verschiedene Perspektiven berücksichtigt und fair dargestellt?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-toggle-area">
+                    <button class="solution-toggle">Sachtext-Analyse anzeigen</button>
+                    <div class="solution">
+                        <div class="sachtext-analyse">
+                            <h5>Analyse des wissenschaftsjournalistischen Textes:</h5>
+                            
+                            <div class="wissenschaftlichkeit">
+                                <h6>Wissenschaftlichkeit und Glaubwürdigkeit:</h6>
+                                <ul>
+                                    <li><strong>Fachterminologie:</strong> "limbisches System", "präfrontaler Kortex" - zeigt wissenschaftliche Fundierung</li>
+                                    <li><strong>Studienverweise:</strong> "Neurowissenschaftliche Studien zeigen" - stützt Aussagen auf Forschung</li>
+                                    <li><strong>Differenzierte Darstellung:</strong> Widerlegung von Vorurteilen ("keineswegs nur Faulheit")</li>
+                                </ul>
+                            </div>
+
+                            <div class="verstaendlichkeit">
+                                <h6>Strategien der Verständlichkeit:</h6>
+                                <ul>
+                                    <li><strong>Alltagsbezug:</strong> "Morgen mache ich es bestimmt" - jeder kann sich identifizieren</li>
+                                    <li><strong>Metaphern:</strong> "Teufelskreis", "bewältigbare Häppchen" - machen Abstraktes konkret</li>
+                                    <li><strong>Erklärungsmuster:</strong> Ursache-Wirkungs-Zusammenhänge werden klar dargestellt</li>
+                                </ul>
+                            </div>
+
+                            <div class="praxisbezug">
+                                <h6>Praxisorientierung:</h6>
+                                <ul>
+                                    <li><strong>Konkrete Techniken:</strong> "Zwei-Minuten-Regel", "Pomodoro-Technik"</li>
+                                    <li><strong>Handlungsempfehlungen:</strong> Klare, umsetzbare Ratschläge</li>
+                                    <li><strong>Realistische Zielsetzung:</strong> "nicht vollständig eliminieren" - keine utopischen Versprechungen</li>
+                                </ul>
+                            </div>
+
+                            <div class="ausgewogenheit">
+                                <h6>Perspektivenvielfalt:</h6>
+                                <ul>
+                                    <li><strong>Paradox-Darstellung:</strong> Zeigt Widersprüchlichkeit des Phänomens</li>
+                                    <li><strong>Positive Wendung:</strong> Erkennt auch kreative Aspekte des "Wartens"</li>
+                                    <li><strong>Nuancierte Bewertung:</strong> Vermeidet einseitige Verurteilung</li>
+                                </ul>
+                            </div>
+
+                            <div class="textstruktur-analyse">
+                                <h6>Strukturelle Analyse:</h6>
+                                <p><strong>Aufbau:</strong> Problem-Erklärung → Wissenschaftliche Fundierung → Lösungsansätze → Philosophische Einordnung</p>
+                                <p><strong>Sprachstil:</strong> Wissenschaftlich-populär, zugänglich aber nicht vereinfachend</p>
+                                <p><strong>Zielgruppe:</strong> Gebildete Laien, die sowohl wissenschaftliche Erklärungen als auch praktische Hilfen suchen</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="tip-box">
-        <strong>Tipp für die Praxis:</strong> Üben Sie regelmäßig mit verschiedenen Textsorten und achten Sie dabei auf Zeitmanagement. Eine gute Textanalyse benötigt etwa 60-90 Minuten. Teilen Sie Ihre Zeit sinnvoll ein: 15 Minuten für gründliches Lesen und Verstehen, 45-60 Minuten für das Schreiben, 10-15 Minuten für Korrektur und Überarbeitung.
+<!-- ================ VERGLEICHENDE TEXTANALYSE ================ -->
+
+<div class="accordion-section">
+    <div class="accordion-header">
+        <h2>Vergleichende Textanalyse - Meisterklasse</h2>
     </div>
-</body>
-</html>
+    <div class="panel">
+        <div class="vergleich-section">
+            <h3>Professionelle Vergleichsanalyse in 4 Schritten</h3>
+            
+            <div class="vergleich-methodik">
+                <div class="methodik-schritt">
+                    <h4>Schritt 1: Gemeinsamkeiten identifizieren</h4>
+                    <p>Was verbindet die Texte? Thema, Grundhaltung, Zielgruppe, stilistische Ähnlichkeiten</p>
+                </div>
+                <div class="methodik-schritt">
+                    <h4>Schritt 2: Unterschiede herausarbeiten</h4>
+                    <p>Wo divergieren die Texte? Argumentation, Stil, Wirkungsabsicht, Sprachebene</p>
+                </div>
+                <div class="methodik-schritt">
+                    <h4>Schritt 3: Kontextualisierung</h4>
+                    <p>Warum bestehen diese Unterschiede? Medium, Zielgruppe, zeitlicher Kontext</p>
+                </div>
+                <div class="methodik-schritt">
+                    <h4>Schritt 4: Bewertung</h4>
+                    <p>Welcher Text ist überzeugender? Welcher erreicht sein Ziel besser?</p>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Übung 4: Kontroverse um Künstliche Intelligenz</h4>
+                
+                <div class="text-gruppe">
+                    <div class="text-example">
+                        <div class="text-source">Text A: Blogbeitrag "KI - Chance für die Menschheit"</div>
+                        <div class="text-content">
+                            <p>"Künstliche Intelligenz wird unser Leben revolutionieren – und das ist gut so! Stellen wir uns vor: Ärzte, die niemals müde werden und Krankheiten erkennen, bevor Symptome auftreten. Lehrer, die jeden Schüler individuell fördern können. Wissenschaftler, die in Monaten erreichen, wofür sie früher Jahre brauchten.</p>
+                            
+                            <p>Ja, es gibt Risiken. Aber haben wir nicht immer mit Risiken gelebt? Als das Auto erfunden wurde, fürchteten die Menschen, schneller als 30 km/h zu fahren würde sie töten. Heute ist das Auto unverzichtbar. Genauso wird es mit KI sein.</p>
+                            
+                            <p>Die Frage ist nicht, ob KI kommt – sie ist schon da. Die Frage ist, ob wir sie nutzen oder von ihr überrollt werden. Deutschland muss jetzt investieren, forschen, regulieren. Intelligente Regulation statt Verbote. Innovation statt Angst. Die Zukunft wartet nicht auf uns."</p>
+                        </div>
+                    </div>
+
+                    <div class="text-example">
+                        <div class="text-source">Text B: Essay "Die KI-Illusion" (Philosophie Magazin, fiktiv)</div>
+                        <div class="text-content">
+                            <p>"Wir nennen sie 'künstliche Intelligenz', doch was wir erschaffen, ist weder künstlich noch intelligent – es ist eine hochkomplexe Nachahmung menschlicher Denkprozesse. Diese semantische Unschärfe offenbart ein grundsätzliches Missverständnis unserer Zeit.</p>
+                            
+                            <p>Intelligenz ist mehr als die Verarbeitung von Datenmengen. Sie umfasst Intuition, Empathie, die Fähigkeit zum ethischen Urteil – Qualitäten, die nicht algorithmisch reproduzierbar sind. Eine Maschine, die Krebszellen erkennt, 'versteht' nicht, was Krebs ist. Sie folgt lediglich Mustern in Daten.</p>
+                            
+                            <p>Die wahre Gefahr liegt nicht in einer Maschinen-Revolte Hollywood'scher Prägung, sondern in unserer schleichenden Entmündigung. Wenn Algorithmen entscheiden, wen wir treffen, was wir kaufen, welche Nachrichten wir lesen, verlieren wir nicht nur unsere Autonomie – wir verlieren das, was uns menschlich macht: die Fähigkeit zur bewussten Entscheidung.</p>
+                            
+                            <p>Es ist Zeit für eine ehrlichere Debatte. KI ist ein Werkzeug – nicht mehr, nicht weniger. Die Frage ist nicht, wie intelligent unsere Maschinen sind, sondern wie weise wir mit ihnen umgehen."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vergleich-arbeitsblatt">
+                    <h5>Systematisches Vergleichs-Arbeitsblatt:</h5>
+                    <div class="vergleich-tabelle">
+                        <table class="analyse-matrix">
+                            <thead>
+                                <tr>
+                                    <th>Vergleichsaspekt</th>
+                                    <th>Text A (Blog)</th>
+                                    <th>Text B (Essay)</th>
+                                    <th>Bewertung</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Grundhaltung</strong></td>
+                                    <td>Optimistisch, technikaffin</td>
+                                    <td>Skeptisch, philosophisch</td>
+                                    <td>Komplementäre Perspektiven</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Argumentationsstil</strong></td>
+                                    <td>Emotional, beispielhaft</td>
+                                    <td>Rational, begrifflich präzise</td>
+                                    <td>Verschiedene Überzeugungsstrategien</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sprachebene</strong></td>
+                                    <td>Alltagssprache, metaphorisch</td>
+                                    <td>Fachsprache, differenziert</td>
+                                    <td>Zielgruppengerecht</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Zeitperspektive</strong></td>
+                                    <td>Zukunftsorientiert</td>
+                                    <td>Gegenwartskritisch</td>
+                                    <td>Ergänzende Blickwinkel</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="solution-toggle-area">
+                    <button class="solution-toggle">Professionelle Vergleichsanalyse anzeigen</button>
+                    <div class="solution">
+                        <div class="vergleichsanalyse-komplett">
+                            <h5>Umfassende Vergleichsanalyse:</h5>
+                            
+                            <div class="gemeinsamkeiten">
+                                <h6>1. Gemeinsamkeiten:</h6>
+                                <ul>
+                                    <li><strong>Thematischer Fokus:</strong> Beide Texte behandeln gesellschaftliche Auswirkungen von KI</li>
+                                    <li><strong>Problemrealismus:</strong> Beide erkennen Herausforderungen, keine naive Verklärung</li>
+                                    <li><strong>Handlungsappell:</strong> Beide fordern bewussten Umgang mit Technologie</li>
+                                    <li><strong>Rhetorische Fragen:</strong> Beide nutzen Fragen zur Aktivierung der Leser</li>
+                                </ul>
+                            </div>
+
+                            <div class="unterschiede">
+                                <h6>2. Zentrale Unterschiede:</h6>
+                                <div class="unterschied-detail">
+                                    <h7>Argumentationsweise:</h7>
+                                    <ul>
+                                        <li><strong>Text A:</strong> Induktiv (Beispiele → Schlussfolgerung), emotional appellierend</li>
+                                        <li><strong>Text B:</strong> Deduktiv (Begriffsdefinition → Ableitung), rational argumentierend</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="unterschied-detail">
+                                    <h7>Sprachliche Gestaltung:</h7>
+                                    <ul>
+                                        <li><strong>Text A:</strong> "revolutionieren", "überrollt werden" - dynamische Metaphorik</li>
+                                        <li><strong>Text B:</strong> "semantische Unschärfe", "algorithmisch" - präzise Fachsprache</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="unterschied-detail">
+                                    <h7>Lösungsansätze:</h7>
+                                    <ul>
+                                        <li><strong>Text A:</strong> Pragmatisch-technologisch ("investieren, forschen, regulieren")</li>
+                                        <li><strong>Text B:</strong> Reflexiv-philosophisch ("ehrlichere Debatte", "weise umgehen")</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="kontextualisierung">
+                                <h6>3. Kontextuelle Einordnung:</h6>
+                                <p><strong>Medienkontext:</strong> Der Blogbeitrag (Text A) richtet sich an ein breites, technikinteressiertes Publikum und verwendet entsprechend zugängliche Sprache. Der Essay (Text B) entstammt einem Philosophiemagazin und bedient ein akademisch geprägtes Publikum.</p>
+                                
+                                <p><strong>Funktionale Unterschiede:</strong> Text A will mobilisieren und Begeisterung wecken, Text B will zur kritischen Reflexion anregen und vor unreflektiertem Optimismus warnen.</p>
+                            </div>
+
+                            <div class="bewertung">
+                                <h6>4. Kritische Bewertung:</h6>
+                                <div class="text-bewertung">
+                                    <h7>Stärken von Text A:</h7>
+                                    <ul>
+                                        <li>Motivierend und handlungsorientiert</li>
+                                        <li>Verständliche Analogien (Auto-Vergleich)</li>
+                                        <li>Konkrete Visionen</li>
+                                    </ul>
+                                    <h7>Schwächen von Text A:</h7>
+                                    <ul>
+                                        <li>Vereinfachende Darstellung komplexer Probleme</li>
+                                        <li>Mangelnde Auseinandersetzung mit ethischen Fragen</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="text-bewertung">
+                                    <h7>Stärken von Text B:</h7>
+                                    <ul>
+                                        <li>Begriffliche Präzision und Tiefe</li>
+                                        <li>Berücksichtigung philosophischer Dimensionen</li>
+                                        <li>Differenzierte Problemanalyse</li>
+                                    </ul>
+                                    <h7>Schwächen von Text B:</h7>
+                                    <ul>
+                                        <li>Möglicherweise zu abstrakt für breite Öffentlichkeit</li>
+                                        <li>Wenig konkrete Handlungsvorschläge</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="synthese">
+                                <h6>5. Synthese:</h6>
+                                <p>Beide Texte leisten wichtige Beiträge zur KI-Debatte. Text A zeigt Chancen und Dynamik der Entwicklung auf, Text B mahnt zur Besinnung auf menschliche Werte. In ihrer Komplementarität bilden sie die Spannbreite der aktuellen Diskussion ab. Eine produktive Debatte braucht sowohl den Optimismus und Gestaltungswillen von Text A als auch die kritische Reflexion und begriffliche Präzision von Text B.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================ CREATIVE WRITING: EIGENE ANALYSEN VERFASSEN ================ -->
+
+<div class="accordion-section">
+    <div class="accordion-header">
+        <h2>Eigene Analysen verfassen - Workshop</h2>
+    </div>
+    <div class="panel">
+        <div class="writing-workshop">
+            <h3>Von der Textlektüre zur perfekten Analyse</h3>
+            
+            <div class="writing-prozess">
+                <div class="prozess-stufe">
+                    <h4>Stufe 1: Textverständnis entwickeln</h4>
+                    <div class="uebung-mini">
+                        <h5>Übung: Inhaltsangabe in 3 Sätzen</h5>
+                        <p>Wähle einen der Texte aus den vorherigen Übungen und fasse ihn in genau 3 Sätzen zusammen:</p>
+                        <ul>
+                            <li><strong>Satz 1:</strong> Thema und Grundaussage</li>
+                            <li><strong>Satz 2:</strong> Hauptargumentation</li>
+                            <li><strong>Satz 3:</strong> Schlussfolgerung/Appell</li>
+                        </ul>
+                        <div class="erfolgs-tipp">
+                            <strong>Erfolgstipp:</strong> Wenn du einen Text nicht in 3 Sätzen zusammenfassen kannst, hast du ihn noch nicht vollständig verstanden. Lies nochmals gründlich!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prozess-stufe">
+                    <h4>Stufe 2: Stilmittel systematisch erfassen</h4>
+                    <div class="stilmittel-checkliste">
+                        <h5>Checkliste für vollständige Stilmittel-Erfassung:</h5>
+                        <div class="checkliste-kategorien">
+                            <div class="kategorie-check">
+                                <h6>🎵 Klangfiguren</h6>
+                                <ul>
+                                    <li>☐ Alliterationen gesucht?</li>
+                                    <li>☐ Assonanzen erkannt?</li>
+                                    <li>☐ Rhythmus analysiert?</li>
+                                </ul>
+                            </div>
+                            <div class="kategorie-check">
+                                <h6>🔄 Wiederholungsfiguren</h6>
+                                <ul>
+                                    <li>☐ Anaphern markiert?</li>
+                                    <li>☐ Parallelismen gefunden?</li>
+                                    <li>☐ Klimax entdeckt?</li>
+                                </ul>
+                            </div>
+                            <div class="kategorie-check">
+                                <h6>🖼️ Bildliche Sprache</h6>
+                                <ul>
+                                    <li>☐ Metaphern identifiziert?</li>
+                                    <li>☐ Personifikationen erkannt?</li>
+                                    <li>☐ Vergleiche gefunden?</li>
+                                </ul>
+                            </div>
+                            <div class="kategorie-check">
+                                <h6>💭 Gedankenfiguren</h6>
+                                <ul>
+                                    <li>☐ Rhetorische Fragen entdeckt?</li>
+                                    <li>☐ Ironie erkannt?</li>
+                                    <li>☐ Antithesen gefunden?</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prozess-stufe">
+                    <h4>Stufe 3: Wirkung präzise beschreiben</h4>
+                    <div class="wirkung-vokabular">
+                        <h5>Präzises Wirkungsvokabular:</h5>
+                        <div class="vokabular-kategorien">
+                            <div class="vokabular-gruppe">
+                                <h6>Emotionale Wirkung:</h6>
+                                <p>anrührend, bewegend, erschütternd, berührend, verstörend, beunruhigend, beschwichtigend, tröstend</p>
+                            </div>
+                            <div class="vokabular-gruppe">
+                                <h6>Kognitive Wirkung:</h6>
+                                <p>verdeutlichend, veranschaulichend, präzisierend, differenzierend, vereinfachend, komplexitätssteigernd</p>
+                            </div>
+                            <div class="vokabular-gruppe">
+                                <h6>Appellative Wirkung:</h6>
+                                <p>mobilisierend, aktivierend, mahnend, warnend, ermutigend, bestärkend, überzeugend, manipulativ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="praktische-schreibuebung">
+                <h4>Praxis-Workshop: Vollständige Analyse schreiben</h4>
+                
+                <div class="text-fuer-analyse">
+                    <h5>Übungstext: Kurzkommentar zur Digitalen Bildung</h5>
+                    <div class="text-example">
+                        <div class="text-content">
+                            <p>"Unsere Kinder sitzen vor Bildschirmen, statt Bücher zu lesen. Sie wischen über Displays, statt mit Stiften zu schreiben. Sie googeln Fakten, statt zu denken. Ist das die Bildung der Zukunft?</p>
+                            
+                            <p>Diese Schwarzmalerei greift zu kurz. Ja, digitale Medien verändern das Lernen – aber nicht zwangsläufig zum Schlechten. Ein Tablet kann tausend Bücher enthalten. Eine App kann Mathematik visualisieren, wie es kein Lehrbuch kann. Ein Online-Kurs kann Schüler in entlegenen Dörfern mit den besten Professoren der Welt verbinden.</p>
+                            
+                            <p>Entscheidend ist nicht das 'Ob', sondern das 'Wie'. Digitale Bildung bedeutet nicht, analoge Methoden zu ersetzen, sondern sie intelligent zu ergänzen. Der Stift wird nicht verschwinden – er bekommt nur Gesellschaft von der Tastatur."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schreibanleitung">
+                    <h5>Deine Aufgabe: Verfasse eine komplette Textanalyse (300-400 Wörter)</h5>
+                    <div class="analyse-struktur">
+                        <div class="struktur-teil">
+                            <h6>Einleitung (50-70 Wörter):</h6>
+                            <ul>
+                                <li>Autor, Titel, Textsorte, Thema</li>
+                                <li>Zentrale Aussage in einem Satz</li>
+                                <li>Übergang zur Analyse</li>
+                            </ul>
+                        </div>
+                        <div class="struktur-teil">
+                            <h6>Hauptteil (200-250 Wörter):</h6>
+                            <ul>
+                                <li>Argumentationsaufbau analysieren</li>
+                                <li>Stilmittel identifizieren und deuten</li>
+                                <li>Sprachebene und Zielgruppe bestimmen</li>
+                                <li>Wirkungsabsicht bewerten</li>
+                            </ul>
+                        </div>
+                        <div class="struktur-teil">
+                            <h6>Schluss (50-80 Wörter):</h6>
+                            <ul>
+                                <li>Bewertung der Überzeugungskraft</li>
+                                <li>Eigene Stellungnahme</li>
+                                <li>Abschließende Einschätzung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-toggle-area">
+                    <button class="solution-toggle">Musteranalyse und Bewertung anzeigen</button>
+                    <div class="solution">
+                        <div class="muster-analyse">
+                            <h5>Beispiel einer Schüleranalyse mit Bewertung:</h5>
+                            
+                            <div class="schueler-text">
+                                <h6>Schüleranalyse:</h6>
+                                <div class="analyse-beispiel">
+                                    <p><strong>[Einleitung]</strong> Der vorliegende Kommentar thematisiert die Rolle digitaler Medien in der Bildung. Der Autor vertritt die Position, dass digitale Bildung eine sinnvolle Ergänzung zu traditionellen Lernmethoden darstellt, wenn sie intelligent eingesetzt wird.</p>
+                                    
+                                    <p><strong>[Hauptteil]</strong> Der Text folgt einem klassischen argumentativen Aufbau: These, Antithese, Synthese. Zu Beginn präsentiert der Autor bewusst überspitzte Kritikpunkte in Form rhetorischer Fragen ("Ist das die Bildung der Zukunft?"), um die verbreitete Skepsis gegenüber digitalen Medien aufzugreifen. Die Wiederholung "Sie sitzen... Sie wischen... Sie googeln" (Anapher) verstärkt dabei den kritischen Grundton.</p>
+                                    
+                                    <p>Im zweiten Absatz vollzieht der Autor eine argumentative Wende, eingeleitet durch "Diese Schwarzmalerei greift zu kurz." Die folgende Aufzählung der Vorteile digitaler Medien ("Ein Tablet kann... Eine App kann... Ein Online-Kurs kann...") nutzt ebenfalls das Stilmittel der Anapher, allerdings mit positiver Konnotation. Diese parallele Struktur macht die Gegenargumentation einprägsam und überzeugend.</p>
+                                    
+                                    <p>Der Schluss präsentiert eine ausgewogene Synthese durch die Metapher "Der Stift bekommt Gesellschaft von der Tastatur", die Tradition und Innovation versöhnt. Die alliterative Formulierung macht diese Schlüsselbotschaft besonders einprägsam.</p>
+                                    
+                                    <p><strong>[Schluss]</strong> Der Text überzeugt durch seine ausgewogene Argumentation und die geschickte Verwendung rhetorischer Mittel. Besonders wirkungsvoll ist die spiegelbildliche Verwendung von Anaphern für Kritik und Lob digitaler Medien. Der Autor erreicht sein Ziel, eine differenzierte Sichtweise zu vermitteln, ohne polarisierend zu wirken.</p>
+                                </div>
+                            </div>
+
+                            <div class="bewertung-detail">
+                                <h6>Detaillierte Bewertung:</h6>
+                                <div class="bewertung-kategorien">
+                                    <div class="bewertung-punkt">
+                                        <h7>Textverständnis: 14/15 Punkte</h7>
+                                        <ul>
+                                            <li>✅ Thema und Aussage richtig erfasst</li>
+                                            <li>✅ Argumentationsstruktur korrekt analysiert</li>
+                                            <li>➖ Zielgruppe hätte expliziter bestimmt werden können</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bewertung-punkt">
+                                        <h7>Stilmittel-Analyse: 13/15 Punkte</h7>
+                                        <ul>
+                                            <li>✅ Anaphern korrekt identifiziert und gedeutet</li>
+                                            <li>✅ Metapher am Schluss erkannt</li>
+                                            <li>✅ Alliteration berücksichtigt</li>
+                                            <li>➖ Rhetorische Fragen hätten ausführlicher analysiert werden können</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bewertung-punkt">
+                                        <h7>Sprachliche Qualität: 12/15 Punkte</h7>
+                                        <ul>
+                                            <li>✅ Fachsprache angemessen verwendet</li>
+                                            <li>✅ Klare Strukturierung</li>
+                                            <li>➖ Einige Formulierungen könnten präziser sein</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="gesamtbewertung">
+                                    <strong>Gesamtbewertung: 39/45 Punkte = Note 2+ (Gut bis Sehr Gut)</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================ PRÜFUNGSSTRATEGIEN ================ -->
+
+<div class="accordion-section">
+    <div class="accordion-header">
+        <h2>Prüfungsstrategien und Zeitmanagement</h2>
+    </div>
+    <div class="panel">
+        <div class="pruefung-strategien">
+            <h3>Zeitmanagement in der Matura/Abitur-Prüfung</h3>
+            
+            <div class="zeit-verteilung">
+                <h4>Optimale Zeitverteilung für 240 Minuten (4 Stunden):</h4>
+                <div class="zeit-blöcke">
+                    <div class="zeit-block">
+                        <h5>⏰ 0-30 Min: Orientierung & Planung</h5>
+                        <ul>
+                            <li>Alle Aufgaben durchlesen</li>
+                            <li>Texte vollständig erfassen</li>
+                            <li>Aufgabe wählen (falls Wahlmöglichkeit)</li>
+                            <li>Groben Arbeitsplan erstellen</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="zeit-block">
+                        <h5>⏰ 30-180 Min: Intensive Bearbeitung</h5>
+                        <ul>
+                            <li>Text gründlich analysieren (45 Min)</li>
+                            <li>Gliederung erstellen (15 Min)</li>
+                            <li>Analyse schreiben (90 Min)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="zeit-block">
+                        <h5>⏰ 180-240 Min: Fertigstellung</h5>
+                        <ul>
+                            <li>Text überarbeiten (45 Min)</li>
+                            <li>Rechtschreibung korrigieren (10 Min)</li>
+                            <li>Endkontrolle (5 Min)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notfall-strategien">
+                <h4>Notfall-Strategien bei Zeitproblem:</h4>
+                <div class="notfall-tipps">
+                    <div class="notfall-tipp">
+                        <h5>🚨 Szenario: 30 Minuten vor Schluss, Hauptteil nicht fertig</h5>
+                        <div class="strategie">
+                            <strong>Strategie:</strong>
+                            <ul>
+                                <li>Nicht in Panik geraten!</li>
+                                <li>Stichpunktartig die wichtigsten Stilmittel auflisten</li>
+                                <li>Kurze Bewertung in 2-3 Sätzen</li>
+                                <li>Unbedingt einen Schluss schreiben</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="notfall-tipp">
+                        <h5>🚨 Szenario: Blackout beim Stilmittel</h5>
+                        <div class="strategie">
+                            <strong>Strategie:</strong>
+                            <ul>
+                                <li>Wirkung beschreiben, auch wenn der Fachbegriff fehlt</li>
+                                <li>"Der Autor wiederholt..." statt "Anapher"</li>
+                                <li>Auf andere Aspekte konzentrieren</li>
+                                <li>Argumentationsanalyse verstärken</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qualitaet-checkliste">
+                <h4>Qualitäts-Checkliste für die letzten 15 Minuten:</h4>
+                <div class="final-check">
+                    <div class="check-kategorie">
+                        <h5>📝 Inhaltliche Vollständigkeit</h5>
+                        <ul>
+                            <li>☐ Einleitung mit Textvorstellung vorhanden?</li>
+                            <li>☐ Mindestens 3 Stilmittel analysiert?</li>
+                            <li>☐ Wirkung und Funktion erklärt?</li>
+                            <li>☐ Eigene Stellungnahme formuliert?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="check-kategorie">
+                        <h5>🔤 Sprachliche Qualität</h5>
+                        <ul>
+                            <li>☐ Fachbegriffe korrekt verwendet?</li>
+                            <li>☐ Zeilennummern richtig angegeben?</li>
+                            <li>☐ Argumentation logisch?</li>
+                            <li>☐ Rechtschreibung geprüft?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================ HÄUFIGE FEHLER UND LÖSUNGEN ================ -->
+
+<div class="accordion-section">
+    <div class="accordion-header">
+        <h2>Häufige Fehler vermeiden - Troubleshooting</h2>
+    </div>
+    <div class="panel">
+        <div class="fehler-katalog">
+            <h3>Die 10 häufigsten Fehler bei Textanalysen</h3>
+            
+            <div class="fehler-liste">
+                <div class="fehler-item">
+                    <h4>❌ Fehler 1: "Stilmittel-Hunting" ohne Wirkungsanalyse</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "In Zeile 3 steht eine Metapher. In Zeile 5 gibt es eine Alliteration."</p>
+                        <p><strong>Richtig:</strong> "Die Metapher 'Gedankengefängnis' (Z. 3) veranschaulicht die geistige Beschränkung, während die Alliteration 'starrer Strukturen' (Z. 5) die Monotonie betont."</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Immer fragen: "Warum verwendet der Autor dieses Stilmittel hier? Welche Wirkung erzielt er?"
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 2: Inhaltsangabe statt Analyse</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "Der Autor sagt, dass Smartphones schlecht sind. Dann erklärt er, warum sie gut sind."</p>
+                        <p><strong>Richtig:</strong> "Der Autor nutzt zunächst provokante Thesen, um Aufmerksamkeit zu erzeugen, bevor er durch eine argumentative Wende eine differenzierte Position entwickelt."</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Nicht WAS gesagt wird analysieren, sondern WIE und WARUM es gesagt wird.
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 3: Überinterpretation</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "Das Wort 'und' in Zeile 7 symbolisiert die Verbindung zwischen Mensch und Natur."</p>
+                        <p><strong>Richtig:</strong> Konzentration auf offensichtlich bedeutsame Stilmittel und deren nachvollziehbare Wirkung.</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Bei jeder Deutung fragen: "Ist das plausibel und begründbar?"
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 4: Mangelnde Textbelege</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "Der Autor verwendet viele Metaphern." 
+
+
+
+
+
+
+
+
+
+ <div class="fehler-item">
+                    <h4>❌ Fehler 4: Mangelnde Textbelege</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "Der Autor verwendet viele Metaphern."</p>
+                        <p><strong>Richtig:</strong> "Der Autor nutzt Metaphern wie 'Datenmeer' (Z. 12) und 'digitaler Tsunami' (Z. 18), um die Überforderung durch Informationen zu veranschaulichen."</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Jede Behauptung durch konkrete Textstellen mit Zeilennummern belegen.
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 5: Unklare Fachsprache</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "Der Autor macht das sehr gut mit schöner Sprache."</p>
+                        <p><strong>Richtig:</strong> "Der Autor erzielt durch bildhafte Metaphorik eine hohe emotionale Wirkung beim Leser."</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Präzise Fachbegriffe verwenden und Bewertungen konkret begründen.
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 6: Fehlende Struktur</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> Wilde Mischung aus Stilmitteln, Inhalt und eigener Meinung ohne erkennbare Ordnung.</p>
+                        <p><strong>Richtig:</strong> Einleitung → Argumentationsanalyse → Stilmittelanalyse → Wirkungsanalyse → Schluss</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Vor dem Schreiben eine klare Gliederung erstellen und einhalten.
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 7: Falsche Stilmittel-Identifikation</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "Er läuft wie der Wind" → "Das ist eine Metapher"</p>
+                        <p><strong>Richtig:</strong> "Er läuft wie der Wind" → "Das ist ein Vergleich (Erkennungsmerkmal: 'wie')"</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Stilmittel gründlich lernen und Erkennungsmerkmale beachten.
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 8: Vernachlässigung des Kontexts</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> Stilmittel isoliert betrachten ohne Bezug zu Textsorte, Zielgruppe, Entstehungszeit</p>
+                        <p><strong>Richtig:</strong> "Als Zeitungskommentar richtet sich der Text an eine breite Öffentlichkeit, daher die verständliche Metaphorik."</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Immer den Gesamtkontext des Textes berücksichtigen.
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 9: Zu oberflächliche Einleitung</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> "In diesem Text geht es um Computer."</p>
+                        <p><strong>Richtig:</strong> "In seinem 2024 erschienenen Kommentar 'Digitale Bildung' setzt sich Max Mustermann kritisch mit der zunehmenden Technologisierung des Lernens auseinander und plädiert für einen bewussten Umgang mit digitalen Medien im Bildungsbereich."</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Vollständige Textvorstellung mit Autor, Titel, Textsorte, Erscheinungsjahr, Thema und Kernaussage.
+                    </div>
+                </div>
+
+                <div class="fehler-item">
+                    <h4>❌ Fehler 10: Fehlender oder schwacher Schluss</h4>
+                    <div class="fehler-beispiel">
+                        <p><strong>Falsch:</strong> Text bricht einfach ab oder: "Das war meine Analyse."</p>
+                        <p><strong>Richtig:</strong> "Insgesamt gelingt es dem Autor durch die geschickte Kombination von emotionalen und rationalen Argumenten, seine Position überzeugend zu vertreten. Besonders wirkungsvoll ist dabei die ausgewogene Darstellung, die sowohl Chancen als auch Risiken der Digitalisierung berücksichtigt."</p>
+                    </div>
+                    <div class="loesung">
+                        <strong>Lösung:</strong> Bewertung der Überzeugungskraft und kurze eigene Stellungnahme.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================ ÜBUNGSSAMMLUNG FÜR VERSCHIEDENE NIVEAUS ================ -->
+
+<div class="accordion-section">
+    <div class="accordion-header">
+        <h2>Progressives Training - von einfach bis Experte</h2>
+    </div>
+    <div class="panel">
+        <div class="niveau-training">
+            
+            <!-- Einsteiger-Niveau -->
+            <div class="niveau-bereich">
+                <h3>🟢 Niveau 1: Einsteiger (Note 4-3)</h3>
+                <div class="niveau-beschreibung">
+                    <p><strong>Lernziel:</strong> Grundlegende Texterschließung und erste Stilmittel-Erkennung</p>
+                </div>
+                
+                <div class="schnell-uebungen">
+                    <h4>Schnellübungen (je 15 Minuten):</h4>
+                    
+                    <div class="mini-uebung">
+                        <h5>Übung 1a: Thema erfassen</h5>
+                        <div class="uebung-text">
+                            <p>"Influencer zeigen uns das perfekte Leben: strahlende Zähne, traumhafte Reisen, endloses Glück. Doch hinter den glänzenden Bildern verbirgt sich oft eine andere Realität. Viele junge Menschen entwickeln unrealistische Erwartungen an ihr eigenes Leben."</p>
+                        </div>
+                        <div class="mini-aufgabe">
+                            <p><strong>Aufgabe:</strong> Formuliere das Thema in einem Satz und benenne die Grundhaltung des Autors.</p>
+                        </div>
+                        <div class="solution-toggle-area">
+                            <button class="solution-toggle">Lösung anzeigen</button>
+                            <div class="solution">
+                                <p><strong>Thema:</strong> Einfluss von Influencern auf die Erwartungshaltung junger Menschen</p>
+                                <p><strong>Grundhaltung:</strong> Kritisch - der Autor warnt vor unrealistischen Darstellungen in sozialen Medien</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mini-uebung">
+                        <h5>Übung 1b: Offensichtliche Stilmittel</h5>
+                        <div class="uebung-text">
+                            <p>"Wir rennen und rennen und rennen - aber wohin? Wir sammeln Likes, wir sammeln Follower, wir sammeln Bestätigung. Am Ende des Tages sind wir erschöpft, aber nicht erfüllt."</p>
+                        </div>
+                        <div class="mini-aufgabe">
+                            <p><strong>Aufgabe:</strong> Finde drei verschiedene Stilmittel und erkläre ihre Grundwirkung.</p>
+                        </div>
+                        <div class="solution-toggle-area">
+                            <button class="solution-toggle">Lösung anzeigen</button>
+                            <div class="solution">
+                                <ul>
+                                    <li><strong>Wiederholung "rennen und rennen und rennen":</strong> Betont die Hektik des modernen Lebens</li>
+                                    <li><strong>Anapher "wir sammeln":</strong> Zeigt die Monotonie des Suchens nach Bestätigung</li>
+                                    <li><strong>Antithese "erschöpft, aber nicht erfüllt":</strong> Verdeutlicht den Widerspruch zwischen Aktivität und Zufriedenheit</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fortgeschrittenen-Niveau -->
+            <div class="niveau-bereich">
+                <h3>🟡 Niveau 2: Fortgeschrittene (Note 3-2)</h3>
+                <div class="niveau-beschreibung">
+                    <p><strong>Lernziel:</strong> Systematische Analyse mit Wirkungsbeschreibung und Kontextbezug</p>
+                </div>
+                
+                <div class="komplex-uebung">
+                    <h4>Übung 2: Argumentationsanalyse mit Stilmitteln</h4>
+                    <div class="text-example">
+                        <div class="text-content">
+                            <p>"Sind wir noch Herr unserer eigenen Daten? Diese Frage stellt sich drängender denn je. Während wir gedankenlos durch Apps wischen, sammeln Algorithmen unsere intimsten Geheimnisse. Sie wissen, wann wir schlafen, was wir kaufen, wen wir lieben. Diese digitalen Spione arbeiten im Verborgenen - lautlos, aber unermüdlich.</p>
+                            
+                            <p>Der gläserne Mensch ist längst Realität geworden. Was einst Dystopie war, ist heute Geschäftsmodell. Unsere Aufmerksamkeit wird zur Ware, unsere Privatsphäre zum Handelsgut. Doch wir können noch handeln: durch bewusste Entscheidungen, durch digitale Aufklärung, durch politischen Druck.</p>
+                            
+                            <p>Die Zukunft der Privatsphäre liegt in unseren Händen. Noch."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="erweiterte-aufgaben">
+                        <h5>Mehrteilige Analyseaufgabe:</h5>
+                        <div class="aufgaben-komplex">
+                            <div class="aufgabe-teil">
+                                <strong>Teil A:</strong> Analysiere die Funktion der rhetorischen Frage im ersten Satz.
+                            </div>
+                            <div class="aufgabe-teil">
+                                <strong>Teil B:</strong> Untersuche die Metaphorik ("digitale Spione", "gläserner Mensch") und ihre Wirkung.
+                            </div>
+                            <div class="aufgabe-teil">
+                                <strong>Teil C:</strong> Analysiere den Aufbau: Wie entwickelt sich die Argumentation von Absatz zu Absatz?
+                            </div>
+                            <div class="aufgabe-teil">
+                                <strong>Teil D:</strong> Bewerte die Wirksamkeit des Schlusses.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="solution-toggle-area">
+                        <button class="solution-toggle">Ausführliche Analyse anzeigen</button>
+                        <div class="solution">
+                            <div class="analyse-komplett">
+                                <h6>Teil A: Rhetorische Frage</h6>
+                                <p>Die Eingangsfrage "Sind wir noch Herr unserer eigenen Daten?" fungiert als Leitfrage des gesamten Textes. Sie aktiviert den Leser zur Selbstreflexion und etabliert gleichzeitig das Thema. Der Autor nutzt das Pronomen "wir", um eine Gemeinschaft der Betroffenen zu schaffen und den Leser direkt einzubeziehen.</p>
+                                
+                                <h6>Teil B: Metaphorik-Analyse</h6>
+                                <p><strong>"Digitale Spione":</strong> Diese Metapher verleiht abstrakten Algorithmen menschliche Eigenschaften und betont ihre heimliche, bedrohliche Tätigkeit. Die Personifikation macht die unsichtbare Datensammlung greifbar und erzeugt Unbehagen.</p>
+                                <p><strong>"Gläserner Mensch":</strong> Rekurs auf Orwell'sche Dystopien, macht die totale Durchsichtigkeit des Individuums in der digitalen Welt plastisch. Die Metapher aktiviert kulturelles Wissen über Überwachungsgesellschaften.</p>
+                                
+                                <h6>Teil C: Argumentationsaufbau</h6>
+                                <p><strong>Absatz 1:</strong> Problemdarstellung durch Frage und bedrohliche Bilder</p>
+                                <p><strong>Absatz 2:</strong> Verschärfung durch historischen Bezug ("Was einst Dystopie war"), dann Wendung zum Lösungsansatz</p>
+                                <p><strong>Absatz 3:</strong> Optimistischer Appell mit eindringlichem Nachsatz</p>
+                                <p>Die Entwicklung folgt dem klassischen Schema: These (Problem) → Antithese (Verschärfung) → Synthese (Lösungsmöglichkeit)</p>
+                                
+                                <h6>Teil D: Schlussgestaltung</h6>
+                                <p>Der Schluss ist rhetorisch außerordentlich wirkungsvoll: "Die Zukunft der Privatsphäre liegt in unseren Händen. Noch." Das isolierte "Noch." als Einzelwort-Satz erzeugt Dringlichkeit und lässt den drohenden Kontrollverlust nachklingen. Die Kürze verstärkt die Eindringlichkeit des Appells.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experten-Niveau -->
+            <div class="niveau-bereich">
+                <h3>🔴 Niveau 3: Experten (Note 2-1)</h3>
+                <div class="niveau-beschreibung">
+                    <p><strong>Lernziel:</strong> Professionelle Analyse mit literaturwissenschaftlicher Tiefe</p>
+                </div>
+                
+                <div class="meister-uebung">
+                    <h4>Meisterübung: Intertextuelle Analyse</h4>
+                    <div class="text-example">
+                        <div class="text-source">Essay-Fragment: "Prometheus 2.0" (fiktiv)</div>
+                        <div class="text-content">
+                            <p>"Wie Prometheus das Feuer, so brachte Steve Jobs das iPhone zu den Menschen. Beide Gaben entfesselten ungeahnte Kräfte - und unvorhergesehene Konsequenzen. Der titanische Rebell wurde an den Felsen geschmiedet, der kalifornische Visionär starb jung. Beide hinterließen eine Menschheit, die mit den Folgen ihrer Geschenke ringt.</p>
+                            
+                            <p>Das Smartphone ist unser Feuer geworden: Es wärmt und verbrennt zugleich. Es erhellt unseren Geist mit dem Wissen der Welt - und blendet uns für das Leben, das direkt vor uns liegt. Wir sind alle Prometheus' Erben, gefesselt an unsere leuchtenden Bildschirme, während unsere Träume von digitalen Adlern zerrissen werden.</p>
+                            
+                            <p>Doch vielleicht liegt gerade darin unsere Befreiung: in der Erkenntnis, dass wir die Macht besitzen, unsere Ketten zu lösen. Herakles kommt nicht von außen - er erwacht in uns selbst."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="experten-aufgabe">
+                        <h5>Hochkomplexe Analyseaufgabe:</h5>
+                        <p>Verfasse eine professionelle Analyse (500-600 Wörter), die folgende Aspekte berücksichtigt:</p>
+                        <ul>
+                            <li><strong>Intertextualität:</strong> Analyse der Prometheus-Adaption</li>
+                            <li><strong>Metaphorische Struktur:</strong> Systematische Entwicklung der Feuer-Metaphorik</li>
+                            <li><strong>Paradoxe Formulierungen:</strong> Analyse der Widersprüche als Stilprinzip</li>
+                            <li><strong>Mythologische Transformation:</strong> Wie wird antiker Mythos für moderne Kritik funktionalisiert?</li>
+                            <li><strong>Sprachebenen:</strong> Wechsel zwischen poetischer und analytischer Sprache</li>
+                        </ul>
+                    </div>
+
+                    <div class="solution-toggle-area">
+                        <button class="solution-toggle">Expertenanalyse anzeigen</button>
+                        <div class="solution">
+                            <div class="experten-analyse">
+                                <h6>Professionelle literaturwissenschaftliche Analyse:</h6>
+                                
+                                <p><strong>Intertextuelle Strategie:</strong> Der Text funktionalisiert den Prometheus-Mythos als interpretatives Raster für die Digitalisierungskritik. Die Parallelisierung Jobs-Prometheus schafft eine heroisch-tragische Dimension, die über reine Technikkritik hinausgeht. Beide Figuren werden als ambivalente Kulturbringer dargestellt, deren Gaben Fluch und Segen zugleich sind.</p>
+                                
+                                <p><strong>Metaphorische Kohärenz:</strong> Die Feuer-Metaphorik durchzieht den gesamten Text und wird systematisch entwickelt: vom ursprünglichen prometheischen Feuer über das iPhone als "unser Feuer" bis zur paradoxen Formulierung "wärmt und verbrennt zugleich". Diese metaphorische Konsistenz verleiht der Argumentation innere Logik und emotionale Kohärenz.</p>
+                                
+                                <p><strong>Paradoxe Strukturen:</strong> Der Text lebt von bewusst gesetzten Widersprüchen: "erhellt und blendet", "wärmt und verbrennt", "Geschenke" mit negativen Folgen. Diese Paradoxa sind nicht Denkfehler, sondern Stilprinzip zur Darstellung der Ambivalenz technologischen Fortschritts. Sie spiegeln die Widersprüchlichkeit der behandelten Phänomene wider.</p>
+                                
+                                <p><strong>Mythologische Transformation:</strong> Der antike Mythos wird nicht einfach übertragen, sondern produktiv transformiert. Während der ursprüngliche Prometheus-Mythos die Hybris menschlichen Erkenntnisdrangs thematisiert, fokussiert die moderne Adaption auf die unbeabsichtigten Nebenfolgen technologischer Innovation. Die "digitalen Adler" als moderne Entsprechung der mythischen Strafe zeigen, wie klassische Topoi aktualisiert werden können.</p>
+                                
+                                <p><strong>Sprachliche Gestaltung:</strong> Der Text oszilliert zwischen poetisch-metaphorischer ("leuchtende Bildschirme", "Träume zerrissen") und rational-analytischer Sprache. Diese Mehrsprachigkeit entspricht der thematischen Komplexität und verhindert sowohl naive Technokratie als auch blinde Fortschrittsskepsis.</p>
+                                
+                                <p><strong>Schlusswendung:</strong> Die finale Transformation (Herakles als innere Befreiungskraft) überwindet die pessimistische Grundstimmung durch eine humanistische Wende. Die Selbstermächtigung des Menschen wird als Ausweg aus der technologischen Gefangenschaft präsentiert.</p>
+                                
+                                <p><strong>Gesamtbewertung:</strong> Ein hochgradig reflektierter Text, der durch intertextuelle Verfahren, konsistente Metaphorik und paradoxe Strukturen eine differenzierte Technologiekritik entwickelt. Die mythologische Rahmung verleiht aktuellen Problemen zeitlose Dimension, ohne in Kulturpessimismus zu verfallen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================ FINAL ASSESSMENT UND SELBSTEVALUATION ================ -->
+
+<div class="accordion-section">
+    <div class="accordion-header">
+        <h2>Selbsteinschätzung und Leistungsmessung</h2>
+    </div>
+    <div class="panel">
+        <div class="selbsteinschaetzung">
+            <h3>Wo stehst du? Ehrliche Selbsteinschätzung</h3>
+            
+            <div class="kompetenz-check">
+                <div class="check-bereich">
+                    <h4>📚 Textverständnis</h4>
+                    <div class="self-check-liste">
+                        <label><input type="checkbox"> Ich erfasse Thema und Hauptaussage beim ersten Lesen</label><br>
+                        <label><input type="checkbox"> Ich erkenne die Textsorte und ihre Charakteristika</label><br>
+                        <label><input type="checkbox"> Ich verstehe die Argumentationsstruktur</label><br>
+                        <label><input type="checkbox"> Ich erfasse Zielgruppe und Wirkungsabsicht</label><br>
+                        <label><input type="checkbox"> Ich kann den Text in seinem Kontext einordnen</label>
+                    </div>
+                    <div class="auswertung">
+                        <p><strong>5/5:</strong> Expertenniveau | <strong>3-4/5:</strong> Fortgeschritten | <strong>1-2/5:</strong> Grundlagen üben</p>
+                    </div>
+                </div>
+
+                <div class="check-bereich">
+                    <h4>🎨 Stilmittel-Kompetenz</h4>
+                    <div class="self-check-liste">
+                        <label><input type="checkbox"> Ich erkenne die 10 wichtigsten Stilmittel sicher</label><br>
+                        <label><input type="checkbox"> Ich kann Stilmittel korrekt benennen (Fachbegriffe)</label><br>
+                        <label><input type="checkbox"> Ich analysiere die Wirkung kontextbezogen</label><br>
+                        <label><input type="checkbox"> Ich erkenne das Zusammenspiel mehrerer Stilmittel</label><br>
+                        <label><input type="checkbox"> Ich kann seltene/anspruchsvolle Stilmittel identifizieren</label>
+                    </div>
+                </div>
+
+                <div class="check-bereich">
+                    <h4>✍️ Schreibkompetenz</h4>
+                    <div class="self-check-liste">
+                        <label><input type="checkbox"> Ich schreibe strukturiert und logisch aufgebaut</label><br>
+                        <label><input type="checkbox"> Ich verwende Fachsprache präzise und angemessen</label><br>
+                        <label><input type="checkbox"> Ich belege alle Aussagen mit Textstellen</label><br>
+                        <label><input type="checkbox"> Ich entwickle eine eigene, begründete Position</label><br>
+                        <label><input type="checkbox"> Ich schreibe sprachlich abwechslungsreich und korrekt</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="leistungstest">
+                <h4>🎯 Schneller Leistungstest (20 Minuten)</h4>
+                <div class="test-text">
+                    <p><strong>Testtext:</strong> "Die sozialen Medien sind zu einem Spiegel unserer Gesellschaft geworden - einem zerbrochenen Spiegel, der die Realität verzerrt wiedergibt. Was wir dort sehen, ist nicht das Leben, sondern eine Inszenierung des Lebens. Wir alle sind Schauspieler geworden in einem Drama, das niemand geschrieben hat, aber jeder mitspielt. Die Bühne ist global, das Publikum endlos - und der Applaus wird in Likes gemessen."</p>
+                </div>
+                
+                <div class="test-aufgaben">
+                    <h5>Testaufgaben (je 5 Punkte):</h5>
+                    <ol>
+                        <li>Identifiziere drei Stilmittel und benenne sie korrekt</li>
+                        <li>Analysiere die Wirkung der Spiegel-Metapher</li>
+                        <li>Erkläre die Funktion der Theater-Metaphorik</li>
+                        <li>Bewerte die Überzeugungskraft der Argumentation</li>
+                    </ol>
+                </div>
+
+                <div class="solution-toggle-area">
+                    <button class="solution-toggle">Test-Auswertung anzeigen</button>
+                    <div class="solution">
+                        <div class="test-bewertung">
+                            <h6>Musterlösungen und Bewertung:</h6>
+                            
+                            <div class="test-antwort">
+                                <p><strong>1. Stilmittel (5 Punkte):</strong></p>
+                                <ul>
+                                    <li>Metapher: "Spiegel unserer Gesellschaft" (1 Punkt)</li>
+                                    <li>Erweiterte Metapher: "zerbrochener Spiegel" (1 Punkt)</li>
+                                    <li>Metapher: "Schauspieler in einem Drama" (1 Punkt)</li>
+                                    <li>Metonymie: "Applaus wird in Likes gemessen" (2 Punkte - schwieriger)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="test-antwort">
+                                <p><strong>2. Spiegel-Metapher (5 Punkte):</strong></p>
+                                <p>Die Metapher des "zerbrochenen Spiegels" visualisiert die Verzerrung der Realität in sozialen Medien (2 Punkte). "Zerbrochen" betont, dass das Abbild fragmentiert und entstellt ist (2 Punkte). Die Metapher macht abstrakte Medienkritik konkret erfahrbar (1 Punkt).</p>
+                            </div>
+                            
+                            <div class="test-antwort">
+                                <p><strong>3. Theater-Metaphorik (5 Punkte):</strong></p>
+                                <p>Die erweiterte Theater-Metapher ("Schauspieler", "Drama", "Bühne", "Publikum", "Applaus") strukturiert die gesamte Kritik (2 Punkte). Sie zeigt die Künstlichkeit sozialer Medien auf (2 Punkte) und macht jeden User zum bewussten Darsteller statt authentischen Menschen (1 Punkt).</p>
+                            </div>
+                            
+                            <div class="test-antwort">
+                                <p><strong>4. Überzeugungskraft (5 Punkte):</strong></p>
+                                <p>Hohe Überzeugungskraft durch konsistente Metaphorik (2 Punkte). Die Bilder sind anschaulich und nachvollziehbar (2 Punkte). Kritikpunkt könnte sein: wenig Lösungsvorschläge, eher kulturpessimistisch (1 Punkt).</p>
+                            </div>
+                            
+                            <div class="notenskala">
+                                <h6>Bewertungsskala:</h6>
+                                <ul>
+                                    <li><strong>18-20 Punkte:</strong> Note 1 (Sehr gut) - Expertenniveau</li>
+                                    <li><strong>15-17 Punkte:</strong> Note 2 (Gut) - Fortgeschrittenniveau</li>
+                                    <li><strong>12-14 Punkte:</strong> Note 3 (Befriedigend) - Solide Grundlagen</li>
+                                    <li><strong>9-11 Punkte:</strong> Note 4 (Ausreichend) - Grundlagen üben</li>
+                                    <li><strong>Unter 9 Punkte:</strong> Intensive Wiederholung nötig</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entwicklungsplan">
+                <h4>📈 Dein persönlicher Entwicklungsplan</h4>
+                <div class="plan-kategorien">
+                    <div class="plan-stufe">
+                        <h5>Wenn du Note 4-5 hast:</h5>
+                        <ul>
+                            <li>Täglich 15 Min Stilmittel-Grundlagen wiederholen</li>
+                            <li>Mit Level 1-Übungen beginnen</li>
+                            <li>Schwerpunkt: Textverständnis und einfache Stilmittel</li>
+                            <li>Wöchentlich eine Kurzanalyse (200 Wörter) schreiben</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="plan-stufe">
+                        <h5>Wenn du Note 3 hast:</h5>
+                        <ul>
+                            <li>Level 2-Übungen systematisch durcharbeiten</li>
+                            <li>Schwerpunkt: Wirkungsanalyse und Argumentationsstrukturen</li>
+                            <li>Alle 3 Tage eine mittlere Analyse (300-400 Wörter)</li>
+                            <li>Verschiedene Textsorten üben</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="plan-stufe">
+                        <h5>Wenn du Note 2-1 hast:</h5>
+                        <ul>
+                            <li>Level 3-Übungen und vergleichende Analysen</li>
+                            <li>Schwerpunkt: Literaturwissenschaftliche Tiefe</li>
+                            <li>Wöchentlich eine Expertenanalyse (500+ Wörter)</li>
+                            <li>Intertextualität und komplexe Interpretationsansätze</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================ ABSCHLUSS UND RESSOURCEN ================ -->
+
+<div class="accordion-section">
+    <div class="accordion-header">
+        <h2>Ressourcen und Abschluss</h2>
+    </div>
+    <div class="panel">
+        <div class="ressourcen-sammlung">
+            <h3>Dein Werkzeugkasten für die perfekte Textanalyse</h3>
+            
+            <div class="werkzeug-kategorien">
+                <div class="werkzeug-box">
+                    <h4>Formulierungshilfen</h4>
+                    <div class="formulierung-sammlung">
+                        <h5>Einleitungen:</h5>
+                        <ul>
+                            <li>"Der vorliegende Text thematisiert..."</li>
+                            <li>"In seinem [Jahr] erschienenen [Textsorte] setzt sich [Autor] mit... auseinander"</li>
+                            <li>"[Autor] vertritt in seinem Text die Position, dass..."</li>
+                        </ul>
+                        
+                        <h5>Stilmittel-Analyse:</h5>
+                        <ul>
+                            <li>"Durch den Einsatz von... erzielt der Autor..."</li>
+                            <li>"Besonders auffällig ist die Häufung von..."</li>
+                            <li>"Die Wirkung wird verstärkt durch..."</li>
+                        </ul>
+                        
+                        <h5>Bewertung:</h5>
+                        <ul>
+                            <li>"Die Überzeugungskraft des Textes liegt in..."</li>
+                            <li>"Kritisch zu hinterfragen ist..."</li>
+                            <li>"Insgesamt gelingt es dem Autor..."</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="werkzeug-box">
+                    <h4>Checkliste für die Prüfung</h4>
+                    <div class="pruefungs-checkliste">
+                        <h5>Vor dem Schreiben:</h5>
+                        <ul>
+                            <li>Text mindestens 2x vollständig gelesen?</li>
+                            <li>Stilmittel markiert und benannt?</li>
+                            <li>Grobe Gliederung erstellt?</li>
+                            <li>Zeit eingeteilt?</li>
+                        </ul>
+                        
+                        <h5>Beim Schreiben:</h5>
+                        <ul>
+                            <li>Jede Behauptung mit Textbeleg?</li>
+                            <li>Zeilennummern korrekt angegeben?</li>
+                            <li>Wirkung und nicht nur Benennung?</li>
+                            <li>Logischer Aufbau eingehalten?</li>
+                        </ul>
+                        
+                        <h5>Nach dem Schreiben:</h5>
+                        <ul>
+                            <li>Einleitung und Schluss vorhanden?</li>
+                            <li>Rechtschreibung kontrolliert?</li>
+                            <li>Fachbegriffe korrekt verwendet?</li>
+                            <li>Argumentation schlüssig?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="werkzeug-box">
+                    <h4>SOS-Strategien bei Problemen</h4>
+                    <div class="notfall-hilfen">
+                        <div class="problem-loesung">
+                            <h5>Problem: "Ich finde keine Stilmittel!"</h5>
+                            <p><strong>Lösung:</strong> Konzentriere dich auf Wirkung. Beschreibe, wie bestimmte Formulierungen wirken, auch ohne Fachbegriff.</p>
+                        </div>
+                        
+                        <div class="problem-loesung">
+                            <h5>Problem: "Mir geht die Zeit aus!"</h5>
+                            <p><strong>Lösung:</strong> Prioritäten setzen: Lieber wenige Stilmittel gut analysiert als viele oberflächlich.</p>
+                        </div>
+                        
+                        <div class="problem-loesung">
+                            <h5>Problem: "Ich verstehe den Text nicht!"</h5>
+                            <p><strong>Lösung:</strong> Fokus auf das, was du verstehst. Einzelne Sätze analysieren, dann zusammenfügen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="motivations-abschluss">
+                <h3>Dein Weg zum Erfolg</h3>
+                <div class="erfolgs-philosophie">
+                    <div class="philosophie-punkt">
+                        <h4>Übung macht den Meister</h4>
+                        <p>Jede Textanalyse macht dich besser. Auch vermeintliche "Fehler" sind Lernschritte auf dem Weg zur Perfektion.</p>
+                    </div>
+                    
+                    <div class="philosophie-punkt">
+                        <h4>Qualität vor Quantität</h4>
+                        <p>Lieber wenige Stilmittel richtig und tiefgehend analysiert als viele oberflächlich abgehakt.</p>
+                    </div>
+                    
+                    <div class="philosophie-punkt">
+                        <h4>Vertraue deinem Sprachgefühl</h4>
+                        <p>Du spürst oft intuitiv, wenn etwas besonders wirkt. Vertraue diesem Gefühl und versuche es zu begründen.</p>
+                    </div>
+                    
+                    <div class="philosophie-punkt">
+                        <h4>Bleib neugierig</h4>
+                        <p>Jeder Text hat etwas Interessantes zu bieten. Gehe mit Entdeckerfreude an die Analyse heran.</p>
+                    </div>
+                </div>
+                
+                <div class="finaler-appell">
+                    <h4>Bereit für die Matura/das Abitur?</h4>
+                    <p>Du hast jetzt alle Werkzeuge in der Hand, die du für eine erfolgreiche Textanalyse brauchst. Von den Grundlagen bis zu den Expertenstrategien, von einfachen Stilmitteln bis zu komplexen intertextuellen Bezügen - alles ist da.</p>
+                    
+                    <p>Denk daran: Eine perfekte Textanalyse entsteht nicht über Nacht. Sie ist das Ergebnis von Übung, Reflexion und der Bereitschaft, immer wieder Neues zu entdecken. Nutze diese Übungen regelmäßig, teste dein Können, und hab Vertrauen in deine Fähigkeiten.</p>
+                    
+                    <p><strong>Dein Erfolg beginnt mit dem nächsten Text, den du analysierst. Also: Leg los!</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+                            

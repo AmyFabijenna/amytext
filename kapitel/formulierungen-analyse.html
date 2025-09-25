@@ -87,7 +87,7 @@
             margin-bottom: 15px;
         }
 
-        .toggle-solution {
+        .solution-toggle {
             background: #3498db;
             color: white;
             border: none;
@@ -98,11 +98,11 @@
             transition: background 0.3s;
         }
 
-        .toggle-solution:hover {
+        .solution-toggle:hover {
             background: #2980b9;
         }
 
-        .solution-box {
+        .solution {
             background: #d4edda;
             border-radius: 5px;
             padding: 15px;
@@ -330,8 +330,8 @@
         <p>Analysiere folgenden Ausschnitt und verwende dabei mindestens drei der gelernten Formulierungshilfen:</p>
         <p><em>"Die sozialen Medien haben unsere Kommunikation revolutioniert. Wo früher Briefe Wochen unterwegs waren, erreichen Nachrichten heute binnen Sekunden ihr Ziel. Doch dieser Geschwindigkeit zahlen wir einen Preis: die Tiefe unserer Beziehungen. Sind wir wirklich näher zusammengerückt, oder täuscht die Illusion der Nähe?"</em></p>
         
-        <button class="toggle-solution">Lösungsvorschlag anzeigen</button>
-        <div class="solution-box">
+        <button class="solution-toggle">Lösungsvorschlag anzeigen</button>
+        <div class="solution">
             <p><strong>Lösungsvorschlag:</strong></p>
             <p>"Die Argumentation folgt einer dialektischen Struktur: Zunächst wird die positive Entwicklung der Kommunikationsgeschwindigkeit beschrieben, dann der negative Preis dieser Entwicklung benannt. Besonders überzeugend wirkt die rhetorische Frage am Ende, die die Lesenden zum kritischen Nachdenken über die Qualität digitaler Beziehungen anregt. Die Metapher 'Illusion der Nähe' veranschaulicht eindrücklich den Widerspruch zwischen scheinbarer und tatsächlicher Verbundenheit."</p>
         </div>
@@ -340,25 +340,5 @@
     <div class="warning-box">
         <strong>Wichtig:</strong> Formulierungen sollten nie schematisch übernommen werden, sondern immer an den konkreten Text angepasst werden. Die hier genannten Beispiele dienen als Inspiration und Muster, nicht als starre Vorlagen.
     </div>
-
-    <script>
-        // Accordion-Funktionalität
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                header.classList.toggle('active');
-                const panel = header.nextElementSibling;
-                panel.classList.toggle('active');
-            });
-        });
-
-        // Lösung anzeigen/verbergen
-        document.querySelectorAll('.toggle-solution').forEach(button => {
-            button.addEventListener('click', () => {
-                const solution = button.nextElementSibling;
-                solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
-                button.textContent = solution.style.display === 'block' ? 'Lösung verbergen' : 'Lösungsvorschlag anzeigen';
-            });
-        });
-    </script>
 </body>
 </html>
