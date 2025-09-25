@@ -4,1475 +4,541 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Textgebundene Erörterung - Grundlagen</title>
-    <h2>Was ist eine textgebundene Erörterung?</h2>
-<p>Eine textgebundene Erörterung ist eine <strong>kritische Auseinandersetzung mit einem Ausgangstext</strong>. Du analysierst nicht nur den Inhalt, sondern bewertest die Argumentation des Autors und entwickelst eine eigene, begründete Position zu dem behandelten Thema.</p>
+    <style>
+        /* Accordion-Styles */
+        .accordion-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 5px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
 
-<div class="tip-box">
-    <strong>Zentrale Unterscheidung:</strong><br>
-    <strong>Inhaltsangabe:</strong> Wiedergabe des Textinhalts (WAS steht im Text?)<br>
-    <strong>Erörterung:</strong> Kritische Bewertung (WIE überzeugend ist der Text? WARUM stimme ich zu oder nicht?)
-</div>
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #2980b9, #2573a7);
+        }
 
-<h3>Die drei Säulen einer gelungenen Erörterung:</h3>
-<ol>
-    <li><strong>Textverständnis:</strong> Du zeigst, dass du den Text vollständig verstanden hast</li>
-    <li><strong>Analyse:</strong> Du untersuchst die Argumentation systematisch</li>
-    <li><strong>Bewertung:</strong> Du entwickelst eine eigene, begründete Position</li>
-</ol>
+        .accordion-header.active {
+            background: linear-gradient(135deg, #2573a7, #1c5d8a);
+            border-radius: 8px 8px 0 0;
+        }
 
-<div class="accordion-header">
-    <span>1. Grundlagen der Argumentation verstehen</span>
-    <span class="accordion-icon">+</span>
-</div>
-<div class="panel">
-    <h3>Was ist ein Argument?</h3>
-    <p>Ein Argument besteht aus drei Teilen:</p>
-    
-    <div class="formula-box">
-        <strong>Argumentationsschema:</strong><br>
-        1. <strong>These:</strong> Eine Behauptung (z.B. "Soziale Medien sind schädlich")<br>
-        2. <strong>Begründung:</strong> Warum diese Behauptung stimmt (z.B. "weil sie süchtig machen")<br>
-        3. <strong>Beleg:</strong> Beweis oder Beispiel (z.B. "Studien zeigen 3h tägliche Nutzung bei Jugendlichen")
-    </div>
+        .accordion-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
 
-    <h3>Argumentationstypen erkennen</h3>
-    
-    <h4>Faktenargument</h4>
-    <div class="example-box">
-        Stützt sich auf überprüfbare Daten<br>
-        <em>Beispiel:</em> "Laut Statistik nutzen 80% der Jugendlichen täglich soziale Medien"
-    </div>
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
+        }
 
-    <h4>Autoritätsargument</h4>
-    <div class="example-box">
-        Beruft sich auf Experten<br>
-        <em>Beispiel:</em> "Professor Müller von der Universität Wien warnt vor..."
-    </div>
+        .panel {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-    <h4>Erfahrungsargument</h4>
-    <div class="example-box">
-        Bezieht sich auf alltägliche Beobachtungen<br>
-        <em>Beispiel:</em> "Viele Eltern berichten von Konzentrationsproblemen ihrer Kinder"
-    </div>
-<h4>Analogieargument</h4>
-    <div class="example-box">
-        Zieht Vergleiche<br>
-        <em>Beispiel:</em> "Wie Alkohol kann auch Social Media süchtig machen"
-    </div>
+        .panel.active {
+            max-height: 5000px;
+            padding: 20px;
+        }
 
-    <h3>Schwächen von Argumenten identifizieren</h3>
-    <ul>
-        <li><strong>Pauschalisierung:</strong> "Alle Jugendlichen sind handysüchtig"</li>
-        <li><strong>Fehlende Belege:</strong> Behauptungen ohne Beweise</li>
-        <li><strong>Emotionale Manipulation:</strong> Angstmache statt sachlicher Argumentation</li>
-        <li><strong>Einseitigkeit:</strong> Nur eine Perspektive berücksichtigt</li>
-    </ul>
-</div>
+        /* Spezifische Styles für diese Seite */
+        .formula-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            border-radius: 0 8px 8px 0;
+        }
 
-<div class="accordion-header">
-    <span>2. Systematische Textanalyse</span>
-    <span class="accordion-icon">+</span>
-</div>
-<div class="panel">
-    <h3>Schritt 1: Ersten Überblick gewinnen</h3>
-    <p>Beim ersten Lesen:</p>
-    <ul>
-        <li>Worum geht es grundsätzlich?</li>
-        <li>Was ist die zentrale These des Autors?</li>
-        <li>Welche Grundhaltung hat der Autor (befürwortend, kritisch, neutral)?</li>
-    </ul>
+        .warning-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
 
-    <h3>Schritt 2: Strukturanalyse</h3>
-    <div class="tip-box">
-        <strong>Markierungssystem entwickeln:</strong>
-        <ul>
-            <li><strong>Rot:</strong> Hauptthese unterstreichen</li>
-            <li><strong>Blau:</strong> Pro-Argumente markieren</li>
-            <li><strong>Gelb:</strong> Contra-Argumente markieren</li>
-            <li><strong>Grün:</strong> Beispiele und Belege einkreisen</li>
-            <li><strong>Orange:</strong> Rhetorische Mittel notieren</li>
-        </ul>
-    </div>
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
 
-    <h3>Schritt 3: Argumentationsstruktur erfassen</h3>
-    <p>Fragen zur Struktur:</p>
-    <ul>
-        <li>Wie ist der Text aufgebaut?</li>
-        <li>Welche Argumente führt der Autor in welcher Reihenfolge an?</li>
-        <li>Gibt es eine Steigerung oder einen roten Faden?</li>
-        <li>Wie verknüpft der Autor seine Argumente?</li>
-    </ul>
-</div>
+        .example-box {
+            background: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
 
-<div class="accordion-header">
-    <span>3. Aufbau und Struktur meistern</span>
-    <span class="accordion-icon">+</span>
-</div>
-<div class="panel">
-    <h3>Gesamtstruktur (500-600 Wörter)</h3>
-    
-    <table>
-        <tr>
-            <th>Textteil</th>
-            <th>Umfang</th>
-            <th>Inhalt</th>
-        </tr>
-        <tr>
-            <td><strong>Einleitung</strong></td>
-            <td>80-100 Wörter</td>
-            <td>
-                • Hinführung zum Thema<br>
-                • Textangabe (Autor, Titel, Jahr, Medium)<br>
-                • Zentrale These des Autors<br>
-                • Überleitung zum Hauptteil
-            </td>
-        </tr>
-        <tr>
-            <td><strong>Hauptteil A: Textanalyse</strong></td>
-            <td>150-180 Wörter</td>
-            <td>
-                • Argumentationsstruktur<br>
-                • Sprachliche Mittel<br>
-                • Bewertung der Überzeugungskraft
-            </td>
-        </tr>
-        <tr>
-            <td><strong>Hauptteil B: Stellungnahme</strong></td>
-            <td>200-220 Wörter</td>
-            <td>
-                • Pro-Argumente für die Autorenposition<br>
-                • Contra-Argumente und Kritikpunkte<br>
-                • Eigene Position mit Begründung
-            </td>
-        </tr>
-        <tr>
-            <td><strong>Schluss</strong></td>
-            <td>100-120 Wörter</td>
-            <td>
-                • Zusammenfassung der wichtigsten Erkenntnisse<br>
-                • Persönliches Fazit<br>
-                • Ausblick oder weiterführende Gedanken
-            </td>
-        </tr>
-    </table>
-</div>
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
 
-<div class="accordion-header">
-    <span>4. Die perfekte Einleitung</span>
-    <span class="accordion-icon">+</span>
-</div>
-<div class="panel">
-    <h3>Aufgaben der Einleitung</h3>
-    <ol>
-        <li><strong>Interesse wecken:</strong> Den Leser ins Thema hineinführen</li>
-        <li><strong>Orientierung geben:</strong> Textangabe und Kernthese</li>
-        <li><strong>Vorschau bieten:</strong> Was wird im Hauptteil behandelt?</li>
-    </ol>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
 
-    <h3>Vier-Sätze-Struktur</h3>
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
 
-    <h4>Satz 1: Problemstellung</h4>
-    <p>Führe in das Thema ein, ohne den Text zu erwähnen.</p>
-    <div class="example-box">
-        <strong>Varianten:</strong>
-        <ul>
-            <li>"In einer Zeit, da... wird intensiv diskutiert..."</li>
-            <li>"Während manche..., argumentieren andere..."</li>
-            <li>"Das Thema... beschäftigt zunehmend..."</li>
-            <li>"Die Frage, ob... spaltet die Gesellschaft"</li>
-        </ul>
-    </div>
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
 
-    <h4>Satz 2: Textangabe</h4>
-    <p>Vollständige Quellenangabe mit Kernthese.</p>
-    <div class="formula-box">
-        <strong>Formel:</strong> "[Autor] [Textsorte] '[Titel]' ([Jahr/Medium]) [Hauptaussage]"
-    </div>
-    
-    <div class="example-box">
-        <strong>Beispiel:</strong> "Max Mustermann behandelt in seinem Kommentar 'Digitale Demenz?' (Die Zeit, 2024) die umstrittene Frage nach den Auswirkungen digitaler Medien auf die Denkfähigkeit von Jugendlichen und kommt zu dem Schluss, dass intensive Smartphone-Nutzung die Konzentrationsfähigkeit nachhaltig schädigt."
-    </div>
-</div>
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-<div class="accordion-header">
-    <span>5. Eigene Stellungnahme entwickeln</span>
-    <span class="accordion-icon">+</span>
-</div>
-<div class="panel">
-    <h3>Von der Analyse zur eigenen Position</h3>
-    <p>Die Stellungnahme ist deine Chance, zu zeigen, dass du nicht nur den Text verstanden hast, sondern dir auch eine fundierte Meinung bilden kannst.</p>
+        .checklist {
+            margin: 20px 0;
+        }
 
-    <h3>Argumentationstechniken</h3>
+        .checklist-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
 
-    <h4>Pro-Argumente für die Autorenposition</h4>
-    <p>Welche Argumente des Autors sind besonders überzeugend?</p>
-    
-    <div class="example-box">
-        <strong>Beispiel:</strong> "Mustermanns Verweis auf die neurobiologischen Studien ist insofern berechtigt, als tatsächlich nachgewiesen wurde, dass intensive Bildschirmnutzung die Aufmerksamkeitsspanne verkürzen kann. Die von ihm zitierten Langzeitstudien liefern hierfür empirische Evidenz."
-    </div>
+        .checklist-item input {
+            margin-right: 10px;
+        }
 
-    <h4>Contra-Argumente und Kritikpunkte</h4>
-    <p>Wo liegen Schwächen in der Argumentation?</p>
-    
-    <div class="example-box">
-        <strong>Beispiel:</strong> "Problematisch ist jedoch Mustermanns pauschale Verurteilung aller digitalen Medien. Er unterscheidet nicht zwischen sinnvoller und sinnloser Nutzung und ignoriert Studien, die positive Effekte von digitalem Lernen belegen."
-    </div>
-</div>
+        .content-body {
+            padding: 20px;
+            line-height: 1.6;
+        }
 
-<div class="accordion-header">
-    <span>6. Der überzeugende Schluss</span>
-    <span class="accordion-icon">+</span>
-</div>
-<div class="panel">
-    <h3>Aufgaben des Schlusses</h3>
-    <ol>
-        <li><strong>Zusammenfassen:</strong> Wichtigste Erkenntnisse bündeln</li>
-        <li><strong>Abrunden:</strong> Gedankengang abschließen</li>
-        <li><strong>Perspektive eröffnen:</strong> Weiterführende Gedanken anbieten</li>
-    </ol>
+        h2, h3, h4 {
+            color: #2c3e50;
+            margin: 20px 0 10px;
+        }
 
-    <h3>Drei-Sätze-Struktur</h3>
+        h2 {
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
 
-    <h4>Satz 1: Zusammenfassung</h4>
-    <p>Fasse deine Hauptargumente knapp zusammen.</p>
-    <div class="example-box">
-        <strong>Beispiel:</strong> "Die Analyse hat gezeigt, dass Mustermanns Argumentation zwar auf valide Studien zurückgreift, aber durch pauschale Urteile und Einseitigkeit an Überzeugungskraft verliert."
-    </div>
+        p {
+            margin-bottom: 15px;
+        }
 
-    <h4>Satz 2: Eigenes Fazit</h4>
-    <p>Formuliere deine abschließende Bewertung.</p>
-    <div class="example-box">
-        <strong>Beispiel:</strong> "Insgesamt erscheint eine differenziertere Betrachtung notwendig, die sowohl die Risiken als auch die Bildungschancen digitaler Medien ernst nimmt."
-    </div>
-</div>
+        ul, ol {
+            margin: 15px 0 15px 25px;
+        }
 
-<div class="accordion-header">
-    <span>7. Häufige Fehler und wie du sie vermeidest</span>
-    <span class="accordion-icon">+</span>
-</div>
-<div class="panel">
-    <h3>Die größten Stolperfallen</h3>
+        li {
+            margin-bottom: 8px;
+        }
 
-    <h4>1. Inhaltsangabe statt Erörterung</h4>
-    <div class="warning-box">
-        <strong>Falsch:</strong> "Der Autor sagt, dass Smartphones schlecht sind. Dann erklärt er, warum sie schlecht sind. Zum Schluss meint er, dass man sie nicht benutzen soll."<br><br>
-        <strong>Richtig:</strong> "Der Autor argumentiert mit neurobiologischen Studien überzeugend, übersieht jedoch die positiven Aspekte digitaler Medien..."
-    </div>
+        .expand-all-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px 0;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
 
-    <h4>2. Fehlende eigene Position</h4>
-    <div class="warning-box">
-        <strong>Problem:</strong> Nur Zusammenfassung der Autorenposition ohne eigene Stellungnahme<br><br>
-        <strong>Lösung:</strong> Eigene Argumente entwickeln und begründet Position beziehen
-    </div>
-
-    <h4>3. Unwissenschaftliche Sprache</h4>
-    <table>
-        <tr>
-            <th>Problematisch</th>
-            <th>Besser</th>
-        </tr>
-        <tr>
-            <td>"Ich finde..."</td>
-            <td>"Die Argumentation erweist sich als..."</td>
-        </tr>
-        <tr>
-            <td>"Das ist Blödsinn"</td>
-            <td>"Diese Position ist nicht haltbar"</td>
-        </tr>
-        <tr>
-            <td>"Alle wissen, dass..."</td>
-            <td>"Studien belegen, dass..."</td>
-        </tr>
-    </table>
-</div>
-
-<div class="success-box">
-    <h3>Zusammenfassung</h3>
-    <p>Eine gelungene textgebundene Erörterung verbindet analytisches Denken mit argumentativer Kompetenz. Du zeigst, dass du einen Text nicht nur verstehst, sondern auch kritisch bewerten und eine eigene, begründete Position entwickeln kannst. Mit der systematischen Herangehensweise aus diesem Handbuch bist du bestens für die nächste Schularbeit gerüstet!</p>
-</div>
-
-<style>
-.formula-box {
-    background: #e3f2fd;
-    border-left: 4px solid #1976d2;
-    padding: 15px;
-    margin: 15px 0;
-    font-family: monospace;
-    border-radius: 0 8px 8px 0;
-}
-
-.warning-box {
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 15px 0;
-}
-
-.success-box {
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 15px 0;
-}
-
-.exercise-box {
-    background: #e8f4f8;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
-}
-
-.toggle-solution {
-    background: #3498db;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.3s;
-}
-
-.toggle-solution:hover {
-    background: #2980b9;
-}
-
-.solution-box {
-    background: #d4edda;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 15px;
-    display: none;
-}
-</style>
-
-
-
+        .expand-all-btn:hover {
+            background: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
-    
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h1>Deutschmatura</h1>
-            <p>Komplettes Handbuch</p>
-        </div>
+    <div class="content-body">
+        <h1>Textgebundene Erörterung - Grundlagen</h1>
         
-        <div class="nav-menu">
-            <div class="nav-section">
-                <div class="nav-section-title">Grundlagen</div>
-                <div class="nav-item">
-                    <a href="willkommen.html" class="nav-link">Willkommen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/eroerterung-grundlagen.html" class="nav-link active">Textgebundene Erörterung</a>
-                </div>
+        <div class="intro-section">
+            <h2>Was ist eine textgebundene Erörterung?</h2>
+            <p>Eine textgebundene Erörterung ist eine <strong>kritische Auseinandersetzung mit einem Ausgangstext</strong>. Du analysierst nicht nur den Inhalt, sondern bewertest die Argumentation des Autors und entwickelst eine eigene, begründete Position zu dem behandelten Thema.</p>
+            
+            <div class="tip-box">
+                <strong>Zentrale Unterscheidung:</strong><br>
+                <strong>Inhaltsangabe:</strong> Wiedergabe des Textinhalts (WAS steht im Text?)<br>
+                <strong>Erörterung:</strong> Kritische Bewertung (WIE überzeugend ist der Text? WARUM stimme ich zu oder nicht?)
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-title">Textanalyse</div>
-                <div class="nav-item">
-                    <a href="kapitel/textanalyse-grundlagen.html" class="nav-link">Grundlagen der Textanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/stilmittel-rhetorik.html" class="nav-link">Stilmittel & Rhetorik</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/argumentationsanalyse.html" class="nav-link">Argumentationsanalyse</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/sprachanalyse.html" class="nav-link">Sprachanalyse</a>
-                </div>
+            <h3>Die drei Säulen einer gelungenen Erörterung:</h3>
+            <ol>
+                <li><strong>Textverständnis:</strong> Du zeigst, dass du den Text vollständig verstanden hast</li>
+                <li><strong>Analyse:</strong> Du untersuchst die Argumentation systematisch</li>
+                <li><strong>Bewertung:</strong> Du entwickelst eine eigene, begründete Position</li>
+            </ol>
+        </div>
+
+        <button class="expand-all-btn" onclick="toggleAllAccordions()">Alle Kapitel aufklappen/zuklappen</button>
+
+        <!-- Kapitel 1 -->
+        <div class="accordion-header">
+            <span>1. Grundlagen der Argumentation verstehen</span>
+            <span class="accordion-icon">+</span>
+        </div>
+        <div class="panel">
+            <h3>Was ist ein Argument?</h3>
+            <p>Ein Argument besteht aus drei Teilen:</p>
+            
+            <div class="formula-box">
+                <strong>Argumentationsschema:</strong><br>
+                1. <strong>These:</strong> Eine Behauptung (z.B. "Soziale Medien sind schädlich")<br>
+                2. <strong>Begründung:</strong> Warum diese Behauptung stimmt (z.B. "weil sie süchtig machen")<br>
+                3. <strong>Beleg:</strong> Beweis oder Beispiel (z.B. "Studien zeigen 3h tägliche Nutzung bei Jugendlichen")
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-title">Textinterpretation</div>
-                <div class="nav-item">
-                    <a href="kapitel/textinterpretation.html" class="nav-link">Textinterpretation</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/literarische-epochen.html" class="nav-link">Literarische Epochen</a>
-                </div>
+            <h3>Argumentationstypen erkennen</h3>
+            
+            <h4>Faktenargument</h4>
+            <div class="example-box">
+                Stützt sich auf überprüfbare Daten<br>
+                <em>Beispiel:</em> "Laut Statistik nutzen 80% der Jugendlichen täglich soziale Medien"
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-title">Textsorten</div>
-                <div class="nav-item">
-                    <a href="kapitel/textsorten-uebersicht.html" class="nav-link">Textsorten-Übersicht</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/lyrik-analyse.html" class="nav-link">Lyrik analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/prosa-analyse.html" class="nav-link">Prosa analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/drama-analyse.html" class="nav-link">Drama analysieren</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/sachtext-analyse.html" class="nav-link">Sachtext analysieren</a>
-                </div>
+            <h4>Autoritätsargument</h4>
+            <div class="example-box">
+                Beruft sich auf Experten<br>
+                <em>Beispiel:</em> "Professor Müller von der Universität Wien warnt vor..."
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-title">Praxisbeispiele</div>
-                <div class="nav-item">
-                    <a href="kapitel/beispiel-kolumne.html" class="nav-link">Beispiel: Kolumne</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/beispiel-sachtext.html" class="nav-link">Beispiel: Sachtext</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/musterloesungen.html" class="nav-link">Musterlösungen</a>
-                </div>
+            <h4>Erfahrungsargument</h4>
+            <div class="example-box">
+                Bezieht sich auf alltägliche Beobachtungen<br>
+                <em>Beispiel:</em> "Viele Eltern berichten von Konzentrationsproblemen ihrer Kinder"
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-title">Formulierungshilfen</div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-einleitung.html" class="nav-link">Einleitung & Schluss</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-analyse.html" class="nav-link">Analyse-Formulierungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/formulierungen-interpretation.html" class="nav-link">Interpretations-Formulierungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/fachbegriffe.html" class="nav-link">Fachbegriffe</a>
-                </div>
+            <h4>Analogieargument</h4>
+            <div class="example-box">
+                Zieht Vergleiche<br>
+                <em>Beispiel:</em> "Wie Alkohol kann auch Social Media süchtig machen"
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-title">Übungen</div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-stilmittel.html" class="nav-link">Stilmittel-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-analyse.html" class="nav-link">Analyse-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-eroerterung.html" class="nav-link">Erörterungs-Übungen</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/uebungen-interpretation.html" class="nav-link">Interpretations-Übungen</a>
-                </div>
+            <h3>Schwächen von Argumenten identifizieren</h3>
+            <ul>
+                <li><strong>Pauschalisierung:</strong> "Alle Jugendlichen sind handysüchtig"</li>
+                <li><strong>Fehlende Belege:</strong> Behauptungen ohne Beweise</li>
+                <li><strong>Emotionale Manipulation:</strong> Angstmache statt sachlicher Argumentation</li>
+                <li><strong>Einseitigkeit:</strong> Nur eine Perspektive berücksichtigt</li>
+            </ul>
+        </div>
+
+        <!-- Kapitel 2 -->
+        <div class="accordion-header">
+            <span>2. Systematische Textanalyse</span>
+            <span class="accordion-icon">+</span>
+        </div>
+        <div class="panel">
+            <h3>Schritt 1: Ersten Überblick gewinnen</h3>
+            <p>Beim ersten Lesen:</p>
+            <ul>
+                <li>Worum geht es grundsätzlich?</li>
+                <li>Was ist die zentrale These des Autors?</li>
+                <li>Welche Grundhaltung hat der Autor (befürwortend, kritisch, neutral)?</li>
+            </ul>
+
+            <h3>Schritt 2: Strukturanalyse</h3>
+            <div class="tip-box">
+                <strong>Markierungssystem entwickeln:</strong>
+                <ul>
+                    <li><strong>Rot:</strong> Hauptthese unterstreichen</li>
+                    <li><strong>Blau:</strong> Pro-Argumente markieren</li>
+                    <li><strong>Gelb:</strong> Contra-Argumente markieren</li>
+                    <li><strong>Grün:</strong> Beispiele und Belege einkreisen</li>
+                    <li><strong>Orange:</strong> Rhetorische Mittel notieren</li>
+                </ul>
             </div>
 
-            <div class="nav-section">
-                <div class="nav-section-title">Prüfungsvorbereitung</div>
-                <div class="nav-item">
-                    <a href="kapitel/zeitmanagement.html" class="nav-link">Zeitmanagement</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/ueberarbeitung.html" class="nav-link">Überarbeitungstechniken</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/checklisten.html" class="nav-link">Checklisten</a>
-                </div>
-                <div class="nav-item">
-                    <a href="kapitel/haeufige-fehler.html" class="nav-link">Häufige Fehler</a>
-                </div>
+            <h3>Schritt 3: Argumentationsstruktur erfassen</h3>
+            <p>Fragen zur Struktur:</p>
+            <ul>
+                <li>Wie ist der Text aufgebaut?</li>
+                <li>Welche Argumente führt der Autor in welcher Reihenfolge an?</li>
+                <li>Gibt es eine Steigerung oder einen roten Faden?</li>
+                <li>Wie verknüpft der Autor seine Argumente?</li>
+            </ul>
+        </div>
+
+        <!-- Kapitel 3 -->
+        <div class="accordion-header">
+            <span>3. Aufbau und Struktur meistern</span>
+            <span class="accordion-icon">+</span>
+        </div>
+        <div class="panel">
+            <h3>Gesamtstruktur (500-600 Wörter)</h3>
+            
+            <table>
+                <tr>
+                    <th>Textteil</th>
+                    <th>Umfang</th>
+                    <th>Inhalt</th>
+                </tr>
+                <tr>
+                    <td><strong>Einleitung</strong></td>
+                    <td>80-100 Wörter</td>
+                    <td>
+                        • Hinführung zum Thema<br>
+                        • Textangabe (Autor, Titel, Jahr, Medium)<br>
+                        • Zentrale These des Autors<br>
+                        • Überleitung zum Hauptteil
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Hauptteil A: Textanalyse</strong></td>
+                    <td>150-180 Wörter</td>
+                    <td>
+                        • Argumentationsstruktur<br>
+                        • Sprachliche Mittel<br>
+                        • Bewertung der Überzeugungskraft
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Hauptteil B: Stellungnahme</strong></td>
+                    <td>200-220 Wörter</td>
+                    <td>
+                        • Pro-Argumente für die Autorenposition<br>
+                        • Contra-Argumente und Kritikpunkte<br>
+                        • Eigene Position mit Begründung
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Schluss</strong></td>
+                    <td>100-120 Wörter</td>
+                    <td>
+                        • Zusammenfassung der wichtigsten Erkenntnisse<br>
+                        • Persönliches Fazit<br>
+                        • Ausblick oder weiterführende Gedanken
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Kapitel 4 -->
+        <div class="accordion-header">
+            <span>4. Die perfekte Einleitung</span>
+            <span class="accordion-icon">+</span>
+        </div>
+        <div class="panel">
+            <h3>Aufgaben der Einleitung</h3>
+            <ol>
+                <li><strong>Interesse wecken:</strong> Den Leser ins Thema hineinführen</li>
+                <li><strong>Orientierung geben:</strong> Textangabe und Kernthese</li>
+                <li><strong>Vorschau bieten:</strong> Was wird im Hauptteil behandelt?</li>
+            </ol>
+
+            <h3>Vier-Sätze-Struktur</h3>
+
+            <h4>Satz 1: Problemstellung</h4>
+            <p>Führe in das Thema ein, ohne den Text zu erwähnen.</p>
+            <div class="example-box">
+                <strong>Varianten:</strong>
+                <ul>
+                    <li>"In einer Zeit, da... wird intensiv diskutiert..."</li>
+                    <li>"Während manche..., argumentieren andere..."</li>
+                    <li>"Das Thema... beschäftigt zunehmend..."</li>
+                    <li>"Die Frage, ob... spaltet die Gesellschaft"</li>
+                </ul>
+            </div>
+
+            <h4>Satz 2: Textangabe</h4>
+            <p>Vollständige Quellenangabe mit Kernthese.</p>
+            <div class="formula-box">
+                <strong>Formel:</strong> "[Autor] [Textsorte] '[Titel]' ([Jahr/Medium]) [Hauptaussage]"
+            </div>
+            
+            <div class="example-box">
+                <strong>Beispiel:</strong> "Max Mustermann behandelt in seinem Kommentar 'Digitale Demenz?' (Die Zeit, 2024) die umstrittene Frage nach den Auswirkungen digitaler Medien auf die Denkfähigkeit von Jugendlichen und kommt zu dem Schluss, dass intensive Smartphone-Nutzung die Konzentrationsfähigkeit nachhaltig schädigt."
             </div>
         </div>
-    </nav>
 
-    <main class="main-content">
-        <div class="content-container">
-            <header class="content-header">
-                <h1>Textgebundene Erörterung</h1>
-                <p>Umfassendes Handbuch für die 9. Schulstufe - Von der Grundlage zur Note SEHR GUT</p>
-            </header>
-
-            <div class="content-body">
-                <div class="intro-section">
-                    <h2>Was ist eine textgebundene Erörterung?</h2>
-                    <p>Eine textgebundene Erörterung ist eine <strong>kritische Auseinandersetzung mit einem Ausgangstext</strong>. Du analysierst nicht nur den Inhalt, sondern bewertest die Argumentation des Autors und entwickelst eine eigene, begründete Position zu dem behandelten Thema.</p>
-                    
-                    <div class="tip-box">
-                        <strong>Zentrale Unterscheidung:</strong><br>
-                        <strong>Inhaltsangabe:</strong> Wiedergabe des Textinhalts (WAS steht im Text?)<br>
-                        <strong>Erörterung:</strong> Kritische Bewertung (WIE überzeugend ist der Text? WARUM stimme ich zu oder nicht?)
-                    </div>
-
-                    <h3>Die drei Säulen einer gelungenen Erörterung:</h3>
-                    <ol>
-                        <li><strong>Textverständnis:</strong> Du zeigst, dass du den Text vollständig verstanden hast</li>
-                        <li><strong>Analyse:</strong> Du untersuchst die Argumentation systematisch</li>
-                        <li><strong>Bewertung:</strong> Du entwickelst eine eigene, begründete Position</li>
-                    </ol>
-                </div>
-
-                <button class="expand-all-btn" onclick="toggleAll()">Alle Kapitel aufklappen</button>
-
-                <!-- Kapitel 1 -->
-                <button class="collapsible">1. Grundlagen der Argumentation verstehen</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Was ist ein Argument?</h3>
-                        <p>Ein Argument besteht aus drei Teilen:</p>
-                        
-                        <div class="formula-box">
-                            <strong>Argumentationsschema:</strong><br>
-                            1. <strong>These:</strong> Eine Behauptung (z.B. "Soziale Medien sind schädlich")<br>
-                            2. <strong>Begründung:</strong> Warum diese Behauptung stimmt (z.B. "weil sie süchtig machen")<br>
-                            3. <strong>Beleg:</strong> Beweis oder Beispiel (z.B. "Studien zeigen 3h tägliche Nutzung bei Jugendlichen")
-                        </div>
-
-                        <h3>Argumentationstypen erkennen</h3>
-                        
-                        <h4>Faktenargument</h4>
-                        <div class="example-box">
-                            Stützt sich auf überprüfbare Daten<br>
-                            <em>Beispiel:</em> "Laut Statistik nutzen 80% der Jugendlichen täglich soziale Medien"
-                        </div>
-
-                        <h4>Autoritätsargument</h4>
-                        <div class="example-box">
-                            Beruft sich auf Experten<br>
-                            <em>Beispiel:</em> "Professor Müller von der Universität Wien warnt vor..."
-                        </div>
-
-                        <h4>Erfahrungsargument</h4>
-                        <div class="example-box">
-                            Bezieht sich auf alltägliche Beobachtungen<br>
-                            <em>Beispiel:</em> "Viele Eltern berichten von Konzentrationsproblemen ihrer Kinder"
-                        </div>
-
-                        <h4>Analogieargument</h4>
-                        <div class="example-box">
-                            Zieht Vergleiche<br>
-                            <em>Beispiel:</em> "Wie Alkohol kann auch Social Media abhängig machen"
-                        </div>
-
-                        <h3>Schwächen von Argumenten identifizieren</h3>
-                        <ul>
-                            <li><strong>Pauschalisierung:</strong> "Alle Jugendlichen sind handysüchtig"</li>
-                            <li><strong>Fehlende Belege:</strong> Behauptungen ohne Beweise</li>
-                            <li><strong>Emotionale Manipulation:</strong> Angstmache statt sachlicher Argumentation</li>
-                            <li><strong>Einseitigkeit:</strong> Nur eine Perspektive berücksichtigt</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Kapitel 2 -->
-                <button class="collapsible">2. Systematische Textanalyse</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Schritt 1: Ersten Überblick gewinnen</h3>
-                        <p>Beim ersten Lesen:</p>
-                        <ul>
-                            <li>Worum geht es grundsätzlich?</li>
-                            <li>Was ist die zentrale These des Autors?</li>
-                            <li>Welche Grundhaltung hat der Autor (befürwortend, kritisch, neutral)?</li>
-                        </ul>
-
-                        <h3>Schritt 2: Strukturanalyse</h3>
-                        <div class="tip-box">
-                            <strong>Markierungssystem entwickeln:</strong>
-                            <ul>
-                                <li><strong>Rot:</strong> Hauptthese unterstreichen</li>
-                                <li><strong>Blau:</strong> Pro-Argumente markieren</li>
-                                <li><strong>Gelb:</strong> Contra-Argumente markieren</li>
-                                <li><strong>Grün:</strong> Beispiele und Belege einkreisen</li>
-                                <li><strong>Orange:</strong> Rhetorische Mittel notieren</li>
-                            </ul>
-                        </div>
-
-                        <h3>Schritt 3: Argumentationsstruktur erfassen</h3>
-                        <p>Fragen zur Struktur:</p>
-                        <ul>
-                            <li>Wie ist der Text aufgebaut?</li>
-                            <li>Welche Argumente führt der Autor in welcher Reihenfolge an?</li>
-                            <li>Gibt es eine Steigerung oder einen roten Faden?</li>
-                            <li>Wie verknüpft der Autor seine Argumente?</li>
-                        </ul>
-
-                        <h3>Schritt 4: Sprachanalyse</h3>
-                        
-                        <h4>Tonfall identifizieren:</h4>
-                        <ul>
-                            <li>Sachlich-neutral vs. emotional-wertend</li>
-                            <li>Fachsprache vs. Alltagssprache</li>
-                            <li>Objektiv vs. subjektiv</li>
-                        </ul>
-
-                        <h4>Rhetorische Mittel erkennen:</h4>
-                        <ul>
-                            <li>Metaphern und Vergleiche</li>
-                            <li>Rhetorische Fragen</li>
-                            <li>Ironie oder Sarkasmus</li>
-                            <li>Wiederholungen zur Betonung</li>
-                        </ul>
-
-                        <h3>Schritt 5: Bewertung der Argumente</h3>
-                        <div class="checklist">
-                            <h4>Qualitätskriterien:</h4>
-                            <ul>
-                                <li>Sind die Argumente logisch?</li>
-                                <li>Sind die Belege glaubwürdig?</li>
-                                <li>Werden Gegenargumente berücksichtigt?</li>
-                                <li>Ist die Schlussfolgerung nachvollziehbar?</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kapitel 3 -->
-                <button class="collapsible">3. Aufbau und Struktur meistern</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Gesamtstruktur (500-600 Wörter)</h3>
-                        
-                        <table>
-                            <tr>
-                                <th>Textteil</th>
-                                <th>Umfang</th>
-                                <th>Inhalt</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Einleitung</strong></td>
-                                <td>80-100 Wörter</td>
-                                <td>
-                                    • Hinführung zum Thema<br>
-                                    • Textangabe (Autor, Titel, Jahr, Medium)<br>
-                                    • Zentrale These des Autors<br>
-                                    • Überleitung zum Hauptteil
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Hauptteil A: Textanalyse</strong></td>
-                                <td>150-180 Wörter</td>
-                                <td>
-                                    • Argumentationsstruktur<br>
-                                    • Sprachliche Mittel<br>
-                                    • Bewertung der Überzeugungskraft
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Hauptteil B: Stellungnahme</strong></td>
-                                <td>200-220 Wörter</td>
-                                <td>
-                                    • Pro-Argumente für die Autorenposition<br>
-                                    • Contra-Argumente und Kritikpunkte<br>
-                                    • Eigene Position mit Begründung
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Schluss</strong></td>
-                                <td>100-120 Wörter</td>
-                                <td>
-                                    • Zusammenfassung der wichtigsten Erkenntnisse<br>
-                                    • Persönliches Fazit<br>
-                                    • Ausblick oder weiterführende Gedanken
-                                </td>
-                            </tr>
-                        </table>
-
-                        <h3>Absatzgliederung</h3>
-                        <p>Jeder Absatz sollte:</p>
-                        <ul>
-                            <li>Eine zentrale Idee behandeln</li>
-                            <li>Mit einem Themensatz beginnen</li>
-                            <li>Durch Beispiele gestützt werden</li>
-                            <li>Zum nächsten Absatz überleiten</li>
-                        </ul>
-
-                        <div class="example-box">
-                            <strong>Beispiel für Absatzaufbau:</strong><br>
-                            1. <strong>Themensatz:</strong> "Ein schwerwiegender Kritikpunkt an Mustermannns Argumentation ist..."<br>
-                            2. <strong>Erläuterung:</strong> "Der Autor übersieht dabei..."<br>
-                            3. <strong>Beispiel:</strong> "So zeigt sich etwa..."<br>
-                            4. <strong>Schlussfolgerung:</strong> "Dies führt dazu, dass..."<br>
-                            5. <strong>Überleitung:</strong> "Darüber hinaus..."
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kapitel 4 -->
-                <button class="collapsible">4. Die perfekte Einleitung</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Aufgaben der Einleitung</h3>
-                        <ol>
-                            <li><strong>Interesse wecken:</strong> Den Leser ins Thema hineinführen</li>
-                            <li><strong>Orientierung geben:</strong> Textangabe und Kernthese</li>
-                            <li><strong>Vorschau bieten:</strong> Was wird im Hauptteil behandelt?</li>
-                        </ol>
-
-                        <h3>Vier-Sätze-Struktur</h3>
-
-                        <h4>Satz 1: Problemstellung</h4>
-                        <p>Führe in das Thema ein, ohne den Text zu erwähnen.</p>
-                        <div class="example-box">
-                            <strong>Varianten:</strong>
-                            <ul>
-                                <li>"In einer Zeit, da... wird intensiv diskutiert..."</li>
-                                <li>"Während manche..., argumentieren andere..."</li>
-                                <li>"Das Thema... beschäftigt zunehmend..."</li>
-                                <li>"Die Frage, ob... spaltet die Gesellschaft"</li>
-                            </ul>
-                        </div>
-
-                        <h4>Satz 2: Textangabe</h4>
-                        <p>Vollständige Quellenangabe mit Kernthese.</p>
-                        <div class="formula-box">
-                            <strong>Formel:</strong> "[Autor] [Textsorte] '[Titel]' ([Jahr/Medium]) [Hauptaussage]"
-                        </div>
-                        
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Max Mustermann behandelt in seinem Kommentar 'Digitale Demenz?' (Die Zeit, 2024) die umstrittene Frage nach den Auswirkungen digitaler Medien auf die Denkfähigkeit von Jugendlichen und kommt zu dem Schluss, dass intensive Smartphone-Nutzung die Konzentrationsfähigkeit nachhaltig schädigt."
-                        </div>
-
-                        <h4>Satz 3: Präzisierung der These</h4>
-                        <p>Konkretisiere die Position des Autors.</p>
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Dabei stützt er sich hauptsächlich auf neurobiologische Studien und warnt vor einer 'Generation der Zerstreuten'."
-                        </div>
-
-                        <h4>Satz 4: Überleitung</h4>
-                        <p>Kündige deine Analyse an.</p>
-                        <div class="example-box">
-                            <strong>Varianten:</strong>
-                            <ul>
-                                <li>"Im Folgenden soll diese Argumentation kritisch analysiert werden."</li>
-                                <li>"Die Überzeugungskraft dieser Position gilt es zu hinterfragen."</li>
-                                <li>"Dabei stellt sich die Frage, ob diese Einschätzung der Komplexität des Themas gerecht wird."</li>
-                            </ul>
-                        </div>
-
-                        <h3>Häufige Einleitungsfehler vermeiden</h3>
-                        <div class="warning-box">
-                            <strong>Vermeide:</strong>
-                            <ul>
-                                <li><strong>Zu allgemein:</strong> "Seit es Menschen gibt, diskutieren sie über..."</li>
-                                <li><strong>Zu persönlich:</strong> "Ich finde das Thema sehr interessant..."</li>
-                                <li><strong>Zu lang:</strong> Einleitung über 100 Wörter</li>
-                                <li><strong>Unvollständige Textangabe:</strong> Autor oder Jahr fehlen</li>
-                                <li><strong>Vage Thesenwiedergabe:</strong> "Der Autor ist der Meinung, dass..."</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kapitel 5 -->
-                <button class="collapsible">5. Textanalyse im Detail</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Systematisches Vorgehen</h3>
-                        <p>Die Textanalyse ist das Herzstück deiner Erörterung. Hier zeigst du, dass du den Text nicht nur verstanden, sondern auch durchschaut hast.</p>
-
-                        <h3>Argumentationsanalyse</h3>
-
-                        <h4>Schritt 1: Hauptthese identifizieren</h4>
-                        <p>Die Hauptthese ist die zentrale Behauptung des Autors. Sie steht oft am Anfang oder Ende des Textes, manchmal auch im Titel.</p>
-                        
-                        <div class="example-box">
-                            <strong>Formulierungshilfen:</strong>
-                            <ul>
-                                <li>"Die zentrale These lautet..."</li>
-                                <li>"Der Autor vertritt die Position, dass..."</li>
-                                <li>"Kern der Argumentation ist die Behauptung..."</li>
-                            </ul>
-                        </div>
-
-                        <h4>Schritt 2: Argumentationsstrategie erkennen</h4>
-                        <p>Wie baut der Autor seine Argumentation auf?</p>
-                        
-                        <table>
-                            <tr>
-                                <th>Strategie</th>
-                                <th>Beschreibung</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Induktiv</strong></td>
-                                <td>Von Beispielen zur allgemeinen Regel</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Deduktiv</strong></td>
-                                <td>Von der Regel zu konkreten Fällen</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Steigernd</strong></td>
-                                <td>Schwache zu starken Argumenten</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Antithetisch</strong></td>
-                                <td>These-Antithese-Synthese</td>
-                            </tr>
-                        </table>
-
-                        <h4>Schritt 3: Einzelargumente bewerten</h4>
-                        <p>Für jedes Argument prüfst du:</p>
-                        <ul>
-                            <li>Ist es logisch nachvollziehbar?</li>
-                            <li>Ist es ausreichend belegt?</li>
-                            <li>Berücksichtigt es Gegenargumente?</li>
-                        </ul>
-
-                        <div class="example-box">
-                            <strong>Beispielanalyse:</strong> "Mustermannns erstes Argument stützt sich auf eine Studie der Universität München, die bei 500 Jugendlichen verminderte Konzentrationsfähigkeit nach intensiver Smartphone-Nutzung feststellte. Diese Studie ist methodisch solide, jedoch ist die Stichprobe möglicherweise zu klein, um generelle Aussagen über alle Jugendlichen zu treffen. Zudem wird nicht berücksichtigt, dass Konzentrationsschwächen auch andere Ursachen haben können."
-                        </div>
-
-                        <h3>Sprachanalyse</h3>
-
-                        <h4>Registeranalyse:</h4>
-                        <ul>
-                            <li>Fachsprache vs. Alltagssprache</li>
-                            <li>Formell vs. informell</li>
-                            <li>Objektiv vs. subjektiv</li>
-                        </ul>
-
-                        <h4>Rhetorische Mittel identifizieren:</h4>
-                        
-                        <div class="example-box">
-                            <strong>Metaphern und Vergleiche:</strong> "Der Autor spricht von einer 'digitalen Lawine', die über die Jugend hereinbreche. Diese Metapher suggeriert eine unkontrollierbare Naturgewalt und verstärkt den Eindruck einer bedrohlichen Entwicklung."
-                        </div>
-
-                        <div class="example-box">
-                            <strong>Rhetorische Fragen:</strong> "Mit der Frage 'Wollen wir eine Generation von Bildschirmzombies?' appelliert der Autor an die Ängste der Eltern und versucht, emotionale Zustimmung zu erzeugen, ohne ein sachliches Argument zu liefern."
-                        </div>
-
-                        <h3>Adressatenanalyse</h3>
-                        <p>An wen richtet sich der Text?</p>
-                        <ul>
-                            <li>Fachpublikum oder Laien?</li>
-                            <li>Welches Vorwissen wird vorausgesetzt?</li>
-                            <li>Welche Werte und Einstellungen werden angesprochen?</li>
-                        </ul>
-
-                        <h3>Gesamtbewertung</h3>
-                        <p>Zusammenfassende Einschätzung der Überzeugungskraft:</p>
-                        
-                        <div class="checklist">
-                            <h4>Bewertungskriterien:</h4>
-                            <ul>
-                                <li>Logische Konsistenz der Argumentation</li>
-                                <li>Qualität der Belege</li>
-                                <li>Berücksichtigung von Gegenargumenten</li>
-                                <li>Angemessenheit der Sprache</li>
-                                <li>Fairness in der Darstellung</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kapitel 6 -->
-                <button class="collapsible">6. Eigene Stellungnahme entwickeln</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Von der Analyse zur eigenen Position</h3>
-                        <p>Die Stellungnahme ist deine Chance, zu zeigen, dass du nicht nur den Text verstanden hast, sondern dir auch eine fundierte Meinung bilden kannst.</p>
-
-                        <h3>Argumentationstechniken</h3>
-
-                        <h4>Pro-Argumente für die Autorenposition</h4>
-                        <p>Welche Argumente des Autors sind besonders überzeugend?</p>
-                        
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Mustermanns Verweis auf die neurobiologischen Studien ist insofern berechtigt, als tatsächlich nachgewiesen wurde, dass intensive Bildschirmnutzung die Aufmerksamkeitsspanne verkürzen kann. Die von ihm zitierten Langzeitstudien liefern hierfür empirische Evidenz."
-                        </div>
-
-                        <h4>Contra-Argumente und Kritikpunkte</h4>
-                        <p>Wo liegen Schwächen in der Argumentation?</p>
-                        
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Problematisch ist jedoch Mustermanns pauschale Verurteilung aller digitalen Medien. Er unterscheidet nicht zwischen sinnvoller und sinnloser Nutzung und ignoriert Studien, die positive Effekte von digitalem Lernen belegen."
-                        </div>
-
-                        <h4>Eigene Argumente einbringen</h4>
-                        <p>Ergänze die Diskussion mit eigenen Gedanken.</p>
-                        
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Darüber hinaus wäre zu bedenken, dass nicht die Technologie selbst das Problem ist, sondern der Umgang mit ihr. Anstatt digitale Medien generell zu verdammen, sollte die Diskussion über sinnvolle Nutzungsregeln und Medienkompetenz geführt werden."
-                        </div>
-
-                        <h3>Perspektivenwechsel</h3>
-                        <p>Betrachte das Thema aus verschiedenen Blickwinkeln:</p>
-                        
-                        <table>
-                            <tr>
-                                <th>Perspektive</th>
-                                <th>Fragestellungen</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Individuell</strong></td>
-                                <td>Wie wirkt sich das Thema auf Einzelne aus?</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Gesellschaftlich</strong></td>
-                                <td>Welche Auswirkungen hat es auf die Gemeinschaft?</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ethisch</strong></td>
-                                <td>Welche Werte und Normen sind betroffen?</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Zukunftsorientiert</strong></td>
-                                <td>Welche langfristigen Folgen sind zu erwarten?</td>
-                            </tr>
-                        </table>
-
-                        <h3>Abwägende Argumentation</h3>
-                        <p>Zeige, dass du verschiedene Aspekte berücksichtigst:</p>
-                        
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Einerseits ist Mustermanns Warnung vor exzessiver Nutzung berechtigt, da tatsächlich Suchtpotential besteht. Andererseits übersieht er die Chancen digitaler Bildung. Letztlich kommt es auf eine ausgewogene Betrachtung an, die sowohl Risiken als auch Potenziale berücksichtigt."
-                        </div>
-
-                        <h3>Eigene Position formulieren</h3>
-                        <p>Deine Schlussfolgerung sollte:</p>
-                        <ul>
-                            <li>Aus der Analyse hervorgehen</li>
-                            <li>Durch Argumente gestützt sein</li>
-                            <li>Differenziert und nachvollziehbar sein</li>
-                        </ul>
-
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Zusammenfassend lässt sich sagen, dass Mustermann wichtige Probleme benennt, aber zu einseitig argumentiert. Digitale Medien sind weder ausschließlich schädlich noch uneingeschränkt positiv zu bewerten. Entscheidend ist ein reflektierter Umgang, der sowohl die Risiken minimiert als auch die Chancen nutzt."
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kapitel 7 -->
-                <button class="collapsible">7. Der überzeugende Schluss</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Aufgaben des Schlusses</h3>
-                        <ol>
-                            <li><strong>Zusammenfassen:</strong> Wichtigste Erkenntnisse bündeln</li>
-                            <li><strong>Abrunden:</strong> Gedankengang abschließen</li>
-                            <li><strong>Perspektive eröffnen:</strong> Weiterführende Gedanken anbieten</li>
-                        </ol>
-
-                        <h3>Drei-Sätze-Struktur</h3>
-
-                        <h4>Satz 1: Zusammenfassung</h4>
-                        <p>Fasse deine Hauptargumente knapp zusammen.</p>
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Die Analyse hat gezeigt, dass Mustermanns Argumentation zwar auf valide Studien zurückgreift, aber durch pauschale Urteile und Einseitigkeit an Überzeugungskraft verliert."
-                        </div>
-
-                        <h4>Satz 2: Eigenes Fazit</h4>
-                        <p>Formuliere deine abschließende Bewertung.</p>
-                        <div class="example-box">
-                            <strong>Beispiel:</strong> "Insgesamt erscheint eine differenziertere Betrachtung notwendig, die sowohl die Risiken als auch die Bildungschancen digitaler Medien ernst nimmt."
-                        </div>
-
-                        <h4>Satz 3: Ausblick</h4>
-                        <p>Biete eine Perspektive über den Text hinaus.</p>
-                        <div class="example-box">
-                            <strong>Varianten:</strong>
-                            <ul>
-                                <li>"Die Diskussion wird weitergehen, insbesondere..."</li>
-                                <li>"Künftig sollte stärker berücksichtigt werden..."</li>
-                                <li>"Offen bleibt die Frage..."</li>
-                                <li>"Es wäre wünschenswert, wenn..."</li>
-                            </ul>
-                        </div>
-
-                        <h3>Häufige Schlussfehler vermeiden</h3>
-                        <div class="warning-box">
-                            <strong>Vermeide:</strong>
-                            <ul>
-                                <li><strong>Neue Argumente:</strong> Im Schluss nichts Neues einführen</li>
-                                <li><strong>Zu persönlich:</strong> "Ich hoffe, ich habe überzeugt"</li>
-                                <li><strong>Zu allgemein:</strong> "Das war alles zum Thema"</li>
-                                <li><strong>Unverbunden:</strong> Plötzlicher Themenwechsel</li>
-                                <li><strong>Zu lang:</strong> Ausufernde Wiederholungen</li>
-                            </ul>
-                        </div>
-
-                        <h3>Wirkungsvolle Schlusssätze</h3>
-                        <div class="example-box">
-                            <strong>Beispiele:</strong>
-                            <ul>
-                                <li>"Letztlich zeigt die Auseinandersetzung mit Mustermanns Text, dass..."</li>
-                                <li>"Die Komplexität des Themas erfordert..."</li>
-                                <li>"Abschließend lässt sich festhalten, dass..."</li>
-                                <li>"Die Diskussion um... wird uns weiter beschäftigen, denn..."</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kapitel 8 -->
-                <button class="collapsible">8. Formulierungshilfen und sprachliche Gestaltung</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Wissenschaftlicher Sprachgebrauch</h3>
-                        <p>Eine Erörterung erfordert eine sachliche, präzise Sprache.</p>
-
-                        <h4>Verben der Meinungsäußerung</h4>
-                        
-                        <table>
-                            <tr>
-                                <th>Stärke</th>
-                                <th>Verben</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Neutral</strong></td>
-                                <td>äußern, feststellen, darlegen, ausführen</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Zustimmend</strong></td>
-                                <td>betonen, unterstreichen, bekräftigen, bestätigen</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Zweifelnd</strong></td>
-                                <td>hinterfragen, bezweifeln, infrage stellen, relativieren</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ablehnend</strong></td>
-                                <td>widerlegen, entkräften, zurückweisen, kritisieren</td>
-                            </tr>
-                        </table>
-
-                        <h4>Formulierungshilfen für die Analyse</h4>
-
-                        <div class="example-box">
-                            <strong>Textwiedergabe:</strong>
-                            <ul>
-                                <li>"Der Autor führt aus, dass..."</li>
-                                <li>"Laut Mustermann..."</li>
-                                <li>"Wie der Verfasser darlegt..."</li>
-                                <li>"Mustermann zufolge..."</li>
-                            </ul>
-                        </div>
-
-                        <div class="example-box">
-                            <strong>Argumentationsbeschreibung:</strong>
-                            <ul>
-                                <li>"Zur Untermauerung dieser These führt der Autor an..."</li>
-                                <li>"Als Beleg dient..."</li>
-                                <li>"Dies wird gestützt durch..."</li>
-                                <li>"Zur Veranschaulichung..."</li>
-                            </ul>
-                        </div>
-
-                        <div class="example-box">
-                            <strong>Sprachanalyse:</strong>
-                            <ul>
-                                <li>"Auffällig ist die Verwendung von..."</li>
-                                <li>"Durch... erzeugt der Autor..."</li>
-                                <li>"Die metaphorische Sprache..."</li>
-                                <li>"Der wiederholte Gebrauch von..."</li>
-                            </ul>
-                        </div>
-
-                        <h4>Formulierungshilfen für die Stellungnahme</h4>
-
-                        <div class="example-box">
-                            <strong>Zustimmung:</strong>
-                            <ul>
-                                <li>"Überzeugend ist..."</li>
-                                <li>"Trifft zu, weil..."</li>
-                                <li>"Berechtigterweise weist der Autor auf..."</li>
-                                <li>"In der Tat..."</li>
-                            </ul>
-                        </div>
-
-                        <div class="example-box">
-                            <strong>Kritik:</strong>
-                            <ul>
-                                <li>"Problematisch erscheint..."</li>
-                                <li>"Fragwürdig ist..."</li>
-                                <li>"Übersehen wird..."</li>
-                                <li>"Nicht nachvollziehbar ist..."</li>
-                            </ul>
-                        </div>
-
-                        <div class="example-box">
-                            <strong>Abwägung:</strong>
-                            <ul>
-                                <li>"Einerseits... andererseits..."</li>
-                                <li>"Zwar... aber..."</li>
-                                <li>"Obwohl... so doch..."</li>
-                                <li>"Trotz... muss bedacht werden..."</li>
-                            </ul>
-                        </div>
-
-                        <h3>Sprachliche Qualität</h3>
-
-                        <h4>Präzision</h4>
-                        <p>Vermeide vage Formulierungen:</p>
-                        
-                        <div class="example-box">
-                            <span class="incorrect">"Der Autor sagt irgendwas über Medien"</span><br>
-                            <span class="correct">"Der Autor kritisiert die exzessive Nutzung sozialer Medien"</span>
-                        </div>
-
-                        <h4>Variation</h4>
-                        <p>Vermeide Wiederholungen:</p>
-                        
-                        <div class="example-box">
-                            <span class="incorrect">"Der Autor meint... Der Autor sagt... Der Autor findet..."</span><br>
-                            <span class="correct">"Der Autor vertritt die Auffassung... Er argumentiert... Seine Position ist..."</span>
-                        </div>
-
-                        <h4>Objektivität</h4>
-                        <p>Vermeide subjektive Wertungen:</p>
-                        
-                        <div class="example-box">
-                            <span class="incorrect">"Das ist total blöd, was der Autor sagt"</span><br>
-                            <span class="correct">"Die Argumentation des Autors überzeugt nicht, weil..."</span>
-                        </div>
-
-                        <h3>Typische Formulierungsfehler</h3>
-                        <div class="warning-box">
-                            <strong>Vermeide:</strong>
-                            <ul>
-                                <li><strong>Umgangssprache:</strong> "Der Text geht voll ab"</li>
-                                <li><strong>Wertende Adjektive:</strong> "super", "toll", "schrecklich"</li>
-                                <li><strong>Unpräzise Bezüge:</strong> "das", "es", "welches"</li>
-                                <li><strong>Passiv-Überfluss:</strong> "Es wird gesagt, dass..."</li>
-                                <li><strong>Nominalstil:</strong> "Die Durchführung einer Analyse"</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kapitel 9 -->
-                <button class="collapsible">9. Zeitmanagement und Überarbeitung</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Zeitplan für 90 Minuten</h3>
-                        
-                        <table>
-                            <tr>
-                                <th>Phase</th>
-                                <th>Zeit</th>
-                                <th>Aufgabe</th>
-                            </tr>
-                            <tr>
-                                <td><strong>1. Lesen & Verstehen</strong></td>
-                                <td>15 Min</td>
-                                <td>
-                                    • Text zweimal lesen<br>
-                                    • Kernaussage erfassen<br>
-                                    • Wichtiges markieren
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>2. Strukturieren</strong></td>
-                                <td>10 Min</td>
-                                <td>
-                                    • Gliederung erstellen<br>
-                                    • Argumente ordnen<br>
-                                    • Thesen formulieren
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>3. Schreiben</strong></td>
-                                <td>50 Min</td>
-                                <td>
-                                    • Einleitung (10 Min)<br>
-                                    • Hauptteil (30 Min)<br>
-                                    • Schluss (10 Min)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>4. Überarbeiten</strong></td>
-                                <td>15 Min</td>
-                                <td>
-                                    • Rechtschreibung prüfen<br>
-                                    • Logik überprüfen<br>
-                                    • Formulierungen verbessern
-                                </td>
-                            </tr>
-                        </table>
-
-                        <h3>Überarbeitungscheckliste</h3>
-                        
-                        <div class="checklist">
-                            <h4>Inhalt</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check1">
-                                <label for="check1">Ist die Textangabe vollständig?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check2">
-                                <label for="check2">Wurde die Kernthese richtig erfasst?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check3">
-                                <label for="check3">Sind alle Argumente berücksichtigt?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check4">
-                                <label for="check4">Ist die eigene Position klar?</label>
-                            </div>
-
-                            <h4>Struktur</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check5">
-                                <label for="check5">Klare Gliederung erkennbar?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check6">
-                                <label for="check6">Logischer Gedankenfluss?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check7">
-                                <label for="check7">Gute Überleitungen?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check8">
-                                <label for="check8">Angemessener Umfang?</label>
-                            </div>
-
-                            <h4>Sprache</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check9">
-                                <label for="check9">Rechtschreibung korrekt?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check10">
-                                <label for="check10">Satzbau variiert?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check11">
-                                <label for="check11">Fachbegriffe richtig verwendet?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check12">
-                                <label for="check12">Objektive Sprache?</label>
-                            </div>
-                        </div>
-
-                        <h3>Typische Zeitfallen</h3>
-                        <div class="warning-box">
-                            <strong>Vermeide:</strong>
-                            <ul>
-                                <li><strong>Zu langes Lesen:</strong> Maximal 15 Minuten für Textverständnis</li>
-                                <li><strong>Perfektionismus:</strong> Erster Entwurf muss nicht perfekt sein</li>
-                                <li><strong>Ausschweifungen:</strong> Beim Thema bleiben</li>
-                                <li><strong>Zu spätes Schreiben:</strong> Nach 25 Minuten solltest du schreiben</li>
-                                <li><strong>Keine Zeit für Korrektur:</strong> Mindestens 10 Minuten einplanen</li>
-                            </ul>
-                        </div>
-
-                        <h3>Notfallplan bei Zeitknappheit</h3>
-                        <ol>
-                            <li><strong>Priorisieren:</strong> Wichtigste Argumente zuerst</li>
-                            <li><strong>Kürzen:</strong> Bei Einleitung und Schluss sparen</li>
-                            <li><strong>Struktur bewahren:</strong> Trotzdem vollständige Gliederung</li>
-                            <li><strong>Schluss schreiben:</strong> Lieber kürzer als gar nicht</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Kapitel 10 -->
-                <button class="collapsible">10. Checkliste zur Selbstkontrolle</button>
-                <div class="section-content">
-                    <div class="section-inner">
-                        <h3>Vor dem Abgeben kontrollieren</h3>
-                        
-                        <div class="checklist">
-                            <h4>Allgemeines</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check13">
-                                <label for="check13">Name und Datum nicht vergessen?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check14">
-                                <label for="check14">Leserliche Handschrift?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check15">
-                                <label for="check15">Seitenzahl angegeben?</label>
-                            </div>
-
-                            <h4>Einleitung</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check16">
-                                <label for="check16">Interessanter Einstieg?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check17">
-                                <label for="check17">Vollständige Textangabe?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check18">
-                                <label for="check18">Kernthese genannt?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check19">
-                                <label for="check19">Überleitung zum Hauptteil?</label>
-                            </div>
-
-                            <h4>Hauptteil</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check20">
-                                <label for="check20">Analyse der Argumentationsstruktur?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check21">
-                                <label for="check21">Sprachanalyse?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check22">
-                                <label for="check22">Eigene Stellungnahme?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check23">
-                                <label for="check23">Abwägende Argumentation?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check24">
-                                <label for="check24">Belege und Beispiele?</label>
-                            </div>
-
-                            <h4>Schluss</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check25">
-                                <label for="check25">Zusammenfassung der Hauptpunkte?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check26">
-                                <label for="check26">Eigenes Fazit?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check27">
-                                <label for="check27">Ausblick oder Perspektive?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check28">
-                                <label for="check28">Keine neuen Argumente?</label>
-                            </div>
-
-                            <h4>Sprache</h4>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check29">
-                                <label for="check29">Wissenschaftlicher Stil?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check30">
-                                <label for="check30">Variierter Wortschatz?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check31">
-                                <label for="check31">Korrekte Zitierweise?</label>
-                            </div>
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check32">
-                                <label for="check32">Rechtschreibung geprüft?</label>
-                            </div>
-                        </div>
-
-                        <h3>Bewertungskriterien verstehen</h3>
-                        <p>Die Note setzt sich zusammen aus:</p>
-                        
-                        <table>
-                            <tr>
-                                <th>Bereich</th>
-                                <th>Gewichtung</th>
-                                <th>Was wird bewertet?</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Inhalt</strong></td>
-                                <td>40%</td>
-                                <td>
-                                    • Textverständnis<br>
-                                    • Analysequalität<br>
-                                    • Argumentationsfähigkeit
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Aufbau</strong></td>
-                                <td>30%</td>
-                                <td>
-                                    • Struktur<br>
-                                    • Logik<br>
-                                    • Kohärenz
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Sprache</strong></td>
-                                <td>30%</td>
-                                <td>
-                                    • Ausdruck<br>
-                                    • Stil<br>
-                                    • Formale Korrektheit
-                                </td>
-                            </tr>
-                        </table>
-
-                        <div class="success-box">
-                            <strong>Erfolgsgaranten:</strong>
-                            <ul>
-                                <li>Tiefes Textverständnis zeigen</li>
-                                <li>Differenzierte Analyse bieten</li>
-                                <li>Eigene Position begründen</li>
-                                <li>Klare Struktur einhalten</li>
-                                <li>Sorgfältige Sprache verwenden</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <!-- Kapitel 5 -->
+        <div class="accordion-header">
+            <span>5. Eigene Stellungnahme entwickeln</span>
+            <span class="accordion-icon">+</span>
+        </div>
+        <div class="panel">
+            <h3>Von der Analyse zur eigenen Position</h3>
+            <p>Die Stellungnahme ist deine Chance, zu zeigen, dass du nicht nur den Text verstanden hast, sondern dir auch eine fundierte Meinung bilden kannst.</p>
+
+            <h3>Argumentationstechniken</h3>
+
+            <h4>Pro-Argumente für die Autorenposition</h4>
+            <p>Welche Argumente des Autors sind besonders überzeugend?</p>
+            
+            <div class="example-box">
+                <strong>Beispiel:</strong> "Mustermanns Verweis auf die neurobiologischen Studien ist insofern berechtigt, als tatsächlich nachgewiesen wurde, dass intensive Bildschirmnutzung die Aufmerksamkeitsspanne verkürzen kann. Die von ihm zitierten Langzeitstudien liefern hierfür empirische Evidenz."
+            </div>
+
+            <h4>Contra-Argumente und Kritikpunkte</h4>
+            <p>Wo liegen Schwächen in der Argumentation?</p>
+            
+            <div class="example-box">
+                <strong>Beispiel:</strong> "Problematisch ist jedoch Mustermanns pauschale Verurteilung aller digitalen Medien. Er unterscheidet nicht zwischen sinnvoller und sinnloser Nutzung und ignoriert Studien, die positive Effekte von digitalem Lernen belegen."
             </div>
         </div>
-    </main>
+
+        <!-- Kapitel 6 -->
+        <div class="accordion-header">
+            <span>6. Der überzeugende Schluss</span>
+            <span class="accordion-icon">+</span>
+        </div>
+        <div class="panel">
+            <h3>Aufgaben des Schlusses</h3>
+            <ol>
+                <li><strong>Zusammenfassen:</strong> Wichtigste Erkenntnisse bündeln</li>
+                <li><strong>Abrunden:</strong> Gedankengang abschließen</li>
+                <li><strong>Perspektive eröffnen:</strong> Weiterführende Gedanken anbieten</li>
+            </ol>
+
+            <h3>Drei-Sätze-Struktur</h3>
+
+            <h4>Satz 1: Zusammenfassung</h4>
+            <p>Fasse deine Hauptargumente knapp zusammen.</p>
+            <div class="example-box">
+                <strong>Beispiel:</strong> "Die Analyse hat gezeigt, dass Mustermanns Argumentation zwar auf valide Studien zurückgreift, aber durch pauschale Urteile und Einseitigkeit an Überzeugungskraft verliert."
+            </div>
+
+            <h4>Satz 2: Eigenes Fazit</h4>
+            <p>Formuliere deine abschließende Bewertung.</p>
+            <div class="example-box">
+                <strong>Beispiel:</strong> "Insgesamt erscheint eine differenziertere Betrachtung notwendig, die sowohl die Risiken als auch die Bildungschancen digitaler Medien ernst nimmt."
+            </div>
+        </div>
+
+        <!-- Kapitel 7 -->
+        <div class="accordion-header">
+            <span>7. Häufige Fehler und wie du sie vermeidest</span>
+            <span class="accordion-icon">+</span>
+        </div>
+        <div class="panel">
+            <h3>Die größten Stolperfallen</h3>
+
+            <h4>1. Inhaltsangabe statt Erörterung</h4>
+            <div class="warning-box">
+                <strong>Falsch:</strong> "Der Autor sagt, dass Smartphones schlecht sind. Dann erklärt er, warum sie schlecht sind. Zum Schluss meint er, dass man sie nicht benutzen soll."<br><br>
+                <strong>Richtig:</strong> "Der Autor argumentiert mit neurobiologischen Studien überzeugend, übersieht jedoch die positiven Aspekte digitaler Medien..."
+            </div>
+
+            <h4>2. Fehlende eigene Position</h4>
+            <div class="warning-box">
+                <strong>Problem:</strong> Nur Zusammenfassung der Autorenposition ohne eigene Stellungnahme<br><br>
+                <strong>Lösung:</strong> Eigene Argumente entwickeln und begründet Position beziehen
+            </div>
+
+            <h4>3. Unwissenschaftliche Sprache</h4>
+            <table>
+                <tr>
+                    <th>Problematisch</th>
+                    <th>Besser</th>
+                </tr>
+                <tr>
+                    <td>"Ich finde..."</td>
+                    <td>"Die Argumentation erweist sich als..."</td>
+                </tr>
+                <tr>
+                    <td>"Das ist Blödsinn"</td>
+                    <td>"Diese Position ist nicht haltbar"</td>
+                </tr>
+                <tr>
+                    <td>"Alle wissen, dass..."</td>
+                    <td>"Studien belegen, dass..."</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="success-box">
+            <h3>Zusammenfassung</h3>
+            <p>Eine gelungene textgebundene Erörterung verbindet analytisches Denken mit argumentativer Kompetenz. Du zeigst, dass du einen Text nicht nur verstehst, sondern auch kritisch bewerten und eine eigene, begründete Position entwickeln kannst. Mit der systematischen Herangehensweise aus diesem Handbuch bist du bestens für die nächste Schularbeit gerüstet!</p>
+        </div>
+    </div>
 
     <script>
-        // JavaScript für die Collapsible Sections
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+        // Accordion-Funktionalität
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    
+                    if (panel.classList.contains('active')) {
+                        panel.classList.remove('active');
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.classList.add('active');
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            });
+            
+            // Öffne das erste Kapitel standardmäßig
+            if (accordionHeaders.length > 0) {
+                accordionHeaders[0].classList.add('active');
+                const firstPanel = accordionHeaders[0].nextElementSibling;
+                firstPanel.classList.add('active');
+                firstPanel.style.maxHeight = firstPanel.scrollHeight + "px";
+            }
+        });
 
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
+        // Funktion zum Öffnen/Schließen aller Accordions
+        function toggleAllAccordions() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            const panels = document.querySelectorAll('.panel');
+            
+            // Prüfen, ob alle geschlossen sind
+            const allClosed = Array.from(panels).every(panel => !panel.classList.contains('active'));
+            
+            // Alle öffnen oder schließen
+            accordionHeaders.forEach(header => {
+                if (allClosed) {
+                    header.classList.add('active');
                 } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
+                    header.classList.remove('active');
+                }
+            });
+            
+            panels.forEach(panel => {
+                if (allClosed) {
+                    panel.classList.add('active');
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } else {
+                    panel.classList.remove('active');
+                    panel.style.maxHeight = null;
                 }
             });
         }
-
-        // Funktion zum Öffnen/Schließen aller Sections
-        function toggleAll() {
-            var allContent = document.getElementsByClassName("section-content");
-            var allButtons = document.getElementsByClassName("collapsible");
-            var isAnyOpen = false;
-            
-            // Prüfen, ob mindestens eine Section geöffnet ist
-            for (var i = 0; i < allContent.length; i++) {
-                if (allContent[i].style.maxHeight) {
-                    isAnyOpen = true;
-                    break;
-                }
-            }
-            
-            // Alle öffnen oder schließen
-            for (var i = 0; i < allContent.length; i++) {
-                if (isAnyOpen) {
-                    // Alle schließen
-                    allContent[i].style.maxHeight = null;
-                    allButtons[i].classList.remove("active");
-                } else {
-                    // Alle öffnen
-                    allContent[i].style.maxHeight = allContent[i].scrollHeight + "px";
-                    allButtons[i].classList.add("active");
-                }
-            }
-        }
-
-        // Funktion für die Sidebar auf mobilen Geräten
-        function toggleSidebar() {
-            var sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("active");
-        }
-
-        // Automatisch die erste Section öffnen
-        window.onload = function() {
-            if (window.innerWidth > 768) {
-                document.getElementsByClassName("collapsible")[0].click();
-            }
-        };
     </script>
 </body>
 </html>
