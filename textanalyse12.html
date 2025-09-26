@@ -542,7 +542,12 @@ class PaymentSystem {
     constructor() {
         this.accessData = null;
         this.loadAccessData();
-        this.initPaymentUI();
+        // UI erst nach DOM ready initialisieren
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.initPaymentUI());
+        } else {
+            this.initPaymentUI();
+        }
     }
 
     loadAccessData() {
@@ -586,8 +591,13 @@ class PaymentSystem {
     }
 
     initPaymentUI() {
-        // Payment-Button zur Navigation hinzufügen
+        console.log('Initialisiere Payment UI');
         const navMenu = document.querySelector('.nav-menu');
+        if (!navMenu) {
+            console.error('Nav-Menu nicht gefunden');
+            return;
+        }
+
         const paymentSection = document.createElement('div');
         paymentSection.className = 'nav-section';
         paymentSection.innerHTML = `
@@ -611,7 +621,6 @@ class PaymentSystem {
             statusElement.style.display = hasAccess ? 'block' : 'none';
         }
         
-        // Navigationselemente je nach Zugang anzeigen/verstecken
         this.toggleNavigationAccess(hasAccess);
     }
 
@@ -649,7 +658,7 @@ class PaymentSystem {
         modal.className = 'modal-overlay';
         
         modal.innerHTML = `
-            <div class="modal-content">
+           <div class="modal-content">
                         <h3 style="color: #2c3e50; margin-bottom: 20px;">🔓 Premium-Zugang freischalten</h3>
                         <p>Vollständiger Zugang zu allen Inhalten für <strong>€19,99</strong> (6 Monate)</p>
                         
@@ -701,17 +710,30 @@ class PaymentSystem {
         this.closeModal();
         this.updatePaymentUI();
         
-        // Zur Startseite zurückkehren
         loadContent('willkommen');
     }
 }
 
-// Payment System initialisieren
-const paymentSystem = new PaymentSystem();
-
 // ===== KORRIGIERTE loadContent FUNCTION =====
 async function loadContent(page, event = null) {
     console.log('Lade Seite:', page);
+    
+    // Warte bis DOM vollständig geladen ist
+    if (document.readyState === 'loading') {
+        await new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve));
+    }
+    
+    // Finde contentBody sicher
+    let contentBody = document.getElementById('content-body');
+    if (!contentBody) {
+        console.error('content-body Element nicht gefunden! Suche nach Alternativen...');
+        // Alternative Suche
+        contentBody = document.querySelector('.content-body');
+        if (!contentBody) {
+            console.error('Kein content-body Element gefunden');
+            return;
+        }
+    }
     
     // Bezahlschranke für alle Seiten außer Willkommen
     if (page !== 'willkommen' && !paymentSystem.hasActiveAccess()) {
@@ -736,9 +758,6 @@ async function loadContent(page, event = null) {
         }
     }
     
-    // Load content based on page parameter
-    const contentBody = document.getElementById('content-body');
-    
     // Show loading message
     contentBody.innerHTML = `
         <div class="loading-indicator">
@@ -752,7 +771,7 @@ async function loadContent(page, event = null) {
         const response = await fetch(`kapitel/${page}.html`);
         
         if (!response.ok) {
-            throw new Error(`Seite nicht gefunden: ${page}.html`);
+            throw new Error(`Seite nicht gefunden: ${page}.html (Status: ${response.status})`);
         }
         
         const html = await response.text();
@@ -777,8 +796,10 @@ async function loadContent(page, event = null) {
     
     // Close sidebar on mobile after selection
     if (window.innerWidth <= 968) {
-        document.getElementById('sidebar').classList.remove('active');
-        document.getElementById('main-content').classList.remove('sidebar-active');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        if (sidebar) sidebar.classList.remove('active');
+        if (mainContent) mainContent.classList.remove('sidebar-active');
     }
 }
 
@@ -786,9 +807,9 @@ async function loadContent(page, event = null) {
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('main-content');
-    sidebar.classList.toggle('active');
+    if (sidebar) sidebar.classList.toggle('active');
     
-    if (window.innerWidth <= 968) {
+    if (window.innerWidth <= 968 && mainContent) {
         mainContent.classList.toggle('sidebar-active');
     }
 }
@@ -800,7 +821,8 @@ document.addEventListener('click', function(event) {
     const mainContent = document.getElementById('main-content');
     
     if (window.innerWidth <= 968 && 
-        sidebar.classList.contains('active') && 
+        sidebar && sidebar.classList.contains('active') && 
+        menuToggle && mainContent &&
         !sidebar.contains(event.target) && 
         !menuToggle.contains(event.target)) {
         sidebar.classList.remove('active');
@@ -829,17 +851,31 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Payment System initialisieren (nach DOM ready)
+let paymentSystem;
+
 // Initial load - show welcome page
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM vollständig geladen');
+    
+    // Payment System initialisieren
+    paymentSystem = new PaymentSystem();
+    
     // Set welcome as default active
     const welcomeLink = document.querySelector('.nav-link[onclick*="loadContent(\'willkommen\')"]');
     if (welcomeLink) {
         welcomeLink.classList.add('active');
     }
     
-    // Lade Willkommen-Seite beim Start
-    loadContent('willkommen');
+    // Lade Willkommen-Seite beim Start (mit Verzögerung um sicherzustellen, dass alles initialisiert ist)
+    setTimeout(() => {
+        loadContent('willkommen');
+    }, 100);
 });
+
+// Globale Funktionen für Event-Handler
+window.toggleSidebar = toggleSidebar;
+window.loadContent = loadContent;
 </script>
 </body>
 </html>
