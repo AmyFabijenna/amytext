@@ -3,14 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beispiel: Sachtext analysieren | Deutschmatura</title>
+    <title>Sachtext-Analyse - Deutschmatura Handbuch</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6074 50%, #5d6d7e 75%, #708090 100%);
+            min-height: 100vh;
             line-height: 1.6;
             color: #333;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(52, 73, 94, 0.95);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
             padding: 20px;
-            margin: 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 2px 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.2);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .nav-section {
+            margin-bottom: 15px;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bdc3c7;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 40px;
         }
 
         .welcome-section {
@@ -26,118 +145,60 @@
             margin-bottom: 20px;
         }
 
-        .section {
-            margin-bottom: 40px;
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
         }
 
-        .section-title {
-            color: #2c3e50;
-            border-bottom: 2px solid #34495e;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-
-        .text-example {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
             border-left: 4px solid #34495e;
         }
 
-        .text-example h4 {
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.1em;
         }
 
-        .accordion {
-            margin: 30px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            background: white;
-        }
-
-        .accordion-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white;
-            padding: 20px;
-            margin: 0;
-            cursor: pointer;
-            font-size: 1.3em;
-            transition: background 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-        }
-
-        .accordion-header:hover {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-        }
-
-        .accordion-header h3 {
-            margin: 0;
-            color: white;
-        }
-
-        .accordion-icon {
-            font-size: 1.5em;
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-
-        .accordion-header.active .accordion-icon {
-            transform: rotate(45deg);
-        }
-
-        .panel {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-        }
-
-        .panel.active {
-            max-height: 5000px;
-            padding: 20px;
-        }
-
-        .exercise {
-            background: #e8f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .exercise h4 {
-            color: #2c3e50;
+        .feature-card p {
+            font-size: 0.95em;
+            color: #666;
             margin-bottom: 15px;
         }
 
-        .solution-toggle {
-            background: #5dade2;
+        .feature-link {
+            display: inline-block;
+            background: #34495e;
             color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.3s;
-            font-size: 0.9em;
-        }
-
-        .solution-toggle:hover {
-            background: #3498db;
-        }
-
-        .solution {
-            background: #d4edda;
+            padding: 8px 16px;
             border-radius: 5px;
-            padding: 15px;
-            margin-top: 15px;
-            display: none;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .feature-link:hover {
+            background: #2c3e50;
+        }
+
+        .progress-section {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3498db;
         }
 
         .tip-box {
@@ -152,42 +213,86 @@
             color: #856404;
         }
 
-        .card {
+        /* Styling für aufklappbare Bereiche */
+        .accordion {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .active-accordion, .accordion:hover {
+            background-color: #e9ecef;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            color: #2c3e50;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active-accordion:after {
+            content: "\2212";
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 10px;
+        }
+
+        .exercise {
             background: #f8f9fa;
-            padding: 20px;
-            margin: 15px 0;
             border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
             border-radius: 5px;
         }
 
-        .progress-section {
-            background: #e8f4f8;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #3498db;
-        }
-
-        .weiter-button {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        .solution-toggle {
+            background: #34495e;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
+            padding: 8px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin: 30px 0;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
         }
 
-        .weiter-button:hover {
-            background: linear-gradient(135deg, #c0392b, #a93226);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+        .solution {
+            display: none;
+            padding: 15px;
+            background: #e8f4f8;
+            border-radius: 5px;
+            margin-top: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 1px solid #cce5ff;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
         }
 
         .method-grid {
@@ -225,572 +330,595 @@
             margin: 15px 0;
             border-radius: 5px;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+                transform: translateX(-250px);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-body {
+                padding: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: #34495e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="welcome-section">
-        <h2>Sachtextanalyse: Der Wert des Analogen im digitalen Zeitalter</h2>
-        <p>In diesem Kapitel analysieren wir einen Sachtext von Dr. Thomas Maier, der die Renaissance analoger Medien in unserer digitalen Welt thematisiert. Du lernst Schritt für Schritt, wie du einen Sachtext systematisch analysierst und interpretierst.</p>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Grundlagen der Sachtextanalyse</span>
-            <span class="accordion-icon">+</span>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Deutschmatura</h1>
+            <p>Komplettes Handbuch</p>
         </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Was sind Sachtexte?</h4>
-                <p>Sachtexte sind nicht-fiktionale Texte, die primär informieren, argumentieren oder instruieren. Sie setzen sich sachlich mit realen Themen auseinander und haben verschiedene Funktionen:</p>
-                
-                <div class="method-grid">
-                    <div class="method-card">
-                        <h4>Informierende Texte</h4>
-                        <ul>
-                            <li>Nachricht, Bericht</li>
-                            <li>Wissenschaftlicher Artikel</li>
-                            <li>Lexikonartikel</li>
-                        </ul>
-                    </div>
-                    <div class="method-card">
-                        <h4>Argumentierende Texte</h4>
-                        <ul>
-                            <li>Kommentar, Glosse</li>
-                            <li>Rezension</li>
-                            <li>Erörterung/Stellungnahme</li>
-                        </ul>
-                    </div>
-                    <div class="method-card">
-                        <h4>Expressive Texte</h4>
-                        <ul>
-                            <li>Reportage</li>
-                            <li>Populärwissenschaftlicher Text</li>
-                            <li>Essay</li>
-                        </ul>
-                    </div>
+        
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Grundlagen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('willkommen')">Willkommen</a>
                 </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('eroerterung-grundlagen')">Textgebundene Erörterung</a>
+                </div>
+            </div>
 
-                <div class="highlight-box">
-                    <strong>Wichtig:</strong> Bei der Sachtextanalyse geht es darum, den Text zu analysieren, nicht zu interpretieren. Im Fokus stehen Inhalt, Struktur, Sprache und Argumentationsweise.
+            <div class="nav-section">
+                <div class="nav-section-title">Textanalyse</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('textanalyse-grundlagen')">Grundlagen der Textanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('stilmittel-rhetorik')">Stilmittel & Rhetorik</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('argumentationsanalyse')">Argumentationsanalyse</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" onclick="loadContent('sprachanalyse')">Sprachanalyse</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Textsorten</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('textsorten-uebersicht')">Textsorten-Übersicht</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('lyrik-analyse')">Lyrik analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('prosa-analyse')">Prosa analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('drama-analyse')">Drama analysieren</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" onclick="loadContent('sachtext-analyse')">Sachtext analysieren</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Praxisbeispiele</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('beispiel-kolumne')">Beispiel: Kolumne</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('beispiel-sachtext')">Beispiel: Sachtext</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('musterloesungen')">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('formulierungen-einleitung')">Einleitung & Schluss</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('formulierungen-analyse')">Analyse-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('formulierungen-interpretation')">Interpretations-Formulierungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('fachbegriffe')">Fachbegriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Übungen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-stilmittel')">Stilmittel-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-analyse')">Analyse-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-eroerterung')">Erörterungs-Übungen</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('uebungen-interpretation')">Interpretations-Übungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Prüfungsvorbereitung</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('zeitmanagement')">Zeitmanagement</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('ueberarbeitung')">Überarbeitungstechniken</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('checklistsen')">Checklisten</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('haeufige-fehler')">Häufige Fehler</a>
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Lesestrategien und Texterschließung</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Methodisches Vorgehen beim ersten Lesen</h4>
-                <p>Eine systematische Texterschließung erfolgt in mehreren Phasen:</p>
-                
-                <div class="card">
-                    <h4>1. Orientierender Überblick</h4>
+    <main class="main-content">
+        <div class="content-container">
+            <header class="content-header">
+                <h1>Sachtext-Analyse</h1>
+                <p>Argumentationsaufbau, Objektivität und Subjektivität erkennen</p>
+            </header>
+
+            <div class="content-body" id="content-body">
+                <div class="welcome-section">
+                    <h2>Sachtexte systematisch analysieren</h2>
+                    <p>Sachtexte informieren, erklären, überzeugen oder kommentieren. In dieser Lektion lernst du, wie du Sachtexte systematisch analysierst, Argumentationsstrukturen erkennst und zwischen objektiven und subjektiven Aussagen unterscheidest.</p>
+                </div>
+
+                <h2>Was sind Sachtexte?</h2>
+                <p>Sachtexte sind nicht-fiktionale Texte, die Informationen vermitteln, Standpunkte darlegen oder Handlungsanweisungen geben. Sie unterscheiden sich von literarischen Texten durch ihren informativen Charakter und ihre sachliche Ausrichtung.</p>
+
+                <button class="accordion">Typische Sachtextsorten</button>
+                <div class="panel">
                     <ul>
-                        <li>Titel, Untertitel, Verfasser identifizieren</li>
-                        <li>Textsorte bestimmen</li>
-                        <li>Länge und Struktur erfassen</li>
-                        <li>Publikationskontext beachten</li>
+                        <li><strong>Kommentare</strong> - subjektive Meinungsäußerungen zu aktuellen Themen</li>
+                        <li><strong>Berichte</strong> - sachliche Darstellung von Ereignissen oder Fakten</li>
+                        <li><strong>Essays</strong> - anspruchsvolle, reflektierende Abhandlungen</li>
+                        <li><strong>Reportagen</strong> - anschauliche Schilderungen von Ereignissen</li>
+                        <li><strong>Rezensionen</strong> - kritische Besprechungen von Werken</li>
+                        <li><strong>Wissenschaftliche Texte</strong> - fachliche Abhandlungen mit Theorien und Belegen</li>
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h4>2. Intensives Lesen</h4>
+                <h2>Argumentationsstruktur in Sachtexten</h2>
+                <p>Die Analyse der Argumentationsstruktur ist zentral für das Verständnis von Sachtexten. Dabei untersuchst du, wie der Autor seine Position begründet und welche Argumentationsstrategien er verwendet.</p>
+
+                <button class="accordion">Argumentationstypen</button>
+                <div class="panel">
+                    <h3>Deduktive Argumentation</h3>
+                    <p>Vom Allgemeinen zum Besonderen: Eine allgemeine These wird durch spezifische Beispiele belegt.</p>
+                    
+                    <h3>Induktive Argumentation</h3>
+                    <p>Vom Besonderen zum Allgemeinen: Aus einzelnen Beobachtungen wird eine allgemeine Schlussfolgerung gezogen.</p>
+                    
+                    <h3>Dialektische Argumentation</h3>
+                    <p>These - Antithese - Synthese: Zunächst wird eine Position dargestellt, dann eine Gegenposition, schließlich eine vermittelnde Lösung.</p>
+                    
+                    <h3>Kausale Argumentation</h3>
+                    <p>Ursache-Wirkung-Beziehungen werden dargestellt, um Argumente zu stützen.</p>
+                </div>
+
+                <button class="accordion">Argumentationsbausteine identifizieren</button>
+                <div class="panel">
+                    <p>Bei der Analyse der Argumentation solltest du folgende Elemente identifizieren:</p>
                     <ul>
-                        <li>Unbekannte Begriffe klären</li>
-                        <li>Kernaussagen markieren</li>
-                        <li>Argumentationsstruktur verfolgen</li>
-                        <li>Stilistische Auffälligkeiten notieren</li>
+                        <li><strong>Hauptthese</strong> - Die zentrale Aussage oder Forderung des Textes</li>
+                        <li><strong>Unterstützende Argumente</strong> - Begründungen für die Hauptthese</li>
+                        <li><strong>Belege</strong> - Fakten, Statistiken, Zitate oder Beispiele</li>
+                        <li><strong>Gegenargumente</strong> - Widerlegte Einwände gegen die Hauptthese</li>
+                        <li><strong>Schlussfolgerung</strong> - Zusammenfassung und mögliche Handlungsempfehlungen</li>
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h4>3. Analytisches Lesen</h4>
+                <div class="example-box">
+                    <h3>Beispiel: Argumentationsanalyse</h3>
+                    <p><strong>Textauszug:</strong> "Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht."</p>
+                    <p><strong>Analyse:</strong> Hier wird eine kausale Argumentation verwendet. Die Hauptthese ("Klimawandel erfordert sofortiges Handeln") wird durch einen faktischen Beleg (Temperaturanstieg) gestützt.</p>
+                </div>
+
+                <h2>Erweiterte Argumenttypologie</h2>
+                <p>Für eine differenzierte Analyse ist es hilfreich, verschiedene Argumenttypen zu kennen:</p>
+
+                <button class="accordion">Erweiterte Argumenttypen</button>
+                <div class="panel">
+                    <div class="method-grid">
+                        <div class="method-card">
+                            <h4>Kausalargument</h4>
+                            <p>Ursache-Wirkung-Beziehungen ("Wenn A, dann B")</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Finalargument</h4>
+                            <p>Zweck-Mittel-Argumentation ("Um X zu erreichen, muss Y getan werden")</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Präzedenzargument</h4>
+                            <p>Berufung auf bewährte Praktiken oder frühere Entscheidungen</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Pragmatisches Argument</h4>
+                            <p>Berufung auf praktische Vorteile oder Nachteile</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Probabilitätsargument</h4>
+                            <p>Wahrscheinlichkeitsüberlegungen</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Konsequenzargument</h4>
+                            <p>Argumentation über zu erwartende Folgen</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Scheinargumente erkennen</h2>
+                <p>Scheinargumente sind rhetorische Tricks, die eine Argumentation vortäuschen, ohne sie tatsächlich zu stützen.</p>
+
+                <button class="accordion">Typische Scheinargumente</button>
+                <div class="panel">
+                    <div class="warning-box">
+                        <strong>Achtung vor diesen Scheinargumenten:</strong>
+                        <ul>
+                            <li><strong>Argumentum ad antiquitatem:</strong> Berufung aufs Alter ("Das war schon immer so")</li>
+                            <li><strong>Argumentum ad novitam:</strong> Berufung auf Neuheit ("Das ist modern/zeitgemäß")</li>
+                            <li><strong>Argumentum ad consequentiam:</strong> Falsche Kausalitäten</li>
+                            <li><strong>Slippery Slope:</strong> Dammbruchargument ohne reale Grundlage</li>
+                            <li><strong>Strohmann-Argument:</strong> Verzerrung der gegnerischen Position</li>
+                            <li><strong>False Dilemma:</strong> Künstliche Entweder-oder-Situation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Textlinguistische Analyse</h2>
+                <p>Die textlinguistische Analyse untersucht, wie Texte sprachlich zusammenhängen und strukturiert sind.</p>
+
+                <button class="accordion">Kohäsion und Kohärenz</button>
+                <div class="panel">
+                    <table>
+                        <tr>
+                            <th>Begriff</th>
+                            <th>Beschreibung</th>
+                            <th>Beispiel</th>
+                        </tr>
+                        <tr>
+                            <td>Rekurrenz</td>
+                            <td>Wiederholung gleicher Wörter</td>
+                            <td>"Digitalisierung... Digitalisierung..."</td>
+                        </tr>
+                        <tr>
+                            <td>Substitution</td>
+                            <td>Ersetzung durch Pronomen oder Synonyme</td>
+                            <td>"Der Autor... Er..."</td>
+                        </tr>
+                        <tr>
+                            <td>Proformen</td>
+                            <td>"Dies", "jenes", "so etwas"</td>
+                            <td>"Dies zeigt deutlich..."</td>
+                        </tr>
+                        <tr>
+                            <td>Ellipse</td>
+                            <td>Auslassung bekannter Informationen</td>
+                            <td>"Erstens [ist wichtig]..."</td>
+                        </tr>
+                        <tr>
+                            <td>Junktion</td>
+                            <td>Explizite Verknüpfungsausdrücke</td>
+                            <td>"jedoch", "trotzdem", "folglich"</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h2>Stilistische Mikroanalyse</h2>
+                <p>Die stilistische Mikroanalyse untersucht sprachliche Besonderheiten auf Wort- und Satzebene.</p>
+
+                <button class="accordion">Wortbildungsanalyse</button>
+                <div class="panel">
                     <ul>
-                        <li>Intentionen des Autors erkennen</li>
-                        <li>Zielgruppe identifizieren</li>
-                        <li>Wirkungsabsicht analysieren</li>
-                        <li>Bewertung der Argumentation</li>
+                        <li><strong>Komposita:</strong> Zusammensetzungen und ihre semantischen Relationen</li>
+                        <li><strong>Derivation:</strong> Ableitungen durch Präfixe/Suffixe</li>
+                        <li><strong>Neologismen:</strong> Wortneuschöpfungen</li>
+                        <li><strong>Archaismen:</strong> Veraltete Wörter</li>
+                        <li><strong>Barbarismen:</strong> Fremdsprachliche Einflüsse</li>
                     </ul>
+                </div>
+
+                <button class="accordion">Semantische Felder</button>
+                <div class="panel">
+                    <ul>
+                        <li><strong>Isotopie:</strong> Durchgängige Bedeutungsfelder im Text</li>
+                        <li><strong>Antonymie:</strong> Gegensatzpaare</li>
+                        <li><strong>Synonymie:</strong> Bedeutungsähnlichkeiten</li>
+                        <li><strong>Hyperonymie/Hyponymie:</strong> Über-/Unterordnungsbeziehungen</li>
+                        <li><strong>Polysemie:</strong> Mehrdeutigkeit</li>
+                    </ul>
+                </div>
+
+                <h2>Textsortenspezifische Merkmale</h2>
+                <p>Verschiedene Sachtextsorten haben charakteristische Merkmale, die bei der Analyse berücksichtigt werden sollten.</p>
+
+                <button class="accordion">Kommentar-Subtypen</button>
+                <div class="panel">
+                    <div class="method-grid">
+                        <div class="method-card">
+                            <h4>Leitartikel</h4>
+                            <p>Meinungsführend, grundsätzlich</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Kolumne</h4>
+                            <p>Persönlicher, oft humorvoll</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Glosse</h4>
+                            <p>Satirisch, pointiert</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Editorial</h4>
+                            <p>Redaktionelle Linie</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="accordion">Essay-Varianten</button>
+                <div class="panel">
+                    <div class="method-grid">
+                        <div class="method-card">
+                            <h4>Persönlicher Essay</h4>
+                            <p>Subjektive Erfahrungen</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Argumentativer Essay</h4>
+                            <p>These-gestützt</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Deskriptiver Essay</h4>
+                            <p>Beschreibend</p>
+                        </div>
+                        <div class="method-card">
+                            <h4>Narrativer Essay</h4>
+                            <p>Erzählend</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Rhetorische Strategien</h2>
+                <p>Rhetorische Strategien nach Aristoteles helfen, die Überzeugungsabsicht eines Textes zu analysieren.</p>
+
+                <button class="accordion">Überzeugungsstrategien nach Aristoteles</button>
+                <div class="panel">
+                    <div class="method-grid">
+                        <div class="method-card">
+                            <h4>Ethos-Strategien</h4>
+                            <p>Glaubwürdigkeit des Sprechers</p>
+                            <ul>
+                                <li>Expertise betonen</li>
+                                <li>Charakter demonstrieren</li>
+                                <li>Wohlwollen zeigen</li>
+                            </ul>
+                        </div>
+                        <div class="method-card">
+                            <h4>Pathos-Strategien</h4>
+                            <p>Emotionale Ansprache</p>
+                            <ul>
+                                <li>Angst erzeugen</li>
+                                <li>Mitleid wecken</li>
+                                <li>Stolz ansprechen</li>
+                            </ul>
+                        </div>
+                        <div class="method-card">
+                            <h4>Logos-Strategien</h4>
+                            <p>Rationale Argumentation</p>
+                            <ul>
+                                <li>Deduktion</li>
+                                <li>Induktion</li>
+                                <li>Analogiebildung</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Digitale Textsorten</h2>
+                <p>Moderne Sachtexte erscheinen zunehmend in digitalen Formaten mit spezifischen Merkmalen.</p>
+
+                <button class="accordion">Digitale Textsorten</button>
+                <div class="panel">
+                    <div class="method-grid">
+                        <div class="method-card">
+                            <h4>Blog-Beiträge</h4>
+                            <ul>
+                                <li>Persönlicher Blog: Tagebuch-Charakter</li>
+                                <li>Corporate Blog: Unternehmenskommunikation</li>
+                                <li>Themen-Blog: Expertenplattform</li>
+                            </ul>
+                        </div>
+                        <div class="method-card">
+                            <h4>Social Media Texte</h4>
+                            <ul>
+                                <li>Twitter/X: Kürze, Hashtags, Verweise</li>
+                                <li>LinkedIn: Professioneller Diskurs</li>
+                                <li>Instagram: Text-Bild-Kombination</li>
+                            </ul>
+                        </div>
+                        <div class="method-card">
+                            <h4>Online-Journalismus</h4>
+                            <ul>
+                                <li>Clickbait-Strategien: Aufmerksamkeitsgenerierung</li>
+                                <li>SEO-Optimierung: Suchmaschinenfreundlichkeit</li>
+                                <li>Interaktive Elemente: Kommentare, Bewertungen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Übungen zur Sachtext-Analyse</h2>
+
+                <div class="exercise">
+                    <h3>Übung 1: Argumentationsstruktur erkennen</h3>
+                    <p>Analysiere den folgenden Textauszug und identifiziere die Argumentationsstruktur:</p>
+                    <p>"Die Digitalisierung des Bildungswesens wird heute vielfach als Allheilmittel für die Probleme unserer Schulen gepriesen. Tablets statt Schulbücher, Online-Kurse statt Frontalunterricht, Lern-Apps statt Arbeitsblätter – so lautet die Devise. Befürworter argumentieren, dass die digitale Transformation unaufhaltsam sei und Schulen die Schüler auf eine digitalisierte Arbeitswelt vorbereiten müssten.</p>
+                    <p>Doch bei aller Begeisterung für die neuen Möglichkeiten werden die Risiken oft übersehen. Studien zeigen, dass die intensive Nutzung digitaler Medien die Konzentrationsfähigkeit beeinträchtigen kann. Zudem verleitet die Informationsflut im Internet zu oberflächlichem Denken und erschwert das vertiefte Verstehen komplexer Zusammenhänge."</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('solution1')">Lösung anzeigen</button>
+                    <div id="solution1" class="solution">
+                        <h4>Lösung:</h4>
+                        <p>Der Text verwendet eine dialektische Argumentationsstruktur:</p>
+                        <ol>
+                            <li><strong>These:</strong> Digitalisierung wird als Allheilmittel gepriesen (mit Beispielen: Tablets, Online-Kurse, Lern-Apps)</li>
+                            <li><strong>Antithese:</strong> Risiken werden übersehen (Konzentrationsstörungen, oberflächliches Denken)</li>
+                            <li><strong>Argumentationsweise:</strong> Der Autor stellt zunächst die verbreitete positive Sicht dar, um dann mit Gegenargumenten zu widersprechen. Es werden Studien als Belege angeführt.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3>Übung 2: Objektivität und Subjektivität unterscheiden</h3>
+                    <p>Markiere in folgendem Textauszug subjektive Aussagen:</p>
+                    <p>"Die sozialen Medien haben unsere Gesellschaft <span class="highlight">leider</span> nicht nur verändert, sondern <span class="highlight">zerschnitten, zersplittert und zerstückelt</span>. Es ist <span class="highlight">erschreckend</span> zu sehen, wie <span class="highlight">oberflächlich</span> die Kommunikation geworden ist. <span class="highlight">Jeder</span> gibt nur noch seine Meinung kund, ohne <span class="highlight">jemals</span> zuzuhören. <span class="highlight">Eigentlich</span> sollten diese Plattformen uns doch verbinden, aber <span class="highlight">in Wirklichkeit</span> tun sie das Gegenteil."</p>
+                    
+                    <button class="solution-toggle" onclick="toggleSolution('solution2')">Lösung anzeigen</button>
+                    <div id="solution2" class="solution">
+                        <h4>Lösung:</h4>
+                        <p>Subjektive Aussagen sind:</p>
+                        <ul>
+                            <li>"leider" - wertende Einschätzung</li>
+                            <li>"zerschnitten, zersplittert und zerstückelt" - stark emotionale, metaphorische Beschreibung</li>
+                            <li>"erschreckend" - emotionale Bewertung</li>
+                            <li>"oberflächlich" - wertendes Adjektiv</li>
+                            <li>"Jeder... jemals" - absolute, übertreibende Formulierung</li>
+                            <li>"Eigentlich... in Wirklichkeit" - subjektive Gegenüberstellung</li>
+                        </ul>
+                        <p>Diese Formulierungen zeigen eine stark subjektive, emotionale Haltung des Autors.</p>
+                    </div>
                 </div>
 
                 <div class="tip-box">
-                    <strong>Lesetipp:</strong> Verwende verschiedene Markierungsfarben für Thesen (rot), Argumente (blau), Beispiele (grün) und sprachliche Besonderheiten (gelb).
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Argumentationsanalyse vertiefen</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Argumentationstypen erkennen und bewerten</h4>
-                
-                <div class="method-grid">
-                    <div class="method-card">
-                        <h4>Faktenargument</h4>
-                        <p>Überprüfbare Tatsachen, Statistiken, empirische Daten</p>
-                        <strong>Bewertung:</strong> Meist stark, wenn Quellen seriös
-                    </div>
-                    <div class="method-card">
-                        <h4>Autoritätsargument</h4>
-                        <p>Berufung auf Experten, Institutionen, Studien</p>
-                        <strong>Bewertung:</strong> Abhängig von Glaubwürdigkeit der Quelle
-                    </div>
-                    <div class="method-card">
-                        <h4>Normatives Argument</h4>
-                        <p>Berufung auf ethische, moralische oder rechtliche Normen</p>
-                        <strong>Bewertung:</strong> Stark, wenn Normen allgemein akzeptiert
-                    </div>
+                    <strong>Tipp für die Sachtext-Analyse:</strong>
+                    <p>Beginne immer mit einer gründlichen Textlektüre und notiere erste Eindrücke. Analysiere dann systematisch: Welche Textsorte liegt vor? Welche Hauptthese wird vertreten? Wie ist die Argumentation aufgebaut? Welche sprachlichen Mittel werden eingesetzt? Erst am Ende solltest du eine Bewertung vornehmen.</p>
                 </div>
 
-                <div class="warning-box">
-                    <strong>Achtung Scheinargumente:</strong>
+                <div class="progress-section">
+                    <h3>Weiterführende Analyse-Tools</h3>
+                    <p>Für eine vertiefte Analyse kannst du folgende Fragen stellen:</p>
                     <ul>
-                        <li><strong>Argumentum ad hominem:</strong> Angriff auf die Person statt auf die Sache</li>
-                        <li><strong>Argumentum ad populum:</strong> Berufung auf Mehrheitsmeinung</li>
-                        <li><strong>Argumentum ad baculum:</strong> Drohung oder Einschüchterung</li>
-                        <li><strong>Argumentum ad misericordiam:</strong> Appell an Mitleid</li>
-                    </ul>
-                </div>
-
-                <h4>Argumentationsstrukturen</h4>
-                <div class="card">
-                    <p><strong>Linear:</strong> These → Argument 1 → Argument 2 → Argument 3 → Schluss</p>
-                    <p><strong>Antithetisch:</strong> These → Gegenthese → Argumente pro/contra → Synthese</p>
-                    <p><strong>Dialektisch:</strong> Problemstellung → verschiedene Standpunkte → Abwägung → Position</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="analysis-section">
-        <h3>Der Sachtext: "Der Wert des Analogen im digitalen Zeitalter"</h3>
-        <div class="text-example">
-            <p><strong>Von Dr. Thomas Maier, veröffentlicht in "Wissen & Bildung", Januar 2025</strong></p>
-            <p>Die Digitalisierung hat nahezu jeden Aspekt unseres Alltags erfasst. Wir lesen digitale Bücher, hören gestreamte Musik, kommunizieren über Messenger-Dienste und speichern unsere Erinnerungen als Dateien in der Cloud. Diese Entwicklung bringt unbestreitbare Vorteile: Informationen sind jederzeit und überall verfügbar, die Verbreitung von Wissen wird demokratisiert, die Kommunikation beschleunigt.</p>
-            
-            <p>Doch parallel zu dieser fortschreitenden Digitalisierung lässt sich ein bemerkenswertes Phänomen beobachten: die Renaissance des Analogen. Vinylschallplatten verzeichnen seit Jahren steigende Verkaufszahlen, gedruckte Bücher behaupten sich trotz E-Books am Markt, Polaroid-Kameras erfreuen sich wachsender Beliebtheit, und handgeschriebene Notizen erleben in Form des "Bullet Journaling" ein Comeback.</p>
-            
-            <p>Diese parallele Entwicklung wirft Fragen auf: Warum wenden sich Menschen in einer durchdigitalisierten Welt bewusst analogen Alternativen zu? Welche Qualitäten bietet das Analoge, die im Digitalen verloren gehen?</p>
-            
-            <p>Empirische Studien liefern erste Antworten. So zeigen Untersuchungen zur Lese- und Lernpsychologie, dass Informationen auf Papier oft besser verarbeitet und erinnert werden als auf Bildschirmen. Die räumliche Orientierung im physischen Buch – zu wissen, ob eine Information eher am Anfang oder Ende stand – unterstützt die kognitive Verarbeitung. Ähnlich verhält es sich mit handschriftlichen Notizen, die komplexere motorische und kognitive Prozesse erfordern als das Tippen und dadurch das Verständnis fördern.</p>
-            
-            <p>Doch über diese funktionalen Vorteile hinaus bietet das Analoge eine sinnliche Dimension, die im Digitalen oft fehlt: die Haptik eines Buches, das Rauschen einer Schallplatte, die Zufälligkeit und Unwiderruflichkeit eines Polaroid-Fotos. Diese Qualitäten schaffen eine andere Form der Aufmerksamkeit und Verbindlichkeit. Ein gedrucktes Buch lässt sich nicht nebenbei konsumieren wie ein E-Book zwischen E-Mails und Push-Nachrichten. Es fordert eine bewusstere Entscheidung, eine höhere Verbindlichkeit.</p>
-            
-            <p>Zudem besitzen analoge Objekte eine materielle Beständigkeit, die digitalen Inhalten fehlt. Sie altern und entwickeln eine Patina, die ihre Geschichte widerspiegelt – vom abgegriffenen Lieblingsbuch bis zur zerkratzten Schallplatte. Diese physischen Spuren des Gebrauchs erzeugen eine emotionalere Bindung und symbolische Bedeutung, die rein digitale Inhalte kaum erreichen können.</p>
-            
-            <p>Die Renaissance des Analogen sollte daher nicht als nostalgische Verweigerungshaltung missverstanden werden. Vielmehr zeigt sie das Bedürfnis nach einem ausgewogenen Verhältnis zwischen digitaler Effizienz und analoger Tiefe. Eine zukunftsfähige Mediennutzung wird vermutlich in der intelligenten Kombination beider Welten liegen – in der Erkenntnis, wann digitale Werkzeuge überlegen sind und wann analoge Alternativen einen Mehrwert bieten.</p>
-            
-            <p>Die Herausforderung besteht darin, nicht der Logik des "Entweder-oder" zu folgen, sondern die spezifischen Qualitäten beider Sphären zu würdigen. In diesem Sinne ist die Rückbesinnung auf das Analoge keine rückwärtsgewandte Bewegung, sondern eine Bereicherung unserer medial hochentwickelten Kultur.</p>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Schritt 1: Einleitung und kurze Inhaltsangabe</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Ziel dieser Phase</h4>
-                <p>Den Text einordnen und seinen wesentlichen Inhalt knapp zusammenfassen.</p>
-                
-                <h4>Hilfreiche Formulierungen für den Einstieg</h4>
-                <ul>
-                    <li>"Der Sachtext 'Der Wert des Analogen im digitalen Zeitalter' von Dr. Thomas Maier, erschienen in 'Wissen & Bildung' (Januar 2025), behandelt..."</li>
-                    <li>"Im vorliegenden Artikel untersucht der Autor..."</li>
-                    <li>"Der Text setzt sich mit dem Phänomen auseinander, dass..."</li>
-                </ul>
-                
-                <h4>Für die Inhaltsangabe</h4>
-                <ul>
-                    <li>Thema und zentrale These des Textes nennen</li>
-                    <li>Hauptargumente in logischer Reihenfolge darstellen</li>
-                    <li>Neutral und im Präsens formulieren</li>
-                    <li>Konjunktiv I bei Wiedergabe der Autorenmeinung verwenden</li>
-                </ul>
-                
-                <button class="solution-toggle">Musterlösung anzeigen</button>
-                <div class="solution">
-                    <h4>Musterlösung für die Einleitung</h4>
-                    <p>Der Sachtext "Der Wert des Analogen im digitalen Zeitalter" von Dr. Thomas Maier, veröffentlicht in der Zeitschrift "Wissen & Bildung" im Januar 2025, thematisiert die parallel zur Digitalisierung verlaufende Renaissance analoger Medien und Praktiken. Der Autor stellt zunächst die umfassende Digitalisierung unseres Alltags dar, um dann auf das gegenläufige Phänomen der wachsenden Beliebtheit analoger Alternativen wie Vinyl-Schallplatten, gedruckte Bücher und Polaroid-Fotografie einzugehen. Anhand wissenschaftlicher Erkenntnisse und phänomenologischer Betrachtungen untersucht Maier die spezifischen Qualitäten des Analogen und plädiert schließlich für eine ausgewogene Nutzung beider Medienwelten.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Schritt 2: Stilanalyse</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Ziel dieser Phase</h4>
-                <p>Die sprachlichen und strukturellen Merkmale des Textes untersuchen und ihre Wirkung analysieren.</p>
-                
-                <h4>Auf folgende Aspekte achten</h4>
-                <ul>
-                    <li>Textsorte (hier: Sachtext mit informierendem und argumentierendem Charakter)</li>
-                    <li>Aufbau und Argumentationsstruktur</li>
-                    <li>Sprachlicher Stil (Fachsprache, Verständlichkeit)</li>
-                    <li>Verwendete Stilmittel</li>
-                    <li>Objektivität vs. subjektive Elemente</li>
-                </ul>
-                
-                <h4>Stilmittel systematisch analysieren</h4>
-                <div class="card">
-                    <p><strong>Metaphern und Bilder:</strong> "Renaissance des Analogen", "Patina der Geschichte"</p>
-                    <p><strong>Kontrastierungen:</strong> Digital vs. Analog durchgängig als Strukturprinzip</p>
-                    <p><strong>Rhetorische Fragen:</strong> Zur Aktivierung der Leser</p>
-                    <p><strong>Aufzählungen:</strong> Zur Veranschaulichung und Konkretisierung</p>
-                </div>
-                
-                <h4>Hilfreiche Formulierungen</h4>
-                <ul>
-                    <li>"Der Text überzeugt durch seine differenzierte Betrachtung des Phänomens..."</li>
-                    <li>"Besonders gelungen ist die Art, wie der Autor..."</li>
-                    <li>"Eine kritische Betrachtung legt nahe, dass..."</li>
-                    <li>"Aus meiner Sicht spricht der Autor einen wichtigen Aspekt an, wenn er..."</li>
-                    <li>"Zusammenfassend kann man sagen, dass..."</li>
-                </ul>
-                
-                <button class="solution-toggle">Musterlösung anzeigen</button>
-                <div class="solution">
-                    <h4>Musterlösung für die Bewertung und den Schluss</h4>
-                    <p>Der Text von Dr. Maier überzeugt durch seine differenzierte und ausgewogene Darstellung des Spannungsfeldes zwischen analog und digital. Statt einer einseitigen Verherrlichung des Analogen oder einer unkritischen Technikbegeisterung gelingt es dem Autor, die spezifischen Qualitäten beider Medienwelten herauszuarbeiten. Besonders überzeugend ist die Verbindung von wissenschaftlichen Erkenntnissen mit alltäglichen Beobachtungen, wodurch der Text sowohl informativ als auch anschaulich wirkt.</p>
-                    
-                    <p>Allerdings bleibt der Text in einigen Bereichen etwas vage. So werden die "empirischen Studien" zwar erwähnt, aber nicht näher benannt oder in ihrem Umfang beschrieben. Hier hätten konkretere Quellenangaben die Argumentation noch stärker untermauern können. Zudem werden soziale und ökonomische Faktoren der analogen Renaissance – etwa Fragen der Exklusivität oder des Status – kaum thematisiert.</p>
-                    
-                    <p>Das von Maier beschriebene Phänomen lässt sich tatsächlich in vielen Bereichen unseres Alltags beobachten. Die wachsende Beliebtheit von Vinylschallplatten, das Überleben gedruckter Bücher trotz digitaler Alternativen oder der Trend zu handgeschriebenen Notizen zeigen, dass digitale Lösungen nicht automatisch analoge Praktiken verdrängen. Es scheint, als würden Menschen intuitiv spüren, wann die Qualitäten des Analogen – Haptik, Beständigkeit, sinnliche Erfahrung – einen Mehrwert bieten.</p>
-                    
-                    <p>Abschließend lässt sich festhalten, dass der Text einen wichtigen Beitrag zur aktuellen Mediendiskussion leistet, indem er über die oft polarisierende Gegenüberstellung von analog und digital hinausgeht. Die vorgeschlagene Balance zwischen beiden Welten erscheint als zukunftsweisender Ansatz in einer Zeit, in der technologische Entwicklungen immer schneller voranschreiten, während gleichzeitig das Bedürfnis nach Entschleunigung und sinnlicher Erfahrung wächst.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Bewertungskriterien und Qualitätsmerkmale</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Kriterien für eine gelungene Sachtextanalyse</h4>
-                
-                <div class="card">
-                    <h4>Inhaltliche Vollständigkeit</h4>
-                    <ul>
-                        <li>Vollständige Textangaben in der Einleitung</li>
-                        <li>Präzise Inhaltsangabe ohne Interpretation</li>
-                        <li>Systematische Analyse aller wichtigen Textaspekte</li>
-                        <li>Fundierte Bewertung mit eigener Stellungnahme</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h4>Methodische Sicherheit</h4>
-                    <ul>
-                        <li>Korrekte Verwendung von Fachbegrffen</li>
-                        <li>Strukturierter Aufbau mit logischen Übergängen</li>
-                        <li>Belegung aller Aussagen durch Textstellen</li>
-                        <li>Trennung von Analyse und Interpretation</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h4>Sprachliche Qualität</h4>
-                    <ul>
-                        <li>Präzise und angemessene Ausdrucksweise</li>
-                        <li>Korrekte Verwendung des Konjunktivs</li>
-                        <li>Abwechslungsreiche Formulierungen</li>
-                        <li>Sachlicher, aber nicht monotoner Stil</li>
-                    </ul>
-                </div>
-
-                <div class="warning-box">
-                    <strong>Häufige Fehler vermeiden:</strong>
-                    <ul>
-                        <li>Reine Inhaltsangabe statt Analyse</li>
-                        <li>Vorschnelle Interpretation ohne Textbelege</li>
-                        <li>Unstrukturierte Aneinanderreihung von Beobachtungen</li>
-                        <li>Fehlende oder oberflächliche Bewertung</li>
-                        <li>Ignorieren der Textintention</li>
+                        <li>Welche Intention verfolgt der Autor? (informieren, überzeugen, unterhalten?)</li>
+                        <li>An welches Publikum richtet sich der Text?</li>
+                        <li>Welche Wertvorstellungen werden transportiert?</li>
+                        <li>Wie ist der historische und gesellschaftliche Kontext?</li>
+                        <li>Welche Alternativpositionen werden ausgeblendet?</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Textsortenspezifische Analyse</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Besonderheiten verschiedener Sachtextarten</h4>
-                
-                <div class="method-grid">
-                    <div class="method-card">
-                        <h4>Kommentar</h4>
-                        <ul>
-                            <li>Subjektive Meinungsäußerung</li>
-                            <li>Aktualitätsbezug</li>
-                            <li>Persuasive Intention</li>
-                            <li>Pointierte Sprache</li>
-                        </ul>
-                    </div>
-                    <div class="method-card">
-                        <h4>Reportage</h4>
-                        <ul>
-                            <li>Anschauliche Darstellung</li>
-                            <li>Szenische Elemente</li>
-                            <li>Atmosphärische Beschreibungen</li>
-                            <li>Mischung aus Information und Unterhaltung</li>
-                        </ul>
-                    </div>
-                    <div class="method-card">
-                        <h4>Essay</h4>
-                        <ul>
-                            <li>Subjektive Reflexion</li>
-                            <li>Assoziative Gedankenführung</li>
-                            <li>Literarische Qualität</li>
-                            <li>Offener Schluss</li>
-                        </ul>
-                    </div>
-                </div>
+    <script>
+        // Accordion-Funktionalität
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active-accordion");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
 
-                <div class="card">
-                    <h4>Analysestrategie anpassen</h4>
-                    <p>Je nach Textsorte sollten unterschiedliche Schwerpunkte gesetzt werden:</p>
-                    <ul>
-                        <li><strong>Bei informativen Texten:</strong> Sachlichkeit, Vollständigkeit, Verständlichkeit</li>
-                        <li><strong>Bei argumentativen Texten:</strong> Argumentation, Überzeugungskraft, logische Struktur</li>
-                        <li><strong>Bei expressiven Texten:</strong> Sprachgestaltung, Wirkung, künstlerische Qualität</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+        // Lösung ein-/ausblenden
+        function toggleSolution(id) {
+            var solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
 
-    <div class="exercise">
-        <h3>Übung: Eigene Sachtextanalyse</h3>
-        <p><strong>Aufgabe:</strong> Analysiere den folgenden Sachtextauszug nach dem gelernten Schema.</p>
-        
-        <div class="text-example">
-            <p><strong>Auszug aus: "Die Zukunft der Arbeit" von Max Mustermann</strong></p>
-            <p>Die Digitalisierung der Arbeitswelt schreitet unaufhaltsam voran. Künstliche Intelligenz und Automatisierung verändern nicht nur einzelne Berufsbilder, sondern das gesamte Konzept von Arbeit. Während viele vor den Risiken warnen – Jobverlust, soziale Ungleichheit, Entfremdung –, werden die Chancen oft übersehen. Automatisierung kann uns von monotonen Tätigkeiten befreien und Raum für kreative, sinnstiftende Arbeit schaffen. Die Herausforderung besteht nicht darin, den technologischen Fortschritt aufzuhalten, sondern ihn menschlich zu gestalten.</p>
-        </div>
-        
-        <p><strong>Arbeitsaufträge:</strong></p>
-        <ol>
-            <li>Verfasse eine Einleitung mit Textangaben und Inhaltszusammenfassung.</li>
-            <li>Analysiere die Argumentationsstruktur und sprachlichen Mittel.</li>
-            <li>Formuliere eine kritische Bewertung des Textausschnitts.</li>
-        </ol>
-        
-        <button class="solution-toggle">Lösungsvorschlag anzeigen</button>
-        <div class="solution">
-            <h4>Lösungsvorschlag für die Übung</h4>
-            <p><strong>1. Einleitung:</strong> Der Textauszug "Die Zukunft der Arbeit" von Max Mustermann thematisiert die Auswirkungen der Digitalisierung auf die Arbeitswelt. Der Autor beschreibt die unaufhaltsame Entwicklung von künstlicher Intelligenz und Automatisierung und plädiert für eine differenzierte Betrachtung, die nicht nur Risiken, sondern auch Chancen berücksichtigt.</p>
+        // Sidebar-Toggle für Mobile
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        }
+
+        // Navigation-Funktionalität
+        function loadContent(contentId) {
+            // Hier würde normalerweise der Content dynamisch geladen werden
+            // Für dieses Beispiel zeigen wir einfach eine Meldung an
+            alert("Inhalt würde geladen werden: " + contentId);
             
-            <p><strong>2. Analyse:</strong> Der Text weist eine klare antithetische Struktur auf: Zunächst werden die negativen Aspekte der Digitalisierung genannt ("Jobverlust, soziale Ungleichheit, Entfremdung"), um dann die positiven Gegenargumente zu präsentieren ("Befreiung von monotonen Tätigkeiten", "Raum für kreative Arbeit"). Sprachlich fällt die Verwendung von starken Begriffen wie "unaufhaltsam" und "befreien" auf, die eine emotionale Wirkung erzeugen. Die abschließende Forderung nach einer "menschlichen Gestaltung" des Fortschritts fungiert als Synthese.</p>
-            
-            <p><strong>3. Bewertung:</strong> Der Textausschnitt bietet eine ausgewogene Perspektive auf ein komplexes Thema. Die Gegenüberstellung von Risiken und Chancen ist gelungen, allerdings bleiben die Aussagen recht allgemein. Konkrete Beispiele oder Studien würden die Argumentation stärken. Die Schlussforderung nach einer "menschlichen Gestaltung" ist appellativ, aber etwas vage formuliert.</p>
-        </div>
-    </div>
+            // Aktive Navigation hervorheben
+            var navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
 
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Praktische Übungen und Vertiefung</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Übungsformen zur Sachtextanalyse</h4>
-                
-                <div class="method-grid">
-                    <div class="method-card">
-                        <h4>Argumentationsschema erstellen</h4>
-                        <p>Visualisiere die Argumentationsstruktur eines Textes grafisch mit Pfeilen, Ebenen und Verbindungen.</p>
-                    </div>
-                    <div class="method-card">
-                        <h4>Stilmittel-Jagd</h4>
-                        <p>Suche gezielt nach verschiedenen Stilmitteln und analysiere ihre spezifische Wirkung im Kontext.</p>
-                    </div>
-                    <div class="method-card">
-                        <h4>Perspektivenwechsel</h4>
-                        <p>Analysiere, wie der Text auf verschiedene Zielgruppen wirken könnte.</p>
-                    </div>
-                </div>
-
-                <h4>Analysewerkzeuge</h4>
-                <div class="card">
-                    <p><strong>Textmarkierungen:</strong> Verschiedene Farben für Thesen, Argumente, Beispiele, Stilmittel</p>
-                    <p><strong>Randnotizen:</strong> Spontane Reaktionen und Fragen beim ersten Lesen</p>
-                    <p><strong>Strukturskizze:</strong> Übersichtliche Darstellung des Textaufbaus</p>
-                    <p><strong>Argumentationskette:</strong> Logische Verbindungen zwischen den Argumenten</p>
-                </div>
-
-                <h4>Weiterführende Analysefragen</h4>
-                <ul>
-                    <li>Welche Vorannahmen macht der Autor?</li>
-                    <li>Was wird nicht gesagt, aber impliziert?</li>
-                    <li>Welche Gegenargumente werden ausgeblendet?</li>
-                    <li>Wie zeitgebunden sind die Aussagen?</li>
-                    <li>Welche kulturellen oder ideologischen Prägungen sind erkennbar?</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="tip-box">
-        <strong>Tipp für die Sachtextanalyse:</strong><br>
-        Achte besonders auf die Argumentationsstruktur und die Verhältnismäßigkeit der Argumente. Sachtexte zielen oft auf Überzeugung ab – identifiziere die Strategien, die der Autor verwendet, um seine Leser zu überzeugen.
-    </div>
-
-    <div class="progress-section">
-        <h3>Checkliste für die Sachtextanalyse</h3>
-        <ul>
-            <li>✓ Textart und Textsorte korrekt bestimmt</li>
-            <li>✓ Einleitung mit allen notwendigen Textangaben</li>
-            <li>✓ Inhalt präzise und neutral zusammengefasst</li>
-            <li>✓ Argumentationsstruktur analysiert</li>
-            <li>✓ Sprachliche Mittel identifiziert und ihre Wirkung beschrieben</li>
-            <li>✓ Autorposition und Intention herausgearbeitet</li>
-            <li>✓ Eigene kritische Bewertung formuliert</li>
-            <li>✓ Bezug zur Gegenwart hergestellt</li>
-            <li>✓ Strukturierter Aufbau mit logischen Übergängen</li>
-            <li>✓ Alle Aussagen durch Textstellen belegt</li>
-        </ul>
-    </div>
-
-    <div style="text-align: center; margin-top: 40px;">
-        <a href="sachtext-analyse-weiter.html" class="weiter-button">
-            📚 Weiterführende Informationen zur Sachtext-Analyse
-        </a>
-        <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
-            Vertiefende Übungen, Musterlösungen und Expertentipps
-        </p>
-    </div>
-                    <li>"Der Text zeichnet sich durch eine klare Struktur aus, die..."</li>
-                    <li>"Die Sprache ist überwiegend sachlich, wird jedoch durch bildhafte Elemente wie... anschaulich gestaltet."</li>
-                    <li>"Typisch für einen wissenschaftlich orientierten Sachtext ist die Verwendung von..."</li>
-                    <li>"Die Argumentation entwickelt sich vom Allgemeinen zum Spezifischen, indem..."</li>
-                </ul>
-                
-                <button class="solution-toggle">Musterlösung anzeigen</button>
-                <div class="solution">
-                    <h4>Musterlösung für die Stilanalyse</h4>
-                    <p>Der vorliegende Text ist ein informierender Sachtext mit argumentativen Elementen, der ein ausgewogenes Verhältnis zwischen Fachwissen und allgemeiner Verständlichkeit anstrebt. Sprachlich bewegt sich der Autor auf einem gehobenen, aber zugänglichen Niveau und vermeidet übermäßigen Fachjargon.</p>
-                    
-                    <p>Die Argumentationsstruktur ist klar aufgebaut: Ausgehend von der allgemeinen Feststellung der Digitalisierung entwickelt der Autor zunächst die Gegenthese der "Renaissance des Analogen", um dann systematisch deren Ursachen zu analysieren. Dabei verbindet er wissenschaftliche Erkenntnisse ("Empirische Studien liefern erste Antworten") mit phänomenologischen Betrachtungen zur sinnlichen Qualität analoger Objekte.</p>
-                    
-                    <p>Rhetorisch setzt der Autor auf verschiedene Strategien: Er verwendet rhetorische Fragen ("Warum wenden sich Menschen...?"), um Denkprozesse anzuregen, konkrete Beispiele (Vinyl, Bücher, Polaroid), um seine Thesen zu veranschaulichen, und kontrastierende Gegenüberstellungen von analog und digital, um Unterschiede zu verdeutlichen.</p>
-                    
-                    <p>Auffällig ist der Wechsel zwischen sachlicher Darstellung (besonders bei der Erwähnung von Studien) und wertenden Passagen, in denen die positiven Qualitäten des Analogen hervorgehunden werden. Der Autor bemüht sich jedoch um einen differenzierten Blick, indem er sowohl die Vorteile der Digitalisierung anerkennt als auch vor einer nostalgischen Verklärung des Analogen warnt.</p>
-                    
-                    <p>Die Wortwahl ist präzise und teilweise bildreich, wie bei der Erwähnung der "Patina" analoger Objekte oder der "Haptik eines Buches". Der Autor nutzt diese sensorischen Beschreibungen gezielt, um die sinnliche Dimension des Analogen zu vermitteln, die ein zentrales Argument seines Textes darstellt.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Sprachanalyse vertiefen</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Wortschatz und Semantik</h4>
-                <div class="method-grid">
-                    <div class="method-card">
-                        <h4>Fachsprache</h4>
-                        <p>Identifiziere fachspezifische Begriffe und deren Funktion. Werden sie erklärt oder als bekannt vorausgesetzt?</p>
-                    </div>
-                    <div class="method-card">
-                        <h4>Wortfelder</h4>
-                        <p>Analysiere semantische Felder (z.B. Technik vs. Sinnlichkeit) und ihre kontrastive Verwendung.</p>
-                    </div>
-                    <div class="method-card">
-                        <h4>Konnotationen</h4>
-                        <p>Achte auf positive/negative Wertungen in der Wortwahl und deren persuasive Wirkung.</p>
-                    </div>
-                </div>
-
-                <h4>Satzstrukturen analysieren</h4>
-                <div class="card">
-                    <p><strong>Parataxe:</strong> Kurze, klare Hauptsätze für prägnante Aussagen</p>
-                    <p><strong>Hypotaxe:</strong> Komplexe Satzgefüge für differenzierte Argumentation</p>
-                    <p><strong>Satzlänge:</strong> Variation zwischen kurzen prägnanten und langen ausführenden Sätzen</p>
-                </div>
-
-                <h4>Rhetorische Strategien</h4>
-                <ul>
-                    <li><strong>Ethos:</strong> Glaubwürdigkeit durch Expertenstatus und seriöse Darstellung</li>
-                    <li><strong>Logos:</strong> Logische Argumentation mit wissenschaftlichen Belegen</li>
-                    <li><strong>Pathos:</strong> Emotionale Ansprache durch sensorische Beschreibungen</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion">
-        <div class="accordion-header">
-            <span>Schritt 3: Bewertung und Ausblick/Schluss</span>
-            <span class="accordion-icon">+</span>
-        </div>
-        <div class="panel">
-            <div class="analysis-section">
-                <h4>Ziel dieser Phase</h4>
-                <p>Den Text kritisch würdigen und eigene Gedanken zum Thema entwickeln.</p>
-                
-                <h4>Achte auf</h4>
-                <ul>
-                    <li>Ausgewogenes Urteil zu Stärken und Schwächen des Textes</li>
-                    <li>Einordnung in größere Zusammenhänge</li>
-                    <li>Persönliche Stellungnahme zum Thema (mit Begründung)</li>
-                    <li>Aktuelle Bezüge oder Zukunftsperspektiven</li>
-                </ul>
-
-                <h4>Bewertungskriterien</h4>
-                <div class="method-grid">
-                    <div class="method-card">
-                        <h4>Inhaltliche Qualität</h4>
-                        <ul>
-                            <li>Sachlichkeit und Objektivität</li>
-                            <li>Vollständigkeit der Argumentation</li>
-                            <li>Aktualität und Relevanz</li>
-                        </ul>
-                    </div>
-                    <div class="method-card">
-                        <h4>Argumentative Stärke</h4>
-                        <ul>
-                            <li>Logik und Nachvollziehbarkeit</li>
-                            <li>Belegqualität</li>
-                            <li>Berücksichtigung von Gegenargumenten</li>
-                        </ul>
-                    </div>
-                    <div class="method-card">
-                        <h4>Sprachliche Gestaltung</h4>
-                        <ul>
-                            <li>Verständlichkeit</li>
-                            <li>Angemessenheit</li>
-                            <li>Wirksamkeit der Stilmittel</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <h4>Hilfreiche Formulierungen</h4>
-                <ul>
+        // Initial alle Accordions geschlossen lassen
+        window.onload = function() {
+            var panels = document.getElementsByClassName("panel");
+            for (var i = 0; i < panels.length; i++) {
+                panels[i].style.maxHeight = null;
+            }
+        };
+    </script>
+</body>
+</html>
