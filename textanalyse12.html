@@ -536,108 +536,120 @@
         <!-- Dein bestehender Content... -->
     </main>
 
-    <script>
-        // ===== PAYMENT SYSTEM =====
-        class PaymentSystem {
-            constructor() {
-                this.accessData = null;
-                this.loadAccessData();
-                this.initPaymentUI();
-            }
+<script>
+// ===== PAYMENT SYSTEM =====
+class PaymentSystem {
+    constructor() {
+        this.accessData = null;
+        this.loadAccessData();
+        this.initPaymentUI();
+    }
 
-            loadAccessData() {
-                const saved = localStorage.getItem('maturaPaymentAccess');
-                if (saved) {
-                    this.accessData = JSON.parse(saved);
-                }
-            }
+    loadAccessData() {
+        const saved = localStorage.getItem('maturaPaymentAccess');
+        if (saved) {
+            this.accessData = JSON.parse(saved);
+            console.log('Geladene Zugangsdaten:', this.accessData);
+        }
+    }
 
-            saveAccessData() {
-                if (this.accessData) {
-                    localStorage.setItem('maturaPaymentAccess', JSON.stringify(this.accessData));
-                }
-            }
+    saveAccessData() {
+        if (this.accessData) {
+            localStorage.setItem('maturaPaymentAccess', JSON.stringify(this.accessData));
+        }
+    }
 
-            hasActiveAccess() {
-                if (!this.accessData || !this.accessData.granted) return false;
-                return Date.now() < this.accessData.until;
-            }
+    hasActiveAccess() {
+        if (!this.accessData || !this.accessData.granted) {
+            console.log('Keine Zugangsdaten vorhanden');
+            return false;
+        }
+        const hasAccess = Date.now() < this.accessData.until;
+        console.log('Zugang aktiv?', hasAccess, 'Ablaufdatum:', new Date(this.accessData.until));
+        return hasAccess;
+    }
 
-            grantAccess(days = 365) {
-                const code = 'MAT' + Math.floor(10000 + Math.random() * 90000);
-                
-                this.accessData = {
-                    granted: true,
-                    until: Date.now() + (days * 24 * 60 * 60 * 1000),
-                    code: code,
-                    grantedAt: new Date().toISOString()
-                };
-                
-                this.saveAccessData();
-                this.updatePaymentUI();
-                return code;
-            }
+    grantAccess(days = 365) {
+        const code = 'MAT' + Math.floor(10000 + Math.random() * 90000);
+        
+        this.accessData = {
+            granted: true,
+            until: Date.now() + (days * 24 * 60 * 60 * 1000),
+            code: code,
+            grantedAt: new Date().toISOString()
+        };
+        
+        this.saveAccessData();
+        this.updatePaymentUI();
+        console.log('Zugang gewährt mit Code:', code);
+        return code;
+    }
 
-            initPaymentUI() {
-                // Payment-Button zur Navigation hinzufügen
-                const navMenu = document.querySelector('.nav-menu');
-                const paymentSection = document.createElement('div');
-                paymentSection.className = 'nav-section';
-                paymentSection.innerHTML = `
-                    <div class="nav-section-title">Zugang</div>
-                    <div class="nav-item">
-                        <a href="#" class="nav-link" onclick="paymentSystem.togglePaymentModal()">
-                            🔓 Premium-Zugang
-                        </a>
-                    </div>
-                `;
-                navMenu.insertBefore(paymentSection, navMenu.firstChild);
-                
-                this.updatePaymentUI();
-            }
+    initPaymentUI() {
+        // Payment-Button zur Navigation hinzufügen
+        const navMenu = document.querySelector('.nav-menu');
+        const paymentSection = document.createElement('div');
+        paymentSection.className = 'nav-section';
+        paymentSection.innerHTML = `
+            <div class="nav-section-title">Zugang</div>
+            <div class="nav-item">
+                <a href="#" class="nav-link" onclick="paymentSystem.togglePaymentModal()">
+                    🔓 Premium-Zugang
+                </a>
+            </div>
+        `;
+        navMenu.insertBefore(paymentSection, navMenu.firstChild);
+        
+        this.updatePaymentUI();
+    }
 
-            updatePaymentUI() {
-                const statusElement = document.getElementById('paymentStatus');
-                const hasAccess = this.hasActiveAccess();
-                
-                if (statusElement) {
-                    statusElement.style.display = hasAccess ? 'block' : 'none';
-                }
-                
-                // Navigationselemente je nach Zugang anzeigen/verstecken
-                this.toggleNavigationAccess(hasAccess);
-            }
+    updatePaymentUI() {
+        const statusElement = document.getElementById('paymentStatus');
+        const hasAccess = this.hasActiveAccess();
+        
+        if (statusElement) {
+            statusElement.style.display = hasAccess ? 'block' : 'none';
+        }
+        
+        // Navigationselemente je nach Zugang anzeigen/verstecken
+        this.toggleNavigationAccess(hasAccess);
+    }
 
-            toggleNavigationAccess(hasAccess) {
-                const allNavItems = document.querySelectorAll('.nav-item');
-                allNavItems.forEach(item => {
-                    const link = item.querySelector('.nav-link');
-                    if (link && link.onclick && link.onclick.toString().includes('loadContent')) {
-                        const match = link.onclick.toString().match(/loadContent\('([^']+)'\)/);
-                        if (match && match[1] !== 'willkommen') {
-                            if (hasAccess) {
-                                item.classList.remove('locked');
-                                item.title = '';
-                            } else {
-                                item.classList.add('locked');
-                                item.title = 'Premium-Zugang erforderlich';
-                            }
-                        }
+    toggleNavigationAccess(hasAccess) {
+        const allNavItems = document.querySelectorAll('.nav-item');
+        allNavItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            if (link && link.getAttribute('onclick')) {
+                const onclickContent = link.getAttribute('onclick');
+                const match = onclickContent.match(/loadContent\('([^']+)'\)/);
+                if (match && match[1] !== 'willkommen') {
+                    if (hasAccess) {
+                        item.classList.remove('locked');
+                        item.title = '';
+                        link.style.pointerEvents = 'auto';
+                        link.style.opacity = '1';
+                    } else {
+                        item.classList.add('locked');
+                        item.title = 'Premium-Zugang erforderlich';
+                        link.style.pointerEvents = 'none';
+                        link.style.opacity = '0.6';
                     }
-                });
-            }
-
-            togglePaymentModal() {
-                if (this.hasActiveAccess()) {
-                    alert('✅ Ihr Premium-Zugang ist aktiv!');
-                    return;
                 }
+            }
+        });
+    }
 
-                const modal = document.createElement('div');
-                modal.className = 'modal-overlay';
-                
-                modal.innerHTML = `
-                    <div class="modal-content">
+    togglePaymentModal() {
+        if (this.hasActiveAccess()) {
+            alert('✅ Ihr Premium-Zugang ist aktiv!');
+            return;
+        }
+
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        
+        modal.innerHTML = `
+            <div class="modal-content">
                         <h3 style="color: #2c3e50; margin-bottom: 20px;">🔓 Premium-Zugang freischalten</h3>
                         <p>Vollständiger Zugang zu allen Inhalten für <strong>€19,99</strong> (6 Monate)</p>
                         
@@ -663,155 +675,171 @@
                             Schließen
                         </button>
                     </div>
-                `;
-                
-                document.body.appendChild(modal);
-                document.getElementById('paymentCodeDisplay').textContent = this.grantAccess(365);
-            }
+        `;
+        
+        document.body.appendChild(modal);
+        document.getElementById('paymentCodeDisplay').textContent = this.grantAccess(365);
+    }
 
-            closeModal() {
-                const modal = document.querySelector('.modal-overlay');
-                if (modal) {
-                    modal.remove();
-                }
-            }
+    closeModal() {
+        const modal = document.querySelector('.modal-overlay');
+        if (modal) {
+            modal.remove();
+        }
+    }
 
-            processPayment() {
-                const email = document.getElementById('paymentEmail').value;
-                if (!email || !email.includes('@')) {
-                    alert('Bitte gültige E-Mail eingeben');
-                    return;
-                }
-
-                const code = document.getElementById('paymentCodeDisplay').textContent;
-                alert(`✅ Zugang freigeschaltet!\n\nVerwendungszweck: ${code}\nZugang aktiv für 12 Monate`);
-                
-                this.closeModal();
-                this.updatePaymentUI();
-                
-                // Zur Startseite zurückkehren
-                loadContent('willkommen');
-            }
+    processPayment() {
+        const email = document.getElementById('paymentEmail').value;
+        if (!email || !email.includes('@')) {
+            alert('Bitte gültige E-Mail eingeben');
+            return;
         }
 
-        // Payment System initialisieren
-        const paymentSystem = new PaymentSystem();
+        const code = document.getElementById('paymentCodeDisplay').textContent;
+        alert(`✅ Zugang freigeschaltet!\n\nVerwendungszweck: ${code}\nZugang aktiv für 12 Monate`);
+        
+        this.closeModal();
+        this.updatePaymentUI();
+        
+        // Zur Startseite zurückkehren
+        loadContent('willkommen');
+    }
+}
 
-        // ===== ORIGINAL FUNCTIONS (angepasst) =====
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
-            sidebar.classList.toggle('active');
-            
-            if (window.innerWidth <= 968) {
-                mainContent.classList.toggle('sidebar-active');
-            }
+// Payment System initialisieren
+const paymentSystem = new PaymentSystem();
+
+// ===== KORRIGIERTE loadContent FUNCTION =====
+async function loadContent(page, event = null) {
+    console.log('Lade Seite:', page);
+    
+    // Bezahlschranke für alle Seiten außer Willkommen
+    if (page !== 'willkommen' && !paymentSystem.hasActiveAccess()) {
+        console.log('Zugang verweigert für:', page);
+        paymentSystem.togglePaymentModal();
+        return;
+    }
+
+    // Remove active class from all nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to clicked link (wenn Event vorhanden)
+    if (event && event.target) {
+        event.target.classList.add('active');
+    } else {
+        // Fallback: Finde den entsprechenden Link und setze ihn aktiv
+        const targetLink = document.querySelector(`.nav-link[onclick*="loadContent('${page}')"]`);
+        if (targetLink) {
+            targetLink.classList.add('active');
         }
-
-        async function loadContent(page) {
-            // Bezahlschranke für alle Seiten außer Willkommen
-            if (page !== 'willkommen' && !paymentSystem.hasActiveAccess()) {
-                paymentSystem.togglePaymentModal();
-                return;
-            }
-
-            // Remove active class from all nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Add active class to clicked link
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
-            
-            // Load content based on page parameter
-            const contentBody = document.getElementById('content-body');
-            
-            // Show loading message
-            contentBody.innerHTML = `
-                <div class="loading-indicator">
-                    <div class="spinner"></div>
-                    <div>Lade Inhalte für: ${page}</div>
-                </div>
-            `;
-            
-            try {
-                // Try to load the external HTML file
-                const response = await fetch(`kapitel/${page}.html`);
-                
-                if (!response.ok) {
-                    throw new Error(`Seite nicht gefunden: ${page}.html`);
-                }
-                
-                const html = await response.text();
-                contentBody.innerHTML = `
-                    <a href="#" class="back-button" onclick="loadContent('willkommen'); return false;">← Zurück zur Übersicht</a>
-                    <div class="chapter-content">${html}</div>
-                `;
-            } catch (error) {
-                console.error('Fehler beim Laden der Seite:', error);
-                contentBody.innerHTML = `
-                    <div class="error-message">
-                        <h3>Seite konnte nicht geladen werden</h3>
-                        <p>Die angeforderte Seite "${page}.html" konnte nicht gefunden werden.</p>
-                        <p>Bitte stellen Sie sicher, dass die Datei im Ordner "kapitel" existiert.</p>
-                        <p><a href="#" onclick="loadContent('willkommen'); return false;">Zurück zur Startseite</a></p>
-                    </div>
-                `;
-            }
-            
-            // Close sidebar on mobile after selection
-            if (window.innerWidth <= 968) {
-                document.getElementById('sidebar').classList.remove('active');
-                document.getElementById('main-content').classList.remove('sidebar-active');
-            }
+    }
+    
+    // Load content based on page parameter
+    const contentBody = document.getElementById('content-body');
+    
+    // Show loading message
+    contentBody.innerHTML = `
+        <div class="loading-indicator">
+            <div class="spinner"></div>
+            <div>Lade Inhalte für: ${page}</div>
+        </div>
+    `;
+    
+    try {
+        // Try to load the external HTML file
+        const response = await fetch(`kapitel/${page}.html`);
+        
+        if (!response.ok) {
+            throw new Error(`Seite nicht gefunden: ${page}.html`);
         }
+        
+        const html = await response.text();
+        contentBody.innerHTML = `
+            <a href="#" class="back-button" onclick="loadContent('willkommen'); return false;">← Zurück zur Übersicht</a>
+            <div class="chapter-content">${html}</div>
+        `;
+        
+        console.log('Seite erfolgreich geladen:', page);
+    } catch (error) {
+        console.error('Fehler beim Laden der Seite:', error);
+        contentBody.innerHTML = `
+            <div class="error-message">
+                <h3>Seite konnte nicht geladen werden</h3>
+                <p>Die angeforderte Seite "${page}.html" konnte nicht gefunden werden.</p>
+                <p>Fehler: ${error.message}</p>
+                <p>Bitte stellen Sie sicher, dass die Datei im Ordner "kapitel" existiert.</p>
+                <p><a href="#" onclick="loadContent('willkommen'); return false;">Zurück zur Startseite</a></p>
+            </div>
+        `;
+    }
+    
+    // Close sidebar on mobile after selection
+    if (window.innerWidth <= 968) {
+        document.getElementById('sidebar').classList.remove('active');
+        document.getElementById('main-content').classList.remove('sidebar-active');
+    }
+}
 
-        // Rest deiner originalen Funktionen...
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const mainContent = document.getElementById('main-content');
-            
-            if (window.innerWidth <= 968 && 
-                sidebar.classList.contains('active') && 
-                !sidebar.contains(event.target) && 
-                !menuToggle.contains(event.target)) {
-                sidebar.classList.remove('active');
-                mainContent.classList.remove('sidebar-active');
-            }
-        });
+// ===== RESTLICHE FUNKTIONEN =====
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    sidebar.classList.toggle('active');
+    
+    if (window.innerWidth <= 968) {
+        mainContent.classList.toggle('sidebar-active');
+    }
+}
 
-        // Event-Delegation für dynamisch geladene Inhalte
-        document.addEventListener('click', function(e) {
-            // Accordion-Header
-            if (e.target.closest('.accordion-header')) {
-                const header = e.target.closest('.accordion-header');
-                header.classList.toggle('active');
-                const panel = header.nextElementSibling;
-                if (panel && panel.classList.contains('panel')) {
-                    panel.classList.toggle('active');
-                }
-            }
-            
-            // Solution-Toggle-Buttons
-            if (e.target.classList.contains('solution-toggle')) {
-                const solution = e.target.nextElementSibling;
-                if (solution && solution.classList.contains('solution')) {
-                    solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
-                }
-            }
-        });
+// Event-Listener für Klicks außerhalb der Sidebar
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainContent = document.getElementById('main-content');
+    
+    if (window.innerWidth <= 968 && 
+        sidebar.classList.contains('active') && 
+        !sidebar.contains(event.target) && 
+        !menuToggle.contains(event.target)) {
+        sidebar.classList.remove('active');
+        mainContent.classList.remove('sidebar-active');
+    }
+});
 
-        // Initial load - show welcome page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set welcome as default active
-            const welcomeLink = document.querySelector('.nav-link[onclick="loadContent(\'willkommen\')"]');
-            if (welcomeLink) {
-                welcomeLink.classList.add('active');
-            }
-        });
-    </script>
+// Event-Delegation für dynamisch geladene Inhalte
+document.addEventListener('click', function(e) {
+    // Accordion-Header
+    if (e.target.closest('.accordion-header')) {
+        const header = e.target.closest('.accordion-header');
+        header.classList.toggle('active');
+        const panel = header.nextElementSibling;
+        if (panel && panel.classList.contains('panel')) {
+            panel.classList.toggle('active');
+        }
+    }
+    
+    // Solution-Toggle-Buttons
+    if (e.target.classList.contains('solution-toggle')) {
+        const solution = e.target.nextElementSibling;
+        if (solution && solution.classList.contains('solution')) {
+            solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
+        }
+    }
+});
+
+// Initial load - show welcome page
+document.addEventListener('DOMContentLoaded', function() {
+    // Set welcome as default active
+    const welcomeLink = document.querySelector('.nav-link[onclick*="loadContent(\'willkommen\')"]');
+    if (welcomeLink) {
+        welcomeLink.classList.add('active');
+    }
+    
+    // Lade Willkommen-Seite beim Start
+    loadContent('willkommen');
+});
+</script>
 </body>
 </html>
