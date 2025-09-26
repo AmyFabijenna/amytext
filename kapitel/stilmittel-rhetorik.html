@@ -3,510 +3,742 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Übungsaufgaben - Deutschmatura</title>
-   <style>
-.exercise-section {
-    margin-bottom: 40px;
-}
+    <title>Stilmittel & Rhetorik - Deutschmatura</title>
+    <style>
+        .chapter-content {
+            line-height: 1.8;
+        }
 
-.exercise-section h2 {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
+        .chapter-content h2 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
 
-.exercise-card {
-    background: white;
-    border-radius: 10px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-left: 4px solid #3498db;
-}
+        .chapter-content h3 {
+            color: #34495e;
+            margin: 20px 0 12px;
+        }
 
-.exercise-title {
-    color: #2c3e50;
-    margin-bottom: 15px;
-    font-size: 1.3em;
-}
+        .chapter-content h4 {
+            color: #5d6d7e;
+            margin: 15px 0 10px;
+            font-size: 1.1em;
+        }
 
-.exercise-content {
-    margin-bottom: 20px;
-}
+        .chapter-content p {
+            margin-bottom: 15px;
+        }
 
-.solution-area {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 15px 0;
-    border: 2px dashed #dee2e6;
-}
+        .chapter-content ul, .chapter-content ol {
+            margin: 15px 0 15px 25px;
+        }
 
-.accordion {
-    margin: 15px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    background: white;
-}
+        .chapter-content li {
+            margin-bottom: 8px;
+        }
 
-.accordion-header {
-    background: linear-gradient(135deg, #34495e, #2c3e50);
-    color: white;
-    padding: 15px 20px;
-    margin: 0;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background 0.3s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-}
+        .accordion {
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+        }
 
-.accordion-header:hover {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-}
+        .accordion-header {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 15px 20px;
+            margin: 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
 
-.accordion-icon {
-    font-size: 1.3em;
-    font-weight: bold;
-    transition: transform 0.3s;
-}
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+        }
 
-.accordion-header.active .accordion-icon {
-    transform: rotate(45deg);
-}
+        .accordion-icon {
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
 
-.panel {
-    padding: 0 20px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
+        .accordion-header.active .accordion-icon {
+            transform: rotate(45deg);
+        }
 
-.panel.active {
-    max-height: 5000px;
-    padding: 20px;
-}
+        .panel {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
 
-.difficulty-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8em;
-    font-weight: bold;
-    margin-left: 10px;
-}
+        .panel.active {
+            max-height: 10000px;
+            padding: 20px;
+        }
 
-.easy {
-    background: #d4edda;
-    color: #155724;
-}
+        .example-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
 
-.medium {
-    background: #fff3cd;
-    color: #856404;
-}
+        .definition-box {
+            background: #e8f5e8;
+            border: 1px solid #27ae60;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
 
-.hard {
-    background: #f8d7da;
-    color: #721c24;
-}
+        .definition-box strong {
+            color: #27ae60;
+        }
 
-.exercise-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 0.9em;
-    color: #666;
-}
+        .category-box {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
 
-.time-estimate {
-    background: #e9ecef;
-    padding: 4px 8px;
-    border-radius: 4px;
-}
+        .stylistic-device {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-.btn-toggle-all {
-    background: #3498db;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size: 1em;
-    font-weight: bold;
-}
+        .stylistic-device h4 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
 
-.btn-toggle-all:hover {
-    background: #2980b9;
-}
+        .device-example {
+            background: #f1f2f6;
+            padding: 10px;
+            border-left: 3px solid #3498db;
+            margin: 10px 0;
+            font-style: italic;
+        }
 
-@media (max-width: 768px) {
-    .exercise-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-}
-</style>
+        .wirkung-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .analysis-method {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .error-box {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .error-box h4 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+
+        .tip-box {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .textsorte-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .textsorte-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .interactive-quiz {
+            background: #f0f8ff;
+            border: 2px solid #4682b4;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .quiz-options {
+            margin: 10px 0;
+        }
+
+        .quiz-option {
+            margin: 5px 0;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .quiz-option:hover {
+            background: #e6f3ff;
+        }
+
+        .btn-toggle-all {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .btn-toggle-all:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .textsorte-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .accordion-header {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+            
+            .panel.active {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="content-body">
-        <button type="button" class="btn-toggle-all">Alle Lösungen öffnen/schließen</button>
+    <div class="chapter-content">
+        <button type="button" class="btn-toggle-all">Alle Bereiche öffnen/schließen</button>
 
-        <div class="exercise-section">
-            <h2>Stilmittel erkennen und analysieren</h2>
-            
-            <div class="exercise-card">
-                <div class="exercise-meta">
-                    <span class="difficulty-badge easy">Einfach</span>
-                    <span class="time-estimate">⏱️ 10 Minuten</span>
-                </div>
-                <h3 class="exercise-title">Übung 1: Stilmittel identifizieren</h3>
-                <div class="exercise-content">
-                    <p>Identifiziere die folgenden sprachlichen Mittel und erkläre ihre Wirkung:</p>
-                    <ol>
-                        <li>"Die Zeit rennt."</li>
-                        <li>"Sie kämpfte wie eine Löwin."</li>
-                        <li>"Das ist ja großartig! Wirklich großartig!"</li>
-                        <li>"Die Stadt ist ein brodelnder Kessel."</li>
-                        <li>"Sein Lachen war Musik in meinen Ohren."</li>
-                    </ol>
-                </div>
-                <div class="accordion">
-                    <div class="accordion-header">
-                        <span>Lösung anzeigen</span>
-                        <span class="accordion-icon">+</span>
-                    </div>
-                    <div class="panel">
-                        <p><strong>Lösungen:</strong></p>
-                        <ol>
-                            <li><strong>Personifikation:</strong> Der Zeit werden menschliche Eigenschaften (rennen) zugeschrieben. Wirkung: Dynamisierung, Betonung der Schnelligkeit.</li>
-                            <li><strong>Vergleich:</strong> Der Kampf wird mit dem einer Löwin verglichen. Wirkung: Veranschaulichung der Intensität und Wildheit.</li>
-                            <li><strong>Wiederholung:</strong> Das Wort "großartig" wird wiederholt. Wirkung: Verstärkung, emotionale Betonung.</li>
-                            <li><strong>Metapher:</strong> Die Stadt wird mit einem brodelnden Kessel verglichen. Wirkung: Bildhafte Darstellung von Lebendigkeit, Unruhe, Hitze.</li>
-                            <li><strong>Metapher:</strong> Das Lachen wird mit Musik verglichen. Wirkung: Positive emotionale Aufladung, Betonung der angenehmen Wirkung.</li>
-                        </ol>
-                    </div>
-                </div>
+        <!-- THEORETISCHE GRUNDLAGEN -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>1. Was sind Stilmittel? - Theoretische Grundlagen</span>
+                <span class="accordion-icon">+</span>
             </div>
+            <div class="panel">
+                <div class="definition-box">
+                    <strong>Definition:</strong> Stilmittel (auch rhetorische Figuren oder sprachliche Mittel) sind bewusst eingesetzte sprachliche Gestaltungsmittel, die über die reine Informationsvermittlung hinausgehen und bestimmte Wirkungen beim Rezipienten erzeugen sollen.
+                </div>
 
-            <div class="exercise-card">
-                <div class="exercise-meta">
-                    <span class="difficulty-badge medium">Mittel</span>
-                    <span class="time-estimate">⏱️ 15 Minuten</span>
-                </div>
-                <h3 class="exercise-title">Übung 2: Textanalyse mit Stilmitteln</h3>
-                <div class="exercise-content">
-                    <p>Analysiere den folgenden Textausschnitt auf verwendete Stilmittel und beschreibe ihre Wirkung:</p>
-                    <blockquote>
-                        "Die Nacht senkte sich wie ein schwerer Mantel über die Stadt. In den Straßen herrschte eine gespenstische Stille, nur unterbrochen vom leisen Flüstern des Windes. Die Schatten tanzten ihr mystisches Ballett an den Hauswänden, während der Mond sein silbernes Licht über die schlafenden Dächer goss."
-                    </blockquote>
-                </div>
+                <h3>1.1 Grundprinzipien von Stilmitteln</h3>
+                <p>Stilmittel funktionieren nach dem Prinzip der <strong>Abweichung</strong> (Deviation) von der Normalsprache. Sie fallen auf, weil sie:</p>
+                <ul>
+                    <li><strong>Wiederholen:</strong> Bestimmte sprachliche Strukturen werden mehrfach verwendet</li>
+                    <li><strong>Weglassen:</strong> Erwartete Elemente fehlen (Ellipse, Aposiopese)</li>
+                    <li><strong>Hinzufügen:</strong> Redundante oder schmückende Elemente werden eingefügt</li>
+                    <li><strong>Vertauschen:</strong> Die normale Wortstellung wird verändert</li>
+                    <li><strong>Ersetzen:</strong> Ein Wort wird durch ein anderes ersetzt (Metapher, Metonymie)</li>
+                </ul>
+
+                <h3>1.2 Wirkungsebenen von Stilmitteln</h3>
+                
                 <div class="accordion">
                     <div class="accordion-header">
-                        <span>Lösung anzeigen</span>
+                        <span>Emotionale Wirkungsebene</span>
                         <span class="accordion-icon">+</span>
                     </div>
                     <div class="panel">
-                        <p><strong>Lösung:</strong></p>
+                        <p>Stilmittel sprechen Gefühle an und erzeugen emotionale Reaktionen:</p>
                         <ul>
-                            <li><strong>Vergleich:</strong> "wie ein schwerer Mantel" - Veranschaulicht die Last und Undurchdringlichkeit der Nacht.</li>
-                            <li><strong>Adjektiv:</strong> "gespenstische Stille" - Erzeugt eine unheimliche, bedrohliche Atmosphäre.</li>
-                            <li><strong>Personifikation:</strong> "Flüstern des Windes" - Verleiht dem Wind menschliche Eigenschaften, macht ihn geheimnisvoll.</li>
-                            <li><strong>Personifikation/Metapher:</strong> "Schatten tanzten ihr mystisches Ballett" - Verlebendigung der Schatten, Betonung der geheimnisvollen Atmosphäre.</li>
-                            <li><strong>Personifikation/Metapher:</strong> "Mond goss sein silbernes Licht" - Poetische Verlebendigung, erzeugt ein magisches Bild.</li>
+                            <li><strong>Identifikation:</strong> Leser fühlt sich angesprochen</li>
+                            <li><strong>Empathie:</strong> Mitgefühl wird geweckt</li>
+                            <li><strong>Spannung:</strong> Neugier und Interesse werden erzeugt</li>
+                            <li><strong>Atmosphäre:</strong> Stimmungen werden transportiert</li>
                         </ul>
-                        <p><strong>Gesamtwirkung:</strong> Der Text erzeugt durch die Häufung von bildhaften Stilmitteln eine mystische, fast märchenhafte Atmosphäre. Die Nacht wird als lebendige, geheimnisvolle Kraft dargestellt.</p>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Das Herz der Stadt pulsiert" - Die Personifikation erzeugt ein Gefühl von Lebendigkeit und Dynamik.
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="exercise-section">
-            <h2>Argumentation und Textanalyse</h2>
-            
-            <div class="exercise-card">
-                <div class="exercise-meta">
-                    <span class="difficulty-badge medium">Mittel</span>
-                    <span class="time-estimate">⏱️ 20 Minuten</span>
-                </div>
-                <h3 class="exercise-title">Übung 3: Argumentationsstruktur analysieren</h3>
-                <div class="exercise-content">
-                    <p>Analysiere die Argumentationsstruktur des folgenden Textes:</p>
-                    <blockquote>
-                        "Die Digitalisierung des Unterrichts ist unvermeidlich und notwendig. Erstens leben wir in einer digitalen Welt, und die Schule muss die Schüler auf diese Realität vorbereiten. Zweitens bieten digitale Medien völlig neue Möglichkeiten des Lernens, die traditionelle Methoden ergänzen können. Drittens zeigen Studien, dass der richtige Einsatz von Technologie die Lernmotivation steigern kann. Allerdings darf die Digitalisierung nicht zum Selbstzweck werden. Sie muss pädagogisch sinnvoll eingesetzt werden und die soziale Interaktion im Unterricht nicht ersetzen, sondern bereichern."
-                    </blockquote>
-                    <p>Arbeitsaufträge:</p>
-                    <ol>
-                        <li>Identifiziere die Hauptthese</li>
-                        <li>Nenne die unterstützenden Argumente</li>
-                        <li>Erkläre die argumentative Strategie</li>
-                        <li>Beurteile die Überzeugungskraft</li>
-                    </ol>
-                </div>
                 <div class="accordion">
                     <div class="accordion-header">
-                        <span>Lösung anzeigen</span>
+                        <span>Rationale Wirkungsebene</span>
                         <span class="accordion-icon">+</span>
                     </div>
                     <div class="panel">
-                        <p><strong>Lösung:</strong></p>
-                        <ol>
-                            <li><strong>Hauptthese:</strong> Die Digitalisierung des Unterrichts ist unvermeidlich und notwendig.</li>
-                            <li><strong>Unterstützende Argumente:</strong>
-                                <ul>
-                                    <li>Vorbereitung auf die digitale Welt</li>
-                                    <li>Neue Lernmöglichkeiten</li>
-                                    <li>Steigerung der Lernmotivation (durch Studien belegt)</li>
-                                    <li>Einschränkung: Digitalisierung nicht zum Selbstzweck, pädagogisch sinnvoller Einsatz erforderlich</li>
-                                </ul>
-                            </li>
-                            <li><strong>Argumentative Strategie:</strong> Der Text verwendet eine abwägende Argumentation. Zuerst werden positive Aspekte genannt (Pro-Argumente), dann wird eine wichtige Einschränkung gemacht (Gegenargument entkräftet). Dies macht die Argumentation ausgewogen und glaubwürdig.</li>
-                            <li><strong>Überzeugungskraft:</strong> Die Argumentation ist überzeugend, weil sie sowohl die Notwendigkeit der Digitalisierung betont als auch auf mögliche Gefahren hinweist. Die Verweise auf Studien und die konkrete Benennung von Vorteilen stärken die Argumentation.</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="exercise-section">
-            <h2>Kreatives Schreiben</h2>
-            
-            <div class="exercise-card">
-                <div class="exercise-meta">
-                    <span class="difficulty-badge hard">Schwierig</span>
-                    <span class="time-estimate">⏱️ 25 Minuten</span>
-                </div>
-                <h3 class="exercise-title">Übung 4: Textproduktion mit Stilmitteln</h3>
-                <div class="exercise-content">
-                    <p>Verfasse eine kurze Beschreibung (etwa 150 Wörter) eines Gewitters, in der du mindestens fünf verschiedene Stilmittel verwendest. Markiere anschließend die verwendeten Stilmittel und erkläre ihre Wirkung.</p>
-                    <div class="solution-area">
-                        <textarea id="gewitterText" placeholder="Hier deinen Text schreiben..." style="width: 100%; height: 150px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: inherit; resize: vertical;"></textarea>
-                        <button onclick="downloadText()" style="margin-top: 10px; background: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">📝 Text als TXT speichern</button>
-                    </div>
-                </div>
-                <div class="accordion">
-                    <div class="accordion-header">
-                        <span>Beispiellösung anzeigen</span>
-                        <span class="accordion-icon">+</span>
-                    </div>
-                    <div class="panel">
-                        <p><strong>Beispiellösung:</strong></p>
-                        <blockquote>
-                            "Das Gewitter brach mit elementarer Gewalt über die Landschaft herein. <strong>Blitze zuckten</strong> wie nervöse Gedanken am Horizont. <strong>Der Donner brüllte</strong> sein urzeitliches Lied, während <strong>Regen prasselte</strong> – ein Trommelfeuer auf den Dächern. Die Bäume <strong>tanzten einen wilden Tanz</strong> im Sturm, ihre Äste <strong>fuchtelten verzweifelt</strong> im Wind. Plötzlich ein <strong>blendend weißer Blitz</strong>, gefolgt von einem <strong>ohrenbetäubenden Donnerschlag</strong>. Die Natur zeigte sich von ihrer machtvollsten Seite – <strong>schön und schrecklich zugleich</strong>."
-                        </blockquote>
-                        <p><strong>Verwendete Stilmittel:</strong></p>
+                        <p>Stilmittel können auch rational überzeugen und Gedankenprozesse strukturieren:</p>
                         <ul>
-                            <li><strong>Personifikation:</strong> "Donner brüllte", "Bäume tanzten" - Verlebendigung der Naturgewalten</li>
-                            <li><strong>Vergleich:</strong> "wie nervöse Gedanken" - Veranschaulichung der Unberechenbarkeit</li>
-                            <li><strong>Metapher:</strong> "Trommelfeuer", "urzeitliches Lied" - Steigerung der Intensität</li>
-                            <li><strong>Adjektiv:</strong> "elementare Gewalt", "ohrenbetäubend" - Verstärkung der Wirkung</li>
-                            <li><strong>Oxymoron:</strong> "schön und schrecklich zugleich" - Darstellung der Ambivalenz</li>
-                            <li><strong>Wiederholung:</strong> "Blitze zuckten", "blendend weißer Blitz" - Betonung der Hauptelemente</li>
+                            <li><strong>Klarstellung:</strong> Komplexe Sachverhalte werden veranschaulicht</li>
+                            <li><strong>Beweiskraft:</strong> Argumente werden verstärkt</li>
+                            <li><strong>Struktur:</strong> Gedankengänge werden gegliedert</li>
+                            <li><strong>Prägnanz:</strong> Kernaussagen werden hervorgehoben</li>
                         </ul>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Erstens..., zweitens..., drittens..." - Die Enumeration strukturiert die Argumentation logisch.
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="exercise-section">
-            <h2>Textinterpretation</h2>
-            
-            <div class="exercise-card">
-                <div class="exercise-meta">
-                    <span class="difficulty-badge hard">Schwierig</span>
-                    <span class="time-estimate">⏱️ 30 Minuten</span>
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Ästhetische Wirkungsebene</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <p>Stilmittel schaffen sprachliche Schönheit und künstlerische Qualität:</p>
+                        <ul>
+                            <li><strong>Klang:</strong> Melodie und Rhythmus der Sprache</li>
+                            <li><strong>Bildkraft:</strong> Lebendige, anschauliche Darstellung</li>
+                            <li><strong>Originalität:</strong> Überraschende Wendungen</li>
+                            <li><strong>Harmonie:</strong> Ausgewogene sprachliche Gestaltung</li>
+                        </ul>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Im tiefen Tal der Tränen" - Alliteration und Metapher schaffen einen melodischen, bildkräftigen Ausdruck.
+                        </div>
+                    </div>
                 </div>
-                <h3 class="exercise-title">Übung 5: Gedichtinterpretation</h3>
-                <div class="exercise-content">
-                    <p>Interpretiere das folgende Gedicht von Joseph von Eichendorff:</p>
-                    <blockquote>
-                        "Mondnacht<br>
-                        Es war, als hätt' der Himmel<br>
-                        Die Erde still geküsst,<br>
-                        Dass sie im Blütenschimmer<br>
-                        Von ihm nun träumen müsst.<br><br>
-                        
-                        Die Luft ging durch die Felder,<br>
-                        Die Ähren wogten sacht,<br>
-                        Es rauschten leis' die Wälder,<br>
-                        So sternklar war die Nacht."
-                    </blockquote>
-                    <p>Analysiere besonders:</p>
+
+                <h3>1.3 Kontextabhängigkeit der Wirkung</h3>
+                <div class="tip-box">
+                    <strong>Wichtig:</strong> Die Wirkung von Stilmitteln ist nie absolut, sondern hängt ab von:
                     <ul>
-                        <li>Sprachliche Bilder und Stilmittel</li>
-                        <li>Atmosphäre und Stimmung</li>
-                        <li>Aussage des Gedichts</li>
+                        <li>Der <strong>Textsorte</strong> (Gedicht vs. Sachtext vs. Rede)</li>
+                        <li>Der <strong>historischen Epoche</strong> und ihren Konventionen</li>
+                        <li>Der <strong>Zielgruppe</strong> und ihrem Vorwissen</li>
+                        <li>Dem <strong>kulturellen Kontext</strong> und gesellschaftlichen Normen</li>
+                        <li>Der <strong>Kommunikationssituation</strong> (privat vs. öffentlich)</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+
+        <!-- KATEGORIEN VON STILMITTELN -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>2. Systematische Kategorisierung von Stilmitteln</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
+                <p>Eine wissenschaftlich fundierte Kategorisierung erleichtert das systematische Erkennen und Analysieren von Stilmitteln:</p>
+
+                <div class="category-box">
+                    KLANGFIGUREN (Figurae elocutionis)
+                </div>
+
                 <div class="accordion">
                     <div class="accordion-header">
-                        <span>Lösungsvorschlag anzeigen</span>
+                        <span>2.1 Klangfiguren - Lautliche Gestaltung</span>
                         <span class="accordion-icon">+</span>
                     </div>
                     <div class="panel">
-                        <p><strong>Lösungsvorschlag:</strong></p>
-                        <p><strong>Sprachliche Bilder und Stilmittel:</strong></p>
-                        <ul>
-                            <li><strong>Personifikation:</strong> Der Himmel küsst die Erde - Darstellung einer innigen Verbindung zwischen Himmel und Erde</li>
-                            <li><strong>Metapher:</strong> "Blütenschimmer" - Symbol für Schönheit und Zartheit</li>
-                            <li><strong>Synästhesie:</strong> Verbindung von visuellen ("Blütenschimmer", "sternklar") und akustischen Elementen ("rauschten leis'")</li>
-                            <li><strong>Alliteration:</strong> "still geküsst", "wogten sacht" - Schaffung eines melodischen Rhythmus</li>
-                        </ul>
+                        <div class="stylistic-device">
+                            <h4>Alliteration (Stabreim)</h4>
+                            <p><strong>Definition:</strong> Wiederholung des gleichen Anlauts in aufeinanderfolgenden Wörtern</p>
+                            <div class="device-example">
+                                "Milch macht müde Männer munter" (Werbespruch)<br>
+                                "Bei Nacht und Nebel" (Redewendung)<br>
+                                "Goethes goldene Gedanken" (Buchtitel)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Rhythmische Betonung, Einprägsamkeit, musikalische Qualität, Verstärkung der Aussage
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Assonanz</h4>
+                            <p><strong>Definition:</strong> Wiederholung gleicher oder ähnlicher Vokale</p>
+                            <div class="device-example">
+                                "O Täler weit, o Höhen" (Eichendorff)<br>
+                                "Die blaue Blume blüht" (Novalis)<br>
+                                "Im tiefen Winter freue ich mich" (Rilke)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Klangliche Verbindung, emotionale Tönung (helle/dunkle Vokale), melodische Struktur
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Onomatopoesie (Lautmalerei)</h4>
+                            <p><strong>Definition:</strong> Nachahmung von Naturlauten und Geräuschen</p>
+                            <div class="device-example">
+                                "Das Summen der Bienen" (Tierlaut)<br>
+                                "Plätschern, rauschen, knarren" (Naturgeräusche)<br>
+                                "Tick-tack macht die Uhr" (Geräuschnachahmung)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Veranschaulichung, sinnliche Erfahrung, Lebendigkeit, Unmittelbarkeit
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Reim</h4>
+                            <p><strong>Definition:</strong> Gleichklang von Wörtern vom letzten betonten Vokal an</p>
+                            <div class="device-example">
+                                Paarreim: "Wer reitet so spät durch Nacht und Wind? / Es ist der Vater mit seinem Kind" (Goethe)<br>
+                                Kreuzreim: "Im Wald und auf der Heide / da such ich meine Freude" (Volksllied)<br>
+                                Binnenreim: "Es war einmal ein reicher Zwerg im Berge" (Märchen)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Rhythmisierung, Strukturierung, Einprägsamkeit, ästhetische Wirkung
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>6.3 Kreative Stilmittelanwendung</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <h4>Übung D: Eigene Texte mit gezielten Stilmitteln gestalten</h4>
                         
-                        <p><strong>Atmosphäre und Stimmung:</strong><br>
-                        Das Gedicht erzeugt eine stille, traumhafte Atmosphäre. Die Nacht wird als friedvoll und harmonisch dargestellt, in der Natur und Kosmos in Einklang stehen. Die leisen Geräusche (Rauschen, Wogen) unterstreichen die Stille rather than sie zu stören.</p>
+                        <div class="tip-box">
+                            <strong>Aufgabe 1: Wetterbeschreibung</strong><br>
+                            Beschreiben Sie einen Regenschauer mit mindestens drei verschiedenen Stilmitteln. Nutzen Sie:
+                            <ul>
+                                <li>Eine Personifikation</li>
+                                <li>Eine Onomatopoesie</li>
+                                <li>Eine Metapher</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-box">
+                            <strong>Beispiellösung:</strong><br>
+                            <em>"Der Himmel <strong>weinte</strong> (Personifikation) seine Tränen auf die durstende Erde. <strong>Pitter-patter, pitter-patter</strong> (Onomatopoesie) - die Tropfen tanzten ihren Reigen auf dem Dach. Ein <strong>Vorhang aus Wasser</strong> (Metapher) hüllte die Landschaft in geheimnisvolles Grau."</em>
+                        </div>
+
+                        <div class="tip-box">
+                            <strong>Aufgabe 2: Gefühlsausdruck durch Stilmittel</strong><br>
+                            Drücken Sie "Einsamkeit" aus, ohne das Wort selbst zu verwenden. Nutzen Sie:
+                            <ul>
+                                <li>Eine Ellipse</li>
+                                <li>Eine Metapher</li>
+                                <li>Eine Wiederholung</li>
+                            </ul>
+                        </div>
+
+                        <div class="accordion">
+                            <div class="accordion-header">
+                                <span>Beispiellösung anzeigen</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="panel">
+                                <p><strong>Beispiellösung:</strong><br>
+                                <em>"Das Telefon. Stumm. (Ellipse) Eine <strong>Insel im Meer der Menschen</strong> (Metapher) - das bin ich. Schweigen, schweigen, schweigen (Wiederholung) erfüllt die Räume meines Lebens."</em></p>
+                                <p><strong>Analyse der Wirkung:</strong> Die Ellipse verstärkt die Fragmentierung, die Metapher visualisiert die Isolation, die Wiederholung intensiviert das Gefühl der Leere.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>6.4 Digitale Stilmittel-Flashcards</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <h4>Interaktives Stilmittel-Quiz</h4>
+                        <p>Klicken Sie auf die Karten, um Definitionen und Beispiele zu sehen:</p>
                         
-                        <p><strong>Aussage des Gedichts:</strong><br>
-                        Eichendorff stellt die Natur als einen Raum der Harmonie und Sehnsucht dar. Die Verbindung von Himmel und Erde symbolisiert eine transzendente Einheit. Das Gedicht vermittelt eine romantische Weltsicht, in der die Natur beseelt ist und der Mensch Teil eines größeren Ganzen wird.</p>
+                        <div class="textsorte-grid">
+                            <div class="textsorte-card" onclick="flipCard('card1')">
+                                <h4 id="card1-front">Klimax</h4>
+                                <div id="card1-back" style="display: none;">
+                                    <p><strong>Definition:</strong> Steigerung in drei Stufen</p>
+                                    <p><strong>Beispiel:</strong> "Ich kam, ich sah, ich siegte"</p>
+                                    <p><strong>Wirkung:</strong> Dramatische Steigerung, Vollendung</p>
+                                </div>
+                            </div>
+                            
+                            <div class="textsorte-card" onclick="flipCard('card2')">
+                                <h4 id="card2-front">Synästhesie</h4>
+                                <div id="card2-back" style="display: none;">
+                                    <p><strong>Definition:</strong> Verbindung verschiedener Sinneswahrnehmungen</p>
+                                    <p><strong>Beispiel:</strong> "Warme Farben", "kalte Töne"</p>
+                                    <p><strong>Wirkung:</strong> Intensivierung der Wahrnehmung</p>
+                                </div>
+                            </div>
+                            
+                            <div class="textsorte-card" onclick="flipCard('card3')">
+                                <h4 id="card3-front">Hyperbaton</h4>
+                                <div id="card3-back" style="display: none;">
+                                    <p><strong>Definition:</strong> Ungewöhnliche Wortstellung</p>
+                                    <p><strong>Beispiel:</strong> "Röslein rot" statt "rotes Röslein"</p>
+                                    <p><strong>Wirkung:</strong> Betonung, poetische Qualität</p>
+                                </div>
+                            </div>
+                            
+                            <div class="textsorte-card" onclick="flipCard('card4')">
+                                <h4 id="card4-front">Litotes</h4>
+                                <div id="card4-back" style="display: none;">
+                                    <p><strong>Definition:</strong> Verneinung des Gegenteils</p>
+                                    <p><strong>Beispiel:</strong> "Nicht schlecht" für "gut"</p>
+                                    <p><strong>Wirkung:</strong> Untertreibung, Zurückhaltung</p>
+                                </div>
+                            </div>
+                            
+                            <div class="textsorte-card" onclick="flipCard('card5')">
+                                <h4 id="card5-front">Euphemismus</h4>
+                                <div id="card5-back" style="display: none;">
+                                    <p><strong>Definition:</strong> Beschönigender Ausdruck</p>
+                                    <p><strong>Beispiel:</strong> "Heimgang" statt "Tod"</p>
+                                    <p><strong>Wirkung:</strong> Milderung, Höflichkeit</p>
+                                </div>
+                            </div>
+                            
+                            <div class="textsorte-card" onclick="flipCard('card6')">
+                                <h4 id="card6-front">Zeugma</h4>
+                                <div id="card6-back" style="display: none;">
+                                    <p><strong>Definition:</strong> Ein Wort bezieht sich auf zwei andere in unterschiedlicher Bedeutung</p>
+                                    <p><strong>Beispiel:</strong> "Er brach sein Wort und sein Bein"</p>
+                                    <p><strong>Wirkung:</strong> Überraschung, oft komisch</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="exercise-section">
-            <h2>Moderne Texte analysieren</h2>
-            
-            <div class="exercise-card">
-                <div class="exercise-meta">
-                    <span class="difficulty-badge medium" style="background: #ffeaa7; color: #d63031;">Mittel+</span>
-                    <span class="time-estimate">⏱️ 25 Minuten</span>
-                </div>
-                <h3 class="exercise-title">Übung 6: Stilmittel in einer Kolumne (Daniel Glattauer)</h3>
-                <div class="exercise-content">
-                    <p>Analysiere die folgende Kolumne von Daniel Glattauer aus "Kolumnen aus dem Alltag" auf verwendete Stilmittel:</p>
-                    <blockquote>
-                        <h4 style="text-align: center; margin-bottom: 15px;">Hundertmal gesagt</h4>
-                        <p>Julia R., Mutter der 14-jährigen Lara, empfiehlt uns, hier einmal zu hinterfragen, wie pädagogisch sinnvoll die stereotype Wiederholung ein und desselben unausgeführten Befehls ist. Ständig wird ja behauptet: »Das kann man gar nicht oft genug sagen.« Stimmt das? Oder hat man damit nicht bereits unterschwellig eingestanden, wie genug oft man es schon gesagt hat und wie wirkungslos es geblieben ist?</p>
-                        <p>Seit Generationen äußerst beliebt bei Eltern und Lehrern: »Habe ich dir nicht schon hundertmal gesagt, du sollst (…)?« – Naheliegende Antwort: »Ja, hundert könnte hinkommen.« Oder: »Ich weiß es nicht, ich hab nicht mitgezählt.« Unverbesserliche Pädagogen probieren es gar mit der Frage: »Wie oft soll ich dir noch sagen, du sollst (…)?« – Kinder verhalten sich in solchen Situationen eher diplomatisch und schweigen. Ehrlich wäre: »Sooft du willst, mir ist es egal, ich höre es ohnehin nicht mehr.«</p>
-                        <p>Julia R. unlängst zu ihrer Tochter: »Wie oft muss ich dir noch sagen, dass du die Schuhe wegräumen sollst?« – Tochter Lara: »Mama, hab ich dir nicht schon hundertmal gesagt: Du brauchst es überhaupt nicht mehr zu sagen. Ich muss von selbst draufkommen.«</p>
-                    </blockquote>
-                    <p>Arbeitsaufträge:</p>
-                    <ol>
-                        <li>Identifiziere mindestens 6 verschiedene Stilmittel</li>
-                        <li>Erkläre ihre jeweilige Wirkung im Kontext</li>
-                        <li>Analysiere den Humor und die Ironie des Textes</li>
-                        <li>Beschreibe den Schreibstil Glattauers</li>
-                    </ol>
-                </div>
+        <!-- ÖSTERREICHISCHE AUTOREN UND STILMITTEL -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>7. Österreichische Autoren und ihre charakteristischen Stilmittel</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
                 <div class="accordion">
                     <div class="accordion-header">
-                        <span>Lösungsvorschlag anzeigen</span>
+                        <span>7.1 Hugo von Hofmannsthal (1874-1929)</span>
                         <span class="accordion-icon">+</span>
                     </div>
                     <div class="panel">
-                        <p><strong>Lösungsvorschlag:</strong></p>
-                        <p><strong>1. Identifizierte Stilmittel:</strong></p>
+                        <div class="example-box">
+                            <strong>Textbeispiel aus "Manche freilich...":</strong><br>
+                            <em>"Manche freilich müssen drunten sterben,<br>
+                            Wo die schweren Ruder der Schiffe streifen,<br>
+                            Andre wohnen bei dem Steuer droben,<br>
+                            Kennen Vogelflug und Sternenlande."</em>
+                        </div>
+                        
+                        <p><strong>Charakteristische Stilmittel Hofmannsthals:</strong></p>
                         <ul>
-                            <li><strong>Rhetorische Fragen:</strong> "Stimmt das?", "Wie oft soll ich dir noch sagen..." - Regen zum Nachdenken an, wirken dialogisch</li>
-                            <li><strong>Wiederholung/Anapher:</strong> "hundertmal gesagt", "hundert könnte hinkommen" - Verstärkt das Thema der sinnlosen Wiederholung</li>
-                            <li><strong>Ironie:</strong> "äußerst beliebt bei Eltern", "Unverbesserliche Pädagogen" - Entlarvt die Widersprüche im Erziehungsverhalten</li>
-                            <li><strong>Alliteration:</strong> "sinnvoll die stereotype", "sooft du willst" - Schafft Rhythmus und Eindringlichkeit</li>
-                            <li><strong>Parenthese:</strong> "(…)" - Zeigt die Austauschbarkeit der Inhalte, Universalität des Problems</li>
-                            <li><strong>Antithese:</strong> Gegensatz zwischen pädagogischem Anspruch und tatsächlicher Wirkungslosigkeit</li>
-                            <li><strong>Klimax:</strong> Steigerung von der allgemeinen Beobachtung zum konkreten Beispiel</li>
-                            <li><strong>Wortneuschöpfung:</strong> "Unverbesserliche Pädagogen" - Humorvolle Charakterisierung</li>
+                            <li><strong>Antithese:</strong> "drunten sterben" vs. "droben wohnen" - sozialer Gegensatz</li>
+                            <li><strong>Metapher:</strong> "schweren Ruder der Schiffe" - Lebensmühsal</li>
+                            <li><strong>Symbol:</strong> "Steuer" = Kontrolle über das eigene Leben</li>
+                            <li><strong>Synästhesie:</strong> "Sternenlande" - Verbindung von Sehen und Raum</li>
                         </ul>
                         
-                        <p><strong>2. Wirkung der Stilmittel:</strong><br>
-                        Die rhetorischen Fragen schaffen eine dialogische Atmosphäre und beziehen den Leser aktiv ein. Die Wiederholungen verstärken ironisch das Thema der sinnlosen Repetition. Die Ironie entlarvt schonungslos die Widersprüche im Erziehungsalltag.</p>
-                        
-                        <p><strong>3. Humor und Ironie:</strong><br>
-                        Glattauer nutzt situative Ironie: Eltern beklagen die Wirkungslosigkeit ihrer Ermahnungen, wiederholen aber genau dasselbe Verhalten. Der Höhepunkt ist Laras schlagfertige Antwort, die die elterliche Logik gegen sie selbst wendet. Der Humor entsteht durch Wiedererkennung - jeder kennt solche Situationen.</p>
-                        
-                        <p><strong>4. Schreibstil Glattauers:</strong><br>
-                        Glattauer schreibt alltagsnah und beobachtungsscharf. Er nutzt einen analytischen, aber humorvollen Ton. Seine Stärke liegt darin, universelle menschliche Schwächen liebevoll zu entlarven, ohne zu verurteilen. Der Stil ist journalistisch präzise, aber literarisch ausgefeilt.</p>
+                        <div class="wirkung-box">
+                            <strong>Hofmannsthals Stil:</strong> Präzise Bildsprache, melancholische Grundstimmung, Verbindung von Sinnlichkeit und Philosophie, Einfluss des französischen Symbolismus
+                        </div>
                     </div>
                 </div>
-            </div>
-            </div>
 
-            <div class="exercise-card">
-                <div class="exercise-meta">
-                    <span class="difficulty-badge medium" style="background: #ffeaa7; color: #d63031;">Mittel+</span>
-                    <span class="time-estimate">⏱️ 30 Minuten</span>
-                </div>
-                <h3 class="exercise-title">Übung 7: Sprachkritik und Stilmittel (Daniel Glattauer)</h3>
-                <div class="exercise-content">
-                    <p>Analysiere die folgende Kolumne von Daniel Glattauer aus "Kolumnen aus dem Alltag" auf sprachliche Mittel und gesellschaftskritische Aspekte:</p>
-                    <blockquote>
-                        <h4 style="text-align: center; margin-bottom: 15px;">Okay</h4>
-                        <p>Wie viele »Okay« pro Stunde verträgt die Gesellschaft? »Okay« begnügt sich nämlich längst nicht mehr damit, das bekannteste Wort der Welt zu sein. Zusätzlich ist es seit fünfzig Jahren in Mode. Innerhalb seiner Langzeitpopularität erlebt es abwechselnd Kult- und Boom-Phasen. Und innerhalb so eines Booms bricht es im deutschsprachigen Raum gerade in alle Bedeutungsrichtungen aus.</p>
-                        <p>Es gibt praktisch keine Bemerkungen mehr, die nicht mit »Okay« erwidert werden können (außer jene, die wirklich absolut nicht okay sind). Dabei sollte »Okay« eigentlich nur »in Ordnung« heißen, »einverstanden« ersetzen und »gut so« vertreten.</p>
-                        <p>»Okay« ist aber mittlerweile auch zum Ersatz für folgende Botschaften gereift: Ich habe dir zugehört. Ich tue so, als hätte ich dir zugehört. Ich habe zu Kenntnis genommen, dass du eine Sprechpause eingelegt hast. Ich habe in solchen Fällen früher immer »mhm« gemurmel, nun erkläre ich mich unter Protest bereit, die Lippen zu öffnen. Ich bin mit dem Gesagten einverstanden oder nicht einverstanden, will mich aber (noch) nicht festlegen. Ich verstehe dich trotz schlechten Empfangs. Ich habe dazu nichts zu sagen. Reg dich nicht so auf!</p>
-                    </blockquote>
-                    <p>Arbeitsaufträge:</p>
-                    <ol>
-                        <li>Identifiziere und analysiere die verwendeten Stilmittel</li>
-                        <li>Untersuche die rhetorischen Strategien des Autors</li>
-                        <li>Analysiere die gesellschaftskritische Dimension</li>
-                        <li>Bewerte die Argumentation und den Schreibstil</li>
-                        <li>Vergleiche den Text mit der vorherigen Kolumne "Hundertmal gesagt"</li>
-                    </ol>
-                </div>
                 <div class="accordion">
                     <div class="accordion-header">
-                        <span>Lösungsvorschlag anzeigen</span>
+                        <span>7.2 Rainer Maria Rilke (1875-1926)</span>
                         <span class="accordion-icon">+</span>
                     </div>
                     <div class="panel">
-                        <p><strong>Lösungsvorschlag:</strong></p>
+                        <div class="example-box">
+                            <strong>Textbeispiel aus "Der Panther":</strong><br>
+                            <em>"Sein Blick ist vom Vorübergehn der Stäbe<br>
+                            so müd geworden, daß er nichts mehr hält.<br>
+                            Ihm ist, als ob es tausend Stäbe gäbe<br>
+                            und hinter tausend Stäben keine Welt."</em>
+                        </div>
                         
-                        <p><strong>1. Stilmittel und ihre Analyse:</strong></p>
+                        <p><strong>Charakteristische Stilmittel Rilkes:</strong></p>
                         <ul>
-                            <li><strong>Rhetorische Frage:</strong> "Wie viele »Okay« pro Stunde verträgt die Gesellschaft?" - Provokanter Einstieg, regt zum Nachdenken an</li>
-                            <li><strong>Personifikation:</strong> "»Okay« begnügt sich nicht mehr", "es bricht aus" - Das Wort wird als handelndes Subjekt dargestellt</li>
-                            <li><strong>Metapher:</strong> "Kult- und Boom-Phasen", "bricht in alle Bedeutungsrichtungen aus" - Veranschaulicht die Ausbreitung des Wortes</li>
-                            <li><strong>Ironie:</strong> "das bekannteste Wort der Welt" - Übertreibung zur Verdeutlichung der Omnipräsenz</li>
-                            <li><strong>Paradox:</strong> "einverstanden oder nicht einverstanden" - Zeigt die Widersprüchlichkeit der Wortverwendung</li>
-                            <li><strong>Aufzählung/Klimax:</strong> Die lange Liste der Bedeutungen steigert sich zur Verdeutlichung der Beliebigkeit</li>
-                            <li><strong>Parenthese:</strong> "(außer jene, die wirklich absolut nicht okay sind)" - Ironische Einschränkung</li>
-                            <li><strong>Alliteration:</strong> "Bedeutungsrichtungen aus", "Boom bricht" - Rhythmische Verstärkung</li>
+                            <li><strong>Personifikation:</strong> Der Blick wird müde - Vermenschlichung</li>
+                            <li><strong>Metapher:</strong> "Stäbe" = Gefangenschaft, Begrenztheit</li>
+                            <li><strong>Hyperbel:</strong> "tausend Stäbe" - Übertreibung der Ausweglosigkeit</li>
+                            <li><strong>Paradox:</strong> "keine Welt" hinter den Stäben - existentielle Leere</li>
                         </ul>
                         
-                        <p><strong>2. Rhetorische Strategien:</strong><br>
-                        Glattauer verwendet eine analytisch-humorvolle Herangehensweise. Er beginnt mit einer provokativen Frage, führt eine scheinbar sachliche Analyse durch und entlarvt dann die Absurdität des Phänomens durch eine übertriebene Auflistung. Die Strategie ist entlarvend, aber nicht anklagend.</p>
-                        
-                        <p><strong>3. Gesellschaftskritische Dimension:</strong><br>
-                        Der Text kritisiert die sprachliche Verarmung und Oberflächlichkeit moderner Kommunikation. "Okay" wird zum Symbol für Bequemlichkeit, Unverbindlichkeit und mangelnde Präzision im zwischenmenschlichen Austausch. Glattauer zeigt, wie ein Wort zur universellen Floskel degeneriert.</p>
-                        
-                        <p><strong>4. Bewertung der Argumentation:</strong><br>
-                        Die Argumentation ist überzeugend, weil sie vom Konkreten (einem Wort) zum Allgemeinen (Kommunikationsverhalten) führt. Der humorvolle Ton macht die Kritik zugänglich, ohne belehrend zu wirken. Die Beispielsammlung am Ende ist besonders wirkungsvoll.</p>
-                        
-                        <p><strong>5. Vergleich mit "Hundertmal gesagt":</strong><br>
-                        Beide Texte kritisieren kommunikative Gewohnheiten, aber unterschiedlich: "Hundertmal gesagt" fokussiert auf die Wirkungslosigkeit von Wiederholungen in der Erziehung, "Okay" auf die Bedeutungslosigkeit eines überstrapzierten Universalwortes. Beide nutzen Ironie und konkrete Beispiele, "Okay" ist aber sprachkritischer, "Hundertmal gesagt" pädagogisch orientiert.</p>
+                        <div class="wirkung-box">
+                            <strong>Rilkes Stil:</strong> Dinggedichte mit philosophischer Tiefe, präzise Beobachtung, existentielle Themen, innovative Metaphorik
+                        </div>
                     </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>7.3 Georg Trakl (1887-1914)</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <div class="example-box">
+                            <strong>Textbeispiel aus "Grodek":</strong><br>
+                            <em>"Am Abend tönen die herbstlichen Wälder<br>
+                            Von tödlichen Waffen, die goldenen Ebenen<br>
+                            Und blauen Seen, darüber die Sonne<br>
+                            Düster hinrollt"</em>
+                        </div>
+                        
+                        <p><strong>Charakteristische Stilmittel Trakls:</strong></p>
+                        <ul>
+                            <li><strong>Farbsymbolik:</strong> "golden", "blau" - oft mit Tod und Verfall verbunden</li>
+                            <li><strong>Synästhesie:</strong> "tönen" + "tödlichen Waffen" - Hören und Gewalt</li>
+                            <li><strong>Personifikation:</strong> "Sonne rollt düster" - Nature als bedrohliche Kraft</li>
+                            <li><strong>Oxymoron:</strong> "tödliche Waffen" + "goldene Ebenen" - Schönheit und Horror</li>
+                        </ul>
+                        
+                        <div class="wirkung-box">
+                            <strong>Trakls Stil:</strong> Düstere Farbsymbolik, Todessehnsucht, expressionistische Bildsprache, Verbindung von Schönheit und Vergänglichkeit
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>7.4 Ingeborg Bachmann (1926-1973)</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <div class="example-box">
+                            <strong>Textbeispiel aus "Anrufung des Großen Bären":</strong><br>
+                            <em>"Großer Bär, komm herab, zottige Nacht,<br>
+                            Wolkenpelztier mit den alten Augen,<br>
+                            Sternenaugen,<br>
+                            durch das Dickicht brechen schimmernd<br>
+                            deine Pfoten mit den Krallen"</em>
+                        </div>
+                        
+                        <p><strong>Charakteristische Stilmittel Bachmanns:</strong></p>
+                        <ul>
+                            <li><strong>Apostrophe:</strong> Direkte Anrede an den Großen Bären</li>
+                            <li><strong>Neologismus:</strong> "Wolkenpelztier" - innovative Wortschöpfung</li>
+                            <li><strong>Metapher:</strong> Sternbild als lebendiges Tier dargestellt</li>
+                            <li><strong>Enjambement:</strong> Zeilensprünge schaffen fließenden Rhythmus</li>
+                        </ul>
+                        
+                        <div class="wirkung-box">
+                            <strong>Bachmanns Stil:</strong> Sprachexperimente, feministische Perspektiven, politische Lyrik, Verbindung von Mythos und Moderne
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>7.5 Thomas Bernhard (1931-1989)</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <div class="example-box">
+                            <strong>Textbeispiel aus "Holzfällen":</strong><br>
+                            <em>"Die Burgschauspieler sind alle verlogen, dachte ich, während ich in Richtung Graben ging, verlogen und selbstgefällig und größenwahnsinnig und geschmacklos, aber genau das macht ja ihre Ausstrahlung aus, ihre Ausstrahlung und ihren Erfolg"</em>
+                        </div>
+                        
+                        <p><strong>Charakteristische Stilmittel Bernhards:</strong></p>
+                        <ul>
+                            <li><strong>Wiederholung:</strong> "verlogen", "ihre Ausstrahlung" - obsessive Beharrlichkeit</li>
+                            <li><strong>Aufzählung:</strong> "verlogen und selbstgefällig..." - steigernd</li>
+                            <li><strong>Parenthese:</strong> "dachte ich" - Gedankenstrom-Technik</li>
+                            <li><strong>Paradox:</strong> Negative Eigenschaften als Erfolgsgarant</li>
+                        </ul>
+                        
+                        <div class="wirkung-box">
+                            <strong>Bernhards Stil:</strong> Endlose Sätze, obsessive Wiederholungen, gesellschaftskritische Tiraden, schwarzer Humor
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABSCHLUSS UND ZUSAMMENFASSUNG -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>8. Zusammenfassung: Stilmittel erfolgreich analysieren</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
+                <h3>8.1 Die wichtigsten Grundsätze</h3>
+                <div class="tip-box">
+                    <p><strong>Qualität vor Quantität:</strong> Lieber wenige Stilmittel gründlich analysieren als oberflächlich viele auflisten.</p>
+                    
+                    <p><strong>Funktion im Kontext:</strong> Jedes Stilmittel muss zur Gesamtaussage des Textes beitragen - fragen Sie immer "Warum verwendet der Autor gerade hier dieses Mittel?"</p>
+                    
+                    <p><strong>Präzise Wirkungsbeschreibung:</strong> Verwenden Sie spezifische Formulierungen statt allgemeiner Wendungen wie "wirkt schön".</p>
+                    
+                    <p><strong>Textbelege:</strong> Jede Analyse muss durch konkrete Textstellen mit Zeilenangabe gestützt werden.</p>
+                </div>
+
+                <h3>8.2 Typische Matura-Aufgabenstellungen</h3>
+                <div class="analysis-method">
+                    <h4>Häufige Formulierungen in Matura-Aufgaben:</h4>
+                    <ul>
+                        <li><strong>"Analysieren Sie die sprachliche Gestaltung..."</strong> → Systematische Stilmittelanalyse mit Wirkungsbeschreibung</li>
+                        <li><strong>"Untersuchen Sie die Wirkung der verwendeten Stilmittel..."</strong> → Fokus auf Wirkungsanalyse</li>
+                        <li><strong>"Erläutern Sie die Funktion der sprachlichen Mittel..."</strong> → Bezug zur Gesamtaussage herstellen</li>
+                        <li><strong>"Beurteilen Sie die sprachliche Qualität..."</strong> → Wertende Einschätzung mit Begründung</li>
+                    </ul>
+                </div>
+
+                <h3>8.3 Checkliste für die Matura-Vorbereitung</h3>
+                <div class="tip-box">
+                    <h4>Können Sie folgende Fragen beantworten?</h4>
+                    <ul>
+                        <li>☐ Kenne ich die wichtigsten Stilmittel-Kategorien?</li>
+                        <li>☐ Kann ich Stilmittel sicher identifizieren?</li>
+                        <li>☐ Beschreibe ich Wirkungen präzise und differenziert?</li>
+                        <li>☐ Stelle ich Bezüge zur Gesamtinterpretation her?</li>
+                        <li>☐ Verwende ich korrekte Fachterminologie?</li>
+                        <li>☐ Belege ich meine Analysen mit Textstellen?</li>
+                        <li>☐ Vermeide ich die häufigsten Analysefehler?</li>
+                        <li>☐ Kenne ich österreichische Autoren und ihre Stilbesonderheiten?</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <strong>Erfolgstipp:</strong> Üben Sie regelmäßig mit authentischen Matura-Texten verschiedener Epochen und Textsorten. Entwickeln Sie ein Gefühl dafür, welche Stilmittel in welchem Kontext besonders wirkungsvoll sind. Die Stilmittelanalyse ist ein Handwerk - und wie jedes Handwerk erfordert es kontinuierliche Praxis!
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Download-Funktion für den Textbereich
-        function downloadText() {
-            const text = document.getElementById('gewitterText').value;
-            if (text.trim() === '') {
-                alert('Bitte schreiben Sie erst einen Text, bevor Sie ihn speichern.');
-                return;
-            }
-            
-            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'gewitter-beschreibung.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-        
         // Accordion-Funktionalität
         document.addEventListener('DOMContentLoaded', function() {
             const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -521,13 +753,6 @@
                     // Aktiven Zustand umschalten
                     this.classList.toggle('active');
                     panel.classList.toggle('active');
-                    
-                    // Panel-Höhe animieren
-                    if (panel.classList.contains('active')) {
-                        panel.style.maxHeight = panel.scrollHeight + 'px';
-                    } else {
-                        panel.style.maxHeight = '0';
-                    }
                 });
             });
             
@@ -545,20 +770,698 @@
                             // Alle schließen
                             header.classList.remove('active');
                             panel.classList.remove('active');
-                            panel.style.maxHeight = '0';
                         } else {
                             // Alle öffnen
                             header.classList.add('active');
                             panel.classList.add('active');
-                            panel.style.maxHeight = panel.scrollHeight + 'px';
                         }
                     });
                     
                     // Button-Text aktualisieren
-                    this.textContent = anyActive ? 'Alle Lösungen öffnen' : 'Alle Lösungen schließen';
+                    this.textContent = anyActive ? 'Alle Bereiche öffnen' : 'Alle Bereiche schließen';
                 });
             }
         });
+
+        // Quiz-Funktionen
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.style.display = 'block';
+            } else {
+                answer.style.display = 'none';
+            }
+        }
+
+        // Flashcard-Funktion
+        function flipCard(cardId) {
+            const front = document.getElementById(cardId + '-front');
+            const back = document.getElementById(cardId + '-back');
+            
+            if (back.style.display === 'none' || back.style.display === '') {
+                front.style.display = 'none';
+                back.style.display = 'block';
+            } else {
+                front.style.display = 'block';
+                back.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
+
+                <div class="category-box">
+                    WORTFIGUREN (Figurae verborum)
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>2.2 Wortfiguren - Bedeutungsebene</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <div class="stylistic-device">
+                            <h4>Metapher</h4>
+                            <p><strong>Definition:</strong> Übertragung der Bedeutung aufgrund einer Ähnlichkeit ohne Vergleichspartikel</p>
+                            <div class="device-example">
+                                "Das Leben ist eine Reise" (Lebensmetapher)<br>
+                                "Der Sturm der Entrüstung" (Gefühlsmetapher)<br>
+                                "Schneewittchen" - "Haut so weiß wie Schnee" (Märchen)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Veranschaulichung abstrakter Begriffe, Bildkraft, emotionale Wirkung, Prägnanz
+                            </div>
+                            <p><strong>Unterarten der Metapher:</strong></p>
+                            <ul>
+                                <li><strong>Personifikation:</strong> Vermenschlichung ("Der Wind flüstert")</li>
+                                <li><strong>Allegorie:</strong> Verbildlichung abstrakter Begriffe ("Justitia mit Waage")</li>
+                                <li><strong>Symbol:</strong> Konventionalisierte Bedeutung ("Taube = Frieden")</li>
+                            </ul>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Metonymie</h4>
+                            <p><strong>Definition:</strong> Ersetzung durch einen sachlich verwandten Begriff</p>
+                            <div class="device-example">
+                                "Das Weiße Haus entschied" (Institution für Person)<br>
+                                "Ein Glas trinken" (Behälter für Inhalt)<br>
+                                "Goethe lesen" (Autor für Werk)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Verkürzung, Prägnanz, Fokussierung auf wesentliche Aspekte
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Synecdoche (Pars pro Toto)</h4>
+                            <p><strong>Definition:</strong> Teil steht für das Ganze oder umgekehrt</p>
+                            <div class="device-example">
+                                "Alle Mann an Deck!" (Person für Besatzung)<br>
+                                "Deutschland gewann 7:1" (Land für Mannschaft)<br>
+                                "Dach über dem Kopf" (Teil für Haus)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Prägnanz, Fokussierung, oft emotionale Verstärkung
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Vergleich (Simile)</h4>
+                            <p><strong>Definition:</strong> Gegenüberstellung mit Vergleichspartikeln (wie, als, gleich)</p>
+                            <div class="device-example">
+                                "Mutig wie ein Löwe" (Charaktereigenschaft)<br>
+                                "Schnell wie der Blitz" (Geschwindigkeit)<br>
+                                "Sie kämpfte wie eine Löwin um ihre Kinder" (Intensität)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Veranschaulichung, Verstärkung, oft wertend, manchmal humorvoll
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-box">
+                    SATZFIGUREN (Figurae sententiae)
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>2.3 Satzfiguren - Strukturelle Gestaltung</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <div class="stylistic-device">
+                            <h4>Anapher</h4>
+                            <p><strong>Definition:</strong> Wiederholung am Satz- oder Versanfang</p>
+                            <div class="device-example">
+                                "Ich bin ein Berliner. Ich bin stolz darauf." (Kennedy)<br>
+                                "Wer nie sein Brot mit Tränen aß, / Wer nie die kummervollen Nächte..." (Goethe)<br>
+                                "Das ist mein Haus. Das ist mein Garten. Das ist mein Leben." (Emphase)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Betonung, Eindringlichkeit, rhythmische Strukturierung, emotionale Verstärkung
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Epipher</h4>
+                            <p><strong>Definition:</strong> Wiederholung am Satz- oder Versende</p>
+                            <div class="device-example">
+                                "Alle Menschen werden Brüder, wo dein sanfter Flügel weilt" (Schiller)<br>
+                                "Government of the people, by the people, for the people" (Lincoln)<br>
+                                "Sie kam, sie sah, sie ging fort."
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Nachhallende Betonung, Zusammenfassung, emotionaler Abschluss
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Parallelismus</h4>
+                            <p><strong>Definition:</strong> Wiederholung gleicher Satzstrukturen</p>
+                            <div class="device-example">
+                                "Der eine gräbt den Brunnen, der andere trinkt daraus" (Sprichwort)<br>
+                                "Ich kam, ich sah, ich siegte" (Caesar)<br>
+                                "Mit dem Schiffe spielen Wind und Wellen, / mit der Liebe spielen Wind und Wellen" (Heine)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Rhythmisierung, Ordnung, Verstärkung durch Wiederholung, Eindringlichkeit
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Chiasmus</h4>
+                            <p><strong>Definition:</strong> Überkreuzstellung von Satzgliedern (ABBA-Schema)</p>
+                            <div class="device-example">
+                                "Die Kunst ist lang, und kurz ist unser Leben" (Goethe)<br>
+                                "Eng ist die Welt, und das Gehirn ist weit" (Schiller)<br>
+                                "Ask not what your country can do for you—ask what you can do for your country" (Kennedy)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Ausgewogenheit, Prägnanz, antithetische Betonung, Merkfähigkeit
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Ellipse</h4>
+                            <p><strong>Definition:</strong> Auslassung von Satzteilen</p>
+                            <div class="device-example">
+                                "Je schneller, desto besser" (Vollständig: "Je schneller es geht, desto besser ist es")<br>
+                                "Nichts zu danken!" (Vollständig: "Sie haben nichts zu danken")<br>
+                                "Ein Gedicht von Goethe" (Vollständig: "Das ist ein Gedicht von Goethe")
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Verknappung, Dynamik, Spontaneität, Nähe zur gesprochenen Sprache
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-box">
+                    GEDANKENFIGUREN (Figurae sententiarum)
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>2.4 Gedankenfiguren - Inhaltliche Wendungen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <div class="stylistic-device">
+                            <h4>Ironie</h4>
+                            <p><strong>Definition:</strong> Ausdruck des Gegenteils der eigentlichen Meinung</p>
+                            <div class="device-example">
+                                "Das hast du ja wieder toll gemacht!" (bei einem Fehler)<br>
+                                "Ein schöner Freund bist du!" (bei Enttäuschung)<br>
+                                "Welch eine Überraschung!" (bei Erwartbarem)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Kritik, Spott, Distanzierung, oft humorvoll, kann verletzend wirken
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Paradoxon</h4>
+                            <p><strong>Definition:</strong> Scheinbarer Widerspruch, der bei genauerer Betrachtung einen tieferen Sinn enthält</p>
+                            <div class="device-example">
+                                "Weniger ist mehr" (Mies van der Rohe)<br>
+                                "Der einzige Weg, einen Freund zu haben, ist der, selbst einer zu sein" (Emerson)<br>
+                                "Ich weiß, dass ich nichts weiß" (Sokrates)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Provokation, Nachdenklichkeit, Aufmerksamkeit, philosophische Tiefe
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Oxymoron</h4>
+                            <p><strong>Definition:</strong> Verbindung zweier sich widersprechender Begriffe</p>
+                            <div class="device-example">
+                                "Alter Knabe" (Widerspruch: alt vs. jung)<br>
+                                "Bittersüße Erinnerung" (gegensätzliche Gefühle)<br>
+                                "Geordnetes Chaos" (Zustandswiderspruch)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Überraschung, Komplexität, Ambivalenz, prägnante Charakterisierung
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Antithese</h4>
+                            <p><strong>Definition:</strong> Gegenüberstellung gegensätzlicher Begriffe oder Gedanken</p>
+                            <div class="device-example">
+                                "Heiß und kalt" (Temperaturgegensatz)<br>
+                                "Arm und reich" (sozialer Gegensatz)<br>
+                                "Leben ist der Anfang des Todes" (philosophischer Gegensatz)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Verdeutlichung durch Kontrast, Spannung, Prägnanz, Vollständigkeit
+                            </div>
+                        </div>
+
+                        <div class="stylistic-device">
+                            <h4>Rhetorische Frage</h4>
+                            <p><strong>Definition:</strong> Frage, auf die keine Antwort erwartet wird, da sie offensichtlich ist</p>
+                            <div class="device-example">
+                                "Ist das zu fassen?" (Empörung)<br>
+                                "Wer weiß das nicht?" (Selbstverständlichkeit)<br>
+                                "Kann man das überhaupt glauben?" (Zweifel)
+                            </div>
+                            <div class="wirkung-box">
+                                <strong>Wirkung:</strong> Einbeziehung des Lesers, Verstärkung, Nachdenklichkeit, rhetorische Emphase
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STILMITTEL IN VERSCHIEDENEN TEXTSORTEN -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>3. Stilmittel in verschiedenen Textsorten</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
+                <p>Die Verwendung und Wirkung von Stilmitteln variiert stark je nach Textsorte und Kommunikationskontext:</p>
+
+                <div class="textsorte-grid">
+                    <div class="textsorte-card">
+                        <h4>Lyrik</h4>
+                        <p><strong>Typische Stilmittel:</strong></p>
+                        <ul>
+                            <li>Metapher, Symbol</li>
+                            <li>Reim, Metrum</li>
+                            <li>Alliteration, Assonanz</li>
+                            <li>Personifikation</li>
+                            <li>Synästhesie</li>
+                        </ul>
+                        <div class="example-box">
+                            <strong>Beispiel (Rilke):</strong> "Der Herbst steht in den Wäldern" - Personifikation erzeugt bildhafte Vorstellung der Jahreszeit als handelnde Person.
+                        </div>
+                    </div>
+
+                    <div class="textsorte-card">
+                        <h4>Reden und Rhetorik</h4>
+                        <p><strong>Typische Stilmittel:</strong></p>
+                        <ul>
+                            <li>Anapher, Epipher</li>
+                            <li>Rhetorische Frage</li>
+                            <li>Parallelismus</li>
+                            <li>Klimax, Antiklimax</li>
+                            <li>Antithese</li>
+                        </ul>
+                        <div class="example-box">
+                            <strong>Beispiel (M.L. King):</strong> "I have a dream..." - Die anaphorische Wiederholung verstärkt die Vision und macht sie eindringlich.
+                        </div>
+                    </div>
+
+                    <div class="textsorte-card">
+                        <h4>Prosatexte (Epik)</h4>
+                        <p><strong>Typische Stilmittel:</strong></p>
+                        <ul>
+                            <li>Vergleich, Metapher</li>
+                            <li>Personifikation</li>
+                            <li>Detailschilderung</li>
+                            <li>Zeitraffung/-dehnung</li>
+                            <li>Perspektivwechsel</li>
+                        </ul>
+                        <div class="example-box">
+                            <strong>Beispiel (Thomas Mann):</strong> "Der Tod in Venedig" - Die Krankheitsmetaphorik durchzieht die gesamte Novelle und spiegelt den inneren Zustand des Protagonisten.
+                        </div>
+                    </div>
+
+                    <div class="textsorte-card">
+                        <h4>Journalistische Texte</h4>
+                        <p><strong>Typische Stilmittel:</strong></p>
+                        <ul>
+                            <li>Übertreibung (Hyperbel)</li>
+                            <li>Vergleich</li>
+                            <li>Rhetorische Frage</li>
+                            <li>Ironie</li>
+                            <li>Neologismen</li>
+                        </ul>
+                        <div class="example-box">
+                            <strong>Beispiel (Zeitungskommentar):</strong> "Die Politiklandschaft gleicht einem Schlachtfeld" - Die Kriegsmetapher dramatisiert politische Auseinandersetzungen.
+                        </div>
+                    </div>
+
+                    <div class="textsorte-card">
+                        <h4>Werbetexte</h4>
+                        <p><strong>Typische Stilmittel:</strong></p>
+                        <ul>
+                            <li>Alliteration</li>
+                            <li>Superlativ</li>
+                            <li>Imperativ</li>
+                            <li>Neologismen</li>
+                            <li>Wortspiele</li>
+                        </ul>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Milch macht müde Männer munter" - Alliteration sorgt für Einprägsamkeit und Wiedererkennung.
+                        </div>
+                    </div>
+
+                    <div class="textsorte-card">
+                        <h4>Wissenschaftliche Texte</h4>
+                        <p><strong>Typische Stilmittel:</strong></p>
+                        <ul>
+                            <li>Fachterminologie</li>
+                            <li>Passivkonstruktionen</li>
+                            <li>Nominalisierungen</li>
+                            <li>Konditionalsätze</li>
+                            <li>Zitate und Verweise</li>
+                        </ul>
+                        <div class="example-box">
+                            <strong>Beispiel:</strong> "Es lässt sich feststellen, dass..." - Unpersönliche Formulierung suggeriert Objektivität.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYSEMETHODIK -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>4. Systematische Stilmittelanalyse - Methodik</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
+                <h3>4.1 Identifikationsstrategie</h3>
+                <div class="analysis-method">
+                    <h4>5-Schritte-Methode zur Stilmittelerkennung:</h4>
+                    <ol>
+                        <li><strong>Ersten Eindruck festhalten:</strong> Welche Stellen fallen besonders auf?</li>
+                        <li><strong>Systematisch durchgehen:</strong> Text Satz für Satz auf Auffälligkeiten prüfen</li>
+                        <li><strong>Kategorien abarbeiten:</strong> Klang, Wort, Satz, Gedanke systematisch durchdenken</li>
+                        <li><strong>Kontext berücksichtigen:</strong> Textsorte, Epoche, Autor einbeziehen</li>
+                        <li><strong>Häufungen beachten:</strong> Wiederkehrende Muster und Kombinationen erkennen</li>
+                    </ol>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Praktische Identifikationshilfen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <h4>Checkliste für die Stilmittelsuche:</h4>
+                        <div class="tip-box">
+                            <strong>Klangebene - Fragen Sie sich:</strong>
+                            <ul>
+                                <li>Welche Laute/Silben wiederholen sich?</li>
+                                <li>Gibt es auffällige Klangmuster?</li>
+                                <li>Wie klingt der Text beim lauten Lesen?</li>
+                                <li>Welcher Rhythmus entsteht?</li>
+                            </ul>
+                            
+                            <strong>Wortebene - Achten Sie auf:</strong>
+                            <ul>
+                                <li>Ungewöhnliche Wortwahl oder -kombination</li>
+                                <li>Bildhafte Ausdrücke</li>
+                                <li>Wörter in übertragener Bedeutung</li>
+                                <li>Emotionale Aufladung der Begriffe</li>
+                            </ul>
+                            
+                            <strong>Satzebene - Beobachten Sie:</strong>
+                            <ul>
+                                <li>Wiederholungen von Wörtern oder Strukturen</li>
+                                <li>Ungewöhnliche Wortstellung</li>
+                                <li>Parallelismen oder Gegensätze</li>
+                                <li>Satzlängen und -rhythmus</li>
+                            </ul>
+                            
+                            <strong>Gedankenebene - Prüfen Sie:</strong>
+                            <ul>
+                                <li>Logische Widersprüche oder Paradoxa</li>
+                                <li>Ironie oder Mehrdeutigkeit</li>
+                                <li>Übertreibungen oder Untertreibungen</li>
+                                <li>Versteckte Botschaften</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>4.2 Wirkungsanalyse - Wie beschreibe ich die Wirkung?</h3>
+                <div class="analysis-method">
+                    <h4>Strukturiertes Vorgehen bei der Wirkungsanalyse:</h4>
+                    <ol>
+                        <li><strong>Unmittelbare Wirkung:</strong> Welchen ersten Eindruck erzeugt das Stilmittel?</li>
+                        <li><strong>Emotionale Dimension:</strong> Welche Gefühle werden angesprochen?</li>
+                        <li><strong>Rationale Dimension:</strong> Welche gedanklichen Prozesse werden ausgelöst?</li>
+                        <li><strong>Ästhetische Dimension:</strong> Wie trägt es zur sprachlichen Schönheit bei?</li>
+                        <li><strong>Funktionale Dimension:</strong> Welchem Zweck dient es im Gesamttext?</li>
+                    </ol>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Formulierungshilfen für Wirkungsbeschreibungen</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <h4>Wirkungsverben - Differenziert formulieren:</h4>
+                        <div class="tip-box">
+                            <strong>Statt "wirkt" verwenden Sie:</strong><br>
+                            erzeugt, bewirkt, verstärkt, betont, unterstreicht, verdeutlicht, veranschaulicht, vermittelt, suggeriert, impliziert, evoziert, provoziert, appelliert, emotionalisiert, dramatisiert, rhythmisiert, strukturiert, kontrastiert, verbindet, trennt, fokussiert, lenkt die Aufmerksamkeit auf...
+
+                            <strong>Emotionale Wirkungen:</strong><br>
+                            berührt, bewegt, erschüttert, tröstet, beunruhigt, verängstigt, begeistert, amüsiert, nachdenklich stimmt, Melancholie auslöst, Spannung aufbaut, Entspannung schafft
+
+                            <strong>Kognitive Wirkungen:</strong><br>
+                            verdeutlicht, erklärt, veranschaulicht, konkretisiert, abstrahiert, vereinfacht, komplexiert, ordnet, strukturiert, argumentiert, beweist, widerlegt
+
+                            <strong>Ästhetische Wirkungen:</strong><br>
+                            verschönert, schmückt, rhythmisiert, harmonisiert, kontrastiert, überrascht, variiert, belebt, dynamisiert
+                        </div>
+
+                        <h4>Musterfomulierungen für Wirkungsanalysen:</h4>
+                        <div class="example-box">
+                            <strong>Metapher-Analyse:</strong><br>
+                            "Die Metapher 'Das Leben ist eine Reise' veranschaulicht die Dynamik menschlicher Existenz, indem sie abstrakte Lebensphasen als konkrete Stationen einer Reise darstellt. Sie suggeriert sowohl die Ungewissheit des Weges als auch die Möglichkeit bewusster Entscheidungen und verleiht dem philosophischen Gedanken eine bildhafte, emotional ansprechende Qualität."
+
+                            <strong>Anapher-Analyse:</strong><br>
+                            "Die anaphorische Wiederholung von 'Ich bin...' verstärkt nicht nur die Selbstbehauptung des lyrischen Ichs, sondern erzeugt durch den parallel verlaufenden Rhythmus auch eine hymnische Qualität, die der Aussage Feierlichkeit und Eindringlichkeit verleiht."
+                        </div>
+                    </div>
+                </div>
+
+                <h3>4.3 Kontextbezug herstellen</h3>
+                <div class="analysis-method">
+                    <p>Ein Stilmittel wirkt nie isoliert, sondern immer im Kontext. Berücksichtigen Sie:</p>
+                    <ul>
+                        <li><strong>Textsorte:</strong> Welche Stilmittel sind für diese Textsorte typisch/untypisch?</li>
+                        <li><strong>Epoche:</strong> Welche stilistischen Konventionen herrschten zur Entstehungszeit?</li>
+                        <li><strong>Autor:</strong> Welche Stilmittel verwendet dieser Autor bevorzugt?</li>
+                        <li><strong>Thema:</strong> Wie unterstützt das Stilmittel die thematische Aussage?</li>
+                        <li><strong>Textstellung:</strong> Wo im Text steht das Stilmittel? (Anfang, Höhepunkt, Ende)</li>
+                        <li><strong>Umfeld:</strong> Mit welchen anderen Stilmitteln ist es kombiniert?</li>
+                    </ul>
+                </div>
+
+                <h3>4.4 Integration in die Gesamtinterpretation</h3>
+                <div class="tip-box">
+                    <strong>Wichtige Grundsätze:</strong>
+                    <ul>
+                        <li>Stilmittel sind <strong>Mittel zum Zweck</strong>, nie Selbstzweck</li>
+                        <li>Sie müssen zur <strong>Gesamtaussage des Textes</strong> beitragen</li>
+                        <li>Quantität ist nicht gleich Qualität - <strong>wenige, gut analysierte Stilmittel</strong> sind besser als oberflächliche Aufzählungen</li>
+                        <li>Die Analyse muss <strong>textbelegt</strong> und <strong>nachvollziehbar</strong> sein</li>
+                        <li>Vermeiden Sie <strong>Standardformulierungen</strong> - seien Sie präzise und spezifisch</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- HÄUFIGE ANALYSEFEHLER -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>5. Häufige Analysefehler und wie man sie vermeidet</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
+                <div class="error-box">
+                    <h4>Fehler 1: Stilmittel um ihrer selbst willen benennen</h4>
+                    <p><strong>Problematisch:</strong> "In Zeile 3 steht eine Metapher, in Zeile 5 eine Alliteration..."</p>
+                    <p><strong>Besser:</strong> "Die Metapher in Zeile 3 veranschaulicht..., wodurch... Die nachfolgende Alliteration verstärkt diese Wirkung durch..."</p>
+                    <p><strong>Lösung:</strong> Immer die Funktion und Wirkung des Stilmittels erklären!</p>
+                </div>
+
+                <div class="error-box">
+                    <h4>Fehler 2: Oberflächliche Wirkungsbeschreibung</h4>
+                    <p><strong>Problematisch:</strong> "Die Metapher wirkt schön." / "Das macht den Text interessanter."</p>
+                    <p><strong>Besser:</strong> "Die Metapher erzeugt eine bildhafte Vorstellung, die dem abstrakten Begriff emotionale Tiefe verleiht und dem Leser eine konkrete Assoziation ermöglicht."</p>
+                    <p><strong>Lösung:</strong> Spezifische, differenzierte Wirkungsbeschreibung mit präzisem Vokabular!</p>
+                </div>
+
+                <div class="error-box">
+                    <h4>Fehler 3: Fehlende Textbelege</h4>
+                    <p><strong>Problematisch:</strong> "Der Autor verwendet viele Metaphern."</p>
+                    <p><strong>Besser:</strong> "Der Autor verwendet Metaphern wie 'Lebensstrom' (Z.3) und 'Gedankenpalast' (Z.7), die..."</p>
+                    <p><strong>Lösung:</strong> Immer konkrete Textstellen mit Zeilenangabe zitieren!</p>
+                </div>
+
+                <div class="error-box">
+                    <h4>Fehler 4: Überinterpretation</h4>
+                    <p><strong>Problematisch:</strong> "Das Wort 'und' steht hier für die Verbindung aller Dinge im Universum."</p>
+                    <p><strong>Besser:</strong> Sich auf deutlich erkennbare und belegbare Stilmittel konzentrieren.</p>
+                    <p><strong>Lösung:</strong> Maß halten! Nicht jede sprachliche Eigenheit ist ein bewusstes Stilmittel!</p>
+                </div>
+
+                <div class="error-box">
+                    <h4>Fehler 5: Fehlende Verknüpfung zum Gesamttext</h4>
+                    <p><strong>Problematisch:</strong> Isolierte Betrachtung einzelner Stilmittel</p>
+                    <p><strong>Besser:</strong> "Diese Metapher fügt sich in das durchgängige Bildfeld des Texts ein und unterstützt die zentrale Aussage, dass..."</p>
+                    <p><strong>Lösung:</strong> Stilmittel im Kontext der Gesamtaussage interpretieren!</p>
+                </div>
+
+                <div class="tip-box">
+                    <h4>Selbstcheck-Fragen zur Qualitätssicherung:</h4>
+                    <ul>
+                        <li>Habe ich erklärt, <strong>warum</strong> der Autor dieses Stilmittel verwendet?</li>
+                        <li>Ist meine Wirkungsbeschreibung <strong>spezifisch</strong> und <strong>nachvollziehbar</strong>?</li>
+                        <li>Habe ich <strong>Textbelege</strong> angeführt?</li>
+                        <li>Steht meine Analyse im <strong>Zusammenhang</strong> mit der Gesamtinterpretation?</li>
+                        <li>Verwende ich <strong>präzise Fachbegriffe</strong>?</li>
+                        <li>Vermeide ich <strong>Floskeln</strong> und <strong>Standardformulierungen</strong>?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERWEITERTE ÜBUNGSBEREICHE -->
+        <div class="accordion">
+            <div class="accordion-header">
+                <span>6. Erweiterte Übungen zur Stilmittelanalyse</span>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="panel">
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>6.1 Stilmittel in authentischen Maturatexten</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <h4>Übung A: Ingeborg Bachmann - "Reklame" (Auszug)</h4>
+                        <div class="example-box">
+                            <em>"Wohin aber gehen wir<br>
+                            ohne sorge sei ohne sorge<br>
+                            wenn es dunkel und wenn es kalt wird<br>
+                            sei ohne sorge<br>
+                            aber<br>
+                            mit musik<br>
+                            was hören wir denn<br>
+                            mit musik<br>
+                            erreichen wir die menschen<br>
+                            mit musik."</em>
+                        </div>
+                        
+                        <div class="interactive-quiz">
+                            <div class="quiz-question">Identifizieren Sie die Stilmittel in diesem Text:</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="toggleAnswer('answer6a1')">a) Anapher</div>
+                                <div class="quiz-option" onclick="toggleAnswer('answer6a2')">b) Aposiopese</div>
+                                <div class="quiz-option" onclick="toggleAnswer('answer6a3')">c) Rhetorische Frage</div>
+                                <div class="quiz-option" onclick="toggleAnswer('answer6a4')">d) Chiasmus</div>
+                            </div>
+                            
+                            <div id="answer6a1" class="panel" style="display: none;">
+                                <p><strong>Richtig!</strong> Die Wiederholung von "mit musik" ist eine Anapher, die die zentrale Bedeutung der Musik betont und rhythmisiert.</p>
+                            </div>
+                            <div id="answer6a2" class="panel" style="display: none;">
+                                <p><strong>Richtig!</strong> Das isolierte "aber" nach "sei ohne sorge" ist eine Aposiopese - ein bewusster Abbruch, der Unsicherheit ausdrückt.</p>
+                            </div>
+                            <div id="answer6a3" class="panel" style="display: none;">
+                                <p><strong>Richtig!</strong> "Wohin aber gehen wir" und "was hören wir denn" sind rhetorische Fragen, die Orientierungslosigkeit ausdrücken.</p>
+                            </div>
+                            <div id="answer6a4" class="panel" style="display: none;">
+                                <p><strong>Falsch.</strong> Ein Chiasmus (Überkreuzstellung) ist hier nicht erkennbar.</p>
+                            </div>
+                        </div>
+
+                        <h4>Übung B: Ernst Jandl - "schtzngrmm" (Lautgedicht)</h4>
+                        <div class="example-box">
+                            <em>"schtzngrmm<br>
+                            t-t-t-t<br>
+                            grrrmmmmm<br>
+                            t-t-t-t<br>
+                            s-----c-----h<br>
+                            tzngrmm<br>
+                            grrrrr<br>
+                            t-t-t-t"</em>
+                        </div>
+                        
+                        <p><strong>Analyseauftrag:</strong> Welche Stilmittel verwendet Jandl hier? Wie erzeugt er Bedeutung ohne "normale" Wörter?</p>
+                        
+                        <div class="accordion">
+                            <div class="accordion-header">
+                                <span>Musterlösung anzeigen</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="panel">
+                                <p><strong>Stilmittel:</strong></p>
+                                <ul>
+                                    <li><strong>Onomatopoesie:</strong> Lautmalerei imitiert Maschinengewehrfeuer ("t-t-t-t") und Explosionen ("grrrmmmmm")</li>
+                                    <li><strong>Wiederholung:</strong> "t-t-t-t" strukturiert das Gedicht rhythmisch</li>
+                                    <li><strong>Neologismus:</strong> "schtzngrmm" ist eine Wort-Neuschöpfung</li>
+                                    <li><strong>Typographische Gestaltung:</strong> Streckung ("s-----c-----h") visualisiert den Klang</li>
+                                </ul>
+                                <p><strong>Wirkung:</strong> Das Gedicht macht Kriegsgewalt durch pure Lautimitation erfahrbar, ohne beschreibende Wörter zu verwenden. Die Reduktion auf Geräusche intensiviert die erschreckende Wirkung.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>6.2 Vergleichende Stilmittelanalyse</span>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="panel">
+                        <h4>Übung C: Liebe in verschiedenen Epochen</h4>
+                        
+                        <div class="example-box">
+                            <strong>Barock (Andreas Gryphius):</strong><br>
+                            <em>"Ich liebe, was vergänglich ist, und muss vergehen,<br>
+                            Ich such' in dem, was ewig währt, mein Glück zu sehen."</em>
+                            <br><br>
+                            <strong>Romantik (Heinrich Heine):</strong><br>
+                            <em>"Du bist wie eine Blume<br>
+                            So hold und schön und rein"</em>
+                            <br><br>
+                            <strong>Moderne (Ingeborg Bachmann):</strong><br>
+                            <em>"Die gestundete Zeit<br>
+                            zwischen Wort und Wort<br>
+                            wo du weißt,<br>
+                            das Glück ist nicht geteilt."</em>
+                        </div>
+
+                        <p><strong>Analyseaufgabe:</strong> Vergleichen Sie die Stilmittel und deren Wirkung in den drei Epochen!</p>
+                        
+                        <div class="accordion">
+                            <div class="accordion-header">
+                                <span>Vergleichende Analyse</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="panel">
+                                <p><strong>Barock:</strong></p>
+                                <ul>
+                                    <li><strong>Antithese:</strong> "vergänglich" vs. "ewig" - typisch barocke Gegensätzlichkeit</li>
+                                    <li><strong>Parallelismus:</strong> "Ich liebe..." / "Ich such'" - strukturierte Gedankenführung</li>
+                                    <li><strong>Wirkung:</strong> Philosophische Reflexion über Vergänglichkeit</li>
+                                </ul>
+                                
+                                <p><strong>Romantik:</strong></p>
+                                <ul>
+                                    <li><strong>Vergleich:</strong> "wie eine Blume" - Naturvergleich idealisiert die Geliebte</li>
+                                    <li><strong>Aufzählung:</strong> "hold und schön und rein" - steigert die Vollkommenheit</li>
+                                    <li><strong>Wirkung:</strong> Idealisierung und Verklärung der Liebe</li>
+                                </ul>
+                                
+                                <p><strong>Moderne:</strong></p>
+                                <ul>
+                                    <li><strong>Metapher:</strong> "gestundete Zeit" - Zeit als begrenzte Ressource</li>
+                                    <li><strong>Repetition:</strong> "Wort und Wort" - betont Sprachlosigkeit</li>
+                                    <li><strong>Wirkung:</strong> Fragmentierung und Unsicherheit moderner Liebeserfahrung</li>
+                                </ul>
+                            </div>
+                        
