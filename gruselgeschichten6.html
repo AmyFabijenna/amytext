@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gruselgeschichten verfassen - Das schaurige Haus | Amy Lang</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e6e6e6;
+            line-height: 1.6;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(30, 30, 46, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d0b3d, #4a1e6b);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30 Z" fill="white"/></svg>');
+            background-size: 200px;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .book-cover {
+            width: 200px;
+            height: 280px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #2d0b3d, #6a3093);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 2px solid #8a4db9;
+        }
+
+        .book-cover h3 {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.4em;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            background: rgba(40, 40, 60, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #8a4db9;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #c77dff;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4a1e6b;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #e0aaff;
+            margin: 15px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .activity {
+            background: rgba(50, 50, 70, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #5a5a7a;
+        }
+
+        .question {
+            background: rgba(60, 40, 80, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #8a4db9;
+        }
+
+        .writing-area {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            margin: 15px 0;
+            background: rgba(30, 30, 40, 0.8);
+            border: 1px solid #5a5a7a;
+            border-radius: 5px;
+            color: #e6e6e6;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #8a4db9, #6a3093);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 10px 5px;
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #9a5dc9, #7a40a3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 77, 185, 0.4);
+        }
+
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(60, 60, 80, 0.5);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: rgba(80, 60, 100, 0.7);
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .character-card {
+            background: rgba(50, 40, 70, 0.5);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #6a5a8a;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #c77dff;
+            border-left: 3px solid #8a4db9;
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+
+        .tip {
+            background: rgba(90, 60, 120, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #c77dff;
+        }
+
+        .result {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .correct {
+            background: rgba(40, 120, 60, 0.3);
+            border-left: 4px solid #4CAF50;
+        }
+
+        .incorrect {
+            background: rgba(120, 40, 60, 0.3);
+            border-left: 4px solid #F44336;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2d0b3d, #4a1e6b);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Gruselgeschichten verfassen</h1>
+            <p>Inspiriert von "Das schaurige Haus" von Martina Wildner</p>
+            <div class="book-cover">
+                <h3>Das schaurige Haus<br><span style="font-size: 0.8em;">von Martina Wildner</span></h3>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="section">
+                <h2>Willkommen in der Welt von "Das schaurige Haus"</h2>
+                <p>Du hast Martina Wildners "Das schaurige Haus" gelesen und kennst dich jetzt mit der geheimnisvollen Welt von Katti, Flo und dem unheimlichen Haus aus. In dieser Übungseinheit wirst du lernen, wie du selbst solche spannenden Gruselgeschichten schreiben kannst.</p>
+                <p>Wir werden uns die Elemente ansehen, die Martina Wildners Buch so fesselnd machen, und dann wirst du deine eigene Gruselgeschichte erschaffen!</p>
+            </div>
+
+            <div class="section">
+                <h2>Verständnisfragen zum Buch</h2>
+                <p>Beantworte diese Fragen, um zu zeigen, wie gut du das Buch verstanden hast:</p>
+                
+                <div class="question">
+                    <h3>Frage 1: Was ist das Geheimnis des schaurigen Hauses?</h3>
+                    <textarea class="writing-area" placeholder="Schreibe hier deine Antwort..."></textarea>
+                </div>
+                
+                <div class="question">
+                    <h3>Frage 2: Wie beschreibt Martina Wildner die Atmosphäre im Haus?</h3>
+                    <textarea class="writing-area" placeholder="Schreibe hier deine Antwort..."></textarea>
+                </div>
+                
+                <div class="question">
+                    <h3>Frage 3: Welche Rolle spielt die Vorgeschichte des Hauses für die Handlung?</h3>
+                    <textarea class="writing-area" placeholder="Schreibe hier deine Antwort..."></textarea>
+                </div>
+                
+                <button class="button" onclick="checkAnswers()">Antworten überprüfen</button>
+            </div>
+
+            <div class="section">
+                <h2>Quiz: Bist du ein "Schauriges Haus"-Experte?</h2>
+                
+                <div class="question">
+                    <h3>Frage 1: Wie heißt die Hauptfigur in "Das schaurige Haus"?</h3>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Katti</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Anna</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Marie</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Lisa</div>
+                </div>
+                
+                <div class="question">
+                    <h3>Frage 2: Was ist das Besondere an dem Haus?</h3>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Es hat eine geheimnisvolle Vergangenheit</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Es ist das größte Haus der Stadt</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Es wurde von einem berühmten Architekten gebaut</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Es steht unter Denkmalschutz</div>
+                </div>
+                
+                <div class="question">
+                    <h3>Frage 3: Welches literarische Mittel verwendet Martina Wildner häufig, um Spannung zu erzeugen?</h3>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Unheimliche Andeutungen</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Komische Dialoge</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Ausführliche Landschaftsbeschreibungen</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Wissenschaftliche Erklärungen</div>
+                </div>
+                
+                <button class="button" onclick="showQuizResults()">Quiz auswerten</button>
+                <div id="quiz-result" class="result"></div>
+            </div>
+
+            <div class="section">
+                <h2>Charaktere analysieren</h2>
+                <p>Martina Wildner erschafft lebendige Charaktere. Analysiere die Hauptfiguren aus "Das schaurige Haus":</p>
+                
+                <div class="character-grid">
+                    <div class="character-card">
+                        <h3>Katti</h3>
+                        <p>Wie würde sie sich in einer neuen gruseligen Situation verhalten?</p>
+                        <textarea class="writing-area" placeholder="Schreibe hier..."></textarea>
+                    </div>
+                    
+                    <div class="character-card">
+                        <h3>Flo</h3>
+                        <p>Welche Eigenschaften machen ihn zu einem interessanten Charakter?</p>
+                        <textarea class="writing-area" placeholder="Schreibe hier..."></textarea>
+                    </div>
+                    
+                    <div class="character-card">
+                        <h3>Das Haus</h3>
+                        <p>Wie wird das Haus fast zu einer eigenen Figur in der Geschichte?</p>
+                        <textarea class="writing-area" placeholder="Schreibe hier..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Schreibtechniken von Martina Wildner</h2>
+                
+                <div class="tip">
+                    <h3>Atmosphäre schaffen</h3>
+                    <p>Martina Wildner beschreibt nicht nur, wie etwas aussieht, sondern auch, wie es sich anfühlt, riecht und klingt. Probiere es aus:</p>
+                    <textarea class="writing-area" placeholder="Beschreibe einen Raum in einem alten Haus mit allen Sinnen..."></textarea>
+                </div>
+                
+                <div class="tip">
+                    <h3>Spannung aufbauen</h3>
+                    <p>Die Autorin gibt Hinweise, die Neugier wecken, ohne alles sofort zu verraten. Schreibe einen spannungsvollen Satz:</p>
+                    <textarea class="writing-area" placeholder="Schreibe einen Satz, der neugierig macht..."></textarea>
+                </div>
+                
+                <div class="tip">
+                    <h3>Dialoge gestalten</h3>
+                    <p>Die Gespräche zwischen den Charakteren verraten viel über ihre Persönlichkeit. Schreibe einen Dialog:</p>
+                    <textarea class="writing-area" placeholder="Schreibe einen Dialog zwischen zwei Charakteren, die etwas Unheimliches entdecken..."></textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Deine eigene Gruselgeschichte</h2>
+                <p>Jetzt bist du dran! Verwende alles, was du über "Das schaurige Haus" und Martina Wildners Schreibstil gelernt hast, um deine eigene Gruselgeschichte zu schreiben.</p>
+                
+                <div class="activity">
+                    <h3>Thema: "Das geheimnisvolle Nachbarhaus"</h3>
+                    <p>Stell dir vor, in deiner Nachbarschaft steht ein Haus, das allen Angst macht. Was verbirgt sich dort?</p>
+                    
+                    <h4>Planung deiner Geschichte:</h4>
+                    <textarea class="writing-area" placeholder Wer sind deine Hauptfiguren? Was ist das Geheimnis? Wie baust du Spannung auf?"></textarea>
+                    
+                    <h4>Anfang deiner Geschichte:</h4>
+                    <textarea class="writing-area" placeholder="Beginne mit einer alltäglichen Situation, die unheimlich wird..."></textarea>
+                    
+                    <h4>Höhepunkt der Geschichte:</h4>
+                    <textarea class="writing-area" placeholder="Beschreibe den spannendsten Moment..."></textarea>
+                    
+                    <h4>Ende der Geschichte:</h4>
+                    <textarea class="writing-area" placeholder="Wie löst du das Geheimnis auf? Oder lässt du es offen?"></textarea>
+                </div>
+                
+                <button class="button" onclick="saveStory()">Geschichte speichern</button>
+            </div>
+
+            <div class="section">
+                <h2>Weiterführende Ideen</h2>
+                <p>Wenn du noch mehr mit "Das schaurige Haus" arbeiten möchtest, probiere diese Aktivitäten aus:</p>
+                
+                <div class="activity">
+                    <h3>Eine Szene aus einer anderen Perspektive schreiben</h3>
+                    <p>Wähle eine wichtige Szene aus dem Buch und schreibe sie aus der Perspektive einer anderen Figur.</p>
+                    <textarea class="writing-area" placeholder="Welche Szene wählst du? Aus wessen Perspektive schreibst du?"></textarea>
+                </div>
+                
+                <div class="activity">
+                    <h3>Ein alternatives Ende erfinden</h3>
+                    <p>Wie könnte die Geschichte anders enden? Erfinde dein eigenes Ende für "Das schaurige Haus".</p>
+                    <textarea class="writing-area" placeholder="Schreibe dein alternatives Ende..."></textarea>
+                </div>
+                
+                <div class="activity">
+                    <h3>Eine Fortsetzung planen</h3>
+                    <p>Was passiert nach dem Ende des Buches? Erzähle, wie es mit den Charakteren weitergeht.</p>
+                    <textarea class="writing-area" placeholder="Schreibe deine Ideen für eine Fortsetzung..."></textarea>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/index.html" class="button">Zurück zur Übersicht</a>
+                <button class="button" onclick="printPage()">Seite drucken</button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Amy Lang - Deutschtrainerin | Inspiriert von "Das schaurige Haus" von Martina Wildner</p>
+        </footer>
+    </div>
+
+    <script>
+        function selectAnswer(element, type) {
+            // Entferne Auswahl von allen Optionen in dieser Frage
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.background = '';
+            });
+            
+            // Markiere die ausgewählte Option
+            if (type === 'correct') {
+                element.style.background = 'rgba(40, 120, 60, 0.5)';
+            } else {
+                element.style.background = 'rgba(120, 40, 60, 0.5)';
+            }
+        }
+        
+        function showQuizResults() {
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<h3>Quiz-Ergebnis</h3><p>Super! Du kennst dich wirklich gut mit "Das schaurige Haus" aus. Diese Kenntnisse helfen dir jetzt beim Schreiben deiner eigenen Gruselgeschichte.</p>';
+            resultDiv.className = 'result correct';
+        }
+        
+        function checkAnswers() {
+            alert('Gut gemacht! Deine Antworten zeigen, dass du das Buch gut verstanden hast. Diese Kenntnisse werden dir beim Schreiben helfen.');
+        }
+        
+        function saveStory() {
+            alert('Deine Geschichte wurde gespeichert! Du kannst sie jetzt ausdrucken oder später weiterarbeiten.');
+        }
+        
+        function printPage() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
