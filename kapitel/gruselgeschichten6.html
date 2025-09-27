@@ -537,92 +537,92 @@
         }
         
         function saveAllAnswers() {
-            // Sammle alle Fragen und Antworten
-            let content = "Antworten zu 'Das schaurige Haus' - Lernübung\n";
-            content += "===============================================\n\n";
-            
-            // Verständnisfragen
-            content += "VERSTÄNDNISFRAGEN ZUM BUCH:\n";
-            content += "---------------------------\n";
-            
-            const understandingQuestions = document.querySelectorAll('.section:nth-child(2) .question h3');
-            const understandingAnswers = document.querySelectorAll('.section:nth-child(2) .writing-area');
-            
-            for (let i = 0; i < understandingQuestions.length; i++) {
-                content += `Frage ${i+1}: ${understandingQuestions[i].textContent}\n`;
-                content += `Antwort: ${understandingAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
-            }
-            
-            // Charakteranalysen
-            content += "CHARAKTERANALYSEN:\n";
-            content += "------------------\n";
-            
-            const characterCards = document.querySelectorAll('.character-card');
-            const characterAnswers = document.querySelectorAll('.character-grid .writing-area');
-            
-            for (let i = 0; i < characterCards.length; i++) {
-                content += `${characterCards[i].querySelector('h3').textContent}:\n`;
-                content += `Frage: ${characterCards[i].querySelector('p').textContent}\n`;
-                content += `Antwort: ${characterAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
-            }
-            
-            // Schreibtechniken
-            content += "SCHREIBTECHNIKEN:\n";
-            content += "----------------\n";
-            
-            const techniqueTips = document.querySelectorAll('.tip');
-            const techniqueAnswers = document.querySelectorAll('.tip .writing-area');
-            
-            for (let i = 0; i < techniqueTips.length; i++) {
-                content += `${techniqueTips[i].querySelector('h3').textContent}:\n`;
-                content += `Aufgabe: ${techniqueTips[i].querySelector('p').textContent}\n`;
-                content += `Antwort: ${techniqueAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
-            }
-            
-            // Eigene Gruselgeschichte
-            content += "EIGENE GRUSELGESCHICHTE:\n";
-            content += "------------------------\n";
-            
-            const storySection = document.querySelector('.section:nth-child(7) .activity');
-            const storyHeadings = storySection.querySelectorAll('h4');
-            const storyTextareas = storySection.querySelectorAll('.writing-area');
-            
-            for (let i = 0; i < storyHeadings.length; i++) {
-                content += `${storyHeadings[i].textContent}\n`;
-                content += `Inhalt: ${storyTextareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
-            }
-            
-            // Weiterführende Ideen
-            content += "WEITERFÜHRENDE IDEEN:\n";
-            content += "---------------------\n";
-            
-            const ideaActivities = document.querySelectorAll('.section:nth-child(8) .activity');
-            
-            for (let i = 0; i < ideaActivities.length; i++) {
-                const title = ideaActivities[i].querySelector('h3').textContent;
-                const description = ideaActivities[i].querySelector('p').textContent;
-                const answer = ideaActivities[i].querySelector('.writing-area').value || '(Keine Antwort gegeben)';
-                
-                content += `${title}:\n`;
-                content += `Aufgabe: ${description}\n`;
-                content += `Antwort: ${answer}\n\n`;
-            }
-            
-            content += `\nGespeichert am: ${new Date().toLocaleString('de-DE')}`;
-            
-            // Erstelle und lade die Textdatei herunter
-            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'antworten_schauriges_haus.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            alert('Alle Antworten wurden als Textdatei gespeichert!');
-        }
+    // Sammle alle Fragen und Antworten
+    let content = "Antworten zu 'Das schaurige Haus' - Lernübung\n";
+    content += "===============================================\n\n";
+    
+    // Verständnisfragen
+    content += "VERSTÄNDNISFRAGEN ZUM BUCH:\n";
+    content += "---------------------------\n";
+    
+    const understandingQuestions = document.querySelectorAll('.section:nth-child(2) .question h3');
+    const understandingAnswers = document.querySelectorAll('.section:nth-child(2) .writing-area');
+    
+    for (let i = 0; i < understandingQuestions.length; i++) {
+        content += `Frage ${i+1}: ${understandingQuestions[i].textContent}\n`;
+        content += `Antwort: ${understandingAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
+    }
+    
+    // Charakteranalysen
+    content += "CHARAKTERANALYSEN:\n";
+    content += "------------------\n";
+    
+    const characterCards = document.querySelectorAll('.character-card');
+    const characterAnswers = document.querySelectorAll('.character-grid .writing-area');
+    
+    for (let i = 0; i < characterCards.length; i++) {
+        content += `${characterCards[i].querySelector('h3').textContent}:\n`;
+        content += `Frage: ${characterCards[i].querySelector('p').textContent}\n`;
+        content += `Antwort: ${characterAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
+    }
+    
+    // Schreibtechniken
+    content += "SCHREIBTECHNIKEN:\n";
+    content += "----------------\n";
+    
+    const techniqueTips = document.querySelectorAll('.tip');
+    const techniqueAnswers = document.querySelectorAll('.tip .writing-area');
+    
+    for (let i = 0; i < techniqueTips.length; i++) {
+        content += `${techniqueTips[i].querySelector('h3').textContent}:\n`;
+        content += `Aufgabe: ${techniqueTips[i].querySelector('p').textContent}\n`;
+        content += `Antwort: ${techniqueAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
+    }
+    
+    // Eigene Gruselgeschichte
+    content += "EIGENE GRUSELGESCHICHTE:\n";
+    content += "------------------------\n";
+    
+    const storySection = document.querySelector('.section:nth-child(7) .activity');
+    const storyHeadings = storySection.querySelectorAll('h4');
+    const storyTextareas = storySection.querySelectorAll('.writing-area');
+    
+    for (let i = 0; i < storyHeadings.length; i++) {
+        content += `${storyHeadings[i].textContent}\n`;
+        content += `Inhalt: ${storyTextareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
+    }
+    
+    // Weiterführende Ideen
+    content += "WEITERFÜHRENDE IDEEN:\n";
+    content += "---------------------\n";
+    
+    const ideaActivities = document.querySelectorAll('.section:nth-child(8) .activity');
+    
+    for (let i = 0; i < ideaActivities.length; i++) {
+        const title = ideaActivities[i].querySelector('h3').textContent;
+        const description = ideaActivities[i].querySelector('p').textContent;
+        const answer = ideaActivities[i].querySelector('.writing-area').value || '(Keine Antwort gegeben)';
+        
+        content += `${title}:\n`;
+        content += `Aufgabe: ${description}\n`;
+        content += `Antwort: ${answer}\n\n`;
+    }
+    
+    content += `\nGespeichert am: ${new Date().toLocaleString('de-DE')}`;
+    
+    // Erstelle und lade die Textdatei herunter
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'antworten_schauriges_haus.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    alert('Alle Antworten wurden als Textdatei gespeichert!');
+}
     </script>
 </body>
 </html>
