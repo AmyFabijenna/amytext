@@ -237,6 +237,13 @@
             margin-top: 40px;
         }
 
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            background: rgba(60, 60, 80, 0.5);
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.2em;
@@ -265,7 +272,7 @@
         <main class="content">
             <div class="section">
                 <h2>Willkommen in der Welt von "Das schaurige Haus"</h2>
-                <p>Du hast Martina Wildners "Das schaurige Haus" gelesen und kennst dich jetzt mit der geheimnisvollen Welt von Katti, Flo und dem unheimlichen Haus aus. In dieser Übungseinheit wirst du lernen, wie du selbst solche spannenden Gruselgeschichten schreiben kannst.</p>
+                <p>Du hast Martina Wildners "Das schaurige Haus" gelesen und kennst dich jetzt mit der geheimnisvollen Welt von Hendrik, Eddi und dem unheimlichen Haus aus. In dieser Übungseinheit wirst du lernen, wie du selbst solche spannenden Gruselgeschichten schreiben kannst.</p>
                 <p>Wir werden uns die Elemente ansehen, die Martina Wildners Buch so fesselnd machen, und dann wirst du deine eigene Gruselgeschichte erschaffen!</p>
             </div>
 
@@ -289,6 +296,7 @@
                 </div>
                 
                 <button class="button" onclick="checkAnswers()">Antworten überprüfen</button>
+                <div id="answer-feedback" class="feedback"></div>
             </div>
 
             <div class="section">
@@ -296,25 +304,26 @@
                 
                 <div class="question">
                     <h3>Frage 1: Wie heißt die Hauptfigur in "Das schaurige Haus"?</h3>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Katti</div>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Anna</div>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Marie</div>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Lisa</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Eddi</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Hendrik</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Ida</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Chris</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Ignaz</div>
                 </div>
                 
                 <div class="question">
                     <h3>Frage 2: Was ist das Besondere an dem Haus?</h3>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Es hat eine geheimnisvolle Vergangenheit</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Es hat eine geheimnisvolle Vergangenheit</div>
                     <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Es ist das größte Haus der Stadt</div>
                     <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Es wurde von einem berühmten Architekten gebaut</div>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Es steht unter Denkmalschutz</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Es steht unter Denkmalschutz</div>
                 </div>
                 
                 <div class="question">
                     <h3>Frage 3: Welches literarische Mittel verwendet Martina Wildner häufig, um Spannung zu erzeugen?</h3>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Unheimliche Andeutungen</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Unheimliche Andeutungen</div>
                     <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Komische Dialoge</div>
-                    <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Ausführliche Landschaftsbeschreibungen</div>
+                    <div class="quiz-option" onclick="selectAnswer(this, 'correct')">Ausführliche Landschaftsbeschreibungen</div>
                     <div class="quiz-option" onclick="selectAnswer(this, 'incorrect')">Wissenschaftliche Erklärungen</div>
                 </div>
                 
@@ -328,13 +337,13 @@
                 
                 <div class="character-grid">
                     <div class="character-card">
-                        <h3>Katti</h3>
-                        <p>Wie würde sie sich in einer neuen gruseligen Situation verhalten?</p>
+                        <h3>Hendrik</h3>
+                        <p>Wie würde er sich in einer neuen gruseligen Situation verhalten?</p>
                         <textarea class="writing-area" placeholder="Schreibe hier..."></textarea>
                     </div>
                     
                     <div class="character-card">
-                        <h3>Flo</h3>
+                        <h3>Eddi</h3>
                         <p>Welche Eigenschaften machen ihn zu einem interessanten Charakter?</p>
                         <textarea class="writing-area" placeholder="Schreibe hier..."></textarea>
                     </div>
@@ -378,7 +387,7 @@
                     <p>Stell dir vor, in deiner Nachbarschaft steht ein Haus, das allen Angst macht. Was verbirgt sich dort?</p>
                     
                     <h4>Planung deiner Geschichte:</h4>
-                    <textarea class="writing-area" placeholder Wer sind deine Hauptfiguren? Was ist das Geheimnis? Wie baust du Spannung auf?"></textarea>
+                    <textarea class="writing-area" placeholder="Wer sind deine Hauptfiguren? Was ist das Geheimnis? Wie baust du Spannung auf?"></textarea>
                     
                     <h4>Anfang deiner Geschichte:</h4>
                     <textarea class="writing-area" placeholder="Beginne mit einer alltäglichen Situation, die unheimlich wird..."></textarea>
@@ -419,6 +428,7 @@
             <div class="navigation">
                 <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/index.html" class="button">Zurück zur Übersicht</a>
                 <button class="button" onclick="printPage()">Seite drucken</button>
+                <button class="button" onclick="saveAllAnswers()">Alle Antworten speichern</button>
             </div>
         </main>
 
@@ -446,12 +456,75 @@
         function showQuizResults() {
             const resultDiv = document.getElementById('quiz-result');
             resultDiv.style.display = 'block';
-            resultDiv.innerHTML = '<h3>Quiz-Ergebnis</h3><p>Super! Du kennst dich wirklich gut mit "Das schaurige Haus" aus. Diese Kenntnisse helfen dir jetzt beim Schreiben deiner eigenen Gruselgeschichte.</p>';
-            resultDiv.className = 'result correct';
+            
+            // Zähle die richtigen Antworten
+            let correctCount = 0;
+            const questions = document.querySelectorAll('.question');
+            
+            questions.forEach(question => {
+                const selected = question.querySelector('.quiz-option[style*="rgba(40, 120, 60"]');
+                if (selected) correctCount++;
+            });
+            
+            let feedback = '';
+            if (correctCount === 3) {
+                feedback = '<h3>Ausgezeichnet! 🏆</h3><p>Du hast alle Fragen richtig beantwortet und kennst dich wirklich ausgezeichnet mit "Das schaurige Haus" aus. Diese fundierten Kenntnisse werden dir beim Schreiben deiner eigenen Gruselgeschichte sehr helfen.</p>';
+                resultDiv.className = 'result correct';
+            } else if (correctCount === 2) {
+                feedback = '<h3>Gut gemacht! 👍</h3><p>Du hast die meisten Fragen richtig beantwortet und kennst dich gut mit dem Buch aus. Mit diesen soliden Kenntnissen bist du gut vorbereitet für deine eigene Gruselgeschichte.</p>';
+                resultDiv.className = 'result correct';
+            } else if (correctCount === 1) {
+                feedback = '<h3>Grundverständnis vorhanden 📚</h3><p>Du hast einige wichtige Aspekte des Buches verstanden, könntest aber noch etwas mehr ins Detail gehen. Schau dir das Buch vielleicht noch einmal an, bevor du mit dem Schreiben beginnst.</p>';
+                resultDiv.className = 'result incorrect';
+            } else {
+                feedback = '<h3>Überprüfungsbedarf 🔍</h3><p>Es scheint, als hättest du das Buch vielleicht noch nicht vollständig verstanden. Lies es am besten noch einmal, bevor du mit den Schreibübungen beginnst.</p>';
+                resultDiv.className = 'result incorrect';
+            }
+            
+            resultDiv.innerHTML = feedback;
         }
         
         function checkAnswers() {
-            alert('Gut gemacht! Deine Antworten zeigen, dass du das Buch gut verstanden hast. Diese Kenntnisse werden dir beim Schreiben helfen.');
+            const textareas = document.querySelectorAll('.writing-area');
+            let filledCount = 0;
+            let qualityFeedback = '';
+            
+            textareas.forEach(textarea => {
+                if (textarea.value.trim().length > 0) {
+                    filledCount++;
+                }
+            });
+            
+            // Bewertung der Antwortqualität basierend auf Länge und Inhalt
+            if (filledCount === 3) {
+                // Analysiere die Qualität der Antworten
+                let totalLength = 0;
+                textareas.forEach(textarea => {
+                    totalLength += textarea.value.trim().length;
+                });
+                
+                const avgLength = totalLength / 3;
+                
+                if (avgLength > 200) {
+                    qualityFeedback = 'Ausgezeichnet! Deine Antworten sind sehr ausführlich und zeigen ein tiefes Verständnis des Buches. Du hast viele Details einbezogen und gut argumentiert.';
+                } else if (avgLength > 100) {
+                    qualityFeedback = 'Gut gemacht! Deine Antworten sind substantiell und zeigen ein solides Verständnis der wichtigsten Aspekte des Buches.';
+                } else if (avgLength > 50) {
+                    qualityFeedback = 'Deine Antworten sind etwas knapp, aber sie zeigen ein grundlegendes Verständnis des Buches. Versuche, mehr Details und Beispiele einzubringen.';
+                } else {
+                    qualityFeedback = 'Deine Antworten sind sehr kurz und oberflächlich. Versuche, mehr in die Tiefe zu gehen und konkrete Beispiele aus dem Buch zu nennen.';
+                }
+            } else if (filledCount > 0) {
+                qualityFeedback = 'Du hast nicht alle Fragen beantwortet. Versuche, alle Fragen vollständig zu beantworten, um dein Verständnis des Buches besser zu zeigen.';
+            } else {
+                qualityFeedback = 'Du hast noch keine Antworten gegeben. Bitte beantworte die Fragen, um fortzufahren.';
+            }
+            
+            document.getElementById('answer-feedback').innerHTML = `
+                <h3>Bewertung deiner Antworten</h3>
+                <p>${qualityFeedback}</p>
+                <p>Beantwortete Fragen: ${filledCount}/3</p>
+            `;
         }
         
         function saveStory() {
@@ -460,6 +533,90 @@
         
         function printPage() {
             window.print();
+        }
+        
+        function saveAllAnswers() {
+            // Sammle alle Fragen und Antworten
+            let content = "Antworten zu 'Das schaurige Haus' - Lernübung\n";
+            content += "===============================================\n\n";
+            
+            // Verständnisfragen
+            content += "VERSTÄNDNISFRAGEN ZUM BUCH:\n";
+            content += "---------------------------\n";
+            
+            const questions = document.querySelectorAll('.question h3');
+            const textareas = document.querySelectorAll('.writing-area');
+            
+            for (let i = 0; i < Math.min(3, questions.length); i++) {
+                content += `Frage ${i+1}: ${questions[i].textContent}\n`;
+                content += `Antwort: ${textareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
+            }
+            
+            // Charakteranalysen
+            content += "CHARAKTERANALYSEN:\n";
+            content += "------------------\n";
+            
+            const characterCards = document.querySelectorAll('.character-card');
+            for (let i = 3; i < Math.min(6, textareas.length); i++) {
+                if (characterCards[i-3]) {
+                    content += `${characterCards[i-3].querySelector('h3').textContent}: ${characterCards[i-3].querySelector('p').textContent}\n`;
+                    content += `Antwort: ${textareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
+                }
+            }
+            
+            // Schreibtechniken
+            content += "SCHREIBTECHNIKEN:\n";
+            content += "----------------\n";
+            
+            const tips = document.querySelectorAll('.tip h3');
+            for (let i = 6; i < Math.min(9, textareas.length); i++) {
+                if (tips[i-6]) {
+                    content += `${tips[i-6].textContent}\n`;
+                    content += `Antwort: ${textareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
+                }
+            }
+            
+            // Eigene Gruselgeschichte
+            content += "EIGENE GRUSELGESCHICHTE:\n";
+            content += "------------------------\n";
+            
+            const storyTextareas = document.querySelectorAll('.activity textarea');
+            for (let i = 0; i < storyTextareas.length; i++) {
+                const label = storyTextareas[i].previousElementSibling;
+                if (label && label.tagName === 'H4') {
+                    content += `${label.textContent}\n`;
+                    content += `Inhalt: ${storyTextareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
+                }
+            }
+            
+            // Weiterführende Ideen
+            content += "WEITERFÜHRENDE IDEEN:\n";
+            content += "---------------------\n";
+            
+            const ideaTextareas = document.querySelectorAll('.activity textarea');
+            const ideaTitles = document.querySelectorAll('.activity h3');
+            
+            for (let i = storyTextareas.length; i < ideaTextareas.length; i++) {
+                if (ideaTitles[i - storyTextareas.length]) {
+                    content += `${ideaTitles[i - storyTextareas.length].textContent}\n`;
+                    content += `Inhalt: ${ideaTextareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
+                }
+            }
+            
+            content += `\nGespeichert am: ${new Date().toLocaleString('de-DE')}`;
+            
+            // Erstelle und lade die Textdatei herunter
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'antworten_schauriges_haus.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Alle Antworten wurden als Textdatei gespeichert!');
         }
     </script>
 </body>
