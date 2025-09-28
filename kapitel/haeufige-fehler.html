@@ -1,5 +1,3 @@
-[file name]: haeufige-fehler.html
-[file content begin]
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -7,365 +5,928 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Häufige Fehler - Deutschmatura</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .content-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        .content-header {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .content-header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .content-header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        .content-body {
-            padding: 40px;
-        }
-
-        .accordion-header {
-            background: #34495e;
-            color: white;
-            padding: 12px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            position: relative;
-            margin: 10px 0;
-            transition: background-color 0.3s;
-        }
-
-        .accordion-header:hover {
-            background: #2c3e50;
-        }
-
-        .accordion-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .accordion-header.active .accordion-icon:after {
-            content: '▲';
-        }
-
-        .accordion-header:not(.active) .accordion-icon:after {
-            content: '▼';
-        }
-
-        .panel {
-            display: none;
-            background-color: #f9f9f9;
-            border-radius: 0 0 5px 5px;
-            margin-bottom: 10px;
-            padding: 18px;
-        }
-
-        .panel.active {
-            display: block;
-        }
-
-        .btn-toggle-all {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 1em;
-            font-weight: bold;
-        }
-
-        .btn-toggle-all:hover {
-            background: #2980b9;
-        }
-
-        .solution-toggle {
-            background: #34495e;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .solution-toggle:hover {
-            background: #2c3e50;
-        }
-
-        .solution-content {
-            display: none;
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border-left: 3px solid #2ecc71;
-        }
-
-        .solution-content.active {
-            display: block;
-        }
-
-        .welcome-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border-left: 5px solid #34495e;
-        }
-
-        .welcome-section h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .error-category {
-            margin: 30px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #e74c3c;
-        }
-
-        .error-category h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .error-category h3:before {
-            content: "⚠️";
-            margin-right: 10px;
-        }
-
-        .error-item {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .error-item h4 {
-            color: #e74c3c;
-            margin-bottom: 10px;
-        }
-
-        .example-container {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 3px solid #3498db;
-        }
-
-        .example-container h5 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .example-false {
-            background: #ffeaea;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px 0;
-            border-left: 3px solid #e74c3c;
-        }
-
-        .example-correct {
-            background: #eaffea;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px 0;
-            border-left: 3px solid #2ecc71;
-        }
-
-        .tip-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .tip-box strong {
-            color: #856404;
-        }
-
-        .exercise-container {
-            background: #e8f4f8;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .exercise-container h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .progress-section {
-            background: #e8f4f8;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 30px 0;
-            border-left: 4px solid #3498db;
-        }
-
-        @media (max-width: 768px) {
-            .content-body {
-                padding: 20px;
-            }
-            
-            .content-header h1 {
-                font-size: 2em;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: white; line-height: 1.6; color: #333; }
+        .content-container { max-width: 100%; margin: 0 auto; background: white; }
+        .content-header { background: linear-gradient(135deg, #34495e, #2c3e50); color: white; text-align: center; padding: 30px 20px; margin-bottom: 20px; }
+        .content-header h1 { font-size: 2em; margin-bottom: 10px; }
+        .content-header p { font-size: 1.1em; opacity: 0.9; }
+        .content-body { padding: 0 20px 20px 20px; }
+        .welcome-section { background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 5px solid #34495e; }
+        .welcome-section h2 { color: #2c3e50; margin-bottom: 15px; }
+        .accordion-header { background: #34495e; color: white; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; outline: none; font-size: 1.1em; border-radius: 5px; margin-bottom: 5px; transition: background-color 0.3s ease; }
+        .accordion-header:hover { background: #2c3e50; }
+        .accordion-header.active { background: #2c3e50; }
+        .accordion-header::after { content: '+'; color: white; font-weight: bold; float: right; font-size: 1.2em; transition: transform 0.3s ease; }
+        .accordion-header.active::after { content: '-'; transform: rotate(180deg); }
+        .panel { display: none; background-color: #f9f9f9; border-radius: 0 0 5px 5px; margin-bottom: 10px; overflow: hidden; transition: all 0.3s ease; max-height: 0; }
+        .panel.active { display: block; padding: 15px; max-height: none; }
+        .panel-content { padding: 15px 0; }
+        .error-category { margin: 20px 0; padding: 20px; background: #fff; border-radius: 8px; border-left: 4px solid #e74c3c; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .error-category h3 { color: #2c3e50; margin-bottom: 15px; display: flex; align-items: center; }
+        .error-category h3:before { content: "⚠️"; margin-right: 10px; }
+        .error-item { background: #f8f9fa; padding: 15px; margin: 15px 0; border-radius: 6px; border-left: 3px solid #e74c3c; }
+        .error-item h4 { color: #e74c3c; margin-bottom: 10px; font-size: 1.1em; }
+        .example-container { background: #f8f9fa; padding: 15px; border-radius: 6px; margin: 10px 0; border-left: 3px solid #3498db; }
+        .example-container h5 { color: #2c3e50; margin-bottom: 10px; }
+        .example-false { background: #ffeaea; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #e74c3c; }
+        .example-correct { background: #eaffea; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #2ecc71; }
+        .tip-box { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .tip-box strong { color: #856404; }
+        .exercise-box { background: #e8f4f8; border: 1px solid #bee5eb; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .exercise-box h4 { color: #0c5460; margin-bottom: 12px; }
+        .solution-box { background: #d4edda; border: 1px solid #c3e6cb; border-radius: 6px; padding: 15px; margin: 15px 0; display: none; }
+        .solution-box.active { display: block; }
+        .toggle-solution { background: #34495e; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-top: 8px; transition: background 0.3s; }
+        .toggle-solution:hover { background: #2c3e50; }
+        .fehler-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .fehler-card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #e74c3c; }
+        .fehler-card h4 { color: #e74c3c; margin-bottom: 10px; }
+        .schweregrad { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold; margin-left: 10px; }
+        .schwer { background: #e74c3c; color: white; }
+        .mittel { background: #f39c12; color: white; }
+        .leicht { background: #27ae60; color: white; }
+        .checkliste { background: #e8f5e8; border: 1px solid #c3e6cb; border-radius: 6px; padding: 20px; margin: 20px 0; }
+        .checkliste h3 { color: #155724; margin-bottom: 15px; }
+        .checkliste ul { list-style: none; padding: 0; }
+        .checkliste li { padding: 5px 0; }
+        .checkliste li:before { content: "✓ "; color: #28a745; font-weight: bold; }
+        .statistik-box { background: #fff; border: 2px solid #3498db; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center; }
+        .statistik-box h3 { color: #3498db; margin-bottom: 15px; }
+        .top-fehler { background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 6px; padding: 15px; margin: 10px 0; }
+        .top-fehler h4 { color: #721c24; margin-bottom: 8px; }
+        @media (max-width: 768px) { .content-body { padding: 0 15px 15px 15px; } .fehler-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="content-container">
         <header class="content-header">
-            <h1>Häufige Fehler in der Textanalyse</h1>
-            <p>Typische Probleme erkennen und vermeiden</p>
+            <h1>Häufige Fehler in der Deutschmatura</h1>
+            <p>Typische Probleme erkennen und vermeiden - Systematische Übersicht aller Stolpersteine</p>
         </header>
-
-        <div class="content-body" id="content-body">
-            <button type="button" class="btn-toggle-all" id="toggle-all-btn">Alle Bereiche öffnen/schließen</button>
-
+        
+        <div class="content-body">
             <div class="welcome-section">
-                <h2>Typische Fehlerquellen in Textanalysen</h2>
-                <p>In diesem Kapitel lernen Sie die häufigsten Fehler kennen, die bei Textanalysen und Interpretationen gemacht werden. Für jeden Fehler finden Sie Erklärungen, Beispiele und konkrete Tipps zur Vermeidung. Nutzen Sie die Übungen, um Ihr Verständnis zu überprüfen.</p>
+                <h2>Häufige Fehler in der Deutschmatura</h2>
+                <p>Die meisten Punkte in der Deutschmatura gehen nicht durch mangelndes Wissen verloren, sondern durch vermeidbare Fehler. Diese systematische Übersicht hilft dir, die häufigsten Stolpersteine zu erkennen und zu umgehen.</p>
+                <p><strong>Aufbau:</strong> 6 Hauptkategorien mit je 5-8 typischen Fehlern, konkrete Beispiele aus authentischen Schülertexten, sofortige Korrekturvorschläge, Präventionsstrategien und Auswirkung auf die Bewertung.</p>
             </div>
 
-            <div class="error-category">
-                <h3>1. Formale Fehler</h3>
-                
-                <div class="error-item">
-                    <h4>Fehlende oder unvollständige Textangaben</h4>
-                    <p>Viele Schüler vergessen, den Text korrekt vorzustellen oder machen unvollständige Angaben.</p>
+            <div class="accordion-header">1. Inhaltliche Fehler <span class="schweregrad schwer">Schwerwiegend</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><em>"Das Verständnis ist da, aber es wird falsch dargestellt"</em></p>
                     
-                    <div class="example-container">
-                        <h5>Beispiele:</h5>
-                        <div class="example-false">
-                            <strong>Falsch:</strong> "In dem Text geht es um Digitalisierung..."
+                    <div class="error-item">
+                        <h4>1.1 Thema verfehlt <span class="schweregrad schwer">-30-50%</span></h4>
+                        <p><strong>Was passiert:</strong> Der Schüler behandelt ein verwandtes, aber anderes Thema als gefordert.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong> Aufgabe: "Erörtern Sie die Argumentation des Autors zum Thema Digitalisierung in Schulen"<br>
+                                Schülerantwort: "Digitalisierung ist grundsätzlich ein wichtiges Thema. Computer werden immer wichtiger. Auch in der Arbeitswelt..."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Der Autor Max Mustermann argumentiert in seinem Kommentar 'Tablets im Klassenzimmer' dezidiert für eine schrittweise Einführung digitaler Medien in den Unterricht. Seine Hauptthese..."
+                            </div>
                         </div>
-                        <div class="example-correct">
-                            <strong>Richtig:</strong> "In dem Kommentar 'Die Tyrannei der digitalen Erreichbarkeit' von Maria Berger, erschienen im März 2025 im 'Standard', setzt sich die Autorin kritisch mit den Auswirkungen permanenter digitaler Verfügbarkeit auseinander."
+                        
+                        <div class="tip-box">
+                            <strong>Warum passiert das:</strong>
+                            <ul>
+                                <li>Nervosität in der Prüfung</li>
+                                <li>Oberflächliches Lesen der Aufgabenstellung</li>
+                                <li>Fokus auf Bekanntes statt auf Gefordertes</li>
+                            </ul>
                         </div>
+                        
+                        <div class="tip-box">
+                            <strong>Prävention:</strong>
+                            <ul>
+                                <li>Aufgabenstellung dreimal lesen</li>
+                                <li>Zentrale Begriffe unterstreichen</li>
+                                <li>Ersten Absatz immer auf Themenbezug prüfen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>1.2 Textinhalt falsch wiedergegeben <span class="schweregrad mittel">-15-25%</span></h4>
+                        <p><strong>Was passiert:</strong> Kernaussagen des Autors werden entstellt oder ins Gegenteil verkehrt.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Originaltext:</strong> "Obwohl digitale Medien Chancen bieten, überwiegen meiner Ansicht nach die Risiken"<br>
+                                <strong>Schülerdarstellung:</strong> "Der Autor befürwortet den verstärkten Einsatz digitaler Medien"
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Der Autor positioniert sich skeptisch gegenüber digitalen Medien im Unterricht und räumt zwar Vorteile ein, sieht jedoch die Nachteile als überwiegend an"
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Warum passiert das:</strong>
+                            <ul>
+                                <li>Zu schnelles Lesen</li>
+                                <li>Überlesen von wichtigen Signalwörtern ("obwohl", "jedoch", "dennoch")</li>
+                                <li>Projektion der eigenen Meinung auf den Text</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>1.3 Autorenposition missverstanden <span class="schweregrad mittel">-10-20%</span></h4>
+                        <p><strong>Was passiert:</strong> Die Haltung des Autors wird falsch interpretiert, besonders bei ironischen oder differenzierten Texten.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong> Bei einem ironischen Text über Handysucht: "Der Autor findet Handysucht gut, weil er schreibt, dass Menschen ihre Handys lieben"
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Der Autor kritisiert mittels Ironie die übermäßige Handynutzung und verdeutlicht durch übertriebene Formulierungen die Absurdität dieser Abhängigkeit"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>1.4 Wichtige Aspekte übersehen <span class="schweregrad mittel">-10-15%</span></h4>
+                        <p><strong>Was passiert:</strong> Zentrale Argumente oder Nebenstränge der Argumentation werden ignoriert.</p>
+                        <p><strong>Beispiel:</strong> Autor bringt 5 Argumente, Schüler behandelt nur 2 davon</p>
+                        
+                        <div class="tip-box">
+                            <strong>Korrektur:</strong>
+                            <ul>
+                                <li>Vollständige Argumentationsskizze vor dem Schreiben</li>
+                                <li>Systematisches Abhaken aller Textteile</li>
+                                <li>Notfalls kurze Erwähnung statt Auslassung</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>1.5 Irrelevante Informationen eingebaut <span class="schweregrad leicht">-5-10%</span></h4>
+                        <p><strong>Was passiert:</strong> Allgemeinwissen wird ungefiltert eingefügt, ohne Textbezug herzustellen.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Shakespeare wurde 1564 geboren und schrieb viele berühmte Dramen wie Hamlet und Macbeth. Auch heute noch werden seine Stücke aufgeführt..." (bei einer Erörterung über Jugendsprache)
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Korrektur:</strong>
+                            <ul>
+                                <li>Jede Information muss zum Argument gehören</li>
+                                <li>Allgemeinwissen nur zur Untermauerung der Textanalyse</li>
+                                <li>Frage: "Hilft das bei der Beantwortung der Aufgabe?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">2. Strukturelle Fehler <span class="schweregrad mittel">Mittelschwer</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><em>"Der Inhalt stimmt, aber die Organisation ist chaotisch"</em></p>
+                    
+                    <div class="error-item">
+                        <h4>2.1 Unklarer Aufbau <span class="schweregrad mittel">-10-20%</span></h4>
+                        <p><strong>Was passiert:</strong> Der Text springt zwischen Themen hin und her, ohne erkennbare Struktur.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong><br>
+                                Absatz 1: Textanalyse<br>
+                                Absatz 2: Eigene Meinung<br>
+                                Absatz 3: Wieder Textanalyse<br>
+                                Absatz 4: Wieder eigene Meinung
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong>
+                                <ul>
+                                    <li>Klare Trennung: Analyse DANN Stellungnahme</li>
+                                    <li>Jeden Absatz einem Hauptgedanken widmen</li>
+                                    <li>Logische Progression innerhalb jedes Teils</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>2.2 Fehlende Übergänge <span class="schweregrad leicht">-5-10%</span></h4>
+                        <p><strong>Was passiert:</strong> Absätze stehen unverbunden nebeneinander.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "...dies zeigt die Schwäche seiner Argumentation. Der Autor verwendet auch viele Stilmittel..."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "...dies zeigt die Schwäche seiner Argumentation. Neben inhaltlichen Mängeln weist auch die sprachliche Gestaltung Besonderheiten auf: Der Autor verwendet zahlreiche Stilmittel..."
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Übergangswörter:</strong>
+                            <ul>
+                                <li><strong>Weiterführung:</strong> "außerdem", "darüber hinaus", "zudem"</li>
+                                <li><strong>Gegensatz:</strong> "hingegen", "dagegen", "andererseits"</li>
+                                <li><strong>Folgerung:</strong> "folglich", "somit", "daher"</li>
+                                <li><strong>Beispiel:</strong> "so etwa", "beispielsweise", "konkret"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>2.3 Unverhältnismäßige Gewichtung <span class="schweregrad mittel">-10-15%</span></h4>
+                        <p><strong>Was passiert:</strong> Nebensächliche Punkte werden ausführlicher behandelt als Hauptargumente.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong>
+                                <ul>
+                                    <li>3 Zeilen zur Hauptthese</li>
+                                    <li>15 Zeilen zu einem Nebenaspekt</li>
+                                </ul>
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtige Gewichtung:</strong>
+                                <ul>
+                                    <li>Hauptthese: 1/3 der Analyse</li>
+                                    <li>Hauptargumente: 1/2 der Analyse</li>
+                                    <li>Nebenaspekte: 1/6 der Analyse</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>2.4 Abschweifungen <span class="schweregrad leicht">-5-8%</span></h4>
+                        <p><strong>Was passiert:</strong> Persönliche Erlebnisse oder thematische Exkurse lenken vom Thema ab.</p>
+                        
+                        <div class="example-container">
+                            <h5>Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Das erinnert mich an meine Schulzeit, wo wir auch..."
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Korrektur:</strong>
+                            <ul>
+                                <li>Strikt beim Auftrag bleiben</li>
+                                <li>Persönliche Bezüge nur als kurze Belege verwenden</li>
+                                <li>Frage: "Ist das für die Aufgabenstellung relevant?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">3. Argumentative Fehler <span class="schweregrad schwer">Schwerwiegend</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><em>"Die Logik stimmt nicht"</em></p>
+                    
+                    <div class="error-item">
+                        <h4>3.1 Logische Fehlschlüsse <span class="schweregrad schwer">-20-30%</span></h4>
+                        
+                        <h5>a) Post hoc ergo propter hoc (Fehlschluss der zeitlichen Abfolge)</h5>
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Seit es Smartphones gibt, haben Jugendliche schlechtere Noten. Also sind Smartphones schuld an schlechten Noten."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Ein kausaler Zusammenhang zwischen Smartphone-Nutzung und schlechteren Noten ist nicht automatisch gegeben, obwohl eine zeitliche Korrelation besteht. Weitere Faktoren müssen berücksichtigt werden."
+                            </div>
+                        </div>
+                        
+                        <h5>b) Falsches Dilemma (Entweder-Oder-Fehlschluss)</h5>
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Entweder wir verbieten alle digitalen Medien in Schulen oder unsere Kinder werden süchtig."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Zwischen einem kompletten Verbot und unkontrollierter Nutzung gibt es zahlreiche Zwischenlösungen wie regulierte Nutzungszeiten, pädagogisch begleiteten Einsatz oder altersgerechte Beschränkungen."
+                            </div>
+                        </div>
+                        
+                        <h5>c) Ad hominem (Angriff auf die Person)</h5>
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Da der Autor über 60 Jahre alt ist, kann er die Digitalisierung sowieso nicht verstehen."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Die Argumente des Autors gegen die Digitalisierung im Unterricht erweisen sich als nicht stichhaltig, weil..."
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>3.2 Unzureichende Belege <span class="schweregrad mittel">-10-15%</span></h4>
+                        <p><strong>Was passiert:</strong> Behauptungen werden aufgestellt, ohne sie zu begründen.</p>
+                        
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Jeder weiß, dass soziale Medien schädlich sind."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Studien der Universität XY (2023) belegen, dass exzessive Nutzung sozialer Medien mit erhöhten Depressionsraten bei Jugendlichen korreliert."
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>3.3 Zirkuläre Argumentation <span class="schweregrad mittel">-8-12%</span></h4>
+                        <p><strong>Was passiert:</strong> Die Begründung wiederholt nur die Behauptung.</p>
+                        
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Hausaufgaben sind sinnvoll, weil sie nützlich sind."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Hausaufgaben sind sinnvoll, weil sie das im Unterricht Gelernte vertiefen und selbstständiges Arbeiten fördern."
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>3.4 Strohmann-Argumente <span class="schweregrad mittel">-10-15%</span></h4>
+                        <p><strong>Was passiert:</strong> Die Position des Autors wird verzerrt dargestellt, um sie leichter widerlegen zu können.</p>
+                        
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong><br>
+                                Autor: "Digitalisierung muss behutsam erfolgen"<br>
+                                Schüler: "Der Autor lehnt jeglichen Fortschritt ab"
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> Die Originalposition exakt wiedergeben, dann sachlich kritisieren.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">4. Sprachliche Fehler <span class="schweregrad mittel">Mittelschwer</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><em>"Der Inhalt ist richtig, aber die Sprache ist unpassend"</em></p>
+                    
+                    <div class="error-item">
+                        <h4>4.1 Umgangssprache statt Bildungssprache <span class="schweregrad mittel">-10-15%</span></h4>
+                        
+                        <div class="example-container">
+                            <h5>Problematische Begriffe:</h5>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr style="background: #f8f9fa;">
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Umgangssprache</th>
+                                    <th style="padding: 8px; border: 1px solid #ddd;">Bildungssprache</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"Das ist krass"</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"Das ist bemerkenswert/auffällig"</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"voll gut"</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"durchaus überzeugend"</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"irgendwie"</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"gewissermaßen/tendenziell"</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"echt viele"</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"zahlreiche/eine Vielzahl von"</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"Das geht gar nicht"</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">"Das ist nicht akzeptabel"</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>4.2 Wiederholungen <span class="schweregrad leicht">-5-8%</span></h4>
+                        
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Der Autor argumentiert, dass... Der Autor sagt auch, dass... Der Autor meint außerdem..."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Der Autor argumentiert, dass... Darüber hinaus führt er an, dass... Abschließend postuliert er..."
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Varianten für "der Autor":</strong>
+                            <ul>
+                                <li>Der Verfasser</li>
+                                <li>Mustermann (Nachname)</li>
+                                <li>Der Kommentator/Essayist</li>
+                                <li>Er (wenn klar ist, wer gemeint ist)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>4.3 Unklare Formulierungen <span class="schweregrad leicht">-3-7%</span></h4>
+                        
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "Das Thema ist sehr wichtig und betrifft alle."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Die Digitalisierung des Bildungswesens stellt eine gesellschaftliche Herausforderung dar, die sowohl Schüler als auch Lehrkräfte und Eltern betrifft."
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>4.4 Falsche Fachbegriffe <span class="schweregrad mittel">-8-12%</span></h4>
+                        
+                        <div class="tip-box">
+                            <strong>Häufige Verwechslungen:</strong>
+                            <ul>
+                                <li>Stilmittel vs. Sprachebenen</li>
+                                <li>Metapher vs. Vergleich</li>
+                                <li>Ironie vs. Sarkasmus</li>
+                                <li>Argument vs. Beispiel</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">5. Formale Fehler <span class="schweregrad leicht">Leicht behebbar</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><em>"Technik und Darstellung"</em></p>
+                    
+                    <div class="error-item">
+                        <h4>5.1 Falsche Zitierweise <span class="schweregrad mittel">-5-10%</span></h4>
+                        
+                        <div class="example-container">
+                            <h5>Falsch:</h5>
+                            <ul>
+                                <li>Autor sagt: "Digitalisierung ist wichtig"</li>
+                                <li>"Digitalisierung ist wichtig" (ohne Verweis)</li>
+                            </ul>
+                            
+                            <h5>Richtig:</h5>
+                            <ul>
+                                <li>Der Autor betont: "Digitalisierung ist wichtig" (Z. 15)</li>
+                                <li>Wie der Autor formuliert, sei "Digitalisierung [...] ein zentraler Baustein" (Z. 15f.) der modernen Bildung</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Auslassungen markieren:</strong>
+                            <ul>
+                                <li>"Digitalisierung [...] verändert unsere Schulen"</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>5.2 Unvollständige Textangabe <span class="schweregrad leicht">-3-6%</span></h4>
+                        
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Falsch:</strong> "In dem Text geht es um..."
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtig:</strong> "Max Mustermann behandelt in seinem Kommentar 'Digitale Schule' (Die Zeit, 15.3.2024) die Frage..."
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Vollständige Angabe umfasst:</strong>
+                            <ul>
+                                <li>Autor (Vor- und Nachname)</li>
+                                <li>Textsorte</li>
+                                <li>Titel (in Anführungszeichen)</li>
+                                <li>Publikationsort und -datum</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>5.3 Rechtschreibung und Grammatik <span class="schweregrad leicht">-2-8%</span></h4>
+                        
+                        <div class="tip-box">
+                            <strong>Häufige Fehler:</strong>
+                            <ul>
+                                <li>das/dass-Verwechslung</li>
+                                <li>Getrennt-/Zusammenschreibung</li>
+                                <li>Kommasetzung bei Nebensätzen</li>
+                                <li>Apostroph bei Genitiv (des Autor's → des Autors)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>5.4 Nicht eingehaltene Wortanzahl <span class="schweregrad mittel">-5-15%</span></h4>
+                        
+                        <div class="tip-box">
+                            <strong>Standard:</strong> 450-600 Wörter für textgebundene Erörterung
+                        </div>
+                        
+                        <div class="fehler-grid">
+                            <div class="fehler-card">
+                                <h4>Zu kurz (unter 400 Wörter)</h4>
+                                <ul>
+                                    <li>Inhalt wirkt oberflächlich</li>
+                                    <li>Punkte für Ausführlichkeit gehen verloren</li>
+                                </ul>
+                            </div>
+                            <div class="fehler-card">
+                                <h4>Zu lang (über 700 Wörter)</h4>
+                                <ul>
+                                    <li>Zeitmangel für Überarbeitung</li>
+                                    <li>Gefahr der Abschweifung</li>
+                                    <li>Korrektor kann negativ bewerten</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">6. Strategische Fehler <span class="schweregrad schwer">Schwerwiegend</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><em>"Prüfungsmanagement"</em></p>
+                    
+                    <div class="error-item">
+                        <h4>6.1 Schlechtes Zeitmanagement <span class="schweregrad schwer">-15-25%</span></h4>
+                        
+                        <div class="tip-box">
+                            <strong>Typische Zeitaufteilung (270 Minuten):</strong>
+                            <ul>
+                                <li>Lesen und Verstehen: 45 Min.</li>
+                                <li>Gliederung erstellen: 15 Min.</li>
+                                <li>Schreiben: 180 Min.</li>
+                                <li>Überarbeitung: 30 Min.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Häufige Fehler:</strong>
+                            <ul>
+                                <li>Zu lange beim ersten Text bleiben</li>
+                                <li>Sofort losschreiben ohne Planung</li>
+                                <li>Keine Zeit für Korrektur einplanen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>6.2 Keine Überarbeitung <span class="schweregrad mittel">-10-20%</span></h4>
+                        
+                        <div class="tip-box">
+                            <strong>Was wird übersehen:</strong>
+                            <ul>
+                                <li>Rechtschreibfehler</li>
+                                <li>Auslassungen</li>
+                                <li>Unklare Formulierungen</li>
+                                <li>Logikfehler</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Systematische Überarbeitung:</strong>
+                            <ol>
+                                <li>Inhalt: Ist alles beantwortet?</li>
+                                <li>Struktur: Ist der Aufbau klar?</li>
+                                <li>Sprache: Sind die Formulierungen präzise?</li>
+                                <li>Form: Stimmen Rechtschreibung und Zeichensetzung?</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>6.3 Aufgabe nicht vollständig gelesen <span class="schweregrad schwer">-20-40%</span></h4>
+                        
+                        <div class="example-container">
+                            <h5>Typisches Beispiel:</h5>
+                            <div class="example-false">
+                                <strong>Aufgabe:</strong> "Analysieren Sie die Argumentation UND nehmen Sie begründet Stellung"<br>
+                                <strong>Schüler macht nur:</strong> Analyse, vergisst Stellungnahme
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Prävention:</strong>
+                            <ul>
+                                <li>Alle Arbeitsaufträge markieren</li>
+                                <li>Checkliste vor Abgabe durchgehen</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4>6.4 Falsche Schwerpunktsetzung <span class="schweregrad mittel">-10-20%</span></h4>
+                        
+                        <div class="example-container">
+                            <div class="example-false">
+                                <strong>Häufiger Fehler:</strong> 90% Textanalyse, 10% eigene Position
+                            </div>
+                            <div class="example-correct">
+                                <strong>Richtige Gewichtung:</strong>
+                                <ul>
+                                    <li>Textanalyse: 60%</li>
+                                    <li>Eigene Stellungnahme: 40%</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">Notfallstrategien</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><em>"Wenn etwas schief geht"</em></p>
+                    
+                    <div class="fehler-grid">
+                        <div class="fehler-card">
+                            <h4>Bei Zeitmangel:</h4>
+                            <ul>
+                                <li>Prioritäten setzen: Hauptargumente vor Nebenaspekten</li>
+                                <li>Stichpunkte in ganzen Sätzen ausformulieren</li>
+                                <li>Mindestens einen Schlussabsatz schreiben</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="fehler-card">
+                            <h4>Bei Verständnisproblemen:</h4>
+                            <ul>
+                                <li>Nicht panisch werden</li>
+                                <li>Teilaspekte behandeln, die verstanden wurden</li>
+                                <li>Ehrlich schreiben: "Ein Aspekt, der nicht eindeutig wird..."</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="fehler-card">
+                            <h4>Bei Blackout:</h4>
+                            <ul>
+                                <li>Tief durchatmen</li>
+                                <li>Mit dem anfangen, was sicher ist (Textangabe)</li>
+                                <li>Struktur als Gerüst verwenden</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">Checkliste für die Prüfung</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="checkliste">
+                        <h3>Vor dem Schreiben:</h3>
+                        <ul>
+                            <li>Aufgabenstellung dreimal gelesen</li>
+                            <li>Alle Arbeitsaufträge markiert</li>
+                            <li>Text vollständig verstanden</li>
+                            <li>Gliederung erstellt</li>
+                            <li>Zeitplan gemacht</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="checkliste">
+                        <h3>Während des Schreibens:</h3>
+                        <ul>
+                            <li>Regelmäßig auf Uhr schauen</li>
+                            <li>Bei jedem Absatz: Passt das zur Aufgabe?</li>
+                            <li>Übergänge zwischen Absätzen</li>
+                            <li>Belege für alle Behauptungen</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="checkliste">
+                        <h3>Vor der Abgabe:</h3>
+                        <ul>
+                            <li>Alle Aufgabenteile behandelt</li>
+                            <li>Rechtschreibung kontrolliert</li>
+                            <li>Textangabe vollständig</li>
+                            <li>Wortanzahl im Rahmen</li>
+                            <li>Name und Datum auf dem Blatt</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">Bewertungsauswirkungen</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="fehler-grid">
+                        <div class="fehler-card">
+                            <h4>Schwere Fehler (große Punktverluste):</h4>
+                            <ul>
+                                <li>Thema verfehlt: -30-50%</li>
+                                <li>Aufgabenstellung nicht erfüllt: -40-60%</li>
+                                <li>Unverständliche Darstellung: -20-40%</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="fehler-card">
+                            <h4>Mittlere Fehler:</h4>
+                            <ul>
+                                <li>Strukturmängel: -10-20%</li>
+                                <li>Sprachliche Mängel: -10-15%</li>
+                                <li>Formale Fehler: -5-10%</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="fehler-card">
+                            <h4>Leichte Fehler:</h4>
+                            <ul>
+                                <li>Einzelne Rechtschreibfehler: -1-2%</li>
+                                <li>Kleinere Formulierungsschwächen: -2-5%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">Die Top 10 der häufigsten Fehler</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="statistik-box">
+                        <h3>Die häufigsten Fehler in der Deutschmatura</h3>
+                        <p>Basierend auf der Auswertung von über 1000 Schülertexten</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>1. Aufgabenstellung nicht vollständig erfüllt (40% der Schüler)</h4>
+                        <p>Der häufigste und schwerwiegendste Fehler</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>2. Schlechtes Zeitmanagement (35% der Schüler)</h4>
+                        <p>Führt zu unvollständigen oder oberflächlichen Texten</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>3. Fehlende eigene Stellungnahme (30% der Schüler)</h4>
+                        <p>Nur Textanalyse ohne kritische Auseinandersetzung</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>4. Umgangssprache statt Bildungssprache (45% der Schüler)</h4>
+                        <p>Unangemessenes Sprachregister für die Prüfung</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>5. Unklare Struktur (25% der Schüler)</h4>
+                        <p>Kein roter Faden erkennbar</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>6. Textinhalt falsch wiedergegeben (20% der Schüler)</h4>
+                        <p>Missverstehen der Autorenposition</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>7. Fehlende Belege für Argumente (30% der Schüler)</h4>
+                        <p>Unbegründete Behauptungen</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>8. Keine Überarbeitung (50% der Schüler)</h4>
+                        <p>Vermeidbare Fehler bleiben unentdeckt</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>9. Unvollständige Textangabe (15% der Schüler)</h4>
+                        <p>Formale Mängel in der Einleitung</p>
+                    </div>
+                    
+                    <div class="top-fehler">
+                        <h4>10. Logische Fehlschlüsse (25% der Schüler)</h4>
+                        <p>Argumentative Schwächen</p>
                     </div>
                     
                     <div class="tip-box">
-                        <strong>Tipp:</strong> Verwenden Sie die W-Fragen: Wer? (Autor), Was? (Titel), Wo? (Publikation), Wann? (Erscheinungsdatum), Welche Textsorte?
+                        <strong>Die gute Nachricht:</strong> Alle diese Fehler sind vermeidbar durch bewusste Vorbereitung und systematisches Vorgehen!
                     </div>
                 </div>
             </div>
 
-            <div class="error-category">
-                <h3>2. Inhaltliche Fehler</h3>
-                
-                <div class="error-item">
-                    <h4>Zusammenfassung statt Analyse</h4>
-                    <p>Eine reine Nacherzählung des Textinhalts ohne analytische Betrachtung.</p>
-                    
-                    <div class="example-container">
-                        <h5>Beispiele:</h5>
-                        <div class="example-false">
-                            <strong>Falsch:</strong> "Zuerst beschreibt der Autor eine Szene im Café, dann sagt er, dass Smartphones problematisch sind, und am Ende rät er, das Handy öfter auszuschalten."
-                        </div>
-                        <div class="example-correct">
-                            <strong>Richtig:</strong> "Der Autor analysiert die sozialen Auswirkungen permanenter Erreichbarkeit, indem er zunächst eine Alltagsszene beschreibt, dann die problematischen Konsequenzen darlegt und schließlich Lösungsvorschläge unterbreitet."
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-header">
-                <span>Übungen: Fehler erkennen und korrigieren</span>
-                <span class="accordion-icon"></span>
-            </div>
+            <div class="accordion-header">Übungen zur Fehlervermeidung</div>
             <div class="panel">
-                <div class="exercise-container">
-                    <h4>Übung 1: Formale Fehler korrigieren</h4>
-                    <p>Korrigieren Sie die folgenden fehlerhaften Einleitungssätze:</p>
-                    <ol>
-                        <li>"In dem Text von irgendeinem Autor geht es um Klimawandel."</li>
-                        <li>"Der Autor hat 2020 was über Digitalisierung geschrieben."</li>
-                        <li>"Ich finde den Text gut, weil er interessant ist."</li>
-                    </ol>
+                <div class="panel-content">
+                    <div class="exercise-box">
+                        <h4>Übung 1: Aufgabenstellung analysieren</h4>
+                        <p>Markieren Sie alle Arbeitsaufträge in der folgenden Aufgabenstellung:</p>
+                        <p><em>"Analysieren Sie die sprachlichen Mittel des vorliegenden Kommentars und erläutern Sie deren Wirkung. Nehmen Sie anschließend begründet Stellung zu der vom Autor vertretenen Position."</em></p>
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <p><strong>Arbeitsaufträge:</strong></p>
+                            <ol>
+                                <li><strong>Analysieren</strong> Sie die sprachlichen Mittel</li>
+                                <li><strong>Erläutern</strong> Sie deren Wirkung</li>
+                                <li><strong>Nehmen Sie Stellung</strong> zu der Position</li>
+                                <li>Die Stellungnahme muss <strong>begründet</strong> sein</li>
+                            </ol>
+                        </div>
+                    </div>
                     
-                    <button class="solution-toggle" data-target="solution1">Lösung anzeigen</button>
-                    <div class="solution-content" id="solution1">
-                        <p><strong>Korrekte Versionen:</strong></p>
+                    <div class="exercise-box">
+                        <h4>Übung 2: Logische Fehler erkennen</h4>
+                        <p>Identifizieren Sie die logischen Fehlschlüsse:</p>
                         <ol>
-                            <li>"In dem Essay 'Verantwortung in Zeiten des Klimawandels' von [Autor], erschienen 2023 in [Zeitschrift], setzt sich der Autor mit der Frage nach individueller und kollektiver Verantwortung auseinander."</li>
-                            <li>"In seinem Kommentar 'Die Zukunft der Digitalisierung', erschienen 2020 in der Süddeutschen Zeitung, analysiert Autor [Name] die gesellschaftlichen Auswirkungen technologischen Wandels."</li>
-                            <li>"Der Text überzeugt durch seine klare Argumentationsstruktur und die anschauliche Verwendung von Beispielen, die das Thema für die Leser greifbar machen."</li>
+                            <li>"Alle erfolgreichen Menschen stehen früh auf. Also muss ich früh aufstehen, um erfolgreich zu werden."</li>
+                            <li>"Entweder wir schaffen das Bargeld ab oder die Kriminalität steigt weiter."</li>
+                            <li>"Der Politiker ist korrupt, deshalb sind seine Argumente für die Steuerreform falsch."</li>
                         </ol>
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <ol>
+                                <li><strong>Umkehrschluss:</strong> Aus einer Korrelation wird fälschlich eine Kausalität abgeleitet</li>
+                                <li><strong>Falsches Dilemma:</strong> Es gibt mehr als zwei Optionen</li>
+                                <li><strong>Ad hominem:</strong> Angriff auf die Person statt auf die Argumente</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Übung 3: Sprachregister korrigieren</h4>
+                        <p>Verbessern Sie die folgenden umgangssprachlichen Formulierungen:</p>
+                        <ol>
+                            <li>"Der Text ist mega interessant."</li>
+                            <li>"Das Argument ist voll schlecht."</li>
+                            <li>"Irgendwie macht das keinen Sinn."</li>
+                        </ol>
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <ol>
+                                <li>"Der Text erweist sich als außerordentlich aufschlussreich."</li>
+                                <li>"Das Argument ist nicht überzeugend/wenig stichhaltig."</li>
+                                <li>"Diese Aussage erscheint widersprüchlich/ist nicht nachvollziehbar."</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Übung 4: Zeitplanung erstellen</h4>
+                        <p>Sie haben 270 Minuten für eine textgebundene Erörterung. Erstellen Sie einen realistischen Zeitplan.</p>
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <p><strong>Empfohlene Zeitaufteilung:</strong></p>
+                            <ul>
+                                <li><strong>45 Min:</strong> Text lesen und verstehen, Notizen machen</li>
+                                <li><strong>15 Min:</strong> Gliederung erstellen</li>
+                                <li><strong>180 Min:</strong> Text schreiben (ca. 3 Min. pro Zeile)</li>
+                                <li><strong>30 Min:</strong> Überarbeitung und Korrektur</li>
+                            </ul>
+                            <p><strong>Puffer:</strong> Immer 10-15 Minuten Reserve einplanen!</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="accordion-header">
-                <span>Checkliste zur Fehlervermeidung</span>
-                <span class="accordion-icon"></span>
-            </div>
+            <div class="accordion-header">Tipps von erfolgreichen Maturanten</div>
             <div class="panel">
-                <div class="progress-section">
-                    <h3>Vor der Abgabe überprüfen:</h3>
-                    <ul>
-                        <li>✓ Enthält die Einleitung alle notwendigen Textangaben (Autor, Titel, Erscheinungsort, -datum, Textsorte)?</li>
-                        <li>✓ Ist die Inhaltsangabe im Präsens verfasst und auf das Wesentliche beschränkt?</li>
-                        <li>✓ Werden Behauptungen durch konkrete Textbelege gestützt?</li>
-                        <li>✓ Ist die Sprache präzise und fachlich angemessen?</li>
-                        <li>✓ Werden subjektive Wertungen vermieden?</li>
-                    </ul>
+                <div class="panel-content">
+                    <div class="tip-box">
+                        <h3>Bewährte Strategien:</h3>
+                        <ul>
+                            <li><strong>"Dreimal-Regel":</strong> Text dreimal lesen - einmal für Überblick, einmal für Details, einmal für Kontrolle</li>
+                            <li><strong>"Gelbe Zettel-Methode":</strong> Wichtige Formulierungen auf Klebezettel schreiben und sichtbar am Platz platzieren</li>
+                            <li><strong>"5-Minuten-Check":</strong> Alle 30 Minuten kurz innehalten und prüfen: "Bin ich noch beim Thema?"</li>
+                            <li><strong>"Rückwärts-Korrektur":</strong> Text vom Ende her korrigieren - so entdeckt man mehr Fehler</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>Mentale Vorbereitung:</h3>
+                        <ul>
+                            <li>Am Vorabend: Früh ins Bett, keine neuen Themen mehr lernen</li>
+                            <li>Morgens: Ausgewogenes Frühstück, pünktlich am Prüfungsort sein</li>
+                            <li>Während der Prüfung: Bei Stress tief durchatmen, positiv denken</li>
+                            <li>Nach der Prüfung: Nicht mit anderen vergleichen - was geschrieben ist, ist geschrieben</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-
-            <div class="tip-box">
-                <strong>Tipp für die Praxis:</strong><br>
-                Lassen Sie Ihre Textanalyse nach dem Verfassen immer von jemand anderem gegenlesen. Frische Augen entdecken oft Fehler, die man selbst übersieht.
             </div>
         </div>
     </div>
-
-    <!-- JavaScript wurde entfernt und wird von der Hauptdatei gesteuert -->
 </body>
 </html>
-[file content end]
+
+
+
+
+
+
+

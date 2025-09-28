@@ -5,226 +5,1203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erörterungs-Übungen - Deutschmatura</title>
     <style>
-        .exercise-section {
-            margin-bottom: 40px;
-        }
-
-        .exercise-section h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-        }
-
-        .exercise-card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            border-left: 4px solid #34495e;
-        }
-
-        .exercise-card h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .text-excerpt {
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 15px 0;
-            font-style: italic;
-            border-radius: 5px;
-        }
-
-        .text-excerpt h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-style: normal;
-        }
-
-        .toggle-button {
-            display: inline-block;
-            background: #34495e;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: background 0.3s;
-            cursor: pointer;
-            border: none;
-            margin-top: 10px;
-        }
-
-        .toggle-button:hover {
-            background: #2c3e50;
-        }
-
-        .solution {
-            display: none;
-            background: #e8f4f8;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 15px;
-            border-left: 4px solid #3498db;
-        }
-
-        .solution h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .solution strong {
-            color: #2c3e50;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: white; line-height: 1.6; color: #333; }
+        .content-container { max-width: 100%; margin: 0 auto; background: white; }
+        .content-header { background: linear-gradient(135deg, #34495e, #2c3e50); color: white; text-align: center; padding: 30px 20px; margin-bottom: 20px; }
+        .content-header h1 { font-size: 2em; margin-bottom: 10px; }
+        .content-header p { font-size: 1.1em; opacity: 0.9; }
+        .content-body { padding: 0 20px 20px 20px; }
+        .welcome-section { background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 5px solid #34495e; }
+        .welcome-section h2 { color: #2c3e50; margin-bottom: 15px; }
+        .accordion-header { background: #34495e; color: white; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; outline: none; font-size: 1.1em; border-radius: 5px; margin-bottom: 5px; transition: background-color 0.3s ease; }
+        .accordion-header:hover { background: #2c3e50; }
+        .accordion-header.active { background: #2c3e50; }
+        .accordion-header::after { content: '+'; color: white; font-weight: bold; float: right; font-size: 1.2em; transition: transform 0.3s ease; }
+        .accordion-header.active::after { content: '-'; transform: rotate(180deg); }
+        .panel { display: none; background-color: #f9f9f9; border-radius: 0 0 5px 5px; margin-bottom: 10px; overflow: hidden; transition: all 0.3s ease; max-height: 0; }
+        .panel.active { display: block; padding: 15px; max-height: none; }
+        .panel-content { padding: 15px 0; }
+        .exercise-card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #3498db; margin-bottom: 20px; }
+        .exercise-card h3 { color: #2c3e50; margin-bottom: 15px; font-size: 1.2em; }
+        .exercise-card h4 { color: #34495e; margin-bottom: 10px; font-size: 1.1em; }
+        .text-excerpt { background: #f8f9fa; border-left: 4px solid #3498db; padding: 15px; margin: 15px 0; font-style: italic; border-radius: 5px; }
+        .text-excerpt h4 { color: #2c3e50; margin-bottom: 10px; font-style: normal; }
+        .text-excerpt h5 { color: #34495e; margin-bottom: 8px; font-style: normal; font-size: 1em; }
+        .example-box { background: #e8f4f8; border-left: 4px solid #3498db; padding: 12px; margin: 12px 0; border-radius: 4px; }
+        .example-box h4 { color: #2c3e50; margin-bottom: 8px; }
+        .solution-box { background: #d4edda; border: 1px solid #c3e6cb; border-radius: 6px; padding: 15px; margin: 15px 0; display: none; }
+        .solution-box.active { display: block; }
+        .solution-box h4 { color: #155724; margin-bottom: 15px; }
+        .solution-box strong { color: #155724; }
+        .toggle-solution { background: #34495e; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-top: 8px; transition: background 0.3s; }
+        .toggle-solution:hover { background: #2c3e50; }
+        .tip-box { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .tip-box strong { color: #856404; }
+        .schwierigkeitsgrad { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold; margin-left: 10px; }
+        .einfach { background: #27ae60; color: white; }
+        .mittel { background: #f39c12; color: white; }
+        .schwer { background: #e74c3c; color: white; }
+        .aufgaben-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .uebung-kategorie { background: #f8f9fa; border-radius: 8px; padding: 20px; border-left: 4px solid #e74c3c; margin: 20px 0; }
+        .uebung-kategorie h3 { color: #2c3e50; margin-bottom: 15px; }
+        .checkliste { background: #e8f5e8; border: 1px solid #c3e6cb; border-radius: 6px; padding: 20px; margin: 20px 0; }
+        .checkliste h3 { color: #155724; margin-bottom: 15px; }
+        .checkliste ul { list-style: none; padding: 0; }
+        .checkliste li { padding: 5px 0; }
+        .checkliste li:before { content: "✓ "; color: #28a745; font-weight: bold; }
+        .argumentations-schema { background: #fff; border: 2px solid #3498db; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .argumentations-schema h3 { color: #3498db; margin-bottom: 15px; text-align: center; }
+        .schema-stufe { background: #f8f9fa; border-radius: 6px; padding: 15px; margin: 10px 0; border-left: 3px solid #3498db; }
+        .schema-stufe h4 { color: #2c3e50; margin-bottom: 8px; }
+        .muster-text { background: #f0f8ff; border: 1px solid #b3d9ff; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .muster-text h4 { color: #0066cc; margin-bottom: 10px; }
+        @media (max-width: 768px) { .content-body { padding: 0 15px 15px 15px; } .aufgaben-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="exercise-section">
-        <h2>Übungen zur Argumentationsanalyse</h2>
+    <div class="content-container">
+        <header class="content-header">
+            <h1>Erörterungs-Übungen für die Deutschmatura</h1>
+            <p>Systematisches Training für textgebundene und freie Erörterungen</p>
+        </header>
         
-        <div class="exercise-card">
-            <h3>Übung 1: Argumentationsbausteine identifizieren</h3>
-            <p>Lies den folgenden Textausschnitt und identifiziere:</p>
-            <ul>
-                <li>Die Hauptthese</li>
-                <li>Untergeordnete Thesen/Behauptungen</li>
-                <li>Argumente und Belege</li>
-                <li>Schlussfolgerungen</li>
-            </ul>
-            
-            <div class="text-excerpt">
-                <p>"Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln. Die globalen Temperaturen steigen nachweislich: Laut Weltklimarat haben sie sich seit der vorindustriellen Zeit bereits um mehr als ein Grad Celsius erhöht. Die Folgen sind bereits spürbar – schmelzende Polkappen, zunehmende Extremwetterereignisse und steigende Meeresspiegel. Besonders alarmierend ist, dass viele dieser Entwicklungen sich selbst verstärken können. Wenn etwa das arktische Eis schmilzt, reflektiert weniger weiße Oberfläche das Sonnenlicht, und die Erwärmung beschleunigt sich. Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert. Doch die Kosten des Nichthandelns übersteigen bei weitem die Investitionen, die jetzt nötig wären. Es ist daher nicht nur eine ökologische, sondern auch eine ökonomische Notwendigkeit, den CO₂-Ausstoß drastisch zu reduzieren und auf erneuerbare Energien umzusteigen."</p>
+        <div class="content-body">
+            <div class="welcome-section">
+                <h2>Erörterungs-Übungen für die Deutschmatura</h2>
+                <p>Die Erörterung ist eine der wichtigsten Aufgabenarten in der Deutschmatura. Diese umfassende Übungssammlung hilft dir dabei, systematisch alle Aspekte der Erörterung zu trainieren - von der Argumentationsanalyse bis zur eigenen Stellungnahme.</p>
+                <p><strong>Aufbau:</strong> 8 Übungskategorien mit über 25 praxisnahen Aufgaben, Musterlösungen mit detaillierten Erklärungen, Schwierigkeitsgrade von einfach bis anspruchsvoll, konkrete Bewertungskriterien und Formulierungshilfen.</p>
             </div>
-            
-            <button class="toggle-button solution-toggle">Lösung anzeigen</button>
-            
-            <div class="solution">
-                <h4>Musterlösung:</h4>
-                <ul>
-                    <li><strong>Hauptthese:</strong> Der Klimawandel ist eine existenzielle Bedrohung für die Menschheit und erfordert sofortiges Handeln.</li>
-                    <li><strong>Untergeordnete Thesen:</strong>
+
+            <div class="accordion-header">1. Grundlagen der Argumentation <span class="schwierigkeitsgrad einfach">Einfach</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="argumentations-schema">
+                        <h3>Das Grundschema der Argumentation</h3>
+                        <div class="schema-stufe">
+                            <h4>1. These/Behauptung</h4>
+                            <p>Eine Aussage, die bewiesen oder widerlegt werden soll</p>
+                        </div>
+                        <div class="schema-stufe">
+                            <h4>2. Argument</h4>
+                            <p>Die Begründung für oder gegen die These</p>
+                        </div>
+                        <div class="schema-stufe">
+                            <h4>3. Beleg/Beispiel</h4>
+                            <p>Konkrete Belege, die das Argument stützen</p>
+                        </div>
+                        <div class="schema-stufe">
+                            <h4>4. Folgerung</h4>
+                            <p>Die logische Schlussfolgerung aus der Argumentation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 1.1: Argumentationsbausteine identifizieren <span class="schwierigkeitsgrad einfach">Einfach</span></h3>
+                        <p>Identifiziere in den folgenden Aussagen: These, Argument, Beleg und eventuelle Folgerung.</p>
+                        
+                        <div class="text-excerpt">
+                            <p><strong>Text A:</strong> "Schuluniformen sollten an allen Schulen eingeführt werden. Sie fördern das Gemeinschaftsgefühl und reduzieren soziale Unterschiede. In Großbritannien, wo Schuluniformen weit verbreitet sind, gibt es weniger Mobbing aufgrund von Kleidung. Daher würden Schuluniformen zu einem besseren Schulklima beitragen."</p>
+                        </div>
+                        
+                        <div class="text-excerpt">
+                            <p><strong>Text B:</strong> "Die 4-Tage-Woche steigert die Produktivität von Arbeitnehmern erheblich. Studien aus Island zeigen, dass bei gleicher Arbeitsleistung die Zufriedenheit der Mitarbeiter um 40% steigt. Unternehmen sollten daher dieses Modell ernsthaft prüfen."</p>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            <p><strong>Text A:</strong></p>
+                            <ul>
+                                <li><strong>These:</strong> Schuluniformen sollten an allen Schulen eingeführt werden.</li>
+                                <li><strong>Argument:</strong> Sie fördern das Gemeinschaftsgefühl und reduzieren soziale Unterschiede.</li>
+                                <li><strong>Beleg:</strong> In Großbritannien gibt es weniger Mobbing aufgrund von Kleidung.</li>
+                                <li><strong>Folgerung:</strong> Schuluniformen würden zu einem besseren Schulklima beitragen.</li>
+                            </ul>
+                            <p><strong>Text B:</strong></p>
+                            <ul>
+                                <li><strong>These:</strong> Die 4-Tage-Woche steigert die Produktivität von Arbeitnehmern erheblich.</li>
+                                <li><strong>Argument:</strong> Bei gleicher Arbeitsleistung steigt die Zufriedenheit der Mitarbeiter.</li>
+                                <li><strong>Beleg:</strong> Studien aus Island zeigen eine Steigerung der Zufriedenheit um 40%.</li>
+                                <li><strong>Folgerung:</strong> Unternehmen sollten dieses Modell ernsthaft prüfen.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 1.2: Argumentationsketten aufbauen <span class="schwierigkeitsgrad einfach">Einfach</span></h3>
+                        <p>Bauen Sie zu den folgenden Thesen vollständige Argumentationsketten auf:</p>
+                        
+                        <ol>
+                            <li>"Social Media sollte für Jugendliche unter 16 Jahren verboten werden."</li>
+                            <li>"Hausaufgaben gehören abgeschafft."</li>
+                            <li>"Jeder Bürger sollte ein bedingungsloses Grundeinkommen erhalten."</li>
+                        </ol>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung (Beispiel für These 1):</h4>
+                            <p><strong>These:</strong> Social Media sollte für Jugendliche unter 16 Jahren verboten werden.</p>
+                            <p><strong>Argument:</strong> Die intensive Nutzung sozialer Medien kann die psychische Gesundheit von Jugendlichen beeinträchtigen.</p>
+                            <p><strong>Beleg:</strong> Studien zeigen einen Zusammenhang zwischen exzessiver Social-Media-Nutzung und erhöhten Depressionsraten bei Jugendlichen.</p>
+                            <p><strong>Folgerung:</strong> Ein Verbot würde junge Menschen vor diesen gesundheitlichen Risiken schützen.</p>
+                            
+                            <p><strong>Gegenargument:</strong> Ein komplettes Verbot wäre jedoch nicht praktikabel und würde Jugendliche von wichtigen digitalen Lernprozessen ausschließen. Besser wäre eine begleitete, altersgerechte Heranführung an soziale Medien.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">2. Argumentationsanalyse <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 2.1: Argumentationsmuster erkennen <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Analysieren Sie die folgenden Textpassagen und identifizieren Sie die verwendeten Argumentationsmuster. Bewerten Sie deren Überzeugungskraft:</p>
+                        
+                        <div class="text-excerpt">
+                            <h5>Text A: Autoritätsargument</h5>
+                            <p>"Der renommierte Klimaforscher Prof. Dr. Schmidt warnt eindringlich vor den Folgen des Klimawandels. Als einer der führenden Experten auf diesem Gebiet sollten wir seinen Empfehlungen unbedingt folgen und sofort drastische Maßnahmen zur CO₂-Reduktion ergreifen."</p>
+                        </div>
+                        
+                        <div class="text-excerpt">
+                            <h5>Text B: Analogieschluss</h5>
+                            <p>"Wie ein Gärtner seine Pflanzen regelmäßig gießen und pflegen muss, damit sie gedeihen, so müssen auch Eltern ihre Kinder kontinuierlich fördern und unterstützen. Vernachlässigung führt in beiden Fällen zu schlechten Ergebnissen."</p>
+                        </div>
+                        
+                        <div class="text-excerpt">
+                            <h5>Text C: Kausalargument</h5>
+                            <p>"Seit der Einführung der Ganztagsschule ist die Zahl der Schulabbrecher um 15% gesunken. Diese Entwicklung zeigt deutlich, dass Ganztagsschulen erfolgreich sind und flächendeckend eingeführt werden sollten."</p>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            <p><strong>Text A - Autoritätsargument:</strong></p>
+                            <ul>
+                                <li><strong>Muster:</strong> Berufung auf eine Autorität (Experte)</li>
+                                <li><strong>Bewertung:</strong> Grundsätzlich stark, da Expertise relevant ist. Schwäche: Nur eine Quelle, keine konkreten Daten oder Studien genannt.</li>
+                                <li><strong>Verbesserung:</strong> Mehrere Expertenmeinungen und konkrete Belege hinzufügen.</li>
+                            </ul>
+                            
+                            <p><strong>Text B - Analogieschluss:</strong></p>
+                            <ul>
+                                <li><strong>Muster:</strong> Vergleich zwischen Pflanzenpflege und Kindererziehung</li>
+                                <li><strong>Bewertung:</strong> Mittlere Überzeugungskraft. Die Analogie ist nachvollziehbar, aber vereinfachend.</li>
+                                <li><strong>Schwäche:</strong> Kinder sind komplexer als Pflanzen; die Analogie greift zu kurz.</li>
+                            </ul>
+                            
+                            <p><strong>Text C - Kausalargument:</strong></p>
+                            <ul>
+                                <li><strong>Muster:</strong> Ursache-Wirkungs-Beziehung</li>
+                                <li><strong>Bewertung:</strong> Problematisch, da Korrelation mit Kausalität verwechselt wird.</li>
+                                <li><strong>Schwäche:</strong> Andere Faktoren für den Rückgang der Schulabbrüche werden nicht berücksichtigt.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 2.2: Logische Fehlschlüsse identifizieren <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Erkennen Sie die logischen Fehlschlüsse in den folgenden Argumentationen:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="text-excerpt">
+                                <h5>Aufgabe A</h5>
+                                <p>"Alle großen Erfinder waren Schulversager. Einstein war schlecht in Mathematik, Edison flog von der Schule. Also ist schulischer Misserfolg ein Zeichen für Genialität."</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h5>Aufgabe B</h5>
+                                <p>"Entweder wir führen die Todesstrafe wieder ein, oder die Kriminalität wird weiter steigen. Da niemand steigende Kriminalität will, müssen wir die Todesstrafe einführen."</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h5>Aufgabe C</h5>
+                                <p>"Videospiele führen zu Gewalt. Mein Nachbar spielt jeden Tag und wurde letzte Woche bei einer Schlägerei erwischt."</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h5>Aufgabe D</h5>
+                                <p>"Wenn wir Cannabis legalisieren, ist das der erste Schritt zur Legalisierung aller Drogen. Bald werden auch Heroin und Kokain frei verkäuflich sein."</p>
+                            </div>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            <p><strong>Aufgabe A:</strong> <em>Hastige Verallgemeinerung + Fehlende Kausalität</em><br>
+                            Wenige Einzelfälle werden zur allgemeinen Regel erklärt. Zudem ist die Behauptung über Einstein faktisch falsch.</p>
+                            
+                            <p><strong>Aufgabe B:</strong> <em>Falsches Dilemma</em><br>
+                            Es werden nur zwei Optionen präsentiert, obwohl es viele andere Möglichkeiten zur Kriminalitätsprävention gibt.</p>
+                            
+                            <p><strong>Aufgabe C:</strong> <em>Post hoc ergo propter hoc</em><br>
+                            Aus einer zeitlichen Abfolge wird fälschlich eine Kausalität abgeleitet. Ein Einzelfall beweist keine allgemeine Regel.</p>
+                            
+                            <p><strong>Aufgabe D:</strong> <em>Dammbruch-Argument (Slippery Slope)</em><br>
+                            Es wird behauptet, dass eine Maßnahme zwangsläufig zu extremen Konsequenzen führt, ohne dies zu belegen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">3. Textgebundene Erörterung <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 3.1: Vollständige Textanalyse <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Analysieren Sie den folgenden Text systematisch und bereiten Sie eine textgebundene Erörterung vor:</p>
+                        
+                        <div class="muster-text">
+                            <h4>Digitale Bildung – Chance oder Risiko?</h4>
+                            <p>Die Digitalisierung des Bildungswesens wird heute vielfach als Allheilmittel für die Probleme unserer Schulen gepriesen. Tablets statt Schulbücher, Online-Kurse statt Frontalunterricht, Lern-Apps statt Arbeitsblätter – so lautet die Devise. Befürworter argumentieren, dass die digitale Transformation unaufhaltsam sei und Schulen die Schüler auf eine digitalisierte Arbeitswelt vorbereiten müssten.</p>
+                            
+                            <p>Doch bei aller Begeisterung für die neuen Möglichkeiten werden die Risiken oft übersehen. Studien zeigen, dass die intensive Nutzung digitaler Medien die Konzentrationsfähigkeit beeinträchtigen kann. Zudem verleitet die Informationsflut im Internet zu oberflächlichem Denken und erschwert das vertiefte Verstehen komplexer Zusammenhänge.</p>
+                            
+                            <p>Besonders problematisch ist auch die wachsende Abhängigkeit von Technologiekonzernen, die ihre kommerziellen Interessen verfolgen. Schulen geraten in Gefahr, zu Absatzmärkten für Hard- und Software zu werden, ohne dass der pädagogische Mehrwert immer gegeben ist.</p>
+                            
+                            <p>Statt einem blinden Digitalisierungshype zu folgen, sollten wir einen ausgewogenen Ansatz wählen. Digitale Werkzeuge können den Unterricht bereichern, wenn sie gezielt und reflektiert eingesetzt werden. Sie sollten jedoch traditionelle Lernformen nicht vollständig ersetzen, sondern ergänzen. Letztlich kommt es nicht auf die Quantität der eingesetzten Technologie an, sondern auf die Qualität der pädagogischen Konzepte.</p>
+                        </div>
+                        
+                        <p><strong>Arbeitsaufträge:</strong></p>
+                        <ol>
+                            <li>Fassen Sie die Hauptaussage des Textes kurz zusammen (ca. 50 Wörter)</li>
+                            <li>Analysieren Sie die Argumentationsstruktur des Autors</li>
+                            <li>Bewerten Sie die Überzeugungskraft der verwendeten Argumente</li>
+                            <li>Nehmen Sie begründet Stellung zur Position des Autors</li>
+                        </ol>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung:</h4>
+                            
+                            <p><strong>1. Zusammenfassung:</strong><br>
+                            Der Autor kritisiert die unreflektierte Digitalisierung des Bildungswesens. Er warnt vor Risiken wie Konzentrationsschwäche und kommerzieller Abhängigkeit und plädiert für einen ausgewogenen Ansatz, bei dem digitale Werkzeuge traditionelle Lernformen ergänzen, nicht ersetzen.</p>
+                            
+                            <p><strong>2. Argumentationsstruktur:</strong></p>
+                            <ul>
+                                <li><strong>Einleitung:</strong> Darstellung der aktuellen Digitalisierungseuphorie</li>
+                                <li><strong>Gegenthese:</strong> Die Risiken werden übersehen</li>
+                                <li><strong>Argumente gegen übermäßige Digitalisierung:</strong>
+                                    <ul>
+                                        <li>Beeinträchtigung der Konzentrationsfähigkeit</li>
+                                        <li>Oberflächliches Denken</li>
+                                        <li>Abhängigkeit von Technologiekonzernen</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Synthese:</strong> Plädoyer für ausgewogenen Ansatz</li>
+                            </ul>
+                            
+                            <p><strong>3. Bewertung der Argumente:</strong><br>
+                            Die Argumentation ist grundsätzlich nachvollziehbar und differenziert. Positiv ist die ausgewogene Betrachtung von Chancen und Risiken. Schwäche: Die genannten "Studien" werden nicht konkret benannt oder belegt. Die Argumentation würde durch spezifische Beispiele und Daten gestärkt.</p>
+                            
+                            <p><strong>4. Eigene Stellungnahme (Beispiel):</strong><br>
+                            Ich stimme der Position des Autors weitgehend zu. Besonders überzeugend ist sein Hinweis auf die kommerziellen Interessen der Technologiekonzerne, die oft übersehen werden. Der Ansatz einer ergänzenden statt ersetzenden Digitalisierung erscheint sinnvoll. Allerdings sollte auch berücksichtigt werden, dass digitale Kompetenzen heute unverzichtbar sind und Schulen ihre Schüler darauf vorbereiten müssen.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 3.2: Schwache Argumentation stärken <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Der folgende Text enthält schwache Argumentationen. Identifizieren Sie die Schwächen und verbessern Sie die Argumentation:</p>
+                        
+                        <div class="text-excerpt">
+                            <p>"Handys sollten in Schulen komplett verboten werden. Alle Lehrer sagen, dass Handys nur stören. Ein Schüler aus meiner Klasse ist ständig am Handy und hat schlechte Noten. Außerdem machen Handys süchtig, das weiß jeder. In der Schule von meinem Cousin sind Handys verboten und dort läuft alles besser. Wenn wir Handys nicht verbieten, werden alle Schüler nur noch daddeln und nichts mehr lernen."</p>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Identifizierte Schwächen:</h4>
+                            <ul>
+                                <li><strong>Verallgemeinerung:</strong> "Alle Lehrer sagen..." - keine Belege</li>
+                                <li><strong>Anekdotische Evidenz:</strong> Ein Einzelfall wird verallgemeinert</li>
+                                <li><strong>Unbelegte Behauptung:</strong> "das weiß jeder" - keine konkreten Studien</li>
+                                <li><strong>Unspezifische Aussage:</strong> "läuft alles besser" - keine konkreten Kriterien</li>
+                                <li><strong>Übertreibung:</strong> "alle Schüler werden nur noch daddeln"</li>
+                            </ul>
+                            
+                            <h4>Verbesserte Argumentation:</h4>
+                            <p>"Ein Handyverbot in Schulen ist durchaus diskussionswürdig. Studien der Universität London (2015) zeigen, dass Schulen mit Handyverboten eine Leistungssteigerung von 6% verzeichnen konnten, insbesondere bei schwächeren Schülern. Dies deutet darauf hin, dass Handys tatsächlich vom Lernen ablenken können.</p>
+                            
+                            <p>Problematisch ist jedoch ein komplettes Verbot, da Handys auch pädagogische Möglichkeiten bieten. Ein differenzierter Ansatz wäre sinnvoller: Handyfreie Zeiten während des Unterrichts bei gleichzeitigem gezielten Einsatz für Lernzwecke. So könnten die Vorteile genutzt und die Nachteile minimiert werden."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">4. Eigene Stellungnahme entwickeln <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 4.1: Pro- und Contra-Argumente sammeln <span class="schwierigkeitsgrad einfach">Einfach</span></h3>
+                        <p>Sammeln Sie zu den folgenden Themen jeweils mindestens 3 Pro- und 3 Contra-Argumente:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="uebung-kategorie">
+                                <h4>Thema A: Tempolimit auf Autobahnen</h4>
+                                <p>Sollte in Deutschland ein generelles Tempolimit von 130 km/h auf Autobahnen eingeführt werden?</p>
+                            </div>
+                            
+                            <div class="uebung-kategorie">
+                                <h4>Thema B: Pflichtjahr nach der Schule</h4>
+                                <p>Sollten alle Jugendlichen ein verpflichthendes soziales Jahr nach der Schule absolvieren?</p>
+                            </div>
+                            
+                            <div class="uebung-kategorie">
+                                <h4>Thema C: Fleischsteuer</h4>
+                                <p>Sollte Fleisch höher besteuert werden, um den Konsum zu reduzieren?</p>
+                            </div>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung Thema A - Tempolimit:</h4>
+                            
+                            <p><strong>Pro-Argumente:</strong></p>
+                            <ul>
+                                <li>Verkehrssicherheit: Weniger schwere Unfälle durch geringere Geschwindigkeiten</li>
+                                <li>Umweltschutz: Reduzierung des CO₂-Ausstoßes durch effizienteren Kraftstoffverbrauch</li>
+                                <li>Verkehrsfluss: Gleichmäßigerer Verkehr, weniger Staus durch Geschwindigkeitsunterschiede</li>
+                                <li>Lärmschutz: Geringere Lärmbelastung für Anwohner</li>
+                            </ul>
+                            
+                            <p><strong>Contra-Argumente:</strong></p>
+                            <ul>
+                                <li>Persönliche Freiheit: Einschränkung der individuellen Entscheidungsfreiheit</li>
+                                <li>Wirtschaftliche Nachteile: Längere Fahrzeiten beeinträchtigen wirtschaftliche Effizienz</li>
+                                <li>Technischer Fortschritt: Moderne Autos sind auch bei höheren Geschwindigkeiten sicher</li>
+                                <li>Bereits gute Sicherheitsbilanz: Deutsche Autobahnen gehören zu den sichersten weltweit</li>
+                            </ul>
+                            
+                            <p><strong>Ähnliche Strukturen für Themen B und C mit jeweils spezifischen Argumenten...</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 4.2: Differenzierte Stellungnahme formulieren <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Entwickeln Sie eine differenzierte Stellungnahme zum folgenden Thema. Vermeiden Sie extreme Positionen und zeigen Sie verschiedene Perspektiven auf:</p>
+                        
+                        <div class="text-excerpt">
+                            <h4>Thema: Künstliche Intelligenz in der Schule</h4>
+                            <p>ChatGPT und ähnliche KI-Tools revolutionieren die Art, wie Schüler lernen und Aufgaben bearbeiten. Während einige Schulen diese Technologien verbieten, experimentieren andere mit ihrer Integration in den Unterricht. Wie sollten Schulen mit KI-Tools umgehen?</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Formulierungshilfen für differenzierte Stellungnahmen:</strong>
+                            <ul>
+                                <li>"Einerseits... andererseits..."</li>
+                                <li>"Während... spricht für..., ist jedoch auch... zu berücksichtigen"</li>
+                                <li>"Die Wahrheit liegt vermutlich zwischen den Extrempositionen"</li>
+                                <li>"Ein differenzierter Ansatz würde..."</li>
+                                <li>"Sowohl die Chancen als auch die Risiken müssen bedacht werden"</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung - Differenzierte Stellungnahme:</h4>
+                            
+                            <p>Die Frage nach dem Umgang mit KI-Tools in Schulen erfordert eine ausgewogene Betrachtung, die weder von unreflektierter Euphorie noch von grundsätzlicher Ablehnung geprägt sein sollte.</p>
+                            
+                            <p><strong>Chancen der KI-Integration:</strong><br>
+                            KI-Tools bieten zweifellos interessante pädagogische Möglichkeiten. Sie können als Lernassistenten fungieren, individualisierte Übungsaufgaben generieren und Schülern bei der Ideenfindung helfen. Zudem ist es realitätsnah, Schüler auf eine Arbeitswelt vorzubereiten, in der KI-Tools zunehmend standard sein werden.</p>
+                            
+                            <p><strong>Bererechtigte Bedenken:</strong><br>
+                            Gleichzeitig sind die Sorgen vor Betrug und dem Verlust eigenständiger Denkfähigkeit nachvollziehbar. Wenn Schüler lernen, Texte unreflektiert von KI generieren zu lassen, könnten wichtige Kompetenzen wie kritisches Denken und eigenständige Argumentation verkümmern.</p>
+                            
+                            <p><strong>Ausgewogener Lösungsansatz:</strong><br>
+                            Statt eines kompletten Verbots oder einer unkontrollierten Freigabe sollten Schulen einen "guided approach" wählen: KI-Tools könnten in bestimmten Kontexten erlaubt und ihre Nutzung transparent gemacht werden. Wichtig wäre die Schulung der Digital Literacy, damit Schüler lernen, KI-Outputs kritisch zu bewerten und als Werkzeug, nicht als Ersatz für eigenes Denken zu verstehen.</p>
+                            
+                            <p><strong>Fazit:</strong><br>
+                            Die Integration von KI in die Bildung ist unausweichlich, aber sie muss pädagogisch durchdacht erfolgen. Ziel sollte es sein, die Vorteile zu nutzen, ohne die Entwicklung eigenständiger Kompetenzen zu gefährden.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">5. Freie Erörterung <span class="schwierigkeitsgrad schwer">Schwer</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 5.1: Thema eingrenzen und strukturieren <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Freie Erörterungen erfordern eine klare Eingrenzung des Themas. Entwickeln Sie zu den folgenden breiten Themen eine konkrete Fragestellung und eine Gliederung:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="text-excerpt">
+                                <h4>Thema 1: "Soziale Medien"</h4>
+                                <p>→ Konkrete Fragestellung entwickeln</p>
+                                <p>→ Gliederung erstellen</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h4>Thema 2: "Nachhaltigkeit"</h4>
+                                <p>→ Konkrete Fragestellung entwickeln</p>
+                                <p>→ Gliederung erstellen</p>
+                            </div>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung Thema 1 - Soziale Medien:</h4>
+                            
+                            <p><strong>Konkrete Fragestellung:</strong><br>
+                            "Sollten soziale Medien für Jugendliche unter 16 Jahren mit einer täglichen Nutzungszeit von maximal einer Stunde reguliert werden?"</p>
+                            
+                            <p><strong>Gliederung:</strong></p>
+                            <ol>
+                                <li><strong>Einleitung</strong>
+                                    <ul>
+                                        <li>Aktuelle Situation der Social-Media-Nutzung bei Jugendlichen</li>
+                                        <li>Problemstellung und Fragestellung</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Argumente für eine Regulierung</strong>
+                                    <ul>
+                                        <li>Gesundheitliche Aspekte (Schlafmangel, psychische Belastung)</li>
+                                        <li>Schutz vor Cybermobbing und inadäquaten Inhalten</li>
+                                        <li>Förderung realer sozialer Kontakte</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Argumente gegen eine Regulierung</strong>
+                                    <ul>
+                                        <li>Eingriff in persönliche Freiheit</li>
+                                        <li>Praktische Umsetzungsprobleme</li>
+                                        <li>Positive Aspekte sozialer Medien (Bildung, Kreativität)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Abwägung und eigene Position</strong></li>
+                                <li><strong>Schluss mit Ausblick</strong></li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 5.2: Vollständige freie Erörterung <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Schreiben Sie eine vollständige freie Erörterung (400-500 Wörter) zu folgendem Thema:</p>
+                        
+                        <div class="muster-text">
+                            <h4>"Sollte das Wahlrecht bereits ab 16 Jahren gewährt werden?"</h4>
+                            <p>In einigen Bundesländern dürfen 16-Jährige bereits bei Kommunalwahlen abstimmen. Diskutieren Sie, ob das Wahlalter generell auf 16 Jahre gesenkt werden sollte.</p>
+                        </div>
+                        
+                        <div class="checkliste">
+                            <h3>Bewertungskriterien:</h3>
+                            <ul>
+                                <li>Klare Einleitung mit Hinführung zum Thema</li>
+                                <li>Systematische Darstellung von Pro- und Contra-Argumenten</li>
+                                <li>Verwendung konkreter Beispiele und Belege</li>
+                                <li>Ausgewogene Abwägung der Argumente</li>
+                                <li>Deutliche eigene Positionierung</li>
+                                <li>Logischer Schluss mit Ausblick</li>
+                                <li>Angemessenes Sprachregister</li>
+                                <li>Korrekte Rechtschreibung und Grammatik</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musteraufsatz (gekürzt):</h4>
+                            
+                            <p><strong>Sollte das Wahlrecht bereits ab 16 Jahren gewährt werden?</strong></p>
+                            
+                            <p>Die Diskussion um eine Senkung des Wahlalters auf 16 Jahre gewinnt in Deutschland zunehmend an Fahrt. Während einige Bundesländer bereits bei Kommunalwahlen das Wahlrecht ab 16 eingeführt haben, bleibt die Frage kontrovers diskutiert. Die Entscheidung berührt fundamentale Fragen über Partizipation, Reife und demokratische Teilhabe.</p>
+                            
+                            <p><strong>Argumente für das Wahlrecht ab 16:</strong><br>
+                            Befürworter argumentieren, dass 16-Jährige bereits wichtige gesellschaftliche Verantwortung übernehmen. Sie dürfen arbeiten, Steuern zahlen und sind in vielen Bereichen rechtlich mündig. Zudem zeigen Studien aus Österreich, dass junge Wähler ihre Entscheidung oft bewusster treffen als ältere, da sie sich intensiver informieren.</p>
+                            
+                            <p><strong>Argumente gegen eine Senkung:</strong><br>
+                            Kritiker wenden ein, dass politische Reife Zeit braucht und 16-Jährige noch stark von emotionalen Entscheidungen geleitet werden könnten. Die Gefahr populistischer Einflüsse sei größer, da politische Erfahrung und historisches Bewusstsein noch nicht vollständig entwickelt seien.</p>
+                            
+                            <p><strong>Abwägung:</strong><br>
+                            Die Erfahrungen aus anderen Ländern zeigen, dass junge Wähler durchaus verantwortungsvoll mit ihrem Wahlrecht umgehen. Gleichzeitig könnte eine frühere politische Partizipation das Interesse an Politik langfristig stärken und der Politikverdrossenheit entgegenwirken...</p>
+                            
+                            <p><em>[Der vollständige Musteraufsatz würde weitere Argumente und einen ausführlichen Schluss enthalten]</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">6. Sprachliche Gestaltung <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 6.1: Verknüpfungswörter richtig einsetzen <span class="schwierigkeitsgrad einfach">Einfach</span></h3>
+                        <p>Verbessern Sie die folgenden Textpassagen durch den gezielten Einsatz von Verknüpfungswörtern:</p>
+                        
+                        <div class="text-excerpt">
+                            <p><strong>Originaltext:</strong><br>
+                            "Smartphones haben viele Vorteile. Sie ermöglichen schnelle Kommunikation. Sie können auch problematisch sein. Viele Menschen sind süchtig danach. Die Nutzung sollte bewusst erfolgen. Extreme Positionen helfen nicht weiter."</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Verknüpfungswörter nach Funktion:</strong>
+                            <ul>
+                                <li><strong>Ergänzung:</strong> außerdem, darüber hinaus, zusätzlich, ferner</li>
+                                <li><strong>Gegensatz:</strong> jedoch, hingegen, dennoch, andererseits</li>
+                                <li><strong>Folgerung:</strong> daher, folglich, somit, infolgedessen</li>
+                                <li><strong>Beispiel:</strong> beispielsweise, etwa, so zum Beispiel</li>
+                                <li><strong>Einschränkung:</strong> allerdings, freilich, immerhin</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Verbesserte Version:</h4>
+                            <p>"Smartphones haben zweifellos viele Vorteile, da sie beispielsweise schnelle Kommunikation ermöglichen. Andererseits können sie jedoch auch problematisch sein, weil viele Menschen süchtig danach sind. Folglich sollte die Nutzung bewusst erfolgen, wobei extreme Positionen allerdings nicht weiterhelfen."</p>
+                            
+                            <p><strong>Verbesserungen:</strong></p>
+                            <ul>
+                                <li>Satzverknüpfungen statt einzelner Hauptsätze</li>
+                                <li>Logische Progression durch Verknüpfungswörter</li>
+                                <li>Flüssigerer Lesefluss</li>
+                                <li>Klarere Argumentationsstruktur</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 6.2: Sachlichen Stil entwickeln <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Verwandeln Sie die folgenden emotionalen/umgangssprachlichen Aussagen in sachliche Formulierungen:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="text-excerpt">
+                                <h5>Aufgabe 1</h5>
+                                <p>"Das ist total bescheuert und geht gar nicht!"</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h5>Aufgabe 2</h5>
+                                <p>"Jeder normale Mensch weiß doch, dass das Quatsch ist."</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h5>Aufgabe 3</h5>
+                                <p>"Die Politiker sind alle korrupt und denken nur an sich selbst."</p>
+                            </div>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Sachliche Formulierungen:</h4>
+                            
+                            <p><strong>Aufgabe 1:</strong><br>
+                            "Diese Lösung erscheint wenig durchdacht und ist aus verschiedenen Gründen problematisch."</p>
+                            
+                            <p><strong>Aufgabe 2:</strong><br>
+                            "Diese Argumentation ist nicht überzeugend und wird durch keine belastbaren Belege gestützt."</p>
+                            
+                            <p><strong>Aufgabe 3:</strong><br>
+                            "Das Vertrauen in die Politik ist erschüttert, da einige Politiker den Eindruck erwecken, primär eigene Interessen zu verfolgen."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">7. Prüfungssimulation <span class="schwierigkeitsgrad schwer">Schwer</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 7.1: Zeitmanagement trainieren <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Simulieren Sie eine Prüfungssituation mit vorgegebener Zeitbegrenzung:</p>
+                        
+                        <div class="checkliste">
+                            <h3>Zeitplan für 270 Minuten (4,5 Stunden):</h3>
+                            <ul>
+                                <li>45 Min: Text lesen und verstehen</li>
+                                <li>30 Min: Gliederung erstellen</li>
+                                <li>180 Min: Aufsatz schreiben</li>
+                                <li>15 Min: Überarbeitung</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="muster-text">
+                            <h4>Prüfungsaufgabe:</h4>
+                            <p>Analysieren Sie die Argumentation des folgenden Kommentars und nehmen Sie begründet Stellung zur Position des Autors. (450-600 Wörter)</p>
+                            
+                            <h5>"Die Zukunft der Arbeit" von Dr. Sarah Müller</h5>
+                            <p>Die Diskussion um die 4-Tage-Woche nimmt Fahrt auf. Während Progressive sie als Lösung für Burnout und Work-Life-Balance preisen, warnen Konservative vor wirtschaftlichen Einbußen. Doch beide Seiten übersehen entscheidende Aspekte...</p>
+                            
+                            <p><em>[Vollständiger Text würde hier folgen - ca. 300-400 Wörter]</em></p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Prüfungstipps:</strong>
+                            <ul>
+                                <li>Timer verwenden und Zwischenzeiten notieren</li>
+                                <li>Nicht zu lange beim Lesen verweilen</li>
+                                <li>Gliederung schriftlich festhalten</li>
+                                <li>Kontinuierlich weiterschreiben, auch bei Unsicherheiten</li>
+                                <li>Zeit für Korrektur einhalten</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 7.2: Vollständige Prüfungssimulation <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Bearbeiten Sie unter Prüfungsbedingungen eine der folgenden Aufgaben:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="muster-text">
+                                <h4>Option A: Textgebundene Erörterung</h4>
+                                <p>Thema: "Digitaler Minimalismus"</p>
+                                <p>Text: Kommentar über bewussten Verzicht auf digitale Technologien</p>
+                            </div>
+                            
+                            <div class="muster-text">
+                                <h4>Option B: Freie Erörterung</h4>
+                                <p>Thema: "Sollte Werbung für ungesunde Lebensmittel verboten werden?"</p>
+                            </div>
+                        </div>
+                        
+                        <div class="checkliste">
+                            <h3>Selbstbewertung nach der Simulation:</h3>
+                            <ul>
+                                <li>Zeitmanagement erfolgreich?</li>
+                                <li>Alle Aufgabenteile bearbeitet?</li>
+                                <li>Argumentation logisch aufgebaut?</li>
+                                <li>Genügend konkrete Belege verwendet?</li>
+                                <li>Sprachlicher Stil angemessen?</li>
+                                <li>Eigene Position klar entwickelt?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">8. Bewertung und Verbesserung <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 8.1: Schülertexte bewerten <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Bewerten Sie die folgenden Schülertexte nach den Standard-Kriterien und geben Sie Verbesserungsvorschläge:</p>
+                        
+                        <div class="text-excerpt">
+                            <h4>Schülertext 1 (Einleitung einer Erörterung):</h4>
+                            <p>"Heute ist Umweltschutz voll wichtig. Alle reden davon aber keiner macht was. Ich finde das echt krass. In meinem Aufsatz will ich erörtern ob Plastikverpackungen verboten werden sollten oder nicht. Es gibt Pro und Contra Argumente."</p>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Bewertung und Verbesserungsvorschläge:</h4>
+                            
+                            <p><strong>Probleme:</strong></p>
+                            <ul>
+                                <li>Umgangssprache ("voll wichtig", "echt krass")</li>
+                                <li>Pauschale Aussagen ohne Belege</li>
+                                <li>Fehlende präzise Themenfokussierung</li>
+                                <li>Zu persönlicher Ton</li>
+                                <li>Unvollständige Hinführung zum Thema</li>
+                            </ul>
+                            
+                            <p><strong>Verbesserte Version:</strong><br>
+                            "Der Umgang mit Plastikverpackungen ist zu einem zentralen Umweltthema geworden. Während die Convenience-Gesellschaft auf praktische Verpackungslösungen angewiesen ist, belastet die zunehmende Plastikverschmutzung Ozeane und Ökosysteme erheblich. Die Frage, ob ein generelles Verbot von Plastikverpackungen sinnvoll und umsetzbar wäre, erfordert eine differenzierte Betrachtung der Vor- und Nachteile."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 8.2: Eigene Texte überarbeiten <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Verwenden Sie diese Checkliste zur systematischen Überarbeitung Ihrer eigenen Erörterungen:</p>
+                        
+                        <div class="checkliste">
+                            <h3>Überarbeitungs-Checkliste:</h3>
+                            <ul>
+                                <li><strong>Inhalt:</strong> Alle Aspekte der Aufgabenstellung behandelt?</li>
+                                <li><strong>Struktur:</strong> Logischer Aufbau erkennbar?</li>
+                                <li><strong>Argumentation:</strong> Nachvollziehbare Begründungen?</li>
+                                <li><strong>Belege:</strong> Konkrete Beispiele verwendet?</li>
+                                <li><strong>Sprache:</strong> Angemessenes Register?</li>
+                                <li><strong>Verknüpfungen:</strong> Flüssige Übergänge?</li>
+                                <li><strong>Position:</strong> Eigene Meinung deutlich?</li>
+                                <li><strong>Form:</strong> Rechtschreibung und Grammatik korrekt?</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Praktische Überarbeitungstipps:</strong>
+                            <ul>
+                                <li>Text laut vorlesen - Stolperstellen fallen auf</li>
+                                <li>Rückwärts korrigieren - mehr Rechtschreibfehler entdeckt</li>
+                                <li>Jeden Absatz auf Kernaussage prüfen</li>
+                                <li>Verknüpfungswörter ergänzen</li>
+                                <li>Umgangssprache durch Bildungssprache ersetzen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">Formulierungshilfen für Erörterungen</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="uebung-kategorie">
+                        <h3>Einleitungsformulierungen</h3>
                         <ul>
-                            <li>Die globalen Temperaturen steigen nachweislich.</li>
-                            <li>Die Folgen sind bereits spürbar.</li>
-                            <li>Viele Entwicklungen können sich selbst verstärken.</li>
-                            <li>Wirtschaftliche Interessen und politische Kurzfristigkeit haben bisher wirksame Maßnahmen verhindert.</li>
-                            <li>Die Kosten des Nichthandelns übersteigen die nötigen Investitionen.</li>
+                            <li>"Die Frage nach... beschäftigt..."</li>
+                            <li>"In der aktuellen Diskussion um... stehen sich verschiedene Positionen gegenüber"</li>
+                            <li>"Das Thema... ist von großer gesellschaftlicher Relevanz, da..."</li>
+                            <li>"Während die einen... befürworten, warnen andere vor..."</li>
                         </ul>
-                    </li>
-                    <li><strong>Argumente und Belege:</strong>
+                    </div>
+                    
+                    <div class="uebung-kategorie">
+                        <h3>Argumentation strukturieren</h3>
                         <ul>
-                            <li>Faktischer Beleg: Laut Weltklimarat haben sich die Temperaturen seit der vorindustriellen Zeit um mehr als ein Grad Celsius erhöht.</li>
-                            <li>Beispiele für Folgen: Schmelzende Polkappen, Extremwetterereignisse, steigende Meeresspiegel.</li>
-                            <li>Beispiel für selbstverstärkende Effekte: Schmelzendes arktisches Eis reduziert die Reflexion von Sonnenlicht.</li>
+                            <li>"Ein gewichtiges Argument für... ist..."</li>
+                            <li>"Dagegen spricht jedoch..."</li>
+                            <li>"Dies wird durch... belegt"</li>
+                            <li>"Ein konkretes Beispiel verdeutlicht..."</li>
+                            <li>"Daraus folgt..."</li>
                         </ul>
-                    </li>
-                    <li><strong>Schlussfolgerung:</strong> Es ist eine ökologische und ökonomische Notwendigkeit, den CO₂-Ausstoß zu reduzieren und auf erneuerbare Energien umzusteigen.</li>
-                </ul>
+                    </div>
+                    
+                    <div class="uebung-kategorie">
+                        <h3>Eigene Position formulieren</h3>
+                        <ul>
+                            <li>"Nach Abwägung aller Argumente..."</li>
+                            <li>"Meiner Ansicht nach überwiegen..."</li>
+                            <li>"Eine differenzierte Betrachtung zeigt..."</li>
+                            <li>"Die Lösung liegt vermutlich in einem ausgewogenen Ansatz"</li>
+                        </ul>
+                    </div>
+
+
+
+                    nutzt und die Nachteile minimiert werden."</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="exercise-card">
-            <h3>Übung 2: Argumentationsmuster erkennen</h3>
-            <p>Identifiziere in den folgenden kurzen Textpassagen die verwendeten Argumentationsmuster und bewerte ihre Überzeugungskraft:</p>
-            
-            <div class="text-excerpt">
-                <p>a) "Fast jeder Mensch besitzt heute ein Smartphone. Die ständige Erreichbarkeit führt nachweislich zu erhöhtem Stress. Daher sollte jeder regelmäßig bewusste Auszeiten von digitalen Geräten nehmen."</p>
-                <p>b) "Viele erfolgreiche Unternehmer wie Steve Jobs und Bill Gates haben ihr Studium abgebrochen. Ein Universitätsabschluss ist also keine Voraussetzung für beruflichen Erfolg."</p>
-                <p>c) "Entweder wir investieren jetzt massiv in den öffentlichen Nahverkehr, oder der Verkehrskollaps in unseren Städten wird sich weiter verschlimmern. Da niemand einen Verkehrskollaps will, bleibt nur die Option der Investitionen."</p>
+
+            <div class="accordion-header">4. Eigene Stellungnahme entwickeln <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 4.1: Pro- und Contra-Argumente sammeln <span class="schwierigkeitsgrad einfach">Einfach</span></h3>
+                        <p>Sammeln Sie zu den folgenden Themen jeweils mindestens 3 Pro- und 3 Contra-Argumente:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="uebung-kategorie">
+                                <h4>Thema A: Tempolimit auf Autobahnen</h4>
+                                <p>Sollte in Deutschland ein generelles Tempolimit von 130 km/h auf Autobahnen eingeführt werden?</p>
+                            </div>
+                            
+                            <div class="uebung-kategorie">
+                                <h4>Thema B: Pflichtjahr nach der Schule</h4>
+                                <p>Sollten alle Jugendlichen ein verpflichthendes soziales Jahr nach der Schule absolvieren?</p>
+                            </div>
+                            
+                            <div class="uebung-kategorie">
+                                <h4>Thema C: Fleischsteuer</h4>
+                                <p>Sollte Fleisch höher besteuert werden, um den Konsum zu reduzieren?</p>
+                            </div>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung Thema A - Tempolimit:</h4>
+                            
+                            <p><strong>Pro-Argumente:</strong></p>
+                            <ul>
+                                <li>Verkehrssicherheit: Weniger schwere Unfälle durch geringere Geschwindigkeiten</li>
+                                <li>Umweltschutz: Reduzierung des CO₂-Ausstoßes durch effizienteren Kraftstoffverbrauch</li>
+                                <li>Verkehrsfluss: Gleichmäßigerer Verkehr, weniger Staus durch Geschwindigkeitsunterschiede</li>
+                                <li>Lärmschutz: Geringere Lärmbelastung für Anwohner</li>
+                            </ul>
+                            
+                            <p><strong>Contra-Argumente:</strong></p>
+                            <ul>
+                                <li>Persönliche Freiheit: Einschränkung der individuellen Entscheidungsfreiheit</li>
+                                <li>Wirtschaftliche Nachteile: Längere Fahrzeiten beeinträchtigen wirtschaftliche Effizienz</li>
+                                <li>Technischer Fortschritt: Moderne Autos sind auch bei höheren Geschwindigkeiten sicher</li>
+                                <li>Bereits gute Sicherheitsbilanz: Deutsche Autobahnen gehören zu den sichersten weltweit</li>
+                            </ul>
+                            
+                            <p><strong>Ähnliche Strukturen für Themen B und C mit jeweils spezifischen Argumenten...</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 4.2: Differenzierte Stellungnahme formulieren <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Entwickeln Sie eine differenzierte Stellungnahme zum folgenden Thema. Vermeiden Sie extreme Positionen und zeigen Sie verschiedene Perspektiven auf:</p>
+                        
+                        <div class="text-excerpt">
+                            <h4>Thema: Künstliche Intelligenz in der Schule</h4>
+                            <p>ChatGPT und ähnliche KI-Tools revolutionieren die Art, wie Schüler lernen und Aufgaben bearbeiten. Während einige Schulen diese Technologien verbieten, experimentieren andere mit ihrer Integration in den Unterricht. Wie sollten Schulen mit KI-Tools umgehen?</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Formulierungshilfen für differenzierte Stellungnahmen:</strong>
+                            <ul>
+                                <li>"Einerseits... andererseits..."</li>
+                                <li>"Während... spricht für..., ist jedoch auch... zu berücksichtigen"</li>
+                                <li>"Die Wahrheit liegt vermutlich zwischen den Extrempositionen"</li>
+                                <li>"Ein differenzierter Ansatz würde..."</li>
+                                <li>"Sowohl die Chancen als auch die Risiken müssen bedacht werden"</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung - Differenzierte Stellungnahme:</h4>
+                            
+                            <p>Die Frage nach dem Umgang mit KI-Tools in Schulen erfordert eine ausgewogene Betrachtung, die weder von unreflektierter Euphorie noch von grundsätzlicher Ablehnung geprägt sein sollte.</p>
+                            
+                            <p><strong>Chancen der KI-Integration:</strong><br>
+                            KI-Tools bieten zweifellos interessante pädagogische Möglichkeiten. Sie können als Lernassistenten fungieren, individualisierte Übungsaufgaben generieren und Schülern bei der Ideenfindung helfen. Zudem ist es realitätsnah, Schüler auf eine Arbeitswelt vorzubereiten, in der KI-Tools zunehmend standard sein werden.</p>
+                            
+                            <p><strong>Bererechtigte Bedenken:</strong><br>
+                            Gleichzeitig sind die Sorgen vor Betrug und dem Verlust eigenständiger Denkfähigkeit nachvollziehbar. Wenn Schüler lernen, Texte unreflektiert von KI generieren zu lassen, könnten wichtige Kompetenzen wie kritisches Denken und eigenständige Argumentation verkümmern.</p>
+                            
+                            <p><strong>Ausgewogener Lösungsansatz:</strong><br>
+                            Statt eines kompletten Verbots oder einer unkontrollierten Freigabe sollten Schulen einen "guided approach" wählen: KI-Tools könnten in bestimmten Kontexten erlaubt und ihre Nutzung transparent gemacht werden. Wichtig wäre die Schulung der Digital Literacy, damit Schüler lernen, KI-Outputs kritisch zu bewerten und als Werkzeug, nicht als Ersatz für eigenes Denken zu verstehen.</p>
+                            
+                            <p><strong>Fazit:</strong><br>
+                            Die Integration von KI in die Bildung ist unausweichlich, aber sie muss pädagogisch durchdacht erfolgen. Ziel sollte es sein, die Vorteile zu nutzen, ohne die Entwicklung eigenständiger Kompetenzen zu gefährden.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <button class="toggle-button solution-toggle">Lösung anzeigen</button>
-            
-            <div class="solution">
-                <h4>Musterlösung:</h4>
-                <p><strong>a)</strong></p>
-                <ul>
-                    <li><strong>Argumentationsmuster:</strong> Kausale Argumentation (Wenn-Dann-Struktur)</li>
-                    <li><strong>Bewertung:</strong> Grundsätzlich logisch, aber die Prämissen sind nicht ausreichend belegt. Die Verallgemeinerung "fast jeder" ist ungenau. Der Zusammenhang zwischen Smartphone-Besitz und ständiger Erreichbarkeit wird vorausgesetzt, aber nicht bewiesen.</li>
-                </ul>
-                
-                <p><strong>b)</strong></p>
-                <ul>
-                    <li><strong>Argumentationsmuster:</strong> Argumentation mit Beispielen, induktives Schließen von Einzelfällen auf eine allgemeine Regel</li>
-                    <li><strong>Bewertung:</strong> Schwache Argumentation durch selektive Beispiele. Die wenigen prominenten Ausnahmen werden benutzt, um eine allgemeine Regel abzuleiten. Dies ist ein klassisches Beispiel für Cherry-Picking.</li>
-                </ul>
-                
-                <p><strong>c)</strong></p>
-                <ul>
-                    <li><strong>Argumentationsmuster:</strong> Dilemma/Entweder-Oder-Argumentation</li>
-                    <li><strong>Bewertung:</strong> Problematische Vereinfachung durch falsche Dichotomie. Es werden nur zwei Alternativen präsentiert, während es möglicherweise andere Lösungsansätze gibt.</li>
-                </ul>
+
+            <div class="accordion-header">5. Freie Erörterung <span class="schwierigkeitsgrad schwer">Schwer</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 5.1: Thema eingrenzen und strukturieren <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Freie Erörterungen erfordern eine klare Eingrenzung des Themas. Entwickeln Sie zu den folgenden breiten Themen eine konkrete Fragestellung und eine Gliederung:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="text-excerpt">
+                                <h4>Thema 1: "Soziale Medien"</h4>
+                                <p>→ Konkrete Fragestellung entwickeln</p>
+                                <p>→ Gliederung erstellen</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h4>Thema 2: "Nachhaltigkeit"</h4>
+                                <p>→ Konkrete Fragestellung entwickeln</p>
+                                <p>→ Gliederung erstellen</p>
+                            </div>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musterlösung Thema 1 - Soziale Medien:</h4>
+                            
+                            <p><strong>Konkrete Fragestellung:</strong><br>
+                            "Sollten soziale Medien für Jugendliche unter 16 Jahren mit einer täglichen Nutzungszeit von maximal einer Stunde reguliert werden?"</p>
+                            
+                            <p><strong>Gliederung:</strong></p>
+                            <ol>
+                                <li><strong>Einleitung</strong>
+                                    <ul>
+                                        <li>Aktuelle Situation der Social-Media-Nutzung bei Jugendlichen</li>
+                                        <li>Problemstellung und Fragestellung</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Argumente für eine Regulierung</strong>
+                                    <ul>
+                                        <li>Gesundheitliche Aspekte (Schlafmangel, psychische Belastung)</li>
+                                        <li>Schutz vor Cybermobbing und inadäquaten Inhalten</li>
+                                        <li>Förderung realer sozialer Kontakte</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Argumente gegen eine Regulierung</strong>
+                                    <ul>
+                                        <li>Eingriff in persönliche Freiheit</li>
+                                        <li>Praktische Umsetzungsprobleme</li>
+                                        <li>Positive Aspekte sozialer Medien (Bildung, Kreativität)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Abwägung und eigene Position</strong></li>
+                                <li><strong>Schluss mit Ausblick</strong></li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 5.2: Vollständige freie Erörterung <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Schreiben Sie eine vollständige freie Erörterung (400-500 Wörter) zu folgendem Thema:</p>
+                        
+                        <div class="muster-text">
+                            <h4>"Sollte das Wahlrecht bereits ab 16 Jahren gewährt werden?"</h4>
+                            <p>In einigen Bundesländern dürfen 16-Jährige bereits bei Kommunalwahlen abstimmen. Diskutieren Sie, ob das Wahlalter generell auf 16 Jahre gesenkt werden sollte.</p>
+                        </div>
+                        
+                        <div class="checkliste">
+                            <h3>Bewertungskriterien:</h3>
+                            <ul>
+                                <li>Klare Einleitung mit Hinführung zum Thema</li>
+                                <li>Systematische Darstellung von Pro- und Contra-Argumenten</li>
+                                <li>Verwendung konkreter Beispiele und Belege</li>
+                                <li>Ausgewogene Abwägung der Argumente</li>
+                                <li>Deutliche eigene Positionierung</li>
+                                <li>Logischer Schluss mit Ausblick</li>
+                                <li>Angemessenes Sprachregister</li>
+                                <li>Korrekte Rechtschreibung und Grammatik</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Musteraufsatz (gekürzt):</h4>
+                            
+                            <p><strong>Sollte das Wahlrecht bereits ab 16 Jahren gewährt werden?</strong></p>
+                            
+                            <p>Die Diskussion um eine Senkung des Wahlalters auf 16 Jahre gewinnt in Deutschland zunehmend an Fahrt. Während einige Bundesländer bereits bei Kommunalwahlen das Wahlrecht ab 16 eingeführt haben, bleibt die Frage kontrovers diskutiert. Die Entscheidung berührt fundamentale Fragen über Partizipation, Reife und demokratische Teilhabe.</p>
+                            
+                            <p><strong>Argumente für das Wahlrecht ab 16:</strong><br>
+                            Befürworter argumentieren, dass 16-Jährige bereits wichtige gesellschaftliche Verantwortung übernehmen. Sie dürfen arbeiten, Steuern zahlen und sind in vielen Bereichen rechtlich mündig. Zudem zeigen Studien aus Österreich, dass junge Wähler ihre Entscheidung oft bewusster treffen als ältere, da sie sich intensiver informieren.</p>
+                            
+                            <p><strong>Argumente gegen eine Senkung:</strong><br>
+                            Kritiker wenden ein, dass politische Reife Zeit braucht und 16-Jährige noch stark von emotionalen Entscheidungen geleitet werden könnten. Die Gefahr populistischer Einflüsse sei größer, da politische Erfahrung und historisches Bewusstsein noch nicht vollständig entwickelt seien.</p>
+                            
+                            <p><strong>Abwägung:</strong><br>
+                            Die Erfahrungen aus anderen Ländern zeigen, dass junge Wähler durchaus verantwortungsvoll mit ihrem Wahlrecht umgehen. Gleichzeitig könnte eine frühere politische Partizipation das Interesse an Politik langfristig stärken und der Politikverdrossenheit entgegenwirken...</p>
+                            
+                            <p><em>[Der vollständige Musteraufsatz würde weitere Argumente und einen ausführlichen Schluss enthalten]</em></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="exercise-section">
-        <h2>Übungen zur eigenen Positionierung</h2>
-        
-        <div class="exercise-card">
-            <h3>Übung 3: Texte kritisch bewerten</h3>
-            <p>Lies den folgenden Text und beantworte die Fragen:</p>
-            
-            <div class="text-excerpt">
-                <h4>Digitale Bildung – Chance oder Risiko?</h4>
-                <p>Die Digitalisierung des Bildungswesens wird heute vielfach als Allheilmittel für die Probleme unserer Schulen gepriesen. Tablets statt Schulbücher, Online-Kurse statt Frontalunterricht, Lern-Apps statt Arbeitsblätter – so lautet die Devise. Befürworter argumentieren, dass die digitale Transformation unaufhaltsam sei und Schulen die Schüler auf eine digitalisierte Arbeitswelt vorbereiten müssten.</p><p>Doch bei aller Begeisterung für die neuen Möglichkeiten werden die Risiken oft übersehen. Studien zeigen, dass die intensive Nutzung digitaler Medien die Konzentrationsfähigkeit beeinträchtigen kann. Zudem verleitet die Informationsflut im Internet zu oberflächlichem Denken und erschwert das vertiefte Verstehen komplexer Zusammenhänge.</p>
-                <p>Besonders problematisch ist auch die wachsende Abhängigkeit von Technologiekonzernen, die ihre kommerziellen Interessen verfolgen. Schulen geraten in Gefahr, zu Absatzmärkten für Hard- und Software zu werden, ohne dass der pädagogische Mehrwert immer gegeben ist.</p>
-                <p>Statt einem blinden Digitalisierungshype zu folgen, sollten wir einen ausgewogenen Ansatz wählen. Digitale Werkzeuge können den Unterricht bereichern, wenn sie gezielt und reflektiert eingesetzt werden. Sie sollten jedoch traditionelle Lernformen nicht vollständig ersetzen, sondern ergänzen. Letztlich kommt es nicht auf die Quantität der eingesetzten Technologie an, sondern auf die Qualität der pädagogischen Konzepte.</p>
+
+            <div class="accordion-header">6. Sprachliche Gestaltung <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 6.1: Verknüpfungswörter richtig einsetzen <span class="schwierigkeitsgrad einfach">Einfach</span></h3>
+                        <p>Verbessern Sie die folgenden Textpassagen durch den gezielten Einsatz von Verknüpfungswörtern:</p>
+                        
+                        <div class="text-excerpt">
+                            <p><strong>Originaltext:</strong><br>
+                            "Smartphones haben viele Vorteile. Sie ermöglichen schnelle Kommunikation. Sie können auch problematisch sein. Viele Menschen sind süchtig danach. Die Nutzung sollte bewusst erfolgen. Extreme Positionen helfen nicht weiter."</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Verknüpfungswörter nach Funktion:</strong>
+                            <ul>
+                                <li><strong>Ergänzung:</strong> außerdem, darüber hinaus, zusätzlich, ferner</li>
+                                <li><strong>Gegensatz:</strong> jedoch, hingegen, dennoch, andererseits</li>
+                                <li><strong>Folgerung:</strong> daher, folglich, somit, infolgedessen</li>
+                                <li><strong>Beispiel:</strong> beispielsweise, etwa, so zum Beispiel</li>
+                                <li><strong>Einschränkung:</strong> allerdings, freilich, immerhin</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Verbesserte Version:</h4>
+                            <p>"Smartphones haben zweifellos viele Vorteile, da sie beispielsweise schnelle Kommunikation ermöglichen. Andererseits können sie jedoch auch problematisch sein, weil viele Menschen süchtig danach sind. Folglich sollte die Nutzung bewusst erfolgen, wobei extreme Positionen allerdings nicht weiterhelfen."</p>
+                            
+                            <p><strong>Verbesserungen:</strong></p>
+                            <ul>
+                                <li>Satzverknüpfungen statt einzelner Hauptsätze</li>
+                                <li>Logische Progression durch Verknüpfungswörter</li>
+                                <li>Flüssigerer Lesefluss</li>
+                                <li>Klarere Argumentationsstruktur</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 6.2: Sachlichen Stil entwickeln <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Verwandeln Sie die folgenden emotionalen/umgangssprachlichen Aussagen in sachliche Formulierungen:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="text-excerpt">
+                                <h5>Aufgabe 1</h5>
+                                <p>"Das ist total bescheuert und geht gar nicht!"</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h5>Aufgabe 2</h5>
+                                <p>"Jeder normale Mensch weiß doch, dass das Quatsch ist."</p>
+                            </div>
+                            
+                            <div class="text-excerpt">
+                                <h5>Aufgabe 3</h5>
+                                <p>"Die Politiker sind alle korrupt und denken nur an sich selbst."</p>
+                            </div>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Sachliche Formulierungen:</h4>
+                            
+                            <p><strong>Aufgabe 1:</strong><br>
+                            "Diese Lösung erscheint wenig durchdacht und ist aus verschiedenen Gründen problematisch."</p>
+                            
+                            <p><strong>Aufgabe 2:</strong><br>
+                            "Diese Argumentation ist nicht überzeugend und wird durch keine belastbaren Belege gestützt."</p>
+                            
+                            <p><strong>Aufgabe 3:</strong><br>
+                            "Das Vertrauen in die Politik ist erschüttert, da einige Politiker den Eindruck erwecken, primär eigene Interessen zu verfolgen."</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <ol>
-                <li>Fassen Sie die Hauptaussage des Textes kurz zusammen.</li>
-                <li>Welche Position vertritt der Autor zur Digitalisierung in der Bildung?</li>
-                <li>Formulieren Sie Ihre eigene Position zum Text. Stimmen Sie dem Autor zu oder nicht? Begründen Sie Ihre Antwort mit konkreten Bezügen zum Text.</li>
-                <li>Erweitern Sie Ihre Stellungnahme um einen Aspekt, der im Text nicht behandelt wird.</li>
-            </ol>
-            
-            <button class="toggle-button solution-toggle">Lösung anzeigen</button>
-            
-            <div class="solution">
-                <h4>Musterlösung:</h4>
-                <ol>
-                    <li><strong>Zusammenfassung:</strong> Der Text setzt sich kritisch mit der Digitalisierung im Bildungswesen auseinander. Während er die Vorteile der Digitalisierung anerkennt, warnt er vor den Risiken wie Konzentrationsschwäche, oberflächlichem Denken und Abhängigkeit von Technologiekonzernen. Der Autor plädiert für einen ausgewogenen Ansatz, bei dem digitale Werkzeuge traditionelle Lernformen ergänzen, aber nicht ersetzen.</li>
-                    <li><strong>Position des Autors:</strong> Der Autor vertritt eine differenzierte, kritische Position. Er lehnt eine unreflektierte Digitalisierung ab und befürwortet einen gezielten, pädagogisch sinnvollen Einsatz digitaler Medien. Er warnt vor den Risiken und plädiert für eine Balance zwischen digitalen und traditionellen Lernformen.</li>
-                    <li><strong>Eigene Position (Beispiel):</strong> Ich stimme der Position des Autors weitgehend zu. Besonders überzeugend finde ich die Betonung der pädagogischen Qualität gegenüber der reinen Quantität der Technologie. Der Autor macht zurecht auf die Risiken der Digitalisierung aufmerksam, insbesondere auf die Abhängigkeit von kommerziellen Interessen der Technologiekonzerne.</li>
-                    <li><strong>Erweiterung:</strong> Ein Aspekt, der im Text nicht behandelt wird, ist die Frage der digitalen Kluft (Digital Divide). Die ungleiche Verfügbarkeit und Nutzung digitaler Technologien könnte soziale Ungleichheiten im Bildungswesen verstärken.</li>
-                </ol>
+
+            <div class="accordion-header">7. Prüfungssimulation <span class="schwierigkeitsgrad schwer">Schwer</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 7.1: Zeitmanagement trainieren <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Simulieren Sie eine Prüfungssituation mit vorgegebener Zeitbegrenzung:</p>
+                        
+                        <div class="checkliste">
+                            <h3>Zeitplan für 270 Minuten (4,5 Stunden):</h3>
+                            <ul>
+                                <li>45 Min: Text lesen und verstehen</li>
+                                <li>30 Min: Gliederung erstellen</li>
+                                <li>180 Min: Aufsatz schreiben</li>
+                                <li>15 Min: Überarbeitung</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="muster-text">
+                            <h4>Prüfungsaufgabe:</h4>
+                            <p>Analysieren Sie die Argumentation des folgenden Kommentars und nehmen Sie begründet Stellung zur Position des Autors. (450-600 Wörter)</p>
+                            
+                            <h5>"Die Zukunft der Arbeit" von Dr. Sarah Müller</h5>
+                            <p>Die Diskussion um die 4-Tage-Woche nimmt Fahrt auf. Während Progressive sie als Lösung für Burnout und Work-Life-Balance preisen, warnen Konservative vor wirtschaftlichen Einbußen. Doch beide Seiten übersehen entscheidende Aspekte...</p>
+                            
+                            <p><em>[Vollständiger Text würde hier folgen - ca. 300-400 Wörter]</em></p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Prüfungstipps:</strong>
+                            <ul>
+                                <li>Timer verwenden und Zwischenzeiten notieren</li>
+                                <li>Nicht zu lange beim Lesen verweilen</li>
+                                <li>Gliederung schriftlich festhalten</li>
+                                <li>Kontinuierlich weiterschreiben, auch bei Unsicherheiten</li>
+                                <li>Zeit für Korrektur einhalten</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 7.2: Vollständige Prüfungssimulation <span class="schwierigkeitsgrad schwer">Schwer</span></h3>
+                        <p>Bearbeiten Sie unter Prüfungsbedingungen eine der folgenden Aufgaben:</p>
+                        
+                        <div class="aufgaben-grid">
+                            <div class="muster-text">
+                                <h4>Option A: Textgebundene Erörterung</h4>
+                                <p>Thema: "Digitaler Minimalismus"</p>
+                                <p>Text: Kommentar über bewussten Verzicht auf digitale Technologien</p>
+                            </div>
+                            
+                            <div class="muster-text">
+                                <h4>Option B: Freie Erörterung</h4>
+                                <p>Thema: "Sollte Werbung für ungesunde Lebensmittel verboten werden?"</p>
+                            </div>
+                        </div>
+                        
+                        <div class="checkliste">
+                            <h3>Selbstbewertung nach der Simulation:</h3>
+                            <ul>
+                                <li>Zeitmanagement erfolgreich?</li>
+                                <li>Alle Aufgabenteile bearbeitet?</li>
+                                <li>Argumentation logisch aufgebaut?</li>
+                                <li>Genügend konkrete Belege verwendet?</li>
+                                <li>Sprachlicher Stil angemessen?</li>
+                                <li>Eigene Position klar entwickelt?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="exercise-card">
-            <h3>Übung 4: Gegenposition entwickeln</h3>
-            <p>Entwickeln Sie zu folgendem Textausschnitt eine differenzierte Gegenposition:</p>
-            
-            <div class="text-excerpt">
-                <p>"Der öffentliche Nahverkehr sollte in allen Städten kostenlos sein. Dies würde nicht nur die Umwelt entlasten, da mehr Menschen vom Auto auf Bus und Bahn umsteigen würden, sondern auch soziale Gerechtigkeit fördern. Geringverdiener, die sich kein Auto leisten können, wären nicht länger durch hohe Ticketpreise belastet. Zudem würden die Städte lebenswerter, da weniger Autos zu weniger Lärm und besserer Luftqualität führen würden. Die Kosten könnten durch eine moderate Erhöhung der Steuern für Besserverdienende gedeckt werden."</p>
+
+            <div class="accordion-header">8. Bewertung und Verbesserung <span class="schwierigkeitsgrad mittel">Mittel</span></div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-card">
+                        <h3>Übung 8.1: Schülertexte bewerten <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Bewerten Sie die folgenden Schülertexte nach den Standard-Kriterien und geben Sie Verbesserungsvorschläge:</p>
+                        
+                        <div class="text-excerpt">
+                            <h4>Schülertext 1 (Einleitung einer Erörterung):</h4>
+                            <p>"Heute ist Umweltschutz voll wichtig. Alle reden davon aber keiner macht was. Ich finde das echt krass. In meinem Aufsatz will ich erörtern ob Plastikverpackungen verboten werden sollten oder nicht. Es gibt Pro und Contra Argumente."</p>
+                        </div>
+                        
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <h4>Bewertung und Verbesserungsvorschläge:</h4>
+                            
+                            <p><strong>Probleme:</strong></p>
+                            <ul>
+                                <li>Umgangssprache ("voll wichtig", "echt krass")</li>
+                                <li>Pauschale Aussagen ohne Belege</li>
+                                <li>Fehlende präzise Themenfokussierung</li>
+                                <li>Zu persönlicher Ton</li>
+                                <li>Unvollständige Hinführung zum Thema</li>
+                            </ul>
+                            
+                            <p><strong>Verbesserte Version:</strong><br>
+                            "Der Umgang mit Plastikverpackungen ist zu einem zentralen Umweltthema geworden. Während die Convenience-Gesellschaft auf praktische Verpackungslösungen angewiesen ist, belastet die zunehmende Plastikverschmutzung Ozeane und Ökosysteme erheblich. Die Frage, ob ein generelles Verbot von Plastikverpackungen sinnvoll und umsetzbar wäre, erfordert eine differenzierte Betrachtung der Vor- und Nachteile."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card">
+                        <h3>Übung 8.2: Eigene Texte überarbeiten <span class="schwierigkeitsgrad mittel">Mittel</span></h3>
+                        <p>Verwenden Sie diese Checkliste zur systematischen Überarbeitung Ihrer eigenen Erörterungen:</p>
+                        
+                        <div class="checkliste">
+                            <h3>Überarbeitungs-Checkliste:</h3>
+                            <ul>
+                                <li><strong>Inhalt:</strong> Alle Aspekte der Aufgabenstellung behandelt?</li>
+                                <li><strong>Struktur:</strong> Logischer Aufbau erkennbar?</li>
+                                <li><strong>Argumentation:</strong> Nachvollziehbare Begründungen?</li>
+                                <li><strong>Belege:</strong> Konkrete Beispiele verwendet?</li>
+                                <li><strong>Sprache:</strong> Angemessenes Register?</li>
+                                <li><strong>Verknüpfungen:</strong> Flüssige Übergänge?</li>
+                                <li><strong>Position:</strong> Eigene Meinung deutlich?</li>
+                                <li><strong>Form:</strong> Rechtschreibung und Grammatik korrekt?</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Praktische Überarbeitungstipps:</strong>
+                            <ul>
+                                <li>Text laut vorlesen - Stolperstellen fallen auf</li>
+                                <li>Rückwärts korrigieren - mehr Rechtschreibfehler entdeckt</li>
+                                <li>Jeden Absatz auf Kernaussage prüfen</li>
+                                <li>Verknüpfungswörter ergänzen</li>
+                                <li>Umgangssprache durch Bildungssprache ersetzen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <button class="toggle-button solution-toggle">Lösung anzeigen</button>
-            
-            <div class="solution">
-                <h4>Musterlösung:</h4>
-                <p><strong>Gegenposition:</strong></p>
-                <p>Während die Idee eines kostenlosen öffentlichen Nahverkehrs auf den ersten Blick verlockend erscheint, gibt es mehrere gewichtige Gegenargumente:</p>
-                <ol>
-                    <li><strong>Finanzierungsprobleme:</strong> Die Finanzierung durch Steuererhöhungen für Besserverdienende könnte zu Widerständen führen und ist möglicherweise nicht nachhaltig. Zudem besteht die Gefahr, dass andere wichtige öffentliche Aufgaben unterfinanziert werden.</li>
-                    <li><strong>Qualitätsverlust:</strong> Erfahrungen aus Städten mit kostenlosem Nahverkehr zeigen, dass die Qualität der Dienstleistungen oft leidet, wenn keine direkten Einnahmen generiert werden. Es könnte zu überfüllten Verkehrsmitteln und weniger Investitionen in die Infrastruktur kommen.</li>
-                    <li><strong>Fehlende Lenkungswirkung:</strong> Ein komplett kostenloser Nahverkehr könnte zu einer Übernutzung führen, bei der auch kurze Strecken, die problemlos zu Fuß oder mit dem Fahrrad zurückgelegt werden könnten, mit öffentlichen Verkehrsmitteln gefahren werden.</li>
-                    <li><strong>Soziale Gerechtigkeit:</strong> Die Finanzierung durch allgemeine Steuermittel bedeutet, dass auch Menschen, die den Nahverkehr nicht nutzen (können oder wollen), für ihn bezahlen müssen. Dies könnte als ungerecht empfunden werden.</li>
-                    <li><strong>Alternativvorschlag:</strong> Statt eines vollständig kostenlosen Nahverkehrs wäre ein sozial gestaffeltes System mit ermäßigten Preisen für bestimmte Gruppen möglicherweise sinnvoller und finanzierbarer.</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    
-    <div class="tip-box">
-        <strong>Tipp für die Erörterungsübungen:</strong><br>
-        Achten Sie bei der Entwicklung Ihrer Position immer auf eine ausgewogene Argumentation. Berücksichtigen Sie sowohl Pro- als auch Contra-Argumente und belegen Sie Ihre Aussagen mit konkreten Beispielen oder Textstellen. Eine gute Erörterung zeichnet sich durch Differenziertheit und Sachlichkeit aus.
-    </div>
-</body>
-</html>
+
+            <div class="accordion-header">Formulierungshilfen für Erörterungen</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="uebung-kategorie">
+                        <h3>Einleitungsformulierungen</h3>
+                        <ul>
+                            <li>"Die Frage nach... beschäftigt..."</li>
+                            <li>"In der aktuellen Diskussion um... stehen sich verschiedene Positionen gegenüber"</li>
+                            <li>"Das Thema... ist von großer gesellschaftlicher Relevanz, da..."</li>
+                            <li>"Während die einen... befürworten, warnen andere vor..."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="uebung-kategorie">
+                        <h3>Argumentation strukturieren</h3>
+                        <ul>
+                            <li>"Ein gewichtiges Argument für... ist..."</li>
+                            <li>"Dagegen spricht jedoch..."</li>
+                            <li>"Dies wird durch... belegt"</li>
+                            <li>"Ein konkretes Beispiel verdeutlicht..."</li>
+                            <li>"Daraus folgt..."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="uebung-kategorie">
+                        <h3>Eigene Position formulieren</h3>
+                        <ul>
+                            <li>"Nach Abwägung aller Argumente..."</li>
+                            <li>"Meiner Ansicht nach überwiegen..."</li>
+                            <li>"Eine differenzierte Betrachtung zeigt..."</li>
+                            <li>"Die Lösung liegt vermutlich in einem ausgewogenen Ansatz"</li>
+                        </ul>
+                    </div>

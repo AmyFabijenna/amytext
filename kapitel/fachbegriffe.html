@@ -12,271 +12,652 @@
         .content-header h1 { font-size: 2em; margin-bottom: 10px; }
         .content-header p { font-size: 1.1em; opacity: 0.9; }
         .content-body { padding: 0 20px 20px 20px; }
-        .back-button { display: inline-block; background: #95a5a6; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; margin-bottom: 20px; transition: background 0.3s; }
-        .back-button:hover { background: #7f8c8d; }
-        .section { margin-bottom: 30px; }
-        .section-title { color: #2c3e50; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #3498db; font-size: 1.5em; }
-        .btn-toggle-all { background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; margin-bottom: 15px; font-size: 0.9em; font-weight: bold; transition: background 0.3s ease; }
-        .btn-toggle-all:hover { background: #2980b9; }
-        .accordion-header { background: linear-gradient(135deg, #34495e, #2c3e50); color: white; padding: 12px 15px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border: none; width: 100%; text-align: left; outline: none; position: relative; user-select: none; transition: background 0.3s ease; font-size: 0.95em; border-radius: 6px; margin-bottom: 5px; }
-        .accordion-header:hover { background: linear-gradient(135deg, #2c3e50, #34495e); }
-        .accordion-header.active { background: linear-gradient(135deg, #2c3e50, #34495e); }
-        .accordion-header .accordion-icon::after { content: '+'; font-size: 1.1em; font-weight: bold; transition: transform 0.3s ease; }
-        .accordion-header.active .accordion-icon::after { content: '-'; }
-        .panel { display: none; background-color: #f9f9f9; border-radius: 0 0 5px 5px; margin-bottom: 10px; padding: 15px; }
-        .panel.active { display: block; }
-        .term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin: 15px 0; }
-        .term-card { background: #f8f9fa; border-radius: 6px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid #3498db; transition: transform 0.2s ease, box-shadow 0.2s ease; font-size: 0.9em; }
-        .term-card:hover { transform: translateY(-2px); box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
-        .term-card h3 { color: #2c3e50; margin-bottom: 8px; font-size: 1.1em; }
-        .example-box { background: #e8f4f8; border-radius: 4px; padding: 10px; margin: 10px 0; font-style: italic; font-size: 0.9em; }
-        .exercise { background: #f9f9f9; border-radius: 6px; padding: 15px; margin: 15px 0; border: 1px solid #e0e0e0; }
-        .exercise h3 { color: #2c3e50; margin-bottom: 12px; font-size: 1.2em; }
-        .exercise-question { margin-bottom: 12px; }
-        .exercise-options { margin-left: 15px; }
-        .exercise-options label { display: block; margin-bottom: 6px; cursor: pointer; }
-        .btn { background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s ease; font-size: 0.9em; }
-        .btn:hover { background: #2980b9; }
-        .solution { display: none; background: #d4edda; border-radius: 4px; padding: 12px; margin-top: 12px; }
-        .solution.active { display: block; }
-        @media (max-width: 768px) { .content-body { padding: 0 15px 15px 15px; } .term-grid { grid-template-columns: 1fr; } .content-header h1 { font-size: 1.7em; } }
+        .welcome-section { background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 5px solid #34495e; }
+        .welcome-section h2 { color: #2c3e50; margin-bottom: 15px; }
+        .accordion-header { background: #34495e; color: white; cursor: pointer; padding: 15px; width: 100%; border: none; text-align: left; outline: none; font-size: 1.1em; border-radius: 5px; margin-bottom: 5px; transition: background-color 0.3s ease; }
+        .accordion-header:hover { background: #2c3e50; }
+        .accordion-header.active { background: #2c3e50; }
+        .accordion-header::after { content: '+'; color: white; font-weight: bold; float: right; font-size: 1.2em; transition: transform 0.3s ease; }
+        .accordion-header.active::after { content: '-'; transform: rotate(180deg); }
+        .panel { display: none; background-color: #f9f9f9; border-radius: 0 0 5px 5px; margin-bottom: 10px; overflow: hidden; transition: all 0.3s ease; max-height: 0; }
+        .panel.active { display: block; padding: 15px; max-height: 1000px; }
+        .panel-content { padding: 15px 0; }
+        .term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .term-card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #3498db; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .term-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .term-card h3 { color: #2c3e50; margin-bottom: 10px; font-size: 1.2em; }
+        .term-card .definition { margin-bottom: 10px; font-weight: bold; color: #34495e; }
+        .term-card .wirkung { margin-bottom: 10px; color: #666; }
+        .term-card .beispiel { background: #e8f4f8; padding: 10px; border-radius: 4px; font-style: italic; border-left: 3px solid #3498db; }
+        .example-box { background: #e8f4f8; border-left: 4px solid #3498db; padding: 12px; margin: 12px 0; border-radius: 4px; }
+        .example-box h4 { color: #2c3e50; margin-bottom: 8px; }
+        .exercise-box { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .exercise-box h4 { color: #856404; margin-bottom: 12px; }
+        .solution-box { background: #d4edda; border: 1px solid #c3e6cb; border-radius: 6px; padding: 15px; margin: 15px 0; display: none; }
+        .solution-box.active { display: block; }
+        .toggle-solution { background: #34495e; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-top: 8px; transition: background 0.3s; }
+        .toggle-solution:hover { background: #2c3e50; }
+        .kategorie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0; }
+        .kategorie-card { background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 3px solid #e74c3c; }
+        .kategorie-card h4 { color: #2c3e50; margin-bottom: 8px; }
+        .tip-box { background: #e8f5e8; border: 1px solid #c3e6cb; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .tip-box strong { color: #155724; }
+        .prüfungsrelevanz { display: inline-block; background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.8em; margin-left: 5px; }
+        .wichtigkeit-1 { background: #e74c3c; }
+        .wichtigkeit-2 { background: #f39c12; }
+        .wichtigkeit-3 { background: #27ae60; }
+        @media (max-width: 768px) { .content-body { padding: 0 15px 15px 15px; } .term-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="content-container">
         <header class="content-header">
             <h1>Fachbegriffe für die Deutschmatura</h1>
-            <p>Glossar wichtiger Begriffe mit Definitionen und Anwendungsbeispielen</p>
+            <p>Umfassende Sammlung aller wichtigen Begriffe mit Definitionen und Anwendungsbeispielen</p>
         </header>
-
+        
         <div class="content-body">
-            <button type="button" class="btn-toggle-all">Alle Bereiche öffnen/schließen</button>
+            <div class="welcome-section">
+                <h2>Fachbegriffe für die Deutschmatura</h2>
+                <p>Ein präziser Umgang mit Fachbegriffen zeigt deine sprachliche Kompetenz und fachliche Sicherheit. Diese umfassende Sammlung enthält alle wichtigen Begriffe für die Deutschmatura - von grundlegenden Stilmitteln bis zu komplexen literaturwissenschaftlichen Konzepten.</p>
+                <p><strong>Aufbau:</strong> 10 Hauptkategorien mit über 200 Begriffen, präzise Definitionen mit Beispielen, Anwendungshinweise für die Textanalyse, Verwechslungsgefahren und Abgrenzungen.</p>
+            </div>
 
-            <section id="stilmittel" class="section">
-                <h2 class="section-title">Stilmittel und rhetorische Figuren</h2>
-                
-                <div class="accordion-header">
-                    <span>Metapher</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Bildlicher Ausdruck, bei dem ein Wort aus seinem eigentlichen Bedeutungszusammenhang in einen anderen übertragen wird.</p>
-                    <p><strong>Wirkung:</strong> Veranschaulichung, Verstärkung, emotionale Aufladung</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "Das Feuer der Liebe" (Liebe wird mit Feuer verglichen, ohne dass ein expliziter Vergleich verwendet wird)
+            <div class="accordion-header">1. Stilmittel und rhetorische Figuren</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <h3>Wortfiguren (Tropen)</h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Metapher <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Bildlicher Ausdruck durch Übertragung der Bedeutung ohne Vergleichspartikel</div>
+                            <div class="wirkung">Wirkung: Veranschaulichung, emotionale Intensivierung</div>
+                            <div class="beispiel">Beispiel: "Das Feuer der Leidenschaft" (Leidenschaft = Feuer)</div>
+                            <p><strong>Abgrenzung:</strong> Vergleich verwendet "wie" oder "als"</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Vergleich (Simile) <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Gegenüberstellung mittels Vergleichspartikeln (wie, als, gleich)</div>
+                            <div class="wirkung">Wirkung: Veranschaulichung, Konkretisierung</div>
+                            <div class="beispiel">Beispiel: "Sie kämpfte wie eine Löwin"</div>
+                            <p><strong>Analysehilfe:</strong> Immer beide Vergleichsobjekte benennen</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Metonymie <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Ersetzung eines Begriffs durch einen sachlich verwandten</div>
+                            <div class="wirkung">Unterkategorien:</div>
+                            <ul>
+                                <li><strong>Pars pro toto:</strong> "Alle Hände an Deck" (Hand = Person)</li>
+                                <li><strong>Totum pro parte:</strong> "Deutschland spielt gegen Italien" (Land = Mannschaft)</li>
+                                <li><strong>Ursache für Wirkung:</strong> "Er trinkt ein Glas" (Glas = Inhalt)</li>
+                            </ul>
+                            <p><strong>Abgrenzung:</strong> Bei Metapher kein sachlicher Zusammenhang</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Personifikation (Prosopopoeia) <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Vermenschlichung von Tieren, Pflanzen, Gegenständen oder Abstrakta</div>
+                            <div class="wirkung">Wirkung: Verlebendigung, emotionale Nähe</div>
+                            <div class="beispiel">Beispiel: "Der Wind flüstert", "Die Zeit läuft"</div>
+                            <p><strong>Häufig in:</strong> Lyrik, märchenhaften Texten</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Hyperbel <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Bewusste Übertreibung</div>
+                            <div class="wirkung">Wirkung: Verstärkung, Dramatisierung</div>
+                            <div class="beispiel">Beispiel: "Ich warte schon eine Ewigkeit"</div>
+                            <p><strong>Gegenteil:</strong> Untertreibung (Litotes)</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Oxymoron <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Verbindung zweier sich widersprechender Begriffe</div>
+                            <div class="wirkung">Wirkung: Spannung, Paradoxie, gedankliche Herausforderung</div>
+                            <div class="beispiel">Beispiel: "bittersüß", "alter Knabe", "stummer Schrei"</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Klangfiguren</h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Alliteration <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Wiederholung des Anfangslauts in aufeinanderfolgenden Wörtern</div>
+                            <div class="wirkung">Wirkung: Rhythmus, Einprägsamkeit</div>
+                            <div class="beispiel">Beispiel: "Milch macht müde Männer munter"</div>
+                            <p><strong>Häufig in:</strong> Werbung, Lyrik, Sprichwörtern</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Assonanz <span class="prüfungsrelevanz wichtigkeit-3">⭐</span></h3>
+                            <div class="definition">Definition: Wiederholung gleicher Vokale</div>
+                            <div class="wirkung">Wirkung: Klangliche Harmonie, Musikalisierung</div>
+                            <div class="beispiel">Beispiel: "Der Nebel steigt, es fällt das Laub"</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Onomatopoeia (Lautmalerei) <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Nachahmung von Lauten durch Sprache</div>
+                            <div class="wirkung">Wirkung: Sinnliche Vergegenwärtigung</div>
+                            <div class="beispiel">Beispiel: "zisch", "plätschern", "summen"</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Satzfiguren</h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Anapher <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Wiederholung am Satz-/Versanfang</div>
+                            <div class="wirkung">Wirkung: Steigerung, Rhythmus, Eindringlichkeit</div>
+                            <div class="beispiel">Beispiel: "Ich kam. Ich sah. Ich siegte."</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Rhetorische Frage <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Frage ohne erwartete Antwort, impliziert bestimmte Antwort</div>
+                            <div class="wirkung">Wirkung: Zustimmung erzwingen, Publikum einbeziehen</div>
+                            <div class="beispiel">Beispiel: "Wer würde das nicht wollen?"</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Chiasmus <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Kreuzstellung von Satzgliedern (AB-BA)</div>
+                            <div class="wirkung">Wirkung: Prägnanz, Ausgewogenheit</div>
+                            <div class="beispiel">Beispiel: "Der Einsatz war groß, klein war der Gewinn"</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Parallelismus <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Wiederholung der gleichen Satzstruktur</div>
+                            <div class="wirkung">Wirkung: Rhythmus, Verstärkung</div>
+                            <div class="beispiel">Beispiel: "Heiß ist die Liebe, kalt ist der Schnee"</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Gedankenfiguren</h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Ironie <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Ausdruck des Gegenteils vom Gemeinten</div>
+                            <div class="wirkung">Wirkung: Kritik, Humor, Distanzierung</div>
+                            <div class="beispiel">Beispiel: "Das hast du ja toll gemacht!" (bei einem Missgeschick)</div>
+                            <p><strong>Abgrenzung:</strong> Sarkasmus ist verletzender, Zynismus grundsätzlich menschenverachtend</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Paradoxon <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Scheinbar widersprüchliche, aber tiefere Wahrheit enthaltende Aussage</div>
+                            <div class="wirkung">Wirkung: Nachdenklichkeit, philosophische Tiefe</div>
+                            <div class="beispiel">Beispiel: "Wer sein Leben retten will, wird es verlieren"</div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="accordion-header">
-                    <span>Vergleich</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Gegenüberstellung von zwei Dingen mit Hilfe von Vergleichspartikeln (wie, als, gleichsam).</p>
-                    <p><strong>Wirkung:</strong> Veranschaulichung, Konkretisierung</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "Sie kämpfte wie eine Löwin" (Der Vergleich mit einer Löwin veranschaulicht die Intensität des Kampfes)
-                    </div>
-                </div>
-                
-                <div class="accordion-header">
-                    <span>Personifikation</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Zuschreibung menschlicher Eigenschaften oder Handlungen zu unbelebten Dingen, Tieren oder abstrakten Begriffen.</p>
-                    <p><strong>Wirkung:</strong> Veranschaulichung, Emotionalisierung, lebendigere Darstellung</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "Die Sonne lachte vom Himmel" (Der Sonne wird die menschliche Eigenschaft des Lachens zugeschrieben)
-                    </div>
-                </div>
-                
-                <div class="accordion-header">
-                    <span>Hyperbel</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Übertreibung, um etwas besonders eindringlich darzustellen.</p>
-                    <p><strong>Wirkung:</strong> Verstärkung, Dramatisierung, Betonung</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "Ich habe dir das schon tausendmal gesagt" (Die Zahl tausend wird übertrieben verwendet, um die Häufigkeit zu betonen)
-                    </div>
-                </div>
-                
-                <div class="accordion-header">
-                    <span>Anapher</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Wiederholung eines Wortes oder einer Wortgruppe am Anfang aufeinanderfolgender Sätze oder Verse.</p>
-                    <p><strong>Wirkung:</strong> Rhythmisierung, Betonung, Steigerung</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "Er lachte nicht. Er weinte nicht. Er sprach nicht." (Wiederholung von "Er" am Satzanfang)
-                    </div>
-                </div>
-                
-                <div class="accordion-header">
-                    <span>Rhetorische Frage</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Frage, die keine Antwort erwartet, sondern eine Aussage verstärken oder den Leser zum Nachdenken anregen soll.</p>
-                    <p><strong>Wirkung:</strong> Appell, Betonung, gedankliche Beteiligung des Lesers</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "Soll das etwa gerecht sein?" (Es wird keine Antwort erwartet, sondern die Ungerechtigkeit betont)
-                    </div>
-                </div>
-                
-                <div class="accordion-header">
-                    <span>Ironie</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Aussage, bei der das Gesagte nicht dem Gemeinten entspricht, oft mit kritischer oder spöttischer Absicht.</p>
-                    <p><strong>Wirkung:</strong> Kritik, Spott, humorvolle Distanzierung</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "Das hast du aber toll gemacht!" (wenn jemand etwas versehentlich kaputt gemacht hat)
-                    </div>
-                </div>
-                
-                <div class="accordion-header">
-                    <span>Oxymoron</span>
-                    <span class="accordion-icon"></span>
-                </div>
-                <div class="panel">
-                    <p><strong>Definition:</strong> Verbindung zweier sich widersprechender Begriffe zu einer neuen Einheit.</p>
-                    <p><strong>Wirkung:</strong> Spannung, Paradoxie, gedankliche Herausforderung</p>
-                    <div class="example-box">
-                        <strong>Beispiel:</strong> "bittersüß", "alter Knabe", "hastiges Warten"
-                    </div>
-                </div>
-            </section>
+            </div>
 
-            <section id="textanalyse" class="section">
-                <h2 class="section-title">Textanalyse</h2>
-                
-                <div class="term-grid">
-                    <div class="term-card">
-                        <h3>Erzählperspektive</h3>
-                        <p>Die Position, aus der eine Geschichte erzählt wird (personal, auktorial, neutral, Ich-Erzähler).</p>
-                    </div>
-                    
-                    <div class="term-card">
-                        <h3>Sprachregister</h3>
-                        <p>Die sprachliche Varietät, die je nach Situation, Thema und Gesprächspartner gewählt wird (formell, informell, Fachsprache).</p>
-                    </div>
-                    
-                    <div class="term-card">
-                        <h3>Syntax</h3>
-                        <p>Lehre vom Satzbau; untersucht die Anordnung und Beziehung von Wörtern im Satz.</p>
-                    </div>
-                    
-                    <div class="term-card">
-                        <h3>Semantik</h3>
-                        <p>Lehre von der Bedeutung sprachlicher Zeichen und ihrer Beziehungen zueinander.</p>
-                    </div>
-                    
-                    <div class="term-card">
-                        <h3>Tempus</h3>
-                        <p>Zeitform des Verbs (Präsens, Präteritum, Perfekt, Plusquamperfekt, Futur I/II).</p>
-                    </div>
-                    
-                    <div class="term-card">
-                        <h3>Modus</h3>
-                        <p>Aussageweise des Verbs (Indikativ, Konjunktiv, Imperativ).</p>
+            <div class="accordion-header">2. Textstruktur und -aufbau</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Exposition <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Einführung in Handlung, Personen, Ort und Zeit</div>
+                            <div class="wirkung">Funktion: Grundlegende Information für Textverständnis</div>
+                            <p><strong>Häufig in:</strong> Drama, Epik</p>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Peripetie <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Wendepunkt, Umschlag der Handlung</div>
+                            <div class="wirkung">Funktion: Spannungshöhepunkt</div>
+                            <div class="beispiel">Beispiel: Erkennungsszene in der Tragödie</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Katharsis <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Läuterung durch Mitleid und Furcht (Aristoteles)</div>
+                            <div class="wirkung">Anwendung: Wirkung der Tragödie auf den Zuschauer</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Klimax <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Stufenweise Steigerung</div>
+                            <div class="wirkung">Wirkung: Intensivierung, Höhepunkt</div>
+                            <div class="beispiel">Beispiel: "Veni, vidi, vici" - "ich kam, sah, siegte"</div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section id="interpretation" class="section">
-                <h2 class="section-title">Interpretation</h2>
-                
-                <div class="term-grid">
-                    <div class="term-card">
-                        <h3>Deutungshypothese</h3>
-                        <p>Vorläufige Annahme über die Bedeutung oder Aussageabsicht eines Textes, die im Verlauf der Interpretation überprüft wird.</p>
+            <div class="accordion-header">3. Narrative Techniken</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <h3>Erzählperspektive <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                    <div class="kategorie-grid">
+                        <div class="kategorie-card">
+                            <h4>Ich-Erzähler</h4>
+                            <p>Subjektive Sicht, beschränktes Wissen</p>
+                        </div>
+                        <div class="kategorie-card">
+                            <h4>Auktorialer Erzähler</h4>
+                            <p>Allwissend, kommentierend</p>
+                        </div>
+                        <div class="kategorie-card">
+                            <h4>Personaler Erzähler</h4>
+                            <p>Perspektive einer Figur</p>
+                        </div>
+                        <div class="kategorie-card">
+                            <h4>Neutraler Erzähler</h4>
+                            <p>Objektiv berichtend</p>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Symbol</h3>
-                        <p>Zeichen, das über seine unmittelbare Bedeutung hinaus auf etwas Allgemeineres, Abstrakteres verweist.</p>
+                    <h3>Fokalisierung (Genette) <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Nullfokalisierung</h3>
+                            <div class="definition">Erzähler weiß mehr als Figuren</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Interne Fokalisierung</h3>
+                            <div class="definition">Erzähler = Figur</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Externe Fokalisierung</h3>
+                            <div class="definition">Erzähler weiß weniger als Figuren</div>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Motiv</h3>
-                        <p>Wiederkehrendes inhaltliches oder formales Element in einem oder mehreren literarischen Werken.</p>
-                    </div>
-                    
-                    <div class="term-card">
-                        <h3>Leitmotiv</h3>
-                        <p>Ein sich wiederholendes Motiv, das mit einer bestimmten Person, Situation oder Idee verbunden ist.</p>
+                    <h3>Zeitgestaltung</h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Erzählzeit vs. Erzählte Zeit <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Dauer des Erzählens vs. Dauer der Handlung</div>
+                            <div class="wirkung">Techniken: Zeitraffung, Zeitdehnung, Deckung</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Analepse (Rückblende) <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Nachträgliche Darstellung früherer Ereignisse</div>
+                            <div class="wirkung">Funktion: Erklärung, Charakterisierung</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Prolepse (Vorausdeutung) <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Vorwegnahme künftiger Ereignisse</div>
+                            <div class="wirkung">Funktion: Spannung, Ironie</div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section id="textsorten" class="section">
-                <h2 class="section-title">Textsorten</h2>
-                
-                <div class="term-grid">
-                    <div class="term-card">
-                        <h3>Lyrik</h3>
-                        <p>Dichtung in Versform; Gedichte, Balladen, Sonette.</p>
+            <div class="accordion-header">4. Lyrik-Analyse</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <h3>Metrum <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Jambus</h3>
+                            <div class="definition">unbetont-betont (∪ /)</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Trochäus</h3>
+                            <div class="definition">betont-unbetont (/ ∪)</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Anapäst</h3>
+                            <div class="definition">unbetont-unbetont-betont (∪ ∪ /)</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Daktylus</h3>
+                            <div class="definition">betont-unbetont-unbetont (/ ∪ ∪)</div>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Epik</h3>
-                        <p>Erzählende Dichtung; Romane, Novellen, Kurzgeschichten, Fabeln.</p>
+                    <h3>Versmaße <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Blankvers</h3>
+                            <div class="definition">Ungereimter fünfhebiger Jambus</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Alexandriner</h3>
+                            <div class="definition">Sechshebiger Jambus mit Zäsur</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Knittelvers</h3>
+                            <div class="definition">Vierhebiger Jambus (Goethe's Faust I)</div>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Dramatik</h3>
-                        <p>Dichtung für die Bühne; Tragödien, Komödien, Dramen.</p>
+                    <h3>Reimschema <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Paarreim</h3>
+                            <div class="definition">aabb</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Kreuzreim</h3>
+                            <div class="definition">abab</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Umarmender Reim</h3>
+                            <div class="definition">abba</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Schweifreim</h3>
+                            <div class="definition">aabccb</div>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Sachtext</h3>
-                        <p>Informierender Text; Kommentare, Reportagen, Essays, wissenschaftliche Texte.</p>
+                    <h3>Kadenz <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Männlich</h3>
+                            <div class="definition">Betonung auf letzter Silbe</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Weiblich</h3>
+                            <div class="definition">Betonung auf vorletzter Silbe</div>
+                        </div>
+                        <div class="term-card">
+                            <h3>Gleitend</h3>
+                            <div class="definition">Betonung auf drittletzter Silbe</div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section id="argumentation" class="section">
-                <h2 class="section-title">Argumentation</h2>
-                
-                <div class="term-grid">
-                    <div class="term-card">
-                        <h3>These</h3>
-                        <p>Behauptung oder aufgestellter Gedanke, der begründet werden soll.</p>
+            <div class="accordion-header">5. Sprachanalyse-Begriffe</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <h3>Phonetik/Phonologie <span class="prüfungsrelevanz wichtigkeit-3">⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Phonem</h3>
+                            <div class="definition">Definition: Kleinste bedeutungsunterscheidende Lauteinheit</div>
+                            <div class="beispiel">Beispiel: /b/ und /p/ unterscheiden "Bein" und "Pein"</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Phonästhetik</h3>
+                            <div class="definition">Definition: Lehre von der Lautwirkung</div>
+                            <div class="wirkung">Anwendung: Klanganalyse in der Lyrik</div>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Argument</h3>
-                        <p>Begründung oder Beweis für eine These.</p>
+                    <h3>Morphologie <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Morphem</h3>
+                            <div class="definition">Definition: Kleinste bedeutungstragende Einheit</div>
+                            <div class="wirkung">Typen: Wurzel-, Ableitungs-, Flexionsmorpheme</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Derivation</h3>
+                            <div class="definition">Definition: Wortbildung durch Ableitung</div>
+                            <div class="beispiel">Beispiel: "lesen" → "Leser" → "lesbar"</div>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Beleg</h3>
-                        <p>Konkretes Beispiel, Zitat oder empirischer Nachweis für ein Argument.</p>
+                    <h3>Semantik <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Denotation</h3>
+                            <div class="definition">Definition: Grundbedeutung, Wörterbuchbedeutung</div>
+                            <div class="beispiel">Beispiel: "Rose" = Blume</div>
+                        
+                        <div class="term-card">
+                            <h3>Konnotation</h3>
+                            <div class="definition">Definition: Nebenbedeutung, assoziative Bedeutung</div>
+                            <div class="beispiel">Beispiel: "Rose" = Liebe, Schönheit</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Polysemie</h3>
+                            <div class="definition">Definition: Mehrdeutigkeit eines Wortes</div>
+                            <div class="beispiel">Beispiel: "Bank" (Sitzgelegenheit/Geldinstitut)</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Synonymie</h3>
+                            <div class="definition">Definition: Bedeutungsgleichheit</div>
+                            <div class="beispiel">Beispiel: "beginnen" - "anfangen"</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Antonymie</h3>
+                            <div class="definition">Definition: Bedeutungsgegensatz</div>
+                            <div class="beispiel">Beispiel: "heiß" - "kalt"</div>
+                        </div>
                     </div>
                     
-                    <div class="term-card">
-                        <h3>Schlussfolgerung</h3>
-                        <p>Logische Konsequenz aus den vorangegangenen Argumenten.</p>
-                    </div>
-                    
-                    <div class="term-card">
-                        <h3>Appell</h3>
-                        <p>Aufforderung an den Leser oder Zuhörer, etwas zu tun oder zu denken.</p>
+                    <h3>Pragmatik <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Sprechakt (Austin/Searle)</h3>
+                            <div class="definition">Definition: Handlung durch Sprechen</div>
+                            <div class="wirkung">Typen: Repräsentative, Direktive, Kommissive, Expressive, Deklarative</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Konversationsmaximen (Grice)</h3>
+                            <div class="definition">Kommunikationsregeln:</div>
+                            <ul>
+                                <li><strong>Quantität:</strong> Gib so viel Information wie nötig</li>
+                                <li><strong>Qualität:</strong> Sei wahrhaftig</li>
+                                <li><strong>Relation:</strong> Sei relevant</li>
+                                <li><strong>Modalität:</strong> Sei klar und eindeutig</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section id="uebungen" class="section">
-                <h2 class="section-title">Übungen</h2>
-                
-                <div class="exercise">
-                    <h3>Übung 1: Stilmittel erkennen</h3>
-                    <div class="exercise-question">
+            <div class="accordion-header">6. Textlinguistik</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Kohäsion <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Grammatische Verknüpfung der Textelemente</div>
+                            <div class="wirkung">Mittel: Pronomen, Konjunktionen, Wiederholungen</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Kohärenz <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Inhaltlicher Zusammenhang, "roter Faden"</div>
+                            <div class="wirkung">Bedeutung: Text als sinnvolle Einheit</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Textsorte <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Definition: Konventionalisierte Muster für bestimmte Kommunikationssituationen</div>
+                            <div class="wirkung">Merkmale: Funktion, Struktur, Stil</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Register <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Situativ bedingte Sprachvarietät</div>
+                            <div class="wirkung">Faktoren: Formalität, Fachlichkeit, Medium</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">7. Literaturgeschichte und Epochen</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <h3>Epochenbegriffe <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Mittelalter (800-1350)</h3>
+                            <div class="definition">Merkmale: Geistliche Literatur, Minnelyrik, Heldenepik</div>
+                            <div class="wirkung">Autoren: Walther von der Vogelweide, Wolfram von Eschenbach</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Barock (1600-1720)</h3>
+                            <div class="definition">Merkmale: Vanitas, Carpe diem, Antithesen</div>
+                            <div class="wirkung">Autoren: Gryphius, Fleming, Grimmelshausen</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Aufklärung (1720-1785)</h3>
+                            <div class="definition">Merkmale: Vernunft, Toleranz, bürgerliches Trauerspiel</div>
+                            <div class="wirkung">Autoren: Lessing, Gellert</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Sturm und Drang (1767-1785)</h3>
+                            <div class="definition">Merkmale: Geniekult, Gefühl über Vernunft, Rebellion</div>
+                            <div class="wirkung">Autoren: Goethe, Schiller, Lenz</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Klassik (1786-1805)</h3>
+                            <div class="definition">Merkmale: Humanität, Harmonie, Vollendung der Form</div>
+                            <div class="wirkung">Autoren: Goethe, Schiller</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Romantik (1795-1848)</h3>
+                            <div class="definition">Merkmale: Sehnsucht, Natur, Mittelalterbegeisterung</div>
+                            <div class="wirkung">Autoren: Eichendorff, Brentano, E.T.A. Hoffmann</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Realismus (1848-1890)</h3>
+                            <div class="definition">Merkmale: Gesellschaftskritik, objektive Darstellung</div>
+                            <div class="wirkung">Autoren: Fontane, Storm, Keller</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Expressionismus (1910-1925)</h3>
+                            <div class="definition">Merkmale: Subjektivität, Deformation, Großstadtlyrik</div>
+                            <div class="wirkung">Autoren: Trakl, Benn, Kaiser</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Gattungstheorie <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Epik</h3>
+                            <div class="definition">Merkmale: Erzählende Dichtung, Erzählinstanz</div>
+                            <div class="wirkung">Formen: Roman, Novelle, Erzählung, Märchen</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Lyrik</h3>
+                            <div class="definition">Merkmale: Subjektive Aussage, Sprachkunst, meist Versform</div>
+                            <div class="wirkung">Formen: Sonett, Ballade, Lied, Hymne</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Dramatik</h3>
+                            <div class="definition">Merkmale: Handelnde Personen, szenische Darstellung</div>
+                            <div class="wirkung">Formen: Tragödie, Komödie, Drama</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">8. Interpretationsansätze</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Hermeneutik <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Lehre vom Verstehen und Interpretieren</div>
+                            <div class="wirkung">Anwendung: Systematische Texterschließung</div>
+                            <div class="beispiel">Grundprinzip: Verstehenshorizont von Text und Interpret</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Hermeneutischer Zirkel <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Ganzes verstehen durch Teile, Teile durch Ganzes</div>
+                            <div class="wirkung">Anwendung: Iterativer Interpretationsprozess</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Rezeptionsästhetik <span class="prüfungsrelevanz wichtigkeit-3">⭐</span></h3>
+                            <div class="definition">Definition: Theorie der Wirkung von Literatur auf den Leser</div>
+                            <div class="wirkung">Kernbegriff: Leerstellen, die der Leser füllt</div>
+                            <div class="beispiel">Vertreter: Hans Robert Jauß, Wolfgang Iser</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>New Criticism <span class="prüfungsrelevanz wichtigkeit-3">⭐</span></h3>
+                            <div class="definition">Definition: Werkimmanente Interpretation ohne biografische/historische Bezüge</div>
+                            <div class="wirkung">Fokus: Close Reading, Text als autonomes Kunstwerk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">9. Kommunikationstheorie</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Vier-Seiten-Modell (Schulz von Thun) <span class="prüfungsrelevanz wichtigkeit-1">⭐⭐⭐</span></h3>
+                            <div class="definition">Ebenen: Sachinhalt, Beziehung, Selbstoffenbarung, Appell</div>
+                            <div class="wirkung">Anwendung: Missverständnisse analysieren</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Kommunikationsaxiome (Watzlawick) <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">5 Grundregeln der Kommunikation:</div>
+                            <ul>
+                                <li>Man kann nicht nicht kommunizieren</li>
+                                <li>Inhalts- und Beziehungsaspekt</li>
+                                <li>Interpunktion von Ereignisfolgen</li>
+                                <li>Digitale und analoge Kommunikation</li>
+                                <li>Symmetrische und komplementäre Interaktion</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Organon-Modell (Bühler) <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Funktionen: Darstellung, Ausdruck, Appell</div>
+                            <div class="wirkung">Basis für moderne Kommunikationstheorien</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">10. Medienanalyse</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="term-grid">
+                        <div class="term-card">
+                            <h3>Multimodalität <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Zusammenspiel verschiedener Zeichensysteme</div>
+                            <div class="beispiel">Beispiel: Text + Bild + Ton in digitalen Medien</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Frames <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Interpretationsrahmen für Ereignisse</div>
+                            <div class="wirkung">Funktion: Meinungsbildung in Medien</div>
+                        </div>
+                        
+                        <div class="term-card">
+                            <h3>Agenda Setting <span class="prüfungsrelevanz wichtigkeit-2">⭐⭐</span></h3>
+                            <div class="definition">Definition: Medien bestimmen Themen der öffentlichen Diskussion</div>
+                            <div class="wirkung">Wirkung: Was wird für wichtig gehalten</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-header">Übungen zu Fachbegriffen</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="exercise-box">
+                        <h4>Übung 1: Stilmittel erkennen</h4>
                         <p>Erkennen Sie die Stilmittel in den folgenden Sätzen:</p>
                         <ol>
                             <li>"Die Zeit rennt wie ein gejagtes Reh."</li>
@@ -284,59 +665,105 @@
                             <li>"Ich warte hier schon eine Ewigkeit."</li>
                             <li>"Du fragst mich, warum? Du fragst mich, wozu? Du fragst mich, wieso?"</li>
                         </ol>
-                    </div>
-                    
-                    <button class="btn solution-toggle">Lösung anzeigen</button>
-                    
-                    <div class="solution">
-                        <ol>
-                            <li>Vergleich ("wie ein gejagtes Reh")</li>
-                            <li>Personifikation ("sang sein trauriges Lied")</li>
-                            <li>Hyperbel ("eine Ewigkeit")</li>
-                            <li>Anapher ("Du fragst mich")</li>
-                        </ol>
-                    </div>
-                </div>
-                
-                <div class="exercise">
-                    <h3>Übung 2: Fachbegriffe zuordnen</h3>
-                    <div class="exercise-question">
-                        <p>Ordnen Sie die folgenden Begriffe den richtigen Kategorien zu:</p>
-                        <p>Metapher, These, Erzählperspektive, Symbol, Lyrik, Argument, Beleg, Motiv, Dramatik, Epik</p>
-                        
-                        <div class="exercise-options">
-                            <label>
-                                <input type="checkbox"> Stilmittel
-                            </label>
-                            <label>
-                                <input type="checkbox"> Textanalyse
-                            </label>
-                            <label>
-                                <input type="checkbox"> Interpretation
-                            </label>
-                            <label>
-                                <input type="checkbox"> Textsorten
-                            </label>
-                            <label>
-                                <input type="checkbox"> Argumentation
-                            </label>
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <ol>
+                                <li><strong>Vergleich</strong> ("wie ein gejagtes Reh")</li>
+                                <li><strong>Personifikation</strong> ("sang sein trauriges Lied")</li>
+                                <li><strong>Hyperbel</strong> ("eine Ewigkeit")</li>
+                                <li><strong>Anapher</strong> ("Du fragst mich")</li>
+                            </ol>
                         </div>
                     </div>
                     
-                    <button class="btn solution-toggle">Lösung anzeigen</button>
-                    
-                    <div class="solution">
+                    <div class="exercise-box">
+                        <h4>Übung 2: Epochen zuordnen</h4>
+                        <p>Ordnen Sie die folgenden Merkmale den richtigen Epochen zu:</p>
                         <ul>
-                            <li><strong>Stilmittel:</strong> Metapher</li>
-                            <li><strong>Textanalyse:</strong> Erzählperspektive</li>
-                            <li><strong>Interpretation:</strong> Symbol, Motiv</li>
-                            <li><strong>Textsorten:</strong> Lyrik, Dramatik, Epik</li>
-                            <li><strong>Argumentation:</strong> These, Argument, Beleg</li>
+                            <li>Vanitas-Motiv</li>
+                            <li>Geniekult</li>
+                            <li>Vernunft als höchstes Gut</li>
+                            <li>Sehnsucht nach dem Mittelalter</li>
                         </ul>
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <ul>
+                                <li><strong>Vanitas-Motiv:</strong> Barock</li>
+                                <li><strong>Geniekult:</strong> Sturm und Drang</li>
+                                <li><strong>Vernunft als höchstes Gut:</strong> Aufklärung</li>
+                                <li><strong>Sehnsucht nach dem Mittelalter:</strong> Romantik</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Übung 3: Erzählperspektiven unterscheiden</h4>
+                        <p>Bestimmen Sie die Erzählperspektive in den folgenden Textausschnitten:</p>
+                        <ol>
+                            <li>"Ich ging durch die dunkle Straße und wusste nicht, was mich erwartete."</li>
+                            <li>"Maria ahnte nicht, dass Hans sie bereits seit Wochen beobachtete."</li>
+                            <li>"Er betrat das Zimmer. Seine Augen weiteten sich vor Schreck."</li>
+                        </ol>
+                        <button class="toggle-solution">Lösung anzeigen</button>
+                        <div class="solution-box">
+                            <ol>
+                                <li><strong>Ich-Erzähler</strong> (subjektive Sicht, beschränktes Wissen)</li>
+                                <li><strong>Auktorialer Erzähler</strong> (allwissend, kennt Gedanken mehrerer Figuren)</li>
+                                <li><strong>Personaler Erzähler</strong> (aus der Perspektive einer Figur)</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
+            <div class="accordion-header">Verwendungshinweise für die Textanalyse</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="tip-box">
+                        <h3>Häufige Verwechslungen vermeiden:</h3>
+                        <ul>
+                            <li><strong>Symbol ≠ Allegorie:</strong> Symbol punktuell, Allegorie durchgängig</li>
+                            <li><strong>Metapher ≠ Vergleich:</strong> Metapher ohne "wie/als"</li>
+                            <li><strong>Metonymie ≠ Synekdoche:</strong> Metonymie sachlicher Bezug, Synekdoche Teil/Ganzes</li>
+                            <li><strong>Ironie ≠ Sarkasmus:</strong> Sarkasmus verletzender</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>Systematische Anwendung:</h3>
+                        <ol>
+                            <li>Begriff identifizieren</li>
+                            <li>Textstelle markieren</li>
+                            <li>Wirkung beschreiben</li>
+                            <li>Funktion im Gesamtkontext erklären</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h3>Formulierungshilfen:</h3>
+                        <ul>
+                            <li>"Das Stilmittel X bewirkt..."</li>
+                            <li>"Durch Y wird erreicht, dass..."</li>
+                            <li>"Im Kontext der Textstelle dient Z dazu..."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="example-box">
+                        <h4>Tipp für die Praxis:</h4>
+                        <p>Nicht alle gefundenen Stilmittel sind interpretationsrelevant. Konzentriere dich auf die, die zur Aussage des Textes beitragen!</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
