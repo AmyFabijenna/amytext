@@ -135,11 +135,12 @@ function showRegistrationDialog() {
                 <div style="margin-bottom: 25px;">
                     <label style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">
                         Wünsche / Mitteilungen:
-                        <span style="font-weight: normal; color: #888; font-size: 0.9em;">(optional)</span>
+                        <span style="font-weight: normal; color: #888; font-size: 0.9em;">(optional, max. 500 Zeichen)</span>
                     </label>
-                    <textarea name="mitteilungen" rows="4" 
+                    <textarea name="mitteilungen" rows="4" maxlength="500"
                         placeholder="Hast du spezielle Lernziele oder Wünsche? Lass es uns wissen..."
                         style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1em; box-sizing: border-box; resize: vertical; font-family: inherit;"></textarea>
+                    <div id="char-counter" style="text-align: right; font-size: 0.85em; color: #888; margin-top: 5px;">0 / 500 Zeichen</div>
                 </div>
 
                 <button type="submit" style="
@@ -168,6 +169,21 @@ function showRegistrationDialog() {
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 
+    // VERBESSERUNG 4: Zeichenzähler für Mitteilungen
+    const textarea = document.querySelector('textarea[name="mitteilungen"]');
+    const counter = document.getElementById('char-counter');
+    if (textarea && counter) {
+        textarea.addEventListener('input', function() {
+            const length = this.value.length;
+            counter.textContent = `${length} / 500 Zeichen`;
+            if (length > 450) {
+                counter.style.color = '#f44336';
+            } else {
+                counter.style.color = '#888';
+            }
+        });
+    }
+
     // Form Handler
     document.getElementById('daf-registration-form').addEventListener('submit', handleRegistration);
 }
@@ -177,13 +193,30 @@ async function handleRegistration(e) {
     e.preventDefault();
     
     const formData = new FormData(e.target);
+    
+    // VERBESSERUNG 4: Validierung und Bereinigung der Mitteilungen
+    let mitteilungen = formData.get('mitteilungen') || '';
+    mitteilungen = mitteilungen.trim(); // Leerzeichen entfernen
+    
+    // Prüfe auf übermäßig viele Links (einfacher Spam-Schutz)
+    const linkCount = (mitteilungen.match(/https?:\/\//g) || []).length;
+    if (linkCount > 3) {
+        alert('Zu viele Links in der Mitteilung. Bitte maximal 3 Links verwenden.');
+        return;
+    }
+    
+    // Wenn leer, setze auf "Keine Angabe"
+    if (!mitteilungen) {
+        mitteilungen = 'Keine Angabe';
+    }
+    
     const data = {
         name: formData.get('name'),
         email: formData.get('email'),
         altersklasse: formData.get('altersklasse'),
         muttersprache: formData.get('muttersprache'),
         koennerstufe: formData.get('koennerstufe'),
-        mitteilungen: formData.get('mitteilungen') || 'Keine Angabe',
+        mitteilungen: mitteilungen,
         registration_date: new Date().toLocaleString('de-DE')
     };
 
@@ -215,13 +248,13 @@ async function handleRegistration(e) {
             }
         );
 
-        // Email an NUTZER (Bestätigung)
+        // VERBESSERUNG 3: Email an NUTZER mit korrekter to_email Variable
         await emailjs.send(
             EMAILJS_SERVICE_ID,
             EMAILJS_TEMPLATE_USER,
             {
                 name: data.name,
-                to_email: data.email,
+                to_email: data.email,  // Wichtig: Wird an diese Email gesendet
                 confirmation_link: confirmationLink
             }
         );
@@ -260,7 +293,7 @@ async function handleRegistration(e) {
     }
 }
 
-// Bestätigung über URL Parameter
+// VERBESSERUNG 5: Bestätigung über URL Parameter - URL sofort bereinigen
 function checkConfirmation() {
     const urlParams = new URLSearchParams(window.location.search);
     const confirmToken = urlParams.get('confirm');
@@ -271,6 +304,10 @@ function checkConfirmation() {
         localStorage.setItem('daf_access_granted', 'true');
         localStorage.setItem('daf_user_email', email);
         localStorage.setItem('daf_access_date', new Date().toISOString());
+        
+        // URL SOFORT bereinigen (nicht erst nach 3 Sekunden)
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
         
         // Erfolgs-Overlay anzeigen
         const overlay = document.createElement('div');
@@ -312,12 +349,6 @@ function checkConfirmation() {
         
         document.body.appendChild(overlay);
         document.body.style.overflow = 'hidden';
-        
-        // URL bereinigen nach 3 Sekunden
-        setTimeout(() => {
-            const cleanUrl = window.location.origin + window.location.pathname;
-            window.history.replaceState({}, document.title, cleanUrl);
-        }, 3000);
     }
 }
 
