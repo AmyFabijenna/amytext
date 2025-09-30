@@ -396,6 +396,65 @@
                 grid-template-columns: 1fr;
             }
         }
+    
+        /* Stile für Übungen und Lösungen */
+        .exercise-card {
+            border-left: 5px solid #4caf50;
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+        }
+        
+        .exercise-card .section-header {
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: white;
+        }
+        
+        .solution-card {
+            border-left: 5px solid #2196f3;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        }
+        
+        .solution-card .section-header {
+            background: linear-gradient(135deg, #2196f3, #42a5f5);
+            color: white;
+        }
+        
+        .solution-toggle {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .solution-btn {
+            background: linear-gradient(135deg, #ff9800, #ffb74d);
+            color: #212121;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .solution-btn:hover {
+            background: linear-gradient(135deg, #ffb74d, #ffcc80);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+        }
+        
+        .hidden-solution {
+            display: none;
+        }
+        
+        .visible-solution {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    
     </style>
 </head>
 <body>
@@ -538,7 +597,45 @@
         </div>
     </main>
 
-    <script>
+    
+        // === SOLUTION TOGGLE FUNCTION ===
+        function toggleSolution(button) {
+            const solutionCard = button.closest('.section-card').nextElementSibling;
+            if (solutionCard && solutionCard.classList.contains('solution-card')) {
+                const content = solutionCard.querySelector('.section-content');
+                if (content) {
+                    if (content.classList.contains('active')) {
+                        content.classList.remove('active');
+                        solutionCard.querySelector('.section-header').classList.remove('active');
+                        button.querySelector('button').textContent = '📋 Musterlösung anzeigen';
+                    } else {
+                        content.classList.add('active');
+                        solutionCard.querySelector('.section-header').classList.add('active');
+                        button.querySelector('button').textContent = '📋 Musterlösung ausblenden';
+                    }
+                }
+            }
+        }
+        
+        // === ENHANCED TOGGLE FUNCTION ===
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.toggle-arrow');
+            
+            if (content && content.classList.contains('section-content')) {
+                if (content.classList.contains('active')) {
+                    content.classList.remove('active');
+                    header.classList.remove('active');
+                    if (arrow) arrow.textContent = '▼';
+                } else {
+                    content.classList.add('active');
+                    header.classList.add('active');
+                    if (arrow) arrow.textContent = '▲';
+                }
+            }
+        }
+    
+        <script>
         // === TOGGLE SIDEBAR ===
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
