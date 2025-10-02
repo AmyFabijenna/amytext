@@ -7,10 +7,6 @@
 
 
 <style>
-/* ============================================
-   GRUNDLEGENDE RESET & BODY STYLES
-   ============================================ */
-
 * {
     margin: 0;
     padding: 0;
@@ -32,19 +28,6 @@ body {
     overflow-x: hidden;
     width: 100%;
 }
-
-/* ============================================
-   SIDEBAR NAVIGATION
-   ============================================ */
-
-.sidebar {
-    width: 280px;
-    background: rgba(26, 35, 126, 0.95);
-    color: white;
-    position: fixed;
-    height/* ============================================
-   SIDEBAR NAVIGATION
-   ============================================ */
 
 .sidebar {
     width: 280px;
@@ -124,10 +107,6 @@ body {
     font-weight: bold;
 }
 
-/* ============================================
-   MAIN CONTENT BEREICH
-   ============================================ */
-
 .main-content {
     margin-left: 280px;
     flex: 1;
@@ -189,10 +168,6 @@ body {
 .content-body {
     padding: 40px;
 }
-
-/* ============================================
-   WELCOME SECTION (Startseite)
-   ============================================ */
 
 .welcome-section {
     background: linear-gradient(135deg, #fff3e0, #ffe0b2);
@@ -259,10 +234,6 @@ body {
     color: #e65100;
 }
 
-/* ============================================
-   BACK BUTTON
-   ============================================ */
-
 .back-button {
     display: inline-block;
     background: linear-gradient(135deg, #ff6f00, #ff8f00);
@@ -281,10 +252,6 @@ body {
     box-shadow: 0 5px 15px rgba(255, 143, 0, 0.4);
 }
 
-/* ============================================
-   CHAPTER CONTENT
-   ============================================ */
-
 .chapter-content {
     line-height: 1.8;
 }
@@ -300,10 +267,6 @@ body {
     color: #ff8f00;
     margin: 20px 0 12px;
 }
-
-/* ============================================
-   LOADING & ERROR STATES
-   ============================================ */
 
 .loading-indicator {
     text-align: center;
@@ -336,10 +299,6 @@ body {
     border-left: 4px solid #f44336;
 }
 
-/* ============================================
-   MENU TOGGLE (Mobile)
-   ============================================ */
-
 .menu-toggle {
     display: none;
     position: fixed;
@@ -356,10 +315,8 @@ body {
 }
 
 /* ============================================
-   EBENE 1: HAUPTKAPITEL (immer sichtbar)
-   Diese Ebene ist NICHT ausklappbar
+   NEU: EBENE 1 - Hauptkapitel (immer sichtbar)
    ============================================ */
-
 .main-chapter {
     background: linear-gradient(135deg, #ff6f00, #ff8f00);
     border-radius: 12px;
@@ -385,10 +342,8 @@ body {
 }
 
 /* ============================================
-   EBENE 2: AUSKLAPPBARE HAUPTBEREICHE (Blautöne)
-   Erste ausklappbare Ebene - natürliche Blautöne
+   NEU: EBENE 2 - Ausklappbare Bereiche (Blautöne)
    ============================================ */
-
 .section-card.level-2 {
     background: linear-gradient(135deg, #e3f2fd, #bbdefb);
     border-radius: 12px;
@@ -405,7 +360,6 @@ body {
     border-color: #42a5f5;
 }
 
-/* Header der EBENE 2 - Abendblau/Jeansblau */
 .section-card.level-2 > .section-header {
     background: linear-gradient(135deg, #5c9bd1, #6fa8dc);
     color: white;
@@ -423,7 +377,6 @@ body {
     background: linear-gradient(135deg, #6fa8dc, #85b8e0);
 }
 
-/* Content der EBENE 2 - standardmäßig zugeklappt */
 .section-card.level-2 > .section-content {
     max-height: 0;
     overflow: hidden;
@@ -431,17 +384,14 @@ body {
     padding: 0 20px;
 }
 
-/* Content der EBENE 2 - aufgeklappt */
 .section-card.level-2 > .section-content.active {
     max-height: 5000px;
     padding: 20px;
 }
 
 /* ============================================
-   EBENE 3: VERSCHACHTELTE UNTERBEREICHE (Hellere Blautöne)
-   Zweite ausklappbare Ebene - innerhalb von EBENE 2
+   NEU: EBENE 3 - Verschachtelte Unterbereiche
    ============================================ */
-
 .section-card.level-3 {
     background: linear-gradient(135deg, #e8f4fd, #cfe3f7);
     border-radius: 10px;
@@ -457,7 +407,6 @@ body {
     box-shadow: 0 4px 12px rgba(100, 181, 246, 0.25);
 }
 
-/* Header der EBENE 3 - Heller als EBENE 2 */
 .section-card.level-3 > .section-header {
     background: linear-gradient(135deg, #85b8e0, #9ac9e8);
     color: #212121;
@@ -475,7 +424,6 @@ body {
     background: linear-gradient(135deg, #9ac9e8, #afd4ed);
 }
 
-/* Content der EBENE 3 - standardmäßig zugeklappt */
 .section-card.level-3 > .section-content {
     max-height: 0;
     overflow: hidden;
@@ -483,31 +431,27 @@ body {
     padding: 0 18px;
 }
 
-/* Content der EBENE 3 - aufgeklappt */
 .section-card.level-3 > .section-content.active {
     max-height: 3000px;
     padding: 18px;
 }
 
 /* ============================================
-   TOGGLE-PFEIL (für alle ausklappbaren Ebenen)
+   NEU: Toggle-Pfeil
    ============================================ */
-
 .toggle-arrow {
     font-size: 1.2em;
     transition: transform 0.3s ease;
     font-weight: bold;
 }
 
-/* Pfeil rotiert wenn aufgeklappt */
 .section-header.active .toggle-arrow {
     transform: rotate(180deg);
 }
 
 /* ============================================
-   SPEZIAL-CARDS: ÜBUNGEN (Grüne Akzente)
+   NEU: Übungen (Grüne Akzente)
    ============================================ */
-
 .exercise-card {
     border-left: 5px solid #4caf50 !important;
     background: linear-gradient(135deg, #e8f5e9, #c8e6c9) !important;
@@ -519,9 +463,8 @@ body {
 }
 
 /* ============================================
-   LÖSUNGS-BUTTONS & LÖSUNGS-CARDS
+   NEU: Lösungs-Buttons
    ============================================ */
-
 .solution-toggle {
     text-align: center;
     margin: 20px 0;
@@ -546,7 +489,6 @@ body {
     box-shadow: 0 6px 18px rgba(255, 152, 0, 0.4);
 }
 
-/* Lösungs-Card (wird durch Button ein-/ausgeblendet) */
 .solution-card {
     background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important;
     border-left: 4px solid #ff9800 !important;
@@ -565,9 +507,8 @@ body {
 }
 
 /* ============================================
-   TABELLEN-STYLING
+   NEU: Tabellen
    ============================================ */
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -603,9 +544,8 @@ table tbody tr:last-child td {
 }
 
 /* ============================================
-   TEXT-FORMATIERUNG IN SECTIONS
+   NEU: Text-Formatierung in Sections
    ============================================ */
-
 .section-content p {
     margin: 12px 0;
     line-height: 1.7;
@@ -632,47 +572,38 @@ table tbody tr:last-child td {
 }
 
 /* ============================================
-   RESPONSIVE DESIGN (Mobile & Tablet)
+   RESPONSIVE DESIGN
    ============================================ */
-
 @media (max-width: 968px) {
-    /* Sidebar versteckt auf mobilen Geräten */
     .sidebar {
         transform: translateX(-280px);
     }
 
-    /* Sidebar sichtbar wenn 'active' Klasse gesetzt */
     .sidebar.active {
         transform: translateX(0);
     }
 
-    /* Main Content nimmt volle Breite */
     .main-content {
         margin-left: 0;
         width: 100%;
     }
 
-    /* Menu Toggle Button sichtbar */
     .menu-toggle {
         display: block;
     }
 
-    /* Content Body weniger Padding */
     .content-body {
         padding: 20px;
     }
 
-    /* Header Titel kleiner */
     .content-header h1 {
         font-size: 2em;
     }
 
-    /* Feature Grid einspaltig */
     .feature-grid {
         grid-template-columns: 1fr;
     }
     
-    /* EBENE 1: Hauptkapitel */
     .main-chapter {
         padding: 20px;
         margin: 20px 0;
@@ -686,7 +617,6 @@ table tbody tr:last-child td {
         font-size: 1.3em;
     }
     
-    /* EBENE 2: Ausklappbare Bereiche */
     .section-card.level-2 > .section-header {
         font-size: 1em;
         padding: 14px 16px;
@@ -700,7 +630,6 @@ table tbody tr:last-child td {
         padding: 16px;
     }
     
-    /* EBENE 3: Verschachtelte Bereiche */
     .section-card.level-3 > .section-header {
         font-size: 0.9em;
         padding: 10px 14px;
@@ -714,7 +643,6 @@ table tbody tr:last-child td {
         padding: 14px;
     }
     
-    /* Tabellen horizontal scrollbar */
     table {
         display: block;
         overflow-x: auto;
