@@ -7,6 +7,10 @@
 
 
 <style>
+/* ============================================
+   GRUNDLEGENDE RESET & BODY STYLES
+   ============================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -28,6 +32,19 @@ body {
     overflow-x: hidden;
     width: 100%;
 }
+
+/* ============================================
+   SIDEBAR NAVIGATION
+   ============================================ */
+
+.sidebar {
+    width: 280px;
+    background: rgba(26, 35, 126, 0.95);
+    color: white;
+    position: fixed;
+    height/* ============================================
+   SIDEBAR NAVIGATION
+   ============================================ */
 
 .sidebar {
     width: 280px;
@@ -107,6 +124,10 @@ body {
     font-weight: bold;
 }
 
+/* ============================================
+   MAIN CONTENT BEREICH
+   ============================================ */
+
 .main-content {
     margin-left: 280px;
     flex: 1;
@@ -168,6 +189,10 @@ body {
 .content-body {
     padding: 40px;
 }
+
+/* ============================================
+   WELCOME SECTION (Startseite)
+   ============================================ */
 
 .welcome-section {
     background: linear-gradient(135deg, #fff3e0, #ffe0b2);
@@ -234,6 +259,10 @@ body {
     color: #e65100;
 }
 
+/* ============================================
+   BACK BUTTON
+   ============================================ */
+
 .back-button {
     display: inline-block;
     background: linear-gradient(135deg, #ff6f00, #ff8f00);
@@ -252,6 +281,10 @@ body {
     box-shadow: 0 5px 15px rgba(255, 143, 0, 0.4);
 }
 
+/* ============================================
+   CHAPTER CONTENT
+   ============================================ */
+
 .chapter-content {
     line-height: 1.8;
 }
@@ -267,6 +300,10 @@ body {
     color: #ff8f00;
     margin: 20px 0 12px;
 }
+
+/* ============================================
+   LOADING & ERROR STATES
+   ============================================ */
 
 .loading-indicator {
     text-align: center;
@@ -299,6 +336,10 @@ body {
     border-left: 4px solid #f44336;
 }
 
+/* ============================================
+   MENU TOGGLE (Mobile)
+   ============================================ */
+
 .menu-toggle {
     display: none;
     position: fixed;
@@ -314,138 +355,172 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-/* Accordion Styles - Erste Ebene */
-.section-card {
-    background: linear-gradient(135deg, #fff3e0, #ffcc80);
-    border-radius: 15px;
+/* ============================================
+   EBENE 1: HAUPTKAPITEL (immer sichtbar)
+   Diese Ebene ist NICHT ausklappbar
+   ============================================ */
+
+.main-chapter {
+    background: linear-gradient(135deg, #ff6f00, #ff8f00);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+    box-shadow: 0 6px 20px rgba(255, 111, 0, 0.25);
+}
+
+.main-chapter .main-title {
+    color: #212121;
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.main-chapter .section-title {
+    color: #212121;
+    font-size: 1.6em;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   EBENE 2: AUSKLAPPBARE HAUPTBEREICHE (Blautöne)
+   Erste ausklappbare Ebene - natürliche Blautöne
+   ============================================ */
+
+.section-card.level-2 {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 12px;
     margin: 20px 0;
-    box-shadow: 0 8px 25px rgba(255, 111, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(66, 165, 245, 0.2);
     overflow: hidden;
     border: 2px solid transparent;
     transition: all 0.3s ease;
 }
 
-.section-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(255, 111, 0, 0.3);
-    border-color: #ff6f00;
+.section-card.level-2:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 165, 245, 0.3);
+    border-color: #42a5f5;
 }
 
-.section-header {
-    background: linear-gradient(135deg, #ff6f00, #ff8f00);
-    color: #212121;
-    padding: 20px;
+/* Header der EBENE 2 - Abendblau/Jeansblau */
+.section-card.level-2 > .section-header {
+    background: linear-gradient(135deg, #5c9bd1, #6fa8dc);
+    color: white;
+    padding: 16px 20px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 700;
-    font-size: 1.3em;
+    font-weight: 600;
+    font-size: 1.1em;
     transition: background 0.3s ease;
 }
 
-.section-header:hover {
-    background: linear-gradient(135deg, #ff8f00, #ffb300);
+.section-card.level-2 > .section-header:hover {
+    background: linear-gradient(135deg, #6fa8dc, #85b8e0);
 }
+
+/* Content der EBENE 2 - standardmäßig zugeklappt */
+.section-card.level-2 > .section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 20px;
+}
+
+/* Content der EBENE 2 - aufgeklappt */
+.section-card.level-2 > .section-content.active {
+    max-height: 5000px;
+    padding: 20px;
+}
+
+/* ============================================
+   EBENE 3: VERSCHACHTELTE UNTERBEREICHE (Hellere Blautöne)
+   Zweite ausklappbare Ebene - innerhalb von EBENE 2
+   ============================================ */
+
+.section-card.level-3 {
+    background: linear-gradient(135deg, #e8f4fd, #cfe3f7);
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 3px 10px rgba(100, 181, 246, 0.15);
+    overflow: hidden;
+    border: 1px solid #b3d9f2;
+    transition: all 0.3s ease;
+}
+
+.section-card.level-3:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(100, 181, 246, 0.25);
+}
+
+/* Header der EBENE 3 - Heller als EBENE 2 */
+.section-card.level-3 > .section-header {
+    background: linear-gradient(135deg, #85b8e0, #9ac9e8);
+    color: #212121;
+    padding: 12px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: background 0.3s ease;
+}
+
+.section-card.level-3 > .section-header:hover {
+    background: linear-gradient(135deg, #9ac9e8, #afd4ed);
+}
+
+/* Content der EBENE 3 - standardmäßig zugeklappt */
+.section-card.level-3 > .section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 18px;
+}
+
+/* Content der EBENE 3 - aufgeklappt */
+.section-card.level-3 > .section-content.active {
+    max-height: 3000px;
+    padding: 18px;
+}
+
+/* ============================================
+   TOGGLE-PFEIL (für alle ausklappbaren Ebenen)
+   ============================================ */
 
 .toggle-arrow {
     font-size: 1.2em;
     transition: transform 0.3s ease;
+    font-weight: bold;
 }
 
+/* Pfeil rotiert wenn aufgeklappt */
 .section-header.active .toggle-arrow {
     transform: rotate(180deg);
 }
 
-.section-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-    padding: 0 25px;
-}
+/* ============================================
+   SPEZIAL-CARDS: ÜBUNGEN (Grüne Akzente)
+   ============================================ */
 
-.section-content.active {
-    max-height: 5000px;
-    padding: 25px;
-}
-
-/* Zweite Verschachtelungsebene */
-.section-card .section-card {
-    margin: 15px 0;
-    background: linear-gradient(135deg, #fff8e1, #ffecb3);
-}
-
-.section-card .section-card .section-header {
-    background: linear-gradient(135deg, #ffb74d, #ffc107);
-    font-size: 1.1em;
-    padding: 15px 20px;
-}
-
-.section-card .section-card .section-header:hover {
-    background: linear-gradient(135deg, #ffc107, #ffd54f);
-}
-
-.section-card .section-card .section-content {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 25px;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-}
-
-.section-card .section-card .section-content.active {
-    max-height: 3000px;
-    padding: 25px;
-}
-
-/* Dritte Verschachtelungsebene */
-.section-card .section-card .section-card {
-    margin: 10px 0;
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-}
-
-.section-card .section-card .section-card .section-header {
-    background: linear-gradient(135deg, #42a5f5, #64b5f6);
-    font-size: 1em;
-    font-weight: 500;
-    padding: 12px 18px;
-}
-
-.section-card .section-card .section-card .section-header:hover {
-    background: linear-gradient(135deg, #64b5f6, #90caf9);
-}
-
-.section-card .section-card .section-card .section-content {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    transition: max-height 0.5s ease, padding 0.5s ease;
-}
-
-.section-card .section-card .section-card .section-content.active {
-    max-height: 2000px;
-    padding: 20px;
-}
-
-/* Übungen und Lösungen */
 .exercise-card {
-    border-left: 5px solid #4caf50;
-    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+    border-left: 5px solid #4caf50 !important;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9) !important;
 }
 
-.exercise-card .section-header {
-    background: linear-gradient(135deg, #4caf50, #66bb6a);
-    color: white;
+.exercise-card > .section-header {
+    background: linear-gradient(135deg, #66bb6a, #81c784) !important;
+    color: white !important;
 }
 
-.solution-card {
-    border-left: 5px solid #2196f3;
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-}
-
-.solution-card .section-header {
-    background: linear-gradient(135deg, #2196f3, #42a5f5);
-    color: white;
-}
+/* ============================================
+   LÖSUNGS-BUTTONS & LÖSUNGS-CARDS
+   ============================================ */
 
 .solution-toggle {
     text-align: center;
@@ -456,73 +531,196 @@ body {
     background: linear-gradient(135deg, #ff9800, #ffb74d);
     color: #212121;
     border: none;
-    padding: 12px 24px;
+    padding: 12px 28px;
     border-radius: 25px;
     font-weight: 600;
+    font-size: 0.95em;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }
 
 .solution-btn:hover {
     background: linear-gradient(135deg, #ffb74d, #ffcc80);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+    box-shadow: 0 6px 18px rgba(255, 152, 0, 0.4);
 }
 
-.hidden-solution {
-    display: none;
+/* Lösungs-Card (wird durch Button ein-/ausgeblendet) */
+.solution-card {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important;
+    border-left: 4px solid #ff9800 !important;
+    margin-top: 15px;
 }
 
-.visible-solution {
-    display: block;
-    animation: fadeIn 0.5s ease;
+.solution-content {
+    background: #fffbf5;
+    padding: 15px !important;
+    border-radius: 8px;
 }
 
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(-10px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
+.solution-content h4 {
+    color: #e65100;
+    margin-bottom: 12px;
 }
 
-/* Media Queries */
+/* ============================================
+   TABELLEN-STYLING
+   ============================================ */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background: linear-gradient(135deg, #5c9bd1, #6fa8dc);
+    color: white;
+}
+
+table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================
+   TEXT-FORMATIERUNG IN SECTIONS
+   ============================================ */
+
+.section-content p {
+    margin: 12px 0;
+    line-height: 1.7;
+}
+
+.section-content ul, 
+.section-content ol {
+    margin: 12px 0;
+    padding-left: 25px;
+}
+
+.section-content li {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.section-content strong {
+    color: #1565c0;
+    font-weight: 600;
+}
+
+.section-content em {
+    color: #424242;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN (Mobile & Tablet)
+   ============================================ */
+
 @media (max-width: 968px) {
+    /* Sidebar versteckt auf mobilen Geräten */
     .sidebar {
         transform: translateX(-280px);
     }
 
+    /* Sidebar sichtbar wenn 'active' Klasse gesetzt */
     .sidebar.active {
         transform: translateX(0);
     }
 
+    /* Main Content nimmt volle Breite */
     .main-content {
         margin-left: 0;
         width: 100%;
     }
 
+    /* Menu Toggle Button sichtbar */
     .menu-toggle {
         display: block;
     }
 
+    /* Content Body weniger Padding */
     .content-body {
         padding: 20px;
     }
 
+    /* Header Titel kleiner */
     .content-header h1 {
         font-size: 2em;
     }
 
+    /* Feature Grid einspaltig */
     .feature-grid {
         grid-template-columns: 1fr;
     }
-}
-
     
+    /* EBENE 1: Hauptkapitel */
+    .main-chapter {
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .main-chapter .main-title {
+        font-size: 1.6em;
+    }
+    
+    .main-chapter .section-title {
+        font-size: 1.3em;
+    }
+    
+    /* EBENE 2: Ausklappbare Bereiche */
+    .section-card.level-2 > .section-header {
+        font-size: 1em;
+        padding: 14px 16px;
+    }
+    
+    .section-card.level-2 > .section-content {
+        padding: 0 16px;
+    }
+    
+    .section-card.level-2 > .section-content.active {
+        padding: 16px;
+    }
+    
+    /* EBENE 3: Verschachtelte Bereiche */
+    .section-card.level-3 > .section-header {
+        font-size: 0.9em;
+        padding: 10px 14px;
+    }
+    
+    .section-card.level-3 > .section-content {
+        padding: 0 14px;
+    }
+    
+    .section-card.level-3 > .section-content.active {
+        padding: 14px;
+    }
+    
+    /* Tabellen horizontal scrollbar */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
 </style>
 
 
@@ -670,33 +868,40 @@ body {
 </main>
 
 <script>
-// === TOGGLE SIDEBAR ===
+/* ============================================
+   TOGGLE SIDEBAR FUNKTION
+   Öffnet/Schließt die Navigation auf mobilen Geräten
+   ============================================ */
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('active');
 }
 
-// === LOAD CONTENT FUNCTION ===
+/* ============================================
+   LOAD CONTENT FUNKTION
+   Lädt HTML-Inhalte der einzelnen Kapitel dynamisch
+   ============================================ */
 async function loadContent(page) {
     const contentBody = document.getElementById('content-body');
     
+    // Sicherheitscheck
     if (!contentBody) {
         console.error('content-body Element nicht gefunden!');
         return;
     }
     
-    // Remove active class from all nav links
+    // Entferne 'active' Klasse von allen Nav-Links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
     });
     
-    // Add active class to clicked link
+    // Füge 'active' Klasse zum angeklickten Link hinzu
     const targetLink = document.querySelector(`.nav-link[onclick*="loadContent('${page}')"]`);
     if (targetLink) {
         targetLink.classList.add('active');
     }
     
-    // Show loading message
+    // Zeige Lade-Animation
     contentBody.innerHTML = `
         <div class="loading-indicator">
             <div class="spinner"></div>
@@ -705,14 +910,17 @@ async function loadContent(page) {
     `;
     
     try {
+        // Lade HTML-Datei aus 'kapitel' Ordner
         const response = await fetch(`kapitel/${page}.html`);
         
+        // Fehlerbehandlung wenn Datei nicht gefunden
         if (!response.ok) {
             throw new Error(`Seite nicht gefunden: ${page}.html (Status: ${response.status})`);
         }
         
         const html = await response.text();
         
+        // Füge Zurück-Button hinzu (außer bei Willkommen-Seite)
         if (page !== 'willkommen') {
             contentBody.innerHTML = `
                 <a href="#" class="back-button" onclick="loadContent('willkommen'); return false;">← Zurück zur Übersicht</a>
@@ -722,10 +930,11 @@ async function loadContent(page) {
             contentBody.innerHTML = html;
         }
         
-        // Nach dem Laden: Accordion-Funktionalität initialisieren
+        // WICHTIG: Nach dem Laden Accordion-Funktionalität initialisieren
         initializeAccordions();
         
     } catch (error) {
+        // Fehlerbehandlung mit Fehlermeldung
         console.error('Fehler beim Laden der Seite:', error);
         contentBody.innerHTML = `
             <div class="error-message">
@@ -737,44 +946,59 @@ async function loadContent(page) {
         `;
     }
     
-    // Close sidebar on mobile after selection
+    // Schließe Sidebar auf mobilen Geräten nach Auswahl
     if (window.innerWidth <= 968) {
         const sidebar = document.getElementById('sidebar');
         if (sidebar) sidebar.classList.remove('active');
     }
 }
 
-// === ACCORDION FUNCTIONALITY ===
+/* ============================================
+   ACCORDION FUNKTIONALITÄT INITIALISIEREN
+   Fügt Click-Listener zu allen section-headers hinzu
+   Wird nach jedem Content-Laden aufgerufen
+   ============================================ */
 function initializeAccordions() {
     const headers = document.querySelectorAll('.section-header');
     
+    // Entferne alte Event-Listener durch Cloning
+    // (verhindert doppelte Listener bei erneutem Laden)
     headers.forEach(header => {
-        // Entferne alte Event-Listener
         const clone = header.cloneNode(true);
         header.parentNode.replaceChild(clone, header);
     });
     
-    // Füge neue Event-Listener hinzu (nach dem Cloning)
+    // Füge neue Event-Listener zu allen geclonten Headers hinzu
     document.querySelectorAll('.section-header').forEach(header => {
         header.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation(); // Verhindert Event-Bubbling bei verschachtelten Cards
             toggleSection(this);
         });
     });
 }
 
+/* ============================================
+   TOGGLE SECTION FUNKTION
+   Klappt einzelne Bereiche auf/zu
+   Funktioniert für alle Ebenen (2, 3, etc.)
+   ============================================ */
 function toggleSection(header) {
+    // Finde den zugehörigen Content-Bereich
     const content = header.nextElementSibling;
     const arrow = header.querySelector('.toggle-arrow');
     
+    // Prüfe ob es ein gültiger section-content ist
     if (content && content.classList.contains('section-content')) {
         const isActive = content.classList.contains('active');
         
         if (isActive) {
+            // ZUKLAPPEN
             content.classList.remove('active');
             header.classList.remove('active');
             if (arrow) arrow.textContent = '▼';
         } else {
+            // AUFKLAPPEN
             content.classList.add('active');
             header.classList.add('active');
             if (arrow) arrow.textContent = '▲';
@@ -782,30 +1006,44 @@ function toggleSection(header) {
     }
 }
 
-// === SOLUTION TOGGLE FUNCTION ===
+/* ============================================
+   SOLUTION TOGGLE FUNKTION
+   Für Lösungs-Buttons bei Übungen
+   Blendet Lösungen ein/aus
+   ============================================ */
 function toggleSolution(button) {
-    const solutionCard = button.closest('.section-card').nextElementSibling;
-    if (solutionCard && solutionCard.classList.contains('solution-card')) {
-        const content = solutionCard.querySelector('.section-content');
-        if (content) {
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                solutionCard.querySelector('.section-header').classList.remove('active');
-                button.querySelector('button').textContent = '📋 Musterlösung anzeigen';
-            } else {
-                content.classList.add('active');
-                solutionCard.querySelector('.section-header').classList.add('active');
-                button.querySelector('button').textContent = '📋 Musterlösung ausblenden';
-            }
+    // Finde die übergeordnete Exercise-Card
+    const exerciseCard = button.closest('.section-card');
+    
+    // Finde die Lösungs-Card innerhalb der Exercise-Card
+    const solutionCard = exerciseCard.querySelector('.solution-card');
+    
+    if (solutionCard) {
+        // Prüfe aktuellen Zustand
+        const isVisible = solutionCard.style.display === 'block';
+        
+        if (isVisible) {
+            // Lösung AUSBLENDEN
+            solutionCard.style.display = 'none';
+            button.textContent = '📋 Lösung anzeigen';
+        } else {
+            // Lösung EINBLENDEN
+            solutionCard.style.display = 'block';
+            button.textContent = '📋 Lösung ausblenden';
         }
     }
 }
 
-// === CLICK OUTSIDE SIDEBAR TO CLOSE (MOBILE) ===
+/* ============================================
+   CLICK OUTSIDE SIDEBAR TO CLOSE (MOBILE)
+   Schließt Sidebar wenn außerhalb geklickt wird
+   Nur auf mobilen Geräten aktiv
+   ============================================ */
 document.addEventListener('click', function(event) {
     const sidebar = document.getElementById('sidebar');
     const menuToggle = document.querySelector('.menu-toggle');
     
+    // Nur auf mobilen Geräten (Breite <= 968px)
     if (window.innerWidth <= 968 && 
         sidebar && sidebar.classList.contains('active') && 
         menuToggle &&
@@ -815,12 +1053,18 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// === INITIAL LOAD ===
+/* ============================================
+   INITIAL LOAD
+   Lädt automatisch die Willkommen-Seite beim ersten Laden
+   ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
     loadContent('willkommen');
 });
 
-// === GLOBAL FUNCTIONS FOR EVENT HANDLERS ===
+/* ============================================
+   GLOBALE FUNKTIONEN FÜR EVENT HANDLERS
+   Macht Funktionen im HTML onclick-Attribut verfügbar
+   ============================================ */
 window.toggleSidebar = toggleSidebar;
 window.loadContent = loadContent;
 window.toggleSection = toggleSection;
