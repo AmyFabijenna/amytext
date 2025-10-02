@@ -886,25 +886,35 @@ async function loadContent(page) {
    Fügt Click-Listener zu allen section-headers hinzu
    Wird nach jedem Content-Laden aufgerufen
    ============================================ */
+
 function initializeAccordions() {
     const headers = document.querySelectorAll('.section-header');
     
-    // Entferne alte Event-Listener durch Cloning
-    // (verhindert doppelte Listener bei erneutem Laden)
+    console.log('Initialisiere Accordions, gefunden:', headers.length, 'headers');
+    
     headers.forEach(header => {
-        const clone = header.cloneNode(true);
-        header.parentNode.replaceChild(clone, header);
+        // Entferne alle alten onclick Attribute aus dem HTML
+        header.removeAttribute('onclick');
+        
+        // Entferne alte Event Listener durch Klonen
+        const newHeader = header.cloneNode(true);
+        newHeader.removeAttribute('onclick'); // Nochmal sicherstellen
+        header.parentNode.replaceChild(newHeader, header);
     });
     
-    // Füge neue Event-Listener zu allen geclonten Headers hinzu
+    // WICHTIG: Jetzt die NEUEN Headers auswählen und Listener hinzufügen
     document.querySelectorAll('.section-header').forEach(header => {
         header.addEventListener('click', function(e) {
             e.preventDefault();
-            e.stopPropagation(); // Verhindert Event-Bubbling bei verschachtelten Cards
+            e.stopPropagation();
             toggleSection(this);
         });
     });
+    
+    console.log('Accordions initialisiert!');
 }
+
+
 
 /* ============================================
    TOGGLE SECTION FUNKTION
