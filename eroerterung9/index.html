@@ -354,18 +354,17 @@
             transform: rotate(180deg);
         }
 
-        .section-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            padding: 0 25px;
-        }
+.section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    padding: 0 25px;
+}
 
-        .section-content.active {
-            max-height: 5000px;
-            padding: 25px;
-        }
-
+.section-content.active {
+    max-height: 10000px; /* Erhöht für längere Inhalte */
+    padding: 25px;
+}
         @media (max-width: 968px) {
             .sidebar {
                 transform: translateX(-280px);
@@ -597,173 +596,165 @@
         </div>
     </main>
 
+</main>
+
+<script>
+// === TOGGLE SIDEBAR ===
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+
+// === LOAD CONTENT FUNCTION ===
+async function loadContent(page) {
+    const contentBody = document.getElementById('content-body');
     
-        // === SOLUTION TOGGLE FUNCTION ===
-        function toggleSolution(button) {
-            const solutionCard = button.closest('.section-card').nextElementSibling;
-            if (solutionCard && solutionCard.classList.contains('solution-card')) {
-                const content = solutionCard.querySelector('.section-content');
-                if (content) {
-                    if (content.classList.contains('active')) {
-                        content.classList.remove('active');
-                        solutionCard.querySelector('.section-header').classList.remove('active');
-                        button.querySelector('button').textContent = '📋 Musterlösung anzeigen';
-                    } else {
-                        content.classList.add('active');
-                        solutionCard.querySelector('.section-header').classList.add('active');
-                        button.querySelector('button').textContent = '📋 Musterlösung ausblenden';
-                    }
-                }
-            }
+    if (!contentBody) {
+        console.error('content-body Element nicht gefunden!');
+        return;
+    }
+    
+    // Remove active class from all nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to clicked link
+    const targetLink = document.querySelector(`.nav-link[onclick*="loadContent('${page}')"]`);
+    if (targetLink) {
+        targetLink.classList.add('active');
+    }
+    
+    // Show loading message
+    contentBody.innerHTML = `
+        <div class="loading-indicator">
+            <div class="spinner"></div>
+            <div>Lade Inhalte für: ${page}</div>
+        </div>
+    `;
+    
+    try {
+        const response = await fetch(`kapitel/${page}.html`);
+        
+        if (!response.ok) {
+            throw new Error(`Seite nicht gefunden: ${page}.html (Status: ${response.status})`);
         }
         
-        // === ENHANCED TOGGLE FUNCTION ===
-        function toggleSection(header) {
-            const content = header.nextElementSibling;
-            const arrow = header.querySelector('.toggle-arrow');
-            
-            if (content && content.classList.contains('section-content')) {
-                if (content.classList.contains('active')) {
-                    content.classList.remove('active');
-                    header.classList.remove('active');
-                    if (arrow) arrow.textContent = '▼';
-                } else {
-                    content.classList.add('active');
-                    header.classList.add('active');
-                    if (arrow) arrow.textContent = '▲';
-                }
-            }
-        }
-    
-        <script>
-        // === TOGGLE SIDEBAR ===
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        }
-
-        // === LOAD CONTENT FUNCTION ===
-        async function loadContent(page) {
-            const contentBody = document.getElementById('content-body');
-            
-            if (!contentBody) {
-                console.error('content-body Element nicht gefunden!');
-                return;
-            }
-            
-            // Remove active class from all nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Add active class to clicked link
-            const targetLink = document.querySelector(`.nav-link[onclick*="loadContent('${page}')"]`);
-            if (targetLink) {
-                targetLink.classList.add('active');
-            }
-            
-            // Show loading message
+        const html = await response.text();
+        
+        if (page !== 'willkommen') {
             contentBody.innerHTML = `
-                <div class="loading-indicator">
-                    <div class="spinner"></div>
-                    <div>Lade Inhalte für: ${page}</div>
-                </div>
+                <a href="#" class="back-button" onclick="loadContent('willkommen'); return false;">← Zurück zur Übersicht</a>
+                <div class="chapter-content">${html}</div>
             `;
-            
-            try {
-                const response = await fetch(`kapitel/${page}.html`);
-                
-                if (!response.ok) {
-                    throw new Error(`Seite nicht gefunden: ${page}.html (Status: ${response.status})`);
-                }
-                
-                const html = await response.text();
-                
-                if (page !== 'willkommen') {
-                    contentBody.innerHTML = `
-                        <a href="#" class="back-button" onclick="loadContent('willkommen'); return false;">← Zurück zur Übersicht</a>
-                        <div class="chapter-content">${html}</div>
-                    `;
-                } else {
-                    contentBody.innerHTML = html;
-                }
-                
-                // Nach dem Laden: Accordion-Funktionalität initialisieren
-                initializeAccordions();
-                
-            } catch (error) {
-                console.error('Fehler beim Laden der Seite:', error);
-                contentBody.innerHTML = `
-                    <div class="error-message">
-                        <h3>Seite konnte nicht geladen werden</h3>
-                        <p>Die angeforderte Seite "${page}.html" konnte nicht gefunden werden.</p>
-                        <p>Fehler: ${error.message}</p>
-                        <p><a href="#" onclick="loadContent('willkommen'); return false;">Zurück zur Startseite</a></p>
-                    </div>
-                `;
-            }
-            
-            // Close sidebar on mobile after selection
-            if (window.innerWidth <= 968) {
-                const sidebar = document.getElementById('sidebar');
-                if (sidebar) sidebar.classList.remove('active');
-            }
+        } else {
+            contentBody.innerHTML = html;
         }
+        
+        // Nach dem Laden: Accordion-Funktionalität initialisieren
+        initializeAccordions();
+        
+    } catch (error) {
+        console.error('Fehler beim Laden der Seite:', error);
+        contentBody.innerHTML = `
+            <div class="error-message">
+                <h3>Seite konnte nicht geladen werden</h3>
+                <p>Die angeforderte Seite "${page}.html" konnte nicht gefunden werden.</p>
+                <p>Fehler: ${error.message}</p>
+                <p><a href="#" onclick="loadContent('willkommen'); return false;">Zurück zur Startseite</a></p>
+            </div>
+        `;
+    }
+    
+    // Close sidebar on mobile after selection
+    if (window.innerWidth <= 968) {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) sidebar.classList.remove('active');
+    }
+}
 
-        // === ACCORDION FUNCTIONALITY ===
-        function initializeAccordions() {
-            const headers = document.querySelectorAll('.section-header');
-            
-            headers.forEach(header => {
-                // Remove old listeners by cloning
-                const newHeader = header.cloneNode(true);
-                header.parentNode.replaceChild(newHeader, header);
-                
-                // Add new listener
-                newHeader.addEventListener('click', function() {
-                    toggleSection(this);
-                });
-            });
-        }
-
-        function toggleSection(header) {
-            const content = header.nextElementSibling;
-            const arrow = header.querySelector('.toggle-arrow');
-            
-            if (content && content.classList.contains('section-content')) {
-                if (content.classList.contains('active')) {
-                    content.classList.remove('active');
-                    header.classList.remove('active');
-                } else {
-                    content.classList.add('active');
-                    header.classList.add('active');
-                }
-            }
-        }
-
-        // === CLICK OUTSIDE SIDEBAR TO CLOSE (MOBILE) ===
-        document.addEventListener('click', function(event) {
-            const sidebar = document.getElementById('sidebar');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (window.innerWidth <= 968 && 
-                sidebar && sidebar.classList.contains('active') && 
-                menuToggle &&
-                !sidebar.contains(event.target) && 
-                !menuToggle.contains(event.target)) {
-                sidebar.classList.remove('active');
-            }
+// === ACCORDION FUNCTIONALITY ===
+function initializeAccordions() {
+    const headers = document.querySelectorAll('.section-header');
+    
+    headers.forEach(header => {
+        // Entferne alte Event-Listener
+        const clone = header.cloneNode(true);
+        header.parentNode.replaceChild(clone, header);
+    });
+    
+    // Füge neue Event-Listener hinzu (nach dem Cloning)
+    document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleSection(this);
         });
+    });
+}
 
-        // === INITIAL LOAD ===
-        document.addEventListener('DOMContentLoaded', function() {
-            loadContent('willkommen');
-        });
+function toggleSection(header) {
+    const content = header.nextElementSibling;
+    const arrow = header.querySelector('.toggle-arrow');
+    
+    if (content && content.classList.contains('section-content')) {
+        const isActive = content.classList.contains('active');
+        
+        if (isActive) {
+            content.classList.remove('active');
+            header.classList.remove('active');
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            content.classList.add('active');
+            header.classList.add('active');
+            if (arrow) arrow.textContent = '▲';
+        }
+    }
+}
 
-        // === GLOBAL FUNCTIONS FOR EVENT HANDLERS ===
-        window.toggleSidebar = toggleSidebar;
-        window.loadContent = loadContent;
-        window.toggleSection = toggleSection;
-    </script>
+// === SOLUTION TOGGLE FUNCTION ===
+function toggleSolution(button) {
+    const solutionCard = button.closest('.section-card').nextElementSibling;
+    if (solutionCard && solutionCard.classList.contains('solution-card')) {
+        const content = solutionCard.querySelector('.section-content');
+        if (content) {
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                solutionCard.querySelector('.section-header').classList.remove('active');
+                button.querySelector('button').textContent = '📋 Musterlösung anzeigen';
+            } else {
+                content.classList.add('active');
+                solutionCard.querySelector('.section-header').classList.add('active');
+                button.querySelector('button').textContent = '📋 Musterlösung ausblenden';
+            }
+        }
+    }
+}
+
+// === CLICK OUTSIDE SIDEBAR TO CLOSE (MOBILE) ===
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (window.innerWidth <= 968 && 
+        sidebar && sidebar.classList.contains('active') && 
+        menuToggle &&
+        !sidebar.contains(event.target) && 
+        !menuToggle.contains(event.target)) {
+        sidebar.classList.remove('active');
+    }
+});
+
+// === INITIAL LOAD ===
+document.addEventListener('DOMContentLoaded', function() {
+    loadContent('willkommen');
+});
+
+// === GLOBAL FUNCTIONS FOR EVENT HANDLERS ===
+window.toggleSidebar = toggleSidebar;
+window.loadContent = loadContent;
+window.toggleSection = toggleSection;
+window.toggleSolution = toggleSolution;
+</script>
+
 </body>
 </html>
