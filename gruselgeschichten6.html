@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deutsch-Nachhilfe: Gruselgeschichten verfassen wie Martina Wildner | Amy Lang</title>
-    <meta name="description" content="Professionelle Deutsch-Nachhilfe: Lerne Gruselgeschichten zu schreiben wie in 'Das schaurige Haus' von Martina Wildner. Verbessere deine Aufsätze mit unserer Schülernachhilfe.">
-    <meta name="keywords" content="Deutsch-Nachhilfe, Schülernachhilfe, Gruselgeschichten schreiben, Aufsatz training, Martina Wildner, Das schaurige Haus, Deutsch lernen, Nachhilfelehrer">
-    <meta name="author" content="Amy Lang - Deutschtrainerin">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Deutsch-Nachhilfe: Gruselgeschichten verfassen | Amy Lang">
-    <meta property="og:description" content="Lerne Gruselgeschichten zu schreiben mit professioneller Deutsch-Nachhilfe">
-    <meta property="og:type" content="website">
-    
+    <title>Gruselgeschichten schreiben - Leitfaden</title>
     <style>
-        /* Dein bestehender CSS-Code hier */
-        /* CSS bleibt gleich wie vorher */
+        :root {
+            --orange: #FF6B35;
+            --purple: #7B68EE;
+            --dark-blue: #1a1a3e;
+            --light-purple: #B8A4D9;
+            --cream: #FFF8DC;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -23,370 +21,1337 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #e6e6e6;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, #2d1b4e 100%);
+            color: var(--cream);
             line-height: 1.6;
-            padding: 0;
-            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(30, 30, 46, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            background: rgba(26, 26, 62, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px var(--shadow);
         }
 
-        .header {
-            background: linear-gradient(135deg, #2d0b3d, #4a1e6b);
-            color: white;
+        h1 {
             text-align: center;
-            padding: 40px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30 Z" fill="white"/></svg>');
-            background-size: 200px;
-        }
-
-        .header h1 {
-            font-size: 2.8em;
+            color: var(--orange);
+            font-size: 3em;
             margin-bottom: 10px;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            position: relative;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        .header p {
-            font-size: 1.3em;
-            opacity: 0.9;
-            position: relative;
+        @keyframes glow {
+            from {
+                text-shadow: 3px 3px 6px rgba(255, 107, 53, 0.5);
+            }
+            to {
+                text-shadow: 3px 3px 20px rgba(255, 107, 53, 0.8);
+            }
         }
 
-
-/* Navigation Leiste */
-.main-nav {
-    background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
-    padding: 15px 0;
-    border-bottom: 3px solid #1e3a5f;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 0 20px;
-}
-
-.nav-btn {
-    padding: 12px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    text-align: center;
-    min-width: 140px;
-}
-
-.back-btn {
-    background: #2d3748;
-    color: #e2e8f0;
-}
-
-.nav-btn:not(.home-btn):not(.booking-btn) {
-    background: #2d3748;
-    color: #e2e8f0;
-}
-
-.home-btn {
-    background: #d69e2e;
-    color: #1a202c;
-    border-color: #b7791f;
-}
-
-.booking-btn {
-    background: #2c7a7b;
-    color: white;
-    border-color: #285e61;
-}
-
-.nav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.home-btn:hover {
-    background: #ecc94b;
-}
-
-.booking-btn:hover {
-    background: #319795;
-}
-
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .nav-btn {
-        width: 90%;
-        max-width: 300px;
-    }
-}
-
-        .book-cover {
-            width: 200px;
-            height: 280px;
-            margin: 20px auto;
-            background: linear-gradient(135deg, #2d0b3d, #6a3093);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border: 2px solid #8a4db9;
-        }
-
-        .book-cover h3 {
+        .subtitle {
             text-align: center;
-            padding: 20px;
-            font-size: 1.4em;
+            color: var(--light-purple);
+            font-size: 1.5em;
+            margin-bottom: 40px;
         }
 
-        .content {
+        .welcome {
+            background: linear-gradient(90deg, var(--purple), var(--orange));
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .toc {
+            background: rgba(123, 104, 238, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--orange);
+            margin-bottom: 30px;
+        }
+
+        .toc h2 {
+            color: var(--orange);
+            margin-bottom: 15px;
+        }
+
+        .toc ol {
+            margin-left: 20px;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            color: var(--light-purple);
+        }
+
+        .chapter {
+            margin-bottom: 20px;
+            border: 2px solid var(--purple);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .chapter:hover {
+            border-color: var(--orange);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .chapter-header {
+            background: linear-gradient(90deg, var(--purple), var(--dark-blue));
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .chapter-header:hover {
+            background: linear-gradient(90deg, var(--orange), var(--purple));
+        }
+
+        .chapter-header h2 {
+            color: var(--orange);
+            font-size: 1.8em;
+            margin: 0;
+        }
+
+        .toggle-icon {
+            font-size: 1.5em;
+            color: var(--light-purple);
+            transition: transform 0.3s ease;
+        }
+
+        .chapter.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .chapter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: rgba(26, 26, 62, 0.5);
+        }
+
+        .chapter.active .chapter-content {
+            max-height: 50000px;
+        }
+
+        .chapter-inner {
             padding: 30px;
         }
 
-        .section {
-            background: rgba(40, 40, 60, 0.7);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 5px solid #8a4db9;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        h2 {
-            color: #c77dff;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #4a1e6b;
-            padding-bottom: 8px;
-        }
-
         h3 {
-            color: #e0aaff;
-            margin: 15px 0 10px 0;
+            color: var(--orange);
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        h4 {
+            color: var(--light-purple);
+            margin: 20px 0 10px 0;
         }
 
         p {
-            margin-bottom: 15px;
-        }
-
-        .activity {
-            background: rgba(50, 50, 70, 0.5);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 1px solid #5a5a7a;
-        }
-
-        .question {
-            background: rgba(60, 40, 80, 0.3);
-            padding: 15px;
-            border-radius: 8px;
             margin: 15px 0;
-            border-left: 4px solid #8a4db9;
         }
 
-        .writing-area {
-            width: 100%;
-            min-height: 150px;
-            padding: 15px;
-            margin: 15px 0;
-            background: rgba(30, 30, 40, 0.8);
-            border: 1px solid #5a5a7a;
-            border-radius: 5px;
-            color: #e6e6e6;
-            font-family: inherit;
-            font-size: 1em;
+        ul, ol {
+            margin: 15px 0 15px 30px;
         }
 
-        .button {
-            background: linear-gradient(135deg, #8a4db9, #6a3093);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin: 10px 5px;
+        li {
+            margin: 8px 0;
         }
 
-        .button:hover {
-            background: linear-gradient(135deg, #9a5dc9, #7a40a3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138, 77, 185, 0.4);
-        }
-
-        .quiz-option {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
-            background: rgba(60, 60, 80, 0.5);
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .quiz-option:hover {
-            background: rgba(80, 60, 100, 0.7);
-        }
-
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+        blockquote {
+            background: rgba(123, 104, 238, 0.2);
+            border-left: 5px solid var(--orange);
+            padding: 15px 20px;
             margin: 20px 0;
-        }
-
-        .character-card {
-            background: rgba(50, 40, 70, 0.5);
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #6a5a8a;
-        }
-
-        .quote {
             font-style: italic;
-            color: #c77dff;
-            border-left: 3px solid #8a4db9;
-            padding-left: 15px;
-            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(26, 26, 62, 0.8);
+        }
+
+        th {
+            background: var(--purple);
+            color: var(--cream);
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--light-purple);
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid var(--purple);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(123, 104, 238, 0.1);
+        }
+
+        .highlight {
+            background: var(--orange);
+            color: var(--dark-blue);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: rgba(255, 107, 53, 0.2);
+            border: 2px solid var(--orange);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
         }
 
         .tip {
-            background: rgba(90, 60, 120, 0.3);
+            background: rgba(123, 104, 238, 0.2);
+            border: 2px solid var(--purple);
             padding: 15px;
             border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #c77dff;
+            margin: 20px 0;
         }
 
-        .result {
+        pre {
+            background: var(--dark-blue);
             padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid var(--purple);
+        }
+
+        code {
+            color: var(--orange);
+            font-family: 'Courier New', monospace;
+        }
+
+        .hidden-chapter {
             display: none;
         }
 
-        .correct {
-            background: rgba(40, 120, 60, 0.3);
-            border-left: 4px solid #4CAF50;
+        strong {
+            color: var(--orange);
         }
 
-        .incorrect {
-            background: rgba(120, 40, 60, 0.3);
-            border-left: 4px solid #F44336;
+        em {
+            color: var(--light-purple);
         }
 
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
+        hr {
+            border: none;
+            border-top: 2px solid var(--purple);
+            margin: 30px 0;
+            opacity: 0.5;
         }
 
         .footer {
-            background: linear-gradient(135deg, #2d0b3d, #4a1e6b);
-            color: white;
             text-align: center;
+            margin-top: 50px;
             padding: 20px;
-            margin-top: 40px;
+            border-top: 2px solid var(--purple);
+            color: var(--light-purple);
         }
-
-        .feedback {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            background: rgba(60, 60, 80, 0.5);
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2em;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .character-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LearningResource",
-  "name": "Gruselgeschichten verfassen - Das schaurige Haus",
-  "description": "Deutsch-Nachhilfe Material zum Verfassen von Gruselgeschichten inspiriert von Martina Wildner",
-  "educationalLevel": "Sekundarstufe",
-  "learningResourceType": "Unterrichtsmaterial",
-  "author": {
-    "@type": "Person",
-    "name": "Amy Lang"
-  },
-  "provider": {
-    "@type": "EducationalOrganization",
-    "name": "Amy Lang Deutsch-Nachhilfe"
-  }
-}
-</script>
     
+.section {
+    background: rgba(40, 40, 60, 0.7);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--orange);
+}
+
+.question {
+    background: rgba(60, 40, 80, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid var(--purple);
+}
+
+.writing-area {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    background: rgba(30, 30, 40, 0.8);
+    border: 1px solid var(--purple);
+    border-radius: 5px;
+    color: var(--cream);
+    font-family: inherit;
+    margin: 10px 0;
+}
+
+.quiz-option {
+    padding: 10px;
+    margin: 8px 0;
+    background: rgba(60, 60, 80, 0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.quiz-option:hover {
+    background: rgba(80, 60, 100, 0.7);
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.character-card {
+    background: rgba(50, 40, 70, 0.5);
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid var(--purple);
+}
+
+.feedback {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(123, 104, 238, 0.2);
+}
+
+.result {
+    display: none;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+
+
+    </style>
 </head>
 <body>
     <div class="container">
+        <h1>📖 Gruselgeschichten schreiben</h1>
+        <p class="subtitle">Dein ultimativer Leitfaden für die 6. Schulstufe</p>
 
-<nav class="main-nav">
-    <div class="nav-container">
-        <a href="../index.html" class="nav-btn back-btn">Zurück zu Texte für die Schule schreiben</a>
-        <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/index.html" class="nav-btn">Zurück zur Schülernachhilfe</a>
-        <a href="https://amyfabijenna.github.io/amylang-deutsch/" class="nav-btn home-btn">Zurück zur Hauptseite</a>
-        <a href="https://wa.me/36301818503?text=Hallo!%20Ich%20möchte%20Nachhilfe%20buchen." class="nav-btn booking-btn">Nachhilfe buchen</a>
-    </div>
-</nav>
+        <div class="welcome">
+            <h2>🎯 Willkommen in der Welt des Gruselns!</h2>
+            <p>Du hast schon Märchen geschrieben, Erlebniserzählungen verfasst und Bildergeschichten zum Leben erweckt. Jetzt ist es Zeit für etwas richtig Aufregendes: <strong>Gruselgeschichten!</strong></p>
+            <p>In diesem Leitfaden findest du alles, was du brauchst, um deine Leser*innen zum Zittern zu bringen und gleichzeitig eine richtig gute Geschichte zu erzählen.</p>
+        </div>
 
-        <header class="header">
-            <h1>Gruselgeschichten verfassen</h1>
-            <p>Inspiriert von "Das schaurige Haus" von Martina Wildner</p>
-            <div class="book-cover">
-                <h3>Das schaurige Haus<br><span style="font-size: 0.8em;">von Martina Wildner</span></h3>
+        <div class="toc">
+    <h2>📚 Inhaltsverzeichnis</h2>
+    <ol>
+        <li>Was macht eine Gruselgeschichte aus?</li>
+        <li>Arten von Gruselgeschichten</li>
+        <li>Der Aufbau: Einleitung, Hauptteil, Schluss</li>
+        <li>Die Spannungskurve - dein wichtigstes Werkzeug</li>
+        <li>Die richtige Atmosphäre schaffen</li>
+        <li>Formulierungshilfen für gruseliges Schreiben</li>
+        <li>Beispiele aus der Literatur</li>
+        <li>Übungen mit Lösungen</li>
+        <li>Checkliste für deine eigene Geschichte</li>
+        <li>Häufige Fehler und wie du sie vermeidest</li>
+        <li>Interaktive Übungen: "Das schaurige Haus"</li> <!-- NEU -->
+    </ol>
+</div>
+
+
+
+
+
+
+
+        <!-- Kapitel 1 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>1. Was macht eine Gruselgeschichte aus? 👻</h2>
+                <span class="toggle-icon">▼</span>
             </div>
-        </header>
-<!-- Navigation Leiste -->
-        <main class="content">
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Eine Gruselgeschichte ist mehr als nur "gruselig". Sie hat bestimmte Merkmale:</p>
+                    
+                    <h3>Die 5 Säulen einer guten Gruselgeschichte:</h3>
+                    
+                    <div class="tip">
+                        <strong>🏰 Atmosphäre:</strong> Die Stimmung muss stimmen! Düster, unheimlich, bedrohlich.
+                    </div>
+                    
+                    <div class="tip">
+                        <strong>😰 Spannung:</strong> Der Leser muss weiterlesen WOLLEN. Was passiert als Nächstes?
+                    </div>
+                    
+                    <div class="tip">
+                        <strong>👤 Nachvollziehbare Figuren:</strong> Deine Hauptperson muss echt wirken. Wir müssen mit ihr mitfühlen.
+                    </div>
+                    
+                    <div class="tip">
+                        <strong>❓ Das Unbekannte:</strong> Etwas Unerklärliches, Mysteriöses oder Übernatürliches.
+                    </div>
+                    
+                    <div class="tip">
+                        <strong>💥 Ein Höhepunkt:</strong> Der gruseligste Moment, auf den alles hinausläuft.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 2 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>2. Arten von Gruselgeschichten 🎭</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Es gibt verschiedene Arten von Gruselgeschichten. Hier sind die wichtigsten:</p>
+                    
+                    <h3>🏚️ Die Geistergeschichte</h3>
+                    <ul>
+                        <li>Spukende Häuser, Geister von Verstorbenen</li>
+                        <li><strong>Beispiel:</strong> "Das schaurige Haus" von Martina Wildner</li>
+                        <li><strong>Typisches Element:</strong> Unerklärliche Geräusche, kalte Luftzüge, Erscheinungen</li>
+                    </ul>
+                    
+                    <h3>🧛 Die Monster-Geschichte</h3>
+                    <ul>
+                        <li>Vampire, Werwölfe, andere Kreaturen</li>
+                        <li><strong>Typisches Element:</strong> Die Verwandlung, die Jagd, das Versteck</li>
+                    </ul>
+                    
+                    <h3>🌙 Die Mystery-Geschichte</h3>
+                    <ul>
+                        <li>Unerklärliche Ereignisse, rätselhafte Vorgänge</li>
+                        <li><strong>Typisches Element:</strong> Hinweise sammeln, Rätsel lösen, überraschende Wendung</li>
+                    </ul>
+                    
+                    <h3>😱 Die psychologische Gruselgeschichte</h3>
+                    <ul>
+                        <li>Der Schrecken liegt im Kopf</li>
+                        <li><strong>Typisches Element:</strong> Ist es real oder Einbildung? Zweifel, Angst, Paranoia</li>
+                    </ul>
+                    
+                    <h3>🏃 Die Verfolgungsjagd</h3>
+                    <ul>
+                        <li>Jemand wird gejagt oder verfolgt</li>
+                        <li><strong>Typisches Element:</strong> Verstecken, Flucht, immer näher kommende Gefahr</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 3 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>3. Der Aufbau: Einleitung, Hauptteil, Schluss 📝</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Wie bei jeder guten Geschichte brauchst du eine klare Struktur:</p>
+                    
+                    <h3>📖 EINLEITUNG (ca. 1/4 der Geschichte)</h3>
+                    
+                    <p><strong>Was muss rein?</strong></p>
+                    <ul>
+                        <li>WER? (Hauptfigur vorstellen - aber nicht zu viel!)</li>
+                        <li>WO? (Schauplatz beschreiben - Atmosphäre aufbauen!)</li>
+                        <li>WANN? (Tageszeit, Jahreszeit)</li>
+                        <li>Erste Andeutung: Etwas stimmt nicht…</li>
+                    </ul>
+                    
+                    <p><strong>Beispiel:</strong></p>
+                    <blockquote>
+                        Lena stand vor dem alten Bauernhaus ihrer Großtante. Der Herbstwind zerrte an ihren Haaren und trieb welke Blätter über den ungepflegten Vorgarten. Die Fensterläden klapperten. Eines der Fenster im ersten Stock stand offen – dabei hatte Mama gesagt, das Haus sei seit Jahren verlassen.
+                    </blockquote>
+                    
+                    <div class="warning">
+                        <strong>Wichtig für Schülerin 1:</strong> Starte mit einer Person an einem Ort. Nicht mehr! Dann baue die Grusel-Stimmung langsam auf.
+                    </div>
+                    
+                    <div class="warning">
+                        <strong>Wichtig für Schülerin 2:</strong> Konzentriere dich auf EINE Hauptfigur und EINEN Schauplatz. Du kannst später mehr hinzufügen, aber starte einfach!
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>🎬 HAUPTTEIL (ca. 1/2 der Geschichte)</h3>
+                    
+                    <p><strong>Was passiert hier?</strong></p>
+                    <ul>
+                        <li>Die Spannung steigt (siehe Spannungskurve!)</li>
+                        <li>Merkwürdige Ereignisse häufen sich</li>
+                        <li>Die Hauptfigur entdeckt Hinweise</li>
+                        <li>Die Gefahr wird immer realer</li>
+                        <li>Höhepunkt: Der gruseligste Moment!</li>
+                    </ul>
+                    
+                    <p><strong>Struktur im Hauptteil:</strong></p>
+                    <ol>
+                        <li><strong>Etwas Seltsames passiert</strong> → Hauptfigur ist neugierig/misstrauisch</li>
+                        <li><strong>Weitere unheimliche Ereignisse</strong> → Hauptfigur bekommt Angst</li>
+                        <li><strong>Die Situation spitzt sich zu</strong> → Hauptfigur versucht zu fliehen/sich zu wehren</li>
+                        <li><strong>HÖHEPUNKT</strong> → Konfrontation mit dem Grusel</li>
+                    </ol>
+                    
+                    <div class="warning">
+                        <strong>Wichtig für Schülerin 1:</strong> Schreibe Schritt für Schritt. Was passiert zuerst? Dann? Und dann? Mache eine Liste, bevor du schreibst!
+                    </div>
+                    
+                    <div class="warning">
+                        <strong>Wichtig für Schülerin 2:</strong> Du hast 1000 Ideen - super! Aber wähle nur 3-4 wichtige Ereignisse aus. Nicht alles auf einmal! Der Leser braucht Zeit zum Mitdenken.
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>🎯 SCHLUSS (ca. 1/4 der Geschichte)</h3>
+                    
+                    <p><strong>Zwei Möglichkeiten:</strong></p>
+                    
+                    <h4>A) Die Auflösung (klassisches Ende)</h4>
+                    <ul>
+                        <li>Das Rätsel wird gelöst</li>
+                        <li>Die Gefahr ist gebannt</li>
+                        <li>Die Hauptfigur ist in Sicherheit</li>
+                        <li><strong>ABER:</strong> Vielleicht ein kleiner Hinweis, dass doch nicht alles vorbei ist…</li>
+                    </ul>
+                    
+                    <blockquote>
+                        Lena rannte, so schnell sie konnte, aus dem Haus. Erst draußen im hellen Sonnenlicht wagte sie sich umzudrehen. Das Haus stand da, still und harmlos. Hatte sie sich alles nur eingebildet? Sie schloss die Gartentür hinter sich. Als sie zum Fenster im ersten Stock hinaufsah, bewegte sich der Vorhang. Aber das war sicher nur der Wind. Oder?
+                    </blockquote>
+                    
+                    <h4>B) Das offene Ende (für Mutige!)</h4>
+                    <ul>
+                        <li>Die Geschichte endet mitten in der Spannung</li>
+                        <li>Der Leser muss selbst weiterspinnen</li>
+                        <li><strong>Achtung:</strong> Kann frustrierend sein, wenn es zu plötzlich kommt!</li>
+                    </ul>
+                    
+                    <blockquote>
+                        Lena wirbelte herum. Der Schatten war direkt hinter ihr. Sie wollte schreien, aber ihre Stimme versagte. Eine eiskalte Hand berührte ihre Schulter und…
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Kapitel 4 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>4. Die Spannungskurve - dein wichtigstes Werkzeug 📈</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Die Spannungskurve zeigt, wie spannend deine Geschichte zu welchem Zeitpunkt ist. Es gibt zwei Haupttypen:</p>
+                    
+                    <h3>📊 Spannungskurve A: Der klassische Aufbau</h3>
+                    
+                    <pre><code>
+                                    * HÖHEPUNKT
+                                   /|
+                                  / |
+                              ___/  |
+                         ____/      |
+                    ____/           |
+        ___________/                |___________
+        EINLEITUNG    HAUPTTEIL         SCHLUSS
+                    </code></pre>
+                    
+                    <p><strong>So funktioniert's:</strong></p>
+                    <ul>
+                        <li><strong>Einleitung:</strong> Spannung niedrig, Stimmung wird aufgebaut</li>
+                        <li><strong>Hauptteil:</strong> Spannung steigt langsam und stetig</li>
+                        <li><strong>Höhepunkt:</strong> Die gruseligste, spannendste Szene</li>
+                        <li><strong>Schluss:</strong> Spannung fällt schnell ab, Auflösung</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <strong>Wann benutzen?</strong> Wenn du eine Geschichte mit klarer Steigerung willst.
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>📊 Spannungskurve B: Der Spannungstrick</h3>
+                    
+                    <pre><code>
+      *                                  * HÖHEPUNKT  
+     /|\                                /|
+    / | \                              / |
+   /  |  \____                    ____/  |
+  /   |       \_______________   /       |
+ /    |                       \_/        |__________
+START     BERUHIGUNG         AUFBAU      SCHLUSS
+                    </code></pre>
+                    
+                    <p><strong>So funktioniert's:</strong></p>
+                    <ul>
+                        <li><strong>Start:</strong> SOFORT spannend! (Ein Schrei, ein Schatten, eine Gefahr)</li>
+                        <li><strong>Beruhigung:</strong> Spannung sinkt, es scheint eine Erklärung zu geben</li>
+                        <li><strong>Neuer Aufbau:</strong> Doch es wird wieder gruselig - diesmal noch schlimmer!</li>
+                        <li><strong>Höhepunkt:</strong> Der finale Schock</li>
+                        <li><strong>Schluss:</strong> Schnelle Auflösung</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <strong>Wann benutzen?</strong> Wenn du deine Leser*innen sofort packen willst!
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>🎯 Welche Kurve für welche Geschichte?</h3>
+                    
+                    <div class="warning">
+                        <strong>Für Schülerin 1:</strong> Nimm Kurve A! Sie ist einfacher zu planen. Schreib dir auf: Was passiert am Anfang? In der Mitte? Am Ende?
+                    </div>
+                    
+                    <div class="warning">
+                        <strong>Für Schülerin 2:</strong> Kurve B könnte perfekt für dich sein! Du kannst mit einem Knaller starten, aber dann MUSST du dich fokussieren und nicht 10 neue Ideen einbauen. Bleib bei einer Linie!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 5 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>5. Die richtige Atmosphäre schaffen 🌙</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Atmosphäre ist die <strong>Stimmung</strong> deiner Geschichte. Bei Gruselgeschichten willst du: <strong>Unbehagen, Angst, Spannung!</strong></p>
+                    
+                    <h3>🏚️ Der Schauplatz</h3>
+                    
+                    <p>Klassische gruselige Orte:</p>
+                    <ul>
+                        <li>Alte, verlassene Häuser</li>
+                        <li>Dunkle Wälder</li>
+                        <li>Friedhöfe</li>
+                        <li>Neblige Moore</li>
+                        <li>Leere Schulen/Krankenhäuser nachts</li>
+                        <li>Keller oder Dachböden</li>
+                    </ul>
+                    
+                    <p><strong>Aber:</strong> Auch normale Orte können gruselig werden!</p>
+                    
+                    <div class="tip">
+                        <p>❌ <strong>Langweilig:</strong> "Das Haus war alt."</p>
+                        <p>✅ <strong>Besser:</strong> "Das Haus kauerte zwischen den Bäumen, die Farbe blätterte von den Wänden wie tote Haut."</p>
+                    </div>
+                    
+                    <h3>🌫️ Das Wetter und die Sinne</h3>
+                    
+                    <p>Nutze <strong>alle fünf Sinne</strong> für die Atmosphäre:</p>
+                    
+                    <h4>👁️ SEHEN:</h4>
+                    <ul>
+                        <li>Schatten, Nebel, flackerndes Licht</li>
+                        <li>"Die Glühbirne flackerte und tauchte den Raum in zuckendes Licht."</li>
+                    </ul>
+                    
+                    <h4>👂 HÖREN:</h4>
+                    <ul>
+                        <li>Knarren, Flüstern, Stille (die zu still ist!)</li>
+                        <li>"Die Stille war so dicht, dass sie in den Ohren schmerzte."</li>
+                    </ul>
+                    
+                    <h4>👃 RIECHEN:</h4>
+                    <ul>
+                        <li>Moder, Fäulnis, Staub</li>
+                        <li>"Der Geruch von nassem Stein und etwas Süßlichem, das sie nicht benennen konnte, hing in der Luft."</li>
+                    </ul>
+                    
+                    <h4>🖐️ FÜHLEN:</h4>
+                    <ul>
+                        <li>Kälte, Feuchtigkeit, Gänsehaut</li>
+                        <li>"Eine eisige Berührung, wie Finger aus Eis, streifte ihren Nacken."</li>
+                    </ul>
+                    
+                    <h4>👅 SCHMECKEN:</h4>
+                    <ul>
+                        <li>Angst (metallischer Geschmack), staubige Luft</li>
+                        <li>"Sie schmeckte Angst, metallisch und bitter auf der Zunge."</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 6 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>6. Formulierungshilfen für gruseliges Schreiben ✍️</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Hier findest du fertige Satzanfänge und Formulierungen, die du in deiner Geschichte verwenden kannst:</p>
+                    
+                    <h3>🚀 Spannende Satzanfänge</h3>
+                    
+                    <h4>Für den Beginn:</h4>
+                    <ul>
+                        <li>Plötzlich…</li>
+                        <li>Ohne Vorwarnung…</li>
+                        <li>Aus dem Nichts…</li>
+                        <li>In diesem Moment…</li>
+                        <li>Gerade als… (Gerade als sie sich beruhigen wollte…)</li>
+                    </ul>
+                    
+                    <h4>Für die Steigerung:</h4>
+                    <ul>
+                        <li>Immer mehr…</li>
+                        <li>Noch nie zuvor…</li>
+                        <li>Zum ersten Mal…</li>
+                        <li>Mit jeder Sekunde…</li>
+                        <li>Je länger sie…, desto… (Je länger sie lauschte, desto sicherer war sie…)</li>
+                    </ul>
+                    
+                    <h4>Für den Höhepunkt:</h4>
+                    <ul>
+                        <li>Jetzt war es zu spät…</li>
+                        <li>Da geschah es…</li>
+                        <li>In diesem Augenblick…</li>
+                        <li>Endlich verstand sie…</li>
+                        <li>Jetzt gab es kein Zurück mehr…</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h3>😱 Angst und Furcht beschreiben</h3>
+                    
+                    <h4>Körperliche Reaktionen:</h4>
+                    <ul>
+                        <li>Ihr Herz hämmerte gegen die Rippen.</li>
+                        <li>Ein kalter Schauer lief ihr über den Rücken.</li>
+
+
+
+                        <li>Ihre Hände zitterten unkontrolliert.</li>
+                        <li>Der Schweiß brach ihr aus allen Poren.</li>
+                        <li>Ihre Knie wurden weich wie Butter.</li>
+                        <li>Sie spürte, wie ihr das Blut aus dem Gesicht wich.</li>
+                        <li>Ein Kloß bildete sich in ihrer Kehle.</li>
+                        <li>Gänsehaut breitete sich auf ihren Armen aus.</li>
+                    </ul>
+                    
+                    <h4>Gefühle:</h4>
+                    <ul>
+                        <li>Panik ergriff von ihr Besitz.</li>
+                        <li>Nackte Angst durchfuhr sie.</li>
+                        <li>Ihr Atem stockte.</li>
+                        <li>Sie wagte nicht, sich zu bewegen.</li>
+                        <li>Jeder Muskel in ihrem Körper spannte sich an.</li>
+                        <li>Sie wollte schreien, aber kein Ton kam über ihre Lippen.</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h3>👻 Unheimliche Ereignisse beschreiben</h3>
+                    
+                    <h4>Geräusche:</h4>
+                    <ul>
+                        <li>Ein Knarren zerriss die Stille.</li>
+                        <li>Ein schabendes Geräusch kroch die Wand entlang.</li>
+                        <li>Schritte – langsam, schleppend – näherten sich.</li>
+                        <li>Ein Flüstern, zu leise, um die Worte zu verstehen.</li>
+                        <li>Etwas scharrte hinter der Tür.</li>
+                        <li>Die Stille war ohrenbetäubend.</li>
+                    </ul>
+                    
+                    <h4>Bewegungen und Schatten:</h4>
+                    <ul>
+                        <li>Ein Schatten huschte über die Wand.</li>
+                        <li>Etwas bewegte sich im Augenwinkel.</li>
+                        <li>Die Tür schwang langsam auf – wie von Geisterhand.</li>
+                        <li>Der Vorhang bauschte sich, obwohl kein Wind ging.</li>
+                        <li>Eine dunkle Gestalt stand regungslos in der Ecke.</li>
+                    </ul>
+                    
+                    <h3>⚡ Vergleiche und Bilder (Metaphern)</h3>
+                    <ul>
+                        <li>Die Dunkelheit lag wie eine Decke über dem Haus.</li>
+                        <li>Seine Augen glühten wie Kohlen.</li>
+                        <li>Die Angst kroch wie eine Spinne durch ihren Körper.</li>
+                        <li>Der Nebel waberte wie lebendige Geister umher.</li>
+                        <li>Die Stille war so dick, dass man sie hätte schneiden können.</li>
+                        <li>Ihr Herz schlug wie eine Trommel.</li>
+                        <li>Die Kälte biss wie Nadeln in ihre Haut.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 7 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>7. Beispiele aus der Literatur 📚</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <h3>📖 "Das schaurige Haus" - Martina Wildner</h3>
+                    
+                    <p><strong>Worum geht's?</strong><br>
+                    Hendrik und sein Bruder Eddi ziehen mit ihren Eltern in ein altes, etwas heruntergekommenes Haus in Österreich. Von Anfang an passieren merkwürdige Dinge: Gegenstände verschwinden, es gibt seltsame Geräusche, und Hendrik fühlt sich beobachtet.</p>
+                    
+                    <p><strong>Was macht diese Geschichte gruselig?</strong></p>
+                    
+                    <div class="tip">
+                        <strong>1. Atmosphäre:</strong> Das alte Haus wird sehr detailliert beschrieben
+                        <ul>
+                            <li><em>Beispiel:</em> Die knarzenden Treppen, die dunklen Ecken, die Geschichte des Hauses</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip">
+                        <strong>2. Geheimnisse:</strong> Es gibt viele Rätsel
+                        <ul>
+                            <li>Wer ist das Mädchen, das Hendrik sieht?</li>
+                            <li>Was ist damals wirklich passiert?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tip">
+                        <strong>3. Die Mischung:</strong> Realistische Familie + übernatürliche Ereignisse
+                        <ul>
+                            <li>Die Familie ist normal → wir können uns mit ihnen identifizieren</li>
+                            <li>Das Unerklärliche bricht in den Alltag ein → besonders gruselig!</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>📝 Analyse einer Grusel-Szene</h3>
+                    
+                    <p><strong>Original-Beispiel (fiktiv):</strong></p>
+                    <blockquote>
+                        <em>Lisa stand im dunklen Flur. Sie hörte ein Geräusch aus dem Zimmer am Ende. Langsam ging sie darauf zu. Die Tür stand einen Spalt offen. Sie schob sie auf und…</em>
+                    </blockquote>
+                    
+                    <p><strong>Jetzt verbessert mit unseren Techniken:</strong></p>
+                    <blockquote>
+                        <em>Der Flur lag in völliger Dunkelheit. Lisa tastete sich an der kalten Wand entlang, ihr Herz hämmerte. Aus dem letzten Zimmer drang ein schabendes Kratzen, wie Fingernägel auf Holz. Sie blieb stehen, jeder Muskel angespannt. Das Geräusch verstummte. In der Stille hörte sie nur ihren eigenen rasenden Atem. Die Tür am Ende stand einen Spalt offen – ein schwarzer Schlund in der Dunkelheit. Mit zitternder Hand schob sie die Tür auf und…</em>
+                    </blockquote>
+                    
+                    <p><strong>Was wurde verbessert?</strong></p>
+                    <ul>
+                        <li>Mehr Sinneseindrücke (kalt, Kratzen, Atem)</li>
+                        <li>Körperliche Reaktionen (Herz hämmert, zittert)</li>
+                        <li>Vergleiche (schwarzer Schlund)</li>
+                        <li>Kurze und lange Sätze im Wechsel (Rhythmus!)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 8 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>8. Übungen mit Lösungen 🎯</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Jetzt wird's praktisch! Hier findest du Übungen, mit denen du das Gelernte anwenden kannst.</p>
+                    
+                    <h3>✍️ Übung 1: Spannungskurve zuordnen</h3>
+                    
+                    <p><strong>Aufgabe:</strong> Lies die beiden Anfänge und entscheide: Spannungskurve A oder B?</p>
+                    
+                    <p><strong>Text 1:</strong></p>
+                    <blockquote>
+                        <em>Der Wind pfiff durch die Ritzen des alten Fensterrahmens. Emma packte die letzten Kartons aus und betrachtete ihr neues Zimmer. Es war größer als ihr altes und hatte sogar einen Balkon. "Gar nicht so schlecht", dachte sie und begann, ihre Bücher in das Regal zu stellen. Als es dunkel wurde, hörte sie zum ersten Mal das Klopfen…</em>
+                    </blockquote>
+                    
+                    <p><strong>Text 2:</strong></p>
+                    <blockquote>
+                        <em>"Nein!", schrie Emma und riss die Augen auf. Der Albtraum verblasste langsam. Nur ein Traum. Sie atmete tief durch und wischte sich den Schweiß von der Stirn. Ihr neues Zimmer lag friedlich im Mondlicht. Alles war still. Sie lächelte über ihre eigene Angst. Doch dann – ein Klopfen an der Wand. Rhythmisch. Drei Schläge. Eine Pause. Wieder drei Schläge.</em>
+                    </blockquote>
+                    
+                    <div class="tip">
+                        <p><strong>Lösung:</strong></p>
+                        <ul>
+                            <li><strong>Text 1 = Spannungskurve A:</strong> Beginnt ruhig (Umzug, Auspacken), baut langsam Spannung auf (erst am Ende das Klopfen)</li>
+                            <li><strong>Text 2 = Spannungskurve B:</strong> Beginnt mit Spannung (Albtraum, Schreien), wird ruhiger (nur ein Traum), steigt dann wieder (das echte Klopfen!)</li>
+                        </ul>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>✍️ Übung 2: Atmosphäre schaffen</h3>
+                    
+                    <p><strong>Aufgabe:</strong> Verwandle diese langweiligen Beschreibungen in gruselige Atmosphäre!</p>
+                    
+                    <p><strong>a)</strong> Das Haus war alt und leer.<br>
+                    <strong>b)</strong> Es war Nacht und dunkel.<br>
+                    <strong>c)</strong> Sie ging durch den Wald.</p>
+                    
+                    <div class="tip">
+                        <p><strong>Lösungsbeispiele:</strong></p>
+                        
+                        <p><strong>a) Das Haus war alt und leer.</strong></p>
+                        <ul>
+                            <li><em>Möglichkeit 1:</em> "Das Haus kauerte zwischen verwilderten Büschen. Die Fenster starrten wie blinde Augen, und durch die zerbrochenen Scheiben pfiff der Wind ein klagendes Lied."</li>
+                            <li><em>Möglichkeit 2:</em> "Jahrzehntelanger Verfall hatte das Haus in eine Ruine verwandelt. In den leeren Räumen hallte jeder Schritt wider, als würde das Haus selbst lauschen."</li>
+                        </ul>
+                        
+                        <p><strong>Tipp:</strong> Deine Lösung muss nicht genau so sein! Wichtig ist: Nutze konkrete Details und Sinneseindrücke!</p>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>✍️ Übung 6: Story-Planung für Schülerin 1 (Struktur-Hilfe)</h3>
+                    
+                    <p><strong>Aufgabe:</strong> Fülle diese Planungs-Tabelle aus, BEVOR du eine Geschichte schreibst. Das hilft dir, die Struktur klar zu haben!</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Element</th>
+                                <th>Deine Idee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>HAUPTFIGUR:</strong> Wer ist es?</td>
+                                <td>z.B. Sarah, 12 Jahre, neu in der Stadt</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ORT:</strong> Wo spielt es?</td>
+                                <td>z.B. alte Bibliothek</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ZEIT:</strong> Wann?</td>
+                                <td>z.B. Spätnachmittag, wird dunkel</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PROBLEM:</strong> Was ist das Gruselige?</td>
+                                <td>z.B. Bücher bewegen sich von selbst</td>
+                            </tr>
+                            <tr>
+                                <td><strong>EREIGNIS 1:</strong> Was passiert zuerst?</td>
+                                <td>z.B. Sarah hört Flüstern</td>
+                            </tr>
+                            <tr>
+                                <td><strong>EREIGNIS 2:</strong> Was passiert dann?</td>
+                                <td>z.B. Sie sieht Schatten zwischen Regalen</td>
+                            </tr>
+                            <tr>
+                                <td><strong>EREIGNIS 3:</strong> Was steigert die Spannung?</td>
+                                <td>z.B. Sie wird eingesperrt</td>
+                            </tr>
+                            <tr>
+                                <td><strong>HÖHEPUNKT:</strong> Gruseligster Moment!</td>
+                                <td>z.B. Geist erscheint</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LÖSUNG:</strong> Wie endet es?</td>
+                                <td>z.B. Geist will nur helfen, zeigt ihr den Ausgang</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <hr>
+                    
+                    <h3>✍️ Übung 7: Ideen-Fokussierung für Schülerin 2 (Fokus-Training)</h3>
+                    
+                    <p><strong>Aufgabe:</strong> Du hast bestimmt 1000 Ideen! Hier lernst du, die beste auszuwählen und dabei zu bleiben.</p>
+                    
+                    <div class="warning">
+                        <p><strong>Schritt 4: Storyline in 3 Sätzen</strong><br>
+                        Schreib die ganze Geschichte in NUR 3 Sätzen:</p>
+                        <ol>
+                            <li><strong>Anfang:</strong> Was passiert? (Mia findet eine alte Puppe am Dachboden.)</li>
+                            <li><strong>Mitte:</strong> Was ist das Problem? (Die Puppe beginnt zu sprechen und kennt Mias Geheimnisse.)</li>
+                            <li><strong>Ende:</strong> Wie endet es? (Mia erfährt, dass die Puppe ihrer verstorbenen Oma gehörte, die sie beschützen will.)</li>
+                        </ol>
+                    </div>
+                    
+                    <p><strong>Wichtig für Schülerin 2:</strong></p>
+                    <ul>
+                        <li>Siehst du? Eine Hauptidee + 3 Elemente = komplette Geschichte!</li>
+                        <li>Du musst nicht Zeitreise UND Vampir UND Nebel-Monster UND verfluchten Spiegel einbauen!</li>
+                        <li>Weniger ist mehr – deine Leser können dir so folgen!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 9 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>9. Checkliste für deine eigene Geschichte ✅</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Bevor du deine Geschichte abgibst, geh diese Checkliste durch:</p>
+                    
+                    <h3>📋 VOR dem Schreiben:</h3>
+                    <ul>
+                        <li>☐ Ich habe eine Spannungskurve (A oder B) gewählt</li>
+                        <li>☐ Ich weiß, wer meine Hauptfigur ist</li>
+                        <li>☐ Ich weiß, wo und wann die Geschichte spielt</li>
+                        <li>☐ Ich habe das Grusel-Element festgelegt</li>
+                        <li>☐ Ich weiß, wie die Geschichte endet</li>
+                        <li>☐ <strong>Für Schülerin 1:</strong> Ich habe eine Planungs-Tabelle ausgefüllt</li>
+                        <li>☐ <strong>Für Schülerin 2:</strong> Ich habe mich auf EINE Hauptidee + max. 3 Elemente beschränkt</li>
+                    </ul>
+                    
+                    <h3>📝 WÄHREND des Schreibens:</h3>
+                    
+                    <h4>Einleitung:</h4>
+                    <ul>
+                        <li>☐ Ich habe die Hauptfigur vorgestellt</li>
+                        <li>☐ Ich habe den Ort beschrieben</li>
+                        <li>☐ Ich habe eine gruselige Atmosphäre aufgebaut</li>
+                        <li>☐ Erste Andeutung: Etwas stimmt nicht</li>
+                    </ul>
+                    
+                    <h4>Hauptteil:</h4>
+                    <ul>
+                        <li>☐ Die Spannung steigt (nach meiner gewählten Kurve)</li>
+                        <li>☐ Ich habe merkwürdige Ereignisse eingebaut</li>
+                        <li>☐ Ich habe mindestens 3 verschiedene Sinne genutzt (Sehen, Hören, Riechen, Fühlen, Schmecken)</li>
+                        <li>☐ Ich zeige die Gefühle meiner Hauptfigur (Körperreaktionen!)</li>
+                        <li>☐ Es gibt einen klaren Höhepunkt (den gruseligsten Moment)</li>
+                    </ul>
+                    
+                    <h4>Schluss:</h4>
+                    <ul>
+                        <li>☐ Die Geschichte hat einen Abschluss (Auflösung oder offenes Ende)</li>
+                        <li>☐ Der Schluss ist kürzer als der Hauptteil</li>
+                        <li>☐ <strong>Optional:</strong> Ein kleiner letzter Grusel-Hinweis</li>
+                    </ul>
+                    
+                    <h3>🎨 Sprache & Stil:</h3>
+                    <ul>
+                        <li>☐ Ich habe verschiedene Satzlängen (kurz UND lang)</li>
+                        <li>☐ Ich nutze Formulierungshilfen aus Kapitel 6</li>
+                        <li>☐ Ich zeige, statt zu bewerten (nicht "es war gruselig", sondern WIE es gruselig war)</li>
+                        <li>☐ Ich habe Vergleiche/Metaphern eingebaut (z.B. "kalt wie Eis", "Dunkelheit verschluckte…")</li>
+                        <li>☐ Ich vermeide Wortwiederholungen (nicht 10x "gruselig"!)</li>
+                    </ul>
+                    
+                    <h3>🔍 NACH dem Schreiben:</h3>
+                    <ul>
+                        <li>☐ Ich habe die Geschichte laut vorgelesen (hört sie sich gut an?)</li>
+                        <li>☐ Ich habe auf Rechtschreibung & Grammatik geachtet</li>
+                        <li>☐ Jeder Absatz beginnt mit einer neuen Zeile</li>
+                        <li>☐ Meine Geschichte hat einen Titel</li>
+                        <li>☐ <strong>Für Schülerin 1:</strong> Kann man meiner Geschichte gut folgen? Ist die Reihenfolge klar?</li>
+                        <li>☐ <strong>Für Schülerin 2:</strong> Habe ich mich fokussiert? Oder zu viele Ideen reingepackt?</li>
+                    </ul>
+                    
+                    <h3>🎯 Selbstbewertung:</h3>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kriterium</th>
+                                <th>Super!</th>
+                                <th>Geht so</th>
+                                <th>Muss ich überarbeiten</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Aufbau klar (Einleitung, Hauptteil, Schluss)</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Gruselige Atmosphäre</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Spannung steigt</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Höhepunkt vorhanden</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Abwechslungsreiche Sprache</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Originelle Idee</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kapitel 10 -->
+        <div class="chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>10. Häufige Fehler und wie du sie vermeidest 🚫</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p>Hier sind die typischen Fehler, die Schüler*innen machen – und wie du sie vermeidest:</p>
+                    
+                    <h3>❌ Fehler 1: "Es war gruselig" - Bewerten statt Zeigen</h3>
+                    
+                    <div class="warning">
+                        <p><strong>Falsch:</strong></p>
+                        <blockquote>"Das Haus war gruselig und das Zimmer war unheimlich."</blockquote>
+                        
+                        <p><strong>Richtig:</strong></p>
+                        <blockquote>"Spinnweben hingen wie schmutzige Vorhänge von der Decke, und in den Ecken huschten Schatten, die sich nicht erklären ließen."</blockquote>
+                        
+                        <p><strong>Warum?</strong> Der Leser soll selbst entscheiden, ob es gruselig ist! Zeige ihm WARUM es gruselig ist!</p>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>❌ Fehler 2: Zu viele Adjektive</h3>
+                    
+                    <div class="warning">
+                        <p><strong>Falsch:</strong></p>
+                        <blockquote>"Die große, dunkle, schaurige, alte, kalte Tür quietschte laut."</blockquote>
+                        
+                        <p><strong>Richtig:</strong></p>
+                        <blockquote>"Die alte Tür quietschte, als Kälte aus dem dunklen Raum dahinter wehte."</blockquote>
+                        
+                        <p><strong>Warum?</strong> Zu viele Adjektive machen den Satz schwerfällig. Wähle 1-2 starke Adjektive!</p>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>❌ Fehler 8: Zu viele verschiedene Grusel-Elemente (WICHTIG für Schülerin 2!)</h3>
+                    
+                    <div class="warning">
+                        <p><strong>Falsch:</strong></p>
+                        <blockquote>"Im Haus war ein Geist, und im Keller ein Vampir, auf dem Dachboden ein Portal in eine andere Dimension, im Garten ein Werwolf, und die Nachbarin war eine Hexe, und…"</blockquote>
+                        
+                        <p><strong>Richtig:</strong></p>
+                        <blockquote>"Im Haus war ein Geist. Nur ein Geist. Aber das reichte."</blockquote>
+                        
+                        <p><strong>Warum?</strong> Ein Grusel-Element, richtig erzählt, ist besser als zehn auf einmal! Der Leser kann dir sonst nicht folgen.</p>
+                        
+                        <p><strong>Regel für Schülerin 2:</strong> Maximal 1 Haupt-Grusel-Element + 1 kleines Neben-Element!</p>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>✅ Fehler-Vermeidungs-Tipps:</h3>
+                    
+                    <div class="tip">
+                        <p><strong>Für Schülerin 1:</strong></p>
+                        <ol>
+                            <li>Schreib einen Satz. Lies ihn laut. Klingt er gut? Wenn nein: umformulieren!</li>
+                            <li>Nutze die Planungs-Tabelle – so vergisst du keine wichtigen Elemente</li>
+                            <li>Überprüfe: Folgt ein Ereignis logisch aus dem vorherigen?</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tip">
+                        <p><strong>Für Schülerin 2:</strong></p>
+                        <ol>
+                            <li>Setze dir ein Limit: MAX 1 Hauptidee + 3 Nebenelemente</li>
+                            <li>Schreib die Storyline in 3 Sätzen auf, BEVOR du die Geschichte schreibst</li>
+                            <li>Frag dich bei jedem neuen Element: "Braucht die Geschichte das WIRKLICH?"</li>
+                        </ol>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>📚 Anhang: Weitere Ressourcen & Tipps</h3>
+                    
+                    <h4>💡 Profi-Tipps für die Schularbeit</h4>
+                    
+                    <div class="tip">
+                        <h4>⏰ Zeitmanagement (bei 50 Minuten Schularbeit):</h4>
+                        
+                        <p><strong>10 Minuten: PLANUNG</strong></p>
+                        <ul>
+                            <li>Lies die Angabe genau!</li>
+                            <li>Wähle Spannungskurve</li>
+                            <li>Fülle eine Mini-Planungstabelle aus</li>
+                            <li>Entscheide: Hauptidee + max. 3 Elemente</li>
+                        </ul>
+                        
+                        <p><strong>30 Minuten: SCHREIBEN</strong></p>
+                        <ul>
+                            <li>5 Min: Einleitung</li>
+                            <li>20 Min: Hauptteil (inkl. Höhepunkt!)</li>
+                            <li>5 Min: Schluss</li>
+                        </ul>
+                        
+                        <p><strong>10 Minuten: ÜBERARBEITUNG</strong></p>
+                        <ul>
+                            <li>Laut vorlesen (leise!)</li>
+                            <li>Rechtschreibung checken</li>
+                            <li>Fehlende Sinneseindrücke ergänzen</li>
+                            <li>Langweilige Wörter ersetzen</li>
+                        </ul>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h3>🎓 Zusammenfassung: Die 10 goldenen Regeln</h3>
+                    
+                    <ol>
+                        <li><strong>PLANE, bevor du schreibst!</strong> Spannungskurve wählen, Hauptelemente festlegen</li>
+                        <li><strong>EINE klare Struktur!</strong> Einleitung → Hauptteil → Schluss</li>
+                        <li><strong>STEIGERE die Spannung!</strong> Langsam aufbauen oder mit Knall starten</li>
+                        <li><strong>ZEIGE, nicht bewerte!</strong> Nicht "es war gruselig", sondern WIE war es gruselig</li>
+                        <li><strong>NUTZE alle Sinne!</strong> Sehen, Hören, Riechen, Fühlen, Schmecken</li>
+                        <li><strong>KÖRPERREAKTIONEN zeigen!</strong> Herz rast, Gänsehaut, zitternde Hände</li>
+                        <li><strong>VARIIERE die Sätze!</strong> Kurz und lang im Wechsel</li>
+                        <li><strong>FOKUSSIERE dich!</strong> Eine Hauptidee gut > zehn Ideen schlecht</li>
+                        <li><strong>EIN starker Höhepunkt!</strong> Der gruseligste Moment muss klar sein</li>
+                        <li><strong>ÜBERARBEITE immer!</strong> Laut vorlesen, verbessern, verfeinern</li>
+                    </ol>
+                    
+                    <hr>
+                    
+                    <h3>🏆 Abschluss-Worte</h3>
+                    
+                    <p><strong>Liebe Schülerin,</strong></p>
+                    
+                    <p>Du hast jetzt alle Werkzeuge, um fantastische Gruselgeschichten zu schreiben!</p>
+                    
+                    <div class="tip">
+                        <p><strong>Für Schülerin 1:</strong> Denk daran – eine Geschichte braucht Zeit. Nutze die Planungs-Tabelle, schreib Schritt für Schritt, und überarbeite dann. Du wirst sehen: Mit jedem Mal wird es leichter!</p>
+                    </div>
+                    
+                    <div class="tip">
+                        <p><strong>Für Schülerin 2:</strong> Deine Ideen sind großartig! Aber denk an die Fokus-Übungen. Wähle die BESTE Idee aus, nicht alle auf einmal. Deine Leser werden es dir danken, wenn sie deiner Geschichte folgen können!</p>
+                    </div>
+                    
+                    <p><strong>Für euch beide gilt:</strong></p>
+                    <ul>
+                        <li>Gruselgeschichten schreiben macht Spaß!</li>
+                        <li>Fehler sind okay – daraus lernt man!</li>
+                        <li>Übung macht die Meisterin!</li>
+                        <li>Lies viel, schreib viel, und hab Freude daran!</li>
+                    </ul>
+                    
+                    <p>In einem Monat ist eure Schularbeit. Nutzt diesen Leitfaden zum Üben. Schreibt mehrere Geschichten. Probiert verschiedene Spannungskurven aus. Findet heraus, was euch liegt.</p>
+                    
+                    <p><strong>Und vergesst nicht:</strong> Jede Autorin, die heute berühmt ist, hat mal genau dort angefangen, wo ihr jetzt seid – mit einer leeren Seite und einer Idee.</p>
+                    
+                    <p>Jetzt liegt es an euch. Macht eure Leser*innen das Gruseln lehren! 👻</p>
+                    
+                    <hr>
+                    
+                    <h3>📌 Schnell-Referenz für die Schularbeit</h3>
+                    
+                    <div class="warning">
+                        <p><strong>Diese Seite kannst du dir herauskopieren und in der Schularbeit neben dich legen:</strong></p>
+                        
+                        <h4>⚡ Express-Checkliste (2 Minuten vor Abgabe!):</h4>
+                        <ul>
+                            <li>☐ Titel vorhanden?</li>
+                            <li>☐ Einleitung, Hauptteil, Schluss erkennbar?</li>
+                            <li>☐ Höhepunkt (gruseligster Moment) vorhanden?</li>
+                            <li>☐ Mindestens 3 Sinne genutzt?</li>
+                            <li>☐ Körperreaktionen beschrieben?</li>
+                            <li>☐ Verschiedene Satzlängen?</li>
+                            <li>☐ Name auf dem Blatt?</li>
+                        </ul>
+                        
+                        <h4>🚀 Notfall-Formulierungen:</h4>
+                        
+                        <p><strong>Wenn dir nichts einfällt für…</strong></p>
+                        
+                        <p><strong>…Atmosphäre:</strong><br>
+                        "Die Luft war kalt und roch nach Moder."<br>
+                        "Schatten krochen über die Wände."<br>
+                        "Die Stille war ohrenbetäubend."</p>
+                        
+                        <p><strong>…Angst:</strong><br>
+                        "Ihr Herz hämmerte gegen die Rippen."<br>
+                        "Ein kalter Schauer lief ihr über den Rücken."<br>
+                        "Sie spürte, wie ihr das Blut aus dem Gesicht wich."</p>
+                        
+                        <p><strong>…Höhepunkt:</strong><br>
+                        "In diesem Moment geschah es."<br>
+                        "Jetzt war es zu spät."<br>
+                        "Da stand es – direkt vor ihr."</p>
+                        
+                        <h4>🎯 Zeitplan Schularbeit (50 Min):</h4>
+                        <ul>
+                            <li>0-10 Min: Planen!</li>
+                            <li>10-40 Min: Schreiben!</li>
+                            <li>40-50 Min: Überarbeiten!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+<!-- Kapitel 11 - Das schaurige Haus Übungen -->
+<div class="chapter">
+    <div class="chapter-header" onclick="toggleChapter(this)">
+        <h2>11. Interaktive Übungen: "Das schaurige Haus" 📖</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="chapter-content">
+        <div class="chapter-inner">
+
+
+
+
+
+            <!-- Kapitel 11 - Das schaurige Haus Übungen -->
+<div class="chapter">
+    <div class="chapter-header" onclick="toggleChapter(this)">
+        <h2>11. Interaktive Übungen: "Das schaurige Haus" 📖</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="chapter-content">
+        <div class="chapter-inner">
+
+
+
             <div class="section">
                 <h2>Willkommen in der Welt von "Das schaurige Haus"</h2>
                 <p>Du hast Martina Wildners "Das schaurige Haus" gelesen und kennst dich jetzt mit der geheimnisvollen Welt von Hendrik, Eddi und dem unheimlichen Haus aus. In dieser Übungseinheit wirst du lernen, wie du selbst solche spannenden Gruselgeschichten schreiben kannst.</p>
@@ -548,186 +1513,205 @@
     <button class="button" onclick="printPage()">Seite drucken</button>
     <button class="button" onclick="saveAllAnswers()">Alle Antworten speichern</button>
 </div>
-        </main>
 
-        <footer class="footer">
-            <p>&copy; 2025 Amy Lang - Deutschtrainerin | Inspiriert von "Das schaurige Haus" von Martina Wildner</p>
-        </footer>
+</div> <!-- schließt chapter-inner -->
+</div> <!-- schließt chapter-content -->
+</div> <!-- schließt chapter -->
+
+
+
+
+
+
+
+
+        <!-- VERSTECKTES Kapitel 12 - Template für zukünftige Erweiterungen -->
+        <div class="chapter hidden-chapter">
+            <div class="chapter-header" onclick="toggleChapter(this)">
+                <h2>12. [TEMPLATE - Nicht anzeigen] Zusätzliches Kapitel 🎨</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="chapter-content">
+                <div class="chapter-inner">
+                    <p><strong>HINWEIS FÜR LEHRER*IN:</strong> Dies ist ein Template-Kapitel für zukünftige Erweiterungen. Entfernen Sie die Klasse "hidden-chapter" vom div, um es anzuzeigen.</p>
+                    
+                    <h3>Beispiel-Überschrift für neuen Inhalt</h3>
+                    
+                    <p>Hier können Sie neuen Inhalt einfügen. Nutzen Sie die gleichen HTML-Strukturen wie in den anderen Kapiteln:</p>
+                    
+                    <h4>Unterüberschrift</h4>
+                    
+                    <ul>
+                        <li>Listenpunkt 1</li>
+                        <li>Listenpunkt 2</li>
+                        <li>Listenpunkt 3</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <p><strong>Tipp-Box:</strong> Verwenden Sie die Klasse "tip" für hilfreiche Hinweise.</p>
+                    </div>
+                    
+                    <div class="warning">
+                        <p><strong>Warnung-Box:</strong> Verwenden Sie die Klasse "warning" für wichtige Informationen oder Warnungen.</p>
+                    </div>
+                    
+                    <blockquote>
+                        Dies ist ein Beispiel für ein Zitat oder einen hervorgehobenen Textblock.
+                    </blockquote>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Spalte 1</th>
+                                <th>Spalte 2</th>
+                                <th>Spalte 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Inhalt A1</td>
+                                <td>Inhalt B1</td>
+                                <td>Inhalt C1</td>
+                            </tr>
+                            <tr>
+                                <td>Inhalt A2</td>
+                                <td>Inhalt B2</td>
+                                <td>Inhalt C2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <hr>
+                    
+                    <h3>Mögliche Themen für Kapitel 11:</h3>
+                    
+                    <ul>
+                        <li><strong>Dialoge in Gruselgeschichten:</strong> Wie man gespenstische Gespräche schreibt</li>
+                        <li><strong>Verschiedene Erzählzeiten:</strong> Präsens vs. Präteritum in Gruselgeschichten</li>
+                        <li><strong>Cliffhanger schreiben:</strong> Die Kunst des offenen Endes perfektionieren</li>
+                        <li><strong>Weltenbau:</strong> Gruselige Welten erschaffen (für längere Geschichten)</li>
+                        <li><strong>Charakterentwicklung:</strong> Von der Normalität zum Helden unter Stress</li>
+                        <li><strong>Grusel-Recherche:</strong> Wie man echte gruselige Orte/Legenden als Inspiration nutzt</li>
+                        <li><strong>Revision-Techniken:</strong> Erweiterte Überarbeitungsstrategien</li>
+                        <li><strong>Genre-Mischung:</strong> Grusel + Comedy, Grusel + Fantasy, etc.</li>
+                        <li><strong>Fortgeschrittene Übungen:</strong> Für Schüler*innen, die mehr wollen</li>
+                        <li><strong>Autorenstimme finden:</strong> Deinen eigenen Grusel-Stil entwickeln</li>
+                    </ul>
+                    
+                    <h3>Anleitung zum Hinzufügen von Inhalt:</h3>
+                    
+                    <ol>
+                        <li>Entfernen Sie die Klasse <code>hidden-chapter</code> aus dem Kapitel-div oben</li>
+                        <li>Ändern Sie die Überschrift von "[TEMPLATE]" zu Ihrem gewünschten Titel</li>
+                        <li>Ersetzen Sie diesen Template-Inhalt mit Ihrem eigenen Inhalt</li>
+                        <li>Verwenden Sie die bestehenden CSS-Klassen für konsistentes Styling</li>
+                        <li>Aktualisieren Sie das Inhaltsverzeichnis oben, um das neue Kapitel aufzulisten</li>
+                    </ol>
+                    
+                    <div class="tip">
+                        <p><strong>Tipp:</strong> Kopieren Sie Strukturen aus den anderen Kapiteln, um Zeit zu sparen und Konsistenz zu gewährleisten!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <hr>
+            <p><strong>VIEL ERFOLG! Du schaffst das! 🌟</strong></p>
+            <p><em>Ende des Leitfadens</em><br>
+            <em>Gesamtumfang: ca. 30 Seiten</em><br>
+            <em>Erstellt für die 6. Schulstufe AHS, Österreich</em><br>
+            <em>Basierend auf den Bildungsstandards und adaptiert für individuelle Lernbedürfnisse</em></p>
+        </div>
     </div>
 
     <script>
-        function selectAnswer(element, type) {
-            // Entferne Auswahl von allen Optionen in dieser Frage
-            const options = element.parentElement.querySelectorAll('.quiz-option');
-            options.forEach(opt => {
-                opt.style.background = '';
-            });
-            
-            // Markiere die ausgewählte Option
-            if (type === 'correct') {
-                element.style.background = 'rgba(40, 120, 60, 0.5)';
-            } else {
-                element.style.background = 'rgba(120, 40, 60, 0.5)';
+        function toggleChapter(header) {
+            const chapter = header.parentElement;
+            chapter.classList.toggle('active');
+        }
+
+        // Optional: Erstes Kapitel beim Laden öffnen
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstChapter = document.querySelector('.chapter:not(.hidden-chapter)');
+            if (firstChapter) {
+                firstChapter.classList.add('active');
             }
-        }
-        
-        function showQuizResults() {
-            const resultDiv = document.getElementById('quiz-result');
-            resultDiv.style.display = 'block';
-            
-            // Zähle die richtigen Antworten
-            let correctCount = 0;
-            const questions = document.querySelectorAll('.question');
-            
-            questions.forEach(question => {
-                const selected = question.querySelector('.quiz-option[style*="rgba(40, 120, 60"]');
-                if (selected) correctCount++;
-            });
-            
-            let feedback = '';
-            if (correctCount === 3) {
-                feedback = '<h3>Ausgezeichnet! 🏆</h3><p>Du hast alle Fragen richtig beantwortet und kennst dich wirklich ausgezeichnet mit "Das schaurige Haus" aus. Diese fundierten Kenntnisse werden dir beim Schreiben deiner eigenen Gruselgeschichte sehr helfen.</p>';
-                resultDiv.className = 'result correct';
-            } else if (correctCount === 2) {
-                feedback = '<h3>Gut gemacht! 👍</h3><p>Du hast die meisten Fragen richtig beantwortet und kennst dich gut mit dem Buch aus. Mit diesen soliden Kenntnissen bist du gut vorbereitet für deine eigene Gruselgeschichte.</p>';
-                resultDiv.className = 'result correct';
-            } else if (correctCount === 1) {
-                feedback = '<h3>Grundverständnis vorhanden 📚</h3><p>Du hast einige wichtige Aspekte des Buches verstanden, könntest aber noch etwas mehr ins Detail gehen. Schau dir das Buch vielleicht noch einmal an, bevor du mit dem Schreiben beginnst.</p>';
-                resultDiv.className = 'result incorrect';
-            } else {
-                feedback = '<h3>Überprüfungsbedarf 🔍</h3><p>Es scheint, als hättest du das Buch vielleicht noch nicht vollständig verstanden. Lies es am besten noch einmal, bevor du mit den Schreibübungen beginnst.</p>';
-                resultDiv.className = 'result incorrect';
-            }
-            
-            resultDiv.innerHTML = feedback;
-        }
-        
-        function checkAnswers() {
-            const textareas = document.querySelectorAll('.writing-area');
-            let filledCount = 0;
-            let qualityFeedback = '';
-            
-            textareas.forEach(textarea => {
-                if (textarea.value.trim().length > 0) {
-                    filledCount++;
-                }
-            });
-            
-            // Bewertung der Antwortqualität basierend auf Länge und Inhalt
-            if (filledCount === 3) {
-                // Analysiere die Qualität der Antworten
-                let totalLength = 0;
-                textareas.forEach(textarea => {
-                    totalLength += textarea.value.trim().length;
-                });
-                
-                const avgLength = totalLength / 3;
-                
-                if (avgLength > 200) {
-                    qualityFeedback = 'Ausgezeichnet! Deine Antworten sind sehr ausführlich und zeigen ein tiefes Verständnis des Buches. Du hast viele Details einbezogen und gut argumentiert.';
-                } else if (avgLength > 100) {
-                    qualityFeedback = 'Gut gemacht! Deine Antworten sind substantiell und zeigen ein solides Verständnis der wichtigsten Aspekte des Buches.';
-                } else if (avgLength > 50) {
-                    qualityFeedback = 'Deine Antworten sind etwas knapp, aber sie zeigen ein grundlegendes Verständnis des Buches. Versuche, mehr Details und Beispiele einzubringen.';
-                } else {
-                    qualityFeedback = 'Deine Antworten sind sehr kurz und oberflächlich. Versuche, mehr in die Tiefe zu gehen und konkrete Beispiele aus dem Buch zu nennen.';
-                }
-            } else if (filledCount > 0) {
-                qualityFeedback = 'Du hast nicht alle Fragen beantwortet. Versuche, alle Fragen vollständig zu beantworten, um dein Verständnis des Buches besser zu zeigen.';
-            } else {
-                qualityFeedback = 'Du hast noch keine Antworten gegeben. Bitte beantworte die Fragen, um fortzufahren.';
-            }
-            
-            document.getElementById('answer-feedback').innerHTML = `
-                <h3>Bewertung deiner Antworten</h3>
-                <p>${qualityFeedback}</p>
-                <p>Beantwortete Fragen: ${filledCount}/3</p>
-            `;
-        }
-        
-        function saveStory() {
-            alert('Deine Geschichte wurde gespeichert! Du kannst sie jetzt ausdrucken oder später weiterarbeiten.');
-        }
-        
-        function printPage() {
-            window.print();
-        }
-        
-        function saveAllAnswers() {
-    // Sammle alle Fragen und Antworten
-    let content = "Antworten zu 'Das schaurige Haus' - Lernübung\n";
-    content += "===============================================\n\n";
+        });
+
+// Funktionen für Kapitel 11 - Das schaurige Haus
+function selectAnswer(element, type) {
+    const options = element.parentElement.querySelectorAll('.quiz-option');
+    options.forEach(opt => {
+        opt.style.background = '';
+    });
     
-    // Verständnisfragen
-    content += "VERSTÄNDNISFRAGEN ZUM BUCH:\n";
-    content += "---------------------------\n";
+    if (type === 'correct') {
+        element.style.background = 'rgba(40, 120, 60, 0.5)';
+    } else {
+        element.style.background = 'rgba(120, 40, 60, 0.5)';
+    }
+}
+
+function showQuizResults() {
+    const resultDiv = document.getElementById('quiz-result');
+    resultDiv.style.display = 'block';
     
-    const understandingQuestions = document.querySelectorAll('.section:nth-child(2) .question h3');
-    const understandingAnswers = document.querySelectorAll('.section:nth-child(2) .writing-area');
+    let correctCount = 0;
+    const questions = document.querySelectorAll('.question');
     
-    for (let i = 0; i < understandingQuestions.length; i++) {
-        content += `Frage ${i+1}: ${understandingQuestions[i].textContent}\n`;
-        content += `Antwort: ${understandingAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
+    questions.forEach(question => {
+        const selected = question.querySelector('.quiz-option[style*="rgba(40, 120, 60"]');
+        if (selected) correctCount++;
+    });
+    
+    let feedback = '';
+    if (correctCount === 3) {
+        feedback = '<h3>Ausgezeichnet! 🏆</h3><p>Du hast alle Fragen richtig beantwortet!</p>';
+        resultDiv.className = 'result correct';
+    } else if (correctCount === 2) {
+        feedback = '<h3>Gut gemacht! 👍</h3><p>Du kennst dich gut mit dem Buch aus.</p>';
+        resultDiv.className = 'result correct';
+    } else {
+        feedback = '<h3>Übe noch ein bisschen 📚</h3><p>Lies das Buch noch einmal.</p>';
+        resultDiv.className = 'result incorrect';
     }
     
-    // Charakteranalysen
-    content += "CHARAKTERANALYSEN:\n";
-    content += "------------------\n";
+    resultDiv.innerHTML = feedback;
+}
+
+function checkAnswers() {
+    const textareas = document.querySelectorAll('.writing-area');
+    let filledCount = 0;
     
-    const characterCards = document.querySelectorAll('.character-card');
-    const characterAnswers = document.querySelectorAll('.character-grid .writing-area');
+    textareas.forEach(textarea => {
+        if (textarea.value.trim().length > 0) {
+            filledCount++;
+        }
+    });
     
-    for (let i = 0; i < characterCards.length; i++) {
-        content += `${characterCards[i].querySelector('h3').textContent}:\n`;
-        content += `Frage: ${characterCards[i].querySelector('p').textContent}\n`;
-        content += `Antwort: ${characterAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
-    }
+    let qualityFeedback = filledCount === 3 ? 
+        'Gut! Du hast alle Fragen beantwortet.' : 
+        'Bitte beantworte alle Fragen.';
     
-    // Schreibtechniken
-    content += "SCHREIBTECHNIKEN:\n";
-    content += "----------------\n";
+    document.getElementById('answer-feedback').innerHTML = `
+        <h3>Bewertung</h3>
+        <p>${qualityFeedback}</p>
+        <p>Beantwortete Fragen: ${filledCount}/3</p>
+    `;
+}
+
+function saveStory() {
+    alert('Deine Geschichte wurde gespeichert!');
+}
+
+function saveAllAnswers() {
+    let content = "Antworten zu 'Das schaurige Haus'\n\n";
+    const textareas = document.querySelectorAll('.writing-area');
+    textareas.forEach((textarea, index) => {
+        content += `Antwort ${index + 1}: ${textarea.value || '(leer)'}\n\n`;
+    });
     
-    const techniqueTips = document.querySelectorAll('.tip');
-    const techniqueAnswers = document.querySelectorAll('.tip .writing-area');
-    
-    for (let i = 0; i < techniqueTips.length; i++) {
-        content += `${techniqueTips[i].querySelector('h3').textContent}:\n`;
-        content += `Aufgabe: ${techniqueTips[i].querySelector('p').textContent}\n`;
-        content += `Antwort: ${techniqueAnswers[i].value || '(Keine Antwort gegeben)'}\n\n`;
-    }
-    
-    // Eigene Gruselgeschichte
-    content += "EIGENE GRUSELGESCHICHTE:\n";
-    content += "------------------------\n";
-    
-    const storySection = document.querySelector('.section:nth-child(7) .activity');
-    const storyHeadings = storySection.querySelectorAll('h4');
-    const storyTextareas = storySection.querySelectorAll('.writing-area');
-    
-    for (let i = 0; i < storyHeadings.length; i++) {
-        content += `${storyHeadings[i].textContent}\n`;
-        content += `Inhalt: ${storyTextareas[i].value || '(Keine Antwort gegeben)'}\n\n`;
-    }
-    
-    // Weiterführende Ideen
-    content += "WEITERFÜHRENDE IDEEN:\n";
-    content += "---------------------\n";
-    
-    const ideaActivities = document.querySelectorAll('.section:nth-child(8) .activity');
-    
-    for (let i = 0; i < ideaActivities.length; i++) {
-        const title = ideaActivities[i].querySelector('h3').textContent;
-        const description = ideaActivities[i].querySelector('p').textContent;
-        const answer = ideaActivities[i].querySelector('.writing-area').value || '(Keine Antwort gegeben)';
-        
-        content += `${title}:\n`;
-        content += `Aufgabe: ${description}\n`;
-        content += `Antwort: ${answer}\n\n`;
-    }
-    
-    content += `\nGespeichert am: ${new Date().toLocaleString('de-DE')}`;
-    
-    // Erstelle und lade die Textdatei herunter
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -738,8 +1722,9 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     
-    alert('Alle Antworten wurden als Textdatei gespeichert!');
+    alert('Antworten gespeichert!');
 }
+
     </script>
 </body>
 </html>
