@@ -339,7 +339,30 @@
     border-radius: 8px;
 }
 
+/* Link-Buttons hellblau gestalten */
+.chapter-inner a {
+    display: inline-block;
+    background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+    color: white;
+    padding: 12px 24px;
+    margin: 10px 5px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(70, 130, 180, 0.4);
+    transition: all 0.3s ease;
+}
 
+.chapter-inner a:hover {
+    background: linear-gradient(135deg, #4682B4 0%, #87CEEB 100%);
+    box-shadow: 0 6px 12px rgba(70, 130, 180, 0.6);
+    transform: translateY(-2px);
+}
+
+.chapter-inner a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(70, 130, 180, 0.4);
+}
 
     </style>
 </head>
@@ -367,7 +390,8 @@
         <li>Übungen mit Lösungen</li>
         <li>Checkliste für deine eigene Geschichte</li>
         <li>Häufige Fehler und wie du sie vermeidest</li>
-        <li>Interaktive Übungen: "Das schaurige Haus"</li> <!-- NEU -->
+        <li>Interaktive Übungen: "Das schaurige Haus"</li> 
+        <li>Gruselfiguren & Gruselgeschichten-Beispiele</li><!-- NEU -->
     </ol>
 </div>
 
@@ -1485,15 +1509,10 @@ START     BERUHIGUNG         AUFBAU      SCHLUSS
                     <h3>Eine Fortsetzung planen</h3>
                     <p>Was passiert nach dem Ende des Buches? Erzähle, wie es mit den Charakteren weitergeht.</p>
                     <textarea class="writing-area" placeholder="Schreibe deine Ideen für eine Fortsetzung..."></textarea>
-                </div>
-            </div>
+    </div>
+            
 
-            <div class="navigation">
-    <a href="../index.html" class="button">Zurück zu Texte für die Schule schreiben</a>
-    <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/index.html" class="button">Zurück zur Schülernachhilfe</a>
-    <button class="button" onclick="printPage()">Seite drucken</button>
-    <button class="button" onclick="saveAllAnswers()">Alle Antworten speichern</button>
-</div>
+  </div>
 
 </div> <!-- schließt chapter-inner -->
 </div> <!-- schließt chapter-content -->
@@ -1503,107 +1522,46 @@ START     BERUHIGUNG         AUFBAU      SCHLUSS
 
 
 
+        <!-- NEUES Kapitel 12 -->
+<div class="chapter">
+    <div class="chapter-header" onclick="toggleChapter(this)">
+        <h2>12. Hier geht es weiter mit Gruselfiguren und Beispielgeschichten 🎨</h2>
+        <span class="toggle-icon">▼</span>
+    </div>
+    <div class="chapter-content">
+        <div class="chapter-inner">
+            
+            <p>In diesem Bereich findest du zusätzliche Ressourcen für deine Gruselgeschichten:</p>
+            
+            <h3>📚 Zusätzliche Materialien:</h3>
+            <ul>
+                <li><a href="gruselgeschichten_gruselfiguren.html">Gruselfiguren vorgestellt</a></li>
+                <li><a href="gruselgeschichten_friedhofgespenst.html">3 Gruselgeschichten mit Friedhofgespenst</a></li>
+                <li><a href="gruselgeschichten_schlosskatze.html">3 Gruselgeschichten mit Schlosskatze</a></li>
+            </ul>
 
+        </div> 
+    </div>
+</div> <!-- schließt chapter (Kapitel 12) -->
 
+    </div> <!-- schließt container -->
 
-        <!-- VERSTECKTES Kapitel 12 - Template für zukünftige Erweiterungen -->
-        <div class="chapter hidden-chapter">
-            <div class="chapter-header" onclick="toggleChapter(this)">
-                <h2>12. [TEMPLATE - Nicht anzeigen] Zusätzliches Kapitel 🎨</h2>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="chapter-content">
-                <div class="chapter-inner">
-                    <p><strong>HINWEIS FÜR LEHRER*IN:</strong> Dies ist ein Template-Kapitel für zukünftige Erweiterungen. Entfernen Sie die Klasse "hidden-chapter" vom div, um es anzuzeigen.</p>
-                    
-                    <h3>Beispiel-Überschrift für neuen Inhalt</h3>
-                    
-                    <p>Hier können Sie neuen Inhalt einfügen. Nutzen Sie die gleichen HTML-Strukturen wie in den anderen Kapiteln:</p>
-                    
-                    <h4>Unterüberschrift</h4>
-                    
-                    <ul>
-                        <li>Listenpunkt 1</li>
-                        <li>Listenpunkt 2</li>
-                        <li>Listenpunkt 3</li>
-                    </ul>
-                    
-                    <div class="tip">
-                        <p><strong>Tipp-Box:</strong> Verwenden Sie die Klasse "tip" für hilfreiche Hinweise.</p>
-                    </div>
-                    
-                    <div class="warning">
-                        <p><strong>Warnung-Box:</strong> Verwenden Sie die Klasse "warning" für wichtige Informationen oder Warnungen.</p>
-                    </div>
-                    
-                    <blockquote>
-                        Dies ist ein Beispiel für ein Zitat oder einen hervorgehobenen Textblock.
-                    </blockquote>
-                    
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Spalte 1</th>
-                                <th>Spalte 2</th>
-                                <th>Spalte 3</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Inhalt A1</td>
-                                <td>Inhalt B1</td>
-                                <td>Inhalt C1</td>
-                            </tr>
-                            <tr>
-                                <td>Inhalt A2</td>
-                                <td>Inhalt B2</td>
-                                <td>Inhalt C2</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <hr>
-                    
-                    <h3>Mögliche Themen für Kapitel 11:</h3>
-                    
-                    <ul>
-                        <li><strong>Dialoge in Gruselgeschichten:</strong> Wie man gespenstische Gespräche schreibt</li>
-                        <li><strong>Verschiedene Erzählzeiten:</strong> Präsens vs. Präteritum in Gruselgeschichten</li>
-                        <li><strong>Cliffhanger schreiben:</strong> Die Kunst des offenen Endes perfektionieren</li>
-                        <li><strong>Weltenbau:</strong> Gruselige Welten erschaffen (für längere Geschichten)</li>
-                        <li><strong>Charakterentwicklung:</strong> Von der Normalität zum Helden unter Stress</li>
-                        <li><strong>Grusel-Recherche:</strong> Wie man echte gruselige Orte/Legenden als Inspiration nutzt</li>
-                        <li><strong>Revision-Techniken:</strong> Erweiterte Überarbeitungsstrategien</li>
-                        <li><strong>Genre-Mischung:</strong> Grusel + Comedy, Grusel + Fantasy, etc.</li>
-                        <li><strong>Fortgeschrittene Übungen:</strong> Für Schüler*innen, die mehr wollen</li>
-                        <li><strong>Autorenstimme finden:</strong> Deinen eigenen Grusel-Stil entwickeln</li>
-                    </ul>
-                    
-                    <h3>Anleitung zum Hinzufügen von Inhalt:</h3>
-                    
-                    <ol>
-                        <li>Entfernen Sie die Klasse <code>hidden-chapter</code> aus dem Kapitel-div oben</li>
-                        <li>Ändern Sie die Überschrift von "[TEMPLATE]" zu Ihrem gewünschten Titel</li>
-                        <li>Ersetzen Sie diesen Template-Inhalt mit Ihrem eigenen Inhalt</li>
-                        <li>Verwenden Sie die bestehenden CSS-Klassen für konsistentes Styling</li>
-                        <li>Aktualisieren Sie das Inhaltsverzeichnis oben, um das neue Kapitel aufzulisten</li>
-                    </ol>
-                    
-                    <div class="tip">
-                        <p><strong>Tipp:</strong> Kopieren Sie Strukturen aus den anderen Kapiteln, um Zeit zu sparen und Konsistenz zu gewährleisten!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Navigation außerhalb aller Kapitel -->
+   <!-- Navigation außerhalb aller Kapitel -->
+<div class="navigation" style="margin-top: 40px; text-align: center; padding: 20px;">
+    <button class="button" onclick="window.location.href='../index.html'">Zurück zu Texte für die Schule schreiben</button>
+    <button class="button" onclick="window.location.href='https://amyfabijenna.github.io/amylang-deutsch/schueler/index.html'">Zurück zur Schülernachhilfe</button>
+    <button class="button" onclick="printPage()">Seite drucken</button>
+    <button class="button" onclick="saveAllAnswers()">Alle Antworten speichern</button>
+</div>
 
-        <div class="footer">
-            <hr>
-            <p><strong>VIEL ERFOLG! Du schaffst das! 🌟</strong></p>
-            <p><em>Ende des Leitfadens</em><br>
-            <em>Gesamtumfang: ca. 30 Seiten</em><br>
-            <em>Erstellt für die 6. Schulstufe AHS, Österreich</em><br>
-            <em>Basierend auf den Bildungsstandards und adaptiert für individuelle Lernbedürfnisse</em></p>
-        </div>
+    <div class="footer">
+        <hr>
+        <p><strong>VIEL ERFOLG! Du schaffst das! 🌟</strong></p>
+        <p><em>Ende des Leitfadens</em><br>
+        <em>Gesamtumfang: ca. 30 Seiten</em><br>
+        <em>Erstellt für die 6. Schulstufe AHS, Österreich</em><br>
+        <em>Basierend auf den Bildungsstandards und adaptiert für individuelle Lernbedürfnisse</em></p>
     </div>
 
     <script>
@@ -1620,92 +1578,95 @@ START     BERUHIGUNG         AUFBAU      SCHLUSS
             }
         });
 
-// Funktionen für Kapitel 11 - Das schaurige Haus
-function selectAnswer(element, type) {
-    const options = element.parentElement.querySelectorAll('.quiz-option');
-    options.forEach(opt => {
-        opt.style.background = '';
-    });
-    
-    if (type === 'correct') {
-        element.style.background = 'rgba(40, 120, 60, 0.5)';
-    } else {
-        element.style.background = 'rgba(120, 40, 60, 0.5)';
-    }
-}
-
-function showQuizResults() {
-    const resultDiv = document.getElementById('quiz-result');
-    resultDiv.style.display = 'block';
-    
-    let correctCount = 0;
-    const questions = document.querySelectorAll('.question');
-    
-    questions.forEach(question => {
-        const selected = question.querySelector('.quiz-option[style*="rgba(40, 120, 60"]');
-        if (selected) correctCount++;
-    });
-    
-    let feedback = '';
-    if (correctCount === 3) {
-        feedback = '<h3>Ausgezeichnet! 🏆</h3><p>Du hast alle Fragen richtig beantwortet!</p>';
-        resultDiv.className = 'result correct';
-    } else if (correctCount === 2) {
-        feedback = '<h3>Gut gemacht! 👍</h3><p>Du kennst dich gut mit dem Buch aus.</p>';
-        resultDiv.className = 'result correct';
-    } else {
-        feedback = '<h3>Übe noch ein bisschen 📚</h3><p>Lies das Buch noch einmal.</p>';
-        resultDiv.className = 'result incorrect';
-    }
-    
-    resultDiv.innerHTML = feedback;
-}
-
-function checkAnswers() {
-    const textareas = document.querySelectorAll('.writing-area');
-    let filledCount = 0;
-    
-    textareas.forEach(textarea => {
-        if (textarea.value.trim().length > 0) {
-            filledCount++;
+        // Funktionen für Kapitel 11 - Das schaurige Haus
+        function selectAnswer(element, type) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.background = '';
+            });
+            
+            if (type === 'correct') {
+                element.style.background = 'rgba(40, 120, 60, 0.5)';
+            } else {
+                element.style.background = 'rgba(120, 40, 60, 0.5)';
+            }
         }
-    });
-    
-    let qualityFeedback = filledCount === 3 ? 
-        'Gut! Du hast alle Fragen beantwortet.' : 
-        'Bitte beantworte alle Fragen.';
-    
-    document.getElementById('answer-feedback').innerHTML = `
-        <h3>Bewertung</h3>
-        <p>${qualityFeedback}</p>
-        <p>Beantwortete Fragen: ${filledCount}/3</p>
-    `;
-}
 
-function saveStory() {
-    alert('Deine Geschichte wurde gespeichert!');
-}
+        function showQuizResults() {
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.style.display = 'block';
+            
+            let correctCount = 0;
+            const questions = document.querySelectorAll('.question');
+            
+            questions.forEach(question => {
+                const selected = question.querySelector('.quiz-option[style*="rgba(40, 120, 60"]');
+                if (selected) correctCount++;
+            });
+            
+            let feedback = '';
+            if (correctCount === 3) {
+                feedback = '<h3>Ausgezeichnet! 🏆</h3><p>Du hast alle Fragen richtig beantwortet!</p>';
+                resultDiv.className = 'result correct';
+            } else if (correctCount === 2) {
+                feedback = '<h3>Gut gemacht! 👍</h3><p>Du kennst dich gut mit dem Buch aus.</p>';
+                resultDiv.className = 'result correct';
+            } else {
+                feedback = '<h3>Übe noch ein bisschen 📚</h3><p>Lies das Buch noch einmal.</p>';
+                resultDiv.className = 'result incorrect';
+            }
+            
+            resultDiv.innerHTML = feedback;
+        }
 
-function saveAllAnswers() {
-    let content = "Antworten zu 'Das schaurige Haus'\n\n";
-    const textareas = document.querySelectorAll('.writing-area');
-    textareas.forEach((textarea, index) => {
-        content += `Antwort ${index + 1}: ${textarea.value || '(leer)'}\n\n`;
-    });
-    
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'antworten_schauriges_haus.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    
-    alert('Antworten gespeichert!');
-}
+        function checkAnswers() {
+            const textareas = document.querySelectorAll('.writing-area');
+            let filledCount = 0;
+            
+            textareas.forEach(textarea => {
+                if (textarea.value.trim().length > 0) {
+                    filledCount++;
+                }
+            });
+            
+            let qualityFeedback = filledCount === 3 ? 
+                'Gut! Du hast alle Fragen beantwortet.' : 
+                'Bitte beantworte alle Fragen.';
+            
+            document.getElementById('answer-feedback').innerHTML = `
+                <h3>Bewertung</h3>
+                <p>${qualityFeedback}</p>
+                <p>Beantwortete Fragen: ${filledCount}/3</p>
+            `;
+        }
 
+        function saveStory() {
+            alert('Deine Geschichte wurde gespeichert!');
+        }
+
+        function saveAllAnswers() {
+            let content = "Antworten zu 'Das schaurige Haus'\n\n";
+            const textareas = document.querySelectorAll('.writing-area');
+            textareas.forEach((textarea, index) => {
+                content += `Antwort ${index + 1}: ${textarea.value || '(leer)'}\n\n`;
+            });
+            
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'antworten_schauriges_haus.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Antworten gespeichert!');
+        }
+
+        function printPage() {
+            window.print();
+        }
     </script>
 </body>
 </html>
