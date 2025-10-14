@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redewendungen & Phrasen für Geschichten</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 25%, #1e3a5f 75%, #0d1b2a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #FF6B35, #FF8C42);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .controls {
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #FF6B35, #FF8C42);
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: #2E3856;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            color: white;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .category {
+    margin-bottom: 30px;
+    border: 3px solid #FF6B35;
+    border-radius: 15px;
+    overflow: visible;
+    transition: all 0.3s;
+}
+
+.category-content {
+    max-height: 3000px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    border-radius: 0 0 12px 12px;
+}
+        
+        .category.hidden {
+            display: none;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .category-header:hover {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+        }
+        
+        .category-header h2 {
+            font-size: 1.8em;
+        }
+        
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+        
+        .category.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        .category-content {
+            max-height: 3000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .category.collapsed .category-content {
+            max-height: 0;
+        }
+        
+        .phrase-card {
+            background: #f8f9fa;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #4A5899;
+            transition: all 0.3s;
+        }
+        
+        .phrase-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .phrase-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #FF6B35;
+            margin-bottom: 10px;
+        }
+        
+        .phrase-meaning {
+            color: #2E3856;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .phrase-example {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 3px solid #4A5899;
+        }
+        
+        .example-label {
+            font-weight: bold;
+            color: #4A5899;
+            margin-bottom: 5px;
+        }
+        
+        .visual-hint {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 2em;
+            text-align: center;
+        }
+        
+        .error-card {
+            background: #ffe6e6;
+            border-left-color: #dc3545;
+        }
+        
+        .wrong-phrase {
+            color: #dc3545;
+            text-decoration: line-through;
+            font-weight: bold;
+        }
+        
+        .correct-phrase {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            color: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+        }
+        
+        .quiz-button {
+            background: linear-gradient(135deg, #FF8C42, #FF6B35);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .quiz-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 Redewendungen & Phrasen 🌟</h1>
+            <p class="subtitle">Lerne deutsche Redewendungen für lebendige Geschichten!</p>
+        </header>
+        
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Suche nach Redewendungen...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="alle">Alle</button>
+                <button class="filter-btn" data-category="emotionen">Emotionen</button>
+                <button class="filter-btn" data-category="sinne">Sinne</button>
+                <button class="filter-btn" data-category="spannung">Spannung</button>
+                <button class="filter-btn" data-category="wetter">Wetter</button>
+                <button class="filter-btn" data-category="bewegung">Bewegung</button>
+                <button class="filter-btn" data-category="fehler">Häufige Fehler</button>
+            </div>
+        </div>
+        
+        <div class="content" id="content">
+            <div class="no-results" id="noResults" style="display:none;">
+                Keine Ergebnisse gefunden. Versuche einen anderen Suchbegriff!
+            </div>
+            
+            <!-- EMOTIONEN -->
+            <div class="category" data-category="emotionen">
+                <div class="category-header">
+                    <h2>😊 Emotionen ausdrücken</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Herz schlug bis zum Hals</div>
+                        <div class="phrase-meaning">Bedeutung: sehr große Angst oder Aufregung haben</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie das Geräusch im dunklen Keller hörte, schlug ihr Herz bis zum Hals.
+                        </div>
+                        <div class="visual-hint">💗➡️😰</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">vor Freude strahlen</div>
+                        <div class="phrase-meaning">Bedeutung: sehr glücklich sein und es im Gesicht zeigen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als Maria das Geschenk auspackte, strahlte sie vor Freude.
+                        </div>
+                        <div class="visual-hint">😄✨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Haare standen zu Berge</div>
+                        <div class="phrase-meaning">Bedeutung: sehr erschrocken oder entsetzt sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei der gruseligen Geschichte standen mir die Haare zu Berge.
+                        </div>
+                        <div class="visual-hint">😱🏔️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen Kloß im Hals haben</div>
+                        <div class="phrase-meaning">Bedeutung: sehr traurig oder gerührt sein und kaum sprechen können</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Beim Abschied hatte sie einen dicken Kloß im Hals.
+                        </div>
+                        <div class="visual-hint">😢🥔</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">jemandem fiel ein Stein vom Herzen</div>
+                        <div class="phrase-meaning">Bedeutung: erleichtert sein, wenn eine Sorge vorbei ist</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als er hörte, dass die Prüfung gut lief, fiel ihm ein Stein vom Herzen.
+                        </div>
+                        <div class="visual-hint">❤️🪨⬇️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">Schmetterlinge im Bauch haben</div>
+                        <div class="phrase-meaning">Bedeutung: verliebt sein oder sich auf etwas sehr freuen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Wenn sie an ihn dachte, hatte sie Schmetterlinge im Bauch.
+                        </div>
+                        <div class="visual-hint">🦋💝</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">vor Wut kochen</div>
+                        <div class="phrase-meaning">Bedeutung: sehr wütend sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als er von der Ungerechtigkeit erfuhr, kochte er vor Wut.
+                        </div>
+                        <div class="visual-hint">😡🔥</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Augen leuchteten</div>
+                        <div class="phrase-meaning">Bedeutung: begeistert und glücklich sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als die Kinder den Freizeitpark sahen, leuchteten ihre Augen.
+                        </div>
+                        <div class="visual-hint">👀✨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Blut gefror in den Adern</div>
+                        <div class="phrase-meaning">Bedeutung: vor Schreck oder Angst erstarren</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie die Gestalt im Schatten sah, gefror ihr das Blut in den Adern.
+                        </div>
+                        <div class="visual-hint">🩸❄️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">jemandem rutschte das Herz in die Hose</div>
+                        <div class="phrase-meaning">Bedeutung: plötzlich große Angst bekommen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als er das Knurren des Hundes hörte, rutschte ihm das Herz in die Hose.
+                        </div>
+                        <div class="visual-hint">❤️⬇️👖</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">auf Wolke sieben schweben</div>
+                        <div class="phrase-meaning">Bedeutung: überglücklich sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach dem tollen Tag schwebte sie auf Wolke sieben.
+                        </div>
+                        <div class="visual-hint">☁️7️⃣😊</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Mundwinkel zuckten</div>
+                        <div class="phrase-meaning">Bedeutung: versuchen, nicht zu lächeln oder zu lachen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei seinem lustigen Witz zuckten ihre Mundwinkel, obwohl sie ernst bleiben wollte.
+                        </div>
+                        <div class="visual-hint">😏</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Gesicht verzog sich</div>
+                        <div class="phrase-meaning">Bedeutung: einen negativen Gesichtsausdruck machen (Ekel, Schmerz)</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie die saure Zitrone aß, verzog sich ihr Gesicht.
+                        </div>
+                        <div class="visual-hint">😖🍋</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen Luftsprung machen</div>
+                        <div class="phrase-meaning">Bedeutung: vor Freude hochspringen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie die gute Nachricht bekam, machte sie einen Luftsprung.
+                        </div>
+                        <div class="visual-hint">🤸‍♀️✨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Knie schlotterten</div>
+                        <div class="phrase-meaning">Bedeutung: vor Angst oder Aufregung zittern</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Vor dem Referat schlotterten ihm die Knie.
+                        </div>
+                        <div class="visual-hint">🦵😰</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">den Kopf hängen lassen</div>
+                        <div class="phrase-meaning">Bedeutung: traurig oder entmutigt sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach der Niederlage ließ die Mannschaft die Köpfe hängen.
+                        </div>
+                        <div class="visual-hint">😔⬇️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">Gänsehaut bekommen</div>
+                        <div class="phrase-meaning">Bedeutung: durch Angst, Kälte oder Begeisterung kleine Hautunebenheiten bekommen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei der spannenden Szene bekam sie Gänsehaut.
+                        </div>
+                        <div class="visual-hint">🪿😱</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">feuchte Augen bekommen</div>
+                        <div class="phrase-meaning">Bedeutung: fast weinen, gerührt sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei der rührenden Rede bekam er feuchte Augen.
+                        </div>
+                        <div class="visual-hint">👁️💧</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Gesicht erstrahlte</div>
+                        <div class="phrase-meaning">Bedeutung: plötzlich sehr glücklich aussehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie ihren besten Freund sah, erstrahlte ihr Gesicht.
+                        </div>
+                        <div class="visual-hint">😊🌟</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">vor Scham im Boden versinken wollen</div>
+                        <div class="phrase-meaning">Bedeutung: sich sehr schämen und am liebsten verschwinden wollen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie vor der ganzen Klasse stolperte, wollte sie vor Scham im Boden versinken.
+                        </div>
+                        <div class="visual-hint">😳⬇️</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SINNESWAHRNEHMUNGEN -->
+            <div class="category" data-category="sinne">
+                <div class="category-header">
+                    <h2>👂 Sinneswahrnehmungen beschreiben</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Ohren spitzen</div>
+                        <div class="phrase-meaning">Bedeutung: sehr aufmerksam zuhören</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie ihren Namen hörte, spitzte sie die Ohren.
+                        </div>
+                        <div class="visual-hint">👂🔊</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Augen zusammenkneifen</div>
+                        <div class="phrase-meaning">Bedeutung: angestrengt sehen wollen oder misstrauisch schauen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im hellen Sonnenlicht kniff er die Augen zusammen.
+                        </div>
+                        <div class="visual-hint">😑☀️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">den Atem anhalten</div>
+                        <div class="phrase-meaning">Bedeutung: vor Spannung oder Angst nicht atmen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei der spannenden Szene hielten alle den Atem an.
+                        </div>
+                        <div class="visual-hint">😶💨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Blut rauschen hören</div>
+                        <div class="phrase-meaning">Bedeutung: in großer Aufregung das eigene Herz stark schlagen hören</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Vor Nervosität hörte sie ihr Blut rauschen.
+                        </div>
+                        <div class="visual-hint">💗🌊</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Nase rümpfen</div>
+                        <div class="phrase-meaning">Bedeutung: Ablehnung oder Ekel zeigen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei dem unangenehmen Geruch rümpfte sie die Nase.
+                        </div>
+                        <div class="visual-hint">👃😤</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">große Augen machen</div>
+                        <div class="phrase-meaning">Bedeutung: erstaunt oder überrascht sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als er das riesige Geschenk sah, machte er große Augen.
+                        </div>
+                        <div class="visual-hint">👁️👁️😲</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">auf der Zunge zergehen</div>
+                        <div class="phrase-meaning">Bedeutung: etwas schmeckt besonders gut und fein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die Schokolade zerging ihm auf der Zunge.
+                        </div>
+                        <div class="visual-hint">😋🍫</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen scharfen Blick haben</div>
+                        <div class="phrase-meaning">Bedeutung: Details gut erkennen können, aufmerksam sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die Detektivin hatte einen scharfen Blick und entdeckte den versteckten Hinweis.
+                        </div>
+                        <div class="visual-hint">👀🔍</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">an den Fingerspitzen spüren</div>
+                        <div class="phrase-meaning">Bedeutung: etwas deutlich fühlen oder ahnen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Sie konnte die raue Oberfläche an den Fingerspitzen spüren.
+                        </div>
+                        <div class="visual-hint">✋📍</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Luft schmecken können</div>
+                        <div class="phrase-meaning">Bedeutung: einen intensiven Geschmack oder Geruch in der Luft wahrnehmen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Man konnte das Salz in der Meeresluft schmecken.
+                        </div>
+                        <div class="visual-hint">👃🌊</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Stille war ohrenbetäubend</div>
+                        <div class="phrase-meaning">Bedeutung: es war so still, dass die Stille unangenehm auffiel</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach der Explosion war die Stille ohrenbetäubend.
+                        </div>
+                        <div class="visual-hint">🔇😶</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">etwas im Augenwinkel sehen</div>
+                        <div class="phrase-meaning">Bedeutung: etwas nur am Rand des Sichtfeldes bemerken</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im Augenwinkel sah sie eine Bewegung im Schatten.
+                        </div>
+                        <div class="visual-hint">👁️↔️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">den Geschmack auf der Zunge haben</div>
+                        <div class="phrase-meaning">Bedeutung: sich an einen Geschmack erinnern oder ihn fast wieder schmecken</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Beim Gedanken an Omas Kuchen hatte sie den Geschmack schon auf der Zunge.
+                        </div>
+                        <div class="visual-hint">👅🍰</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">Musik in den Ohren sein</div>
+                        <div class="phrase-meaning">Bedeutung: etwas sehr gerne hören, schöne Worte</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Das Lob des Lehrers war Musik in ihren Ohren.
+                        </div>
+                        <div class="visual-hint">🎵👂</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Augen nicht abwenden können</div>
+                        <div class="phrase-meaning">Bedeutung: von etwas so fasziniert sein, dass man wegschauen muss</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Von dem spektakulären Sonnenuntergang konnte sie die Augen nicht abwenden.
+                        </div>
+                        <div class="visual-hint">👀😍</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">ein Kribbeln spüren</div>
+                        <div class="phrase-meaning">Bedeutung: ein leichtes, prickelndes Gefühl auf der Haut haben</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Vor Aufregung spürte sie ein Kribbeln im ganzen Körper.
+                        </div>
+                        <div class="visual-hint">✨🦋</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Ohren klingen</div>
+                        <div class="phrase-meaning">Bedeutung: nach einem lauten Geräusch ein Pfeifen im Ohr haben</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach dem Konzert klingelten ihm noch die Ohren.
+                        </div>
+                        <div class="visual-hint">👂🔔</div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">mit den Augen verschlingen</div>
+                        <div class="phrase-meaning">Bedeutung: etwas sehr interessiert und intensiv ansehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Sie verschlang die Bilder im Buch mit den Augen.
+                        </div>
+                        <div class="visual-hint">👀📖</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen schalen Geschmack haben</div>
+                        <div class="phrase-meaning">Bedeutung: ein unangenehmes Gefühl bei etwas haben</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Sein unfairer Sieg hinterließ einen schalen Geschmack.
+                        </div>
+                        <div class="visual-hint">😕👅</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">jemanden nicht riechen können</div>
+                        <div class="phrase-meaning">Bedeutung: jemanden nicht mögen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die beiden Schüler konnten sich von Anfang an nicht riechen.
+                        </div>
+                        <div class="visual-hint">👃❌</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SPANNUNG AUFBAUEN -->
+            <div class="category" data-category="spannung">
+                <div class="category-header">
+                    <h2>⚡ Spannung aufbauen</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Zeit schien stillzustehen</div>
+                        <div class="phrase-meaning">Bedeutung: ein Moment fühlte sich sehr lang an</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie auf das Ergebnis wartete, schien die Zeit stillzustehen.
+                        </div>
+                        <div class="visual-hint">⏰🧊</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Spannung war zum Zerreißen</div>
+                        <div class="phrase-meaning">Bedeutung: sehr große Spannung und Erwartung</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Kurz vor der Bekanntgabe des Gewinners war die Spannung zum Zerreißen.
+                        </div>
+                        <div class="visual-hint">⚡💥</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einem lief ein Schauer über den Rücken</div>
+                        <div class="phrase-meaning">Bedeutung: ein kaltes, gruseliges Gefühl bekommen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei dem unheimlichen Geräusch lief ihr ein Schauer über den Rücken.
+                        </div>
+                        <div class="visual-hint">🥶↕️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Schweigen wurde bedrohlich</div>
+                        <div class="phrase-meaning">Bedeutung: die Stille wirkte unheimlich und gefährlich</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im dunklen Wald wurde das Schweigen plötzlich bedrohlich.
+                        </div>
+                        <div class="visual-hint">🤫😰</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Luft war zum Schneiden</div>
+                        <div class="phrase-meaning">Bedeutung: die Atmosphäre war sehr angespannt</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach dem Streit war die Luft zum Schneiden.
+                        </div>
+                        <div class="visual-hint">🔪💨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einem stockte der Atem</div>
+                        <div class="phrase-meaning">Bedeutung: vor Schreck oder Überraschung kurz nicht atmen können</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als sie die Gestalt sah, stockte ihr der Atem.
+                        </div>
+                        <div class="visual-hint">😮‍💨❌</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">in letzter Sekunde</div>
+                        <div class="phrase-meaning">Bedeutung: genau im richtigen, oft knappen Moment</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            In letzter Sekunde konnte sie den fallenden Teller auffangen.
+                        </div>
+                        <div class="visual-hint">⏱️🏃</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Nerven lagen blank</div>
+                        <div class="phrase-meaning">Bedeutung: sehr nervös und gereizt sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach der langen Wartezeit lagen bei allen die Nerven blank.
+                        </div>
+                        <div class="visual-hint">😤⚡</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen Moment lang erstarrte alles</div>
+                        <div class="phrase-meaning">Bedeutung: für kurze Zeit bewegte sich nichts, totale Stille</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach dem lauten Knall erstarrte für einen Moment lang alles.
+                        </div>
+                        <div class="visual-hint">⏸️🧊</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Unheil nahte</div>
+                        <div class="phrase-meaning">Bedeutung: etwas Schlimmes kam näher</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die dunklen Wolken zeigten, dass das Unheil nahte.
+                        </div>
+                        <div class="visual-hint">☁️⚠️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">auf Messers Schneide stehen</div>
+                        <div class="phrase-meaning">Bedeutung: in einer sehr gefährlichen oder kritischen Situation sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Der Ausgang des Wettkampfs stand auf Messers Schneide.
+                        </div>
+                        <div class="visual-hint">🔪⚖️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Sekunden zogen sich wie Stunden</div>
+                        <div class="phrase-meaning">Bedeutung: die Zeit verging sehr langsam</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Während sie auf Hilfe wartete, zogen sich die Sekunden wie Stunden.
+                        </div>
+                        <div class="visual-hint">⏰🐌</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">es lag etwas in der Luft</div>
+                        <div class="phrase-meaning">Bedeutung: man spürte, dass etwas passieren würde</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Schon beim Betreten des Hauses spürte sie, dass etwas in der Luft lag.
+                        </div>
+                        <div class="visual-hint">🌫️❓</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Herz pochte wie wild</div>
+                        <div class="phrase-meaning">Bedeutung: das Herz schlug sehr schnell und kräftig</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Vor Aufregung pochte sein Herz wie wild.
+                        </div>
+                        <div class="visual-hint">💗💥</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Dunkelheit verschluckte alles</div>
+                        <div class="phrase-meaning">Bedeutung: es wurde so dunkel, dass man nichts mehr sehen konnte</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als die Sonne unterging, verschluckte die Dunkelheit alles.
+                        </div>
+                        <div class="visual-hint">🌑👻</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">ein ungutes Gefühl beschlich einen</div>
+                        <div class="phrase-meaning">Bedeutung: langsam bekam man ein schlechtes, warnendes Gefühl</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als er die leere Straße entlangging, beschlich ihn ein ungutes Gefühl.
+                        </div>
+                        <div class="visual-hint">😰👻</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Gefahr lauerte überall</div>
+                        <div class="phrase-meaning">Bedeutung: überall konnte etwas Gefährliches versteckt sein</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im dichten Nebel lauerte die Gefahr überall.
+                        </div>
+                        <div class="visual-hint">⚠️👀</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das Blut rauschte in den Ohren</div>
+                        <div class="phrase-meaning">Bedeutung: vor Aufregung oder Anstrengung das eigene Herz laut hören</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Beim Sprint rauschte ihm das Blut in den Ohren.
+                        </div>
+                        <div class="visual-hint">🩸👂</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">mit angehaltenem Atem</div>
+                        <div class="phrase-meaning">Bedeutung: vor Spannung nicht atmend</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Mit angehaltenem Atem beobachteten sie das Geschehen.
+                        </div>
+                        <div class="visual-hint">😶💨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">ein Schatten huschte vorbei</div>
+                        <div class="phrase-meaning">Bedeutung: etwas bewegte sich schnell und kaum sichtbar</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im Mondlicht huschte ein Schatten an der Wand vorbei.
+                        </div>
+                        <div class="visual-hint">👤💨</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- WETTER UND NATUR -->
+            <div class="category" data-category="wetter">
+                <div class="category-header">
+                    <h2>🌦️ Wetter und Natur beschreiben</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="phrase-card">
+                        <div class="phrase-title">der Wind heulte</div>
+                        <div class="phrase-meaning">Bedeutung: der Wind machte laute, unheimliche Geräusche</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            In der Nacht heulte der Wind um das alte Haus.
+                        </div>
+                        <div class="visual-hint">💨😱</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">der Himmel öffnete seine Schleusen</div>
+                        <div class="phrase-meaning">Bedeutung: es begann sehr stark zu regnen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Plötzlich öffnete der Himmel seine Schleusen und es goss in Strömen.
+                        </div>
+                        <div class="visual-hint">☁️💧💧💧</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">es regnete wie aus Eimern</div>
+                        <div class="phrase-meaning">Bedeutung: es regnete sehr stark</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Wir mussten schnell ins Haus, denn es regnete wie aus Eimern.
+                        </div>
+                        <div class="visual-hint">🪣💧</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Sonne brannte vom Himmel</div>
+                        <div class="phrase-meaning">Bedeutung: es war sehr heiß und sonnig</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            An diesem Sommertag brannte die Sonne vom Himmel.
+                        </div>
+                        <div class="visual-hint">☀️🔥</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">der Nebel kroch über den Boden</div>
+                        <div class="phrase-meaning">Bedeutung: der Nebel bewegte sich langsam am Boden entlang</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Am frühen Morgen kroch der Nebel über die Wiese.
+                        </div>
+                        <div class="visual-hint">🌫️🐌</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">Blitz und Donner</div>
+                        <div class="phrase-meaning">Bedeutung: ein Gewitter mit Blitzen und Donner</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Blitz und Donner kündigten das Unwetter an.
+                        </div>
+                        <div class="visual-hint">⚡🌩️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">der Schnee knirschte unter den Füßen</div>
+                        <div class="phrase-meaning">Bedeutung: beim Gehen im Schnee ein knirschendes Geräusch machen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            In der Kälte knirschte der Schnee unter ihren Füßen.
+                        </div>
+                        <div class="visual-hint">❄️👣</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Blätter raschelten im Wind</div>
+                        <div class="phrase-meaning">Bedeutung: die Blätter machten Geräusche, wenn der Wind sie bewegte</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Leise raschelten die herbstlichen Blätter im Wind.
+                        </div>
+                        <div class="visual-hint">🍂💨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">der Himmel verdüsterte sich</div>
+                        <div class="phrase-meaning">Bedeutung: dunkle Wolken kamen und es wurde dunkel</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Innerhalb von Minuten verdüsterte sich der Himmel.
+                        </div>
+                        <div class="visual-hint">☁️⚫</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Wellen schlugen gegen die Felsen</div>
+                        <div class="phrase-meaning">Bedeutung: das Meer war wild und die Wellen trafen hart auf die Felsen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im Sturm schlugen die Wellen wild gegen die Felsen.
+                        </div>
+                        <div class="visual-hint">🌊🪨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Luft flimmerte vor Hitze</div>
+                        <div class="phrase-meaning">Bedeutung: durch große Hitze schien die Luft zu zittern</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Über dem heißen Asphalt flimmerte die Luft.
+                        </div>
+                        <div class="visual-hint">🔥〰️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Kälte biss ins Gesicht</div>
+                        <div class="phrase-meaning">Bedeutung: es war so kalt, dass es unangenehm im Gesicht war</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Draußen biss die eisige Kälte ins Gesicht.
+                        </div>
+                        <div class="visual-hint">🥶😣</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">ein sanfter Windhauch</div>
+                        <div class="phrase-meaning">Bedeutung: ein leichter, angenehmer Wind</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Ein sanfter Windhauch strich durch ihr Haar.
+                        </div>
+                        <div class="visual-hint">💨🍃</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">der Mond schien hell</div>
+                        <div class="phrase-meaning">Bedeutung: der Mond gab viel Licht</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            In der klaren Nacht schien der Mond hell über dem Wald.
+                        </div>
+                        <div class="visual-hint">🌕✨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">Tropfen perlten auf der Oberfläche</div>
+                        <div class="phrase-meaning">Bedeutung: Wassertropfen bildeten kleine Kugeln auf etwas</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die Regentropfen perlten auf den Blättern.
+                        </div>
+                        <div class="visual-hint">💧🍃</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Luft war geschwängert mit</div>
+                        <div class="phrase-meaning">Bedeutung: die Luft war voll von einem bestimmten Geruch</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die Frühlingsluft war geschwängert mit dem Duft von Blumen.
+                        </div>
+                        <div class="visual-hint">🌸👃</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Hitze lastete auf der Stadt</div>
+                        <div class="phrase-meaning">Bedeutung: die Hitze war drückend und schwer zu ertragen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            An diesem Nachmittag lastete die Hitze wie eine schwere Decke auf der Stadt.
+                        </div>
+                        <div class="visual-hint">🏙️🔥</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">Tau glitzerte auf den Grashalmen</div>
+                        <div class="phrase-meaning">Bedeutung: morgendliche Wassertropfen schimmerten im Licht</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im ersten Sonnenlicht glitzerte der Tau auf den Grashalmen.
+                        </div>
+                        <div class="visual-hint">🌱💎</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">der Sturm tobte</div>
+                        <div class="phrase-meaning">Bedeutung: ein sehr starker, wilder Sturm herrschte</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die ganze Nacht tobte der Sturm über dem Land.
+                        </div>
+                        <div class="visual-hint">🌪️😤</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">das erste Morgenlicht brach durch</div>
+                        <div class="phrase-meaning">Bedeutung: die ersten Sonnenstrahlen am Morgen wurden sichtbar</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Langsam brach das erste Morgenlicht durch die Wolken.
+                        </div>
+                        <div class="visual-hint">🌅☁️</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BEWEGUNG BESCHREIBEN -->
+            <div class="category" data-category="bewegung">
+                <div class="category-header">
+                    <h2>🏃 Bewegung beschreiben</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="phrase-card">
+                        <div class="phrase-title">wie der Blitz</div>
+                        <div class="phrase-meaning">Bedeutung: sehr schnell</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Sie rannte wie der Blitz zur Bushaltestelle.
+                        </div>
+                        <div class="visual-hint">⚡🏃</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">sich schleichen</div>
+                        <div class="phrase-meaning">Bedeutung: sich leise und vorsichtig bewegen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Leise schlich er durch den dunklen Flur.
+                        </div>
+                        <div class="visual-hint">🚶‍♂️🤫</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">stolpern und straucheln</div>
+                        <div class="phrase-meaning">Bedeutung: unsicher gehen und fast fallen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im Dunkeln stolperte sie über eine Wurzel.
+                        </div>
+                        <div class="visual-hint">🤕⚠️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">wie angewurzelt dastehen</div>
+                        <div class="phrase-meaning">Bedeutung: vor Schreck oder Überraschung nicht bewegen können</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als er den Bären sah, stand er wie angewurzelt da.
+                        </div>
+                        <div class="visual-hint">🧍😱</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">davonrennen/davonstürzen</div>
+                        <div class="phrase-meaning">Bedeutung: sehr schnell weglaufen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Vor Angst rannte sie davon.
+                        </div>
+                        <div class="visual-hint">🏃💨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">sich auf etwas stürzen</div>
+                        <div class="phrase-meaning">Bedeutung: schnell und heftig zu etwas hingehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Die hungrigen Kinder stürzten sich auf das Essen.
+                        </div>
+                        <div class="visual-hint">🤸‍♂️🍕</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">die Flucht ergreifen</div>
+                        <div class="phrase-meaning">Bedeutung: weglaufen, fliehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Bei Gefahr ergriffen die Tiere sofort die Flucht.
+                        </div>
+                        <div class="visual-hint">🦌💨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen Satz machen</div>
+                        <div class="phrase-meaning">Bedeutung: einen Sprung machen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Erschrocken machte sie einen Satz zur Seite.
+                        </div>
+                        <div class="visual-hint">🦘⬅️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">schweren Herzens gehen</div>
+                        <div class="phrase-meaning">Bedeutung: traurig oder ungern weggehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Schweren Herzens verließ er seine Heimat.
+                        </div>
+                        <div class="visual-hint">😔💔</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">sich vorsichtig herantasten</div>
+                        <div class="phrase-meaning">Bedeutung: sich langsam und vorsichtig nähern</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Im Dunkeln tastete sie sich vorsichtig zur Tür heran.
+                        </div><div class="visual-hint">🚶‍♀️👋</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">sich in Sicherheit bringen</div>
+                        <div class="phrase-meaning">Bedeutung: an einen sicheren Ort gehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Schnell brachten sie sich vor dem Unwetter in Sicherheit.
+                        </div>
+                        <div class="visual-hint">🏃🛡️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">auf Zehenspitzen gehen</div>
+                        <div class="phrase-meaning">Bedeutung: sehr leise gehen, nur auf den Zehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Um niemanden zu wecken, ging sie auf Zehenspitzen.
+                        </div>
+                        <div class="visual-hint">🦶🤫</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">sich vorwärts kämpfen</div>
+                        <div class="phrase-meaning">Bedeutung: mit Mühe weitergehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Durch den tiefen Schnee kämpften sie sich vorwärts.
+                        </div>
+                        <div class="visual-hint">💪❄️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen Schritt zurückweichen</div>
+                        <div class="phrase-meaning">Bedeutung: aus Angst oder Vorsicht zurückgehen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Als der Hund knurrte, wich er einen Schritt zurück.
+                        </div>
+                        <div class="visual-hint">👣⬅️</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">über etwas hinwegspringen</div>
+                        <div class="phrase-meaning">Bedeutung: springend über ein Hindernis kommen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Geschickt sprang er über den Zaun.
+                        </div>
+                        <div class="visual-hint">🏃‍♂️🚧</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">sich ducken</div>
+                        <div class="phrase-meaning">Bedeutung: den Kopf und Körper nach unten beugen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Schnell duckte sie sich hinter die Mauer.
+                        </div>
+                        <div class="visual-hint">🙇‍♀️🧱</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">Hals über Kopf</div>
+                        <div class="phrase-meaning">Bedeutung: sehr hastig und überstürzt</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Hals über Kopf verließen sie das brennende Haus.
+                        </div>
+                        <div class="visual-hint">🤸🔥</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">sich durchs Dickicht schlagen</div>
+                        <div class="phrase-meaning">Bedeutung: sich mühsam durch dichtes Gebüsch bewegen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Stundenlang schlugen sie sich durch das Dickicht des Dschungels.
+                        </div>
+                        <div class="visual-hint">🌿💪</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">außer Atem sein</div>
+                        <div class="phrase-meaning">Bedeutung: nach Anstrengung schwer atmen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Nach dem langen Lauf war sie völlig außer Atem.
+                        </div>
+                        <div class="visual-hint">😮‍💨💨</div>
+                    </div>
+                    
+                    <div class="phrase-card">
+                        <div class="phrase-title">einen Umweg machen</div>
+                        <div class="phrase-meaning">Bedeutung: nicht den direkten Weg nehmen</div>
+                        <div class="phrase-example">
+                            <div class="example-label">Beispiel:</div>
+                            Wegen der Baustelle mussten sie einen großen Umweg machen.
+                        </div>
+                        <div class="visual-hint">🔄🚧</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HÄUFIGE FEHLER -->
+            <div class="category" data-category="fehler">
+                <div class="category-header">
+                    <h2>❌ Häufige Fehler vermeiden</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="category-content">
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Die Ohren spitzen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: die Ohren spüren</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: die Ohren spitzen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Spüren" bedeutet fühlen, aber hier geht es ums Hören. "Spitzen" kommt von "spitz" - wie ein Hund seine Ohren aufstellt.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Als sie ihren Namen hörte, spitzte sie die Ohren.
+                        </div>
+                        <div class="visual-hint">👂⚡</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Das Herz schlug bis zum Hals</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: das Herz schlug in den Hals</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: das Herz schlug bis zum Hals</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Man sagt "bis zum" weil das Herz gefühlt so hoch schlägt, dass es den Hals erreicht.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Vor Aufregung schlug ihr Herz bis zum Hals.
+                        </div>
+                        <div class="visual-hint">💗⬆️</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Die Haare standen zu Berge</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: die Haare stehen auf Berge / die Haare stehen hoch</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: die Haare standen zu Berge</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Zu Berge" ist eine feste Redewendung. Die Haare stehen so hoch wie ein Berg!
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Bei der gruseligen Geschichte standen mir die Haare zu Berge.
+                        </div>
+                        <div class="visual-hint">😱🏔️</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Einen Kloß im Hals haben</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: einen Kloss im Mund haben / einen Ball im Hals</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: einen Kloß im Hals haben</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Ein "Kloß" ist wie eine Kartoffelkugel. Es fühlt sich an, als ob man nicht schlucken kann.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Vor Rührung hatte sie einen dicken Kloß im Hals.
+                        </div>
+                        <div class="visual-hint">😢🥔</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Wie der Blitz</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: wie ein Blitz / wie Blitze</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: wie der Blitz</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Man sagt immer "der Blitz" (bestimmter Artikel), nicht "ein Blitz".
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Er rannte wie der Blitz zur Tür.
+                        </div>
+                        <div class="visual-hint">⚡💨</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Das Blut gefror in den Adern</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: das Blut wurde kalt in den Adern / das Blut fror</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: das Blut gefror in den Adern</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Gefrieren" bedeutet zu Eis werden. Das zeigt extreme Angst!
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Als sie das Geräusch hörte, gefror ihr das Blut in den Adern.
+                        </div>
+                        <div class="visual-hint">🩸❄️</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Auf Wolke sieben schweben</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: auf Wolke acht / auf der siebten Wolke / in Wolke sieben</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: auf Wolke sieben schweben</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Es ist immer "Wolke sieben" - das ist die feste Redewendung für großes Glück.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Nach dem tollen Tag schwebte sie auf Wolke sieben.
+                        </div>
+                        <div class="visual-hint">☁️7️⃣</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Wie angewurzelt dastehen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: wie eine Wurzel stehen / wie gewurzelt</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: wie angewurzelt dastehen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Angewurzelt" bedeutet: mit Wurzeln am Boden festgewachsen, kann sich nicht bewegen.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Vor Schreck stand er wie angewurzelt da.
+                        </div>
+                        <div class="visual-hint">🧍🌳</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Es regnete wie aus Eimern</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: es regnete wie Eimer / es regnete aus Eimern</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: es regnete wie aus Eimern</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Wie aus Eimern" - als ob jemand Eimer voll Wasser von oben ausgießt.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Plötzlich regnete es wie aus Eimern.
+                        </div>
+                        <div class="visual-hint">🪣💧</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Jemandem rutschte das Herz in die Hose</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: das Herz fiel in die Hose / das Herz ging in die Hose</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: jemandem rutschte das Herz in die Hose</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Rutschen" zeigt die Bewegung nach unten bei großer Angst.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Als er den Abgrund sah, rutschte ihm das Herz in die Hose.
+                        </div>
+                        <div class="visual-hint">❤️⬇️👖</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Den Atem anhalten</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: den Atem halten / den Atem stoppen</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: den Atem anhalten</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Man sagt immer "anhalten" - das "an" gehört dazu!
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Vor Spannung hielt sie den Atem an.
+                        </div>
+                        <div class="visual-hint">😶⏸️</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Einen Stein vom Herzen fallen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: ein Stein fällt vom Herzen / der Stein fiel</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: jemandem fiel ein Stein vom Herzen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Man braucht die Person (jemandem) und sagt "ein Stein" nicht "der Stein".
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Als sie die gute Nachricht hörte, fiel ihr ein Stein vom Herzen.
+                        </div>
+                        <div class="visual-hint">❤️🪨⬇️</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Die Nase rümpfen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: die Nase runzeln / die Nase verziehen</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: die Nase rümpfen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Rümpfen" ist das richtige Wort für die Nase. "Runzeln" sagt man bei der Stirn!
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Bei dem schlechten Geruch rümpfte sie die Nase.
+                        </div>
+                        <div class="visual-hint">👃😤</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Vor Wut kochen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: von Wut kochen / in Wut kochen</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: vor Wut kochen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Bei Emotionen sagt man meistens "vor" (vor Freude, vor Angst, vor Wut).
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Bei der Ungerechtigkeit kochte er vor Wut.
+                        </div>
+                        <div class="visual-hint">😡🔥</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Die Flucht ergreifen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: die Flucht nehmen / eine Flucht machen</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: die Flucht ergreifen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Ergreifen" bedeutet schnell nehmen/packen - man "ergreift" die Chance zur Flucht.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Bei Gefahr ergriffen sie sofort die Flucht.
+                        </div>
+                        <div class="visual-hint">🏃💨</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Auf Messers Schneide stehen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: auf der Messerschneide / auf Messer Schneide</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: auf Messers Schneide stehen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Messers" ist der Genitiv (Besitzform) von Messer. Die Schneide gehört zum Messer.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Das Spiel stand auf Messers Schneide.
+                        </div>
+                        <div class="visual-hint">🔪⚖️</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Hals über Kopf</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: Kopf über Hals / Hals und Kopf</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: Hals über Kopf</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Die Reihenfolge ist wichtig: erst Hals, dann Kopf - zeigt das Überstürzte!
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Hals über Kopf verließen sie das Haus.
+                        </div>
+                        <div class="visual-hint">🤸💨</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Gänsehaut bekommen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: Hühnerhaut bekommen / Gänse Haut</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: Gänsehaut bekommen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Im Deutschen sagt man "Gänsehaut" (wie die Haut einer Gans), nicht Hühnerhaut!
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Bei der spannenden Szene bekam sie eine Gänsehaut.
+                        </div>
+                        <div class="visual-hint">🪿😰</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Den Kopf hängen lassen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: den Kopf fallen lassen / den Kopf senken</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: den Kopf hängen lassen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            "Hängen lassen" ist die feste Wendung - der Kopf hängt nach unten bei Traurigkeit.
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Nach der Niederlage ließ er den Kopf hängen.
+                        </div>
+                        <div class="visual-hint">😔⬇️</div>
+                    </div>
+                    
+                    <div class="phrase-card error-card">
+                        <div class="phrase-title">Im Boden versinken wollen</div>
+                        <div class="phrase-meaning">
+                            <span class="wrong-phrase">❌ FALSCH: in den Boden sinken / im Boden verschwinden</span><br>
+                            <span class="correct-phrase">✅ RICHTIG: im Boden versinken wollen</span>
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Warum dieser Fehler?</div>
+                            Man sagt "im Boden" (nicht "in den") und "versinken" (nicht "verschwinden").
+                        </div>
+                        <div class="phrase-example">
+                            <div class="example-label">Richtiger Satz:</div>
+                            Vor Scham wollte sie im Boden versinken.
+                        </div>
+                        <div class="visual-hint">😳⬇️</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- QUIZ SECTION -->
+            <div class="quiz-section">
+                <h2>🎯 Übungen</h2>
+                <p style="margin: 15px 0;">Teste dein Wissen über die Redewendungen!</p>
+                <button class="quiz-button" onclick="startQuiz()">Quiz starten</button>
+                <button class="quiz-button" onclick="randomPhrase()">Zufällige Phrase zeigen</button>
+                <div id="quizArea" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle category collapse
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', function() {
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const categories = document.querySelectorAll('.category');
+            let hasResults = false;
+            
+            categories.forEach(category => {
+                const cards = category.querySelectorAll('.phrase-card');
+                let categoryHasMatch = false;
+                
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        card.style.display = '';
+                        categoryHasMatch = true;
+                        hasResults = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                if (categoryHasMatch || searchTerm === '') {
+                    category.style.display = '';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('noResults').style.display = hasResults || searchTerm === '' ? 'none' : 'block';
+        });
+        
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                const categories = document.querySelectorAll('.category');
+                
+                categories.forEach(cat => {
+                    if (category === 'alle') {
+                        cat.style.display = '';
+                    } else {
+                        if (cat.dataset.category === category) {
+                            cat.style.display = '';
+                        } else {
+                            cat.style.display = 'none';
+                        }
+                    }
+                });
+                
+                // Clear search
+                searchInput.value = '';
+                document.querySelectorAll('.phrase-card').forEach(card => card.style.display = '');
+                document.getElementById('noResults').style.display = 'none';
+            });
+        });
+        
+        // Quiz functionality
+        const phrases = [
+            {q: "Wie heißt es richtig?", options: ["die Ohren spüren", "die Ohren spitzen"], correct: 1},
+            {q: "Wie heißt es richtig?", options: ["das Herz schlug in den Hals", "das Herz schlug bis zum Hals"], correct: 1},
+            {q: "Wie heißt es richtig?", options: ["die Haare standen zu Berge", "die Haare stehen hoch"], correct: 0},
+            {q: "Wie heißt es richtig?", options: ["wie ein Blitz", "wie der Blitz"], correct: 1},
+            {q: "Wie heißt es richtig?", options: ["auf Wolke acht", "auf Wolke sieben"], correct: 1},
+            {q: "Wie heißt es richtig?", options: ["es regnete wie aus Eimern", "es regnete wie Eimer"], correct: 0},
+            {q: "Wie heißt es richtig?", options: ["Hals über Kopf", "Kopf über Hals"], correct: 0},
+            {q: "Wie heißt es richtig?", options: ["Gänsehaut bekommen", "Hühnerhaut bekommen"], correct: 0},
+            {q: "Wie heißt es richtig?", options: ["die Nase runzeln", "die Nase rümpfen"], correct: 1},
+            {q: "Wie heißt es richtig?", options: ["vor Wut kochen", "von Wut kochen"], correct: 0}
+        ];
+        
+        let currentQuiz = [];
+        let currentQuestion = 0;
+        let score = 0;
+        
+        function startQuiz() {
+            currentQuiz = [...phrases].sort(() => Math.random() - 0.5).slice(0, 5);
+            currentQuestion = 0;
+            score = 0;
+            showQuestion();
+        }
+        
+        function showQuestion() {
+            const quizArea = document.getElementById('quizArea');
+            if (currentQuestion >= currentQuiz.length) {
+                quizArea.innerHTML = `
+                    <div style="background: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3>Quiz beendet! 🎉</h3>
+                        <p style="font-size: 1.5em; margin: 15px 0;">Du hast ${score} von ${currentQuiz.length} Fragen richtig beantwortet!</p>
+                        <button class="quiz-button" onclick="startQuiz()">Noch einmal spielen</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            const q = currentQuiz[currentQuestion];
+            quizArea.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 10px;">
+                    <h3>Frage ${currentQuestion + 1} von ${currentQuiz.length}</h3>
+                    <p style="font-size: 1.2em; margin: 15px 0;">${q.q}</p>
+                    <button class="quiz-button" onclick="checkAnswer(0)">${q.options[0]}</button>
+                    <button class="quiz-button" onclick="checkAnswer(1)">${q.options[1]}</button>
+                </div>
+            `;
+        }
+        
+        function checkAnswer(selected) {
+            const q = currentQuiz[currentQuestion];
+            const quizArea = document.getElementById('quizArea');
+            
+            if (selected === q.correct) {
+                score++;
+                quizArea.innerHTML += `<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; margin-top: 10px;">✅ Richtig! Sehr gut!</div>`;
+            } else {
+                quizArea.innerHTML += `<div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 10px; margin-top: 10px;">❌ Leider falsch. Die richtige Antwort ist: <strong>${q.options[q.correct]}</strong></div>`;
+            }
+            
+            currentQuestion++;
+            setTimeout(showQuestion, 2000);
+        }
+        
+        function randomPhrase() {
+            const allCards = document.querySelectorAll('.phrase-card');
+            const randomCard = allCards[Math.floor(Math.random() * allCards.length)];
+            
+            // Scroll to the card
+            randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Highlight it temporarily
+            randomCard.style.background = '#fff3cd';
+            randomCard.style.transform = 'scale(1.05)';
+            
+            setTimeout(() => {
+                randomCard.style.background = '';
+                randomCard.style.transform = '';
+            }, 2000);
+        }
+        
+        // Initialize - expand all categories by default
+        document.querySelectorAll('.category').forEach(cat => {
+            cat.classList.remove('collapsed');
+        });
+    </script>
+</body>
+</html>
