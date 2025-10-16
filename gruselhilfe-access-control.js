@@ -1,6 +1,6 @@
 (function() {
     // HIER DAS PASSWORT ÄNDERN:
-    const KORREKTES_PASSWORT = "gruselgruselgrusel";
+    const KORREKTES_PASSWORT = "Nabiha2025";
     
     // Prüfen ob bereits eingeloggt
     const isLoggedIn = sessionStorage.getItem('daf_access') === 'granted';
