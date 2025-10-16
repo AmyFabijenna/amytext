@@ -6,7 +6,23 @@
     <title>Gruselgeschichten-Schablonen für die Schularbeit</title>
 
 <!-- DAF Zugangsschutz -->
-    <script src="gruselhilfe-access-control.js"></script>
+    <script>
+(function() {
+    const KORREKTES_PASSWORT = "Nabiha2025";
+    const isLoggedIn = sessionStorage.getItem('daf_access') === 'granted';
+    
+    if (!isLoggedIn) {
+        const eingabe = prompt("Diese Seite ist geschützt.\nBitte Passwort eingeben:");
+        
+        if (eingabe === KORREKTES_PASSWORT) {
+            sessionStorage.setItem('daf_access', 'granted');
+        } else {
+            alert("Falsches Passwort! Zugriff verweigert.");
+            document.body.innerHTML = '<div style="text-align:center; padding:50px; font-family:Arial;"><h1>🔒 Zugriff verweigert</h1><p>Falsches Passwort.</p></div>';
+        }
+    }
+})();
+</script>
 
     <style>
         * {
@@ -476,6 +492,8 @@
                     <li>In der Schularbeit: Wähle die passende Schablone (A, B oder C)</li>
                     <li>Setze nur die [LÜCKEN] ein – der Rest steht schon!</li>
                     <li>Zeit: 5 Min Planung + 40 Min Schreiben + 5 Min Überprüfen</li>
+                    <li><a href="gruselschularbeit1.html">Gruselgeschichten zu Überschriften</a></li>
+                    <li><a href="gruselschularbeit2.html">Gruselgeschichten nach anderen Vorgaben</a></li>
                 </ul>
             </div>
         </header>
@@ -490,7 +508,7 @@
             <button class="tab-button" onclick="switchTab('option-c')">
                 🎨 Option C<br><small>Struktur-Schablone</small>
             </button>
-        </div>
+                    </div>
 
         <!-- OPTION A -->
         <div id="option-a" class="tab-content active">
