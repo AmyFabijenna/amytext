@@ -8,19 +8,26 @@
 <!-- DAF Zugangsschutz -->
     <script>
 (function() {
-    const KORREKTES_PASSWORT = "Nabiha2025";
-    const isLoggedIn = sessionStorage.getItem('daf_access') === 'granted';
+    const KORREKTES_PASSWORT = "test";
+    let versuche = 3;
     
-    if (!isLoggedIn) {
-        const eingabe = prompt("Diese Seite ist geschützt.\nBitte Passwort eingeben:");
+    while (versuche > 0) {
+        const eingabe = prompt(`Passwort eingeben (${versuche} Versuche übrig):`);
         
         if (eingabe === KORREKTES_PASSWORT) {
-            sessionStorage.setItem('daf_access', 'granted');
+            alert("Zugriff gewährt!");
+            return; // Erfolg - Script beenden
         } else {
-            alert("Falsches Passwort! Zugriff verweigert.");
-            document.body.innerHTML = '<div style="text-align:center; padding:50px; font-family:Arial;"><h1>🔒 Zugriff verweigert</h1><p>Falsches Passwort.</p></div>';
+            versuche--;
+            if (versuche > 0) {
+                alert(`Falsches Passwort! Noch ${versuche} Versuche.`);
+            }
         }
     }
+    
+    // Keine Versuche mehr übrig
+    alert("Zugriff verweigert!");
+    document.body.innerHTML = '<div style="text-align:center; padding:50px; font-family:Arial; background:red; color:white;"><h1>🔒 ZUGRIFF VERWEIGERT</h1><p>Falsches Passwort.</p></div>';
 })();
 </script>
 
