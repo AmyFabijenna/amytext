@@ -53,13 +53,264 @@
             color: white;
             text-shadow: 2px 2px 4px black;
         }
-    </style>
+ 
+
+ <style>
+/* Sidebar Inhaltsverzeichnis */
+#toc-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(180deg, #1a0000 0%, #330000 100%);
+    overflow-y: auto;
+    padding: 20px 10px;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    border-right: 3px solid #ff6600;
+}
+
+#toc-sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+#toc-sidebar::-webkit-scrollbar-track {
+    background: #1a0000;
+}
+
+#toc-sidebar::-webkit-scrollbar-thumb {
+    background: #ff6600;
+    border-radius: 4px;
+}
+
+#toc-title {
+    color: #ff6600;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.toc-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin: 5px 0;
+    background: rgba(255, 102, 0, 0.1);
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #ffcc99;
+}
+
+.toc-item:hover {
+    background: rgba(255, 102, 0, 0.3);
+    border-left: 3px solid #ff6600;
+    transform: translateX(5px);
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+}
+
+.toc-item.active {
+    background: rgba(255, 102, 0, 0.4);
+    border-left: 3px solid #ff6600;
+    color: #fff;
+    font-weight: bold;
+}
+
+.toc-icon {
+    font-size: 18px;
+    margin-right: 10px;
+    min-width: 20px;
+}
+
+.toc-number {
+    font-weight: bold;
+    margin-right: 8px;
+    color: #ff6600;
+}
+
+.toc-text {
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+/* Body Anpassung für Platz links */
+body {
+    margin-left: 300px;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+
+<nav id="toc-sidebar">
+    <div id="toc-title">🎃 INHALT 🎃</div>
+    <a href="#aufgabe1" class="toc-item">
+        <span class="toc-icon">🧛</span>
+        <span class="toc-number">01</span>
+        <span class="toc-text">Der Vampir im Keller</span>
+    </a>
+    <a href="#aufgabe2" class="toc-item">
+        <span class="toc-icon">👻</span>
+        <span class="toc-number">02</span>
+        <span class="toc-text">Das Gespenst im Keller</span>
+    </a>
+    <a href="#aufgabe3" class="toc-item">
+        <span class="toc-icon">🧟</span>
+        <span class="toc-number">03</span>
+        <span class="toc-text">Die Mumie im Sarkophag</span>
+    </a>
+    <a href="#aufgabe4" class="toc-item">
+        <span class="toc-icon">🐺</span>
+        <span class="toc-number">04</span>
+        <span class="toc-text">Der Werwolf in der Nacht</span>
+    </a>
+    <a href="#aufgabe5" class="toc-item">
+        <span class="toc-icon">🎭</span>
+        <span class="toc-number">05</span>
+        <span class="toc-text">Das Phantom der Oper</span>
+    </a>
+    <a href="#aufgabe6" class="toc-item">
+        <span class="toc-icon">☠️</span>
+        <span class="toc-number">06</span>
+        <span class="toc-text">Der Zombiekönig</span>
+    </a>
+    <a href="#aufgabe7" class="toc-item">
+        <span class="toc-icon">🧙</span>
+        <span class="toc-number">07</span>
+        <span class="toc-text">Die Hexe im Turm</span>
+    </a>
+    <a href="#aufgabe8" class="toc-item">
+        <span class="toc-icon">💀</span>
+        <span class="toc-number">08</span>
+        <span class="toc-text">Das Skelett im Schrank</span>
+    </a>
+    <a href="#aufgabe9" class="toc-item">
+        <span class="toc-icon">🕷️</span>
+        <span class="toc-number">09</span>
+        <span class="toc-text">Die Riesenspinne</span>
+    </a>
+    <a href="#aufgabe10" class="toc-item">
+        <span class="toc-icon">🦇</span>
+        <span class="toc-number">10</span>
+        <span class="toc-text">Die Fledermaus-Armee</span>
+    </a>
+    <a href="#aufgabe11" class="toc-item">
+        <span class="toc-icon">🔮</span>
+        <span class="toc-number">11</span>
+        <span class="toc-text">Der verfluchte Spiegel</span>
+    </a>
+    <a href="#aufgabe12" class="toc-item">
+        <span class="toc-icon">⚰️</span>
+        <span class="toc-number">12</span>
+        <span class="toc-text">Der lebendige Sarg</span>
+    </a>
+    <a href="#aufgabe13" class="toc-item">
+        <span class="toc-icon">🌑</span>
+        <span class="toc-number">13</span>
+        <span class="toc-text">Die schwarze Katze</span>
+    </a>
+    <a href="#aufgabe14" class="toc-item">
+        <span class="toc-icon">🏰</span>
+        <span class="toc-number">14</span>
+        <span class="toc-text">Das verfluchte Schloss</span>
+    </a>
+    <a href="#aufgabe15" class="toc-item">
+        <span class="toc-icon">🕯️</span>
+        <span class="toc-number">15</span>
+        <span class="toc-text">Die geheime Kammer</span>
+    </a>
+    <a href="#aufgabe16" class="toc-item">
+        <span class="toc-icon">🗝️</span>
+        <span class="toc-number">16</span>
+        <span class="toc-text">Der verfluchte Schlüssel</span>
+    </a>
+    <a href="#aufgabe17" class="toc-item">
+        <span class="toc-icon">📿</span>
+        <span class="toc-number">17</span>
+        <span class="toc-text">Das magische Amulett</span>
+    </a>
+    <a href="#aufgabe18" class="toc-item">
+        <span class="toc-icon">🌕</span>
+        <span class="toc-number">18</span>
+        <span class="toc-text">Vollmond im Friedhof</span>
+    </a>
+    <a href="#aufgabe19" class="toc-item">
+        <span class="toc-icon">🪦</span>
+        <span class="toc-number">19</span>
+        <span class="toc-text">Das offene Grab</span>
+    </a>
+    <a href="#aufgabe20" class="toc-item">
+        <span class="toc-icon">🌫️</span>
+        <span class="toc-number">20</span>
+        <span class="toc-text">Der Nebel des Grauens</span>
+    </a>
+    <a href="#aufgabe21" class="toc-item">
+        <span class="toc-icon">🕸️</span>
+        <span class="toc-number">21</span>
+        <span class="toc-text">Das Spinnennetz</span>
+    </a>
+    <a href="#aufgabe22" class="toc-item">
+        <span class="toc-icon">🏛️</span>
+        <span class="toc-number">22</span>
+        <span class="toc-text">Das Vampir-Labyrinth</span>
+    </a>
+    <a href="#aufgabe23" class="toc-item">
+        <span class="toc-icon">⚔️</span>
+        <span class="toc-number">23</span>
+        <span class="toc-text">Phantom vs Werwolf</span>
+    </a>
+    <a href="#aufgabe24" class="toc-item">
+        <span class="toc-icon">💔</span>
+        <span class="toc-number">24</span>
+        <span class="toc-text">Mumie & Gespenst</span>
+    </a>
+    <a href="#aufgabe25" class="toc-item">
+        <span class="toc-icon">🕛</span>
+        <span class="toc-number">25</span>
+        <span class="toc-text">Mitternacht im Schloss</span>
+    </a>
+</nav>
+
+<script>
+// Aktuelle Position hervorheben beim Scrollen
+const tocItems = document.querySelectorAll('.toc-item');
+const aufgaben = document.querySelectorAll('.aufgabe');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    aufgaben.forEach(aufgabe => {
+        const aufgabeTop = aufgabe.offsetTop;
+        const aufgabeHeight = aufgabe.clientHeight;
+        if (window.pageYOffset >= aufgabeTop - 200) {
+            current = aufgabe.querySelector('h2').textContent.match(/\d+/)[0];
+        }
+    });
+    
+    tocItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href').includes('aufgabe' + current)) {
+            item.classList.add('active');
+        }
+    });
+});
+</script>
+
+
+
 </head>
 <body>
 
 <h1>🎃 25 Gruselgeschichten-Aufgaben mit Musterlösungen 🎃</h1>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe1">
     <h2>Aufgabe 1: Der Vampir im Keller</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -85,7 +336,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe2">
     <h2>Aufgabe 2: Das Gespenst im Keller</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -111,7 +362,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe3">
     <h2>Aufgabe 3: Die Mumie erwacht</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -137,7 +388,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe4">
     <h2>Aufgabe 4: Der Werwolf bei Vollmond</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -163,7 +414,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe5">
     <h2>Aufgabe 5: Das Phantom im Schloss</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -189,7 +440,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe6">
     <h2>Aufgabe 6: Das Labyrinth unter dem Keller</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -215,7 +466,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe7">
     <h2>Aufgabe 7: Das verlassene Schloss</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -241,7 +492,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe8">
     <h2>Aufgabe 8: Die Gespenster im Keller</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -267,7 +518,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe9">
     <h2>Aufgabe 9: Der Vampir erwacht um Mitternacht</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -293,7 +544,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe10">
     <h2>Aufgabe 10: Die Mumie im Keller</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -319,7 +570,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe11">
     <h2>Aufgabe 11: Das Phantom in der Oper</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -345,7 +596,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe12">
     <h2>Aufgabe 12: Der Werwolf im Schloss</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -371,7 +622,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe13">
     <h2>Aufgabe 13: Das Gespenst auf dem Friedhof</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -397,7 +648,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe14">
     <h2>Aufgabe 14: Die Mumie im Museum</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -423,7 +674,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe15">
     <h2>Aufgabe 15: Das Labyrinth im Schloss</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -449,7 +700,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe16">
     <h2>Aufgabe 16: Der Vampir und das Schloss</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -475,7 +726,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe17">
     <h2>Aufgabe 17: Das Gespenst im Schloss</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -501,7 +752,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe18">
     <h2>Aufgabe 18: Der Werwolf im Keller</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -527,7 +778,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe19">
     <h2>Aufgabe 19: Das Phantom im Labyrinth</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -553,7 +804,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe20">
     <h2>Aufgabe 20: Die Mumie im Schloss</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -579,7 +830,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe21">
     <h2>Aufgabe 21: Das Gespenst im Labyrinth</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -605,7 +856,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe22">
     <h2>Aufgabe 22: Der Vampir im Labyrinth</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -631,7 +882,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe23">
     <h2>Aufgabe 23: Das Phantom und der Werwolf</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -657,7 +908,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe24">
     <h2>Aufgabe 24: Die Mumie und das Gespenst</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
@@ -683,7 +934,7 @@
     </div>
 </div>
 
-<div class="aufgabe">
+<div class="aufgabe" id="aufgabe25">
     <h2>Aufgabe 25: Mitternacht im Schlosskeller</h2>
     <p><strong>Wähle eine Schreibaufgabe aus und verfasse selbst eine spannende Geschichte:</strong></p>
     <div class="option">
