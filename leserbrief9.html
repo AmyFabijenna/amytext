@@ -3,191 +3,2306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deutsch Übungen - Prüfungsvorbereitung</title>
+    <title>Leserbrief schreiben - Umfassendes Lernmaterial für die 9. Schulstufe AHS</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        .container {
-            max-width: 1200px;
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
             margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            background-color: #f5f5f5;
         }
         
         h1 {
-            text-align: center;
             color: #2c3e50;
+            text-align: center;
+            padding: 20px 0;
             border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
             margin-bottom: 30px;
         }
         
-        .navigation {
-            background: #2c3e50;
-            padding: 15px;
-            margin: -30px -30px 30px -30px;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-        
-        .home-link {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            background: #34495e;
+        .section {
+            background-color: white;
+            margin-bottom: 15px;
             border-radius: 5px;
-            transition: background 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            font-size: 18px;
             font-weight: bold;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
         
-        .home-link:hover {
-            background: #3498db;
+        .section-header:hover {
+            background-color: #2980b9;
         }
         
-        .info-message {
-            text-align: center;
-            padding: 60px 40px;
-            margin: 40px 0;
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-            color: white;
-            border-radius: 10px;
-            font-size: 2em;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .whatsapp-button-container {
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .whatsapp-button {
-            background: linear-gradient(135deg, #ff7b00 0%, #ff4500 25%, #dc143c 50%, #8b0000 75%, #2f1b14 100%);
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(255, 123, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .whatsapp-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 123, 0, 0.4);
-            background: linear-gradient(135deg, #ff8c1a 0%, #ff5722 25%, #e91e63 50%, #9c0e0e 75%, #3d241a 100%);
-        }
-        
-        .whatsapp-button::before {
-            content: "💬";
-            font-size: 1.3em;
-        }
-        
-        /* Abschluss-Styling */
-        .closing-section {
-            margin-top: 50px;
+        .section-content {
             padding: 20px;
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            color: white;
-            border-radius: 10px;
-            text-align: center;
+            display: none;
         }
         
-        .closing-section h2 {
-            color: white;
-            margin-top: 0;
-            background: none;
-            padding: 0;
-            font-size: 1.8em;
+        .section-content.active {
+            display: block;
         }
         
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                padding: 15px;
-            }
-            
-            .navigation {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .info-message {
-                font-size: 1.5em;
-                padding: 40px 20px;
-            }
-            
-            .whatsapp-button {
-                font-size: 1.1em;
-                padding: 12px 25px;
-            }
+        .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .arrow.rotated {
+            transform: rotate(180deg);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .wichtig {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .tipp {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .beispiel {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .fehler {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .checkliste {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .formulierung {
+            background-color: #e8f5e9;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #4caf50;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .uebung {
+            background-color: #fff9e6;
+            border: 2px solid #ffeb3b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="navigation">
-            <a href="https://amyfabijenna.github.io/amylang-deutsch/" class="home-link">← Zur Hauptseite</a>
+    <h1>Der Leserbrief - Umfassendes Lernmaterial für die 9. Schulstufe AHS</h1>
+    
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>1. Was ist ein Leserbrief? - Grundlagen und Definition</span>
+            <span class="arrow">▼</span>
         </div>
-        
-        <h1>Deutsch Übungen - Prüfungsvorbereitung</h1>
-        
-        <p>Willkommen zu unserer umfassenden Deutsch-Prüfungsvorbereitung! Diese Übungen decken alle wichtigen Grammatik- und Rechtschreibthemen ab, die du für eine erfolgreiche Prüfung benötigst.</p>
-        
-        <div class="info-message">
-            Übungsgrammatik für diese Schulstufe gerne auf Anfrage
-        </div>
-        
-        <div class="whatsapp-button-container">
-            <a href="https://wa.me/36301818503" class="whatsapp-button" target="_blank">
-                Senden Sie mir gleich eine Nachricht!
-            </a>
-        </div>
-        
-        <!-- Abschluss -->
-        <div class="closing-section">
-            <h2>Viel Erfolg beim Lernen!</h2>
-            <p style="margin-bottom: 0;">Wir unterstützen Sie gerne bei Ihrem Lernprozess!</p>
+        <div class="section-content">
+            <h2>1.1 Definition</h2>
+            <p>Ein Leserbrief ist eine persönliche, schriftliche Stellungnahme zu einem bereits erschienenen Zeitungsartikel, Bericht oder anderen Medienbeitrag. Er wird an die Redaktion des jeweiligen Mediums geschickt mit dem Ziel, veröffentlicht zu werden und damit die öffentliche Meinung zu beeinflussen.</p>
+            
+            <div class="wichtig">
+                <strong>WICHTIG für die Schularbeit:</strong>
+                <p>Der Leserbrief ist eine argumentative und appellative Textsorte. Das bedeutet, du musst deine Meinung mit überzeugenden Argumenten begründen und am Ende einen Appell oder eine Handlungsaufforderung formulieren.</p>
+            </div>
+            
+            <h2>1.2 Merkmale eines Leserbriefs</h2>
+            <ul>
+                <li><strong>Bezug zu einem konkreten Artikel:</strong> Du reagierst immer auf einen bestimmten Text</li>
+                <li><strong>Persönliche Stellungnahme:</strong> Du äußerst deine eigene Meinung</li>
+                <li><strong>Sachlicher Ton:</strong> Trotz persönlicher Meinung bleibt der Ton respektvoll und sachlich</li>
+                <li><strong>Argumentative Struktur:</strong> Deine Meinung wird durch Argumente gestützt</li>
+                <li><strong>Öffentlichkeitscharakter:</strong> Der Brief ist zur Veröffentlichung bestimmt</li>
+                <li><strong>Appellfunktion:</strong> Du möchtest etwas bewirken oder zum Nachdenken anregen</li>
+            </ul>
+            
+            <h2>1.3 Funktionen des Leserbriefs</h2>
+            <p>Mit einem Leserbrief kannst du:</p>
+            <ol>
+                <li><strong>Zustimmen:</strong> Die Meinung des Autors unterstützen und weitere Argumente liefern</li>
+                <li><strong>Widersprechen:</strong> Eine gegenteilige Position vertreten</li>
+                <li><strong>Ergänzen:</strong> Wichtige Aspekte hinzufügen, die im Artikel fehlen</li>
+                <li><strong>Korrigieren:</strong> Falsche Informationen richtigstellen</li>
+                <li><strong>Kommentieren:</strong> Aus einer anderen Perspektive beleuchten</li>
+            </ol>
+            
+            <h2>1.4 Abgrenzung zu anderen Textsorten</h2>
+            <table>
+                <tr>
+                    <th>Textsorte</th>
+                    <th>Hauptunterschied zum Leserbrief</th>
+                </tr>
+                <tr>
+                    <td>Kommentar</td>
+                    <td>Wird von Journalist*innen geschrieben, nicht als Reaktion auf einen Artikel</td>
+                </tr>
+                <tr>
+                    <td>Offener Brief</td>
+                    <td>Richtet sich an eine Person/Institution, nicht an ein Medium</td>
+                </tr>
+                <tr>
+                    <td>Erörterung</td>
+                    <td>Schulische Textsorte, betrachtet ein Thema multiperspektivisch</td>
+                </tr>
+                <tr>
+                    <td>Stellungnahme</td>
+                    <td>Allgemeine Meinungsäußerung ohne Briefform und Medienbezug</td>
+                </tr>
+            </table>
+            
+            <div class="tipp">
+                <strong>TIPP:</strong> Der Leserbrief verbindet die Briefform mit argumentativer Meinungsäußerung. Er ist persönlicher als ein Kommentar, aber sachlicher als ein emotionaler Brief an eine Zeitung.
+            </div>
         </div>
     </div>
-    
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>2. Der Aufbau eines Leserbriefs - Die perfekte Struktur</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>2.1 Formaler Aufbau (Briefkopf)</h2>
+            
+            <div class="beispiel">
+                <h3>Beispiel für den Briefkopf:</h3>
+                <p>
+                <strong>Max Mustermann</strong><br>
+                Beispielstraße 15<br>
+                1010 Wien<br>
+                <br>
+                Wien, 22. Oktober 2025<br>
+                <br>
+                <strong>Leserbrief zu „Klimaschutz beginnt in der Schule" vom 15. Oktober 2025</strong><br>
+                <br>
+                Sehr geehrte Redaktion der Tageszeitung,
+                </p>
+            </div>
+            
+            <div class="wichtig">
+                <strong>WICHTIG:</strong>
+                <ul>
+                    <li>Absenderadresse oben links oder rechts (je nach Vorgabe)</li>
+                    <li>Ort und Datum rechtsbündig</li>
+                    <li>Betreffzeile fett markiert (kann auch weggelassen werden)</li>
+                    <li>Anrede richtig wählen (siehe Abschnitt 2.2)</li>
+                </ul>
+            </div>
+            
+            <h2>2.2 Die richtige Anrede</h2>
+            <table>
+                <tr>
+                    <th>Situation</th>
+                    <th>Anrede</th>
+                </tr>
+                <tr>
+                    <td>Brief an die Redaktion</td>
+                    <td>Sehr geehrte Damen und Herren,<br>oder: Sehr geehrte Redaktion,</td>
+                </tr>
+                <tr>
+                    <td>Brief an Autor/in (Name bekannt)</td>
+                    <td>Sehr geehrte Frau Müller,<br>Sehr geehrter Herr Schmidt,</td>
+                </tr>
+                <tr>
+                    <td>Brief an Autor/in (Name unbekannt)</td>
+                    <td>Sehr geehrte Autorin,<br>Sehr geehrter Autor,</td>
+                </tr>
+            </table>
+            
+            <div class="fehler">
+                <strong>FEHLER vermeiden:</strong>
+                <ul>
+                    <li>❌ Vornamen verwenden ("Lieber Thomas")</li>
+                    <li>❌ Zu informelle Anrede ("Hallo")</li>
+                    <li>❌ Keine Anrede</li>
+                    <li>✅ Immer formell und respektvoll bleiben</li>
+                </ul>
+            </div>
+            
+            <h2>2.3 Struktureller Aufbau - Die drei Teile</h2>
+            
+            <h3>EINLEITUNG (ca. 10-15% des Textes)</h3>
+            <p><strong>Was muss in die Einleitung?</strong></p>
+            <ol>
+                <li><strong>Bezug zum Artikel herstellen</strong> mit folgenden Informationen:
+                    <ul>
+                        <li>Titel des Artikels</li>
+                        <li>Autor/in (falls bekannt)</li>
+                        <li>Erscheinungsdatum</li>
+                        <li>Textsorte (Bericht, Kommentar, Reportage, etc.)</li>
+                        <li>Rubrik/Thema</li>
+                    </ul>
+                </li>
+                <li><strong>Kurze Zusammenfassung</strong> der Hauptaussage des Artikels</li>
+                <li><strong>Deine Grundhaltung</strong> deutlich machen (Zustimmung/Ablehnung)</li>
+                <li><strong>Deine Rolle/Betroffenheit</strong> klarstellen (Schüler/in, betroffene Person, etc.)</li>
+            </ol>
+            
+            <div class="formulierung">
+                <strong>Formulierungshilfen für die Einleitung:</strong>
+                <ul>
+                    <li>"Mit großem Interesse habe ich Ihren Artikel ... vom ... gelesen ..."</li>
+                    <li>"In Ihrem Bericht ... vom ... thematisieren Sie ..."</li>
+                    <li>"Ihr Kommentar ... in der Ausgabe vom ... hat mich als ... besonders betroffen gemacht ..."</li>
+                    <li>"Als betroffene/r Schüler/in möchte ich zu Ihrem Artikel ... Stellung nehmen ..."</li>
+                    <li>"Mit Verwunderung/Zustimmung/Sorge habe ich Ihre Reportage ... gelesen ..."</li>
+                </ul>
+            </div>
+            
+            <h3>HAUPTTEIL (ca. 70-80% des Textes)</h3>
+            <p><strong>Was gehört in den Hauptteil?</strong></p>
+            
+            <ol>
+                <li><strong>Persönliche Betroffenheit ausführen</strong>
+                    <ul>
+                        <li>Warum reagierst du auf diesen Artikel?</li>
+                        <li>Welche persönliche Erfahrung hast du mit dem Thema?</li>
+                        <li>In welcher Rolle äußerst du dich?</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Deine Hauptmeinung klar formulieren</strong>
+                    <ul>
+                        <li>Stelle deine Position deutlich dar</li>
+                        <li>Sei eindeutig in deiner Haltung</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Argumente mit Beispielen untermauern</strong>
+                    <ul>
+                        <li>Mindestens 2-3 starke Argumente</li>
+                        <li>Jedes Argument mit konkretem Beispiel belegen</li>
+                        <li>Vom stärksten zum schwächsten Argument aufbauen</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Gegenargumente entkräften</strong>
+                    <ul>
+                        <li>Zeige, dass du auch andere Sichtweisen kennst</li>
+                        <li>Widerlege sie mit überzeugenden Argumenten</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <div class="formulierung">
+                <strong>Formulierungshilfen für den Hauptteil:</strong>
+                <p><strong>Persönliche Betroffenheit:</strong></p>
+                <ul>
+                    <li>"Als Schüler/in der ... erlebe ich täglich ..."</li>
+                    <li>"Aus meiner eigenen Erfahrung kann ich berichten, dass ..."</li>
+                    <li>"Diese Problematik betrifft mich persönlich, weil ..."</li>
+                </ul>
+                
+                <p><strong>Meinung äußern:</strong></p>
+                <ul>
+                    <li>"Ihrer Argumentation kann ich nur teilweise zustimmen ..."</li>
+                    <li>"Ich bin der festen Überzeugung, dass ..."</li>
+                    <li>"Aus meiner Sicht ist es problematisch, dass ..."</li>
+                    <li>"Besonders bemerkenswert finde ich ..."</li>
+                </ul>
+                
+                <p><strong>Argumente einleiten:</strong></p>
+                <ul>
+                    <li>"Zunächst möchte ich betonen, dass ..."</li>
+                    <li>"Ein weiterer wichtiger Aspekt ist ..."</li>
+                    <li>"Darüber hinaus muss berücksichtigt werden ..."</li>
+                    <li>"Nicht zu vergessen ist außerdem ..."</li>
+                </ul>
+                
+                <p><strong>Beispiele anführen:</strong></p>
+                <ul>
+                    <li>"Dies zeigt sich beispielsweise daran, dass ..."</li>
+                    <li>"Ein konkretes Beispiel verdeutlicht dies: ..."</li>
+                    <li>"So hat sich in meiner Schule gezeigt, dass ..."</li>
+                </ul>
+                
+                <p><strong>Gegenargumente:</strong></p>
+                <ul>
+                    <li>"Zwar wird oft argumentiert, dass ... jedoch ..."</li>
+                    <li>"Dem Einwand, dass ... lässt sich entgegnen ..."</li>
+                    <li>"Auch wenn manche behaupten ... so zeigt die Realität ..."</li>
+                </ul>
+            </div>
+            
+            <h3>SCHLUSS (ca. 10-15% des Textes)</h3>
+            <p><strong>Was muss in den Schluss?</strong></p>
+            <ol>
+                <li><strong>Zusammenfassung der Hauptargumente</strong> (sehr knapp)</li>
+                <li><strong>Appell / Handlungsaufforderung</strong> (SEHR WICHTIG!)
+                    <ul>
+                        <li>An wen richtet sich der Appell?</li>
+                        <li>Was soll konkret geschehen?</li>
+                        <li>Welche Lösung schlägst du vor?</li>
+                    </ul>
+                </li>
+                <li><strong>Höfliche Schlussformel</strong></li>
+                <li><strong>Unterschrift mit persönlichen Angaben</strong></li>
+            </ol>
+            
+            <div class="formulierung">
+                <strong>Formulierungshilfen für den Schluss:</strong>
+                <p><strong>Appell formulieren:</strong></p>
+                <ul>
+                    <li>"Daher appelliere ich an ... dass ..."</li>
+                    <li>"Ich fordere daher ... auf, endlich ..."</li>
+                    <li>"Es wäre wünschenswert, wenn ..."</li>
+                    <li>"Deshalb sollte dringend ... unternommen werden ..."</li>
+                    <li>"Ich hoffe sehr, dass ..."</li>
+                    <li>"Lassen Sie uns gemeinsam ..."</li>
+                </ul>
+                
+                <p><strong>Schlussformeln:</strong></p>
+                <ul>
+                    <li>Mit freundlichen Grüßen</li>
+                    <li>Mit besten Grüßen</li>
+                    <li>Hochachtungsvoll</li>
+                </ul>
+            </div>
+            
+            <div class="wichtig">
+                <strong>Unterschrift mit Angaben:</strong>
+                <p>Nach der Grußformel folgt:</p>
+                <ul>
+                    <li>Dein vollständiger Name</li>
+                    <li>Alter (bei Schularbeiten manchmal gefordert)</li>
+                    <li>Rolle/Beruf (z.B. "Schülerin der 9. Klasse")</li>
+                    <li>Postleitzahl oder Wohnort</li>
+                </ul>
+                <p>Beispiel: <br>
+                <em>Sarah Müller, 15 Jahre<br>
+                Schülerin der 9. Klasse AHS<br>
+                1020 Wien</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>3. Bewertungskriterien der Schularbeit - So wirst du bewertet</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>3.1 Der Beurteilungsraster der SRDP</h2>
+            <p>Deine Schularbeit wird nach dem offiziellen Beurteilungsraster der SRDP (Standardisierte Reife- und Diplomprüfung) bewertet. Es gibt drei Hauptdimensionen:</p>
+            
+            <h3>Dimension 1: INHALT</h3>
+            <table>
+                <tr>
+                    <th>Kriterium</th>
+                    <th>Worauf wird geachtet?</th>
+                    <th>Tipps für Bestnote</th>
+                </tr>
+                <tr>
+                    <td><strong>K1/1: Aufgabenerfüllung aus inhaltlicher Sicht</strong></td>
+                    <td>
+                        • Alle Arbeitsaufträge erfüllt?<br>
+                        • Bezug zum Artikel hergestellt?<br>
+                        • Eigene Meinung klar erkennbar?<br>
+                        • Argumente vorhanden?
+                    </td>
+                    <td>
+                        ✅ Lies die Angabe genau<br>
+                        ✅ Hake jeden Arbeitsauftrag ab<br>
+                        ✅ Bringe mindestens 3 Argumente<br>
+                        ✅ Stelle klaren Artikelbezug her
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>K1/2: Eigenständigkeit und Ideenreichtum</strong></td>
+                    <td>
+                        • Sind die Argumente originell?<br>
+                        • Eigene Gedanken oder nur Wiederholung?<br>
+                        • Kreative Lösungsvorschläge?<br>
+                        • Persönliche Perspektive?
+                    </td>
+                    <td>
+                        ✅ Bringe eigene Beispiele<br>
+                        ✅ Zeige persönliche Betroffenheit<br>
+                        ✅ Denke über den Text hinaus<br>
+                        ✅ Sei kreativ beim Appell
+                    </td>
+                </tr>
+            </table>
+            
+            <h3>Dimension 2: STRUKTUR UND AUFBAU</h3>
+            <table>
+                <tr>
+                    <th>Kriterium</th>
+                    <th>Worauf wird geachtet?</th>
+                    <th>Tipps für Bestnote</th>
+                </tr>
+                <tr>
+                    <td><strong>K2/1: Textsortenmerkmale</strong></td>
+                    <td>
+                        • Briefform eingehalten?<br>
+                        • Anrede vorhanden?<br>
+                        • Einleitung-Hauptteil-Schluss?<br>
+                        • Appell am Ende?<br>
+                        • Grußformel und Unterschrift?
+                    </td>
+                    <td>
+                        ✅ Nutze die Leserbrief-Struktur exakt<br>
+                        ✅ Vergiss keine formalen Elemente<br>
+                        ✅ Achte auf die Briefkonventionen<br>
+                        ✅ Formuliere einen starken Appell
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>K2/2: Textaufbau und Kohärenz</strong></td>
+                    <td>
+                        • Logischer Aufbau?<br>
+                        • Gute Übergänge zwischen Absätzen?<br>
+                        • Roter Faden erkennbar?<br>
+                        • Sinnvolle Gliederung?
+                    </td>
+                    <td>
+                        ✅ Nutze Absätze<br>
+                        ✅ Verwende Konnektoren<br>
+                        ✅ Baue Argumente logisch auf<br>
+                        ✅ Sorge für klare Struktur
+                    </td>
+                </tr>
+            </table>
+            
+            <h3>Dimension 3: SPRACHE</h3>
+            <table>
+                <tr>
+                    <th>Kriterium</th>
+                    <th>Worauf wird geachtet?</th>
+                    <th>Tipps für Bestnote</th>
+                </tr>
+                <tr>
+                    <td><strong>K3/1: Stil und Ausdruck</strong></td>
+                    <td>
+                        • Wortschatz: vielfältig, präzise, angemessen<br>
+                        • Satzbau: verständlich, variabel<br>
+                        • Stil: sachlich, angemessen<br>
+                        • Register: formell passend
+                    </td>
+                    <td>
+                        ✅ Vermeide Umgangssprache<br>
+                        ✅ Nutze Fachbegriffe richtig<br>
+                        ✅ Variiere Satzanfänge<br>
+                        ✅ Bleibe sachlich, aber nicht langweilig
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>K3/2: Normative Sprachrichtigkeit</strong></td>
+                    <td>
+                        • Rechtschreibung<br>
+                        • Grammatik<br>
+                        • Zeichensetzung<br>
+                        • Tempus (Präsens!)
+                    </td>
+                    <td>
+                        ✅ Korrekturlesen ist PFLICHT!<br>
+                        ✅ Achte auf Kommas<br>
+                        ✅ Schreibe im Präsens<br>
+                        ✅ Prüfe Verbformen
+                    </td>
+                </tr>
+            </table>
+            
+            <h2>3.2 Notenstufen - Was wird erwartet?</h2>
+            
+            <div class="wichtig">
+                <h3>FÜR EINE EINS brauchst du:</h3>
+                <ul>
+                    <li><strong>Inhalt:</strong> Alle Aufgaben umfassend erfüllt, originelle und eigenständige Argumente, persönliche Perspektive erkennbar, kreative Lösungsansätze</li>
+                    <li><strong>Struktur:</strong> Perfekte Textsorte, klarer roter Faden, ausgezeichnete Kohärenz, überzeugender Appell</li>
+                    <li><strong>Sprache:</strong> Breiter und präziser Wortschatz, idiomatische Wendungen, variantenreiche und klare Syntax, kaum Fehler</li>
+                </ul>
+            </div>
+            
+            <div class="tipp">
+                <h3>FÜR EINE ZWEI brauchst du:</h3>
+                <ul>
+                    <li><strong>Inhalt:</strong> Alle Aufgaben zur Gänze erfüllt, eigenständige Gedanken erkennbar</li>
+                    <li><strong>Struktur:</strong> Textsorte klar erkennbar, gute Kohärenz</li>
+                    <li><strong>Sprache:</strong> Angemessener Wortschatz, durchwegs verständliche Syntax, wenige Fehler</li>
+                </ul>
+            </div>
+            
+            <h2>3.3 Häufigste Fehler und wie du sie vermeidest</h2>
+            
+            <div class="fehler">
+                <h3>TOP 10 Fehler bei Leserbriefen:</h3>
+                <ol>
+                    <li><strong>❌ Fehlende oder falsche Anrede</strong><br>
+                    ✅ Immer "Sehr geehrte..." verwenden, nie "Hallo" oder "Liebe/r"</li>
+                    
+                    <li><strong>❌ Kein klarer Artikelbezug</strong><br>
+                    ✅ Titel, Datum, Autor und Thema des Artikels erwähnen</li>
+                    
+                    <li><strong>❌ Zu lange Inhaltsangabe</strong><br>
+                    ✅ Maximal 10% des Textes für Zusammenfassung, konzentriere dich auf deine Meinung</li>
+                    
+                    <li><strong>❌ Keine persönliche Betroffenheit</strong><br>
+                    ✅ Erkläre, warum DU auf den Artikel reagierst</li>
+                    
+                    <li><strong>❌ Argumente ohne Beispiele</strong><br>
+                    ✅ Jedes Argument braucht ein konkretes Beispiel oder Beleg</li>
+                    
+                    <li><strong>❌ Fehlender Appell</strong><br>
+                    ✅ Der Schluss MUSS eine Handlungsaufforderung enthalten</li>
+                    
+                    <li><strong>❌ Umgangssprache</strong><br>
+                    ✅ Sachlicher, formeller Stil ("Ihr Artikel ist echt schlecht" → "An Ihrem Artikel kritisiere ich...")</li>
+                    
+                    <li><strong>❌ Falsche Zeitform</strong><br>
+                    ✅ Schreibe im Präsens, nicht im Präteritum</li>
+                    
+                    <li><strong>❌ Keine Grußformel</strong><br>
+                    ✅ "Mit freundlichen Grüßen" nicht vergessen</li>
+                    
+                    <li><strong>❌ Fehlende Unterschrift mit Angaben</strong><br>
+                    ✅ Name, Alter, Rolle, Wohnort angeben</li>
+                </ol>
+            </div>
+            
+            <h2>3.4 Wortanzahl und Zeitmanagement</h2>
+            
+            <div class="wichtig">
+                <strong>Empfohlene Wortanzahl:</strong>
+                <ul>
+                    <li>9. Schulstufe: ca. 300-450 Wörter</li>
+                    <li>Bei mehrstündigen Schularbeiten: bis 600 Wörter möglich</li>
+                    <li><strong>WICHTIG:</strong> Qualität vor Quantität! Lieber kürzer und präzise als lang und schwammig</li>
+                </ul>
+                
+                <strong>Zeitmanagement bei der Schularbeit:</strong>
+                <ul>
+                    <li>5-10 Min: Artikel lesen und verstehen</li>
+                    <li>5-10 Min: Planung und Argumentesammlung</li>
+                    <li>40-50 Min: Schreiben</li>
+                    <li>10-15 Min: Überarbeiten und Korrekturlesen</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>4. Argumentation - Das Herzstück des Leserbriefs</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>4.1 Was ist ein gutes Argument?</h2>
+            
+            <p>Ein vollständiges Argument besteht aus drei Teilen:</p>
+            <ol>
+                <li><strong>Behauptung/These:</strong> Deine Meinung zu einem Aspekt</li>
+                <li><strong>Begründung:</strong> Warum ist das so?</li>
+                <li><strong>Beispiel/Beleg:</strong> Konkreter Nachweis oder Veranschaulichung</li>
+            </ol>
+            
+            <div class="beispiel">
+                <h3>Beispiel für ein vollständiges Argument:</h3>
+                <p><strong>Behauptung:</strong> "Ich bin der Überzeugung, dass Handyverbote an Schulen kontraproduktiv sind."</p>
+                <p><strong>Begründung:</strong> "Smartphones sind heutzutage wichtige Lernwerkzeuge, mit denen Schüler*innen schnell Informationen recherchieren, digitale Lernplattformen nutzen und Gruppenarbeiten organisieren können."</p>
+                <p><strong>Beispiel:</strong> "In meiner Klasse nutzen wir beispielsweise regelmäßig Lern-Apps für Mathematik, die uns beim Üben helfen und sofortiges Feedback geben. Ein generelles Verbot würde diese moderne Form des Lernens unmöglich machen."</p>
+            </div>
+            
+            <h2>4.2 Argumentationsstrategien</h2>
+            
+            <h3>a) Faktenargument</h3>
+            <p>Basiert auf nachprüfbaren Tatsachen, Statistiken oder wissenschaftlichen Erkenntnissen.</p>
+            <div class="formulierung">
+                <strong>Beispiel:</strong> "Studien zeigen, dass Schüler*innen, die regelmäßig Sport treiben, bessere Noten erzielen. Laut einer Erhebung der Universität Wien verbessert sich die Konzentrationsfähigkeit durch tägliche Bewegung um bis zu 20%."
+            </div>
+            
+            <h3>b) Autoritätsargument</h3>
+            <p>Bezieht sich auf Expert*innenmeinungen oder anerkannte Institutionen.</p>
+            <div class="formulierung">
+                <strong>Beispiel:</strong> "Auch die Österreichische Gesellschaft für Ernährung empfiehlt, dass Schulen gesunde Mahlzeiten anbieten sollten, um die Leistungsfähigkeit der Schüler*innen zu fördern."
+            </div>
+            
+            <h3>c) Analogieargument</h3>
+            <p>Vergleicht eine Situation mit einer ähnlichen, bekannten Situation.</p>
+            <div class="formulierung">
+                <strong>Beispiel:</strong> "Ähnlich wie beim Führerschein, wo man erst nach einer Ausbildung fahren darf, sollte auch der Umgang mit sozialen Medien in der Schule gelehrt werden, bevor Jugendliche unbegleitet ins Netz gehen."
+            </div>
+            
+            <h3>d) Normatives Argument</h3>
+            <p>Beruft sich auf allgemein anerkannte Werte, Normen oder Rechte.</p>
+            <div class="formulierung">
+                <strong>Beispiel:</strong> "Bildung ist ein Grundrecht, das allen Kindern unabhängig von ihrer sozialen Herkunft zusteht. Daher müssen Schulbücher und digitale Lernmittel kostenlos zur Verfügung gestellt werden."
+            </div>
+            
+            <h3>e) Plausibilitätsargument</h3>
+            <p>Basiert auf logischem Nachdenken und Erfahrungswissen.</p>
+            <div class="formulierung">
+                <strong>Beispiel:</strong> "Es ist nachvollziehbar, dass Schüler*innen nach sechs Unterrichtsstunden erschöpft sind und eine längere Mittagspause benötigen, um am Nachmittag wieder konzentriert arbeiten zu können."
+            </div>
+            
+            <h2>4.3 Argumentationsketten aufbauen</h2>
+            
+            <p><strong>Methode 1: Steigerung (Klimax)</strong></p>
+            <p>Vom schwächsten zum stärksten Argument aufbauen.</p>
+            <div class="beispiel">
+                <p>Schwaches Argument → Mittleres Argument → Starkes Argument</p>
+                <p>"Zunächst ... Darüber hinaus ... Am wichtigsten ist jedoch ..."</p>
+            </div>
+            
+            <p><strong>Methode 2: Ping-Pong-Methode</strong></p>
+            <p>Pro-Argument → Gegenargument entkräften → Nächstes Pro-Argument</p>
+            <div class="beispiel">
+                <p>"Einerseits ... Zwar wird oft eingewendet, dass ... jedoch ... Andererseits ..."</p>
+            </div>
+            
+            <h2>4.4 Gegenargumente entkräften</h2>
+            
+            <p>Zeige, dass du auch andere Sichtweisen kennst und berücksichtigt hast:</p>
+            
+            <div class="formulierung">
+                <strong>Formulierungshilfen:</strong>
+                <ul>
+                    <li>"Zwar mag es stimmen, dass ... jedoch übersieht diese Sichtweise ..."</li>
+                    <li>"Dem häufig vorgebrachten Einwand, dass ... lässt sich entgegnen ..."</li>
+                    <li>"Auch wenn manche argumentieren ... so zeigt die Praxis doch ..."</li>
+                    <li>"Es wird oft behauptet ... Dies ist jedoch nur bedingt richtig, denn ..."</li>
+                    <li>"Kritiker*innen führen an, dass ... Allerdings berücksichtigen sie nicht ..."</li>
+                </ul>
+            </div>
+            
+            <h2>4.5 Typische Argumentationsfehler (Argumentative Fehlschlüsse)</h2>
+            
+            <div class="fehler">
+                <h3>Diese Fehler solltest du VERMEIDEN:</h3>
+                
+                <p><strong>1. Ad hominem (Angriff auf die Person)</strong></p>
+                <p>❌ "Der Autor ist ja sowieso inkompetent, deshalb kann man seine Meinung ignorieren."<br>
+                ✅ Kritisiere die Argumente, nicht die Person</p>
+                
+                <p><strong>2. Strohmann-Argument</strong></p>
+                <p>❌ Die Position des Autors verzerrt darstellen und dann angreifen<br>
+                ✅ Die tatsächliche Position fair wiedergeben</p>
+                
+                <p><strong>3. Falsches Dilemma</strong></p>
+                <p>❌ "Entweder wir verbieten Handys komplett oder die Schüler lernen nichts mehr."<br>
+                ✅ Zeige, dass es mehr als zwei Optionen gibt</p>
+                
+                <p><strong>4. Voreilige Verallgemeinerung</strong></p>
+                <p>❌ "Mein Freund hatte ein schlechtes Erlebnis, also ist das System generell schlecht."<br>
+                ✅ Nutze repräsentative Beispiele oder Daten</p>
+                
+                <p><strong>5. Zirkelschluss</strong></p>
+                <p>❌ "Hausaufgaben sind wichtig, weil sie wichtig sind."<br>
+                ✅ Liefere echte Begründungen</p>
+            </div>
+            
+            <h2>4.6 Übung: Argumente entwickeln</h2>
+            
+            <div class="uebung">
+                <h3>Aufgabe: Entwickle zu folgenden Thesen vollständige Argumente</h3>
+                <p>(Behauptung + Begründung + Beispiel)</p>
+                
+                <ol>
+                    <li>"Schuluniformen sollten in österreichischen Schulen eingeführt werden."</li>
+                    <li>"Der Klimawandel muss auch in der Schule stärker thematisiert werden."</li>
+                    <li>"Soziale Medien haben einen negativen Einfluss auf Jugendliche."</li>
+                </ol>
+                
+                <p><strong>Tipp:</strong> Entwickle auch Gegenargumente und überlege, wie du sie entkräften würdest!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>5. Sprache und Stil - So schreibst du überzeugend</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>5.1 Der richtige Ton - Sachlich und respektvoll</h2>
+            
+            <div class="wichtig">
+                <p><strong>Grundregel:</strong> Ein Leserbrief ist sachlich, aber nicht emotionslos. Du darfst deine Meinung deutlich äußern, musst aber respektvoll bleiben.</p>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>❌ Zu vermeiden</th>
+                    <th>✅ Besser formulieren</th>
+                </tr>
+                <tr>
+                    <td>"Ihr Artikel ist total doof und falsch."</td>
+                    <td>"An Ihrem Artikel kritisiere ich, dass wichtige Aspekte unberücksichtigt bleiben."</td>
+                </tr>
+                <tr>
+                    <td>"Das ist ja wohl echt nicht wahr!"</td>
+                    <td>"Diese Darstellung erscheint mir fragwürdig."</td>
+                </tr>
+                <tr>
+                    <td>"Jeder weiß doch, dass..."</td>
+                    <td>"Es ist bekannt, dass..." / "Studien zeigen, dass..."</td>
+                </tr>
+                <tr>
+                    <td>"Die Politiker sind alle korrupt."</td>
+                    <td>"Es ist problematisch, wenn politische Entscheidungen intransparent getroffen werden."</td>
+                </tr>
+                <tr>
+                    <td>"Das ist mega krass!"</td>
+                    <td>"Dies ist äußerst bemerkenswert."</td>
+                </tr>
+            </table>
+            
+            <h2>5.2 Sprachliches Register - Formell, aber nicht steif</h2>
+            
+            <h3>Die richtige Balance finden:</h3>
+            <ul>
+                <li><strong>✅ Formell:</strong> Sie-Form, vollständige Sätze, Standardsprache</li>
+                <li><strong>✅ Persönlich:</strong> "Ich", "meine Erfahrung", "aus meiner Sicht"</li>
+                <li><strong>❌ Zu umgangssprachlich:</strong> "krass", "voll", "echt", "mega"</li>
+                <li><strong>❌ Zu gestelzt:</strong> übertrieben komplizierte Ausdrücke</li>
+            </ul>
+            
+            <div class="beispiel">
+                <h3>Beispielvergleich:</h3>
+                <p><strong>❌ Zu umgangssprachlich:</strong><br>
+                "Ich find's echt nicht cool, dass die Schule jetzt voll auf digital macht. Das ist mega stressig für uns Schüler."</p>
+                
+                <p><strong>❌ Zu steif/gestelzt:</strong><br>
+                "Die vollumfängliche Digitalisierung des schulischen Bildungswesens erscheint mir als inadäquat und vermag ob ihrer Komplexität die Schülerschaft zu überfordern."</p>
+                
+                <p><strong>✅ Richtig - sachlich und angemessen:</strong><br>
+                "Die rasche Digitalisierung der Schulen stellt viele Schüler*innen vor große Herausforderungen. Als betroffene Schülerin erlebe ich täglich, dass die technische Ausstattung oft nicht ausreicht und viele meiner Mitschüler*innen überfordert sind."</p>
+            </div>
+            
+            <h2>5.3 Wortschatz - Vielfältig und präzise</h2>
+            
+            <h3>Vermeide Wortwiederholungen</h3>
+            
+            <div class="formulierung">
+                <p><strong>Statt immer "sagen" zu verwenden:</strong></p>
+                <ul>
+                    <li>argumentieren, behaupten, betonen, darlegen, erklären</li>
+                    <li>hervorheben, schildern, verdeutlichen, vertreten</li>
+                    <li>ausführen, anführen, erwähnen</li>
+                </ul>
+                
+                <p><strong>Statt immer "meinen":</strong></p>
+                <ul>
+                    <li>bin der Ansicht/Überzeugung, vertrete die Position</li>
+                    <li>halte für, erachte als, schätze ein</li>
+                </ul>
+                
+                <p><strong>Statt immer "wichtig":</strong></p>
+                <ul>
+                    <li>bedeutsam, wesentlich, zentral, relevant</li>
+                    <li>entscheidend, essenziell, bedeutend</li>
+                </ul>
+                
+                <p><strong>Statt immer "Problem":</strong></p>
+                <ul>
+                    <li>Schwierigkeit, Herausforderung, Problematik</li>
+                    <li>Konflikt, Missstand, Kritikpunkt</li>
+                </ul>
+            </div>
+            
+            <h2>5.4 Satzanfänge variieren</h2>
+            
+            <div class="fehler">
+                <p><strong>❌ Monoton - alle Sätze beginnen gleich:</strong></p>
+                <p>"Ich finde, dass... Ich bin der Meinung, dass... Ich denke, dass..."</p>
+            </div>
+            
+            <div class="tipp">
+                <p><strong>✅ Abwechslungsreich:</strong></p>
+                <ul>
+                    <li><strong>Mit Adverbien:</strong> Zunächst, Darüber hinaus, Außerdem, Folglich, Dennoch, Allerdings</li>
+                    <li><strong>Mit Präpositionen:</strong> Trotz dieser Argumente, Aufgrund der Tatsachen, Im Hinblick auf</li>
+                    <li><strong>Mit Nebensätzen:</strong> Obwohl viele behaupten..., Während einige argumentieren...</li>
+                    <li><strong>Mit Partizipien:</strong> Betrachtet man..., Ausgehend von...</li>
+                </ul>
+            </div>
+            
+            <h2>5.5 Konnektoren - Gedanken verbinden</h2>
+            
+            <table>
+                <tr>
+                    <th>Funktion</th>
+                    <th>Konnektoren</th>
+                </tr>
+                <tr>
+                    <td><strong>Aufzählung</strong></td>
+                    <td>zunächst, erstens, zweitens, außerdem, darüber hinaus, ferner, weiterhin, überdies, zudem</td>
+                </tr>
+                <tr>
+                    <td><strong>Begründung</strong></td>
+                    <td>denn, weil, da, demnach, deshalb, daher, folglich, somit, infolgedessen, aus diesem Grund</td>
+                </tr>
+                <tr>
+                    <td><strong>Gegensatz</strong></td>
+                    <td>aber, jedoch, allerdings, dennoch, trotzdem, hingegen, dagegen, andererseits, im Gegensatz dazu</td>
+                </tr>
+                <tr>
+                    <td><strong>Einschränkung</strong></td>
+                    <td>zwar... aber, einerseits... andererseits, teilweise, in gewisser Hinsicht</td>
+                </tr>
+                <tr>
+                    <td><strong>Beispiel</strong></td>
+                    <td>beispielsweise, zum Beispiel, etwa, wie zum Beispiel, so etwa</td>
+                </tr>
+                <tr>
+                    <td><strong>Schlussfolgerung</strong></td>
+                    <td>also, folglich, demnach, demzufolge, zusammenfassend, insgesamt, abschließend</td>
+                </tr>
+            </table>
+            
+            <h2>5.6 Rhetorische Mittel gezielt einsetzen</h2>
+            
+            <h3>Wirksame Stilmittel für Leserbriefe:</h3>
+            
+            <div class="formulierung">
+                <p><strong>1. Rhetorische Frage</strong> (zum Nachdenken anregen)</p>
+                <p><em>"Ist es nicht längst an der Zeit, dass wir Verantwortung für unsere Umwelt übernehmen?"</em></p>
+                
+                <p><strong>2. Parallelismus</strong> (Struktur wiederholen für Eindringlichkeit)</p>
+                <p><em>"Wir brauchen keine leeren Versprechen, wir brauchen konkrete Taten. Wir brauchen keine Ausreden, wir brauchen Lösungen."</em></p>
+                
+                <p><strong>3. Metapher</strong> (bildhafter Vergleich)</p>
+                <p><em>"Die Digitalisierung ist ein zweischneidiges Schwert."</em></p>
+                
+                <p><strong>4. Dreiergruppe (Trikolon)</strong> (drei parallele Elemente)</p>
+                <p><em>"Wir fordern mehr Transparenz, mehr Mitsprache und mehr Verantwortung."</em></p>
+                
+                <p><strong>5. Antithese</strong> (Gegensatz)</p>
+                <p><em>"Nicht das Verbieten führt zum Lernen, sondern das Ermöglichen."</em></p>
+            </div>
+            
+            <div class="wichtig">
+                <p><strong>ACHTUNG:</strong> Rhetorische Mittel sparsam einsetzen! Sie sollen den Text bereichern, nicht überladen. Zu viele Stilmittel wirken gekünstelt.</p>
+            </div>
+            
+            <h2>5.7 Zeitform - Immer Präsens!</h2>
+            
+            <div class="fehler">
+                <p><strong>❌ FALSCH - Präteritum:</strong><br>
+                "In Ihrem Artikel schrieben Sie, dass die Maßnahmen erfolgreich waren..."</p>
+            </div>
+            
+            <div class="tipp">
+                <p><strong>✅ RICHTIG - Präsens:</strong><br>
+                "In Ihrem Artikel schreiben Sie, dass die Maßnahmen erfolgreich sind..."</p>
+                
+                <p><strong>Ausnahme:</strong> Wenn du über vergangene Ereignisse berichtest:<br>
+                "Letztes Jahr wurde in meiner Schule ein neues System eingeführt..."</p>
+            </div>
+            
+            <h2>5.8 Checkliste Sprache und Stil</h2>
+            
+            <div class="checkliste">
+                <h3>Überprüfe vor der Abgabe:</h3>
+                <ul>
+                    <li>☐ Durchgehend sachlicher und respektvoller Ton?</li>
+                    <li>☐ Sie-Form konsequent verwendet?</li>
+                    <li>☐ Keine Umgangssprache?</li>
+                    <li>☐ Wortwiederholungen vermieden?</li>
+                    <li>☐ Verschiedene Satzanfänge?</li>
+                    <li>☐ Konnektoren zur Verknüpfung genutzt?</li>
+                    <li>☐ Präsens als Grundzeitform?</li>
+                    <li>☐ Fachbegriffe korrekt verwendet?</li>
+                    <li>☐ Stilmittel angemessen eingesetzt?</li>
+                    <li>☐ Präzise und klare Formulierungen?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>6. Vollständige Musterleserbriefe mit Analyse</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>6.1 Musterleserbrief 1: Sehr Gut - Beispiel mit ausführlicher Analyse</h2>
+            
+            <div class="beispiel">
+                <h3>Ausgangssituation:</h3>
+                <p><strong>Artikel:</strong> "Handyverbot an Schulen - Endlich Ruhe im Klassenzimmer" von Dr. Maria Weber, erschienen am 10. Oktober 2025 in der Tageszeitung, Rubrik Bildung</p>
+                <p><strong>Kernaussage des Artikels:</strong> Die Autorin befürwortet ein striktes Handyverbot an Schulen, da Smartphones die Schüler ablenken und den Unterricht stören.</p>
+            </div>
+            
+            <div class="beispiel">
+                <h3>Musterleserbrief:</h3>
+                
+                <p>
+                <strong>Lisa Maier</strong><br>
+                Schulstraße 42<br>
+                1030 Wien<br>
+                <br>
+                Wien, 22. Oktober 2025<br>
+                <br>
+                <strong>Leserbrief zu „Handyverbot an Schulen - Endlich Ruhe im Klassenzimmer"</strong><br>
+                <br>
+                Sehr geehrte Frau Dr. Weber,
+                </p>
+                
+                <p>
+                mit großem Interesse habe ich Ihren Artikel „Handyverbot an Schulen - Endlich Ruhe im Klassenzimmer" vom 10. Oktober 2025 gelesen, in dem Sie sich für ein striktes Handyverbot an österreichischen Schulen aussprechen. Sie argumentieren darin, dass Smartphones den Unterricht massiv stören und Schüler*innen vom Lernen abhalten würden. Als Schülerin der 9. Klasse möchte ich dieser Pauschalisierung entschieden widersprechen, da sie die positiven Aspekte digitaler Medien im Bildungsbereich völlig ausblendet.
+                </p>
+                
+                <p>
+                Zunächst muss ich betonen, dass Smartphones längst zu unverzichtbaren Lernwerkzeugen geworden sind. In meiner Schule nutzen wir regelmäßig Lern-Apps für Mathematik, Fremdsprachen und Naturwissenschaften, die uns individuelles Lernen ermöglichen und sofortiges Feedback geben. So kann ich beispielsweise mit der App „Photomath" komplexe Rechenaufgaben Schritt für Schritt nachvollziehen oder mit „Quizlet" Vokabeln in meinem eigenen Tempo lernen. Ein generelles Verbot würde uns diese modernen Lernmöglichkeiten verwehren und uns ins analoge Zeitalter zurückwerfen.
+                </p>
+                
+                <p>
+                Darüber hinaus übersehen Sie in Ihrer Argumentation, dass digitale Kompetenz heute eine Schlüsselqualifikation ist. Anstatt Smartphones pauschal zu verbieten, sollten Schulen Jugendliche im verantwortungsvollen Umgang damit schulen. Medienbildung bedeutet nicht Verbote, sondern Befähigung. In unserem Deutschunterricht lernen wir etwa, Quellen kritisch zu hinterfragen und Fake News zu erkennen - Fähigkeiten, die in unserer digitalisierten Welt unerlässlich sind.
+                </p>
+                
+                <p>
+                Zwar mag es stimmen, dass manche Schüler*innen ihre Handys während des Unterrichts missbräuchlich nutzen. Jedoch ist dies ein Problem der fehlenden Regelungen und Konsequenzen, nicht der Technologie selbst. In meiner Klasse haben wir klare Vereinbarungen: Während des Frontalunterrichts bleiben die Handys in der Tasche, bei Gruppenarbeiten oder Recherchen dürfen wir sie gezielt einsetzen. Dieses System funktioniert hervorragend und zeigt, dass nicht das Gerät das Problem ist, sondern dessen unreflektierter Einsatz.
+                </p>
+                
+                <p>
+                Abschließend appelliere ich an alle Verantwortlichen im Bildungssystem, den Blick nach vorne zu richten statt zurück. Verbote sind keine Lösung für die Herausforderungen der Digitalisierung. Stattdessen brauchen wir durchdachte Medienkonzepte, die Schüler*innen befähigen, digitale Medien sinnvoll zu nutzen. Ich hoffe sehr, dass Schulen diesen Weg einschlagen und junge Menschen auf eine Zukunft vorbereiten, in der digitale Kompetenzen unverzichtbar sind.
+                </p>
+                
+                <p>
+                Mit freundlichen Grüßen<br>
+                <br>
+                Lisa Maier<br>
+                Schülerin der 9. Klasse<br>
+                15 Jahre, 1030 Wien
+                </p>
+            </div>
+            
+            <h3>Analyse: Warum dieser Leserbrief eine „Sehr gut" verdient</h3>
+            
+            <table>
+                <tr>
+                    <th>Kriterium</th>
+                    <th>Bewertung</th>
+                    <th>Begründung</th>
+                </tr>
+                <tr>
+                    <td><strong>Formaler Aufbau</strong></td>
+                    <td>Perfekt ✅</td>
+                    <td>
+                        • Vollständiger Briefkopf<br>
+                        • Korrekte Anrede<br>
+                        • Aussagekräftige Betreffzeile<br>
+                        • Grußformel und Unterschrift mit Angaben
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Einleitung</strong></td>
+                    <td>Sehr gut ✅</td>
+                    <td>
+                        • Klarer Artikelbezug (Titel, Datum, Autor)<br>
+                        • Kurze Zusammenfassung der Hauptthese<br>
+                        • Eigene Position deutlich erkennbar<br>
+                        • Rolle als Schülerin genannt
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Hauptteil - Argumentation</strong></td>
+                    <td>Hervorragend ✅</td>
+                    <td>
+                        • 3 vollständige Argumente<br>
+                        • Jedes Argument mit konkretem Beispiel<br>
+                        • Gegenargument aufgegriffen und entkräftet<br>
+                        • Logischer Aufbau (Klimax)<br>
+                        • Persönliche Erfahrungen eingebunden
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Schluss</strong></td>
+                    <td>Sehr gut ✅</td>
+                    <td>
+                        • Klarer Appell an Verantwortliche<br>
+                        • Lösungsvorschlag formuliert<br>
+                        • Überzeugender Abschluss
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Sprache</strong></td>
+                    <td>Sehr gut ✅</td>
+                    <td>
+                        • Sachlicher, angemessener Ton<br>
+                        • Vielfältiger Wortschatz<br>
+                        • Gute Konnektoren<br>
+                        • Variantenreiche Satzanfänge<br>
+                        • Präsens durchgehend
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Länge</strong></td>
+                    <td>Optimal ✅</td>
+                    <td>Ca. 380 Wörter - perfekt für 9. Schulstufe</td>
+                </tr>
+            </table>
+            
+            <h2>6.2 Musterleserbrief 2: Zustimmender Leserbrief</h2>
+            
+            <div class="beispiel">
+                <h3>Ausgangssituation:</h3>
+                <p><strong>Artikel:</strong> "Mehr Sport für Schüler*innen - Eine gesunde Investition" von Thomas Berger, erschienen am 5. Oktober 2025 im Stadtjournal</p>
+                <p><strong>Kernaussage:</strong> Der Autor fordert mehr Sportstunden an Schulen für die Gesundheit der Kinder.</p>
+            </div>
+            
+            <div class="beispiel">
+                <h3>Musterleserbrief (zustimmend):</h3>
+                
+                <p>
+                Sehr geehrter Herr Berger,
+                </p>
+                
+                <p>
+                Ihren Artikel „Mehr Sport für Schüler*innen - Eine gesunde Investition" vom 5. Oktober 2025 kann ich als aktive Schülerin und Leistungssportlerin nur ausdrücklich unterstützen. Sie sprechen einen Missstand an, der dringend behoben werden muss: die zu geringe Anzahl an Sportstunden in österreichischen Schulen.
+                </p>
+                
+                <p>
+                Ihre Argumentation, dass Bewegung die kognitive Leistungsfähigkeit steigert, kann ich aus eigener Erfahrung bestätigen. Als Mitglied der Schulvolleyballmannschaft trainiere ich regelmäßig und stelle fest, dass ich an Trainingstagen konzentrierter lernen kann und bessere schulische Leistungen erbringe. Studien der Universität Graz belegen zudem, dass bereits 30 Minuten tägliche Bewegung die Konzentrationsfähigkeit um bis zu 20 Prozent verbessern können.
+                </p>
+                
+                <p>
+                Besonders wichtig erscheint mir Ihr Hinweis auf die zunehmende Bewegungsarmut bei Jugendlichen. Laut einer aktuellen Erhebung der Österreichischen Gesundheitskasse bewegen sich 60 Prozent der Schüler*innen zu wenig. Die Folgen sind gravierend: Übergewicht, Haltungsschäden und mangelnde soziale Kompetenzen. Hier hat die Schule eine wichtige Verantwortung, gegenzusteuern.
+                </p>
+                
+                <p>
+                Daher appelliere ich an das Bildungsministerium, Ihre Forderung nach mindestens vier Wochenstunden Sport ernst zu nehmen und zeitnah umzusetzen. Investitionen in die Gesundheit junger Menschen zahlen sich langfristig für die gesamte Gesellschaft aus.
+                </p>
+                
+                <p>
+                Mit sportlichen Grüßen<br>
+                Sophia Huber<br>
+                Schülerin und Leistungssportlerin, 16 Jahre<br>
+                8010 Graz
+                </p>
+            </div>
+            
+            <h2>6.3 Vergleich: Guter vs. Weniger guter Leserbrief</h2>
+            
+            <table>
+                <tr>
+                    <th>Aspekt</th>
+                    <th>❌ Weniger gut</th>
+                    <th>✅ Gut</th>
+                </tr>
+                <tr>
+                    <td><strong>Anrede</strong></td>
+                    <td>"Hallo!"</td>
+                    <td>"Sehr geehrte Frau Müller,"</td>
+                </tr>
+                <tr>
+                    <td><strong>Artikelbezug</strong></td>
+                    <td>"Ich habe neulich einen Artikel gelesen..."</td>
+                    <td>"In Ihrem Artikel „..." vom 10.10.2025 thematisieren Sie..."</td>
+                </tr>
+                <tr>
+                    <td><strong>Meinung</strong></td>
+                    <td>"Ich finde das voll blöd."</td>
+                    <td>"Dieser Argumentation kann ich nicht zustimmen, da..."</td>
+                </tr>
+                <tr>
+                    <td><strong>Argumentation</strong></td>
+                    <td>"Das ist einfach falsch."</td>
+                    <td>"Diese Behauptung ist problematisch, weil... Beispielsweise..."</td>
+                </tr>
+                <tr>
+                    <td><strong>Schluss</strong></td>
+                    <td>"Das musste mal gesagt werden."</td>
+                    <td>"Daher appelliere ich an..., konkrete Maßnahmen zu ergreifen."</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>7. Schritt-für-Schritt-Anleitung: Von der Aufgabe zum fertigen Leserbrief</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>7.1 Phase 1: Verstehen und Analysieren (5-10 Minuten)</h2>
+            
+            <h3>Schritt 1: Die Aufgabenstellung genau lesen</h3>
+            <div class="checkliste">
+                <ul>
+                    <li>☐ Lies die Angabe zweimal</li>
+                    <li>☐ Markiere alle Arbeitsaufträge (Operatoren)</li>
+                    <li>☐ Achte auf: Wer ist der Adressat? (Redaktion, Autor*in?)</li>
+                    <li>☐ Wie lang soll der Text sein?</li>
+                    <li>☐ Gibt es besondere Vorgaben?</li>
+                </ul>
+            </div>
+            
+            <h3>Schritt 2: Den Ausgangsartikel erschließen</h3>
+            <div class="tipp">
+                <strong>Aktives Lesen mit der 5-Schritt-Methode:</strong>
+                <ol>
+                    <li><strong>Überblick:</strong> Titel, Untertitel, Textart erfassen</li>
+                    <li><strong>Kernaussagen:</strong> Hauptthese des Autors identifizieren</li>
+                    <li><strong>Argumente:</strong> Mit welchen Argumenten wird die These gestützt?</li>
+                    <li><strong>Markieren:</strong> Wichtige Stellen unterstreichen</li>
+                    <li><strong>Notizen:</strong> Erste Reaktionen am Rand notieren</li>
+                </ol>
+            </div>
+            
+            <div class="beispiel">
+                <h3>Markierungssystem beim Lesen:</h3>
+                <ul>
+                    <li>✓ = Zustimmung, gutes Argument</li>
+                    <li>? = Zweifel, fragwürdig</li>
+                    <li>! = Wichtig, zentral</li>
+                    <li>X = Widerspruch, Fehler</li>
+                </ul>
+            </div>
+            
+            <h2>7.2 Phase 2: Planen und Strukturieren (5-10 Minuten)</h2>
+            
+            <h3>Schritt 3: Position festlegen</h3>
+            <div class="wichtig">
+                <p>Entscheide dich klar:</p>
+                <ul>
+                    <li>Stimmst du dem Artikel zu? (zustimmender Leserbrief)</li>
+                    <li>Widersprichst du? (kritischer Leserbrief)</li>
+                    <li>Differenzierte Meinung? (teilweise Zustimmung)</li>
+                </ul>
+                <p><strong>TIPP:</strong> Eine klare Position ist überzeugender als ein "sowohl als auch"!</p>
+            </div>
+            
+            <h3>Schritt 4: Argumente sammeln (Mindmap/Tabelle)</h3>
+            
+            <div class="beispiel">
+                <h3>Methode 1: Pro-Contra-Tabelle</h3>
+                <table>
+                    <tr>
+                        <th>PRO (meine Argumente)</th>
+                        <th>CONTRA (Gegenargumente)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            1. Smartphones sind Lernwerkzeuge<br>
+                            → Beispiel: Lern-Apps<br><br>
+                            2. Digitale Kompetenz wichtig<br>
+                            → Beispiel: Medienbildung<br><br>
+                            3. Regeln statt Verbote<br>
+                            → Beispiel: Klassenvereinbarung
+                        </td>
+                        <td>
+                            - Ablenkung im Unterricht<br>
+                            → Entkräftung: Klare Regeln helfen<br><br>
+                            - Cybermobbing<br>
+                            → Entkräftung: Präventionsarbeit statt Verbot
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="beispiel">
+                <h3>Methode 2: Clustern/Mindmap</h3>
+                <p>Schreibe das Thema in die Mitte eines Blattes und verzweige deine Gedanken:</p>
+                <ul>
+                    <li>Hauptast 1: Vorteile von Smartphones</li>
+                    <li>Hauptast 2: Nachteile</li>
+                    <li>Hauptast 3: Lösungsvorschläge</li>
+                    <li>Hauptast 4: Persönliche Erfahrungen</li>
+                </ul>
+            </div>
+            
+            <h3>Schritt 5: Grobgliederung erstellen</h3>
+            
+            <div class="checkliste">
+                <h3>Strukturvorlage zum Ausfüllen:</h3>
+                <p><strong>EINLEITUNG:</strong></p>
+                <ul>
+                    <li>Artikelinfo: _______________</li>
+                    <li>Hauptthese des Autors: _______________</li>
+                    <li>Meine Position: _______________</li>
+                    <li>Meine Rolle: _______________</li>
+                </ul>
+                
+                <p><strong>HAUPTTEIL:</strong></p>
+                <ul>
+                    <li>Argument 1: _______________ + Beispiel: _______________</li>
+                    <li>Argument 2: _______________ + Beispiel: _______________</li>
+                    <li>Argument 3: _______________ + Beispiel: _______________</li>
+                    <li>Gegenargument entkräften: _______________</li>
+                </ul>
+                
+                <p><strong>SCHLUSS:</strong></p>
+                <ul>
+                    <li>Appell an: _______________</li>
+                    <li>Forderung: _______________</li>
+                </ul>
+            </div>
+            
+            <h2>7.3 Phase 3: Schreiben (40-50 Minuten)</h2>
+            
+            <h3>Schritt 6: Einleitung formulieren</h3>
+            
+            <div class="tipp">
+                <strong>Bewährte Einleitungsformeln:</strong>
+                <p><strong>Variante 1 (neutral):</strong></p>
+                <p>"Mit Interesse habe ich Ihren Artikel/Bericht/Kommentar „[Titel]" vom [Datum] gelesen, in dem Sie [Thema] thematisieren. Sie vertreten darin die Position, dass [Hauptthese kurz]. Als [Rolle] möchte ich zu dieser Thematik Stellung nehmen."</p>
+                
+                <p><strong>Variante 2 (zustimmend):</strong></p>
+                <p>"Ihren Artikel „[Titel]" vom [Datum] kann ich als [Rolle] nur ausdrücklich unterstützen. Sie sprechen einen wichtigen Punkt an, der auch mich persönlich betrifft: [Thema]."</p>
+                
+                <p><strong>Variante 3 (kritisch):</strong></p>
+                <p>"Mit Verwunderung/Sorge habe ich Ihren Bericht „[Titel]" vom [Datum] gelesen. Ihrer Argumentation, dass [These], möchte ich als [Rolle] entschieden widersprechen."</p>
+            </div>
+            
+            <h3>Schritt 7: Hauptteil ausformulieren</h3>
+            
+            <div class="wichtig">
+                <strong>Goldene Regeln für den Hauptteil:</strong>
+                <ul>
+                    <li><strong>Eine Idee pro Absatz:</strong> Jeder Absatz = ein Argument</li>
+                    <li><strong>Absätze verbinden:</strong> Nutze Konnektoren (Zunächst, Darüber hinaus, Zwar...)</li>
+                    <li><strong>Konkret werden:</strong> Abstrakte Aussagen mit Beispielen belegen</li>
+                    <li><strong>Persönlich werden:</strong> Eigene Erfahrungen einbringen</li>
+                </ul>
+            </div>
+            
+            <div class="formulierung">
+                <h3>Argumentaufbau - Dreischritt-Formel:</h3>
+                <p><strong>1. Behaupten:</strong> "Zunächst möchte ich betonen, dass..."</p>
+                <p><strong>2. Begründen:</strong> "...weil/da/denn..."</p>
+                <p><strong>3. Belegen:</strong> "Dies zeigt sich beispielsweise daran, dass..."</p>
+            </div>
+            
+            <h3>Schritt 8: Schluss formulieren</h3>
+            
+            <div class="tipp">
+                <strong>Effektiver Schlusssatz - 3 Varianten:</strong>
+                
+                <p><strong>Variante 1 - Appell:</strong><br>
+                "Daher appelliere ich an [Adressat], [konkrete Handlung] umzusetzen, damit [Ziel]."</p>
+                
+                <p><strong>Variante 2 - Hoffnung:</strong><br>
+                "Ich hoffe sehr, dass [Wunsch] und wir gemeinsam [Ziel] erreichen können."</p>
+                
+                <p><strong>Variante 3 - Aufforderung:</strong><br>
+                "Lassen Sie uns gemeinsam [Handlung], um [Ziel] zu verwirklichen."</p>
+            </div>
+            
+            <h2>7.4 Phase 4: Überarbeiten und Korrigieren (10-15 Minuten)</h2>
+            
+            <h3>Schritt 9: Inhaltliche Überarbeitung</h3>
+            
+            <div class="checkliste">
+                <h3>Checkliste Inhalt:</h3>
+                <ul>
+                    <li>☐ Alle Arbeitsaufträge erfüllt?</li>
+                    <li>☐ Klarer Bezug zum Artikel hergestellt?</li>
+                    <li>☐ Eigene Position deutlich erkennbar?</li>
+                    <li>☐ Mindestens 2-3 Argumente vorhanden?</li>
+                    <li>☐ Jedes Argument mit Beispiel belegt?</li>
+                    <li>☐ Gegenargument erwähnt und entkräftet?</li>
+                    <li>☐ Persönliche Perspektive eingebracht?</li>
+                    <li>☐ Appell am Ende formuliert?</li>
+                </ul>
+            </div>
+            
+            <h3>Schritt 10: Formale und sprachliche Überarbeitung</h3>
+            
+            <div class="checkliste">
+                <h3>Checkliste Form und Sprache:</h3>
+                <p><strong>Formales:</strong></p>
+                <ul>
+                    <li>☐ Briefkopf vollständig?</li>
+                    <li>☐ Anrede korrekt?</li>
+                    <li>☐ Absätze vorhanden?</li>
+                    <li>☐ Grußformel und Unterschrift?</li>
+                </ul>
+                
+                <p><strong>Sprache:</strong></p>
+                <ul>
+                    <li>☐ Durchgehend sachlicher Ton?</li>
+                    <li>☐ Keine Umgangssprache?</li>
+                    <li>☐ Präsens als Grundzeitform?</li>
+                    <li>☐ Wortwiederholungen vermieden?</li>
+                    <li>☐ Konnektoren verwendet?</li>
+                    <li>☐ Satzanfänge variiert?</li>
+                </ul>
+                
+                <p><strong>Rechtschreibung & Grammatik:</strong></p>
+                <ul>
+                    <li>☐ Rechtschreibung überprüft?</li>
+                    <li>☐ Kommasetzung korrekt?</li>
+                    <li>☐ Grammatik (Verbformen, Fälle)?</li>
+                    <li>☐ Groß-/Kleinschreibung?</li>
+                </ul>
+            </div>
+            
+            <div class="tipp">
+                <strong>Profi-Tipp zum Korrekturlesen:</strong>
+                <ol>
+                    <li>Lies den Text einmal laut vor (Stolperstellen fallen auf)</li>
+                    <li>Lies rückwärts Satz für Satz (Rechtschreibfehler werden sichtbar)</li>
+                    <li>Kontrolliere gezielt Kommas bei Nebensätzen</li>
+                    <li>Prüfe Endungen (er/sie/es → -t, wir/sie/Sie → -en)</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>8. Operatoren verstehen - Was wird von dir verlangt?</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>8.1 Was sind Operatoren?</h2>
+            
+            <p>Operatoren sind Arbeitsanweisungen in Aufgabenstellungen, die genau vorgeben, was du tun sollst. Sie sind die "Befehlswörter" in der Angabe.</p>
+            
+            <div class="wichtig">
+                <p><strong>WICHTIG:</strong> Lies Operatoren genau! Sie bestimmen, was du schreiben musst. Ein falscher Operator = falsche Antwort = Punkteabzug!</p>
+            </div>
+            
+            <h2>8.2 Die wichtigsten Operatoren für Leserbriefe</h2>
+            
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Bedeutung</th>
+                    <th>Was musst du tun?</th>
+                    <th>Beispiel</th>
+                </tr>
+                <tr>
+                    <td><strong>zusammenfassen</strong></td>
+                    <td>Kurze Wiedergabe der Hauptaussagen</td>
+                    <td>Die wichtigsten Punkte des Artikels in eigenen Worten knapp darstellen (max. 10% deines Textes)</td>
+                    <td>"Der Autor argumentiert, dass..."</td>
+                </tr>
+                <tr>
+                    <td><strong>Stellung nehmen / sich positionieren</strong></td>
+                    <td>Eigene Meinung äußern</td>
+                    <td>Deine persönliche Position klar formulieren und begründen</td>
+                    <td>"Ich bin der Überzeugung, dass... weil..."</td>
+                </tr>
+                <tr>
+                    <td><strong>argumentieren</strong></td>
+                    <td>Meinung mit Argumenten stützen</td>
+                    <td>Mindestens 2-3 Argumente mit Begründungen und Beispielen anführen</td>
+                    <td>"Ein wichtiger Aspekt ist... Dies zeigt sich beispielsweise..."</td>
+                </tr>
+                <tr>
+                    <td><strong>kritisch beurteilen / kritisch hinterfragen</strong></td>
+                    <td>Vor- und Nachteile abwägen, bewerten</td>
+                    <td>Positive und negative Aspekte nennen, gewichten und eine begründete Schlussfolgerung ziehen</td>
+                    <td>"Einerseits... andererseits... Insgesamt überwiegen jedoch..."</td>
+                </tr>
+                <tr>
+                    <td><strong>erörtern</strong></td>
+                    <td>Pro und Contra abwägen</td>
+                    <td>Verschiedene Perspektiven darstellen, dann eigene Position beziehen</td>
+                    <td>"Befürworter argumentieren... Kritiker hingegen... Meiner Ansicht nach..."</td>
+                </tr>
+                <tr>
+                    <td><strong>appellieren</strong></td>
+                    <td>Handlungsaufforderung formulieren</td>
+                    <td>Konkrete Forderung oder Bitte an eine Zielgruppe richten</td>
+                    <td>"Daher appelliere ich an..., endlich... zu..."</td>
+                </tr>
+                <tr>
+                    <td><strong>Lösungen vorschlagen</strong></td>
+                    <td>Konkrete Verbesserungsvorschläge</td>
+                    <td>Praktikable Maßnahmen nennen, die das Problem lösen könnten</td>
+                    <td>"Eine Lösung wäre... Konkret könnte man..."</td>
+                </tr>
+                <tr>
+                    <td><strong>begründen</strong></td>
+                    <td>Erklären warum</td>
+                    <td>Ursachen, Gründe, Zusammenhänge darlegen</td>
+                    <td>"...weil/da/denn... Daraus folgt..."</td>
+                </tr>
+            </table>
+            
+            <h2>8.3 Typische Aufgabenstellungen entschlüsseln</h2>
+            
+            <div class="beispiel">
+                <h3>Beispiel-Aufgabenstellung 1:</h3>
+                <p><em>"Verfassen Sie einen Leserbrief an die Redaktion, in dem Sie</em></p>
+                <ol>
+                    <li><em>die Kernaussage des Artikels zusammenfassen,</em></li>
+                    <li><em>zu der im Artikel vertretenen Position kritisch Stellung nehmen und</em></li>
+                    <li><em>konkrete Lösungsvorschläge für die angesprochene Problematik entwickeln."</em></li>
+                </ol>
+                
+                <h3>Was wird verlangt?</h3>
+                <table>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Umsetzung im Leserbrief</th>
+                    </tr>
+                    <tr>
+                        <td><strong>zusammenfassen</strong></td>
+                        <td>In der Einleitung kurz (2-3 Sätze) die Hauptthese des Artikels wiedergeben</td>
+                    </tr>
+                    <tr>
+                        <td><strong>kritisch Stellung nehmen</strong></td>
+                        <td>Im Hauptteil eigene Position formulieren, Pro-/Contra-Argumente nennen, bewerten</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lösungsvorschläge entwickeln</strong></td>
+                        <td>Im Schluss konkrete, umsetzbare Maßnahmen vorschlagen</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="beispiel">
+                <h3>Beispiel-Aufgabenstellung 2:</h3>
+                <p><em>"Schreiben Sie einen Leserbrief, in dem Sie</em></p>
+                <ol>
+                    <li><em>Ihre persönliche Betroffenheit darlegen,</em></li>
+                    <li><em>mit Argumenten und Beispielen begründen, warum Sie der Autorin widersprechen, und</em></li>
+                    <li><em>an die Verantwortlichen appellieren."</em></li>
+                </ol>
+                
+                <h3>Was wird verlangt?</h3>
+                <table>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Umsetzung im Leserbrief</th>
+                    </tr>
+                    <tr>
+                        <td><strong>darlegen</strong></td>
+                        <td>Zu Beginn des Hauptteils erklären, warum dich das Thema persönlich betrifft</td>
+                    </tr>
+                    <tr>
+                        <td><strong>begründen</strong></td>
+                        <td>Mindestens 3 vollständige Argumente (These-Begründung-Beispiel) gegen die Autorin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>appellieren</strong></td>
+                        <td>Im Schluss klare Handlungsaufforderung an konkrete Zielgruppe</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h2>8.4 Häufige Fehler bei Operatoren</h2>
+            
+            <div class="fehler">
+                <h3>TOP 5 Operator-Fehler:</h3>
+                
+                <p><strong>1. "Zusammenfassen" zu ausführlich</strong></p>
+                <p>❌ Halbe Seite Zusammenfassung<br>
+                ✅ Maximum 10% des Textes (2-4 Sätze)</p>
+                
+                <p><strong>2. "Stellung nehmen" ohne Begründung</strong></p>
+                <p>❌ "Ich finde das gut."<br>
+                ✅ "Ich unterstütze dies, weil... Beispielsweise..."</p>
+                
+                <p><strong>3. "Argumentieren" ohne Beispiele</strong></p>
+                <p>❌ Nur Behauptungen aufstellen<br>
+                ✅ Jedes Argument mit konkretem Beispiel belegen</p>
+                
+                <p><strong>4. "Kritisch beurteilen" nur einseitig</strong></p>
+                <p>❌ Nur Pro- oder nur Contra-Argumente<br>
+                ✅ Beide Seiten beleuchten, dann Position beziehen</p>
+                
+                <p><strong>5. "Appellieren" vergessen</strong></p>
+                <p>❌ Kein Appell am Ende<br>
+                ✅ Klare Handlungsaufforderung formulieren</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>9. Übungsaufgaben - Setze dein Wissen um</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>9.1 Übung 1: Einleitungen schreiben</h2>
+            
+            <div class="uebung">
+                <h3>Aufgabenstellung:</h3>
+                <p><strong>Artikel:</strong> "Vier-Tage-Woche für alle - Die Zukunft der Arbeit" von Sandra Berger, erschienen am 12.10.2025 in der Wirtschaftszeitung, Rubrik Arbeitswelt</p>
+                <p><strong>Kernaussage:</strong> Die Autorin plädiert für eine Vier-Tage-Woche bei vollem Lohnausgleich, da dies Produktivität und Lebensqualität steigere.</p>
+                
+                <p><strong>Deine Aufgabe:</strong> Schreibe drei verschiedene Einleitungen für einen Leserbrief:</p>
+                <ol>
+                    <li>Eine zustimmende Einleitung</li>
+                    <li>Eine ablehnende Einleitung</li>
+                    <li>Eine differenzierte Einleitung (teils/teils)</li>
+                </ol>
+                
+                <p>Achte darauf, dass jede Einleitung enthält:</p>
+                <ul>
+                    <li>Korrekte Anrede</li>
+                    <li>Vollständigen Artikelbezug</li>
+                    <li>Kurze Zusammenfassung der Hauptthese</li>
+                    <li>Deine Grundhaltung</li>
+                    <li>Deine Rolle</li>
+                </ul>
+            </div>
+            
+            <h2>9.2 Übung 2: Argumente ausbauen</h2>
+            
+            <div class="uebung">
+                <h3>Aufgabenstellung:</h3>
+                <p>Folgende Behauptungen sind unvollständig. Ergänze sie zu vollständigen Argumenten mit Begründung und Beispiel:</p>
+                
+                <ol>
+                    <li><strong>Behauptung:</strong> "Klimaschutz sollte in allen Schulfächern thematisiert werden."<br>
+                    Begründung: _______________<br>
+                    Beispiel: _______________</li>
+                    
+                    <li><strong>Behauptung:</strong> "Soziale Medien haben einen negativen Einfluss auf die psychische Gesundheit von Jugendlichen."<br>
+                    Begründung: _______________<br>
+                    Beispiel: _______________</li>
+                    
+                    <li><strong>Behauptung:</strong> "Schulbibliotheken sind in Zeiten der Digitalisierung wichtiger denn je."<br>
+                    Begründung: _______________<br>
+                    Beispiel: _______________</li>
+                </ol>
+            </div>
+            
+            <h2>9.3 Übung 3: Gegenargumente entkräften</h2>
+            
+            <div class="uebung">
+                <h3>Aufgabenstellung:</h3>
+                <p><strong>These:</strong> "Hausaufgaben sollten an Schulen abgeschafft werden."</p>
+                
+                <p>Typische Gegenargumente:</p>
+                <ol>
+                    <li>"Ohne Hausaufgaben lernen Schüler*innen nicht, selbstständig zu arbeiten."</li>
+                    <li>"Hausaufgaben sind wichtig zur Übung und Festigung des Stoffes."</li>
+                    <li>"Eltern können so den Lernfortschritt ihrer Kinder verfolgen."</li>
+                </ol>
+                
+                <p><strong>Deine Aufgabe:</strong> Entkräfte diese drei Gegenargumente. Nutze Formulierungen wie "Zwar..., jedoch...", "Diesem Einwand lässt sich entgegnen..." etc.</p>
+            </div>
+            
+            <h2>9.4 Übung 4: Appelle formulieren</h2>
+            
+            <div class="uebung">
+                <h3>Aufgabenstellung:</h3>
+                <p>Formuliere zu folgenden Themen jeweils einen überzeugenden Appell. Beachte: An wen richtet sich der Appell? Was soll konkret passieren?</p>
+                
+                <ol>
+                    <li><strong>Thema:</strong> Zu wenig vegetarische/vegane Optionen in der Schulmensa<br>
+                    Appell: _______________</li>
+                    
+                    <li><strong>Thema:</strong> Fehlende Verkehrssicherheit vor Schulen<br>
+                    Appell: _______________</li>
+                    
+                    <li><strong>Thema:</strong> Mangelnde psychologische Unterstützung für Schüler*innen<br>
+                    Appell: _______________</li>
+                </ol>
+            </div>
+            
+            <h2>9.5 Übung 5: Kompletter Leserbrief (Prüfungssituation)</h2>
+            
+            <div class="uebung">
+                <h3>Vollständige Aufgabenstellung:</h3>
+                
+                <p><strong>Ausgangssituation:</strong></p>
+                <p>In der Zeitung "Der Standard" erschien am 18. Oktober 2025 ein Artikel von Journalist Michael Gruber mit dem Titel "Schulnoten gehören abgeschafft". Der Autor argumentiert, dass das traditionelle Notensystem Schüler*innen unter Druck setzt, Kreativität einschränkt und nicht die tatsächlichen Fähigkeiten widerspiegelt. Er plädiert für alternative Bewertungsformen wie ausführliche Kompetenzraster und Entwicklungsgespräche.</p>
+                
+                <p><strong>Aufgabenstellung:</strong></p>
+                <p>Verfassen Sie einen Leserbrief (350-450 Wörter) an die Redaktion des "Standard", in dem Sie</p>
+                <ol>
+                    <li>die Hauptargumente des Autors kurz zusammenfassen,</li>
+                    <li>zu der im Artikel vertretenen Position begründet Stellung nehmen und dabei Ihre persönliche Perspektive als Schüler*in einbringen,</li>
+                    <li>konkrete Verbesserungsvorschläge für das Bewertungssystem entwickeln und</li>
+                    <li>an die Verantwortlichen im Bildungssystem appellieren.</li>
+                </ol>
+                
+                <p><strong>Zeit:</strong> 60 Minuten</p>
+                
+                <p><strong>Tipps zur Bearbeitung:</strong></p>
+                <ul>
+                    <li>Plane 5-10 Minuten für die Vorbereitung</li>
+                    <li>Schreibe 40-45 Minuten</li>
+                    <li>Korrigiere 10-15 Minuten</li>
+                    <li>Achte auf alle formalen Anforderungen</li>
+                    <li>Nutze die Bewertungskriterien aus Kapitel 3 zur Selbstkontrolle</li>
+                </ul>
+            </div>
+            
+            <h2>9.6 Selbstkorrektur-Checkliste</h2>
+            
+            <div class="checkliste">
+                <h3>Bewerte deinen eigenen Leserbrief (aus Übung 9.5):</h3>
+                
+                <p><strong>Inhalt (maximal 10 Punkte):</strong></p>
+                <ul>
+                    <li>☐ Alle Arbeitsaufträge erfüllt (2 Punkte)</li>
+                    <li>☐ Klarer Artikelbezug (1 Punkt)</li>
+                    <li>☐ Eigene Position deutlich (2 Punkte)</li>
+                    <li>☐ Mind. 3 vollständige Argumente (3 Punkte)</li>
+                    <li>☐ Persönliche Perspektive eingebracht (1 Punkt)</li>
+                    <li>☐ Originalität und Ideenreichtum (1 Punkt)</li>
+                </ul>
+                <p>Erreichte Punkte: _____ / 10</p>
+                
+                <p><strong>Struktur (maximal 5 Punkte):</strong></p>
+                <ul>
+                    <li>☐ Textsortenmerkmale eingehalten (2 Punkte)</li>
+                    <li>☐ Logischer Aufbau, Kohärenz (2 Punkte)</li>
+                    <li>☐ Überzeugender Appell (1 Punkt)</li>
+                </ul>
+                <p>Erreichte Punkte: _____ / 5</p>
+                
+                <p><strong>Sprache (maximal 10 Punkte):</strong></p>
+                <ul>
+                    <li>☐ Angemessener, vielfältiger Wortschatz (3 Punkte)</li>
+                    <li>☐ Variantenreiche Syntax (2 Punkte)</li>
+                    <li>☐ Sachlicher Stil (2 Punkte)</li>
+                    <li>☐ Rechtschreibung korrekt (1 Punkt)</li>
+                    <li>☐ Grammatik korrekt (1 Punkt)</li>
+                    <li>☐ Zeichensetzung korrekt (1 Punkt)</li>
+                </ul>
+                <p>Erreichte Punkte: _____ / 10</p>
+                
+                <p><strong>GESAMT: _____ / 25 Punkte</strong></p>
+                
+                <p><strong>Umrechnung in Noten:</strong></p>
+                <ul>
+                    <li>23-25 Punkte = Sehr gut (1)</li>
+                    <li>20-22 Punkte = Gut (2)</li>
+                    <li>16-19 Punkte = Befriedigend (3)</li>
+                    <li>13-15 Punkte = Genügend (4)</li>
+                    <li>0-12 Punkte = Nicht genügend (5)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>10. Formulierungshilfen - Dein Spickzettel für die Schularbeit</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>10.1 Einleitung - Artikelbezug herstellen</h2>
+            
+            <div class="formulierung">
+                <p><strong>Artikel benennen:</strong></p>
+                <ul>
+                    <li>Mit großem Interesse habe ich Ihren Artikel/Bericht/Kommentar „..." vom ... gelesen</li>
+                    <li>In Ihrem Beitrag „..." vom ... in der ... thematisieren Sie</li>
+                    <li>Ihr Artikel „..." in der Ausgabe vom ... hat mich als ... besonders angesprochen</li>
+                    <li>Zu Ihrem Artikel „...", der am ... erschienen ist, möchte ich Stellung nehmen</li>
+                </ul>
+                
+                <p><strong>Autorenposition zusammenfassen:</strong></p>
+                <ul>
+                    <li>Sie vertreten darin die Position/Ansicht, dass...</li>
+                    <li>Ihre Hauptthese lautet, dass...</li>
+                    <li>Sie argumentieren, dass...</li>
+                    <li>Darin plädieren Sie für/gegen...</li>
+                    <li>Sie kritisieren/befürworten, dass...</li>
+                </ul>
+                
+                <p><strong>Eigene Grundhaltung ausdrücken:</strong></p>
+                <ul>
+                    <li>Dieser Argumentation kann ich nur teilweise/nicht/voll und ganz zustimmen</li>
+                    <li>Als ... möchte ich dieser Darstellung widersprechen/beipflichten</li>
+                    <li>Ihrer Einschätzung möchte ich als ... entschieden widersprechen</li>
+                    <li>Mit Verwunderung/Zustimmung/Sorge habe ich gelesen, dass...</li>
+                    <li>Diese Sichtweise erscheint mir problematisch/nachvollziehbar/einseitig</li>
+                </ul>
+            </div>
+            
+            <h2>10.2 Hauptteil - Meinungen äußern</h2>
+            
+            <div class="formulierung">
+                <p><strong>Zustimmung ausdrücken:</strong></p>
+                <ul>
+                    <li>Ich teile Ihre Ansicht, dass...</li>
+                    <li>Ihrer Argumentation kann ich mich vollständig anschließen</li>
+                    <li>Sie haben absolut recht, wenn Sie sagen...</li>
+                    <li>Dieser Punkt ist besonders treffend formuliert</li>
+                    <li>Zu Recht weisen Sie darauf hin, dass...</li>
+                </ul>
+                
+                <p><strong>Widerspruch ausdrücken:</strong></p>
+                <ul>
+                    <li>Dieser Darstellung muss ich entschieden widersprechen</li>
+                    <li>An dieser Stelle irren Sie jedoch</li>
+                    <li>Diese Schlussfolgerung erscheint mir nicht nachvollziehbar</li>
+                    <li>Ihre Argumentation übersieht/vernachlässigt jedoch...</li>
+                    <li>Diese Sichtweise greift zu kurz/ist einseitig</li>
+                </ul>
+                
+                <p><strong>Eigene Position formulieren:</strong></p>
+                <ul>
+                    <li>Ich bin der festen Überzeugung, dass...</li>
+                    <li>Aus meiner Sicht ist es entscheidend, dass...</li>
+                    <li>Meiner Meinung nach sollte vielmehr...</li>
+                    <li>Ich vertrete die Position, dass...</li>
+                    <li>Nach meiner Einschätzung ist es notwendig, dass...</li>
+                </ul>
+            </div>
+            
+            <h2>10.3 Hauptteil - Argumente einleiten und verknüpfen</h2>
+            
+            <div class="formulierung">
+                <p><strong>Argumente beginnen:</strong></p>
+                <ul>
+                    <li>Zunächst möchte ich betonen, dass...</li>
+                    <li>Ein wesentlicher Aspekt ist...</li>
+                    <li>Besonders wichtig erscheint mir...</li>
+                    <li>Als erstes Argument möchte ich anführen...</li>
+                    <li>Entscheidend ist meines Erachtens...</li>
+                </ul>
+                
+                <p><strong>Weitere Argumente anfügen:</strong></p>
+                <ul>
+                    <li>Darüber hinaus muss berücksichtigt werden...</li>
+                    <li>Ein weiterer wichtiger Punkt ist...</li>
+                    <li>Außerdem spricht dafür/dagegen, dass...</li>
+                    <li>Hinzu kommt, dass...</li>
+                    <li>Nicht zu vergessen ist außerdem...</li>
+                    <li>Ferner ist zu bedenken, dass...</li>
+                </ul>
+                
+                <p><strong>Argumente steigern:</strong></p>
+                <ul>
+                    <li>Noch wichtiger ist jedoch...</li>
+                    <li>Am gewichtigsten erscheint mir...</li>
+                    <li>Das stärkste Argument ist meiner Ansicht nach...</li>
+                    <li>Besonders hervorzuheben ist...</li>
+                </ul>
+            </div>
+            
+            <h2>10.4 Hauptteil - Beispiele und Belege anführen</h2>
+            
+            <div class="formulierung">
+                <p><strong>Beispiele einleiten:</strong></p>
+                <ul>
+                    <li>Dies zeigt sich beispielsweise daran, dass...</li>
+                    <li>Ein konkretes Beispiel verdeutlicht dies:...</li>
+                    <li>So habe ich in meiner Schule/meinem Umfeld erlebt, dass...</li>
+                    <li>Dies lässt sich anhand folgenden Beispiels illustrieren:...</li>
+                    <li>In meiner eigenen Erfahrung hat sich gezeigt, dass...</li>
+                </ul>
+                
+                <p><strong>Auf Fakten berufen:</strong></p>
+                <ul>
+                    <li>Studien belegen, dass...</li>
+                    <li>Laut einer Erhebung der ... ist erwiesen, dass...</li>
+                    <li>Statistische Daten zeigen, dass...</li>
+                    <li>Wissenschaftliche Untersuchungen haben ergeben, dass...</li>
+                    <li>Es ist nachgewiesen, dass...</li>
+                </ul>
+                
+                <p><strong>Persönliche Erfahrung einbringen:</strong></p>
+                <ul>
+                    <li>Als Schüler*in der 9. Klasse erlebe ich täglich, dass...</li>
+                    <li>Aus meiner eigenen Erfahrung kann ich berichten, dass...</li>
+                    <li>In meinem Umfeld beobachte ich, dass...</li>
+                    <li>Mir selbst ist aufgefallen, dass...</li>
+                </ul>
+            </div>
+            
+            <h2>10.5 Hauptteil - Gegenargumente entkräften</h2>
+            
+            <div class="formulierung">
+                <p><strong>Einräumen und widerlegen:</strong></p>
+                <ul>
+                    <li>Zwar mag es stimmen, dass ... jedoch übersieht diese Sichtweise...</li>
+                    <li>Auch wenn man argumentieren könnte, dass ... so zeigt die Praxis doch...</li>
+                    <li>Dem häufig vorgebrachten Einwand, dass ... lässt sich entgegnen...</li>
+                    <li>Kritiker*innen führen oft an, dass ... Dies berücksichtigt jedoch nicht...</li>
+                    <li>Auf den ersten Blick scheint es, als ... Bei genauerem Hinsehen zeigt sich jedoch...</li>
+                </ul>
+                
+                <p><strong>Einschränken:</strong></p>
+                <ul>
+                    <li>Einerseits trifft es zu, dass ... andererseits muss man bedenken...</li>
+                    <li>Teilweise ist diese Argumentation nachvollziehbar, jedoch...</li>
+                    <li>In gewisser Hinsicht haben Sie recht, wenn ... allerdings...</li>
+                    <li>Das Argument ist nur bedingt richtig, denn...</li>
+                </ul>
+            </div>
+            
+            <h2>10.6 Schluss - Appelle und Forderungen</h2>
+            
+            <div class="formulierung">
+                <p><strong>Appelle formulieren:</strong></p>
+                <ul>
+                    <li>Daher appelliere ich an ..., endlich/dringend ... zu ...</li>
+                    <li>Ich fordere ... auf, konkrete Maßnahmen zu ergreifen</li>
+                    <li>Es ist höchste Zeit, dass ... tätig wird/werden</li>
+                    <li>Deshalb muss ... umgehend/zeitnah ...</li>
+                    <li>Ich richte meinen Appell an ..., dass ...</li>
+                </ul>
+                
+                <p><strong>Lösungen vorschlagen:</strong></p>
+                <ul>
+                    <li>Eine sinnvolle Lösung wäre...</li>
+                    <li>Konkret sollte man...</li>
+                    <li>Ich schlage vor, dass...</li>
+                    <li>Als Lösungsansatz bietet sich an...</li>
+                    <li>Ein erster Schritt könnte sein...</li>
+                </ul>
+                
+                <p><strong>Hoffnung/Wünsche ausdrücken:</strong></p>
+                <ul>
+                    <li>Ich hoffe sehr, dass...</li>
+                    <li>Es wäre wünschenswert, wenn...</li>
+                    <li>Mein Wunsch ist es, dass...</li>
+                    <li>Ich bin zuversichtlich, dass...</li>
+                </ul>
+                
+                <p><strong>Gemeinsames Handeln:</strong></p>
+                <ul>
+                    <li>Lassen Sie uns gemeinsam daran arbeiten, dass...</li>
+                    <li>Nur wenn wir alle ..., können wir ...</li>
+                    <li>Es liegt an uns allen, dass...</li>
+                    <li>Gemeinsam können wir erreichen, dass...</li>
+                </ul>
+            </div>
+            
+            <h2>10.7 Grußformeln</h2>
+            
+            <div class="formulierung">
+                <p><strong>Standard-Grußformeln:</strong></p>
+                <ul>
+                    <li>Mit freundlichen Grüßen (am häufigsten verwendet)</li>
+                    <li>Mit besten Grüßen</li>
+                    <li>Hochachtungsvoll (sehr formell)</li>
+                </ul>
+                
+                <p><strong>Thematisch passende Varianten (optional):</strong></p>
+                <ul>
+                    <li>Mit nachdenklichen Grüßen</li>
+                    <li>Mit hoffnungsvollen Grüßen</li>
+                    <li>Mit besorgten Grüßen</li>
+                </ul>
+                
+                <p><strong>WICHTIG:</strong> Nach der Grußformel niemals ein Komma, sondern direkt zur nächsten Zeile!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>11. Häufige Fehler und wie du sie vermeidest</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>11.1 Inhaltliche Fehler</h2>
+            
+            <div class="fehler">
+                <h3>Fehler 1: Fehlender oder unklarer Artikelbezug</h3>
+                <p><strong>❌ Falsch:</strong> "Ich habe neulich einen Artikel gelesen über Klimawandel..."</p>
+                <p><strong>✅ Richtig:</strong> "In Ihrem Artikel „Klimaschutz jetzt!" vom 15. Oktober 2025 in der Tageszeitung argumentieren Sie..."</p>
+                <p><strong>Tipp:</strong> Nenne immer: Titel + Datum + (Autor) + Medium</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 2: Zu ausführliche Inhaltsangabe</h3>
+                <p><strong>Problem:</strong> Die Zusammenfassung nimmt mehr als 15% des Textes ein</p>
+                <p><strong>Lösung:</strong> Maximal 3-4 Sätze! Konzentriere dich auf die Hauptthese, nicht auf Details</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 3: Keine persönliche Perspektive</h3>
+                <p><strong>❌ Falsch:</strong> "Man könnte sagen, dass..."</p>
+                <p><strong>✅ Richtig:</strong> "Als betroffene Schülerin erlebe ich täglich, dass..."</p>
+                <p><strong>Tipp:</strong> Zeige deine Rolle und Betroffenheit!</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 4: Argumente ohne Beispiele</h3>
+                <p><strong>❌ Unvollständig:</strong> "Smartphones sind wichtige Lernwerkzeuge."</p>
+                <p><strong>✅ Vollständig:</strong> "Smartphones sind wichtige Lernwerkzeuge, da sie den Zugang zu Informationen erleichtern. In meiner Klasse nutzen wir beispielsweise Lern-Apps für Mathematik, die uns sofortiges Feedback geben."</p>
+                <p><strong>Formel:</strong> These + Begründung + Beispiel</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 5: Fehlender oder schwacher Appell</h3>
+                <p><strong>❌ Schwach:</strong> "Es sollte etwas getan werden."</p>
+                <p><strong>✅ Stark:</strong> "Daher appelliere ich an das Bildungsministerium, bis zum nächsten Schuljahr ein Medienkonzept zu entwickeln, das Schüler*innen im verantwortungsvollen Umgang mit digitalen Medien schult."</p>
+                <p><strong>Tipp:</strong> Konkret benennen: WER soll WAS tun?</p>
+            </div>
+            
+            <h2>11.2 Formale Fehler</h2>
+            
+            <div class="fehler">
+                <h3>Fehler 6: Falsche oder fehlende Anrede</h3>
+                <p><strong>❌ Falsch:</strong></p>
+                <ul>
+                    <li>"Hallo!" / "Liebe Frau Müller"</li>
+                    <li>Keine Anrede</li>
+                    <li>"Sehr geehrter Thomas" (Vorname)</li>
+                </ul>
+                <p><strong>✅ Richtig:</strong></p>
+                <ul>
+                    <li>"Sehr geehrte Frau Müller,"</li>
+                    <li>"Sehr geehrte Damen und Herren,"</li>
+                    <li>"Sehr geehrte Redaktion,"</li>
+                </ul>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 7: Unvollständiger Briefkopf</h3>
+                <p><strong>Was oft fehlt:</strong></p>
+                <ul>
+                    <li>Eigene Adresse</li>
+                    <li>Datum</li>
+                    <li>Unterschrift mit Angaben (Name, Alter, Rolle, Wohnort)</li>
+                </ul>
+                <p><strong>Merke:</strong> Der Leserbrief ist ein Brief! Alle Briefelemente müssen enthalten sein.</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 8: Fehlende Absätze</h3>
+                <p><strong>Problem:</strong> Ein langer Textblock ohne Gliederung</p>
+                <p><strong>Lösung:</strong> Mindestens 4 Absätze:</p>
+                <ol>
+                    <li>Einleitung</li>
+                    <li>Hauptteil (besser: 2-3 Absätze für verschiedene Argumente)</li>
+                    <li>Schluss</li>
+                </ol>
+            </div>
+            
+            <h2>11.3 Sprachliche Fehler</h2>
+            
+            <div class="fehler">
+                <h3>Fehler 9: Umgangssprache</h3>
+                <table>
+                    <tr>
+                        <th>❌ Umgangssprachlich</th>
+                        <th>✅ Sachlich/Formell</th>
+                    </tr>
+                    <tr>
+                        <td>krass, mega, voll, echt, total</td>
+                        <td>äußerst, sehr, besonders, überaus</td>
+                    </tr>
+                    <tr>
+                        <td>Das ist echt nicht okay</td>
+                        <td>Dies ist nicht akzeptabel/vertretbar</td>
+                    </tr>
+                    <tr>
+                        <td>Ihr Artikel ist voll daneben</td>
+                        <td>Ihrer Argumentation kann ich nicht zustimmen</td>
+                    </tr>
+                    <tr>
+                        <td>irgendwie, irgendwas</td>
+                        <td>gewissermaßen, in gewisser Hinsicht</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 10: Falsche Zeitform</h3>
+                <p><strong>❌ Falsch - Präteritum:</strong> "In Ihrem Artikel schrieben Sie, dass die Maßnahmen erfolgreich waren."</p>
+                <p><strong>✅ Richtig - Präsens:</strong> "In Ihrem Artikel schreiben Sie, dass die Maßnahmen erfolgreich sind."</p>
+                <p><strong>Ausnahme:</strong> Wenn du über Vergangenes berichtest: "Letztes Jahr wurde in meiner Schule..."</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 11: Monotone Satzanfänge</h3>
+                <p><strong>❌ Eintönig:</strong> "Ich denke, dass... Ich finde, dass... Ich bin der Meinung, dass..."</p>
+                <p><strong>✅ Variiert:</strong> "Zunächst möchte ich betonen... Darüber hinaus ist zu bedenken... Besonders wichtig erscheint mir... Aus meiner Sicht..."</p>
+            </div>
+            
+            <h2>11.4 Argumentationsfehler</h2>
+            
+            <div class="fehler">
+                <h3>Fehler 12: Zirkelschluss</h3>
+                <p><strong>❌ Falsch:</strong> "Hausaufgaben sind wichtig, weil sie wichtig sind."</p>
+                <p><strong>✅ Richtig:</strong> "Hausaufgaben sind wichtig, weil sie Schüler*innen helfen, den Unterrichtsstoff selbstständig zu vertiefen und zu festigen."</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 13: Ad hominem (Angriff auf die Person)</h3>
+                <p><strong>❌ Falsch:</strong> "Der Autor ist inkompetent und versteht nichts von Bildung."</p>
+                <p><strong>✅ Richtig:</strong> "Die im Artikel vertretene Position erscheint mir nicht überzeugend, weil wichtige Aspekte unberücksichtigt bleiben."</p>
+                <p><strong>Regel:</strong> Kritisiere Argumente, niemals die Person!</p>
+            </div>
+            
+            <div class="fehler">
+                <h3>Fehler 14: Voreilige Verallgemeinerung</h3>
+                <p><strong>❌ Falsch:</strong> "Mein Freund hatte ein schlechtes Erlebnis, also ist das ganze System schlecht."</p>
+                <p><strong>✅ Richtig:</strong> "Wie Studien belegen, erleben 40% der Schüler*innen... Dies zeigt, dass systematische Probleme vorliegen."</p>
+            </div>
+            
+            <h2>11.5 Checkliste zur Fehlervermeidung</h2>
+            
+            <div class="checkliste">
+                <h3>Vor der Abgabe überprüfen:</h3>
+                
+                <p><strong>Inhalt:</strong></p>
+                <ul>
+                    <li>☐ Alle Arbeitsaufträge erfüllt?</li>
+                    <li>☐ Klarer Artikelbezug mit allen Details?</li>
+                    <li>☐ Eigene Position eindeutig erkennbar?</li>
+                    <li>☐ Mind. 2-3 vollständige Argumente?</li>
+                    <li>☐ Persönliche Perspektive eingebracht?</li>
+                    <li>☐ Konkreter Appell vorhanden?</li>
+                </ul>
+                
+                <p><strong>Form:</strong></p>
+                <ul>
+                    <li>☐ Vollständiger Briefkopf?</li>
+                    <li>☐ Korrekte Anrede?</li>
+                    <li>☐ Absätze gesetzt?</li>
+                    <li>☐ Grußformel vorhanden?</li>
+                    <li>☐ Unterschrift mit Angaben?</li>
+                </ul>
+                
+                <p><strong>Sprache:</strong></p>
+                <ul>
+                    <li>☐ Keine Umgangssprache?</li>
+                    <li>☐ Durchgehend Präsens?</li>
+                    <li>☐ Variantenreiche Satzanfänge?</li>
+                    <li>☐ Konnektoren verwendet?</li>
+                    <li>☐ Sachlicher, respektvoller Ton?</li>
+                </ul>
+                
+                <p><strong>Rechtschreibung/Grammatik:</strong></p>
+                <ul>
+                    <li>☐ Rechtschreibung überprüft?</li>
+                    <li>☐ Kommasetzung korrekt?</li>
+                    <li>☐ Grammatik (Verbformen, Fälle) richtig?</li>
+                    <li>☐ Groß-/Kleinschreibung beachtet?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <span>12. Last-Minute-Tipps für die Schularbeit</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content">
+            <h2>12.1 Am Tag vor der Schularbeit</h2>
+            
+            <div class="tipp">
+                <h3>DO's:</h3>
+                <ul>
+                    <li>✅ Dieses Lernmaterial nochmals durchgehen (besonders Kapitel 2, 3, 7)</li>
+                    <li>✅ Formulierungshilfen (Kapitel 10) durchlesen</li>
+                    <li>✅ Einen Musterleserbrief genau ansehen</li>
+                    <li>✅ Stifte, Papier, Uhr bereitlegen</li>
+                    <li>✅ Ausreichend schlafen</li>
+                    <li>✅ Entspannungsübungen machen</li>
+                </ul>
+                
+                <h3>DON'Ts:</h3>
+                <ul>
+                    <li>❌ Bis spät in die Nacht lernen</li>
+                    <li>❌ Komplett neues Material durcharbeiten</li>
+                    <li>❌ Sich selbst unter Druck setzen</li>
+                    <li>❌ Zu viel Koffein</li>
+                </ul>
+            </div>
+            
+            <h2>12.2 Während der Schularbeit - Zeitmanagement</h2>
+            
+            <div class="wichtig">
+                <h3>Empfohlener Zeitplan (bei 60 Minuten):</h3>
+                <ul>
+                    <li><strong>0-5 Min:</strong> Aufgabenstellung zweimal lesen, Operatoren markieren</li>
+                    <li><strong>5-10 Min:</strong> Artikel lesen, wichtige Stellen markieren</li>
+                    <li><strong>10-15 Min:</strong> Argumente sammeln, Grobgliederung erstellen</li>
+                    <li><strong>15-20 Min:</strong> Einleitung schreiben</li>
+                    <li><strong>20-45 Min:</strong> Hauptteil ausformulieren</li>
+                    <li><strong>45-50 Min:</strong> Schluss schreiben</li>
+                    <li><strong>50-60 Min:</strong> Korrekturlesen und überarbeiten</li>
+                </ul>
+                
+                <p><strong>WICHTIG:</strong> Die letzten 10 Minuten sind GOLD wert! Nutze sie zum Korrigieren!</p>
+            </div>
+            
+            <h2>12.3 Mentale Strategien</h2>
+            
+            <div class="tipp">
+                <h3>Bei Nervosität:</h3>
+                <ul>
+                    <li><strong>4-7-8 Atemtechnik:</strong> 4 Sek. einatmen, 7 Sek. halten, 8 Sek. ausatmen</li>
+                    <li><strong>Positive Selbstgespräche:</strong> "Ich habe mich gut vorbereitet. Ich schaffe das."</li>
+                    <li><strong>Visualisierung:</strong> Stelle dir vor, wie du erfolgreich schreibst</li>
+                </ul>
+                
+                <h3>Bei Schreibblockade:</h3>
+                <ul>
+                    <li>Beginne mit dem einfachsten Teil (oft: Einleitung mit Artikelbezug)</li>
+                    <li>Schreibe erst den Hauptteil, dann Einleitung</li>
+                    <li>Nutze die Formulierungshilfen aus Kapitel 10</li>
+                    <li>Mache eine 30-Sekunden-Pause, atme tief durch</li>
+                </ul>
+            </div>
+            
+            <h2>12.4 Notfall-Strukturvorlage - Kopiere diese mentale Schablone</h2>
+            
+            <div class="beispiel">
+                <h3>Wenn dir nichts einfällt, nutze diese Struktur:</h3>
+                
+                <p><strong>EINLEITUNG (4-5 Sätze):</strong></p>
+                <ol>
+                    <li>Anrede: "Sehr geehrte ..."</li>
+                    <li>Artikelbezug: "Mit [Interesse/Verwunderung] habe ich Ihren [Textsorte] „[Titel]" vom [Datum] gelesen"</li>
+                    <li>Zusammenfassung: "Sie argumentieren darin, dass [Hauptthese]"</li>
+                    <li>Position: "Als [Rolle] möchte ich dieser Position [zustimmen/widersprechen]"</li>
+                </ol>
+                
+                <p><strong>HAUPTTEIL (3 Absätze):</strong></p>
+                <p><em>Absatz 1 - Argument 1:</em></p>
+                <ul>
+                    <li>"Zunächst möchte ich betonen, dass [These], weil [Begründung]. Dies zeigt sich beispielsweise daran, dass [Beispiel]."</li>
+                </ul>
+                
+                <p><em>Absatz 2 - Argument 2:</em></p>
+                <ul>
+                    <li>"Darüber hinaus ist zu bedenken, dass [These]. [Begründung]. Konkret habe ich erlebt, dass [Beispiel]."</li>
+                </ul>
+                
+                <p><em>Absatz 3 - Argument 3 + Gegenargument:</em></p>
+                <ul>
+                    <li>"Am wichtigsten erscheint mir, dass [These], weil [Begründung]. [Beispiel]. Zwar könnte man einwenden, dass [Gegenargument], jedoch [Entkräftung]."</li>
+                </ul>
+                
+                <p><strong>SCHLUSS (3-4 Sätze):</strong></p>
+                <ul>
+                    <li>"Daher appelliere ich an [Adressat], [konkrete Handlung] umzusetzen. Nur so können wir [Ziel] erreichen."</li>
+                    <li>"Mit freundlichen Grüßen"</li>
+                    <li>[Name, Alter, Rolle, Wohnort]</li>
+                </ul>
+            </div>
+            
+            <h2>12.5 Die wichtigsten Punkte für eine Eins - Zusammenfassung</h2>
+            
+            <div class="wichtig">
+                <h3>Top 10 Erfolgsfaktoren:</h3>
+                <ol>
+                    <li><strong>Alle Arbeitsaufträge erfüllen</strong> - Lies die Angabe genau!</li>
+                    <li><strong>Klarer Artikelbezug</strong> - Titel, Datum, Autor, Medium nennen</li>
+                    <li><strong>Deutliche eigene Position</strong> - Sei eindeutig in deiner Meinung</li>
+                    <li><strong>Mindestens 3 starke Argumente</strong> - Mit Begründung und Beispiel</li>
+                    <li><strong>Persönliche Perspektive</strong> - Zeige deine Betroffenheit als Schüler*in</li>
+                    <li><strong>Gegenargument entkräften</strong> - Zeige, dass du differenziert denkst</li>
+                    <li><strong>Überzeugender Appell</strong> - Konkret: WER soll WAS tun</li>
+                    <li><strong>Perfekte Textsorte</strong> - Alle Briefelemente vorhanden</li>
+                    <li><strong>Variantenreiche Sprache</strong> - Keine Wortwiederholungen, gute Konnektoren</li>
+                    <li><strong>Fehlerfreie Sprache</strong> - Unbedingt 10 Min. Korrekturlesen!</li>
+                </ol>
+            </div>
+            
+            <h2>12.6 Motivations-Reminder</h2>
+            
+            <div class="tipp">
+                <h3>Denke daran:</h3>
+                <ul>
+                    <li>💪 Du hast dich gut vorbereitet</li>
+                    <li>📚 Du kennst die Struktur und die Bewertungskriterien</li>
+                    <li>✍️ Du hast alle Formulierungshilfen parat</li>
+                    <li>🎯 Du weißt genau, worauf es ankommt</li>
+                    <li>🌟 Du schaffst das!</li>
+                </ul>
+                
+                <p><strong>Viel Erfolg bei deiner Schularbeit! 🍀</strong></p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Einfache Interaktivität für bessere Benutzererfahrung
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navigation smooth scrolling für interne Links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                arrow.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                arrow.classList.add('rotated');
+            }
+        }
+        
+        // Erste Sektion beim Laden öffnen
+        window.addEventListener('DOMContentLoaded', () => {
+            const firstSection = document.querySelector('.section-header');
+            if (firstSection) {
+                toggleSection(firstSection);
+            }
         });
     </script>
 </body>
