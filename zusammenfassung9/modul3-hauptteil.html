@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 3: Hauptteil schreiben</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #003d5c 0%, #004d73 50%, #005580 100%);
+            color: #000;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            color: #003d5c;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header .module-number {
+            background: #FF6B35;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: #fff;
+            color: #003d5c;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #004d73;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #FF6B35;
+            color: #fff;
+            border-color: #FF6B35;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-header {
+            background: #004d73;
+            color: #fff;
+            padding: 20px 25px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .section-header:hover {
+            background: #003d5c;
+        }
+
+        .section-content {
+            padding: 25px;
+            display: none;
+            color: #000;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .original-box {
+            background: #ffebee;
+            border: 3px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .paraphrased-box {
+            background: #e8f5e9;
+            border: 3px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .original-box h4, .paraphrased-box h4 {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .technique-card {
+            background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+            border-left: 5px solid #FF6B35;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+
+        .technique-card h3 {
+            color: #003d5c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .technique-number {
+            background: #FF6B35;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .practice-area {
+            background: #fff3e0;
+            border: 3px solid #FF6B35;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .practice-area h4 {
+            color: #003d5c;
+            margin-bottom: 15px;
+        }
+
+        .practice-area textarea {
+            width: 100%;
+            min-height: 120px;
+            border: 2px solid #004d73;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .word-tag {
+            background: #004d73;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .word-tag:hover {
+            background: #FF6B35;
+            transform: translateY(-2px);
+        }
+
+        .word-tag:active {
+            transform: scale(0.95);
+        }
+
+        .synonym-display {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+            border-left: 4px solid #2196f3;
+        }
+
+        .synonym-display.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .interactive-exercise {
+            background: #f0f8ff;
+            border: 3px solid #004d73;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .sentence-pair {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+
+        .original-sentence {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #FF6B35;
+        }
+
+        .input-area {
+            margin-top: 15px;
+        }
+
+        .check-button {
+            background: #004d73;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .check-button:hover {
+            background: #FF6B35;
+        }
+
+        .feedback-box {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback-box.show {
+            display: block;
+        }
+
+        .feedback-box.good {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+        }
+
+        .feedback-box.hint {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+        }
+
+        .book-reference {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid #FF6B35;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .book-reference strong {
+            color: #003d5c;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border: 3px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box h3 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+        .dos-donts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .dos-donts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .do-card {
+            background: #e8f5e9;
+            border: 3px solid #4caf50;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .dont-card {
+            background: #ffebee;
+            border: 3px solid #f44336;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .do-card h4, .dont-card h4 {
+            margin-bottom: 15px;
+        }
+
+        .do-card ul, .dont-card ul {
+            margin-left: 20px;
+        }
+
+        .do-card li, .dont-card li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="module-number">Modul 3</div>
+            <h1>✍️ Hauptteil schreiben</h1>
+            <p>Lerne, wie du Texte in eigenen Worten wiedergibst und professionell paraphrasierst</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="modul2-vorbereitung.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+            <a href="modul4-sprache.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+
+        <!-- Section 1: Die goldene Regel -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Die goldene Regel: Eigene Worte!
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="warning-box">
+                    <h3>⚠️ WICHTIG: Niemals abschreiben!</h3>
+                    <p>Die größte Herausforderung beim Zusammenfassen: Du darfst <strong>keine ganzen Sätze</strong> aus dem Originaltext übernehmen. Alles muss in deinen eigenen Worten formuliert sein!</p>
+                </div>
+
+                <h3 style="color: #003d5c; margin: 25px 0 15px 0;">Warum ist das so wichtig?</h3>
+                <ul style="margin-left: 25px; line-height: 2;">
+                    <li>Es zeigt, dass du den Text <strong>wirklich verstanden</strong> hast</li>
+                    <li>Du entwickelst deinen <strong>eigenen Schreibstil</strong></li>
+                    <li>Du vermeidest <strong>Plagiate</strong> (= Abschreiben ohne Quellenangabe)</li>
+                    <li>Es ist eine wichtige <strong>akademische Fähigkeit</strong> für die Oberstufe und Universität</li>
+                </ul>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Siehe Seite 289 - "Regel die Argumentation" zum Thema eigene Formulierungen
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Umformulierungstechniken -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🔄 Die 5 Umformulierungstechniken
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 25px;">Mit diesen fünf Techniken kannst du jeden Satz umformulieren:</p>
+
+                <div class="technique-card">
+                    <h3><span class="technique-number">1</span> Synonyme verwenden</h3>
+                    <p style="margin-bottom: 15px;">Ersetze Wörter durch bedeutungsähnliche Begriffe.</p>
+                    <div class="comparison-box">
+                        <div class="original-box">
+                            <h4>❌ Original:</h4>
+                            <p>"Die <strong>Diskussion</strong> über die Schreibschrift ist <strong>heftig</strong>."</p>
+                        </div>
+                        <div class="paraphrased-box">
+                            <h4>✅ Umformuliert:</h4>
+                            <p>"Die <strong>Debatte</strong> um Handschrift verläuft <strong>kontrovers</strong>."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="word-bank" style="margin-top: 20px;">
+                        <p style="width: 100%; margin-bottom: 10px; font-weight: bold; color: #003d5c;">💡 Klicke auf die Wörter für Alternativen:</p>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'wichtig → bedeutend, relevant, wesentlich, entscheidend, zentral')">wichtig</div>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'zeigen → aufzeigen, darstellen, verdeutlichen, belegen, demonstrieren')">zeigen</div>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'sagen → äußern, erklären, betonen, anmerken, feststellen')">sagen</div>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'Problem → Schwierigkeit, Herausforderung, Problematik, Hindernis')">Problem</div>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'viele → zahlreiche, etliche, diverse, verschiedene, mehrere')">viele</div>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'machen → durchführen, realisieren, umsetzen, bewerkstelligen')">machen</div>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'gut → positiv, vorteilhaft, förderlich, günstig, erfreulich')">gut</div>
+                        <div class="word-tag" onclick="toggleSynonyms(this, 'schlecht → negativ, nachteilig, ungünstig, problematisch')">schlecht</div>
+                    </div>
+                    <div class="synonym-display" id="synonymDisplay"></div>
+                </div>
+
+                <div class="technique-card">
+                    <h3><span class="technique-number">2</span> Aktiv ↔ Passiv tauschen</h3>
+                    <p style="margin-bottom: 15px;">Ändere die Perspektive des Satzes.</p>
+                    <div class="comparison-box">
+                        <div class="original-box">
+                            <h4>❌ Original (Aktiv):</h4>
+                            <p>"Die Schule <strong>fördert</strong> die Schreibschrift."</p>
+                        </div>
+                        <div class="paraphrased-box">
+                            <h4>✅ Umformuliert (Passiv):</h4>
+                            <p>"Die Schreibschrift <strong>wird gefördert</strong>."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <h3><span class="technique-number">3</span> Satzstruktur ändern</h3>
+                    <p style="margin-bottom: 15px;">Stelle Satzteile um oder teile lange Sätze.</p>
+                    <div class="comparison-box">
+                        <div class="original-box">
+                            <h4>❌ Original:</h4>
+                            <p>"Obwohl die Schreibschrift mühsam zu lernen ist, fördert sie die Feinmotorik."</p>
+                        </div>
+                        <div class="paraphrased-box">
+                            <h4>✅ Umformuliert:</h4>
+                            <p>"Die Schreibschrift trainiert die Feinmotorik. Das Erlernen erfordert jedoch Übung."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <h3><span class="technique-number">4</span> Nominalisierung / Verbalisierung</h3>
+                    <p style="margin-bottom: 15px;">Wandle Verben in Nomen um (oder umgekehrt).</p>
+                    <div class="comparison-box">
+                        <div class="original-box">
+                            <h4>❌ Original (Verb):</h4>
+                            <p>"Viele Lehrer <strong>kritisieren</strong> die Entscheidung."</p>
+                        </div>
+                        <div class="paraphrased-box">
+                            <h4>✅ Umformuliert (Nomen):</h4>
+                            <p>"Die Entscheidung stößt auf <strong>Kritik</strong> der Lehrerschaft."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <h3><span class="technique-number">5</span> Mehrere Informationen zusammenfassen</h3>
+                    <p style="margin-bottom: 15px;">Fasse mehrere Sätze zu einem kompakten Satz zusammen.</p>
+                    <div class="comparison-box">
+                        <div class="original-box">
+                            <h4>❌ Original (3 Sätze):</h4>
+                            <p>"In Finnland wurde die Schreibschrift abgeschafft. In Österreich wird noch diskutiert. In Deutschland sinkt die Schreibkompetenz."</p>
+                        </div>
+                        <div class="paraphrased-box">
+                            <h4>✅ Umformuliert (1 Satz):</h4>
+                            <p>"Während Finnland die Schreibschrift bereits abgeschafft hat und in Österreich noch debattiert wird, zeigen deutsche Studien einen Rückgang der Schreibfähigkeiten."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Die Techniken basieren auf den Beispielen im Mustertext, Seite 289
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Interaktive Übungen -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎮 Interaktive Umformulierungsübungen
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="interactive-exercise">
+                    <h3 style="color: #003d5c; margin-bottom: 20px;">Übung 1: Formuliere um!</h3>
+                    
+                    <div class="sentence-pair">
+                        <div class="original-sentence">
+                            <strong>Originalsatz:</strong><br>
+                            "Die Studie zeigt, dass handschriftliches Schreiben die Gedächtnisleistung verbessert."
+                        </div>
+                        <div class="input-area">
+                            <label style="font-weight: bold; color: #003d5c; display: block; margin-bottom: 10px;">Deine Umformulierung:</label>
+                            <textarea id="exercise1" placeholder="Schreibe den Satz in eigenen Worten..."></textarea>
+                            <button class="check-button" onclick="checkExercise(1)">Hinweis anzeigen</button>
+                            <div class="feedback-box" id="feedback1"></div>
+                        </div>
+                    </div>
+
+                    <div class="sentence-pair">
+                        <div class="original-sentence">
+                            <strong>Originalsatz:</strong><br>
+                            "Viele Experten sind der Meinung, dass die Digitalisierung wichtiger ist als Handschrift."
+                        </div>
+                        <div class="input-area">
+                            <label style="font-weight: bold; color: #003d5c; display: block; margin-bottom: 10px;">Deine Umformulierung:</label>
+                            <textarea id="exercise2" placeholder="Schreibe den Satz in eigenen Worten..."></textarea>
+                            <button class="check-button" onclick="checkExercise(2)">Hinweis anzeigen</button>
+                            <div class="feedback-box" id="feedback2"></div>
+                        </div>
+                    </div>
+
+                    <div class="sentence-pair">
+                        <div class="original-sentence">
+                            <strong>Originalsatz:</strong><br>
+                            "In Deutschland führte eine Umfrage unter 2000 Lehrern zu dem Ergebnis, dass die Schreibkompetenz schlechter geworden ist."
+                        </div>
+                        <div class="input-area">
+                            <label style="font-weight: bold; color: #003d5c; display: block; margin-bottom: 10px;">Deine Umformulierung:</label>
+                            <textarea id="exercise3" placeholder="Schreibe den Satz in eigenen Worten..."></textarea>
+                            <button class="check-button" onclick="checkExercise(3)">Hinweis anzeigen</button>
+                            <div class="feedback-box" id="feedback3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-area" style="margin-top: 30px;">
+                    <h4>🎯 Freie Übung: Umformulieren</h4>
+                    <p style="margin-bottom: 15px;">Nimm einen beliebigen Absatz aus einem Text und formuliere ihn komplett um:</p>
+                    <textarea placeholder="Originaltext:
+
+"></textarea>
+                    <textarea placeholder="Deine Umformulierung:
+
+"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Do's and Don'ts -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✅❌ Do's and Don'ts
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="dos-donts">
+                    <div class="do-card">
+                        <h4>✅ Das solltest du tun:</h4>
+                        <ul>
+                            <li>Den Sinn des Originals beibehalten</li>
+                            <li>Synonyme und alternative Formulierungen nutzen</li>
+                            <li>Die Satzstruktur verändern</li>
+                            <li>Mehrere kurze Sätze zu einem längeren verbinden</li>
+                            <li>Aktiv/Passiv-Konstruktionen ändern</li>
+                            <li>Fachbegriffe können übernommen werden</li>
+                        </ul>
+                    </div>
+                    <div class="dont-card">
+                        <h4>❌ Das solltest du vermeiden:</h4>
+                        <ul>
+                            <li>Ganze Sätze wortwörtlich abschreiben</li>
+                            <li>Nur einzelne Wörter austauschen</li>
+                            <li>Die Bedeutung des Originals verfälschen</li>
+                            <li>Eigene Meinungen hinzufügen</li>
+                            <li>Wörtliche Zitate ohne Anführungszeichen</li>
+                            <li>Den Stil des Originaltextes imitieren</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning-box" style="margin-top: 30px;">
+                    <h3>⚠️ Häufiger Fehler: "Patchwork-Zusammenfassung"</h3>
+                    <p>Viele Schüler*innen machen den Fehler, einfach einzelne Wörter auszutauschen, aber die Satzstruktur beizubehalten. Das ist <strong>kein echtes Umformulieren</strong>!</p>
+                    
+                    <div class="comparison-box" style="margin-top: 15px;">
+                        <div class="original-box">
+                            <h4>❌ Schlecht (nur Wörter getauscht):</h4>
+                            <p><strong>Original:</strong> "Die Debatte über Schreibschrift ist heftig."<br>
+                            <strong>Schlecht:</strong> "Die Diskussion über Handschrift ist stark."</p>
+                        </div>
+                        <div class="paraphrased-box">
+                            <h4>✅ Gut (komplett umformuliert):</h4>
+                            <p><strong>Gut:</strong> "Ob Handschrift weiterhin gelehrt werden soll, wird kontrovers diskutiert."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons" style="margin-top: 40px;">
+            <a href="modul2-vorbereitung.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+            <a href="modul4-sprache.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        function toggleSynonyms(element, text) {
+            const display = document.getElementById('synonymDisplay');
+            display.textContent = text;
+            display.classList.toggle('show');
+        }
+
+        const hints = {
+            1: "💡 Versuche: Beginne mit 'Laut einer Studie...' oder 'Forschungsergebnisse belegen...' | Verwende Synonyme für 'zeigt' (belegt, demonstriert) und 'verbessert' (steigert, fördert)",
+            2: "💡 Versuche: Ändere die Perspektive! Statt 'Experten sind der Meinung' → 'Zahlreiche Fachleute betonen...' | Umstrukturiere den Satz: 'Der Fokus sollte auf...'",
+            3: "💡 Versuche: Fasse zusammen! 'Eine deutsche Befragung von 2000 Lehrkräften ergab...' | Verwende andere Wörter für 'Ergebnis' (zeigte, offenbarte) und 'schlechter' (rückläufig, verschlechtert)"
+        };
+
+        function checkExercise(number) {
+            const feedback = document.getElementById('feedback' + number);
+            const textarea = document.getElementById('exercise' + number);
+            
+            if (textarea.value.trim().length > 0) {
+                feedback.className = 'feedback-box hint show';
+                feedback.innerHTML = '<strong>Hinweis zur Verbesserung:</strong><br>' + hints[number];
+            } else {
+                feedback.className = 'feedback-box hint show';
+                feedback.innerHTML = '<strong>✍️ Tipp:</strong> Schreibe erst deine Umformulierung, dann kannst du den Hinweis anzeigen!';
+            }
+        }
+
+        // Auto-open first section
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSection = document.querySelector('.section-header');
+            if (firstSection) {
+                toggleSection(firstSection);
+            }
+        });
+    </script>
+</body>
+</html>

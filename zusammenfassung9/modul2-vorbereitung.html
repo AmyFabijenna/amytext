@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 2: Textvorbereitung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #003d5c 0%, #004d73 50%, #005580 100%);
+            color: #000;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            color: #003d5c;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header .module-number {
+            background: #FF6B35;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-button {
+            background: #fff;
+            color: #003d5c;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #004d73;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #FF6B35;
+            color: #fff;
+            border-color: #FF6B35;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-header {
+            background: #004d73;
+            color: #fff;
+            padding: 20px 25px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .section-header:hover {
+            background: #003d5c;
+        }
+
+        .section-content {
+            padding: 25px;
+            display: none;
+            color: #000;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .step-box {
+            background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+            border-left: 5px solid #FF6B35;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .step-box h3 {
+            color: #003d5c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: #FF6B35;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .interactive-text {
+            background: #fff;
+            border: 3px solid #004d73;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            line-height: 2;
+        }
+
+        .interactive-text p {
+            margin-bottom: 15px;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-text p:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .interactive-text span {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-text span:hover {
+            background: #ffeb3b;
+        }
+
+        .highlighted-important {
+            background: #ffeb3b;
+            font-weight: bold;
+        }
+
+        .highlighted-detail {
+            background: #e0e0e0;
+            text-decoration: line-through;
+        }
+
+        .marker-legend {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .marker-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .marker-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #000;
+        }
+
+        .color-important {
+            background: #ffeb3b;
+        }
+
+        .color-detail {
+            background: #e0e0e0;
+        }
+
+        .w-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .w-card {
+            background: linear-gradient(135deg, #004d73 0%, #003d5c 100%);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .w-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .w-card h4 {
+            color: #FF6B35;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .practice-area {
+            background: #fff3e0;
+            border: 3px solid #FF6B35;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .practice-area h4 {
+            color: #003d5c;
+            margin-bottom: 15px;
+        }
+
+        .practice-area textarea {
+            width: 100%;
+            min-height: 150px;
+            border: 2px solid #004d73;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tip-card {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .tip-card h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .book-reference {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid #FF6B35;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .book-reference strong {
+            color: #003d5c;
+        }
+
+        .reading-exercise {
+            background: #f0f8ff;
+            border: 3px solid #004d73;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .exercise-text {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            line-height: 1.8;
+            border: 2px solid #ddd;
+        }
+
+        .exercise-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .control-button {
+            background: #004d73;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .control-button:hover {
+            background: #FF6B35;
+            transform: translateY(-2px);
+        }
+
+        .control-button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="module-number">Modul 2</div>
+            <h1>🎯 Textvorbereitung</h1>
+            <p>Lerne, wie du Texte aktiv liest, wichtige Informationen markierst und strukturierst</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="modul1-grundlagen.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+            <a href="modul3-hauptteil.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+
+        <!-- Section 1: Die 3 Lesedurchgänge -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📖 Die 3 Lesedurchgänge
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 20px;">Bevor du mit dem Schreiben beginnst, musst du den Text gründlich durcharbeiten. Das geschieht in <strong>drei Schritten</strong>:</p>
+
+                <div class="step-box">
+                    <h3><span class="step-number">1</span> Erster Durchgang: Überblick verschaffen</h3>
+                    <p><strong>Ziel:</strong> Den Text einmal komplett durchlesen, ohne zu markieren</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Worum geht es grundsätzlich?</li>
+                        <li>Was ist das Hauptthema?</li>
+                        <li>Welche Struktur hat der Text?</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #FF6B35; font-weight: bold;">💡 Tipp: Lies entspannt, ohne Stress. Es geht nur ums Verstehen!</p>
+                </div>
+
+                <div class="step-box">
+                    <h3><span class="step-number">2</span> Zweiter Durchgang: Wichtiges markieren</h3>
+                    <p><strong>Ziel:</strong> Kernaussagen, Hauptargumente und wichtige Fakten hervorheben</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Markiere Schlüsselsätze und zentrale Aussagen</li>
+                        <li>Unterstreiche wichtige Begriffe</li>
+                        <li>Mache Randnotizen zu Abschnitten</li>
+                    </ul>
+                    <div class="marker-legend">
+                        <div class="marker-item">
+                            <div class="marker-color color-important"></div>
+                            <span><strong>Gelb:</strong> Wichtige Hauptinformationen</span>
+                        </div>
+                        <div class="marker-item">
+                            <div class="marker-color color-detail"></div>
+                            <span><strong>Grau:</strong> Unwichtige Details (weglassen)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <h3><span class="step-number">3</span> Dritter Durchgang: Struktur erkennen</h3>
+                    <p><strong>Ziel:</strong> Den logischen Aufbau und die Argumentationsstruktur verstehen</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Wie ist der Text aufgebaut?</li>
+                        <li>Welche Argumente baut der Autor aufeinander auf?</li>
+                        <li>Was ist die Hauptbotschaft?</li>
+                    </ul>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Siehe Seite 289 zum Thema "Texte lesen und verstehen"
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Die W-Fragen -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ❓ Die W-Fragen beantworten
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 20px;">Bevor du mit dem Schreiben beginnst, beantworte diese Fragen für die Einleitung:</p>
+
+                <div class="w-questions">
+                    <div class="w-card">
+                        <h4>Wer?</h4>
+                        <p>Autor/Autorin<br>des Textes</p>
+                    </div>
+                    <div class="w-card">
+                        <h4>Was?</h4>
+                        <p>Textsorte<br>(Artikel, Bericht, etc.)</p>
+                    </div>
+                    <div class="w-card">
+                        <h4>Wo?</h4>
+                        <p>Erscheinungsort<br>(Zeitung, Website)</p>
+                    </div>
+                    <div class="w-card">
+                        <h4>Wann?</h4>
+                        <p>Datum der<br>Veröffentlichung</p>
+                    </div>
+                    <div class="w-card">
+                        <h4>Worum?</h4>
+                        <p>Hauptthema<br>in 1 Satz</p>
+                    </div>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Fülle die W-Fragen aus</h4>
+                    <p style="margin-bottom: 15px;">Lies dir einen Text deiner Wahl durch und beantworte die W-Fragen:</p>
+                    <textarea placeholder="Wer: 
+Was: 
+Wo: 
+Wann: 
+Worum: 
+
+Schreibe hier deine Antworten..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Markierungsübung -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✍️ Interaktive Markierungsübung
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="reading-exercise">
+                    <h3 style="color: #003d5c; margin-bottom: 15px;">Übungstext: Klicke auf Sätze, um sie zu markieren</h3>
+                    <p style="margin-bottom: 15px; color: #666;">Klicke einmal = Wichtig (gelb) | Zweimal = Unwichtig (grau durchgestrichen) | Dreimal = Zurücksetzen</p>
+                    
+                    <div class="exercise-text" id="markingText">
+                        <p class="markable">Die Schreibschrift gerät zunehmend in Bedrängnis und wird in vielen Ländern nicht mehr als verpflichtender Teil des Lehrplans unterrichtet.</p>
+                        
+                        <p class="markable">In Finnland hat man sich bereits vor einigen Jahren von der Schreibschrift verabschiedet, während in Österreich die Diskussion über ihre Zukunft erst kürzlich begonnen hat.</p>
+                        
+                        <p class="markable">Die älteren Semester erinnern sich noch gut an vollgemälte Hefte mit schwungvollen Bögen der Latein- oder Schreibschrift.</p>
+                        
+                        <p class="markable">Für manche Schülerinnen und Schüler war das Erlernen der Schreibschrift eine Freude, für andere bedeutete es mühsame Übungsstunden.</p>
+                        
+                        <p class="markable">Befürworter der Schreibschrift argumentieren, dass das handschriftliche Schreiben die Gedächtnisleistung fördert und die Feinmotorik trainiert.</p>
+                        
+                        <p class="markable">Eine amerikanische Studie der Princeton Universität zeigt, dass Studierende, die handschriftlich mitschreiben, bei Prüfungen signifikant besser abschneiden.</p>
+                        
+                        <p class="markable">Kritiker der Schreibschrift betonen hingegen, dass die Zeit besser für digitale Kompetenzen genutzt werden sollte.</p>
+                        
+                        <p class="markable">In Deutschland führte eine Umfrage unter 2000 Lehrern zu dem Ergebnis, dass die Schreibkompetenz von vier Fünfteln der Schüler in den letzten Jahren schlechter geworden ist.</p>
+                    </div>
+
+                    <div class="exercise-controls">
+                        <button class="control-button" onclick="resetMarking()">🔄 Alle Markierungen zurücksetzen</button>
+                        <button class="control-button" onclick="showSolution()">💡 Lösung anzeigen</button>
+                        <button class="control-button" onclick="checkMarking()">✓ Meine Markierungen prüfen</button>
+                    </div>
+
+                    <div id="markingFeedback" style="margin-top: 20px; padding: 15px; border-radius: 8px; display: none;"></div>
+                </div>
+
+                <div class="tips-grid" style="margin-top: 30px;">
+                    <div class="tip-card">
+                        <h4>💡 Was markieren?</h4>
+                        <ul style="margin-left: 15px;">
+                            <li>Hauptaussagen</li>
+                            <li>Kernargumente</li>
+                            <li>Wichtige Fakten</li>
+                            <li>Schlussfolgerungen</li>
+                        </ul>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🚫 Was NICHT markieren?</h4>
+                        <ul style="margin-left: 15px;">
+                            <li>Detaillierte Beispiele</li>
+                            <li>Nebensächliche Informationen</li>
+                            <li>Persönliche Anekdoten</li>
+                            <li>Füllwörter und Floskeln</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Notizen machen -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📝 Notizen und Gliederung erstellen
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="step-box">
+                    <h3>Warum Notizen?</h3>
+                    <p>Notizen helfen dir, die Struktur deiner Zusammenfassung zu planen, bevor du mit dem Schreiben beginnst. So vergisst du nichts Wichtiges und behältst den Überblick!</p>
+                </div>
+
+                <h3 style="color: #003d5c; margin: 30px 0 15px 0;">So erstellst du eine Gliederung:</h3>
+                
+                <div class="step-box">
+                    <h3><span class="step-number">1</span> Notiere die Einleitung</h3>
+                    <p>Schreibe die Antworten auf die W-Fragen stichpunktartig auf</p>
+                </div>
+
+                <div class="step-box">
+                    <h3><span class="step-number">2</span> Liste die Hauptpunkte auf</h3>
+                    <p>Schreibe die wichtigsten 3-5 Kernaussagen des Textes in Stichpunkten auf</p>
+                </div>
+
+                <div class="step-box">
+                    <h3><span class="step-number">3</span> Ordne logisch</h3>
+                    <p>Bringe die Punkte in eine sinnvolle Reihenfolge (meist: chronologisch oder nach Wichtigkeit)</p>
+                </div>
+
+                <div class="practice-area">
+                    <h4>🎯 Übung: Erstelle eine Gliederung</h4>
+                    <p style="margin-bottom: 15px;">Erstelle zu dem markierten Text eine Gliederung in Stichpunkten:</p>
+                    <textarea placeholder="EINLEITUNG:
+- Wer:
+- Was:
+- Worum:
+
+HAUPTTEIL:
+1. 
+2. 
+3. 
+
+Schreibe hier deine Gliederung..."></textarea>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Siehe Aufgabe A22 auf Seite 289 zur Arbeit mit Grafiken und Strukturierung
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons" style="margin-top: 40px;">
+            <a href="modul1-grundlagen.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+            <a href="modul3-hauptteil.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        // Marking exercise functionality
+        const markableTexts = document.querySelectorAll('.markable');
+        const correctImportant = [0, 1, 4, 5, 6, 7]; // Indices of important paragraphs
+        const correctUnimportant = [2, 3]; // Indices of unimportant paragraphs
+
+        markableTexts.forEach((p, index) => {
+            let clickCount = 0;
+            p.addEventListener('click', function() {
+                clickCount++;
+                if (clickCount === 1) {
+                    this.className = 'markable highlighted-important';
+                } else if (clickCount === 2) {
+                    this.className = 'markable highlighted-detail';
+                } else {
+                    this.className = 'markable';
+                    clickCount = 0;
+                }
+            });
+        });
+
+        function resetMarking() {
+            markableTexts.forEach(p => {
+                p.className = 'markable';
+            });
+            document.getElementById('markingFeedback').style.display = 'none';
+        }
+
+        function showSolution() {
+            markableTexts.forEach((p, index) => {
+                if (correctImportant.includes(index)) {
+                    p.className = 'markable highlighted-important';
+                } else if (correctUnimportant.includes(index)) {
+                    p.className = 'markable highlighted-detail';
+                } else {
+                    p.className = 'markable';
+                }
+            });
+            
+            const feedback = document.getElementById('markingFeedback');
+            feedback.style.display = 'block';
+            feedback.style.background = '#e3f2fd';
+            feedback.style.border = '2px solid #2196f3';
+            feedback.innerHTML = '<strong>💡 Lösung angezeigt:</strong><br>Gelb markiert = Wichtige Hauptinformationen für die Zusammenfassung<br>Grau durchgestrichen = Unwichtige Details, die weggelassen werden können';
+        }
+
+        function checkMarking() {
+            let correctCount = 0;
+            let totalImportant = correctImportant.length + correctUnimportant.length;
+            
+            markableTexts.forEach((p, index) => {
+                const isMarkedImportant = p.classList.contains('highlighted-important');
+                const isMarkedUnimportant = p.classList.contains('highlighted-detail');
+                
+                if (correctImportant.includes(index) && isMarkedImportant) {
+                    correctCount++;
+                } else if (correctUnimportant.includes(index) && isMarkedUnimportant) {
+                    correctCount++;
+                }
+            });
+            
+            const feedback = document.getElementById('markingFeedback');
+            feedback.style.display = 'block';
+            
+            const percentage = (correctCount / totalImportant * 100).toFixed(0);
+            
+            if (percentage >= 80) {
+                feedback.style.background = '#e8f5e9';
+                feedback.style.border = '2px solid #4caf50';
+                feedback.innerHTML = `<strong>✅ Sehr gut!</strong><br>Du hast ${correctCount} von ${totalImportant} Sätzen richtig markiert (${percentage}%). Du verstehst, was wichtig ist!`;
+            } else if (percentage >= 60) {
+                feedback.style.background = '#fff3e0';
+                feedback.style.border = '2px solid #ff9800';
+                feedback.innerHTML = `<strong>👍 Gut gemacht!</strong><br>Du hast ${correctCount} von ${totalImportant} Sätzen richtig markiert (${percentage}%). Schau dir die Lösung an, um zu sehen, wo du dich verbessern kannst.`;
+            } else {
+                feedback.style.background = '#ffebee';
+                feedback.style.border = '2px solid #f44336';
+                feedback.innerHTML = `<strong>💪 Übung macht den Meister!</strong><br>Du hast ${correctCount} von ${totalImportant} Sätzen richtig markiert (${percentage}%). Klicke auf "Lösung anzeigen", um zu sehen, welche Informationen wichtig sind.`;
+            }
+        }
+
+        // Auto-open first section
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSection = document.querySelector('.section-header');
+            if (firstSection) {
+                toggleSection(firstSection);
+            }
+        });
+    </script>
+</body>
+</html>

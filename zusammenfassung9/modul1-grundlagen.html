@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 1: Grundlagen & Merkmale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #003d5c 0%, #004d73 50%, #005580 100%);
+            color: #000;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            color: #003d5c;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header .module-number {
+            background: #FF6B35;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-button {
+            background: #fff;
+            color: #003d5c;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #004d73;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #FF6B35;
+            color: #fff;
+            border-color: #FF6B35;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-header {
+            background: #004d73;
+            color: #fff;
+            padding: 20px 25px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .section-header:hover {
+            background: #003d5c;
+        }
+
+        .section-content {
+            padding: 25px;
+            display: none;
+            color: #000;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .toggle-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+            border-left: 5px solid #FF6B35;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .definition-box h3 {
+            color: #003d5c;
+            margin-bottom: 10px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f0f8ff;
+            border: 2px solid #004d73;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            border-color: #FF6B35;
+        }
+
+        .feature-card h4 {
+            color: #003d5c;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            background: #FF6B35;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .good-example {
+            background: #e8f5e9;
+            border: 3px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .bad-example {
+            background: #ffebee;
+            border: 3px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .good-example h4, .bad-example h4 {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .interactive-quiz {
+            background: #fff3e0;
+            border: 3px solid #FF6B35;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+        }
+
+        .quiz-question h4 {
+            color: #003d5c;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: #fff;
+            border: 2px solid #004d73;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #e6f3ff;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #4caf50;
+            color: #fff;
+            border-color: #4caf50;
+        }
+
+        .quiz-option.wrong {
+            background: #f44336;
+            color: #fff;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            color: #000;
+        }
+
+        .feedback.wrong {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            color: #000;
+        }
+
+        .book-reference {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid #FF6B35;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .book-reference strong {
+            color: #003d5c;
+        }
+
+        .key-info {
+            background: linear-gradient(135deg, #004d73 0%, #003d5c 100%);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .key-info h3 {
+            color: #FF6B35;
+            margin-bottom: 15px;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            color: #FF6B35;
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .example-text {
+            background: #f5f5f5;
+            border: 2px solid #004d73;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="module-number">Modul 1</div>
+            <h1>📚 Grundlagen & Merkmale</h1>
+            <p>Verstehe, was eine Zusammenfassung ist und welche Merkmale sie auszeichnet</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-button">⬅ Zurück zur Übersicht</a>
+            <a href="modul2-vorbereitung.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📖 Was ist eine Zusammenfassung?
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="definition-box">
+                    <h3>Definition</h3>
+                    <p>Eine <strong>Zusammenfassung</strong> (auch: Inhaltsangabe) gibt die wichtigsten Informationen eines Textes in eigenen Worten wieder. Sie ist kürzer als der Originaltext und konzentriert sich auf das Wesentliche.</p>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Siehe Seite 133-135 zur Textsorte "Zusammenfassung"
+                </div>
+
+                <h3>Wofür braucht man Zusammenfassungen?</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><span class="feature-icon">📚</span> Lernen</h4>
+                        <p>Komplexe Inhalte auf das Wichtigste reduzieren und besser verstehen</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><span class="feature-icon">💡</span> Überblick</h4>
+                        <p>Schnell erfassen, worum es in einem längeren Text geht</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><span class="feature-icon">✍️</span> Vorbereitung</h4>
+                        <p>Als Grundlage für Essays, Referate oder Diskussionen</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><span class="feature-icon">🎯</span> Prüfungen</h4>
+                        <p>Häufige Aufgabenstellung in Schularbeiten und Matura</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✨ Die 6 wichtigsten Merkmale
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 20px;">Eine gute Zusammenfassung hat immer diese Merkmale:</p>
+
+                <div class="key-info">
+                    <h3>Merkmal 1: Sachlich und objektiv</h3>
+                    <ul class="checklist">
+                        <li>Keine eigene Meinung</li>
+                        <li>Keine Wertungen oder Kommentare</li>
+                        <li>Neutrale, sachliche Sprache</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-box">
+                    <div class="bad-example">
+                        <h4>❌ Falsch (mit Meinung):</h4>
+                        <p>"Der Autor beschreibt auf langweilige Weise die Geschichte der Schreibschrift. Ich finde, dass Handschrift heute nicht mehr wichtig ist."</p>
+                    </div>
+                    <div class="good-example">
+                        <h4>✅ Richtig (sachlich):</h4>
+                        <p>"Der Autor beschreibt die Geschichte der Schreibschrift und ihre Bedeutung im Bildungssystem."</p>
+                    </div>
+                </div>
+
+                <div class="key-info">
+                    <h3>Merkmal 2: Im Präsens (Gegenwart)</h3>
+                    <ul class="checklist">
+                        <li>Auch wenn im Originaltext Vergangenheit verwendet wird</li>
+                        <li>Durchgehend Präsens verwenden</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-box">
+                    <div class="bad-example">
+                        <h4>❌ Falsch (Vergangenheit):</h4>
+                        <p>"Der Artikel beschrieb, wie die Schreibschrift eingeführt wurde."</p>
+                    </div>
+                    <div class="good-example">
+                        <h4>✅ Richtig (Präsens):</h4>
+                        <p>"Der Artikel beschreibt, wie die Schreibschrift eingeführt wird."</p>
+                    </div>
+                </div>
+
+                <div class="key-info">
+                    <h3>Merkmal 3: In eigenen Worten</h3>
+                    <ul class="checklist">
+                        <li>Keine wörtlichen Zitate (außer Fachbegriffe)</li>
+                        <li>Inhalte umformulieren</li>
+                        <li>Eigene Satzstrukturen verwenden</li>
+                    </ul>
+                </div>
+
+                <div class="key-info">
+                    <h3>Merkmal 4: Keine Details</h3>
+                    <ul class="checklist">
+                        <li>Nur Hauptinformationen</li>
+                        <li>Keine Beispiele aus dem Originaltext</li>
+                        <li>Keine Nebensächlichkeiten</li>
+                    </ul>
+                </div>
+
+                <div class="key-info">
+                    <h3>Merkmal 5: Logische Struktur</h3>
+                    <ul class="checklist">
+                        <li>Einleitung mit Basisinformationen</li>
+                        <li>Hauptteil mit Kerninhalten</li>
+                        <li>Klarer, roter Faden</li>
+                    </ul>
+                </div>
+
+                <div class="key-info">
+                    <h3>Merkmal 6: Kürze</h3>
+                    <ul class="checklist">
+                        <li>Etwa 1/3 bis 1/4 der Originallänge</li>
+                        <li>Bei Matura: 270-330 Wörter</li>
+                        <li>Konzentration auf das Wesentliche</li>
+                    </ul>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Siehe Seite 135, "Im Klartext"-Box für die wichtigsten Merkmale
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Interaktives Quiz: Teste dein Wissen!
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="interactive-quiz">
+                    <div class="quiz-question">
+                        <h4>Frage 1: Welche Zeitform verwendest du in einer Zusammenfassung?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 1)">
+                                Vergangenheit (Präteritum)
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 1)">
+                                Gegenwart (Präsens)
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 1)">
+                                Zukunft (Futur)
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback1"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 2: Darfst du deine eigene Meinung in der Zusammenfassung äußern?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 2)">
+                                Ja, am Ende der Zusammenfassung
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 2)">
+                                Nein, eine Zusammenfassung ist immer sachlich und objektiv
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 2)">
+                                Ja, aber nur wenn ich anderer Meinung bin
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback2"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 3: Wie lang sollte eine Zusammenfassung sein?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 3)">
+                                Genauso lang wie der Originaltext
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 3)">
+                                Die Hälfte des Originaltextes
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 3)">
+                                Etwa 1/3 bis 1/4 des Originaltextes
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback3"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 4: Was gehört NICHT in eine Zusammenfassung?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 4)">
+                                Die Hauptaussagen des Textes
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 4)">
+                                Detaillierte Beispiele und Anekdoten
+                            </div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 4)">
+                                Titel und Autor des Originaltextes
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📝 Der Aufbau einer Zusammenfassung
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <h3>Eine Zusammenfassung besteht aus zwei Teilen:</h3>
+
+                <div class="key-info" style="margin-top: 20px;">
+                    <h3>Teil 1: Die Einleitung</h3>
+                    <p style="margin-bottom: 15px;">Die Einleitung beantwortet die W-Fragen in 1-2 Sätzen:</p>
+                    <ul class="checklist">
+                        <li><strong>Wer</strong> hat den Text geschrieben? (Autor/in)</li>
+                        <li><strong>Was</strong> für ein Text ist es? (Zeitungsartikel, Sachtext, etc.)</li>
+                        <li><strong>Wo</strong> wurde er veröffentlicht? (Zeitung, Magazin, etc.)</li>
+                        <li><strong>Wann</strong> wurde er veröffentlicht? (Datum)</li>
+                        <li><strong>Worum</strong> geht es? (Thema in einem Satz)</li>
+                    </ul>
+                </div>
+
+                <div class="example-text">
+                    <strong>Beispiel einer Einleitung:</strong><br>
+                    In dem Artikel "Eine Schrift als Glaubensfrage" von David Tiefenthaler, erschienen am [Datum] in [Medium], setzt sich der Autor mit der Debatte über die Schreibschrift auseinander. Er zeigt verschiedene Positionen zur Frage, ob Handschrift im digitalen Zeitalter noch einen Platz im Lehrplan haben sollte.
+                </div>
+
+                <div class="key-info" style="margin-top: 30px;">
+                    <h3>Teil 2: Der Hauptteil</h3>
+                    <p style="margin-bottom: 15px;">Der Hauptteil fasst die wichtigsten Inhalte zusammen:</p>
+                    <ul class="checklist">
+                        <li>Hauptargumente oder Hauptaussagen</li>
+                        <li>Wichtige Zusammenhänge</li>
+                        <li>Kernbotschaft des Textes</li>
+                        <li>Logische Reihenfolge beibehalten</li>
+                    </ul>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Siehe Seite 289 für den Mustertext zur Aufgabe A24
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons" style="margin-top: 40px;">
+            <a href="index.html" class="nav-button">⬅ Zurück zur Übersicht</a>
+            <a href="modul2-vorbereitung.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        function checkAnswer(element, isCorrect, questionNumber) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('feedback' + questionNumber);
+            
+            // Reset all options
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark selected option
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.className = 'feedback correct show';
+                feedback.textContent = '✅ Richtig! Super gemacht!';
+            } else {
+                element.classList.add('wrong');
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = '❌ Leider falsch. Versuche es nochmal oder schaue dir die Erklärung oben an.';
+                
+                // Show correct answer after 2 seconds
+                setTimeout(() => {
+                    options.forEach(opt => {
+                        if (opt.textContent === element.textContent) return;
+                        opt.style.pointerEvents = 'auto';
+                    });
+                }, 2000);
+            }
+        }
+
+        // Auto-open first section
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSection = document.querySelector('.section-header');
+            if (firstSection) {
+                toggleSection(firstSection);
+            }
+        });
+    </script>
+</body>
+</html>

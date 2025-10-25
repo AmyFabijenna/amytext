@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 5: Interaktive Übungen</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #003d5c 0%, #004d73 50%, #005580 100%);
+            color: #000;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .header h1 { color: #003d5c; font-size: 2.2em; margin-bottom: 10px; }
+        .header .module-number {
+            background: #FF6B35;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .nav-buttons { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-button {
+            background: #fff;
+            color: #003d5c;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #004d73;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background: #FF6B35;
+            color: #fff;
+            border-color: #FF6B35;
+            transform: translateY(-2px);
+        }
+        .section {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .section-header {
+            background: #004d73;
+            color: #fff;
+            padding: 20px 25px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        .section-header:hover { background: #003d5c; }
+        .section-content {
+            padding: 25px;
+            display: none;
+            color: #000;
+        }
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .toggle-icon { font-size: 1.2em; transition: transform 0.3s ease; }
+        .toggle-icon.rotated { transform: rotate(180deg); }
+        
+        .exercise-box {
+            background: #fff3e0;
+            border: 3px solid #FF6B35;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .exercise-box h3 {
+            color: #003d5c;
+            margin-bottom: 15px;
+        }
+        .quiz-container {
+            background: #f0f8ff;
+            border: 3px solid #004d73;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .quiz-question {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+        }
+        .quiz-question h4 {
+            color: #003d5c;
+            margin-bottom: 15px;
+        }
+        .quiz-option {
+            background: #f5f5f5;
+            border: 2px solid #004d73;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .quiz-option:hover {
+            background: #e6f3ff;
+            transform: translateX(5px);
+        }
+        .quiz-option.correct {
+            background: #4caf50;
+            color: #fff;
+            border-color: #4caf50;
+        }
+        .quiz-option.wrong {
+            background: #f44336;
+            color: #fff;
+            border-color: #f44336;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .feedback.correct {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+        }
+        .feedback.wrong {
+            background: #ffebee;
+            border: 2px solid #f44336;
+        }
+        .score-display {
+            background: linear-gradient(135deg, #004d73 0%, #003d5c 100%);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .score-display .score-number {
+            font-size: 2em;
+            color: #FF6B35;
+            font-weight: bold;
+        }
+        .lueckentext {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 2.5;
+            border: 2px solid #004d73;
+        }
+        .luecke {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid #004d73;
+            margin: 0 5px;
+            padding: 0 5px;
+        }
+        .luecke input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            text-align: center;
+        }
+        .luecke input:focus {
+            outline: none;
+            background: #e6f3ff;
+        }
+        .check-button {
+            background: #FF6B35;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .check-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+        .check-button:active {
+            transform: translateY(0);
+        }
+        .writing-exercise {
+            margin: 20px 0;
+        }
+        .writing-exercise textarea {
+            width: 100%;
+            min-height: 200px;
+            border: 2px solid #004d73;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .word-counter {
+            text-align: right;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .timer-box {
+            background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .timer-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .timer-button {
+            background: #fff;
+            color: #FF6B35;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .timer-button:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+        .example-text {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example-text h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="module-number">Modul 5</div>
+            <h1>🎮 Interaktive Übungen</h1>
+            <p>Teste und trainiere dein Wissen mit abwechslungsreichen Übungen</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="modul4-sprache.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+            <a href="modul6-praxis.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+
+        <!-- Section 1: Großes Quiz -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                🎯 Großes Wissensquiz
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="score-display" id="scoreDisplay">
+                    Erreichte Punkte: <span class="score-number" id="scoreNumber">0</span> / 10
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <h4>Frage 1: In welcher Zeitform schreibst du eine Zusammenfassung?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 1)">Präsens (Gegenwart)</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 1)">Präteritum (Vergangenheit)</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 1)">Perfekt</div>
+                        <div class="feedback" id="quiz-feedback1"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 2: Was gehört in die Einleitung einer Zusammenfassung?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 2)">Deine eigene Meinung zum Thema</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 2)">Autor, Titel, Quelle, Datum und Hauptthema</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 2)">Detaillierte Beispiele aus dem Text</div>
+                        <div class="feedback" id="quiz-feedback2"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 3: Wie lang sollte eine Zusammenfassung ungefähr sein?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 3)">Genauso lang wie das Original</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 3)">Etwa 1/3 bis 1/4 des Originaltextes</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 3)">Mindestens 500 Wörter</div>
+                        <div class="feedback" id="quiz-feedback3"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 4: Welche Aussage ist richtig?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 4)">Du darfst ganze Sätze aus dem Original übernehmen</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 4)">Du musst alles in eigenen Worten formulieren</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 4)">Du sollst den Stil des Autors nachahmen</div>
+                        <div class="feedback" id="quiz-feedback4"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 5: Was darfst du NICHT in eine Zusammenfassung schreiben?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 5)">Die Hauptaussagen des Textes</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 5)">Deine eigene Meinung und Bewertung</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 5)">Verbindungswörter wie "deshalb" oder "jedoch"</div>
+                        <div class="feedback" id="quiz-feedback5"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 6: Welches Verbindungswort zeigt einen Gegensatz?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 6)">deshalb</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 6)">jedoch</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 6)">außerdem</div>
+                        <div class="feedback" id="quiz-feedback6"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 7: Was bedeutet "sachlich schreiben"?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 7)">Neutral und objektiv ohne eigene Wertung</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 7)">Mit vielen Fachbegriffen und schwierigen Wörtern</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 7)">Mit emotionaler und lebendiger Sprache</div>
+                        <div class="feedback" id="quiz-feedback7"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 8: Was gehört NICHT in eine Zusammenfassung?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 8)">Detaillierte Beispiele und Anekdoten</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 8)">Die Hauptargumente des Autors</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 8)">Die Kernbotschaft des Textes</div>
+                        <div class="feedback" id="quiz-feedback8"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 9: Wie viele Lesedurchgänge solltest du vor dem Schreiben machen?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 9)">Einen - mehr braucht man nicht</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 9)">Mindestens drei (Überblick, Markieren, Strukturieren)</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 9)">Fünf - nur so versteht man den Text richtig</div>
+                        <div class="feedback" id="quiz-feedback9"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Frage 10: Welcher Satz ist korrekt für eine Zusammenfassung?</h4>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 10)">"Der Autor beschrieb interessanterweise, dass..."</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, true, 10)">"Der Autor zeigt, dass..."</div>
+                        <div class="quiz-option" onclick="checkQuizAnswer(this, false, 10)">"Ich finde, der Autor hat recht, dass..."</div>
+                        <div class="feedback" id="quiz-feedback10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Lückentext -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✍️ Lückentext-Übung
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="exercise-box">
+                    <h3>Fülle die Lücken aus!</h3>
+                    <p style="margin-bottom: 20px;">Ergänze die fehlenden Wörter für eine perfekte Einleitung:</p>
+                    
+                    <div class="lueckentext" id="lueckentext">
+                        <p>
+                            In dem <span class="luecke"><input type="text" id="luecke1" data-answer="Artikel"></span> 
+                            "Eine Schrift als Glaubensfrage" von David <span class="luecke"><input type="text" id="luecke2" data-answer="Tiefenthaler"></span>, 
+                            erschienen am [Datum] in [Medium], <span class="luecke"><input type="text" id="luecke3" data-answer="setzt"></span> 
+                            sich der Autor mit der Debatte über die <span class="luecke"><input type="text" id="luecke4" data-answer="Schreibschrift"></span> 
+                            auseinander. Er <span class="luecke"><input type="text" id="luecke5" data-answer="zeigt"></span> 
+                            verschiedene Positionen zur Frage, ob Handschrift im digitalen Zeitalter noch einen 
+                            <span class="luecke"><input type="text" id="luecke6" data-answer="Platz"></span> 
+                            im Lehrplan haben sollte.
+                        </p>
+                    </div>
+                    
+                    <button class="check-button" onclick="checkLueckentext()">Lückentext überprüfen</button>
+                    <div class="feedback" id="lueckentext-feedback"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Schreibübung mit Timer -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ⏱️ Schreibübung mit Timer
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="timer-box">
+                    <h3 style="margin-bottom: 15px;">Zeitnahme für deine Zusammenfassung</h3>
+                    <p style="margin-bottom: 15px;">Übe unter realistischen Bedingungen!</p>
+                    <div class="timer-display" id="timerDisplay">00:00</div>
+                    <div class="timer-controls">
+                        <button class="timer-button" onclick="startTimer(10)">10 Minuten</button>
+                        <button class="timer-button" onclick="startTimer(15)">15 Minuten</button>
+                        <button class="timer-button" onclick="startTimer(20)">20 Minuten</button>
+                        <button class="timer-button" onclick="stopTimer()">Stop</button>
+                        <button class="timer-button" onclick="resetTimer()">Zurücksetzen</button>
+                    </div>
+                </div>
+
+                <div class="example-text">
+                    <h4>📄 Übungstext: Digitalisierung in Schulen</h4>
+                    <p style="line-height: 1.8;">
+                        In den letzten Jahren hat die Digitalisierung auch in den Schulen Einzug gehalten. 
+                        Tablets, Laptops und interaktive Whiteboards gehören mittlerweile in vielen Klassenzimmern 
+                        zur Standardausstattung. Befürworter dieser Entwicklung betonen, dass digitale Medien den 
+                        Unterricht bereichern und Schüler auf die moderne Arbeitswelt vorbereiten. Kritiker warnen 
+                        jedoch vor zu viel Bildschirmzeit und befürchten, dass traditionelle Lernmethoden wie das 
+                        handschriftliche Schreiben vernachlässigt werden könnten. Studien zeigen unterschiedliche 
+                        Ergebnisse: Während einige Untersuchungen positive Effekte auf die Motivation und Kreativität 
+                        der Schüler feststellen, weisen andere auf Ablenkungspotenzial und gesundheitliche Risiken hin.
+                    </p>
+                </div>
+
+                <div class="writing-exercise">
+                    <h4 style="color: #003d5c; margin-bottom: 15px;">✍️ Schreibe hier deine Zusammenfassung:</h4>
+                    <textarea id="writingArea" placeholder="Beginne mit der Einleitung (W-Fragen beantworten), dann fasse die Hauptpunkte zusammen..."></textarea>
+                    <div class="word-counter" id="wordCounter">0 Wörter</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons" style="margin-top: 40px;">
+            <a href="modul4-sprache.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+            <a href="modul6-praxis.html" class="nav-button">Nächstes Modul ➡</a>
+        </div>
+    </div>
+
+    <script>
+        let currentScore = 0;
+        let timerInterval = null;
+        let timeLeft = 0;
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        function checkQuizAnswer(element, isCorrect, questionNumber) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('quiz-feedback' + questionNumber);
+            
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.className = 'feedback correct show';
+                feedback.textContent = '✅ Richtig!';
+                currentScore++;
+            } else {
+                element.classList.add('wrong');
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = '❌ Falsch. Versuche die anderen Optionen oder schaue im Lernmaterial nach.';
+            }
+            
+            document.getElementById('scoreNumber').textContent = currentScore;
+        }
+
+        function checkLueckentext() {
+            const inputs = document.querySelectorAll('.luecke input');
+            let correct = 0;
+            
+            inputs.forEach(input => {
+                const answer = input.getAttribute('data-answer').toLowerCase();
+                const userAnswer = input.value.trim().toLowerCase();
+                
+                if (userAnswer === answer) {
+                    input.style.background = '#c8e6c9';
+                    correct++;
+                } else {
+                    input.style.background = '#ffcdd2';
+                }
+            });
+            
+            const feedback = document.getElementById('lueckentext-feedback');
+            feedback.classList.add('show');
+            
+            if (correct === inputs.length) {
+                feedback.className = 'feedback correct show';
+                feedback.textContent = `✅ Perfekt! Alle ${correct} Lücken richtig ausgefüllt!`;
+            } else {
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = `Du hast ${correct} von ${inputs.length} Lücken richtig ausgefüllt. Die falschen Lücken sind rot markiert.`;
+            }
+        }
+
+        function startTimer(minutes) {
+            stopTimer();
+            timeLeft = minutes * 60;
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    alert('⏰ Zeit ist um!');
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function resetTimer() {
+            stopTimer();
+            timeLeft = 0;
+            updateTimerDisplay();
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Word counter
+        document.getElementById('writingArea').addEventListener('input', function() {
+            const text = this.value.trim();
+            const wordCount = text.length > 0 ? text.split(/\s+/).length : 0;
+            document.getElementById('wordCounter').textContent = `${wordCount} Wörter`;
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSection = document.querySelector('.section-header');
+            if (firstSection) {
+                toggleSection(firstSection);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 6: Praxis & Checklisten</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #003d5c 0%, #004d73 50%, #005580 100%);
+            color: #000;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .header {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .header h1 { color: #003d5c; font-size: 2.2em; margin-bottom: 10px; }
+        .header .module-number {
+            background: #FF6B35;
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .nav-buttons { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-button {
+            background: #fff;
+            color: #003d5c;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #004d73;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background: #FF6B35;
+            color: #fff;
+            border-color: #FF6B35;
+            transform: translateY(-2px);
+        }
+        .section {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .section-header {
+            background: #004d73;
+            color: #fff;
+            padding: 20px 25px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+        .section-header:hover { background: #003d5c; }
+        .section-content {
+            padding: 25px;
+            display: none;
+            color: #000;
+        }
+        .section-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .toggle-icon { font-size: 1.2em; transition: transform 0.3s ease; }
+        .toggle-icon.rotated { transform: rotate(180deg); }
+        
+        .step-by-step {
+            background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+            border-left: 5px solid #FF6B35;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+        .step-by-step h3 {
+            color: #003d5c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .step-number {
+            background: #FF6B35;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .checklist {
+            background: #fff;
+            border: 3px solid #4caf50;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .checklist h3 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 12px;
+            margin: 8px 0;
+            background: #f9f9f9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .checklist-item:hover {
+            background: #e8f5e9;
+            transform: translateX(5px);
+        }
+        .checkbox {
+            width: 25px;
+            height: 25px;
+            border: 3px solid #4caf50;
+            border-radius: 5px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .checklist-item.checked .checkbox {
+            background: #4caf50;
+        }
+        .checklist-item.checked .checkbox:after {
+            content: "✓";
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .error-box {
+            background: #ffebee;
+            border: 3px solid #f44336;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .error-box h4 {
+            color: #c62828;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .error-icon {
+            background: #f44336;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .tip-card {
+            background: #fff3e0;
+            border: 2px solid #FF6B35;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .tip-card h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        .download-box {
+            background: linear-gradient(135deg, #004d73 0%, #003d5c 100%);
+            color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .download-box h3 {
+            color: #FF6B35;
+            margin-bottom: 15px;
+        }
+        .download-button {
+            background: #FF6B35;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .download-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+        .example-summary {
+            background: #f0f8ff;
+            border: 3px solid #004d73;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .example-summary h4 {
+            color: #003d5c;
+            margin-bottom: 15px;
+        }
+        .example-part {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #FF6B35;
+        }
+        .example-part h5 {
+            color: #FF6B35;
+            margin-bottom: 8px;
+        }
+        .book-reference {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid #FF6B35;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .book-reference strong { color: #003d5c; }
+        .congrats-box {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .congrats-box h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="module-number">Modul 6</div>
+            <h1>🚀 Praxis & Checklisten</h1>
+            <p>Die Schritt-für-Schritt-Anleitung mit Checklisten und häufigen Fehlern</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="modul5-uebungen.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+        </div>
+
+        <!-- Section 1: Schritt-für-Schritt Anleitung -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📋 Schritt-für-Schritt Anleitung
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 20px; font-size: 1.1em;">Folge dieser Anleitung, um eine perfekte Zusammenfassung zu schreiben:</p>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">1</span> Vorbereitung: Text lesen</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                        <li><strong>Erster Durchgang:</strong> Text komplett durchlesen für Überblick</li>
+                        <li><strong>Zweiter Durchgang:</strong> Wichtige Stellen markieren (gelb = wichtig)</li>
+                        <li><strong>Dritter Durchgang:</strong> Struktur und Argumentationsaufbau verstehen</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">2</span> W-Fragen beantworten</h3>
+                    <p style="margin-bottom: 10px;">Notiere die Antworten für deine Einleitung:</p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Wer:</strong> Autor/Autorin</li>
+                        <li><strong>Was:</strong> Textsorte (Artikel, Bericht, etc.)</li>
+                        <li><strong>Wo:</strong> Erscheinungsort (Zeitung, Website)</li>
+                        <li><strong>Wann:</strong> Datum</li>
+                        <li><strong>Worum:</strong> Hauptthema in einem Satz</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">3</span> Gliederung erstellen</h3>
+                    <p style="margin-bottom: 10px;">Schreibe die Hauptpunkte als Stichworte auf:</p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>3-5 Hauptaussagen des Textes</li>
+                        <li>Logische Reihenfolge festlegen</li>
+                        <li>Verbindungen zwischen den Punkten überlegen</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">4</span> Einleitung schreiben</h3>
+                    <p style="margin-bottom: 10px;">Formuliere 1-2 Sätze mit den W-Fragen:</p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>Alle W-Fragen in 1-2 Sätzen beantworten</li>
+                        <li>Im Präsens schreiben</li>
+                        <li>Sachlich bleiben</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">5</span> Hauptteil schreiben</h3>
+                    <p style="margin-bottom: 10px;">Fasse die Hauptpunkte zusammen:</p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>Jeden Hauptpunkt in eigenen Worten wiedergeben</li>
+                        <li>Verbindungswörter verwenden (deshalb, jedoch, außerdem)</li>
+                        <li>Keine Details oder Beispiele aus dem Original</li>
+                        <li>Durchgehend Präsens verwenden</li>
+                    </ul>
+                </div>
+
+                <div class="step-by-step">
+                    <h3><span class="step-number">6</span> Überarbeiten & Korrigieren</h3>
+                    <p style="margin-bottom: 10px;">Prüfe deine Zusammenfassung:</p>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li>Rechtschreibung und Grammatik kontrollieren</li>
+                        <li>Länge überprüfen (1/3 bis 1/4 des Originals)</li>
+                        <li>Checkliste durchgehen (siehe unten)</li>
+                    </ul>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Diese Schritte basieren auf den Aufgaben A21-A24 auf Seite 289
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Interaktive Checkliste -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ✅ Interaktive Checkliste
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 20px;">Klicke die Punkte an, um sie abzuhaken. So stellst du sicher, dass du nichts vergessen hast!</p>
+
+                <div class="checklist">
+                    <h3>📝 Inhalt & Struktur</h3>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Einleitung mit allen W-Fragen (Wer, Was, Wo, Wann, Worum)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Hauptpunkte des Textes erfasst</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Logische Reihenfolge eingehalten</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Keine unwichtigen Details</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Keine Beispiele aus dem Original</div>
+                    </div>
+                </div>
+
+                <div class="checklist">
+                    <h3>💬 Sprache & Stil</h3>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Durchgehend im Präsens geschrieben</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Alles in eigenen Worten formuliert</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Sachlich und objektiv (keine eigene Meinung)</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Verbindungswörter verwendet</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Keine wörtlichen Zitate</div>
+                    </div>
+                </div>
+
+                <div class="checklist">
+                    <h3>📏 Länge & Form</h3>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Länge: etwa 1/3 bis 1/4 des Originals</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Rechtschreibung geprüft</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Grammatik kontrolliert</div>
+                    </div>
+                    <div class="checklist-item" onclick="toggleCheck(this)">
+                        <div class="checkbox"></div>
+                        <div>Flüssiger Schreibstil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Häufige Fehler -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                ⚠️ Die 10 häufigsten Fehler
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p style="margin-bottom: 25px;">Diese Fehler machen viele Schüler*innen – vermeide sie!</p>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">1</span> Vergangenheitsform verwenden</h4>
+                    <p><strong>Falsch:</strong> "Der Autor beschrieb..."<br>
+                    <strong>Richtig:</strong> "Der Autor beschreibt..."</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">2</span> Eigene Meinung einbringen</h4>
+                    <p><strong>Falsch:</strong> "Ich finde, dass der Autor recht hat..."<br>
+                    <strong>Richtig:</strong> "Der Autor argumentiert, dass..."</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">3</span> Ganze Sätze abschreiben</h4>
+                    <p><strong>Falsch:</strong> Wörtliche Übernahme von Sätzen<br>
+                    <strong>Richtig:</strong> Komplett umformulieren in eigenen Worten</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">4</span> Zu viele Details</h4>
+                    <p><strong>Falsch:</strong> Alle Beispiele und Nebensächlichkeiten aufführen<br>
+                    <strong>Richtig:</strong> Nur Hauptaussagen und Kernargumente</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">5</span> W-Fragen vergessen</h4>
+                    <p><strong>Falsch:</strong> Einleitung ohne Autor, Titel oder Quelle<br>
+                    <strong>Richtig:</strong> Alle W-Fragen in der Einleitung beantworten</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">6</span> Keine Verbindungswörter</h4>
+                    <p><strong>Falsch:</strong> Aneinanderreihung von Sätzen ohne Zusammenhang<br>
+                    <strong>Richtig:</strong> Logische Verbindungen mit Konnektoren herstellen</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">7</span> Zu lang oder zu kurz</h4>
+                    <p><strong>Falsch:</strong> Zusammenfassung ist fast so lang wie das Original<br>
+                    <strong>Richtig:</strong> Etwa 1/3 bis 1/4 der Originallänge</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">8</span> Emotionale Sprache</h4>
+                    <p><strong>Falsch:</strong> "Die unglaubliche Studie zeigt erstaunlicherweise..."<br>
+                    <strong>Richtig:</strong> "Die Studie zeigt..."</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">9</span> Reihenfolge durcheinander</h4>
+                    <p><strong>Falsch:</strong> Willkürliche Reihenfolge der Informationen<br>
+                    <strong>Richtig:</strong> Logische oder chronologische Struktur</p>
+                </div>
+
+                <div class="error-box">
+                    <h4><span class="error-icon">10</span> Nur Wörter austauschen</h4>
+                    <p><strong>Falsch:</strong> "Die Diskussion ist heftig" → "Die Debatte ist stark"<br>
+                    <strong>Richtig:</strong> Komplette Satzumstellung: "Ob Handschrift gelehrt werden soll, wird kontrovers diskutiert"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Beispiel-Zusammenfassung -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                📄 Muster-Zusammenfassung
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="example-summary">
+                    <h4>Beispiel: Zusammenfassung zum Thema "Schreibschrift"</h4>
+                    
+                    <div class="example-part">
+                        <h5>Einleitung (W-Fragen)</h5>
+                        <p>In dem Artikel "Eine Schrift als Glaubensfrage" von David Tiefenthaler, erschienen in [Medium] am [Datum], setzt sich der Autor mit der aktuellen Debatte über die Zukunft der Schreibschrift im Schulunterricht auseinander. Er beleuchtet verschiedene Positionen zur Frage, ob handschriftliches Schreiben im digitalen Zeitalter noch einen festen Platz im Lehrplan haben sollte.</p>
+                    </div>
+
+                    <div class="example-part">
+                        <h5>Hauptteil (Kernaussagen)</h5>
+                        <p>Der Text zeigt zunächst, dass die Schreibschrift in vielen Ländern zunehmend aus dem Lehrplan verschwindet. Während Finnland diese Entscheidung bereits vor Jahren umgesetzt hat, wird in Österreich und Deutschland noch kontrovers diskutiert. 
+                        <br><br>
+                        Befürworter der Handschrift argumentieren, dass das Schreiben mit der Hand die Gedächtnisleistung fördert und die Feinmotorik trainiert. Zudem belegen amerikanische Studien, dass handschriftliche Notizen zu besseren Lernergebnissen führen als digitale Mitschriften.
+                        <br><br>
+                        Hingegen betonen Kritiker, dass die Zeit sinnvoller für den Erwerb digitaler Kompetenzen genutzt werden sollte. Sie verweisen darauf, dass die Schreibkompetenz der Schüler*innen ohnehin bereits deutlich nachgelassen hat.
+                        <br><br>
+                        Der Autor stellt abschließend dar, dass die Debatte weiterhin ungeklärt bleibt und beide Seiten überzeugende Argumente vorbringen.</p>
+                    </div>
+
+                    <p style="margin-top: 20px; color: #666; font-style: italic;">
+                        <strong>Hinweis:</strong> Diese Zusammenfassung demonstriert alle wichtigen Merkmale: Präsens, eigene Worte, sachlicher Stil, Verbindungswörter, logische Struktur.
+                    </p>
+                </div>
+
+                <div class="book-reference">
+                    <strong>📖 Klartext Deutsch 5:</strong> Vergleiche mit dem Mustertext auf Seite 289 - Aufgabe A23
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Tipps für Profis -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                💡 Profi-Tipps
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="tip-grid">
+                    <div class="tip-card">
+                        <h4>⏱️ Zeitmanagement</h4>
+                        <p>Nimm dir genug Zeit für die Vorbereitung! 40% Lesen & Markieren, 60% Schreiben.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>📝 Weniger ist mehr</h4>
+                        <p>Lieber kürzer und präzise als zu lang und ausschweifend. Konzentriere dich aufs Wesentliche!</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>🔄 Umformulieren üben</h4>
+                        <p>Je mehr du übst, desto leichter fällt es! Nimm dir jeden Tag einen kurzen Absatz vor.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>📚 Synonyme sammeln</h4>
+                        <p>Lege dir eine Liste mit Synonymen für häufige Wörter an ("zeigen", "sagen", "wichtig").</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>✍️ Erst Rohfassung</h4>
+                        <p>Schreibe erst die Rohfassung, dann überarbeite! Perfektion braucht Zeit.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h4>👥 Feedback einholen</h4>
+                        <p>Lass andere deine Zusammenfassung lesen. Frische Augen sehen mehr Fehler!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Congratulations Section -->
+        <div class="congrats-box">
+            <h2>🎉 Herzlichen Glückwunsch!</h2>
+            <p style="font-size: 1.2em; margin: 15px 0;">Du hast alle 6 Module abgeschlossen und kennst jetzt alle Techniken zum Schreiben professioneller Zusammenfassungen!</p>
+            <p style="margin-top: 20px;">
+                <a href="index.html" class="download-button" style="background: #fff; color: #4caf50;">🏠 Zurück zur Übersicht</a>
+                <a href="modul5-uebungen.html" class="download-button" style="background: #fff; color: #2196f3;">🎮 Übungen wiederholen</a>
+            </p>
+        </div>
+
+        <div class="nav-buttons" style="margin-top: 40px;">
+            <a href="modul5-uebungen.html" class="nav-button">⬅ Vorheriges Modul</a>
+            <a href="index.html" class="nav-button">🏠 Zur Übersicht</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+
+        function toggleCheck(item) {
+            item.classList.toggle('checked');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSection = document.querySelector('.section-header');
+            if (firstSection) {
+                toggleSection(firstSection);
+            }
+        });
+    </script>
+</body>
+</html>
