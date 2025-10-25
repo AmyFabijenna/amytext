@@ -3,616 +3,1129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texte schreiben mit Amy</title>
-    <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    <title>Textgebundene Erörterung - Komplettes Lernmaterial</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a237e 0%, #303f9f 25%, #3f51b5 50%, #ff6f00 75%, #ffb300 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+    color: #212121;
+    display: flex;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.sidebar {
+    width: 280px;
+    background: rgba(26, 35, 126, 0.95);
+    color: white;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, #1a237e, #303f9f);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+}
+
+.sidebar-header h1 {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    color: #ffb300;
+}
+
+.sidebar-header p {
+    font-size: 0.9em;
+    opacity: 0.9;
+    color: #fff;
+}
+
+.nav-menu {
+    padding: 15px 0;
+}
+
+.nav-section {
+    margin-bottom: 5px;
+}
+
+.nav-section-title {
+    padding: 12px 20px;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffb300;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+    margin-bottom: 5px;
+    background: rgba(255, 111, 0, 0.1);
+}
+
+.nav-item {
+    margin: 2px 0;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+    font-size: 0.9em;
+}
+
+.nav-link:hover {
+    background: rgba(255, 193, 7, 0.2);
+    border-left-color: #ffb300;
+    transform: translateX(5px);
+}
+
+.nav-link.active {
+    background: rgba(255, 143, 0, 0.3);
+    border-left-color: #ff8f00;
+    font-weight: bold;
+}
+
+.main-content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    width: calc(100% - 280px);
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.content-header {
+    background: linear-gradient(135deg, #ff6f00, #ffb300, #ffc107);
+    color: #212121;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.content-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: float 30s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateX(-50px) translateY(-50px); }
+    100% { transform: translateX(50px) translateY(50px); }
+}
+
+.content-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+    font-weight: 700;
+}
+
+.content-header p {
+    font-size: 1.2em;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+}
+
+.content-body {
+    padding: 40px;
+}
+
+.welcome-section {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    border-left: 5px solid #ff6f00;
+}
+
+.welcome-section h2 {
+    color: #ff6f00;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.welcome-section h3 {
+    color: #ff8f00;
+    margin: 20px 0 10px 0;
+    font-size: 1.3em;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(255, 111, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-left: 4px solid #ff6f00;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 111, 0, 0.3);
+}
+
+.feature-card h3 {
+    color: #ff6f00;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.feature-card p {
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.6;
+}
+
+.tip-box {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    border-left: 4px solid #ff9800;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.tip-box strong {
+    color: #e65100;
+}
+
+.back-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6f00, #ff8f00);
+    color: #212121;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.back-button:hover {
+    background: linear-gradient(135deg, #ff8f00, #ffb300);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 143, 0, 0.4);
+}
+
+.chapter-content {
+    line-height: 1.8;
+}
+
+.chapter-content h2 {
+    color: #ff6f00;
+    margin: 25px 0 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ffe0b2;
+}
+
+.chapter-content h3 {
+    color: #ff8f00;
+    margin: 20px 0 12px;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 50px;
+    color: #ff6f00;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 111, 0, 0.1);
+    border-left: 4px solid #ff6f00;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+    border-left: 4px solid #f44336;
+}
+
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: #1a237e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* ============================================
+   EBENE 1 - Hauptkapitel (immer sichtbar)
+   ============================================ */
+.main-chapter {
+    background: linear-gradient(135deg, #ff6f00, #ff8f00);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+    box-shadow: 0 6px 20px rgba(255, 111, 0, 0.25);
+}
+
+.main-chapter .main-title {
+    color: #212121;
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.main-chapter .section-title {
+    color: #212121;
+    font-size: 1.6em;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   EBENE 2 - Ausklappbare Bereiche (Blautöne)
+   ============================================ */
+.section-card.level-2 {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(66, 165, 245, 0.2);
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.section-card.level-2:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 165, 245, 0.3);
+    border-color: #42a5f5;
+}
+
+.section-card.level-2 > .section-header {
+    background: linear-gradient(135deg, #5c9bd1, #6fa8dc);
+    color: white;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background 0.3s ease;
+}
+
+.section-card.level-2 > .section-header:hover {
+    background: linear-gradient(135deg, #6fa8dc, #85b8e0);
+}
+
+.section-card.level-2 > .section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 20px;
+}
+
+.section-card.level-2 > .section-content.active {
+    max-height: 5000px;
+    padding: 20px;
+}
+
+/* ============================================
+   EBENE 3 - Verschachtelte Unterbereiche
+   ============================================ */
+.section-card.level-3 {
+    background: linear-gradient(135deg, #e8f4fd, #cfe3f7);
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 3px 10px rgba(100, 181, 246, 0.15);
+    overflow: hidden;
+    border: 1px solid #b3d9f2;
+    transition: all 0.3s ease;
+}
+
+.section-card.level-3:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(100, 181, 246, 0.25);
+}
+
+.section-card.level-3 > .section-header {
+    background: linear-gradient(135deg, #85b8e0, #9ac9e8);
+    color: #212121;
+    padding: 12px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: background 0.3s ease;
+}
+
+.section-card.level-3 > .section-header:hover {
+    background: linear-gradient(135deg, #9ac9e8, #afd4ed);
+}
+
+.section-card.level-3 > .section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 18px;
+}
+
+.section-card.level-3 > .section-content.active {
+    max-height: 3000px;
+    padding: 18px;
+}
+
+/* Allgemeine section-card (ohne Level-Angabe) */
+.section-card {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(66, 165, 245, 0.2);
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.section-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 165, 245, 0.3);
+    border-color: #42a5f5;
+}
+
+.section-card > .section-header {
+    background: linear-gradient(135deg, #5c9bd1, #6fa8dc);
+    color: white;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background 0.3s ease;
+}
+
+.section-card > .section-header:hover {
+    background: linear-gradient(135deg, #6fa8dc, #85b8e0);
+}
+
+.section-card > .section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 20px;
+}
+
+.section-card > .section-content.active {
+    max-height: 5000px;
+    padding: 20px;
+}
+
+/* ============================================
+   Toggle-Pfeil
+   ============================================ */
+.toggle-arrow {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+    font-weight: bold;
+}
+
+.section-header.active .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+/* ============================================
+   Übungen (Grüne Akzente)
+   ============================================ */
+.exercise-card {
+    border-left: 5px solid #4caf50 !important;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9) !important;
+}
+
+.exercise-card > .section-header {
+    background: linear-gradient(135deg, #66bb6a, #81c784) !important;
+    color: white !important;
+}
+
+/* ============================================
+   Lösungs-Buttons
+   ============================================ */
+.solution-toggle {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.solution-btn {
+    background: linear-gradient(135deg, #ff9800, #ffb74d);
+    color: #212121;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.solution-btn:hover {
+    background: linear-gradient(135deg, #ffb74d, #ffcc80);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 152, 0, 0.4);
+}
+
+.solution-card {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important;
+    border-left: 4px solid #ff9800 !important;
+    margin-top: 15px;
+    display: none;
+}
+
+.solution-content {
+    background: #fffbf5;
+    padding: 15px !important;
+    border-radius: 8px;
+}
+
+.solution-content h4 {
+    color: #e65100;
+    margin-bottom: 12px;
+}
+
+/* ============================================
+   Tabellen
+   ============================================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background: linear-gradient(135deg, #5c9bd1, #6fa8dc);
+    color: white;
+}
+
+table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================
+   Text-Formatierung in Sections
+   ============================================ */
+.section-content p {
+    margin: 12px 0;
+    line-height: 1.7;
+}
+
+.section-content ul, 
+.section-content ol {
+    margin: 12px 0;
+    padding-left: 25px;
+}
+
+.section-content li {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.section-content strong {
+    color: #1565c0;
+    font-weight: 600;
+}
+
+.section-content em {
+    color: #424242;
+}
+
+/* ============================================
+   Willkommen-Seite Styles
+   ============================================ */
+.navigation {
+    margin-bottom: 30px;
+}
+
+.home-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6f00, #ff8f00);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
+}
+
+.home-link:hover {
+    background: linear-gradient(135deg, #ff8f00, #ffb300);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 111, 0, 0.4);
+}
+
+.info-message {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-left: 5px solid #2196f3;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+    font-size: 1.1em;
+    color: #1565c0;
+}
+
+.whatsapp-button-container {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.whatsapp-button {
+    display: inline-block;
+    background: #25d366;
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-button:hover {
+    background: #128c7e;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+}
+
+.closing-section {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 40px;
+    text-align: center;
+    border-left: 5px solid #ff9800;
+}
+
+.closing-section h2 {
+    color: #e65100;
+    margin-bottom: 15px;
+}
+
+.closing-section p {
+    color: #424242;
+    font-size: 1.05em;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 968px) {
+    .sidebar {
+        transform: translateX(-280px);
     }
 
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #005580 0%, #0077be 50%, #1e90ff 100%);
-        min-height: 100vh;
-        padding: 0;
-        line-height: 1.6;
-        color: #000;
-    }
-
-    /* Top Navigation */
-    .top-navigation {
-        background: #003d5c;
-        padding: 10px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .top-nav-links {
-        display: flex;
-        gap: 10px;
-    }
-    
-    .top-nav-links a {
-        color: white;
-        text-decoration: none;
-        padding: 6px 12px;
-        background: #005580;
-        border-radius: 5px;
-        transition: background 0.3s;
-        font-size: 0.9em;
-    }
-    
-    .top-nav-links a:hover {
-        background: #0077be;
-    }
-
-    .home-button-top {
-        background: #ffc107 !important;
-        color: #333 !important;
-    }
-
-    .home-button-top:hover {
-        background: #e0a800 !important;
+    .sidebar.active {
+        transform: translateX(0);
     }
 
     .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .content-body {
         padding: 20px;
     }
 
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        background: rgba(255, 255, 255, 0.98);
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-    }
-
-    .header {
-        background: linear-gradient(135deg, #005580, #0077be);
-        color: white;
-        text-align: center;
-        padding: 50px 20px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .header::before {
-        content: '✏️ 📝 🖊️ 📖 ✨ 🎨 📚 ✒️';
-        position: absolute;
-        top: 10px;
-        left: 0;
-        right: 0;
+    .content-header h1 {
         font-size: 2em;
-        opacity: 0.2;
-        animation: float 20s infinite linear;
     }
 
-    @keyframes float {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
+    .feature-grid {
+        grid-template-columns: 1fr;
     }
-
-    .header h1 {
-        font-size: 2.8em;
-        margin-bottom: 15px;
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-        position: relative;
-        z-index: 1;
+    
+    .main-chapter {
+        padding: 20px;
+        margin: 20px 0;
     }
-
-    .header p {
+    
+    .main-chapter .main-title {
+        font-size: 1.6em;
+    }
+    
+    .main-chapter .section-title {
         font-size: 1.3em;
-        opacity: 0.95;
-        position: relative;
-        z-index: 1;
     }
-
-    .content {
-        padding: 40px;
+    
+    .section-card.level-2 > .section-header {
+        font-size: 1em;
+        padding: 14px 16px;
     }
-
-    .intro-text {
-        background: linear-gradient(135deg, #e8f4f8, #fff5e6);
-        padding: 30px;
-        border-radius: 15px;
-        margin-bottom: 40px;
-        border-left: 6px solid #ff6b35;
-        text-align: center;
-        font-size: 1.15em;
-        color: #000;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    
+    .section-card.level-2 > .section-content {
+        padding: 0 16px;
     }
-
-    /* Ausklappbare Schulstufen-Bereiche */
-    .grade-section {
-        margin-bottom: 20px;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
+    
+    .section-card.level-2 > .section-content.active {
+        padding: 16px;
     }
-
-    .grade-section:hover {
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    
+    .section-card.level-3 > .section-header {
+        font-size: 0.9em;
+        padding: 10px 14px;
     }
-
-    .grade-header {
-        background: linear-gradient(135deg, #ff6b35, #ff8c42);
-        color: #000;
-        padding: 20px 30px;
-        font-size: 1.4em;
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.3s ease;
-        border: none;
-        width: 100%;
-        text-align: left;
+    
+    .section-card.level-3 > .section-content {
+        padding: 0 14px;
     }
-
-    .grade-header:hover {
-        background: linear-gradient(135deg, #ff8c42, #ffa35c);
-        transform: translateX(5px);
+    
+    .section-card.level-3 > .section-content.active {
+        padding: 14px;
     }
-
-    .grade-header .icon {
-        font-size: 1.5em;
-        display: flex;
-        align-items: center;
-        gap: 15px;
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
-
-    .grade-header .arrow {
-        font-size: 1.2em;
-        transition: transform 0.3s ease;
-    }
-
-    .grade-header.active .arrow {
-        transform: rotate(90deg);
-    }
-
-    .grade-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out;
-        background: linear-gradient(135deg, #e8f4f8, #f0f8ff);
-    }
-
-    .grade-content.active {
-        max-height: 2000px;
-        transition: max-height 0.6s ease-in;
-    }
-
-    .buttons-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        padding: 25px;
-    }
-
-    .document-button {
-        background: linear-gradient(135deg, #005580, #0077be);
-        color: #fff;
-        padding: 25px;
-        border: none;
-        border-radius: 15px;
-        font-size: 1.1em;
-        font-weight: 600;
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0, 85, 128, 0.3);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .document-button::before {
-        content: '✨';
-        position: absolute;
-        top: -20px;
-        right: -20px;
-        font-size: 3em;
-        opacity: 0.1;
-        animation: sparkle 3s infinite;
-    }
-
-    @keyframes sparkle {
-        0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.1; }
-        50% { transform: rotate(180deg) scale(1.2); opacity: 0.3; }
-    }
-
-    .document-button:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-        background: linear-gradient(135deg, #ff6b35, #ff8c42);
-        color: #000;
-    }
-
-    .document-button:active {
-        transform: translateY(-2px);
-    }
-
-    .document-button small {
-        font-size: 0.85em;
-        margin-top: 8px;
-        opacity: 0.9;
-        font-weight: 400;
-    }
-
-    .about-text {
-        background: linear-gradient(135deg, #fff5e6, #e8f4f8);
-        padding: 30px;
-        border-radius: 15px;
-        margin: 40px 0 30px 0;
-        border-left: 6px solid #005580;
-        font-size: 1.1em;
-        color: #000;
-        line-height: 1.8;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .whatsapp-container {
-        display: flex;
-        justify-content: center;
-        margin: 30px 0;
-    }
-
-    .whatsapp-button {
-        background: linear-gradient(135deg, #25D366, #128C7E);
-        color: white;
-        padding: 25px 35px;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.3em;
-        font-weight: 600;
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-        cursor: pointer;
-        min-width: 300px;
-    }
-
-    .whatsapp-button:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
-        background: linear-gradient(135deg, #128C7E, #075E54);
-    }
-
-    .whatsapp-button small {
-        font-size: 0.85em;
-        margin-top: 8px;
-        opacity: 0.95;
-        font-weight: 400;
-    }
-
-    .footer {
-        background: linear-gradient(135deg, #003d5c, #005580);
-        color: white;
-        text-align: center;
-        padding: 30px;
-        margin-top: 40px;
-    }
-
-    /* Kreative Dekorationselemente */
-    .creative-icons {
-        position: fixed;
-        font-size: 2em;
-        opacity: 0.15;
-        pointer-events: none;
-        z-index: 0;
-        animation: floatAround 15s infinite ease-in-out;
-    }
-
-    .icon-1 { top: 10%; left: 5%; animation-delay: 0s; }
-    .icon-2 { top: 20%; right: 8%; animation-delay: 2s; }
-    .icon-3 { top: 40%; left: 3%; animation-delay: 4s; }
-    .icon-4 { top: 60%; right: 5%; animation-delay: 6s; }
-    .icon-5 { top: 80%; left: 10%; animation-delay: 8s; }
-
-    @keyframes floatAround {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        25% { transform: translateY(-20px) rotate(5deg); }
-        50% { transform: translateY(0px) rotate(-5deg); }
-        75% { transform: translateY(-15px) rotate(3deg); }
-    }
-
-    @media (max-width: 768px) {
-        .header h1 {
-            font-size: 2em;
-        }
-        
-        .content {
-            padding: 20px;
-        }
-        
-        .buttons-container {
-            grid-template-columns: 1fr;
-            padding: 15px;
-        }
-
-        .top-navigation {
-            flex-direction: column;
-            gap: 10px;
-            padding: 15px 20px;
-        }
-        
-        .top-nav-links {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .grade-header {
-            font-size: 1.2em;
-            padding: 15px 20px;
-        }
-
-        .creative-icons {
-            display: none;
-        }
-    }
+}
 </style>
+
 </head>
 <body>
-    <!-- Kreative schwebende Icons -->
-    <div class="creative-icons icon-1">✍️</div>
-    <div class="creative-icons icon-2">📚</div>
-    <div class="creative-icons icon-3">🖊️</div>
-    <div class="creative-icons icon-4">✨</div>
-    <div class="creative-icons icon-5">🎨</div>
-
-    <!-- Obere Navigation -->
-    <div class="top-navigation">
-        <div class="top-nav-links">
-            <a href="https://amyfabijenna.github.io/amylang-deutsch" class="home-button-top">Amy Lang, Deutsch-Trainerin</a>
-            <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/index.html">Zurück zur Schülernachhilfe</a>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Textgebundene Erörterung</h1>
+            <p>9. Schulstufe</p>
         </div>
-    </div>
 
-    <div class="main-content">
-        <div class="container">
-            <header class="header">
-                <h1>✨ Texte schreiben mit Amy ✨</h1>
-                <p>Deutsch Trainerin mit 20 Jahren Erfahrung</p>
-            </header>
-
-            <main class="content">
-                <div class="intro-text">
-                    <strong>🎉 Willkommen zu meinen Schreibhilfen! 🎉</strong><br>
-                    Hier findest du Anleitungen und Hilfestellungen für verschiedene Textarten. 
-                    Klicke einfach auf deine Schulstufe und entdecke, wie du professionell und kreativ schreibst!
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 1: Grundlagen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil1-grundlagen'); return false;">Was ist eine textgebundene Erörterung?</a>
                 </div>
+            </div>
 
-                <!-- 4. Schulstufe -->
-                <div class="grade-section">
-                    <button class="grade-header" onclick="toggleGrade(this)">
-                        <span class="icon">🖼️ 4. Schulstufe</span>
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/grundschule/grundschule4/bildergeschichten4g.html" target="_blank" class="document-button">
-                                🖼️ Bildergeschichten schreiben<br>
-                                <small>für die 4./5. Schulstufe</small>
-                            </a>
-                            <a href="personen4g.html" target="_blank" class="document-button">
-                                👩🏼 Personen beschreiben<br>
-                                <small>4. Schulstufe</small>
-                            </a>
-                            <a href="person_uebung4g.html" target="_blank" class="document-button">
-                                👩🏼 Personen beschreiben - Übungen für DAF<br>
-                                <small>4. Schulstufe</small>
-                            </a>
-                            <a href="spannend_schreiben456.html" target="_blank" class="document-button">
-                                📖 Spannend schreiben<br>
-                                <small>4-6. Schulstufe</small>
-                            </a>
-                        </div>
-                    </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 2: Texte verstehen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil2-texte-verstehen'); return false;">Lesetechniken • Sprachliche Mittel • Autorenperspektive</a>
                 </div>
+            </div>
 
-                <!-- 5. Schulstufe -->
-                <div class="grade-section">
-                    <button class="grade-header" onclick="toggleGrade(this)">
-                        <span class="icon">🏰 5. Schulstufe</span>
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/grundschule/grundschule4/bildergeschichten4g.html" target="_blank" class="document-button">
-                                🖼️ Bildergeschichten schreiben<br>
-                                <small>für die 4./5. Schulstufe</small>
-                            </a>
-                            <a href="maerchen5.html" target="_blank" class="document-button">
-                                🏰 Märchen schreiben<br>
-                                <small>5. Schulstufe</small>
-                            </a>
-                            <a href="spannend_schreiben456.html" target="_blank" class="document-button">
-                                📖 Spannend schreiben<br>
-                                <small>4-6. Schulstufe</small>
-                            </a>
-                            <a href="storyphrasen6.html" target="_blank" class="document-button">
-                                📖 Phrasen und Redewendungen<br>
-                                <small>ab der 5. Schulstufe</small>
-                            </a>
-                            <a href="erlebniserzaehlung5.html" target="_blank" class="document-button">
-                                📖 Erlebniserzählung schreiben<br>
-                                <small>5. Schulstufe</small>
-                            </a>
-                        </div>
-                    </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 3: Schreibprozess</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil3-schreibprozess'); return false;">📋 Übersicht</a>
                 </div>
-
-                <!-- 6. Schulstufe -->
-                <div class="grade-section">
-                    <button class="grade-header" onclick="toggleGrade(this)">
-                        <span class="icon">👻 6. Schulstufe</span>
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="spannend_schreiben456.html" target="_blank" class="document-button">
-                                📖 Spannend schreiben<br>
-                                <small>4-6. Schulstufe</small>
-                            </a>
-                            <a href="storyphrasen6.html" target="_blank" class="document-button">
-                                📖 Phrasen und Redewendungen<br>
-                                <small>ab der 5. Schulstufe</small>
-                            </a>
-                            <a href="sagen6.html" target="_blank" class="document-button">
-                                👻 Sagen und Gruselgeschichten<br>
-                                <small>6. Schulstufe</small>
-                            </a>
-                            <a href="sagen_nacherzaehlen6.html" target="_blank" class="document-button">
-                                📜 Sagen nacherzählen<br>
-                                <small>6. Schulstufe</small>
-                            </a>
-                            <a href="gruselgeschichten6.html" target="_blank" class="document-button">
-                                🕯️ Gruselgeschichten schreiben<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-                            <a href="gruselhilfe6.html" target="_blank" class="document-button">
-                                👻 Grusel-Notkoffer<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-                            <a href="25gruselstories.html" target="_blank" class="document-button">
-                                🕯️ 25 Grusel- und Horrorgeschichten mit Musterlösung<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-                            <a href="25nurgruselstories.html" target="_blank" class="document-button">
-                                👻 25 Gruselgeschichten mit Musterlösung<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-
-                            <a href="spannungsaufbau6.html" target="_blank" class="document-button">
-                                👻 So baust du logisch Spannung auf<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-
-
-                            <a href="zusammenfassungen6.html" target="_blank" class="document-button">
-                                📝 Zusammenfassung schreiben<br>
-                                <small>6. Schulstufe</small>
-                            </a>
-                        </div>
-                    </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil3a-einleitung'); return false;">→ Teil 3a: Einleitung</a>
                 </div>
-
-                <!-- 9. Schulstufe -->
-                <div class="grade-section">
-                    <button class="grade-header" onclick="toggleGrade(this)">
-                        <span class="icon">📝 9. Schulstufe</span>
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="grade-content">
-                        <div class="buttons-container">
-                            
-                        <a href="zusammenfassung9/index.html" target="_blank" class="document-button">
-                                📝 Zusammenfassung schreiben<br>
-                                <small>9. Schulstufe</small>
-                            </a>
-
-                            <a href="leserbrief9.html" target="_blank" class="document-button">
-                                📝 Leserbrief schreiben<br>
-                                <small>9. Schulstufe</small>
-                            </a>
-                            <a href="eroerterung9/index.html" target="_blank" class="document-button">
-                                📝 Erörterung schreiben<br>
-                                <small>9. Schulstufe</small>
-                            </a>
-                        </div>
-                    </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil3b-hauptteil'); return false;">→ Teil 3b: Hauptteil</a>
                 </div>
-
-                <!-- 10. Schulstufe -->
-                <div class="grade-section">
-                    <button class="grade-header" onclick="toggleGrade(this)">
-                        <span class="icon">📊 10. Schulstufe</span>
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="diagramme10.html" target="_blank" class="document-button">
-                                📊 Diagramme lesen<br>
-                                <small>nicht-lineare Texte verfassen - 10. Schulstufe</small>
-                            </a>
-                        </div>
-                    </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil3c-schluss'); return false;">→ Teil 3c: Schluss</a>
                 </div>
+            </div>
 
-                <!-- 12. Schulstufe / Matura -->
-                <div class="grade-section">
-                    <button class="grade-header" onclick="toggleGrade(this)">
-                        <span class="icon">🔎 12. Schulstufe / Matura</span>
-                        <span class="arrow">▶</span>
-                    </button>
-                    <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="textanalyse12.html" target="_blank" class="document-button">
-                                🔎 Textanalyse schreiben<br>
-                                <small>für die Matura</small>
-                            </a>
-                        </div>
-                    </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 4: Sprache & Stil</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil4-sprache-stil'); return false;">Konjunktiv • Verbindungswörter • Fehler</a>
                 </div>
+            </div>
 
-                <div class="about-text">
-                    <strong>🌟 Hallo! Mein Name ist Amy Lang 🌟</strong><br><br>
-                    Ich bin Deutschtrainerin mit 20 Jahren erfolgreicher Erfahrung und Universitätsabschluss. 
-                    Ich unterrichte mit großer Freude online von Null bis C2-Niveau. Auf Wunsch sende ich gerne Referenzen meiner Schüler und ein Angebot. 
-                    Meine Schüler bleiben jahrelang bei mir, denn meine Stunden sind bunt und abwechslungsreich, fröhlich, strukturiert und vor allem: <strong>effektiv</strong>. 
-                    Ich freue mich auf Ihre Anmeldung!
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 5: Praxis</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil5-praxis'); return false;">Beispiele & Musterlösungen</a>
                 </div>
-                
-                <div class="whatsapp-container">
-                    <a href="https://wa.me/4368120283291?text=Hallo%20Amy,%20ich%20m%C3%B6chte%20gerne%20Deutschunterricht%20bei%20dir%20buchen!" 
-                       target="_blank" 
-                       class="whatsapp-button">
-                        💬 WhatsApp: Unterricht buchen
-                        <small>+43 681 202 832 91</small>
-                    </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 6: Argumentieren</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil6-argumentieren'); return false;">Pro & Kontra</a>
                 </div>
+            </div>
 
-            </main>
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 7: Textanalyse</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil7-textanalyse-techniken'); return false;">Analysetechniken</a>
+                </div>
+            </div>
 
-            <footer class="footer">
-                <p>&copy; 2025 Amy Lang - Deutschtrainerin | Alle Rechte vorbehalten</p>
-            </footer>
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 8: Strukturierung</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil8-strukturierung'); return false;">Strukturieren & Gliedern</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 9: Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil9-formulierungshilfen'); return false;">Phrasen & Begriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 10: Komplett-Beispiel</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil10-komplett-beispiel'); return false;">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 11: Übungstexte</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil11-uebungstexte'); return false;">Texte zum Üben • Aufgaben</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 12: Checklisten</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil12-checklisten'); return false;">Kontrolllisten • Selbstcheck</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 13: Häufige Fehler</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil13-haeufige-fehler'); return false;">Typische Probleme • Lösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 14: Abschluss</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil14-abschluss'); return false;">Zusammenfassung • Tipps fürs Üben</a>
+                </div>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <script>
-        function toggleGrade(button) {
-            const content = button.nextElementSibling;
-            const allHeaders = document.querySelectorAll('.grade-header');
-            const allContents = document.querySelectorAll('.grade-content');
-            
-            // Wenn der geklickte Bereich bereits offen ist, schließe ihn
-            if (button.classList.contains('active')) {
-                button.classList.remove('active');
-                content.classList.remove('active');
-            } else {
-                // Schließe alle anderen Bereiche
-                allHeaders.forEach(header => header.classList.remove('active'));
-                allContents.forEach(cont => cont.classList.remove('active'));
-                
-                // Öffne den geklickten Bereich
-                button.classList.add('active');
-                content.classList.add('active');
-            }
+    <main class="main-content" id="main-content">
+        <div class="content-container">
+            <div class="content-header">
+                <h1>Textgebundene Erörterung</h1>
+                <p>Komplettes Lernmaterial für die 9. Schulstufe</p>
+            </div>
+            <div class="content-body" id="content-body">
+                <!-- Initial content wird hier geladen -->
+            </div>
+        </div>
+    </main>
+
+<script>
+/* ============================================
+   TOGGLE SIDEBAR FUNKTION
+   Öffnet/Schließt die Navigation auf mobilen Geräten
+   ============================================ */
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+
+/* ============================================
+   LOAD CONTENT FUNKTION
+   Lädt HTML-Inhalte der einzelnen Kapitel dynamisch
+   ============================================ */
+async function loadContent(page) {
+    const contentBody = document.getElementById('content-body');
+    
+    // Sicherheitscheck
+    if (!contentBody) {
+        console.error('content-body Element nicht gefunden!');
+        return;
+    }
+    
+    // Entferne 'active' Klasse von allen Nav-Links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Füge 'active' Klasse zum angeklickten Link hinzu
+    const targetLink = document.querySelector(`.nav-link[onclick*="loadContent('${page}')"]`);
+    if (targetLink) {
+        targetLink.classList.add('active');
+    }
+    
+    // Zeige Lade-Animation
+    contentBody.innerHTML = `
+        <div class="loading-indicator">
+            <div class="spinner"></div>
+            <div>Lade Inhalte für: ${page}</div>
+        </div>
+    `;
+    
+    try {
+        // KORRIGIERT: Lade HTML-Datei direkt (KEIN "kapitel/" Ordner!)
+        const response = await fetch(`${page}.html`);
+        
+        // Fehlerbehandlung wenn Datei nicht gefunden
+        if (!response.ok) {
+            throw new Error(`Seite nicht gefunden: ${page}.html (Status: ${response.status})`);
         }
-    </script>
+        
+        const html = await response.text();
+        
+        // Füge Zurück-Button hinzu (außer bei Willkommen-Seite)
+        if (page !== 'willkommen') {
+            contentBody.innerHTML = `
+                <a href="#" class="back-button" onclick="loadContent('willkommen'); return false;">← Zurück zur Übersicht</a>
+                <div class="chapter-content">${html}</div>
+            `;
+        } else {
+            contentBody.innerHTML = html;
+        }
+        
+        // WICHTIG: Nach dem Laden Accordion-Funktionalität initialisieren
+        initializeAccordions();
+        
+    } catch (error) {
+        // Fehlerbehandlung mit Fehlermeldung
+        console.error('Fehler beim Laden der Seite:', error);
+        contentBody.innerHTML = `
+            <div class="error-message">
+                <h3>⚠️ Seite konnte nicht geladen werden</h3>
+                <p>Die angeforderte Seite "${page}.html" konnte nicht gefunden werden.</p>
+                <p><strong>Mögliche Gründe:</strong></p>
+                <ul>
+                    <li>Die Datei existiert noch nicht</li>
+                    <li>Der Dateiname ist falsch geschrieben</li>
+                    <li>Die Datei liegt nicht im richtigen Verzeichnis</li>
+                </ul>
+                <p>Fehlerdetails: ${error.message}</p>
+                <p><a href="#" onclick="loadContent('willkommen'); return false;">← Zurück zur Startseite</a></p>
+            </div>
+        `;
+    }
+    
+    // Schließe Sidebar auf mobilen Geräten nach Auswahl
+    if (window.innerWidth <= 968) {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) sidebar.classList.remove('active');
+    }
+}
+
+/* ============================================
+   ACCORDION FUNKTIONALITÄT INITIALISIEREN
+   Fügt Click-Listener zu allen section-headers hinzu
+   Wird nach jedem Content-Laden aufgerufen
+   ============================================ */
+
+function initializeAccordions() {
+    const headers = document.querySelectorAll('.section-header');
+    
+    console.log('Initialisiere Accordions, gefunden:', headers.length, 'headers');
+    
+    headers.forEach(header => {
+        // Entferne alle alten onclick Attribute aus dem HTML
+        header.removeAttribute('onclick');
+        
+        // Entferne alte Event Listener durch Klonen
+        const newHeader = header.cloneNode(true);
+        newHeader.removeAttribute('onclick'); // Nochmal sicherstellen
+        header.parentNode.replaceChild(newHeader, header);
+    });
+    
+    // WICHTIG: Jetzt die NEUEN Headers auswählen und Listener hinzufügen
+    document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSection(this);
+        });
+    });
+    
+    console.log('Accordions initialisiert!');
+}
+
+
+
+/* ============================================
+   TOGGLE SECTION FUNKTION
+   Klappt einzelne Bereiche auf/zu
+   Funktioniert für alle Ebenen (2, 3, etc.)
+   ============================================ */
+function toggleSection(header) {
+    // Finde den zugehörigen Content-Bereich
+    const content = header.nextElementSibling;
+    const arrow = header.querySelector('.toggle-arrow');
+    
+    // Prüfe ob es ein gültiger section-content ist
+    if (content && content.classList.contains('section-content')) {
+        const isActive = content.classList.contains('active');
+        
+        if (isActive) {
+            // ZUKLAPPEN
+            content.classList.remove('active');
+            header.classList.remove('active');
+            if (arrow) arrow.textContent = '▼';
+        } else {
+            // AUFKLAPPEN
+            content.classList.add('active');
+            header.classList.add('active');
+            if (arrow) arrow.textContent = '▲';
+        }
+    }
+}
+
+/* ============================================
+   SOLUTION TOGGLE FUNKTION
+   Für Lösungs-Buttons bei Übungen
+   Blendet Lösungen ein/aus
+   ============================================ */
+function toggleSolution(button) {
+    // Finde die übergeordnete Exercise-Card
+    const exerciseCard = button.closest('.section-card');
+    
+    // Finde die Lösungs-Card innerhalb der Exercise-Card
+    const solutionCard = exerciseCard.querySelector('.solution-card');
+    
+    if (solutionCard) {
+        // Prüfe aktuellen Zustand
+        const isVisible = solutionCard.style.display === 'block';
+        
+        if (isVisible) {
+            // Lösung AUSBLENDEN
+            solutionCard.style.display = 'none';
+            button.textContent = '📋 Lösung anzeigen';
+        } else {
+            // Lösung EINBLENDEN
+            solutionCard.style.display = 'block';
+            button.textContent = '📋 Lösung ausblenden';
+        }
+    }
+}
+
+/* ============================================
+   CLICK OUTSIDE SIDEBAR TO CLOSE (MOBILE)
+   Schließt Sidebar wenn außerhalb geklickt wird
+   Nur auf mobilen Geräten aktiv
+   ============================================ */
+document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    // Nur auf mobilen Geräten (Breite <= 968px)
+    if (window.innerWidth <= 968 && 
+        sidebar && sidebar.classList.contains('active') && 
+        menuToggle &&
+        !sidebar.contains(event.target) && 
+        !menuToggle.contains(event.target)) {
+        sidebar.classList.remove('active');
+    }
+});
+
+/* ============================================
+   INITIAL LOAD
+   Lädt automatisch die Willkommen-Seite beim ersten Laden
+   ============================================ */
+document.addEventListener('DOMContentLoaded', function() {
+    loadContent('willkommen');
+});
+
+/* ============================================
+   GLOBALE FUNKTIONEN FÜR EVENT HANDLERS
+   Macht Funktionen im HTML onclick-Attribut verfügbar
+   ============================================ */
+window.toggleSidebar = toggleSidebar;
+window.loadContent = loadContent;
+window.toggleSection = toggleSection;
+window.toggleSolution = toggleSolution;
+</script>
+
 </body>
 </html>
