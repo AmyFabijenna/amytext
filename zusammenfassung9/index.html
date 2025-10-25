@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zusammenfassungen schreiben - Interaktive Lernumgebung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #003d5c 0%, #004d73 50%, #005580 100%);
+            color: #000;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            color: #003d5c;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .header .subtitle {
+            color: #FF6B35;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .header p {
+            color: #000;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .module-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            border: 3px solid #004d73;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: #FF6B35;
+        }
+
+        .module-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .module-title {
+            color: #003d5c;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .module-description {
+            color: #000;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .module-number {
+            background: #FF6B35;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .quick-start {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-start h2 {
+            color: #003d5c;
+            margin-bottom: 20px;
+        }
+
+        .quick-start ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .quick-start li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #000;
+        }
+
+        .quick-start li:before {
+            content: "▸";
+            color: #FF6B35;
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+        }
+
+        .footer {
+            text-align: center;
+            color: #fff;
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        .book-ref {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #fff;
+            border-left: 5px solid #FF6B35;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Zusammenfassungen schreiben</h1>
+            <div class="subtitle">Interaktive Lernumgebung für die 9. Schulstufe</div>
+            <p>Lerne Schritt für Schritt, wie du professionelle Zusammenfassungen schreibst – mit interaktiven Übungen, sofortigem Feedback und praxisnahen Beispielen.</p>
+        </div>
+
+        <div class="modules-grid">
+            <a href="modul1-grundlagen.html" class="module-card">
+                <div class="module-number">1</div>
+                <div class="module-icon">📚</div>
+                <div class="module-title">Grundlagen & Merkmale</div>
+                <div class="module-description">Was ist eine Zusammenfassung? Lerne die grundlegenden Merkmale und den Aufbau kennen.</div>
+            </a>
+
+            <a href="modul2-vorbereitung.html" class="module-card">
+                <div class="module-number">2</div>
+                <div class="module-icon">🎯</div>
+                <div class="module-title">Textvorbereitung</div>
+                <div class="module-description">Aktives Lesen, Markieren und Strukturieren – bereite dich optimal vor!</div>
+            </a>
+
+            <a href="modul3-hauptteil.html" class="module-card">
+                <div class="module-number">3</div>
+                <div class="module-icon">✍️</div>
+                <div class="module-title">Hauptteil schreiben</div>
+                <div class="module-description">Vom Originaltext zur eigenen Formulierung – die Kunst des Zusammenfassens.</div>
+            </a>
+
+            <a href="modul4-sprache.html" class="module-card">
+                <div class="module-number">4</div>
+                <div class="module-icon">💬</div>
+                <div class="module-title">Sprache & Stil</div>
+                <div class="module-description">Präsens, sachlicher Stil und Verbindungswörter – so schreibst du professionell.</div>
+            </a>
+
+            <a href="modul5-uebungen.html" class="module-card">
+                <div class="module-number">5</div>
+                <div class="module-icon">🎮</div>
+                <div class="module-title">Interaktive Übungen</div>
+                <div class="module-description">Teste dein Wissen mit Quizzen, Lückentexten und praktischen Schreibaufgaben.</div>
+            </a>
+
+            <a href="modul6-praxis.html" class="module-card">
+                <div class="module-number">6</div>
+                <div class="module-icon">🚀</div>
+                <div class="module-title">Praxis & Checklisten</div>
+                <div class="module-description">Schritt-für-Schritt-Anleitung mit Checklisten und häufigen Fehlern.</div>
+            </a>
+        </div>
+
+        <div class="quick-start">
+            <h2>🎯 Schnellstart-Anleitung</h2>
+            <ul>
+                <li>Beginne mit <strong>Modul 1</strong>, um die Grundlagen zu verstehen</li>
+                <li>Arbeite die Module <strong>der Reihe nach</strong> durch – jedes baut auf dem vorherigen auf</li>
+                <li>Nutze die <strong>interaktiven Übungen</strong> in jedem Modul</li>
+                <li>Lade <strong>Checklisten</strong> herunter, um sie beim Schreiben zu verwenden</li>
+                <li>Teste dein Wissen mit dem <strong>großen Abschlussquiz</strong> in Modul 5</li>
+            </ul>
+        </div>
+
+        <div class="book-ref">
+            <strong>📖 Buchgrundlage:</strong> Diese Lernumgebung basiert auf dem Lehrbuch "Klartext Deutsch 5" und erweitert die Inhalte durch interaktive Elemente und zusätzliche Übungen. Seitenverweise auf das Buch findest du in den einzelnen Modulen.
+        </div>
+
+        <div class="footer">
+            <p>Viel Erfolg beim Lernen! 🎓</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Klicke auf ein Modul, um zu beginnen.</p>
+        </div>
+    </div>
+</body>
+</html>
