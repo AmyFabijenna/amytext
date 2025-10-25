@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Textgebundene Erörterung - Komplettes Lernmaterial</title>
 
-
 <style>
 * {
     margin: 0;
@@ -315,7 +314,7 @@ body {
 }
 
 /* ============================================
-   NEU: EBENE 1 - Hauptkapitel (immer sichtbar)
+   EBENE 1 - Hauptkapitel (immer sichtbar)
    ============================================ */
 .main-chapter {
     background: linear-gradient(135deg, #ff6f00, #ff8f00);
@@ -342,7 +341,7 @@ body {
 }
 
 /* ============================================
-   NEU: EBENE 2 - Ausklappbare Bereiche (Blautöne)
+   EBENE 2 - Ausklappbare Bereiche (Blautöne)
    ============================================ */
 .section-card.level-2 {
     background: linear-gradient(135deg, #e3f2fd, #bbdefb);
@@ -390,7 +389,7 @@ body {
 }
 
 /* ============================================
-   NEU: EBENE 3 - Verschachtelte Unterbereiche
+   EBENE 3 - Verschachtelte Unterbereiche
    ============================================ */
 .section-card.level-3 {
     background: linear-gradient(135deg, #e8f4fd, #cfe3f7);
@@ -436,8 +435,54 @@ body {
     padding: 18px;
 }
 
+/* Allgemeine section-card (ohne Level-Angabe) */
+.section-card {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(66, 165, 245, 0.2);
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.section-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 165, 245, 0.3);
+    border-color: #42a5f5;
+}
+
+.section-card > .section-header {
+    background: linear-gradient(135deg, #5c9bd1, #6fa8dc);
+    color: white;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background 0.3s ease;
+}
+
+.section-card > .section-header:hover {
+    background: linear-gradient(135deg, #6fa8dc, #85b8e0);
+}
+
+.section-card > .section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    padding: 0 20px;
+}
+
+.section-card > .section-content.active {
+    max-height: 5000px;
+    padding: 20px;
+}
+
 /* ============================================
-   NEU: Toggle-Pfeil
+   Toggle-Pfeil
    ============================================ */
 .toggle-arrow {
     font-size: 1.2em;
@@ -450,7 +495,7 @@ body {
 }
 
 /* ============================================
-   NEU: Übungen (Grüne Akzente)
+   Übungen (Grüne Akzente)
    ============================================ */
 .exercise-card {
     border-left: 5px solid #4caf50 !important;
@@ -463,7 +508,7 @@ body {
 }
 
 /* ============================================
-   NEU: Lösungs-Buttons
+   Lösungs-Buttons
    ============================================ */
 .solution-toggle {
     text-align: center;
@@ -493,6 +538,7 @@ body {
     background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important;
     border-left: 4px solid #ff9800 !important;
     margin-top: 15px;
+    display: none;
 }
 
 .solution-content {
@@ -507,7 +553,7 @@ body {
 }
 
 /* ============================================
-   NEU: Tabellen
+   Tabellen
    ============================================ */
 table {
     width: 100%;
@@ -544,7 +590,7 @@ table tbody tr:last-child td {
 }
 
 /* ============================================
-   NEU: Text-Formatierung in Sections
+   Text-Formatierung in Sections
    ============================================ */
 .section-content p {
     margin: 12px 0;
@@ -569,6 +615,84 @@ table tbody tr:last-child td {
 
 .section-content em {
     color: #424242;
+}
+
+/* ============================================
+   Willkommen-Seite Styles
+   ============================================ */
+.navigation {
+    margin-bottom: 30px;
+}
+
+.home-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6f00, #ff8f00);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
+}
+
+.home-link:hover {
+    background: linear-gradient(135deg, #ff8f00, #ffb300);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 111, 0, 0.4);
+}
+
+.info-message {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-left: 5px solid #2196f3;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+    font-size: 1.1em;
+    color: #1565c0;
+}
+
+.whatsapp-button-container {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.whatsapp-button {
+    display: inline-block;
+    background: #25d366;
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-button:hover {
+    background: #128c7e;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+}
+
+.closing-section {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 40px;
+    text-align: center;
+    border-left: 5px solid #ff9800;
+}
+
+.closing-section h2 {
+    color: #e65100;
+    margin-bottom: 15px;
+}
+
+.closing-section p {
+    color: #424242;
+    font-size: 1.05em;
 }
 
 /* ============================================
@@ -651,8 +775,135 @@ table tbody tr:last-child td {
 }
 </style>
 
-
 </head>
+<body>
+    <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
+    
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Textgebundene Erörterung</h1>
+            <p>9. Schulstufe</p>
+        </div>
+
+        <div class="nav-menu">
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 1: Grundlagen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil1-grundlagen'); return false;">Was ist eine textgebundene Erörterung?</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 2: Texte verstehen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil2-texte-verstehen'); return false;">Lesetechniken • Sprachliche Mittel • Autorenperspektive</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 3: Schreibprozess</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil3-schreibprozess'); return false;">Einleitung • Hauptteil • Schluss</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 4: Sprache & Stil</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil4-sprache-stil'); return false;">Konjunktiv • Verbindungswörter • Fehler</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 5: Praxis</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil5-praxis'); return false;">Beispiele & Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 6: Argumentieren</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil6-argumentieren'); return false;">Pro & Kontra</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 7: Textanalyse</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil7-textanalyse-techniken'); return false;">Analysetechniken</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 8: Strukturierung</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil8-strukturierung'); return false;">Strukturieren & Gliedern</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 9: Formulierungshilfen</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil9-formulierungshilfen'); return false;">Phrasen & Begriffe</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 10: Komplett-Beispiel</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil10-komplett-beispiel'); return false;">Musterlösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 11: Übungstexte</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil11-uebungstexte'); return false;">Texte zum Üben • Aufgaben</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 12: Checklisten</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil12-checklisten'); return false;">Kontrolllisten • Selbstcheck</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 13: Häufige Fehler</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil13-haeufige-fehler'); return false;">Typische Probleme • Lösungen</a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Teil 14: Abschluss</div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="loadContent('teil14-abschluss'); return false;">Zusammenfassung • Tipps fürs Üben</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <div class="content-container">
+            <div class="content-header">
+                <h1>Textgebundene Erörterung</h1>
+                <p>Komplettes Lernmaterial für die 9. Schulstufe</p>
+            </div>
+            <div class="content-body" id="content-body">
+                <!-- Initial content wird hier geladen -->
+            </div>
+        </div>
+    </main>
+
+<script>
+/* ============================================
+   TOGGLE SIDEBAR FUNKTION
+   Öffnet/Schließt die Navigation auf mobilen Geräten
+   ============================================ */
+
 <body>
     <button class="menu-toggle" onclick="toggleSidebar()">☰ Menü</button>
     
@@ -815,8 +1066,8 @@ async function loadContent(page) {
     `;
     
     try {
-        // Lade HTML-Datei aus 'kapitel' Ordner
-        const response = await fetch(`kapitel/${page}.html`);
+        // KORRIGIERT: Lade HTML-Datei direkt (KEIN "kapitel/" Ordner!)
+        const response = await fetch(`${page}.html`);
         
         // Fehlerbehandlung wenn Datei nicht gefunden
         if (!response.ok) {
@@ -843,10 +1094,16 @@ async function loadContent(page) {
         console.error('Fehler beim Laden der Seite:', error);
         contentBody.innerHTML = `
             <div class="error-message">
-                <h3>Seite konnte nicht geladen werden</h3>
+                <h3>⚠️ Seite konnte nicht geladen werden</h3>
                 <p>Die angeforderte Seite "${page}.html" konnte nicht gefunden werden.</p>
-                <p>Fehler: ${error.message}</p>
-                <p><a href="#" onclick="loadContent('willkommen'); return false;">Zurück zur Startseite</a></p>
+                <p><strong>Mögliche Gründe:</strong></p>
+                <ul>
+                    <li>Die Datei existiert noch nicht</li>
+                    <li>Der Dateiname ist falsch geschrieben</li>
+                    <li>Die Datei liegt nicht im richtigen Verzeichnis</li>
+                </ul>
+                <p>Fehlerdetails: ${error.message}</p>
+                <p><a href="#" onclick="loadContent('willkommen'); return false;">← Zurück zur Startseite</a></p>
             </div>
         `;
     }
@@ -856,7 +1113,7 @@ async function loadContent(page) {
         const sidebar = document.getElementById('sidebar');
         if (sidebar) sidebar.classList.remove('active');
     }
-}
+
 
 /* ============================================
    ACCORDION FUNKTIONALITÄT INITIALISIEREN
