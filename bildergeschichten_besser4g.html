@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kniffliger Übungsbogen - Bildergeschichte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #003D5C;
+            color: #000000;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            color: #003D5C;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            border-bottom: 4px solid #FF8C00;
+            padding-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        .goal-box {
+            background: #003D5C;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 8px solid #FF8C00;
+        }
+
+        .goal-box h2 {
+            color: #FF8C00;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 3px solid #003D5C;
+        }
+
+        .section-title {
+            background: #003D5C;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-number {
+            background: #FF8C00;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .exercise {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #FF8C00;
+        }
+
+        .exercise-title {
+            color: #003D5C;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.15em;
+        }
+
+        .example-bad {
+            background: #ffe6e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #ff4444;
+        }
+
+        .example-good {
+            background: #e6ffe6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #44ff44;
+        }
+
+        .answer-space {
+            background: #f0f8ff;
+            border: 2px dashed #003D5C;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            min-height: 100px;
+        }
+
+        .answer-space textarea {
+            width: 100%;
+            min-height: 80px;
+            border: none;
+            background: transparent;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            resize: vertical;
+            outline: none;
+        }
+
+        .word-bank {
+            background: #fff8e6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px solid #FF8C00;
+        }
+
+        .word-bank-title {
+            color: #FF8C00;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .word-chip {
+            display: inline-block;
+            background: white;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            border: 2px solid #003D5C;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .word-chip:hover {
+            background: #003D5C;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .tip-box {
+            background: #e8f4f8;
+            border-left: 5px solid #003D5C;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .tip-box strong {
+            color: #FF8C00;
+        }
+
+        .challenge-badge {
+            background: #FF8C00;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .sentence-starters {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .starter-item {
+            background: #f0f8ff;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #003D5C;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .starter-item:hover {
+            background: #003D5C;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .mixed-section {
+            background: linear-gradient(135deg, #003D5C 0%, #004D6D 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .mixed-section h2 {
+            color: #FF8C00;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .points-box {
+            background: #FF8C00;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .checklist {
+            background: white;
+            color: #000000;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .checklist-item {
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 4px solid #FF8C00;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        th {
+            background: #003D5C;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            border: 2px solid #003D5C;
+        }
+
+        td {
+            padding: 12px;
+            border: 2px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .highlight-orange {
+            color: #FF8C00;
+            font-weight: bold;
+        }
+
+        .highlight-blue {
+            color: #003D5C;
+            font-weight: bold;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Kniffliger Übungsbogen: Bildergeschichte</h1>
+        <p class="subtitle">Auf dem Weg zur AHS - Training für die Note SEHR GUT!</p>
+
+        <div class="goal-box">
+            <h2>🎓 Dein Ziel für die Schularbeit:</h2>
+            <p><strong>✅ Viele beschreibende Adjektive verwenden</strong></p>
+            <p><strong>✅ Den Schauplatz genau beschreiben (was du auf den Bildern siehst!)</strong></p>
+            <p><strong>✅ Gefühle, Gedanken und Gemütszustände der Figuren interpretieren</strong></p>
+            <p><strong>✅ Abwechslungsreiche Satzanfänge benutzen</strong></p>
+        </div>
+
+        <!-- TEIL 1: ADJEKTIVE -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-number">1</div>
+                <span>Adjektive-Training 🎨</span>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: KNIFFLIG</span>
+                <div class="exercise-title">📝 Übung 1.1: Faden zu Spannend!</div>
+                <p>Verbessere diese <strong>langweiligen Sätze</strong> mit mindestens <span class="highlight-orange">3 Adjektiven</span> pro Satz:</p>
+                
+                <div class="example-bad">
+                    <strong>❌ FADER SATZ:</strong><br>
+                    "Max ging durch den Wald."
+                </div>
+
+                <div class="example-good">
+                    <strong>✅ SPANNENDER SATZ:</strong><br>
+                    "Der <u>mutige</u> Max ging vorsichtig durch den <u>dunklen</u>, <u>mysteriösen</u> Wald."
+                </div>
+
+                <div class="word-bank">
+                    <div class="word-bank-title">🎨 Wortbank - Adjektive zum Verwenden:</div>
+                    <span class="word-chip">strahlend</span>
+                    <span class="word-chip">nervös</span>
+                    <span class="word-chip">riesig</span>
+                    <span class="word-chip">winzig</span>
+                    <span class="word-chip">glitzernd</span>
+                    <span class="word-chip">rostig</span>
+                    <span class="word-chip">modern</span>
+                    <span class="word-chip">verbeult</span>
+                    <span class="word-chip">funkelnagelneu</span>
+                    <span class="word-chip">schäbig</span>
+                    <span class="word-chip">aufgeregt</span>
+                    <span class="word-chip">ängstlich</span>
+                </div>
+
+                <p><strong>Jetzt du! Verbessere diese Sätze:</strong></p>
+                
+                <p>a) "Lisa fand ein Fahrrad."</p>
+                <div class="answer-space">
+                    <textarea placeholder="Schreibe hier deinen verbesserten Satz mit mindestens 3 Adjektiven..."></textarea>
+                </div>
+
+                <p>b) "Der Hund lief über die Straße."</p>
+                <div class="answer-space">
+                    <textarea placeholder="Schreibe hier deinen verbesserten Satz mit mindestens 3 Adjektiven..."></textarea>
+                </div>
+
+                <p>c) "Das Mädchen aß ein Eis."</p>
+                <div class="answer-space">
+                    <textarea placeholder="Schreibe hier deinen verbesserten Satz mit mindestens 3 Adjektiven..."></textarea>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: SEHR KNIFFLIG</span>
+                <div class="exercise-title">📝 Übung 1.2: Gegensätze ziehen sich an!</div>
+                <p>Beschreibe die <strong>zwei Figuren</strong> mit <strong>gegensätzlichen Adjektiven</strong>:</p>
+                
+                <div class="tip-box">
+                    <strong>💡 Tipp:</strong> Verwende Gegensätze wie groß/klein, dick/dünn, schnell/langsam, fröhlich/traurig, ordentlich/chaotisch
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Figur 1 (z.B. Max)</th>
+                        <th>Figur 2 (z.B. Tim)</th>
+                    </tr>
+                    <tr>
+                        <td>groß, stark, sportlich</td>
+                        <td>klein, zart, ungeschickt</td>
+                    </tr>
+                    <tr>
+                        <td><textarea style="width: 100%; min-height: 60px; border: 1px solid #ddd; padding: 8px; border-radius: 5px;" placeholder="Beschreibe Figur 1 mit mindestens 4 Adjektiven..."></textarea></td>
+                        <td><textarea style="width: 100%; min-height: 60px; border: 1px solid #ddd; padding: 8px; border-radius: 5px;" placeholder="Beschreibe Figur 2 mit gegensätzlichen Adjektiven..."></textarea></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: EXPERTE</span>
+                <div class="exercise-title">📝 Übung 1.3: Adjektiv-Marathon</div>
+                <p>Schreibe einen kurzen Absatz (4-5 Sätze) über eine Situation deiner Wahl.</p>
+                <p><strong>CHALLENGE: Verwende mindestens 12 verschiedene Adjektive!</strong></p>
+                
+                <div class="word-bank">
+                    <div class="word-bank-title">🎨 Schwierige Adjektive für Experten:</div>
+                    <span class="word-chip">enthusiastisch</span>
+                    <span class="word-chip">misstrauisch</span>
+                    <span class="word-chip">überwältigt</span>
+                    <span class="word-chip">triumphierend</span>
+                    <span class="word-chip">zögerlich</span>
+                    <span class="word-chip">entschlossen</span>
+                    <span class="word-chip">verzweifelt</span>
+                    <span class="word-chip">erleichtert</span>
+                    <span class="word-chip">verblüfft</span>
+                    <span class="word-chip">unbeholfen</span>
+                    <span class="word-chip">geschickt</span>
+                    <span class="word-chip">verwirrt</span>
+                </div>
+
+                <div class="answer-space">
+                    <textarea style="min-height: 150px;" placeholder="Schreibe hier deinen Absatz mit mindestens 12 verschiedenen Adjektiven..."></textarea>
+                </div>
+
+                <div class="points-box">
+                    ⭐ Zähle nach: Hast du wirklich 12 Adjektive verwendet? Streiche sie im Text an!
+                </div>
+            </div>
+        </div>
+
+        <!-- TEIL 2: SCHAUPLATZ BESCHREIBEN -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-number">2</div>
+                <span>Schauplatz-Beschreibung 🏞️</span>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: KNIFFLIG</span>
+                <div class="exercise-title">📝 Übung 2.1: Was sehe ich auf dem Bild?</div>
+                <p>Schau dir ein Bild aus deiner Bildergeschichte an. Beschreibe <strong>5 Dinge</strong>, die du siehst - aber nur was <strong>wirklich auf dem Bild zu sehen ist!</strong></p>
+                
+                <div class="example-bad">
+                    <strong>❌ FALSCH (das steht nicht im Bild):</strong><br>
+                    "Sie war schon den ganzen Tag unterwegs." → <span style="color: red;">Das kann man nicht sehen!</span>
+                </div>
+
+                <div class="example-good">
+                    <strong>✅ RICHTIG (das sieht man):</strong><br>
+                    "Auf dem <u>verstaubten</u> Tisch lag ein <u>altes</u>, <u>zerknittertes</u> Buch."
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Was kannst du beschreiben?</strong><br>
+                    ✓ Wetter (sonnig, regnerisch, bewölkt)<br>
+                    ✓ Ort (Park, Zimmer, Straße, Wald)<br>
+                    ✓ Gegenstände (Möbel, Spielzeug, Pflanzen)<br>
+                    ✓ Details (Farben, Größen, Zustand der Dinge)<br>
+                    ✓ Tageszeit (hell/dunkel, Schatten, Licht)
+                </div>
+
+                <p><strong>Beschreibe 5 Dinge aus einem Bild deiner Bildergeschichte:</strong></p>
+                
+                <div class="answer-space">
+                    <p><strong>1.</strong> <input type="text" style="width: 90%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;" placeholder="z.B. Der hellblaue, wolkenlose Himmel..."></p>
+                </div>
+
+                <div class="answer-space">
+                    <p><strong>2.</strong> <input type="text" style="width: 90%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;" placeholder="z.B. Ein großer, alter Baum mit dichtem Laub..."></p>
+                </div>
+
+                <div class="answer-space">
+                    <p><strong>3.</strong> <input type="text" style="width: 90%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;" placeholder="z.B. ..."></p>
+                </div>
+
+                <div class="answer-space">
+                    <p><strong>4.</strong> <input type="text" style="width: 90%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;" placeholder="z.B. ..."></p>
+                </div>
+
+                <div class="answer-space">
+                    <p><strong>5.</strong> <input type="text" style="width: 90%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;" placeholder="z.B. ..."></p>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: SEHR KNIFFLIG</span>
+                <div class="exercise-title">📝 Übung 2.2: Schauplatz in Sätzen</div>
+                <p>Beschreibe den <strong>Schauplatz des ersten Bildes</strong> in 3-4 vollständigen Sätzen. Verwende dabei mindestens <span class="highlight-orange">6 Adjektive</span>!</p>
+
+                <div class="sentence-starters">
+                    <p><strong>Nützliche Satzanfänge:</strong></p>
+                    <div class="starter-item">Die Geschichte spielt an einem...</div>
+                    <div class="starter-item">Im Hintergrund sieht man...</div>
+                    <div class="starter-item">Überall liegen/stehen/hängen...</div>
+                    <div class="starter-item">Die Sonne scheint/Der Regen fällt...</div>
+                    <div class="starter-item">Rings um ... herum befinden sich...</div>
+                </div>
+
+                <div class="answer-space">
+                    <textarea style="min-height: 120px;" placeholder="Beschreibe hier den Schauplatz mit 3-4 Sätzen und mindestens 6 Adjektiven..."></textarea>
+                </div>
+
+                <div class="points-box">
+                    ⭐ Kontrolliere: Hast du mindestens 6 Adjektive verwendet?
+                </div>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: EXPERTE</span>
+                <div class="exercise-title">📝 Übung 2.3: Schauplatz-Veränderung</div>
+                <p>Oft ändert sich der Schauplatz im Laufe der Geschichte. Beschreibe, <strong>wie sich der Ort vom ersten zum letzten Bild verändert hat</strong>.</p>
+
+                <div class="tip-box">
+                    <strong>💡 Beispiel:</strong><br>
+                    "Am Anfang war der Spielplatz noch <u>menschenleer</u> und <u>ruhig</u>. Am Ende war er <u>voller</u> <u>fröhlicher</u> Kinder und es war <u>laut</u> und <u>lebendig</u>."
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Bild 1 - Am Anfang</th>
+                        <th>Letztes Bild - Am Ende</th>
+                    </tr>
+                    <tr>
+                        <td><textarea style="width: 100%; min-height: 80px; border: 1px solid #ddd; padding: 8px; border-radius: 5px;" placeholder="Wie sieht der Ort am Anfang aus?"></textarea></td>
+                        <td><textarea style="width: 100%; min-height: 80px; border: 1px solid #ddd; padding: 8px; border-radius: 5px;" placeholder="Wie hat sich der Ort verändert?"></textarea></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- TEIL 3: GEFÜHLE UND GEDANKEN -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-number">3</div>
+                <span>Gefühle, Gedanken & Gemütszustände 💭❤️</span>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: KNIFFLIG</span>
+                <div class="exercise-title">📝 Übung 3.1: Gefühle erkennen und beschreiben</div>
+                <p>Schau dir die <strong>Gesichtsausdrücke und Körperhaltung</strong> der Figuren auf den Bildern an. Was fühlen sie wahrscheinlich?</p>
+
+                <div class="example-good">
+                    <strong>✅ GUT BESCHRIEBEN:</strong><br>
+                    "Lisa <u>starrte</u> mit <u>großen</u>, <u>leuchtenden</u> Augen auf das Geschenk. Sie konnte ihre <u>Aufregung</u> kaum verbergen und <u>hüpfte</u> <u>ungeduldig</u> von einem Fuß auf den anderen."
+                </div>
+
+                <div class="word-bank">
+                    <div class="word-bank-title">💭 Gefühlswörter - Wähle passende aus:</div>
+                    <span class="word-chip">überglücklich</span>
+                    <span class="word-chip">enttäuscht</span>
+                    <span class="word-chip">erleichtert</span>
+                    <span class="word-chip">verzweifelt</span>
+                    <span class="word-chip">stolz</span>
+                    <span class="word-chip">beschämt</span>
+                    <span class="word-chip">hoffnungsvoll</span>
+                    <span class="word-chip">nervös</span>
+                    <span class="word-chip">wütend</span>
+                    <span class="word-chip">ängstlich</span>
+                    <span class="word-chip">verblüfft</span>
+                    <span class="word-chip">neidisch</span>
+                    <span class="word-chip">begeistert</span>
+                    <span class="word-chip">frustriert</span>
+                    <span class="word-chip">zufrieden</span>
+                    <span class="word-chip">aufgeregt</span>
+                </div>
+
+                <p><strong>Beschreibe die Gefühle der Figur in jedem Bild:</strong></p>
+
+                <div class="answer-space">
+                    <p><strong>Bild 1 - Die Figur fühlt sich...</strong></p>
+                    <textarea style="min-height: 80px; width: 100%; border: 2px solid #003D5C; border-radius: 5px; padding: 10px;" placeholder="Beschreibe, was die Figur fühlt und WARUM du das denkst (Körperhaltung, Gesichtsausdruck)..."></textarea>
+                </div>
+
+                <div class="answer-space">
+                    <p><strong>Bild 2 - Die Figur fühlt sich...</strong></p>
+                    <textarea style="min-height: 80px; width: 100%; border: 2px solid #003D5C; border-radius: 5px; padding: 10px;" placeholder="Beschreibe, was die Figur fühlt und WARUM du das denkst..."></textarea>
+                </div>
+
+                <div class="answer-space">
+                    <p><strong>Bild 3 - Die Figur fühlt sich...</strong></p>
+                    <textarea style="min-height: 80px; width: 100%; border: 2px solid #003D5C; border-radius: 5px; padding: 10px;" placeholder="Beschreibe, was die Figur fühlt und WARUM du das denkst..."></textarea>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: SEHR KNIFFLIG</span>
+                <div class="exercise-title">📝 Übung 3.2: Gedanken interpretieren</div>
+                <p>Was <strong>denkt</strong> die Figur wahrscheinlich in dieser Situation? Schreibe 2-3 Sätze mit ihren möglichen Gedanken.</p>
+
+                <div class="tip-box">
+                    <strong>💡 Tipp:</strong> Überlege: Was würdest DU in dieser Situation denken?<br>
+                    Verwende: "Vielleicht dachte sie...", "Wahrscheinlich überlegte er...", "Vermutlich fragte sie sich..."
+                </div>
+
+                <div class="sentence-starters">
+                    <p><strong>Nützliche Formulierungen:</strong></p>
+                    <div class="starter-item">"Was soll ich nur tun?", dachte...</div>
+                    <div class="starter-item">In Gedanken überlegte er/sie...</div>
+                    <div class="starter-item">Vermutlich fragte sich...</div>
+                    <div class="starter-item">Vielleicht hoffte er/sie...</div>
+                    <div class="starter-item">Innerlich war er/sie...</div>
+                    <div class="starter-item">In seinem/ihrem Kopf kreisten die Gedanken...</div>
+                </div>
+
+                <p><strong>Wähle ein Bild und schreibe die wahrscheinlichen Gedanken der Figur:</strong></p>
+
+                <div class="answer-space">
+                    <p><strong>Bild Nr: ____ - Gedanken der Figur:</strong></p>
+                    <textarea style="min-height: 100px; width: 100%; border: 2px solid #003D5C; border-radius: 5px; padding: 10px;" placeholder="Was denkt die Figur wahrscheinlich? Schreibe 2-3 Sätze..."></textarea>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: EXPERTE</span>
+                <div class="exercise-title">📝 Übung 3.3: Gefühle im Wandel</div>
+                <p>Zeige, wie sich die <strong>Gefühle der Hauptfigur</strong> im Laufe der Geschichte verändern. Schreibe einen zusammenhängenden Text (5-6 Sätze).</p>
+
+                <div class="example-good">
+                    <strong>✅ BEISPIEL:</strong><br>
+                    "Zu Beginn war Tom noch <u>zuversichtlich</u> und <u>fröhlich</u> gestimmt. Als er jedoch das Problem bemerkte, wurde er immer <u>besorgter</u>. Seine anfängliche <u>Begeisterung</u> verwandelte sich in <u>Nervosität</u>. Doch dann kam ihm eine Idee und er fühlte neue <u>Hoffnung</u> aufkeimen. Am Ende war er <u>erleichtert</u> und <u>unglaublich stolz</u> auf sich."
+                </div>
+
+                <div class="answer-space">
+                    <textarea style="min-height: 150px; width: 100%; border: 2px solid #003D5C; border-radius: 5px; padding: 10px;" placeholder="Beschreibe, wie sich die Gefühle vom ersten bis zum letzten Bild verändern (5-6 Sätze)..."></textarea>
+                </div>
+
+                <div class="points-box">
+                    ⭐ Hast du mindestens 5 verschiedene Gefühlswörter verwendet?
+                </div>
+            </div>
+        </div>
+
+        <!-- TEIL 4: SATZANFÄNGE -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-number">4</div>
+                <span>Abwechslungsreiche Satzanfänge ✍️</span>
+            </div>
+
+            <div class="exercise">
+                <span class="challenge-badge">SCHWIERIGKEITSSTUFE: KNIFFLIG</span>
+                <div class="exercise-title">📝 Übung 4.1: Satzanfänge variieren</div>
+                <p>Schreibe 6 Sätze über ein Bild. <strong>WICHTIG: Jeder Satz muss mit einem anderen Anfang beginnen!</strong></p>
+
+                <div class="sentence-starters">
+                    <p><strong>Mögliche Satzanfänge (wähle 6 verschiedene):</strong></p>
+                    <div class="starter-item"><strong>Zeitangaben:</strong> Plötzlich / Dann / Danach / Später / Gleichzeitig / Währenddessen / Sofort</div>
+                    <div class="starter-item"><strong>Ortsangaben:</strong> Im Hintergrund / Vorne / Links / Rechts / Daneben / Darüber / Darunter</div>
+                    <div class="starter-item"><strong>Gefühle/Gedanken:</strong> Ängstlich / Freudig / Verzweifelt / Hoffnungsvoll / Erleichtert</div>
+                    <div class="starter-item"><strong>Personen:</strong> Die Hauptfigur / Der Junge/Das Mädchen / Er/Sie / Mit zitternden Händen</div>
+                    <div class="starter-item"><strong>Umstände:</strong> Trotz / Obwohl / Weil / Da / Als / Während</div>
+                    <div class="starter-item"><strong>Beschreibung:</strong> Mit großen Augen / Vorsichtig / Entschlossen / Zögernd</div>
+                </div>
+
+                <div class="answer-space">
+                    <p><strong>Satz 1:</strong> <input type="text" style="width: 95%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;"></p>
+                    <p><strong>Satz 2:</strong> <input type="text" style="width: 95%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;"></p>
+                    <p><strong>Satz 3:</strong> <input type="text" style="width: 95%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;"></p>
+                    <p><strong>Satz 4:</strong> <input type="text" style="width: 95%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;"></p>
+                    <p><strong>Satz 5:</strong> <input type="text" style="width: 95%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;"></p>
+                    <p><strong>Satz 6:</strong> <input type="text" style="width: 95%; padding: 8px; border: 2px solid #003D5C; border-radius: 5px;"></p>
+                </div>
+
+                <div class="points-box">
+                    ⭐ Überprüfe: Beginnt jeder Satz anders?
+                </div>
+            </div>
+        </div>
+
+        <!-- TEIL 5: GEMISCHTE ÜBUNGEN -->
+        <div class="mixed-section">
+            <h2>🔥 TEIL 5: GROSSE HERAUSFORDERUNG - Alles kombiniert!</h2>
+
+            <div class="checklist">
+                <h3 style="color: #003D5C; margin-bottom: 15px;">Schreibe einen kompletten Absatz über EIN Bild (8-10 Sätze)</h3>
+                
+                <p style="margin-bottom: 20px; color: #000000;"><strong>Dein Absatz MUSS Folgendes enthalten:</strong></p>
+                
+                <div class="checklist-item">
+                    <label>
+                        <input type="checkbox">
+                        <strong>Mindestens 10 verschiedene Adjektive</strong>
+                    </label>
+                </div>
+
+                <div class="checklist-item">
+                    <label>
+                        <input type="checkbox">
+                        <strong>2-3 Sätze über den Schauplatz (was du siehst)</strong>
+                    </label>
+                </div>
+
+                <div class="checklist-item">
+                    <label>
+                        <input type="checkbox">
+                        <strong>2-3 Sätze über die Gefühle der Figur</strong>
+                    </label>
+                </div>
+
+                <div class="checklist-item">
+                    <label>
+                        <input type="checkbox">
+                        <strong>1-2 Sätze über die Gedanken der Figur</strong>
+                    </label>
+                </div>
+
+                <div class="checklist-item">
+                    <label>
+                        <input type="checkbox">
+                        <strong>Mindestens 6 verschiedene Satzanfänge</strong>
+                    </label>
+                </div>
+
+                <div class="checklist-item">
+                    <label>
+                        <input type="checkbox">
+                        <strong>Alle Sätze sind im Präteritum (ging, sah, war, dachte...)</strong>
+                    </label>
+                </div>
+
+                <div style="margin-top: 25px; background: white; padding: 20px; border-radius: 10px;">
+                    <textarea style="width: 100%; min-height: 250px; border: 3px solid #003D5C; border-radius: 8px; padding: 15px; font-size: 16px; color: #000000; line-height: 1.8;" placeholder="Schreibe hier deinen großen Absatz (8-10 Sätze) mit ALLEN Anforderungen..."></textarea>
+                </div>
+
+                <div style="background: #FF8C00; color: white; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center;">
+                    <h3 style="margin-bottom: 10px;">🏆 SELBSTKONTROLLE</h3>
+                    <p>Gehe deine Checkliste durch und hake ALLES ab!</p>
+                    <p style="font-size: 1.2em; margin-top: 10px;"><strong>Wenn du alle Punkte erfüllt hast: GRATULATION! 🎉</strong></p>
+                    <p>Du bist bereit für die EINS in der Schularbeit!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LÖSUNGSHILFE / BEWERTUNGSKRITERIEN -->
+        <div class="section" style="margin-top: 30px;">
+            <div class="section-title">
+                <div class="section-number">📊</div>
+                <span>Bewertungskriterien - So wird benotet!</span>
+            </div>
+
+            <table>
+                <tr>
+                    <th style="width: 30%;">Kriterium</th>
+                    <th style="width: 35%;">Sehr Gut (1)</th>
+                    <th style="width: 35%;">Befriedigend (3-4)</th>
+                </tr>
+                <tr>
+                    <td><strong>Adjektive</strong></td>
+                    <td class="highlight-blue">Viele (10+), abwechslungsreich, treffend</td>
+                    <td>Wenige (3-5), immer die gleichen</td>
+                </tr>
+                <tr>
+                    <td><strong>Schauplatz</strong></td>
+                    <td class="highlight-blue">Genau beschrieben, mehrere Details, nur was sichtbar ist</td>
+                    <td>Kaum beschrieben, keine Details, Erfundenes</td>
+                </tr>
+                <tr>
+                    <td><strong>Gefühle</strong></td>
+                    <td class="highlight-blue">Ausführlich beschrieben, verschiedene Gefühlswörter, Veränderung gezeigt</td>
+                    <td>Nur "froh" und "traurig", keine Entwicklung</td>
+                </tr>
+                <tr>
+                    <td><strong>Gedanken</strong></td>
+                    <td class="highlight-blue">Interpretiert, nachvollziehbar, zur Situation passend</td>
+                    <td>Nicht vorhanden oder unpassend</td>
+                </tr>
+                <tr>
+                    <td><strong>Satzanfänge</strong></td>
+                    <td class="highlight-blue">Abwechslungsreich (8+ verschiedene), kreativ</td>
+                    <td>Immer gleich ("Dann..., Dann..., Dann...")</td>
+                </tr>
+            </table>
+
+            <div class="tip-box" style="margin-top: 20px;">
+                <strong>💡 TIPP zum Schluss:</strong><br>
+                Wenn du diese Übungen ALLE gelöst hast, kannst du sicher sein:<br>
+                <span class="highlight-blue" style="font-size: 1.2em;">Du bist BESTENS vorbereitet auf die Schularbeit!</span><br>
+                Übe weiter mit echten Bildergeschichten und wende alles an, was du hier gelernt hast!
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="background: #003D5C; color: white; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center;">
+            <h2 style="color: #FF8C00; margin-bottom: 15px;">🎓 Viel Erfolg auf dem Weg zur AHS!</h2>
+            <p style="font-size: 1.1em;">Wenn du alle Übungen geschafft hast, bist du ein echter Bildergeschichten-Profi!</p>
+            <p style="margin-top: 15px; font-size: 1.3em;"><strong>Du schaffst die EINS! 💪⭐</strong></p>
+        </div>
+
+    </div>
+
+    <script>
+        // Einfache Funktionalität zum Abspeichern von Zwischenständen
+        document.querySelectorAll('textarea, input[type="text"]').forEach(element => {
+            const key = 'saved_' + Math.random().toString(36).substr(2, 9);
+            
+            // Lade gespeicherten Wert
+            const saved = localStorage.getItem(key);
+            if (saved) {
+                element.value = saved;
+            }
+            
+            // Speichere bei Änderung
+            element.addEventListener('input', () => {
+                localStorage.setItem(key, element.value);
+            });
+        });
+
+        // Checkbox-Funktion
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if(this.checked) {
+                    this.parentElement.style.opacity = '0.7';
+                } else {
+                    this.parentElement.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
