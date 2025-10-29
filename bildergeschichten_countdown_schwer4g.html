@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-Tage-Countdown zur Sehr Gut! 🎯 - FORTGESCHRITTEN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #003D5C;
+            color: #000000;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            color: #003D5C;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+            border-bottom: 4px solid #FF8C00;
+            padding-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .countdown-intro {
+            background: linear-gradient(135deg, #003D5C 0%, #005a7f 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 5px solid #FF8C00;
+            text-align: center;
+        }
+
+        .countdown-intro h2 {
+            color: #FF8C00;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .expert-badge {
+            background: #FF8C00;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1em;
+            display: inline-block;
+            margin: 10px 5px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+        }
+
+        .progress-tracker {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 4px solid #FF8C00;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF8C00 0%, #ffb347 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .day-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 4px solid #003D5C;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #FF8C00 0%, #ff9d1f 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .day-number {
+            background: white;
+            color: #FF8C00;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.4em;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .day-focus {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 6px solid #FF8C00;
+        }
+
+        .exercise-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 3px solid #003D5C;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .exercise-title {
+            color: #003D5C;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .difficulty-badge {
+            background: #dc3545;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .dropdown-question {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #003D5C;
+        }
+
+        .dropdown-question p {
+            margin-bottom: 12px;
+            font-weight: bold;
+            color: #003D5C;
+            line-height: 1.6;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 3px solid #003D5C;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select:hover {
+            border-color: #FF8C00;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+
+        .correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+        }
+
+        .incorrect {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .comparison-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border: 3px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .comparison-item:hover {
+            border-color: #FF8C00;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .comparison-item h4 {
+            color: #003D5C;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .version-bad {
+            border-color: #dc3545;
+            background: #ffe6e6;
+        }
+
+        .version-medium {
+            border-color: #ffc107;
+            background: #fff8e6;
+        }
+
+        .version-good {
+            border-color: #28a745;
+            background: #e6ffe6;
+        }
+
+        .drag-drop-container {
+            background: #fff8e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #FF8C00;
+        }
+
+        .drag-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            min-height: 60px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 2px dashed #003D5C;
+        }
+
+        .drag-item {
+            background: #003D5C;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: move;
+            user-select: none;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .drag-item:hover {
+            background: #FF8C00;
+            transform: scale(1.05);
+        }
+
+        .drag-item.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .drop-zone {
+            min-height: 60px;
+            padding: 15px;
+            background: white;
+            border: 3px dashed #003D5C;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .drop-zone.drag-over {
+            background: #e8f4f8;
+            border-color: #FF8C00;
+        }
+
+        .drop-zone-label {
+            font-weight: bold;
+            color: #003D5C;
+            min-width: 100px;
+        }
+
+        .check-button {
+            background: #FF8C00;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .check-button:hover {
+            background: #ff9d1f;
+            transform: translateY(-2px);
+        }
+
+        .error-finding-box {
+            background: #ffe6e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #dc3545;
+        }
+
+        .error-text {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 2;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .error-word {
+            background: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 2px solid #dc3545;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .error-word:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .error-word.found {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .mini-story {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 4px solid #003D5C;
+        }
+
+        .mini-story-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mini-story-image {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            text-align: center;
+            font-weight: bold;
+            color: #666;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .expert-tip {
+            background: linear-gradient(135deg, #003D5C 0%, #005a7f 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 8px solid #FF8C00;
+        }
+
+        .expert-tip h4 {
+            color: #FF8C00;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .tip-box {
+            background: #e8f4f8;
+            border-left: 5px solid #003D5C;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .tip-box strong {
+            color: #FF8C00;
+            font-size: 1.1em;
+        }
+
+        .example-story {
+            background: #fff8e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #FF8C00;
+            line-height: 1.8;
+        }
+
+        .highlight-good {
+            background: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .highlight-bad {
+            background: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-decoration: line-through;
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, #FF8C00 0%, #ff9d1f 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+            border: 5px solid #003D5C;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+            .mini-story-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 10-Tage-Countdown zur SEHR GUT! 🎯</h1>
+        <div class="subtitle">Fortgeschrittenes Training für Bildergeschichten-Profis</div>
+
+        <div class="countdown-intro">
+            <h2>🚀 Willkommen zum Experten-Training!</h2>
+            <p style="margin: 15px 0;">Dies ist KEIN einfaches Training. Hier wirst du zum Bildergeschichten-Meister!</p>
+            <div style="margin-top: 20px;">
+                <span class="expert-badge">FORTGESCHRITTEN</span>
+                <span class="expert-badge">ANSPRUCHSVOLL</span>
+                <span class="expert-badge">SEHR GUT GARANTIERT</span>
+            </div>
+        </div>
+
+        <!-- PROGRESS TRACKER -->
+        <div class="progress-tracker">
+            <h3>📊 Dein Fortschritt zum Bildergeschichten-Profi</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+            <p style="font-size: 1.1em; color: #666; margin-top: 10px;">
+                <span id="daysCompleted">0</span> von 10 Tagen gemeistert!
+            </p>
+        </div>
+
+        <!-- TAG 10 -->
+        <div class="day-section" data-day="10">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">10</div>
+                    <span>Schauplatz-Meisterschaft</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, wie echte Profis den Schauplatz so beschreiben, dass jeder das Bild vor sich sieht!</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ ANSPRUCHSVOLL</span>
+                <div class="exercise-title">🔍 Übung 1: Welche Schauplatz-Beschreibung ist die BESTE?</div>
+                
+                <div class="comparison-box">
+                    <div class="comparison-item version-bad">
+                        <h4>Version A</h4>
+                        <p>"Es war in einem Zimmer. Das Zimmer war schön."</p>
+                    </div>
+                    <div class="comparison-item version-medium">
+                        <h4>Version B</h4>
+                        <p>"Im hellen Klassenzimmer standen viele Tische. An der Wand hing eine Tafel."</p>
+                    </div>
+                    <div class="comparison-item version-good">
+                        <h4>Version C</h4>
+                        <p>"Das sonnendurchflutete Klassenzimmer wirkte freundlich und einladend. Bunte Kinderzeichnungen schmückten die cremefarbenen Wände, während die große, saubere Tafel im Sonnenlicht glänzte."</p>
+                    </div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welche Version ist am BESTEN und WARUM?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Version A - weil sie kurz ist</option>
+                        <option value="1">Version B - weil sie konkret ist</option>
+                        <option value="2">Version C - weil sie lang ist</option>
+                        <option value="3">Version C - weil sie mehrere Sinne anspricht, viele Adjektive verwendet und Details zeigt</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was macht Version C besser als Version B?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Sie ist länger</option>
+                        <option value="1">Sie verwendet mehr Verben</option>
+                        <option value="2">Sie verwendet atmosphärische Adjektive (sonnendurchflutet, freundlich, einladend) statt nur faktische Beschreibungen</option>
+                        <option value="3">Sie hat mehr Sätze</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ EXPERTEN-LEVEL</span>
+                <div class="exercise-title">🎯 Übung 2: Schauplatz-Details zuordnen (Drag & Drop)</div>
+                
+                <div class="drag-drop-container">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #003D5C;">
+                        Ordne die Beschreibungen der richtigen Kategorie zu!
+                    </p>
+                    
+                    <div class="drag-items" id="dragItems10">
+                        <div class="drag-item" draggable="true" data-category="visual">Die Wände waren in warmen Gelbtönen gestrichen</div>
+                        <div class="drag-item" draggable="true" data-category="atmosphere">Eine gemütliche Stimmung erfüllte den Raum</div>
+                        <div class="drag-item" draggable="true" data-category="visual">Durch das große Fenster fiel helles Sonnenlicht</div>
+                        <div class="drag-item" draggable="true" data-category="detail">Auf dem Regal standen bunte Ordner</div>
+                        <div class="drag-item" draggable="true" data-category="atmosphere">Der Raum wirkte einladend und freundlich</div>
+                        <div class="drag-item" draggable="true" data-category="detail">An der Pinnwand hingen Kinderzeichnungen</div>
+                    </div>
+
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="visual">
+                            <span class="drop-zone-label">Visuelle Beschreibung:</span>
+                        </div>
+                        <div class="drop-zone" data-category="atmosphere">
+                            <span class="drop-zone-label">Atmosphäre:</span>
+                        </div>
+                        <div class="drop-zone" data-category="detail">
+                            <span class="drop-zone-label">Konkrete Details:</span>
+                        </div>
+                    </div>
+
+                    <button class="check-button" onclick="checkDragDrop('dragItems10')">Überprüfen</button>
+                    <div class="feedback" id="feedback10"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>Die besten Schauplatz-Beschreibungen kombinieren DREI Elemente: 1) Visuelle Details (Farben, Licht), 2) Atmosphäre (Stimmung), 3) Konkrete Objekte. Verwende mindestens 4-5 verschiedene Adjektive!</p>
+            </div>
+        </div>
+
+        <!-- TAG 9 -->
+        <div class="day-section" data-day="9">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">9</div>
+                    <span>Gefühls-Evolution zeigen</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, wie sich Gefühle ENTWICKELN und VERÄNDERN - das macht den Unterschied zwischen GUT und SEHR GUT!</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ SCHWER</span>
+                <div class="exercise-title">😊 Übung 1: Gefühls-Abstufungen erkennen</div>
+                
+                <div class="dropdown-question">
+                    <p>Ein Kind wartet auf sein Geburtstaggeschenk. Welche Reihenfolge der Gefühle macht am meisten Sinn?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">froh → glücklich → froh</option>
+                        <option value="1">aufgeregt → aufgeregt → aufgeregt</option>
+                        <option value="2">gespannt → aufgeregt → überglücklich → dankbar</option>
+                        <option value="3">traurig → froh</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Lies: "Lisa war nervös. Sie öffnete die Tür. Sie war erleichtert."<br>Was fehlt hier für eine SEHR GUT?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Mehr Sätze</option>
+                        <option value="1">Mehr Namen</option>
+                        <option value="2">Mehr Orte</option>
+                        <option value="3">Zwischengefühle (ängstlich → hoffnungsvoll → erleichtert) und Körpersprache</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ EXPERTEN-CHALLENGE</span>
+                <div class="exercise-title">🎭 Übung 2: Gefühls-Entwicklung sortieren (Drag & Drop)</div>
+                
+                <div class="drag-drop-container">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #003D5C;">
+                        Sortiere die Gefühle in eine logische Reihenfolge für diese Geschichte:<br>
+                        <em>"Ein Mädchen sucht ihren verlorenen Hund"</em>
+                    </p>
+                    
+                    <div class="drag-items" id="dragItems9">
+                        <div class="drag-item" draggable="true" data-order="1">besorgt</div>
+                        <div class="drag-item" draggable="true" data-order="4">überglücklich</div>
+                        <div class="drag-item" draggable="true" data-order="2">verzweifelt</div>
+                        <div class="drag-item" draggable="true" data-order="5">erleichtert</div>
+                        <div class="drag-item" draggable="true" data-order="3">hoffnungsvoll</div>
+                    </div>
+
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-order="1"><span class="drop-zone-label">1. Anfang:</span></div>
+                        <div class="drop-zone" data-order="2"><span class="drop-zone-label">2. Problem wird größer:</span></div>
+                        <div class="drop-zone" data-order="3"><span class="drop-zone-label">3. Erste Hoffnung:</span></div>
+                        <div class="drop-zone" data-order="4"><span class="drop-zone-label">4. Lösung gefunden:</span></div>
+                        <div class="drop-zone" data-order="5"><span class="drop-zone-label">5. Nach der Lösung:</span></div>
+                    </div>
+
+                    <button class="check-button" onclick="checkOrder('dragItems9')">Überprüfen</button>
+                    <div class="feedback" id="feedback9"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>Eine SEHR GUT bekommt, wer mindestens 5 verschiedene Gefühle zeigt UND die Entwicklung mit Körpersprache untermalt: "Ihre Hände zitterten" (nervös), "Erleichterung durchflutete sie" (erleichtert), "Ein Lächeln breitete sich aus" (glücklich).</p>
+            </div>
+        </div>
+
+        <!-- TAG 8 -->
+        <div class="day-section" data-day="8">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">8</div>
+                    <span>Gedanken wie ein Profi</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Gedanken machen deine Geschichte lebendig! Du lernst, sie RICHTIG zu interpretieren.</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ ANSPRUCHSVOLL</span>
+                <div class="exercise-title">💭 Übung 1: Gedanken vs. Gefühle - erkenne den Unterschied!</div>
+                
+                <div class="dropdown-question">
+                    <p>Welcher Satz zeigt GEDANKEN (nicht nur Gefühle)?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Tim war sehr glücklich.</option>
+                        <option value="1">Tim freute sich.</option>
+                        <option value="2">Tim lächelte breit.</option>
+                        <option value="3">Tim überlegte fieberhaft: "Wo könnte ich noch suchen? Vielleicht im Garten?"</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Ein Mädchen steht vor einer verschlossenen Tür mit ihrem Schlüssel in der Hand. Welcher Gedanke ist am REALISTISCHSTEN?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">"Die Tür ist blau."</option>
+                        <option value="1">"Ich bin froh."</option>
+                        <option value="2">"Hoffentlich passt der Schlüssel! Sonst muss ich Mama anrufen..."</option>
+                        <option value="3">"Die Tür war gestern auch zu."</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ EXPERTEN-LEVEL</span>
+                <div class="exercise-title">🧠 Übung 2: Gedanken-Wörter richtig zuordnen</div>
+                
+                <div class="drag-drop-container">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #003D5C;">
+                        Ordne die Wörter den richtigen Kategorien zu!
+                    </p>
+                    
+                    <div class="drag-items" id="dragItems8">
+                        <div class="drag-item" draggable="true" data-category="thought">überlegte</div>
+                        <div class="drag-item" draggable="true" data-category="feeling">war glücklich</div>
+                        <div class="drag-item" draggable="true" data-category="thought">fragte sich</div>
+                        <div class="drag-item" draggable="true" data-category="thought">grübelte</div>
+                        <div class="drag-item" draggable="true" data-category="feeling">fühlte sich erleichtert</div>
+                        <div class="drag-item" draggable="true" data-category="thought">dachte nach</div>
+                    </div>
+
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="thought">
+                            <span class="drop-zone-label">GEDANKEN-Wörter:</span>
+                        </div>
+                        <div class="drop-zone" data-category="feeling">
+                            <span class="drop-zone-label">GEFÜHLS-Wörter:</span>
+                        </div>
+                    </div>
+
+                    <button class="check-button" onclick="checkDragDrop('dragItems8')">Überprüfen</button>
+                    <div class="feedback" id="feedback8"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>Gedanken zeigen das INNERE der Figur. Verwende: "überlegte", "fragte sich", "grübelte", "dachte sich". Pro Bildergeschichte: 2-3 Gedanken-Sätze sind perfekt für die SEHR GUT!</p>
+            </div>
+        </div>
+
+        <!-- TAG 7 -->
+        <div class="day-section" data-day="7">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">7</div>
+                    <span>Satzanfänge-Meisterschaft</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Monotone Satzanfänge = schlechte Note! Du lernst, wie echte Profis ihre Sätze variieren.</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ FEHLER FINDEN</span>
+                <div class="exercise-title">❌ Übung 1: Finde die schlechten Satzanfänge!</div>
+                
+                <div class="error-finding-box">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #721c24;">
+                        Klicke auf ALLE Wörter, die zu oft als Satzanfang verwendet werden!
+                    </p>
+                    <div class="error-text">
+                        <span class="error-word" data-error="true">Dann</span> ging Tim los. <span class="error-word" data-error="true">Dann</span> sah er einen Hund. <span class="error-word" data-error="true">Dann</span> lief er nach Hause. <span class="error-word" data-error="false">Plötzlich</span> hörte er ein Geräusch. <span class="error-word" data-error="true">Dann</span> öffnete er die Tür. <span class="error-word" data-error="false">Vorsichtig</span> trat er ein.
+                    </div>
+                    <button class="check-button" onclick="checkErrors(this)">Überprüfen</button>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ EXPERTEN-CHALLENGE</span>
+                <div class="exercise-title">🎯 Übung 2: Satzanfang-Kategorien zuordnen</div>
+                
+                <div class="drag-drop-container">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #003D5C;">
+                        Ordne die Satzanfänge der richtigen Kategorie zu!
+                    </p>
+                    
+                    <div class="drag-items" id="dragItems7">
+                        <div class="drag-item" draggable="true" data-category="time">Plötzlich</div>
+                        <div class="drag-item" draggable="true" data-category="place">Im Hintergrund</div>
+                        <div class="drag-item" draggable="true" data-category="feeling">Ängstlich</div>
+                        <div class="drag-item" draggable="true" data-category="time">Währenddessen</div>
+                        <div class="drag-item" draggable="true" data-category="place">Auf der rechten Seite</div>
+                        <div class="drag-item" draggable="true" data-category="feeling">Mit klopfendem Herzen</div>
+                    </div>
+
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="time"><span class="drop-zone-label">ZEIT-Angaben:</span></div>
+                        <div class="drop-zone" data-category="place"><span class="drop-zone-label">ORT-Angaben:</span></div>
+                        <div class="drop-zone" data-category="feeling"><span class="drop-zone-label">GEFÜHL-Angaben:</span></div>
+                    </div>
+
+                    <button class="check-button" onclick="checkDragDrop('dragItems7')">Überprüfen</button>
+                    <div class="feedback" id="feedback7"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>Für die SEHR GUT brauchst du mindestens 8 verschiedene Satzanfänge! Mische: Zeit (Plötzlich, Währenddessen), Ort (Im Hintergrund, Daneben), Gefühle (Ängstlich, Erleichtert), Personen (Das Mädchen, Mit zitternden Händen).</p>
+            </div>
+        </div>
+
+        <!-- TAG 6 -->
+        <div class="day-section" data-day="6">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">6</div>
+                    <span>Einleitung perfektionieren</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Die ersten Sätze entscheiden über die Note! Du lernst, wie eine SEHR GUT-Einleitung aussieht.</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ VERGLEICHSAUFGABE</span>
+                <div class="exercise-title">🚀 Übung 1: Bewerte diese 3 Einleitungen!</div>
+                
+                <div class="comparison-box">
+                    <div class="comparison-item">
+                        <h4>Einleitung A</h4>
+                        <p>"Es war einmal ein Junge. Er hieß Tom. Er ging los."</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Einleitung B</h4>
+                        <p>"An einem Samstag war Tom im Park. Er spielte dort."</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Einleitung C</h4>
+                        <p>"An einem sonnigen Samstagnachmittag im Mai stand der zehnjährige Tom aufgeregt vor seinem Haus und schnürte seine Wanderschuhe. Heute wollte er endlich den geheimnisvollen Waldweg erkunden."</p>
+                    </div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welche Einleitung verdient eine SEHR GUT?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">A - weil sie kurz ist</option>
+                        <option value="1">B - weil sie WO und WANN nennt</option>
+                        <option value="2">C - weil sie WER + Alter, WANN genau, WO genau, Ausgangssituation UND Vorfreude/Spannung kombiniert</option>
+                        <option value="3">Alle drei sind gleich gut</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was macht Einleitung C besser als die anderen?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Sie ist am längsten</option>
+                        <option value="1">Sie hat schwierige Wörter</option>
+                        <option value="2">Sie nennt einen Namen</option>
+                        <option value="3">Sie macht neugierig ("geheimnisvoll"), gibt alle wichtigen Infos UND zeigt schon Gefühle ("aufgeregt")</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ FEHLER ERKENNEN</span>
+                <div class="exercise-title">❌ Übung 2: Was fehlt in dieser Einleitung?</div>
+                
+                <div class="error-finding-box">
+                    <div class="error-text" style="background: #ffe6e6;">
+                        "Lisa ging in die Schule. Sie war nervös."
+                    </div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was fehlt hier ALLES? (Wähle die vollständigste Antwort!)</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Nur das Alter</option>
+                        <option value="1">Nur die Zeitangabe</option>
+                        <option value="2">Zeitangabe und Ort</option>
+                        <option value="3">WANN genau, WIE ALT Lisa ist, WIE die Schule/der Weg aussieht, WARUM sie nervös ist (Ausgangssituation), atmosphärische Adjektive</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>SEHR GUT-Einleitung = 2-3 Sätze mit: 1) Genauer Zeitangabe ("An einem nebligen Montagmorgen"), 2) WER mit Alter + Adjektiv ("die achtjährige Lisa"), 3) WO mit Details, 4) Ausgangssituation + erstes Gefühl. Beginne NIE mit "Es war einmal"!</p>
+            </div>
+        </div>
+
+        <!-- TAG 5 -->
+        <div class="day-section" data-day="5">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">5</div>
+                    <span>Schluss mit Wow-Effekt</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Der Schluss bleibt in Erinnerung! Du lernst, wie du deine Geschichte perfekt beendest.</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ KRITISCHES DENKEN</span>
+                <div class="exercise-title">🏁 Übung 1: Vergleiche diese Schlüsse!</div>
+                
+                <div class="comparison-box">
+                    <div class="comparison-item version-bad">
+                        <h4>Schluss A</h4>
+                        <p>"Dann ging Tom nach Hause. Ende."</p>
+                    </div>
+                    <div class="comparison-item version-medium">
+                        <h4>Schluss B</h4>
+                        <p>"Tom war froh, dass er den Schlüssel gefunden hatte. Er ging nach Hause."</p>
+                    </div>
+                    <div class="comparison-item version-good">
+                        <h4>Schluss C</h4>
+                        <p>"Überglücklich und erleichtert drückte Tom den Schlüssel fest an sein Herz. Von nun an würde er besser auf seine Sachen achten. Mit einem zufriedenen Lächeln und einem wichtigen Gedanken reicher machte er sich auf den Heimweg."</p>
+                    </div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Warum ist Schluss C der BESTE?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Weil er am längsten ist</option>
+                        <option value="1">Weil er schwierige Wörter hat</option>
+                        <option value="2">Weil er "Ende" nicht schreibt</option>
+                        <option value="3">Weil er Gefühle zeigt, eine Erkenntnis nennt ("würde besser achten"), Körpersprache verwendet UND einen positiven Ausblick gibt</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was ist der GRÖSSTE Fehler bei Schluss A?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Er ist zu kurz</option>
+                        <option value="1">Er schreibt "Ende"</option>
+                        <option value="2">Er zeigt keine Gefühle, keine Erkenntnis, keine Entwicklung - nur eine Handlung</option>
+                        <option value="3">Der Name Tom fehlt</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ EXPERTEN-ANALYSE</span>
+                <div class="exercise-title">🎯 Übung 2: Schluss-Elemente zuordnen</div>
+                
+                <div class="drag-drop-container">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #003D5C;">
+                        Ordne zu: Was gehört in einen SEHR GUT-Schluss?
+                    </p>
+                    
+                    <div class="drag-items" id="dragItems5">
+                        <div class="drag-item" draggable="true" data-category="good">Gefühle nach der Lösung zeigen</div>
+                        <div class="drag-item" draggable="true" data-category="bad">Nur "Ende" schreiben</div>
+                        <div class="drag-item" draggable="true" data-category="good">Eine Erkenntnis/Lehre einbauen</div>
+                        <div class="drag-item" draggable="true" data-category="bad">Eine neue Geschichte beginnen</div>
+                        <div class="drag-item" draggable="true" data-category="good">Einen positiven Ausblick geben</div>
+                        <div class="drag-item" draggable="true" data-category="bad">Das Problem ungelöst lassen</div>
+                    </div>
+
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="good">
+                            <span class="drop-zone-label">✅ GEHÖRT in Schluss:</span>
+                        </div>
+                        <div class="drop-zone" data-category="bad">
+                            <span class="drop-zone-label">❌ NICHT in Schluss:</span>
+                        </div>
+                    </div>
+
+                    <button class="check-button" onclick="checkDragDrop('dragItems5')">Überprüfen</button>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>SEHR GUT-Schluss = Problem ist gelöst + intensive Gefühls-Beschreibung + Erkenntnis ("Von nun an...") + positiver Ausblick. Mindestens 2-3 Sätze! NIE nur "Ende" oder "Und dann..."</p>
+            </div>
+        </div>
+
+        <!-- TAG 4 -->
+        <div class="day-section" data-day="4">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">4</div>
+                    <span>Wörtliche Rede wie ein Profi</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Wörtliche Rede macht deine Geschichte lebendig - aber nur wenn sie RICHTIG eingesetzt wird!</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ FEHLER FINDEN</span>
+                <div class="exercise-title">❌ Übung 1: Finde ALLE Fehler in der wörtlichen Rede!</div>
+                
+                <div class="error-finding-box">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #721c24;">
+                        Klicke auf ALLE Fehler in diesen Sätzen!
+                    </p>
+                    <div class="error-text">
+                        <span class="error-word" data-error="true">Hilfe rief er</span>. 
+                        <span class="error-word" data-error="false">"Komm schnell!"</span>, sagte Lisa. 
+                        <span class="error-word" data-error="true">'Ich habe es geschafft'</span> jubelte Tom. 
+                        <span class="error-word" data-error="false">"Wo bist du?"</span>, fragte sie ängstlich.
+                    </div>
+                    <button class="check-button" onclick="checkErrors(this)">Überprüfen</button>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ EXPERTEN-LEVEL</span>
+                <div class="exercise-title">💬 Übung 2: Welche Begleitsätze passen?</div>
+                
+                <div class="dropdown-question">
+                    <p>"Das habe ich endlich geschafft!", ... Tim stolz.<br>Welches Wort passt am BESTEN?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">sagte</option>
+                        <option value="1">sprach</option>
+                        <option value="2">verkündete</option>
+                        <option value="3">meinte</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>"Sei doch leiser!", ... die Mutter mahnend.<br>Welches Wort ist FALSCH?</p>
+                    <select class="quiz" data-correct="0">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">jubelte (passt nicht zur Situation)</option>
+                        <option value="1">ermahnte</option>
+                        <option value="2">bat</option>
+                        <option value="3">flüsterte</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Wie oft solltest du wörtliche Rede in einer Bildergeschichte (4-6 Bilder) verwenden?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Gar nicht</option>
+                        <option value="1">2-3 Mal an wichtigen Stellen</option>
+                        <option value="2">In jedem Satz</option>
+                        <option value="3">Nur einmal</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>Wörtliche Rede MUSS richtig geschrieben sein: „..." (unten-oben). Vermeide langweilige Begleitsätze! Statt "sagte" nutze: verkündete, flüsterte, jubelte, seufzte, fragte besorgt, antwortete erleichtert. Pro Geschichte: 2-3x perfekt platziert = SEHR GUT!</p>
+            </div>
+        </div>
+
+        <!-- TAG 3 -->
+        <div class="day-section" data-day="3">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">3</div>
+                    <span>Spannung aufbauen - Meisterklasse</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Spannung = der Unterschied zwischen GUT und SEHR GUT! Du lernst, wie Profis Spannung erzeugen.</p>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ VERGLEICHEN UND BEWERTEN</span>
+                <div class="exercise-title">⚡ Übung 1: Welche Version ist SPANNENDER?</div>
+                
+                <div class="comparison-box">
+                    <div class="comparison-item">
+                        <h4>Version A</h4>
+                        <p>"Max suchte den Schlüssel. Er fand ihn. Er ging hinein."</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Version B</h4>
+                        <p>"Max suchte nervös den Schlüssel. Plötzlich fand er ihn in seiner Tasche. Erleichtert ging er hinein."</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Version C</h4>
+                        <p>"Fieberhaft durchsuchte Max seine Taschen. 'Wo ist er nur?', fragte er sich verzweifelt. Sein Herz hämmerte. Die Zeit lief ihm davon! Plötzlich - da! Ganz unten in der Jackentasche ertasteten seine zitternden Finger etwas Metallisches. Im letzten Moment hatte er ihn gefunden!"</p>
+                    </div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Warum ist Version C am SPANNENDSTEN?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Weil sie am längsten ist</option>
+                        <option value="1">Weil sie Ausrufezeichen hat</option>
+                        <option value="2">Weil ein Name vorkommt</option>
+                        <option value="3">Weil sie: Spannungswörter (fieberhaft, plötzlich), Gedanken, Körperreaktionen (Herz hämmerte), Zeitdruck UND eine verzögerte Lösung kombiniert</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ EXPERTEN-ANALYSE</span>
+                <div class="exercise-title">🎬 Übung 2: Spannungs-Elemente erkennen</div>
+                
+                <div class="drag-drop-container">
+                    <p style="font-weight: bold; margin-bottom: 15px; color: #003D5C;">
+                        Was erzeugt Spannung? Ordne richtig zu!
+                    </p>
+                    
+                    <div class="drag-items" id="dragItems3">
+                        <div class="drag-item" draggable="true" data-category="span">"Plötzlich"</div>
+                        <div class="drag-item" draggable="true" data-category="nospan">"Dann"</div>
+                        <div class="drag-item" draggable="true" data-category="span">"Sein Herz raste"</div>
+                        <div class="drag-item" draggable="true" data-category="nospan">"Er war da"</div>
+                        <div class="drag-item" draggable="true" data-category="span">"Im letzten Moment"</div>
+                        <div class="drag-item" draggable="true" data-category="nospan">"Später"</div>
+                    </div>
+
+                    <div class="drop-zones">
+                        <div class="drop-zone" data-category="span">
+                            <span class="drop-zone-label">✅ Erzeugt SPANNUNG:</span>
+                        </div>
+                        <div class="drop-zone" data-category="nospan">
+                            <span class="drop-zone-label">❌ Erzeugt KEINE Spannung:</span>
+                        </div>
+                    </div>
+
+                    <button class="check-button" onclick="checkDragDrop('dragItems3')">Überprüfen</button>
+                    <div class="feedback" id="feedback3"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>Spannung = Problem + Verzögerung + Körperreaktionen + Zeitdruck! Verwende: "plötzlich", "unerwartet", "im letzten Moment", "fieberhaft". Zeige Körper: "Herz hämmerte", "zitternde Hände", "Schweiß auf der Stirn". WICHTIG: Lösung nicht sofort nennen!</p>
+            </div>
+        </div>
+
+        <!-- TAG 2 -->
+        <div class="day-section" data-day="2">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">2</div>
+                    <span>Mini-Bildergeschichte analysieren</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du bekommst eine Mini-Bildergeschichte und analysierst sie wie ein Profi!</p>
+            </div>
+
+            <div class="mini-story">
+                <h3 style="color: #003D5C; text-align: center; margin-bottom: 20px;">
+                    📖 Mini-Bildergeschichte: "Der mutige Sprung"
+                </h3>
+                
+                <div class="mini-story-images">
+                    <div class="mini-story-image">
+                        <strong>BILD 1:</strong><br>
+                        Ein Mädchen steht am Rand eines Schwimmbeckens und blickt ängstlich ins Wasser
+                    </div>
+                    <div class="mini-story-image">
+                        <strong>BILD 2:</strong><br>
+                        Sie atmet tief durch, ihre Freunde feuern sie an
+                    </div>
+                    <div class="mini-story-image">
+                        <strong>BILD 3:</strong><br>
+                        Sie springt ins Wasser und taucht strahlend wieder auf
+                    </div>
+                </div>
+
+                <div class="example-story" style="border: 4px solid #003D5C; margin-top: 20px;">
+                    <h4 style="color: #003D5C; margin-bottom: 15px;">Eine SEHR GUT-Geschichte dazu:</h4>
+                    <p style="line-height: 2; margin-bottom: 15px;">
+                        <strong>Einleitung:</strong> An einem heißen Sommernachmittag stand die <span class="highlight-good">zehnjährige Emma</span> am <span class="highlight-good">Rand des großen Schwimmbeckens</span>. <span class="highlight-good">Nervös</span> blickte sie in das <span class="highlight-good">tiefe, blau schimmernde Wasser</span>. Sie hatte noch nie einen Kopfsprung gemacht.
+                    </p>
+                    <p style="line-height: 2; margin-bottom: 15px;">
+                        <strong>Hauptteil:</strong> <span class="highlight-good">Ihr Herz klopfte wild</span>, während sie <span class="highlight-good">überlegte</span>: <span class="highlight-good">"Schaffe ich das wirklich?"</span> <span class="highlight-good">Im Hintergrund</span> feuerten ihre Freunde sie <span class="highlight-good">begeistert</span> an. <span class="highlight-good">"Du schaffst das, Emma!"</span>, rief Lisa <span class="highlight-good">aufmunternd</span>. <span class="highlight-good">Langsam</span> holte Emma <span class="highlight-good">tief Luft</span>. <span class="highlight-good">Plötzlich</span> fühlte sie <span class="highlight-good">neuen Mut</span> in sich aufsteigen.
+                    </p>
+                    <p style="line-height: 2;">
+                        <strong>Schluss:</strong> <span class="highlight-good">Mit einem entschlossenen Blick</span> stieß sie sich ab und <span class="highlight-good">sprang kopfüber</span> ins <span class="highlight-good">erfrischende Wasser</span>. <span class="highlight-good">Überglücklich und stolz</span> tauchte sie wieder auf. Von nun an wusste sie: <span class="highlight-good">Mutig sein lohnt sich!</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <span class="difficulty-badge">⚡ ANSPRUCHSVOLLE ANALYSE</span>
+                <div class="exercise-title">🔍 Übung: Analysiere die Geschichte wie ein Experte!</div>
+                
+                <div class="dropdown-question">
+                    <p>Wie viele VERSCHIEDENE Adjektive werden in der Geschichte verwendet?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">3-5</option>
+                        <option value="1">6-8</option>
+                        <option value="2">9-11</option>
+                        <option value="3">12 oder mehr (heiß, zehnjährig, groß, nervös, tief, blau schimmernd, wild, begeistert, aufmunternd, neu, entschlossen, erfrischend, überglücklich, stolz)</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welche Spannungs-Techniken werden verwendet?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Keine</option>
+                        <option value="1">Nur Spannungswörter</option>
+                        <option value="2">Nur Gedanken</option>
+                        <option value="3">Kombination aus: Körperreaktionen (Herz klopfte), Gedanken (Schaffe ich das?), Spannungswörter (Plötzlich), verzögerte Lösung</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Wie wird die Gefühls-Entwicklung gezeigt?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Gar nicht</option>
+                        <option value="1">Nur "nervös" und "froh"</option>
+                        <option value="2">Klare Entwicklung: nervös → zweifelnd → mutiger werdend → entschlossen → überglücklich und stolz</option>
+                        <option value="3">Immer das gleiche Gefühl</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welche Satzanfänge werden verwendet? (Wähle die vollständigste Antwort)</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Nur "dann"</option>
+                        <option value="1">Nur Zeitangaben</option>
+                        <option value="2">Nur Personen</option>
+                        <option value="3">Abwechslungsreich: Zeitangabe (An einem...), Gefühl (Nervös), Person (Ihr Herz, Emma), Ort (Im Hintergrund), Zeit (Langsam, Plötzlich), Umstand (Mit einem...)</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was macht den Schluss zu einem SEHR GUT-Schluss?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Er ist kurz</option>
+                        <option value="1">Er schreibt "Ende"</option>
+                        <option value="2">Er ist lang</option>
+                        <option value="3">Er zeigt Gefühle (überglücklich, stolz), beschreibt die Handlung (sprang, tauchte auf), nennt eine Erkenntnis ("Mutig sein lohnt sich") UND schließt positiv ab</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="expert-tip">
+                <h4>💎 EXPERTEN-TIPP:</h4>
+                <p>Diese Geschichte zeigt ALLE Elemente einer SEHR GUT: Einleitung (WER, WANN, WO, Ausgangssituation), 12+ Adjektive, Gefühls-Entwicklung, Gedanken, wörtliche Rede (2x), Spannung, 8+ verschiedene Satzanfänge, Schluss mit Erkenntnis. Lerne von diesem Beispiel!</p>
+            </div>
+        </div>
+
+        <!-- TAG 1 -->
+        <div class="day-section" data-day="1">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">1</div>
+                    <span>FINALE: Deine Bildergeschichte! 🎯</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>HEUTE IST ES SOWEIT! Schreibe deine beste Bildergeschichte und wende ALLES an, was du gelernt hast!</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #003D5C 0%, #005a7f 100%); color: white; padding: 40px; border-radius: 15px; margin: 20px 0; border: 5px solid #FF8C00;">
+                <h3 style="color: #FF8C00; font-size: 2em; text-align: center; margin-bottom: 25px;">
+                    🏆 DEINE PROFI-CHECKLISTE 🏆
+                </h3>
+                
+                <p style="font-size: 1.2em; margin-bottom: 25px; text-align: center;">
+                    Nimm dir EINE deiner Bildergeschichten (4-6 Bilder) und schreibe sie mit ALLEN Profi-Techniken!<br>
+                    <strong>Zeit: 45 Minuten</strong>
+                </p>
+
+                <div style="background: white; color: #000; padding: 30px; border-radius: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ EINLEITUNG (2-3 Sätze):</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">WANN genau (z.B. "An einem nebligen Montagmorgen")<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">WER mit Alter + Adjektiv (z.B. "der zehnjährige Tim")<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">WO mit Details<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Ausgangssituation + erstes Gefühl<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Macht neugierig
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ SCHAUPLATZ:</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">3 Kategorien: Visuell + Atmosphäre + Details<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Mindestens 4-5 atmosphärische Adjektive<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Nur das beschreiben, was sichtbar ist
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ GEFÜHLE:</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Mindestens 5 verschiedene Gefühle<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Entwicklung zeigen (nervös → mutiger → stolz)<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Mit Körpersprache untermauern<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">NICHT nur "froh" und "traurig"
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ GEDANKEN:</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">2-3 Gedanken-Sätze<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Mit "überlegte", "fragte sich", "dachte"<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Logisch zur Situation passend
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ SATZANFÄNGE:</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Mindestens 8 verschiedene<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Mix: Zeit, Ort, Gefühl, Person<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">NICHT immer "Dann", "Und", "Er/Sie"
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ WÖRTLICHE REDE:</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">2-3 Mal verwendet<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Richtige Zeichen: „..."<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Verschiedene Begleitsätze (nicht nur "sagte")
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ SPANNUNG:</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Spannungswörter (plötzlich, unerwartet, im letzten Moment)<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Körperreaktionen (Herz hämmerte, zitternde Hände)<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Lösung nicht sofort verraten
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ SCHLUSS (2-3 Sätze):</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Problem ist gelöst<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Gefühle nach Lösung zeigen<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Erkenntnis ("Von nun an...")<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Positiver Ausblick<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">NICHT "Ende" oder nur "Er ging..."
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style="color: #003D5C; margin-bottom: 15px; font-size: 1.2em;">✅ ALLGEMEIN:</h4>
+                            <div style="margin-left: 20px; line-height: 2;">
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Mindestens 12 verschiedene Adjektive<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Alles im Präteritum<br>
+                                <input type="checkbox" style="width: 20px; height: 20px; margin-right: 10px;">Rechtschreibung kontrolliert
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding: 25px; background: #FF8C00; border-radius: 10px;">
+                    <h3 style="font-size: 1.8em; margin-bottom: 15px;">⏱️ WICHTIG:</h3>
+                    <p style="font-size: 1.3em; line-height: 1.8;">
+                        Stelle dir einen Timer auf <strong>45 Minuten</strong>!<br>
+                        Schreibe auf Papier wie in der echten Schularbeit.<br>
+                        Gehe danach die <strong>KOMPLETTE</strong> Checkliste durch!
+                    </p>
+                </div>
+            </div>
+
+            <div class="expert-tip" style="margin-top: 30px;">
+                <h4>💎 LETZTER EXPERTEN-TIPP:</h4>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    Wenn du ALLE Punkte auf dieser Checkliste erfüllt hast, dann hast du eine <strong>SEHR GUT</strong> geschrieben! 
+                    Diese Checkliste enthält ALLE Kriterien, die Lehrer für die beste Note erwarten. 
+                    Du hast 10 Tage hart trainiert - jetzt zeig, was du kannst! <strong>Du bist bereit! 🎯</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- FINAL MESSAGE -->
+        <div class="final-message">
+            <h2 style="font-size: 2.5em; margin-bottom: 20px;">🏆 GRATULATION, PROFI! 🏆</h2>
+            <p style="font-size: 1.3em; margin: 20px 0; line-height: 1.8;">
+                Du hast das härteste Bildergeschichten-Training absolviert!<br>
+                Du kennst jetzt ALLE Geheimnisse für die SEHR GUT!
+            </p>
+            <div style="margin: 30px 0;">
+                <span class="expert-badge" style="font-size: 1.2em; padding: 12px 25px;">EXPERTEN-NIVEAU ERREICHT</span>
+            </div>
+            <p style="font-size: 1.4em; margin: 30px 0;">
+                <strong>Die SEHR GUT gehört DIR! 💪⭐</strong>
+            </p>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                Gehe vor der Schularbeit nochmal die Checkliste von Tag 1 durch.<br>
+                Du schaffst das - denn du bist jetzt ein Bildergeschichten-MEISTER!
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Quiz functionality
+        document.querySelectorAll('select.quiz').forEach(select => {
+            select.addEventListener('change', function() {
+                const correctAnswer = this.getAttribute('data-correct');
+                const selectedAnswer = this.value;
+                const feedback = this.nextElementSibling;
+                
+                if (selectedAnswer === '') {
+                    feedback.classList.remove('show');
+                    this.classList.remove('correct', 'incorrect');
+                    return;
+                }
+                
+                if (selectedAnswer === correctAnswer) {
+                    this.classList.remove('incorrect');
+                    this.classList.add('correct');
+                    feedback.textContent = '✅ Perfekt! Das ist die Experten-Antwort!';
+                    feedback.classList.remove('incorrect');
+                    feedback.classList.add('correct', 'show');
+                } else {
+                    this.classList.remove('correct');
+                    this.classList.add('incorrect');
+                    feedback.textContent = '❌ Noch nicht ganz! Überlege nochmal genau und lies alle Antworten durch.';
+                    feedback.classList.remove('correct');
+                    feedback.classList.add('incorrect', 'show');
+                }
+            });
+        });
+
+        // Drag and Drop functionality
+        let draggedElement = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupDragDrop();
+        });
+
+        function setupDragDrop() {
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.classList.add('dragging');
+                });
+
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                });
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    if (draggedElement) {
+                        this.appendChild(draggedElement);
+                    }
+                });
+            });
+        }
+
+        function checkDragDrop(containerId) {
+            const container = document.getElementById(containerId);
+            const dropZones = container.parentElement.querySelectorAll('.drop-zone');
+            const feedback = container.parentElement.querySelector('.feedback');
+            
+            let allCorrect = true;
+            
+            dropZones.forEach(zone => {
+                const expectedCategory = zone.getAttribute('data-category');
+                const items = zone.querySelectorAll('.drag-item');
+                
+                items.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (itemCategory !== expectedCategory) {
+                        allCorrect = false;
+                    }
+                });
+            });
+            
+            if (allCorrect) {
+                feedback.textContent = '✅ Perfekt! Alle Zuordnungen sind richtig!';
+                feedback.classList.remove('incorrect');
+                feedback.classList.add('correct', 'show');
+            } else {
+                feedback.textContent = '❌ Noch nicht alle Zuordnungen sind korrekt. Versuche es nochmal!';
+                feedback.classList.remove('correct');
+                feedback.classList.add('incorrect', 'show');
+            }
+        }
+
+        function checkOrder(containerId) {
+            const container = document.getElementById(containerId);
+            const dropZones = container.parentElement.querySelectorAll('.drop-zone');
+            const feedback = container.parentElement.querySelector('.feedback');
+            
+            let allCorrect = true;
+            
+            dropZones.forEach(zone => {
+                const expectedOrder = zone.getAttribute('data-order');
+                const items = zone.querySelectorAll('.drag-item');
+                
+                if (items.length === 0) {
+                    allCorrect = false;
+                } else {
+                    items.forEach(item => {
+                        const itemOrder = item.getAttribute('data-order');
+                        if (itemOrder !== expectedOrder) {
+                            allCorrect = false;
+                        }
+                    });
+                }
+            });
+            
+            if (allCorrect) {
+                feedback.textContent = '✅ Perfekt! Die Reihenfolge ist richtig!';
+                feedback.classList.remove('incorrect');
+                feedback.classList.add('correct', 'show');
+            } else {
+                feedback.textContent = '❌ Die Reihenfolge stimmt noch nicht. Überlege nochmal!';
+                feedback.classList.remove('correct');
+                feedback.classList.add('incorrect', 'show');
+            }
+        }
+
+        function checkErrors(button) {
+            const errorBox = button.parentElement;
+            const errorWords = errorBox.querySelectorAll('.error-word');
+            const feedback = errorBox.querySelector('.feedback');
+            
+            let allFound = true;
+            let wrongClicks = 0;
+            
+            errorWords.forEach(word => {
+                const isError = word.getAttribute('data-error') === 'true';
+                const isFound = word.classList.contains('found');
+                
+                if (isError && !isFound) {
+                    allFound = false;
+                }
+                if (!isError && isFound) {
+                    wrongClicks++;
+                }
+            });
+            
+            if (allFound && wrongClicks === 0) {
+                feedback.textContent = '✅ Perfekt! Du hast alle Fehler gefunden!';
+                feedback.classList.remove('incorrect');
+                feedback.classList.add('correct', 'show');
+            } else if (wrongClicks > 0) {
+                feedback.textContent = '❌ Du hast auch Wörter markiert, die keine Fehler sind. Versuche es nochmal!';
+                feedback.classList.remove('correct');
+                feedback.classList.add('incorrect', 'show');
+            } else {
+                feedback.textContent = '❌ Du hast noch nicht alle Fehler gefunden!';
+                feedback.classList.remove('correct');
+                feedback.classList.add('incorrect', 'show');
+            }
+        }
+
+        // Error word clicking
+        document.querySelectorAll('.error-word').forEach(word => {
+            word.addEventListener('click', function() {
+                this.classList.toggle('found');
+            });
+        });
+
+        // Progress tracker
+        const dayCheckboxes = document.querySelectorAll('.day-checkbox');
+        const progressBar = document.getElementById('progressBar');
+        const daysCompleted = document.getElementById('daysCompleted');
+
+        function updateProgress() {
+            const completed = Array.from(dayCheckboxes).filter(cb => cb.checked).length;
+            const percentage = (completed / 10) * 100;
+            
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = Math.round(percentage) + '%';
+            daysCompleted.textContent = completed;
+        }
+
+        dayCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>

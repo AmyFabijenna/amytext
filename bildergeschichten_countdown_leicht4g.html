@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-Tage-Countdown zur Sehr Gut! 🎯</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #003D5C;
+            color: #000000;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            color: #003D5C;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+            border-bottom: 4px solid #FF8C00;
+            padding-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .countdown-intro {
+            background: linear-gradient(135deg, #003D5C 0%, #005a7f 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 5px solid #FF8C00;
+            text-align: center;
+        }
+
+        .countdown-intro h2 {
+            color: #FF8C00;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .countdown-intro p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .day-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 4px solid #003D5C;
+            position: relative;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #FF8C00 0%, #ff9d1f 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .day-number {
+            background: white;
+            color: #FF8C00;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.4em;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .day-focus {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 6px solid #FF8C00;
+        }
+
+        .day-focus h3 {
+            color: #003D5C;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .exercise-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 3px solid #003D5C;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .exercise-title {
+            color: #003D5C;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-question {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #003D5C;
+        }
+
+        .dropdown-question p {
+            margin-bottom: 12px;
+            font-weight: bold;
+            color: #003D5C;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 3px solid #003D5C;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select:hover {
+            border-color: #FF8C00;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #FF8C00;
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+        }
+
+        .correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+        }
+
+        .incorrect {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .example-story {
+            background: #fff8e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #FF8C00;
+            line-height: 1.8;
+        }
+
+        .example-story h4 {
+            color: #FF8C00;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .highlight-good {
+            background: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .highlight-bad {
+            background: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-decoration: line-through;
+        }
+
+        .tip-box {
+            background: #e8f4f8;
+            border-left: 5px solid #003D5C;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .tip-box strong {
+            color: #FF8C00;
+            font-size: 1.1em;
+        }
+
+        .checklist {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 3px solid #FF8C00;
+        }
+
+        .checklist-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .checklist-item:hover {
+            background: #e8f4f8;
+            border-color: #003D5C;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .mock-test-box {
+            background: linear-gradient(135deg, #003D5C 0%, #005a7f 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 5px solid #FF8C00;
+        }
+
+        .mock-test-box h3 {
+            color: #FF8C00;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .print-button {
+            background: #FF8C00;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+        }
+
+        .print-button:hover {
+            background: #ff9d1f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
+        }
+
+        .word-bank {
+            background: #fff8e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 3px solid #FF8C00;
+        }
+
+        .word-bank-title {
+            color: #FF8C00;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .word-chip {
+            display: inline-block;
+            background: white;
+            padding: 10px 18px;
+            margin: 6px;
+            border-radius: 20px;
+            border: 2px solid #003D5C;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .progress-tracker {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 4px solid #FF8C00;
+            text-align: center;
+        }
+
+        .progress-tracker h3 {
+            color: #003D5C;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF8C00 0%, #ffb347 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #003D5C;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, #FF8C00 0%, #ff9d1f 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+            border: 5px solid #003D5C;
+        }
+
+        .final-message h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .final-message p {
+            font-size: 1.3em;
+            line-height: 1.8;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .print-button, .progress-tracker {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 10-Tage-Countdown zur SEHR GUT! 🎯</h1>
+        <div class="subtitle">Dein Intensiv-Training für die perfekte Bildergeschichte</div>
+
+        <div class="countdown-intro">
+            <h2>🚀 Willkommen zum Countdown!</h2>
+            <p style="margin: 15px 0;">In 10 Tagen schreibst du die beste Bildergeschichte deines Lebens!</p>
+            <p><strong>So funktioniert's:</strong> Jeden Tag machst du die Übungen für diesen Tag. Am Ende kannst du alles, was du für die SEHR GUT brauchst!</p>
+        </div>
+
+        <!-- PROGRESS TRACKER -->
+        <div class="progress-tracker">
+            <h3>📊 Dein Fortschritt</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+            <p style="font-size: 1.1em; color: #666; margin-top: 10px;">
+                <span id="daysCompleted">0</span> von 10 Tagen geschafft!
+            </p>
+        </div>
+
+        <!-- TAG 10 -->
+        <div class="day-section" data-day="10">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">10</div>
+                    <span>Schauplatz genau beschreiben</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, den Schauplatz so genau zu beschreiben, dass sich jeder das Bild vorstellen kann!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🔍 Übung 1: Was siehst du auf dem Bild?</div>
+                
+                <p style="margin-bottom: 15px;">Stell dir vor, du siehst dieses Bild: <strong>Ein Junge steht in einem bunten Klassenzimmer vor einer Tafel.</strong></p>
+
+                <div class="dropdown-question">
+                    <p>Was beschreibst du ZUERST beim Schauplatz?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Die Gefühle vom Jungen</option>
+                        <option value="1">Wo die Geschichte spielt (Klassenzimmer)</option>
+                        <option value="2">Was vor dem Bild passiert ist</option>
+                        <option value="3">Wie die Geschichte endet</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welcher Satz beschreibt den Schauplatz am BESTEN?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Das Klassenzimmer war schön.</option>
+                        <option value="1">Es war in der Schule.</option>
+                        <option value="2">Im hellen Klassenzimmer hingen bunte Plakate an den Wänden und die große Tafel glänzte sauber.</option>
+                        <option value="3">Der Junge stand da.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was darfst du NICHT in die Schauplatz-Beschreibung schreiben?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Wie das Klassenzimmer aussieht</option>
+                        <option value="1">Welche Farben du siehst</option>
+                        <option value="2">Was im Hintergrund ist</option>
+                        <option value="3">Dass das Klassenzimmer normalerweise schmutzig ist</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">📝 Übung 2: Schauplatz-Wörter kombinieren</div>
+                
+                <div class="word-bank">
+                    <div class="word-bank-title">🎨 Wörter-Bank für Schauplätze:</div>
+                    <span class="word-chip">hell erleuchtet</span>
+                    <span class="word-chip">gemütlich</span>
+                    <span class="word-chip">eng</span>
+                    <span class="word-chip">weitläufig</span>
+                    <span class="word-chip">aufgeräumt</span>
+                    <span class="word-chip">chaotisch</span>
+                    <span class="word-chip">bunt geschmückt</span>
+                    <span class="word-chip">leer</span>
+                    <span class="word-chip">überfüllt</span>
+                    <span class="word-chip">sonnendurchflutet</span>
+                    <span class="word-chip">schattig</span>
+                    <span class="word-chip">freundlich</span>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welches Wort passt NICHT zu einem fröhlichen Geburtstagszimmer?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">bunt geschmückt</option>
+                        <option value="1">hell erleuchtet</option>
+                        <option value="2">leer und trostlos</option>
+                        <option value="3">gemütlich</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Beschreibe immer nur das, was du wirklich auf dem Bild SIEHST! Erfinde nichts dazu!
+            </div>
+        </div>
+
+        <!-- TAG 9 -->
+        <div class="day-section" data-day="9">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">9</div>
+                    <span>Gefühle richtig zeigen</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, Gefühle nicht nur zu benennen, sondern sie zu ZEIGEN!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">😊 Übung 1: Gefühle erkennen</div>
+                
+                <p style="margin-bottom: 15px;">Ein Mädchen hat ihr Lieblingskuscheltier verloren.</p>
+
+                <div class="dropdown-question">
+                    <p>Welcher Satz zeigt ihr Gefühl am BESTEN?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Sie war traurig.</option>
+                        <option value="1">Sie fühlte sich schlecht.</option>
+                        <option value="2">Sie war nicht froh.</option>
+                        <option value="3">Tränen liefen über ihre Wangen, während sie verzweifelt in jede Ecke ihres Zimmers blickte.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Ein Junge hat sein erstes Tor geschossen. Wie zeigst du seine Freude?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Er war froh.</option>
+                        <option value="1">Er freute sich.</option>
+                        <option value="2">Mit strahlendem Gesicht und hochgereckten Armen sprang er jubelnd über den Platz.</option>
+                        <option value="3">Er lächelte.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was ist FALSCH bei Gefühlen?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Gefühle mit Körpersprache zeigen</option>
+                        <option value="1">Nur schreiben: "Er war froh"</option>
+                        <option value="2">Beschreiben, wie sich das Gesicht verändert</option>
+                        <option value="3">Zeigen, was die Figur tut</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🎭 Übung 2: Gefühls-Wörter auswählen</div>
+                
+                <div class="word-bank">
+                    <div class="word-bank-title">❤️ Gefühls-Wörter:</div>
+                    <span class="word-chip">überglücklich</span>
+                    <span class="word-chip">erleichtert</span>
+                    <span class="word-chip">aufgeregt</span>
+                    <span class="word-chip">nervös</span>
+                    <span class="word-chip">ängstlich</span>
+                    <span class="word-chip">stolz</span>
+                    <span class="word-chip">enttäuscht</span>
+                    <span class="word-chip">verzweifelt</span>
+                    <span class="word-chip">begeistert</span>
+                    <span class="word-chip">erstaunt</span>
+                    <span class="word-chip">wütend</span>
+                    <span class="word-chip">ratlos</span>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Ein Kind bekommt das Geschenk, das es sich gewünscht hat. Welches Gefühl passt?</p>
+                    <select class="quiz" data-correct="0">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">überglücklich</option>
+                        <option value="1">enttäuscht</option>
+                        <option value="2">ängstlich</option>
+                        <option value="3">wütend</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Ein Schüler hat eine schwierige Aufgabe endlich gelöst. Welches Gefühl passt?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">verzweifelt</option>
+                        <option value="1">erleichtert und stolz</option>
+                        <option value="2">ängstlich</option>
+                        <option value="3">enttäuscht</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Zeige Gefühle durch Handlungen! Statt "Er war froh" schreibe "Er hüpfte vor Freude" oder "Ein breites Lächeln zog sich über sein Gesicht".
+            </div>
+        </div>
+
+        <!-- TAG 8 -->
+        <div class="day-section" data-day="8">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">8</div>
+                    <span>Gedanken der Figuren</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, die Gedanken der Figuren zu interpretieren und aufzuschreiben!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">💭 Übung 1: Was denkt die Figur?</div>
+                
+                <p style="margin-bottom: 15px;">Ein Mädchen steht vor einer verschlossenen Tür und hat ihren Schlüssel vergessen.</p>
+
+                <div class="dropdown-question">
+                    <p>Was könnte sie denken?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Sie denkt nichts.</option>
+                        <option value="1">Sie war traurig.</option>
+                        <option value="2">"Oh nein! Wie komme ich jetzt bloß hinein? Vielleicht hat Mama einen Ersatzschlüssel?"</option>
+                        <option value="3">Die Tür war zu.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Ein Junge findet ein verlorenes Portemonnaie auf der Straße. Was denkt er?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Das Portemonnaie war schwer.</option>
+                        <option value="1">"Jemand sucht das bestimmt verzweifelt. Ich bringe es zur Polizei!"</option>
+                        <option value="2">Er freute sich.</option>
+                        <option value="3">Es war ein Portemonnaie.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Wie schreibst du Gedanken am BESTEN?</p>
+                    <select class="quiz" data-correct="0">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Mit Worten wie: "dachte", "überlegte", "fragte sich"</option>
+                        <option value="1">Gar nicht, nur Gefühle beschreiben</option>
+                        <option value="2">Nur mit "Er dachte"</option>
+                        <option value="3">In Großbuchstaben</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🧠 Übung 2: Gedanken interpretieren</div>
+                
+                <div class="dropdown-question">
+                    <p>Ein Kind steht vor einer großen Torte. Seine Augen leuchten. Was denkt es?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Die Torte war groß.</option>
+                        <option value="1">Es war froh.</option>
+                        <option value="2">Die Torte schmeckte gut.</option>
+                        <option value="3">"Wow! Die sieht ja fantastisch aus! Ob ich ein großes Stück haben darf?"</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Ein Schüler bekommt seine Schularbeit zurück und lächelt erleichtert. Was denkt er?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Die Schularbeit war schwer.</option>
+                        <option value="1">Er freute sich.</option>
+                        <option value="2">"Geschafft! Ich habe es doch gut gemacht! Mama wird stolz sein!"</option>
+                        <option value="3">Er bekam die Arbeit.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Gedanken interpretierst du aus dem, was du auf dem Bild siehst! Frage dich: "Was könnte die Figur jetzt denken?" und schreibe es mit "dachte", "überlegte" oder "fragte sich".
+            </div>
+        </div>
+
+        <!-- TAG 7 -->
+        <div class="day-section" data-day="7">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">7</div>
+                    <span>Abwechslungsreiche Satzanfänge</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, deine Sätze NICHT immer gleich zu beginnen!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">✍️ Übung 1: Satzanfänge erkennen</div>
+                
+                <div class="dropdown-question">
+                    <p>Was ist FALSCH bei diesen Satzanfängen?<br>
+                    "Dann ging er los. Dann sah er den Hund. Dann lief er nach Hause."</p>
+                    <select class="quiz" data-correct="0">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Alle Sätze beginnen mit "Dann"</option>
+                        <option value="1">Die Sätze sind zu kurz</option>
+                        <option value="2">Es sind zu viele Sätze</option>
+                        <option value="3">Die Sätze sind falsch geschrieben</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welcher Satzanfang ist eine ZEITANGABE?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Im Hintergrund</option>
+                        <option value="1">Plötzlich</option>
+                        <option value="2">Das Mädchen</option>
+                        <option value="3">Mit einem Lächeln</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welcher Satzanfang ist eine ORTSANGABE?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Währenddessen</option>
+                        <option value="1">Danach</option>
+                        <option value="2">Freudig</option>
+                        <option value="3">Auf der linken Seite</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🎯 Übung 2: Bessere Satzanfänge wählen</div>
+                
+                <div class="word-bank">
+                    <div class="word-bank-title">📝 Satzanfänge zum Auswählen:</div>
+                    <span class="word-chip">Plötzlich</span>
+                    <span class="word-chip">Währenddessen</span>
+                    <span class="word-chip">Im Hintergrund</span>
+                    <span class="word-chip">Vorsichtig</span>
+                    <span class="word-chip">Mit großen Augen</span>
+                    <span class="word-chip">Sofort</span>
+                    <span class="word-chip">Links davon</span>
+                    <span class="word-chip">Erleichtert</span>
+                    <span class="word-chip">Danach</span>
+                    <span class="word-chip">Entschlossen</span>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welcher Satzanfang passt zu: "... rannte das Kind nach Hause."</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Im Hintergrund</option>
+                        <option value="1">Links davon</option>
+                        <option value="2">Sofort</option>
+                        <option value="3">Dann</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welcher Satzanfang passt zu: "... öffnete sie die Tür."</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Dann</option>
+                        <option value="1">Vorsichtig</option>
+                        <option value="2">Im Hintergrund</option>
+                        <option value="3">Später</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Verwende mindestens 6 verschiedene Satzanfänge in deiner Geschichte! Mische Zeitangaben (Plötzlich), Ortsangaben (Im Hintergrund), Gefühle (Freudig) und Personen (Das Mädchen).
+            </div>
+        </div>
+
+        <!-- TAG 6 -->
+        <div class="day-section" data-day="6">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">6</div>
+                    <span>Die perfekte Einleitung</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, wie du deine Geschichte STARK beginnst!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🚀 Übung 1: Was gehört in die Einleitung?</div>
+                
+                <div class="dropdown-question">
+                    <p>Was musst du in der Einleitung schreiben?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Nur den Namen der Hauptfigur</option>
+                        <option value="1">Nur wo die Geschichte spielt</option>
+                        <option value="2">Nur wann die Geschichte spielt</option>
+                        <option value="3">WER, WO, WANN und die AUSGANGSSITUATION</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welche Einleitung ist BESSER?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Es war einmal ein Junge.</option>
+                        <option value="1">An einem sonnigen Samstagnachmittag stand der zehnjährige Tim aufgeregt in seinem Zimmer und packte seinen Rucksack.</option>
+                        <option value="2">Dann ging Tim los.</option>
+                        <option value="3">Tim war froh.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was darfst du in der Einleitung NICHT schreiben?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Den Namen der Hauptfigur</option>
+                        <option value="1">Wo die Geschichte spielt</option>
+                        <option value="2">Wie die Geschichte endet</option>
+                        <option value="3">Die Ausgangssituation</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="example-story">
+                <h4>📖 Beispiel für eine gute Einleitung:</h4>
+                <p>
+                    <span class="highlight-good">An einem regnerischen Montagmorgen</span> saß die achtjährige 
+                    <span class="highlight-good">Lisa</span> <span class="highlight-good">in ihrem gemütlichen Kinderzimmer</span> 
+                    und blickte besorgt aus dem Fenster. Heute war ihr erster Schultag nach den Ferien, und sie hatte 
+                    ihr Lieblingsbuch noch immer nicht gefunden.
+                </p>
+                <p style="margin-top: 15px; padding: 15px; background: #e8f4f8; border-radius: 8px;">
+                    <strong>✅ Das ist gut, weil:</strong><br>
+                    ✔️ WANN: "An einem regnerischen Montagmorgen"<br>
+                    ✔️ WER: "die achtjährige Lisa"<br>
+                    ✔️ WO: "in ihrem gemütlichen Kinderzimmer"<br>
+                    ✔️ AUSGANGSSITUATION: Sie sucht ihr Buch vor dem ersten Schultag
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Eine gute Einleitung macht neugierig! Der Leser soll sofort wissen, um wen es geht, wo und wann die Geschichte spielt.
+            </div>
+        </div>
+
+        <!-- TAG 5 -->
+        <div class="day-section" data-day="5">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">5</div>
+                    <span>Der gelungene Schluss</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, wie du deine Geschichte perfekt beendest!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🏁 Übung 1: Was gehört in den Schluss?</div>
+                
+                <div class="dropdown-question">
+                    <p>Was schreibst du im Schluss?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Eine neue Geschichte</option>
+                        <option value="1">Nur "Ende"</option>
+                        <option value="2">Wie das Problem gelöst wurde und wie sich die Figur fühlt</option>
+                        <option value="3">Was vorher passiert ist</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welcher Schluss ist BESSER?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Dann war die Geschichte zu Ende.</option>
+                        <option value="1">Er war froh. Ende.</option>
+                        <option value="2">Und dann ging er nach Hause.</option>
+                        <option value="3">Erleichtert und mit einem glücklichen Lächeln lief Tom nach Hause. Das war der aufregendste Tag seines Lebens gewesen!</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was macht einen Schluss INTERESSANT?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Wenn du nur "Ende" schreibst</option>
+                        <option value="1">Wenn du zeigst, wie die Figur sich fühlt und was sie gelernt hat</option>
+                        <option value="2">Wenn du eine neue Figur einführst</option>
+                        <option value="3">Wenn du alles wiederholst</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="example-story">
+                <h4>📖 Beispiel für einen guten Schluss:</h4>
+                <p>
+                    Endlich hielt Lisa ihr geliebtes Buch in den Händen. Mit einem zufriedenen Seufzer legte sie es 
+                    in ihren Schulrucksack. <span class="highlight-good">"Morgen wird ein toller Tag!"</span>, 
+                    dachte sie erleichtert. Von nun an würde sie besser auf ihre Sachen aufpassen. 
+                    <span class="highlight-good">Glücklich kuschelte sie sich in ihr Bett und freute sich auf den nächsten Tag.</span>
+                </p>
+                <p style="margin-top: 15px; padding: 15px; background: #e8f4f8; border-radius: 8px;">
+                    <strong>✅ Das ist gut, weil:</strong><br>
+                    ✔️ Das Problem ist gelöst (Buch gefunden)<br>
+                    ✔️ Gefühle werden gezeigt (erleichtert, glücklich)<br>
+                    ✔️ Es gibt eine Erkenntnis (besser aufpassen)<br>
+                    ✔️ Der Leser weiß, dass alles gut ist
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Ein guter Schluss rundet die Geschichte ab! Zeige, dass das Problem gelöst ist und wie sich die Figur jetzt fühlt. Der Leser soll zufrieden sein!
+            </div>
+        </div>
+
+        <!-- TAG 4 -->
+        <div class="day-section" data-day="4">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">4</div>
+                    <span>Wörtliche Rede richtig einsetzen</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, wie du deine Geschichte mit wörtlicher Rede lebendiger machst!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">💬 Übung 1: Wörtliche Rede erkennen</div>
+                
+                <div class="dropdown-question">
+                    <p>Wie schreibst du wörtliche Rede RICHTIG?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Hilfe rief er laut</option>
+                        <option value="1">"Hilfe!", rief er laut.</option>
+                        <option value="2">Hilfe! rief er laut</option>
+                        <option value="3">'Hilfe' rief er laut</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Wo stehen die Anführungszeichen?</p>
+                    <select class="quiz" data-correct="0">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">„unten" und „oben"</option>
+                        <option value="1">Nur oben</option>
+                        <option value="2">Nur unten</option>
+                        <option value="3">Gar nicht</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welcher Satz ist FALSCH geschrieben?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">"Ich habe es geschafft!", jubelte Tim.</option>
+                        <option value="1">Lisa fragte: "Kommst du mit?"</option>
+                        <option value="2">"Endlich!", seufzte sie erleichtert.</option>
+                        <option value="3">Komm her sagte er.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🗣️ Übung 2: Begleitsatz auswählen</div>
+                
+                <p style="margin-bottom: 15px;">Statt immer nur "sagte" kannst du andere Wörter verwenden!</p>
+
+                <div class="word-bank">
+                    <div class="word-bank-title">💭 Begleitsätze:</div>
+                    <span class="word-chip">rief</span>
+                    <span class="word-chip">flüsterte</span>
+                    <span class="word-chip">jubelte</span>
+                    <span class="word-chip">fragte</span>
+                    <span class="word-chip">antwortete</span>
+                    <span class="word-chip">seufzte</span>
+                    <span class="word-chip">lachte</span>
+                    <span class="word-chip">weinte</span>
+                    <span class="word-chip">schrie</span>
+                    <span class="word-chip">murmelte</span>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>"Ich habe gewonnen!", ... Tim begeistert.</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">flüsterte</option>
+                        <option value="1">jubelte</option>
+                        <option value="2">weinte</option>
+                        <option value="3">murmelte</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>"Sei bitte leise!", ... die Lehrerin streng.</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">jubelte</option>
+                        <option value="1">lachte</option>
+                        <option value="2">ermahnte</option>
+                        <option value="3">flüsterte</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="example-story">
+                <h4>📖 Beispiel mit wörtlicher Rede:</h4>
+                <p>
+                    Tom stand vor der verschlossenen Tür und klopfte laut. <span class="highlight-good">"Hallo? Ist jemand da?"</span>, 
+                    rief er hoffnungsvoll. Niemand antwortete. <span class="highlight-good">"Was mache ich denn jetzt?"</span>, 
+                    murmelte er ratlos vor sich hin. Plötzlich hörte er Schritte. <span class="highlight-good">"Moment, ich komme!"</span>, 
+                    rief eine freundliche Stimme von drinnen.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Verwende wörtliche Rede 2-3 Mal in deiner Geschichte! Das macht sie lebendig. Aber: Nicht in jedem Satz! Achte auf die richtige Zeichensetzung: „...".
+            </div>
+        </div>
+
+        <!-- TAG 3 -->
+        <div class="day-section" data-day="3">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">3</div>
+                    <span>Spannung aufbauen</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du lernst, wie du deine Geschichte SPANNEND machst!</p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">⚡ Übung 1: Spannung erkennen</div>
+                
+                <div class="dropdown-question">
+                    <p>Welcher Satz ist SPANNENDER?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Er ging zur Tür.</option>
+                        <option value="1">Die Tür war zu.</option>
+                        <option value="2">Mit klopfendem Herzen schlich er zur Tür und lauschte. War da jemand dahinter?</option>
+                        <option value="3">Dann öffnete er die Tür.</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Was macht eine Geschichte SPANNEND?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Wenn alles sofort klappt</option>
+                        <option value="1">Wenn es ein Problem gibt und die Lösung nicht sofort klar ist</option>
+                        <option value="2">Wenn die Geschichte sehr kurz ist</option>
+                        <option value="3">Wenn immer das Gleiche passiert</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welche Wörter machen eine Geschichte spannend?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">dann, dann, dann</option>
+                        <option value="1">schön, nett, gut</option>
+                        <option value="2">groß, klein, rund</option>
+                        <option value="3">plötzlich, unerwartet, aufgeregt, ängstlich</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🎬 Übung 2: Spannungswörter auswählen</div>
+                
+                <div class="word-bank">
+                    <div class="word-bank-title">⚡ Wörter für Spannung:</div>
+                    <span class="word-chip">plötzlich</span>
+                    <span class="word-chip">unerwartet</span>
+                    <span class="word-chip">mit klopfendem Herzen</span>
+                    <span class="word-chip">aufgeregt</span>
+                    <span class="word-chip">nervös</span>
+                    <span class="word-chip">ängstlich</span>
+                    <span class="word-chip">gespannt</span>
+                    <span class="word-chip">überraschend</span>
+                    <span class="word-chip">endlich</span>
+                    <span class="word-chip">im letzten Moment</span>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welches Wort macht diesen Satz spannender?<br>"... hörte sie ein Geräusch."</p>
+                    <select class="quiz" data-correct="0">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Plötzlich</option>
+                        <option value="1">Dann</option>
+                        <option value="2">Später</option>
+                        <option value="3">Auch</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welches Wort zeigt, dass etwas gerade noch geklappt hat?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Dann</option>
+                        <option value="1">Früher</option>
+                        <option value="2">Im letzten Moment</option>
+                        <option value="3">Später</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="example-story">
+                <h4>📖 Beispiel für Spannung:</h4>
+                <p>
+                    <span style="background: #ffe6e6; padding: 2px 6px; border-radius: 4px;">❌ Nicht spannend:</span><br>
+                    Max suchte seinen Schlüssel. Er fand ihn. Dann ging er hinein.
+                </p>
+                <p style="margin-top: 15px;">
+                    <span style="background: #d4edda; padding: 2px 6px; border-radius: 4px;">✅ Spannend:</span><br>
+                    <span class="highlight-good">Mit klopfendem Herzen</span> durchsuchte Max verzweifelt seine Tasche. 
+                    Wo war nur der Schlüssel? <span class="highlight-good">Die Zeit lief ihm davon!</span> 
+                    <span class="highlight-good">Plötzlich</span> ertasteten seine Finger etwas Metallisches in der 
+                    Jackentasche. <span class="highlight-good">Im letzten Moment</span> hatte er ihn gefunden!
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 TIPP:</strong> Beschreibe NICHT sofort die Lösung! Zeige erst das Problem, die Gefühle der Figur, und dann die Lösung. Verwende Spannungswörter!
+            </div>
+        </div>
+
+        <!-- TAG 2 -->
+        <div class="day-section" data-day="2">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">2</div>
+                    <span>Beispiel-Geschichte analysieren</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Du schaust dir eine SEHR GUTE Bildergeschichte an und lernst daraus!</p>
+            </div>
+
+            <div class="example-story" style="border: 4px solid #003D5C;">
+                <h4 style="text-align: center; color: #003D5C; font-size: 1.4em; margin-bottom: 20px;">
+                    📖 Beispiel: "Der verlorene Schlüssel" (Note: Sehr Gut)
+                </h4>
+                
+                <p style="margin-bottom: 15px; line-height: 2;">
+                    <strong style="color: #FF8C00;">Einleitung:</strong><br>
+                    An einem <span class="highlight-good">sonnigen Samstagnachmittag</span> stand der 
+                    <span class="highlight-good">neunjährige Tim</span> <span class="highlight-good">vor der Haustür</span> 
+                    und durchsuchte <span class="highlight-good">hektisch</span> seine Hosentaschen. Sein Herz schlug 
+                    schneller. Der Schlüssel war verschwunden!
+                </p>
+
+                <p style="margin-bottom: 15px; line-height: 2;">
+                    <strong style="color: #FF8C00;">Hauptteil:</strong><br>
+                    <span class="highlight-good">Verzweifelt</span> dachte er nach: <span class="highlight-good">"Wo habe ich ihn nur gelassen?"</span> 
+                    <span class="highlight-good">Mit bebenden Händen</span> leerte er seinen Rucksack auf den Boden. 
+                    <span class="highlight-good">Nichts!</span> <span class="highlight-good">Plötzlich</span> fiel ihm ein, 
+                    dass er beim Spielplatz gewesen war. <span class="highlight-good">Sofort</span> rannte er zurück. 
+                    Seine Beine fühlten sich schwer an, aber er gab nicht auf. <span class="highlight-good">Im Sandkasten</span>, 
+                    dort, wo er gespielt hatte, <span class="highlight-good">glänzte</span> etwas Silbernes in der Sonne. 
+                    <span class="highlight-good">"Das ist er!"</span>, jubelte Tim <span class="highlight-good">erleichtert</span>.
+                </p>
+
+                <p style="line-height: 2;">
+                    <strong style="color: #FF8C00;">Schluss:</strong><br>
+                    <span class="highlight-good">Überglücklich</span> hielt Tim den Schlüssel fest in seiner Hand und 
+                    rannte nach Hause. Von nun an würde er <span class="highlight-good">besser aufpassen</span>. 
+                    <span class="highlight-good">Lächelnd</span> sperrte er die Tür auf. Was für ein aufregender Tag!
+                </p>
+            </div>
+
+            <div class="exercise-box">
+                <div class="exercise-title">🔍 Übung: Analysiere die Geschichte</div>
+                
+                <div class="dropdown-question">
+                    <p>Wie viele verschiedene Adjektive findest du in der Geschichte?</p>
+                    <select class="quiz" data-correct="2">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">2-3</option>
+                        <option value="1">4-6</option>
+                        <option value="2">8-10</option>
+                        <option value="3">Keine</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Wie oft wird wörtliche Rede verwendet?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Gar nicht</option>
+                        <option value="1">2 Mal</option>
+                        <option value="2">In jedem Satz</option>
+                        <option value="3">5 Mal</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Welche Satzanfänge werden verwendet?</p>
+                    <select class="quiz" data-correct="3">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Immer "Dann"</option>
+                        <option value="1">Immer "Er"</option>
+                        <option value="2">Immer "Und"</option>
+                        <option value="3">Verschiedene: Verzweifelt, Plötzlich, Sofort, Im Sandkasten, Überglücklich</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Wird im Schluss gezeigt, wie sich Tim fühlt?</p>
+                    <select class="quiz" data-correct="0">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Ja: überglücklich, lächelnd</option>
+                        <option value="1">Nein, nur "Ende"</option>
+                        <option value="2">Es gibt keinen Schluss</option>
+                        <option value="3">Nur "Er ging nach Hause"</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+
+                <div class="dropdown-question">
+                    <p>Wird Spannung aufgebaut?</p>
+                    <select class="quiz" data-correct="1">
+                        <option value="">--- Wähle die richtige Antwort ---</option>
+                        <option value="0">Nein</option>
+                        <option value="1">Ja: "Verzweifelt", "Plötzlich", "Nichts!", "Wo habe ich ihn nur gelassen?"</option>
+                        <option value="2">Nein, er findet den Schlüssel sofort</option>
+                        <option value="3">Es gibt kein Problem</option>
+                    </select>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 WICHTIG:</strong> Schaue dir diese Geschichte genau an! Sie hat ALLES, was du für eine SEHR GUT brauchst. Versuche, deine eigenen Geschichten genauso aufzubauen!
+            </div>
+        </div>
+
+        <!-- TAG 1 -->
+        <div class="day-section" data-day="1">
+            <div class="day-header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div class="day-number">1</div>
+                    <span>Mock-Test: Deine Probe-Schularbeit! 🎯</span>
+                </div>
+                <input type="checkbox" class="day-checkbox" style="width: 30px; height: 30px; cursor: pointer;">
+            </div>
+
+            <div class="day-focus">
+                <h3>🎯 Heutiges Ziel:</h3>
+                <p>Heute schreibst du eine KOMPLETTE Bildergeschichte unter echten Bedingungen!</p>
+            </div>
+
+            <div class="mock-test-box">
+                <h3>📝 DEINE PROBE-SCHULARBEIT</h3>
+                <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 20px;">
+                    Nimm dir eine deiner eigenen Bildergeschichten (4-6 Bilder) und schreibe eine komplette 
+                    Geschichte dazu. Du hast dafür <strong>45 Minuten</strong> Zeit – genau wie in der echten Schularbeit!
+                </p>
+
+                <div style="background: white; color: #003D5C; padding: 25px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #FF8C00; margin-bottom: 15px; font-size: 1.3em;">✅ CHECKLISTE für deine Geschichte:</h4>
+                    
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Einleitung:</strong> WER, WO, WANN, Ausgangssituation</label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Mindestens 10 verschiedene Adjektive</strong></label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Schauplatz genau beschrieben</strong> (was du siehst)</label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Gefühle ausführlich gezeigt</strong> (nicht nur "froh")</label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Gedanken der Figur</strong> (was sie denkt)</label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Mindestens 6 verschiedene Satzanfänge</strong></label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>2-3x wörtliche Rede</strong> mit richtigen Anführungszeichen</label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Spannung aufgebaut</strong> (Spannungswörter verwendet)</label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Alles im Präteritum</strong> (ging, sah, war, dachte...)</label>
+                    </div>
+
+                    <div class="checklist-item" style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                        <input type="checkbox" style="width: 25px; height: 25px;">
+                        <label style="color: #000;"><strong>Schluss:</strong> Lösung + Gefühle + Erkenntnis</label>
+                    </div>
+                </div>
+
+                <button class="print-button" onclick="window.print()">🖨️ Checkliste ausdrucken</button>
+
+                <p style="text-align: center; font-size: 1.2em; margin-top: 25px; color: white;">
+                    <strong>⏱️ Stelle dir einen Timer auf 45 Minuten!</strong><br>
+                    Schreibe deine Geschichte auf ein leeres Blatt Papier.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 NACH DEM SCHREIBEN:</strong> Gehe deine Checkliste durch! Hast du ALLES erfüllt? 
+                Wenn ja: Du bist bereit für die SEHR GUT! Wenn nein: Schau, was noch fehlt und übe es nochmal!
+            </div>
+
+            <div class="example-story" style="margin-top: 30px; border: 4px solid #FF8C00;">
+                <h4 style="color: #003D5C; text-align: center; font-size: 1.3em; margin-bottom: 20px;">
+                    🎯 Bewertungsschlüssel (wie die Lehrerin bewertet)
+                </h4>
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <th style="background: #003D5C; color: white; padding: 12px; border: 1px solid #ddd;">Kriterium</th>
+                        <th style="background: #003D5C; color: white; padding: 12px; border: 1px solid #ddd;">Sehr Gut (1)</th>
+                        <th style="background: #003D5C; color: white; padding: 12px; border: 1px solid #ddd;">Gut (2)</th>
+                        <th style="background: #003D5C; color: white; padding: 12px; border: 1px solid #ddd;">Befriedigend (3)</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Adjektive</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd; background: #d4edda;">10+ verschiedene</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">7-9</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">3-6</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Schauplatz</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd; background: #d4edda;">Genau beschrieben, mehrere Details</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Beschrieben mit Details</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Kaum beschrieben</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Gefühle</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd; background: #d4edda;">Gezeigt, nicht nur benannt</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Beschrieben</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Nur "froh", "traurig"</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Satzanfänge</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd; background: #d4edda;">8+ verschiedene</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">6-7 verschiedene</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Immer gleich</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Wörtliche Rede</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd; background: #d4edda;">2-3x richtig verwendet</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">1-2x verwendet</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Gar nicht</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #ddd;"><strong>Spannung</strong></td>
+                        <td style="padding: 12px; border: 1px solid #ddd; background: #d4edda;">Aufgebaut, Spannungswörter</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Ansatzweise vorhanden</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">Keine Spannung</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- FINAL MESSAGE -->
+        <div class="final-message">
+            <h2>🏆 Du hast es geschafft! 🏆</h2>
+            <p style="margin: 20px 0;">
+                Du hast alle 10 Tage Training absolviert und bist jetzt ein echter Bildergeschichten-Profi!
+            </p>
+            <p style="font-size: 1.5em; margin: 20px 0;">
+                <strong>Du bist bereit für die SEHR GUT! 💪⭐</strong>
+            </p>
+            <p>
+                Denk daran: Verwende ALLE Techniken, die du gelernt hast, und du wirst in deiner Schularbeit brillieren!
+            </p>
+            <p style="margin-top: 30px; font-size: 1.3em;">
+                <strong>🎯 Viel Erfolg! Du schaffst das! 🎯</strong>
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Quiz functionality with feedback
+        document.querySelectorAll('select.quiz').forEach(select => {
+            select.addEventListener('change', function() {
+                const correctAnswer = this.getAttribute('data-correct');
+                const selectedAnswer = this.value;
+                const feedback = this.nextElementSibling;
+                
+                if (selectedAnswer === '') {
+                    feedback.classList.remove('show');
+                    this.classList.remove('correct', 'incorrect');
+                    return;
+                }
+                
+                if (selectedAnswer === correctAnswer) {
+                    this.classList.remove('incorrect');
+                    this.classList.add('correct');
+                    feedback.textContent = '✅ Richtig! Super gemacht!';
+                    feedback.classList.remove('incorrect');
+                    feedback.classList.add('correct', 'show');
+                } else {
+                    this.classList.remove('correct');
+                    this.classList.add('incorrect');
+                    feedback.textContent = '❌ Nicht ganz richtig. Versuche es nochmal!';
+                    feedback.classList.remove('correct');
+                    feedback.classList.add('incorrect', 'show');
+                }
+            });
+        });
+
+        // Progress tracker
+        const dayCheckboxes = document.querySelectorAll('.day-checkbox');
+        const progressBar = document.getElementById('progressBar');
+        const daysCompleted = document.getElementById('daysCompleted');
+
+        function updateProgress() {
+            const completed = Array.from(dayCheckboxes).filter(cb => cb.checked).length;
+            const percentage = (completed / 10) * 100;
+            
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = Math.round(percentage) + '%';
+            daysCompleted.textContent = completed;
+            
+            // Save to localStorage
+            const checkedDays = Array.from(dayCheckboxes).map(cb => cb.checked);
+            localStorage.setItem('dayProgress', JSON.stringify(checkedDays));
+        }
+
+        // Load saved progress
+        const savedProgress = localStorage.getItem('dayProgress');
+        if (savedProgress) {
+            const checkedDays = JSON.parse(savedProgress);
+            dayCheckboxes.forEach((cb, index) => {
+                if (checkedDays[index]) {
+                    cb.checked = true;
+                }
+            });
+            updateProgress();
+        }
+
+        dayCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        // Checklist functionality
+        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.parentElement.style.opacity = '0.6';
+                    this.parentElement.style.textDecoration = 'line-through';
+                } else {
+                    this.parentElement.style.opacity = '1';
+                    this.parentElement.style.textDecoration = 'none';
+                }
+            });
+        });
+
+        // Initial progress update
+        updateProgress();
+    </script>
+</body>
+</html>
