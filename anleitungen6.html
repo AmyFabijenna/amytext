@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anleitungen verfassen – Schularbeitsvorbereitung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a365d;
+            --primary-medium: #2c5282;
+            --primary-light: #4a7ab8;
+            --primary-pale: #a8c5e2;
+            --primary-bg: #e8f1f8;
+            --primary-soft: #f0f6fb;
+            --gold: #c9a227;
+            --gold-light: #e6c85a;
+            --text-dark: #1a2a3a;
+            --text-medium: #3d5a7a;
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans 3', sans-serif; background: linear-gradient(135deg, var(--primary-bg), var(--primary-soft), var(--white)); color: var(--text-dark); line-height: 1.7; }
+        
+        .hero { background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--primary-light)); padding: 50px 20px; text-align: center; }
+        .hero h1 { font-family: 'Crimson Pro', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--white); margin-bottom: 10px; }
+        .hero .gold { color: var(--gold-light); }
+        .hero p { color: var(--primary-pale); font-size: 1.1rem; max-width: 700px; margin: 0 auto 20px; }
+        .hero-badge { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); padding: 10px 25px; border-radius: 30px; font-weight: 600; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+        
+        .intro-box { background: var(--white); padding: 25px; border-radius: 15px; box-shadow: 0 4px 12px rgba(26,54,93,0.1); margin-bottom: 25px; border-left: 5px solid var(--gold); }
+        .intro-box h2 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin-bottom: 10px; }
+        
+        .accordion { background: var(--white); border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(26,54,93,0.08); border: 1px solid var(--primary-pale); overflow: hidden; }
+        .accordion-header { padding: 18px 22px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, var(--primary-soft), var(--white)); transition: background 0.3s; }
+        .accordion-header:hover { background: var(--primary-bg); }
+        .accordion-header h3 { font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--primary-dark); display: flex; align-items: center; gap: 12px; }
+        .accordion-header .num { width: 30px; height: 30px; background: var(--primary-medium); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; flex-shrink: 0; }
+        .accordion-header .toggle { width: 26px; height: 26px; border: 2px solid var(--primary-medium); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; color: var(--primary-medium); transition: all 0.3s; }
+        .accordion.open .toggle { background: var(--primary-medium); color: white; transform: rotate(45deg); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .accordion.open .accordion-content { max-height: 15000px; }
+        .accordion-inner { padding: 22px; border-top: 1px solid var(--primary-pale); }
+
+        h4 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin: 20px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--gold); display: inline-block; }
+        h4:first-child { margin-top: 0; }
+        p { margin-bottom: 12px; color: var(--text-medium); }
+        
+        .info-box { background: var(--primary-soft); border-radius: 8px; padding: 18px; margin: 18px 0; border-left: 4px solid var(--primary-medium); }
+        .info-box.gold { background: linear-gradient(135deg, #fef9e7, #fdf5d8); border-left-color: var(--gold); }
+        .info-box.important { background: linear-gradient(135deg, #e8f4fc, #d4e9f7); border-left-color: var(--primary-dark); }
+        .info-box strong { color: var(--primary-dark); }
+
+        ul.styled { list-style: none; margin: 12px 0; }
+        ul.styled li { padding: 8px 0 8px 25px; position: relative; border-bottom: 1px solid var(--primary-pale); }
+        ul.styled li:last-child { border-bottom: none; }
+        ul.styled li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: bold; }
+
+        ol.numbered { list-style: none; counter-reset: item; margin: 12px 0; }
+        ol.numbered li { padding: 10px 0 10px 40px; position: relative; counter-increment: item; border-bottom: 1px solid var(--primary-pale); }
+        ol.numbered li:last-child { border-bottom: none; }
+        ol.numbered li::before { content: counter(item); position: absolute; left: 0; width: 26px; height: 26px; background: var(--primary-medium); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem; }
+
+        .example-box { background: var(--white); border: 2px solid var(--primary-pale); border-radius: 10px; padding: 22px; margin: 18px 0; position: relative; }
+        .example-box::before { content: 'BEISPIEL'; position: absolute; top: -11px; left: 18px; background: var(--gold); color: var(--primary-dark); padding: 3px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; }
+        .example-box.good::before { content: '✓ GUTES BEISPIEL'; background: #48bb78; color: white; }
+        .example-box.bad::before { content: '✗ SO NICHT'; background: #ed8936; color: white; }
+        .example-box h5 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin-bottom: 10px; }
+        .example-content { background: var(--primary-soft); padding: 15px; border-radius: 6px; line-height: 1.8; }
+
+        table.grammar { width: 100%; border-collapse: collapse; margin: 15px 0; background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(26,54,93,0.08); }
+        table.grammar th { background: var(--primary-medium); color: white; padding: 12px; text-align: left; }
+        table.grammar td { padding: 10px 12px; border-bottom: 1px solid var(--primary-pale); }
+        table.grammar tr:nth-child(even) { background: var(--primary-soft); }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 15px 0; }
+        @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+        .col-box { background: var(--white); border-radius: 8px; padding: 18px; border: 1px solid var(--primary-pale); }
+        .col-box h5 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--primary-light); }
+
+        .word-bank { background: linear-gradient(135deg, var(--primary-soft), var(--white)); border-radius: 10px; padding: 18px; margin: 15px 0; }
+        .word-bank h5 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin-bottom: 12px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { background: var(--primary-medium); color: white; padding: 6px 14px; border-radius: 18px; font-size: 0.9rem; }
+        .tag.gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); }
+
+        .practice { background: linear-gradient(135deg, var(--primary-bg), var(--white)); border: 2px dashed var(--primary-light); border-radius: 10px; padding: 22px; margin: 18px 0; }
+        .practice h5 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin-bottom: 12px; }
+        .exercise { background: var(--white); border-radius: 8px; padding: 18px; margin-bottom: 12px; border-left: 4px solid var(--primary-light); }
+        .exercise:last-child { margin-bottom: 0; }
+        .exercise-q { font-weight: 500; margin-bottom: 12px; }
+        .exercise textarea, .exercise input[type="text"] { width: 100%; padding: 12px; border: 2px solid var(--primary-pale); border-radius: 6px; font-family: inherit; font-size: 1rem; resize: vertical; }
+        .exercise textarea { min-height: 100px; }
+        .exercise textarea:focus, .exercise input:focus { outline: none; border-color: var(--primary-medium); }
+
+        .solution-btn { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; margin-top: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+        .solution-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(201,162,39,0.3); }
+        .solution { display: none; background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 8px; padding: 18px; margin-top: 12px; border-left: 4px solid #4caf50; }
+        .solution.show { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-title { font-weight: 600; color: #2e7d32; margin-bottom: 8px; }
+
+        .checklist { background: var(--white); border-radius: 12px; padding: 22px; margin: 18px 0; border: 2px solid var(--gold); }
+        .checklist h5 { font-family: 'Crimson Pro', serif; color: var(--gold); margin-bottom: 12px; font-size: 1.2rem; }
+        .check-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--primary-pale); }
+        .check-item:last-child { border-bottom: none; }
+        .check-item input { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; margin-top: 3px; }
+        .check-item label { cursor: pointer; }
+
+        .highlight { background: linear-gradient(135deg, var(--gold-light), var(--gold)); padding: 1px 6px; border-radius: 4px; color: var(--primary-dark); font-weight: 600; }
+        .highlight-blue { background: var(--primary-pale); padding: 1px 6px; border-radius: 4px; }
+
+        footer { background: var(--primary-dark); color: var(--primary-pale); text-align: center; padding: 35px 20px; margin-top: 50px; }
+        footer h4 { font-family: 'Crimson Pro', serif; color: var(--white); font-size: 1.4rem; margin-bottom: 12px; }
+        footer .gold { color: var(--gold-light); }
+
+        @media print { .accordion-content { max-height: none !important; } .solution { display: block !important; } .solution-btn { display: none; } }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>Anleitungen <span class="gold">verfassen</span></h1>
+    <p>Dein vollständiger Leitfaden für die Schularbeit – mit Theorie, Beispielen, Grammatik und Übungen</p>
+    <span class="hero-badge">🎯 Ziel: SEHR GUT</span>
+</header>
+
+<main class="container">
+
+<div class="intro-box">
+    <h2>Willkommen zu deinem Schularbeits-Training!</h2>
+    <p>Diese Seite enthält <strong>alles</strong>, was du brauchst, um die Textsorte „Anleitung" perfekt zu beherrschen. Klicke auf die Überschriften, um die einzelnen Bereiche zu öffnen. Arbeite alle Abschnitte durch und nutze die Übungen zur Selbstkontrolle!</p>
+</div>
+
+<!-- ABSCHNITT 1: GRUNDLAGEN -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">1</span> Was ist eine Anleitung? – Die Grundlagen</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Definition</h4>
+            <p>Eine Anleitung ist ein informierender Text, der einen <strong>Vorgang oder Ablauf beschreibt</strong>, der <strong>wiederholbar</strong> ist. Der Leser soll ein <strong>objektives Bild</strong> von den Fakten bekommen und <strong>Erklärungen</strong> erhalten.</p>
+            
+            <div class="info-box gold">
+                <strong>🎯 Das Ziel einer Anleitung:</strong><br>
+                Der Leser soll sich <strong>auskennen</strong> und den Vorgang <strong>selbstständig nachvollziehen</strong> können – ohne zusätzliche Hilfe!
+            </div>
+
+            <h4>Arten von Anleitungen</h4>
+            <ul class="styled">
+                <li><strong>Kochrezepte</strong> – Erklären die Zubereitung von Speisen</li>
+                <li><strong>Bastelanleitungen</strong> – Beschreiben, wie man etwas herstellt</li>
+                <li><strong>Spielbeschreibungen</strong> – Erklären die Regeln eines Spiels</li>
+                <li><strong>Wegbeschreibungen</strong> – Führen von A nach B</li>
+                <li><strong>Gebrauchsanweisungen</strong> – Erklären die Bedienung von Geräten</li>
+                <li><strong>Vorgangsbeschreibungen</strong> – Allgemeine Abläufe</li>
+            </ul>
+
+            <div class="info-box important">
+                <strong>⚠️ Das Wichtigste:</strong><br>
+                Wichtig ist ein <strong>vollständiger, zeitlich und sachlich richtig dargestellter Ablauf!</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 2: AUFBAU -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">2</span> Der Aufbau einer Anleitung</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Die drei Teile einer Anleitung</h4>
+            <ol class="numbered">
+                <li><strong>Einleitung: Voraussetzungen & grundlegende Informationen</strong><br>Was wird benötigt? Material-Liste mit Mengenangaben. Bei Rezepten: Zutaten + Mengen. Bei Bastelanleitungen: Werkzeug, Materialien + Anzahl.</li>
+                <li><strong>Hauptteil: Der Ablauf</strong><br>Richtige Reihenfolge der Arbeitsschritte. Übersichtliche Gliederung in Absätze. Logischer, nachvollziehbarer Aufbau. Zeitangaben, wenn nötig.</li>
+                <li><strong>Schluss: Ziel & Resultat</strong><br>Das fertige Produkt beschreiben. Eventuell Tipps, Wünsche oder Hinweise geben.</li>
+            </ol>
+
+            <h4>Schreibplan für Anleitungen</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>📝 Einleitung</h5>
+                    <p><strong>Material-Liste:</strong></p>
+                    <ul class="styled">
+                        <li>Rezepte: Zutaten + Mengenangaben (30 dag Mehl, 200 ml Milch...)</li>
+                        <li>Basteln: Werkzeug, Materialien + Anzahl (2 Pappteller, 1 Schere...)</li>
+                    </ul>
+                </div>
+                <div class="col-box">
+                    <h5>📄 Hauptteil</h5>
+                    <p><strong>Erklärung der Arbeitsschritte:</strong></p>
+                    <ul class="styled">
+                        <li>In ganzen Sätzen formulieren</li>
+                        <li>Absätze für Übersichtlichkeit</li>
+                        <li>Logische Reihenfolge</li>
+                        <li>Zeitangaben verwenden</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-box" style="margin-top:15px;">
+                <h5>🏁 Schluss</h5>
+                <p><strong>Tipp, Wunsch oder Ergebnis:</strong></p>
+                <ul class="styled">
+                    <li><em>Tipp:</em> „Du kannst ihn noch mit Zucker bestreuen."</li>
+                    <li><em>Wunsch:</em> „Gutes Gelingen! Lass es dir schmecken!"</li>
+                    <li><em>Ergebnis:</em> „Fertig ist dein selbstgemachtes Vogelfutter!"</li>
+                </ul>
+            </div>
+
+            <h4>Die Überschrift</h4>
+            <div class="info-box">
+                <strong>💡 Tipp:</strong> Die Überschrift nennt das <strong>Ergebnis</strong> der Anleitung.<br>
+                <strong>Beispiele:</strong> „So gelingt Eischnee" • „Smartphone-Halter aus Karton" • „Salzteig zum Basteln"
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 3: SPRACHLICHE GESTALTUNG -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">3</span> Sprachliche Gestaltung</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Grundregeln der Sprache in Anleitungen</h4>
+            <table class="grammar">
+                <tr><th>Merkmal</th><th>Erklärung</th><th>Beispiel</th></tr>
+                <tr><td><strong>Präsens</strong></td><td>Anleitungen werden in der Gegenwart geschrieben</td><td>„Du rührst die Zutaten um." ✓</td></tr>
+                <tr><td><strong>Genau & klar</strong></td><td>Präzise Angaben, keine vagen Formulierungen</td><td>„Koche 10 Minuten" ✓ statt „Koche eine Weile" ✗</td></tr>
+                <tr><td><strong>Sachlich</strong></td><td>Keine persönlichen Meinungen oder Wertungen</td><td>„Das Papier wird gefaltet" ✓</td></tr>
+                <tr><td><strong>Leicht verständlich</strong></td><td>Einfache Sätze, klare Anweisungen</td><td>Kurze Sätze, bekannte Wörter</td></tr>
+                <tr><td><strong>Keine Urteile</strong></td><td>Keine persönlichen Wertungen</td><td>„Schneide die Zwiebel" ✓ statt „die leckere Zwiebel" ✗</td></tr>
+            </table>
+
+            <h4>Anredeformen in Anleitungen</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>Persönliche Anrede (Imperativ)</h5>
+                    <ul class="styled">
+                        <li><strong>du:</strong> „Ziehe jetzt eine gerade Linie."</li>
+                        <li><strong>ihr:</strong> „Zieht jetzt eine gerade Linie."</li>
+                        <li><strong>Sie:</strong> „Ziehen Sie jetzt eine gerade Linie."</li>
+                    </ul>
+                    <div class="info-box"><strong>Wichtig:</strong> Wechsle nicht zwischen du- und Sie-Anrede!</div>
+                </div>
+                <div class="col-box">
+                    <h5>Unpersönliche Formen</h5>
+                    <ul class="styled">
+                        <li><strong>Infinitiv:</strong> „Zuerst eine gerade Linie ziehen."</li>
+                        <li><strong>man:</strong> „Zuerst zieht man eine gerade Linie."</li>
+                        <li><strong>Passiv:</strong> „Zuerst wird eine gerade Linie gezogen."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Zeitangaben und Satzverbindungen</h4>
+            <div class="word-bank">
+                <h5>Wörter für den Zeitablauf</h5>
+                <div class="tags">
+                    <span class="tag">zuerst</span>
+                    <span class="tag">dann</span>
+                    <span class="tag">danach</span>
+                    <span class="tag">nun</span>
+                    <span class="tag">jetzt</span>
+                    <span class="tag">anschließend</span>
+                    <span class="tag">in der Zwischenzeit</span>
+                    <span class="tag">am Schluss</span>
+                    <span class="tag">zum Schluss</span>
+                    <span class="tag gold">sobald</span>
+                    <span class="tag gold">währenddessen</span>
+                    <span class="tag gold">schließlich</span>
+                </div>
+            </div>
+
+            <h4>Fachausdrücke verwenden</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>Kochen & Backen</h5>
+                    <p>unterheben, pürieren, rösten, dünsten, anrösten, verrühren, hinzufügen, aufgießen, schaumig rühren</p>
+                </div>
+                <div class="col-box">
+                    <h5>Basteln & Werken</h5>
+                    <p>falten, kleben, schneiden, anzeichnen, bohren, schleifen, abmessen, einstechen, befestigen, lackieren</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 4: IMPERATIV -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">4</span> Der Imperativ (Befehlsform)</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Was ist der Imperativ?</h4>
+            <p>Der <strong>Imperativ</strong> (die Befehlsform) wird verwendet, um jemanden zu einer Handlung aufzufordern. In Anleitungen ist er besonders wichtig!</p>
+            
+            <div class="info-box important">
+                <strong>📌 Wichtig:</strong> Das Prädikat steht in Aufforderungssätzen an <strong>erster Satzgliedstelle</strong>. Am Satzende steht ein <strong>Punkt</strong> oder ein <strong>Rufzeichen</strong>.
+            </div>
+
+            <h4>Bildung des Imperativs</h4>
+            <table class="grammar">
+                <tr><th>Anrede</th><th>Bildung</th><th>Beispiel</th></tr>
+                <tr><td><strong>du</strong> (Singular)</td><td>Verbstamm (+ e)</td><td>Hilf mir! / Lass(e) den Teig rasten. / Gib Salz dazu.</td></tr>
+                <tr><td><strong>ihr</strong> (Plural)</td><td>Verbstamm + t</td><td>Helft mir! / Lasst den Teig rasten. / Gebt Salz dazu.</td></tr>
+                <tr><td><strong>Sie</strong> (höflich)</td><td>Infinitiv + Sie</td><td>Helfen Sie mir! / Lassen Sie den Teig rasten.</td></tr>
+            </table>
+            
+            <div class="info-box">
+                <strong>📝 Merke:</strong> Die Personalpronomen <strong>du</strong> und <strong>ihr</strong> fallen normalerweise weg:<br>
+                <span class="highlight-blue">Sag ja!</span> statt „Sag du ja!"
+            </div>
+
+            <h4>Unregelmäßige Formen: „sein"</h4>
+            <table class="grammar">
+                <tr><th>Person</th><th>Imperativ</th></tr>
+                <tr><td>du</td><td><strong>Sei</strong> vorsichtig!</td></tr>
+                <tr><td>ihr</td><td><strong>Seid</strong> vorsichtig!</td></tr>
+                <tr><td>Sie</td><td><strong>Seien Sie</strong> vorsichtig!</td></tr>
+            </table>
+
+            <h4>Beispiel: Von du zu Sie</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>Vertraulich (du)</h5>
+                    <div class="example-content">
+                        <strong>Bringe</strong> 300 g Kokosfett zum Schmelzen.<br>
+                        <strong>Gib</strong> 2 EL Speiseöl hinzu.<br>
+                        <strong>Rühre</strong> 300 g Körner unter.
+                    </div>
+                </div>
+                <div class="col-box">
+                    <h5>Distanziert (Sie)</h5>
+                    <div class="example-content">
+                        <strong>Bringen Sie</strong> 300 g Kokosfett zum Schmelzen.<br>
+                        <strong>Geben Sie</strong> 2 EL Speiseöl hinzu.<br>
+                        <strong>Rühren Sie</strong> 300 g Körner unter.
+                    </div>
+                </div>
+            </div>
+
+            <div class="practice">
+                <h5>🔧 Übung: Imperativ bilden</h5>
+                <div class="exercise">
+                    <p class="exercise-q">Bilde die Imperativformen für folgende Verben (du, ihr, Sie):</p>
+                    <p><strong>1. geben:</strong></p>
+                    <input type="text" placeholder="du: ... / ihr: ... / Sie: ...">
+                    <p style="margin-top:10px;"><strong>2. nehmen:</strong></p>
+                    <input type="text" placeholder="du: ... / ihr: ... / Sie: ...">
+                    <p style="margin-top:10px;"><strong>3. schneiden:</strong></p>
+                    <input type="text" placeholder="du: ... / ihr: ... / Sie: ...">
+                    <button class="solution-btn" onclick="toggleSolution('sol-imp')">Lösung anzeigen</button>
+                    <div id="sol-imp" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p><strong>1. geben:</strong> Gib! / Gebt! / Geben Sie!</p>
+                        <p><strong>2. nehmen:</strong> Nimm! / Nehmt! / Nehmen Sie!</p>
+                        <p><strong>3. schneiden:</strong> Schneide! / Schneidet! / Schneiden Sie!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 5: AKTIV UND PASSIV -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">5</span> Aktiv und Passiv</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Der Unterschied</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>🏃 Aktiv</h5>
+                    <p>Wenn benannt wird, <strong>wer etwas tut</strong> (handelnde Person), steht das Prädikat im Aktiv.</p>
+                    <div class="example-content"><strong>Meine Schwester</strong> sticht zwei Löcher in den Boden.</div>
+                    <p><em>→ Die handelnde Person ist wichtig!</em></p>
+                </div>
+                <div class="col-box">
+                    <h5>⚙️ Passiv</h5>
+                    <p>Wenn es <strong>nicht nötig ist</strong>, die handelnde Person zu nennen, steht das Prädikat im Passiv.</p>
+                    <div class="example-content">Zwei Löcher <strong>werden</strong> in den Boden <strong>gestochen</strong>.</div>
+                    <p><em>→ Der Vorgang ist wichtig!</em></p>
+                </div>
+            </div>
+
+            <h4>Vom Aktiv zum Passiv</h4>
+            <div class="example-box">
+                <div class="example-content">
+                    <p><strong>Aktiv:</strong> Sie | schneidet | die Melone | in Stücke.</p>
+                    <p><strong>Passiv:</strong> Die Melone | wird | (von ihr) | in Stücke | geschnitten.</p>
+                </div>
+            </div>
+            <div class="info-box important">
+                <strong>📌 Regeln:</strong>
+                <ul class="styled">
+                    <li>Das <strong>Akkusativobjekt</strong> des Aktiv-Satzes wird zum <strong>Subjekt</strong> des Passiv-Satzes.</li>
+                    <li>Die handelnde Person kann in einer Präpositionalgruppe (<em>von</em> + Dativ) stehen – oder wegfallen.</li>
+                </ul>
+            </div>
+
+            <h4>Vorgangspassiv und Zustandspassiv</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>Vorgangspassiv (werden-Passiv)</h5>
+                    <p>Beschreibt einen <strong>Vorgang</strong>, der gerade passiert.</p>
+                    <p><strong>Bildung:</strong> <span class="highlight-blue">werden</span> + Partizip 2</p>
+                    <div class="example-content">Die Kante <strong>wird</strong> nach innen <strong>gebogen</strong>.</div>
+                </div>
+                <div class="col-box">
+                    <h5>Zustandspassiv (sein-Passiv)</h5>
+                    <p>Zeigt einen <strong>erreichten Zustand</strong>.</p>
+                    <p><strong>Bildung:</strong> <span class="highlight-blue">sein</span> + Partizip 2</p>
+                    <div class="example-content">Der Schreibtisch <strong>ist</strong> jetzt <strong>aufgeräumt</strong>.</div>
+                </div>
+            </div>
+
+            <h4>Beispiele</h4>
+            <table class="grammar">
+                <tr><th>Aktiv</th><th>Passiv</th></tr>
+                <tr><td>Flo <strong>wäscht</strong> die Tomaten.</td><td>Die Tomaten <strong>werden gewaschen</strong>.</td></tr>
+                <tr><td>Ich <strong>schneide</strong> den Mozzarella.</td><td>Der Mozzarella <strong>wird geschnitten</strong>.</td></tr>
+                <tr><td>Wir <strong>streuen</strong> Basilikum darüber.</td><td>Basilikum <strong>wird</strong> darüber <strong>gestreut</strong>.</td></tr>
+            </table>
+
+            <div class="practice">
+                <h5>🔧 Übung: Aktiv → Passiv</h5>
+                <div class="exercise">
+                    <p class="exercise-q">Wandle die Sätze ins Passiv um:</p>
+                    <p><strong>1.</strong> Mein Vater schält die Kartoffeln.</p>
+                    <input type="text" placeholder="Passiv: ...">
+                    <p style="margin-top:10px;"><strong>2.</strong> Die Köchin würzt die Suppe mit Salz.</p>
+                    <input type="text" placeholder="Passiv: ...">
+                    <button class="solution-btn" onclick="toggleSolution('sol-pass')">Lösung anzeigen</button>
+                    <div id="sol-pass" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p><strong>1.</strong> Die Kartoffeln werden (von meinem Vater) geschält.</p>
+                        <p><strong>2.</strong> Die Suppe wird (von der Köchin) mit Salz gewürzt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 6: ZEICHENSETZUNG -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">6</span> Zeichensetzung: Beistrich und Doppelpunkt</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Der Doppelpunkt vor Aufzählungen</h4>
+            <p>Ein <strong>Doppelpunkt</strong> steht vor Aufzählungen:</p>
+            <div class="example-box">
+                <div class="example-content">
+                    <p>Heute zu tun<strong>:</strong> 1. Karim anrufen, 2. Heft kaufen, 3. ...</p>
+                    <p>Benötigte Materialien<strong>:</strong> ein Karton, Klebeband, Paketschnur ...</p>
+                </div>
+            </div>
+
+            <h4>Der Beistrich in Aufzählungen</h4>
+            <p>Der <strong>Beistrich</strong> trennt gleichrangige Wörter. Er ersetzt <strong>und</strong> oder <strong>oder</strong>:</p>
+            <div class="example-box">
+                <h5>Gleichrangige Verben</h5>
+                <div class="example-content">Zuerst auswählen<strong>,</strong> falten<strong>,</strong> glattstreichen <strong>und</strong> festkleben.</div>
+            </div>
+            <div class="example-box">
+                <h5>Gleichrangige Nomen</h5>
+                <div class="example-content">Marillen<strong>,</strong> Zwetschken <strong>oder</strong> Birnen nehmen.</div>
+            </div>
+
+            <div class="info-box important">
+                <strong>⚠️ Achtung:</strong> <strong>Nie</strong> ein Leerzeichen <strong>vor</strong> Beistrich oder Doppelpunkt, aber <strong>immer danach</strong>!<br>
+                <span class="highlight">Richtig:</span> Mehl, Zucker, Eier<br>
+                <span class="highlight">Falsch:</span> Mehl , Zucker , Eier
+            </div>
+
+            <div class="practice">
+                <h5>🔧 Übung: Satzzeichen ergänzen</h5>
+                <div class="exercise">
+                    <p class="exercise-q">Ergänze Beistrich, Punkt und Doppelpunkt:</p>
+                    <p>1. Vorübergehend dürfen folgende Räume nicht betreten werden Werkraum Turnsaal und Bibliothek</p>
+                    <input type="text" placeholder="Schreibe den Satz mit Satzzeichen...">
+                    <p style="margin-top:10px;">2. Zwei Drittel des Mehls die Schokostreusel den Vanillezucker und die Zitronenschale dazugeben</p>
+                    <input type="text" placeholder="Schreibe den Satz mit Satzzeichen...">
+                    <button class="solution-btn" onclick="toggleSolution('sol-zeichen')">Lösung anzeigen</button>
+                    <div id="sol-zeichen" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p>1. Vorübergehend dürfen folgende Räume nicht betreten werden<strong>:</strong> Werkraum<strong>,</strong> Turnsaal und Bibliothek<strong>.</strong></p>
+                        <p>2. Zwei Drittel des Mehls<strong>,</strong> die Schokostreusel<strong>,</strong> den Vanillezucker und die Zitronenschale dazugeben<strong>.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 7: NOMINALISIERUNG -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">7</span> Verben als Nomen (Nominalisierung)</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Was ist Nominalisierung?</h4>
+            <p>Verben in der Grundform (Infinitiv) können als Nomen verwendet werden. Dann schreibt man sie <strong>groß</strong>!</p>
+            <div class="example-box">
+                <div class="example-content">
+                    <p><strong>kochen</strong> → <strong>das Kochen</strong></p>
+                    <p><strong>aufkleben</strong> → vor dem <strong>Aufkleben</strong></p>
+                    <p><strong>rühren</strong> → <strong>das Rühren</strong></p>
+                </div>
+            </div>
+
+            <h4>Signalwörter für Großschreibung</h4>
+            <table class="grammar">
+                <tr><th>Signalwort-Typ</th><th>Beispiele</th></tr>
+                <tr><td><strong>1. Artikel/Pronomen</strong></td><td><strong>das</strong> Kneten, <strong>sein</strong> Lachen</td></tr>
+                <tr><td><strong>2. Adjektiv-Attribut</strong></td><td><strong>sauberes</strong> Arbeiten, <strong>gründliches</strong> Waschen</td></tr>
+                <tr><td><strong>3. Präposition</strong> (mit/ohne Artikel)</td><td><strong>beim</strong> Kochen, <strong>zum</strong> Nähen, <strong>vor dem</strong> Auffädeln</td></tr>
+            </table>
+
+            <div class="example-box">
+                <h5>Beispiele mit Signalwörtern</h5>
+                <div class="example-content">
+                    <p><strong>Beim</strong> Ab<strong>schleifen</strong> auf die Ecken achten. → <em>beim = bei dem</em></p>
+                    <p><strong>Das</strong> <strong>Trocknen</strong> dauert ein paar Sekunden. → <em>Artikel „das"</em></p>
+                    <p><strong>Genaues</strong> <strong>Arbeiten</strong> ist wichtig. → <em>Adjektiv-Attribut</em></p>
+                </div>
+            </div>
+
+            <div class="practice">
+                <h5>🔧 Übung: Groß oder klein?</h5>
+                <div class="exercise">
+                    <p class="exercise-q">Schreibe die nominalisierten Verben heraus:</p>
+                    <div class="example-content">DAS RECHTZEITIGE BEREITLEGEN DER MATERIALIEN HILFT BEIM AUSFÜHREN DER ARBEITSSCHRITTE. ZUM GEMEINSAMEN BASTELN BRAUCHEN WIR NICHT VIEL.</div>
+                    <textarea placeholder="Nominalisierte Verben: ..."></textarea>
+                    <button class="solution-btn" onclick="toggleSolution('sol-nom')">Lösung anzeigen</button>
+                    <div id="sol-nom" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <ul class="styled">
+                            <li><strong>das</strong> rechtzeitige <strong>Bereitlegen</strong></li>
+                            <li><strong>beim Ausführen</strong> (= bei dem Ausführen)</li>
+                            <li><strong>zum</strong> gemeinsamen <strong>Basteln</strong> (= zu dem Basteln)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 8: WORTSCHATZ -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">8</span> Wortschatz: Abkürzungen & Vokabeln</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Abkürzungen in Rezepten</h4>
+            <table class="grammar">
+                <tr><th>Abkürzung</th><th>Bedeutung</th><th>Beispiel</th></tr>
+                <tr><td><strong>g</strong></td><td>Gramm</td><td>200 g Mehl</td></tr>
+                <tr><td><strong>dag</strong></td><td>Dekagramm (= 10 g, österreichisch)</td><td>30 dag Mehl = 300 g</td></tr>
+                <tr><td><strong>kg</strong></td><td>Kilogramm</td><td>1 kg Kartoffeln</td></tr>
+                <tr><td><strong>ml</strong></td><td>Milliliter</td><td>200 ml Milch</td></tr>
+                <tr><td><strong>l</strong></td><td>Liter</td><td>1 l Wasser</td></tr>
+                <tr><td><strong>EL</strong></td><td>Esslöffel</td><td>2 EL Öl</td></tr>
+                <tr><td><strong>TL</strong></td><td>Teelöffel</td><td>1 TL Salz</td></tr>
+                <tr><td><strong>Msp.</strong></td><td>Messerspitze</td><td>2 Msp. Zimt</td></tr>
+                <tr><td><strong>Pr.</strong></td><td>Prise</td><td>1 Pr. Salz</td></tr>
+                <tr><td><strong>Pk.</strong></td><td>Packung</td><td>1 Pk. Backpulver</td></tr>
+                <tr><td><strong>Min.</strong></td><td>Minuten</td><td>ca. 10-15 Min.</td></tr>
+                <tr><td><strong>ca.</strong></td><td>circa (ungefähr)</td><td>ca. 200 ml</td></tr>
+            </table>
+
+            <h4>Österreichische Wörter</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>🇦🇹 Österreich</h5>
+                    <p>Erdäpfel, Paradeiser, Karfiol, Fisolen, Obers, Topfen, Semmel, Kipferl, Palatschinken, Knödel, Faschiertes</p>
+                </div>
+                <div class="col-box">
+                    <h5>🇩🇪 Deutschland</h5>
+                    <p>Kartoffeln, Tomaten, Blumenkohl, grüne Bohnen, Sahne, Quark, Brötchen, Hörnchen, Pfannkuchen, Klöße, Hackfleisch</p>
+                </div>
+            </div>
+
+            <h4>Wichtige Verben zum Kochen</h4>
+            <div class="word-bank">
+                <div class="tags">
+                    <span class="tag">schneiden</span>
+                    <span class="tag">würfeln</span>
+                    <span class="tag">hacken</span>
+                    <span class="tag">reiben</span>
+                    <span class="tag">schälen</span>
+                    <span class="tag">rühren</span>
+                    <span class="tag gold">unterheben</span>
+                    <span class="tag">pürieren</span>
+                    <span class="tag">kneten</span>
+                    <span class="tag">kochen</span>
+                    <span class="tag">braten</span>
+                    <span class="tag gold">dünsten</span>
+                    <span class="tag">backen</span>
+                    <span class="tag gold">anrösten</span>
+                    <span class="tag">aufgießen</span>
+                    <span class="tag">abschmecken</span>
+                    <span class="tag">würzen</span>
+                </div>
+            </div>
+
+            <h4>Wichtige Verben zum Basteln</h4>
+            <div class="word-bank">
+                <div class="tags">
+                    <span class="tag">schneiden</span>
+                    <span class="tag">falten</span>
+                    <span class="tag">knicken</span>
+                    <span class="tag">kleben</span>
+                    <span class="tag gold">ankleben</span>
+                    <span class="tag">malen</span>
+                    <span class="tag">zeichnen</span>
+                    <span class="tag">bohren</span>
+                    <span class="tag gold">abschleifen</span>
+                    <span class="tag">sägen</span>
+                    <span class="tag">leimen</span>
+                    <span class="tag">befestigen</span>
+                    <span class="tag gold">auffädeln</span>
+                    <span class="tag">abmessen</span>
+                    <span class="tag">lackieren</span>
+                </div>
+            </div>
+
+            <h4>Wörter für Wegbeschreibungen</h4>
+            <div class="word-bank">
+                <div class="tags">
+                    <span class="tag">gehe geradeaus</span>
+                    <span class="tag">gehe ... entlang</span>
+                    <span class="tag">gehe an ... vorbei</span>
+                    <span class="tag gold">überquere</span>
+                    <span class="tag">biege links/rechts ab</span>
+                    <span class="tag">nach/bei ...</span>
+                    <span class="tag gold">befindet sich</span>
+                    <span class="tag">gegenüber von</span>
+                    <span class="tag">neben/zwischen</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 9: MUSTERBEISPIELE -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">9</span> Musterbeispiele – So sieht eine gute Anleitung aus</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Musterbeispiel 1: Kochrezept (du-Anrede)</h4>
+            <div class="example-box good">
+                <h5>Erdäpfelpüree – cremig und lecker</h5>
+                <div class="example-content">
+                    <p><strong>Zutaten für 2 Personen:</strong><br>
+                    500 g mehlige Erdäpfel, 150 ml Milch, 5 dag Butter, 1 Pr. Muskatnuss, Salz, etwas Kümmel</p>
+                    <p><strong>Kochwerkzeug:</strong><br>
+                    1 Kochtopf, 1 Sieb, 1 Erdäpfelstampfer, 1 Kochlöffel</p>
+                    <p><strong>Zubereitung:</strong><br>
+                    Schäle zuerst 500 g rohe mehlige Erdäpfel, schneide sie in Würfel und gib sie in einen Topf mit Salzwasser und etwas Kümmel. Koche sie bei schwacher Hitze ca. 10-15 Minuten sehr weich.</p>
+                    <p>Erwärme in der Zwischenzeit 150 ml Milch. Schütte danach die Erdäpfel in ein Sieb und lass sie abtropfen. Gib sie zurück in den heißen Topf und zerdrücke sie mit dem Erdäpfelstampfer.</p>
+                    <p>Gib nun warme Milch und 5 dag Butter in kleinen Stücken dazu und verrühre alles mit einem Kochlöffel. Würze zum Schluss mit 1 Prise frisch geriebener Muskatnuss und salze eventuell nach.</p>
+                    <p><em>Guten Appetit!</em></p>
+                </div>
+            </div>
+            <div class="info-box gold">
+                <strong>✓ Was macht dieses Beispiel gut?</strong>
+                <ul class="styled">
+                    <li>Klare Überschrift mit Ergebnis</li>
+                    <li>Zutatenliste mit genauen Mengenangaben</li>
+                    <li>Kochwerkzeug aufgelistet</li>
+                    <li>Präsens durchgehend</li>
+                    <li>Imperativ (du-Form) konsequent</li>
+                    <li>Zeitwörter: zuerst, in der Zwischenzeit, danach, nun, zum Schluss</li>
+                    <li>Fachausdrücke: schälen, abtropfen, zerdrücken, würzen</li>
+                    <li>Freundlicher Schluss</li>
+                </ul>
+            </div>
+
+            <h4>Musterbeispiel 2: Bastelanleitung (Sie-Anrede)</h4>
+            <div class="example-box good">
+                <h5>Smartphone-Halter aus Karton</h5>
+                <div class="example-content">
+                    <p><strong>Material:</strong><br>
+                    1 Kartonrolle mit Deckel, 1 Karton (6 x 10 cm), Lineal, Stift, Stanleymesser/Cutter, Klebstoff, Watte zum Füllen</p>
+                    <p><strong>Anleitung:</strong><br>
+                    Zeichnen Sie zuerst am Ende der Rolle (geschlossene Seite) die Breite und Dicke Ihres Smartphones ein. Danach wird mit dem Stanleymesser das eingezeichnete Rechteck herausgeschnitten.</p>
+                    <p>Legen Sie nun Ihren Karton im Hochformat vor sich. Messen Sie mit dem Lineal von oben 3-mal nacheinander 3 cm ab und zeichnen Sie 3 Querlinien ein. Wenn Sie es richtig gemacht haben, bleibt unten ein Rand von 1 cm übrig. Zeichnen Sie jetzt noch eine senkrechte Mittellinie (3 cm vom linken oder rechten Rand) ein.</p>
+                    <p>Schneiden Sie den Karton danach mit Hilfe des Lineals und des Stanleymessers in der Mitte auseinander. Sie haben jetzt 2 gleich große Streifen. Falten Sie diese entlang der eingezeichneten Striche nach innen. Kleben Sie dann die Dreieckfüßchen am 1-cm-Rand zusammen.</p>
+                    <p>Geben Sie anschließend die Watte in die Rolle und verschließen Sie sie mit dem Deckel. Kleben Sie zum Schluss die Füßchen fest: eines links und eines rechts unter der Handyöffnung.</p>
+                    <p>Probieren Sie gleich aus, ob Ihr Smartphone gut hält und sicher steht. <em>Viel Spaß beim Musikhören!</em></p>
+                </div>
+            </div>
+
+            <h4>Musterbeispiel 3: Rezept im Passiv</h4>
+            <div class="example-box good">
+                <h5>Hummus selbst gemacht</h5>
+                <div class="example-content">
+                    <p><strong>Zutaten:</strong><br>
+                    Saft einer Zitrone, ½ TL Salz, 1-2 gepresste Knoblauchzehen, 120 g dünnflüssiges Tahini, 100 ml eiskaltes Wasser, 50 ml Kichererbsenwasser, 265 g Kichererbsen (Abtropfgewicht aus einer Dose), ½ TL gemahlener Kreuzkümmel, 1-2 EL Olivenöl, etwas Petersil</p>
+                    <p><strong>Zubereitung:</strong><br>
+                    Zuerst wird der Saft einer Zitrone, ½ TL Salz und 1-2 gepresste Knoblauchzehen gemixt. Danach werden 120 g dünnflüssiges Tahini dazugegeben und weiter gemixt. Anschließend wird nach und nach 100 ml eiskaltes Wasser und 50 ml Kichererbsenwasser dazugegossen.</p>
+                    <p>Erst am Ende werden 265 g Kichererbsen in die lockere Masse gegeben und es wird mit ½ TL gemahlenem Kreuzkümmel gewürzt. Zum Schluss wird das Ganze noch ca. 3 Minuten gemixt, bis eine cremige Masse entsteht.</p>
+                    <p>Das fertige Hummus wird mit 1-2 EL Olivenöl und etwas Petersil angerichtet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 10: ÜBUNGEN -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">10</span> Übungsbereich – Teste dein Wissen!</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Übung 1: Rezept in die richtige Reihenfolge bringen</h4>
+            <div class="practice">
+                <div class="exercise">
+                    <p class="exercise-q">Nummeriere die Arbeitsschritte für Erdäpfelpüree in der richtigen Reihenfolge (1-6):</p>
+                    <p>__ mit 1 Pr. frisch geriebener Muskatnuss würzen, Püree kosten und eventuell nachsalzen</p>
+                    <p>__ in der Zwischenzeit 150 ml Milch erwärmen, dann Erdäpfelwürfel mit Erdäpfelstampfer zerdrücken</p>
+                    <p>__ Erdäpfel in ein Sieb schütten, abtropfen lassen, dann zurück in den heißen Topf geben</p>
+                    <p>__ 500 g rohe mehlige Erdäpfel schälen, in Würfel schneiden und in einen Topf mit Salzwasser geben</p>
+                    <p>__ wenn es gesprenkelt ist: Petersilblätter klein schneiden und unter das fertige Püree mischen</p>
+                    <p>__ bei schwacher Hitze ca. 10-15 Min. sehr weich kochen</p>
+                    <button class="solution-btn" onclick="toggleSolution('sol-reih')">Lösung anzeigen</button>
+                    <div id="sol-reih" class="solution">
+                        <div class="solution-title">✓ Richtige Reihenfolge:</div>
+                        <p><strong>1</strong> – 500 g rohe mehlige Erdäpfel schälen...</p>
+                        <p><strong>2</strong> – bei schwacher Hitze ca. 10-15 Min. sehr weich kochen</p>
+                        <p><strong>3</strong> – in der Zwischenzeit 150 ml Milch erwärmen...</p>
+                        <p><strong>4</strong> – Erdäpfel in ein Sieb schütten, abtropfen lassen...</p>
+                        <p><strong>5</strong> – mit 1 Pr. frisch geriebener Muskatnuss würzen...</p>
+                        <p><strong>6</strong> – wenn es gesprenkelt ist: Petersilblätter...</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Übung 2: Imperativ-Formen ergänzen</h4>
+            <div class="practice">
+                <div class="exercise">
+                    <p class="exercise-q">Ergänze die Aufforderungen mit den richtigen Imperativ-Formen:</p>
+                    <p>1. <strong>geben</strong> (an eine Person, per du): _______ das Wasser zum Gips.</p>
+                    <p>2. <strong>tragen</strong> (an mehrere Personen, per du): _______ beim Basteln Kleidung, bei der Flecken nicht stören.</p>
+                    <p>3. <strong>aufpassen</strong> (per Sie): _______ gut, denn der Kleber trocknet schnell.</p>
+                    <p>4. <strong>mitnehmen</strong> (an mehrere, per du): _______ bitte vom Baumarkt Holzrahmen.</p>
+                    <input type="text" placeholder="Schreibe die Lösungen hier...">
+                    <button class="solution-btn" onclick="toggleSolution('sol-impueb')">Lösung anzeigen</button>
+                    <div id="sol-impueb" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p>1. <strong>Gib</strong> das Wasser zum Gips.</p>
+                        <p>2. <strong>Tragt</strong> beim Basteln Kleidung, bei der Flecken nicht stören.</p>
+                        <p>3. <strong>Passen Sie</strong> gut auf, denn der Kleber trocknet schnell.</p>
+                        <p>4. <strong>Nehmt</strong> bitte vom Baumarkt Holzrahmen mit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Übung 3: Aktiv oder Passiv?</h4>
+            <div class="practice">
+                <div class="exercise">
+                    <p class="exercise-q">Bestimme, ob die Sätze im Aktiv (A) oder Passiv (P) stehen:</p>
+                    <p>1. Von der Mozartgasse aus sieht man die Markthalle. __</p>
+                    <p>2. Das Papier wird in kleine Stücke gerissen. __</p>
+                    <p>3. Am Schluss wird die Soße mit Obers verfeinert. __</p>
+                    <p>4. Sie wird vor der Haltestelle auf dich warten. __</p>
+                    <p>5. Werden die Wollfäden auf die linke Seite geklebt? __</p>
+                    <p>6. Bei der Kreuzung biegst du am besten links ab. __</p>
+                    <input type="text" placeholder="z.B.: 1-A, 2-P, ...">
+                    <button class="solution-btn" onclick="toggleSolution('sol-akpa')">Lösung anzeigen</button>
+                    <div id="sol-akpa" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p>1. <strong>A</strong> – man sieht (Aktiv mit „man")</p>
+                        <p>2. <strong>P</strong> – wird gerissen (Vorgangspassiv)</p>
+                        <p>3. <strong>P</strong> – wird verfeinert (Vorgangspassiv)</p>
+                        <p>4. <strong>A</strong> – Sie wird warten (Futur Aktiv, nicht Passiv!)</p>
+                        <p>5. <strong>P</strong> – Werden geklebt (Vorgangspassiv)</p>
+                        <p>6. <strong>A</strong> – du biegst ab (Aktiv)</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Übung 4: Nominalisierte Verben – Groß oder klein?</h4>
+            <div class="practice">
+                <div class="exercise">
+                    <p class="exercise-q">Ergänze die fehlenden Verben in der richtigen Schreibung (groß oder klein):</p>
+                    <p>1. GRILLEN: Beim _______ wird Fleisch besonders zart. Doch auch Gemüse eignet sich zum _______.</p>
+                    <p>2. KNETEN: Das _______ geht besonders einfach mit einer Küchenmaschine. Nie wieder selbst _______ zu müssen klingt verlockend.</p>
+                    <p>3. SCHNEIDEN: Mit gut geschliffenen Messern kann man besser _______. Doch Achtung: Wer will sich schon in den Finger _______?</p>
+                    <textarea placeholder="Schreibe die vollständigen Sätze..."></textarea>
+                    <button class="solution-btn" onclick="toggleSolution('sol-nomverb')">Lösung anzeigen</button>
+                    <div id="sol-nomverb" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p>1. Beim <strong>Grillen</strong> wird Fleisch besonders zart. Doch auch Gemüse eignet sich zum <strong>Grillen</strong>.</p>
+                        <p>2. Das <strong>Kneten</strong> geht besonders einfach mit einer Küchenmaschine. Nie wieder selbst <strong>kneten</strong> zu müssen klingt verlockend.</p>
+                        <p>3. Mit gut geschliffenen Messern kann man besser <strong>schneiden</strong>. Doch Achtung: Wer will sich schon in den Finger <strong>schneiden</strong>?</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Übung 5: Schreibe eine eigene Anleitung!</h4>
+            <div class="practice">
+                <div class="exercise">
+                    <p class="exercise-q">Wähle eines der folgenden Themen und schreibe eine vollständige Anleitung (Überschrift, Materialliste, Arbeitsschritte, Schluss):</p>
+                    <ul class="styled">
+                        <li>Wie man ein Pausenbrot macht</li>
+                        <li>Wie man einen Papierflieger faltet</li>
+                        <li>Wie man Tee zubereitet</li>
+                        <li>Wie man ein einfaches Lesezeichen bastelt</li>
+                    </ul>
+                    <textarea style="min-height:200px;" placeholder="Schreibe hier deine Anleitung..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 11: CHECKLISTE -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">11</span> Checkliste für deine Schularbeit</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <div class="checklist">
+                <h5>✓ Checkliste für deine Texte</h5>
+                
+                <p><strong>Gliederung / Inhalt / Sprache:</strong></p>
+                <div class="check-item"><input type="checkbox" id="c1"><label for="c1">In der <strong>Überschrift</strong> habe ich das Ergebnis der Anleitung genannt.</label></div>
+                <div class="check-item"><input type="checkbox" id="c2"><label for="c2">Ich habe zur besseren Übersicht die <strong>Material- und Mengenliste</strong> von den Arbeitsschritten getrennt geschrieben.</label></div>
+                <div class="check-item"><input type="checkbox" id="c3"><label for="c3">Ich habe im Anleitungsteil bei den <strong>Arbeitsschritten</strong> auf die richtige <strong>Reihenfolge</strong> geachtet und sie vollständig aufgezählt. Wichtige Zwischenergebnisse habe ich genannt.</label></div>
+                <div class="check-item"><input type="checkbox" id="c4"><label for="c4">Ich habe die Möglichkeiten der <strong>grafischen Gestaltung</strong> genutzt, z.B. Aufzählungspunkte, Nummerierung, Unterstreichung.</label></div>
+                <div class="check-item"><input type="checkbox" id="c5"><label for="c5">Ich habe im Anleitungsteil durchgängig eine <strong>Anredeform</strong> verwendet (<em>du, ihr</em> oder <em>Sie</em>).</label></div>
+                <div class="check-item"><input type="checkbox" id="c6"><label for="c6">Ich habe <strong>aussagekräftige Verben</strong> und passende <strong>Nomen</strong> verwendet, außerdem Wörter, die den <strong>Zeitablauf</strong> verdeutlichen.</label></div>
+                
+                <p style="margin-top:20px;"><strong>Grammatik / Rechtschreibung:</strong></p>
+                <div class="check-item"><input type="checkbox" id="c7"><label for="c7">Ich habe auf die richtigen <strong>Imperativ-Formen</strong> geachtet.</label></div>
+                <div class="check-item"><input type="checkbox" id="c8"><label for="c8">Bei <strong>Aufzählungen</strong> habe ich gleichrangige Wörter und Satzteile mit <strong>Beistrich</strong> voneinander getrennt. Den letzten Satzteil habe ich mit <em>und/oder</em> (ohne Beistrich) angefügt.</label></div>
+                <div class="check-item"><input type="checkbox" id="c9"><label for="c9">Ich habe <strong>Verben großgeschrieben</strong>, wenn sie als Nomen verwendet werden.</label></div>
+                <div class="check-item"><input type="checkbox" id="c10"><label for="c10"><strong>Gliederung:</strong> Ich habe Zusammengehörendes in einem Absatz geschrieben.</label></div>
+                <div class="check-item"><input type="checkbox" id="c11"><label for="c11"><strong>Abwechslung:</strong> Ich habe verschiedene Satzanfänge verwendet und durch Ersatzwörter Wortwiederholungen vermieden.</label></div>
+            </div>
+
+            <div class="info-box gold">
+                <strong>💡 Tipp für die Schularbeit:</strong><br>
+                Lies deine Anleitung am Ende noch einmal ganz durch und überprüfe jeden Punkt der Checkliste. Hake ab, was du erledigt hast!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 12: ZUSAMMENFASSUNG -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">12</span> Das Wichtigste auf einen Blick</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Anleitungen verfassen</h4>
+            <ul class="styled">
+                <li>Gliedere deine Anleitungen in die <strong>Material-Liste</strong> und den <strong>Anleitungsteil</strong> (mit den Arbeitsschritten in der richtigen Reihenfolge).</li>
+                <li>Halte beim Schreiben des Anleitungsteils die <strong>zeitliche Reihenfolge</strong> der Arbeitsschritte ein.</li>
+                <li>Beim Schreiben sind wichtig: <strong>aussagekräftige Verben</strong>, <strong>Zeitangaben</strong>, die den Ablauf verdeutlichen (z.B. zuerst, danach, am Schluss), und <strong>Fachbegriffe</strong> für Arbeitsgeräte und -materialien.</li>
+            </ul>
+
+            <h4>Imperativ</h4>
+            <ul class="styled">
+                <li>Den Imperativ verwendest du in <strong>Aufforderungssätzen</strong>.</li>
+                <li><strong>Vertrauliche Anrede</strong> an eine Person (du): <em>Gib mir bitte das Lineal.</em></li>
+                <li><strong>Vertrauliche Anrede</strong> an mehrere Personen (ihr): <em>Gebt mir bitte das Lineal.</em></li>
+                <li><strong>Distanzierte Anrede</strong> (Sie): <em>Geben Sie mir bitte das Lineal.</em></li>
+                <li>Das Prädikat steht in Aufforderungssätzen an <strong>erster Satzgliedstelle</strong>.</li>
+            </ul>
+
+            <h4>Aktiv und Passiv</h4>
+            <ul class="styled">
+                <li>Ein Satz steht im <strong>Aktiv</strong>, wenn mit dem Subjekt die handelnde Person genannt wird: <em>Zuerst schlägt mein Vater die Eiklar zu Schnee.</em></li>
+                <li>Ein Satz steht im <strong>Passiv</strong>, wenn der Vorgang im Vordergrund steht: <em>Zuerst werden die Eiklar zu Schnee geschlagen.</em></li>
+                <li>Das <strong>Vorgangspassiv</strong> besteht aus: Personalform von <em>werden</em> + Partizip 2 → <em>werden fast alle Gerichte mit Stäbchen gegessen.</em></li>
+                <li>Das <strong>Zustandspassiv</strong> besteht aus: <em>sein</em> + Partizip 2 → <em>Leider sind schon alle Teigwaren aufgegessen.</em></li>
+            </ul>
+
+            <h4>Satzzeichen in Aufzählungen</h4>
+            <ul class="styled">
+                <li>Der <strong>Beistrich</strong> trennt gleichrangige Wörter und Satzteile in einer Aufzählung. Der letzte Satzteil wird mit <em>und</em> oder <em>oder</em> (ohne Beistrich) angefügt: <em>Wir kochten, schälten, schnitten und aßen die Eier.</em></li>
+                <li>Einen <strong>Doppelpunkt</strong> setzt man vor Aufzählungen: <em>Mitzubringen sind: Geodreieck, Lineal, Zirkel und ...</em></li>
+            </ul>
+
+            <h4>Verben als Nomen verwenden</h4>
+            <ul class="styled">
+                <li>Mit einem Artikel, einem Adjektiv-Attribut oder einer Präposition kannst du den Infinitiv des Verbs nominalisieren. Du schreibst ihn dann <strong>groß</strong>.</li>
+                <li><em>schneiden</em> → <strong>das Schneiden</strong></li>
+                <li><em>ankleben</em> → <strong>rasches Ankleben</strong></li>
+                <li><em>umbiegen</em> → <strong>zum</strong> (= zu dem) <strong>Umbiegen</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<footer>
+    <h4>Viel Erfolg bei deiner <span class="gold">Schularbeit!</span></h4>
+    <p>Du hast alles gelernt, was du brauchst. Glaube an dich – du schaffst das! 🎯</p>
+</footer>
+
+<script>
+function toggleAccordion(header) {
+    const accordion = header.parentElement;
+    accordion.classList.toggle('open');
+}
+
+function toggleSolution(id) {
+    const solution = document.getElementById(id);
+    solution.classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
