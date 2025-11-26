@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anleitungen verfassen – Schularbeitsvorbereitung Gymnasium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-dark: #1a365d; --primary-medium: #2c5282; --primary-light: #4a7ab8; --primary-pale: #a8c5e2; --primary-bg: #e8f1f8; --primary-soft: #f0f6fb; --gold: #c9a227; --gold-light: #e6c85a; --text-dark: #1a2a3a; --text-medium: #3d5a7a; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans 3', sans-serif; background: linear-gradient(135deg, var(--primary-bg), var(--primary-soft), var(--white)); color: var(--text-dark); line-height: 1.75; }
+        .hero { background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--primary-light)); padding: 45px 20px; text-align: center; }
+        .hero h1 { font-family: 'Crimson Pro', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--white); margin-bottom: 10px; }
+        .hero .gold { color: var(--gold-light); }
+        .hero p { color: var(--primary-pale); font-size: 1.1rem; max-width: 800px; margin: 0 auto 18px; }
+        .hero-badge { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); padding: 10px 24px; border-radius: 25px; font-weight: 700; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+        .intro-box { background: var(--white); padding: 24px; border-radius: 14px; box-shadow: 0 4px 16px rgba(26,54,93,0.1); margin-bottom: 25px; border-left: 5px solid var(--gold); }
+        .intro-box h2 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin-bottom: 10px; }
+        .accordion { background: var(--white); border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(26,54,93,0.08); border: 1px solid var(--primary-pale); overflow: hidden; }
+        .accordion-header { padding: 18px 22px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, var(--primary-soft), var(--white)); transition: background 0.3s; user-select: none; }
+        .accordion-header:hover { background: var(--primary-bg); }
+        .accordion-header h3 { font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--primary-dark); display: flex; align-items: center; gap: 12px; }
+        .accordion-header .num { width: 32px; height: 32px; background: var(--primary-medium); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; font-weight: 600; }
+        .accordion-header .toggle { width: 26px; height: 26px; border: 2px solid var(--primary-medium); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; color: var(--primary-medium); transition: all 0.3s; }
+        .accordion.open .toggle { background: var(--primary-medium); color: white; transform: rotate(45deg); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .accordion.open .accordion-content { max-height: 80000px; }
+        .accordion-inner { padding: 24px; border-top: 1px solid var(--primary-pale); }
+        h4 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin: 22px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--gold); display: inline-block; }
+        h4:first-child { margin-top: 0; }
+        h5 { font-family: 'Crimson Pro', serif; color: var(--primary-dark); margin: 15px 0 10px; font-size: 1.05rem; }
+        p { margin-bottom: 12px; color: var(--text-medium); }
+        .info-box { background: var(--primary-soft); border-radius: 8px; padding: 18px; margin: 18px 0; border-left: 4px solid var(--primary-medium); }
+        .info-box.gold { background: linear-gradient(135deg, #fefbf0, #fdf6dc); border-left-color: var(--gold); }
+        .info-box.important { background: linear-gradient(135deg, #eaf4fc, #d6ebf9); border-left-color: var(--primary-dark); }
+        ul.styled { list-style: none; margin: 12px 0; }
+        ul.styled li { padding: 8px 0 8px 25px; position: relative; border-bottom: 1px solid var(--primary-pale); }
+        ul.styled li:last-child { border-bottom: none; }
+        ul.styled li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: bold; }
+        ol.numbered { list-style: none; counter-reset: item; margin: 12px 0; }
+        ol.numbered li { padding: 10px 0 10px 40px; position: relative; counter-increment: item; border-bottom: 1px solid var(--primary-pale); }
+        ol.numbered li:last-child { border-bottom: none; }
+        ol.numbered li::before { content: counter(item); position: absolute; left: 0; width: 28px; height: 28px; background: var(--primary-medium); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem; }
+        .example-box { background: var(--white); border: 2px solid var(--primary-pale); border-radius: 10px; padding: 22px; margin: 18px 0; position: relative; }
+        .example-box::before { content: 'BEISPIEL'; position: absolute; top: -11px; left: 18px; background: var(--gold); color: var(--primary-dark); padding: 3px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; }
+        .example-box.muster::before { content: '★ MUSTERBEISPIEL (200+ Wörter)'; background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+        .example-box h5 { margin-top: 5px; }
+        .example-content { background: var(--primary-soft); padding: 16px; border-radius: 6px; line-height: 1.85; }
+        table.grammar { width: 100%; border-collapse: collapse; margin: 15px 0; background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(26,54,93,0.06); font-size: 0.95rem; }
+        table.grammar th { background: var(--primary-medium); color: white; padding: 12px; text-align: left; }
+        table.grammar td { padding: 10px 12px; border-bottom: 1px solid var(--primary-pale); }
+        table.grammar tr:nth-child(even) { background: var(--primary-soft); }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 15px 0; }
+        .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 15px 0; }
+        @media (max-width: 800px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+        .col-box { background: var(--white); border-radius: 8px; padding: 18px; border: 1px solid var(--primary-pale); }
+        .col-box h5 { margin-top: 0; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+        .col-box.gold { border-color: var(--gold); background: linear-gradient(135deg, #fffdf8, var(--white)); }
+        .word-bank { background: linear-gradient(135deg, var(--primary-soft), var(--white)); border-radius: 10px; padding: 18px; margin: 15px 0; }
+        .word-bank h5 { margin-top: 0; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { background: var(--primary-medium); color: white; padding: 6px 14px; border-radius: 18px; font-size: 0.9rem; }
+        .tag.gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); font-weight: 600; }
+        .practice { background: linear-gradient(135deg, var(--primary-bg), var(--white)); border: 2px dashed var(--primary-light); border-radius: 10px; padding: 22px; margin: 18px 0; }
+        .practice h5 { margin-top: 0; font-size: 1.1rem; }
+        .exercise { background: var(--white); border-radius: 8px; padding: 18px; margin-bottom: 14px; border-left: 4px solid var(--primary-light); }
+        .exercise:last-child { margin-bottom: 0; }
+        .exercise-label { display: inline-block; background: var(--primary-medium); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+        .exercise-q { font-weight: 600; margin-bottom: 12px; }
+        .exercise textarea, .exercise input[type="text"] { width: 100%; padding: 12px; border: 2px solid var(--primary-pale); border-radius: 6px; font-family: inherit; font-size: 0.95rem; resize: vertical; }
+        .exercise textarea { min-height: 100px; }
+        .exercise textarea:focus, .exercise input:focus { outline: none; border-color: var(--primary-medium); }
+        .solution-btn { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--primary-dark); border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 700; margin-top: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+        .solution-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(201,162,39,0.3); }
+        .solution { display: none; background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 8px; padding: 18px; margin-top: 12px; border-left: 4px solid #43a047; }
+        .solution.show { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-title { font-weight: 700; color: #2e7d32; margin-bottom: 8px; }
+        .checklist { background: var(--white); border-radius: 12px; padding: 22px; margin: 18px 0; border: 2px solid var(--gold); }
+        .checklist h5 { margin-top: 0; color: #8b6914; font-size: 1.15rem; }
+        .check-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--primary-pale); }
+        .check-item:last-child { border-bottom: none; }
+        .check-item input { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; margin-top: 2px; }
+        .check-item label { cursor: pointer; }
+        .highlight { background: linear-gradient(135deg, var(--gold-light), var(--gold)); padding: 1px 6px; border-radius: 4px; color: var(--primary-dark); font-weight: 600; }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; margin: 15px 0; }
+        .topic-card { background: var(--white); border: 1px solid var(--primary-pale); border-radius: 8px; padding: 14px; transition: all 0.2s; }
+        .topic-card:hover { border-color: var(--primary-medium); box-shadow: 0 3px 10px rgba(26,54,93,0.1); }
+        .topic-card .topic-num { display: inline-block; background: var(--primary-medium); color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-size: 0.8rem; font-weight: 600; margin-right: 8px; }
+        .topic-card.gold { border-color: var(--gold); }
+        .topic-card.gold .topic-num { background: var(--gold); color: var(--primary-dark); }
+        .satzanfang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+        .satzanfang-item { background: var(--primary-soft); padding: 10px 14px; border-radius: 6px; border-left: 3px solid var(--primary-medium); font-size: 0.9rem; }
+        .satzanfang-item.gold { background: #fefbf0; border-left-color: var(--gold); }
+        .counter-box { background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium)); color: white; padding: 18px; border-radius: 10px; text-align: center; margin: 18px 0; }
+        .counter-box .number { font-size: 2.2rem; font-weight: 700; color: var(--gold-light); }
+        .counter-box .label { font-size: 0.95rem; opacity: 0.9; }
+        footer { background: var(--primary-dark); color: var(--primary-pale); text-align: center; padding: 35px 20px; margin-top: 40px; }
+        footer h4 { font-family: 'Crimson Pro', serif; color: var(--white); font-size: 1.4rem; margin-bottom: 12px; }
+        footer .gold { color: var(--gold-light); }
+        @media print { .accordion-content { max-height: none !important; } .solution { display: block !important; } .solution-btn { display: none; } }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>Anleitungen <span class="gold">verfassen</span></h1>
+    <p>Komplette Schularbeitsvorbereitung für das Gymnasium – Theorie, Grammatik, 30 Übungsthemen, Musterbeispiele im Imperativ (200+ Wörter) und anspruchsvolle Übungen</p>
+    <span class="hero-badge">🎯 Ziel: SEHR GUT</span>
+</header>
+
+<main class="container">
+
+<div class="intro-box">
+    <h2>So erreichst du den Einser!</h2>
+    <p>Diese Seite enthält <strong>alles</strong> für deine Schularbeit: vollständige Theorie, Grammatik (Imperativ, Aktiv/Passiv, Nominalisierung), über <strong>80 Satzanfänge</strong>, ausführliche <strong>Musterbeispiele im Imperativ</strong> mit 200+ Wörtern und <strong>30 typische Schularbeitsthemen</strong>. Klicke auf die Überschriften zum Öffnen.</p>
+</div>
+
+<!-- ABSCHNITT 1 -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">1</span> Grundlagen: Definition und Merkmale</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Was ist eine Anleitung?</h4>
+            <p>Eine <strong>Anleitung</strong> (Vorgangsbeschreibung) ist ein sachlicher Text, der einen <strong>wiederholbaren Vorgang</strong> so präzise beschreibt, dass der Leser ihn <strong>selbstständig nachvollziehen und ausführen</strong> kann.</p>
+            
+            <div class="info-box gold">
+                <strong>🎯 Das Ziel:</strong> Der Leser muss den Vorgang <strong>exakt reproduzieren</strong> können – auch ohne Vorwissen. Deine Anleitung muss so klar sein, dass <strong>nichts schiefgehen kann</strong>.
+            </div>
+
+            <h4>Merkmale einer guten Anleitung</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>✓ So muss es sein</h5>
+                    <ul class="styled">
+                        <li><strong>Vollständig:</strong> Alle Schritte genannt</li>
+                        <li><strong>Sachlich:</strong> Keine Meinungen/Wertungen</li>
+                        <li><strong>Präzise:</strong> Genaue Mengen-/Zeitangaben</li>
+                        <li><strong>Chronologisch:</strong> Richtige Reihenfolge</li>
+                        <li><strong>Verständlich:</strong> Klare Formulierungen</li>
+                        <li><strong>Fachsprachlich:</strong> Korrekte Begriffe</li>
+                    </ul>
+                </div>
+                <div class="col-box">
+                    <h5>✗ Das ist verboten</h5>
+                    <ul class="styled">
+                        <li><strong>Keine Wertungen:</strong> „lecker", „toll"</li>
+                        <li><strong>Keine Gefühle:</strong> „Das macht Spaß!"</li>
+                        <li><strong>Keine vagen Angaben:</strong> „ein bisschen"</li>
+                        <li><strong>Kein Tempuswechsel:</strong> Immer Präsens!</li>
+                        <li><strong>Kein Anredewechsel:</strong> du/Sie durchhalten</li>
+                        <li><strong>Keine Auslassungen:</strong> Jeder Schritt zählt</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Arten von Anleitungen</h4>
+            <table class="grammar">
+                <tr><th>Art</th><th>Beschreibung</th><th>Typische Elemente</th></tr>
+                <tr><td><strong>Kochrezept</strong></td><td>Zubereitung von Speisen</td><td>Zutatenliste, Mengen, Kochzeiten</td></tr>
+                <tr><td><strong>Bastelanleitung</strong></td><td>Herstellung von Gegenständen</td><td>Materialliste, Werkzeuge, Maße</td></tr>
+                <tr><td><strong>Spielanleitung</strong></td><td>Erklärung von Spielregeln</td><td>Spielerzahl, Spielziel, Ablauf</td></tr>
+                <tr><td><strong>Wegbeschreibung</strong></td><td>Anleitung zum Finden eines Ortes</td><td>Ausgangspunkt, Richtungen, Ziel</td></tr>
+                <tr><td><strong>Experimentieranleitung</strong></td><td>Durchführung von Versuchen</td><td>Hypothese, Material, Durchführung</td></tr>
+            </table>
+
+            <div class="info-box important">
+                <strong>⚠️ Merke:</strong> Wichtig ist ein <strong>vollständiger, zeitlich und sachlich richtig dargestellter Ablauf</strong>!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 2 -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">2</span> Der Aufbau einer Anleitung</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Die drei Hauptteile</h4>
+            <div class="three-col">
+                <div class="col-box gold">
+                    <h5>1️⃣ Einleitung</h5>
+                    <ul class="styled">
+                        <li><strong>Überschrift:</strong> Ergebnis nennen</li>
+                        <li><strong>Material-/Zutatenliste</strong></li>
+                        <li>Genaue Mengenangaben</li>
+                        <li>Benötigte Werkzeuge/Geräte</li>
+                        <li>Ggf. Portionen/Personen</li>
+                    </ul>
+                </div>
+                <div class="col-box gold">
+                    <h5>2️⃣ Hauptteil</h5>
+                    <ul class="styled">
+                        <li>Chronologische Reihenfolge</li>
+                        <li>Jeder Schritt vollständig</li>
+                        <li>Gliederung in Absätze</li>
+                        <li>Zeitangaben wo nötig</li>
+                        <li>Präzise Fachbegriffe</li>
+                        <li>Zwischenergebnisse nennen</li>
+                    </ul>
+                </div>
+                <div class="col-box gold">
+                    <h5>3️⃣ Schluss</h5>
+                    <ul class="styled">
+                        <li>Fertiges Ergebnis beschreiben</li>
+                        <li>Tipps oder Varianten</li>
+                        <li>Guter Wunsch</li>
+                        <li>Hinweise zur Aufbewahrung</li>
+                        <li>Mögliche Fehlerquellen</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Die Überschrift</h4>
+            <p>Die Überschrift nennt das <strong>Ergebnis</strong> und macht neugierig:</p>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>✓ Gute Überschriften</h5>
+                    <ul class="styled">
+                        <li>„Knusprige Kartoffelpuffer – einfach selbst gemacht"</li>
+                        <li>„So bastelst du einen Smartphone-Halter"</li>
+                        <li>„Vogelfutter für den Winter herstellen"</li>
+                        <li>„Stadt-Land-Fluss – das beliebte Ratespiel"</li>
+                    </ul>
+                </div>
+                <div class="col-box">
+                    <h5>✗ Schlechte Überschriften</h5>
+                    <ul class="styled">
+                        <li>„Anleitung" (zu ungenau)</li>
+                        <li>„Rezept" (nichtssagend)</li>
+                        <li>„Mein Lieblingsgericht" (subjektiv)</li>
+                        <li>„Wie man etwas macht" (zu vage)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Die Materialliste</h4>
+            <div class="example-box">
+                <h5>Beispiel: Materialliste für ein Rezept</h5>
+                <div class="example-content">
+                    <p><strong>Zutaten für 4 Portionen:</strong><br>
+                    500 g mehlige Erdäpfel, 1 mittelgroße Zwiebel, 2 Eier, 3 EL Mehl, 1 TL Salz, 1 Prise Muskatnuss, Öl zum Braten</p>
+                    <p><strong>Benötigte Küchengeräte:</strong><br>
+                    1 große Schüssel, 1 Reibe, 1 Schneidebrett, 1 Messer, 1 Pfanne, 1 Pfannenwender, Küchenpapier</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 3: SATZANFÄNGE -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">3</span> Über 80 Satzanfänge für abwechslungsreiche Texte</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <div class="counter-box">
+                <div class="number">80+</div>
+                <div class="label">Satzanfänge und Formulierungshilfen</div>
+            </div>
+
+            <h4>Am Anfang</h4>
+            <div class="satzanfang-grid">
+                <div class="satzanfang-item">Zuerst</div>
+                <div class="satzanfang-item">Zunächst</div>
+                <div class="satzanfang-item">Als Erstes</div>
+                <div class="satzanfang-item">Zu Beginn</div>
+                <div class="satzanfang-item gold">Bevor du beginnst,</div>
+                <div class="satzanfang-item">Zur Vorbereitung</div>
+                <div class="satzanfang-item gold">Am Anfang</div>
+                <div class="satzanfang-item">Vor dem Anfangen</div>
+            </div>
+
+            <h4>In der Mitte / Fortführung</h4>
+            <div class="satzanfang-grid">
+                <div class="satzanfang-item">Dann</div>
+                <div class="satzanfang-item">Danach</div>
+                <div class="satzanfang-item">Anschließend</div>
+                <div class="satzanfang-item">Nun</div>
+                <div class="satzanfang-item">Jetzt</div>
+                <div class="satzanfang-item gold">Im nächsten Schritt</div>
+                <div class="satzanfang-item">Daraufhin</div>
+                <div class="satzanfang-item gold">Als Nächstes</div>
+                <div class="satzanfang-item">Hierauf</div>
+                <div class="satzanfang-item gold">Im Anschluss daran</div>
+                <div class="satzanfang-item">Weiter geht es mit</div>
+                <div class="satzanfang-item gold">Der nächste Schritt ist</div>
+            </div>
+
+            <h4>Am Ende</h4>
+            <div class="satzanfang-grid">
+                <div class="satzanfang-item">Zum Schluss</div>
+                <div class="satzanfang-item">Abschließend</div>
+                <div class="satzanfang-item">Schließlich</div>
+                <div class="satzanfang-item">Zuletzt</div>
+                <div class="satzanfang-item gold">Als letzten Schritt</div>
+                <div class="satzanfang-item">Am Ende</div>
+                <div class="satzanfang-item gold">Zur Fertigstellung</div>
+                <div class="satzanfang-item">Ganz zum Schluss</div>
+            </div>
+
+            <h4>Gleichzeitigkeit / Zwischenzeit</h4>
+            <div class="satzanfang-grid">
+                <div class="satzanfang-item gold">In der Zwischenzeit</div>
+                <div class="satzanfang-item">Währenddessen</div>
+                <div class="satzanfang-item gold">Während der Wartezeit</div>
+                <div class="satzanfang-item">Gleichzeitig</div>
+                <div class="satzanfang-item">Inzwischen</div>
+                <div class="satzanfang-item gold">Parallel dazu</div>
+                <div class="satzanfang-item">Unterdessen</div>
+                <div class="satzanfang-item gold">Nebenher</div>
+            </div>
+
+            <h4>Bedingungen und Zeitpunkte</h4>
+            <div class="satzanfang-grid">
+                <div class="satzanfang-item">Sobald</div>
+                <div class="satzanfang-item gold">Wenn ... fertig ist,</div>
+                <div class="satzanfang-item">Nachdem</div>
+                <div class="satzanfang-item">Bevor</div>
+                <div class="satzanfang-item gold">Erst wenn</div>
+                <div class="satzanfang-item">Falls</div>
+                <div class="satzanfang-item gold">Solange ... noch nicht,</div>
+                <div class="satzanfang-item">Bis</div>
+            </div>
+
+            <h4>Zeitangaben (konkret)</h4>
+            <div class="tags">
+                <span class="tag">Nach etwa 5 Minuten</span>
+                <span class="tag gold">Für ca. 10 Minuten</span>
+                <span class="tag">Ungefähr eine Stunde lang</span>
+                <span class="tag gold">Mindestens 15 Minuten</span>
+                <span class="tag">Nach einer kurzen Ruhezeit</span>
+                <span class="tag gold">Über Nacht</span>
+                <span class="tag">Einige Sekunden lang</span>
+            </div>
+
+            <h4>Verben für Kochen (Imperativ)</h4>
+            <div class="satzanfang-grid">
+                <div class="satzanfang-item">Schneide ...</div>
+                <div class="satzanfang-item gold">Gib ... hinzu</div>
+                <div class="satzanfang-item">Verrühre ...</div>
+                <div class="satzanfang-item">Erhitze ...</div>
+                <div class="satzanfang-item gold">Lasse ... köcheln</div>
+                <div class="satzanfang-item">Rühre ... um</div>
+                <div class="satzanfang-item gold">Schmecke ... ab</div>
+                <div class="satzanfang-item">Brate ... an</div>
+                <div class="satzanfang-item gold">Würze mit ...</div>
+                <div class="satzanfang-item">Hebe ... unter</div>
+                <div class="satzanfang-item gold">Schäle ...</div>
+                <div class="satzanfang-item">Zerdrücke ...</div>
+            </div>
+
+            <h4>Verben für Basteln (Imperativ)</h4>
+            <div class="satzanfang-grid">
+                <div class="satzanfang-item">Falte ...</div>
+                <div class="satzanfang-item gold">Schneide ... aus</div>
+                <div class="satzanfang-item">Klebe ... fest</div>
+                <div class="satzanfang-item">Zeichne ... ein</div>
+                <div class="satzanfang-item gold">Befestige ...</div>
+                <div class="satzanfang-item">Bohre ...</div>
+                <div class="satzanfang-item gold">Schleife ... ab</div>
+                <div class="satzanfang-item">Markiere ...</div>
+                <div class="satzanfang-item gold">Miss ... ab</div>
+                <div class="satzanfang-item">Lackiere ...</div>
+            </div>
+
+            <h4>Hinweise und Tipps einleiten</h4>
+            <div class="tags">
+                <span class="tag gold">Achte darauf, dass ...</span>
+                <span class="tag">Wichtig ist, dass ...</span>
+                <span class="tag gold">Pass auf, dass ...</span>
+                <span class="tag">Vergiss nicht, ...</span>
+                <span class="tag gold">Stelle sicher, dass ...</span>
+                <span class="tag">Kontrolliere, ob ...</span>
+                <span class="tag gold">Tipp:</span>
+                <span class="tag">Achtung!</span>
+            </div>
+
+            <h4>Ergebnisse beschreiben</h4>
+            <div class="tags">
+                <span class="tag">So entsteht ...</span>
+                <span class="tag gold">Jetzt hast du ...</span>
+                <span class="tag">Das Ergebnis ist ...</span>
+                <span class="tag gold">Fertig ist ...</span>
+                <span class="tag">Nun ist ... bereit</span>
+                <span class="tag gold">So erhältst du ...</span>
+            </div>
+
+            <div class="info-box gold">
+                <strong>💡 Profi-Tipp:</strong> Verwende <strong>nie</strong> zweimal hintereinander denselben Satzanfang! Wechsle zwischen Kategorien für einen lebendigen Text.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 4: IMPERATIV -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">4</span> Der Imperativ (Befehlsform) – Vollständig erklärt</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Was ist der Imperativ?</h4>
+            <p>Der <strong>Imperativ</strong> ist die Befehlsform. Mit ihm forderst du jemanden direkt zu einer Handlung auf. In Anleitungen ist er die <strong>wichtigste Form</strong>!</p>
+
+            <div class="info-box important">
+                <strong>📌 Merkmale:</strong>
+                <ul class="styled">
+                    <li>Verb steht an <strong>erster Stelle</strong></li>
+                    <li>Subjekt (du/ihr) fällt meistens weg</li>
+                    <li>Am Ende steht <strong>Punkt</strong> oder <strong>Rufzeichen</strong></li>
+                </ul>
+            </div>
+
+            <h4>Bildung des Imperativs</h4>
+            <table class="grammar">
+                <tr><th>Anrede</th><th>Bildung</th><th>geben</th><th>nehmen</th><th>schneiden</th></tr>
+                <tr><td><strong>du</strong></td><td>Verbstamm (+e)</td><td>Gib!</td><td>Nimm!</td><td>Schneide!</td></tr>
+                <tr><td><strong>ihr</strong></td><td>Verbstamm + t</td><td>Gebt!</td><td>Nehmt!</td><td>Schneidet!</td></tr>
+                <tr><td><strong>Sie</strong></td><td>Infinitiv + Sie</td><td>Geben Sie!</td><td>Nehmen Sie!</td><td>Schneiden Sie!</td></tr>
+            </table>
+
+            <h4>Unregelmäßige Verben (Vokalwechsel e→i/ie)</h4>
+            <table class="grammar">
+                <tr><th>Infinitiv</th><th>du (Imperativ)</th><th>Infinitiv</th><th>du (Imperativ)</th></tr>
+                <tr><td>geben</td><td><strong>Gib!</strong></td><td>lesen</td><td><strong>Lies!</strong></td></tr>
+                <tr><td>nehmen</td><td><strong>Nimm!</strong></td><td>sehen</td><td><strong>Sieh!</strong></td></tr>
+                <tr><td>essen</td><td><strong>Iss!</strong></td><td>helfen</td><td><strong>Hilf!</strong></td></tr>
+                <tr><td>vergessen</td><td><strong>Vergiss!</strong></td><td>messen</td><td><strong>Miss!</strong></td></tr>
+                <tr><td>werfen</td><td><strong>Wirf!</strong></td><td>treten</td><td><strong>Tritt!</strong></td></tr>
+            </table>
+
+            <h4>Sonderfall: „sein"</h4>
+            <p><strong>du:</strong> Sei vorsichtig! • <strong>ihr:</strong> Seid vorsichtig! • <strong>Sie:</strong> Seien Sie vorsichtig!</p>
+
+            <h4>Trennbare Verben</h4>
+            <div class="example-box">
+                <div class="example-content">
+                    <p><strong>aufschneiden:</strong> <span class="highlight">Schneide</span> die Tomaten <span class="highlight">auf</span>.</p>
+                    <p><strong>hinzufügen:</strong> <span class="highlight">Füge</span> das Salz <span class="highlight">hinzu</span>.</p>
+                    <p><strong>umrühren:</strong> <span class="highlight">Rühre</span> die Masse gut <span class="highlight">um</span>.</p>
+                    <p><strong>abschmecken:</strong> <span class="highlight">Schmecke</span> die Suppe <span class="highlight">ab</span>.</p>
+                </div>
+            </div>
+
+            <div class="practice">
+                <h5>🔧 Übung: Imperativ bilden</h5>
+                <div class="exercise">
+                    <span class="exercise-label">Schwierigkeit: ★★★</span>
+                    <p class="exercise-q">Bilde die Imperativformen (du / ihr / Sie):</p>
+                    <p>1. unterheben: ___ / ___ / ___</p>
+                    <p>2. abschmecken: ___ / ___ / ___</p>
+                    <p>3. vergessen: ___ / ___ / ___</p>
+                    <p>4. einstechen: ___ / ___ / ___</p>
+                    <textarea placeholder="Schreibe deine Lösungen hier..."></textarea>
+                    <button class="solution-btn" onclick="toggleSolution('sol-imp')">Lösung anzeigen</button>
+                    <div id="sol-imp" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p>1. <strong>Hebe ... unter!</strong> / <strong>Hebt ... unter!</strong> / <strong>Heben Sie ... unter!</strong></p>
+                        <p>2. <strong>Schmecke ... ab!</strong> / <strong>Schmeckt ... ab!</strong> / <strong>Schmecken Sie ... ab!</strong></p>
+                        <p>3. <strong>Vergiss!</strong> / <strong>Vergesst!</strong> / <strong>Vergessen Sie!</strong></p>
+                        <p>4. <strong>Stich ... ein!</strong> / <strong>Stecht ... ein!</strong> / <strong>Stechen Sie ... ein!</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 5: AKTIV/PASSIV -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">5</span> Aktiv und Passiv</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Der Unterschied</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>🏃 Aktiv</h5>
+                    <p>Die <strong>handelnde Person</strong> steht im Mittelpunkt.</p>
+                    <div class="example-content">
+                        <strong>Meine Mutter</strong> schneidet die Zwiebel.
+                    </div>
+                    <p><em>→ Wer handelt? Meine Mutter</em></p>
+                </div>
+                <div class="col-box">
+                    <h5>⚙️ Passiv</h5>
+                    <p>Der <strong>Vorgang</strong> steht im Mittelpunkt.</p>
+                    <div class="example-content">
+                        <strong>Die Zwiebel</strong> wird geschnitten.
+                    </div>
+                    <p><em>→ Was geschieht? Die Zwiebel wird geschnitten</em></p>
+                </div>
+            </div>
+
+            <h4>Umwandlung: Aktiv → Passiv</h4>
+            <div class="info-box important">
+                <strong>Regeln:</strong>
+                <ol class="numbered">
+                    <li><strong>Akkusativobjekt</strong> wird zum <strong>Subjekt</strong></li>
+                    <li><strong>Verb</strong> wird zu <strong>werden + Partizip II</strong></li>
+                    <li><strong>Subjekt</strong> kann als „von + Dativ" stehen oder wegfallen</li>
+                </ol>
+            </div>
+
+            <div class="example-box">
+                <div class="example-content">
+                    <p><strong>Aktiv:</strong> Der Koch würzt die Suppe mit Salz.</p>
+                    <p><strong>Passiv:</strong> Die Suppe wird (vom Koch) mit Salz gewürzt.</p>
+                </div>
+            </div>
+
+            <h4>Vorgangspassiv vs. Zustandspassiv</h4>
+            <table class="grammar">
+                <tr><th></th><th>Vorgangspassiv</th><th>Zustandspassiv</th></tr>
+                <tr><td><strong>Bildung</strong></td><td>werden + Partizip II</td><td>sein + Partizip II</td></tr>
+                <tr><td><strong>Bedeutung</strong></td><td>Vorgang läuft gerade</td><td>Ergebnis einer Handlung</td></tr>
+                <tr><td><strong>Beispiel</strong></td><td>Der Teig <strong>wird</strong> geknetet.</td><td>Der Teig <strong>ist</strong> geknetet.</td></tr>
+            </table>
+
+            <div class="practice">
+                <h5>🔧 Übung: Aktiv ↔ Passiv</h5>
+                <div class="exercise">
+                    <span class="exercise-label">Schwierigkeit: ★★★</span>
+                    <p class="exercise-q">Wandle um:</p>
+                    <p>1. Die Köchin rührt den Teig. → Passiv: ___</p>
+                    <p>2. Die Zwiebeln werden geschnitten. → Aktiv (mit „man"): ___</p>
+                    <textarea placeholder="Schreibe deine Lösungen..."></textarea>
+                    <button class="solution-btn" onclick="toggleSolution('sol-pass')">Lösung anzeigen</button>
+                    <div id="sol-pass" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p>1. Der Teig wird (von der Köchin) gerührt.</p>
+                        <p>2. Man schneidet die Zwiebeln.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 6: NOMINALISIERUNG -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">6</span> Nominalisierung: Verben als Nomen</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Was ist Nominalisierung?</h4>
+            <p>Bei der Nominalisierung wird ein Verb als Nomen verwendet. Dann wird es <strong>großgeschrieben</strong>!</p>
+
+            <div class="example-box">
+                <div class="example-content">
+                    <p>kochen → <strong>das Kochen</strong></p>
+                    <p>braten → beim <strong>Braten</strong></p>
+                    <p>schneiden → zum <strong>Schneiden</strong></p>
+                </div>
+            </div>
+
+            <h4>Signalwörter für Großschreibung</h4>
+            <table class="grammar">
+                <tr><th>Signalwort</th><th>Beispiel</th></tr>
+                <tr><td><strong>Artikel:</strong> das, ein, dem</td><td><strong>Das</strong> Kochen dauert 20 Min.</td></tr>
+                <tr><td><strong>Pronomen:</strong> mein, sein</td><td><strong>Sein</strong> Rühren war zu schwach.</td></tr>
+                <tr><td><strong>Präp. + Artikel:</strong> beim, zum, vom</td><td><strong>Beim</strong> Braten aufpassen!</td></tr>
+                <tr><td><strong>Adjektiv:</strong> langsames, schnelles</td><td><strong>Langsames</strong> Erhitzen ist wichtig.</td></tr>
+            </table>
+
+            <div class="info-box">
+                <strong>💡 Tipp:</strong> Löse Verschmelzungen auf: <strong>beim</strong> = bei <strong>dem</strong> → „dem" ist Signalwort!
+            </div>
+
+            <div class="practice">
+                <h5>🔧 Übung: Groß oder klein?</h5>
+                <div class="exercise">
+                    <span class="exercise-label">Schwierigkeit: ★★★</span>
+                    <p class="exercise-q">Schreibe richtig (groß/klein):</p>
+                    <p>1. Das rechtzeitige (vorbereiten) ___ erleichtert das (kochen) ___.</p>
+                    <p>2. Beim (braten) ___ musst du ständig (umrühren) ___.</p>
+                    <textarea placeholder="Schreibe deine Lösungen..."></textarea>
+                    <button class="solution-btn" onclick="toggleSolution('sol-nom')">Lösung anzeigen</button>
+                    <div id="sol-nom" class="solution">
+                        <div class="solution-title">✓ Lösung:</div>
+                        <p>1. Das rechtzeitige <strong>Vorbereiten</strong> erleichtert das <strong>Kochen</strong>.</p>
+                        <p>2. Beim <strong>Braten</strong> musst du ständig <strong>umrühren</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 7: ZEICHENSETZUNG -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">7</span> Zeichensetzung: Beistrich und Doppelpunkt</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Der Doppelpunkt</h4>
+            <p>Steht <strong>vor Aufzählungen</strong>: „Zutaten<strong>:</strong> Mehl, Zucker, Eier"</p>
+
+            <h4>Der Beistrich</h4>
+            <ul class="styled">
+                <li><strong>In Aufzählungen:</strong> Mehl<strong>,</strong> Zucker<strong>,</strong> Eier <strong>und</strong> Milch (kein Beistrich vor „und"!)</li>
+                <li><strong>Bei Nebensätzen:</strong> Schneide die Zwiebel<strong>,</strong> sobald das Öl heiß ist.</li>
+                <li><strong>Bei Infinitivgruppen:</strong> Vergiss nicht<strong>,</strong> das Backrohr vorzuheizen.</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>⚠️ Wichtig:</strong> <strong>Nie</strong> Leerzeichen <strong>vor</strong> Satzzeichen! Richtig: „Mehl, Zucker" • Falsch: „Mehl , Zucker"
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 8: WORTSCHATZ -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">8</span> Wortschatz: Abkürzungen und Fachbegriffe</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Abkürzungen in Rezepten</h4>
+            <table class="grammar">
+                <tr><th>Abk.</th><th>Bedeutung</th><th>Abk.</th><th>Bedeutung</th></tr>
+                <tr><td><strong>g</strong></td><td>Gramm</td><td><strong>EL</strong></td><td>Esslöffel</td></tr>
+                <tr><td><strong>dag</strong></td><td>Dekagramm (10g, österr.)</td><td><strong>TL</strong></td><td>Teelöffel</td></tr>
+                <tr><td><strong>kg</strong></td><td>Kilogramm</td><td><strong>Msp.</strong></td><td>Messerspitze</td></tr>
+                <tr><td><strong>ml</strong></td><td>Milliliter</td><td><strong>Pr.</strong></td><td>Prise</td></tr>
+                <tr><td><strong>l</strong></td><td>Liter</td><td><strong>Pk.</strong></td><td>Packung</td></tr>
+                <tr><td><strong>ca.</strong></td><td>circa</td><td><strong>Min.</strong></td><td>Minuten</td></tr>
+            </table>
+
+            <h4>Österreichische Bezeichnungen</h4>
+            <div class="two-col">
+                <div class="col-box">
+                    <h5>🇦🇹 Österreich</h5>
+                    <p>Erdäpfel, Paradeiser, Karfiol, Fisolen, Obers, Topfen, Semmel, Palatschinken, Knödel, Faschiertes, Marille, Ribisel</p>
+                </div>
+                <div class="col-box">
+                    <h5>🇩🇪 Deutschland</h5>
+                    <p>Kartoffeln, Tomaten, Blumenkohl, grüne Bohnen, Sahne, Quark, Brötchen, Pfannkuchen, Klöße, Hackfleisch, Aprikose, Johannisbeere</p>
+                </div>
+            </div>
+
+            <h4>Fachverben Kochen</h4>
+            <div class="tags">
+                <span class="tag">schneiden</span>
+                <span class="tag">würfeln</span>
+                <span class="tag gold">unterheben</span>
+                <span class="tag">pürieren</span>
+                <span class="tag gold">dünsten</span>
+                <span class="tag">anrösten</span>
+                <span class="tag gold">abschmecken</span>
+                <span class="tag">karamellisieren</span>
+                <span class="tag gold">blanchieren</span>
+                <span class="tag">flambieren</span>
+            </div>
+
+            <h4>Fachverben Basteln</h4>
+            <div class="tags">
+                <span class="tag">falten</span>
+                <span class="tag">knicken</span>
+                <span class="tag gold">abschleifen</span>
+                <span class="tag">bohren</span>
+                <span class="tag gold">auffädeln</span>
+                <span class="tag">leimen</span>
+                <span class="tag gold">lackieren</span>
+                <span class="tag">ausstechen</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 9: MUSTERBEISPIELE -->
+<!-- ABSCHNITT 9: MUSTERBEISPIELE -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">9</span> 5 Musterbeispiele im Passiv (je ca. 200 Wörter)</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <div class="info-box important">
+                <strong>📌 Wichtig:</strong> Anleitungen werden im <strong>Passiv</strong> verfasst! Der Vorgang steht im Mittelpunkt, nicht die handelnde Person.
+            </div>
+
+            <h4>Musterbeispiel 1: Kochrezept</h4>
+            <div class="example-box muster">
+                <h5>Knusprige Kartoffelpuffer – selbst gemacht</h5>
+                <div class="example-content">
+                    <p><strong>Zutaten für 4 Portionen:</strong><br>
+                    600 g mehlige Erdäpfel, 1 mittelgroße Zwiebel, 2 Eier, 3 EL Mehl, 1 TL Salz, 1 Prise Muskatnuss, Öl zum Braten</p>
+                    
+                    <p><strong>Benötigte Küchengeräte:</strong><br>
+                    1 große Schüssel, 1 Reibe, 1 Schneidebrett, 1 Messer, 1 sauberes Küchentuch, 1 Pfanne, 1 Pfannenwender, Küchenpapier</p>
+                    
+                    <p><strong>Zubereitung:</strong><br>
+                    Zuerst werden die Erdäpfel gründlich mit einem Sparschäler geschält und anschließend unter kaltem Wasser abgewaschen. Danach werden die geschälten Erdäpfel mit einer groben Reibe in eine große Schüssel gerieben. Nun wird auch die Zwiebel geschält und ebenfalls fein zu den Erdäpfeln gerieben.</p>
+                    
+                    <p>Als Nächstes wird die geriebene Masse in ein sauberes Küchentuch gegeben. Das Tuch wird kräftig über der Spüle ausgedrückt, damit die überschüssige Flüssigkeit entweicht. Dieser Schritt ist besonders wichtig, da die Kartoffelpuffer sonst nicht knusprig werden. Die ausgedrückte Masse wird zurück in die Schüssel gegeben.</p>
+                    
+                    <p>Jetzt werden die zwei Eier, das Mehl, das Salz und die Prise Muskatnuss hinzugefügt. Alle Zutaten werden gründlich mit einem Löffel verrührt, bis eine gleichmäßige Masse entsteht. In der Zwischenzeit wird reichlich Öl in einer großen Pfanne bei mittlerer Hitze erhitzt.</p>
+                    
+                    <p>Sobald das Öl heiß ist, werden mit einem Esslöffel kleine Häufchen aus der Masse geformt und vorsichtig in die Pfanne gesetzt. Die Häufchen werden mit dem Pfannenwender flach gedrückt. Die Kartoffelpuffer werden etwa 3 bis 4 Minuten pro Seite gebraten, bis sie goldbraun und knusprig sind. Sie werden behutsam mit dem Pfannenwender gewendet.</p>
+                    
+                    <p>Zum Schluss werden die fertigen Kartoffelpuffer aus der Pfanne genommen und auf einen Teller mit Küchenpapier gelegt, damit das überschüssige Fett abtropfen kann.</p>
+                    
+                    <p><em>Tipp: Die Kartoffelpuffer werden am besten sofort mit Apfelmus oder Sauerrahm serviert. Guten Appetit!</em></p>
+                </div>
+            </div>
+
+            <h4>Musterbeispiel 2: Bastelanleitung</h4>
+            <div class="example-box muster">
+                <h5>Smartphone-Halter aus Karton – praktisch und einfach</h5>
+                <div class="example-content">
+                    <p><strong>Material:</strong><br>
+                    1 leere Küchenrolle aus Karton, 1 fester Karton (ca. 15 x 10 cm), 1 Lineal, 1 Bleistift, 1 Schere oder Cutter, Klebstoff, Acrylfarben oder Buntpapier zum Verzieren</p>
+                    
+                    <p><strong>Anleitung:</strong><br>
+                    Zuerst wird die leere Küchenrolle auf den Tisch gelegt. Mit dem Lineal werden die Breite und Dicke des Smartphones abgemessen und die Maße werden notiert. Dann wird mit dem Bleistift ein Rechteck in der entsprechenden Größe auf die Oberseite der Küchenrolle gezeichnet. Dabei wird darauf geachtet, dass das Rechteck mittig sitzt.</p>
+                    
+                    <p>Als Nächstes wird das markierte Rechteck vorsichtig mit der Schere oder einem Cutter ausgeschnitten. Bei Verwendung eines Cutters sollte ein Erwachsener um Hilfe gebeten werden. Anschließend wird kontrolliert, ob das Smartphone gut in die Öffnung passt. Bei Bedarf wird die Öffnung ein wenig vergrößert.</p>
+                    
+                    <p>Nun wird der feste Karton genommen und es werden zwei identische Rechtecke mit den Maßen 7 x 5 cm darauf gezeichnet. Beide Rechtecke werden sorgfältig ausgeschnitten. Diese werden als Standfüße für den Halter verwendet.</p>
+                    
+                    <p>Jeder Kartonstreifen wird in der Mitte gefaltet, sodass ein Winkel von etwa 90 Grad entsteht. Dann wird die Unterseite der Küchenrolle an beiden Enden mit Klebstoff bestrichen und jeweils ein gefalteter Kartonstreifen wird als Standfuß festgeklebt. Die Standfüße werden einige Sekunden lang angedrückt und der Kleber wird gut trocknen gelassen.</p>
+                    
+                    <p>Sobald der Klebstoff getrocknet ist, kann der Smartphone-Halter nach Belieben verziert werden. Er wird mit Acrylfarben bemalt oder mit buntem Papier beklebt. Die Farbe wird vollständig trocknen gelassen, bevor der Halter benutzt wird.</p>
+                    
+                    <p>Zum Schluss wird der fertige Smartphone-Halter aufgestellt und das Handy wird in die Öffnung gesteckt.</p>
+                    
+                    <p><em>Tipp: Es kann auch ein kleines Loch in die Unterseite gebohrt werden, um ein Ladekabel durchzuführen. Viel Spaß beim Basteln!</em></p>
+                </div>
+            </div>
+
+            <h4>Musterbeispiel 3: Spielanleitung</h4>
+            <div class="example-box muster">
+                <h5>Stadt-Land-Fluss – das beliebte Ratespiel</h5>
+                <div class="example-content">
+                    <p><strong>Material:</strong><br>
+                    Für jeden Mitspieler: 1 Blatt Papier, 1 Stift</p>
+                    
+                    <p><strong>Spieleranzahl:</strong> 2 bis 10 Personen</p>
+                    
+                    <p><strong>Spielanleitung:</strong><br>
+                    Zunächst wird von jedem Mitspieler ein Blatt Papier und ein Stift genommen. Das Blatt wird im Querformat hingelegt. Nun werden am oberen Rand die Kategorien nebeneinander geschrieben. Die klassischen Kategorien sind: Stadt, Land, Fluss, Name, Tier, Beruf und Pflanze. Zwischen den Kategorien wird jeweils etwas Platz gelassen. Unter jede Kategorie werden mehrere Zeilen für die Antworten freigehalten.</p>
+                    
+                    <p>Wenn alle Spieler ihr Blatt vorbereitet haben, wird ein Spieler ausgewählt, der den Buchstaben bestimmt. Dazu wird von diesem Spieler im Kopf das Alphabet aufgesagt. Von einem anderen Spieler wird „Stopp" gerufen. Der Buchstabe, bei dem gestoppt wurde, wird laut genannt.</p>
+                    
+                    <p>Jetzt wird von allen Spielern gleichzeitig begonnen, zu jeder Kategorie ein passendes Wort mit dem genannten Anfangsbuchstaben zu finden. Die Wörter werden in die entsprechenden Spalten geschrieben. Sobald ein Spieler alle Kategorien ausgefüllt hat, wird „Stopp" gerufen. Von allen Spielern müssen die Stifte sofort hingelegt werden.</p>
+                    
+                    <p>Anschließend werden die Antworten verglichen und die Punkte werden gezählt. Für jede richtige Antwort, die kein anderer Spieler hat, werden 10 Punkte vergeben. Für eine Antwort, die auch von anderen genannt wurde, werden 5 Punkte vergeben. Für eine falsche oder keine Antwort werden 0 Punkte vergeben. Die Punkte werden in eine letzte Spalte eingetragen und am Ende zusammengezählt.</p>
+                    
+                    <p>Nach mehreren Runden werden alle Punkte addiert. Der Spieler mit den meisten Punkten wird zum Sieger erklärt.</p>
+                    
+                    <p><em>Tipp: Die Kategorien können beliebig erweitert oder verändert werden, zum Beispiel mit „Film", „Speise" oder „Marke".</em></p>
+                </div>
+            </div>
+
+            <h4>Musterbeispiel 4: Experimentieranleitung</h4>
+            <div class="example-box muster">
+                <h5>Der tanzende Rosinen-Versuch</h5>
+                <div class="example-content">
+                    <p><strong>Material:</strong><br>
+                    1 durchsichtiges Glas (ca. 300 ml), 250 ml Mineralwasser mit Kohlensäure, 5–6 Rosinen</p>
+                    
+                    <p><strong>Durchführung:</strong><br>
+                    Zuerst wird ein durchsichtiges Glas auf den Tisch gestellt. Das Glas wird etwa zu drei Vierteln mit frischem Mineralwasser gefüllt. Dabei wird darauf geachtet, dass das Mineralwasser möglichst viel Kohlensäure enthält. Eine frisch geöffnete Flasche wird empfohlen.</p>
+                    
+                    <p>Nun werden die Rosinen vorsichtig in das Glas gegeben. Die Rosinen werden einzeln nacheinander ins Wasser fallen gelassen, damit sie sich nicht gegenseitig berühren. Zunächst wird beobachtet, dass die Rosinen auf den Boden des Glases sinken.</p>
+                    
+                    <p>Nach etwa einer Minute kann ein interessantes Phänomen beobachtet werden. An den Rosinen werden kleine Bläschen sichtbar, die sich an der runzeligen Oberfläche sammeln. Wenn genügend Bläschen an einer Rosine haften, wird diese nach oben getragen. An der Wasseroberfläche werden die Bläschen abgegeben und die Rosine sinkt wieder nach unten. Dieser Vorgang wird mehrmals wiederholt – die Rosinen scheinen zu „tanzen".</p>
+                    
+                    <p><strong>Erklärung:</strong><br>
+                    Das Kohlendioxid im Mineralwasser steigt als kleine Bläschen nach oben. Die runzelige Oberfläche der Rosinen bietet viele kleine Vertiefungen, an denen sich die Gasbläschen festsetzen können. Durch die Bläschen wird der Auftrieb erhöht und die Rosine wird nach oben gehoben. An der Oberfläche werden die Bläschen an die Luft abgegeben, der Auftrieb geht verloren und die Rosine sinkt wieder.</p>
+                    
+                    <p>Das Experiment funktioniert so lange, bis die Kohlensäure aus dem Wasser entwichen ist. Dies dauert etwa 15 bis 20 Minuten.</p>
+                    
+                    <p><em>Tipp: Statt Rosinen können auch kleine Nudeln oder Maiskörner verwendet werden.</em></p>
+                </div>
+            </div>
+
+            <h4>Musterbeispiel 5: Pflegeanleitung</h4>
+            <div class="example-box muster">
+                <h5>Eine Zimmerpflanze richtig umtopfen</h5>
+                <div class="example-content">
+                    <p><strong>Material:</strong><br>
+                    1 Zimmerpflanze, 1 neuer Topf (ca. 2–3 cm größer als der alte), frische Blumenerde, Blähton oder Tonscherben für die Drainage, 1 kleine Schaufel, Zeitungspapier als Unterlage, Gießkanne mit Wasser</p>
+                    
+                    <p><strong>Anleitung:</strong><br>
+                    Zunächst wird der Arbeitsplatz vorbereitet. Eine Unterlage aus Zeitungspapier wird auf den Tisch gelegt, damit keine Erde verstreut wird. Alle benötigten Materialien werden bereitgestellt.</p>
+                    
+                    <p>Als Erstes wird der neue Topf vorbereitet. Auf den Boden des Topfes wird eine etwa 2 cm hohe Schicht aus Blähton oder Tonscherben gegeben. Diese Drainageschicht ist wichtig, damit überschüssiges Wasser abfließen kann und keine Staunässe entsteht. Auf die Drainageschicht wird eine dünne Schicht frische Blumenerde gegeben.</p>
+                    
+                    <p>Nun wird die Pflanze vorsichtig aus dem alten Topf genommen. Dazu wird der Topf leicht zusammengedrückt oder gegen die Tischkante geklopft. Die Pflanze wird am Stamm festgehalten und behutsam herausgezogen. Alte, lose Erde wird vorsichtig vom Wurzelballen entfernt. Dabei werden die Wurzeln kontrolliert. Braune oder faulige Wurzeln werden mit einer sauberen Schere abgeschnitten.</p>
+                    
+                    <p>Die Pflanze wird mittig in den neuen Topf gesetzt. Dabei wird darauf geachtet, dass sie gerade steht und nicht zu tief eingepflanzt wird. Der Stamm sollte auf derselben Höhe wie vorher mit Erde bedeckt sein. Die Zwischenräume werden mit frischer Blumenerde aufgefüllt. Die Erde wird leicht angedrückt, damit keine Hohlräume entstehen.</p>
+                    
+                    <p>Zum Schluss wird die Pflanze gründlich angegossen. Das Wasser sollte unten aus dem Topf abfließen können. Nach etwa 15 Minuten wird überschüssiges Wasser aus dem Untersetzer entfernt.</p>
+                    
+                    <p><em>Tipp: Die beste Zeit zum Umtopfen ist das Frühjahr, wenn die Pflanze neue Triebe bildet.</em></p>
+                </div>
+            </div>
+
+            <div class="info-box gold">
+                <strong>✓ Was macht diese Beispiele gut?</strong>
+                <ul class="styled">
+                    <li>Klare Überschrift mit Ergebnis</li>
+                    <li>Vollständige Material-/Zutatenliste mit Mengenangaben</li>
+                    <li>Durchgehend <strong>Passiv</strong> (der Vorgang steht im Mittelpunkt)</li>
+                    <li>Abwechslungsreiche Satzanfänge</li>
+                    <li>Logische, chronologische Reihenfolge</li>
+                    <li>Zeitangaben und Hinweise</li>
+                    <li>Freundlicher Schluss mit Tipps</li>
+                    <li>Ca. 200 Wörter pro Beispiel</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 10: 30 ÜBUNGSTHEMEN -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">10</span> 30 typische Schularbeitsthemen zum Üben</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <div class="counter-box">
+                <div class="number">30</div>
+                <div class="label">Übungsthemen für deine Schularbeit</div>
+            </div>
+
+            <h4>Kochrezepte (10 Themen)</h4>
+            <div class="topic-grid">
+                <div class="topic-card gold"><span class="topic-num">1</span><strong>Klassische Palatschinken</strong> – Beschreibe die Zubereitung von dünnen Pfannkuchen mit Marillenmarmelade.</div>
+                <div class="topic-card"><span class="topic-num">2</span><strong>Erdäpfelsalat</strong> – Erkläre, wie man einen typisch österreichischen Kartoffelsalat macht.</div>
+                <div class="topic-card gold"><span class="topic-num">3</span><strong>Kaiserschmarrn</strong> – Beschreibe die Zubereitung des beliebten Mehlspeisen-Klassikers.</div>
+                <div class="topic-card"><span class="topic-num">4</span><strong>Fruchtsmoothie</strong> – Erkläre, wie man einen gesunden Smoothie aus frischen Früchten zubereitet.</div>
+                <div class="topic-card gold"><span class="topic-num">5</span><strong>Spaghetti mit Tomatensauce</strong> – Beschreibe die Zubereitung von Nudeln mit selbstgemachter Sauce.</div>
+                <div class="topic-card"><span class="topic-num">6</span><strong>Grießkoch mit Zimt</strong> – Erkläre die Zubereitung dieser einfachen Süßspeise.</div>
+                <div class="topic-card gold"><span class="topic-num">7</span><strong>Gemüsesuppe</strong> – Beschreibe, wie man eine nahrhafte Suppe aus frischem Gemüse kocht.</div>
+                <div class="topic-card"><span class="topic-num">8</span><strong>Rührei mit Schnittlauch</strong> – Erkläre die Zubereitung eines perfekten Rühreis.</div>
+                <div class="topic-card gold"><span class="topic-num">9</span><strong>Obstsalat</strong> – Beschreibe, wie man einen bunten Obstsalat zubereitet.</div>
+                <div class="topic-card"><span class="topic-num">10</span><strong>Vanillepudding</strong> – Erkläre die Zubereitung von selbstgemachtem Pudding.</div>
+            </div>
+
+            <h4>Bastelanleitungen (10 Themen)</h4>
+            <div class="topic-grid">
+                <div class="topic-card gold"><span class="topic-num">11</span><strong>Papierflieger</strong> – Beschreibe Schritt für Schritt, wie man einen gut fliegenden Papierflieger faltet.</div>
+                <div class="topic-card"><span class="topic-num">12</span><strong>Lesezeichen aus Papier</strong> – Erkläre die Herstellung eines originellen Lesezeichens.</div>
+                <div class="topic-card gold"><span class="topic-num">13</span><strong>Windrad aus Papier</strong> – Beschreibe, wie man ein buntes Windrad bastelt.</div>
+                <div class="topic-card"><span class="topic-num">14</span><strong>Stiftehalter aus Dosen</strong> – Erkläre, wie man aus einer leeren Dose einen praktischen Stiftehalter macht.</div>
+                <div class="topic-card gold"><span class="topic-num">15</span><strong>Vogelfutterstelle</strong> – Beschreibe die Herstellung einer einfachen Futterstelle für Vögel.</div>
+                <div class="topic-card"><span class="topic-num">16</span><strong>Geschenkbox falten</strong> – Erkläre, wie man aus Papier eine kleine Schachtel faltet.</div>
+                <div class="topic-card gold"><span class="topic-num">17</span><strong>Freundschaftsarmband</strong> – Beschreibe, wie man ein geflochtenes Armband herstellt.</div>
+                <div class="topic-card"><span class="topic-num">18</span><strong>Bilderrahmen aus Karton</strong> – Erkläre die Herstellung eines selbstgemachten Rahmens.</div>
+                <div class="topic-card gold"><span class="topic-num">19</span><strong>Pompons aus Wolle</strong> – Beschreibe, wie man flauschige Pompons macht.</div>
+                <div class="topic-card"><span class="topic-num">20</span><strong>Türschild gestalten</strong> – Erkläre, wie man ein persönliches Türschild bastelt.</div>
+            </div>
+
+            <h4>Spielanleitungen (5 Themen)</h4>
+            <div class="topic-grid">
+                <div class="topic-card gold"><span class="topic-num">21</span><strong>Stadt-Land-Fluss</strong> – Erkläre die Regeln und den Ablauf des beliebten Ratespiels.</div>
+                <div class="topic-card"><span class="topic-num">22</span><strong>Memory</strong> – Beschreibe, wie das Gedächtnisspiel gespielt wird.</div>
+                <div class="topic-card gold"><span class="topic-num">23</span><strong>Schiffe versenken</strong> – Erkläre die Regeln dieses Strategiespiels.</div>
+                <div class="topic-card"><span class="topic-num">24</span><strong>Topfschlagen</strong> – Beschreibe den Ablauf dieses Kinderspiel-Klassikers.</div>
+                <div class="topic-card gold"><span class="topic-num">25</span><strong>Stille Post</strong> – Erkläre die Regeln des lustigen Flüsterspiels.</div>
+            </div>
+
+            <h4>Weitere Anleitungen (5 Themen)</h4>
+            <div class="topic-grid">
+                <div class="topic-card"><span class="topic-num">26</span><strong>Fahrradschlauch flicken</strong> – Beschreibe, wie man einen platten Reifen repariert.</div>
+                <div class="topic-card gold"><span class="topic-num">27</span><strong>Pflanze umtopfen</strong> – Erkläre, wie man eine Zimmerpflanze richtig umtopft.</div>
+                <div class="topic-card"><span class="topic-num">28</span><strong>Schulranzen richtig packen</strong> – Beschreibe, wie man den Schulranzen ordentlich einräumt.</div>
+                <div class="topic-card gold"><span class="topic-num">29</span><strong>Tisch richtig decken</strong> – Erkläre, wie man einen Tisch für ein Abendessen deckt.</div>
+                <div class="topic-card"><span class="topic-num">30</span><strong>Händewaschen richtig erklärt</strong> – Beschreibe gründliches Händewaschen Schritt für Schritt.</div>
+            </div>
+
+            <div class="info-box gold">
+                <strong>💡 Übungstipp:</strong> Wähle mindestens <strong>5 verschiedene Themen</strong> aus unterschiedlichen Kategorien und schreibe vollständige Anleitungen (ca. 200 Wörter) im Imperativ. Nutze die Checkliste zur Selbstkontrolle!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 11: CHECKLISTE -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">11</span> Checkliste für die Schularbeit</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <div class="checklist">
+                <h5>✓ Checkliste: Hast du an alles gedacht?</h5>
+                
+                <p><strong>Aufbau & Inhalt:</strong></p>
+                <div class="check-item"><input type="checkbox" id="c1"><label for="c1">Die <strong>Überschrift</strong> nennt das Ergebnis der Anleitung.</label></div>
+                <div class="check-item"><input type="checkbox" id="c2"><label for="c2">Die <strong>Material-/Zutatenliste</strong> ist vollständig mit Mengenangaben.</label></div>
+                <div class="check-item"><input type="checkbox" id="c3"><label for="c3">Alle <strong>Arbeitsschritte</strong> sind in der richtigen <strong>Reihenfolge</strong>.</label></div>
+                <div class="check-item"><input type="checkbox" id="c4"><label for="c4">Kein Schritt fehlt – die Anleitung ist <strong>vollständig</strong>.</label></div>
+                <div class="check-item"><input type="checkbox" id="c5"><label for="c5">Der Text ist in sinnvolle <strong>Absätze</strong> gegliedert.</label></div>
+                <div class="check-item"><input type="checkbox" id="c6"><label for="c6">Der <strong>Schluss</strong> enthält Tipps, Wünsche oder das Ergebnis.</label></div>
+                
+                <p style="margin-top:18px;"><strong>Sprache & Stil:</strong></p>
+                <div class="check-item"><input type="checkbox" id="c7"><label for="c7">Der Text ist durchgehend im <strong>Präsens</strong> geschrieben.</label></div>
+                <div class="check-item"><input type="checkbox" id="c8"><label for="c8">Die <strong>Anredeform</strong> (du/Sie/man) ist einheitlich.</label></div>
+                <div class="check-item"><input type="checkbox" id="c9"><label for="c9">Der <strong>Imperativ</strong> ist korrekt gebildet.</label></div>
+                <div class="check-item"><input type="checkbox" id="c10"><label for="c10">Die <strong>Satzanfänge</strong> sind abwechslungsreich.</label></div>
+                <div class="check-item"><input type="checkbox" id="c11"><label for="c11"><strong>Fachbegriffe</strong> werden korrekt verwendet.</label></div>
+                <div class="check-item"><input type="checkbox" id="c12"><label for="c12">Der Text ist <strong>sachlich</strong> – keine Wertungen.</label></div>
+                
+                <p style="margin-top:18px;"><strong>Grammatik & Rechtschreibung:</strong></p>
+                <div class="check-item"><input type="checkbox" id="c13"><label for="c13">Bei <strong>Aufzählungen</strong> sind Beistriche richtig gesetzt.</label></div>
+                <div class="check-item"><input type="checkbox" id="c14"><label for="c14"><strong>Nominalisierte Verben</strong> sind großgeschrieben.</label></div>
+                <div class="check-item"><input type="checkbox" id="c15"><label for="c15">Die <strong>Rechtschreibung</strong> wurde kontrolliert.</label></div>
+                <div class="check-item"><input type="checkbox" id="c16"><label for="c16">Keine Wortwiederholungen – <strong>Synonyme</strong> verwendet.</label></div>
+            </div>
+
+            <div class="info-box gold">
+                <strong>💡 Tipp für die Schularbeit:</strong> Lies deinen Text am Ende laut vor und prüfe jeden Punkt der Checkliste. Hake ab, was du erledigt hast!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABSCHNITT 12: ZUSAMMENFASSUNG -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span class="num">12</span> Das Wichtigste auf einen Blick</h3>
+        <span class="toggle">+</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-inner">
+            <h4>Anleitungen verfassen</h4>
+            <ul class="styled">
+                <li>Gliedere in <strong>Einleitung</strong> (Materialliste), <strong>Hauptteil</strong> (Arbeitsschritte) und <strong>Schluss</strong> (Tipps/Ergebnis)</li>
+                <li>Halte die <strong>chronologische Reihenfolge</strong> ein</li>
+                <li>Verwende <strong>Fachbegriffe</strong>, <strong>Zeitangaben</strong> und <strong>abwechslungsreiche Satzanfänge</strong></li>
+            </ul>
+
+            <h4>Imperativ</h4>
+            <ul class="styled">
+                <li><strong>du:</strong> Verbstamm (+e) → „Gib!", „Schneide!"</li>
+                <li><strong>ihr:</strong> Verbstamm + t → „Gebt!", „Schneidet!"</li>
+                <li><strong>Sie:</strong> Infinitiv + Sie → „Geben Sie!", „Schneiden Sie!"</li>
+                <li>Bei e→i/ie-Verben: „geben → Gib!", „lesen → Lies!"</li>
+            </ul>
+
+            <h4>Aktiv und Passiv</h4>
+            <ul class="styled">
+                <li><strong>Aktiv:</strong> Wer tut etwas? → „Mein Vater schält die Kartoffeln."</li>
+                <li><strong>Passiv:</strong> Was wird getan? → „Die Kartoffeln werden geschält."</li>
+                <li><strong>Vorgangspassiv:</strong> werden + Partizip II</li>
+                <li><strong>Zustandspassiv:</strong> sein + Partizip II</li>
+            </ul>
+
+            <h4>Nominalisierung</h4>
+            <ul class="styled">
+                <li>Signalwörter (das, beim, zum, langsames...) → Verb wird <strong>großgeschrieben</strong></li>
+                <li>„beim Kochen", „das Rühren", „langsames Erhitzen"</li>
+            </ul>
+
+            <h4>Zeichensetzung</h4>
+            <ul class="styled">
+                <li><strong>Doppelpunkt</strong> vor Aufzählungen: „Zutaten: ..."</li>
+                <li><strong>Beistrich</strong> zwischen gleichrangigen Wörtern, <strong>nicht</strong> vor „und/oder"</li>
+                <li><strong>Beistrich</strong> bei Nebensätzen und erweiterten Infinitivgruppen</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<footer>
+    <h4>Viel Erfolg bei deiner <span class="gold">Schularbeit!</span></h4>
+    <p>Du hast jetzt alles, was du brauchst. Übe mit den 30 Themen und nutze die Checkliste. Du schaffst das! 🎯</p>
+</footer>
+
+<script>
+function toggleAccordion(header) {
+    const accordion = header.parentElement;
+    accordion.classList.toggle('open');
+}
+
+function toggleSolution(id) {
+    const solution = document.getElementById(id);
+    solution.classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
