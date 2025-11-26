@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meisterkurs: Nacherzählung von Kärntner Sagen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --altrosa-dark: #8B4A5E;
+            --altrosa-main: #B76E79;
+            --altrosa-light: #D4A5A5;
+            --altrosa-pale: #F5E6E8;
+            --altrosa-bg: #FDF8F8;
+            --gold-dark: #8B7355;
+            --gold-main: #C9A227;
+            --gold-light: #E8D5A3;
+            --gold-pale: #F7F0DB;
+            --text-dark: #2D2D2D;
+            --text-medium: #4A4A4A;
+            --white: #FFFFFF;
+            --shadow: rgba(139, 74, 94, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, var(--altrosa-bg) 0%, var(--gold-pale) 50%, var(--altrosa-pale) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--altrosa-dark) 0%, var(--altrosa-main) 100%);
+            color: var(--white);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 20H50L38 30L43 45L30 35L17 45L22 30L10 20H25L30 5Z' fill='%23C9A227' fill-opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header h1 span {
+            color: var(--gold-light);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .student-name {
+            display: inline-block;
+            background: var(--gold-main);
+            color: var(--text-dark);
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px var(--shadow);
+            border-bottom: 3px solid var(--gold-main);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--altrosa-dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        nav a:hover {
+            background: var(--altrosa-pale);
+            border-color: var(--altrosa-main);
+        }
+
+        nav a.active {
+            background: var(--altrosa-main);
+            color: var(--white);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px var(--shadow);
+            border-left: 5px solid var(--gold-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--gold-pale) 0%, transparent 70%);
+            border-radius: 0 20px 0 100%;
+        }
+
+        section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--altrosa-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold-light);
+            position: relative;
+        }
+
+        section h2 .emoji {
+            margin-right: 0.5rem;
+        }
+
+        section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--altrosa-main);
+            margin: 1.5rem 0 1rem;
+        }
+
+        /* Collapsible Sections */
+        .collapsible {
+            background: linear-gradient(135deg, var(--altrosa-pale) 0%, var(--gold-pale) 100%);
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--altrosa-dark);
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .collapsible:hover {
+            background: linear-gradient(135deg, var(--altrosa-light) 0%, var(--gold-light) 100%);
+            transform: translateY(-2px);
+        }
+
+        .collapsible::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: var(--gold-main);
+        }
+
+        .collapsible.active::after {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: var(--white);
+            border-radius: 0 0 15px 15px;
+            margin-top: -0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .collapsible-content-inner {
+            padding: 1.5rem;
+            border: 2px solid var(--altrosa-pale);
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* Formulierungshilfen Boxes */
+        .formbox {
+            background: linear-gradient(135deg, var(--gold-pale) 0%, var(--white) 100%);
+            border: 2px solid var(--gold-main);
+            border-radius: 15px;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .formbox.top-choice {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-pale) 100%);
+            border: 3px solid var(--gold-main);
+            box-shadow: 0 5px 20px rgba(201, 162, 39, 0.3);
+        }
+
+        .formbox.top-choice::before {
+            content: '⭐ TOP-FORMULIERUNG';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--gold-main);
+            color: var(--white);
+            padding: 0.2rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .formbox h4 {
+            color: var(--altrosa-dark);
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .formbox ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .formbox li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px dashed var(--altrosa-light);
+        }
+
+        .formbox li:last-child {
+            border-bottom: none;
+        }
+
+        .formbox li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold-main);
+            font-weight: bold;
+        }
+
+        .formbox .example {
+            background: var(--altrosa-pale);
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--text-medium);
+            border-left: 3px solid var(--altrosa-main);
+        }
+
+        /* Tip Boxes */
+        .tip-box {
+            background: linear-gradient(135deg, var(--altrosa-pale) 0%, var(--white) 100%);
+            border-left: 5px solid var(--altrosa-main);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .tip-box.warning {
+            background: linear-gradient(135deg, #FFF3CD 0%, var(--white) 100%);
+            border-left-color: #FFC107;
+        }
+
+        .tip-box.success {
+            background: linear-gradient(135deg, #D4EDDA 0%, var(--white) 100%);
+            border-left-color: #28A745;
+        }
+
+        .tip-box h4 {
+            color: var(--altrosa-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: var(--gold-pale);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--gold-light);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--gold-main);
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .checklist-item.checked label {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        /* Step System */
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--gold-main) 0%, var(--gold-dark) 100%);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+
+        .step-content {
+            flex: 1;
+            background: var(--altrosa-pale);
+            padding: 1.2rem;
+            border-radius: 15px;
+        }
+
+        .step-content h4 {
+            color: var(--altrosa-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Word Lists */
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .word-item {
+            background: var(--white);
+            border: 2px solid var(--altrosa-light);
+            padding: 0.8rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .word-item:hover {
+            border-color: var(--gold-main);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .word-item .word {
+            font-weight: 700;
+            color: var(--altrosa-dark);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .word-item .meaning {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        /* Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--altrosa-main) 0%, var(--altrosa-dark) 100%);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--altrosa-pale);
+            background: var(--white);
+        }
+
+        .comparison-table tr:hover td {
+            background: var(--altrosa-pale);
+        }
+
+        .bad {
+            color: #DC3545;
+            text-decoration: line-through;
+        }
+
+        .good {
+            color: #28A745;
+            font-weight: 600;
+        }
+
+        /* Progress Tracker */
+        .progress-section {
+            background: linear-gradient(135deg, var(--altrosa-dark) 0%, var(--altrosa-main) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 25px;
+            border-radius: 15px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--gold-main) 0%, var(--gold-light) 100%);
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Print Button */
+        .print-section {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .print-btn {
+            background: linear-gradient(135deg, var(--gold-main) 0%, var(--gold-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(201, 162, 39, 0.4);
+        }
+
+        .print-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(201, 162, 39, 0.5);
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, var(--gold-light) 60%);
+            padding: 0 0.2rem;
+        }
+
+        .important {
+            color: var(--altrosa-dark);
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            nav a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                font-size: 11pt;
+            }
+            
+            nav, .print-section, .progress-section {
+                display: none !important;
+            }
+            
+            header {
+                background: none !important;
+                color: black !important;
+                border-bottom: 3px solid #8B4A5E;
+                padding: 1rem;
+            }
+            
+            header::before {
+                display: none;
+            }
+            
+            header h1, .subtitle, .student-name {
+                color: black !important;
+                text-shadow: none !important;
+            }
+            
+            .student-name {
+                background: #E8D5A3 !important;
+            }
+            
+            section {
+                box-shadow: none !important;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+                margin-bottom: 1rem;
+            }
+            
+            .collapsible-content {
+                max-height: none !important;
+                display: block !important;
+            }
+            
+            .collapsible::after {
+                display: none;
+            }
+            
+            .formbox, .tip-box, .checklist {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏰 Meisterkurs: <span>Nacherzählung</span></h1>
+        <p class="subtitle">Kärntner Sagen perfekt nacherzählen – Dein Weg zum Sehr Gut!</p>
+        <span class="student-name">Für Nabiha – 6. Klasse NMS</span>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#grundlagen" class="active">📚 Grundlagen</a>
+            <a href="#strategie">🎯 10-Minuten-Strategie</a>
+            <a href="#aufbau">🏗️ Aufbau</a>
+            <a href="#formulierungen">✨ Formulierungen</a>
+            <a href="#sprache">🗣️ Zeitgemäße Sprache</a>
+            <a href="#textverstaendnis">🔍 Textverstehen</a>
+            <a href="#checkliste">✅ Checkliste</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- SECTION: GRUNDLAGEN -->
+        <section id="grundlagen">
+            <h2><span class="emoji">📚</span> Was du über Sagen wissen musst</h2>
+            
+            <p>Eine <span class="highlight">Sage</span> ist eine alte Erzählung, die auf <span class="important">wahren Begebenheiten</span> basiert, aber mit <span class="important">fantastischen Elementen</span> ausgeschmückt wurde. Kärntner Sagen spielen immer an echten Orten in Kärnten!</p>
+
+            <button class="collapsible">🔮 Typische Elemente in Kärntner Sagen</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="word-grid">
+                        <div class="word-item">
+                            <span class="word">🐉 Lindwürmer</span>
+                            <span class="meaning">Drachenartige Wesen</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">👻 Geister</span>
+                            <span class="meaning">Verstorbene Seelen</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">🧙 Zauberer</span>
+                            <span class="meaning">Menschen mit magischen Kräften</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">👸 Salige Frauen</span>
+                            <span class="meaning">Gute Naturgeister</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">💎 Schätze</span>
+                            <span class="meaning">Verborgenes Gold</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">🏔️ Berge & Seen</span>
+                            <span class="meaning">Wörthersee, Millstätter See</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">⛪ Klöster & Burgen</span>
+                            <span class="meaning">Alte Gebäude</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">🌙 Träume</span>
+                            <span class="meaning">Prophezeiungen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">📋 Was wird bei der Schularbeit bewertet?</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Kriterium</th>
+                            <th>Was das bedeutet</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Inhalt (korrekt)</strong></td>
+                            <td>Du gibst alle wichtigen Ereignisse richtig wieder, ohne etwas zu erfinden</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Struktur</strong></td>
+                            <td>Einleitung → Hauptteil → Schluss → Deutung klar erkennbar</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spannungsbogen</strong></td>
+                            <td>Die Geschichte wird spannend erzählt mit Höhepunkt</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eigene Worte</strong></td>
+                            <td>Du schreibst nicht ab, sondern formulierst selbst</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sprache & Stil</strong></td>
+                            <td>Passende Formulierungen, die zur Sage passen</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Länge</strong></td>
+                            <td>Mindestens 200 Wörter (besser: 220-250)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rechtschreibung</strong></td>
+                            <td>Korrekte Schreibweise und Zeichensetzung</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: 10-MINUTEN-STRATEGIE -->
+        <section id="strategie">
+            <h2><span class="emoji">🎯</span> Die 10-Minuten-Strategie</h2>
+            
+            <p>Du hast <span class="highlight">10 Minuten</span> zum Lesen und Notieren. Nutze diese Zeit perfekt!</p>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Erstes Lesen (3 Minuten)</h4>
+                    <p>Lies die ganze Sage einmal durch. <strong>Nicht unterbrechen!</strong> Verstehe die Geschichte als Ganzes.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Zweites Lesen mit Markieren (4 Minuten)</h4>
+                    <p>Jetzt markierst du:</p>
+                    <ul>
+                        <li>🔵 <strong>WER?</strong> – Alle Personen/Figuren (unterstreichen)</li>
+                        <li>🟢 <strong>WO?</strong> – Alle Orte (einkreisen)</li>
+                        <li>🟡 <strong>WANN?</strong> – Zeitangaben (Wellenlinie)</li>
+                        <li>🔴 <strong>WAS?</strong> – Die 5-6 wichtigsten Ereignisse (nummerieren!)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Stichwort-Zettel schreiben (3 Minuten)</h4>
+                    <p>Schreibe auf deinen Zettel:</p>
+                    <ul>
+                        <li>Die Personen (mit einem Wort beschreiben: „armer Bauer", „alter Bettler")</li>
+                        <li>Die Ereignisse als kurze Stichpunkte (max. 3-4 Wörter pro Ereignis)</li>
+                        <li>Das ENDE / die LEHRE der Geschichte</li>
+                        <li>Schwierige Wörter, die du verstanden hast</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip-box success">
+                <h4>💡 Profi-Tipp für deinen Stichwortzettel</h4>
+                <p>Teile deinen Zettel in <strong>4 Bereiche</strong>:</p>
+                <p><strong>OBEN LINKS:</strong> Wer? Wo? Wann?<br>
+                <strong>OBEN RECHTS:</strong> Schwierige Wörter<br>
+                <strong>MITTE:</strong> Ereignisse 1-6 (nummeriert!)<br>
+                <strong>UNTEN:</strong> Ende + Lehre/Bedeutung</p>
+            </div>
+        </section>
+
+        <!-- SECTION: AUFBAU -->
+        <section id="aufbau">
+            <h2><span class="emoji">🏗️</span> Der perfekte Aufbau</h2>
+
+            <button class="collapsible">📖 EINLEITUNG (ca. 30-40 Wörter)</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p><strong>Ziel:</strong> Den Leser in die Geschichte einführen, ohne zu viel zu verraten!</p>
+                    
+                    <h4>Was muss rein?</h4>
+                    <ul>
+                        <li>✓ <strong>WANN</strong> spielt die Geschichte? (Zeitangabe)</li>
+                        <li>✓ <strong>WO</strong> spielt sie? (Ort in Kärnten)</li>
+                        <li>✓ <strong>WER</strong> ist die Hauptperson?</li>
+                        <li>✓ <strong>WAS</strong> ist die Ausgangssituation?</li>
+                    </ul>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ TOP-Einleitungen (auswendig lernen!)</h4>
+                        <ul>
+                            <li>„Vor langer Zeit lebte in/bei [ORT] ein/eine [PERSON]. Sein/Ihr Leben war [BESCHREIBUNG]."</li>
+                            <li>„In grauer Vorzeit, als es noch [ELEMENT] gab, ereignete sich in [ORT] eine seltsame Geschichte."</li>
+                            <li>„Diese Sage erzählt von einem/einer [PERSON] aus [ORT], dem/der eines Tages etwas Ungewöhnliches widerfuhr."</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> „Vor langer Zeit lebte im Zollfeld bei Klagenfurt ein einfacher Bauer. Sein Leben war hart, und er musste jeden Tag schwer auf den Feldern arbeiten."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">⚡ HAUPTTEIL (ca. 130-160 Wörter)</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p><strong>Ziel:</strong> Die Handlung spannend erzählen mit klarem Höhepunkt!</p>
+
+                    <h4>Die 5 Phasen des Hauptteils:</h4>
+                    
+                    <div class="step">
+                        <div class="step-number">A</div>
+                        <div class="step-content">
+                            <h4>Auslösendes Ereignis</h4>
+                            <p>Was bringt die Geschichte in Gang? (Traum, Entdeckung, Begegnung...)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">B</div>
+                        <div class="step-content">
+                            <h4>Steigende Handlung</h4>
+                            <p>Was passiert dann? Die Spannung steigt!</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">C</div>
+                        <div class="step-content">
+                            <h4>HÖHEPUNKT ⭐</h4>
+                            <p>Der spannendste Moment! Hier musst du besonders ausführlich schreiben!</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">D</div>
+                        <div class="step-content">
+                            <h4>Fallende Handlung</h4>
+                            <p>Wie löst sich die Spannung?</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">E</div>
+                        <div class="step-content">
+                            <h4>Ergebnis</h4>
+                            <p>Was ist das Endergebnis der Handlung?</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box warning">
+                        <h4>⚠️ WICHTIG: Der Höhepunkt!</h4>
+                        <p>Der Höhepunkt ist der <strong>spannendste Moment</strong> der Geschichte. Hier solltest du:</p>
+                        <ul>
+                            <li>Mindestens 3-4 Sätze schreiben</li>
+                            <li>Gefühle beschreiben („Sein Herz klopfte wild...")</li>
+                            <li>Details einbauen („Mit zitternden Händen...")</li>
+                            <li>Kurze, schnelle Sätze für Spannung nutzen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🎬 SCHLUSS (ca. 20-30 Wörter)</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p><strong>Ziel:</strong> Die Geschichte abrunden – was wurde aus der Hauptperson?</p>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ TOP-Schlussformulierungen</h4>
+                        <ul>
+                            <li>„Von diesem Tag an war [PERSON] [ZUSTAND] und lebte [WIE] bis an sein/ihr Lebensende."</li>
+                            <li>„Seither erzählt man sich in [ORT] diese Geschichte."</li>
+                            <li>„Noch heute kann man [WAS] in [ORT] sehen/finden."</li>
+                            <li>„So wurde [PERSON] für seine/ihre [EIGENSCHAFT] belohnt/bestraft."</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> „Von diesem Tag an war der Bauer ein reicher Mann und lebte glücklich und zufrieden bis an sein Lebensende."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">💭 DEUTUNG (ca. 20-30 Wörter)</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p><strong>Ziel:</strong> Was will uns die Sage lehren? Was ist die Botschaft?</p>
+
+                    <div class="tip-box">
+                        <h4>🤔 So findest du die Deutung:</h4>
+                        <p>Frage dich: <strong>„Was lernen wir aus dieser Geschichte?"</strong></p>
+                        <ul>
+                            <li>Wurde jemand für gutes Verhalten belohnt?</li>
+                            <li>Wurde jemand für schlechtes Verhalten bestraft?</li>
+                            <li>Erklärt die Sage, wie etwas entstanden ist?</li>
+                            <li>Warnt die Sage vor etwas?</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ TOP-Deutungsformulierungen</h4>
+                        <ul>
+                            <li>„Diese Sage lehrt uns, dass man [LEHRE]."</li>
+                            <li>„Die Geschichte zeigt, dass [ERKENNTNIS]."</li>
+                            <li>„So erklärt die Sage, warum/wie [ERKLÄRUNG]."</li>
+                            <li>„Der Bauer/Die Frau hatte gelernt, dass [WEISHEIT]."</li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> „Diese Sage lehrt uns, dass man manchmal auf seine Träume hören sollte – und dass das Glück oft näher ist, als man denkt."
+                        </div>
+                    </div>
+
+                    <h4>Häufige Lehren in Kärntner Sagen:</h4>
+                    <div class="word-grid">
+                        <div class="word-item">
+                            <span class="word">Glaube an Träume</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">Ehrlichkeit wird belohnt</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">Gier wird bestraft</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">Hilfsbereitschaft zahlt sich aus</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">Respekt vor der Natur</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">Mut wird belohnt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: FORMULIERUNGEN -->
+        <section id="formulierungen">
+            <h2><span class="emoji">✨</span> Formulierungshilfen – Dein Werkzeugkasten</h2>
+            
+            <p>Diese Formulierungen sind dein <span class="highlight">Geheimrezept</span> für eine großartige Nacherzählung. Die mit ⭐ markierten sind die wichtigsten – lerne sie zuerst!</p>
+
+            <!-- NACH TEXTABSCHNITT -->
+            <h3>📍 Nach Textabschnitt geordnet</h3>
+
+            <button class="collapsible">🌅 Formulierungen für die EINLEITUNG</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    
+                    <div class="formbox top-choice">
+                        <h4>⭐ Zeitangaben (WANN?) – Die 5 Besten</h4>
+                        <ul>
+                            <li><strong>Vor langer Zeit</strong> – passt immer!</li>
+                            <li><strong>In grauer Vorzeit</strong> – klingt sehr alt</li>
+                            <li><strong>Vor vielen hundert Jahren</strong> – konkret, aber sagenhaft</li>
+                            <li><strong>In alten Zeiten</strong> – klassisch</li>
+                            <li><strong>Einst</strong> – kurz und perfekt für Sagen</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Weitere Zeitangaben</h4>
+                        <ul>
+                            <li>Zu jener Zeit, als noch...</li>
+                            <li>Es begab sich vor langer, langer Zeit...</li>
+                            <li>In längst vergangenen Tagen...</li>
+                            <li>Als die Welt noch anders war...</li>
+                            <li>Damals, als es noch ... gab, ...</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Ortsangaben (WO?) – Die 5 Besten</h4>
+                        <ul>
+                            <li><strong>In/Bei [ORT] in Kärnten</strong> – immer richtig</li>
+                            <li><strong>Am Fuße des/der [BERG]</strong> – für Bergsagen</li>
+                            <li><strong>An den Ufern des [SEE]</strong> – für Seensagen</li>
+                            <li><strong>In einem kleinen Dorf nahe [ORT]</strong> – für Dorfsagen</li>
+                            <li><strong>Dort, wo heute [ORT] liegt</strong> – verbindet Vergangenheit und Gegenwart</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Personeneinführung (WER?) – Die 5 Besten</h4>
+                        <ul>
+                            <li><strong>lebte ein/eine [BESCHREIBUNG] [PERSON]</strong> – „lebte ein armer Bauer"</li>
+                            <li><strong>wohnte ein/eine [PERSON], der/die [EIGENSCHAFT]</strong></li>
+                            <li><strong>gab es einen/eine [PERSON] namens [NAME]</strong></li>
+                            <li><strong>hauste ein/eine [PERSON]</strong> – klingt altmodisch, gut für Sagen!</li>
+                            <li><strong>lebte einmal ein/eine [PERSON] mit [EIGENSCHAFT]</strong></li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> „Vor langer Zeit lebte im Zollfeld bei Klagenfurt ein einfacher Bauer, der jeden Tag hart arbeiten musste."
+                        </div>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Weitere Personenbeschreibungen</h4>
+                        <ul>
+                            <li>ein armer, aber fleißiger...</li>
+                            <li>ein alter, weiser...</li>
+                            <li>eine junge, mutige...</li>
+                            <li>ein einfacher, ehrlicher...</li>
+                            <li>ein kluger, pfiffiger...</li>
+                            <li>eine fromme, gutherzige...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">⚡ Formulierungen für den HAUPTTEIL</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    
+                    <div class="formbox top-choice">
+                        <h4>⭐ Übergänge & Verbindungen – Die 10 Wichtigsten</h4>
+                        <ul>
+                            <li><strong>Eines Tages / Eines Nachts</strong> – perfekt für den Beginn der Handlung</li>
+                            <li><strong>Plötzlich</strong> – für überraschende Wendungen</li>
+                            <li><strong>Daraufhin</strong> – zeigt Folge an</li>
+                            <li><strong>Kurze Zeit später</strong> – Zeitsprung</li>
+                            <li><strong>Als er/sie dort ankam</strong> – Ortswechsel</li>
+                            <li><strong>Zu seinem/ihrem Erstaunen</strong> – Überraschung</li>
+                            <li><strong>Ohne zu zögern</strong> – schnelle Reaktion</li>
+                            <li><strong>Kaum hatte er/sie ... , da ...</strong> – zwei Ereignisse verbinden</li>
+                            <li><strong>In diesem Augenblick</strong> – wichtiger Moment</li>
+                            <li><strong>Von nun an</strong> – Veränderung</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Weitere Übergänge</h4>
+                        <ul>
+                            <li>Nach einer Weile...</li>
+                            <li>Am nächsten Morgen...</li>
+                            <li>Schon bald...</li>
+                            <li>Unterdessen...</li>
+                            <li>Gerade als...</li>
+                            <li>Noch bevor...</li>
+                            <li>Im selben Moment...</li>
+                            <li>Sogleich...</li>
+                            <li>Alsbald...</li>
+                            <li>Da geschah es, dass...</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Für Träume & Visionen</h4>
+                        <ul>
+                            <li><strong>Eines Nachts träumte ihm/ihr, dass...</strong></li>
+                            <li><strong>Im Traum erschien ihm/ihr...</strong></li>
+                            <li><strong>Eine Stimme sprach zu ihm/ihr:</strong></li>
+                            <li><strong>Er/Sie hatte eine seltsame Vision...</strong></li>
+                            <li><strong>Der Traum ließ ihn/sie nicht mehr los...</strong></li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> „Eines Nachts träumte dem Bauern, er solle zur Villacher Brücke gehen, denn dort würde er sein Glück finden."
+                        </div>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Für Begegnungen & Gespräche</h4>
+                        <ul>
+                            <li><strong>Da bemerkte er/sie einen/eine...</strong></li>
+                            <li><strong>Ein/Eine [PERSON] kam auf ihn/sie zu und fragte:</strong></li>
+                            <li><strong>Er/Sie erzählte von...</strong></li>
+                            <li><strong>Darauf erwiderte der/die [PERSON]:</strong></li>
+                            <li><strong>Der/Die [PERSON] lachte und meinte...</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Für Handlungen & Aktionen</h4>
+                        <ul>
+                            <li><strong>Er/Sie machte sich auf den Weg...</strong></li>
+                            <li><strong>So schnell er/sie konnte, eilte er/sie...</strong></li>
+                            <li><strong>Mit aller Kraft...</strong></li>
+                            <li><strong>Vorsichtig näherte er/sie sich...</strong></li>
+                            <li><strong>Er/Sie fasste sich ein Herz und...</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Weitere Handlungsverben (statt „machen" und „gehen")</h4>
+                        <ul>
+                            <li>eilen, hasten, rennen, schleichen</li>
+                            <li>ergreifen, packen, umklammern</li>
+                            <li>entdecken, erblicken, erspähen</li>
+                            <li>rufen, flüstern, murmeln, schreien</li>
+                            <li>zerschlagen, zerbrechen, zertrümmern</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🎭 Formulierungen für GEFÜHLE & SPANNUNG</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    
+                    <div class="formbox top-choice">
+                        <h4>⭐ Gefühle beschreiben – Die 10 Wichtigsten</h4>
+                        <ul>
+                            <li><strong>Sein/Ihr Herz klopfte wild...</strong> – Aufregung/Angst</li>
+                            <li><strong>Voller Hoffnung...</strong> – positive Erwartung</li>
+                            <li><strong>Mit zitternden Händen...</strong> – Nervosität</li>
+                            <li><strong>Zu seiner/ihrer großen Freude...</strong> – Glück</li>
+                            <li><strong>Enttäuscht...</strong> / <strong>Voller Enttäuschung...</strong></li>
+                            <li><strong>Verwundert...</strong> / <strong>Erstaunt...</strong></li>
+                            <li><strong>Voller Angst...</strong> / <strong>Furchterfüllt...</strong></li>
+                            <li><strong>Erleichtert...</strong></li>
+                            <li><strong>Neugierig...</strong></li>
+                            <li><strong>Ungeduldig...</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Weitere Gefühlsbeschreibungen</h4>
+                        <ul>
+                            <li>Ein Schauer lief ihm/ihr über den Rücken...</li>
+                            <li>Er/Sie traute seinen/ihren Augen nicht...</li>
+                            <li>Sein/Ihr Mut sank...</li>
+                            <li>Eine tiefe Traurigkeit überkam ihn/sie...</li>
+                            <li>Er/Sie wagte kaum zu atmen...</li>
+                            <li>Vor Schreck erstarrte er/sie...</li>
+                            <li>Überglücklich...</li>
+                            <li>Voller Tatendrang...</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Spannung aufbauen</h4>
+                        <ul>
+                            <li><strong>Doch dann geschah etwas Unerwartetes...</strong></li>
+                            <li><strong>Was er/sie dann sah, verschlug ihm/ihr den Atem...</strong></li>
+                            <li><strong>In diesem Augenblick...</strong></li>
+                            <li><strong>Plötzlich...</strong></li>
+                            <li><strong>Und tatsächlich –</strong></li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> „Mit zitternden Händen schlug er den Stein entzwei. Und tatsächlich – eine Unmenge Goldstücke quoll heraus!"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🏁 Formulierungen für SCHLUSS & DEUTUNG</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    
+                    <div class="formbox top-choice">
+                        <h4>⭐ Schluss-Sätze – Die 5 Besten</h4>
+                        <ul>
+                            <li><strong>Von diesem Tag an lebte er/sie [WIE] bis an sein/ihr Lebensende.</strong></li>
+                            <li><strong>Seither erzählt man sich in [ORT] diese Geschichte.</strong></li>
+                            <li><strong>Noch heute erinnert [WAS] an diese Begebenheit.</strong></li>
+                            <li><strong>So wurde er/sie für [WAS] reich belohnt.</strong></li>
+                            <li><strong>Und wenn er/sie nicht gestorben ist, dann lebt er/sie noch heute.</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Deutungs-Sätze – Die 5 Besten</h4>
+                        <ul>
+                            <li><strong>Diese Sage lehrt uns, dass...</strong></li>
+                            <li><strong>Die Geschichte zeigt, dass...</strong></li>
+                            <li><strong>Er/Sie hatte gelernt, dass...</strong></li>
+                            <li><strong>So erklärt die Sage, warum/wie...</strong></li>
+                            <li><strong>Die Botschaft dieser Sage ist klar:...</strong></li>
+                        </ul>
+                        <div class="example">
+                            <strong>Beispiel:</strong> „Diese Sage lehrt uns, dass das Glück manchmal näher ist, als wir denken – und dass man seinen Träumen vertrauen sollte."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NACH FUNKTION -->
+            <h3>🔧 Nach Funktion geordnet</h3>
+
+            <button class="collapsible">🔗 VERBINDUNGSWÖRTER (Konnektoren)</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    
+                    <div class="formbox top-choice">
+                        <h4>⭐ Zeitliche Abfolge (WANN?)</h4>
+                        <ul>
+                            <li><strong>zunächst, dann, schließlich</strong> – Reihenfolge</li>
+                            <li><strong>daraufhin, danach, anschließend</strong> – was folgt</li>
+                            <li><strong>währenddessen, unterdessen</strong> – gleichzeitig</li>
+                            <li><strong>plötzlich, auf einmal</strong> – überraschend</li>
+                            <li><strong>endlich, zuletzt</strong> – am Ende</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Ursache & Wirkung (WARUM?)</h4>
+                        <ul>
+                            <li><strong>deshalb, daher, darum</strong> – Folge</li>
+                            <li><strong>denn, weil</strong> – Begründung</li>
+                            <li><strong>also, folglich</strong> – Schlussfolgerung</li>
+                            <li><strong>aus diesem Grund</strong> – formeller</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Gegensätze</h4>
+                        <ul>
+                            <li>jedoch, allerdings, doch</li>
+                            <li>obwohl, trotzdem</li>
+                            <li>im Gegensatz dazu</li>
+                            <li>stattdessen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🗣️ DIREKTE REDE richtig einleiten</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    
+                    <div class="tip-box warning">
+                        <h4>⚠️ Wichtige Regel für direkte Rede!</h4>
+                        <p>Deutsche Anführungszeichen: „..." (unten öffnen, oben schließen)<br>
+                        Nach dem Doppelpunkt beginnt ein neuer Satz mit Großbuchstaben!</p>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Redeeinleitungen (statt immer „sagte")</h4>
+                        <ul>
+                            <li><strong>fragte</strong> – „Wonach suchst du?", fragte der Bettler.</li>
+                            <li><strong>antwortete / erwiderte</strong> – Der Bauer erwiderte: „..."</li>
+                            <li><strong>erzählte</strong> – Er erzählte von seinem Traum.</li>
+                            <li><strong>rief / rief aus</strong> – „Endlich!", rief er aus.</li>
+                            <li><strong>flüsterte</strong> – Sie flüsterte leise: „..."</li>
+                            <li><strong>meinte</strong> – Der Alte meinte lachend: „..."</li>
+                            <li><strong>bat</strong> – Sie bat ihn: „..."</li>
+                            <li><strong>befahl</strong> – Der König befahl: „..."</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Erweiterte Redeeinleitungen</h4>
+                        <ul>
+                            <li>...sprach mit fester Stimme:</li>
+                            <li>...entgegnete verwundert:</li>
+                            <li>...murmelte vor sich hin:</li>
+                            <li>...schrie voller Angst:</li>
+                            <li>...fragte neugierig:</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🎨 BESCHREIBENDE ADJEKTIVE</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    
+                    <div class="formbox top-choice">
+                        <h4>⭐ Für Personen</h4>
+                        <ul>
+                            <li><strong>arm, einfach, bescheiden</strong> – niedrige Stellung</li>
+                            <li><strong>alt, weise, erfahren</strong> – für ältere Figuren</li>
+                            <li><strong>jung, mutig, tapfer</strong> – für Helden</li>
+                            <li><strong>klug, pfiffig, schlau</strong> – für clevere Figuren</li>
+                            <li><strong>gierig, habsüchtig, neidisch</strong> – für böse Figuren</li>
+                            <li><strong>freundlich, hilfsbereit, gutherzig</strong> – für gute Figuren</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox top-choice">
+                        <h4>⭐ Für Orte & Atmosphäre</h4>
+                        <ul>
+                            <li><strong>dunkel, finster, unheimlich</strong> – bedrohlich</li>
+                            <li><strong>geheimnisvoll, rätselhaft</strong> – mysteriös</li>
+                            <li><strong>prächtig, herrlich, wunderschön</strong> – positiv</li>
+                            <li><strong>einsam, verlassen, öde</strong> – leer</li>
+                            <li><strong>alt, verfallen, baufällig</strong> – Ruinen</li>
+                        </ul>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>📍 Für Gegenstände & Schätze</h4>
+                        <ul>
+                            <li>golden, silbern, glänzend</li>
+                            <li>kostbar, wertvoll, unbezahlbar</li>
+                            <li>schwer, massiv, gewaltig</li>
+                            <li>alt, verstaubt, verborgen</li>
+                            <li>magisch, verzaubert, wundersam</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ZEITGEMÄSSE SPRACHE -->
+        <section id="sprache">
+            <h2><span class="emoji">🗣️</span> Zeitgemäße Sprache – Was passt zur Sage?</h2>
+            
+            <div class="tip-box warning">
+                <h4>⚠️ Wichtig!</h4>
+                <p>Sagen spielen in der <strong>Vergangenheit</strong> – oft vor Hunderten von Jahren. Moderne Wörter wie „Billionär", „cool", „Handy" oder „Stress" passen hier <strong>überhaupt nicht!</strong></p>
+            </div>
+
+            <h3>❌ Verboten vs. ✅ Erlaubt</h3>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>❌ FALSCH (modern)</th>
+                    <th>✅ RICHTIG (sagenhaft)</th>
+                </tr>
+                <tr>
+                    <td class="bad">Billionär</td>
+                    <td class="good">reicher Mann / steinreich / wohlhabend</td>
+                </tr>
+                <tr>
+                    <td class="bad">cool</td>
+                    <td class="good">erstaunlich / wunderbar / bemerkenswert</td>
+                </tr>
+                <tr>
+                    <td class="bad">okay / OK</td>
+                    <td class="good">gut / einverstanden / in Ordnung</td>
+                </tr>
+                <tr>
+                    <td class="bad">Stress</td>
+                    <td class="good">Sorgen / Not / Mühe</td>
+                </tr>
+                <tr>
+                    <td class="bad">mega / super</td>
+                    <td class="good">sehr / überaus / außerordentlich</td>
+                </tr>
+                <tr>
+                    <td class="bad">checken</td>
+                    <td class="good">prüfen / nachsehen / untersuchen</td>
+                </tr>
+                <tr>
+                    <td class="bad">Job</td>
+                    <td class="good">Arbeit / Aufgabe / Tätigkeit</td>
+                </tr>
+                <tr>
+                    <td class="bad">Typ / Kerl</td>
+                    <td class="good">Mann / Bursche / Fremder</td>
+                </tr>
+                <tr>
+                    <td class="bad">schnell reich werden</td>
+                    <td class="good">zu Reichtum gelangen / sein Glück finden</td>
+                </tr>
+                <tr>
+                    <td class="bad">nach Hause rennen</td>
+                    <td class="good">nach Hause eilen / heimwärts hasten</td>
+                </tr>
+            </table>
+
+            <button class="collapsible">📜 Altertümliche Wörter, die du verwenden kannst</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="word-grid">
+                        <div class="word-item">
+                            <span class="word">einst</span>
+                            <span class="meaning">früher, damals</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">alsbald</span>
+                            <span class="meaning">bald darauf</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">sogleich</span>
+                            <span class="meaning">sofort</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">allerlei</span>
+                            <span class="meaning">verschiedene</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">fürwahr</span>
+                            <span class="meaning">wirklich, tatsächlich</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">gar</span>
+                            <span class="meaning">sehr, völlig</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">ward</span>
+                            <span class="meaning">wurde (alt)</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">fortan</span>
+                            <span class="meaning">von da an</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">hernach</span>
+                            <span class="meaning">danach</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">dereinst</span>
+                            <span class="meaning">einst, früher</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">Gemahl/Gemahlin</span>
+                            <span class="meaning">Ehemann/Ehefrau</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">Gesinde</span>
+                            <span class="meaning">Diener, Arbeiter</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <h4>💡 Tipp</h4>
+                        <p>Du musst nicht alle alten Wörter benutzen! 2-3 pro Text reichen völlig aus. Wichtiger ist, dass du <strong>keine modernen Wörter</strong> verwendest.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">💰 Wie man über Reichtum schreibt</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="formbox top-choice">
+                        <h4>⭐ Statt „reich" und „Billionär":</h4>
+                        <ul>
+                            <li>Er wurde <strong>ein wohlhabender Mann</strong>.</li>
+                            <li>Von nun an lebte er <strong>in Wohlstand</strong>.</li>
+                            <li>Er war <strong>aller Sorgen enthoben</strong>.</li>
+                            <li>Er fand <strong>einen gewaltigen Schatz</strong>.</li>
+                            <li>Eine <strong>Unmenge Goldstücke</strong> / <strong>Goldmünzen</strong></li>
+                            <li>Er war <strong>steinreich</strong>.</li>
+                            <li>Er brauchte <strong>nie wieder zu arbeiten</strong>.</li>
+                            <li>Sein <strong>Glück war gemacht</strong>.</li>
+                        </ul>
+                        <div class="example">
+                            <strong>FALSCH:</strong> Von dem Tag an war der Bauer ein Billionaire.<br>
+                            <strong>RICHTIG:</strong> Von diesem Tag an war der Bauer ein reicher Mann und lebte ohne Sorgen bis an sein Lebensende.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TEXTVERSTEHEN -->
+        <section id="textverstaendnis">
+            <h2><span class="emoji">🔍</span> Texte richtig verstehen – Schritt für Schritt</h2>
+            
+            <p>Viele Sagen verwenden <span class="highlight">alte oder schwierige Wörter</span>. Hier lernst du, wie du den Text trotzdem verstehst!</p>
+
+            <button class="collapsible">🧩 Strategie 1: Unbekannte Wörter erschließen</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Lies den ganzen Satz</h4>
+                            <p>Das unbekannte Wort allein sagt wenig. Der ganze Satz gibt Hinweise!</p>
+                            <div class="example">
+                                „Der alte Zollfelder, der ein <strong>pfiffiger Kopf</strong> war, gab dem Manne ein paar Geldstücke."<br><br>
+                                → Was macht jemand mit einem „pfiffigen Kopf"? Er gibt Geld, obwohl er arm ist... Er muss also etwas verstanden haben, was andere nicht verstehen! → <strong>pfiffig = klug, schlau</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Suche nach ähnlichen Wörtern</h4>
+                            <p>Viele alte Wörter klingen wie moderne Wörter:</p>
+                            <ul>
+                                <li><strong>Bettelmann</strong> → Bettler (Mann, der bettelt)</li>
+                                <li><strong>zerschlagen</strong> → zer + schlagen = kaputt schlagen</li>
+                                <li><strong>Unmenge</strong> → un + Menge = sehr große Menge</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Frag dich: Was würde hier Sinn machen?</h4>
+                            <p>Überlege: Was passt logisch in die Geschichte?</p>
+                            <div class="example">
+                                „Er lief, was er laufen konnte."<br><br>
+                                → Was bedeutet das? Er lief... sehr schnell? So schnell wie möglich? → <strong>JA! Er rannte so schnell er konnte.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🎯 Strategie 2: Die Handlung verstehen</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Stelle dir bei jedem Absatz diese Fragen:</p>
+                    
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <input type="checkbox" id="q1">
+                            <label for="q1"><strong>WER</strong> handelt gerade? (Welche Person?)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="q2">
+                            <label for="q2"><strong>WAS</strong> tut diese Person genau?</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="q3">
+                            <label for="q3"><strong>WARUM</strong> tut sie das? (Grund/Motivation)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" id="q4">
+                            <label for="q4"><strong>WAS PASSIERT</strong> als Folge?</label>
+                        </div>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>Beispiel: „Der steinerne Fuchs"</h4>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Frage</th>
+                                <th>Antwort</th>
+                            </tr>
+                            <tr>
+                                <td>WER?</td>
+                                <td>Der Bauer vom Zollfeld</td>
+                            </tr>
+                            <tr>
+                                <td>WAS tut er?</td>
+                                <td>Er geht zur Villacher Brücke</td>
+                            </tr>
+                            <tr>
+                                <td>WARUM?</td>
+                                <td>Weil er geträumt hat, dass er dort sein Glück findet</td>
+                            </tr>
+                            <tr>
+                                <td>WAS PASSIERT?</td>
+                                <td>Er trifft einen Bettler, der ihm unwissentlich den Hinweis zum Schatz gibt</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">💡 Strategie 3: Die Bedeutung/Lehre finden</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <p>Jede Sage hat eine <strong>Botschaft</strong> oder <strong>Lehre</strong>. So findest du sie:</p>
+
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Schau dir das Ende an</h4>
+                            <p>Wie endet die Geschichte? Gut oder schlecht für die Hauptperson?</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Frag: „Warum endet es so?"</h4>
+                            <ul>
+                                <li>Hat die Person etwas <strong>Gutes</strong> getan → wurde belohnt?</li>
+                                <li>Hat die Person etwas <strong>Schlechtes</strong> getan → wurde bestraft?</li>
+                                <li>Hat die Person eine <strong>kluge Entscheidung</strong> getroffen?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Formuliere die Lehre</h4>
+                            <p>„Diese Sage lehrt uns, dass..."</p>
+                        </div>
+                    </div>
+
+                    <div class="formbox">
+                        <h4>Beispiel: „Der steinerne Fuchs"</h4>
+                        <ul>
+                            <li><strong>Ende:</strong> Der Bauer wird reich</li>
+                            <li><strong>Warum?</strong> Er hat auf seinen Traum gehört UND er war klug genug, den Hinweis des Bettlers zu verstehen</li>
+                            <li><strong>Lehre:</strong> „Man sollte auf seine Träume hören" und „Das Glück liegt oft näher, als man denkt"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">📖 Schwierige Wörter aus Kärntner Sagen</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="word-grid">
+                        <div class="word-item">
+                            <span class="word">das Zollfeld</span>
+                            <span class="meaning">Ebene nördlich von Klagenfurt</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">der Bettelmann</span>
+                            <span class="meaning">Bettler</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">pfiffig</span>
+                            <span class="meaning">klug, schlau</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">die Egge</span>
+                            <span class="meaning">Gerät für die Feldarbeit</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">hausen</span>
+                            <span class="meaning">wohnen, leben</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">die Unmenge</span>
+                            <span class="meaning">sehr viel</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">fortwaehrend</span>
+                            <span class="meaning">ständig, immer wieder</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">heimlich</span>
+                            <span class="meaning">hier: heimwärts, nach Hause</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">zerschlagen</span>
+                            <span class="meaning">kaputt schlagen</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">es ging ihm ein Licht auf</span>
+                            <span class="meaning">er verstand plötzlich</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">der Lindwurm</span>
+                            <span class="meaning">Drache</span>
+                        </div>
+                        <div class="word-item">
+                            <span class="word">die Salige</span>
+                            <span class="meaning">guter weiblicher Naturgeist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: CHECKLISTE -->
+        <section id="checkliste">
+            <h2><span class="emoji">✅</span> Deine Checkliste für die Schularbeit</h2>
+            
+            <p>Gehe diese Liste durch, <span class="highlight">bevor du abgibst</span>!</p>
+
+            <div class="checklist">
+                <h4>📝 FORM</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c1">
+                    <label for="c1">Habe ich <strong>mindestens 200 Wörter</strong> geschrieben?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c2">
+                    <label for="c2">Habe ich einen <strong>Titel</strong> geschrieben?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c3">
+                    <label for="c3">Sind <strong>Absätze</strong> erkennbar? (Einleitung / Hauptteil / Schluss / Deutung)</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>📖 INHALT</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c4">
+                    <label for="c4">Habe ich <strong>alle wichtigen Ereignisse</strong> erwähnt?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c5">
+                    <label for="c5">Habe ich die <strong>richtige Reihenfolge</strong> eingehalten?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c6">
+                    <label for="c6">Habe ich <strong>nichts Falsches</strong> dazuerfunden?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c7">
+                    <label for="c7">Stimmen die <strong>Namen und Orte</strong>?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c8">
+                    <label for="c8">Habe ich eine <strong>Deutung/Lehre</strong> am Ende?</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✨ STIL & SPRACHE</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c9">
+                    <label for="c9">Ist die ganze Geschichte im <strong>Präteritum</strong>? (war, ging, fand...)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c10">
+                    <label for="c10">Habe ich <strong>keine modernen Wörter</strong> verwendet? (kein „cool", „Stress", „Billionär")</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c11">
+                    <label for="c11">Habe ich <strong>verschiedene Satzanfänge</strong> verwendet?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c12">
+                    <label for="c12">Habe ich <strong>Gefühle beschrieben</strong>?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c13">
+                    <label for="c13">Habe ich <strong>Übergangswörter</strong> benutzt? (daraufhin, plötzlich, eines Tages...)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c14">
+                    <label for="c14">Gibt es einen <strong>Spannungshöhepunkt</strong>?</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>📝 RECHTSCHREIBUNG</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c15">
+                    <label for="c15">Habe ich alle <strong>Nomen großgeschrieben</strong>?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c16">
+                    <label for="c16">Steht nach jedem Satz ein <strong>Punkt</strong>?</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c17">
+                    <label for="c17">Sind die <strong>Kommas</strong> richtig gesetzt? (vor „weil", „dass", „obwohl", „als"...)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c18">
+                    <label for="c18">Ist die <strong>direkte Rede</strong> richtig? („..." mit Anführungszeichen)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c19">
+                    <label for="c19">Habe ich <strong>„nach Hause"</strong> getrennt geschrieben?</label>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h3>🏆 Dein Fortschritt</h3>
+                <p>Hake alle erledigten Punkte ab!</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINT SECTION -->
+        <div class="print-section">
+            <h3>📄 Zum Ausdrucken</h3>
+            <p>Möchtest du diese Anleitung ausdrucken?</p>
+            <button class="print-btn" onclick="window.print()">🖨️ Druckerfreundliche Version erstellen</button>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-medium);">
+                Die Druckversion zeigt alle Abschnitte geöffnet und ist für Papier optimiert.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Collapsible functionality
+        document.querySelectorAll('.collapsible').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Checkbox progress tracker
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+            const percentage = Math.round((checked / checkboxes.length) * 100);
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+            
+            // Update parent styling
+            checkboxes.forEach(cb => {
+                const parent = cb.closest('.checklist-item');
+                if (cb.checked) {
+                    parent.classList.add('checked');
+                } else {
+                    parent.classList.remove('checked');
+                }
+            });
+        }
+
+        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        // Navigation active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                const targetSection = document.getElementById(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
