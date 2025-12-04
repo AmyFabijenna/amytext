@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meisterkurs: Kärntner Sagen verstehen & deuten</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --altrosa-dark: #8B4A5E;
+            --altrosa-main: #B76E79;
+            --altrosa-light: #D4A5A5;
+            --altrosa-pale: #F5E6E8;
+            --altrosa-bg: #FDF8F8;
+            --gold-dark: #8B7355;
+            --gold-main: #C9A227;
+            --gold-light: #E8D5A3;
+            --gold-pale: #F7F0DB;
+            --text-dark: #2D2D2D;
+            --text-medium: #4A4A4A;
+            --white: #FFFFFF;
+            --shadow: rgba(139, 74, 94, 0.15);
+            --forest-green: #2E8B57;
+            --deep-blue: #4A6FA5;
+            --warm-orange: #D4853B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, var(--altrosa-bg) 0%, var(--gold-pale) 50%, var(--altrosa-pale) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--altrosa-dark) 0%, var(--altrosa-main) 100%);
+            color: var(--white);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 20H50L38 30L43 45L30 35L17 45L22 30L10 20H25L30 5Z' fill='%23C9A227' fill-opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header h1 span {
+            color: var(--gold-light);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .student-name {
+            display: inline-block;
+            background: var(--gold-main);
+            color: var(--text-dark);
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px var(--shadow);
+            border-bottom: 3px solid var(--gold-main);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--altrosa-dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        nav a:hover {
+            background: var(--altrosa-pale);
+            border-color: var(--altrosa-main);
+        }
+
+        nav a.active {
+            background: var(--altrosa-main);
+            color: var(--white);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px var(--shadow);
+            border-left: 5px solid var(--gold-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--gold-pale) 0%, transparent 70%);
+            border-radius: 0 20px 0 100%;
+        }
+
+        section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--altrosa-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold-light);
+            position: relative;
+        }
+
+        section h2 .emoji {
+            margin-right: 0.5rem;
+        }
+
+        section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--altrosa-main);
+            margin: 1.5rem 0 1rem;
+        }
+
+        section h4 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        /* Collapsible Sections */
+        .collapsible {
+            background: linear-gradient(135deg, var(--altrosa-pale) 0%, var(--gold-pale) 100%);
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--altrosa-dark);
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .collapsible:hover {
+            background: linear-gradient(135deg, var(--altrosa-light) 0%, var(--gold-light) 100%);
+            transform: translateY(-2px);
+        }
+
+        .collapsible::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.active::after {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: var(--white);
+            border-radius: 0 0 15px 15px;
+            margin-top: -5px;
+            padding: 0 1.5rem;
+        }
+
+        .collapsible-content.show {
+            padding: 1.5rem;
+            border: 2px solid var(--altrosa-pale);
+            border-top: none;
+        }
+
+        /* Sage Box */
+        .sage-box {
+            background: linear-gradient(135deg, #F8F4E8 0%, #FDF8F0 100%);
+            border: 2px solid var(--gold-light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .sage-box::before {
+            content: '📜';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--white);
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .sage-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--altrosa-dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-top: 0.5rem;
+        }
+
+        .sage-text {
+            font-style: italic;
+            color: var(--text-medium);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .sage-source {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--gold-dark);
+            text-align: right;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .strategy-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid var(--altrosa-light);
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .strategy-card.green {
+            border-color: var(--forest-green);
+            background: linear-gradient(135deg, #E8F5E9 0%, var(--white) 100%);
+        }
+
+        .strategy-card.blue {
+            border-color: var(--deep-blue);
+            background: linear-gradient(135deg, #E3F2FD 0%, var(--white) 100%);
+        }
+
+        .strategy-card.orange {
+            border-color: var(--warm-orange);
+            background: linear-gradient(135deg, #FFF3E0 0%, var(--white) 100%);
+        }
+
+        .strategy-card.pink {
+            border-color: var(--altrosa-main);
+            background: linear-gradient(135deg, var(--altrosa-pale) 0%, var(--white) 100%);
+        }
+
+        .strategy-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .strategy-card.green .strategy-title { color: var(--forest-green); }
+        .strategy-card.blue .strategy-title { color: var(--deep-blue); }
+        .strategy-card.orange .strategy-title { color: var(--warm-orange); }
+        .strategy-card.pink .strategy-title { color: var(--altrosa-main); }
+
+        .strategy-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .strategy-steps li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .strategy-steps li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold-main);
+            font-weight: bold;
+        }
+
+        /* Motif Cards */
+        .motif-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .motif-card {
+            background: linear-gradient(135deg, var(--gold-pale) 0%, var(--white) 100%);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            border: 2px solid var(--gold-light);
+            transition: all 0.3s ease;
+        }
+
+        .motif-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .motif-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .motif-name {
+            font-weight: 700;
+            color: var(--altrosa-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .motif-desc {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        /* Vocabulary Section */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .vocab-item {
+            background: linear-gradient(135deg, var(--altrosa-pale) 0%, var(--white) 100%);
+            border-radius: 10px;
+            padding: 1rem;
+            border-left: 4px solid var(--altrosa-main);
+        }
+
+        .vocab-word {
+            font-weight: 700;
+            color: var(--altrosa-dark);
+            font-size: 1.1rem;
+        }
+
+        .vocab-meaning {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Analysis Box */
+        .analysis-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+            border: 2px solid var(--forest-green);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .analysis-box h4 {
+            color: var(--forest-green);
+            margin-top: 0;
+        }
+
+        .analysis-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed var(--forest-green);
+        }
+
+        .analysis-row:last-child {
+            border-bottom: none;
+        }
+
+        .analysis-label {
+            font-weight: 700;
+            color: var(--forest-green);
+        }
+
+        /* Difficulty Highlight */
+        .difficulty-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFECB3 100%);
+            border: 2px solid var(--warm-orange);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .difficulty-box h4 {
+            color: var(--warm-orange);
+            margin-top: 0;
+        }
+
+        .difficulty-passage {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--warm-orange);
+            font-style: italic;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #E8F5E9 0%, var(--white) 100%);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--forest-green);
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #5C7FB8 100%);
+            color: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .tip-box::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--white);
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        .tip-box h4 {
+            color: var(--gold-light);
+            margin-bottom: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Interpretation Framework */
+        .interpretation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .interpretation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .interpretation-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid var(--gold-main);
+            position: relative;
+        }
+
+        .interpretation-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-main);
+            color: var(--text-dark);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .interpretation-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--altrosa-dark);
+            font-weight: 700;
+            margin: 0.8rem 0;
+        }
+
+        /* Practice Exercise */
+        .exercise-box {
+            background: linear-gradient(135deg, var(--altrosa-pale) 0%, var(--gold-pale) 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px dashed var(--altrosa-main);
+        }
+
+        .exercise-box h4 {
+            color: var(--altrosa-dark);
+        }
+
+        .exercise-task {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        textarea.exercise-input {
+            width: 100%;
+            min-height: 120px;
+            border: 2px solid var(--altrosa-light);
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea.exercise-input:focus {
+            outline: none;
+            border-color: var(--altrosa-main);
+        }
+
+        /* Checklist */
+        .checklist {
+            background: linear-gradient(135deg, var(--gold-pale) 0%, var(--white) 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            background: var(--white);
+            border-radius: 10px;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--gold-main);
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            transform: translateX(5px);
+        }
+
+        .checklist-item.checked {
+            background: linear-gradient(135deg, #E8F5E9 0%, var(--white) 100%);
+            border-left-color: var(--forest-green);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--forest-green);
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: var(--altrosa-pale);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--altrosa-main) 0%, var(--gold-main) 100%);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--altrosa-dark) 0%, var(--altrosa-main) 100%);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--altrosa-pale);
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--gold-pale);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--altrosa-pale);
+        }
+
+        /* Print Section */
+        .print-section {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .print-btn {
+            background: linear-gradient(135deg, var(--altrosa-main) 0%, var(--altrosa-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .print-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        /* Flowchart */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, var(--altrosa-pale) 0%, var(--gold-pale) 100%);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--altrosa-dark);
+            border: 2px solid var(--gold-main);
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--gold-main);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--altrosa-dark) 0%, var(--altrosa-main) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            nav, .print-section, .progress-section {
+                display: none;
+            }
+            section {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid var(--altrosa-light);
+            }
+            .collapsible-content {
+                max-height: none !important;
+                padding: 1.5rem !important;
+            }
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📚 Kärntner <span>Sagen</span> verstehen & deuten</h1>
+        <p class="subtitle">Dein Werkzeugkoffer für das systematische Analysieren von Sagen</p>
+        <div class="student-name">Meisterkurs Teil 2</div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#grundlagen">Grundlagen</a>
+            <a href="#motive">Motive</a>
+            <a href="#strategien">Strategien</a>
+            <a href="#vokabular">Vokabular</a>
+            <a href="#deutung">Deutung</a>
+            <a href="#beispiele">Beispiele</a>
+            <a href="#uebungen">Übungen</a>
+            <a href="#checkliste">Checkliste</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- SECTION: GRUNDLAGEN -->
+        <section id="grundlagen">
+            <h2><span class="emoji">🏔️</span> Grundlagen: Was ist eine Sage?</h2>
+            
+            <p>Bevor du eine Sage verstehen und deuten kannst, musst du wissen, was eine Sage überhaupt ist und was sie von anderen Textarten unterscheidet.</p>
+
+            <h3>Definition einer Sage</h3>
+            <p>Eine <strong>Sage</strong> ist eine mündlich überlieferte Erzählung, die an einen <strong>realen Ort</strong> oder eine <strong>historische Person</strong> gebunden ist. Sie erklärt oft, wie bestimmte Orte, Namen oder Bräuche entstanden sind.</p>
+
+            <div class="tip-box">
+                <h4>Der wichtigste Unterschied zum Märchen</h4>
+                <p>Während das Märchen mit „Es war einmal..." beginnt und an keinem bestimmten Ort spielt, nennt die Sage <strong>konkrete Orte</strong> (Villach, Wörthersee, Koralpe) und <strong>echte Berge, Seen oder Gebäude</strong>. Die Sage behauptet: „Das ist wirklich passiert!"</p>
+            </div>
+
+            <h3>Die vier Grundpfeiler jeder Kärntner Sage</h3>
+            
+            <div class="interpretation-grid">
+                <div class="interpretation-card">
+                    <div class="interpretation-number">1</div>
+                    <div class="interpretation-title">Orts- bindung</div>
+                    <p>Jede Sage spielt an einem <strong>konkreten Ort</strong> in Kärnten: einem Berg, See, Dorf oder Gebäude.</p>
+                </div>
+                <div class="interpretation-card">
+                    <div class="interpretation-number">2</div>
+                    <div class="interpretation-title">Über- natürliches</div>
+                    <p>Es treten <strong>magische Wesen</strong> auf: Zwerge, Wassermänner, Elfen oder verwunschene Schätze.</p>
+                </div>
+                <div class="interpretation-card">
+                    <div class="interpretation-number">3</div>
+                    <div class="interpretation-title">Moral / Lehre</div>
+                    <p>Die Sage enthält eine <strong>Botschaft</strong>: über Tugenden, Fehler oder das richtige Verhalten.</p>
+                </div>
+            </div>
+
+            <h3>Typischer Aufbau einer Sage</h3>
+            
+            <div class="flowchart">
+                <div class="flow-step">📍 <strong>Einführung:</strong> Ort, Zeit, Hauptperson werden vorgestellt</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">🔮 <strong>Thema:</strong> Begegnung mit dem Übernatürlichen</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">⚡ <strong>Wende:</strong> Entscheidung oder Konflikt – oft mit Spannung!</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">🏛️ <strong>Bleibendes:</strong> Was bis heute sichtbar/bekannt ist</div>
+            </div>
+        </section>
+
+        <!-- SECTION: MOTIVE -->
+        <section id="motive">
+            <h2><span class="emoji">🔮</span> Typische Motive in Kärntner Sagen</h2>
+            
+            <p>Kärntner Sagen verwenden bestimmte <strong>wiederkehrende Motive</strong> (Themen und Figuren). Wenn du diese kennst, verstehst du neue Sagen viel leichter!</p>
+
+            <h3>Magische Wesen</h3>
+            
+            <div class="motif-container">
+                <div class="motif-card">
+                    <div class="motif-icon">🧙‍♂️</div>
+                    <div class="motif-name">Zwerge / Bergmännlein</div>
+                    <div class="motif-desc">Leben im Berg, hüten Schätze, können dankbar oder rachsüchtig sein</div>
+                </div>
+                <div class="motif-card">
+                    <div class="motif-icon">🧜‍♂️</div>
+                    <div class="motif-name">Wassermann</div>
+                    <div class="motif-desc">Lebt in Seen, gefährlich für Menschen, besonders für junge Frauen</div>
+                </div>
+                <div class="motif-card">
+                    <div class="motif-icon">🧚</div>
+                    <div class="motif-name">Elfen / Salige</div>
+                    <div class="motif-desc">Schöne weibliche Naturgeister, können verführen oder helfen</div>
+                </div>
+                <div class="motif-card">
+                    <div class="motif-icon">👻</div>
+                    <div class="motif-name">Geister</div>
+                    <div class="motif-desc">Seelen von Verstorbenen, die keine Ruhe finden</div>
+                </div>
+            </div>
+
+            <h3>Wiederkehrende Themen</h3>
+            
+            <div class="motif-container">
+                <div class="motif-card">
+                    <div class="motif-icon">💰</div>
+                    <div class="motif-name">Verborgene Schätze</div>
+                    <div class="motif-desc">Gold unter dem Herd, im Berg, unter Ruinen</div>
+                </div>
+                <div class="motif-card">
+                    <div class="motif-icon">⚖️</div>
+                    <div class="motif-name">Strafe & Belohnung</div>
+                    <div class="motif-desc">Gute Taten werden belohnt, schlechte bestraft</div>
+                </div>
+                <div class="motif-card">
+                    <div class="motif-icon">🤫</div>
+                    <div class="motif-name">Das gebrochene Versprechen</div>
+                    <div class="motif-desc">Wer sein Wort bricht, wird bestraft</div>
+                </div>
+                <div class="motif-card">
+                    <div class="motif-icon">🏔️</div>
+                    <div class="motif-name">Entstehung von Orten</div>
+                    <div class="motif-desc">Wie Täler, Seen oder Kirchen entstanden</div>
+                </div>
+            </div>
+
+            <h3>Schutzzeichen in Kärntner Sagen</h3>
+            
+            <div class="tip-box">
+                <h4>C+M+B+ – Das Dreikönigs-Zeichen</h4>
+                <p>In der Sage vom Wassermann schützt das <strong>C+M+B+</strong> an der Haustür die Magd vor dem Wassermann. Dieses Zeichen (Caspar, Melchior, Balthasar oder „Christus mansionem benedicat" = Christus segne dieses Haus) wird am 6. Jänner auf Türen geschrieben und gilt als <strong>Schutz vor dem Bösen</strong>.</p>
+            </div>
+        </section>
+
+        <!-- SECTION: STRATEGIEN -->
+        <section id="strategien">
+            <h2><span class="emoji">🧰</span> Strategien: Wenn du etwas nicht verstehst</h2>
+            
+            <p>Kärntner Sagen sind oft in einer <strong>altertümlichen Sprache</strong> geschrieben. Hier sind deine Werkzeuge, wenn du Schwierigkeiten hast!</p>
+
+            <div class="strategy-grid">
+                <div class="strategy-card green">
+                    <div class="strategy-icon">🔍</div>
+                    <div class="strategy-title">Strategie 1: Kontext nutzen</div>
+                    <ul class="strategy-steps">
+                        <li>Lies den Satz davor und danach</li>
+                        <li>Was passiert gerade in der Geschichte?</li>
+                        <li>Welches Wort würde hier Sinn ergeben?</li>
+                        <li>Errate die Bedeutung aus dem Zusammenhang</li>
+                    </ul>
+                </div>
+                
+                <div class="strategy-card blue">
+                    <div class="strategy-icon">🧩</div>
+                    <div class="strategy-title">Strategie 2: Wort zerlegen</div>
+                    <ul class="strategy-steps">
+                        <li>Trenne das Wort in Teile</li>
+                        <li>Suche nach bekannten Wortteilen</li>
+                        <li>„Bergmännlein" = Berg + Mann + lein (klein)</li>
+                        <li>„unerschöpflich" = un- (nicht) + erschöpfen</li>
+                    </ul>
+                </div>
+
+                <div class="strategy-card orange">
+                    <div class="strategy-icon">🔄</div>
+                    <div class="strategy-title">Strategie 3: Umschreiben</div>
+                    <ul class="strategy-steps">
+                        <li>Versuche den Satz in eigenen Worten zu sagen</li>
+                        <li>Was ist die Hauptaussage?</li>
+                        <li>Überspringe das schwierige Wort zuerst</li>
+                        <li>Ergänze es später, wenn du mehr verstehst</li>
+                    </ul>
+                </div>
+
+                <div class="strategy-card pink">
+                    <div class="strategy-icon">🎭</div>
+                    <div class="strategy-title">Strategie 4: Visualisieren</div>
+                    <ul class="strategy-steps">
+                        <li>Male dir die Szene im Kopf aus</li>
+                        <li>Wer ist dabei? Was tun die Personen?</li>
+                        <li>Welche Gefühle haben sie wohl?</li>
+                        <li>Das Bild hilft, den Text zu verstehen</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Schwierige Passagen analysieren – Schritt für Schritt</h3>
+
+            <div class="difficulty-box">
+                <h4>⚠️ Beispiel einer schwierigen Passage</h4>
+                <div class="difficulty-passage">
+                    „Da verabredeten sich die Bauern, ihnen die Schätze abzunehmen, und erspähten eine Gelegenheit, wo sie ein Zwerglein fingen, um seine Genossen zur Herausgabe ihrer verborgenen Schätze zu zwingen."
+                </div>
+                
+                <h4>🔍 Analyse Schritt für Schritt:</h4>
+                
+                <div class="solution-box">
+                    <p><strong>1. Schwierige Wörter identifizieren:</strong></p>
+                    <ul>
+                        <li>„verabredeten sich" → sich absprechen, einen Plan machen</li>
+                        <li>„erspähten" → entdeckten, sahen</li>
+                        <li>„Genossen" → Freunde, Kameraden (die anderen Zwerge)</li>
+                        <li>„Herausgabe" → das Geben, Übergeben</li>
+                    </ul>
+                    
+                    <p style="margin-top: 1rem;"><strong>2. Satz vereinfachen:</strong></p>
+                    <p>„Die Bauern machten einen Plan. Sie fingen einen Zwerg, um die anderen zu zwingen, ihren Schatz herzugeben."</p>
+                </div>
+            </div>
+
+            <div class="difficulty-box">
+                <h4>⚠️ Noch ein Beispiel</h4>
+                <div class="difficulty-passage">
+                    „Von unerträglicher Sehnsucht nach dem Berge gequält, eröffnete der Kleine seinen Peinigern endlich, daß er ihnen zwar kein Gold verschaffen könne, aber sich durch eine Tat dankbar bezeigen wolle."
+                </div>
+                
+                <div class="solution-box">
+                    <p><strong>1. Schwierige Wörter:</strong></p>
+                    <ul>
+                        <li>„unerträgliche Sehnsucht" → sehr starkes Heimweh</li>
+                        <li>„gequält" → leidend</li>
+                        <li>„eröffnete" → sagte, teilte mit</li>
+                        <li>„Peinigern" → denjenigen, die ihn quälen</li>
+                        <li>„sich dankbar bezeigen" → zeigen, dass er dankbar ist</li>
+                    </ul>
+                    
+                    <p style="margin-top: 1rem;"><strong>2. Vereinfacht:</strong></p>
+                    <p>„Der Zwerg hatte so starkes Heimweh, dass er seinen Entführern schließlich sagte: Er könne ihnen zwar kein Gold geben, aber er wolle ihnen auf andere Weise helfen."</p>
+                </div>
+            </div>
+
+            <h3>Die 5-Fragen-Methode für schwierige Texte</h3>
+            
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem;">1️⃣</span>
+                    <label><strong>WER</strong> handelt? (Hauptperson, magisches Wesen, Nebenfiguren)</label>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem;">2️⃣</span>
+                    <label><strong>WO</strong> spielt die Handlung? (Ort, Landschaft, Gebäude)</label>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem;">3️⃣</span>
+                    <label><strong>WAS</strong> passiert? (Die wichtigsten Ereignisse)</label>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem;">4️⃣</span>
+                    <label><strong>WARUM</strong> passiert es? (Motiv, Auslöser, Grund)</label>
+                </div>
+                <div class="checklist-item">
+                    <span style="font-size: 1.5rem;">5️⃣</span>
+                    <label><strong>WAS BLEIBT?</strong> (Folge, Erklärung, Moral)</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: VOKABULAR -->
+        <section id="vokabular">
+            <h2><span class="emoji">📖</span> Vokabular: Altertümliche Wörter verstehen</h2>
+            
+            <p>Kärntner Sagen verwenden oft <strong>veraltete Wörter und Ausdrücke</strong>. Hier ist dein Wörterbuch!</p>
+
+            <button class="collapsible">👤 Personen & Wesen</button>
+            <div class="collapsible-content">
+                <div class="vocab-grid">
+                    <div class="vocab-item">
+                        <div class="vocab-word">die Dirn / Dirne</div>
+                        <div class="vocab-meaning">junges Mädchen, Magd (nicht abwertend!)</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Knecht</div>
+                        <div class="vocab-meaning">männlicher Diener auf einem Bauernhof</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">die Gewerken</div>
+                        <div class="vocab-meaning">Bergwerksbesitzer, reiche Unternehmer</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">die Knappen</div>
+                        <div class="vocab-meaning">Bergarbeiter</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">das Weib / Weiblein</div>
+                        <div class="vocab-meaning">Frau (neutral, nicht abwertend)</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">die Peiniger</div>
+                        <div class="vocab-meaning">Menschen, die jemanden quälen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">die Genossen</div>
+                        <div class="vocab-meaning">Kameraden, Freunde, Gefährten</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">die Salige</div>
+                        <div class="vocab-meaning">guter weiblicher Naturgeist</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🏠 Orte & Gebäude</button>
+            <div class="collapsible-content">
+                <div class="vocab-grid">
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Herd</div>
+                        <div class="vocab-meaning">Feuerstelle in der Küche (früher auch zum Heizen)</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Stollen</div>
+                        <div class="vocab-meaning">Gang im Bergwerk</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Schacht</div>
+                        <div class="vocab-meaning">senkrechter Gang im Bergwerk</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">das Gehöft</div>
+                        <div class="vocab-meaning">Bauernhof mit allen Gebäuden</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">die Ansiedlung</div>
+                        <div class="vocab-meaning">Siedlung, Dorf</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">das Kirchlein</div>
+                        <div class="vocab-meaning">kleine Kirche, Kapelle</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">✨ Handlungen & Zustände</button>
+            <div class="collapsible-content">
+                <div class="vocab-grid">
+                    <div class="vocab-item">
+                        <div class="vocab-word">einstens / ehedem</div>
+                        <div class="vocab-meaning">früher, einmal</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">schleunig</div>
+                        <div class="vocab-meaning">schnell, eilig</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">anbetteln</div>
+                        <div class="vocab-meaning">um Geld bitten</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">stutzig werden</div>
+                        <div class="vocab-meaning">aufmerksam werden, misstrauisch werden</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">erspähen</div>
+                        <div class="vocab-meaning">entdecken, sehen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">schmachten</div>
+                        <div class="vocab-meaning">leiden, sich sehnen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">sich bezeigen</div>
+                        <div class="vocab-meaning">sich zeigen, erweisen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">eröffnen</div>
+                        <div class="vocab-meaning">mitteilen, sagen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">nahen</div>
+                        <div class="vocab-meaning">näher kommen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">ehelichen</div>
+                        <div class="vocab-meaning">heiraten</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">sich laben</div>
+                        <div class="vocab-meaning">sich erfrischen, genießen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">schwelgerisch</div>
+                        <div class="vocab-meaning">verschwenderisch, luxuriös</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">💎 Schätze & Gegenstände</button>
+            <div class="collapsible-content">
+                <div class="vocab-grid">
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Häfen</div>
+                        <div class="vocab-meaning">Topf, Gefäß</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">taubes Gestein</div>
+                        <div class="vocab-meaning">Stein ohne wertvolle Erze</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Schlägel</div>
+                        <div class="vocab-meaning">Hammer des Bergmanns</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Schilfkranz</div>
+                        <div class="vocab-meaning">Kranz aus Wasserpflanzen (typisch für Wasserwesen)</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">der Sold</div>
+                        <div class="vocab-meaning">Lohn, Gehalt</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="collapsible">🎭 Redewendungen & Ausdrücke</button>
+            <div class="collapsible-content">
+                <div class="vocab-grid">
+                    <div class="vocab-item">
+                        <div class="vocab-word">in Schloß und Riegel fallen</div>
+                        <div class="vocab-meaning">fest verschlossen sein</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">das Nachsehen haben</div>
+                        <div class="vocab-meaning">zu spät kommen, leer ausgehen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">Herz und Sinn verrücken</div>
+                        <div class="vocab-meaning">jemanden verliebt/verrückt machen</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">in sicheren Gewahrsam bringen</div>
+                        <div class="vocab-meaning">einsperren, gefangen halten</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">Glück auf!</div>
+                        <div class="vocab-meaning">Gruß der Bergleute</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">von neuem beteuern</div>
+                        <div class="vocab-meaning">immer wieder versichern</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: DEUTUNG -->
+        <section id="deutung">
+            <h2><span class="emoji">🎯</span> Sagen deuten: Die tiefere Bedeutung finden</h2>
+            
+            <p>Jede Sage hat eine <strong>Oberfläche</strong> (was passiert) und eine <strong>tiefere Bedeutung</strong> (was die Sage uns sagen will). So findest du beides!</p>
+
+            <h3>Die drei Deutungsebenen</h3>
+
+            <div class="interpretation-grid">
+                <div class="interpretation-card">
+                    <div class="interpretation-number">1</div>
+                    <div class="interpretation-title">Wörtliche Ebene</div>
+                    <p><strong>Was passiert?</strong><br>Die Handlung zusammenfassen</p>
+                </div>
+                <div class="interpretation-card">
+                    <div class="interpretation-number">2</div>
+                    <div class="interpretation-title">Erklärende Ebene</div>
+                    <p><strong>Was erklärt die Sage?</strong><br>Ortsnamen, Landschaften, Bräuche</p>
+                </div>
+                <div class="interpretation-card">
+                    <div class="interpretation-number">3</div>
+                    <div class="interpretation-title">Moralische Ebene</div>
+                    <p><strong>Was lehrt die Sage?</strong><br>Werte, Warnungen, Lebensweisheiten</p>
+                </div>
+            </div>
+
+            <h3>Häufige Botschaften in Kärntner Sagen</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Thema</th>
+                        <th>Botschaft</th>
+                        <th>Beispiel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Versprechen</strong></td>
+                        <td>Halte dein Wort – wer es bricht, wird bestraft</td>
+                        <td>Der Jäger in „Die Elfenkönigin" verrät sein Geheimnis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Habgier</strong></td>
+                        <td>Gier führt zu Unglück</td>
+                        <td>Die Gewerken in „Die eiserne Henne"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dankbarkeit</strong></td>
+                        <td>Gute Taten werden belohnt</td>
+                        <td>Das Bergmännlein gibt den Bauern fruchtbares Land</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Demut</strong></td>
+                        <td>Sei nicht übermütig gegenüber den Armen</td>
+                        <td>Die Witwe verflucht die grausamen Besitzer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Schutz</strong></td>
+                        <td>Der Glaube und Zeichen schützen vor dem Bösen</td>
+                        <td>C+M+B+ schützt vor dem Wassermann</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Träume</strong></td>
+                        <td>Achte auf Zeichen und Träume</td>
+                        <td>Der Traum des Soldaten führt zum Schatz</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Fragen zur Deutung stellen</h3>
+
+            <div class="tip-box">
+                <h4>Dein Fragenkatalog für jede Sage</h4>
+                <ol style="margin-left: 1.5rem;">
+                    <li><strong>Was erklärt diese Sage?</strong> (z.B. warum es einen Ort gibt, wie ein Name entstand)</li>
+                    <li><strong>Welche Figur handelt richtig, welche falsch?</strong></li>
+                    <li><strong>Was passiert mit den „guten" und „bösen" Figuren am Ende?</strong></li>
+                    <li><strong>Welche Warnung steckt in der Geschichte?</strong></li>
+                    <li><strong>Was sollten die Menschen damals aus der Sage lernen?</strong></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- SECTION: BEISPIELE -->
+        <section id="beispiele">
+            <h2><span class="emoji">📜</span> Beispiel-Sagen mit Analyse</h2>
+            
+            <p>Hier sind fünf Kärntner Sagen mit vollständiger Analyse. Studiere sie sorgfältig!</p>
+
+            <!-- SAGE 1 -->
+            <button class="collapsible">📜 Sage 1: Der Schatz im Herde</button>
+            <div class="collapsible-content">
+                <div class="sage-box">
+                    <div class="sage-title">Der Schatz im Herde</div>
+                    <p class="sage-text">Einstens begab sich der Eigentümer des Hausergehöftes auf dem Goldberg, einem Ausläufer des Jaukengebirges, nach Villach. Auf der Villacher Brücke bettelte ihn ein alter Soldat an und sagte dazu: "Ich brauchte nicht zu betteln, sondern könnt' reich sein, wenn ich wüßt', wo der Goldberg zu finden ist; mir träumte, daß unterm Herd beim Hauser im Goldberg ein großer Schatz verborgen liegt. Aber wo ist der Goldberg?" - Der Hauserbauer wurde stutzig. "Bin auch arm", dachte er, beschenkte den Soldaten und eilte heim.
+                    <br><br>Schleunig machte er sich an die Arbeit, den Herd abzutragen, und richtig fand er den Schatz, einen mit Gold gefüllten Häfen. Aus dem armen Schlucker wurde ein reicher Mann. Zum Dank ließ er auf der Höhe des Goldberges ein Kirchlein bauen, das noch heute mit seinem schlanken Türmchen vom Goldberg niederschaut.</p>
+                    <p class="sage-source">Franz Pehr, Kärntner Sagen, 1913</p>
+                </div>
+
+                <div class="analysis-box">
+                    <h4>✅ Vollständige Analyse</h4>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Ort:</div>
+                        <div>Goldberg (Jaukengebirge), Villach, Villacher Brücke</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Figuren:</div>
+                        <div>Der Hauserbauer (arm), ein alter Soldat (Bettler)</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Übernatürliches:</div>
+                        <div>Ein prophetischer Traum, der den Schatzort verrät</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Handlung:</div>
+                        <div>Ein Bettler erzählt von einem Traum über einen Schatz. Der Bauer erkennt, dass es sein Hof ist, findet den Schatz und wird reich.</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Erklärt:</div>
+                        <div>Warum die Kirche auf dem Goldberg steht</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Botschaft:</div>
+                        <div>Dankbarkeit zeigen! Der Bauer vergisst nicht, woher sein Glück kam, und baut eine Kirche als Dank.</div>
+                    </div>
+                </div>
+
+                <div class="difficulty-box">
+                    <h4>⚠️ Schwierige Stellen erklärt</h4>
+                    <div class="difficulty-passage">„Der Hauserbauer wurde stutzig."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Er wurde aufmerksam und nachdenklich. „Stutzig werden" bedeutet, dass man plötzlich innehält, weil etwas Unerwartetes passiert.</p>
+                    </div>
+                    <div class="difficulty-passage">„...einen mit Gold gefüllten Häfen"</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Einen Topf voller Gold. „Häfen" ist ein altes österreichisches Wort für „Topf".</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAGE 2 -->
+            <button class="collapsible">📜 Sage 2: Der Dank des Bergmännleins</button>
+            <div class="collapsible-content">
+                <div class="sage-box">
+                    <div class="sage-title">Der Dank des Bergmännleins</div>
+                    <p class="sage-text">In dem fruchtbarsten Tale Kärntens, dem Lavanttale, breitete sich vor alten Zeiten ein weiter See mit dunkelgrünem Wasser aus, von mächtigen Bergen eingerahmt, die seine Fluten am Abfluß hinderten. Nur wenige Leute wohnten an den Ufern, denn zu Zeiten stieg das Wasser plötzlich und schwemmte die menschlichen Ansiedlungen, die zu nahe dem Ufer standen, hinweg. Im Innern der Koralpe hausten damals Zwerge. Sie schienen emsig zu schaffen, denn oft wurden sie von Bauern aus der Ferne beobachtet, aber niemand wußte zu sagen, worin ihre Arbeit bestand. Dennoch verbreitete sich in der Gegend das Gerücht, daß die Zwerge Gold und andere Schätze in Haufen aus dem Berge trügen und an unzulängliche Orte brächten.
+                    <br><br>Da verabredeten sich die Bauern, ihnen die Schätze abzunehmen, und erspähten eine Gelegenheit, wo sie ein Zwerglein fingen, um seine Genossen zur Herausgabe ihrer verborgenen Schätze zu zwingen. Es wurde in sicheren Gewahrsam gebracht und lange Jahre gefangen gehalten, obwohl es immer von neuem beteuerte, keine Schätze zu besitzen. Die Habsüchtigen glaubten seinen Worten nicht und ließen es dreißig Jahre in der Gefangenschaft schmachten; nur wenn es ihnen den Schatz der Zwerge ausliefere, sollte es zu den Seinen wiederkehren dürfen.
+                    <br><br>Von unerträglicher Sehnsucht nach dem Berge gequält, eröffnete der Kleine seinen Peinigern endlich, daß er ihnen zwar kein Gold verschaffen könne, aber sich durch eine Tat dankbar bezeigen wolle, die allen Anwohnern des Sees ungeheuren Nutzen bringen werde. Damit begnügten sich die Menschen und ließen ihn laufen. Nach einigen Tagen vernahmen sie ein furchtbares Rollen im See, das fernem Donner glich. Alles eilte bestürzt dem Wasser zu, man fürchtete ein neues Unheil. Aber welch freudige Überraschung bot sich den Leuten, als sie sahen, was der Zwerg getan. Das Wasser war verschwunden und ein breites Tal dehnte sich vor den Erstaunten aus, dessen schlammiger Boden vortreffliches Ackers und Wiesenland spendete.
+                    <br><br>Nach und nach bauten sich dort Menschen an und so entstanden auf den Hängen und im Talboden die zahlreichen Ansiedlungen, denen man den Wohlstand von weitem ansehen kann. An jener Stelle, wo der See am tiefsten gewesen, wurde Wolfsberg erbaut.</p>
+                    <p class="sage-source">Franz Pehr, Kärntner Sagen, 1913</p>
+                </div>
+
+                <div class="analysis-box">
+                    <h4>✅ Vollständige Analyse</h4>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Ort:</div>
+                        <div>Lavanttal, Koralpe, Wolfsberg</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Figuren:</div>
+                        <div>Zwerge (Bergmännlein), habgierige Bauern</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Übernatürliches:</div>
+                        <div>Zwerge mit magischen Kräften können einen See ablassen</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Handlung:</div>
+                        <div>Bauern fangen einen Zwerg, halten ihn 30 Jahre gefangen. Als sie ihn freilassen, lässt er den See ab und schenkt ihnen fruchtbares Land.</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Erklärt:</div>
+                        <div>Wie das Lavanttal und die Stadt Wolfsberg entstanden</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Botschaft:</div>
+                        <div>Auch nach ungerechter Behandlung kann man Gutes tun. Gier führt nicht zum Ziel – die Bauern bekamen kein Gold, aber etwas viel Wertvolleres: fruchtbares Land.</div>
+                    </div>
+                </div>
+
+                <div class="difficulty-box">
+                    <h4>⚠️ Schwierige Stellen erklärt</h4>
+                    <div class="difficulty-passage">„...in sicheren Gewahrsam gebracht..."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Eingesperrt, gefangen gehalten. „Gewahrsam" bedeutet Haft oder Gefangenschaft.</p>
+                    </div>
+                    <div class="difficulty-passage">„...sich durch eine Tat dankbar bezeigen wolle..."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Zeigen, dass er dankbar ist (obwohl er schlecht behandelt wurde – er ist dankbar für die Freilassung).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAGE 3 -->
+            <button class="collapsible">📜 Sage 3: Der Wassermann des Wörthersees</button>
+            <div class="collapsible-content">
+                <div class="sage-box">
+                    <div class="sage-title">Der Wassermann des Wörthersees</div>
+                    <p class="sage-text">In den heißen Tagen des Juli und August sucht man gerne die erquickende Kühle eines Bades auf und der Schwimmer fühlt sich in einem See am wohlsten. Leute, welche wegen der Arbeit tagsüber nicht baden können, gehen in der Dämmerung oder bei Mondschein nachts ins Bad, wie das bei Knechten und Mägden vorzukommen pflegt.
+                    <br><br>Auch eine junge Dirn, die bei einem Pörtschacher Bauer im Dienste stand, ging an einem Samstagabend allein in den Wörthersee baden. Sie mochte schon eine Weile im Wasser gewesen sein, als sie plötzlich von der Mitte her etwas heranschwimmen sah. Der See warf hohe Wellen und mit riesiger Eile nahte sich der Schwimmende. Sie erkannte an dem Schilfkranz in den Haaren und dem grünlichblassen Gesicht den ihr so häufig geschilderten Wassermann. Schreck und Angst erfaßte sie, und wie sie war, lief sie ihrem Wohnhause zu. Atemlos erreichte sie es, trat durch die Haustür und schlug sie gleich hinter sich zu, daß sie in Schloß und Riegel fiel.
+                    <br><br>Kaum war dies geschehen, vernahm sie auch schon den Wassermann vor der Tür, durch die er nicht eintreten konnte, weil ihm ein C+M+B+ den Eingang verleidete. Der Wassermann, gewohnt, alle Jahre ein paar hübsche Mädchen in sein kristallenes Schloß am Seegrunde zu ziehen, hatte diesmal das Nachsehen. Das Mädchen aber war zum letztenmal im See baden gewesen.</p>
+                    <p class="sage-source">Georg Graber, Sagen aus Kärnten, 1941</p>
+                </div>
+
+                <div class="analysis-box">
+                    <h4>✅ Vollständige Analyse</h4>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Ort:</div>
+                        <div>Wörthersee, Pörtschach</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Figuren:</div>
+                        <div>Eine junge Magd (Dirn), der Wassermann</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Übernatürliches:</div>
+                        <div>Der Wassermann mit Schilfkranz und grünlichem Gesicht; C+M+B+ als Schutzzeichen</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Handlung:</div>
+                        <div>Eine Magd badet abends allein im See. Der Wassermann will sie holen. Sie flüchtet ins Haus, wo das Dreikönigs-Zeichen sie schützt.</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Erklärt:</div>
+                        <div>Warum man nicht allein/nachts im See baden sollte; die Bedeutung von C+M+B+</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Botschaft:</div>
+                        <div>Warnung vor Gefahren im Wasser. Der Glaube (C+M+B+) schützt vor dem Bösen.</div>
+                    </div>
+                </div>
+
+                <div class="difficulty-box">
+                    <h4>⚠️ Schwierige Stellen erklärt</h4>
+                    <div class="difficulty-passage">„...daß sie in Schloß und Riegel fiel."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Die Tür war fest verschlossen. „Schloss und Riegel" sind Teile eines alten Türschlosses.</p>
+                    </div>
+                    <div class="difficulty-passage">„...hatte diesmal das Nachsehen."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Er kam zu spät / ging leer aus. Die Redewendung bedeutet, dass jemand nicht bekommt, was er wollte.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAGE 4 -->
+            <button class="collapsible">📜 Sage 4: Die Elfenkönigin</button>
+            <div class="collapsible-content">
+                <div class="sage-box">
+                    <div class="sage-title">Die Elfenkönigin</div>
+                    <p class="sage-text">Ein lustiger Jäger, der in Hartelsberg wohnte, liebte ein reiches und hübsches Bauernmädchen derselben Ortschaft und sollte es in Kürze ehelichen. Als er eines Tages die Wälder an dem Gehänge der Koralpe durchstreifte und gerade beim „Elfenbrunn", einer eiskalten, kristallhellen Quelle, anlangte und sich mit einem vollen Trunk labte, erschien ihm ein verlockend schönes Weib, welches leutselig mit ihm zu sprechen begann und ihm gar bald Herz und Sinn verrückte. Es trug am blendenden Leibe ein langes, seegrünes Kleid und im wallenden Haare einen Schilfkranz. Sie küßten und herzten sich und als er fortging, mußte er ihr versprechen, bald wiederzukommen und keinem Menschen das Geheimnis seiner neuen Bekanntschaft zu verraten.
+                    <br><br>Als er wieder nach Hause kam und von seiner Braut, in deren Augen ein ganzer Himmel von Liebesglück sich spiegelte, umarmt wurde, vergaß er des gegebenen Wortes und erzählte ihr sein Erlebnis mit der Elfenkönigin.
+                    <br><br>Eine geraume Zeit war seither verstrichen; längst dachte er nicht mehr des lieblichen Wasserweibes, der Tag der Hochzeit brach an, die Ringe wurden gewechselt und am Abende begann im Wirtshause der übliche Hochzeitstanz. Plötzlich erschien unter den Tanzenden ein wundersames Weib, mit einem weißen Kleide angetan, einem grünen Kranz in den blonden Locken und mit einem Schleier, so zart wie duftiger Nebel. Kaum erschaute der Jäger die holde Gestalt, so stürzte er auf sie zu und begann mit ihr den Reigen. In leidenschaftlichem Tanze sauste das Paar dahin, dann wirbelte es aus dem Saale und war alsbald den Augen der Hochzeitsgesellschaft entschwunden.
+                    <br><br>Von bleichem Schreck befallen, verfolgte die Braut mit den Hochzeitsgästen die Davontanzenden, doch umsonst, sie konnten nicht mehr eingeholt werden. Als man am Morgen nach dem Neuvermählten weiter forschte, fand man ihn tot neben dem „Elfenbrunn" liegen. Die Elfenkönigin - sie war an dem feuchten Saum ihres Kleides erkannt worden - hatte ihren Liebsten geholt.</p>
+                    <p class="sage-source">Georg Graber, Sagen aus Kärnten, 1941</p>
+                </div>
+
+                <div class="analysis-box">
+                    <h4>✅ Vollständige Analyse</h4>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Ort:</div>
+                        <div>Hartelsberg, Koralpe, „Elfenbrunn" (Quelle)</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Figuren:</div>
+                        <div>Ein Jäger, seine Braut, die Elfenkönigin</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Übernatürliches:</div>
+                        <div>Die Elfenkönigin – verführerisches Wasserwesen mit magischer Anziehungskraft</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Handlung:</div>
+                        <div>Ein Jäger trifft eine Elfe, verliebt sich, verspricht Geheimhaltung. Er bricht das Versprechen. Bei seiner Hochzeit holt ihn die Elfe und er stirbt.</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Erklärt:</div>
+                        <div>Den Namen „Elfenbrunn" und die Gefährlichkeit dieser Quelle</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Botschaft:</div>
+                        <div>Halte dein Versprechen! Wer sein Wort bricht, wird bestraft. Auch: Warnung vor Untreue und Verführung.</div>
+                    </div>
+                </div>
+
+                <div class="difficulty-box">
+                    <h4>⚠️ Schwierige Stellen erklärt</h4>
+                    <div class="difficulty-passage">„...ihm Herz und Sinn verrückte..."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Sie machte ihn verliebt/verrückt. Er konnte nicht mehr klar denken.</p>
+                    </div>
+                    <div class="difficulty-passage">„...mit einem weißen Kleide angetan..."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Sie trug ein weißes Kleid. „Angetan" bedeutet hier „bekleidet mit".</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAGE 5 -->
+            <button class="collapsible">📜 Sage 5: Die eiserne Henne</button>
+            <div class="collapsible-content">
+                <div class="sage-box">
+                    <div class="sage-title">Die eiserne Henne</div>
+                    <p class="sage-text">In altersgrauen Zeiten gab es im Oswaldberg reiche Goldgruben. Die Eigentümer derselben zahlten den Arbeitern hohen Sold, und da der Reichtum des tiefen Schachtes ein unerschöpflicher schien, führten die Herren ein üppiges, schwelgerisches Leben. Anstatt jedoch den Dürftigen von ihrem Überfluss zu reichen, benützten sie deren Hilflosigkeit, um Übermut und tolle Launen an ihnen zu üben.
+                    <br><br>Am Fuße des Berges lebte zu dieser Zeit eine arme Witwe kümmerlich von ihrer Hände Arbeit; ihr ganzer Reichtum war eine Kuh, ein Geschenk der im fernen Lande lebenden Freifrau. Oft gedachte sie in ihren frommen Gebeten der edlen Spenderin. - Da geschah es, dass die Gewerken sich dies arme Weib zum Gegenstand ihres Übermutes wählten. Mit einer Botschaft wurde sie zur Stadt gesandt und inzwischen die Kuh aus dem Stalle geholt, getötet, die Haut mit Stroh gefüllt und an die alte Stelle gebracht.
+                    <br><br>Müde kehrte das arme Weiblein gegen Abend heim und eilte zum Stalle, um ihre Kuh zu tränken und zu melken. Da sieht sie das Geschehene und eilt hinaus, die Nachbarn in der Runde zu fragen, wer den Frevel begangen. Und überall erhält sie dieselbe Kunde, dass der Herren Übermut den tollen Plan ersann.
+                    <br><br>Stumm kehrte sie in ihre Hütte zurück; doch ihr sonst so friedliches Gemüt ist von Rachegedanken erfüllt. Am nächsten Morgen wandert sie zu ihrem Vetter, dem Schmiede, der muss ihr eine Henne und Eier aus rohem Erze schmieden. Diese bringt sie in den tiefen Stollen und spricht: »So wenig diese Henne je wird Eier brüten, so wenig sei das Glück euch wieder hold!«
+                    <br><br>Schreckensbleich und ohne das gewohnte „Glück auf" zogen am nächsten Morgen die Knappen zum Schachte; hatte sich doch die Runde von der Verwünschung der Alten rasch verbreitet. - Und in der Tat, nur taubes Gestein traf der Schlägel, versiegt war die goldene Quelle, und so sehr die Gewerksherren den Berg durchwühlen ließen, nicht ein Stäubchen Goldes wurde mehr gefunden.
+                    <br><br>Und noch heutigen Tages liegt der Fluch der Witwe auf dem Stollen des Oswaldberges.</p>
+                    <p class="sage-source">J. Rappold, Sagen aus Kärnten, 1887</p>
+                </div>
+
+                <div class="analysis-box">
+                    <h4>✅ Vollständige Analyse</h4>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Ort:</div>
+                        <div>Oswaldberg (Goldgruben)</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Figuren:</div>
+                        <div>Die reichen Gewerken (Bergwerksbesitzer), eine arme Witwe, die Knappen (Bergarbeiter)</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Übernatürliches:</div>
+                        <div>Der Fluch der Witwe – eine eiserne Henne, die nie brüten wird, verflucht das Bergwerk</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Handlung:</div>
+                        <div>Reiche Bergwerksbesitzer quälen eine arme Witwe und töten ihre Kuh. Sie verflucht sie mit einer eisernen Henne. Das Goldbergwerk versiegt für immer.</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Erklärt:</div>
+                        <div>Warum im Oswaldberg kein Gold mehr gefunden wird</div>
+                    </div>
+                    <div class="analysis-row">
+                        <div class="analysis-label">Botschaft:</div>
+                        <div>Behandle die Armen nicht schlecht! Übermut und Grausamkeit werden bestraft. Auch der Mächtigste kann von den Schwachen vernichtet werden.</div>
+                    </div>
+                </div>
+
+                <div class="difficulty-box">
+                    <h4>⚠️ Schwierige Stellen erklärt</h4>
+                    <div class="difficulty-passage">„...führten die Herren ein üppiges, schwelgerisches Leben..."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Sie lebten luxuriös und verschwenderisch. „Schwelgerisch" bedeutet übertrieben genießerisch.</p>
+                    </div>
+                    <div class="difficulty-passage">„...nur taubes Gestein traf der Schlägel..."</div>
+                    <div class="solution-box">
+                        <p><strong>Bedeutung:</strong> Die Bergarbeiter fanden nur wertloses Gestein (ohne Gold). „Taub" bedeutet hier „ohne Erzgehalt".</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ÜBUNGEN -->
+        <section id="uebungen">
+            <h2><span class="emoji">✍️</span> Übungen: Dein Können testen</h2>
+            
+            <p>Jetzt bist du dran! Übe das Analysieren und Deuten von Sagen.</p>
+
+            <div class="exercise-box">
+                <h4>📝 Übung 1: Motive erkennen</h4>
+                <div class="exercise-task">
+                    <p>Welche <strong>Motive</strong> findest du in den fünf Beispiel-Sagen? Ordne zu!</p>
+                    <ul>
+                        <li>Verborgener Schatz: _____________</li>
+                        <li>Gebrochenes Versprechen: _____________</li>
+                        <li>Strafe für Grausamkeit: _____________</li>
+                        <li>Dankbarkeit trotz Unrecht: _____________</li>
+                        <li>Schutz durch den Glauben: _____________</li>
+                    </ul>
+                </div>
+                <textarea class="exercise-input" placeholder="Schreibe deine Antworten hier..."></textarea>
+            </div>
+
+            <div class="exercise-box">
+                <h4>📝 Übung 2: Schwierige Wörter übersetzen</h4>
+                <div class="exercise-task">
+                    <p>Übersetze diese altertümlichen Ausdrücke in heutiges Deutsch:</p>
+                    <ol>
+                        <li>„Er wurde stutzig" → _____________</li>
+                        <li>„Sie schmachteten in Gefangenschaft" → _____________</li>
+                        <li>„Der Wassermann hatte das Nachsehen" → _____________</li>
+                        <li>„Sie wollte sich dankbar bezeigen" → _____________</li>
+                        <li>„Sie führten ein schwelgerisches Leben" → _____________</li>
+                    </ol>
+                </div>
+                <textarea class="exercise-input" placeholder="Schreibe deine Übersetzungen hier..."></textarea>
+            </div>
+
+            <div class="exercise-box">
+                <h4>📝 Übung 3: Die Botschaft finden</h4>
+                <div class="exercise-task">
+                    <p>Wähle eine der fünf Sagen und beantworte:</p>
+                    <ol>
+                        <li>Was erklärt diese Sage? (z.B. einen Ortsnamen)</li>
+                        <li>Wer handelt richtig, wer falsch?</li>
+                        <li>Was ist die moralische Botschaft?</li>
+                        <li>Was sollten die Menschen damals aus der Sage lernen?</li>
+                    </ol>
+                </div>
+                <textarea class="exercise-input" placeholder="Schreibe deine Analyse hier..." style="min-height: 200px;"></textarea>
+            </div>
+
+            <div class="exercise-box">
+                <h4>📝 Übung 4: Sage strukturieren</h4>
+                <div class="exercise-task">
+                    <p>Teile „Die Elfenkönigin" in die vier Teile einer Sage ein:</p>
+                    <ul>
+                        <li><strong>Einführung:</strong> Wer? Wo? Wann?</li>
+                        <li><strong>Thema:</strong> Was passiert mit dem Übernatürlichen?</li>
+                        <li><strong>Wende:</strong> Der entscheidende Moment</li>
+                        <li><strong>Bleibendes:</strong> Was bleibt am Ende?</li>
+                    </ul>
+                </div>
+                <textarea class="exercise-input" placeholder="Schreibe deine Strukturierung hier..." style="min-height: 200px;"></textarea>
+            </div>
+        </section>
+
+        <!-- SECTION: CHECKLISTE -->
+        <section id="checkliste">
+            <h2><span class="emoji">✅</span> Checkliste: Sagen verstehen & deuten</h2>
+            
+            <p style="margin-bottom: 1.5rem;">Hake ab, was du schon kannst:</p>
+
+            <div class="checklist">
+                <h4 style="color: var(--altrosa-dark);">📚 Grundwissen</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c1">
+                    <label for="c1">Ich weiß, was eine Sage von einem Märchen unterscheidet.</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c2">
+                    <label for="c2">Ich kenne die typischen Figuren in Kärntner Sagen (Zwerge, Wassermänner, Elfen...).</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="c3">
+                    <label for="c3">Ich kann die vier Teile einer Sage benennen (Einführung, Thema, Wende, Bleibendes).</label>
+                </div>
+            </div>
+
+            <div class="checklist" style="margin-top: 1.5rem;">
+                <h4 style="color: var(--forest-green);">🔍 Verstehensstrategien</h4>
+                <div class="checklist-item" style="border-left: 3px solid var(--forest-green);">
+                    <input type="checkbox" id="c4">
+                    <label for="c4">Ich nutze den <strong>Kontext</strong>, um unbekannte Wörter zu verstehen.</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--forest-green);">
+                    <input type="checkbox" id="c5">
+                    <label for="c5">Ich kann Wörter <strong>zerlegen</strong> und die Teile verstehen.</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--forest-green);">
+                    <input type="checkbox" id="c6">
+                    <label for="c6">Ich kann schwierige Sätze in einfache Sprache <strong>umschreiben</strong>.</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--forest-green);">
+                    <input type="checkbox" id="c7">
+                    <label for="c7">Ich stelle mir die Handlung <strong>bildlich</strong> vor.</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--forest-green);">
+                    <input type="checkbox" id="c8">
+                    <label for="c8">Ich benutze die <strong>5-Fragen-Methode</strong> (Wer? Wo? Was? Warum? Was bleibt?).</label>
+                </div>
+            </div>
+
+            <div class="checklist" style="margin-top: 1.5rem;">
+                <h4 style="color: var(--deep-blue);">🎯 Deuten</h4>
+                <div class="checklist-item" style="border-left: 3px solid var(--deep-blue);">
+                    <input type="checkbox" id="c9">
+                    <label for="c9">Ich kann die <strong>wörtliche Ebene</strong> zusammenfassen (Was passiert?).</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--deep-blue);">
+                    <input type="checkbox" id="c10">
+                    <label for="c10">Ich erkenne, was die Sage <strong>erklärt</strong> (Orte, Namen, Bräuche).</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--deep-blue);">
+                    <input type="checkbox" id="c11">
+                    <label for="c11">Ich kann die <strong>moralische Botschaft</strong> der Sage formulieren.</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--deep-blue);">
+                    <input type="checkbox" id="c12">
+                    <label for="c12">Ich erkenne <strong>wiederkehrende Motive</strong> (Schatz, Versprechen, Strafe...).</label>
+                </div>
+            </div>
+
+            <div class="checklist" style="margin-top: 1.5rem;">
+                <h4 style="color: var(--warm-orange);">📖 Vokabular</h4>
+                <div class="checklist-item" style="border-left: 3px solid var(--warm-orange);">
+                    <input type="checkbox" id="c13">
+                    <label for="c13">Ich kenne wichtige <strong>altertümliche Wörter</strong> (Dirn, Knecht, Gewerken...).</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--warm-orange);">
+                    <input type="checkbox" id="c14">
+                    <label for="c14">Ich verstehe typische <strong>Redewendungen</strong> (stutzig werden, das Nachsehen haben...).</label>
+                </div>
+                <div class="checklist-item" style="border-left: 3px solid var(--warm-orange);">
+                    <input type="checkbox" id="c15">
+                    <label for="c15">Ich kenne <strong>Bergbau-Begriffe</strong> (Stollen, Schacht, Knappe, Schlägel...).</label>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <h3>🏆 Dein Fortschritt</h3>
+                <p>Hake alle erledigten Punkte ab!</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINT SECTION -->
+        <div class="print-section">
+            <h3>📄 Zum Ausdrucken</h3>
+            <p>Möchtest du diesen Leitfaden ausdrucken?</p>
+            <button class="print-btn" onclick="window.print()">🖨️ Druckerfreundliche Version erstellen</button>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-medium);">
+                Die Druckversion zeigt alle Abschnitte geöffnet und ist für Papier optimiert.
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>🏔️ Kärntner Sagen verstehen & deuten – Dein Werkzeugkoffer für systematisches Analysieren 📚</p>
+        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem;">Erstellt für Deutschlernende • Niveau B1-B2</p>
+    </footer>
+
+    <script>
+        // Collapsible functionality
+        document.querySelectorAll('.collapsible').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    content.classList.remove('show');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.classList.add('show');
+                }
+            });
+        });
+
+        // Checkbox progress tracker
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+            const percentage = Math.round((checked / checkboxes.length) * 100);
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = percentage + '%';
+            
+            // Update parent styling
+            checkboxes.forEach(cb => {
+                const parent = cb.closest('.checklist-item');
+                if (cb.checked) {
+                    parent.classList.add('checked');
+                } else {
+                    parent.classList.remove('checked');
+                }
+            });
+        }
+
+        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        // Navigation active state
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                const targetSection = document.getElementById(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
