@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sagen-Meister 📜 Kärntner Sagen nacherzählen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d1b0e;
+            --primary-light: #4a3020;
+            --accent: #d4a03c;
+            --accent-glow: #f0c060;
+            --zeit: #5c9ece;
+            --zeit-glow: #7ab8e8;
+            --ort: #6eb55a;
+            --ort-glow: #8fd47a;
+            --spannung: #e05555;
+            --spannung-glow: #f07070;
+            --gefuehl: #b06cc8;
+            --gefuehl-glow: #d090e0;
+            --verbindung: #e0a030;
+            --verbindung-glow: #f0b850;
+            --success: #4ecdc4;
+            --error: #ff6b6b;
+            --bg-dark: #1a1008;
+            --bg-card: #2d1b0e;
+            --text: #f5e6d3;
+            --text-muted: #b8a080;
+            --gold: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #3d2515 50%, var(--bg-dark) 100%);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-glow), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--accent-glow);
+        }
+
+        /* Saga List */
+        .saga-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .saga-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 15px 20px;
+            color: var(--text);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .saga-btn:hover {
+            transform: translateX(8px);
+            box-shadow: 0 5px 20px rgba(212, 160, 60, 0.4);
+            border-color: var(--accent-glow);
+        }
+
+        .saga-btn .saga-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Game Header */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: var(--primary);
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-light);
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent-glow);
+        }
+
+        .progress-bar {
+            background: var(--primary);
+            border-radius: 10px;
+            height: 16px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 1px solid var(--primary-light);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        /* Original Text Section */
+        .original-section {
+            margin-bottom: 25px;
+        }
+
+        .original-text {
+            background: rgba(0,0,0,0.3);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+
+        .original-text .highlight {
+            background: rgba(212, 160, 60, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Task Section */
+        .task-section {
+            background: rgba(92, 158, 206, 0.1);
+            border: 2px solid var(--zeit);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .task-title {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--zeit-glow);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .task-description {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Sentence Builder */
+        .builder-section {
+            margin-bottom: 25px;
+        }
+
+        .sentence-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sentence-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px dashed var(--primary-light);
+        }
+
+        .sentence-row.complete {
+            border-style: solid;
+            border-color: var(--success);
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .row-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .starter-slot {
+            min-width: 180px;
+            min-height: 40px;
+            padding: 8px 15px;
+            background: var(--primary);
+            border: 2px dashed var(--zeit);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .starter-slot:hover {
+            border-color: var(--zeit-glow);
+            box-shadow: 0 0 15px rgba(92, 158, 206, 0.3);
+        }
+
+        .starter-slot.filled {
+            border-style: solid;
+            color: white;
+            font-weight: 600;
+        }
+
+        .starter-slot.filled.type-zeit {
+            background: var(--zeit);
+            border-color: var(--zeit-glow);
+        }
+
+        .starter-slot.filled.type-ort {
+            background: var(--ort);
+            border-color: var(--ort-glow);
+        }
+
+        .starter-slot.filled.type-spannung {
+            background: var(--spannung);
+            border-color: var(--spannung-glow);
+        }
+
+        .starter-slot.filled.type-gefuehl {
+            background: var(--gefuehl);
+            border-color: var(--gefuehl-glow);
+        }
+
+        .starter-slot.filled.type-verbindung {
+            background: var(--verbindung);
+            border-color: var(--verbindung-glow);
+        }
+
+        .starter-slot.selected {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            border-color: var(--gold);
+        }
+
+        .continuation-input {
+            flex: 1;
+            min-width: 200px;
+            background: var(--primary);
+            border: 2px solid var(--primary-light);
+            border-radius: 8px;
+            padding: 10px 15px;
+            color: var(--text);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+        }
+
+        .continuation-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .continuation-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Starter Options */
+        .starters-section {
+            margin-bottom: 25px;
+        }
+
+        .starters-title {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .starter-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .category-tab {
+            background: var(--primary);
+            border: 2px solid var(--primary-light);
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab:hover, .category-tab.active {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .category-tab.active {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        .starters-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .starter-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border: 2px solid;
+            border-radius: 20px;
+            padding: 10px 18px;
+            color: var(--text);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .starter-btn.type-zeit {
+            border-color: var(--zeit);
+        }
+
+        .starter-btn.type-ort {
+            border-color: var(--ort);
+        }
+
+        .starter-btn.type-spannung {
+            border-color: var(--spannung);
+        }
+
+        .starter-btn.type-gefuehl {
+            border-color: var(--gefuehl);
+        }
+
+        .starter-btn.type-verbindung {
+            border-color: var(--verbindung);
+        }
+
+        .starter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .starter-btn.type-zeit:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--zeit) 100%);
+        }
+
+        .starter-btn.type-ort:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--ort) 100%);
+        }
+
+        .starter-btn.type-spannung:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--spannung) 100%);
+        }
+
+        .starter-btn.type-gefuehl:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--gefuehl) 100%);
+        }
+
+        .starter-btn.type-verbindung:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--verbindung) 100%);
+        }
+
+        .starter-btn.used {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .starter-btn.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .starter-btn.disabled::after {
+            content: '🚫';
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .starter-slot.filled {
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .starter-slot.filled:hover::after {
+            content: '✕';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        .legend-dot.zeit { background: var(--zeit); }
+        .legend-dot.ort { background: var(--ort); }
+        .legend-dot.spannung { background: var(--spannung); }
+        .legend-dot.gefuehl { background: var(--gefuehl); }
+        .legend-dot.verbindung { background: var(--verbindung); }
+
+        /* Control Buttons */
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .control-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--primary-light);
+            border-radius: 12px;
+            padding: 12px 25px;
+            color: var(--text);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-btn:hover {
+            border-color: var(--accent);
+            background: var(--primary);
+        }
+
+        .control-btn.primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+            border-color: var(--accent-glow);
+            color: var(--bg-dark);
+        }
+
+        .control-btn.primary:hover {
+            box-shadow: 0 5px 20px rgba(212, 160, 60, 0.5);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Feedback Modal */
+        .feedback-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .feedback-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            border: 3px solid var(--gold);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .feedback-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .feedback-text {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .feedback-text .starter-highlight {
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .feedback-text .starter-highlight.type-zeit { background: var(--zeit); color: white; }
+        .feedback-text .starter-highlight.type-ort { background: var(--ort); color: white; }
+        .feedback-text .starter-highlight.type-spannung { background: var(--spannung); color: white; }
+        .feedback-text .starter-highlight.type-gefuehl { background: var(--gefuehl); color: white; }
+        .feedback-text .starter-highlight.type-verbindung { background: var(--verbindung); color: white; }
+
+        .feedback-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feedback-stat {
+            background: var(--primary);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .feedback-stat-value {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-glow);
+        }
+
+        .feedback-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Result Screen */
+        .result-card {
+            text-align: center;
+            border: 3px solid var(--gold);
+        }
+
+        .result-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .result-stat {
+            background: var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .result-stat-value {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-glow);
+        }
+
+        .result-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--bg-card);
+            border: 2px solid var(--primary-light);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Tips Box */
+        .tips-box {
+            background: rgba(110, 181, 90, 0.1);
+            border: 2px solid var(--ort);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+
+        .tips-title {
+            color: var(--ort-glow);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .tips-list {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .sentence-row { flex-direction: column; align-items: stretch; }
+            .starter-slot { min-width: 100%; }
+            .continuation-input { min-width: 100%; }
+            .feedback-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" id="backBtn" style="display: none;" onclick="goToMenu()">←</button>
+
+    <div class="container">
+        <header>
+            <h1>📜 Sagen-Meister</h1>
+            <p class="subtitle">Kärntner Sagen verstehen und nacherzählen</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div class="screen active" id="startScreen">
+            <div class="card">
+                <h2 class="card-title">🏔️ Wähle eine Kärntner Sage:</h2>
+                <div class="saga-list" id="sagaList"></div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">📝 So funktioniert's:</h2>
+                <div class="tips-box" style="border-color: var(--accent); background: rgba(212, 160, 60, 0.1);">
+                    <div class="tips-list">
+                        1. Lies den Originaltext der Sage aufmerksam durch<br>
+                        2. Erzähle die Geschichte mit eigenen Worten nach<br>
+                        3. Verwende dabei passende <strong>Satzanfänge</strong> aus den Kategorien<br>
+                        4. Schreibe zu jedem Satzanfang eine passende Fortsetzung<br>
+                        5. Achte auf die richtige <strong>Reihenfolge</strong> der Ereignisse!<br><br>
+                        💡 <em>Tipp: Klicke auf einen gefüllten Satzanfang, um ihn zurückzulegen!</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">🎨 Satzanfang-Kategorien:</h2>
+                <div class="legend" style="justify-content: flex-start; flex-direction: column; gap: 10px;">
+                    <div class="legend-item"><div class="legend-dot zeit"></div> <strong>Zeit:</strong> Plötzlich, Dann, Eines Tages, Schließlich...</div>
+                    <div class="legend-item"><div class="legend-dot ort"></div> <strong>Ort:</strong> Dort, In der Nähe, Am Fuße des Berges...</div>
+                    <div class="legend-item"><div class="legend-dot spannung"></div> <strong>Spannung:</strong> Ohne Vorwarnung, Aus dem Nichts, Da geschah...</div>
+                    <div class="legend-item"><div class="legend-dot gefuehl"></div> <strong>Gefühl:</strong> Voller Angst, Mutig, Erleichtert, Erschrocken...</div>
+                    <div class="legend-item"><div class="legend-dot verbindung"></div> <strong>Verbindung:</strong> Deshalb, Doch, Obwohl... <em>(ab Satz 2)</em></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="screen" id="gameScreen">
+            <div class="game-header">
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-label">Punkte</div>
+                        <div class="stat-value" id="points">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Abschnitt</div>
+                        <div class="stat-value" id="sectionNum">1/3</div>
+                    </div>
+                </div>
+                <div id="sagaTitle" style="font-family: 'Fredoka', sans-serif; color: var(--accent-glow);"></div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+
+            <!-- Original Text -->
+            <div class="card original-section">
+                <h3 class="card-title">📖 Originaltext:</h3>
+                <div class="original-text" id="originalText"></div>
+            </div>
+
+            <!-- Task -->
+            <div class="task-section">
+                <h3 class="task-title">✏️ Deine Aufgabe:</h3>
+                <p class="task-description" id="taskDescription">Erzähle diesen Abschnitt mit eigenen Worten nach. Verwende passende Satzanfänge!</p>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-item"><div class="legend-dot zeit"></div> Zeit</div>
+                <div class="legend-item"><div class="legend-dot ort"></div> Ort</div>
+                <div class="legend-item"><div class="legend-dot spannung"></div> Spannung</div>
+                <div class="legend-item"><div class="legend-dot gefuehl"></div> Gefühl</div>
+                <div class="legend-item"><div class="legend-dot verbindung"></div> Verbindung</div>
+            </div>
+
+            <!-- Sentence Builder -->
+            <div class="card builder-section">
+                <h3 class="card-title">📝 Deine Nacherzählung:</h3>
+                <div class="sentence-slots" id="sentenceSlots"></div>
+            </div>
+
+            <!-- Starter Options -->
+            <div class="card starters-section">
+                <h3 class="starters-title">Wähle Satzanfänge:</h3>
+                <div class="starter-categories" id="starterCategories">
+                    <button class="category-tab active" data-category="all">Alle</button>
+                    <button class="category-tab" data-category="zeit">⏰ Zeit</button>
+                    <button class="category-tab" data-category="ort">📍 Ort</button>
+                    <button class="category-tab" data-category="spannung">⚡ Spannung</button>
+                    <button class="category-tab" data-category="gefuehl">💭 Gefühl</button>
+                    <button class="category-tab" data-category="verbindung">🔗 Verbindung</button>
+                </div>
+                <div class="starters-grid" id="startersGrid"></div>
+            </div>
+
+            <div class="control-buttons">
+                <button class="control-btn" onclick="resetSection()">🔄 Neu beginnen</button>
+                <button class="control-btn primary" id="submitBtn" onclick="submitRetelling()" disabled>✅ Fertig!</button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div class="screen" id="resultScreen">
+            <div class="card result-card">
+                <h2 class="result-title">🎉 Sage abgeschlossen!</h2>
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="finalPoints">0</div>
+                        <div class="result-stat-label">Punkte</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="finalSections">0</div>
+                        <div class="result-stat-label">Abschnitte</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="finalStarters">0</div>
+                        <div class="result-stat-label">Satzanfänge</div>
+                    </div>
+                </div>
+                <div id="finalRetelling" style="text-align: left; margin-bottom: 25px;"></div>
+                <div class="control-buttons">
+                    <button class="control-btn primary" onclick="goToMenu()">🏠 Zum Menü</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // SAGEN DATA - KÄRNTNER SAGEN
+        // ============================================
+        const sagen = [
+            {
+                id: 1,
+                title: "Der Schatz im Herde",
+                location: "Goldberg bei Villach",
+                sections: [
+                    {
+                        original: "Einstens begab sich der Eigentümer des Hausergehöftes auf dem Goldberg, einem Ausläufer des Jaukengebirges, nach Villach. Auf der Villacher Brücke bettelte ihn ein alter Soldat an und sagte dazu: \"Ich brauchte nicht zu betteln, sondern könnt' reich sein, wenn ich wüßt', wo der Goldberg zu finden ist; mir träumte, daß unterm Herd beim Hauser im Goldberg ein großer Schatz verborgen liegt. Aber wo ist der Goldberg?\"",
+                        task: "Erzähle, wie der Bauer nach Villach ging und was der Soldat ihm erzählte.",
+                        keyPoints: ["Bauer geht nach Villach", "Soldat bettelt auf der Brücke", "Traum vom Schatz unter dem Herd"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Der Hauserbauer wurde stutzig. \"Bin auch arm\", dachte er, beschenkte den Soldaten und eilte heim. Schleunig machte er sich an die Arbeit, den Herd abzutragen, und richtig fand er den Schatz, einen mit Gold gefüllten Häfen.",
+                        task: "Erzähle, wie der Bauer reagierte und den Schatz fand.",
+                        keyPoints: ["Bauer wird nachdenklich", "eilt nach Hause", "trägt den Herd ab", "findet den Goldschatz"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Aus dem armen Schlucker wurde ein reicher Mann. Zum Dank ließ er auf der Höhe des Goldberges ein Kirchlein bauen, das noch heute mit seinem schlanken Türmchen vom Goldberg niederschaut.",
+                        task: "Erzähle, was aus dem Bauern wurde und was er aus Dankbarkeit tat.",
+                        keyPoints: ["Bauer wird reich", "baut ein Kirchlein", "Kirche steht noch heute"],
+                        sentenceCount: 2
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Der Dank des Bergmännleins",
+                location: "Lavanttal / Koralpe",
+                sections: [
+                    {
+                        original: "In dem fruchtbarsten Tale Kärntens, dem Lavanttale, breitete sich vor alten Zeiten ein weiter See mit dunkelgrünem Wasser aus, von mächtigen Bergen eingerahmt. Im Innern der Koralpe hausten damals Zwerge. Sie schienen emsig zu schaffen, denn oft wurden sie von Bauern aus der Ferne beobachtet.",
+                        task: "Beschreibe, wie das Lavanttal früher aussah und wer in der Koralpe lebte.",
+                        keyPoints: ["großer See im Lavanttal", "Zwerge in der Koralpe", "fleißige Arbeit der Zwerge"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Da verabredeten sich die Bauern, ihnen die Schätze abzunehmen, und fingen ein Zwerglein, um seine Genossen zur Herausgabe ihrer verborgenen Schätze zu zwingen. Es wurde dreißig Jahre in der Gefangenschaft gehalten, obwohl es immer beteuerte, keine Schätze zu besitzen.",
+                        task: "Erzähle, was die habgierigen Bauern mit dem Zwerg machten.",
+                        keyPoints: ["Bauern wollen Schätze", "fangen einen Zwerg", "halten ihn 30 Jahre gefangen"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Von unerträglicher Sehnsucht nach dem Berge gequält, eröffnete der Kleine seinen Peinigern endlich, daß er ihnen zwar kein Gold verschaffen könne, aber sich durch eine Tat dankbar bezeigen wolle. Nach einigen Tagen vernahmen sie ein furchtbares Rollen im See. Das Wasser war verschwunden und ein breites Tal dehnte sich vor den Erstaunten aus. An jener Stelle, wo der See am tiefsten gewesen, wurde Wolfsberg erbaut.",
+                        task: "Erzähle, wie der Zwerg das Tal befreite und was dann geschah.",
+                        keyPoints: ["Zwerg will helfen", "lässt den See verschwinden", "fruchtbares Tal entsteht", "Wolfsberg wird gebaut"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Der Möselofen",
+                location: "Görtschitztal",
+                sections: [
+                    {
+                        original: "Die Bauern Lattacher und Mosel wurden einst zu gleicher Zeit im Traume aufgefordert, nach dem Möselofen zu gehen und dort den Schatz zu heben. Beide folgten der Eingebung des Traumes und trafen auf dem Feldwege zusammen.",
+                        task: "Erzähle, wie zwei Bauern den gleichen Traum hatten.",
+                        keyPoints: ["zwei Bauern", "gleicher Traum", "treffen sich"],
+                        sentenceCount: 2
+                    },
+                    {
+                        original: "Als sie hinkamen, fanden sie einen Schlüssel und erblickten eine Kellertür. Sie öffneten sie mit dem gefundenen Schlüssel, drangen in den Keller und sahen im Hintergrunde eine große Truhe voll Silber. Schon hatten sie die Truhe bis zur Kellertür gebracht, da sagte Lattacher unbedachter Weise: \"Jetzt haben wir den Schatz\", worauf alles verschwand.",
+                        task: "Erzähle, wie die Bauern den Schatz fast gehoben hätten.",
+                        keyPoints: ["finden Schlüssel und Tür", "Truhe voller Silber", "unbedachte Worte", "alles verschwindet"],
+                        sentenceCount: 4
+                    },
+                    {
+                        original: "Eines Samstagabends ging ein Binder beim Möselofen vorbei. Da begegnete ihm ein Männchen mit roter Kappe, das ihn ins Schloß führte. Dort sah er Soldaten und Schimmel, und in der Mitte saß ein Feldherr, dessen Bart zweimal um den Tisch gewachsen war. Der Binder band Fässer und durfte sich zum Lohn zwölf Fäuste voll Silber nehmen.",
+                        task: "Erzähle die Geschichte des Binders im verzauberten Schloss.",
+                        keyPoints: ["Männchen mit roter Kappe", "verzaubertes Schloss", "Feldherr mit langem Bart", "Belohnung in Silber"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Das Goldbergwerk bei Villach",
+                location: "St. Oswald bei Villach",
+                sections: [
+                    {
+                        original: "In alter Zeit grub man im St. Oswaldberge unweit von Villach nach Golderzen. Die Goldadern des Berges schienen unerschöpflich zu sein. Aber der Reichtum verlockte die Bergleute bald zu rohen Scherzen.",
+                        task: "Beschreibe das reiche Goldbergwerk und die übermütigen Bergleute.",
+                        keyPoints: ["Goldbergwerk bei Villach", "unerschöpfliches Gold", "Bergleute werden übermütig"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Am Fuße des Oswaldiberges stand eine Hütte, in der eine arme, fromme Frau lebte. Ihr ganzes Hab und Gut war eine Kuh. Eines Tages schlachteten die bösen Bergleute ihre Kuh, zogen ihr die Haut ab und füllten diese mit Stroh.",
+                        task: "Erzähle von der armen Frau und dem bösen Streich der Bergleute.",
+                        keyPoints: ["arme fromme Frau", "besitzt nur eine Kuh", "böser Streich der Bergleute"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Als die Frau ihre tote Kuh fand, reifte in ihr der Entschluß, sich zu rächen. Sie ließ eine eherne Henne schmieden und stellte sie in den Stollen mit den Worten: \"So wenig diese Henne jemals Eier legt, so wenig werdet ihr fernerhin Gold finden.\" Am nächsten Tag fanden die Bergleute nur noch taubes Gestein. Der ganze Goldreichtum ist seit jenem Fluch versiegt.",
+                        task: "Erzähle, wie die Frau sich rächte und was mit dem Bergwerk geschah.",
+                        keyPoints: ["Frau beschließt Rache", "eherne Henne", "Fluch über das Bergwerk", "Gold versiegt für immer"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "Das versunkene Schloss",
+                location: "St. Martins-Wald bei Villach",
+                sections: [
+                    {
+                        original: "In dem St. Martins-Walde bei Villach stand einst ein großes Schloß, in welchem eine wunderschöne Prinzessin lebte. Auf einem nahen Schlosse hauste ein Prinz, der die schöne Königstochter leidenschaftlich liebte. Aber als er um sie warb, wurde er von ihrem Vater höhnisch abgewiesen.",
+                        task: "Beschreibe die Ausgangssituation mit der Prinzessin und dem Prinzen.",
+                        keyPoints: ["Schloss im Wald", "schöne Prinzessin", "Prinz liebt sie", "wird vom Vater abgewiesen"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Nun begab er sich zu seiner Großmutter, die eine mächtige Zauberin war. Diese verwandelte die Prinzessin in eine große, weiße Schlange, welche so lange das Schloß hüten muß, bis einer kommt, der ihr den Schlüssel aus dem Maul entreißt.",
+                        task: "Erzähle, wie die Prinzessin verzaubert wurde.",
+                        keyPoints: ["Großmutter ist Zauberin", "Prinzessin wird zur Schlange", "trägt Schlüssel im Maul", "muss erlöst werden"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Ein Ur-Urenkel des Prinzen versuchte dreimal, die Schlange zu erlösen. Beim dritten Mal entriß er ihr den Schlüssel, doch sie tötete ihn im Kampf. Zugleich versank das Schloß und an seiner Stelle wuchs eine Linde. Aus ihrem Holz soll einst die Wiege des Erlösers gebaut werden.",
+                        task: "Erzähle vom Erlösungsversuch und was mit dem Schloss geschah.",
+                        keyPoints: ["Ur-Urenkel versucht Erlösung", "wird getötet", "Schloss versinkt", "Linde wächst", "Prophezeiung"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "Die Sage vom Hundsmarhof",
+                location: "Villacher Alpe / Dobratsch",
+                sections: [
+                    {
+                        original: "Am nördlichen Fuße der Villacher Alpe steht ein Bauernhaus, der Hundsmarhof genannt. Einst wohnte dort ein gewaltiger und reicher Riese, der mit einem Berggeist in Verbindung stand. Sein Gesinde hörte oft um Mitternacht wunderliebliche Musik, wußte aber nicht, woher die Töne kamen.",
+                        task: "Beschreibe den Hundsmarhof und seinen geheimnisvollen Bewohner.",
+                        keyPoints: ["Bauernhaus am Berg", "reicher Riese", "Verbindung zu Berggeist", "geheimnisvolle Musik"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Unter den Dienstleuten befand sich auch ein Bergmann, der eines Nachts dem Riesen heimlich folgte. Er wurde entdeckt und der Riese nahm ihn gefangen. Mit den Worten \"Du sollst meinen Reichtum sehen\" steckte er ihn in die Tasche und zeigte ihm einen Raum, wo das Erz wie Gold und Silber glänzte.",
+                        task: "Erzähle, wie der neugierige Bergmann das Geheimnis entdeckte.",
+                        keyPoints: ["Bergmann folgt heimlich", "wird entdeckt und gefangen", "sieht den glänzenden Schatz"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Ein Zwerg erschien und blies Rauch über das Erzlager, wodurch alles in graues Gestein verwandelt wurde. Er sagte zum Riesen: \"Weil du meinen Aufenthalt einem Menschen gezeigt hast, wirst du von nun an statt Musik klägliches Hundegebell vernehmen.\" Von da an bewachte ein großer schwarzer Hund den Stollen. Daher führt das Gehöft den Namen Hundsmarhof.",
+                        task: "Erzähle von der Strafe des Zwerges und woher der Name kommt.",
+                        keyPoints: ["Zwerg verwandelt Erz in Stein", "Strafe für den Riesen", "Musik wird zu Hundegebell", "Name Hundsmarhof"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "Die verwunschene Jungfrau",
+                location: "Jadersdorf im Gitschtal",
+                sections: [
+                    {
+                        original: "In der Nähe von Jadersdorf steht ein Felsen, das Käppele genannt. Dort prangte in alter Zeit ein Schloß, das von Riesen bewohnt war. Nach deren Aussterben lebte darin eine verwunschene Frau, die einen großen Schatz bewachte.",
+                        task: "Beschreibe das alte Schloss und die verwunschene Frau.",
+                        keyPoints: ["Felsen namens Käppele", "altes Schloss", "früher Riesen", "verwunschene Frau mit Schatz"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Eines Tages begegnete die Frau einem jungen Hirten. Sie bat ihn, am nächsten Tag wiederzukommen. Er solle seinen Hirtenstab schief auf die Erde setzen und warten. Eine gekrönte Schlange würde erscheinen und ihm einen Schlüssel in den Mund legen. Als aber die Schlange in die Nähe seines Gesichtes kam, schrak er zurück, und aus dem Schlosse ertönte großes Wehgeschrei.",
+                        task: "Erzähle vom ersten Erlösungsversuch des Hirten.",
+                        keyPoints: ["Frau bittet Hirten um Hilfe", "soll auf Schlange warten", "Hirte erschrickt", "Erlösung misslingt"],
+                        sentenceCount: 4
+                    },
+                    {
+                        original: "Eine Bäuerin entdeckte später auf dem Schloßgrunde einen Gang. In einem Kellerraum fand sie eine Truhe mit wunderschönen Laubblättern. Sie nahm sich eine Schürze voll davon mit. Zu Hause hatten sich die Blätter in Silbertaler verwandelt! Als sie zurückkehrte, war die Truhe verschwunden. Sie hätte etwas zurücklassen sollen.",
+                        task: "Erzähle, wie eine Bäuerin beinahe den Schatz gehoben hätte.",
+                        keyPoints: ["Bäuerin findet Gang", "Truhe mit Blättern", "Blätter werden zu Silber", "Truhe verschwindet"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 8,
+                title: "Der Wörthersee",
+                location: "Wörthersee",
+                sections: [
+                    {
+                        original: "Eine alte Sage erzählt von einer Stadt mit prächtigen Häusern, die vor vielen hundert Jahren da gestanden haben soll, wo heute der Wörthersee liegt. Aber ihre Bewohner waren durch ihren Reichtum übermütig und üppig geworden.",
+                        task: "Beschreibe die reiche Stadt, die einst stand, wo heute der See ist.",
+                        keyPoints: ["prächtige Stadt", "reiche Bewohner", "wurden übermütig"],
+                        sentenceCount: 2
+                    },
+                    {
+                        original: "So kam es, daß sie sich am Vorabend des Osterfestes zu Tanz und Gelage versammelten. Da öffnete sich die Türe und herein schritt ein eisgraues Männchen. Es mahnte zur Umkehr und Buße. Aber nur höhnisches Lachen antwortete ihm, und noch wilder wirbelten die Paare im Tanz.",
+                        task: "Erzähle, wie die Bewohner am Ostervorabend feierten und gewarnt wurden.",
+                        keyPoints: ["Feier am Ostervorabend", "eisgraues Männchen warnt", "Bewohner lachen höhnisch", "tanzen weiter"],
+                        sentenceCount: 4
+                    },
+                    {
+                        original: "Wenige Minuten vor Mitternacht erschien der Alte zum letzten Mal. Er hielt ein Fäßchen und drohte: \"Sonst öffne ich den Hahn, und Tod und Verderben kommt über euch!\" Als es Mitternacht schlug, alle Lichter erloschen und ein furchtbares Gewitter losbrach. Endlose Fluten entströmten dem Fäßchen und ertränkten die frevelnden Bewohner. So entstand der Wörthersee.",
+                        task: "Erzähle vom Untergang der Stadt und der Entstehung des Sees.",
+                        keyPoints: ["letzte Warnung", "Mitternacht schlägt", "Gewitter bricht los", "Fluten ertränken alle", "See entsteht"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 9,
+                title: "Der Wassermann des Wörthersees",
+                location: "Pörtschach am Wörthersee",
+                sections: [
+                    {
+                        original: "In den heißen Tagen des Juli und August sucht man gerne die erquickende Kühle eines Bades auf. Auch eine junge Dirn, die bei einem Pörtschacher Bauer im Dienste stand, ging an einem Samstagabend allein in den Wörthersee baden.",
+                        task: "Beschreibe, wie die junge Magd zum Baden ging.",
+                        keyPoints: ["heiße Sommertage", "junge Magd", "Samstagabend", "allein im See baden"],
+                        sentenceCount: 2
+                    },
+                    {
+                        original: "Sie mochte schon eine Weile im Wasser gewesen sein, als sie plötzlich von der Mitte her etwas heranschwimmen sah. Der See warf hohe Wellen und mit riesiger Eile nahte sich der Schwimmende. Sie erkannte an dem Schilfkranz in den Haaren und dem grünlichblassen Gesicht den Wassermann.",
+                        task: "Erzähle, wie der Wassermann erschien.",
+                        keyPoints: ["etwas schwimmt heran", "hohe Wellen", "Schilfkranz in den Haaren", "grünliches Gesicht", "Wassermann"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Schreck und Angst erfaßte sie, und wie sie war, lief sie ihrem Wohnhause zu. Atemlos erreichte sie es und schlug die Haustür hinter sich zu. Kaum war dies geschehen, vernahm sie den Wassermann vor der Tür. Doch ein C+M+B+ an der Tür hinderte ihn am Eintreten. Das Mädchen aber war zum letzten Mal im See baden gewesen.",
+                        task: "Erzähle, wie das Mädchen dem Wassermann entkam.",
+                        keyPoints: ["Mädchen flieht in Panik", "erreicht das Haus", "Wassermann kann nicht eintreten", "Dreikönigs-Zeichen schützt", "geht nie wieder baden"],
+                        sentenceCount: 4
+                    }
+                ]
+            },
+            {
+                id: 10,
+                title: "Die Elfenkönigin",
+                location: "Hartelsberg / Koralpe",
+                sections: [
+                    {
+                        original: "Ein lustiger Jäger aus Hartelsberg liebte ein reiches Bauernmädchen und sollte es bald ehelichen. Als er eines Tages beim \"Elfenbrunn\", einer kristallhellen Quelle, anlangte, erschien ihm ein wunderschönes Weib. Es trug ein seegrünes Kleid und im Haar einen Schilfkranz. Sie küßten sich und er mußte versprechen, das Geheimnis zu bewahren.",
+                        task: "Erzähle, wie der Jäger die Elfenkönigin traf.",
+                        keyPoints: ["Jäger hat Braut", "trifft schöne Frau am Elfenbrunn", "seegrünes Kleid", "Schilfkranz", "muss Geheimnis bewahren"],
+                        sentenceCount: 4
+                    },
+                    {
+                        original: "Als er wieder nach Hause kam und von seiner Braut umarmt wurde, vergaß er des gegebenen Wortes und erzählte ihr sein Erlebnis mit der Elfenkönigin. Eine geraume Zeit war seither verstrichen; längst dachte er nicht mehr an das Wasserweib.",
+                        task: "Erzähle, wie der Jäger sein Versprechen brach.",
+                        keyPoints: ["kommt nach Hause", "Braut umarmt ihn", "verrät das Geheimnis", "vergisst die Elfenkönigin"],
+                        sentenceCount: 3
+                    },
+                    {
+                        original: "Der Tag der Hochzeit brach an, am Abend begann der Hochzeitstanz. Plötzlich erschien unter den Tanzenden ein wundersames Weib mit weißem Kleid und grünem Kranz. Der Jäger stürzte auf sie zu und tanzte mit ihr aus dem Saal hinaus. Am nächsten Morgen fand man ihn tot neben dem Elfenbrunn. Die Elfenkönigin hatte ihren Liebsten geholt.",
+                        task: "Erzähle vom tragischen Ende des Jägers.",
+                        keyPoints: ["Hochzeitstag", "Elfenkönigin erscheint", "Jäger tanzt mit ihr davon", "wird tot gefunden", "Elfenkönigin hat ihn geholt"],
+                        sentenceCount: 4
+                    }
+                ]
+            }
+        ];
+
+        // ============================================
+        // SATZANFÄNGE - aus dem Formulierungshilfen-Dokument
+        // ============================================
+        const satzanfaenge = {
+            zeit: [
+                "Vor langer Zeit", "In grauer Vorzeit", "Vor vielen hundert Jahren", "Es war einmal",
+                "Damals", "In alten Zeiten", "Eines Tages", "Eines Nachts",
+                "Zuerst", "Zunächst", "Anfangs", "Dann", "Danach", "Daraufhin",
+                "Anschließend", "Später", "Plötzlich", "Auf einmal",
+                "Währenddessen", "Gleichzeitig", "Am nächsten Tag", "In der folgenden Nacht",
+                "Schließlich", "Letztendlich", "Nach einer Weile", "Kurz darauf",
+                "Im selben Moment", "Endlich", "Seitdem", "Von diesem Tag an"
+            ],
+            ort: [
+                "Dort", "In einem abgelegenen Dorf", "In den tiefen Wäldern",
+                "Auf einer hohen Burg", "Am Fuße des Berges", "An den Ufern",
+                "In der Nähe von", "Mitten in den Bergen", "In dieser Gegend",
+                "An jener Stelle", "Oben auf dem Berg", "Tief im Innern",
+                "In der Ferne", "Am Horizont", "Hinter der Tür", "Im Verborgenen"
+            ],
+            spannung: [
+                "Plötzlich geschah etwas Schreckliches", "Ohne Vorwarnung", "Aus dem Nichts",
+                "In diesem Moment", "Da erschien", "Zu seinem Entsetzen",
+                "Mit einem Mal", "Unerwartet", "Da ereignete sich das Unfassbare",
+                "Im entscheidenden Moment", "Als alle Hoffnung verloren schien",
+                "In höchster Not", "Mit letzter Kraft", "Gerade noch rechtzeitig",
+                "Im Angesicht der Gefahr", "Wie durch Zauberhand", "Auf geheimnisvolle Weise"
+            ],
+            gefuehl: [
+                "Voller Angst", "Mutig", "Tapfer", "Verzweifelt", "Erleichtert",
+                "Verwundert", "Erstaunt", "Entsetzt", "Verängstigt", "Hoffnungsvoll",
+                "Erschrocken", "Neugierig", "Wütend", "Traurig", "Überglücklich",
+                "Voller Freude", "Mit klopfendem Herzen", "Gebannt", "Entschlossen",
+                "In tiefer Sorge", "Ergriffen von Sehnsucht", "Von Habgier getrieben"
+            ],
+            verbindung: [
+                "Deshalb", "Deswegen", "Darum", "Aus diesem Grund", "Daher",
+                "Doch", "Aber", "Jedoch", "Allerdings", "Dennoch",
+                "Obwohl", "Trotzdem", "Trotz allem", "Im Gegensatz dazu",
+                "Außerdem", "Zudem", "Darüber hinaus", "Hinzu kommt",
+                "Denn", "Weil", "Da", "So geschah es, dass", "Und so"
+            ]
+        };
+
+        // ============================================
+        // GAME STATE
+        // ============================================
+        let gameState = {
+            currentSaga: null,
+            currentSectionIndex: 0,
+            points: 0,
+            totalStarters: 0,
+            selectedSlot: null,
+            filledSlots: {},
+            allRetellings: []
+        };
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        function init() {
+            renderSagaList();
+            setupCategoryTabs();
+        }
+
+        function renderSagaList() {
+            const list = document.getElementById('sagaList');
+            list.innerHTML = sagen.map(saga => `
+                <button class="saga-btn" onclick="startSaga(${saga.id})">
+                    <span>📜 ${saga.title}</span>
+                    <span class="saga-location">📍 ${saga.location}</span>
+                </button>
+            `).join('');
+        }
+
+        function setupCategoryTabs() {
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderStarters(tab.dataset.category);
+                });
+            });
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // ============================================
+        // GAME LOGIC
+        // ============================================
+        function startSaga(sagaId) {
+            gameState.currentSaga = sagen.find(s => s.id === sagaId);
+            gameState.currentSectionIndex = 0;
+            gameState.points = 0;
+            gameState.totalStarters = 0;
+            gameState.allRetellings = [];
+
+            document.getElementById('backBtn').style.display = 'flex';
+            showScreen('gameScreen');
+            loadSection();
+        }
+
+        function loadSection() {
+            const saga = gameState.currentSaga;
+            const section = saga.sections[gameState.currentSectionIndex];
+
+            gameState.filledSlots = {};
+            gameState.selectedSlot = null;
+
+            // Update header
+            document.getElementById('sagaTitle').textContent = saga.title;
+            document.getElementById('sectionNum').textContent = 
+                `${gameState.currentSectionIndex + 1}/${saga.sections.length}`;
+            document.getElementById('points').textContent = gameState.points;
+
+            // Progress
+            const progress = (gameState.currentSectionIndex / saga.sections.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // Original text
+            document.getElementById('originalText').textContent = section.original;
+
+            // Task
+            document.getElementById('taskDescription').textContent = section.task;
+
+            // Build sentence slots
+            buildSentenceSlots(section.sentenceCount);
+
+            // Render starters
+            renderStarters('all');
+            
+            // Ersten Slot automatisch auswählen
+            setTimeout(() => selectSlot(0), 100);
+
+            document.getElementById('submitBtn').disabled = true;
+        }
+
+        function buildSentenceSlots(count) {
+            const container = document.getElementById('sentenceSlots');
+            container.innerHTML = '';
+
+            for (let i = 0; i < count; i++) {
+                const row = document.createElement('div');
+                row.className = 'sentence-row';
+                row.id = `row-${i}`;
+                row.innerHTML = `
+                    <span class="row-number">${i + 1}</span>
+                    <span class="starter-slot" id="slot-${i}" onclick="selectSlot(${i})">+ Satzanfang wählen</span>
+                    <input type="text" class="continuation-input" id="input-${i}" 
+                           placeholder="... schreibe hier weiter" 
+                           oninput="checkCompletion()">
+                </row>`;
+                container.appendChild(row);
+            }
+        }
+
+        function renderStarters(category) {
+            const grid = document.getElementById('startersGrid');
+            let starters = [];
+
+            if (category === 'all') {
+                Object.entries(satzanfaenge).forEach(([type, list]) => {
+                    // Show random selection from each category
+                    const shuffled = [...list].sort(() => Math.random() - 0.5);
+                    shuffled.slice(0, 5).forEach(s => starters.push({ text: s, type }));
+                });
+            } else {
+                starters = satzanfaenge[category].map(s => ({ text: s, type: category }));
+            }
+
+            // Shuffle for variety
+            starters.sort(() => Math.random() - 0.5);
+
+            grid.innerHTML = starters.map(s => `
+                <button class="starter-btn type-${s.type}" 
+                        data-type="${s.type}"
+                        onclick="selectStarter('${s.text.replace(/'/g, "\\'")}', '${s.type}')">
+                    ${s.text}
+                </button>
+            `).join('');
+        }
+
+        function selectSlot(index) {
+            document.querySelectorAll('.starter-slot').forEach(s => s.classList.remove('selected'));
+            const slot = document.getElementById(`slot-${index}`);
+            
+            // Wenn Slot gefüllt ist: zurücksetzen
+            if (slot.classList.contains('filled')) {
+                resetSlot(index);
+                return;
+            }
+            
+            // Slot auswählen
+            slot.classList.add('selected');
+            gameState.selectedSlot = index;
+            
+            // Starter-Buttons aktualisieren (Verbindungen nur ab Satz 2)
+            updateStarterAvailability();
+        }
+        
+        function resetSlot(index) {
+            const slot = document.getElementById(`slot-${index}`);
+            const row = document.getElementById(`row-${index}`);
+            
+            // Slot zurücksetzen
+            slot.className = 'starter-slot';
+            slot.textContent = '+ Satzanfang wählen';
+            
+            // Aus gameState entfernen
+            delete gameState.filledSlots[index];
+            
+            // Row-Status aktualisieren
+            row.classList.remove('complete');
+            
+            // Diesen Slot auswählen
+            slot.classList.add('selected');
+            gameState.selectedSlot = index;
+            
+            // Starter-Buttons aktualisieren
+            updateStarterAvailability();
+            
+            checkCompletion();
+        }
+        
+        function updateStarterAvailability() {
+            const targetIndex = gameState.selectedSlot;
+            
+            document.querySelectorAll('.starter-btn').forEach(btn => {
+                const type = btn.dataset.type;
+                
+                // Verbindungen nur ab Satz 2 erlauben
+                if (type === 'verbindung' && targetIndex === 0) {
+                    btn.classList.add('disabled');
+                    btn.title = 'Verbindungen passen nicht an den Satzanfang';
+                } else {
+                    btn.classList.remove('disabled');
+                    btn.title = '';
+                }
+            });
+        }
+
+        function selectStarter(text, type) {
+            // Find first empty slot or use selected slot
+            let targetIndex = gameState.selectedSlot;
+            
+            if (targetIndex === null) {
+                // Find first empty slot (aber für Verbindungen nicht Slot 0)
+                const slots = document.querySelectorAll('.starter-slot');
+                for (let i = 0; i < slots.length; i++) {
+                    if (!slots[i].classList.contains('filled')) {
+                        // Verbindungen nicht in ersten Satz
+                        if (type === 'verbindung' && i === 0) {
+                            continue;
+                        }
+                        targetIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (targetIndex === null) return;
+            
+            // Verbindungen nicht in ersten Satz erlauben
+            if (type === 'verbindung' && targetIndex === 0) {
+                // Visuelles Feedback
+                const btn = event.target;
+                btn.style.animation = 'shake 0.3s';
+                setTimeout(() => btn.style.animation = '', 300);
+                return;
+            }
+
+            const slot = document.getElementById(`slot-${targetIndex}`);
+            
+            // Clear existing classes
+            slot.className = 'starter-slot filled type-' + type;
+            slot.textContent = text;
+            
+            gameState.filledSlots[targetIndex] = { text, type };
+            gameState.selectedSlot = null;
+
+            // Mark row as potentially complete
+            checkRowCompletion(targetIndex);
+            
+            // Auto-focus the input
+            document.getElementById(`input-${targetIndex}`).focus();
+            
+            // Nächsten leeren Slot finden und auswählen
+            const slots = document.querySelectorAll('.starter-slot');
+            for (let i = 0; i < slots.length; i++) {
+                if (!slots[i].classList.contains('filled')) {
+                    selectSlot(i);
+                    break;
+                }
+            }
+
+            checkCompletion();
+        }
+
+        function checkRowCompletion(index) {
+            const slot = document.getElementById(`slot-${index}`);
+            const input = document.getElementById(`input-${index}`);
+            const row = document.getElementById(`row-${index}`);
+
+            if (slot.classList.contains('filled') && input.value.trim().length > 5) {
+                row.classList.add('complete');
+            } else {
+                row.classList.remove('complete');
+            }
+        }
+
+        function checkCompletion() {
+            const section = gameState.currentSaga.sections[gameState.currentSectionIndex];
+            let allComplete = true;
+
+            for (let i = 0; i < section.sentenceCount; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                const input = document.getElementById(`input-${i}`);
+                
+                checkRowCompletion(i);
+
+                if (!slot.classList.contains('filled') || input.value.trim().length < 5) {
+                    allComplete = false;
+                }
+            }
+
+            document.getElementById('submitBtn').disabled = !allComplete;
+        }
+
+        function resetSection() {
+            loadSection();
+        }
+
+        function submitRetelling() {
+            const section = gameState.currentSaga.sections[gameState.currentSectionIndex];
+            
+            // Collect retelling
+            let retelling = [];
+            let starterCount = 0;
+
+            for (let i = 0; i < section.sentenceCount; i++) {
+                const slotData = gameState.filledSlots[i];
+                const continuation = document.getElementById(`input-${i}`).value.trim();
+                
+                if (slotData) {
+                    retelling.push({
+                        starter: slotData.text,
+                        type: slotData.type,
+                        continuation: continuation
+                    });
+                    starterCount++;
+                }
+            }
+
+            // Calculate points (10 per sentence + bonus for variety)
+            const usedTypes = new Set(retelling.map(r => r.type));
+            const varietyBonus = usedTypes.size * 5;
+            const sectionPoints = (starterCount * 10) + varietyBonus;
+            
+            gameState.points += sectionPoints;
+            gameState.totalStarters += starterCount;
+            gameState.allRetellings.push({
+                sectionIndex: gameState.currentSectionIndex,
+                sentences: retelling
+            });
+
+            // Show feedback
+            showFeedback(retelling, sectionPoints, varietyBonus);
+        }
+
+        function showFeedback(retelling, points, varietyBonus) {
+            const overlay = document.createElement('div');
+            overlay.className = 'feedback-overlay';
+            
+            const retellingHTML = retelling.map(r => 
+                `<span class="starter-highlight type-${r.type}">${r.starter}</span> ${r.continuation}`
+            ).join(' ');
+
+            overlay.innerHTML = `
+                <div class="feedback-card">
+                    <h2 class="feedback-title">✨ Gut gemacht!</h2>
+                    <div class="feedback-stats">
+                        <div class="feedback-stat">
+                            <div class="feedback-stat-value">+${points - varietyBonus}</div>
+                            <div class="feedback-stat-label">Punkte</div>
+                        </div>
+                        <div class="feedback-stat">
+                            <div class="feedback-stat-value">+${varietyBonus}</div>
+                            <div class="feedback-stat-label">Vielfalt-Bonus</div>
+                        </div>
+                        <div class="feedback-stat">
+                            <div class="feedback-stat-value">${gameState.points}</div>
+                            <div class="feedback-stat-label">Gesamt</div>
+                        </div>
+                    </div>
+                    <h3 style="color: var(--accent-glow); margin-bottom: 10px;">Deine Nacherzählung:</h3>
+                    <div class="feedback-text">${retellingHTML}</div>
+                    <div class="control-buttons">
+                        <button class="control-btn primary" onclick="closeFeedbackAndContinue(this)">
+                            ${gameState.currentSectionIndex < gameState.currentSaga.sections.length - 1 ? '➡️ Weiter' : '🏆 Abschließen'}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+        }
+
+        function closeFeedbackAndContinue(btn) {
+            btn.closest('.feedback-overlay').remove();
+            
+            gameState.currentSectionIndex++;
+            
+            if (gameState.currentSectionIndex >= gameState.currentSaga.sections.length) {
+                showResults();
+            } else {
+                loadSection();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('finalPoints').textContent = gameState.points;
+            document.getElementById('finalSections').textContent = gameState.currentSaga.sections.length;
+            document.getElementById('finalStarters').textContent = gameState.totalStarters;
+
+            // Build complete retelling
+            let fullRetelling = `<div class="feedback-text">`;
+            gameState.allRetellings.forEach((section, idx) => {
+                fullRetelling += `<p style="margin-bottom: 15px;"><strong>Abschnitt ${idx + 1}:</strong><br>`;
+                section.sentences.forEach(s => {
+                    fullRetelling += `<span class="starter-highlight type-${s.type}">${s.starter}</span> ${s.continuation} `;
+                });
+                fullRetelling += `</p>`;
+            });
+            fullRetelling += `</div>`;
+
+            document.getElementById('finalRetelling').innerHTML = `
+                <h3 style="color: var(--accent-glow); margin-bottom: 15px;">📜 Deine vollständige Nacherzählung:</h3>
+                ${fullRetelling}
+            `;
+
+            document.getElementById('backBtn').style.display = 'none';
+            showScreen('resultScreen');
+        }
+
+        function goToMenu() {
+            document.getElementById('backBtn').style.display = 'none';
+            showScreen('startScreen');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
