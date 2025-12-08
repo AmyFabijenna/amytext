@@ -55,7 +55,7 @@
         .original-text { font-size: 1.05rem; line-height: 1.5; }
         .transform-section { background: rgba(139, 92, 246, 0.1); padding: 15px; border-radius: 10px; border: 2px dashed var(--accent); }
         .transform-label { font-size: 0.8rem; color: var(--accent-glow); margin-bottom: 10px; font-weight: 600; }
-        .transform-input-container { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; line-height: 2; }
+        .transform-input-container { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; line-height: 2.2; }
         .static-text { font-size: 1rem; }
         .input-slot { background: var(--primary); border: 2px solid var(--accent); border-radius: 6px; padding: 6px 10px; color: var(--text); font-size: 0.95rem; font-family: inherit; }
         .input-slot:focus { outline: none; border-color: var(--accent-glow); box-shadow: 0 0 12px rgba(139, 92, 246, 0.4); }
@@ -68,11 +68,12 @@
         .mc-option.correct { border-color: var(--success); background: rgba(16, 185, 129, 0.2); }
         .mc-option.incorrect { border-color: var(--error); background: rgba(239, 68, 68, 0.2); }
         .mc-letter { width: 28px; height: 28px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-        .mc-text { font-size: 0.9rem; }
+        .mc-text { font-size: 0.9rem; line-height: 1.4; }
         .hint-box { background: rgba(251, 191, 36, 0.15); border: 1px solid var(--gold); padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.85rem; display: none; }
         .explanation-box { background: rgba(16, 185, 129, 0.1); border: 2px solid var(--success); padding: 15px; border-radius: 10px; margin-top: 15px; display: none; }
         .explanation-box.show { display: block; }
         .explanation-title { font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .explanation-text { line-height: 1.6; font-size: 0.9rem; }
         .btn-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 15px; }
         .control-btn { padding: 10px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: none; font-family: inherit; }
         .control-btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-glow)); color: white; }
@@ -131,51 +132,20 @@
         <header>
             <h1>Matura-Phrasen & Formulierungen</h1>
             <p class="subtitle">Perfektioniere deinen schriftlichen Ausdruck</p>
-            <span class="level-badge">📝 500+ Übungen • Matura-Niveau</span>
+            <span class="level-badge">📝 500+ Übungen • Matura-Niveau C1</span>
         </header>
         
-        <!-- THEME SCREEN -->
         <div class="screen active" id="themeScreen">
             <div class="menu-card">
                 <h2 style="text-align:center;font-family:'Fredoka',sans-serif;color:var(--accent-glow);margin-bottom:8px;">Wähle deine Textsorte</h2>
-                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Jede Textsorte hat spezifische Phrasen</p>
+                <p style="text-align:center;color:var(--text-muted);font-size:0.9rem;">Anspruchsvolle Formulierungen für die schriftliche Matura</p>
                 <div class="theme-grid">
-                    <div class="theme-card" onclick="selectTheme('eroerterung')">
-                        <span class="theme-icon">⚖️</span>
-                        <h3 class="theme-title">Erörterung</h3>
-                        <p class="theme-desc">Argumentieren & Abwägen</p>
-                        <span class="theme-count">100 Phrasen</span>
-                    </div>
-                    <div class="theme-card" onclick="selectTheme('kommentar')">
-                        <span class="theme-icon">💬</span>
-                        <h3 class="theme-title">Kommentar</h3>
-                        <p class="theme-desc">Meinung & Kritik</p>
-                        <span class="theme-count">100 Phrasen</span>
-                    </div>
-                    <div class="theme-card" onclick="selectTheme('zusammenfassung')">
-                        <span class="theme-icon">📋</span>
-                        <h3 class="theme-title">Zusammenfassung</h3>
-                        <p class="theme-desc">Textbezug & Wiedergabe</p>
-                        <span class="theme-count">100 Phrasen</span>
-                    </div>
-                    <div class="theme-card" onclick="selectTheme('leserbrief')">
-                        <span class="theme-icon">✉️</span>
-                        <h3 class="theme-title">Leserbrief</h3>
-                        <p class="theme-desc">Reaktion & Appell</p>
-                        <span class="theme-count">100 Phrasen</span>
-                    </div>
-                    <div class="theme-card" onclick="selectTheme('textanalyse')">
-                        <span class="theme-icon">🔍</span>
-                        <h3 class="theme-title">Textanalyse</h3>
-                        <p class="theme-desc">Stilmittel & Wirkung</p>
-                        <span class="theme-count">100 Phrasen</span>
-                    </div>
-                    <div class="theme-card" onclick="selectTheme('alle')">
-                        <span class="theme-icon">🏆</span>
-                        <h3 class="theme-title">ALLE</h3>
-                        <p class="theme-desc">Komplettes Training</p>
-                        <span class="theme-count">500+ Phrasen</span>
-                    </div>
+                    <div class="theme-card" onclick="selectTheme('eroerterung')"><span class="theme-icon">⚖️</span><h3 class="theme-title">Erörterung</h3><p class="theme-desc">Argumentieren & Abwägen</p><span class="theme-count">100+ Phrasen</span></div>
+                    <div class="theme-card" onclick="selectTheme('kommentar')"><span class="theme-icon">💬</span><h3 class="theme-title">Kommentar</h3><p class="theme-desc">Meinung & Kritik</p><span class="theme-count">100+ Phrasen</span></div>
+                    <div class="theme-card" onclick="selectTheme('zusammenfassung')"><span class="theme-icon">📋</span><h3 class="theme-title">Zusammenfassung</h3><p class="theme-desc">Textbezug & Wiedergabe</p><span class="theme-count">100+ Phrasen</span></div>
+                    <div class="theme-card" onclick="selectTheme('leserbrief')"><span class="theme-icon">✉️</span><h3 class="theme-title">Leserbrief</h3><p class="theme-desc">Reaktion & Appell</p><span class="theme-count">100+ Phrasen</span></div>
+                    <div class="theme-card" onclick="selectTheme('textanalyse')"><span class="theme-icon">🔍</span><h3 class="theme-title">Textanalyse</h3><p class="theme-desc">Stilmittel & Wirkung</p><span class="theme-count">100+ Phrasen</span></div>
+                    <div class="theme-card" onclick="selectTheme('alle')"><span class="theme-icon">🏆</span><h3 class="theme-title">ALLE</h3><p class="theme-desc">Komplettes Training</p><span class="theme-count">500+ Phrasen</span></div>
                 </div>
             </div>
             <div class="menu-card">
@@ -184,7 +154,6 @@
             </div>
         </div>
         
-        <!-- MODE SCREEN -->
         <div class="screen" id="modeScreen">
             <div class="menu-card">
                 <button class="back-btn" onclick="goToThemeSelect()">← Zurück</button>
@@ -209,7 +178,6 @@
             </div>
         </div>
         
-        <!-- GAME SCREEN -->
         <div class="screen" id="gameScreen">
             <div class="stats-bar">
                 <div class="stat"><div class="stat-value" id="points">0</div><div class="stat-label">Punkte</div></div>
@@ -227,7 +195,6 @@
             </div>
         </div>
         
-        <!-- RESULT SCREEN -->
         <div class="screen" id="resultScreen">
             <div class="result-card">
                 <h2 class="result-title">🎉 Geschafft!</h2>
@@ -254,45 +221,34 @@
         </div>
     </div>
     
-    <!-- THEORY MODAL -->
     <div class="modal-overlay" id="theoryModal">
         <div class="modal-content">
             <button class="modal-close" onclick="hideTheory()">✕</button>
-            <h2 class="modal-title">📚 Matura-Formulierungen - Tipps</h2>
+            <h2 class="modal-title">📚 Matura-Formulierungen - Theorie</h2>
             <div class="theory-section">
-                <h3>1. Konnektoren & Übergänge</h3>
-                <p>Verbinde Argumente elegant:</p>
-                <div class="theory-example"><span class="wrong">Und dann...</span> → <span class="right">Darüber hinaus / Hinzu kommt...</span></div>
+                <h3>1. Konzessive Konnektoren</h3>
+                <div class="theory-example"><span class="wrong">Obwohl es teuer ist, aber...</span> → <span class="right">Wenngleich die Kosten erheblich sind, so überwiegen dennoch...</span></div>
             </div>
             <div class="theory-section">
-                <h3>2. Meinungsäußerung</h3>
-                <div class="theory-example"><span class="wrong">Ich finde...</span> → <span class="right">Meines Erachtens / Aus meiner Sicht...</span></div>
+                <h3>2. Differenzierte Meinungsäußerung</h3>
+                <div class="theory-example"><span class="wrong">Ich finde das falsch.</span> → <span class="right">Diese Argumentation vermag insofern nicht zu überzeugen, als...</span></div>
             </div>
             <div class="theory-section">
-                <h3>3. Textbezug</h3>
-                <div class="theory-example"><span class="wrong">Im Text steht...</span> → <span class="right">Der Autor führt an / legt dar...</span></div>
+                <h3>3. Präziser Textbezug</h3>
+                <div class="theory-example"><span class="wrong">Der Autor sagt...</span> → <span class="right">Der Verfasser expliziert seine These, indem er konstatiert...</span></div>
             </div>
             <div class="theory-section">
-                <h3>4. Argumentation</h3>
-                <div class="theory-example"><span class="wrong">Ein Grund ist...</span> → <span class="right">Ein gewichtiges Argument hierfür ist...</span></div>
+                <h3>4. Wissenschaftliche Absicherung</h3>
+                <div class="theory-example"><span class="wrong">Studien zeigen...</span> → <span class="right">Die empirische Evidenz legt den Schluss nahe, dass...</span></div>
             </div>
             <div class="theory-section">
-                <h3>5. Einleitung & Schluss</h3>
-                <div class="theory-example"><strong>Einleitung:</strong> Die Frage, ob... ist von besonderer Aktualität...<br><strong>Schluss:</strong> Abschließend lässt sich festhalten...</div>
-            </div>
-            <div class="theory-section">
-                <h3>6. Wissenschaftlicher Stil</h3>
-                <div class="theory-example"><span class="wrong">Man kann sagen...</span> → <span class="right">Es lässt sich konstatieren...</span></div>
-            </div>
-            <div class="theory-section">
-                <h3>7. Redewendungen</h3>
-                <div class="theory-example">auf der Hand liegen • unter dem Strich • ins Gewicht fallen • den Nagel auf den Kopf treffen</div>
+                <h3>5. Stilistische Variation</h3>
+                <div class="theory-example">Vermeiden Sie: Satzanfänge mit "Es gibt", "Man kann sagen", Wiederholungen<br>Nutzen Sie: Partizipialkonstruktionen, Nominalisierungen, Inversionen</div>
             </div>
         </div>
     </div>
 
 <script>
-// GAME STATE
 let gameState = { theme: null, mode: null, exercises: [], currentIndex: 0, points: 0, streak: 0, maxStreak: 0, correct: 0, incorrect: 0, hintUsed: false, answered: false, soundEnabled: true, startTime: null, timerInterval: null };
 let audioContext = null;
 
@@ -316,268 +272,211 @@ const themeInfo = {
     alle: { name: 'Alle Textsorten', icon: '🏆' }
 };
 
-// EXERCISES DATABASE - 500+ exercises
+// ANSPRUCHSVOLLE MATURA-ÜBUNGEN
 const exercisesDB = {
     eroerterung: {
         konnektoren: [
-            { type: 'fill', category: 'konnektoren', instruction: 'Ergänze den additiven Konnektor:', original: 'Ein wichtiges Argument ist die Kostenersparnis. <strong>[___]</strong> ist auch der Umweltaspekt zu bedenken.', template: [{id:'a',correct:['Darüber hinaus','Hinzu kommt','Überdies','Ferner','Zudem'],width:150}], hint: 'Zusätzliches Argument einleiten', explanation: '<strong>Darüber hinaus / Hinzu kommt / Überdies</strong> leiten zusätzliche Argumente ein.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Konnektor drückt einen Gegensatz aus?', original: 'Die Digitalisierung bringt viele Vorteile. <strong>[___]</strong> birgt sie auch Risiken.', options: [{text:'Allerdings',correct:true},{text:'Außerdem',correct:false},{text:'Daher',correct:false},{text:'Folglich',correct:false}], hint: 'Adversativer Konnektor', explanation: '<strong>Allerdings</strong> leitet einen Gegensatz oder eine Einschränkung ein.', points: 15 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Setze den kausalen Konnektor ein:', original: 'Die Arbeitslosigkeit steigt. <strong>[___]</strong> wächst die soziale Ungleichheit.', template: [{id:'a',correct:['Infolgedessen','Demzufolge','Folglich','Daher','Somit'],width:140}], hint: 'Ursache → Wirkung', explanation: '<strong>Infolgedessen / Demzufolge / Folglich</strong> zeigen eine Konsequenz an.', points: 10 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Ergänze den konzessiven Konnektor:', original: '<strong>[___]</strong> die Kosten hoch sind, überwiegen die Vorteile.', template: [{id:'a',correct:['Obwohl','Obgleich','Wenngleich','Auch wenn'],width:120}], hint: 'Einräumung trotz Gegenargument', explanation: '<strong>Obwohl / Obgleich / Wenngleich</strong> leiten konzessive Nebensätze ein.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Ausdruck leitet eine Schlussfolgerung ein?', original: 'Die Argumente wurden dargelegt. <strong>[___]</strong> lässt sich festhalten...', options: [{text:'Somit',correct:true},{text:'Jedoch',correct:false},{text:'Einerseits',correct:false},{text:'Zudem',correct:false}], hint: 'Am Ende einer Argumentation', explanation: '<strong>Somit</strong> leitet eine logische Schlussfolgerung ein.', points: 15 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Ergänze den Vergleichskonnektor:', original: '<strong>[___]</strong> in anderen Ländern ist auch in Österreich diese Tendenz zu beobachten.', template: [{id:'a',correct:['Ebenso wie','Wie auch','Genauso wie','Analog zu'],width:130}], hint: 'Parallele ziehen', explanation: '<strong>Ebenso wie / Analog zu</strong> stellen Vergleiche zwischen Sachverhalten her.', points: 10 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Setze den temporalen Konnektor ein:', original: '<strong>[___]</strong> man diese Maßnahmen einführte, verbesserte sich die Situation.', template: [{id:'a',correct:['Nachdem','Sobald','Als','Seitdem'],width:100}], hint: 'Zeitliche Abfolge', explanation: '<strong>Nachdem / Sobald / Als</strong> drücken zeitliche Beziehungen aus.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Konnektor strukturiert zwei Aspekte?', original: '<strong>[___]</strong> ist der wirtschaftliche Aspekt zu nennen, <strong>[___]</strong> der soziale.', options: [{text:'Zum einen ... zum anderen',correct:true},{text:'Weder ... noch',correct:false},{text:'Sowohl ... als auch',correct:false},{text:'Je ... desto',correct:false}], hint: 'Zwei Punkte gegenüberstellen', explanation: '<strong>Zum einen ... zum anderen</strong> strukturiert zwei Aspekte.', points: 15 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Ergänze den einschränkenden Konnektor:', original: 'Diese Lösung erscheint sinnvoll, <strong>[___]</strong> ist sie schwer umsetzbar.', template: [{id:'a',correct:['jedoch','allerdings','freilich','indessen','gleichwohl'],width:120}], hint: 'Einschränkung', explanation: '<strong>Jedoch / allerdings / freilich</strong> schränken vorherige Aussagen ein.', points: 10 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Setze den konditionalen Konnektor ein:', original: '<strong>[___]</strong> diese Maßnahmen greifen, wird sich die Lage verbessern.', template: [{id:'a',correct:['Sofern','Falls','Vorausgesetzt','Wenn','Insofern'],width:120}], hint: 'Bedingung', explanation: '<strong>Sofern / Falls / Vorausgesetzt</strong> drücken Bedingungen aus.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Ausdruck verstärkt ein Argument?', original: 'Das Projekt ist teuer. <strong>[___]</strong> ist es auch zeitaufwändig.', options: [{text:'Darüber hinaus',correct:true},{text:'Dennoch',correct:false},{text:'Stattdessen',correct:false},{text:'Nichtsdestotrotz',correct:false}], hint: 'Zusätzliches verstärkendes Argument', explanation: '<strong>Darüber hinaus</strong> fügt ein weiteres verstärkendes Argument hinzu.', points: 15 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Ergänze den finalen Konnektor:', original: 'Wir müssen handeln, <strong>[___]</strong> die Situation nicht eskaliert.', template: [{id:'a',correct:['damit','sodass','auf dass'],width:100}], hint: 'Ziel/Zweck', explanation: '<strong>Damit / sodass</strong> drücken Zweck oder Ziel aus.', points: 10 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Formulieren Sie den konzessiven Zusammenhang auf C1-Niveau um:', original: '<strong>Obwohl</strong> die Digitalisierung Arbeitsplätze vernichtet, <strong>schafft sie aber auch</strong> neue.', template: [{id:'a',correct:['Wenngleich','Obschon','Ungeachtet der Tatsache, dass'],width:220},'die Digitalisierung Arbeitsplätze vernichtet,',{id:'b',correct:['so generiert sie doch','eröffnet sie gleichwohl','schafft sie nichtsdestoweniger'],width:220},'neue Beschäftigungsmöglichkeiten.'], hint: 'Konzessivität: wenngleich/obschon + adversative Fortsetzung', explanation: '<strong>Wenngleich...so doch / Obschon...gleichwohl</strong> sind gehobene konzessive Strukturen. Vermeiden Sie "obwohl...aber".', points: 20 },
+            { type: 'mc', category: 'konnektoren', instruction: 'Welche Formulierung drückt den kausalen Zusammenhang am präzisesten aus?', original: 'Die Jugendarbeitslosigkeit steigt. Das führt zu sozialen Spannungen.', options: [{text:'Die steigende Jugendarbeitslosigkeit zeitigt soziale Spannungen.',correct:true},{text:'Weil die Jugendarbeitslosigkeit steigt, gibt es soziale Spannungen.',correct:false},{text:'Die Jugendarbeitslosigkeit steigt und deshalb gibt es Spannungen.',correct:false},{text:'Durch die Jugendarbeitslosigkeit entstehen Spannungen.',correct:false}], hint: '"Zeitigen" = hervorbringen, bewirken (gehobene Kausalität)', explanation: '<strong>Zeitigt</strong> drückt eine Kausalbeziehung im gehobenen Stil aus. Die Nominalisierung "steigende" ist stilistisch überlegen.', points: 20 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Verbinden Sie die Sätze mit einem restriktiven Konnektor:', original: 'Diese Maßnahme ist sinnvoll. Sie sollte nur bei Erwachsenen angewandt werden.', template: ['Diese Maßnahme ist',{id:'a',correct:['insoweit','insofern'],width:100},'sinnvoll,',{id:'b',correct:['als sie','wie sie'],width:100},'auf Erwachsene beschränkt bleibt.'], hint: 'Restriktion: insoweit/insofern...als', explanation: '<strong>Insoweit/insofern...als</strong> drückt eine Einschränkung präziser aus als "aber nur wenn".', points: 15 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Drücken Sie die Proportionalität elegant aus:', original: '<strong>Je mehr</strong> man lernt, <strong>desto besser</strong> versteht man.', template: [{id:'a',correct:['In dem Maße, wie','In dem Maße, in dem','Je nachdem, wie intensiv'],width:200},'man sich mit der Materie befasst,',{id:'b',correct:['erschließt sich einem das Verständnis','vertieft sich das Verständnis','wächst die Einsicht'],width:250},'.'], hint: 'Proportionalität gehobener ausdrücken', explanation: '<strong>In dem Maße, wie</strong> ist eine elegantere Alternative zu "je...desto".', points: 15 },
+            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Konnektor leitet eine logische Präzisierung ein?', original: 'Die These ist nicht falsch. Sie bedarf einer Differenzierung.', options: [{text:'Die These ist nicht per se verfehlt, bedarf indes einer Differenzierung.',correct:true},{text:'Die These ist nicht falsch, aber sie muss differenziert werden.',correct:false},{text:'Die These ist richtig, jedoch braucht sie Differenzierung.',correct:false},{text:'Die These stimmt, nur muss man sie differenzieren.',correct:false}], hint: '"Per se" + "indes"', explanation: '<strong>Per se</strong> (an sich) + <strong>indes</strong> (jedoch) bilden eine gehobene adversative Verknüpfung.', points: 20 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Formulieren Sie den temporalen Bezug im Nominalstil:', original: '<strong>Nachdem</strong> die Studie veröffentlicht <strong>wurde</strong>, begann die Debatte.', template: [{id:'a',correct:['Im Anschluss an','In der Folge','Nach'],width:150},'die Veröffentlichung der Studie',{id:'b',correct:['entbrannte','entfachte sich','entspann sich'],width:140},'die Debatte.'], hint: 'Nominalisierung + gehobenes Verb für "begann"', explanation: 'Nominalstil: <strong>Im Anschluss an + Nominalisierung</strong>. "Entbrennen/entfachen" für intensiven Beginn einer Debatte.', points: 15 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Drücken Sie die Finalität wissenschaftlich aus:', original: 'Das Experiment wurde durchgeführt, <strong>um</strong> die Hypothese <strong>zu</strong> überprüfen.', template: ['Das Experiment wurde',{id:'a',correct:['mit dem Ziel durchgeführt','in der Absicht durchgeführt','eigens konzipiert'],width:200},', die Hypothese',{id:'b',correct:['einer Überprüfung zu unterziehen','zu verifizieren','auf ihre Validität zu prüfen'],width:230},'.'], hint: 'Finale Nominalkonstruktion', explanation: '<strong>Mit dem Ziel / in der Absicht</strong> + Nominalisierung ist wissenschaftlicher als "um...zu".', points: 15 },
+            { type: 'mc', category: 'konnektoren', instruction: 'Welche adversative Verknüpfung ist stilistisch am anspruchsvollsten?', original: 'Einerseits sind die Kosten hoch, andererseits ist der Nutzen groß.', options: [{text:'Den hohen Kosten steht ein beträchtlicher Nutzen gegenüber.',correct:true},{text:'Die Kosten sind hoch, aber der Nutzen ist auch groß.',correct:false},{text:'Zwar sind die Kosten hoch, doch der Nutzen ist groß.',correct:false},{text:'Einerseits hohe Kosten, andererseits großer Nutzen.',correct:false}], hint: 'Gegenüberstellung ohne "einerseits/andererseits"', explanation: '<strong>X steht Y gegenüber</strong> vermeidet das oft überstra­pazierte "einerseits/andererseits".', points: 20 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Verknüpfen Sie konsekutiv auf gehobenem Niveau:', original: 'Die Lage ist <strong>so</strong> ernst, <strong>dass</strong> sofortiges Handeln erforderlich ist.', template: ['Die Lage hat eine',{id:'a',correct:['Brisanz erreicht','Dringlichkeit erlangt','Dimension angenommen'],width:180},', die',{id:'b',correct:['unverzügliches Handeln gebietet','sofortiges Eingreifen erfordert','unmittelbares Agieren unabdingbar macht'],width:260},'.'], hint: 'Konsekutivität nominalisiert + "gebieten"', explanation: 'Nominalisierung + Relativsatz ersetzt "so...dass". <strong>Gebieten</strong> = zwingend erfordern (gehoben).', points: 15 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Formulieren Sie die Bedingung im Nominalstil:', original: '<strong>Wenn</strong> man diese Faktoren <strong>berücksichtigt</strong>, ergibt sich ein anderes Bild.', template: [{id:'a',correct:['Unter Berücksichtigung','Bei Berücksichtigung','In Anbetracht'],width:180},'dieser Faktoren',{id:'b',correct:['ergibt sich ein differenzierteres Bild','eröffnet sich eine andere Perspektive','stellt sich die Lage anders dar'],width:260},'.'], hint: 'Präposition + Nominalisierung statt Konditionalsatz', explanation: '<strong>Unter/Bei Berücksichtigung</strong> ersetzt den Konditionalsatz elegant durch eine Präpositionalphrase.', points: 15 },
+            { type: 'mc', category: 'konnektoren', instruction: 'Welche Formulierung drückt Konzessivität am elegantesten aus?', original: 'Trotz der Kritik hält die Regierung an ihrem Kurs fest.', options: [{text:'Ungeachtet der massiven Kritik verharrt die Regierung auf ihrem eingeschlagenen Kurs.',correct:true},{text:'Obwohl es viel Kritik gibt, hält die Regierung an ihrem Kurs fest.',correct:false},{text:'Die Regierung hält trotz Kritik an ihrem Kurs fest.',correct:false},{text:'Trotz aller Kritik bleibt die Regierung bei ihrem Kurs.',correct:false}], hint: '"Ungeachtet" + "verharren auf"', explanation: '<strong>Ungeachtet + Genitiv</strong> ist formeller als "trotz". <strong>Verharren auf</strong> impliziert Starrheit.', points: 20 },
         ],
         meinung: [
-            { type: 'fill', category: 'meinung', instruction: 'Formuliere die Meinung gehobener:', original: '<strong>Ich finde</strong>, dass diese Maßnahme sinnvoll ist.', template: [{id:'a',correct:['Meines Erachtens','Meiner Ansicht nach','Meiner Meinung nach','Aus meiner Sicht','M.E.'],width:180},'ist diese Maßnahme sinnvoll.'], hint: 'Gehobener als "ich finde"', explanation: '<strong>Meines Erachtens / Meiner Ansicht nach</strong> sind formellere Alternativen.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welcher Ausdruck ist am differenziertesten?', original: 'Diese These ist <strong>[___]</strong>.', options: [{text:'nicht unproblematisch',correct:true},{text:'falsch',correct:false},{text:'dumm',correct:false},{text:'Quatsch',correct:false}], hint: 'Kritik ohne Abwertung', explanation: '<strong>Nicht unproblematisch</strong> (Litotes) drückt Kritik differenziert aus.', points: 15 },
-            { type: 'fill', category: 'meinung', instruction: 'Drücke Zustimmung elegant aus:', original: '<strong>Ich stimme zu</strong>, dass hier Handlungsbedarf besteht.', template: [{id:'a',correct:['Es ist unbestreitbar','Zweifelsohne','Unbestritten ist','Fraglos'],width:160},', dass hier Handlungsbedarf besteht.'], hint: 'Starke Zustimmung', explanation: '<strong>Zweifelsohne / Unbestritten</strong> drücken starke Zustimmung aus.', points: 10 },
-            { type: 'fill', category: 'meinung', instruction: 'Relativiere die Aussage:', original: 'Das <strong>ist total falsch</strong>.', template: ['Diese Ansicht',{id:'a',correct:['erscheint fragwürdig','ist zu hinterfragen','greift zu kurz','bedarf der Überprüfung'],width:170},'.'], hint: 'Kritik ohne "falsch"', explanation: '<strong>Erscheint fragwürdig / greift zu kurz</strong> kritisieren elegant.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welche Formulierung drückt bedingte Zustimmung aus?', original: 'Diese Lösung ist <strong>[___]</strong> akzeptabel.', options: [{text:'grundsätzlich',correct:true},{text:'total',correct:false},{text:'voll',correct:false},{text:'echt',correct:false}], hint: 'Eingeschränkte Zustimmung', explanation: '<strong>Grundsätzlich</strong> signalisiert Zustimmung mit möglichen Einschränkungen.', points: 15 },
-            { type: 'fill', category: 'meinung', instruction: 'Drücke vorsichtige Ablehnung aus:', original: '<strong>Das ist Unsinn</strong>.', template: ['Diese Argumentation',{id:'a',correct:['überzeugt nicht','vermag nicht zu überzeugen','ist wenig überzeugend','erscheint nicht schlüssig'],width:200},'.'], hint: 'Höfliche Ablehnung', explanation: '<strong>Überzeugt nicht / vermag nicht zu überzeugen</strong> ist höflicher.', points: 10 },
-            { type: 'fill', category: 'meinung', instruction: 'Formuliere persönliche Überzeugung:', original: '<strong>Ich glaube fest</strong>, dass...', template: [{id:'a',correct:['Ich bin der festen Überzeugung','Ich vertrete die Ansicht','Ich bin überzeugt davon'],width:230},', dass...'], hint: 'Formelle Überzeugung', explanation: '<strong>Ich bin der festen Überzeugung</strong> ist formeller.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welcher Ausdruck zeigt Skepsis?', original: 'Diese Behauptung ist <strong>[___]</strong>.', options: [{text:'mit Vorsicht zu genießen',correct:true},{text:'gelogen',correct:false},{text:'Blödsinn',correct:false},{text:'lachhaft',correct:false}], hint: 'Elegante Skepsis', explanation: '<strong>Mit Vorsicht zu genießen</strong> drückt Skepsis ohne Beleidigung aus.', points: 15 },
-            { type: 'fill', category: 'meinung', instruction: 'Zeige Verständnis für Gegenposition:', original: '<strong>Die anderen liegen falsch</strong>.', template: [{id:'a',correct:['Obgleich diese Position nachvollziehbar ist','Wenngleich dieser Standpunkt verständlich erscheint'],width:300},', halte ich sie für verfehlt.'], hint: 'Erst verstehen, dann widersprechen', explanation: 'Zeige erst Verständnis, dann Widerspruch.', points: 10 },
-            { type: 'fill', category: 'meinung', instruction: 'Drücke eine Vermutung aus:', original: '<strong>Ich denke</strong>, das könnte funktionieren.', template: [{id:'a',correct:['Es ist anzunehmen','Es liegt nahe','Man darf vermuten','Es spricht vieles dafür'],width:180},', dass dies funktionieren könnte.'], hint: 'Formelle Vermutung', explanation: '<strong>Es ist anzunehmen / Es liegt nahe</strong> sind gehobene Vermutungsformeln.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welche Phrase zeigt Zurückhaltung?', original: '<strong>[___]</strong> würde ich dieser These zustimmen.', options: [{text:'Mit gewissen Vorbehalten',correct:true},{text:'Auf jeden Fall',correct:false},{text:'Hundertprozentig',correct:false},{text:'Total',correct:false}], hint: 'Eingeschränkte Zustimmung', explanation: '<strong>Mit gewissen Vorbehalten</strong> signalisiert differenzierte Zustimmung.', points: 15 },
+            { type: 'fill', category: 'meinung', instruction: 'Formulieren Sie die Meinungsäußerung differenziert:', original: '<strong>Ich finde</strong>, dass diese Argumentation <strong>falsch</strong> ist.', template: [{id:'a',correct:['Meines Erachtens','Nach meinem Dafürhalten','Aus meiner Perspektive'],width:200},'vermag diese Argumentation',{id:'b',correct:['nicht zu überzeugen','keiner kritischen Prüfung standzuhalten','in ihrer Schlüssigkeit nicht zu befriedigen'],width:280},'.'], hint: 'Gehobene Meinungsformel + kritische Distanz ohne "falsch"', explanation: '<strong>Meines Erachtens / Nach meinem Dafürhalten</strong> + "vermag nicht zu überzeugen" ist differenzierter als "finde ich falsch".', points: 20 },
+            { type: 'mc', category: 'meinung', instruction: 'Welche Formulierung drückt begründete Skepsis am präzisesten aus?', original: 'Diese Behauptung ist zweifelhaft.', options: [{text:'Diese Behauptung entbehrt einer hinreichenden empirischen Fundierung.',correct:true},{text:'Diese Behauptung ist fragwürdig und nicht bewiesen.',correct:false},{text:'An dieser Behauptung kann man zweifeln.',correct:false},{text:'Diese Behauptung überzeugt mich nicht.',correct:false}], hint: '"Entbehren" + wissenschaftliche Begründung', explanation: '<strong>Entbehrt einer Fundierung</strong> benennt den Grund für die Skepsis präzise und wissenschaftlich.', points: 20 },
+            { type: 'fill', category: 'meinung', instruction: 'Drücken Sie bedingte Zustimmung differenziert aus:', original: 'Das <strong>stimmt</strong>, aber nur <strong>teilweise</strong>.', template: ['Dieser Einschätzung ist',{id:'a',correct:['insoweit beizupflichten','in gewissem Maße Recht zu geben','tendenziell zuzustimmen'],width:220},', als',{id:'b',correct:['sie einen Teilaspekt zutreffend erfasst','sie in ihrer Grundtendenz zutrifft','der Kerngedanke Berechtigung hat'],width:260},'.'], hint: '"Beipflichten" + präzisierende Einschränkung', explanation: '<strong>Beipflichten</strong> ist formeller als "zustimmen". Die Einschränkung erfolgt durch einen präzisierenden Relativsatz.', points: 15 },
+            { type: 'fill', category: 'meinung', instruction: 'Formulieren Sie konstruktive Kritik auf Matura-Niveau:', original: 'Der Autor <strong>irrt sich</strong>, wenn er behauptet...', template: ['Der Autor',{id:'a',correct:['unterliegt einem Irrtum','befindet sich im Irrtum','geht fehl in der Annahme'],width:200},', wenn er',{id:'b',correct:['die These aufstellt','postuliert','die Behauptung wagt'],width:180},', dass...'], hint: '"Einem Irrtum unterliegen" statt "sich irren"', explanation: '<strong>Einem Irrtum unterliegen / fehlgehen</strong> sind sachlichere Formulierungen als "sich irren".', points: 15 },
+            { type: 'mc', category: 'meinung', instruction: 'Welche Formulierung zeigt differenzierte Ablehnung einer These?', original: 'Diese These ist unhaltbar.', options: [{text:'Diese These erweist sich bei näherer Betrachtung als nicht tragfähig.',correct:true},{text:'Diese These ist völlig falsch und unhaltbar.',correct:false},{text:'Ich lehne diese These komplett ab.',correct:false},{text:'Diese These kann so nicht stimmen.',correct:false}], hint: '"Bei näherer Betrachtung" + "tragfähig"', explanation: '<strong>Erweist sich bei näherer Betrachtung als nicht tragfähig</strong> signalisiert eine begründete, nicht dogmatische Ablehnung.', points: 20 },
+            { type: 'fill', category: 'meinung', instruction: 'Drücken Sie vorsichtige Zustimmung wissenschaftlich aus:', original: 'Das <strong>könnte stimmen</strong>.', template: ['Es',{id:'a',correct:['spricht einiges für die Annahme','liegt nahe zu vermuten','darf mit einiger Berechtigung angenommen werden'],width:280},', dass diese Einschätzung',{id:'b',correct:['zutrifft','der Realität entspricht','valide ist'],width:170},'.'], hint: 'Epistemische Absicherung + Validität', explanation: 'Wissenschaftliche Vorsicht: <strong>Es spricht einiges für die Annahme / darf angenommen werden</strong> statt "könnte stimmen".', points: 15 },
+            { type: 'fill', category: 'meinung', instruction: 'Relativieren Sie eine absolute Aussage:', original: 'Das ist <strong>immer</strong> so.', template: ['Dies',{id:'a',correct:['trifft in der Regel zu','gilt tendenziell','lässt sich mehrheitlich beobachten'],width:200},', wenngleich',{id:'b',correct:['Ausnahmen nicht auszuschließen sind','Abweichungen im Einzelfall möglich sind','eine Generalisierung problematisch bleibt'],width:280},'.'], hint: 'Tendenzaussage + konzessive Einschränkung', explanation: 'Wissenschaftliche Texte vermeiden Absolutheitsansprüche: <strong>in der Regel / tendenziell</strong> + Ausnahmevorbehalt.', points: 15 },
+            { type: 'mc', category: 'meinung', instruction: 'Welche Formulierung drückt intellektuelle Bescheidenheit aus?', original: 'Ich weiß, dass ich recht habe.', options: [{text:'Ohne Anspruch auf Letztgültigkeit erscheint mir diese Position als die überzeugendere.',correct:true},{text:'Ich bin mir sicher, dass meine Meinung stimmt.',correct:false},{text:'Meiner Meinung nach habe ich recht.',correct:false},{text:'Ich denke, dass ich richtig liege.',correct:false}], hint: '"Ohne Anspruch auf Letztgültigkeit"', explanation: '<strong>Ohne Anspruch auf Letztgültigkeit</strong> signalisiert epistemische Bescheidenheit und Dialogbereitschaft.', points: 20 },
+            { type: 'fill', category: 'meinung', instruction: 'Würdigen Sie eine Gegenposition vor dem Widerspruch:', original: 'Die Gegner sagen X. Aber das stimmt nicht.', template: [{id:'a',correct:['Wenngleich die Gegenposition','So berechtigt der Einwand','Obschon das Gegenargument'],width:220},'auf den ersten Blick',{id:'b',correct:['plausibel erscheinen mag','nachvollziehbar wirkt','einleuchtet'],width:180},', so verfängt es doch nicht, weil...'], hint: 'Würdigung vor Widerlegung', explanation: 'Dialektisches Argumentieren: <strong>Erst Würdigung, dann Widerlegung</strong>. Zeigt Fairness und rhetorisches Geschick.', points: 15 },
+            { type: 'fill', category: 'meinung', instruction: 'Drücken Sie Überzeugung ohne Dogmatismus aus:', original: 'Ich bin <strong>total überzeugt</strong>, dass...', template: ['Ich',{id:'a',correct:['vertrete mit Nachdruck die Auffassung','bin entschieden der Ansicht','halte es für evident'],width:250},', dass..., wenngleich ich',{id:'b',correct:['für Gegenargumente offen bleibe','die Komplexität der Materie anerkenne','alternative Perspektiven nicht ausschließe'],width:280},'.'], hint: 'Nachdrückliche Meinung + Offenheitsklausel', explanation: 'Überzeugung + <strong>Offenheitsklausel</strong> vermeidet dogmatischen Eindruck und zeigt wissenschaftliche Haltung.', points: 15 },
         ],
         argumentation: [
-            { type: 'fill', category: 'argumentation', instruction: 'Leite ein starkes Argument ein:', original: '<strong>Ein Grund ist</strong>...', template: [{id:'a',correct:['Ein gewichtiges Argument hierfür ist','Ein schlagkräftiges Argument ist','Besonders ins Gewicht fällt'],width:260}], hint: 'Stärker als "ein Grund"', explanation: '<strong>Ein gewichtiges/schlagkräftiges Argument</strong> verleiht mehr Nachdruck.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Wie entkräftet man ein Gegenargument elegant?', original: 'Dieses Argument <strong>[___]</strong>.', options: [{text:'greift zu kurz',correct:true},{text:'ist dumm',correct:false},{text:'ist falsch',correct:false},{text:'ist lächerlich',correct:false}], hint: 'Sachliche Entkräftung', explanation: '<strong>Greift zu kurz</strong> zeigt, dass ein Argument unvollständig ist.', points: 15 },
-            { type: 'fill', category: 'argumentation', instruction: 'Verstärke die Argumentation:', original: 'Dieser Punkt <strong>ist wichtig</strong>.', template: ['Diesem Aspekt kommt',{id:'a',correct:['besondere Bedeutung zu','entscheidende Relevanz zu','erhebliches Gewicht zu'],width:200},'.'], hint: 'Wichtigkeit betonen', explanation: '<strong>Besondere Bedeutung / entscheidende Relevanz</strong> verstärkt.', points: 10 },
-            { type: 'fill', category: 'argumentation', instruction: 'Führe ein Beispiel ein:', original: '<strong>Zum Beispiel</strong>...', template: [{id:'a',correct:['Dies lässt sich exemplarisch an','Dies verdeutlicht das Beispiel','Als Beleg hierfür dient','Exemplarisch sei genannt'],width:230}], hint: 'Formelle Beispieleinleitung', explanation: '<strong>Exemplarisch / als Beleg</strong> sind gehobene Einleitungen.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Welche Phrase zeigt einen Fehlschluss?', original: 'Diese Argumentation beruht auf einem <strong>[___]</strong>.', options: [{text:'Trugschluss',correct:true},{text:'Fehler',correct:false},{text:'Problem',correct:false},{text:'Ding',correct:false}], hint: 'Logikfehler benennen', explanation: '<strong>Trugschluss</strong> bezeichnet einen logischen Fehlschluss.', points: 15 },
-            { type: 'fill', category: 'argumentation', instruction: 'Relativiere ein Argument:', original: 'Dieses Argument <strong>stimmt, aber</strong>...', template: ['Dieses Argument',{id:'a',correct:['hat durchaus seine Berechtigung, jedoch','ist nicht von der Hand zu weisen, gleichwohl','verdient Beachtung, wenngleich'],width:280}], hint: 'Erst anerkennen, dann einschränken', explanation: 'Erst anerkennen, dann einschränken.', points: 10 },
-            { type: 'fill', category: 'argumentation', instruction: 'Weise auf eine Schwäche hin:', original: 'Da <strong>fehlt was</strong>.', template: ['Diese Argumentation weist',{id:'a',correct:['eine Lücke auf','Schwachstellen auf','erhebliche Defizite auf'],width:180},'.'], hint: 'Formell auf Mängel hinweisen', explanation: '<strong>Weist eine Lücke / Schwachstellen auf</strong> ist sachlicher.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Wie führt man das stärkste Argument ein?', original: '<strong>[___]</strong> ist jedoch der folgende Aspekt...', options: [{text:'Ausschlaggebend',correct:true},{text:'Irgendwie wichtig',correct:false},{text:'Auch gut',correct:false},{text:'Okay',correct:false}], hint: 'Das entscheidende Argument', explanation: '<strong>Ausschlaggebend</strong> markiert das wichtigste Argument.', points: 15 },
-            { type: 'fill', category: 'argumentation', instruction: 'Ziehe eine Zwischenbilanz:', original: '<strong>Bis jetzt</strong> haben wir gesehen...', template: [{id:'a',correct:['Zusammenfassend lässt sich an dieser Stelle festhalten','Zwischenbilanzierend ist zu konstatieren','Bis hierhin zeigt sich'],width:320}], hint: 'Formelle Zwischenbilanz', explanation: '<strong>Zusammenfassend / Zwischenbilanzierend</strong> markiert einen Zwischenstand.', points: 10 },
-            { type: 'fill', category: 'argumentation', instruction: 'Widerlege ein Argument:', original: 'Das <strong>stimmt nicht</strong>.', template: ['Dieser Einwand',{id:'a',correct:['lässt sich entkräften','ist nicht stichhaltig','hält einer Überprüfung nicht stand'],width:220},'.'], hint: 'Elegante Widerlegung', explanation: '<strong>Lässt sich entkräften / ist nicht stichhaltig</strong> widerlegt sachlich.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Welche Phrase betont Faktizität?', original: '<strong>[___]</strong> sprechen die Zahlen eine deutliche Sprache.', options: [{text:'De facto',correct:true},{text:'Irgendwie',correct:false},{text:'Vielleicht',correct:false},{text:'Quasi',correct:false}], hint: 'Tatsächlich, faktisch', explanation: '<strong>De facto</strong> betont die faktische Realität.', points: 15 },
+            { type: 'fill', category: 'argumentation', instruction: 'Führen Sie das Hauptargument gewichtig ein:', original: '<strong>Das wichtigste Argument ist</strong>...', template: [{id:'a',correct:['Den Ausschlag gibt letztlich','Von ausschlaggebender Bedeutung ist','Das schlagkräftigste Argument bildet'],width:260},'der Umstand, dass..., zumal',{id:'b',correct:['dieser Aspekt bislang vernachlässigt wurde','dies empirisch belegt ist','sich hieraus weitreichende Implikationen ergeben'],width:280},'.'], hint: '"Den Ausschlag geben" + Verstärkung durch "zumal"', explanation: '<strong>Den Ausschlag geben</strong> betont die Entscheidungskraft. <strong>Zumal</strong> verstärkt durch einen zusätzlichen Grund.', points: 20 },
+            { type: 'mc', category: 'argumentation', instruction: 'Welche Formulierung entkräftet ein Gegenargument am überzeugendsten?', original: 'Dieses Argument ist falsch.', options: [{text:'Dieses Argument erweist sich bei differenzierter Betrachtung als nicht stichhaltig, da es wesentliche Faktoren außer Acht lässt.',correct:true},{text:'Dieses Argument ist falsch und überzeugt nicht.',correct:false},{text:'Ich finde dieses Argument nicht gut.',correct:false},{text:'Das Argument stimmt nicht, weil es Fehler hat.',correct:false}], hint: 'Begründete Entkräftung mit Präzisierung', explanation: 'Entkräftung durch <strong>konkrete Benennung des Mangels</strong>: "außer Acht lassen" zeigt die Lücke auf.', points: 20 },
+            { type: 'fill', category: 'argumentation', instruction: 'Führen Sie ein Beispiel wissenschaftlich ein:', original: '<strong>Zum Beispiel</strong>: In Schweden ist das anders.', template: [{id:'a',correct:['Dies lässt sich exemplarisch am Beispiel Schwedens illustrieren','Als Beleg hierfür mag das schwedische Modell dienen','Exemplarisch sei auf Schweden verwiesen'],width:350},', wo',{id:'b',correct:['ein diametral entgegengesetzter Ansatz verfolgt wird','eine konträre Strategie zur Anwendung gelangt','man einen alternativen Weg beschreitet'],width:280},'.'], hint: '"Exemplarisch illustrieren" + Präzisierung des Beispiels', explanation: '<strong>Exemplarisch illustrieren / Als Beleg dienen</strong> sind wissenschaftlichere Einleitungen für Beispiele.', points: 15 },
+            { type: 'fill', category: 'argumentation', instruction: 'Stellen Sie einen logischen Fehlschluss fest:', original: 'Das ist ein <strong>Denkfehler</strong>.', template: ['Hierbei handelt es sich um einen',{id:'a',correct:['Fehlschluss','logischen Trugschluss','argumentativen Kurzschluss'],width:200},', da',{id:'b',correct:['von einer Korrelation unzulässig auf Kausalität geschlossen wird','eine petitio principii vorliegt','ein non sequitur begangen wird'],width:300},'.'], hint: 'Logikfachbegriffe: Fehlschlusstypen benennen', explanation: 'Benennen Sie den <strong>Fehlschlusstyp</strong>: Korrelation/Kausalität, petitio principii (Zirkelschluss), non sequitur (folgt nicht).', points: 20 },
+            { type: 'mc', category: 'argumentation', instruction: 'Welche Formulierung zeigt eine argumentative Konzession am geschicktesten?', original: 'Das Gegenargument hat auch etwas Wahres.', options: [{text:'Dem Gegenargument ist durchaus eine gewisse Berechtigung nicht abzusprechen, gleichwohl verfängt es nicht, weil...',correct:true},{text:'Das Gegenargument stimmt auch ein bisschen, aber trotzdem...',correct:false},{text:'Man kann das so sehen, aber ich sehe es anders.',correct:false},{text:'Das ist teilweise richtig, aber nicht ganz.',correct:false}], hint: 'Konzession + Überleitung zur Widerlegung', explanation: '<strong>Eine gewisse Berechtigung nicht absprechen + gleichwohl</strong> zeigt dialektisches Argumentieren.', points: 20 },
+            { type: 'fill', category: 'argumentation', instruction: 'Leiten Sie eine Schlussfolgerung stringent ein:', original: '<strong>Deshalb</strong> kann man sagen, dass...', template: [{id:'a',correct:['Aus den dargelegten Prämissen ergibt sich zwingend','Die Konklusion liegt auf der Hand','Hieraus lässt sich stringent ableiten'],width:300},', dass',{id:'b',correct:['die Ausgangsthese als verifiziert gelten darf','die These einer kritischen Prüfung standhält','die Argumentation schlüssig ist'],width:260},'.'], hint: 'Logische Stringenz betonen', explanation: '<strong>Zwingend ergeben / stringent ableiten</strong> betonen die logische Notwendigkeit der Schlussfolgerung.', points: 15 },
+            { type: 'fill', category: 'argumentation', instruction: 'Decken Sie eine argumentative Schwäche auf:', original: 'Das Argument hat <strong>Schwächen</strong>.', template: ['Die Argumentation weist eine',{id:'a',correct:['nicht unerhebliche Schwachstelle auf','gravierende Lücke auf','strukturelle Inkonsistenz auf'],width:240},', die darin besteht, dass',{id:'b',correct:['ein wesentlicher Aspekt unterschlagen wird','die Prämissen ungeprüft übernommen werden','alternative Erklärungsansätze ignoriert werden'],width:290},'.'], hint: 'Schwachstelle präzise benennen', explanation: 'Konstruktive Kritik: <strong>Schwachstelle benennen + konkretisieren</strong>, worin sie besteht.', points: 15 },
+            { type: 'mc', category: 'argumentation', instruction: 'Welche Formulierung leitet eine Synthese am elegantesten ein?', original: 'Wenn man alles zusammenfasst...', options: [{text:'In der Zusammenschau der divergierenden Positionen kristallisiert sich heraus...',correct:true},{text:'Wenn man alles zusammennimmt, sieht man...',correct:false},{text:'Alles in allem kann man sagen...',correct:false},{text:'Zusammenfassend lässt sich sagen...',correct:false}], hint: '"In der Zusammenschau" + "kristallisiert sich heraus"', explanation: '<strong>In der Zusammenschau / kristallisiert sich heraus</strong> suggeriert eine übergreifende Erkenntnis aus verschiedenen Perspektiven.', points: 20 },
+            { type: 'fill', category: 'argumentation', instruction: 'Formulieren Sie eine differenzierte Abwägung:', original: 'Es gibt <strong>Vor- und Nachteile</strong>.', template: ['Es gilt, die',{id:'a',correct:['respektiven Vorzüge und Nachteile','jeweiligen Chancen und Risiken','komparativen Stärken und Schwächen'],width:250},'gegeneinander',{id:'b',correct:['abzuwägen','in Relation zu setzen','zu gewichten'],width:150},', wobei sich zeigt, dass...'], hint: 'Differenzierte Abwägungsformulierung', explanation: '<strong>Respektive Vorzüge / in Relation setzen</strong> sind präzisere Formulierungen für Abwägungen.', points: 15 },
+            { type: 'fill', category: 'argumentation', instruction: 'Markieren Sie einen Wendepunkt in der Argumentation:', original: '<strong>Aber</strong> man muss auch bedenken...', template: [{id:'a',correct:['An dieser Stelle gilt es indes','Gleichwohl ist zu berücksichtigen','Es wäre jedoch verfehlt zu übersehen'],width:260},', dass',{id:'b',correct:['ein gewichtiger Einwand im Raum steht','die Gegenposition nicht ohne Substanz ist','sich bei näherer Betrachtung Differenzierungsbedarf ergibt'],width:300},'.'], hint: 'Eleganter Perspektivwechsel', explanation: '<strong>An dieser Stelle gilt es indes</strong> markiert einen Wendepunkt ohne das abgenutzte "aber".', points: 15 },
         ],
         textbezug: [
-            { type: 'fill', category: 'textbezug', instruction: 'Verweise auf den Autor:', original: '<strong>Er sagt</strong>, dass...', template: ['Der Autor',{id:'a',correct:['führt an','konstatiert','legt dar','hebt hervor','betont'],width:120},', dass...'], hint: 'Gehobener als "sagt"', explanation: '<strong>Führt an / konstatiert / legt dar</strong> sind formelle Alternativen.', points: 10 },
-            { type: 'mc', category: 'textbezug', instruction: 'Welches Verb drückt kritische Wiedergabe aus?', original: 'Die Autorin <strong>[___]</strong> die Situation als problematisch.', options: [{text:'charakterisiert',correct:true},{text:'sagt',correct:false},{text:'meint',correct:false},{text:'findet',correct:false}], hint: 'Beschreibt/bewertet', explanation: '<strong>Charakterisiert</strong> gibt eine wertende Beschreibung wieder.', points: 15 },
-            { type: 'fill', category: 'textbezug', instruction: 'Gib eine Textstelle wieder:', original: '<strong>Im Text steht</strong>...', template: [{id:'a',correct:['Wie aus dem Text hervorgeht','Der Text verdeutlicht','Dem Text ist zu entnehmen','Laut dem Text'],width:220}], hint: 'Formeller Textbezug', explanation: '<strong>Dem Text ist zu entnehmen</strong> ist ein formeller Textbezug.', points: 10 },
-            { type: 'fill', category: 'textbezug', instruction: 'Zitiere mit Einleitung:', original: '<strong>Er schreibt</strong>: "..."', template: ['Wie [Name]',{id:'a',correct:['treffend formuliert','pointiert ausdrückt','prägnant feststellt'],width:180},': "..."'], hint: 'Zitat einleiten', explanation: '<strong>Treffend formuliert</strong> leitet Zitate elegant ein.', points: 10 },
-            { type: 'mc', category: 'textbezug', instruction: 'Welches Verb zeigt Kritik des Autors?', original: 'Der Autor <strong>[___]</strong> diese Entwicklung scharf.', options: [{text:'kritisiert',correct:true},{text:'sagt',correct:false},{text:'schreibt',correct:false},{text:'meint',correct:false}], hint: 'Negative Bewertung', explanation: '<strong>Kritisiert</strong> zeigt die ablehnende Haltung des Autors.', points: 15 },
-            { type: 'fill', category: 'textbezug', instruction: 'Paraphrasiere eine Aussage:', original: '<strong>Er meint</strong>, das sei wichtig.', template: ['Der Verfasser',{id:'a',correct:['unterstreicht die Bedeutung','betont die Relevanz','hebt die Wichtigkeit hervor'],width:210}], hint: 'Wiedergabe der Aussage', explanation: '<strong>Unterstreicht / betont</strong> paraphrasieren elegant.', points: 10 },
-            { type: 'fill', category: 'textbezug', instruction: 'Verweise auf Zeilenangabe:', original: '<strong>In Zeile 5</strong>...', template: [{id:'a',correct:['Wie in Zeile 5 ersichtlich','In Zeile 5 wird deutlich','Zeile 5 verdeutlicht'],width:200}], hint: 'Formeller Zeilenverweis', explanation: '<strong>Wie in Zeile X ersichtlich</strong> ist ein formeller Verweis.', points: 10 },
-            { type: 'mc', category: 'textbezug', instruction: 'Welches Verb drückt eine Forderung aus?', original: 'Der Autor <strong>[___]</strong> ein Umdenken.', options: [{text:'fordert',correct:true},{text:'will',correct:false},{text:'möchte',correct:false},{text:'sagt',correct:false}], hint: 'Nachdrücklicher Appell', explanation: '<strong>Fordert</strong> drückt einen nachdrücklichen Appell aus.', points: 15 },
-            { type: 'fill', category: 'textbezug', instruction: 'Fasse die Hauptthese zusammen:', original: '<strong>Es geht um</strong>...', template: ['Die zentrale These des Textes',{id:'a',correct:['lautet','besagt','besteht darin'],width:120},', dass...'], hint: 'Formelle Thesenwiedergabe', explanation: '<strong>Die zentrale These lautet</strong> fasst formell zusammen.', points: 10 },
-            { type: 'fill', category: 'textbezug', instruction: 'Zeige Übereinstimmung mit dem Autor:', original: '<strong>Er hat recht</strong>.', template: ['Der Argumentation des Autors ist',{id:'a',correct:['beizupflichten','zuzustimmen','insofern Recht zu geben'],width:180},'.'], hint: 'Formelle Zustimmung', explanation: '<strong>Ist beizupflichten / zuzustimmen</strong> drückt formelle Zustimmung aus.', points: 10 },
+            { type: 'fill', category: 'textbezug', instruction: 'Geben Sie die Autorenposition präzise wieder:', original: 'Der Autor <strong>sagt</strong>, dass die Lage ernst ist.', template: ['Der Verfasser',{id:'a',correct:['konstatiert mit Nachdruck','attestiert der Situation','diagnostiziert'],width:200},'eine',{id:'b',correct:['prekäre Lage','Situation von erheblicher Brisanz','besorgniserregende Entwicklung'],width:220},'.'], hint: '"Konstatieren/attestieren/diagnostizieren" + Nominalisierung', explanation: '<strong>Konstatieren/attestieren/diagnostizieren</strong> sind präzisere Verben als "sagen". Nominalisierung statt Nebensatz.', points: 15 },
+            { type: 'mc', category: 'textbezug', instruction: 'Welches Verb gibt die kritische Haltung des Autors am präzisesten wieder?', original: 'Der Autor kritisiert die Politik.', options: [{text:'Der Autor geißelt die verfehlte Politik als Symptom strukturellen Versagens.',correct:true},{text:'Der Autor kritisiert die Politik sehr stark.',correct:false},{text:'Der Autor ist gegen die Politik.',correct:false},{text:'Der Autor findet die Politik schlecht.',correct:false}], hint: '"Geißeln" + Präzisierung der Kritik', explanation: '<strong>Geißeln</strong> impliziert scharfe moralische Kritik. Die Präzisierung zeigt das Verständnis des Kritikinhalts.', points: 20 },
+            { type: 'fill', category: 'textbezug', instruction: 'Leiten Sie ein indirektes Zitat korrekt ein:', original: 'Er schreibt, dass die Situation schwierig <strong>ist</strong>.', template: ['Der Autor',{id:'a',correct:['führt aus','legt dar','expliziert'],width:120},', die Situation',{id:'b',correct:['sei','gestalte sich'],width:120},'von erheblicher Komplexität.'], hint: 'Konjunktiv I in indirekter Rede', explanation: 'Indirekte Rede verlangt den <strong>Konjunktiv I (sei)</strong>. Verben: führt aus, legt dar, expliziert.', points: 15 },
+            { type: 'fill', category: 'textbezug', instruction: 'Beschreiben Sie die Argumentationsstrategie des Autors:', original: 'Der Autor <strong>benutzt</strong> Beispiele.', template: ['Der Verfasser',{id:'a',correct:['untermauert seine Argumentation','stützt seine These','fundiert seine Ausführungen'],width:220},'durch',{id:'b',correct:['den gezielten Rekurs auf exemplarische Fälle','die Anführung prägnanter Beispiele','induktive Evidenz'],width:260},'.'], hint: '"Rekurs auf" / "fundieren durch"', explanation: '<strong>Rekurs auf / fundieren durch</strong> beschreiben die Argumentationsstrategie präziser als "benutzt".', points: 15 },
+            { type: 'mc', category: 'textbezug', instruction: 'Welche Formulierung distanziert sich am deutlichsten von der Autorenposition?', original: 'Der Autor behauptet, dass...', options: [{text:'Der Autor postuliert – ohne hinreichende Belege anzuführen –, dass...',correct:true},{text:'Der Autor sagt, dass...',correct:false},{text:'Nach Meinung des Autors ist es so, dass...',correct:false},{text:'Der Autor meint, dass...',correct:false}], hint: 'Distanzierung durch Einschub', explanation: '<strong>Postuliert + distanzierender Einschub</strong> ("ohne hinreichende Belege") markiert kritische Distanz zur Quelle.', points: 20 },
+            { type: 'fill', category: 'textbezug', instruction: 'Verweisen Sie präzise auf eine Textstelle:', original: 'In <strong>Zeile 5</strong> steht...', template: ['In den',{id:'a',correct:['Zeilen 5-7 wird ersichtlich','Zeilen 5ff. expliziert der Autor','Zeilen 5-7 verdeutlicht sich'],width:220},', dass der Verfasser',{id:'b',correct:['von der Prämisse ausgeht','die These vertritt','den Standpunkt einnimmt'],width:200},', wonach...'], hint: 'Zeilenangabe + Inhaltswiedergabe', explanation: 'Präzise Zeilenangabe + <strong>inhaltliche Wiedergabe</strong> statt bloßer Paraphrase.', points: 15 },
+            { type: 'fill', category: 'textbezug', instruction: 'Stellen Sie einen Widerspruch im Text fest:', original: 'Hier <strong>widerspricht sich</strong> der Autor.', template: ['An dieser Stelle',{id:'a',correct:['gerät der Autor in einen argumentativen Widerspruch','offenbart sich eine Inkonsistenz in der Argumentation','liegt ein Selbstwiderspruch des Verfassers vor'],width:320},', da er einerseits X',{id:'b',correct:['postuliert, andererseits jedoch Y behauptet','konstatiert, zugleich aber Y vertritt','annimmt, gleichzeitig jedoch Y nahelegt'],width:280},'.'], hint: 'Widerspruch präzise aufzeigen', explanation: 'Widerspruch <strong>benennen + belegen</strong> durch Gegenüberstellung der widersprüchlichen Aussagen.', points: 15 },
+            { type: 'mc', category: 'textbezug', instruction: 'Welche Formulierung gibt die implizite Botschaft eines Textes wieder?', original: 'Der Autor will eigentlich sagen, dass...', options: [{text:'Zwischen den Zeilen lässt sich die Implikation erkennen, dass...',correct:true},{text:'Der Autor meint eigentlich, dass...',correct:false},{text:'Was der Autor sagen will, ist...',correct:false},{text:'Der Autor denkt, dass...',correct:false}], hint: '"Zwischen den Zeilen" + "Implikation"', explanation: '<strong>Zwischen den Zeilen / Implikation</strong> verweist auf die subtextuelle Bedeutungsebene.', points: 20 },
         ],
         einleitung_schluss: [
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Beginne mit Aktualitätsbezug:', original: '<strong>Das Thema ist wichtig</strong>.', template: ['Die Frage',{id:'a',correct:['ist von besonderer Aktualität','gewinnt zunehmend an Bedeutung','rückt verstärkt in den Fokus'],width:250},'.'], hint: 'Aktualität betonen', explanation: '<strong>Von besonderer Aktualität</strong> betont die Relevanz.', points: 10 },
-            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welche Einleitung ist am stärksten?', original: '<strong>[___]</strong> prägt die aktuelle Debatte.', options: [{text:'Kaum ein Thema',correct:true},{text:'Ein Thema',correct:false},{text:'Das Thema',correct:false},{text:'Irgendein Thema',correct:false}], hint: 'Betonung der Relevanz', explanation: '<strong>Kaum ein Thema</strong> hebt die außergewöhnliche Relevanz hervor.', points: 15 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formuliere den Schluss:', original: '<strong>Zum Schluss</strong>: Es bleibt festzuhalten...', template: [{id:'a',correct:['Abschließend lässt sich festhalten','Resümierend bleibt zu sagen','Zusammenfassend ist zu konstatieren'],width:280}], hint: 'Formeller Schluss', explanation: '<strong>Abschließend / Resümierend</strong> leiten den Schluss ein.', points: 10 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Stelle eine rhetorische Frage:', original: 'Warum ist das so?', template: [{id:'a',correct:['Es stellt sich die Frage','Zu fragen ist','Die Frage drängt sich auf'],width:200},', warum...'], hint: 'Elegante Frageeinleitung', explanation: '<strong>Es stellt sich die Frage</strong> ist eine gehobene Frageeinleitung.', points: 10 },
-            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Schluss ist am überzeugendsten?', original: '<strong>[___]</strong> überwiegen die Vorteile.', options: [{text:'Unter dem Strich',correct:true},{text:'Irgendwie',correct:false},{text:'So gesehen',correct:false},{text:'Na ja',correct:false}], hint: 'Bilanz ziehen', explanation: '<strong>Unter dem Strich</strong> zieht eine abschließende Bilanz.', points: 15 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Gib einen Ausblick:', original: '<strong>In Zukunft</strong> wird...', template: [{id:'a',correct:['Es bleibt abzuwarten','Die Zukunft wird zeigen','Es ist davon auszugehen'],width:200},', ob/dass...'], hint: 'Formeller Ausblick', explanation: '<strong>Es bleibt abzuwarten</strong> gibt einen formellen Ausblick.', points: 10 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formuliere eine These:', original: 'Ich behaupte, dass...', template: [{id:'a',correct:['Im Folgenden wird die These vertreten','Der vorliegende Text argumentiert','Es wird die Position vertreten'],width:300},', dass...'], hint: 'Formelle Thesenaufstellung', explanation: '<strong>Die These wird vertreten</strong> stellt eine These formal auf.', points: 10 },
-            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Einstieg weckt Interesse?', original: '<strong>[___]</strong> 90% der Jugendlichen nutzen soziale Medien täglich.', options: [{text:'Laut einer aktuellen Studie',correct:true},{text:'Man sagt',correct:false},{text:'Irgendwie',correct:false},{text:'Es heißt',correct:false}], hint: 'Mit Fakten beginnen', explanation: '<strong>Laut einer aktuellen Studie</strong> verleiht Autorität.', points: 15 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Skizziere den Aufbau:', original: '<strong>Zuerst</strong> A, <strong>dann</strong> B.', template: [{id:'a',correct:['Im Folgenden wird zunächst','Der Text beleuchtet zunächst','Zunächst soll'],width:220},' A erörtert, anschließend B.'], hint: 'Formelle Gliederung', explanation: '<strong>Im Folgenden</strong> kündigt die Struktur an.', points: 10 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formuliere ein Fazit:', original: 'Also, ich finde...', template: [{id:'a',correct:['Alles in allem zeigt sich','In der Gesamtschau wird deutlich','Aus den dargelegten Punkten ergibt sich'],width:280}], hint: 'Formelles Fazit', explanation: '<strong>Alles in allem / In der Gesamtschau</strong> leiten das Fazit ein.', points: 10 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formulieren Sie einen packenden Einstieg mit Aktualitätsbezug:', original: 'Das Thema ist <strong>sehr aktuell</strong>.', template: [{id:'a',correct:['Kaum eine Debatte','Selten hat eine Kontroverse','Wenige Themen'],width:180},'hat in jüngster Zeit',{id:'b',correct:['derart polarisiert wie','solche Wellen geschlagen wie','die öffentliche Diskussion so dominiert wie'],width:260},'die Frage nach...'], hint: '"Kaum/Selten/Wenige" + Verstärkung', explanation: '<strong>Kaum/Selten + Verstärkung</strong> erzeugt einen dynamischen Einstieg mit Relevanzanspruch.', points: 15 },
+            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Einstieg ist für eine Erörterung am wirkungsvollsten?', original: 'Die Frage ist wichtig.', options: [{text:'Die Frage, ob X, berührt das Selbstverständnis unserer Gesellschaft in ihren Grundfesten.',correct:true},{text:'Die Frage nach X ist sehr wichtig und aktuell.',correct:false},{text:'Viele Menschen fragen sich, ob X.',correct:false},{text:'In diesem Text geht es um die Frage X.',correct:false}], hint: 'Grundsätzliche Relevanz aufzeigen', explanation: '<strong>Berührt das Selbstverständnis / in den Grundfesten</strong> zeigt die fundamentale Bedeutung des Themas.', points: 20 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formulieren Sie eine These provokant aber seriös:', original: 'Ich <strong>behaupte</strong>, dass...', template: [{id:'a',correct:['Im Folgenden wird die These vertreten','Der vorliegende Text verteidigt die Position','Es soll argumentiert werden'],width:280},', dass – entgegen der landläufigen Meinung –',{id:'b',correct:['X der Fall ist','sich X als zutreffend erweist','X zutrifft'],width:180},'.'], hint: '"Entgegen der landläufigen Meinung" als Spannungselement', explanation: '<strong>Entgegen der landläufigen Meinung</strong> erzeugt Spannung und weckt Leserinteresse.', points: 15 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Skizzieren Sie den Argumentationsgang:', original: '<strong>Zuerst</strong> kommt A, <strong>dann</strong> B.', template: ['Die Argumentation gliedert sich wie folgt:',{id:'a',correct:['Zunächst wird','Eingangs gilt es','Im ersten Schritt wird'],width:180},'A erörtert, bevor',{id:'b',correct:['in einem zweiten Schritt','anschließend','sodann'],width:160},'B in den Blick genommen wird.'], hint: 'Metasprachliche Gliederung', explanation: 'Metasprachliche Vorschau: <strong>Die Argumentation gliedert sich</strong> + klare Schrittbenennung.', points: 15 },
+            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Schluss vermeidet Redundanz und bietet Mehrwert?', original: 'Zusammenfassend kann man sagen, dass die Vorteile überwiegen.', options: [{text:'In der Gesamtschau erweisen sich die Vorzüge als überwiegend, wobei die Implementierung an Bedingungen geknüpft bleibt, die im Weiteren zu spezifizieren wären.',correct:true},{text:'Zusammenfassend kann man sagen, dass die Vorteile überwiegen.',correct:false},{text:'Alles in allem überwiegen die Vorteile, wie gezeigt wurde.',correct:false},{text:'Die Vorteile sind größer als die Nachteile, wie ich gezeigt habe.',correct:false}], hint: 'Fazit + Ausblick auf offene Fragen', explanation: '<strong>Fazit + Ausblick auf offene Fragen</strong> vermeidet bloße Zusammenfassung und zeigt weiteren Forschungsbedarf.', points: 20 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formulieren Sie einen appellativen Schluss:', original: 'Es <strong>muss</strong> etwas getan werden.', template: [{id:'a',correct:['Es obliegt nunmehr den Verantwortlichen','Die politischen Entscheidungsträger sind gefordert','Es liegt an uns allen'],width:280},',',{id:'b',correct:['die erforderlichen Konsequenzen zu ziehen','die gebotenen Schritte einzuleiten','das Notwendige in die Wege zu leiten'],width:270},'.'], hint: 'Appell mit Adressatenbenennung', explanation: '<strong>Es obliegt / sind gefordert</strong> + konkrete Handlungsaufforderung macht den Appell wirksam.', points: 15 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Geben Sie einen differenzierten Ausblick:', original: '<strong>In Zukunft</strong> wird sich zeigen...', template: [{id:'a',correct:['Es bleibt abzuwarten','Die weitere Entwicklung wird zeigen','Ob sich diese Prognose bewahrheitet'],width:250},', ob',{id:'b',correct:['die skizzierten Szenarien Realität werden','die aufgezeigten Tendenzen sich verstärken','der eingeschlagene Kurs Bestand haben wird'],width:280},'.'], hint: 'Offener Ausblick ohne Gewissheitsanspruch', explanation: '<strong>Es bleibt abzuwarten</strong> signalisiert epistemische Bescheidenheit bezüglich Zukunftsprognosen.', points: 15 },
         ],
         wissenschaft: [
-            { type: 'fill', category: 'wissenschaft', instruction: 'Verallgemeinere wissenschaftlich:', original: '<strong>Man kann sagen</strong>...', template: [{id:'a',correct:['Es lässt sich konstatieren','Es ist festzustellen','Man kann konstatieren'],width:200}], hint: 'Wissenschaftliche Feststellung', explanation: '<strong>Es lässt sich konstatieren</strong> ist wissenschaftlich präzise.', points: 10 },
-            { type: 'mc', category: 'wissenschaft', instruction: 'Welcher Ausdruck ist am objektivsten?', original: '<strong>[___]</strong> zeigen die Daten einen Trend.', options: [{text:'Empirisch betrachtet',correct:true},{text:'Irgendwie',correct:false},{text:'Gefühlt',correct:false},{text:'So ungefähr',correct:false}], hint: 'Datenbasierte Aussage', explanation: '<strong>Empirisch betrachtet</strong> verweist auf die Datenbasis.', points: 15 },
-            { type: 'fill', category: 'wissenschaft', instruction: 'Formuliere eine Hypothese:', original: '<strong>Ich glaube</strong>, dass...', template: [{id:'a',correct:['Es ist zu vermuten','Die Hypothese liegt nahe','Es kann angenommen werden'],width:200},', dass...'], hint: 'Wissenschaftliche Vermutung', explanation: '<strong>Es ist zu vermuten / Die Hypothese liegt nahe</strong> sind wissenschaftlich.', points: 10 },
-            { type: 'fill', category: 'wissenschaft', instruction: 'Verweise auf Forschung:', original: '<strong>Studien zeigen</strong>...', template: [{id:'a',correct:['Wie die Forschung belegt','Empirische Befunde zeigen','Die wissenschaftliche Evidenz deutet darauf hin'],width:280}], hint: 'Forschungsbezug', explanation: '<strong>Die Forschung belegt / Empirische Befunde</strong> verweisen auf Quellen.', points: 10 },
-            { type: 'mc', category: 'wissenschaft', instruction: 'Welcher Begriff drückt Unsicherheit aus?', original: 'Die Ergebnisse sind <strong>[___]</strong> aussagekräftig.', options: [{text:'bedingt',correct:true},{text:'total',correct:false},{text:'mega',correct:false},{text:'voll',correct:false}], hint: 'Einschränkung', explanation: '<strong>Bedingt</strong> drückt wissenschaftliche Vorsicht aus.', points: 15 },
-            { type: 'fill', category: 'wissenschaft', instruction: 'Beschreibe eine Korrelation:', original: 'A und B <strong>hängen zusammen</strong>.', template: ['Zwischen A und B besteht',{id:'a',correct:['eine Korrelation','ein kausaler Zusammenhang','eine signifikante Wechselwirkung'],width:220},'.'], hint: 'Wissenschaftlicher Zusammenhang', explanation: '<strong>Korrelation / kausaler Zusammenhang</strong> sind Fachbegriffe.', points: 10 },
-            { type: 'fill', category: 'wissenschaft', instruction: 'Relativiere eine Aussage:', original: 'Das <strong>stimmt immer</strong>.', template: ['Diese Aussage gilt',{id:'a',correct:['tendenziell','in den meisten Fällen','unter bestimmten Bedingungen'],width:200},'.'], hint: 'Wissenschaftliche Einschränkung', explanation: '<strong>Tendenziell / in den meisten Fällen</strong> relativieren.', points: 10 },
-            { type: 'mc', category: 'wissenschaft', instruction: 'Welcher Begriff zeigt methodische Strenge?', original: 'Die Untersuchung wurde <strong>[___]</strong> durchgeführt.', options: [{text:'systematisch',correct:true},{text:'irgendwie',correct:false},{text:'schnell',correct:false},{text:'locker',correct:false}], hint: 'Methodisches Vorgehen', explanation: '<strong>Systematisch</strong> betont die methodische Strenge.', points: 15 },
-            { type: 'fill', category: 'wissenschaft', instruction: 'Formuliere eine Einschränkung:', original: 'Das gilt <strong>nicht für alle</strong>.', template: [{id:'a',correct:['Diese Aussage bedarf der Differenzierung','Hierbei ist zu differenzieren','Dies trifft nicht uneingeschränkt zu'],width:280}], hint: 'Wissenschaftliche Differenzierung', explanation: '<strong>Bedarf der Differenzierung</strong> schränkt ein.', points: 10 },
-            { type: 'fill', category: 'wissenschaft', instruction: 'Beschreibe eine Tendenz:', original: 'Es gibt <strong>immer mehr</strong>...', template: [{id:'a',correct:['Es zeichnet sich ein Trend ab','Eine zunehmende Tendenz ist erkennbar','Es lässt sich eine Entwicklung beobachten'],width:280}], hint: 'Entwicklung beschreiben', explanation: '<strong>Ein Trend zeichnet sich ab</strong> beschreibt Entwicklungen.', points: 10 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Formulieren Sie eine Hypothese wissenschaftlich:', original: 'Ich <strong>glaube</strong>, dass X zu Y führt.', template: [{id:'a',correct:['Es ist zu hypothetisieren','Die vorliegende Studie geht von der Annahme aus','Es wird die Hypothese aufgestellt'],width:280},', dass zwischen X und Y',{id:'b',correct:['ein kausaler Nexus besteht','eine signifikante Korrelation vorliegt','ein Wirkungszusammenhang anzunehmen ist'],width:250},'.'], hint: 'Hypothesenformulierung + Fachterminologie', explanation: '<strong>Hypothetisieren / kausaler Nexus / signifikante Korrelation</strong> sind wissenschaftssprachliche Begriffe.', points: 20 },
+            { type: 'mc', category: 'wissenschaft', instruction: 'Welche Formulierung drückt wissenschaftliche Vorsicht am besten aus?', original: 'Die Studie beweist, dass...', options: [{text:'Die empirischen Befunde legen den Schluss nahe, dass..., wenngleich weitere Forschung geboten erscheint.',correct:true},{text:'Die Studie beweist eindeutig, dass...',correct:false},{text:'Die Studie zeigt klar, dass...',correct:false},{text:'Wie die Studie beweist, ist es so, dass...',correct:false}], hint: '"Legen nahe" + Forschungsvorbehalt', explanation: '<strong>Legen nahe + wenngleich weitere Forschung geboten</strong> vermeidet Überinterpretation und zeigt wissenschaftliche Redlichkeit.', points: 20 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Beschreiben Sie einen Forschungsstand:', original: '<strong>Viele Wissenschaftler sagen</strong>, dass...', template: [{id:'a',correct:['Der aktuelle Forschungsstand','Die Forschungsliteratur','Der wissenschaftliche Konsens'],width:220},'zum Thema X',{id:'b',correct:['konvergiert in der Einschätzung','lässt übereinstimmend erkennen','weist einen breiten Konsens dahingehend auf'],width:270},', dass...'], hint: '"Forschungsstand/Konsens" + "konvergieren"', explanation: '<strong>Forschungsstand konvergiert</strong> ist präziser als "viele Wissenschaftler sagen".', points: 15 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Differenzieren Sie zwischen Korrelation und Kausalität:', original: 'X und Y <strong>hängen zusammen</strong>.', template: ['Zwischen X und Y lässt sich zwar eine',{id:'a',correct:['statistisch signifikante Korrelation','Kovarianz','korrelative Beziehung'],width:220},'nachweisen,',{id:'b',correct:['ein Kausalzusammenhang ist damit jedoch nicht belegt','daraus folgt indes nicht zwingend Kausalität','dies erlaubt jedoch keinen Schluss auf Kausalität'],width:300},'.'], hint: 'Korrelation ≠ Kausalität', explanation: 'Wissenschaftliche Grundregel: <strong>Korrelation impliziert nicht Kausalität</strong>. Diese Differenzierung explizit machen.', points: 20 },
+            { type: 'mc', category: 'wissenschaft', instruction: 'Welche Formulierung relativiert eine Aussage am wissenschaftlichsten?', original: 'Das stimmt meistens.', options: [{text:'Diese Aussage trifft ceteris paribus zu, bedarf jedoch der Spezifikation hinsichtlich der Randbedingungen.',correct:true},{text:'Das stimmt meistens, aber nicht immer.',correct:false},{text:'In den meisten Fällen ist das so.',correct:false},{text:'Das gilt in der Regel.',correct:false}], hint: '"Ceteris paribus" + "Randbedingungen"', explanation: '<strong>Ceteris paribus</strong> (unter sonst gleichen Bedingungen) + <strong>Randbedingungen</strong> sind präzise wissenschaftliche Einschränkungen.', points: 20 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Verweisen Sie auf methodische Limitationen:', original: 'Die Studie hat <strong>Schwächen</strong>.', template: ['Die Studie weist',{id:'a',correct:['methodische Limitationen auf','gewisse methodologische Einschränkungen auf','hinsichtlich ihrer Generalisierbarkeit Grenzen auf'],width:280},', die',{id:'b',correct:['bei der Interpretation der Befunde zu berücksichtigen sind','die Aussagekraft der Ergebnisse relativieren','einer kritischen Würdigung bedürfen'],width:280},'.'], hint: '"Methodische Limitationen" + Relevanz benennen', explanation: 'Wissenschaftliche Redlichkeit: <strong>Limitationen benennen + deren Relevanz einordnen</strong>.', points: 15 },
         ],
         stilistik: [
-            { type: 'fill', category: 'stilistik', instruction: 'Variiere den Satzanfang:', original: '<strong>Es ist</strong> wichtig zu beachten...', template: [{id:'a',correct:['Zu beachten ist','Beachtenswert ist','Hervorzuheben ist'],width:160}], hint: 'Nicht mit "Es" beginnen', explanation: '<strong>Zu beachten ist</strong> variiert den Satzanfang.', points: 10 },
-            { type: 'mc', category: 'stilistik', instruction: 'Welche Formulierung ist prägnanter?', original: 'Es handelt sich um eine Situation, die <strong>[___]</strong>.', options: [{text:'komplex ist',correct:true},{text:'eine komplexe darstellt',correct:false},{text:'Komplexität aufweist',correct:false},{text:'komplexer Natur ist',correct:false}], hint: 'Kürzer = besser', explanation: '<strong>Komplex ist</strong> ist prägnanter.', points: 15 },
-            { type: 'fill', category: 'stilistik', instruction: 'Ersetze das Passiv:', original: 'Es <strong>wird gesagt</strong>, dass...', template: [{id:'a',correct:['Man sagt','Vielerorts heißt es','Die Meinung herrscht vor'],width:180}], hint: 'Aktiv statt Passiv', explanation: 'Aktive Konstruktionen sind lebendiger.', points: 10 },
-            { type: 'fill', category: 'stilistik', instruction: 'Finde ein Synonym für "sagen":', original: 'Der Experte <strong>sagt</strong>...', template: ['Der Experte',{id:'a',correct:['betont','hebt hervor','unterstreicht','konstatiert','merkt an'],width:130}], hint: 'Synonyme für "sagen"', explanation: '<strong>Betont / hebt hervor / unterstreicht</strong> sind Varianten.', points: 10 },
-            { type: 'mc', category: 'stilistik', instruction: 'Welche Formulierung vermeidet Wiederholung?', original: 'Dieses Problem ist ein großes Problem, weil <strong>[___]</strong>.', options: [{text:'es weitreichende Folgen hat',correct:true},{text:'das Problem groß ist',correct:false},{text:'es ein Problem ist',correct:false},{text:'Probleme problematisch sind',correct:false}], hint: 'Wiederholung vermeiden', explanation: '<strong>Weitreichende Folgen</strong> vermeidet die Wiederholung.', points: 15 },
-            { type: 'fill', category: 'stilistik', instruction: 'Verkürze den Ausdruck:', original: 'in der heutigen Zeit, in der wir leben', template: [{id:'a',correct:['heutzutage','gegenwärtig','derzeit','aktuell'],width:130}], hint: 'Kompakter ausdrücken', explanation: '<strong>Heutzutage / gegenwärtig</strong> sind kompakter.', points: 10 },
-            { type: 'fill', category: 'stilistik', instruction: 'Vermeide "man":', original: '<strong>Man</strong> kann davon ausgehen...', template: [{id:'a',correct:['Es ist davon auszugehen','Es lässt sich annehmen','Die Annahme liegt nahe'],width:200}], hint: '"Man" vermeiden', explanation: '<strong>Es ist davon auszugehen</strong> ist formeller.', points: 10 },
-            { type: 'mc', category: 'stilistik', instruction: 'Welcher Ausdruck ist am elegantesten?', original: 'Das ist <strong>[___]</strong> der Fall.', options: [{text:'zweifelsohne',correct:true},{text:'total',correct:false},{text:'voll',correct:false},{text:'echt',correct:false}], hint: 'Gehobene Bestätigung', explanation: '<strong>Zweifelsohne</strong> ist eine elegante Bestätigung.', points: 15 },
-            { type: 'fill', category: 'stilistik', instruction: 'Drücke es nominaler aus:', original: 'Weil die Kosten <strong>steigen</strong>...', template: ['Aufgrund der',{id:'a',correct:['Kostensteigerung','steigenden Kosten','Kostenerhöhung'],width:170}], hint: 'Nominalisierung', explanation: '<strong>Kostensteigerung</strong> ist eine nominale Variante.', points: 10 },
-            { type: 'fill', category: 'stilistik', instruction: 'Vermeide Füllwörter:', original: 'Das ist <strong>eigentlich irgendwie</strong> problematisch.', template: ['Das ist',{id:'a',correct:['durchaus','in der Tat','zweifellos'],width:130},'problematisch.'], hint: 'Ohne Füllwörter', explanation: '<strong>Durchaus / in der Tat</strong> ersetzen Füllwörter.', points: 10 },
+            { type: 'fill', category: 'stilistik', instruction: 'Ersetzen Sie den Es-Satz durch eine elegantere Konstruktion:', original: '<strong>Es ist</strong> wichtig, dass man handelt.', template: [{id:'a',correct:['Handlungsbedarf besteht','Zum Handeln ist aufgerufen','Dringliches Agieren erscheint geboten'],width:250},', zumal',{id:'b',correct:['weiteres Zuwarten kontraproduktiv wäre','sich die Lage zusehends verschärft','die Zeit drängt'],width:230},'.'], hint: 'Nominalisierung + Begründung', explanation: 'Vermeiden Sie <strong>Es-Sätze</strong>: Nominalisierung (Handlungsbedarf) + Begründung (zumal) ist stilistisch überlegen.', points: 15 },
+            { type: 'mc', category: 'stilistik', instruction: 'Welche Formulierung vermeidet die "man"-Konstruktion am elegantesten?', original: 'Man kann sagen, dass...', options: [{text:'Es lässt sich konstatieren, dass... / Festzuhalten ist, dass...',correct:true},{text:'Wir können sagen, dass...',correct:false},{text:'Ich würde sagen, dass...',correct:false},{text:'Jemand kann sagen, dass...',correct:false}], hint: 'Passiv/Nominalisierung statt "man"', explanation: '<strong>Es lässt sich / Festzuhalten ist</strong> vermeiden das unpräzise "man" durch elegante Passiv- oder Nominalkonstruktionen.', points: 15 },
+            { type: 'fill', category: 'stilistik', instruction: 'Variieren Sie den Satzanfang durch eine Partizipialkonstruktion:', original: '<strong>Wenn man</strong> diese Faktoren berücksichtigt, ergibt sich...', template: [{id:'a',correct:['Diese Faktoren berücksichtigend','Die genannten Faktoren in Rechnung stellend','Unter Einbeziehung dieser Faktoren'],width:270},',',{id:'b',correct:['ergibt sich ein differenzierteres Bild','eröffnet sich eine neue Perspektive','stellt sich die Lage komplexer dar'],width:250},'.'], hint: 'Partizip I als Satzanfang', explanation: '<strong>Partizipialkonstruktion am Satzanfang</strong> variiert den Satzbau und verdichtet den Ausdruck.', points: 15 },
+            { type: 'fill', category: 'stilistik', instruction: 'Drücken Sie den gleichen Inhalt nominaler aus:', original: 'Weil die Kosten <strong>gestiegen sind</strong>, muss gespart werden.', template: [{id:'a',correct:['Angesichts der Kostensteigerung','Aufgrund des Kostenanstiegs','In Anbetracht der gestiegenen Kosten'],width:250},'sind',{id:'b',correct:['Einsparungen unumgänglich','Sparmaßnahmen geboten','Kürzungen unvermeidlich'],width:200},'.'], hint: 'Nominalstil: Präposition + Nominalisierung', explanation: '<strong>Nominalstil</strong> (Präposition + Nominalisierung) ist in wissenschaftlichen Texten oft präferiert.', points: 15 },
+            { type: 'mc', category: 'stilistik', instruction: 'Welche Formulierung ist stilistisch am ausgefeiltesten?', original: 'Das ist ein großes Problem, das viele Menschen betrifft.', options: [{text:'Hierin manifestiert sich ein Problem von gesamtgesellschaftlicher Tragweite.',correct:true},{text:'Das ist ein großes Problem für viele Menschen.',correct:false},{text:'Viele Menschen haben dieses große Problem.',correct:false},{text:'Es handelt sich um ein Problem, das viele betrifft.',correct:false}], hint: '"Manifestiert sich" + "gesamtgesellschaftliche Tragweite"', explanation: '<strong>Manifestiert sich + gesamtgesellschaftliche Tragweite</strong> verdichtet den Ausdruck und erhöht das Stilniveau.', points: 20 },
+            { type: 'fill', category: 'stilistik', instruction: 'Ersetzen Sie das Adjektiv durch eine präzisere Wendung:', original: 'Das ist sehr <strong>wichtig</strong>.', template: ['Diesem Aspekt kommt',{id:'a',correct:['kardinale Bedeutung zu','herausragende Relevanz zu','paradigmatischer Stellenwert zu'],width:220},', da er',{id:'b',correct:['die gesamte Argumentation trägt','das Fundament der These bildet','für das Verständnis konstitutiv ist'],width:240},'.'], hint: '"Kardinal/paradigmatisch" + Begründung', explanation: '<strong>Kardinal/paradigmatisch</strong> sind präzisere Intensivierungen als "sehr wichtig". Die Begründung verstärkt.', points: 15 },
         ],
         redewendungen: [
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Diese Entwicklung liegt auf der <strong>[___]</strong>.', template: ['liegt auf der',{id:'a',correct:['Hand'],width:80}], hint: 'offensichtlich sein', explanation: '<strong>Auf der Hand liegen</strong> = offensichtlich sein.', points: 10 },
-            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "unter dem Strich"?', original: '<strong>Unter dem Strich</strong> überwiegen die Vorteile.', options: [{text:'Alles in allem / im Endergebnis',correct:true},{text:'Unterhalb einer Linie',correct:false},{text:'Weniger wichtig',correct:false},{text:'Im Geheimen',correct:false}], hint: 'Bilanz ziehen', explanation: '<strong>Unter dem Strich</strong> = im Endergebnis.', points: 15 },
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Das fällt bei der Entscheidung ins <strong>[___]</strong>.', template: ['fällt ins',{id:'a',correct:['Gewicht'],width:100}], hint: 'wichtig sein für', explanation: '<strong>Ins Gewicht fallen</strong> = von Bedeutung sein.', points: 10 },
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Er hat den Nagel auf den <strong>[___]</strong> getroffen.', template: ['auf den',{id:'a',correct:['Kopf'],width:80},'getroffen.'], hint: 'genau richtig liegen', explanation: '<strong>Den Nagel auf den Kopf treffen</strong> = genau richtig liegen.', points: 10 },
-            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "auf den Punkt bringen"?', original: 'Sie hat es <strong>auf den Punkt gebracht</strong>.', options: [{text:'präzise zusammenfassen',correct:true},{text:'zu einem Punkt gehen',correct:false},{text:'punkten',correct:false},{text:'unterbrechen',correct:false}], hint: 'kurz und treffend', explanation: '<strong>Auf den Punkt bringen</strong> = präzise zusammenfassen.', points: 15 },
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Dieses Argument ist nicht von der <strong>[___]</strong> zu weisen.', template: ['nicht von der',{id:'a',correct:['Hand'],width:80},'zu weisen.'], hint: 'nicht ignorierbar', explanation: '<strong>Nicht von der Hand zu weisen</strong> = nicht zu ignorieren.', points: 10 },
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Das Thema steht im <strong>[___]</strong> der Diskussion.', template: ['steht im',{id:'a',correct:['Mittelpunkt','Zentrum','Fokus'],width:120}], hint: 'zentral sein', explanation: '<strong>Im Mittelpunkt/Zentrum stehen</strong> = zentral sein.', points: 10 },
-            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "ins Auge fassen"?', original: 'Wir sollten diese Option <strong>ins Auge fassen</strong>.', options: [{text:'in Betracht ziehen',correct:true},{text:'anstarren',correct:false},{text:'ignorieren',correct:false},{text:'ablehnen',correct:false}], hint: 'erwägen', explanation: '<strong>Ins Auge fassen</strong> = in Betracht ziehen.', points: 15 },
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Das Argument greift zu <strong>[___]</strong>.', template: ['greift zu',{id:'a',correct:['kurz'],width:80}], hint: 'unvollständig sein', explanation: '<strong>Zu kurz greifen</strong> = nicht weit genug gehen.', points: 10 },
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Die Vor- und Nachteile müssen <strong>[___]</strong> werden.', template: ['müssen',{id:'a',correct:['abgewogen','gegeneinander abgewogen'],width:180},'werden.'], hint: 'sorgfältig vergleichen', explanation: '<strong>Gegeneinander abwägen</strong> = Vor- und Nachteile vergleichen.', points: 10 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Ergänzen Sie die idiomatische Wendung:', original: 'Die Aussage hat viel Wahres.', template: ['Diese Einschätzung',{id:'a',correct:['trifft den Nagel auf den Kopf','ist nicht von der Hand zu weisen','hat Hand und Fuß'],width:240},', wenngleich sie',{id:'b',correct:['der Differenzierung bedarf','nicht uneingeschränkt gilt','gewisser Präzisierung harrt'],width:200},'.'], hint: 'Redewendung + gehobene Einschränkung', explanation: '<strong>Trifft den Nagel auf den Kopf / Hand und Fuß</strong> + gehobene Einschränkung zeigt stilistische Kompetenz.', points: 15 },
+            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "einer kritischen Würdigung unterziehen"?', original: 'Die These wird einer kritischen Würdigung unterzogen.', options: [{text:'systematisch und differenziert analysieren und bewerten',correct:true},{text:'stark kritisieren und ablehnen',correct:false},{text:'würdigen und loben',correct:false},{text:'kurz erwähnen',correct:false}], hint: 'Wissenschaftssprachliche Wendung', explanation: '<strong>Einer kritischen Würdigung unterziehen</strong> = systematisch analysieren (nicht: scharf kritisieren).', points: 15 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Verwenden Sie die Wendung "ins Feld führen" korrekt:', original: 'Als Argument wird X <strong>genannt</strong>.', template: ['Als',{id:'a',correct:['schlagendes','gewichtiges','stichhaltiges'],width:120},'Argument wird',{id:'b',correct:['ins Feld geführt','angeführt','vorgebracht'],width:150},', dass X...'], hint: '"Ins Feld führen" = als Argument vorbringen', explanation: '<strong>Ins Feld führen</strong> = als Argument vorbringen. Verstärkung durch Adjektiv: schlagend/gewichtig/stichhaltig.', points: 15 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Ergänzen Sie die Wendung mit "Rechnung tragen":', original: 'Man muss X beachten.', template: ['Diesem Umstand ist',{id:'a',correct:['Rechnung zu tragen','gebührend Rechnung zu tragen','in angemessener Weise Rechnung zu tragen'],width:250},', indem',{id:'b',correct:['entsprechende Vorkehrungen getroffen werden','die notwendigen Konsequenzen gezogen werden','adäquate Maßnahmen ergriffen werden'],width:280},'.'], hint: '"Rechnung tragen" + Konkretisierung', explanation: '<strong>Rechnung tragen</strong> = berücksichtigen. Verstärkung: gebührend/in angemessener Weise.', points: 15 },
+            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "einer Prüfung standhalten"?', original: 'Die These hält einer kritischen Prüfung stand.', options: [{text:'der Kritik widerstehen und sich als tragfähig erweisen',correct:true},{text:'geprüft werden und durchfallen',correct:false},{text:'ohne Prüfung akzeptiert werden',correct:false},{text:'die Prüfung verweigern',correct:false}], hint: 'Etwas übersteht die kritische Analyse', explanation: '<strong>Einer Prüfung standhalten</strong> = sich bei kritischer Analyse als haltbar erweisen.', points: 15 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Verwenden Sie "in Abrede stellen" korrekt:', original: 'Niemand bestreitet, dass...', template: [{id:'a',correct:['Es lässt sich schwerlich','Es kann kaum','Es wäre verfehlt zu'],width:200},'in Abrede',{id:'b',correct:['stellen','gestellt werden'],width:120},', dass die Situation kritisch ist.'], hint: '"In Abrede stellen" = bestreiten, leugnen', explanation: '<strong>In Abrede stellen</strong> = bestreiten (gehoben). Verstärkung: schwerlich/kaum in Abrede zu stellen.', points: 15 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Ergänzen Sie "auf den Prüfstand stellen":', original: 'Die These muss überprüft werden.', template: ['Es gilt, diese These',{id:'a',correct:['auf den Prüfstand zu stellen','einer kritischen Revision zu unterziehen','auf den Prüfstein zu legen'],width:250},'und',{id:'b',correct:['ihre Tragfähigkeit zu evaluieren','ihre Validität zu hinterfragen','ihre Belastbarkeit zu testen'],width:230},'.'], hint: '"Auf den Prüfstand stellen" + Konkretisierung', explanation: '<strong>Auf den Prüfstand stellen</strong> = kritisch überprüfen. Alternative: auf den Prüfstein legen.', points: 15 },
+            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "den Boden entziehen"?', original: 'Diese Fakten entziehen der These den Boden.', options: [{text:'die Grundlage einer Argumentation zerstören',correct:true},{text:'den Boden wegnehmen',correct:false},{text:'etwas ausgraben',correct:false},{text:'verstecken',correct:false}], hint: 'Metapher: Argumentation als Gebäude', explanation: '<strong>Den Boden entziehen</strong> = die argumentative Grundlage zerstören (Gebäudemetapher).', points: 15 },
         ]
     },
     kommentar: {
         konnektoren: [
-            { type: 'fill', category: 'konnektoren', instruction: 'Leite einen Widerspruch ein:', original: 'Die Regierung verspricht Verbesserungen. <strong>[___]</strong> zeigt die Realität ein anderes Bild.', template: [{id:'a',correct:['Doch','Jedoch','Allerdings','Indessen'],width:120}], hint: 'Gegensatz', explanation: '<strong>Doch / Jedoch</strong> leiten Widerspruch ein.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Konnektor verstärkt eine Kritik?', original: 'Die Maßnahme ist ineffektiv. <strong>[___]</strong> kostet sie Millionen.', options: [{text:'Obendrein',correct:true},{text:'Dennoch',correct:false},{text:'Trotzdem',correct:false},{text:'Hingegen',correct:false}], hint: 'Zusätzliche Kritik', explanation: '<strong>Obendrein</strong> verstärkt durch ein zusätzliches negatives Argument.', points: 15 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Formulieren Sie einen ironischen Gegensatz:', original: 'Die Regierung spricht von Transparenz, aber handelt intransparent.', template: ['Während die Regierung',{id:'a',correct:['vollmundig Transparenz beschwört','nicht müde wird, Transparenz zu proklamieren'],width:280},',',{id:'b',correct:['praktiziert sie das genaue Gegenteil','konterkariert ihr Handeln diese Beteuerungen'],width:280},'.'], hint: '"Vollmundig" + "konterkarieren"', explanation: '<strong>Vollmundig beschwören</strong> impliziert leere Rhetorik. <strong>Konterkarieren</strong> = durch Handeln widerlegen.', points: 20 },
+            { type: 'mc', category: 'konnektoren', instruction: 'Welche Formulierung verstärkt Kritik durch einen Klimax?', original: 'Das ist schlecht, sehr schlecht, katastrophal.', options: [{text:'Was als bedenklich begann, hat sich zu einem Desaster ausgewachsen.',correct:true},{text:'Es ist schlecht, dann sehr schlecht und am Ende katastrophal.',correct:false},{text:'Das ist sehr, sehr, sehr schlecht.',correct:false},{text:'Schlecht, schlechter, am schlechtesten.',correct:false}], hint: 'Klimax mit Variation', explanation: '<strong>Klimax</strong> mit semantischer Steigerung: bedenklich → Desaster.', points: 20 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Drücken Sie Empörung durch eine rhetorische Frage aus:', original: 'Wie kann das sein?', template: [{id:'a',correct:['Wie ist es zu rechtfertigen','Mit welchem Recht','Auf welcher Grundlage'],width:200},', dass',{id:'b',correct:['die Verantwortlichen ungeschoren davonkommen','keinerlei Konsequenzen gezogen werden','dies ohne Folgen bleibt'],width:260},'?'], hint: 'Rhetorische Frage als Kritik', explanation: '<strong>Rhetorische Frage + Skandalon</strong> ist ein wirkungsvolles kommentatorisches Stilmittel.', points: 15 },
         ],
         meinung: [
-            { type: 'fill', category: 'meinung', instruction: 'Drücke scharfe Kritik elegant aus:', original: 'Das ist <strong>totaler Unsinn</strong>.', template: ['Diese Entscheidung ist',{id:'a',correct:['schlicht nicht nachvollziehbar','geradezu absurd','kaum zu rechtfertigen'],width:220}], hint: 'Elegante Kritik', explanation: '<strong>Schlicht nicht nachvollziehbar</strong> kritisiert ohne zu beleidigen.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welcher Ausdruck zeigt Empörung?', original: '<strong>[___]</strong> kann man so nicht mit den Bürgern umgehen.', options: [{text:'Es ist inakzeptabel, dass',correct:true},{text:'Vielleicht',correct:false},{text:'Möglicherweise',correct:false},{text:'Man könnte sagen',correct:false}], hint: 'Starke Ablehnung', explanation: '<strong>Es ist inakzeptabel</strong> drückt starke Ablehnung aus.', points: 15 },
+            { type: 'fill', category: 'meinung', instruction: 'Formulieren Sie pointierte Kritik:', original: 'Das ist <strong>eine Frechheit</strong>.', template: ['Dies grenzt an',{id:'a',correct:['Dreistigkeit','Unverfrorenheit','Chuzpe'],width:150},', die',{id:'b',correct:['sprachlos macht','jedes Maß vermissen lässt','ihresgleichen sucht'],width:200},'.'], hint: '"Grenzt an" + Verstärkung', explanation: '<strong>Grenzt an Dreistigkeit/Chuzpe</strong> ist pointierter als "Frechheit". <strong>Ihresgleichen sucht</strong> verstärkt.', points: 15 },
+            { type: 'mc', category: 'meinung', instruction: 'Welche Formulierung übt Kritik durch Understatement?', original: 'Das ist ein totales Versagen.', options: [{text:'Die Ergebnisse bleiben hinter den selbstgesteckten Zielen nicht unerheblich zurück.',correct:true},{text:'Das ist ein völliges und absolutes Versagen.',correct:false},{text:'Die haben total versagt.',correct:false},{text:'Schlimmer hätte es nicht kommen können.',correct:false}], hint: 'Litotes: "nicht unerheblich"', explanation: '<strong>Litotes (doppelte Verneinung)</strong> wirkt durch Understatement oft schärfer als direkte Kritik.', points: 20 },
+            { type: 'fill', category: 'meinung', instruction: 'Drücken Sie Sarkasmus gehoben aus:', original: 'Das hat ja <strong>super geklappt</strong>.', template: ['Das Ergebnis',{id:'a',correct:['spricht Bände','spricht für sich','bedarf keines Kommentars'],width:180},'– und zwar nicht im positiven Sinne. Vielmehr offenbart sich hier',{id:'b',correct:['ein Armutszeugnis sondergleichen','eklatantes Versagen','ein Musterbeispiel des Scheiterns'],width:250},'.'], hint: 'Ironie durch Kontrast', explanation: '<strong>"Spricht Bände – nicht im positiven Sinne"</strong> erzeugt Ironie durch explizite Negation des positiven Anscheins.', points: 15 },
         ],
         argumentation: [
-            { type: 'fill', category: 'argumentation', instruction: 'Entlarve ein Scheinargument:', original: 'Das ist nur eine <strong>faule Ausrede</strong>.', template: ['Dabei handelt es sich um',{id:'a',correct:['ein Scheinargument','eine Schutzbehauptung','bloße Rhetorik'],width:200}], hint: 'Unechtes Argument', explanation: '<strong>Scheinargument / Schutzbehauptung</strong> entlarvt unechte Argumente.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Wie weist man Verantwortung zu?', original: 'Die <strong>[___]</strong> liegt eindeutig bei der Regierung.', options: [{text:'Verantwortung',correct:true},{text:'Schuld',correct:false},{text:'Sache',correct:false},{text:'Geschichte',correct:false}], hint: 'Sachliche Zuweisung', explanation: '<strong>Verantwortung</strong> ist sachlicher als "Schuld".', points: 15 },
+            { type: 'fill', category: 'argumentation', instruction: 'Entlarven Sie ein Totschlagargument:', original: 'Das war schon immer so.', template: ['Das Argument, dies sei',{id:'a',correct:['schon immer so gewesen','traditionsbedingt','historisch gewachsen'],width:200},', ist ein',{id:'b',correct:['klassisches Totschlagargument','argumentum ad antiquitatem','Zirkelschluss'],width:220},', das einer kritischen Prüfung nicht standhält.'], hint: 'Fehlschlusstyp benennen', explanation: '<strong>Argumentum ad antiquitatem</strong> (Traditionsargument) = Fehlschluss. Benennung zeigt rhetorische Kompetenz.', points: 20 },
+            { type: 'mc', category: 'argumentation', instruction: 'Welche Formulierung weist auf Scheinheiligkeit hin?', original: 'Sie predigen Wasser und trinken Wein.', options: [{text:'In bemerkenswerter Diskrepanz zu den eigenen Verlautbarungen offenbart das Handeln eine diametral entgegengesetzte Praxis.',correct:true},{text:'Sie sagen etwas und machen das Gegenteil.',correct:false},{text:'Wasser predigen und Wein trinken.',correct:false},{text:'Das ist scheinheilig.',correct:false}], hint: '"Diskrepanz" + "diametral entgegengesetzt"', explanation: '<strong>Diskrepanz zwischen Verlautbarung und Praxis</strong> benennt Scheinheiligkeit analytisch.', points: 20 },
+            { type: 'fill', category: 'argumentation', instruction: 'Fordern Sie Konsequenzen:', original: 'Jemand muss <strong>bestraft werden</strong>.', template: [{id:'a',correct:['Es ist an der Zeit','Es erscheint geboten','Die Stunde verlangt'],width:180},', dass die Verantwortlichen',{id:'b',correct:['zur Rechenschaft gezogen werden','sich ihrer Verantwortung stellen','für ihr Handeln einstehen'],width:250},'.'], hint: '"Zur Rechenschaft ziehen"', explanation: '<strong>Zur Rechenschaft ziehen</strong> ist juristisch präziser als "bestrafen" und impliziert Verfahrensgerechtigkeit.', points: 15 },
         ],
         textbezug: [
-            { type: 'fill', category: 'textbezug', instruction: 'Reagiere auf einen Artikel:', original: 'In Ihrem Artikel <strong>schreiben Sie</strong>...', template: ['In Ihrem Artikel vom [Datum]',{id:'a',correct:['führen Sie aus','vertreten Sie die These','behaupten Sie'],width:180}], hint: 'Formeller Bezug', explanation: '<strong>Führen Sie aus / vertreten die These</strong> sind formelle Bezugnahmen.', points: 10 },
-            { type: 'mc', category: 'textbezug', instruction: 'Welches Verb drückt kritischen Widerspruch aus?', original: 'Der Autor <strong>[___]</strong>, dass alle profitieren würden.', options: [{text:'suggeriert',correct:true},{text:'sagt',correct:false},{text:'schreibt',correct:false},{text:'meint',correct:false}], hint: 'Kritische Wiedergabe', explanation: '<strong>Suggeriert</strong> impliziert, dass etwas irreführend sein könnte.', points: 15 },
+            { type: 'fill', category: 'textbezug', instruction: 'Reagieren Sie kritisch auf eine Zeitungsmeldung:', original: 'In der Zeitung steht, dass...', template: ['Der Bericht in [Quelle] vom [Datum]',{id:'a',correct:['erweckt den Eindruck','suggeriert','insinuiert'],width:150},', als handle es sich um',{id:'b',correct:['eine alternativlose Entwicklung','unumstößliche Tatsachen','ein naturgegebenes Faktum'],width:220},'– was indes zu hinterfragen ist.'], hint: '"Insinuieren" = unterschwellig nahelegen', explanation: '<strong>Insinuieren/suggerieren</strong> impliziert kritische Distanz zur behaupteten Objektivität der Quelle.', points: 15 },
         ],
         einleitung_schluss: [
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Beginne mit provokanter Einleitung:', original: 'Das Thema ist wichtig.', template: [{id:'a',correct:['Es mutet geradezu grotesk an','Man reibt sich verwundert die Augen','Es ist kaum zu fassen'],width:250}], hint: 'Aufmerksamkeit erregen', explanation: '<strong>Grotesk / verwundert die Augen reiben</strong> erregen Aufmerksamkeit.', points: 10 },
-            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Schluss fordert zum Handeln auf?', original: '<strong>[___]</strong> ist jetzt gefragt.', options: [{text:'Entschlossenes Handeln',correct:true},{text:'Irgendwas',correct:false},{text:'Nichts',correct:false},{text:'Abwarten',correct:false}], hint: 'Appell', explanation: '<strong>Entschlossenes Handeln ist gefragt</strong> ist ein starker Appell.', points: 15 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formuliere einen warnenden Schluss:', original: 'Das wird <strong>schlimm enden</strong>.', template: [{id:'a',correct:['Die Folgen könnten gravierend sein','Es drohen weitreichende Konsequenzen','Die Entwicklung gibt Anlass zur Sorge'],width:280}], hint: 'Warnung aussprechen', explanation: '<strong>Gravierend / weitreichende Konsequenzen</strong> warnen formal.', points: 10 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Beginnen Sie mit einer provokanten These:', original: 'Das Thema ist umstritten.', template: [{id:'a',correct:['Wer die aktuelle Debatte verfolgt','Wer die jüngsten Entwicklungen beobachtet','Ein Blick auf die gegenwärtige Lage'],width:260},', kommt nicht umhin',{id:'b',correct:['sich verwundert die Augen zu reiben','einen fundamentalen Widerspruch zu konstatieren','Unverständnis zu empfinden'],width:270},'.'], hint: '"Kommt nicht umhin" als Einleitung', explanation: '<strong>"Kommt nicht umhin"</strong> suggeriert, dass die folgende Reaktion zwingend ist.', points: 15 },
+            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Schluss ist für einen Kommentar am wirkungsvollsten?', original: 'Es muss sich etwas ändern.', options: [{text:'Es ist höchste Zeit, dass die Verantwortlichen aus ihrer selbstverschuldeten Lethargie erwachen – andernfalls werden sie von der Realität eingeholt.',correct:true},{text:'Es muss sich jetzt etwas ändern.',correct:false},{text:'Hoffentlich wird es bald besser.',correct:false},{text:'Am Ende muss jeder selbst entscheiden.',correct:false}], hint: 'Appell + Warnung', explanation: '<strong>Appell + Konsequenzwarnung</strong> ("andernfalls werden sie von der Realität eingeholt") ist ein wirkungsvoller Schluss.', points: 20 },
         ],
         wissenschaft: [
-            { type: 'fill', category: 'wissenschaft', instruction: 'Verweise auf Fakten:', original: 'Die Zahlen <strong>zeigen</strong>...', template: ['Die Statistiken',{id:'a',correct:['belegen eindeutig','sprechen eine klare Sprache','lassen keinen Zweifel'],width:200}], hint: 'Fakten betonen', explanation: '<strong>Belegen eindeutig / sprechen eine klare Sprache</strong> betonen Fakten.', points: 10 },
-            { type: 'mc', category: 'wissenschaft', instruction: 'Welcher Ausdruck zeigt Evidenz?', original: '<strong>[___]</strong> ist die Maßnahme gescheitert.', options: [{text:'Offenkundig',correct:true},{text:'Vielleicht',correct:false},{text:'Möglicherweise',correct:false},{text:'Eventuell',correct:false}], hint: 'Klare Evidenz', explanation: '<strong>Offenkundig</strong> zeigt deutliche Evidenz.', points: 15 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Untermauern Sie Kritik mit Fakten:', original: 'Die Zahlen sind schlecht.', template: ['Die',{id:'a',correct:['ernüchternden','desillusionierenden','alarmierenden'],width:160},'Zahlen – X Prozent weniger als im Vorjahr – sprechen eine',{id:'b',correct:['unmissverständliche Sprache','deutliche Sprache','Sprache, die keiner Interpretation bedarf'],width:260},'.'], hint: 'Konkrete Zahlen + bewertende Einordnung', explanation: '<strong>Konkrete Zahlen + metaphorische Bewertung</strong> ("sprechen eine Sprache") verbinden Fakten mit Kommentar.', points: 15 },
         ],
         stilistik: [
-            { type: 'fill', category: 'stilistik', instruction: 'Verwende eine Metapher:', original: 'Die Regierung macht nichts.', template: ['Die Regierung',{id:'a',correct:['sitzt die Probleme aus','verschließt die Augen','steckt den Kopf in den Sand'],width:220}], hint: 'Bildhafte Sprache', explanation: '<strong>Aussitzen / Augen verschließen</strong> sind bildhafte Kritik.', points: 10 },
-            { type: 'mc', category: 'stilistik', instruction: 'Welche Formulierung ist am pointiertesten?', original: 'Das Ergebnis ist <strong>[___]</strong>.', options: [{text:'ein Armutszeugnis',correct:true},{text:'schlecht',correct:false},{text:'nicht gut',correct:false},{text:'suboptimal',correct:false}], hint: 'Starke Wertung', explanation: '<strong>Ein Armutszeugnis</strong> ist eine pointierte negative Wertung.', points: 15 },
+            { type: 'fill', category: 'stilistik', instruction: 'Verwenden Sie eine Metapher zur Kritik:', original: 'Die Regierung ignoriert das Problem.', template: ['Die Regierung',{id:'a',correct:['fährt einen strikten Kurs der Realitätsverweigerung','steuert sehenden Auges auf den Abgrund zu','verschließt die Augen vor der unbequemen Wahrheit'],width:310},'und',{id:'b',correct:['scheint auf ein Wunder zu hoffen','setzt auf die Strategie des Aussitzens','hüllt sich in beredtes Schweigen'],width:260},'.'], hint: 'Metaphorik: Sehen/Blindheit', explanation: '<strong>Metaphorik (Blindheit, Abgrund, Schweigen)</strong> ist ein klassisches Mittel des politischen Kommentars.', points: 15 },
         ],
         redewendungen: [
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Die Politiker <strong>[___]</strong> Wasser und trinken Wein.', template: [{id:'a',correct:['predigen'],width:100},'Wasser und trinken Wein.'], hint: 'Heuchelei', explanation: '<strong>Wasser predigen und Wein trinken</strong> = heucheln.', points: 10 },
-            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "den Bock zum Gärtner machen"?', original: 'Mit dieser Ernennung hat man den <strong>Bock zum Gärtner gemacht</strong>.', options: [{text:'den Falschen mit einer Aufgabe betrauen',correct:true},{text:'einen Gärtner einstellen',correct:false},{text:'Tiere pflegen',correct:false},{text:'einen Fehler korrigieren',correct:false}], hint: 'Ungeeignete Person', explanation: '<strong>Den Bock zum Gärtner machen</strong> = Ungeeigneten beauftragen.', points: 15 },
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Das Kind ist bereits in den <strong>[___]</strong> gefallen.', template: ['in den',{id:'a',correct:['Brunnen'],width:100},'gefallen.'], hint: 'Zu spät', explanation: '<strong>Das Kind ist in den Brunnen gefallen</strong> = es ist zu spät.', points: 10 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Ergänzen Sie die idiomatische Wendung:', original: 'Die lassen sich das nicht gefallen.', template: ['Die Betroffenen werden dies nicht',{id:'a',correct:['widerspruchslos hinnehmen','kampflos über sich ergehen lassen','stillschweigend akzeptieren'],width:250},', sondern',{id:'b',correct:['sich zur Wehr setzen','auf die Barrikaden gehen','dem Widerstand formieren'],width:200},'.'], hint: 'Widerstand ankündigen', explanation: '<strong>Sich zur Wehr setzen / auf die Barrikaden gehen</strong> sind idiomatische Wendungen für Widerstand.', points: 15 },
+            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "den Schwarzen Peter zuschieben"?', original: 'Alle schieben sich gegenseitig den Schwarzen Peter zu.', options: [{text:'die Schuld oder Verantwortung auf andere abwälzen',correct:true},{text:'Karten spielen',correct:false},{text:'jemanden schwarzmalen',correct:false},{text:'einen Brief schreiben',correct:false}], hint: 'Schuldzuweisung', explanation: '<strong>Den Schwarzen Peter zuschieben</strong> = die Verantwortung/Schuld auf andere abwälzen (aus dem Kartenspiel).', points: 15 },
         ]
     },
     zusammenfassung: {
         konnektoren: [
-            { type: 'fill', category: 'konnektoren', instruction: 'Leite die Hauptaussage ein:', original: 'Der Text <strong>handelt von</strong>...', template: ['Der vorliegende Text',{id:'a',correct:['thematisiert','befasst sich mit','behandelt','setzt sich auseinander mit'],width:180}], hint: 'Formelle Themaeinführung', explanation: '<strong>Thematisiert / befasst sich mit</strong> sind formelle Themaeinführungen.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Konnektor zeigt die Textstruktur?', original: '<strong>[___]</strong> erläutert der Autor die Ursachen, <strong>[___]</strong> die Folgen.', options: [{text:'Zunächst ... anschließend',correct:true},{text:'Und ... und',correct:false},{text:'Auch ... auch',correct:false},{text:'Dann ... dann',correct:false}], hint: 'Textstruktur', explanation: '<strong>Zunächst ... anschließend</strong> zeigt die Textstruktur.', points: 15 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Fasse zusammen:', original: 'Am Ende <strong>sagt er</strong>...', template: [{id:'a',correct:['Abschließend resümiert der Autor','Zum Schluss konstatiert der Verfasser','Im Fazit hält der Autor fest'],width:280}], hint: 'Formelle Schlusszusammenfassung', explanation: '<strong>Resümiert / konstatiert / hält fest</strong> leiten das Fazit ein.', points: 10 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Zeige einen Gedankengang:', original: '<strong>Deshalb</strong> kommt er zu dem Schluss...', template: [{id:'a',correct:['Daraus leitet der Autor ab','Hieraus folgert der Verfasser','Auf dieser Grundlage schlussfolgert er'],width:260}], hint: 'Schlussfolgerung', explanation: '<strong>Leitet ab / folgert</strong> zeigen den Gedankengang.', points: 10 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Beschreiben Sie den Argumentationsgang des Textes:', original: 'Zuerst sagt der Autor X, dann Y.', template: ['Der Verfasser',{id:'a',correct:['eröffnet seine Argumentation mit der These','setzt bei der Prämisse an','nimmt seinen Ausgang bei'],width:250},', dass X,',{id:'b',correct:['um sodann den Nachweis zu führen','bevor er im Weiteren darlegt','um anschließend zu explizieren'],width:240},', dass Y.'], hint: 'Argumentationsgang nachzeichnen', explanation: '<strong>Eröffnet mit / nimmt Ausgang bei + sodann / im Weiteren</strong> zeichnet den Argumentationsgang präzise nach.', points: 15 },
         ],
         meinung: [
-            { type: 'fill', category: 'meinung', instruction: 'Gib die Autorenmeinung wieder:', original: 'Der Autor <strong>findet</strong>, dass...', template: ['Der Autor',{id:'a',correct:['vertritt die Ansicht','ist der Auffassung','zeigt sich überzeugt'],width:180},', dass...'], hint: 'Formelle Meinungswiedergabe', explanation: '<strong>Vertritt die Ansicht / ist der Auffassung</strong> geben Meinungen formell wieder.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welches Verb zeigt Autorenkritik?', original: 'Die Autorin <strong>[___]</strong> die aktuelle Politik.', options: [{text:'moniert',correct:true},{text:'sagt',correct:false},{text:'schreibt',correct:false},{text:'meint',correct:false}], hint: 'Kritik äußern', explanation: '<strong>Moniert</strong> drückt Kritik des Autors aus.', points: 15 },
-        ],
-        argumentation: [
-            { type: 'fill', category: 'argumentation', instruction: 'Gib die Argumentation wieder:', original: 'Er <strong>sagt als Argument</strong>...', template: ['Als zentrales Argument',{id:'a',correct:['führt der Autor an','nennt der Verfasser','bringt der Autor vor'],width:180}], hint: 'Argumentwiedergabe', explanation: '<strong>Führt an / nennt / bringt vor</strong> geben Argumente wieder.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Welches Verb zeigt Beweisführung?', original: 'Der Autor <strong>[___]</strong> seine These mit Statistiken.', options: [{text:'untermauert',correct:true},{text:'sagt',correct:false},{text:'hat',correct:false},{text:'macht',correct:false}], hint: 'Beweise anführen', explanation: '<strong>Untermauert</strong> zeigt, dass Beweise angeführt werden.', points: 15 },
+            { type: 'fill', category: 'meinung', instruction: 'Geben Sie eine wertende Aussage des Autors neutral wieder:', original: 'Der Autor findet X schlecht.', template: ['Der Verfasser',{id:'a',correct:['übt scharfe Kritik an','unterzieht X einer kritischen Beurteilung','moniert nachdrücklich'],width:220},'X und',{id:'b',correct:['attestiert diesem/dieser erhebliche Defizite','weist auf gravierende Mängel hin','deckt Schwachstellen auf'],width:250},'.'], hint: 'Distanzierte Wiedergabe von Wertungen', explanation: 'In der Zusammenfassung wird die <strong>Wertung des Autors wiedergegeben, nicht eigene Wertung vorgenommen</strong>.', points: 15 },
         ],
         textbezug: [
-            { type: 'fill', category: 'textbezug', instruction: 'Verweise auf den Textanfang:', original: 'Am Anfang <strong>steht</strong>...', template: [{id:'a',correct:['Eingangs schildert der Autor','Zu Beginn legt der Verfasser dar','Der Text eröffnet mit'],width:240}], hint: 'Formeller Textanfang', explanation: '<strong>Eingangs / Zu Beginn</strong> verweisen auf den Textanfang.', points: 10 },
-            { type: 'mc', category: 'textbezug', instruction: 'Welches Verb beschreibt ein Beispiel?', original: 'Der Autor <strong>[___]</strong> dies am Beispiel der Klimakrise.', options: [{text:'veranschaulicht',correct:true},{text:'sagt',correct:false},{text:'macht',correct:false},{text:'hat',correct:false}], hint: 'Beispiel geben', explanation: '<strong>Veranschaulicht</strong> zeigt, dass ein Beispiel gegeben wird.', points: 15 },
-            { type: 'fill', category: 'textbezug', instruction: 'Gib ein Zitat wieder:', original: 'Er schreibt: "..."', template: ['Wörtlich heißt es im Text:',{id:'a',correct:['"'],width:50}], hint: 'Zitat einleiten', explanation: '<strong>Wörtlich heißt es</strong> leitet ein direktes Zitat ein.', points: 10 },
-            { type: 'fill', category: 'textbezug', instruction: 'Indirekte Rede:', original: 'Er sagt, das <strong>ist</strong> wichtig.', template: ['Der Autor betont, dies',{id:'a',correct:['sei'],width:60},'wichtig.'], hint: 'Konjunktiv I', explanation: 'In der indirekten Rede steht der <strong>Konjunktiv I (sei)</strong>.', points: 10 },
+            { type: 'fill', category: 'textbezug', instruction: 'Formulieren Sie einen vollständigen Basissatz:', original: 'In dem Text geht es um X.', template: ['Der',{id:'a',correct:['vorliegende Sachtext','zu analysierende Text','Text mit dem Titel "..."'],width:200},', verfasst von [Autor] und erschienen',{id:'b',correct:['am [Datum] in [Quelle]','im Jahr [Jahr]','anlässlich [Anlass]'],width:200},', thematisiert [Thema].'], hint: 'Basissatz: Textsorte, Autor, Erscheinungsdatum, Quelle, Thema', explanation: 'Vollständiger <strong>Basissatz</strong> enthält: Textsorte, Autor, Erscheinungsdatum/-ort, Thema.', points: 15 },
+            { type: 'mc', category: 'textbezug', instruction: 'Welche Formulierung wahrt die gebotene Distanz zum Originaltext?', original: 'Der Autor hat recht, wenn er sagt...', options: [{text:'Der Autor vertritt die Ansicht, dass... (Konjunktiv I bei längerer indirekter Rede)',correct:true},{text:'Der Autor hat recht, wenn er sagt...',correct:false},{text:'Richtig sagt der Autor, dass...',correct:false},{text:'Wie der Autor korrekt feststellt...',correct:false}], hint: 'Keine eigene Wertung in der Zusammenfassung', explanation: 'In der <strong>Zusammenfassung keine eigene Wertung</strong>! Nur distanzierte Wiedergabe im Konjunktiv I.', points: 20 },
+            { type: 'fill', category: 'textbezug', instruction: 'Leiten Sie vom Hauptteil zum Schluss über:', original: 'Zum Schluss sagt der Autor...', template: [{id:'a',correct:['Abschließend konstatiert der Verfasser','Im Fazit resümiert der Autor','Seinen Ausführungen fügt der Verfasser hinzu'],width:280},', dass',{id:'b',correct:['sich die Lage voraussichtlich zuspitzen werde','ein Umdenken geboten sei','die Entwicklung weiterer Beobachtung bedürfe'],width:270},'(Konj. I).'], hint: 'Konjunktiv I in der indirekten Rede', explanation: 'Indirekte Rede in der Zusammenfassung verlangt <strong>Konjunktiv I (sei, werde, bedürfe)</strong>.', points: 15 },
         ],
         einleitung_schluss: [
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Beginne die Zusammenfassung:', original: 'In dem Text geht es um...', template: [{id:'a',correct:['Der vorliegende Text von [Autor] thematisiert','In seinem Text setzt sich [Autor] mit ... auseinander','Der Sachtext befasst sich mit'],width:350}], hint: 'Formelle Einleitung', explanation: 'Einleitung mit <strong>Autor, Titel, Jahr, Thema</strong>.', points: 10 },
-            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welche Information gehört in die Einleitung?', original: 'Eine vollständige Einleitung enthält <strong>[___]</strong>.', options: [{text:'Autor, Titel, Jahr, Textsorte, Thema',correct:true},{text:'Nur das Thema',correct:false},{text:'Meine Meinung',correct:false},{text:'Ein Zitat',correct:false}], hint: 'Basissatz', explanation: 'Basissatz: <strong>Autor, Titel, Jahr, Textsorte, Thema</strong>.', points: 15 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Beende die Zusammenfassung:', original: '<strong>Das wars</strong>.', template: [{id:'a',correct:['Zusammenfassend lässt sich festhalten','Abschließend ist zu konstatieren','Die Kernaussage des Textes lautet'],width:280}], hint: 'Formeller Schluss', explanation: '<strong>Zusammenfassend / Abschließend</strong> beenden formell.', points: 10 },
+            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welche Elemente gehören in die Einleitung einer Textzusammenfassung?', original: 'In dem Text geht es um...', options: [{text:'Textsorte, Autor, Titel, Erscheinungsort/-datum, Thema (in einem Satz)',correct:true},{text:'Eigene Meinung zum Thema',correct:false},{text:'Ausführliche Inhaltsangabe',correct:false},{text:'Zitate aus dem Text',correct:false}], hint: 'Basissatz-Formel', explanation: '<strong>Basissatz in einem Satz</strong>: Textsorte + Autor + Titel + Erscheinungsdaten + Thema.', points: 15 },
         ],
         wissenschaft: [
-            { type: 'fill', category: 'wissenschaft', instruction: 'Halte Distanz zur Autorenaussage:', original: 'Er sagt, das <strong>stimmt</strong>.', template: ['Dem Autor zufolge',{id:'a',correct:['trifft dies zu','entspricht dies der Realität','verhält es sich so'],width:200}], hint: 'Distanzierte Wiedergabe', explanation: '<strong>Dem Autor zufolge</strong> wahrt Distanz.', points: 10 },
-            { type: 'mc', category: 'wissenschaft', instruction: 'Welche Formulierung wahrt Neutralität?', original: 'Der Autor behauptet, <strong>[___]</strong> die Zahlen stimmen.', options: [{text:'dass',correct:true},{text:'die',correct:false},{text:'weil',correct:false},{text:'obwohl',correct:false}], hint: 'Neutraler Nebensatz', explanation: '<strong>Dass</strong> leitet einen neutralen Inhaltssatz ein.', points: 15 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Unterscheiden Sie Autorenposition von Faktendarstellung:', original: 'Der Autor sagt, X ist so.', template: ['Während',{id:'a',correct:['der Autor die Position vertritt','der Verfasser die These aufstellt','nach Ansicht des Autors'],width:220},', dass X,',{id:'b',correct:['belegt er dies durch Verweis auf Y','stützt er sich auf die Studie Z','führt er als Beleg Y an'],width:250},'.'], hint: 'These und Beleg unterscheiden', explanation: 'Zusammenfassung <strong>differenziert zwischen Autorenthese und angeführten Belegen</strong>.', points: 15 },
         ],
         stilistik: [
-            { type: 'fill', category: 'stilistik', instruction: 'Variiere "der Autor":', original: '<strong>Der Autor</strong> sagt...', template: [{id:'a',correct:['Der Verfasser','Der Journalist','Der Essayist','Der Schreiber'],width:150}], hint: 'Synonyme für Autor', explanation: '<strong>Verfasser / Journalist / Essayist</strong> sind Varianten.', points: 10 },
-            { type: 'mc', category: 'stilistik', instruction: 'Welche Formulierung vermeidet Wertung?', original: 'Der Autor sagt <strong>[___]</strong>, dass...', options: [{text:'weiter',correct:true},{text:'richtig',correct:false},{text:'falsch',correct:false},{text:'dummerweise',correct:false}], hint: 'Neutral bleiben', explanation: '<strong>Weiter</strong> ist neutral, ohne Wertung.', points: 15 },
+            { type: 'fill', category: 'stilistik', instruction: 'Variieren Sie "der Autor sagt":', original: 'Der Autor sagt... Der Autor sagt auch... Dann sagt der Autor...', template: ['Der Verfasser',{id:'a',correct:['konstatiert','führt aus','legt dar'],width:120},'; ferner',{id:'b',correct:['weist er darauf hin','betont er','hebt er hervor'],width:160},'; schließlich',{id:'c',correct:['resümiert er','zieht er das Fazit','kommt er zu dem Schluss'],width:180},'.'], hint: 'Synonyme Variationen für Textbezug', explanation: '<strong>Synonymvariation</strong> bei Textbezugsverben: konstatieren, ausführen, darlegen, hervorheben, resümieren.', points: 15 },
         ],
         redewendungen: [
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Der Autor bringt es auf den <strong>[___]</strong>.', template: ['auf den',{id:'a',correct:['Punkt'],width:80}], hint: 'Präzise zusammenfassen', explanation: '<strong>Auf den Punkt bringen</strong> = präzise zusammenfassen.', points: 10 },
-            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "den Kern der Sache treffen"?', original: 'Der Autor <strong>trifft den Kern der Sache</strong>.', options: [{text:'das Wesentliche erfassen',correct:true},{text:'einen Kern essen',correct:false},{text:'etwas werfen',correct:false},{text:'sich irren',correct:false}], hint: 'Das Wichtigste', explanation: '<strong>Den Kern treffen</strong> = das Wesentliche erfassen.', points: 15 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Ergänzen Sie die Wendung für inhaltliche Wiedergabe:', original: 'Es geht hauptsächlich um X.', template: ['Im',{id:'a',correct:['Kern','Zentrum','Mittelpunkt'],width:100},'der Ausführungen steht die Frage',{id:'b',correct:['nach','ob','inwiefern'],width:100},'X.'], hint: '"Im Kern/Zentrum stehen"', explanation: '<strong>Im Kern/Zentrum stehen</strong> = den Hauptgegenstand bilden.', points: 15 },
         ]
     },
     leserbrief: {
         konnektoren: [
-            { type: 'fill', category: 'konnektoren', instruction: 'Reagiere auf einen Artikel:', original: '<strong>Wegen</strong> Ihres Artikels...', template: [{id:'a',correct:['Mit Bezug auf','In Reaktion auf','Veranlasst durch'],width:160},'Ihren Artikel...'], hint: 'Formeller Bezug', explanation: '<strong>Mit Bezug auf</strong> ist ein formeller Bezug.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Ausdruck leitet Widerspruch ein?', original: '<strong>[___]</strong> muss ich dem Autor widersprechen.', options: [{text:'An dieser Stelle',correct:true},{text:'Irgendwie',correct:false},{text:'Vielleicht',correct:false},{text:'Quasi',correct:false}], hint: 'Höflicher Widerspruch', explanation: '<strong>An dieser Stelle</strong> leitet höflichen Widerspruch ein.', points: 15 },
-            { type: 'fill', category: 'konnektoren', instruction: 'Stimme teilweise zu:', original: 'Das <strong>stimmt schon, aber</strong>...', template: [{id:'a',correct:['Wenngleich ich dem grundsätzlich zustimme','Obwohl ich diese Ansicht teile'],width:300}], hint: 'Teilzustimmung', explanation: '<strong>Wenngleich ich zustimme</strong> drückt Teilzustimmung aus.', points: 10 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Leiten Sie Ihre Reaktion auf den Artikel ein:', original: 'Wegen Ihres Artikels schreibe ich.', template: [{id:'a',correct:['Veranlasst durch','Mit Bezug auf','In Reaktion auf'],width:160},'Ihren Beitrag vom [Datum] zum Thema X',{id:'b',correct:['möchte ich Stellung nehmen','erlaube ich mir, Stellung zu beziehen','sehe ich mich veranlasst, Stellung zu nehmen'],width:280},'.'], hint: 'Formeller Anlass + Ankündigung', explanation: '<strong>Veranlasst durch + Stellung nehmen</strong> ist die formelle Einleitung eines Leserbriefs.', points: 15 },
         ],
         meinung: [
-            { type: 'fill', category: 'meinung', instruction: 'Drücke Betroffenheit aus:', original: 'Das <strong>macht mich wütend</strong>.', template: [{id:'a',correct:['Mit großer Bestürzung','Mit Befremden','Mit erheblicher Sorge'],width:180},'habe ich...gelesen.'], hint: 'Formelle Betroffenheit', explanation: '<strong>Mit Bestürzung / Befremden</strong> drücken Betroffenheit formell aus.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welcher Ausdruck zeigt Empörung?', original: '<strong>[___]</strong> lese ich, dass...', options: [{text:'Fassungslos',correct:true},{text:'Gerne',correct:false},{text:'Manchmal',correct:false},{text:'Eventuell',correct:false}], hint: 'Starke Reaktion', explanation: '<strong>Fassungslos</strong> drückt starke Empörung aus.', points: 15 },
-            { type: 'fill', category: 'meinung', instruction: 'Zeige Zustimmung:', original: 'Ich <strong>stimme total zu</strong>.', template: [{id:'a',correct:['Ich teile uneingeschränkt die Ansicht','Ich pflichte dem Autor vollkommen bei'],width:320}], hint: 'Formelle Zustimmung', explanation: '<strong>Teile die Ansicht / pflichte bei</strong> sind formelle Zustimmungen.', points: 10 },
+            { type: 'fill', category: 'meinung', instruction: 'Drücken Sie Betroffenheit formell aus:', original: 'Das macht mich wütend.', template: [{id:'a',correct:['Mit erheblicher Bestürzung','Mit großem Befremden','Nicht ohne Betroffenheit'],width:200},'habe ich',{id:'b',correct:['zur Kenntnis genommen','gelesen','erfahren müssen'],width:160},', dass...'], hint: '"Mit Bestürzung/Befremden"', explanation: '<strong>Mit Bestürzung/Befremden + zur Kenntnis nehmen</strong> drückt Betroffenheit formal aus.', points: 15 },
+            { type: 'mc', category: 'meinung', instruction: 'Welche Formulierung drückt höflichen Widerspruch aus?', original: 'Das ist falsch!', options: [{text:'Erlauben Sie mir, in diesem Punkt eine differenziertere Sichtweise anzumahnen.',correct:true},{text:'Das ist komplett falsch!',correct:false},{text:'Ich bin anderer Meinung.',correct:false},{text:'Sie irren sich.',correct:false}], hint: '"Erlauben Sie mir" + "anmahnen"', explanation: '<strong>"Erlauben Sie mir, eine differenziertere Sichtweise anzumahnen"</strong> ist höflicher Widerspruch.', points: 20 },
         ],
         argumentation: [
-            { type: 'fill', category: 'argumentation', instruction: 'Bringe eigene Erfahrung ein:', original: 'Ich hab <strong>selbst erlebt</strong>...', template: [{id:'a',correct:['Aus eigener Erfahrung kann ich berichten','Meine persönliche Erfahrung zeigt','Als selbst Betroffener weiß ich'],width:280}], hint: 'Formelle Erfahrung', explanation: '<strong>Aus eigener Erfahrung</strong> bringt Erfahrung formal ein.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Wie appelliert man an die Leser?', original: '<strong>[___]</strong> sollten wir alle nachdenken.', options: [{text:'Darüber',correct:true},{text:'Irgendwie',correct:false},{text:'Vielleicht',correct:false},{text:'Egal',correct:false}], hint: 'Gemeinsamer Appell', explanation: '<strong>Darüber sollten wir nachdenken</strong> appelliert an die Gemeinschaft.', points: 15 },
-            { type: 'fill', category: 'argumentation', instruction: 'Fordere eine Reaktion:', original: 'Da <strong>muss was passieren</strong>!', template: [{id:'a',correct:['Hier besteht dringender Handlungsbedarf','Es ist höchste Zeit zu handeln'],width:280}], hint: 'Formeller Appell', explanation: '<strong>Handlungsbedarf</strong> fordert formell zum Handeln auf.', points: 10 },
+            { type: 'fill', category: 'argumentation', instruction: 'Führen Sie eigene Erfahrung als Argument an:', original: 'Ich weiß das aus eigener Erfahrung.', template: [{id:'a',correct:['Als selbst Betroffener','Aus meiner langjährigen Erfahrung als','In meiner Eigenschaft als'],width:250},'[Rolle] kann ich',{id:'b',correct:['aus erster Hand berichten','bezeugen','bestätigen'],width:150},', dass...'], hint: 'Expertise/Betroffenheit etablieren', explanation: '<strong>Als Betroffener / aus Erfahrung als</strong> etabliert die Autorität des Leserbriefschreibers.', points: 15 },
         ],
         textbezug: [
-            { type: 'fill', category: 'textbezug', instruction: 'Beziehe dich auf eine Aussage:', original: 'Sie <strong>schreiben</strong>, dass...', template: ['In Ihrem Beitrag',{id:'a',correct:['führen Sie aus','vertreten Sie die These','konstatieren Sie'],width:180},', dass...'], hint: 'Formeller Bezug', explanation: '<strong>Führen aus / vertreten die These</strong> sind formelle Bezugnahmen.', points: 10 },
-            { type: 'mc', category: 'textbezug', instruction: 'Welche Anrede ist korrekt?', original: '<strong>[___]</strong> Damen und Herren der Redaktion,', options: [{text:'Sehr geehrte',correct:true},{text:'Liebe',correct:false},{text:'Hey',correct:false},{text:'Hallo',correct:false}], hint: 'Formelle Anrede', explanation: '<strong>Sehr geehrte</strong> ist die korrekte formelle Anrede.', points: 15 },
+            { type: 'fill', category: 'textbezug', instruction: 'Zitieren Sie eine Passage kritisch:', original: 'Sie schreiben "X". Das stimmt nicht.', template: ['Sie schreiben,',{id:'a',correct:['ich zitiere:','und ich erlaube mir zu zitieren:','wörtlich:'],width:200},'"X". Diese Aussage',{id:'b',correct:['bedarf der Korrektur','entspricht nicht den Tatsachen','ist in dieser Form nicht haltbar'],width:220},'.'], hint: 'Zitat + distanzierte Kritik', explanation: '<strong>Zitat explizit markieren + sachliche Kritik</strong> statt emotionaler Ablehnung.', points: 15 },
         ],
         einleitung_schluss: [
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Beginne den Leserbrief:', original: 'Ich schreibe wegen...', template: [{id:'a',correct:['Mit großem Interesse habe ich Ihren Artikel gelesen','Ihr Beitrag vom [Datum] hat mich veranlasst','Bezugnehmend auf Ihren Artikel'],width:350}], hint: 'Formeller Einstieg', explanation: 'Formeller Einstieg mit <strong>Interesse / veranlasst / bezugnehmend</strong>.', points: 10 },
-            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Schluss ist am wirkungsvollsten?', original: '<strong>[___]</strong>', options: [{text:'Mit freundlichen Grüßen',correct:true},{text:'Tschüss',correct:false},{text:'Bye',correct:false},{text:'Ciao',correct:false}], hint: 'Formeller Gruß', explanation: '<strong>Mit freundlichen Grüßen</strong> ist der korrekte formelle Schluss.', points: 15 },
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formuliere einen Schlusssatz:', original: '<strong>Das wars von mir</strong>.', template: [{id:'a',correct:['Ich würde mich freuen, wenn Sie diese Zeilen veröffentlichen','Über eine Veröffentlichung würde ich mich freuen'],width:350}], hint: 'Bitte um Veröffentlichung', explanation: 'Schlusssatz mit <strong>Bitte um Veröffentlichung</strong>.', points: 10 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formulieren Sie den Schlusssatz eines Leserbriefs:', original: 'Das wars von mir.', template: [{id:'a',correct:['Ich würde mich freuen','Es wäre mir ein Anliegen','Über eine Berücksichtigung'],width:200},', wenn',{id:'b',correct:['meine Anmerkungen Gehör fänden','Sie diese Zeilen veröffentlichten','meine Perspektive in Ihre Berichterstattung Eingang fände'],width:280},'.'], hint: 'Bitte um Veröffentlichung', explanation: 'Leserbriefschluss mit <strong>höflicher Bitte um Veröffentlichung/Berücksichtigung</strong>.', points: 15 },
+            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welche Anrede ist für einen Leserbrief korrekt?', original: 'Hallo Redaktion!', options: [{text:'Sehr geehrte Damen und Herren der Redaktion, / Sehr geehrte Redaktion,',correct:true},{text:'Hallo Redaktion!',correct:false},{text:'Liebe Leute,',correct:false},{text:'Hi!',correct:false}], hint: 'Formelle Anrede', explanation: '<strong>Sehr geehrte Damen und Herren der Redaktion</strong> ist die korrekte formelle Anrede.', points: 15 },
         ],
         wissenschaft: [
-            { type: 'fill', category: 'wissenschaft', instruction: 'Verweise auf Expertise:', original: 'Ich <strong>weiß das</strong>, weil...', template: [{id:'a',correct:['Als Fachmann auf diesem Gebiet','Aufgrund meiner beruflichen Erfahrung','Mit meinem fachlichen Hintergrund'],width:260}], hint: 'Expertise zeigen', explanation: '<strong>Als Fachmann / berufliche Erfahrung</strong> unterstreichen Kompetenz.', points: 10 },
-            { type: 'mc', category: 'wissenschaft', instruction: 'Wie verweist man auf Fakten?', original: '<strong>[___]</strong> belegen, dass...', options: [{text:'Aktuelle Studien',correct:true},{text:'Irgendwelche Sachen',correct:false},{text:'Gerüchte',correct:false},{text:'Stories',correct:false}], hint: 'Wissenschaftliche Quellen', explanation: '<strong>Aktuelle Studien</strong> verleihen Glaubwürdigkeit.', points: 15 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Untermauern Sie Ihre Kritik mit Fakten:', original: 'Die Zahlen stimmen nicht.', template: ['Die im Artikel',{id:'a',correct:['angeführten','genannten','publizierten'],width:120},'Zahlen',{id:'b',correct:['decken sich nicht mit den Erhebungen des [Institut]','weichen erheblich von den Daten des [Quelle] ab','bedürfen der Korrektur, wie [Quelle] belegt'],width:300},'.'], hint: 'Gegenbeleg anführen', explanation: '<strong>Konkrete Gegenquelle anführen</strong> stärkt die Glaubwürdigkeit der Kritik.', points: 15 },
         ],
         stilistik: [
-            { type: 'fill', category: 'stilistik', instruction: 'Formuliere höflich aber bestimmt:', original: 'Sie <strong>liegen falsch</strong>.', template: ['Erlauben Sie mir,',{id:'a',correct:['Ihnen in diesem Punkt zu widersprechen','eine andere Sichtweise darzulegen'],width:280}], hint: 'Höflicher Widerspruch', explanation: '<strong>Erlauben Sie mir</strong> + Widerspruch ist höflich aber bestimmt.', points: 10 },
-            { type: 'mc', category: 'stilistik', instruction: 'Welche Formulierung ist respektvoll-kritisch?', original: '<strong>[___]</strong> möchte ich anmerken...', options: [{text:'Mit Verlaub',correct:true},{text:'Ehrlich gesagt',correct:false},{text:'Egal',correct:false},{text:'Whatever',correct:false}], hint: 'Respektvolle Kritik', explanation: '<strong>Mit Verlaub</strong> leitet respektvolle Kritik ein.', points: 15 },
+            { type: 'fill', category: 'stilistik', instruction: 'Formulieren Sie Kritik respektvoll aber bestimmt:', original: 'Sie liegen völlig daneben.', template: [{id:'a',correct:['Mit Verlaub','Bei allem Respekt','Ohne Ihnen zu nahe treten zu wollen'],width:220},'muss ich',{id:'b',correct:['dieser Darstellung widersprechen','eine Gegenposition formulieren','auf Ungereimtheiten hinweisen'],width:220},'.'], hint: '"Mit Verlaub" + bestimmter Widerspruch', explanation: '<strong>"Mit Verlaub/Bei allem Respekt"</strong> mildert den Widerspruch, ohne ihn abzuschwächen.', points: 15 },
         ],
         redewendungen: [
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze die Redewendung:', original: 'Das geht mir <strong>[___]</strong>.', template: ['geht mir',{id:'a',correct:['nahe','unter die Haut','zu Herzen'],width:120}], hint: 'Emotionale Betroffenheit', explanation: '<strong>Nahe gehen</strong> = emotional berühren.', points: 10 },
-            { type: 'mc', category: 'redewendungen', instruction: 'Was bedeutet "Gehör finden"?', original: 'Ich hoffe, dass meine Kritik <strong>Gehör findet</strong>.', options: [{text:'beachtet wird',correct:true},{text:'gehört wird',correct:false},{text:'laut ist',correct:false},{text:'vergessen wird',correct:false}], hint: 'Aufmerksamkeit bekommen', explanation: '<strong>Gehör finden</strong> = beachtet werden.', points: 15 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Ergänzen Sie die idiomatische Wendung:', original: 'Das betrifft mich persönlich sehr.', template: ['Als direkt Betroffener',{id:'a',correct:['liegt mir dieses Thema am Herzen','geht mir dieses Thema nahe','berührt mich diese Frage zutiefst'],width:250},'und ich',{id:'b',correct:['kann nicht umhin','sehe mich veranlasst','erachte es als meine Pflicht'],width:180},', Stellung zu beziehen.'], hint: '"Am Herzen liegen" / "nahe gehen"', explanation: '<strong>"Am Herzen liegen" / "nahe gehen"</strong> = persönlich wichtig sein, emotional berühren.', points: 15 },
         ]
     },
     textanalyse: {
         konnektoren: [
-            { type: 'fill', category: 'konnektoren', instruction: 'Analysiere den Aufbau:', original: '<strong>Zuerst</strong>...dann...', template: [{id:'a',correct:['Der Text gliedert sich in','Die Struktur des Textes umfasst','Der Aufbau lässt sich beschreiben als'],width:280}], hint: 'Strukturanalyse', explanation: '<strong>Gliedert sich</strong> analysiert den Aufbau.', points: 10 },
-            { type: 'mc', category: 'konnektoren', instruction: 'Welcher Konnektor zeigt Wirkungsanalyse?', original: '<strong>[___]</strong> erzielt der Autor eine starke Wirkung.', options: [{text:'Dadurch',correct:true},{text:'Vielleicht',correct:false},{text:'Irgendwie',correct:false},{text:'Egal',correct:false}], hint: 'Wirkung zeigen', explanation: '<strong>Dadurch</strong> verbindet Stilmittel mit Wirkung.', points: 15 },
+            { type: 'fill', category: 'konnektoren', instruction: 'Verbinden Sie Stilmittelanalyse mit Wirkungsbeschreibung:', original: 'Der Autor benutzt Metaphern. Das wirkt gut.', template: ['Durch den',{id:'a',correct:['gezielten Einsatz','bewussten Rekurs auf','strategischen Gebrauch'],width:180},'metaphorischer Sprache',{id:'b',correct:['evoziert der Autor','erzielt der Verfasser','generiert der Text'],width:180},'eine Wirkung der...'], hint: '"Evozieren" = hervorrufen', explanation: '<strong>Gezielter Einsatz + evozieren</strong> verbindet Stilmittelanalyse mit Wirkungsbeschreibung.', points: 15 },
         ],
         meinung: [
-            { type: 'fill', category: 'meinung', instruction: 'Bewerte ein Stilmittel:', original: 'Das <strong>ist gut gemacht</strong>.', template: ['Dieses Stilmittel',{id:'a',correct:['verleiht dem Text Nachdruck','unterstreicht die Aussage wirkungsvoll','erzielt eine eindringliche Wirkung'],width:250}], hint: 'Formelle Bewertung', explanation: '<strong>Verleiht Nachdruck / erzielt Wirkung</strong> bewerten formal.', points: 10 },
-            { type: 'mc', category: 'meinung', instruction: 'Welche Formulierung interpretiert?', original: 'Das <strong>[___]</strong> könnte symbolisch gemeint sein.', options: [{text:'Bild',correct:true},{text:'Ding',correct:false},{text:'Teil',correct:false},{text:'Zeug',correct:false}], hint: 'Interpretation', explanation: '<strong>Bild / Metapher / Symbol</strong> werden interpretiert.', points: 15 },
+            { type: 'fill', category: 'meinung', instruction: 'Bewerten Sie die Wirksamkeit eines Stilmittels:', original: 'Die Metapher ist gut gewählt.', template: ['Die Metapher',{id:'a',correct:['erweist sich als treffend gewählt','ist von suggestiver Kraft','entfaltet ihre volle Wirkung'],width:220},', indem sie',{id:'b',correct:['das Abstrakte veranschaulicht','komplexe Zusammenhänge verdichtet','beim Leser Assoziationen weckt'],width:240},'.'], hint: 'Wirkung der Metapher beschreiben', explanation: '<strong>Suggestive Kraft / volle Wirkung entfalten</strong> + Konkretisierung der Wirkung.', points: 15 },
         ],
         argumentation: [
-            { type: 'fill', category: 'argumentation', instruction: 'Analysiere die Intention:', original: 'Der Autor <strong>will</strong>...', template: ['Die Intention des Autors',{id:'a',correct:['besteht darin','liegt darin','zielt darauf ab'],width:150}], hint: 'Intention beschreiben', explanation: '<strong>Intention besteht darin</strong> analysiert die Absicht.', points: 10 },
-            { type: 'mc', category: 'argumentation', instruction: 'Welches Verb beschreibt Überzeugungsarbeit?', original: 'Der Autor <strong>[___]</strong> den Leser von seiner These.', options: [{text:'überzeugt',correct:true},{text:'sagt',correct:false},{text:'macht',correct:false},{text:'hat',correct:false}], hint: 'Überzeugen', explanation: '<strong>Überzeugt</strong> beschreibt die rhetorische Wirkung.', points: 15 },
+            { type: 'fill', category: 'argumentation', instruction: 'Analysieren Sie die Intention des Autors:', original: 'Der Autor will überzeugen.', template: ['Die Intention des Verfassers',{id:'a',correct:['besteht offenkundig darin','zielt darauf ab','liegt darin'],width:200},', den Rezipienten',{id:'b',correct:['für seine Position zu gewinnen','von der Validität seiner These zu überzeugen','zu einer Revision seiner Haltung zu bewegen'],width:280},'.'], hint: '"Rezipient" = Leser/Empfänger', explanation: '<strong>Rezipient + für seine Position gewinnen</strong> beschreibt persuasive Intention differenziert.', points: 15 },
         ],
         textbezug: [
-            { type: 'fill', category: 'textbezug', instruction: 'Identifiziere ein Stilmittel:', original: 'Hier <strong>ist</strong> eine Metapher.', template: ['Bei dem Ausdruck handelt es sich um',{id:'a',correct:['eine Metapher','einen Vergleich','eine Personifikation'],width:160}], hint: 'Stilmittel benennen', explanation: '<strong>Handelt es sich um</strong> identifiziert Stilmittel formell.', points: 10 },
-            { type: 'mc', category: 'textbezug', instruction: 'Welches Verb beschreibt Stilmittelgebrauch?', original: 'Der Autor <strong>[___]</strong> rhetorische Fragen.', options: [{text:'verwendet',correct:true},{text:'macht',correct:false},{text:'hat',correct:false},{text:'ist',correct:false}], hint: 'Stilmittel einsetzen', explanation: '<strong>Verwendet / setzt ein</strong> beschreiben Stilmittelgebrauch.', points: 15 },
-            { type: 'fill', category: 'textbezug', instruction: 'Beschreibe die Wirkung:', original: 'Das <strong>macht</strong>, dass...', template: ['Dieses Stilmittel',{id:'a',correct:['bewirkt','erzeugt','evoziert'],width:100},', dass...'], hint: 'Wirkung beschreiben', explanation: '<strong>Bewirkt / erzeugt / evoziert</strong> beschreiben Wirkungen.', points: 10 },
+            { type: 'fill', category: 'textbezug', instruction: 'Identifizieren Sie ein Stilmittel präzise:', original: 'Hier ist eine Metapher.', template: ['Bei dem Ausdruck "[Zitat]" (Z. X)',{id:'a',correct:['handelt es sich um','liegt vor','findet sich'],width:150},'eine',{id:'b',correct:['Metapher, die das Bildfeld des/der ... aktiviert','personifizierende Metapher','lexikalisierte Metapher'],width:280},'.'], hint: 'Stilmittel benennen + Bildfeld angeben', explanation: '<strong>Stilmittelidentifikation + Bildfeld-Analyse</strong> zeigt literaturwissenschaftliche Kompetenz.', points: 15 },
+            { type: 'mc', category: 'textbezug', instruction: 'Welcher Begriff beschreibt wiederholte Satzanfänge?', original: 'Jeder Satz beginnt mit dem gleichen Wort.', options: [{text:'Anapher – die Wiederholung eines Wortes/einer Wortgruppe am Satzanfang',correct:true},{text:'Epipher – die Wiederholung am Satzende',correct:false},{text:'Alliteration – gleicher Anlaut',correct:false},{text:'Parallelismus – gleiche Satzstruktur',correct:false}], hint: 'Rhetorischer Fachbegriff', explanation: '<strong>Anapher</strong> = Wiederholung am Satzanfang (vs. Epipher = am Ende).', points: 15 },
         ],
         einleitung_schluss: [
-            { type: 'fill', category: 'einleitung_schluss', instruction: 'Beginne die Analyse:', original: 'Ich analysiere den Text...', template: [{id:'a',correct:['Im Folgenden soll der Text hinsichtlich seiner sprachlichen Gestaltung analysiert werden','Die folgende Analyse untersucht die stilistischen Mittel'],width:400}], hint: 'Formelle Einleitung', explanation: 'Formelle Einleitung mit <strong>Untersuchungsgegenstand</strong>.', points: 10 },
-            { type: 'mc', category: 'einleitung_schluss', instruction: 'Welcher Schluss fasst die Analyse zusammen?', original: '<strong>[___]</strong> lässt sich festhalten, dass der Autor durch Stilmittel...', options: [{text:'Resümierend',correct:true},{text:'Irgendwie',correct:false},{text:'Na ja',correct:false},{text:'Egal',correct:false}], hint: 'Formeller Schluss', explanation: '<strong>Resümierend</strong> leitet das Analysefazit ein.', points: 15 },
+            { type: 'fill', category: 'einleitung_schluss', instruction: 'Formulieren Sie die Einleitung einer Textanalyse:', original: 'Ich analysiere jetzt den Text.', template: ['Im Folgenden soll der',{id:'a',correct:['vorliegende Text','zu analysierende Text','Text "[Titel]"'],width:180},'hinsichtlich seiner',{id:'b',correct:['sprachlich-stilistischen Gestaltung','rhetorischen Mittel','argumentativen Struktur'],width:220},'untersucht werden.'], hint: 'Analyseziel explizit benennen', explanation: 'Textanalyse-Einleitung: <strong>Text benennen + Untersuchungsaspekt explizieren</strong>.', points: 15 },
         ],
         wissenschaft: [
-            { type: 'fill', category: 'wissenschaft', instruction: 'Verwende Fachterminologie:', original: 'Das Wort <strong>steht für</strong> etwas anderes.', template: ['Das Wort fungiert als',{id:'a',correct:['Metapher','Symbol','Allegorie','Chiffre'],width:120}], hint: 'Fachbegriff', explanation: '<strong>Metapher / Symbol / Allegorie</strong> sind Fachbegriffe.', points: 10 },
-            { type: 'mc', category: 'wissenschaft', instruction: 'Welcher Begriff beschreibt Wiederholung?', original: 'Die <strong>[___]</strong> verstärkt die Aussage.', options: [{text:'Anapher',correct:true},{text:'Wiederholung',correct:false},{text:'Sache',correct:false},{text:'Ding',correct:false}], hint: 'Rhetorischer Fachbegriff', explanation: '<strong>Anapher</strong> = Satzanfangswiederholung.', points: 15 },
-            { type: 'fill', category: 'wissenschaft', instruction: 'Beschreibe den Satzbau:', original: 'Die Sätze sind kurz.', template: ['Der Autor bedient sich',{id:'a',correct:['eines parataktischen Stils','kurzer, prägnanter Sätze'],width:220}], hint: 'Syntaxbeschreibung', explanation: '<strong>Parataktisch</strong> beschreibt kurzen Satzbau.', points: 10 },
+            { type: 'fill', category: 'wissenschaft', instruction: 'Beschreiben Sie die Syntax analytisch:', original: 'Die Sätze sind lang.', template: ['Der Text ist durch einen',{id:'a',correct:['hypotaktischen Stil','komplexen Satzbau','verschachtelten Periodenbau'],width:200},'geprägt, der sich in',{id:'b',correct:['mehrfach subordinierten Nebensatzkonstruktionen','elaborierten Satzgefügen','komplexen Hypotaxen'],width:250},'manifestiert.'], hint: 'Hypotaxe vs. Parataxe', explanation: '<strong>Hypotaxe</strong> = komplexer Satzbau mit Nebensätzen. <strong>Parataxe</strong> = einfache Hauptsatzreihung.', points: 15 },
+            { type: 'mc', category: 'wissenschaft', instruction: 'Was beschreibt der Begriff "Deixis"?', original: 'Wörter wie "hier", "jetzt", "ich"...', options: [{text:'Verweisformen, deren Bedeutung vom Äußerungskontext abhängt (ich, hier, jetzt, dieser)',correct:true},{text:'Hauptwörter',correct:false},{text:'Eigenschaftswörter',correct:false},{text:'Bindewörter',correct:false}], hint: 'Sprachwissenschaftlicher Fachbegriff', explanation: '<strong>Deixis</strong> = kontextabhängige Verweisformen (ich, du, hier, jetzt, dieser).', points: 20 },
         ],
         stilistik: [
-            { type: 'fill', category: 'stilistik', instruction: 'Beschreibe den Tonfall:', original: 'Der Text klingt <strong>ernst</strong>.', template: ['Der Tonfall des Textes ist',{id:'a',correct:['sachlich-nüchtern','appellativ','ironisch-distanziert','pathetisch'],width:180}], hint: 'Tonfall benennen', explanation: '<strong>Sachlich / appellativ / ironisch</strong> beschreiben den Tonfall.', points: 10 },
-            { type: 'mc', category: 'stilistik', instruction: 'Welcher Begriff beschreibt Übertreibung?', original: 'Der Autor verwendet eine <strong>[___]</strong>.', options: [{text:'Hyperbel',correct:true},{text:'Übertreibung',correct:false},{text:'Großmachung',correct:false},{text:'Verstärkung',correct:false}], hint: 'Fachbegriff für Übertreibung', explanation: '<strong>Hyperbel</strong> ist der Fachbegriff für Übertreibung.', points: 15 },
-            { type: 'fill', category: 'stilistik', instruction: 'Analysiere die Wortwahl:', original: 'Die Wörter sind <strong>stark</strong>.', template: ['Die Wortwahl ist',{id:'a',correct:['expressiv','konnotativ aufgeladen','emotional gefärbt','suggestiv'],width:180}], hint: 'Wortwahl beschreiben', explanation: '<strong>Expressiv / konnotativ</strong> beschreiben die Wortwahl.', points: 10 },
+            { type: 'fill', category: 'stilistik', instruction: 'Analysieren Sie die Tonalität des Textes:', original: 'Der Text klingt sachlich.', template: ['Der Text ist von einer',{id:'a',correct:['sachlich-nüchternen Tonalität','distanziert-analytischen Diktion','kühl-rationalen Tonlage'],width:240},'geprägt, die',{id:'b',correct:['Objektivität suggeriert','Seriosität vermittelt','wissenschaftlichen Anspruch signalisiert'],width:220},'.'], hint: '"Tonalität/Diktion" = Tonfall/Ausdrucksweise', explanation: '<strong>Tonalität/Diktion</strong> = Tonfall/Ausdrucksweise. <strong>Wirkung benennen</strong>: Objektivität, Seriosität.', points: 15 },
         ],
         redewendungen: [
-            { type: 'fill', category: 'redewendungen', instruction: 'Ergänze den Fachbegriff:', original: 'Das Bild vom Wolf ist ein <strong>[___]</strong>.', template: ['ist ein',{id:'a',correct:['Topos','geflügeltes Wort','Idiom'],width:150}], hint: 'Wiederkehrendes Motiv', explanation: '<strong>Topos</strong> = wiederkehrendes Motiv.', points: 10 },
-            { type: 'mc', category: 'redewendungen', instruction: 'Was ist eine "Klimax"?', original: '"gut, besser, am besten" ist eine <strong>Klimax</strong>.', options: [{text:'Steigerung',correct:true},{text:'Wiederholung',correct:false},{text:'Gegensatz',correct:false},{text:'Vergleich',correct:false}], hint: 'Rhetorische Figur', explanation: '<strong>Klimax</strong> = rhetorische Steigerung.', points: 15 },
+            { type: 'fill', category: 'redewendungen', instruction: 'Beschreiben Sie bildliche Sprache fachsprachlich:', original: 'Der Autor verwendet viele Bilder.', template: ['Der Text zeichnet sich durch einen',{id:'a',correct:['hohen Grad an Bildlichkeit aus','elaborierten Einsatz von Tropen aus','reichen Fundus an Metaphorik aus'],width:260},', der',{id:'b',correct:['das Abstrakte veranschaulicht','zur Anschaulichkeit des Textes beiträgt','die Plastizität der Darstellung erhöht'],width:250},'.'], hint: '"Tropen" = Oberbegriff für Metapher, Metonymie etc.', explanation: '<strong>Tropen</strong> = Oberbegriff für uneigentliches Sprechen (Metapher, Metonymie, Synekdoche etc.).', points: 15 },
         ]
     }
 };
 
 // GAME FUNCTIONS
-function init() {
-    createNeurons();
-    updateMenuLeaderboard();
-    showScreen('themeScreen');
-}
+function init() { createNeurons(); updateMenuLeaderboard(); showScreen('themeScreen'); }
 
 function createNeurons() {
     const bg = document.getElementById('neuralBg');
@@ -606,13 +505,7 @@ function selectTheme(theme) {
 
 function goToThemeSelect() { showScreen('themeScreen'); }
 function goToModeSelect() { showScreen('modeScreen'); }
-
-function confirmExit() {
-    if (confirm('Training wirklich beenden?')) {
-        stopTimer();
-        showScreen('modeScreen');
-    }
-}
+function confirmExit() { if (confirm('Training wirklich beenden?')) { stopTimer(); showScreen('modeScreen'); } }
 
 function startGame(mode) {
     gameState.mode = mode;
@@ -633,20 +526,13 @@ function startGame(mode) {
 
 function collectExercises() {
     let exercises = [];
-    const themes = gameState.theme === 'alle' 
-        ? ['eroerterung', 'kommentar', 'zusammenfassung', 'leserbrief', 'textanalyse']
-        : [gameState.theme];
-    
+    const themes = gameState.theme === 'alle' ? ['eroerterung', 'kommentar', 'zusammenfassung', 'leserbrief', 'textanalyse'] : [gameState.theme];
     themes.forEach(theme => {
         if (!exercisesDB[theme]) return;
         if (gameState.mode === 'master') {
-            Object.values(exercisesDB[theme]).forEach(catExercises => {
-                exercises = exercises.concat(catExercises);
-            });
+            Object.values(exercisesDB[theme]).forEach(catExercises => { exercises = exercises.concat(catExercises); });
         } else {
-            if (exercisesDB[theme][gameState.mode]) {
-                exercises = exercises.concat(exercisesDB[theme][gameState.mode]);
-            }
+            if (exercisesDB[theme][gameState.mode]) { exercises = exercises.concat(exercisesDB[theme][gameState.mode]); }
         }
     });
     return exercises;
@@ -654,18 +540,12 @@ function collectExercises() {
 
 function shuffleArray(arr) {
     const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
     return a;
 }
 
 function loadExercise() {
-    if (gameState.currentIndex >= gameState.exercises.length) {
-        endGame();
-        return;
-    }
+    if (gameState.currentIndex >= gameState.exercises.length) { endGame(); return; }
     gameState.hintUsed = false;
     gameState.answered = false;
     
@@ -673,49 +553,33 @@ function loadExercise() {
     const container = document.getElementById('exerciseContainer');
     const catInfo = categoryInfo[ex.category] || { name: ex.category, color: '#8b5cf6', icon: '📝' };
     
-    let html = `
-        <div class="exercise-card">
-            <span class="exercise-type" style="background: ${catInfo.color};">${catInfo.icon} ${catInfo.name}</span>
-            <p class="exercise-instruction">${ex.instruction}</p>
-            <div class="original-sentence">
-                <div class="original-label">Ausgangssatz:</div>
-                <div class="original-text">${ex.original}</div>
-            </div>
-    `;
+    let html = `<div class="exercise-card">
+        <span class="exercise-type" style="background: ${catInfo.color};">${catInfo.icon} ${catInfo.name}</span>
+        <p class="exercise-instruction">${ex.instruction}</p>
+        <div class="original-sentence"><div class="original-label">Ausgangssituation:</div><div class="original-text">${ex.original}</div></div>`;
     
     if (ex.type === 'fill') {
-        html += `<div class="transform-section"><div class="transform-label">✏️ Ergänze:</div><div class="transform-input-container">`;
+        html += `<div class="transform-section"><div class="transform-label">✏️ Formulieren Sie um:</div><div class="transform-input-container">`;
         ex.template.forEach(part => {
-            if (typeof part === 'string') {
-                html += `<span class="static-text">${part}</span>`;
-            } else {
-                html += `<input type="text" class="input-slot" id="input_${part.id}" style="width:${part.width}px;" autocomplete="off" spellcheck="false">`;
-            }
+            if (typeof part === 'string') { html += `<span class="static-text">${part}</span>`; }
+            else { html += `<input type="text" class="input-slot" id="input_${part.id}" style="width:${part.width}px;" autocomplete="off" spellcheck="false">`; }
         });
         html += `</div></div>`;
     } else if (ex.type === 'mc') {
         html += `<div class="mc-options">`;
         const letters = ['A', 'B', 'C', 'D'];
-        const shuffledOptions = shuffleArray([...ex.options]);
-        shuffledOptions.forEach((opt, i) => {
-            html += `<div class="mc-option" data-correct="${opt.correct}" onclick="selectMC(this)">
-                <span class="mc-letter">${letters[i]}</span>
-                <span class="mc-text">${opt.text}</span>
-            </div>`;
+        shuffleArray([...ex.options]).forEach((opt, i) => {
+            html += `<div class="mc-option" data-correct="${opt.correct}" onclick="selectMC(this)"><span class="mc-letter">${letters[i]}</span><span class="mc-text">${opt.text}</span></div>`;
         });
         html += `</div>`;
     }
-    
     html += `<div id="hintBox" class="hint-box"></div><div id="explanationBox" class="explanation-box"></div></div>`;
     container.innerHTML = html;
     
-    const progress = (gameState.currentIndex / gameState.exercises.length) * 100;
-    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('progressFill').style.width = (gameState.currentIndex / gameState.exercises.length) * 100 + '%';
     document.getElementById('exerciseCounter').textContent = `Übung ${gameState.currentIndex + 1}/${gameState.exercises.length}`;
-    
     const firstInput = container.querySelector('.input-slot');
     if (firstInput) firstInput.focus();
-    
     document.getElementById('checkBtn').disabled = false;
     document.getElementById('hintBtn').disabled = false;
 }
@@ -728,19 +592,14 @@ function selectMC(element) {
 
 function showHint() {
     const ex = gameState.exercises[gameState.currentIndex];
-    const hintBox = document.getElementById('hintBox');
-    hintBox.innerHTML = `💡 <strong>Tipp:</strong> ${ex.hint}`;
-    hintBox.style.display = 'block';
+    document.getElementById('hintBox').innerHTML = `💡 <strong>Tipp:</strong> ${ex.hint}`;
+    document.getElementById('hintBox').style.display = 'block';
     gameState.hintUsed = true;
     document.getElementById('hintBtn').disabled = true;
 }
 
 function checkAnswer() {
-    if (gameState.answered) {
-        nextExercise();
-        return;
-    }
-    
+    if (gameState.answered) { nextExercise(); return; }
     const ex = gameState.exercises[gameState.currentIndex];
     let isCorrect = false;
     
@@ -749,11 +608,11 @@ function checkAnswer() {
         ex.template.forEach(part => {
             if (typeof part === 'object') {
                 const input = document.getElementById('input_' + part.id);
-                const value = input.value.trim();
-                const correct = part.correct.some(c => 
-                    c.toLowerCase() === value.toLowerCase() ||
-                    (c.toLowerCase().includes(value.toLowerCase()) && value.length > 3)
-                );
+                const value = input.value.trim().toLowerCase();
+                const correct = part.correct.some(c => {
+                    const cLower = c.toLowerCase();
+                    return cLower === value || (value.length > 4 && cLower.includes(value)) || (value.length > 4 && value.includes(cLower.split(' ')[0]));
+                });
                 input.classList.add(correct ? 'correct' : 'incorrect');
                 if (!correct) isCorrect = false;
                 input.disabled = true;
@@ -761,22 +620,17 @@ function checkAnswer() {
         });
     } else if (ex.type === 'mc') {
         const selected = document.querySelector('.mc-option.selected');
-        document.querySelectorAll('.mc-option').forEach(o => {
-            if (o.dataset.correct === 'true') o.classList.add('correct');
-        });
-        if (selected) {
-            isCorrect = selected.dataset.correct === 'true';
-            if (!isCorrect) selected.classList.add('incorrect');
-        }
+        document.querySelectorAll('.mc-option').forEach(o => { if (o.dataset.correct === 'true') o.classList.add('correct'); });
+        if (selected) { isCorrect = selected.dataset.correct === 'true'; if (!isCorrect) selected.classList.add('incorrect'); }
     }
     
     if (isCorrect) {
         gameState.correct++;
         gameState.streak++;
         if (gameState.streak > gameState.maxStreak) gameState.maxStreak = gameState.streak;
-        let pts = ex.points || 10;
+        let pts = ex.points || 15;
         if (gameState.hintUsed) pts = Math.floor(pts * 0.5);
-        pts += gameState.streak * 2;
+        pts += gameState.streak * 3;
         gameState.points += pts;
         showPointsPopup(pts);
         playSound('correct');
@@ -789,25 +643,13 @@ function checkAnswer() {
     const expBox = document.getElementById('explanationBox');
     expBox.innerHTML = `<div class="explanation-title">${isCorrect ? '✅ Richtig!' : '❌ Leider falsch'}</div><div class="explanation-text">${ex.explanation}</div>`;
     expBox.classList.add('show');
-    
     gameState.answered = true;
     document.getElementById('checkBtn').textContent = '➡️ Weiter';
     updateStats();
 }
 
-function nextExercise() {
-    gameState.currentIndex++;
-    document.getElementById('checkBtn').textContent = '✅ Prüfen';
-    loadExercise();
-}
-
-function skipExercise() {
-    gameState.incorrect++;
-    gameState.streak = 0;
-    updateStats();
-    nextExercise();
-}
-
+function nextExercise() { gameState.currentIndex++; document.getElementById('checkBtn').textContent = '✅ Prüfen'; loadExercise(); }
+function skipExercise() { gameState.incorrect++; gameState.streak = 0; updateStats(); nextExercise(); }
 function updateStats() {
     document.getElementById('points').textContent = gameState.points;
     document.getElementById('streak').textContent = gameState.streak;
@@ -816,185 +658,71 @@ function updateStats() {
     document.getElementById('streakFire').style.display = gameState.streak >= 3 ? 'inline' : 'none';
 }
 
-function startTimer() {
-    gameState.timerInterval = setInterval(() => {
-        const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
-        const mins = Math.floor(elapsed / 60);
-        const secs = elapsed % 60;
-        document.getElementById('timer').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-    }, 1000);
-}
-
-function stopTimer() {
-    if (gameState.timerInterval) {
-        clearInterval(gameState.timerInterval);
-        gameState.timerInterval = null;
-    }
-}
-
-function getElapsedTime() {
-    const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
-    return `${Math.floor(elapsed / 60)}:${(elapsed % 60).toString().padStart(2, '0')}`;
-}
+function startTimer() { gameState.timerInterval = setInterval(() => { const e = Math.floor((Date.now() - gameState.startTime) / 1000); document.getElementById('timer').textContent = `${Math.floor(e/60)}:${(e%60).toString().padStart(2,'0')}`; }, 1000); }
+function stopTimer() { if (gameState.timerInterval) { clearInterval(gameState.timerInterval); gameState.timerInterval = null; } }
+function getElapsedTime() { const e = Math.floor((Date.now() - gameState.startTime) / 1000); return `${Math.floor(e/60)}:${(e%60).toString().padStart(2,'0')}`; }
 
 function endGame() {
     stopTimer();
     const total = gameState.correct + gameState.incorrect;
     const accuracy = total > 0 ? Math.round((gameState.correct / total) * 100) : 0;
-    
     document.getElementById('finalPoints').textContent = gameState.points;
     document.getElementById('finalCorrect').textContent = `${gameState.correct}/${total}`;
     document.getElementById('finalStreak').textContent = gameState.maxStreak;
     document.getElementById('finalTime').textContent = getElapsedTime();
     document.getElementById('accuracyText').textContent = accuracy + '%';
-    
     const circle = document.getElementById('accuracyCircle');
-    const offset = 283 - (accuracy / 100) * 283;
-    setTimeout(() => { circle.style.strokeDashoffset = offset; }, 100);
-    
+    setTimeout(() => { circle.style.strokeDashoffset = 283 - (accuracy / 100) * 283; }, 100);
     if (accuracy >= 80) setTimeout(createConfetti, 300);
     showScreen('resultScreen');
     updateResultLeaderboard();
 }
 
-function toggleSound() {
-    gameState.soundEnabled = !gameState.soundEnabled;
-    document.getElementById('soundBtn').textContent = gameState.soundEnabled ? '🔊' : '🔇';
-}
-
+function toggleSound() { gameState.soundEnabled = !gameState.soundEnabled; document.getElementById('soundBtn').textContent = gameState.soundEnabled ? '🔊' : '🔇'; }
 function playSound(type) {
     if (!gameState.soundEnabled) return;
     if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const o = audioContext.createOscillator();
-    const g = audioContext.createGain();
-    o.connect(g);
-    g.connect(audioContext.destination);
-    
-    if (type === 'correct') {
-        o.frequency.setValueAtTime(523, audioContext.currentTime);
-        o.frequency.setValueAtTime(659, audioContext.currentTime + 0.1);
-        g.gain.setValueAtTime(0.1, audioContext.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-        o.start(); o.stop(audioContext.currentTime + 0.2);
-    } else {
-        o.frequency.setValueAtTime(200, audioContext.currentTime);
-        g.gain.setValueAtTime(0.1, audioContext.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
-        o.start(); o.stop(audioContext.currentTime + 0.25);
-    }
+    const o = audioContext.createOscillator(), g = audioContext.createGain();
+    o.connect(g); g.connect(audioContext.destination);
+    if (type === 'correct') { o.frequency.setValueAtTime(523, audioContext.currentTime); o.frequency.setValueAtTime(659, audioContext.currentTime + 0.1); g.gain.setValueAtTime(0.1, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2); o.start(); o.stop(audioContext.currentTime + 0.2); }
+    else { o.frequency.setValueAtTime(200, audioContext.currentTime); g.gain.setValueAtTime(0.1, audioContext.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25); o.start(); o.stop(audioContext.currentTime + 0.25); }
 }
 
-function showPointsPopup(points) {
-    const popup = document.createElement('div');
-    popup.className = 'points-popup';
-    popup.textContent = '+' + points;
-    popup.style.left = '50%';
-    popup.style.top = '30%';
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 1000);
-}
+function showPointsPopup(pts) { const p = document.createElement('div'); p.className = 'points-popup'; p.textContent = '+' + pts; p.style.left = '50%'; p.style.top = '30%'; document.body.appendChild(p); setTimeout(() => p.remove(), 1000); }
+function createConfetti() { const colors = ['#8b5cf6','#ec4899','#10b981','#fbbf24','#3b82f6']; for (let i = 0; i < 50; i++) { const c = document.createElement('div'); c.className = 'confetti'; c.style.left = Math.random()*100+'vw'; c.style.top = '-10px'; c.style.background = colors[Math.floor(Math.random()*colors.length)]; c.style.borderRadius = Math.random()>0.5?'50%':'0'; c.style.width = c.style.height = (Math.random()*8+4)+'px'; document.body.appendChild(c); const a = c.animate([{transform:'translateY(0) rotate(0)',opacity:1},{transform:`translateY(100vh) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:Math.random()*2000+2000,easing:'ease-out'}); a.onfinish = () => c.remove(); } }
 
-function createConfetti() {
-    const colors = ['#8b5cf6', '#ec4899', '#10b981', '#fbbf24', '#3b82f6'];
-    for (let i = 0; i < 50; i++) {
-        const c = document.createElement('div');
-        c.className = 'confetti';
-        c.style.left = Math.random() * 100 + 'vw';
-        c.style.top = '-10px';
-        c.style.background = colors[Math.floor(Math.random() * colors.length)];
-        c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        c.style.width = c.style.height = (Math.random() * 8 + 4) + 'px';
-        document.body.appendChild(c);
-        const anim = c.animate([
-            { transform: 'translateY(0) rotate(0)', opacity: 1 },
-            { transform: `translateY(100vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
-        ], { duration: Math.random() * 2000 + 2000, easing: 'ease-out' });
-        anim.onfinish = () => c.remove();
-    }
-}
-
-function loadLeaderboard() {
-    const saved = localStorage.getItem('maturaPhraseLeaderboard');
-    return saved ? JSON.parse(saved) : [];
-}
-
-function saveLeaderboard(lb) {
-    localStorage.setItem('maturaPhraseLeaderboard', JSON.stringify(lb));
-}
-
+function loadLeaderboard() { const s = localStorage.getItem('maturaPhraseLeaderboardV2'); return s ? JSON.parse(s) : []; }
+function saveLeaderboard(lb) { localStorage.setItem('maturaPhraseLeaderboardV2', JSON.stringify(lb)); }
 function saveScore() {
-    const nameInput = document.getElementById('playerName');
-    const name = nameInput.value.trim() || 'Anonym';
+    const name = document.getElementById('playerName').value.trim() || 'Anonym';
     const total = gameState.correct + gameState.incorrect;
-    const accuracy = total > 0 ? Math.round((gameState.correct / total) * 100) : 0;
-    
-    const entry = {
-        name: name,
-        points: gameState.points,
-        accuracy: accuracy,
-        theme: themeInfo[gameState.theme]?.name || gameState.theme,
-        date: new Date().toLocaleDateString('de-AT')
-    };
-    
     const lb = loadLeaderboard();
-    lb.push(entry);
-    lb.sort((a, b) => b.points - a.points);
-    saveLeaderboard(lb.slice(0, 15));
-    
-    updateResultLeaderboard();
-    updateMenuLeaderboard();
-    
-    nameInput.disabled = true;
-    event.target.disabled = true;
-    event.target.textContent = '✓ Gespeichert!';
+    lb.push({ name, points: gameState.points, accuracy: total > 0 ? Math.round((gameState.correct/total)*100) : 0, theme: themeInfo[gameState.theme]?.name || gameState.theme, date: new Date().toLocaleDateString('de-AT') });
+    lb.sort((a,b) => b.points - a.points);
+    saveLeaderboard(lb.slice(0,15));
+    updateResultLeaderboard(); updateMenuLeaderboard();
+    document.getElementById('playerName').disabled = true;
+    event.target.disabled = true; event.target.textContent = '✓ Gespeichert!';
 }
 
 function updateMenuLeaderboard() {
-    const container = document.getElementById('menuLeaderboard');
-    const lb = loadLeaderboard();
-    if (!lb.length) {
-        container.innerHTML = '<p style="color:var(--text-muted);text-align:center;font-size:0.9rem;">Noch keine Einträge.</p>';
-        return;
-    }
-    container.innerHTML = lb.slice(0, 5).map((e, i) => `
-        <div class="leaderboard-entry">
-            <span class="leaderboard-rank">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1) + '.'}</span>
-            <span class="leaderboard-name">${e.name}</span>
-            <span class="leaderboard-score">${e.points} Pkt</span>
-        </div>
-    `).join('');
+    const c = document.getElementById('menuLeaderboard'), lb = loadLeaderboard();
+    c.innerHTML = !lb.length ? '<p style="color:var(--text-muted);text-align:center;font-size:0.9rem;">Noch keine Einträge.</p>' :
+        lb.slice(0,5).map((e,i) => `<div class="leaderboard-entry"><span class="leaderboard-rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1)+'.'}</span><span class="leaderboard-name">${e.name}</span><span class="leaderboard-score">${e.points} Pkt</span></div>`).join('');
 }
 
 function updateResultLeaderboard() {
-    const container = document.getElementById('resultLeaderboard');
-    const lb = loadLeaderboard();
-    container.innerHTML = `<h3 style="font-family:'Fredoka';color:var(--accent-glow);margin-bottom:10px;font-size:1rem;">🏅 Bestenliste</h3>
-        ${lb.slice(0, 5).map((e, i) => `
-            <div class="leaderboard-entry">
-                <span class="leaderboard-rank">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1) + '.'}</span>
-                <span class="leaderboard-name">${e.name}</span>
-                <span class="leaderboard-score">${e.points} Pkt</span>
-            </div>
-        `).join('')}`;
+    const c = document.getElementById('resultLeaderboard'), lb = loadLeaderboard();
+    c.innerHTML = `<h3 style="font-family:'Fredoka';color:var(--accent-glow);margin-bottom:10px;font-size:1rem;">🏅 Bestenliste</h3>${lb.slice(0,5).map((e,i) => `<div class="leaderboard-entry"><span class="leaderboard-rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1)+'.'}</span><span class="leaderboard-name">${e.name}</span><span class="leaderboard-score">${e.points} Pkt</span></div>`).join('')}`;
 }
 
-function playAgain() {
-    document.getElementById('playerName').disabled = false;
-    document.getElementById('playerName').value = '';
-    const saveBtn = document.querySelector('#resultScreen .control-btn.primary');
-    if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = '💾 Speichern'; }
-    startGame(gameState.mode);
-}
-
+function playAgain() { document.getElementById('playerName').disabled = false; document.getElementById('playerName').value = ''; const b = document.querySelector('#resultScreen .control-btn.primary'); if(b){b.disabled=false;b.textContent='💾 Speichern';} startGame(gameState.mode); }
 function showTheory() { document.getElementById('theoryModal').classList.add('show'); }
 function hideTheory() { document.getElementById('theoryModal').classList.remove('show'); }
 
 document.addEventListener('DOMContentLoaded', init);
 document.getElementById('theoryModal').addEventListener('click', function(e) { if (e.target === this) hideTheory(); });
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && document.getElementById('gameScreen').classList.contains('active')) checkAnswer();
-    if (e.key === 'Escape') hideTheory();
-});
+document.addEventListener('keydown', function(e) { if (e.key === 'Enter' && document.getElementById('gameScreen').classList.contains('active')) checkAnswer(); if (e.key === 'Escape') hideTheory(); });
 </script>
 </body>
 </html>
