@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sommer-Lesereise 📖</title>
+<style>
+:root {
+  --bg: #FAF7FF;
+  --card: #FFFFFF;
+  --text: #1E0F2E;
+  --muted: #8A7A9E;
+  --border: #E4DCEF;
+  --momo: #5E3A9E;
+  --momo-bg: #EDE0FF;
+  --lott: #C43B6A;
+  --lott-bg: #FFE0EC;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+.screen { display: none; }
+.screen.active { display: block; }
+
+.top-bar { background: var(--card); padding: 16px 20px 14px; text-align: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+.top-bar h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.3px; }
+.top-bar p { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+.wrap { max-width: 660px; margin: 0 auto; padding: 24px 16px 80px; }
+
+/* SELECT */
+.sel-intro { text-align: center; margin-bottom: 28px; }
+.sel-intro h2 { font-size: 1.25rem; font-weight: 800; margin-bottom: 8px; }
+.sel-intro p { color: var(--muted); font-size: 0.9rem; line-height: 1.55; max-width: 420px; margin: 0 auto; }
+.book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pick-card {
+  background: var(--card); border-radius: 18px; padding: 28px 16px 22px;
+  text-align: center; cursor: pointer; border: 3px solid transparent;
+  transition: all 0.18s; box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+}
+.pick-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.10); }
+.pick-card.p-momo:hover { border-color: var(--momo); background: var(--momo-bg); }
+.pick-card.p-lott:hover { border-color: var(--lott); background: var(--lott-bg); }
+.pick-chip { display: inline-block; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+.chip-momo { background: var(--momo-bg); color: var(--momo); }
+.chip-lott { background: var(--lott-bg); color: var(--lott); }
+.pick-card .ico { font-size: 3.4rem; margin-bottom: 14px; display: block; }
+.pick-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; line-height: 1.3; }
+.pick-card .aut { font-size: 0.78rem; color: var(--muted); }
+.pick-weeks { font-size: 0.76rem; color: var(--muted); margin-top: 6px; }
+
+/* TABS */
+.tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+.tab-btn {
+  flex: 1; padding: 10px 8px; border-radius: 10px; border: 2px solid var(--border);
+  background: var(--card); font-size: 0.82rem; font-weight: 700; cursor: pointer;
+  transition: all 0.15s; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tab-btn.t-active-momo { border-color: var(--momo); background: var(--momo-bg); color: var(--momo); }
+.tab-btn.t-active-lott { border-color: var(--lott); background: var(--lott-bg); color: var(--lott); }
+.tab-btn.t-unavail { opacity: 0.45; cursor: not-allowed; }
+
+.info-box { background: var(--card); border-radius: 12px; padding: 13px 16px; margin-bottom: 14px; font-size: 0.85rem; color: var(--muted); border: 1px solid var(--border); line-height: 1.5; }
+
+/* MODULE LIST */
+.mod-list { display: flex; flex-direction: column; gap: 9px; }
+.mod-item {
+  background: var(--card); border-radius: 13px; padding: 14px 18px;
+  display: flex; align-items: center; gap: 14px; cursor: pointer;
+  border: 2px solid transparent; box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.mod-item:hover:not(.mod-locked) { transform: translateX(4px); box-shadow: 0 3px 12px rgba(0,0,0,0.07); }
+.mod-item.mod-locked { opacity: 0.5; cursor: not-allowed; }
+.mod-dot {
+  width: 42px; height: 42px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-weight: 800;
+  font-size: 1rem; flex-shrink: 0;
+}
+.dot-momo { background: var(--momo-bg); color: var(--momo); }
+.dot-lott { background: var(--lott-bg); color: var(--lott); }
+.dot-locked { background: #EDE8F2; color: #B8A9C5; }
+.mod-info { flex: 1; min-width: 0; }
+.mod-info h3 { font-size: 0.88rem; font-weight: 700; }
+.mod-info small { font-size: 0.76rem; color: var(--muted); }
+.mod-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+.badge-open { background: #E8F5E9; color: #2A7A30; }
+.badge-done { background: #E3F2FD; color: #1560B8; }
+.badge-lock { background: #EDE8F2; color: #B8A9C5; }
+
+/* MODULE DETAIL */
+.back-btn { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 0.88rem; cursor: pointer; padding: 4px 0; margin-bottom: 18px; }
+.back-btn:hover { color: var(--text); }
+.mod-head { background: var(--card); border-radius: 15px; padding: 18px 20px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.wk-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px; }
+.mod-head h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; line-height: 1.3; }
+.pg-chip { display: inline-block; font-size: 0.76rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+.pg-momo { background: var(--momo-bg); color: var(--momo); }
+.pg-lott { background: var(--lott-bg); color: var(--lott); }
+.reading-box { background: var(--bg); border-radius: 10px; padding: 12px 14px; }
+.rb-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 800; color: var(--muted); margin-bottom: 5px; }
+.reading-box p { font-size: 0.87rem; line-height: 1.55; }
+
+.q-card { background: var(--card); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; box-shadow: 0 1px 5px rgba(0,0,0,0.04); }
+.q-num { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 8px; }
+.q-card > p { font-size: 0.89rem; line-height: 1.58; margin-bottom: 12px; }
+.q-card textarea {
+  width: 100%; min-height: 115px; padding: 10px 13px;
+  border: 2px solid var(--border); border-radius: 10px;
+  font-family: inherit; font-size: 0.87rem; resize: vertical;
+  background: var(--bg); color: var(--text); line-height: 1.5;
+  transition: border-color 0.15s;
+}
+.q-card textarea:focus { outline: none; border-color: var(--muted); }
+.save-row { margin-top: 14px; }
+.save-btn {
+  width: 100%; padding: 13px; border-radius: 12px; border: none;
+  font-size: 0.95rem; font-weight: 800; cursor: pointer;
+  color: #fff; transition: all 0.15s;
+}
+.save-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-momo { background: var(--momo); }
+.btn-lott { background: var(--lott); }
+.save-msg { text-align: center; font-size: 0.82rem; margin-top: 7px; min-height: 18px; color: #2A7A30; }
+.progress-bar { height: 5px; border-radius: 3px; background: var(--border); margin-top: 10px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+.fill-momo { background: var(--momo); }
+.fill-lott { background: var(--lott); }
+.ia-hint { font-size: 0.76rem; background: var(--momo-bg); color: var(--momo); border-radius: 8px; padding: 6px 10px; margin-bottom: 8px; display: inline-block; font-weight: 600; }
+.ia-hint-lott { background: var(--lott-bg); color: var(--lott); }
+
+@media (max-width: 480px) {
+  .book-grid { grid-template-columns: 1fr; }
+  .mod-item { padding: 12px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======================== SELECT ======================== -->
+<div id="s-select" class="screen">
+  <div class="top-bar">
+    <h1>📖 Sommer-Lesereise</h1>
+    <p>Deine Aufgabe von deiner Nachhilfelehrerin</p>
+  </div>
+  <div class="wrap">
+    <div class="sel-intro">
+      <h2>Welches Buch liest du zuerst? ✨</h2>
+      <p>Du wirst beide Bücher bis Anfang September durcharbeiten. Die Übungen helfen dir, für das nächste Schuljahr fit zu werden!</p>
+    </div>
+    <div class="book-grid">
+      <div class="pick-card p-momo" onclick="selectBook('momo')">
+        <span class="pick-chip chip-momo">Buch 1</span>
+        <span class="ico">⏳</span>
+        <h3>Momo</h3>
+        <div class="aut">Michael Ende</div>
+        <div class="pick-weeks">6 Wochen · ca. 240 Seiten</div>
+      </div>
+      <div class="pick-card p-lott" onclick="selectBook('lott')">
+        <span class="pick-chip chip-lott">Buch 1</span>
+        <span class="ico">👯</span>
+        <h3>Das doppelte Lottchen</h3>
+        <div class="aut">Erich Kästner</div>
+        <div class="pick-weeks">4 Wochen · ca. 165 Seiten</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== MAIN ======================== -->
+<div id="s-main" class="screen">
+  <div class="top-bar">
+    <h1>📖 Sommer-Lesereise</h1>
+    <p id="top-sub">Deine Bücher für den Sommer</p>
+  </div>
+  <div class="wrap">
+    <div class="tabs" id="tabs-row"></div>
+    <div id="info-area"></div>
+    <div class="mod-list" id="mod-list"></div>
+  </div>
+</div>
+
+<!-- ======================== MODULE ======================== -->
+<div id="s-module" class="screen">
+  <div class="top-bar">
+    <h1 id="m-title"></h1>
+    <p id="m-sub"></p>
+  </div>
+  <div class="wrap">
+    <div class="back-btn" onclick="goBack()">← Zurück zur Übersicht</div>
+    <div id="m-content"></div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const BOOKS = {
+  momo: {
+    id:'momo', title:'Momo', author:'Michael Ende', icon:'⏳', cls:'momo', totalWeeks:6,
+    weeks:[
+      { title:'Wer ist Momo?',
+        pages:'Seiten 1–45 · Prolog + Kapitel 1–4',
+        hint:'inhaltsangabe',
+        reading:'Momo taucht auf – niemand weiß, woher sie kommt. Lies, wie sie die Menschen um sich herum verändert, und achte auf die Art, wie Michael Ende ihre besondere Fähigkeit beschreibt.',
+        questions:[
+          { id:'m1q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe der ersten 45 Seiten in 5–6 Sätzen im Präsens. Was passiert? Wer sind die wichtigsten Personen? Tipp: Nenne keine eigene Meinung – nur, was im Buch steht!' },
+          { id:'m1q2', text:'Momo hat eine ganz besondere Fähigkeit. Was ist sie, und wie beschreibt Michael Ende sie? Schreibe 4–5 Sätze und benutze Beispiele aus dem Buch.' },
+          { id:'m1q3', text:'Das Amphitheater, in dem Momo lebt, wird sehr genau beschrieben. Schreibe 4–5 Sätze: Wie sieht es aus? Was macht es zum richtigen Zuhause für Momo? Benutze konkrete Details aus dem Buch!' }
+        ]
+      },
+      { title:'Die grauen Herren',
+        pages:'Seiten 46–90 · Kapitel 5–9',
+        hint:'inhaltsangabe',
+        reading:'Die grauen Herren erscheinen. Etwas verändert sich in der Stadt – aber niemand merkt es wirklich. Lies genau, wie Ende diese Veränderung zeigt.',
+        questions:[
+          { id:'m2q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe von Seiten 46–90 in 5–6 Sätzen im Präsens. Was passiert mit den Menschen in der Stadt?' },
+          { id:'m2q2', text:'Beschreibe einen der grauen Herren in 5–6 Sätzen: Wie sieht er aus? Wie spricht er? Was macht ihn unheimlich – ohne dass Michael Ende das Wort „unheimlich" braucht?' },
+          { id:'m2q3', text:'Gigi und Beppo sind sehr verschiedene Menschen. Vergleiche die beiden in 5–6 Sätzen: Was macht jeden von ihnen besonders? Was haben sie gemeinsam, was unterscheidet sie?' }
+        ]
+      },
+      { title:'Meister Hora und die Zeit',
+        pages:'Seiten 91–135 · Kapitel 10–14',
+        hint:'inhaltsangabe',
+        reading:'Momo entdeckt die Wahrheit über die Zeit – und trifft Meister Hora. Lies langsam und genieße die Bilder, die Ende erfindet.',
+        questions:[
+          { id:'m3q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe von Seiten 91–135 in 5–6 Sätzen im Präsens.' },
+          { id:'m3q2', text:'Meister Hora und sein Haus werden sehr besonders beschrieben. Wie sieht er aus? Wie ist sein Haus? Schreibe 5–6 Sätze – benutze Adjektive und Vergleiche, die du selbst wählst!' },
+          { id:'m3q3', text:'Die Zeitblumen sind eines der schönsten Bilder im ganzen Buch. Was sind sie? Was bedeuten sie? Erkläre es in 4–5 Sätzen so, dass auch jemand, der das Buch nicht kennt, es verstehen kann.' }
+        ]
+      },
+      { title:'Momo allein gegen alle',
+        pages:'Seiten 136–180 · Kapitel 15–19',
+        hint:'inhaltsangabe',
+        reading:'Momo muss mutig sein – allein und ohne Beppo und Gigi. Achte darauf, wie Ende innere Gefühle in Handlungen sichtbar macht.',
+        questions:[
+          { id:'m4q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe von Seiten 136–180 in 5–6 Sätzen im Präsens.' },
+          { id:'m4q2', text:'Momo muss in diesem Teil sehr mutig sein. Schreibe 5–6 Sätze aus Momos Perspektive (Ich-Form): Wie fühlt sie sich, als sie allein gegen die grauen Herren antritt? Zeige ihre Gedanken und Gefühle!' },
+          { id:'m4q3', text:'Die Zeit ist das große Thema des Buches. Was bedeutet „Zeit" für die Menschen in der Geschichte? Schreibe 4–5 Sätze – und füge dann 2 persönliche Sätze hinzu: Was bedeutet Zeit für dich?' }
+        ]
+      },
+      { title:'Momo kämpft zurück',
+        pages:'Seiten 181–220 · Kapitel 20–23',
+        hint:'erlebnis',
+        reading:'Momo kämpft zurück – die gestohlenen Stunden werden wieder frei! Lies aufmerksam, wie Ende die Auflösung aufbaut.',
+        questions:[
+          { id:'m5q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe von Seiten 181–220 in 5–6 Sätzen im Präsens.' },
+          { id:'m5q2', text:'Beschreibe eine Szene aus diesem Abschnitt, die dich besonders beeindruckt oder berührt hat. Was hat Michael Ende gemacht, um sie so wirkungsvoll zu gestalten? Schreibe 5–6 Sätze.' },
+          { id:'m5q3', text:'✏️ ERLEBNISERZÄHLUNG (10–12 Sätze): „Ein Tag, an dem ich etwas Wichtiges bemerkt habe, das alle anderen übersehen haben." Zeige deine Gefühle, baue Spannung auf und beschreibe den Moment, in dem du es verstanden hast!' }
+        ]
+      },
+      { title:'✏️ Das Ende & Gesamtrückblick',
+        pages:'Seiten 221–Ende · Kapitel 24–26 + Epilog',
+        hint:'inhaltsangabe',
+        reading:'Das Ende von Momos Geschichte. Lies das letzte Kapitel aufmerksam – dann kommt die wichtigste Übung: eine vollständige Inhaltsangabe des ganzen Buches!',
+        questions:[
+          { id:'m6q1', text:'INHALTSANGABE DES ENDES: Schreibe eine Inhaltsangabe der Kapitel 24–26 und des Epilogs in 6–7 Sätzen im Präsens. Was passiert zuletzt?' },
+          { id:'m6q2', text:'GESAMTE INHALTSANGABE: Schreibe eine vollständige Inhaltsangabe des ganzen Buches „Momo" in 8–10 Sätzen. Wer ist Momo? Was passiert? Wie endet es? Schreibe sachlich, klar und im Präsens – keine eigene Meinung!' },
+          { id:'m6q3', text:'Was ist die Botschaft des Buches? Was wollte Michael Ende sagen? Schreibe 5–6 Sätze – hier ist deine eigene Meinung gefragt!' }
+        ]
+      }
+    ]
+  },
+  lott: {
+    id:'lott', title:'Das doppelte Lottchen', author:'Erich Kästner', icon:'👯', cls:'lott', totalWeeks:4,
+    weeks:[
+      { title:'Lotte und Luise',
+        pages:'Seiten 1–45 · Kapitel 1–6',
+        hint:'inhaltsangabe',
+        reading:'Lotte und Luise treffen sich im Ferienlager und entdecken ein unglaubliches Geheimnis. Achte auf Kästners Humor und auf die Unterschiede zwischen den beiden Mädchen!',
+        questions:[
+          { id:'l1q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe der ersten 45 Seiten in 5–6 Sätzen im Präsens. Was ist die Ausgangssituation? Was entdecken die Mädchen?' },
+          { id:'l1q2', text:'CHARAKTERISTIK: Lotte und Luise sind Zwillinge – aber sehr verschieden. Schreibe eine Charakteristik beider: je 3–4 Sätze pro Person. Was macht jede aus – äußerlich und innerlich?' },
+          { id:'l1q3', text:'Der Moment, in dem die beiden erkennen, dass sie Schwestern sind, ist einer der stärksten im Buch. Beschreibe in 5–6 Sätzen, wie dieser Moment wirkt – was fühlen die Mädchen, wie reagieren sie?' }
+        ]
+      },
+      { title:'Der große Tausch',
+        pages:'Seiten 46–90 · Kapitel 7–12',
+        hint:'inhaltsangabe',
+        reading:'Der Tausch beginnt! Jede lebt jetzt im Leben der anderen. Lies, wie Kästner diesen Tausch gleichzeitig lustig und berührend gestaltet.',
+        questions:[
+          { id:'l2q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe von Seiten 46–90 in 5–6 Sätzen im Präsens.' },
+          { id:'l2q2', text:'Lotte lebt jetzt in Luises Welt und umgekehrt. Schreibe 5–6 Sätze in der Ich-Form einer der beiden: Wie ist es, plötzlich in einem ganz anderen Leben zu sein? Zeige Freude, Verwirrung und vielleicht auch Sehnsucht!' },
+          { id:'l2q3', text:'Kästner schreibt mit viel Humor. Wähle eine lustige oder ironische Szene aus diesem Abschnitt und erkläre in 4–5 Sätzen, was daran lustig ist – und wie Kästner den Humor sprachlich aufbaut.' }
+        ]
+      },
+      { title:'Alles droht aufzufliegen',
+        pages:'Seiten 91–135 · Kapitel 13–18',
+        hint:'erlebnis',
+        reading:'Die Situation wird immer komplizierter – das Geheimnis droht aufzufliegen! Achte darauf, wie Kästner Spannung aufbaut, ohne dass große Dinge passieren müssen.',
+        questions:[
+          { id:'l3q1', text:'INHALTSANGABE: Schreibe eine Inhaltsangabe von Seiten 91–135 in 5–6 Sätzen im Präsens.' },
+          { id:'l3q2', text:'In diesem Teil entsteht viel Spannung, weil das Geheimnis fast auffliegt. Beschreibe in 5–6 Sätzen, wie Kästner diese Spannung aufbaut. Was macht er sprachlich, um dich als Leserin in Atem zu halten?' },
+          { id:'l3q3', text:'✏️ ERLEBNISERZÄHLUNG (10–12 Sätze): „Ein Tag, an dem ich jemand anderen sein musste." Das kann aus dem echten Leben sein oder erfunden – wichtig sind Gefühle, Gedanken und lebendige Details!' }
+        ]
+      },
+      { title:'✏️ Das Happy End & Gesamtrückblick',
+        pages:'Seiten 136–Ende + Schreiben',
+        hint:'inhaltsangabe',
+        reading:'Das Ende – und eine vollständige Inhaltsangabe des ganzen Buches wartet auf dich. Das ist die wichtigste Übung für die Schule!',
+        questions:[
+          { id:'l4q1', text:'INHALTSANGABE DES ENDES: Schreibe eine vollständige Inhaltsangabe des Endes in 6–7 Sätzen im Präsens. Was passiert zuletzt?' },
+          { id:'l4q2', text:'GESAMTE INHALTSANGABE: Schreibe eine vollständige Inhaltsangabe des ganzen Buches „Das doppelte Lottchen" in 8–10 Sätzen. Sachlich, klar, im Präsens – keine eigene Meinung!' },
+          { id:'l4q3', text:'Momo oder Das doppelte Lottchen – welches Buch hat dir mehr gegeben, und warum? Was hast du beim Lesen gelernt – über Sprache, übers Schreiben, über die Welt? Schreibe 5–6 ehrliche Sätze.' }
+        ]
+      }
+    ]
+  }
+};
+
+// ── STORAGE ────────────────────────────────────────────────────────────────
+const MEM = {};
+async function sGet(key) {
+  try { const r = await window.storage.get('girl_' + key); return r ? JSON.parse(r.value) : null; }
+  catch(e) { return MEM[key] ?? null; }
+}
+async function sSet(key, val) {
+  MEM[key] = val;
+  try { await window.storage.set('girl_' + key, JSON.stringify(val)); } catch(e) {}
+}
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+let bookChoice = null;
+let answers = {};
+let activeTab = null;
+let curMod = null;
+
+// ── UNLOCK LOGIC ──────────────────────────────────────────────────────────
+const START = new Date('2026-07-01T00:00:00');
+
+function slot2Offset() {
+  // Depends on which book was chosen first and how many weeks it has
+  return (BOOKS[bookChoice]?.totalWeeks || 6) * 7;
+}
+
+function unlockDate(bookId, wi) {
+  const offset = (bookId !== bookChoice) ? slot2Offset() : 0;
+  const d = new Date(START);
+  d.setDate(d.getDate() + offset + wi * 7);
+  return d;
+}
+
+function isUnlocked(bookId, wi) {
+  if (!bookChoice) return false;
+  if (new URLSearchParams(location.search).get('preview') === 'true') return true;
+  return new Date() >= unlockDate(bookId, wi);
+}
+
+function book2Avail() {
+  if (new URLSearchParams(location.search).get('preview') === 'true') return true;
+  const d = new Date(START); d.setDate(d.getDate() + slot2Offset());
+  return new Date() >= d;
+}
+
+function isComplete(bookId, wi) {
+  return BOOKS[bookId].weeks[wi].questions.every(q => (answers[q.id] || '').trim().length > 10);
+}
+
+function fmtDate(d) {
+  return d.toLocaleDateString('de-AT', { day:'numeric', month:'long' });
+}
+
+// ── SCREENS ───────────────────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── SELECT ────────────────────────────────────────────────────────────────
+async function selectBook(id) {
+  bookChoice = id; activeTab = id;
+  await sSet('bookChoice', id);
+  renderMain(); show('s-main');
+}
+
+// ── RENDER MAIN ───────────────────────────────────────────────────────────
+function renderMain() {
+  const b1 = BOOKS[bookChoice];
+  const b2id = bookChoice === 'momo' ? 'lott' : 'momo';
+  const b2 = BOOKS[b2id];
+  const avail2 = book2Avail();
+
+  // Tabs
+  const tabs = document.getElementById('tabs-row');
+  tabs.innerHTML = '';
+  [b1, b2].forEach((b, i) => {
+    const isActive = activeTab === b.id;
+    const isSecond = i === 1;
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' +
+      (isActive ? ' t-active-' + b.cls : '') +
+      (isSecond && !avail2 ? ' t-unavail' : '');
+    if (isSecond && !avail2) {
+      const d2 = new Date(START); d2.setDate(d2.getDate() + slot2Offset());
+      btn.textContent = b.icon + ' ' + b.title + ' · ab ' + fmtDate(d2);
+    } else {
+      btn.textContent = b.icon + ' ' + b.title;
+      btn.onclick = () => { activeTab = b.id; renderMain(); };
+    }
+    tabs.appendChild(btn);
+  });
+
+  // Info
+  const info = document.getElementById('info-area');
+  info.innerHTML = '';
+  if (activeTab === b2id && !avail2) {
+    const d2 = new Date(START); d2.setDate(d2.getDate() + slot2Offset());
+    info.innerHTML = `<div class="info-box">🔒 Dieses Buch öffnet sich am <strong>${fmtDate(d2)}</strong>, wenn du mit <em>${b1.title}</em> fertig bist!</div>`;
+  }
+
+  // Module list
+  const list = document.getElementById('mod-list');
+  list.innerHTML = '';
+  const curBook = BOOKS[activeTab];
+
+  const doneCount = curBook.weeks.filter((_, wi) => isUnlocked(curBook.id, wi) && isComplete(curBook.id, wi)).length;
+  const totalUnlocked = curBook.weeks.filter((_, wi) => isUnlocked(curBook.id, wi)).length;
+  if (totalUnlocked > 0) {
+    const prog = document.createElement('div');
+    prog.innerHTML = `<div style="font-size:0.76rem;color:var(--muted);margin-bottom:6px;">${doneCount} von ${curBook.weeks.length} Wochen erledigt</div><div class="progress-bar"><div class="progress-fill fill-${curBook.cls}" style="width:${Math.round(doneCount/curBook.weeks.length*100)}%"></div></div>`;
+    prog.style.marginBottom = '16px';
+    list.appendChild(prog);
+  }
+
+  curBook.weeks.forEach((week, wi) => {
+    const unlocked = isUnlocked(curBook.id, wi);
+    const done = unlocked && isComplete(curBook.id, wi);
+    const item = document.createElement('div');
+    item.className = 'mod-item' + (!unlocked ? ' mod-locked' : '');
+
+    let badge, badgeCls;
+    if (!unlocked) { badge = 'ab ' + fmtDate(unlockDate(curBook.id, wi)); badgeCls = 'badge-lock'; }
+    else if (done) { badge = '✓ Fertig'; badgeCls = 'badge-done'; }
+    else { badge = 'Offen'; badgeCls = 'badge-open'; }
+
+    item.innerHTML = `
+      <div class="mod-dot ${unlocked ? 'dot-' + curBook.cls : 'dot-locked'}">${wi+1}</div>
+      <div class="mod-info">
+        <h3>Woche ${wi+1}: ${week.title}</h3>
+        <small>${week.pages}</small>
+      </div>
+      <span class="mod-badge ${badgeCls}">${badge}</span>`;
+    if (unlocked) item.onclick = () => openMod(curBook.id, wi);
+    list.appendChild(item);
+  });
+}
+
+// ── OPEN MODULE ───────────────────────────────────────────────────────────
+function openMod(bookId, wi) {
+  curMod = { bookId, wi };
+  const book = BOOKS[bookId];
+  const week = book.weeks[wi];
+  document.getElementById('m-title').textContent = book.icon + ' ' + book.title;
+  document.getElementById('m-sub').textContent = 'Woche ' + (wi+1) + ': ' + week.title;
+
+  const hintLabel = week.hint === 'inhaltsangabe'
+    ? `<span class="ia-hint ${book.cls === 'lott' ? 'ia-hint-lott' : ''}">📋 Schwerpunkt diese Woche: Inhaltsangabe (Präsens · sachlich · keine Meinung)</span>`
+    : `<span class="ia-hint ${book.cls === 'lott' ? 'ia-hint-lott' : ''}">✏️ Schwerpunkt diese Woche: Erlebniserzählung</span>`;
+
+  const c = document.getElementById('m-content');
+  c.innerHTML = `
+    <div class="mod-head">
+      <div class="wk-label" style="color:var(--${book.cls})">Woche ${wi+1} von ${book.totalWeeks}</div>
+      <h2>${week.title}</h2>
+      <span class="pg-chip pg-${book.cls}">${week.pages}</span>
+      <div class="reading-box">
+        <div class="rb-label">📖 Leseauftrag diese Woche</div>
+        <p>${week.reading}</p>
+      </div>
+    </div>
+    <div style="margin-bottom:10px">${hintLabel}</div>
+    ${week.questions.map((q,qi) => `
+      <div class="q-card">
+        <div class="q-num" style="color:var(--${book.cls})">Aufgabe ${qi+1}</div>
+        <p>${q.text}</p>
+        <textarea id="ta-${q.id}" placeholder="Schreibe hier deine Antwort…">${answers[q.id]||''}</textarea>
+      </div>`).join('')}
+    <div class="save-row">
+      <button class="save-btn btn-${book.cls}" onclick="saveAnswers()">Antworten speichern 💾</button>
+      <div class="save-msg" id="save-msg"></div>
+    </div>`;
+  show('s-module');
+}
+
+// ── SAVE ──────────────────────────────────────────────────────────────────
+async function saveAnswers() {
+  if (!curMod) return;
+  const { bookId, wi } = curMod;
+  BOOKS[bookId].weeks[wi].questions.forEach(q => {
+    const el = document.getElementById('ta-' + q.id);
+    if (el) answers[q.id] = el.value;
+  });
+  await sSet('answers', answers);
+  const msg = document.getElementById('save-msg');
+  msg.textContent = '✓ Gespeichert!';
+  setTimeout(() => msg.textContent = '', 3000);
+}
+
+function goBack() { renderMain(); show('s-main'); }
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+async function init() {
+  bookChoice = await sGet('bookChoice');
+  answers = (await sGet('answers')) || {};
+  if (!bookChoice) { show('s-select'); }
+  else { activeTab = bookChoice; renderMain(); show('s-main'); }
+}
+init();
+</script>
+</body>
+</html>
