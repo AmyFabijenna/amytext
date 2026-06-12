@@ -5,486 +5,292 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sommer-Leseabenteuer 🏕️</title>
 <style>
-:root {
-  --bg: #FEF8ED;
-  --card: #FFFFFF;
-  --text: #2C1810;
-  --muted: #9A7B68;
-  --border: #E8DDD4;
-  --emil: #C87D1A;
-  --emil-bg: #FEF0D4;
-  --bambi: #2A6A47;
-  --bambi-bg: #D5EDDF;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-.screen { display: none; }
-.screen.active { display: block; }
-
-.top-bar { background: var(--card); padding: 16px 20px 14px; text-align: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
-.top-bar h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.3px; }
-.top-bar p { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
-
-.wrap { max-width: 660px; margin: 0 auto; padding: 24px 16px 80px; }
-
-/* SELECT */
-.sel-intro { text-align: center; margin-bottom: 28px; }
-.sel-intro h2 { font-size: 1.25rem; font-weight: 800; margin-bottom: 8px; }
-.sel-intro p { color: var(--muted); font-size: 0.9rem; line-height: 1.55; max-width: 400px; margin: 0 auto; }
-.book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.pick-card {
-  background: var(--card); border-radius: 18px; padding: 28px 16px 22px;
-  text-align: center; cursor: pointer; border: 3px solid transparent;
-  transition: all 0.18s; box-shadow: 0 3px 14px rgba(0,0,0,0.07);
-}
-.pick-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.11); }
-.pick-card.p-emil:hover { border-color: var(--emil); background: var(--emil-bg); }
-.pick-card.p-bambi:hover { border-color: var(--bambi); background: var(--bambi-bg); }
-.pick-chip { display: inline-block; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
-.chip-emil { background: var(--emil-bg); color: var(--emil); }
-.chip-bambi { background: var(--bambi-bg); color: var(--bambi); }
-.pick-card .ico { font-size: 3.4rem; margin-bottom: 14px; display: block; }
-.pick-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; line-height: 1.3; }
-.pick-card .aut { font-size: 0.78rem; color: var(--muted); }
-
-/* TABS */
-.tabs { display: flex; gap: 8px; margin-bottom: 18px; }
-.tab-btn {
-  flex: 1; padding: 10px 8px; border-radius: 10px; border: 2px solid var(--border);
-  background: var(--card); font-size: 0.82rem; font-weight: 700; cursor: pointer;
-  transition: all 0.15s; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.tab-btn.t-active-emil { border-color: var(--emil); background: var(--emil-bg); color: var(--emil); }
-.tab-btn.t-active-bambi { border-color: var(--bambi); background: var(--bambi-bg); color: var(--bambi); }
-.tab-btn.t-unavail { opacity: 0.45; cursor: not-allowed; }
-
-.info-box { background: var(--card); border-radius: 12px; padding: 13px 16px; margin-bottom: 14px; font-size: 0.85rem; color: var(--muted); border: 1px solid var(--border); line-height: 1.5; }
-
-/* MODULE LIST */
-.mod-list { display: flex; flex-direction: column; gap: 9px; }
-.mod-item {
-  background: var(--card); border-radius: 13px; padding: 14px 18px;
-  display: flex; align-items: center; gap: 14px; cursor: pointer;
-  border: 2px solid transparent; box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-  transition: transform 0.12s, box-shadow 0.12s;
-}
-.mod-item:hover:not(.mod-locked) { transform: translateX(4px); box-shadow: 0 3px 12px rgba(0,0,0,0.07); }
-.mod-item.mod-locked { opacity: 0.5; cursor: not-allowed; }
-.mod-dot {
-  width: 42px; height: 42px; border-radius: 50%; display: flex;
-  align-items: center; justify-content: center; font-weight: 800;
-  font-size: 1rem; flex-shrink: 0;
-}
-.dot-emil { background: var(--emil-bg); color: var(--emil); }
-.dot-bambi { background: var(--bambi-bg); color: var(--bambi); }
-.dot-locked { background: #EDE8E3; color: #B8A99A; }
-.mod-info { flex: 1; min-width: 0; }
-.mod-info h3 { font-size: 0.88rem; font-weight: 700; }
-.mod-info small { font-size: 0.76rem; color: var(--muted); }
-.mod-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
-.badge-open { background: #E8F5E9; color: #2A7A30; }
-.badge-done { background: #E3F2FD; color: #1560B8; }
-.badge-lock { background: #EDE8E3; color: #B8A99A; }
-
-/* MODULE DETAIL */
-.back-btn { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 0.88rem; cursor: pointer; padding: 4px 0; margin-bottom: 18px; }
-.back-btn:hover { color: var(--text); }
-.mod-head { background: var(--card); border-radius: 15px; padding: 18px 20px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-.wk-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px; }
-.mod-head h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; line-height: 1.3; }
-.pg-chip { display: inline-block; font-size: 0.76rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
-.pg-emil { background: var(--emil-bg); color: var(--emil); }
-.pg-bambi { background: var(--bambi-bg); color: var(--bambi); }
-.reading-box { background: var(--bg); border-radius: 10px; padding: 12px 14px; }
-.rb-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 800; color: var(--muted); margin-bottom: 5px; }
-.reading-box p { font-size: 0.87rem; line-height: 1.55; }
-
-.q-card { background: var(--card); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; box-shadow: 0 1px 5px rgba(0,0,0,0.04); }
-.q-num { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 8px; }
-.q-card > p { font-size: 0.89rem; line-height: 1.58; margin-bottom: 12px; }
-.q-card textarea {
-  width: 100%; min-height: 115px; padding: 10px 13px;
-  border: 2px solid var(--border); border-radius: 10px;
-  font-family: inherit; font-size: 0.87rem; resize: vertical;
-  background: var(--bg); color: var(--text); line-height: 1.5;
-  transition: border-color 0.15s;
-}
-.q-card textarea:focus { outline: none; border-color: var(--muted); }
-.save-row { margin-top: 14px; }
-.save-btn {
-  width: 100%; padding: 13px; border-radius: 12px; border: none;
-  font-size: 0.95rem; font-weight: 800; cursor: pointer;
-  color: #fff; transition: all 0.15s;
-}
-.save-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-.btn-emil { background: var(--emil); }
-.btn-bambi { background: var(--bambi); }
-.save-msg { text-align: center; font-size: 0.82rem; margin-top: 7px; min-height: 18px; color: #2A7A30; }
-.progress-bar { height: 5px; border-radius: 3px; background: var(--border); margin-top: 10px; overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
-.fill-emil { background: var(--emil); }
-.fill-bambi { background: var(--bambi); }
-
-@media (max-width: 480px) {
-  .book-grid { grid-template-columns: 1fr; }
-  .mod-item { padding: 12px 14px; }
-}
+:root{--bg:#FEF8ED;--card:#FFF;--text:#2C1810;--muted:#9A7B68;--border:#E8DDD4;--emil:#C87D1A;--emil-bg:#FEF0D4;--bambi:#2A6A47;--bambi-bg:#D5EDDF;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.screen{display:none;}.screen.active{display:block;}
+.top-bar{background:var(--card);padding:14px 20px;text-align:center;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
+.top-bar h1{font-size:1.15rem;font-weight:800;}
+.top-bar p{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.wrap{max-width:660px;margin:0 auto;padding:22px 16px 80px;}
+.sel-intro{text-align:center;margin-bottom:26px;}
+.sel-intro h2{font-size:1.2rem;font-weight:800;margin-bottom:8px;}
+.sel-intro p{color:var(--muted);font-size:0.88rem;line-height:1.55;max-width:400px;margin:0 auto;}
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.pick-card{background:var(--card);border-radius:18px;padding:26px 14px 20px;text-align:center;cursor:pointer;border:3px solid transparent;transition:all .18s;box-shadow:0 3px 14px rgba(0,0,0,.07);}
+.pick-card:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(0,0,0,.11);}
+.pick-card.p-emil:hover{border-color:var(--emil);background:var(--emil-bg);}
+.pick-card.p-bambi:hover{border-color:var(--bambi);background:var(--bambi-bg);}
+.pick-chip{display:inline-block;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;padding:3px 10px;border-radius:20px;margin-bottom:12px;}
+.chip-e{background:var(--emil-bg);color:var(--emil);}.chip-b{background:var(--bambi-bg);color:var(--bambi);}
+.pick-card .ico{font-size:3.2rem;margin-bottom:12px;display:block;}
+.pick-card h3{font-size:.97rem;font-weight:800;margin-bottom:4px;line-height:1.3;}
+.pick-card .aut{font-size:.76rem;color:var(--muted);}
+.tabs{display:flex;gap:8px;margin-bottom:16px;}
+.tab-btn{flex:1;padding:9px 8px;border-radius:10px;border:2px solid var(--border);background:var(--card);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tab-btn.te{border-color:var(--emil);background:var(--emil-bg);color:var(--emil);}
+.tab-btn.tb{border-color:var(--bambi);background:var(--bambi-bg);color:var(--bambi);}
+.tab-btn.unavail{opacity:.42;cursor:not-allowed;}
+.info-box{background:var(--card);border-radius:11px;padding:12px 15px;margin-bottom:13px;font-size:.83rem;color:var(--muted);border:1px solid var(--border);line-height:1.5;}
+.mod-list{display:flex;flex-direction:column;gap:8px;}
+.mod-item{background:var(--card);border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;border:2px solid transparent;box-shadow:0 1px 5px rgba(0,0,0,.04);transition:transform .12s,box-shadow .12s;}
+.mod-item:hover:not(.locked){transform:translateX(4px);box-shadow:0 3px 12px rgba(0,0,0,.07);}
+.mod-item.locked{opacity:.48;cursor:not-allowed;}
+.mod-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;flex-shrink:0;}
+.de{background:var(--emil-bg);color:var(--emil);}.db{background:var(--bambi-bg);color:var(--bambi);}.dl{background:#EDE8E3;color:#B8A99A;}
+.mod-info{flex:1;min-width:0;}
+.mod-info h3{font-size:.87rem;font-weight:700;}
+.mod-info small{font-size:.74rem;color:var(--muted);}
+.mod-badge{font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:9px;white-space:nowrap;flex-shrink:0;}
+.bo{background:#E8F5E9;color:#2A7A30;}.bd{background:#E3F2FD;color:#1560B8;}.bl{background:#EDE8E3;color:#B8A99A;}
+.prog-wrap{margin-bottom:14px;}
+.prog-label{font-size:.74rem;color:var(--muted);margin-bottom:5px;}
+.prog-bar{height:5px;border-radius:3px;background:var(--border);overflow:hidden;}
+.prog-fill{height:100%;border-radius:3px;transition:width .4s;}
+.fe{background:var(--emil);}.fb{background:var(--bambi);}
+.back-btn{display:inline-flex;align-items:center;gap:5px;color:var(--muted);font-size:.86rem;cursor:pointer;padding:4px 0;margin-bottom:16px;}
+.back-btn:hover{color:var(--text);}
+.mod-head{background:var(--card);border-radius:14px;padding:17px 19px;margin-bottom:11px;box-shadow:0 2px 9px rgba(0,0,0,.05);}
+.wk-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
+.mod-head h2{font-size:1.08rem;font-weight:800;margin-bottom:7px;line-height:1.3;}
+.pg-chip{display:inline-block;font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:11px;}
+.pe{background:var(--emil-bg);color:var(--emil);}.pb{background:var(--bambi-bg);color:var(--bambi);}
+.reading-box{background:var(--bg);border-radius:9px;padding:11px 13px;}
+.rb-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.6px;font-weight:800;color:var(--muted);margin-bottom:4px;}
+.reading-box p{font-size:.85rem;line-height:1.55;}
+.q-card{background:var(--card);border-radius:13px;padding:15px 17px;margin-bottom:9px;box-shadow:0 1px 5px rgba(0,0,0,.04);}
+.q-num{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px;}
+.q-card>p{font-size:.88rem;line-height:1.57;margin-bottom:11px;}
+.q-card textarea{width:100%;min-height:108px;padding:10px 12px;border:2px solid var(--border);border-radius:9px;font-family:inherit;font-size:.86rem;resize:vertical;background:var(--bg);color:var(--text);line-height:1.5;transition:border-color .15s;}
+.q-card textarea:focus{outline:none;border-color:var(--muted);}
+.wc{font-size:.7rem;color:var(--muted);margin-top:4px;text-align:right;}
+.save-row{margin-top:14px;}
+.save-btn{width:100%;padding:15px;border-radius:13px;border:none;font-size:1rem;font-weight:800;cursor:pointer;color:#fff;transition:all .15s;letter-spacing:.2px;}
+.save-btn:hover{opacity:.87;transform:translateY(-1px);}
+.se{background:var(--emil);}.sb{background:var(--bambi);}
+.save-msg{text-align:center;font-size:.8rem;margin-top:7px;min-height:18px;color:#2A7A30;}
+@media(max-width:480px){.book-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-
-<!-- ======================== SELECT ======================== -->
 <div id="s-select" class="screen">
-  <div class="top-bar">
-    <h1>🏕️ Sommer-Leseabenteuer</h1>
-    <p>Deine Aufgabe von deiner Nachhilfelehrerin</p>
-  </div>
+  <div class="top-bar"><h1>🏕️ Sommer-Leseabenteuer</h1><p>Deine Aufgabe von deiner Nachhilfelehrerin</p></div>
   <div class="wrap">
-    <div class="sel-intro">
-      <h2>Welches Buch liest du zuerst? 📚</h2>
-      <p>Du wirst beide Bücher bis Anfang September durcharbeiten. Wähle jetzt dein erstes Buch für den Juli!</p>
-    </div>
+    <div class="sel-intro"><h2>Welches Buch liest du zuerst? 📚</h2><p>Du arbeitest beide Bücher bis Anfang September durch. Wähle jetzt dein erstes Buch für den Juli!</p></div>
     <div class="book-grid">
-      <div class="pick-card p-emil" onclick="selectBook('emil')">
-        <span class="pick-chip chip-emil">Buch 1 · Juli</span>
-        <span class="ico">🕵️</span>
-        <h3>Emil und die Detektive</h3>
-        <div class="aut">Erich Kästner</div>
-      </div>
-      <div class="pick-card p-bambi" onclick="selectBook('bambi')">
-        <span class="pick-chip chip-bambi">Buch 1 · Juli</span>
-        <span class="ico">🦌</span>
-        <h3>Bambi</h3>
-        <div class="aut">Felix Salten</div>
-      </div>
+      <div class="pick-card p-emil" onclick="selectBook('emil')"><span class="pick-chip chip-e">Buch 1 · Juli</span><span class="ico">🕵️</span><h3>Emil und die Detektive</h3><div class="aut">Erich Kästner</div></div>
+      <div class="pick-card p-bambi" onclick="selectBook('bambi')"><span class="pick-chip chip-b">Buch 1 · Juli</span><span class="ico">🦌</span><h3>Bambi</h3><div class="aut">Felix Salten</div></div>
     </div>
   </div>
 </div>
-
-<!-- ======================== MAIN ======================== -->
 <div id="s-main" class="screen">
-  <div class="top-bar">
-    <h1>🏕️ Sommer-Leseabenteuer</h1>
-    <p id="top-sub">Deine Bücher für den Sommer</p>
-  </div>
-  <div class="wrap">
-    <div class="tabs" id="tabs-row"></div>
-    <div id="info-area"></div>
-    <div class="mod-list" id="mod-list"></div>
-  </div>
+  <div class="top-bar"><h1>🏕️ Sommer-Leseabenteuer</h1><p>Deine Bücher für den Sommer</p></div>
+  <div class="wrap"><div class="tabs" id="tabs-row"></div><div id="info-area"></div><div class="mod-list" id="mod-list"></div></div>
 </div>
-
-<!-- ======================== MODULE ======================== -->
 <div id="s-module" class="screen">
-  <div class="top-bar">
-    <h1 id="m-title"></h1>
-    <p id="m-sub"></p>
-  </div>
-  <div class="wrap">
-    <div class="back-btn" onclick="goBack()">← Zurück zur Übersicht</div>
-    <div id="m-content"></div>
-  </div>
+  <div class="top-bar"><h1 id="m-title"></h1><p id="m-sub"></p></div>
+  <div class="wrap"><div class="back-btn" onclick="goBack()">← Zurück zur Übersicht</div><div id="m-content"></div></div>
 </div>
-
 <script>
-// ── DATA ───────────────────────────────────────────────────────────────────
-const BOOKS = {
-  emil: {
-    id:'emil', title:'Emil und die Detektive', author:'Erich Kästner', icon:'🕵️', cls:'emil',
+const BOOKS={
+  emil:{id:'emil',title:'Emil und die Detektive',author:'Erich Kästner',icon:'🕵️',cls:'e',
     weeks:[
-      { title:'Emil reist nach Berlin',
-        pages:'Seiten 1–45 · Kapitel 1–4',
-        reading:'Emil fährt allein nach Berlin. Achte beim Lesen genau auf seine Gedanken und Gefühle – und auf das, was im Zug passiert!',
-        questions:[
-          { id:'e1q1', text:'Emil sitzt allein im Zug. Schreibe 4–5 Sätze in der Ich-Form, als wärst du Emil selbst – zeige seine Aufregung, seine Hoffnung oder seine Nervosität!' },
-          { id:'e1q2', text:'Etwas Schlimmes passiert im Zug. Was ist es, und wie reagiert Emil? Erkläre es in 3–4 Sätzen – so, als würdest du es deinem besten Freund erzählen.' },
-          { id:'e1q3', text:'Der Herr mit dem steifen Hut wird von Kästner sehr genau beschrieben. Schreibe 3–4 Sätze: Wie sieht er aus? Was macht ihn verdächtig? Benutze genaue Adjektive aus dem Buch!' }
-        ]
-      },
-      { title:'Der Dieb und die Detektive',
-        pages:'Seiten 46–90 · Kapitel 5–8',
-        reading:'Emil ist in Berlin – auf der Jagd! Er trifft Gustav und die anderen Kinder. Beobachte, wie Kästner die Stadt lebendig macht.',
-        questions:[
-          { id:'e2q1', text:'Emil entscheidet sich, den Dieb in einer fremden Stadt zu verfolgen, obwohl er niemanden kennt. Warum macht er das? Schreibe 3–4 Sätze und erkläre auch, ob du dasselbe tun würdest.' },
-          { id:'e2q2', text:'Gustav mit der Hupe ist ein toller Charakter. Beschreibe ihn in 4–5 Sätzen: Wie sieht er aus, wie spricht er, was ist das Besondere an ihm?' },
-          { id:'e2q3', text:'Kästner beschreibt Berlin mit vielen Bildern. Schreibe 3–4 Sätze: Was siehst du in deiner Vorstellung? Welche drei Details aus diesem Abschnitt sind dir besonders geblieben?' }
-        ]
-      },
-      { title:'Der große Plan',
-        pages:'Seiten 91–130 · Kapitel 9–11',
-        reading:'Die Detektive haben einen Plan! Jetzt beginnt der aufregendste Teil – beobachte genau, wie Kästner die Spannung aufbaut.',
-        questions:[
-          { id:'e3q1', text:'Die Kinder haben einen echten Detektivplan. Erkläre in 4–5 Sätzen, wie er aussieht – so, als würdest du ihn jemandem erklären, der das Buch nicht kennt.' },
-          { id:'e3q2', text:'Beschreibe eine Szene aus diesem Abschnitt, die dich besonders gespannt gemacht hat. Was hat Kästner gemacht, um diese Spannung aufzubauen? Schreibe 4–5 Sätze.' },
-          { id:'e3q3', text:'Stell dir vor, du bist einer der Detektive und beobachtest den Verdächtigen. Schreibe 4–5 Sätze in der Ich-Form: Was siehst du? Was denkst du? Was machst du?' }
-        ]
-      },
-      { title:'Die Auflösung',
-        pages:'Seiten 131–165 · Kapitel 12–13',
-        reading:'Der große Moment ist da – der Dieb wird gestellt! Lies, wie Kästner das Ende aufbaut und löst.',
-        questions:[
-          { id:'e4q1', text:'Wie endet die Geschichte? Schreibe eine Inhaltsangabe des Endes in 5–6 Sätzen. Wichtig: benutze das Präsens! Zum Beispiel: „Emil stellt den Dieb. Die Polizei kommt..."' },
-          { id:'e4q2', text:'Was war deine Lieblingsszene im ganzen Buch? Beschreibe sie in 4–5 Sätzen so genau, dass jemand, der das Buch nicht kennt, sie sich richtig vorstellen kann.' },
-          { id:'e4q3', text:'Was hat Emil in dieser Geschichte gelernt? Was hast du beim Lesen gedacht oder gefühlt? Schreibe 4–5 ehrliche Sätze.' }
-        ]
-      },
-      { title:'✏️ Schreibwoche',
-        pages:'Kein neues Lesen – nur Schreiben!',
-        reading:'Diese Woche bist du dran! Schreibe wie Kästner – lebendig, spannend und genau. Nimm dir Zeit und denke nach, bevor du anfängst.',
-        questions:[
-          { id:'e5q1', text:'ERLEBNISERZÄHLUNG (12–15 Sätze): „Ein Tag, an dem ich allein etwas Mutiges getan habe." Denke an Kästner: Was hast du gesehen, gehört, gefühlt? Baue Spannung auf, zeige den Höhepunkt und beschreibe, wie es geendet hat!' },
-          { id:'e5q2', text:'Kästner beginnt mit Emil in seiner Heimatstadt. Beschreibe in 5–6 Sätzen deinen eigenen Wohnort – so, als würdest du ihn in einem Buch vorstellen. Was ist typisch, was ist besonders?' },
-          { id:'e5q3', text:'Schreibe einen kurzen Brief an Emil (6–8 Sätze): Was würdest du ihm sagen? Was hat dir an ihm gefallen? Was würdest du in seiner Situation anders machen?' }
-        ]
-      }
-    ]
-  },
-  bambi: {
-    id:'bambi', title:'Bambi', author:'Felix Salten', icon:'🦌', cls:'bambi',
+      {title:'Emil reist nach Berlin',pages:'Seiten 1–45 · Kapitel 1–4',
+       reading:'Emil fährt allein nach Berlin. Achte auf seine Gedanken und Gefühle – und was im Zug passiert!',
+       questions:[
+         {id:'e1q1',text:'Emil sitzt allein im Zug. Schreibe 4–5 Sätze in der Ich-Form, als wärst du Emil – zeige seine Aufregung, Hoffnung oder Nervosität!'},
+         {id:'e1q2',text:'Etwas Schlimmes passiert im Zug. Was ist es, und wie reagiert Emil? Erkläre es in 3–4 Sätzen – so, als würdest du es deinem besten Freund erzählen.'},
+         {id:'e1q3',text:'Der Herr mit dem steifen Hut wird von Kästner sehr genau beschrieben. Schreibe 3–4 Sätze: Wie sieht er aus? Was macht ihn verdächtig?'}
+       ]},
+      {title:'Der Dieb und die Detektive',pages:'Seiten 46–90 · Kapitel 5–8',
+       reading:'Emil ist in Berlin – auf der Jagd! Er trifft Gustav und die anderen Kinder. Beobachte, wie Kästner die Stadt lebendig macht.',
+       questions:[
+         {id:'e2q1',text:'Emil entscheidet sich, den Dieb zu verfolgen, obwohl er niemanden kennt. Warum? Schreibe 3–4 Sätze und erkläre auch, ob du dasselbe tun würdest.'},
+         {id:'e2q2',text:'Gustav mit der Hupe ist ein toller Charakter. Beschreibe ihn in 4–5 Sätzen: Wie sieht er aus, wie spricht er, was ist das Besondere an ihm?'},
+         {id:'e2q3',text:'Kästner beschreibt Berlin mit vielen Details. Schreibe 3–4 Sätze: Was siehst du in deiner Vorstellung? Welche drei Bilder sind dir besonders geblieben?'}
+       ]},
+      {title:'Der große Plan',pages:'Seiten 91–130 · Kapitel 9–11',
+       reading:'Die Detektive haben einen Plan! Beobachte genau, wie Kästner die Spannung aufbaut.',
+       questions:[
+         {id:'e3q1',text:'Die Kinder haben einen echten Plan. Erkläre in 4–5 Sätzen, wie er aussieht – so, als würdest du ihn jemandem erklären, der das Buch nicht kennt.'},
+         {id:'e3q2',text:'Beschreibe eine Szene, die dich besonders gespannt gemacht hat. Was hat Kästner gemacht, um diese Spannung aufzubauen? Schreibe 4–5 Sätze.'},
+         {id:'e3q3',text:'Stell dir vor, du bist einer der Detektive. Schreibe 4–5 Sätze in der Ich-Form: Was siehst du? Was denkst du? Was machst du?'}
+       ]},
+      {title:'Die Auflösung',pages:'Seiten 131–165 · Kapitel 12–13',
+       reading:'Der große Moment ist da – der Dieb wird gestellt! Lies, wie Kästner das Ende aufbaut.',
+       questions:[
+         {id:'e4q1',text:'Inhaltsangabe des Endes in 5–6 Sätzen im Präsens. Zum Beispiel: „Emil stellt den Dieb. Die Polizei kommt..."'},
+         {id:'e4q2',text:'Was war deine Lieblingsszene? Beschreibe sie in 4–5 Sätzen so genau, dass jemand, der das Buch nicht kennt, sie sich richtig vorstellen kann.'},
+         {id:'e4q3',text:'Was hat Emil gelernt? Was hast du beim Lesen gedacht oder gefühlt? Schreibe 4–5 ehrliche Sätze.'}
+       ]},
+      {title:'✏️ Schreibwoche',pages:'Kein Lesen – nur Schreiben!',
+       reading:'Diese Woche bist du dran! Schreibe wie Kästner – lebendig, spannend und genau.',
+       questions:[
+         {id:'e5q1',text:'ERLEBNISERZÄHLUNG (12–15 Sätze): „Ein Tag, an dem ich allein etwas Mutiges getan habe." Was hast du gesehen, gehört, gefühlt? Baue Spannung auf, zeige den Höhepunkt!'},
+         {id:'e5q2',text:'Beschreibe in 5–6 Sätzen deinen Wohnort – so, als würdest du ihn in einem Buch vorstellen. Was ist typisch, was ist besonders?'},
+         {id:'e5q3',text:'Brief an Emil (6–8 Sätze): Was würdest du ihm sagen? Was hat dir an ihm gefallen? Was würdest du in seiner Situation anders machen?'}
+       ]}
+    ]},
+  bambi:{id:'bambi',title:'Bambi',author:'Felix Salten',icon:'🦌',cls:'b',
     weeks:[
-      { title:'Bambis erste Schritte',
-        pages:'Seiten 1–50 · Frühling',
-        reading:'Bambi wird geboren und entdeckt zum ersten Mal den Wald. Lies, wie Salten Natur mit Wörtern lebendig macht – beachte genau seine Beschreibungen!',
-        questions:[
-          { id:'b1q1', text:'Salten beschreibt Bambis erste Stunden sehr genau. Schreibe 4–5 Sätze: Welche Wörter oder Bilder aus diesem Teil haben dir am besten gefallen? Was hast du dir dabei vorgestellt?' },
-          { id:'b1q2', text:'Stell dir vor, du bist Bambi und siehst zum allerersten Mal: Gras, einen Bach, einen Schmetterling. Schreibe 4–5 Sätze in der Ich-Form – benutze alle fünf Sinne: Was siehst, hörst, riechst und spürst du?' },
-          { id:'b1q3', text:'Bambis Mutter erklärt ihm viele Dinge über den Wald. Wie ist sie als Mutter? Beschreibe sie in 3–4 Sätzen.' }
-        ]
-      },
-      { title:'Sommer im Wald',
-        pages:'Seiten 51–100 · Sommer',
-        reading:'Sommer im Wald – Bambi lernt die Lichtung kennen, trifft neue Tiere und spürt zum ersten Mal, dass der Wald auch Gefahren hat.',
-        questions:[
-          { id:'b2q1', text:'Bambi trifft verschiedene Tiere auf der Lichtung. Wähle eines aus und beschreibe es in 4–5 Sätzen: Wie sieht es aus? Wie verhält es sich? Was macht es besonders?' },
-          { id:'b2q2', text:'Der alte Hirsch erscheint immer wieder, ohne viel zu sagen. Beschreibe ihn in 4–5 Sätzen: Wie sieht er aus? Was strahlt er aus? Warum ist er so geheimnisvoll?' },
-          { id:'b2q3', text:'Salten beschreibt den Sommerwald auf eine ganz besondere Art. Schreibe 4–5 Sätze: Wie klingt, riecht und fühlt sich der Sommer im Wald an? Benutze Saltens Bilder als Inspiration – schreibe aber in eigenen Worten!' }
-        ]
-      },
-      { title:'Herbst und Gefahr',
-        pages:'Seiten 101–145 · Herbst',
-        reading:'Der Wald verändert sich – und etwas Bedrohliches zieht auf. Achte genau darauf, wie Salten durch Sprache Stimmung erzeugt.',
-        questions:[
-          { id:'b3q1', text:'Der Herbst kommt in den Wald. Schreibe 5 Sätze: Wie verändert sich der Wald – Farben, Geräusche, Gerüche, Stimmung? Denk daran, wie Salten schreibt: sehr genau, sehr lebendig!' },
-          { id:'b3q2', text:'Die Jagd ist eine bedrohliche Szene. Schreibe 5–6 Sätze aus Bambis Perspektive: Was hört er? Was spürt er? Was denkt er? Zeige seine Angst – ohne das Wort „Angst" zu benutzen!' },
-          { id:'b3q3', text:'In diesem Teil passiert etwas sehr Trauriges. Was ist es, und wie hat es dich als Leser berührt? Schreibe 4–5 ehrliche Sätze.' }
-        ]
-      },
-      { title:'Bambis harter Winter',
-        pages:'Seiten 146–182 · Winter',
-        reading:'Winter. Der Wald ist kalt und still. Bambi ist fast allein – und trotzdem wächst er weiter. Lies langsam und genieße Saltens Winterbilder.',
-        questions:[
-          { id:'b4q1', text:'Salten beschreibt den Winter sehr eindrücklich. Schreibe 5 Sätze: Was siehst, hörst, riechst und spürst du in diesem Winterwald? Benutze deine Fantasie zusammen mit Saltens Bildern!' },
-          { id:'b4q2', text:'Bambi ist jetzt anders als am Anfang des Buches. Beschreibe in 4–5 Sätzen, wie er sich verändert hat – äußerlich und innerlich.' },
-          { id:'b4q3', text:'Der alte Hirsch und Bambi – was ist die Beziehung zwischen den beiden? Was bedeutet der alte Hirsch für Bambi? Erkläre es in 4–5 Sätzen.' }
-        ]
-      },
-      { title:'✏️ Das Ende & Schreibwoche',
-        pages:'Seiten 183–Ende + Schreiben',
-        reading:'Das Ende von Bambis Geschichte – und eine große Schreibaufgabe wartet auf dich. Lies das letzte Kapitel aufmerksam!',
-        questions:[
-          { id:'b5q1', text:'Wie endet Bambis Geschichte? Schreibe eine Inhaltsangabe des Endes in 5–6 Sätzen im Präsens. Was passiert zuletzt mit Bambi und dem alten Hirsch?' },
-          { id:'b5q2', text:'ERLEBNISERZÄHLUNG (12–15 Sätze): „Ein Morgen im Wald" – Stell dir vor, du wachst früh auf und gehst allein in den Wald. Beschreibe alles, was du siehst, hörst, riechst und spürst. Baue eine kleine Spannung ein und zeige, wie sie sich auflöst!' },
-          { id:'b5q3', text:'Emil oder Bambi – welches Buch hat dir besser gefallen und warum? Schreibe 4–5 ehrliche Sätze.' }
-        ]
-      }
-    ]
-  }
+      {title:'Bambis erste Schritte',pages:'Seiten 1–50 · Frühling',
+       reading:'Bambi wird geboren und entdeckt zum ersten Mal den Wald. Lies, wie Salten Natur mit Wörtern lebendig macht!',
+       questions:[
+         {id:'b1q1',text:'Welche Wörter oder Bilder aus diesem Teil haben dir am besten gefallen? Schreibe 4–5 Sätze: Was hast du dir dabei vorgestellt?'},
+         {id:'b1q2',text:'Stell dir vor, du bist Bambi und siehst zum ersten Mal Gras, einen Bach, einen Schmetterling. Schreibe 4–5 Sätze in der Ich-Form – benutze alle fünf Sinne!'},
+         {id:'b1q3',text:'Bambis Mutter erklärt ihm viele Dinge. Wie ist sie als Mutter? Beschreibe sie in 3–4 Sätzen.'}
+       ]},
+      {title:'Sommer im Wald',pages:'Seiten 51–100 · Sommer',
+       reading:'Sommer im Wald – Bambi lernt neue Tiere kennen und spürt zum ersten Mal Gefahr.',
+       questions:[
+         {id:'b2q1',text:'Wähle ein Tier, dem Bambi begegnet, und beschreibe es in 4–5 Sätzen: Wie sieht es aus? Wie verhält es sich? Was macht es besonders?'},
+         {id:'b2q2',text:'Der alte Hirsch erscheint immer wieder. Beschreibe ihn in 4–5 Sätzen: Wie sieht er aus? Was strahlt er aus? Warum ist er so geheimnisvoll?'},
+         {id:'b2q3',text:'Wie klingt, riecht und fühlt sich der Sommer im Wald an? Schreibe 4–5 Sätze in eigenen Worten – nutze Saltens Bilder als Inspiration!'}
+       ]},
+      {title:'Herbst und Gefahr',pages:'Seiten 101–145 · Herbst',
+       reading:'Der Wald verändert sich – etwas Bedrohliches kommt. Achte darauf, wie Salten Stimmung durch Sprache erzeugt.',
+       questions:[
+         {id:'b3q1',text:'Wie verändert sich der Wald im Herbst? Schreibe 5 Sätze: Farben, Geräusche, Gerüche, Stimmung – so genau und lebendig wie Salten!'},
+         {id:'b3q2',text:'Die Jagd ist eine bedrohliche Szene. Schreibe 5–6 Sätze aus Bambis Perspektive: Was hört er, was spürt er? Zeige Angst – ohne das Wort „Angst" zu benutzen!'},
+         {id:'b3q3',text:'In diesem Teil passiert etwas sehr Trauriges. Was ist es, und wie hat es dich als Leser berührt? Schreibe 4–5 ehrliche Sätze.'}
+       ]},
+      {title:'Bambis harter Winter',pages:'Seiten 146–182 · Winter',
+       reading:'Winter. Der Wald ist kalt und still. Bambi ist fast allein – und trotzdem wächst er.',
+       questions:[
+         {id:'b4q1',text:'Saltens Winterwald: Schreibe 5 Sätze – was siehst, hörst, riechst und spürst du? Benutze seine Bilder und deine eigene Fantasie zusammen!'},
+         {id:'b4q2',text:'Bambi ist jetzt anders als am Anfang. Beschreibe in 4–5 Sätzen, wie er sich verändert hat – äußerlich und innerlich.'},
+         {id:'b4q3',text:'Was bedeutet der alte Hirsch für Bambi? Wie ist die Beziehung zwischen den beiden? Erkläre es in 4–5 Sätzen.'}
+       ]},
+      {title:'✏️ Das Ende & Schreibwoche',pages:'Seiten 183–Ende + Schreiben',
+       reading:'Das Ende von Bambis Geschichte – und eine große Schreibaufgabe wartet!',
+       questions:[
+         {id:'b5q1',text:'Inhaltsangabe des Endes in 5–6 Sätzen im Präsens. Was passiert zuletzt mit Bambi und dem alten Hirsch?'},
+         {id:'b5q2',text:'ERLEBNISERZÄHLUNG (12–15 Sätze): „Ein Morgen im Wald" – du gehst früh allein in den Wald. Beschreibe alles mit allen Sinnen, baue eine kleine Spannung ein!'},
+         {id:'b5q3',text:'Emil oder Bambi – welches Buch hat dir besser gefallen und warum? Schreibe 4–5 ehrliche Sätze.'}
+       ]}
+    ]}
 };
 
-// ── STORAGE ─────────────────────────────────────────────────────────────────
-const MEM = {};
-async function sGet(key) {
-  try { const r = await window.storage.get('boy_' + key); return r ? JSON.parse(r.value) : null; }
-  catch(e) { return MEM[key] ?? null; }
-}
-async function sSet(key, val) {
-  MEM[key] = val;
-  try { await window.storage.set('boy_' + key, JSON.stringify(val)); } catch(e) {}
-}
+const MEM={};
+async function sGet(k){try{const r=await window.storage.get('boy_'+k);return r?JSON.parse(r.value):null;}catch(e){return MEM[k]??null;}}
+async function sSet(k,v){MEM[k]=v;try{await window.storage.set('boy_'+k,JSON.stringify(v));}catch(e){}}
 
-// ── STATE ────────────────────────────────────────────────────────────────────
-let bookChoice = null;
-let answers = {};
-let activeTab = null;
-let curMod = null;
+let bookChoice=null,answers={},activeTab=null,curMod=null;
+const START=new Date('2026-07-01T00:00:00');
 
-// ── UNLOCK LOGIC ─────────────────────────────────────────────────────────────
-const START = new Date('2026-07-01T00:00:00');
-const SLOT2 = 35; // days until book2 starts
+function unlockDate(bookId,wi){const off=(bookChoice&&bookId!==bookChoice)?35:0;const d=new Date(START);d.setDate(d.getDate()+off+wi*7);return d;}
+function isUnlocked(bookId,wi){if(!bookChoice)return false;if(new URLSearchParams(location.search).get('preview')==='true')return true;return new Date()>=unlockDate(bookId,wi);}
+function book2Avail(){if(new URLSearchParams(location.search).get('preview')==='true')return true;const d=new Date(START);d.setDate(d.getDate()+35);return new Date()>=d;}
+function isComplete(bookId,wi){return BOOKS[bookId].weeks[wi].questions.every(q=>(answers[q.id]||'').trim().length>10);}
+function fmtDate(d){return d.toLocaleDateString('de-AT',{day:'numeric',month:'long'});}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function countWords(t){if(!t||!t.trim())return 0;return t.trim().split(/\s+/).filter(w=>w.length>0).length;}
+function countSentences(t){if(!t||!t.trim())return 0;return t.split(/[.!?]+/).filter(s=>s.trim().length>2).length;}
 
-function unlockDate(bookId, wi) {
-  const offset = (bookId !== bookChoice) ? SLOT2 : 0;
-  const d = new Date(START);
-  d.setDate(d.getDate() + offset + wi * 7);
-  return d;
-}
+async function selectBook(id){bookChoice=id;activeTab=id;await sSet('bookChoice',id);renderMain();show('s-main');}
 
-function isUnlocked(bookId, wi) {
-  if (!bookChoice) return false;
-  if (new URLSearchParams(location.search).get('preview') === 'true') return true;
-  return new Date() >= unlockDate(bookId, wi);
-}
-
-function book2Avail() {
-  if (new URLSearchParams(location.search).get('preview') === 'true') return true;
-  const d = new Date(START); d.setDate(d.getDate() + SLOT2);
-  return new Date() >= d;
-}
-
-function isComplete(bookId, wi) {
-  return BOOKS[bookId].weeks[wi].questions.every(q => (answers[q.id] || '').trim().length > 10);
-}
-
-function fmtDate(d) {
-  return d.toLocaleDateString('de-AT', { day:'numeric', month:'long' });
-}
-
-// ── SCREENS ──────────────────────────────────────────────────────────────────
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-// ── SELECT BOOK ──────────────────────────────────────────────────────────────
-async function selectBook(id) {
-  bookChoice = id; activeTab = id;
-  await sSet('bookChoice', id);
-  renderMain(); show('s-main');
-}
-
-// ── RENDER MAIN ──────────────────────────────────────────────────────────────
-function renderMain() {
-  const b1 = BOOKS[bookChoice];
-  const b2id = bookChoice === 'emil' ? 'bambi' : 'emil';
-  const b2 = BOOKS[b2id];
-  const avail2 = book2Avail();
-
-  // Tabs
-  const tabs = document.getElementById('tabs-row');
-  tabs.innerHTML = '';
-  [b1, b2].forEach((b, i) => {
-    const isActive = activeTab === b.id;
-    const isSecond = i === 1;
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' +
-      (isActive ? ' t-active-' + b.cls : '') +
-      (isSecond && !avail2 ? ' t-unavail' : '');
-    if (isSecond && !avail2) {
-      const d = fmtDate(new Date(START.getTime() + SLOT2*86400000));
-      btn.textContent = b.icon + ' ' + b.title + ' · ab ' + d;
-    } else {
-      btn.textContent = b.icon + ' ' + b.title;
-      btn.onclick = () => { activeTab = b.id; renderMain(); };
-    }
+function renderMain(){
+  const b1=BOOKS[bookChoice];const b2id=bookChoice==='emil'?'bambi':'emil';const b2=BOOKS[b2id];const av2=book2Avail();
+  const tabs=document.getElementById('tabs-row');tabs.innerHTML='';
+  [b1,b2].forEach((b,i)=>{
+    const isAct=activeTab===b.id;const is2=i===1;const btn=document.createElement('button');
+    btn.className='tab-btn'+(isAct?' t'+(b.cls==='e'?'e':'b'):'')+(is2&&!av2?' unavail':'');
+    if(is2&&!av2){const d2=new Date(START);d2.setDate(d2.getDate()+35);btn.textContent=b.icon+' '+b.title+' · ab '+fmtDate(d2);}
+    else{btn.textContent=b.icon+' '+b.title;btn.onclick=()=>{activeTab=b.id;renderMain();};}
     tabs.appendChild(btn);
   });
-
-  // Info
-  const info = document.getElementById('info-area');
-  info.innerHTML = '';
-  if (activeTab === b2id && !avail2) {
-    const d = fmtDate(new Date(START.getTime() + SLOT2*86400000));
-    info.innerHTML = `<div class="info-box">🔒 Dieses Buch öffnet sich am <strong>${d}</strong>, wenn du mit <em>${b1.title}</em> fertig bist!</div>`;
-  }
-
-  // Module list
-  const list = document.getElementById('mod-list');
-  list.innerHTML = '';
-  const curBook = BOOKS[activeTab];
-
-  // Progress bar
-  const doneCount = curBook.weeks.filter((_, wi) => isUnlocked(curBook.id, wi) && isComplete(curBook.id, wi)).length;
-  const totalUnlocked = curBook.weeks.filter((_, wi) => isUnlocked(curBook.id, wi)).length;
-  if (totalUnlocked > 0) {
-    const prog = document.createElement('div');
-    prog.innerHTML = `<div style="font-size:0.76rem;color:var(--muted);margin-bottom:6px;">${doneCount} von ${curBook.weeks.length} Wochen erledigt</div><div class="progress-bar"><div class="progress-fill fill-${curBook.cls}" style="width:${Math.round(doneCount/curBook.weeks.length*100)}%"></div></div>`;
-    prog.style.marginBottom = '16px';
-    list.appendChild(prog);
-  }
-
-  curBook.weeks.forEach((week, wi) => {
-    const unlocked = isUnlocked(curBook.id, wi);
-    const done = unlocked && isComplete(curBook.id, wi);
-    const item = document.createElement('div');
-    item.className = 'mod-item' + (!unlocked ? ' mod-locked' : '');
-
-    let badge, badgeCls;
-    if (!unlocked) {
-      badge = 'ab ' + fmtDate(unlockDate(curBook.id, wi));
-      badgeCls = 'badge-lock';
-    } else if (done) {
-      badge = '✓ Fertig'; badgeCls = 'badge-done';
-    } else {
-      badge = 'Offen'; badgeCls = 'badge-open';
-    }
-
-    item.innerHTML = `
-      <div class="mod-dot ${unlocked ? 'dot-' + curBook.cls : 'dot-locked'}">${wi+1}</div>
-      <div class="mod-info">
-        <h3>Woche ${wi+1}: ${week.title}</h3>
-        <small>${week.pages}</small>
-      </div>
-      <span class="mod-badge ${badgeCls}">${badge}</span>`;
-    if (unlocked) item.onclick = () => openMod(curBook.id, wi);
+  const info=document.getElementById('info-area');info.innerHTML='';
+  if(activeTab===b2id&&!av2){const d2=new Date(START);d2.setDate(d2.getDate()+35);info.innerHTML=`<div class="info-box">🔒 Dieses Buch öffnet sich am <strong>${fmtDate(d2)}</strong>, wenn du mit <em>${b1.title}</em> fertig bist!</div>`;}
+  const list=document.getElementById('mod-list');list.innerHTML='';
+  const cb=BOOKS[activeTab];
+  const done=cb.weeks.filter((_,wi)=>isUnlocked(cb.id,wi)&&isComplete(cb.id,wi)).length;
+  const unlocked=cb.weeks.filter((_,wi)=>isUnlocked(cb.id,wi)).length;
+  if(unlocked>0){const p=document.createElement('div');p.className='prog-wrap';p.innerHTML=`<div class="prog-label">${done} von ${cb.weeks.length} Wochen erledigt</div><div class="prog-bar"><div class="prog-fill f${cb.cls}" style="width:${Math.round(done/cb.weeks.length*100)}%"></div></div>`;list.appendChild(p);}
+  cb.weeks.forEach((week,wi)=>{
+    const ul=isUnlocked(cb.id,wi);const dn=ul&&isComplete(cb.id,wi);
+    const item=document.createElement('div');item.className='mod-item'+(ul?'':' locked');
+    let badge,bc;if(!ul){badge='ab '+fmtDate(unlockDate(cb.id,wi));bc='bl';}else if(dn){badge='✓ Fertig';bc='bd';}else{badge='Offen';bc='bo';}
+    item.innerHTML=`<div class="mod-dot ${ul?'d'+cb.cls:'dl'}">${wi+1}</div><div class="mod-info"><h3>Woche ${wi+1}: ${week.title}</h3><small>${week.pages}</small></div><span class="mod-badge ${bc}">${badge}</span>`;
+    if(ul)item.onclick=()=>openMod(cb.id,wi);
     list.appendChild(item);
   });
 }
 
-// ── OPEN MODULE ───────────────────────────────────────────────────────────────
-function openMod(bookId, wi) {
-  curMod = { bookId, wi };
-  const book = BOOKS[bookId];
-  const week = book.weeks[wi];
-  document.getElementById('m-title').textContent = book.icon + ' ' + book.title;
-  document.getElementById('m-sub').textContent = 'Woche ' + (wi+1) + ': ' + week.title;
-
-  const c = document.getElementById('m-content');
-  c.innerHTML = `
+function openMod(bookId,wi){
+  curMod={bookId,wi};const book=BOOKS[bookId];const week=book.weeks[wi];
+  document.getElementById('m-title').textContent=book.icon+' '+book.title;
+  document.getElementById('m-sub').textContent='Woche '+(wi+1)+': '+week.title;
+  const c=document.getElementById('m-content');
+  c.innerHTML=`
     <div class="mod-head">
-      <div class="wk-label" style="color:var(--${book.cls})">Woche ${wi+1} von ${book.weeks.length}</div>
+      <div class="wk-label" style="color:var(--${book.cls==='e'?'emil':'bambi'})">Woche ${wi+1} von ${book.weeks.length}</div>
       <h2>${week.title}</h2>
-      <span class="pg-chip pg-${book.cls}">${week.pages}</span>
-      <div class="reading-box">
-        <div class="rb-label">📖 Leseauftrag diese Woche</div>
-        <p>${week.reading}</p>
-      </div>
+      <span class="pg-chip p${book.cls}">${week.pages}</span>
+      <div class="reading-box"><div class="rb-label">📖 Leseauftrag diese Woche</div><p>${week.reading}</p></div>
     </div>
-    ${week.questions.map((q,qi) => `
+    ${week.questions.map((q,qi)=>`
       <div class="q-card">
-        <div class="q-num" style="color:var(--${book.cls})">Aufgabe ${qi+1}</div>
+        <div class="q-num" style="color:var(--${book.cls==='e'?'emil':'bambi'})">Aufgabe ${qi+1}</div>
         <p>${q.text}</p>
-        <textarea id="ta-${q.id}" placeholder="Schreibe hier deine Antwort…">${answers[q.id]||''}</textarea>
+        <textarea id="ta-${q.id}" placeholder="Schreibe hier deine Antwort…" oninput="updateWC('${q.id}')">${answers[q.id]||''}</textarea>
+        <div class="wc" id="wc-${q.id}">${countWords(answers[q.id]||'')} Wörter · ${countSentences(answers[q.id]||'')} Sätze</div>
       </div>`).join('')}
     <div class="save-row">
-      <button class="save-btn btn-${book.cls}" onclick="saveAnswers()">Antworten speichern 💾</button>
+      <button class="save-btn s${book.cls}" onclick="saveTxt()">💾 Speichern &amp; Herunterladen</button>
       <div class="save-msg" id="save-msg"></div>
     </div>`;
   show('s-module');
 }
 
-// ── SAVE ─────────────────────────────────────────────────────────────────────
-async function saveAnswers() {
-  if (!curMod) return;
-  const { bookId, wi } = curMod;
-  BOOKS[bookId].weeks[wi].questions.forEach(q => {
-    const el = document.getElementById('ta-' + q.id);
-    if (el) answers[q.id] = el.value;
-  });
-  await sSet('answers', answers);
-  const msg = document.getElementById('save-msg');
-  msg.textContent = '✓ Gespeichert!';
-  setTimeout(() => msg.textContent = '', 3000);
+function updateWC(qid){
+  const el=document.getElementById('ta-'+qid);const wc=document.getElementById('wc-'+qid);
+  if(el&&wc)wc.textContent=countWords(el.value)+' Wörter · '+countSentences(el.value)+' Sätze';
 }
 
-function goBack() { renderMain(); show('s-main'); }
+async function saveTxt(){
+  if(!curMod)return;
+  const{bookId,wi}=curMod;const book=BOOKS[bookId];const week=book.weeks[wi];
+  let totalW=0,totalS=0;const parts=[];
+  week.questions.forEach((q,qi)=>{
+    const el=document.getElementById('ta-'+q.id);
+    const txt=el?el.value:(answers[q.id]||'');
+    if(el)answers[q.id]=txt;
+    const w=countWords(txt),s=countSentences(txt);totalW+=w;totalS+=s;
+    parts.push({q,txt,w,s,num:qi+1});
+  });
+  await sSet('answers',answers);
+  let cnt=(await sGet('dlCount'))||0;cnt++;await sSet('dlCount',cnt);
+  const now=new Date();
+  const ds=now.toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const ts=now.toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'});
+  let out=`SOMMER-LESEABENTEUER\n`;
+  out+=`================================================================================\n`;
+  out+=`Buch: ${book.title} (${book.author})\n`;
+  out+=`Woche ${wi+1}: ${week.title}\n`;
+  out+=`Gespeichert: ${ds}, ${ts} Uhr\n`;
+  out+=`Abgabe Nr.: ${String(cnt).padStart(3,'0')}\n`;
+  out+=`================================================================================\n\n`;
+  parts.forEach(a=>{
+    out+=`AUFGABE ${a.num}:\n${a.q.text}\n\nAntwort:\n${a.txt||'(keine Antwort)'}\n\n`;
+    out+=`[${a.w} Wörter · ${a.s} Sätze]\n`;
+    out+=`--------------------------------------------------------------------------------\n\n`;
+  });
+  out+=`================================================================================\n`;
+  out+=`GESAMT: ${week.questions.length} Aufgaben · ${totalW} Wörter · ${totalS} Sätze\n`;
+  out+=`================================================================================\n`;
+  const fn=`${book.title.replace(/\s+/g,'_')}_Woche${wi+1}_${now.toISOString().slice(0,10)}_Nr${String(cnt).padStart(3,'0')}.txt`;
+  const blob=new Blob([out],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  const msg=document.getElementById('save-msg');
+  msg.textContent=`✓ Datei heruntergeladen! (${totalW} Wörter · ${totalS} Sätze)`;
+  setTimeout(()=>msg.textContent='',5000);
+}
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
-async function init() {
-  bookChoice = await sGet('bookChoice');
-  answers = (await sGet('answers')) || {};
-  if (!bookChoice) { show('s-select'); }
-  else { activeTab = bookChoice; renderMain(); show('s-main'); }
+function goBack(){renderMain();show('s-main');}
+
+async function init(){
+  bookChoice=await sGet('bookChoice');answers=(await sGet('answers'))||{};
+  if(!bookChoice)show('s-select');else{activeTab=bookChoice;renderMain();show('s-main');}
 }
 init();
 </script>
