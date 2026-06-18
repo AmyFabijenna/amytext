@@ -1,199 +1,336 @@
-
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gefühlswörter – Steigerungsreihen</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans);color:var(--color-text-primary)}
-.wrap{padding:1rem 0}
-.top{display:flex;gap:10px;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap}
-.top input{flex:1;min-width:160px;padding:8px 12px;font-size:14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary)}
-.filters{display:flex;gap:6px;flex-wrap:wrap}
-.fbtn{font-size:12px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
-.fbtn.active,.fbtn:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-primary);overflow:hidden;transition:box-shadow .15s}
-.card:hover{border-color:var(--color-border-secondary)}
-.card-head{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;user-select:none}
-.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.emo-name{font-size:15px;font-weight:500;flex:1}
-.badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
-.toggle{font-size:18px;color:var(--color-text-tertiary);transition:transform .2s;line-height:1}
-.card-body{display:none;padding:0 16px 16px}
-.card-body.open{display:block}
-.section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-tertiary);margin:12px 0 6px}
-.steps{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
-.step{font-size:13px;padding:3px 9px;border-radius:20px;border:0.5px solid var(--color-border-tertiary)}
-.arrow{font-size:12px;color:var(--color-text-tertiary)}
-.koerper{display:flex;flex-direction:column;gap:5px}
-.krow{display:flex;gap:8px;align-items:flex-start}
-.knum{font-size:10px;font-weight:500;color:var(--color-text-tertiary);min-width:14px;padding-top:2px}
-.ktext{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
-.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:10px 0}
-.count{font-size:13px;color:var(--color-text-tertiary);margin-bottom:.75rem}
-.hidden{display:none!important}
-
-.r{color:#A32D2D;background:#FCEBEB;border-color:#F7C1C1}
-.rdt{color:#A32D2D}
-.c{color:#993C1D;background:#FAECE7;border-color:#F5C4B3}
-.cdt{color:#993C1D}
-.p{color:#534AB7;background:#EEEDFE;border-color:#CECBF6}
-.pdt{color:#534AB7}
-.a{color:#854F0B;background:#FAEEDA;border-color:#FAC775}
-.adt{color:#854F0B}
-.t{color:#0F6E56;background:#E1F5EE;border-color:#9FE1CB}
-.tdt{color:#0F6E56}
-.b{color:#185FA5;background:#E6F1FB;border-color:#B5D4F4}
-.bdt{color:#185FA5}
-.pk{color:#993556;background:#FBEAF0;border-color:#F4C0D1}
-.pkdt{color:#993556}
-.g{color:#5F5E5A;background:#F1EFE8;border-color:#D3D1C7}
-.gdt{color:#5F5E5A}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c1a30;
+  --bg2:#08111f;
+  --panel:rgba(10,20,40,0.95);
+  --surface:rgba(255,255,255,0.05);
+  --y:#FFD700;
+  --yglow:rgba(255,215,0,0.45);
+  --text:#ddeaff;
+  --muted:rgba(221,234,255,0.55);
+  --dim:rgba(221,234,255,0.3);
+  --r:12px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:1.5rem 1.25rem;line-height:1.6}
+h1{font-size:1.45rem;font-weight:700;color:var(--y);margin-bottom:.2rem;letter-spacing:.02em}
+.sub{font-size:.8rem;color:var(--muted);margin-bottom:1.25rem}
+.controls{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
+#search{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,215,0,.35);border-radius:10px;color:var(--text);padding:8px 14px;font-size:13.5px;outline:none;width:100%}
+#search::placeholder{color:var(--dim)}
+#search:focus{border-color:var(--y)}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.fbtn{background:transparent;border:1px solid rgba(255,215,0,.3);border-radius:14px;color:var(--muted);cursor:pointer;font-size:11.5px;padding:4px 11px;transition:all .15s}
+.fbtn:hover{border-color:var(--y);color:var(--text)}
+.fbtn.active{background:rgba(255,215,0,.14);border-color:var(--y);color:var(--y);font-weight:600}
+.cnt{font-size:11.5px;color:var(--dim);margin-bottom:.85rem}
+.btn-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem}
+.ebo{border:2px solid var(--y);border-radius:22px;cursor:pointer;font-size:13px;font-weight:600;padding:7px 17px;transition:all .18s;user-select:none;letter-spacing:.02em;white-space:nowrap}
+.ebo:hover{box-shadow:0 0 10px var(--yglow);transform:translateY(-1px)}
+.ebo.act{box-shadow:0 0 0 2px #fff,0 0 20px var(--yglow);transform:scale(1.06)}
+.ebo.hid{display:none!important}
+.frot   {background:#5A1515;color:#FFD5D5}
+.flila  {background:#31115C;color:#DDD0F8}
+.fblau  {background:#152460;color:#BDD4FF}
+.fgold  {background:#483A00;color:#FFF0A0}
+.fpink  {background:#4D1530;color:#FFD0E6}
+.fgruen {background:#0A3A1E;color:#B5F0CC}
+.forang {background:#4A1E00;color:#FFD8A0}
+.fnavy  {background:#0A1C50;color:#B8CCFF}
+.fviol  {background:#2C0F50;color:#E2CCFF}
+.fgrau  {background:#1E2C3A;color:#C5D8E8}
+#detail{display:none;background:var(--panel);border:1.5px solid rgba(255,215,0,.4);border-radius:14px;padding:1.2rem 1.4rem;animation:fadeIn .2s ease}
+#detail.open{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.dhead{display:flex;align-items:center;gap:10px;margin-bottom:.9rem;flex-wrap:wrap}
+.dname{font-size:1.25rem;font-weight:700;color:var(--y)}
+.dbadge{font-size:10.5px;padding:3px 10px;border-radius:12px;font-weight:600;letter-spacing:.05em}
+.slbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,215,0,.7);margin:.7rem 0 .45rem}
+.steps{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.stp{font-size:12px;padding:3px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);transition:opacity .1s}
+.arr{font-size:11px;color:rgba(255,215,0,.45)}
+.div{border:none;border-top:1px solid rgba(255,255,255,.07);margin:.7rem 0}
+.kbody{display:flex;flex-direction:column;gap:5px}
+.krow{display:flex;gap:9px;align-items:flex-start}
+.kn{font-size:10px;color:var(--y);font-weight:700;min-width:15px;padding-top:3px;opacity:.75}
+.kt{font-size:12.5px;color:rgba(221,234,255,.82);line-height:1.6}
+.cbtn{margin-top:.9rem;background:transparent;border:1px solid rgba(255,215,0,.3);border-radius:8px;color:var(--muted);cursor:pointer;font-size:11.5px;padding:5px 14px;transition:all .15s}
+.cbtn:hover{border-color:var(--y);color:var(--y)}
 </style>
-
-<div class="wrap">
-<h2 class="sr-only">Gefühlswörter-Steigerungsreihen für Erlebniserzählungen</h2>
-<div class="top">
-  <input type="text" id="search" placeholder="Gefühl suchen …" oninput="filter()">
+</head>
+<body>
+<h1>Gefühlswörter · Steigerungsreihen</h1>
+<p class="sub">Für Erlebniserzählungen · Wörter &amp; körperliche Empfindungen · aufsteigend</p>
+<div class="controls">
+  <input type="text" id="search" placeholder="Gefühl suchen …" oninput="applyFilters()">
   <div class="filters">
     <button class="fbtn active" onclick="setTag('alle',this)">Alle</button>
     <button class="fbtn" onclick="setTag('negativ',this)">Negativ</button>
     <button class="fbtn" onclick="setTag('positiv',this)">Positiv</button>
-    <button class="fbtn" onclick="setTag('körper',this)">Körper</button>
     <button class="fbtn" onclick="setTag('sozial',this)">Sozial</button>
+    <button class="fbtn" onclick="setTag('körper',this)">Körper</button>
+    <button class="fbtn" onclick="setTag('aktivierung',this)">Aktivierung</button>
+    <button class="fbtn" onclick="setTag('selbst',this)">Selbst &amp; Scham</button>
+    <button class="fbtn" onclick="setTag('trauer',this)">Trauer</button>
   </div>
 </div>
-<p class="count" id="cnt"></p>
-<div class="grid" id="grid"></div>
-</div>
+<p class="cnt" id="cnt"></p>
+<div class="btn-grid" id="btngrid"></div>
+<div id="detail"></div>
 
 <script>
-const data=[
-{name:"Wut",tags:["negativ","körper"],col:"r",badge:"rdt",fam:"Stark-Negativ",
- schritte:["verärgert","genervt","ärgerlich","wütend","aufgebracht","rasend","außer sich","ausrasten"],
- koerper:["Ich runzelte die Stirn.","Ich biss die Zähne zusammen.","Ich ballte unwillkürlich die Fäuste.","Das Blut schoss mir ins Gesicht.","Ich zitterte am ganzen Leib.","Mir tropfte der Schweiß von der Stirn.","Ich schlug mit der Faust auf den Tisch.","Ein Schrei riss sich aus meiner Kehle, bevor ich es verhindern konnte."]},
-{name:"Nervosität",tags:["negativ","körper"],col:"p",badge:"pdt",fam:"Anspannung",
- schritte:["unruhig","nervös","angespannt","fahrig","zittrig","kribbelig","gereizt","am Ende der Nerven"],
- koerper:["Ich trommelte mit den Fingern auf den Tisch.","Meine Hände wurden feucht.","Ein leises Kribbeln breitete sich in meinem Bauch aus.","Mein Herz pochte schneller als gewöhnlich.","Meine Stimme zitterte, als ich sprach.","Meine Knie wurden weich, als ich aufstand.","Ich konnte nicht mehr stillsitzen — mein ganzer Körper war in Aufruhr.","Mir war so übel, dass ich kaum noch atmen konnte."]},
-{name:"Aufregung",tags:["positiv","körper"],col:"a",badge:"adt",fam:"Aktivierung",
- schritte:["gespannt","aufgeregt","erregt","fieberhaft erregt","elektrisiert","mitgerissen","überwältigt vor Aufregung"],
- koerper:["Ein leises Kribbeln lief mir den Rücken hinunter.","Mein Herz schlug schneller.","Ich konnte kaum stillsitzen.","Adrenalin schoss durch meinen Körper.","Meine Hände zitterten vor lauter Erregung.","Ich bebte am ganzen Körper.","Ich hätte schreien können vor Aufregung — und tat es fast."]},
-{name:"Erleichterung",tags:["positiv","körper"],col:"t",badge:"tdt",fam:"Entspannung",
- schritte:["etwas ruhiger werden","aufatmen","entspannen","eine Last fällt ab","befreit sein","wie neugeboren"],
- koerper:["Ich atmete tief und zitternd aus.","Meine Schultern sanken herab.","Meine Knie wurden weich, beinahe hätte ich mich hingesetzt.","Tränen stiegen in meine Augen — Tränen der Erleichterung.","Ich ließ mich in den nächsten Sessel fallen.","Mein ganzer Körper erschlaffte, als hätten sich alle Fäden gelöst."]},
-{name:"Glücklichkeit",tags:["positiv"],col:"t",badge:"tdt",fam:"Wohlbefinden",
- schritte:["zufrieden","froh","heiter","glücklich","überglücklich","selig","im siebten Himmel schweben"],
- koerper:["Meine Mundwinkel zogen sich unwillkürlich in die Höhe.","Ein Lächeln breitete sich auf meinem Gesicht aus, bevor ich es bemerkte.","Mein Herz wurde weit.","Eine Wärme breitete sich in meiner Brust aus.","Ich fühlte mich leicht wie eine Feder.","Ich strahlte über das ganze Gesicht, sodass mir die Wangen wehtaten.","Ich hätte tanzen können — und Teile von mir taten es, ganz ohne Musik."]},
-{name:"Angst",tags:["negativ","körper"],col:"p",badge:"pdt",fam:"Anspannung",
- schritte:["unwohl","mulmig","besorgt","ängstlich","verängstigt","panisch","starr vor Angst"],
- koerper:["Gänsehaut überlief mich.","Mein Herz setzte einen Schlag aus.","Mein Magen zog sich zusammen.","Meine Hände wurden eiskalt und schweißnass.","Meine Knie zitterten.","Der Atem stockte mir in der Kehle.","Kalter Schweiß brach mir aus.","Ich stand wie angewurzelt da — mein Körper verweigerte jeden Befehl."]},
-{name:"Stolz",tags:["positiv","körper"],col:"b",badge:"bdt",fam:"Selbstwert",
- schritte:["zufrieden","stolz","sehr stolz","erfüllt von Stolz","mächtig stolz","überströmend vor Stolz"],
- koerper:["Ich richtete mich auf.","Ich reckte unwillkürlich die Brust vor.","Mein Kopf hob sich wie von selbst.","Meine Schultern zogen sich zurück.","Mein Herz schwoll.","Ich strahlte, sodass ich kaum in mich hineinpassen konnte — als würde die Freude durch alle Poren dringen."]},
-{name:"Selbstsicherheit",tags:["positiv","körper"],col:"b",badge:"bdt",fam:"Selbstwert",
- schritte:["etwas ruhiger","gelassen","sicher","selbstbewusst","unerschütterlich","unbesiegbar"],
- koerper:["Mein Atem wurde ruhiger und tiefer.","Ich hielt den Blickkontakt, ohne wegzusehen.","Ich saß aufrechter als sonst.","Meine Stimme klang fest und klar.","Mein Händedruck war ruhig und fest.","Ruhe strömte durch mich hindurch wie warmes Wasser — ich spürte nicht einmal mehr das Zittern."]},
-{name:"Schmerz",tags:["negativ","körper"],col:"r",badge:"rdt",fam:"Stark-Negativ",
- schritte:["Unbehagen","leichtes Ziehen","dumpfer Schmerz","stechender Schmerz","bohrend","brennend","unerträglich"],
- koerper:["Ich zuckte kurz zusammen.","Ich biss die Zähne zusammen.","Ein Zischen entwich meinen Lippen.","Ich krümmte mich.","Ich stöhnte — und schämte mich nicht dafür.","Tränen pressten sich aus meinen Augen, obwohl ich es nicht wollte.","Alles drehte sich vor Schmerz.","Die Welt verschwamm vor mir zu einem einzigen weißen Rauschen."]},
-{name:"Spaß",tags:["positiv"],col:"a",badge:"adt",fam:"Leichtigkeit",
- schritte:["amüsiert","belustigt","zum Lachen gereizt","kichernd","prustend","sich ausschütten vor Lachen"],
- koerper:["Ein Schmunzeln huschte über mein Gesicht.","Ich kicherte leise.","Ich lachte laut auf.","Ich prustete los — und konnte nicht mehr aufhören.","Tränen liefen mir über die Wangen.","Ich hielt mir den Bauch.","Ich konnte kaum noch Luft bekommen vor lauter Lachen."]},
-{name:"Überraschung",tags:["körper"],col:"a",badge:"adt",fam:"Aktivierung",
- schritte:["stutzen","innehalten","überrascht","verblüfft","perplex","sprachlos","fassungslos"],
- koerper:["Ich hielt kurz die Luft an.","Meine Augen weiteten sich.","Mein Mund öffnete sich, ohne dass ich es bemerkte.","Ich trat unwillkürlich einen Schritt zurück.","Ich hielt mir die Hand vor den Mund.","Mir verschlug es die Sprache.","Mir wurde schwindelig — als hätte die Welt kurz angehalten."]},
-{name:"Freude",tags:["positiv","körper"],col:"t",badge:"tdt",fam:"Wohlbefinden",
- schritte:["froh","erfreut","begeistert","fröhlich","strahlend","überschwänglich","jauchzend"],
- koerper:["Meine Augen leuchteten auf.","Ich lächelte unwillkürlich.","Mein Herz machte einen kleinen Hüpfer.","Ich klatschte in die Hände.","Meine Füße wollten springen.","Ich umarmte jeden, der in meiner Nähe war.","Es prickelte in meinen Fingerspitzen — wie lauter kleine Funken."]},
-{name:"Freundschaft",tags:["positiv","sozial"],col:"pk",badge:"pkdt",fam:"Verbundenheit",
- schritte:["Sympathie","Zuneigung","Verbundenheit","tiefe Freundschaft","unzertrennlich","Seelenverwandtschaft"],
- koerper:["Eine angenehme Wärme breitete sich in mir aus.","Ein Lächeln kam ganz von selbst, sobald ich die Person sah.","Ich rückte näher.","Ich legte die Hand auf ihre/seine Schulter.","Wir saßen Schulter an Schulter, ohne ein Wort zu brauchen.","Ich fühlte mich so wohl wie nirgendwo sonst auf der Welt."]},
-{name:"Anstrengung",tags:["körper"],col:"g",badge:"gdt",fam:"Körperzustand",
- schritte:["sich bemühen","sich anstrengen","sich abrackern","sich quälen","kämpfen","alles geben","über sich hinauswachsen"],
- koerper:["Mein Atem wurde schwerer.","Schweißperlen standen auf meiner Stirn.","Meine Muskeln brannten.","Meine Beine wurden schwer wie Blei.","Mir tropfte der Schweiß von der Stirn.","Mein Herz hämmerte in meiner Brust.","Ich konnte kaum noch — und tat es dennoch."]},
-{name:"Müdigkeit",tags:["körper"],col:"g",badge:"gdt",fam:"Körperzustand",
- schritte:["ein wenig müde","schläfrig","erschöpft","todmüde","völlig ausgelaugt","am Ende der Kräfte"],
- koerper:["Ich musste gähnen — einmal, dann wieder.","Meine Lider wurden schwer.","Ich rieb mir die Augen.","Meine Glieder wurden bleischwer.","Ich kämpfte gegen das Einschlafen an.","Ich konnte mich kaum noch aufrecht halten.","Ich sackte in mich zusammen wie ein leeres Kleid."]},
-{name:"Gemeinschaft",tags:["positiv","sozial"],col:"pk",badge:"pkdt",fam:"Verbundenheit",
- schritte:["zusammen sein","Zusammengehörigkeit spüren","Verbundenheit","Teil von etwas Größerem","eins mit der Gruppe","ein Herz und eine Seele"],
- koerper:["Eine Wärme strömte durch mich.","Ich spürte die Schultern der anderen neben mir.","Gemeinsames Lachen hallte durch den Raum.","Ich fühlte mich getragen.","Wir fielen uns in die Arme.","Mein Herz war zum Zerreißen voll — und es war das Schönste, das ich je gespürt hatte."]},
-{name:"Fröhlichkeit",tags:["positiv"],col:"t",badge:"tdt",fam:"Wohlbefinden",
- schritte:["aufgeheitert","heiter","ausgelassen","übermütig","quirlig","sprühend vor Lebendigkeit"],
- koerper:["Mein Gang wurde leichter.","Meine Augen blitzten.","Lachen sprudelte aus mir heraus.","Ich begann leise vor mich hin zu summen.","Meine Füße wollten tanzen.","Ich konnte nicht stillsitzen — und hörte gar nicht mehr damit auf."]},
-{name:"Tränen",tags:["körper"],col:"p",badge:"pdt",fam:"Anspannung",
- schritte:["die Augen werden feucht","ein Kloß im Hals","die Stimme zittert","Tränen steigen auf","Tränen laufen über die Wangen","schluchzen","hemmungslos weinen","in Tränen aufgelöst sein"],
- koerper:["Meine Augen brannten.","Ich schluckte gegen den Kloß in meinem Hals.","Meine Unterlippe zitterte.","Die erste Träne rollte meine Wange hinunter.","Ich konnte nicht mehr sprechen.","Ein Schluchzen zerriss mir die Brust.","Mein Körper bebte.","Ich weinte, bis nichts mehr kam — und noch ein wenig danach."]},
-{name:"Dankbarkeit",tags:["positiv","sozial"],col:"t",badge:"tdt",fam:"Wohlbefinden",
- schritte:["erkenntlich sein","dankbar sein","tief dankbar","zu Tränen gerührt","überwältigt von Dankbarkeit","sprachlos vor Dankbarkeit"],
- koerper:["Eine Wärme breitete sich in meiner Brust aus.","Meine Kehle wurde eng.","Meine Augen wurden feucht.","Ich legte unwillkürlich die Hand auf mein Herz.","Mich ergriff ein tiefer Schauer.","Worte versagten mir — und ich ließ meine Umarmung sprechen."]},
-{name:"Neugier",tags:["positiv","körper"],col:"a",badge:"adt",fam:"Aktivierung",
- schritte:["interessiert","neugierig","gespannt","wissbegierig","brennend vor Neugier","es nicht mehr aushalten können"],
- koerper:["Ich spitzte die Ohren.","Ich rückte näher heran.","Meine Augen weiteten sich.","Ich beugte mich unwillkürlich vor.","Mein Herz schlug schneller.","Ich konnte an nichts anderes mehr denken — die Neugier fraß sich durch alles."]}
+const D=[
+{n:"Wut",t:["negativ","körper"],f:"frot",fam:"Stark-Negativ",
+ s:["verärgert","genervt","ärgerlich","wütend","aufgebracht","rasend","außer sich","ausrasten"],
+ k:["Ich runzelte die Stirn.","Ich biss die Zähne zusammen.","Ich ballte unwillkürlich die Fäuste.","Das Blut schoss mir ins Gesicht.","Ich zitterte am ganzen Leib.","Mir tropfte der Schweiß von der Stirn.","Ich schlug mit der Faust auf den Tisch.","Ein Schrei riss sich aus meiner Kehle, bevor ich es verhindern konnte."]},
+{n:"Frustration",t:["negativ","körper"],f:"frot",fam:"Stark-Negativ",
+ s:["leicht genervt","frustriert","zunehmend frustriert","tief frustriert","am Ende der Geduld","am liebsten hinschmeißen"],
+ k:["Ich seufzte laut.","Ich rieb mir die Schläfen.","Meine Kiefermuskulatur spannte sich an.","Ich schloss kurz die Augen.","Meine Hände ballten sich zu Fäusten.","Ich hätte am liebsten alles weggeworfen — und tat es beinahe."]},
+{n:"Empörung",t:["negativ","körper"],f:"frot",fam:"Stark-Negativ",
+ s:["leicht entrüstet","empört","entrüstet","erzürnt","aufgebracht","kochend vor Empörung"],
+ k:["Ich holte tief Luft.","Mein Gesicht lief heiß an.","Ich richtete mich auf.","Meine Stimme wurde lauter und fester.","Ich schlug mit der flachen Hand auf die Fläche.","Ich zitterte — nicht vor Angst, sondern vor gerechtem Zorn."]},
+{n:"Bitterkeit",t:["negativ"],f:"frot",fam:"Stark-Negativ",
+ s:["ein Hauch Bitterkeit","verbittert","bitter","tief verbittert","von Bitterkeit vergiftet","in Bitterkeit erstarrt"],
+ k:["Ich schmeckte etwas Saures im Mund.","Mein Gesicht verhärtete sich.","Meine Lippen pressten sich zusammen.","Ich wandte den Blick ab.","Meine Haltung schloss sich, als wollte ich niemanden mehr hereinlassen.","Jede Erinnerung schmerzte — und ich ließ sie dennoch nicht los."]},
+{n:"Ekel",t:["negativ","körper"],f:"frot",fam:"Stark-Negativ",
+ s:["ein wenig angewidert","unangenehm berührt","angeekelt","angewidert","tief abgestoßen","mir wurde schlecht"],
+ k:["Meine Nase rümpfte sich.","Mein Magen hob sich.","Ich trat unwillkürlich zurück.","Ich hielt mir die Hand vor den Mund.","Übelkeit stieg in mir auf.","Ich musste mich abwenden.","Mir drehte sich alles — ich musste würgen."]},
+{n:"Neid",t:["negativ"],f:"frot",fam:"Stark-Negativ",
+ s:["ein wenig neidisch","neidisch","missgünstig","grün vor Neid","von Neid zerfressen","bitter neidisch"],
+ k:["Ich verkrampfte mich innerlich.","Meine Stimmung verdüsterte sich.","Ich konnte kaum hinschauen.","Ein bitterer Geschmack breitete sich in meinem Mund aus.","Mein Magen zog sich zusammen.","Die Freude an dem, was ich hatte, verblasste."]},
+{n:"Schmerz",t:["negativ","körper"],f:"frot",fam:"Stark-Negativ",
+ s:["Unbehagen","leichtes Ziehen","dumpfer Schmerz","stechender Schmerz","bohrend","brennend","unerträglich"],
+ k:["Ich zuckte kurz zusammen.","Ich biss die Zähne zusammen.","Ein Zischen entwich meinen Lippen.","Ich krümmte mich.","Ich stöhnte — und schämte mich nicht dafür.","Tränen pressten sich aus meinen Augen, obwohl ich es nicht wollte.","Alles drehte sich vor Schmerz.","Die Welt verschwamm vor mir zu einem weißen Rauschen."]},
+{n:"Angst",t:["negativ","körper"],f:"flila",fam:"Anspannung",
+ s:["unwohl","mulmig","besorgt","ängstlich","verängstigt","panisch","starr vor Angst"],
+ k:["Gänsehaut überlief mich.","Mein Herz setzte einen Schlag aus.","Mein Magen zog sich zusammen.","Meine Hände wurden eiskalt und schweißnass.","Meine Knie zitterten.","Der Atem stockte mir in der Kehle.","Kalter Schweiß brach mir aus.","Ich stand wie angewurzelt da — mein Körper verweigerte jeden Befehl."]},
+{n:"Nervosität",t:["negativ","körper"],f:"flila",fam:"Anspannung",
+ s:["unruhig","nervös","angespannt","fahrig","zittrig","kribbelig","gereizt","am Ende der Nerven"],
+ k:["Ich trommelte mit den Fingern auf den Tisch.","Meine Hände wurden feucht.","Ein leises Kribbeln breitete sich in meinem Bauch aus.","Mein Herz pochte schneller als gewöhnlich.","Meine Stimme zitterte, als ich sprach.","Meine Knie wurden weich, als ich aufstand.","Ich konnte nicht mehr stillsitzen — mein ganzer Körper war in Aufruhr.","Mir war so übel, dass ich kaum noch atmen konnte."]},
+{n:"Eifersucht",t:["negativ"],f:"flila",fam:"Anspannung",
+ s:["ein bisschen eifersüchtig","eifersüchtig","argwöhnisch","von Eifersucht geplagt","blind eifersüchtig","rasend vor Eifersucht"],
+ k:["Ich beobachtete alles ganz genau.","Mein Atem wurde flacher.","Mir wurde warm und heiß gleichzeitig.","Mein Herz zog sich zusammen.","Meine Hände wurden kalt.","Ich konnte nicht mehr klar denken."]},
+{n:"Misstrauen",t:["negativ"],f:"flila",fam:"Anspannung",
+ s:["ein schlechtes Gefühl","skeptisch","misstrauisch","argwöhnisch","auf der Hut","vollkommen misstrauisch"],
+ k:["Ich beobachtete genauer als sonst.","Mein Nacken spannte sich an.","Mein Blick wurde schmal.","Ich rückte von der Person ab.","Meine Schultern zogen sich hoch.","Ich hörte auf jeden Ton — und misstraute selbst der Stille."]},
+{n:"Hilflosigkeit",t:["negativ","körper"],f:"flila",fam:"Anspannung",
+ s:["hilflos zuschauen","machtlos","ohnmächtig","vollständig hilflos","gefangen in Hilflosigkeit","kraftlos erstarrt"],
+ k:["Meine Arme hingen herab.","Ich presste die Hände zusammen — ohne zu wissen warum.","Mein Blick suchte, fand aber nichts.","Mein Herz zog sich zusammen.","Tränen kamen — nicht aus Trauer, sondern aus purer Ohnmacht.","Ich war da und zugleich nirgendwo."]},
+{n:"Verwirrung",t:["negativ","körper"],f:"flila",fam:"Anspannung",
+ s:["ein wenig unklar","verwirrt","desorientiert","völlig durcheinander","verloren","ratlos wie noch nie"],
+ k:["Ich runzelte die Stirn.","Ich schüttelte den Kopf.","Ich schaute mich um, als könnte die Antwort irgendwo stehen.","Mein Blick wurde leer.","Ich atmete flach und schnell.","Mir schwindelte — der Boden schien nicht mehr fest zu sein."]},
+{n:"Traurigkeit",t:["negativ","trauer","körper"],f:"fblau",fam:"Trauer",
+ s:["betrübt","traurig","niedergeschlagen","untröstlich","am Boden zerstört","in tiefe Trauer versunken"],
+ k:["Meine Augen wurden schwer.","Ich senkte den Kopf.","Meine Schultern fielen nach vorne.","Ein Druck legte sich auf meine Brust.","Ich konnte nicht mehr schlucken.","Tränen liefen still über meine Wangen.","Ich zog mich in mich selbst zurück wie eine Muschel, die sich schließt."]},
+{n:"Einsamkeit",t:["negativ","trauer"],f:"fblau",fam:"Trauer",
+ s:["allein","einsam","verlassen","ausgegrenzt","isoliert","vollkommen allein auf der Welt"],
+ k:["Stille drückte sich schwer gegen meine Ohren.","Ich starrte ins Leere.","Mein Magen zog sich zusammen.","Ich umfasste meine eigenen Arme.","Die Kälte kroch von innen.","Ich saß da und wartete auf ein Geräusch, das nicht kam."]},
+{n:"Verzweiflung",t:["negativ","trauer","körper"],f:"fblau",fam:"Trauer",
+ s:["beunruhigt","besorgt","hilflos","verzweifelt","am Ende","in den Abgrund blickend"],
+ k:["Mir zitterten die Hände.","Ich konnte nicht mehr klar denken.","Ich presste die Hände vors Gesicht.","Mein Herz raste und war gleichzeitig schwer wie Stein.","Die Tränen kamen lautlos.","Ich sank zusammen, als hätten alle Kräfte mich verlassen."]},
+{n:"Enttäuschung",t:["negativ","trauer"],f:"fblau",fam:"Trauer",
+ s:["etwas enttäuscht","enttäuscht","bitter enttäuscht","tief enttäuscht","desillusioniert","innerlich gebrochen"],
+ k:["Ich ließ die Schultern hängen.","Ich schluckte.","Mein Atem stockte kurz.","Mir sank das Herz.","Ich wandte mich ab.","Ich merkte, wie die Vorfreude aus mir wich wie Luft aus einem Ballon."]},
+{n:"Melancholie",t:["negativ","trauer"],f:"fblau",fam:"Trauer",
+ s:["ein wenig trübsinnig","nachdenklich","schwermütig","melancholisch","in stiller Trauer versunken","von tiefem Weltschmerz erfasst"],
+ k:["Ich starrte ins Leere.","Alles verlangsamte sich.","Ein leises Gewicht legte sich auf meine Brust.","Die Farben um mich herum schienen blasser.","Ich atmete langsam und schwer.","Die Stille war warm und kalt zugleich."]},
+{n:"Freude",t:["positiv","körper"],f:"fgold",fam:"Wohlbefinden",
+ s:["froh","erfreut","begeistert","fröhlich","strahlend","überschwänglich","jauchzend"],
+ k:["Meine Augen leuchteten auf.","Ich lächelte unwillkürlich.","Mein Herz machte einen kleinen Hüpfer.","Ich klatschte in die Hände.","Meine Füße wollten springen.","Ich umarmte jeden, der in meiner Nähe war.","Es prickelte in meinen Fingerspitzen — wie lauter kleine Funken."]},
+{n:"Glücklichkeit",t:["positiv"],f:"fgold",fam:"Wohlbefinden",
+ s:["zufrieden","froh","heiter","glücklich","überglücklich","selig","im siebten Himmel schweben"],
+ k:["Meine Mundwinkel zogen sich unwillkürlich in die Höhe.","Ein Lächeln breitete sich auf meinem Gesicht aus, bevor ich es bemerkte.","Mein Herz wurde weit.","Eine Wärme breitete sich in meiner Brust aus.","Ich fühlte mich leicht wie eine Feder.","Ich strahlte über das ganze Gesicht, sodass mir die Wangen wehtaten.","Ich hätte tanzen können — und Teile von mir taten es, ganz ohne Musik."]},
+{n:"Fröhlichkeit",t:["positiv"],f:"fgold",fam:"Wohlbefinden",
+ s:["aufgeheitert","heiter","ausgelassen","übermütig","quirlig","sprühend vor Lebendigkeit"],
+ k:["Mein Gang wurde leichter.","Meine Augen blitzten.","Lachen sprudelte aus mir heraus.","Ich begann leise vor mich hin zu summen.","Meine Füße wollten tanzen.","Ich konnte nicht stillsitzen — und hörte gar nicht mehr damit auf."]},
+{n:"Spaß",t:["positiv"],f:"fgold",fam:"Wohlbefinden",
+ s:["amüsiert","belustigt","zum Lachen gereizt","kichernd","prustend","sich ausschütten vor Lachen"],
+ k:["Ein Schmunzeln huschte über mein Gesicht.","Ich kicherte leise.","Ich lachte laut auf.","Ich prustete los — und konnte nicht mehr aufhören.","Tränen liefen mir über die Wangen.","Ich hielt mir den Bauch.","Ich konnte kaum noch Luft bekommen vor lauter Lachen."]},
+{n:"Euphorie",t:["positiv","körper"],f:"fgold",fam:"Wohlbefinden",
+ s:["sehr gut drauf","begeistert","hochgestimmt","euphorisch","ekstatisch","in reiner Hochstimmung schwebend"],
+ k:["Ich musste lachen, ohne Grund.","Mein Körper kribbelte überall.","Ich konnte kaum stillstehen.","Mir wurde leicht — unglaublich leicht.","Ich hätte fliegen können.","Alles war strahlend klar und wunderschön — jede Kleinigkeit."]},
+{n:"Dankbarkeit",t:["positiv","sozial"],f:"fgold",fam:"Wohlbefinden",
+ s:["erkenntlich sein","dankbar sein","tief dankbar","zu Tränen gerührt","überwältigt von Dankbarkeit","sprachlos vor Dankbarkeit"],
+ k:["Eine Wärme breitete sich in meiner Brust aus.","Meine Kehle wurde eng.","Meine Augen wurden feucht.","Ich legte unwillkürlich die Hand auf mein Herz.","Mich ergriff ein tiefer Schauer.","Worte versagten mir — und ich ließ meine Umarmung sprechen."]},
+{n:"Freundschaft",t:["positiv","sozial"],f:"fpink",fam:"Verbundenheit",
+ s:["Sympathie","Zuneigung","Verbundenheit","tiefe Freundschaft","unzertrennlich","Seelenverwandtschaft"],
+ k:["Eine angenehme Wärme breitete sich in mir aus.","Ein Lächeln kam ganz von selbst, sobald ich die Person sah.","Ich rückte näher.","Ich legte die Hand auf ihre Schulter.","Wir saßen Schulter an Schulter, ohne ein Wort zu brauchen.","Ich fühlte mich so wohl wie nirgendwo sonst auf der Welt."]},
+{n:"Gemeinschaft",t:["positiv","sozial"],f:"fpink",fam:"Verbundenheit",
+ s:["zusammen sein","Zusammengehörigkeit spüren","Verbundenheit","Teil von etwas Größerem","eins mit der Gruppe","ein Herz und eine Seele"],
+ k:["Eine Wärme strömte durch mich.","Ich spürte die Schultern der anderen neben mir.","Gemeinsames Lachen hallte durch den Raum.","Ich fühlte mich getragen.","Wir fielen uns in die Arme.","Mein Herz war zum Zerreißen voll — und es war das Schönste, das ich je gespürt hatte."]},
+{n:"Liebe",t:["positiv","sozial"],f:"fpink",fam:"Verbundenheit",
+ s:["Zuneigung","Zärtlichkeit","tiefe Zuneigung","tiefe Liebe","bedingungslose Liebe","alles-umfassende Liebe"],
+ k:["Ich lächelte ohne besonderen Grund.","Mein Herz wurde weit.","Ich wollte die andere Person schützend in die Arme nehmen.","Eine tiefe Ruhe breitete sich in mir aus.","Ich spürte, wie alles andere verblasste.","Mein ganzer Körper strahlte Wärme aus."]},
+{n:"Verliebtheit",t:["positiv","sozial","körper"],f:"fpink",fam:"Verbundenheit",
+ s:["aufmerksam","interessiert","angezogen","verliebt","hoffnungslos verliebt","bis über beide Ohren verliebt"],
+ k:["Ich wurde nervös in seiner Nähe.","Mein Herz pochte schneller, kaum dass ich die Person sah.","Mir wurde warm.","Ich konnte nicht aufhören zu lächeln.","Ich vergaß, was ich eigentlich sagen wollte.","Schmetterlinge im Bauch — nur dass es mehr wie ein Sturm war."]},
+{n:"Mitgefühl",t:["positiv","sozial"],f:"fpink",fam:"Verbundenheit",
+ s:["Aufmerksamkeit","Anteilnahme","Mitgefühl","tiefes Mitgefühl","Erbarmen","überwältigendes Mitgefühl"],
+ k:["Ich hörte auf zu reden und hörte einfach zu.","Mein Herz zog sich zusammen.","Ich rückte näher.","Mir wurden die Augen feucht.","Ich wollte die andere Person einfach in die Arme nehmen.","Ihr Schmerz wurde auf einmal meiner."]},
+{n:"Zärtlichkeit",t:["positiv","sozial"],f:"fpink",fam:"Verbundenheit",
+ s:["sanft gestimmt","zärtlich","liebevoll","überwältigend zärtlich","von Zärtlichkeit durchströmt","zärtlich bis ins Mark"],
+ k:["Meine Berührungen wurden leiser.","Ich sprach sanfter.","Ich lächelte unwillkürlich.","Meine Hände legten sich behutsam.","Ich atmete langsamer.","Ich wollte den Moment einfrieren — alles war weich und warm."]},
+{n:"Erleichterung",t:["positiv","körper"],f:"fgruen",fam:"Entspannung",
+ s:["etwas ruhiger werden","aufatmen","entspannen","eine Last fällt ab","befreit sein","wie neugeboren"],
+ k:["Ich atmete tief und zitternd aus.","Meine Schultern sanken herab.","Meine Knie wurden weich, beinahe hätte ich mich hingesetzt.","Tränen stiegen in meine Augen — Tränen der Erleichterung.","Ich ließ mich in den nächsten Sessel fallen.","Mein ganzer Körper erschlaffte, als hätten sich alle Fäden gelöst."]},
+{n:"Zufriedenheit",t:["positiv"],f:"fgruen",fam:"Entspannung",
+ s:["in Ordnung","zufrieden","wohl","behaglich","tief zufrieden","in sich ruhend"],
+ k:["Ich lehnte mich entspannt zurück.","Mein Atem floss ruhig.","Ich seufzte wohlig.","Eine tiefe Stille breitete sich in mir aus.","Meine Schultern sanken entspannt herab.","Ich spürte, wie mein ganzer Körper losließ."]},
+{n:"Gelassenheit",t:["positiv"],f:"fgruen",fam:"Entspannung",
+ s:["etwas ruhiger","ruhig","gelassen","ausgeglichen","tief in sich ruhend","vollkommen gleichmütig"],
+ k:["Mein Atem floss gleichmäßig.","Meine Schultern sanken ab.","Meine Hände lagen offen im Schoß.","Mein Herzschlag wurde langsam und ruhig.","Ich spürte den Boden unter mir.","Ich war einfach — und das war genug."]},
+{n:"Geborgenheit",t:["positiv"],f:"fgruen",fam:"Entspannung",
+ s:["etwas sicherer","geborgen","beschützt","tief geborgen","vollkommen sicher","wie zu Hause in sich selbst"],
+ k:["Ich atmete tief und vollständig.","Meine Muskeln ließen los.","Eine Wärme hüllte mich ein.","Ich schloss die Augen und ließ alles sein.","Mein Körper entspannte sich bis in die Zehenspitzen.","Ich wollte nirgendwo anders sein."]},
+{n:"Hoffnung",t:["positiv"],f:"fgruen",fam:"Entspannung",
+ s:["ein kleines Fünkchen Hoffnung","hoffen","zuversichtlich sein","voller Hoffnung","mit Zuversicht erfüllt","von Hoffnung getragen"],
+ k:["Ich richtete mich auf.","Mein Blick hob sich.","Ich atmete tiefer.","Mein Herz wurde leichter.","Ein Lächeln brach sich Bahn.","Ich spürte, wie Energie langsam zurückkehrte."]},
+{n:"Demut",t:["positiv"],f:"fgruen",fam:"Entspannung",
+ s:["nachdenklich","bescheiden","demütig","tief ergriffen","in stiller Dankbarkeit","von echter Demut erfüllt"],
+ k:["Ich senkte unwillkürlich den Kopf.","Mein Atem wurde langsam und tief.","Ich legte die Hände zusammen.","Eine tiefe Stille breitete sich in mir aus.","Ich wollte nichts mehr sagen — einfach nur sein.","Etwas in mir wurde sehr still und sehr klar."]},
+{n:"Vertrauen",t:["positiv"],f:"fgruen",fam:"Entspannung",
+ s:["offener","zuversichtlich","vertrauend","tief vertrauend","blind vertrauend","vollständig im Vertrauen ruhend"],
+ k:["Meine Schultern entspannten sich.","Ich öffnete die Hände statt sie zu ballen.","Ich atmete tiefer.","Meine Muskeln ließen los.","Ich ließ die Augen zu — und öffnete sie ruhig wieder.","Mein ganzer Körper fühlte sich sicher an."]},
+{n:"Aufregung",t:["positiv","aktivierung","körper"],f:"forang",fam:"Aktivierung",
+ s:["gespannt","aufgeregt","erregt","fieberhaft erregt","elektrisiert","mitgerissen","überwältigt vor Aufregung"],
+ k:["Ein leises Kribbeln lief mir den Rücken hinunter.","Mein Herz schlug schneller.","Ich konnte kaum stillsitzen.","Adrenalin schoss durch meinen Körper.","Meine Hände zitterten vor lauter Erregung.","Ich bebte am ganzen Körper.","Ich hätte schreien können vor Aufregung — und tat es fast."]},
+{n:"Neugier",t:["positiv","aktivierung","körper"],f:"forang",fam:"Aktivierung",
+ s:["interessiert","neugierig","gespannt","wissbegierig","brennend vor Neugier","es nicht mehr aushalten können"],
+ k:["Ich spitzte die Ohren.","Ich rückte näher heran.","Meine Augen weiteten sich.","Ich beugte mich unwillkürlich vor.","Mein Herz schlug schneller.","Ich konnte an nichts anderes mehr denken — die Neugier fraß sich durch alles."]},
+{n:"Überraschung",t:["aktivierung","körper"],f:"forang",fam:"Aktivierung",
+ s:["stutzen","innehalten","überrascht","verblüfft","perplex","sprachlos","fassungslos"],
+ k:["Ich hielt kurz die Luft an.","Meine Augen weiteten sich.","Mein Mund öffnete sich, ohne dass ich es bemerkte.","Ich trat unwillkürlich einen Schritt zurück.","Ich hielt mir die Hand vor den Mund.","Mir verschlug es die Sprache.","Mir wurde schwindelig — als hätte die Welt kurz angehalten."]},
+{n:"Begeisterung",t:["positiv","aktivierung"],f:"forang",fam:"Aktivierung",
+ s:["interessiert","begeistert","enthusiastisch","mitgerissen","entflammt","brennend begeistert"],
+ k:["Meine Augen leuchteten.","Ich gestikulierte lebhafter.","Ich redete schneller.","Ich konnte nicht stillsitzen.","Ein Kribbeln durchlief meinen Körper.","Ich wäre am liebsten aufgesprungen."]},
+{n:"Ehrfurcht",t:["aktivierung"],f:"forang",fam:"Aktivierung",
+ s:["beeindruckt","staunend","bewundernd","ergriffen","in tiefer Ehrfurcht","überwältigt"],
+ k:["Ich hielt die Luft an.","Mein Mund öffnete sich lautlos.","Die Haare an meinen Armen standen auf.","Ich trat unwillkürlich einen Schritt zurück.","Mein ganzer Körper wurde still.","Ich spürte, wie ich kleiner wurde — und gleichzeitig größer."]},
+{n:"Staunen",t:["aktivierung","körper"],f:"forang",fam:"Aktivierung",
+ s:["interessiert","erstaunt","verwundert","staunend","sprachlos vor Staunen","von Staunen überwältigt"],
+ k:["Meine Augen weiteten sich.","Ich öffnete den Mund.","Mein Kopf neigte sich zur Seite.","Ich blinzelte mehrmals.","Ich griff nach nichts — und fand es trotzdem.","Die Welt um mich herum verschwand für einen Augenblick."]},
+{n:"Leidenschaft",t:["positiv","aktivierung"],f:"forang",fam:"Aktivierung",
+ s:["engagiert","leidenschaftlich","brennend engagiert","entflammt","glühend","von Leidenschaft besessen"],
+ k:["Ich vergaß die Zeit.","Mein Herz schlug schneller.","Meine Stimme wurde intensiver.","Ich spürte Energie, die von innen strahlte.","Alles andere verblasste.","Ich brannte — und es tat gut."]},
+{n:"Stolz",t:["positiv","selbst","körper"],f:"fnavy",fam:"Selbstwert",
+ s:["zufrieden","stolz","sehr stolz","erfüllt von Stolz","mächtig stolz","überströmend vor Stolz"],
+ k:["Ich richtete mich auf.","Ich reckte unwillkürlich die Brust vor.","Mein Kopf hob sich wie von selbst.","Meine Schultern zogen sich zurück.","Mein Herz schwoll.","Ich strahlte, sodass ich kaum in mich hineinpassen konnte."]},
+{n:"Selbstsicherheit",t:["positiv","selbst","körper"],f:"fnavy",fam:"Selbstwert",
+ s:["etwas ruhiger","gelassen","sicher","selbstbewusst","unerschütterlich","unbesiegbar"],
+ k:["Mein Atem wurde ruhiger und tiefer.","Ich hielt den Blickkontakt, ohne wegzusehen.","Ich saß aufrechter als sonst.","Meine Stimme klang fest und klar.","Mein Händedruck war ruhig und fest.","Ruhe strömte durch mich hindurch wie warmes Wasser."]},
+{n:"Scham",t:["negativ","selbst","körper"],f:"fnavy",fam:"Selbstwert",
+ s:["unangenehm berührt","verlegen","beschämt","zutiefst beschämt","möchte verschwinden","in den Boden sinken wollen"],
+ k:["Mir wurde heiß.","Das Blut schoss mir ins Gesicht.","Ich vermied jeden Blickkontakt.","Ich wollte mich irgendwo verstecken.","Ich zog den Kopf ein.","Meine Knie wurden weich vor Scham.","Ich wünschte, ich könnte einfach aufhören zu existieren — für diesen Moment."]},
+{n:"Schuldgefühl",t:["negativ","selbst"],f:"fnavy",fam:"Selbstwert",
+ s:["ein schlechtes Gewissen","schuldig fühlen","von Schuld geplagt","sich selbst verurteilen","von Reue zerfressen","für unvergebbar halten"],
+ k:["Ein ungutes Gefühl saß tief in meiner Magengegend.","Ich konnte nicht in den Spiegel sehen.","Ich seufzte immer wieder.","Mein Magen drehte sich um.","Ich fand keine Ruhe — nicht einmal im Schlaf."]},
+{n:"Verlegenheit",t:["negativ","selbst","körper"],f:"fnavy",fam:"Selbstwert",
+ s:["unangenehm berührt","verlegen","geknickt","hoch verlegen","möchte im Boden versinken","vor Scham errötet"],
+ k:["Ich wurde rot.","Ich blickte zur Seite.","Ich konnte keinen Blick halten.","Ich wusste nicht, wohin mit meinen Händen.","Ich lachte nervös.","Das Blut schoss mir ins Gesicht, und kein Wille der Welt konnte es aufhalten."]},
+{n:"Sehnsucht",t:["trauer"],f:"fviol",fam:"Seele",
+ s:["vermissen","sich sehnen","sich verzehren","brennend vermissen","kaum ertragen können","von Sehnsucht zerrissen"],
+ k:["Ein leises Ziehen in der Brust.","Ich schloss die Augen und versuchte, die Erinnerung festzuhalten.","Mein Atem wurde schwer.","Mir wurde warm und kalt gleichzeitig.","Ich streckte unwillkürlich die Hand aus — nach niemandem.","Die Sehnsucht brannte wie ein Feuer, das kein Holz brauchte."]},
+{n:"Nostalgie",t:["trauer"],f:"fviol",fam:"Seele",
+ s:["ein Hauch Erinnerung","nostalgisch","wehmütig","süß-wehmütig","tief bewegt von der Vergangenheit","in der Vergangenheit verloren"],
+ k:["Ich lächelte, aber meine Augen wurden feucht.","Eine Wärme strömte durch mich.","Ich schloss die Augen.","Mein Herz zog sich zart zusammen.","Ich musste tief einatmen, um den Moment zu halten.","Vergangenheit und Gegenwart überlappten sich."]},
+{n:"Ergriffenheit",t:["körper"],f:"fviol",fam:"Seele",
+ s:["berührt","bewegt","tief bewegt","erschüttert","überwältigt","in Ergriffenheit verstummt"],
+ k:["Mir wurde warm in der Brust.","Meine Kehle wurde eng.","Die Augen wurden feucht.","Ich legte unwillkürlich die Hand aufs Herz.","Ein Schauer lief durch mich.","Ich war nicht mehr sicher, ob ich lachte oder weinte — es war beides."]},
+{n:"Tränen",t:["körper"],f:"fviol",fam:"Seele",
+ s:["die Augen werden feucht","Kloß im Hals","die Stimme zittert","Tränen steigen auf","Tränen laufen über die Wangen","schluchzen","hemmungslos weinen","in Tränen aufgelöst sein"],
+ k:["Meine Augen brannten.","Ich schluckte gegen den Kloß in meiner Kehle.","Meine Unterlippe zitterte.","Die erste Träne rollte meine Wange hinunter.","Ich konnte nicht mehr sprechen.","Ein Schluchzen zerriss mir die Brust.","Mein Körper bebte.","Ich weinte, bis nichts mehr kam — und noch ein wenig danach."]},
+{n:"Anstrengung",t:["körper"],f:"fgrau",fam:"Körperzustand",
+ s:["sich bemühen","sich anstrengen","sich abrackern","sich quälen","kämpfen","alles geben","über sich hinauswachsen"],
+ k:["Mein Atem wurde schwerer.","Schweißperlen standen auf meiner Stirn.","Meine Muskeln brannten.","Meine Beine wurden schwer wie Blei.","Mir tropfte der Schweiß von der Stirn.","Mein Herz hämmerte in meiner Brust.","Ich konnte kaum noch — und tat es dennoch."]},
+{n:"Müdigkeit",t:["körper"],f:"fgrau",fam:"Körperzustand",
+ s:["ein wenig müde","schläfrig","erschöpft","todmüde","völlig ausgelaugt","am Ende der Kräfte"],
+ k:["Ich musste gähnen — einmal, dann wieder.","Meine Lider wurden schwer.","Ich rieb mir die Augen.","Meine Glieder wurden bleischwer.","Ich kämpfte gegen das Einschlafen an.","Ich konnte mich kaum noch aufrecht halten.","Ich sackte in mich zusammen wie ein leeres Kleid."]},
+{n:"Langeweile",t:["negativ","körper"],f:"fgrau",fam:"Körperzustand",
+ s:["uninteressiert","gelangweilt","zunehmend gelangweilt","stumpf","abgestumpft","tiefer Überdruss"],
+ k:["Ich gähnte.","Ich schaute auf die Uhr.","Ich ließ den Blick wandern, ohne irgendwo zu bleiben.","Ich schob die Dinge auf meinem Tisch hin und her.","Alles verlangsamte sich.","Die Zeit dehnte sich ins Unerträgliche."]},
+{n:"Ratlosigkeit",t:["negativ","körper"],f:"fgrau",fam:"Körperzustand",
+ s:["ein bisschen unsicher","unsicher","ratlos","verloren","vollkommen orientierungslos","sprachlos hilflos"],
+ k:["Ich zuckte die Schultern.","Ich schaute mich suchend um.","Meine Hände öffneten sich ins Leere.","Ich schluckte.","Ich atmete flach.","Mein Kopf wurde schwer — ich wusste nicht mehr, wohin ich auch nur den ersten Schritt tun sollte."]},
+{n:"Ungeduld",t:["negativ","körper"],f:"fgrau",fam:"Körperzustand",
+ s:["etwas ungeduldig","ungeduldig","zunehmend ungeduldig","gereizt","aufbrausend","kaum noch still zu halten"],
+ k:["Ich tippte mit dem Fuß.","Ich schaute auf die Uhr.","Ich seufzte.","Ich trommelte mit den Fingern.","Ich stand auf und setzte mich wieder.","Mein ganzer Körper drängte vorwärts — die Warterei fraß mich auf."]}
 ];
 
-let activeTag="alle";
+let activeTag="alle", activeIdx=-1;
 
 function setTag(t,btn){
   activeTag=t;
   document.querySelectorAll(".fbtn").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
-  filter();
+  applyFilters();
 }
 
-function filter(){
+function applyFilters(){
   const q=document.getElementById("search").value.toLowerCase().trim();
-  const cards=document.querySelectorAll(".card");
+  const btns=document.querySelectorAll(".ebo");
   let vis=0;
-  cards.forEach(c=>{
-    const name=c.dataset.name.toLowerCase();
-    const tags=c.dataset.tags;
-    const matchQ=!q||name.includes(q)||c.dataset.body.toLowerCase().includes(q);
-    const matchT=activeTag==="alle"||tags.includes(activeTag);
-    if(matchQ&&matchT){c.classList.remove("hidden");vis++}else{c.classList.add("hidden")}
+  btns.forEach((b,i)=>{
+    const d=D[i];
+    const mQ=!q||d.n.toLowerCase().includes(q)||d.s.join(" ").toLowerCase().includes(q)||d.k.join(" ").toLowerCase().includes(q);
+    const mT=activeTag==="alle"||d.t.includes(activeTag);
+    if(mQ&&mT){b.classList.remove("hid");vis++}else{b.classList.add("hid")}
   });
-  document.getElementById("cnt").textContent=vis+" von "+data.length+" Gefühlen";
+  document.getElementById("cnt").textContent=vis+" von "+D.length+" Gefühlen";
 }
 
-function toggle(id){
-  const b=document.getElementById("body-"+id);
-  const a=document.getElementById("arr-"+id);
-  const open=b.classList.toggle("open");
-  a.style.transform=open?"rotate(180deg)":"rotate(0deg)";
+function showDetail(i){
+  const d=D[i];
+  const prev=activeIdx;
+  document.querySelectorAll(".ebo").forEach((b,j)=>b.classList.toggle("act",j===i));
+  if(prev===i){closeDetail();return;}
+  activeIdx=i;
+  const steps=d.s.map((s,j)=>{
+    const cls="s"+Math.min(j,7);
+    return `<span class="stp ${cls}">${s}</span>${j<d.s.length-1?'<span class="arr">›</span>':""}`
+  }).join("");
+  const krows=d.k.map((k,j)=>`<div class="krow"><span class="kn">${j+1}</span><span class="kt">${k}</span></div>`).join("");
+  const det=document.getElementById("detail");
+  det.innerHTML=`
+<div class="dhead">
+  <span class="dname">${d.n}</span>
+  <span class="dbadge ${d.f}">${d.fam}</span>
+</div>
+<p class="slbl">Steigerung der Begriffe</p>
+<div class="steps">${steps}</div>
+<hr class="div">
+<p class="slbl">Körperliche Empfindungen (aufsteigend)</p>
+<div class="kbody">${krows}</div>
+<button class="cbtn" onclick="closeDetail()">✕ schließen</button>`;
+  det.classList.add("open");
+  setTimeout(()=>det.scrollIntoView({behavior:"smooth",block:"nearest"}),50);
+}
+
+function closeDetail(){
+  activeIdx=-1;
+  document.querySelectorAll(".ebo").forEach(b=>b.classList.remove("act"));
+  const det=document.getElementById("detail");
+  det.classList.remove("open");
 }
 
 function build(){
-  const g=document.getElementById("grid");
-  data.forEach((d,i)=>{
-    const allText=d.schritte.join(" ")+d.koerper.join(" ");
-    const card=document.createElement("div");
-    card.className="card";
-    card.dataset.name=d.name;
-    card.dataset.tags=d.tags.join(",");
-    card.dataset.body=allText;
-    const steps=d.schritte.map((s,j)=>{
-      const pct=Math.round((j/(d.schritte.length-1))*100);
-      const opacity=0.45+0.55*(j/(d.schritte.length-1));
-      return `<span class="step ${d.col}" style="opacity:${opacity}">${s}</span>${j<d.schritte.length-1?'<span class="arrow">›</span>':''}`
-    }).join("");
-    const krows=d.koerper.map((k,j)=>{
-      const pct=Math.round((j/(d.koerper.length-1))*100);
-      return `<div class="krow"><span class="knum">${j+1}</span><span class="ktext">${k}</span></div>`
-    }).join("");
-    card.innerHTML=`
-<div class="card-head" onclick="toggle(${i})">
-  <div class="dot" style="background:currentColor" class="${d.badge}"></div>
-  <span class="emo-name">${d.name}</span>
-  <span class="badge ${d.col}">${d.fam}</span>
-  <span class="toggle" id="arr-${i}" style="font-style:normal">⌄</span>
-</div>
-<div class="card-body" id="body-${i}">
-  <p class="section-label">Steigerung der Begriffe</p>
-  <div class="steps">${steps}</div>
-  <hr class="divider">
-  <p class="section-label">Körperliche Empfindungen (aufsteigend)</p>
-  <div class="koerper">${krows}</div>
-</div>`;
-    g.appendChild(card);
+  const g=document.getElementById("btngrid");
+  D.forEach((d,i)=>{
+    const b=document.createElement("button");
+    b.className=`ebo ${d.f}`;
+    b.dataset.idx=i;
+    b.textContent=d.n;
+    b.onclick=()=>showDetail(i);
+    g.appendChild(b);
   });
-  filter();
+  applyFilters();
 }
-
 build();
 </script>
+</body>
+</html>
