@@ -12,18 +12,18 @@
     }
 
     body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #005580 0%, #0077be 50%, #1e90ff 100%);
+        font-family: 'Georgia', 'Times New Roman', serif;
+        background: linear-gradient(135deg, #f5e6e8 0%, #ffe4e9 50%, #f5e6e8 100%);
         min-height: 100vh;
         padding: 0;
         line-height: 1.6;
-        color: #000;
+        color: #000000;
     }
 
     /* Top Navigation */
     .top-navigation {
-        background: #003d5c;
-        padding: 10px 30px;
+        background: linear-gradient(135deg, #2c2c2c 0%, #3d3d3d 100%);
+        padding: 15px 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -37,24 +37,26 @@
     .top-nav-links a {
         color: white;
         text-decoration: none;
-        padding: 6px 12px;
-        background: #005580;
-        border-radius: 5px;
-        transition: background 0.3s;
+        padding: 8px 16px;
+        background: rgba(212, 175, 55, 0.15);
+        border-radius: 8px;
+        transition: all 0.3s ease;
         font-size: 0.9em;
+        border: 1px solid rgba(212, 175, 55, 0.3);
     }
     
     .top-nav-links a:hover {
-        background: #0077be;
+        background: rgba(212, 175, 55, 0.3);
     }
 
     .home-button-top {
-        background: #ffc107 !important;
+        background: linear-gradient(135deg, #D4AF37 0%, #C5B358 100%) !important;
         color: #333 !important;
+        border: none !important;
     }
 
     .home-button-top:hover {
-        background: #e0a800 !important;
+        background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%) !important;
     }
 
     .main-content {
@@ -62,50 +64,37 @@
     }
 
     .container {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
-        background: rgba(255, 255, 255, 0.98);
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
         border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         overflow: hidden;
     }
 
     .header {
-        background: linear-gradient(135deg, #005580, #0077be);
-        color: white;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
+        color: #000000;
         text-align: center;
         padding: 50px 20px;
         position: relative;
         overflow: hidden;
-    }
-
-    .header::before {
-        content: '✏️ 📝 🖊️ 📖 ✨ 🎨 📚 ✒️';
-        position: absolute;
-        top: 10px;
-        left: 0;
-        right: 0;
-        font-size: 2em;
-        opacity: 0.2;
-        animation: float 20s infinite linear;
-    }
-
-    @keyframes float {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
+        border-bottom: 2px solid rgba(212, 175, 55, 0.2);
     }
 
     .header h1 {
-        font-size: 2.8em;
-        margin-bottom: 15px;
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        font-size: 2.4em;
+        margin-bottom: 12px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
         position: relative;
         z-index: 1;
+        font-weight: 700;
     }
 
     .header p {
-        font-size: 1.3em;
-        opacity: 0.95;
+        font-size: 1.15em;
+        opacity: 0.85;
         position: relative;
         z-index: 1;
     }
@@ -115,36 +104,36 @@
     }
 
     .intro-text {
-        background: linear-gradient(135deg, #e8f4f8, #fff5e6);
-        padding: 30px;
+        background: rgba(212, 175, 55, 0.08);
+        padding: 25px 30px;
         border-radius: 15px;
-        margin-bottom: 40px;
-        border-left: 6px solid #ff6b35;
+        margin-bottom: 35px;
+        border-left: 4px solid #D4AF37;
         text-align: center;
-        font-size: 1.15em;
-        color: #000;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        font-size: 1.05em;
+        color: #000000;
     }
 
     /* Ausklappbare Schulstufen-Bereiche */
     .grade-section {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
         transition: all 0.3s ease;
+        border: 1px solid rgba(212, 175, 55, 0.2);
     }
 
     .grade-section:hover {
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 5px 18px rgba(212, 175, 55, 0.15);
     }
 
     .grade-header {
-        background: linear-gradient(135deg, #ff6b35, #ff8c42);
-        color: #000;
-        padding: 20px 30px;
-        font-size: 1.4em;
-        font-weight: bold;
+        background: rgba(255, 255, 255, 0.6);
+        color: #000000;
+        padding: 18px 28px;
+        font-size: 1.2em;
+        font-weight: 700;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -156,19 +145,24 @@
     }
 
     .grade-header:hover {
-        background: linear-gradient(135deg, #ff8c42, #ffa35c);
-        transform: translateX(5px);
+        background: rgba(212, 175, 55, 0.12);
+    }
+
+    .grade-header.active {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.12));
+        border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     }
 
     .grade-header .icon {
-        font-size: 1.5em;
+        font-size: 1em;
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 12px;
     }
 
     .grade-header .arrow {
-        font-size: 1.2em;
+        font-size: 1em;
+        color: #D4AF37;
         transition: transform 0.3s ease;
     }
 
@@ -180,85 +174,71 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease-out;
-        background: linear-gradient(135deg, #e8f4f8, #f0f8ff);
+        background: rgba(255, 255, 255, 0.4);
     }
 
     .grade-content.active {
-        max-height: 2000px;
+        max-height: 3000px;
         transition: max-height 0.6s ease-in;
     }
 
-    .buttons-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        padding: 25px;
-    }
-
-    .document-button {
-        background: linear-gradient(135deg, #005580, #0077be);
-        color: #fff;
-        padding: 25px;
-        border: none;
-        border-radius: 15px;
-        font-size: 1.1em;
-        font-weight: 600;
-        text-decoration: none;
+    .doc-list {
         display: flex;
         flex-direction: column;
+        padding: 8px 15px;
+    }
+
+    .doc-item {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        text-align: center;
-        transition: all 0.3s ease;
-        box-shadow: 0 5px 15px rgba(0, 85, 128, 0.3);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
+        gap: 20px;
+        padding: 14px 20px;
+        text-decoration: none;
+        color: #000000;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        transition: all 0.2s ease;
+        flex-wrap: wrap;
     }
 
-    .document-button::before {
-        content: '✨';
-        position: absolute;
-        top: -20px;
-        right: -20px;
-        font-size: 3em;
-        opacity: 0.1;
-        animation: sparkle 3s infinite;
+    .doc-list .doc-item:last-child {
+        border-bottom: none;
     }
 
-    @keyframes sparkle {
-        0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.1; }
-        50% { transform: rotate(180deg) scale(1.2); opacity: 0.3; }
+    .doc-item:hover {
+        background: rgba(212, 175, 55, 0.1);
+        padding-left: 28px;
     }
 
-    .document-button:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-        background: linear-gradient(135deg, #ff6b35, #ff8c42);
-        color: #000;
+    .doc-item-title {
+        font-size: 1em;
+        font-weight: 600;
+        color: #000000;
+        flex: 1;
+        min-width: 220px;
     }
 
-    .document-button:active {
-        transform: translateY(-2px);
+    .doc-item-desc {
+        font-size: 0.88em;
+        color: #6b6b6b;
+        font-style: italic;
+        text-align: right;
+        flex-shrink: 0;
     }
 
-    .document-button small {
-        font-size: 0.85em;
-        margin-top: 8px;
-        opacity: 0.9;
-        font-weight: 400;
+
     }
 
     .about-text {
-        background: linear-gradient(135deg, #fff5e6, #e8f4f8);
+        background: rgba(212, 175, 55, 0.08);
         padding: 30px;
         border-radius: 15px;
         margin: 40px 0 30px 0;
-        border-left: 6px solid #005580;
-        font-size: 1.1em;
-        color: #000;
+        border-left: 4px solid #D4AF37;
+        font-size: 1.05em;
+        color: #000000;
         line-height: 1.8;
         text-align: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
     .whatsapp-container {
@@ -299,48 +279,30 @@
     }
 
     .footer {
-        background: linear-gradient(135deg, #003d5c, #005580);
+        background: linear-gradient(135deg, #2c2c2c 0%, #3d3d3d 100%);
         color: white;
         text-align: center;
         padding: 30px;
         margin-top: 40px;
     }
 
-    /* Kreative Dekorationselemente */
-    .creative-icons {
-        position: fixed;
-        font-size: 2em;
-        opacity: 0.15;
-        pointer-events: none;
-        z-index: 0;
-        animation: floatAround 15s infinite ease-in-out;
-    }
-
-    .icon-1 { top: 10%; left: 5%; animation-delay: 0s; }
-    .icon-2 { top: 20%; right: 8%; animation-delay: 2s; }
-    .icon-3 { top: 40%; left: 3%; animation-delay: 4s; }
-    .icon-4 { top: 60%; right: 5%; animation-delay: 6s; }
-    .icon-5 { top: 80%; left: 10%; animation-delay: 8s; }
-
-    @keyframes floatAround {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        25% { transform: translateY(-20px) rotate(5deg); }
-        50% { transform: translateY(0px) rotate(-5deg); }
-        75% { transform: translateY(-15px) rotate(3deg); }
-    }
-
     @media (max-width: 768px) {
         .header h1 {
-            font-size: 2em;
+            font-size: 1.8em;
         }
         
         .content {
             padding: 20px;
         }
-        
-        .buttons-container {
-            grid-template-columns: 1fr;
-            padding: 15px;
+
+        .doc-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .doc-item-desc {
+            text-align: left;
         }
 
         .top-navigation {
@@ -366,13 +328,6 @@
 </style>
 </head>
 <body>
-    <!-- Kreative schwebende Icons -->
-    <div class="creative-icons icon-1">✍️</div>
-    <div class="creative-icons icon-2">📚</div>
-    <div class="creative-icons icon-3">🖊️</div>
-    <div class="creative-icons icon-4">✨</div>
-    <div class="creative-icons icon-5">🎨</div>
-
     <!-- Obere Navigation -->
     <div class="top-navigation">
         <div class="top-nav-links">
@@ -384,15 +339,13 @@
     <div class="main-content">
         <div class="container">
             <header class="header">
-                <h1>✨ Texte schreiben mit Amy ✨</h1>
-                <p>Deutsch Trainerin mit 20 Jahren Erfahrung</p>
+                <h1>Texte schreiben mit Amy</h1>
+                <p>Schreibtraining für alle Schulstufen — von der Grundschule bis zur Matura</p>
             </header>
 
             <main class="content">
                 <div class="intro-text">
-                    <strong>🎉 Willkommen zu meinen Schreibhilfen! 🎉</strong><br>
-                    Hier findest du Anleitungen und Hilfestellungen für verschiedene Textarten. 
-                    Klicke einfach auf deine Schulstufe und entdecke, wie du professionell und kreativ schreibst!
+                    Hier finden Sie strukturierte Anleitungen und Übungsmaterialien für alle wichtigen Textsorten – von Bildergeschichten und Märchen bis hin zu Erörterungen und Textanalysen. Wählen Sie einfach Ihre Schulstufe aus, um die passenden Materialien zu sehen.
                 </div>
 
                 <!-- 4. Schulstufe -->
@@ -402,51 +355,50 @@
                         <span class="arrow">▶</span>
                     </button>
                     <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/grundschule/grundschule4/bildergeschichten4g.html" target="_blank" class="document-button">
-                                🖼️ Bildergeschichten schreiben<br>
-                                <small>für die 4./5. Schulstufe</small>
+                        <div class="doc-list">
+                            <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/grundschule/grundschule4/bildergeschichten4g.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🖼️ Bildergeschichten schreiben</span>
+                                <span class="doc-item-desc">für die 4./5. Schulstufe</span>
                             </a>
 
-                            <a href="bildergeschichten_besser4g.html" target="_blank" class="document-button">
-                                🖼️ Bildergeschichten <b>besser</b> schreiben<br>
-                                <small>für die 4./5. Schulstufe</small>
-                            </a>
-
-
-                            <a href="bildergeschichten_countdown_leicht4g.html" target="_blank" class="document-button">
-                                🖼️ Bildergeschichten 10 Tage Countdown LEICHT<br>
-                                <small>für die 4./5. Schulstufe</small>
-                            </a>
-
-                            <a href="bildergeschichten_countdown_schwer4g.html" target="_blank" class="document-button">
-                                🖼️ Bildergeschichten 10 Tage Countdown SCHWER<br>
-                                <small>für die 4./5. Schulstufe</small>
+                            <a href="bildergeschichten_besser4g.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🖼️ Bildergeschichten <b>besser</b> schreiben</span>
+                                <span class="doc-item-desc">für die 4./5. Schulstufe</span>
                             </a>
 
 
-                            <a href="personen4g.html" target="_blank" class="document-button">
-                                👩🏼 Personen beschreiben<br>
-                                <small>4. Schulstufe</small>
-                            </a>
-                            <a href="person_uebung4g.html" target="_blank" class="document-button">
-                                👩🏼 Personen beschreiben - Übungen für DAF<br>
-                                <small>4. Schulstufe</small>
-                            </a>
-                            <a href="spannend_schreiben456.html" target="_blank" class="document-button">
-                                📖 Spannend schreiben<br>
-                                <small>4-6. Schulstufe</small>
+                            <a href="bildergeschichten_countdown_leicht4g.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🖼️ Bildergeschichten 10 Tage Countdown LEICHT</span>
+                                <span class="doc-item-desc">für die 4./5. Schulstufe</span>
                             </a>
 
-                            <a href="satz_zauberer456.html" target="_blank" class="document-button">
-                                🧙🏼 Satz Zauberer<br>
-                                <small>4-6. Schulstufe</small>
+                            <a href="bildergeschichten_countdown_schwer4g.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🖼️ Bildergeschichten 10 Tage Countdown SCHWER</span>
+                                <span class="doc-item-desc">für die 4./5. Schulstufe</span>
                             </a>
 
-                            <a href="sommer_jungs5.html" target="_blank" class="document-button">
-                                📖 Sommer-Lese-Spaß für einen perfekten Start in die Unterstufe<br>
-                                <small>Emil und die Detektive</small><br>
-                                <small>Bambi</small>
+
+                            <a href="personen4g.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">👩🏼 Personen beschreiben</span>
+                                <span class="doc-item-desc">4. Schulstufe</span>
+                            </a>
+                            <a href="person_uebung4g.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">👩🏼 Personen beschreiben - Übungen für DAF</span>
+                                <span class="doc-item-desc">4. Schulstufe</span>
+                            </a>
+                            <a href="spannend_schreiben456.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Spannend schreiben</span>
+                                <span class="doc-item-desc">4-6. Schulstufe</span>
+                            </a>
+
+                            <a href="satz_zauberer456.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🧙🏼 Satz Zauberer</span>
+                                <span class="doc-item-desc">4-6. Schulstufe</span>
+                            </a>
+
+                            <a href="sommer_jungs5.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Sommer-Lese-Spaß für einen perfekten Start in die Unterstufe</span>
+                                <span class="doc-item-desc">Emil und die Detektive · Bambi</span>
                             </a>
 
 
@@ -463,35 +415,35 @@
                         <span class="arrow">▶</span>
                     </button>
                     <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/grundschule/grundschule4/bildergeschichten4g.html" target="_blank" class="document-button">
-                                🖼️ Bildergeschichten schreiben<br>
-                                <small>für die 4./5. Schulstufe</small>
+                        <div class="doc-list">
+                            <a href="https://amyfabijenna.github.io/amylang-deutsch/schueler/grundschule/grundschule4/bildergeschichten4g.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🖼️ Bildergeschichten schreiben</span>
+                                <span class="doc-item-desc">für die 4./5. Schulstufe</span>
                             </a>
-                            <a href="maerchen5.html" target="_blank" class="document-button">
-                                🏰 Märchen schreiben<br>
-                                <small>5. Schulstufe</small>
+                            <a href="maerchen5.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🏰 Märchen schreiben</span>
+                                <span class="doc-item-desc">5. Schulstufe</span>
                             </a>
-                            <a href="spannend_schreiben456.html" target="_blank" class="document-button">
-                                📖 Spannend schreiben<br>
-                                <small>4-6. Schulstufe</small>
+                            <a href="spannend_schreiben456.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Spannend schreiben</span>
+                                <span class="doc-item-desc">4-6. Schulstufe</span>
                             </a>
-                            <a href="satz_zauberer456.html" target="_blank" class="document-button">
-                                🧙🏼 Satz Zauberer<br>
-                                <small>4-6. Schulstufe</small>
+                            <a href="satz_zauberer456.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🧙🏼 Satz Zauberer</span>
+                                <span class="doc-item-desc">4-6. Schulstufe</span>
                             </a>
-                            <a href="storyphrasen6.html" target="_blank" class="document-button">
-                                📖 Phrasen und Redewendungen<br>
-                                <small>ab der 5. Schulstufe</small>
+                            <a href="storyphrasen6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Phrasen und Redewendungen</span>
+                                <span class="doc-item-desc">ab der 5. Schulstufe</span>
                             </a>
-                            <a href="erlebniserzaehlung5.html" target="_blank" class="document-button">
-                                📖 Erlebniserzählung schreiben<br>
-                                <small>5. Schulstufe</small>
+                            <a href="erlebniserzaehlung5.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Erlebniserzählung schreiben</span>
+                                <span class="doc-item-desc">5. Schulstufe</span>
                             </a>
 
-                            <a href="gefuehlswoerter_steigerung.html" target="_blank" class="document-button">
-                                📖 Spannung steigern<br>
-                                <small>mit Gefühlswörtern und Idiomen</small>
+                            <a href="gefuehlswoerter_steigerung.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Spannung steigern</span>
+                                <span class="doc-item-desc">mit Gefühlswörtern und Idiomen</span>
                             </a>
 
                         </div>
@@ -505,89 +457,88 @@
                         <span class="arrow">▶</span>
                     </button>
                     <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="spannend_schreiben456.html" target="_blank" class="document-button">
-                                📖 Spannend schreiben<br>
-                                <small>4-6. Schulstufe</small>
+                        <div class="doc-list">
+                            <a href="spannend_schreiben456.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Spannend schreiben</span>
+                                <span class="doc-item-desc">4-6. Schulstufe</span>
                             </a>
-                            <a href="satz_zauberer456.html" target="_blank" class="document-button">
-                                🧙🏼 Satz Zauberer<br>
-                                <small>4-6. Schulstufe</small>
+                            <a href="satz_zauberer456.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🧙🏼 Satz Zauberer</span>
+                                <span class="doc-item-desc">4-6. Schulstufe</span>
                             </a>
-                            <a href="storyphrasen6.html" target="_blank" class="document-button">
-                                📖 Phrasen und Redewendungen<br>
-                                <small>ab der 5. Schulstufe</small>
+                            <a href="storyphrasen6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Phrasen und Redewendungen</span>
+                                <span class="doc-item-desc">ab der 5. Schulstufe</span>
                             </a>
-                            <a href="sagen6.html" target="_blank" class="document-button">
-                                👻 Sagen und Gruselgeschichten<br>
-                                <small>6. Schulstufe</small>
+                            <a href="sagen6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">👻 Sagen und Gruselgeschichten</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
-                            <a href="sagen_nacherzaehlen6.html" target="_blank" class="document-button">
-                                📜 Sagen nacherzählen<br>
-                                <small>6. Schulstufe</small>
+                            <a href="sagen_nacherzaehlen6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📜 Sagen nacherzählen</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
-                            <a href="formulierungshilfe-sagen6.html" target="_blank" class="document-button">
-                                📜 Formulierungshilfe Sagen nacherzählen<br>
-                                <small>6. Schulstufe</small>
-                            </a>
-
-                            <a href="sagen_verstehen_meisterkurs6.html" target="_blank" class="document-button">
-                                📜 MEISTERKURS Sagen verstehen <br>
-                                <small>6. Schulstufe</small>
+                            <a href="formulierungshilfe-sagen6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📜 Formulierungshilfe Sagen nacherzählen</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
 
-                            <a href="nacherzaehlung_meisterkurs6.html" target="_blank" class="document-button">
-                                📜 MEISTERKURS Sagen nacherzählen<br>
-                                <small>6. Schulstufe</small>
+                            <a href="sagen_verstehen_meisterkurs6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📜 MEISTERKURS Sagen verstehen</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
 
-                            <a href="sagen_meister6.html" target="_blank" class="document-button">
-                                📜 FÜR SAGEN-MEISTER (TIPP!)<br>
-                                <small>6. Schulstufe</small>
+                            <a href="nacherzaehlung_meisterkurs6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📜 MEISTERKURS Sagen nacherzählen</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
 
-                            <a href="gruselgeschichten6.html" target="_blank" class="document-button">
-                                🕯️ Gruselgeschichten schreiben<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-                            <a href="gruselhilfe6.html" target="_blank" class="document-button">
-                                👻 Grusel-Notkoffer<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-                            <a href="25gruselstories.html" target="_blank" class="document-button">
-                                🕯️ 25 Grusel- und Horrorgeschichten mit Musterlösung<br>
-                                <small>für die 6. Schulstufe</small>
-                            </a>
-                            <a href="25nurgruselstories.html" target="_blank" class="document-button">
-                                👻 25 Gruselgeschichten mit Musterlösung<br>
-                                <small>für die 6. Schulstufe</small>
+                            <a href="sagen_meister6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📜 FÜR SAGEN-MEISTER (TIPP!)</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
 
-                            <a href="spannungsaufbau6.html" target="_blank" class="document-button">
-                                👻 So baust du logisch Spannung auf<br>
-                                <small>für die 6. Schulstufe</small>
+                            <a href="gruselgeschichten6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🕯️ Gruselgeschichten schreiben</span>
+                                <span class="doc-item-desc">für die 6. Schulstufe</span>
+                            </a>
+                            <a href="gruselhilfe6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">👻 Grusel-Notkoffer</span>
+                                <span class="doc-item-desc">für die 6. Schulstufe</span>
+                            </a>
+                            <a href="25gruselstories.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🕯️ 25 Grusel- und Horrorgeschichten mit Musterlösung</span>
+                                <span class="doc-item-desc">für die 6. Schulstufe</span>
+                            </a>
+                            <a href="25nurgruselstories.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">👻 25 Gruselgeschichten mit Musterlösung</span>
+                                <span class="doc-item-desc">für die 6. Schulstufe</span>
                             </a>
 
-                            <a href="zusammenfassungen6.html" target="_blank" class="document-button">
-                                📝 Zusammenfassung schreiben<br>
-                                <small>6. Schulstufe</small>
+                            <a href="spannungsaufbau6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">👻 So baust du logisch Spannung auf</span>
+                                <span class="doc-item-desc">für die 6. Schulstufe</span>
+                            </a>
+
+                            <a href="zusammenfassungen6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📝 Zusammenfassung schreiben</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
 
 
-                            <a href="anleitungen6.html" target="_blank" class="document-button">
-                                📝 Anleitungen verfassen (sehr leicht, Imperativ)<br>
-                                <small>6. Schulstufe</small>
+                            <a href="anleitungen6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📝 Anleitungen verfassen (sehr leicht, Imperativ)</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
 
-                            <a href="anleitungen_passiv6.html" target="_blank" class="document-button">
-                                📝 Anleitungen verfassen (anspruchsvoll, Passiv)<br>
-                                <small>6. Schulstufe</small>
+                            <a href="anleitungen_passiv6.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📝 Anleitungen verfassen (anspruchsvoll, Passiv)</span>
+                                <span class="doc-item-desc">6. Schulstufe</span>
                             </a>
 
-                            <a href="sommer_maedchen7.html" target="_blank" class="document-button">
-                                📖 Sommer-Lese-Spaß für einen perfekten Start in die Unterstufe<br>
-                                <small>Momo</small><br>
-                                <small>Das doppelte Lottchen</small>
+                            <a href="sommer_maedchen7.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📖 Sommer-Lese-Spaß für einen perfekten Start in die Unterstufe</span>
+                                <span class="doc-item-desc">Momo · Das doppelte Lottchen</span>
                             </a>
 
 
@@ -602,20 +553,20 @@
                         <span class="arrow">▶</span>
                     </button>
                     <div class="grade-content">
-                        <div class="buttons-container">
+                        <div class="doc-list">
                             
-                        <a href="zusammenfassung9/index.html" target="_blank" class="document-button">
-                                📝 Zusammenfassung schreiben<br>
-                                <small>9. Schulstufe</small>
+                        <a href="zusammenfassung9/index.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📝 Zusammenfassung schreiben</span>
+                                <span class="doc-item-desc">9. Schulstufe</span>
                             </a>
 
-                            <a href="leserbrief9.html" target="_blank" class="document-button">
-                                📝 Leserbrief schreiben<br>
-                                <small>9. Schulstufe</small>
+                            <a href="leserbrief9.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📝 Leserbrief schreiben</span>
+                                <span class="doc-item-desc">9. Schulstufe</span>
                             </a>
-                            <a href="eroerterung9/index.html" target="_blank" class="document-button">
-                                📝 Erörterung schreiben<br>
-                                <small>9. Schulstufe</small>
+                            <a href="eroerterung9/index.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📝 Erörterung schreiben</span>
+                                <span class="doc-item-desc">9. Schulstufe</span>
                             </a>
                         </div>
                     </div>
@@ -628,10 +579,10 @@
                         <span class="arrow">▶</span>
                     </button>
                     <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="diagramme10.html" target="_blank" class="document-button">
-                                📊 Diagramme lesen<br>
-                                <small>nicht-lineare Texte verfassen - 10. Schulstufe</small>
+                        <div class="doc-list">
+                            <a href="diagramme10.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">📊 Diagramme lesen</span>
+                                <span class="doc-item-desc">nicht-lineare Texte verfassen - 10. Schulstufe</span>
                             </a>
                         </div>
                     </div>
@@ -644,15 +595,15 @@
                         <span class="arrow">▶</span>
                     </button>
                     <div class="grade-content">
-                        <div class="buttons-container">
-                            <a href="textanalyse12.html" target="_blank" class="document-button">
-                                🔎 Textanalyse schreiben<br>
-                                <small>für die Matura</small>
+                        <div class="doc-list">
+                            <a href="textanalyse12.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🔎 Textanalyse schreiben</span>
+                                <span class="doc-item-desc">für die Matura</span>
                             </a>
 
-                            <a href="matura_phrasen.html" target="_blank" class="document-button">
-                                🔎 Phrasen und Formulierungen<br>
-                                <small>für die Matura</small>
+                            <a href="matura_phrasen.html" target="_blank" class="doc-item">
+                                <span class="doc-item-title">🔎 Phrasen und Formulierungen</span>
+                                <span class="doc-item-desc">für die Matura</span>
                             </a>
 
                         </div>
@@ -660,10 +611,10 @@
                 </div>
 
                 <div class="about-text">
-                    <strong>🌟 Hallo! Mein Name ist Amy Lang 🌟</strong><br><br>
+                    <strong>Über Amy Lang</strong><br><br>
                     Ich bin Deutschtrainerin mit 20 Jahren erfolgreicher Erfahrung und Universitätsabschluss. 
-                    Ich unterrichte mit großer Freude online von Null bis C2-Niveau. Auf Wunsch sende ich gerne Referenzen meiner Schüler und ein Angebot. 
-                    Meine Schüler bleiben jahrelang bei mir, denn meine Stunden sind bunt und abwechslungsreich, fröhlich, strukturiert und vor allem: <strong>effektiv</strong>. 
+                    Ich unterrichte mit großer Freude online von Null bis C2-Niveau. Auf Wunsch sende ich gerne Referenzen meiner Schüler und ein individuelles Angebot. 
+                    Meine Schüler bleiben jahrelang bei mir, denn meine Stunden sind abwechslungsreich, strukturiert und vor allem: <strong>effektiv</strong>. 
                     Ich freue mich auf Ihre Anmeldung!
                 </div>
                 
