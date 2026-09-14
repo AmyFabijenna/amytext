@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vom Rauschen zur Klarheit — Zusammenfassung schreiben lernen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20242a;
+    --ink-soft:#3a3d3f;
+    --paper:#f3eee1;
+    --paper-panel:#fbf8f0;
+    --paper-panel-2:#eee7d4;
+    --signal:#3e7c74;
+    --signal-dark:#2c5c55;
+    --signal-tint:#e2ede9;
+    --noise:#c4622d;
+    --noise-tint:#f6e6da;
+    --line:#dcd3ba;
+    --muted:#746c5a;
+    --good:#3e7c74;
+    --warn:#b5522a;
+    --shadow: 0 1px 0 rgba(32,36,42,.04);
+    --radius: 3px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background: var(--signal); color:#fff; }
+
+  h1,h2,h3,h4{
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    margin:0 0 .5em 0;
+    color:var(--ink);
+  }
+  p{margin:0 0 1em 0;}
+  .measure{max-width:68ch;}
+
+  a{color:var(--signal-dark);}
+
+  /* ---------- layout shells ---------- */
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+
+  /* ---------- top progress nav ---------- */
+  nav.stepnav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(243,238,225,.92);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .stepnav-inner{
+    max-width:920px; margin:0 auto; padding:10px 24px;
+    display:flex; align-items:center; gap:6px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .stepnav-inner::-webkit-scrollbar{display:none;}
+  .stepnav-brand{
+    font-family:'Source Serif 4', serif; font-weight:600; font-size:15px;
+    color:var(--ink); white-space:nowrap; margin-right:14px; flex-shrink:0;
+  }
+  .steppill{
+    display:flex; align-items:center; gap:7px;
+    white-space:nowrap;
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:13px;
+    color:var(--muted);
+    text-decoration:none;
+    border:1px solid transparent;
+    flex-shrink:0;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .steppill:hover{ background:var(--paper-panel-2); }
+  .steppill.active{
+    color:var(--ink); border-color:var(--line); background:var(--paper-panel);
+    font-weight:500;
+  }
+  .steppill .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--line); flex-shrink:0;
+    transition:background .2s ease;
+  }
+  .steppill .dot.touched{ background:var(--signal); }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    padding:76px 0 56px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .noise-field{
+    position:absolute; inset:0; z-index:0; opacity:.55;
+    pointer-events:none;
+  }
+  .hero .wrap{ position:relative; z-index:1; }
+  .kicker{
+    font-size:14px; color:var(--noise); font-weight:600;
+    margin-bottom:14px; letter-spacing:.01em;
+  }
+  header.hero h1{
+    font-size:clamp(32px, 5vw, 48px);
+    line-height:1.12;
+    max-width:16ch;
+  }
+  header.hero .lede{
+    font-size:17px; color:var(--ink-soft); max-width:62ch; margin-top:18px;
+  }
+  .hero-meta{
+    margin-top:32px; display:flex; gap:28px; flex-wrap:wrap;
+  }
+  .hero-meta div{ font-size:13px; color:var(--muted); }
+  .hero-meta strong{ display:block; font-family:'Source Serif 4', serif; font-size:16px; color:var(--ink); font-weight:600; }
+
+  /* ---------- rules / redemittel boxes ---------- */
+  .rulesbox{
+    background:var(--paper-panel);
+    border:1px solid var(--line);
+    border-left:4px solid var(--signal);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    margin:22px 0;
+  }
+  .rulesbox h3{ font-size:19px; margin-bottom:14px;}
+  .rulesbox ul{ margin:0; padding-left:20px; }
+  .rulesbox li{ margin-bottom:8px; }
+  .rulesbox li:last-child{margin-bottom:0;}
+
+  .twogrid{
+    display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px;
+  }
+  @media (max-width:680px){ .twogrid{ grid-template-columns:1fr; } }
+
+  .levelcard{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .levelcard .lbl{
+    font-size:12px; font-weight:600; color:var(--signal-dark); margin-bottom:6px;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:7px; margin-top:8px;}
+  .chip{
+    font-size:12.5px; font-style:italic;
+    background:var(--paper-panel-2); border:1px solid var(--line);
+    padding:3px 10px; border-radius:999px; color:var(--ink-soft);
+  }
+
+  /* ---------- step blocks ---------- */
+  .stepnum{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:50%;
+    background:var(--ink); color:var(--paper);
+    font-family:'Source Serif 4', serif; font-weight:600; font-size:15px;
+    flex-shrink:0;
+  }
+  .stephead{ display:flex; align-items:center; gap:14px; margin-bottom:6px;}
+  .stephead h2{ font-size:26px; margin:0;}
+  .stepsub{ color:var(--muted); font-size:14px; margin-left:48px; margin-bottom:28px;}
+  .stepgoal{
+    margin-left:48px; margin-bottom:28px;
+    background:var(--signal-tint); border-radius:var(--radius);
+    padding:14px 18px; font-size:14.5px; color:var(--signal-dark); max-width:64ch;
+  }
+  .stepbody{ margin-left:48px; }
+  @media (max-width:560px){
+    .stepsub, .stepgoal, .stepbody{ margin-left:0; }
+  }
+
+  /* ---------- exercise cards ---------- */
+  .task{
+    background:var(--paper-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 26px;
+    margin-bottom:22px;
+  }
+  .task-label{
+    font-size:12px; font-weight:600; color:var(--muted);
+    margin-bottom:8px;
+  }
+  .task h4{ font-size:18px; margin-bottom:10px;}
+  .task p.instr{ color:var(--ink-soft); font-size:15px; margin-bottom:16px;}
+  textarea, input[type=text]{
+    width:100%;
+    font-family:'Source Serif 4', serif;
+    font-size:15.5px;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:#fff;
+    color:var(--ink);
+    resize:vertical;
+  }
+  textarea{ min-height:70px; line-height:1.55;}
+  textarea:focus, input[type=text]:focus, select:focus{
+    outline:none; border-color:var(--signal);
+    box-shadow:0 0 0 3px var(--signal-tint);
+  }
+  label.field-label{ font-size:12.5px; color:var(--muted); display:block; margin-bottom:4px; margin-top:12px;}
+  label.field-label:first-child{margin-top:0;}
+
+  .task-actions{
+    margin-top:14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  button{
+    font-family:'Work Sans', sans-serif;
+    font-size:14px; font-weight:600;
+    cursor:pointer;
+    border-radius:999px;
+    padding:9px 18px;
+    border:1px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+    transition:background .15s ease, color .15s ease;
+  }
+  button:hover{ background:var(--ink); color:var(--paper); }
+  button.primary{ background:var(--signal); border-color:var(--signal); color:#fff; }
+  button.primary:hover{ background:var(--signal-dark); border-color:var(--signal-dark); }
+  button.ghost{ border-color:var(--line); color:var(--muted); }
+  button.ghost:hover{ background:var(--paper-panel-2); color:var(--ink); }
+
+  .solution{
+    margin-top:16px;
+    background:var(--noise-tint);
+    border-left:3px solid var(--noise);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    font-size:15px;
+    display:none;
+  }
+  .solution.show{ display:block; }
+  .solution .sol-tag{
+    font-size:11.5px; font-weight:700; color:var(--warn);
+    margin-bottom:8px;
+  }
+  .solution em.ref{ color:var(--muted); font-style:italic; font-size:13px;}
+
+  /* article reading panel */
+  .articlepanel{
+    background:var(--paper-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:8px 0;
+    margin-bottom:26px;
+    max-height:560px;
+    overflow-y:auto;
+  }
+  .articlepanel .head{
+    padding:18px 26px 12px 26px;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:var(--paper-panel);
+  }
+  .articlepanel .head h4{ margin-bottom:2px; font-size:17px;}
+  .articlepanel .head .by{ font-size:13px; color:var(--muted); font-style:italic;}
+  .art-para{
+    font-family:'Source Serif 4', serif;
+    font-size:15.5px; line-height:1.7;
+    padding:16px 26px;
+    border-bottom:1px dashed var(--line);
+    transition:background 1s ease;
+  }
+  .art-para:last-child{ border-bottom:none; }
+  .art-para .segtag{
+    display:inline-block; font-family:'Work Sans',sans-serif;
+    font-size:11px; font-weight:700; color:#fff; background:var(--signal);
+    border-radius:999px; padding:2px 9px; margin-bottom:8px;
+  }
+  .art-para.flash{ background:var(--signal-tint); }
+
+  .jumplink{
+    font-size:12.5px; display:inline-flex; align-items:center; gap:5px;
+    color:var(--signal-dark); text-decoration:none; margin-bottom:10px;
+    border-bottom:1px dotted var(--signal-dark);
+  }
+
+  /* quiz */
+  .quizq{ margin-bottom:20px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+  .quizq:last-child{ border:none; margin-bottom:0; padding-bottom:0;}
+  .quizq .qtext{ font-size:15px; margin-bottom:10px; font-family:'Source Serif 4', serif;}
+  .opts{ display:flex; flex-direction:column; gap:8px; }
+  .optlabel{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size:14.5px; padding:9px 12px;
+    border:1px solid var(--line); border-radius:var(--radius);
+    cursor:pointer; background:#fff;
+  }
+  .optlabel:hover{ border-color:var(--signal); }
+  .optlabel input{ margin-top:3px; }
+  .feedback{
+    margin-top:9px; font-size:14px; padding:9px 12px; border-radius:var(--radius);
+    display:none;
+  }
+  .feedback.show{ display:block; }
+  .feedback.correct{ background:var(--signal-tint); color:var(--signal-dark); }
+  .feedback.wrong{ background:var(--noise-tint); color:var(--warn); }
+
+  /* checklist */
+  .checklist{ list-style:none; margin:0; padding:0; }
+  .checklist li{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size:15px; padding:9px 0; border-bottom:1px dashed var(--line);
+  }
+  .checklist li:last-child{ border:none; }
+  .checklist input{ margin-top:4px; flex-shrink:0; }
+
+  /* wordcount */
+  .wordbar{
+    display:flex; align-items:center; gap:14px; margin-top:12px; font-size:13.5px; color:var(--muted);
+  }
+  .wc-track{
+    flex:1; height:6px; background:var(--line); border-radius:999px; overflow:hidden; position:relative;
+  }
+  .wc-fill{ height:100%; background:var(--signal); width:0%; transition:width .2s ease, background .2s ease;}
+  .wc-num{ font-weight:600; color:var(--ink); min-width:110px; text-align:right; }
+  .wc-num.ok{ color:var(--signal-dark); }
+  .wc-num.off{ color:var(--warn); }
+
+  footer{
+    padding:52px 0 80px 0; text-align:center; color:var(--muted); font-size:13.5px;
+  }
+  .backtotop{
+    display:inline-block; margin-top:14px; font-size:13px; color:var(--signal-dark);
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="stepnav">
+  <div class="stepnav-inner" id="stepnavInner">
+    <span class="stepnav-brand">Vom Rauschen zur Klarheit</span>
+    <a class="steppill" data-target="regeln" href="#regeln"><span class="dot"></span>Spielregeln</a>
+    <a class="steppill" data-target="step1" href="#step1"><span class="dot" id="dot1"></span>1 · Einstieg</a>
+    <a class="steppill" data-target="step2" href="#step2"><span class="dot" id="dot2"></span>2 · Text erschließen</a>
+    <a class="steppill" data-target="step3" href="#step3"><span class="dot" id="dot3"></span>3 · Einleitungssatz</a>
+    <a class="steppill" data-target="step4" href="#step4"><span class="dot" id="dot4"></span>4 · Abschnitte</a>
+    <a class="steppill" data-target="step5" href="#step5"><span class="dot" id="dot5"></span>5 · Gesamttext</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <svg class="noise-field" viewBox="0 0 920 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#20242a">
+      <!-- left: scattered noise dots, right: resolves into a calm line -->
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="kicker">Schriftliche Kompetenz · Modul 3 · Die Zusammenfassung</div>
+    <h1>Vom Rauschen zur Klarheit</h1>
+    <p class="lede">Fünf Übungsschritte, die dich von den ersten Notizen bis zur eigenständig geschriebenen Zusammenfassung des Artikels <em>„Das große Rauschen"</em> von Doris Heimberger führen. Du liest, ordnest, formulierst — Stück für Stück — und prüfst jeden Schritt an einer Musterlösung, bevor du am Ende die Hausübung ganz allein verfasst.</p>
+    <div class="hero-meta">
+      <div><strong>270–330 Wörter</strong>Zielumfang der fertigen Zusammenfassung</div>
+      <div><strong>5 Übungsschritte</strong>vom Einstieg bis zum Gesamttext</div>
+      <div><strong>Präsens, sachlich</strong>Sprachliche Grundregeln</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= REGELN ================= -->
+<section id="regeln">
+  <div class="wrap">
+    <h2 style="font-size:26px;">Die Spielregeln, bevor es losgeht</h2>
+    <p class="measure" style="color:var(--ink-soft);">Das sind die Vorgaben, an denen sich jede einzelne Übung unten orientiert — schau bei Unsicherheit jederzeit hierher zurück.</p>
+
+    <div class="rulesbox">
+      <h3>Im Klartext — was eine Zusammenfassung braucht</h3>
+      <ul>
+        <li><strong>Vorstellung des Textes:</strong> Autorin/Autor, Titel, Erscheinungsort, evtl. Kontext</li>
+        <li><strong>Wiedergabe des Inhalts</strong> unter Einbeziehung von Sachinformationen und gedanklichen Zusammenhängen</li>
+        <li><strong>Beibehaltung der Gliederung</strong> des Ausgangstextes</li>
+        <li><strong>Eigenständige Formulierungen</strong> und sprachliche Verknüpfungen — nicht abschreiben</li>
+      </ul>
+    </div>
+
+    <div class="twogrid">
+      <div class="levelcard">
+        <div class="lbl">Reproduktion</div>
+        <p style="margin:0; font-size:14.5px;">Du gibst wieder, was im Text steht.</p>
+        <div class="chips">
+          <span class="chip">gib wieder</span><span class="chip">beschreibe</span>
+          <span class="chip">stelle dar</span><span class="chip">benenne</span>
+        </div>
+      </div>
+      <div class="levelcard">
+        <div class="lbl">Transfer</div>
+        <p style="margin:0; font-size:14.5px;">Du ordnest ein, begründest, wendest an.</p>
+        <div class="chips">
+          <span class="chip">erkläre</span><span class="chip">erläutere</span>
+          <span class="chip">analysiere</span><span class="chip">untersuche</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rulesbox" style="border-left-color:var(--noise); margin-top:24px;">
+      <h3>Redemittel für den Einstiegssatz</h3>
+      <p style="margin-bottom:10px; font-size:14.5px; color:var(--ink-soft);">Zwei bewährte Satzmuster, mit denen du fast jede Zusammenfassung eröffnen kannst:</p>
+      <ul>
+        <li><em>„In dem Artikel xy, erschienen in xy am xy, geht es um …"</em></li>
+        <li><em>„Der Artikel xy, erschienen in xy am xy, handelt von …"</em></li>
+      </ul>
+      <p style="margin-top:10px; margin-bottom:0; font-size:13.5px; color:var(--muted);">Sprachlich gilt außerdem: klare, sachliche, möglichst objektive Sprache, durchgehend Präsens.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 1 ================= -->
+<section id="step1">
+  <div class="wrap">
+    <div class="stephead"><span class="stepnum">1</span><h2>Einstieg — bevor du liest</h2></div>
+    <p class="stepsub">Entspricht A2 · Aktivierung von Vorwissen und den sprachlichen Grundregeln</p>
+    <div class="stepgoal">Ziel dieses Schritts: Du aktivierst dein Vorwissen zum Thema und trainierst, sachliche von emotionaler Sprache zu unterscheiden — die Zusammenfassung selbst schreibt sich nämlich konsequent im Präsens und ohne eigene Wertung.</div>
+
+    <div class="stepbody">
+
+      <div class="task">
+        <div class="task-label">Aufgabe 1.1 — Nachdenken vor dem Lesen</div>
+        <h4>Deine eigenen Erfahrungen mit dem Thema</h4>
+        <p class="instr">Der Artikel heißt „Das große Rauschen" und behandelt ständiges Onlinesein. Notiere kurz, mithilfe der W-Fragen: Wer ist in deinem Umfeld ständig online? Wann genau? Welche Folgen bemerkst du an dir selbst oder anderen?</p>
+        <textarea data-section="1" placeholder="Wer … / Wann … / Welche Folgen …"></textarea>
+        <div class="task-actions">
+          <button class="ghost" onclick="toggleSolution('sol-1-1', this)">Beispielantwort anzeigen</button>
+        </div>
+        <div class="solution" id="sol-1-1">
+          <div class="sol-tag">BEISPIELANTWORT</div>
+          <p style="margin:0;">Zum Beispiel: Viele in meiner Klasse schauen direkt nach dem Aufwachen und kurz vor dem Einschlafen aufs Handy. Häufige Folge: Man schläft später ein, denkt im Bett noch an Nachrichten oder Videos und ist am nächsten Morgen müder. Wichtig ist hier nicht die „richtige" Antwort, sondern dass du eigene, konkrete Beobachtungen findest — genau solche Beispiele nutzt später auch der Artikel.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 1.2 — Sachliche Sprache erkennen</div>
+        <h4>Welcher Satz passt in eine Zusammenfassung?</h4>
+        <p class="instr">Eine Zusammenfassung ist sachlich, möglichst objektiv und steht im Präsens. Wähle bei jedem Paar den Satz, der diesen Regeln entspricht.</p>
+
+        <div class="quizq" data-q="1">
+          <div class="qtext">1. Welcher Satz ist für eine Zusammenfassung geeignet?</div>
+          <div class="opts">
+            <label class="optlabel"><input type="radio" name="q1" value="wrong">„Ich finde es total übertrieben, dass manche Menschen ihr Handy nicht weglegen können."</label>
+            <label class="optlabel"><input type="radio" name="q1" value="right">„Der Artikel zeigt, dass viele Menschen Schwierigkeiten haben, ihr Handy abends wegzulegen."</label>
+          </div>
+          <div class="feedback" id="fb-q1"></div>
+        </div>
+
+        <div class="quizq" data-q="2">
+          <div class="qtext">2. Welcher Satz steht korrekt im geforderten Präsens?</div>
+          <div class="opts">
+            <label class="optlabel"><input type="radio" name="q2" value="wrong">„Ein Psychiater stellte die Diagnose, dass Filtermechanismen fehlten."</label>
+            <label class="optlabel"><input type="radio" name="q2" value="right">„Ein Psychiater stellt die Diagnose, dass Filtermechanismen fehlen."</label>
+          </div>
+          <div class="feedback" id="fb-q2"></div>
+        </div>
+
+        <div class="quizq" data-q="3">
+          <div class="qtext">3. Welcher Satz ist sachlich statt wertend formuliert?</div>
+          <div class="opts">
+            <label class="optlabel"><input type="radio" name="q3" value="right">„Firmen beschränken dienstliche E-Mails außerhalb der Arbeitszeit."</label>
+            <label class="optlabel"><input type="radio" name="q3" value="wrong">„Zum Glück greifen die Firmen endlich durch und verbieten die nervigen E-Mails."</label>
+          </div>
+          <div class="feedback" id="fb-q3"></div>
+        </div>
+
+        <div class="task-actions">
+          <button class="primary" onclick="checkQuiz()">Antworten prüfen</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 2 ================= -->
+<section id="step2">
+  <div class="wrap">
+    <div class="stephead"><span class="stepnum">2</span><h2>Den Text erschließen</h2></div>
+    <p class="stepsub">Entspricht A3 · Lesen, markieren, die sieben Bausteine finden</p>
+    <div class="stepgoal">Ziel dieses Schritts: Du liest „Das große Rauschen" aufmerksam und ordnest sieben zentrale Bausteine zu: Vorstellung des Textes/Thema, Ausgangssituation/Beispiel, Schlüsselsatz, Diagnose, Hilfsmaßnahmen, Gegenstimmen, Folgerung.</div>
+
+    <div class="stepbody">
+
+      <div class="articlepanel" id="articlepanel">
+        <div class="head">
+          <h4>Das große Rauschen</h4>
+          <div class="by">von Doris Heimberger · Die Furche, 17. April 2014</div>
+        </div>
+        <div class="art-para" id="para-1">
+          <span class="segtag">Abschnitt 1</span>
+          <p style="margin:0;">Es ist 23 Uhr. Eine gute Zeit, um langsam schlafen zu gehen. Gemeinsam mit ihrem Freund legt sich die junge Frau, nennen wir sie Eva, ins Bett und bespricht mit ihm den Tag: ihre Arbeit als freie Journalistin, den einen oder anderen Artikel, diesen oder jenen Menschen, der besonders spannend oder mühsam war. Irgendwann dreht sie dann das Licht aus, der Freund dreht sich um und schläft. Doch bei Eva beginnt das große Grübeln … Seit vier Jahren leidet Eva unter Schlafproblemen, seit eineinhalb Jahren werden sie immer schlimmer. „Du hast das Gefühl, immer verfügbar und online sein zu müssen", sagt sie zur FURCHE. „Und zugleich hast du nicht einmal die Zeit, einmal genussvoll eine Zeitung zu lesen. Eigentlich ist das krank."</p>
+        </div>
+        <div class="art-para" id="para-2">
+          <span class="segtag">Abschnitt 2</span>
+          <p style="margin:0;">Getrieben von chronischer Müdigkeit konsultiert Eva einen Psychiater, dessen Schlafmittel sie jedoch Nacht für Nacht „in eine Art Koma fallen lassen". Schließlich rät ihr der Arzt zu einer Psychotherapie. Eva ist hochsensibel — wie geschätzt 15 bis 20 Prozent der Bevölkerung; ihr fehlen die nötigen Filter und Abwehrmechanismen, um sich einigermaßen abzugrenzen. Die Wiener Sozialpädagogin und Psychotherapeutin Elisabeth Heller, die sich auf das Thema Hochsensibilität spezialisiert hat, erklärt: Hochsensible seien häufig besonders kreativ und gewissenhaft — und durch ihre ausgeprägte Feinfühligkeit oft sehr erfolgreich im Beruf. Zugleich sei ihr Risiko erhöht, eine psychische Störung zu entwickeln.</p>
+        </div>
+        <div class="art-para" id="para-3">
+          <span class="segtag">Abschnitt 3</span>
+          <p style="margin:0;">Immer mehr Menschen zeigen vergleichbare Symptome, sodass französische und deutsche Firmen, aber auch das deutsche Bundesarbeitsministerium zu Gegenmaßnahmen greifen: Sie nötigen ihre Mitarbeiterinnen und Mitarbeiter nicht mehr dazu, nach 18 Uhr abends und vor 9 Uhr morgens dienstliche E-Mails zu lesen. Während der Nachrichtendienst „Twitter" diese Maßnahmen belächelt, hält der Wiener Arbeitspsychologe und Coach Johann Beran „ziemlich viel" davon — das Gehirn benötige Pausenzeiten, um Informationen zu verarbeiten. Wer ständig online sei, nehme die Informationsflut mit hinein in den Schlaf und gelange kaum mehr in die erholsame Tiefschlafphase.</p>
+        </div>
+        <div class="art-para" id="para-4">
+          <span class="segtag">Abschnitt 4</span>
+          <p style="margin:0;">Beran empfiehlt als Gegenmaßnahme, vor dem Schlafengehen bewusst in eine Ruhephase überzugehen — Fernsehen, Smartphone und iPad hätten keine Entspannungsfunktion. Auch untertags seien Denkpausen ratsam, weil das Gehirn dadurch Reize sortieren und einordnen kann. Auch Harvard-Psychologe Daniel Goleman und Forscherinnen der University of Rochester bestätigen: Ohne solche Pausen verkleinert sich sogar das Abwassersystem des Gehirns, wodurch mehr schädliche Stoffe zurückbleiben.</p>
+        </div>
+        <div class="art-para" id="para-5">
+          <span class="segtag">Abschnitt 5</span>
+          <p style="margin:0;">Auf die schädliche Vorbildwirkung von Erwachsenen verweist Elisabeth Heller: Kinder sehen, wie ständig auf Bildschirme gestarrt wird, statt miteinander zu reden. Der US-Psychologe Daniel Goleman spricht sogar von einer Sucht, die Menschen dazu zwingt, mitten in einem Gespräch nachzusehen, ob eine SMS eingetroffen ist. Auch die Psychotherapeutin Elisabeth Heller warnt: Wer neue Handys kauft, um sich für zwei Minuten Entspannung zu gönnen, würde sich über das eigentliche Kunststück wundern, wenn er einfach mal nichts täte.</p>
+        </div>
+        <div class="art-para" id="para-6">
+          <span class="segtag">Abschnitt 6</span>
+          <p style="margin:0;">Die Journalistin Eva versucht unterdessen, das Problem mithilfe ihrer Psychotherapeutin zu bewältigen: Sie arbeitet nach 20 Uhr nicht mehr und versucht, sich zu entspannen. Mit gutem Gewissen nichts zu tun oder das Handy vom Nachttisch zu verbannen, fällt ihr jedoch nach wie vor schwer.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 2.1</div>
+        <h4>Vorstellung des Textes und Thema</h4>
+        <p class="instr">Wer hat den Text geschrieben, wo und wann ist er erschienen, und worum geht es im Kern?</p>
+        <textarea data-section="2" placeholder="Autorin, Titel, Erscheinungsort, Datum, Thema …"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-2-1', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-2-1">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Der Artikel „Das große Rauschen" von Doris Heimberger ist am 17. April 2014 in der österreichischen Wochenzeitschrift „Die Furche" erschienen. Er behandelt die Frage, wie permanente Erreichbarkeit und ständiges Onlinesein Menschen krank machen können.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 2.2</div>
+        <h4>Ausgangssituation und Beispiel</h4>
+        <p class="instr">An welcher konkreten Person zeigt der Artikel das Problem? <a class="jumplink" onclick="jumpTo('para-1')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="2" placeholder="Wer ist die Beispielperson, was ist ihr Problem …"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-2-2', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-2-2">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Am Beispiel der 24-jährigen Journalistin Eva wird gezeigt, wie Tagesereignisse, Online-Informationen und private Nachrichten den Schlaf so beeinträchtigen können, dass jemand seit Jahren nicht mehr richtig zur Ruhe kommt.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 2.3</div>
+        <h4>Schlüsselsatz / Schlüsselsätze</h4>
+        <p class="instr">Welcher Satz bringt das Kernproblem besonders knapp auf den Punkt? <a class="jumplink" onclick="jumpTo('para-1')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="2" placeholder="Notiere den Schlüsselsatz mit eigenen Worten oder als kurzes Zitat"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-2-3', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-2-3">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Zum Beispiel Evas Aussage, sie habe das Gefühl, immer verfügbar und online sein zu müssen, ohne selbst noch Zeit für Ruhe zu finden — oder allgemeiner: Manchen Menschen fehlen die nötigen Filter- und Abwehrmechanismen, um sich gegen die Informationsflut abzugrenzen.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 2.4</div>
+        <h4>Diagnose</h4>
+        <p class="instr">Wie erklären Fachleute im Text das Phänomen? <a class="jumplink" onclick="jumpTo('para-2')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="2" placeholder="Welche fachliche Erklärung liefert der Text?"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-2-4', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-2-4">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Die Psychotherapeutin Elisabeth Heller erklärt das Phänomen mit Hochsensibilität: Manchen Menschen fehlen die neuronalen Filtermechanismen, um Reize ausreichend abzugrenzen — sie seien dadurch zwar oft kreativ und gewissenhaft, aber auch anfälliger für psychische Störungen.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 2.5</div>
+        <h4>Hilfsmaßnahmen</h4>
+        <p class="instr">Welche Gegenmaßnahmen nennt der Artikel? <a class="jumplink" onclick="jumpTo('para-3')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="2" placeholder="Was schlagen Firmen, Ministerium oder Experten vor?"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-2-5', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-2-5">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Firmen und das deutsche Bundesarbeitsministerium beschränken dienstliche E-Mails außerhalb der Arbeitszeit; Arbeitspsychologe Johann Beran empfiehlt zusätzlich bewusste Pausen und einen Offline-Ausklang vor dem Schlafengehen.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 2.6</div>
+        <h4>Gegenstimmen</h4>
+        <p class="instr">Gibt es im Text auch Stimmen, die die Maßnahmen anders sehen? <a class="jumplink" onclick="jumpTo('para-3')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="2" placeholder="Wer sieht das Thema kritischer oder anders?"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-2-6', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-2-6">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Der Nachrichtendienst „Twitter" belächelt die betrieblichen E-Mail-Beschränkungen und hält offenbar wenig von ihrem Nutzen.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 2.7</div>
+        <h4>Folgerung</h4>
+        <p class="instr">Wie endet der Artikel — welches Fazit bleibt? <a class="jumplink" onclick="jumpTo('para-6')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="2" placeholder="Was ist der Schlussgedanke?"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-2-7', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-2-7">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Trotz des Wissens um die Risiken fällt es Betroffenen wie Eva weiterhin schwer, das Handy tatsächlich wegzulegen oder bewusst offline zu sein.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 3 ================= -->
+<section id="step3">
+  <div class="wrap">
+    <div class="stephead"><span class="stepnum">3</span><h2>Der Einleitungssatz</h2></div>
+    <p class="stepsub">Entspricht A4 · Den ganzen Text in ein bis zwei Sätzen zusammenfassen</p>
+    <div class="stepgoal">Ziel dieses Schritts: Mit einem der beiden Redemittel-Muster formulierst du einen einzigen, präzisen Einleitungssatz, der Autorin, Titel, Erscheinungsort, Datum und das Kernthema in sich vereint.</div>
+
+    <div class="stepbody">
+      <div class="task">
+        <div class="task-label">Aufgabe 3.1 — Baukasten</div>
+        <h4>Setze die Bausteine zusammen</h4>
+        <p class="instr">Trage die Angaben ein — die Vorschau darunter baut sich automatisch zu einem Satz zusammen.</p>
+        <label class="field-label">Satzmuster</label>
+        <select id="tplSelect" onchange="updateTemplate()" style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:var(--radius); font-family:'Source Serif 4', serif; font-size:15px; background:#fff;">
+          <option value="a">In dem Artikel [Titel], erschienen in [Ort] am [Datum], geht es um [Thema].</option>
+          <option value="b">Der Artikel [Titel], erschienen in [Ort] am [Datum], handelt von [Thema].</option>
+        </select>
+        <label class="field-label">Titel</label>
+        <input type="text" id="tplTitel" value="„Das große Rauschen“" oninput="updateTemplate()">
+        <label class="field-label">Erscheinungsort</label>
+        <input type="text" id="tplOrt" value="der österreichischen Wochenzeitschrift „Die Furche“" oninput="updateTemplate()">
+        <label class="field-label">Datum</label>
+        <input type="text" id="tplDatum" value="17. April 2014" oninput="updateTemplate()">
+        <label class="field-label">Thema (in eigenen Worten)</label>
+        <input type="text" id="tplThema" value="die Gefahren des permanenten Onlineseins" oninput="updateTemplate()">
+
+        <div class="solution show" id="tplPreview" style="background:var(--signal-tint); border-left-color:var(--signal); margin-top:16px;">
+          <div class="sol-tag" style="color:var(--signal-dark);">DEINE VORSCHAU</div>
+          <p id="tplOutput" style="margin:0; font-family:'Source Serif 4', serif; font-size:15.5px;"></p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 3.2 — eigenständig formulieren</div>
+        <h4>Schreib jetzt deinen eigenen Einleitungssatz</h4>
+        <p class="instr">Nutze den Baukasten oben nur als Gerüst — schreib den Satz jetzt flüssig und in eigenen Worten, ohne die eckigen Klammern.</p>
+        <textarea data-section="3" placeholder="Der Artikel … / In dem Artikel …"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-3-2', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-3-2">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Der Artikel „Das große Rauschen" von Doris Heimberger, erschienen in der österreichischen Wochenzeitschrift „Die Furche" am 17. April 2014, behandelt Fragen, die die permanente Auseinandersetzung mit dem Internet für die User mit sich bringen.</p>
+          <p style="margin:8px 0 0 0;"><em class="ref">Achte darauf: ein einziger, klarer Satz — keine Aufzählung, keine Wertung.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 4 ================= -->
+<section id="step4">
+  <div class="wrap">
+    <div class="stephead"><span class="stepnum">4</span><h2>Die Sinnesabschnitte zusammenfassen</h2></div>
+    <p class="stepsub">Entspricht A5 · Jeden Abschnitt in ein bis zwei Sätzen bündeln</p>
+    <div class="stepgoal">Ziel dieses Schritts: Für jeden der sechs Sinnesabschnitte aus Schritt 2 schreibst du eine knappe Zusammenfassung. Diese sechs Bausteine bilden später das Rohmaterial für deinen zusammenhängenden Gesamttext.</div>
+
+    <div class="stepbody">
+
+      <div class="task">
+        <div class="task-label">Abschnitt 1–2 · Eva und die Diagnose</div>
+        <h4>Worum geht es in diesen Abschnitten?</h4>
+        <p class="instr"><a class="jumplink" onclick="jumpTo('para-1')">↳ Abschnitt 1 ansehen</a> · <a class="jumplink" onclick="jumpTo('para-2')">↳ Abschnitt 2 ansehen</a></p>
+        <textarea data-section="4" placeholder="Fasse in 1–2 Sätzen zusammen: Evas Schlafproblem und die Erklärung durch Hochsensibilität"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-4-1', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-4-1">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Immer mehr Menschen leiden unter Schlafproblemen. Am Beispiel der jungen Journalistin Eva wird gezeigt, wie sehr Tagesereignisse, Online-Informationen und persönliche Mails den Schlafrhythmus stören können. Ein Psychiater stellt die Diagnose: Manchen Menschen fehlen die nötigen Filter- und Abwehrmechanismen, um sich gegen die Informationsflut abzugrenzen — solche hochsensiblen Menschen seien zwar oft besonders kreativ, hätten aber auch ein erhöhtes Risiko für psychische Störungen.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Abschnitt 3 · Firmen reagieren</div>
+        <h4>Worum geht es in diesem Abschnitt?</h4>
+        <p class="instr"><a class="jumplink" onclick="jumpTo('para-3')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="4" placeholder="Fasse in 1–2 Sätzen zusammen: Gegenmaßnahmen von Firmen und Beran"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-4-2', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-4-2">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Immer mehr Menschen zeigen vergleichbare Symptome, sodass französische und deutsche Firmen sowie das deutsche Bundesarbeitsministerium zu Gegenmaßnahmen greifen und dienstliche E-Mails außerhalb der Arbeitszeit einschränken. Während „Twitter" diese Maßnahmen belächelt, hält der Arbeitspsychologe Johann Beran viel davon, denn das Gehirn benötige Pausenzeiten, um Informationen zu verarbeiten — sonst gelangten viele Menschen nicht mehr in die erholsame Tiefschlafphase.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Abschnitt 4 · Beran empfiehlt</div>
+        <h4>Worum geht es in diesem Abschnitt?</h4>
+        <p class="instr"><a class="jumplink" onclick="jumpTo('para-4')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="4" placeholder="Fasse in 1–2 Sätzen zusammen: konkrete Gegenmaßnahmen im Alltag"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-4-3', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-4-3">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Beran empfiehlt, vor dem Schlafengehen bewusst in eine Ruhephase überzugehen — Fernsehen, Smartphone und iPad hätten keine Entspannungsfunktion. Auch untertags seien Denkpausen ratsam, damit das Gehirn Reize sortieren und richtig einordnen kann.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Abschnitt 5 · Vorbildwirkung und Sucht</div>
+        <h4>Worum geht es in diesem Abschnitt?</h4>
+        <p class="instr"><a class="jumplink" onclick="jumpTo('para-5')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="4" placeholder="Fasse in 1–2 Sätzen zusammen: Vorbildwirkung, Goleman"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-4-4', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-4-4">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Auf die schädliche Vorbildwirkung Erwachsener verweist die Psychotherapeutin Elisabeth Heller. Der US-Psychologe Daniel Goleman spricht sogar von einer Sucht, die Menschen dazu zwingt, mitten in einem Gespräch nachzusehen, ob eine SMS eingetroffen ist.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Abschnitt 6 · Zurück zu Eva</div>
+        <h4>Worum geht es in diesem Abschnitt?</h4>
+        <p class="instr"><a class="jumplink" onclick="jumpTo('para-6')">↳ Textstelle ansehen</a></p>
+        <textarea data-section="4" placeholder="Fasse in 1–2 Sätzen zusammen: wie geht es für Eva weiter?"></textarea>
+        <div class="task-actions"><button class="ghost" onclick="toggleSolution('sol-4-5', this)">Musterlösung anzeigen</button></div>
+        <div class="solution" id="sol-4-5">
+          <div class="sol-tag">MUSTERLÖSUNG</div>
+          <p style="margin:0;">Die Journalistin Eva versucht, das Problem mithilfe ihrer Psychotherapeutin zu bewältigen: Sie arbeitet nach 20 Uhr nicht mehr und versucht, sich zu entspannen. Mit gutem Gewissen nichts zu tun oder das Handy vom Nachttisch zu verbannen, fällt ihr jedoch nach wie vor schwer.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEP 5 ================= -->
+<section id="step5">
+  <div class="wrap">
+    <div class="stephead"><span class="stepnum">5</span><h2>Der zusammenhängende Gesamttext</h2></div>
+    <p class="stepsub">Entspricht A6 · Aus den Bausteinen eine kohärente Zusammenfassung verfassen</p>
+    <div class="stepgoal">Ziel dieses Schritts: Du verknüpfst Einleitungssatz und die sechs Abschnitts-Zusammenfassungen zu einem einzigen, flüssigen Text — mit den drei geforderten Arbeitsaufträgen und im Zielumfang von 270–330 Wörtern.</div>
+
+    <div class="stepbody">
+
+      <div class="task">
+        <div class="task-label">Checkliste vor dem Schreiben</div>
+        <h4>Die drei Arbeitsaufträge</h4>
+        <ul class="checklist">
+          <li><input type="checkbox"><span><strong>Gib</strong> den Inhalt des Artikels wieder — die Fakten, in eigenen Worten.</span></li>
+          <li><input type="checkbox"><span><strong>Beschreibe</strong> die Probleme, die im Artikel aufgeworfen werden.</span></li>
+          <li><input type="checkbox"><span><strong>Erläutere</strong> die Problematik am dargestellten Beispiel bzw. anhand eigener Erfahrungen.</span></li>
+          <li><input type="checkbox"><span>Nutze durchgehend <strong>sachliche Sprache im Präsens</strong>.</span></li>
+          <li><input type="checkbox"><span>Behalte die <strong>Gliederung des Ausgangstextes</strong> bei und markiere Absätze mit Leerzeilen.</span></li>
+          <li><input type="checkbox"><span>Zielumfang: <strong>270–330 Wörter</strong>.</span></li>
+        </ul>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Kurzer Reflexionsimpuls — nur für dich, keine Musterlösung</div>
+        <h4>Eigene Erfahrung</h4>
+        <p class="instr">Für den dritten Arbeitsauftrag brauchst du einen eigenen Bezug: Woran erkennst du bei dir selbst oder in deinem Umfeld etwas von dem, was Eva beschreibt?</p>
+        <textarea data-section="5" placeholder="Notiere ein oder zwei Sätze mit einem eigenen Beispiel, das du später einbauen kannst."></textarea>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 5.1 — dein Gesamttext</div>
+        <h4>Verfasse jetzt die vollständige Zusammenfassung</h4>
+        <p class="instr">Setze Einleitungssatz (Schritt 3) und die sechs Bausteine (Schritt 4) zu einem flüssigen Text zusammen. Verknüpfe mit eigenen Worten, achte auf Absätze und baue deinen eigenen Erfahrungsbezug ein.</p>
+        <textarea data-section="5" id="finalText" style="min-height:280px;" oninput="updateWordcount()" placeholder="Der Artikel „Das große Rauschen“ …"></textarea>
+        <div class="wordbar">
+          <div class="wc-track"><div class="wc-fill" id="wcFill"></div></div>
+          <div class="wc-num" id="wcNum">0 Wörter</div>
+        </div>
+        <div class="task-actions">
+          <button class="primary" onclick="toggleSolution('sol-5-1', this)">Musterlösung anzeigen</button>
+        </div>
+        <div class="solution" id="sol-5-1">
+          <div class="sol-tag">MUSTERLÖSUNG (325 Wörter)</div>
+          <p style="margin:0;">Der Artikel „Das große Rauschen" von Doris Heimberger, erschienen in der österreichischen Wochenzeitschrift „Die Furche" am 17. April 2014, behandelt Fragen, die die permanente Auseinandersetzung mit dem Internet für die User mit sich bringen.</p>
+          <p>Immer mehr Menschen leiden unter Schlafproblemen. Am Beispiel der jungen Journalistin Eva wird gezeigt, wie sehr Tagesereignisse, damit verbundene Eindrücke und Gedanken, Online-Informationen und persönliche Mails den Schlafrhythmus beeinträchtigen und sogar massiv stören können. Ein Psychiater stellt die Diagnose: Manchen Menschen fehlen die nötigen Filter- und Abwehrmechanismen, um sich gegen die Informationsflut und die damit verbundenen Reize abzugrenzen. Solche hochsensiblen Menschen seien häufig besonders kreativ und gewissenhaft. Sie hätten aber auch ein erhöhtes Risiko, psychische Störungen zu entwickeln.</p>
+          <p>Immer mehr Menschen zeigen vergleichbare Symptome, sodass französische und deutsche Firmen, aber auch das deutsche Bundesarbeitsministerium zu Gegenmaßnahmen greifen. Die Firmen nötigen ihre Mitarbeiterinnen und Mitarbeiter nicht mehr dazu, nach 18 Uhr abends und vor 9 Uhr morgens dienstliche E-Mails zu lesen. Während „Twitter" diese Maßnahmen belächelt, hält der Wiener Arbeitspsychologe und Coach Johann Beran „ziemlich viel" davon, denn das Gehirn benötige Pausenzeiten, um zu verarbeiten, was man an Informationen aufgenommen habe. Doch das gehe nicht, wenn man ständig online sei. Dann nehme man die Informationsflut und Spannung mit hinein in den Schlaf. Daher gelangten viele Menschen nicht mehr in die erholsame Tiefschlafphase.</p>
+          <p>Beran empfiehlt als Gegenmaßnahme, vor dem Schlafengehen in eine Ruhephase überzugehen. Fernsehen, Smartphone und iPad hätten keine Entspannungsfunktion. Auch untertags sei es ratsam, Denkpausen einzulegen. Das gebe dem Gehirn die Möglichkeit, Reize zu sortieren und richtig einzuordnen.</p>
+          <p>Auf die schädliche Vorbildwirkung verweist die Psychotherapeutin Elisabeth Heller. Der US-Psychologe Daniel Goleman spricht von einer Sucht, die den Menschen zwingt, während eines Gesprächs nachzusehen, ob eine SMS da sei.</p>
+          <p style="margin-bottom:0;">Die Journalistin Eva versucht, das Problem mithilfe ihrer Psychotherapeutin zu bewältigen. Sie arbeitet nach 20 Uhr nicht mehr und versucht sich zu entspannen. Mit gutem Gewissen nichts zu tun oder das Handy vom Nachttisch zu verbannen, fällt ihr jedoch nach wie vor schwer.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-label">Aufgabe 5.2 — Vergleich und Feinschliff</div>
+        <h4>Vergleiche deinen Text mit der Musterlösung</h4>
+        <p class="instr">Beantworte für dich: Hast du wichtige Informationen vergessen? Welche Informationen könntest du noch streichen? Fehlt dein eigener Erfahrungsbezug aus dem dritten Arbeitsauftrag noch im Text?</p>
+        <textarea data-section="5" placeholder="Was fällt dir beim Vergleich auf? Was änderst du noch?"></textarea>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0;">Wenn du alle fünf Schritte durchgearbeitet hast, bist du bereit, die Musterlösung als Hausübung eigenständig — ohne Vorlage — neu zu verfassen.</p>
+    <a class="backtotop" href="#top">↑ Zurück zum Anfang</a>
+  </div>
+</footer>
+
+<script>
+  // ---------- reveal / hide solution ----------
+  function toggleSolution(id, btn){
+    const el = document.getElementById(id);
+    const showing = el.classList.toggle('show');
+    btn.textContent = showing ? 'Musterlösung ausblenden' : 'Musterlösung anzeigen';
+  }
+
+  // ---------- quiz ----------
+  const quizAnswers = {q1:'right', q2:'right', q3:'right'};
+  const quizExplain = {
+    q1:'Die Zusammenfassung bleibt beobachtend und wertfrei — sie beschreibt, was im Artikel steht, statt eine persönliche Meinung einzubringen.',
+    q2:'Zusammenfassungen stehen konsequent im Präsens, auch wenn der Originaltext im Perfekt formuliert ist.',
+    q3:'Wörter wie „zum Glück" oder „endlich" drücken eine Wertung aus — eine Zusammenfassung bleibt neutral und sachlich.'
+  };
+  function checkQuiz(){
+    Object.keys(quizAnswers).forEach(function(q){
+      const chosen = document.querySelector('input[name="'+q+'"]:checked');
+      const fb = document.getElementById('fb-'+q);
+      if(!chosen){
+        fb.className = 'feedback show wrong';
+        fb.textContent = 'Bitte wähle zuerst eine Antwort aus.';
+        return;
+      }
+      const correct = chosen.value === 'right';
+      fb.className = 'feedback show ' + (correct ? 'correct' : 'wrong');
+      fb.textContent = (correct ? 'Richtig. ' : 'Nicht ganz. ') + quizExplain[q];
+    });
+  }
+
+  // ---------- redemittel template builder ----------
+  function updateTemplate(){
+    const tpl = document.getElementById('tplSelect').value;
+    const titel = document.getElementById('tplTitel').value || '[Titel]';
+    const ort = document.getElementById('tplOrt').value || '[Erscheinungsort]';
+    const datum = document.getElementById('tplDatum').value || '[Datum]';
+    const thema = document.getElementById('tplThema').value || '[Thema]';
+    let out;
+    if(tpl === 'a'){
+      out = 'In dem Artikel ' + titel + ', erschienen in ' + ort + ' am ' + datum + ', geht es um ' + thema + '.';
+    } else {
+      out = 'Der Artikel ' + titel + ', erschienen in ' + ort + ' am ' + datum + ', handelt von ' + thema + '.';
+    }
+    document.getElementById('tplOutput').textContent = out;
+  }
+
+  // ---------- word counter ----------
+  function updateWordcount(){
+    const text = document.getElementById('finalText').value.trim();
+    const words = text.length ? text.split(/\s+/).length : 0;
+    const numEl = document.getElementById('wcNum');
+    const fillEl = document.getElementById('wcFill');
+    numEl.textContent = words + ' Wörter (Ziel: 270–330)';
+    const pct = Math.min(100, (words / 330) * 100);
+    fillEl.style.width = pct + '%';
+    if(words >= 270 && words <= 330){
+      numEl.className = 'wc-num ok';
+      fillEl.style.background = 'var(--signal)';
+    } else {
+      numEl.className = 'wc-num off';
+      fillEl.style.background = 'var(--noise)';
+    }
+  }
+
+  // ---------- jump to article paragraph ----------
+  function jumpTo(id){
+    const panel = document.getElementById('articlepanel');
+    const target = document.getElementById(id);
+    if(!panel || !target) return;
+    document.getElementById('step2').scrollIntoView({behavior:'smooth', block:'start'});
+    setTimeout(function(){
+      panel.scrollTo({top: target.offsetTop - panel.offsetTop - 10, behavior:'smooth'});
+      target.classList.add('flash');
+      setTimeout(function(){ target.classList.remove('flash'); }, 1400);
+    }, 350);
+  }
+
+  // ---------- nav active state + touched dots ----------
+  const sections = ['regeln','step1','step2','step3','step4','step5'].map(id => document.getElementById(id));
+  const pills = document.querySelectorAll('.steppill');
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        pills.forEach(p => p.classList.remove('active'));
+        const match = document.querySelector('.steppill[data-target="'+entry.target.id+'"]');
+        if(match) match.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-40% 0px -55% 0px', threshold:0});
+  sections.forEach(s => { if(s) io.observe(s); });
+
+  document.querySelectorAll('textarea[data-section]').forEach(function(ta){
+    ta.addEventListener('input', function(){
+      if(ta.value.trim().length > 3){
+        const dot = document.getElementById('dot' + ta.dataset.section);
+        if(dot) dot.classList.add('touched');
+      }
+    });
+  });
+
+  updateTemplate();
+</script>
+
+</body>
+</html>
