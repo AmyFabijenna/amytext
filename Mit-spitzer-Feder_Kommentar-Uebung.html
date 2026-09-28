@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mit spitzer Feder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --paper:#F2F3F6; --card:#FFFFFF; --ink:#1B1E29; --muted:#5A5F70; --line:#D8DBE3; --line-strong:#B9BECB;
+  --accent:#8A1C3F; --accent-ink:#FFFFFF; --accent-soft:#F4E2E8;
+  --ok:#1D7348; --ok-soft:#DDF2E6; --bad:#B0281F; --bad-soft:#FBE2DF;
+  --hl-y:#FFE36B; --hl-g:#A9E5C8; --hl-p:#FFC4D5; --hl-b:#C3DEFF; --mark:#FFE36B;
+  --shadow:0 1px 2px rgba(27,30,41,.06),0 6px 20px rgba(27,30,41,.06);
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-read:"Literata",Georgia,"Times New Roman",serif;
+  --f-ui:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#13151B; --card:#1C1F28; --ink:#E9EAF0; --muted:#A3A8B7; --line:#2F3340; --line-strong:#454A59;
+    --accent:#E583A2; --accent-ink:#1B0E14; --accent-soft:#3A1F2A;
+    --ok:#6FD19D; --ok-soft:#173526; --bad:#FF8F85; --bad-soft:#3D1D1B;
+    --hl-y:rgba(255,214,70,.34); --hl-g:rgba(90,210,150,.32); --hl-p:rgba(255,120,160,.32); --hl-b:rgba(110,170,255,.32); --mark:rgba(255,214,70,.4);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#13151B; --card:#1C1F28; --ink:#E9EAF0; --muted:#A3A8B7; --line:#2F3340; --line-strong:#454A59;
+  --accent:#E583A2; --accent-ink:#1B0E14; --accent-soft:#3A1F2A;
+  --ok:#6FD19D; --ok-soft:#173526; --bad:#FF8F85; --bad-soft:#3D1D1B;
+  --hl-y:rgba(255,214,70,.34); --hl-g:rgba(90,210,150,.32); --hl-p:rgba(255,120,160,.32); --hl-b:rgba(110,170,255,.32); --mark:rgba(255,214,70,.4);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:16.5px;line-height:1.6;margin:0}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0}
+a{color:var(--accent)}
+button,select,textarea,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* ---------- Kopfleiste ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:16px;padding-block:10px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:17px;white-space:nowrap;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+.steps{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1;justify-content:flex-end}
+.steps::-webkit-scrollbar{display:none}
+.steps a{flex:none;display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--muted);font-size:13.5px;padding:5px 10px 5px 5px;border-radius:999px;border:1px solid var(--line);background:var(--card);transition:background .2s,color .2s,border-color .2s}
+.steps a b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--paper);font-size:12px;color:var(--ink);font-variant-numeric:tabular-nums}
+.steps a.on{color:var(--ink);border-color:var(--accent)}
+.steps a.on b{background:var(--accent);color:var(--accent-ink)}
+@media (max-width:760px){.steps a .lbl{display:none}.steps a{padding:4px}.brand{font-size:15px}}
+
+/* ---------- Kopf ---------- */
+.hero{padding-block:44px 28px;display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:end}
+.eyebrow{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.hero h1{font-size:clamp(40px,7vw,68px);font-weight:800;letter-spacing:-.025em;margin-top:8px}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 58%,var(--hl-y) 58%, var(--hl-y) 90%,transparent 90%);padding-inline:.06em}
+.hero .lead{margin-top:16px;font-size:18px;color:var(--muted);max-width:56ch}
+.clip{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px 20px;box-shadow:var(--shadow);transform:rotate(1.2deg);font-family:var(--f-read);font-size:15px;line-height:1.55}
+.clip .src{font-family:var(--f-ui);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.clip .mk-demo{background:var(--hl-y);padding:0 2px;border-radius:2px}
+.clip .mk-demo.g{background:var(--hl-g)}
+.clip .mk-demo.p{background:var(--hl-p)}
+@media (max-width:760px){.hero{grid-template-columns:1fr;padding-block:28px 12px}.clip{transform:none}}
+
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-block:8px 36px}
+.howto div{border-top:2px solid var(--ink);padding-top:10px;font-size:15px;color:var(--muted)}
+.howto strong{display:block;color:var(--ink);font-family:var(--f-display);font-size:16px;margin-bottom:2px}
+@media (max-width:760px){.howto{grid-template-columns:1fr}}
+
+/* ---------- Schritte ---------- */
+section.step{padding-block:34px 10px;scroll-margin-top:70px}
+.step-head{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin-bottom:22px}
+.step-no{font-family:var(--f-display);font-weight:800;font-size:54px;line-height:.9;color:var(--accent);font-variant-numeric:tabular-nums}
+.step-head h2{font-size:clamp(25px,3.6vw,34px);font-weight:700;letter-spacing:-.015em}
+.step-head p{color:var(--muted);margin-top:6px;max-width:66ch}
+.step-head .ref{display:inline-block;margin-top:8px;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-strong);border-radius:4px;padding:1px 7px}
+
+.task{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:18px;overflow:hidden}
+.task-body{padding:20px 22px}
+.task h3{font-size:19px;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.task h3 .tn{font-family:var(--f-ui);font-size:13px;color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.task .instr{margin-top:6px;color:var(--muted);max-width:70ch}
+.task .content{margin-top:16px}
+.task-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 22px;border-top:1px solid var(--line);background:color-mix(in srgb,var(--paper) 55%,var(--card))}
+.btn{border:1px solid var(--line-strong);background:var(--card);border-radius:7px;padding:7px 14px;cursor:pointer;font-size:14.5px;font-weight:700;transition:background .15s,border-color .15s}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.sol{background:var(--accent-soft);border-color:transparent;color:var(--ink)}
+.btn.sol[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted);font-weight:400}
+.fb{font-size:14.5px;color:var(--muted);flex-basis:100%}
+.fb:empty{display:none}
+.fb.good{color:var(--ok)}
+.fb.meh{color:var(--bad)}
+@media (min-width:700px){.fb{flex-basis:auto;margin-left:6px}}
+
+.solbox{margin-top:16px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:14px 18px}
+.solbox .sl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px}
+.solbox p+p{margin-top:8px}
+.solbox ul{margin:6px 0 0;padding-left:20px}
+.solbox li+li{margin-top:4px}
+.solbox .quote{font-family:var(--f-read)}
+
+/* Quiz */
+.quiz{display:grid;gap:18px}
+.q .qt{font-weight:700}
+.q .opts{display:grid;gap:7px;margin-top:8px}
+.q .opts button{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:9px 13px;cursor:pointer;font-size:15.5px;line-height:1.4}
+.q .opts button:hover{border-color:var(--line-strong)}
+.q .opts button.right{background:var(--ok-soft);border-color:var(--ok)}
+.q .opts button.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.q .ex{margin-top:8px;font-size:15px;color:var(--muted);padding-left:12px;border-left:2px solid var(--line-strong)}
+
+/* Zuordnen */
+.assign{display:grid;gap:8px}
+.as-row{display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
+.as-row.ok{border-color:var(--ok);background:var(--ok-soft)}
+.as-row.no{border-color:var(--bad);background:var(--bad-soft)}
+.as-text{font-size:15.5px;line-height:1.45}
+.as-text.read{font-family:var(--f-read)}
+.as-ctrl{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.as-ctrl .opt{border:1px solid var(--line-strong);background:var(--card);border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13.5px;font-weight:700}
+.as-ctrl .opt[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.as-ctrl select{border:1px solid var(--line-strong);background:var(--card);border-radius:6px;padding:6px 8px;font-size:14.5px;max-width:100%}
+.as-note{grid-column:1/-1;font-size:14.5px;color:var(--muted)}
+@media (max-width:640px){.as-row{grid-template-columns:1fr}.as-ctrl{justify-content:flex-start}.as-ctrl select{width:100%}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:12px;font-size:13.5px;color:var(--muted)}
+.legend b{color:var(--ink)}
+
+/* Mehrfachauswahl */
+.multi{display:grid;gap:7px}
+.multi label{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);cursor:pointer;font-size:15.5px;line-height:1.45}
+.multi input{margin-top:4px;accent-color:var(--accent);width:17px;height:17px}
+.multi label.ok{border-color:var(--ok);background:var(--ok-soft)}
+.multi label.no{border-color:var(--bad);background:var(--bad-soft)}
+.multi .mnote{grid-column:2;font-size:14px;color:var(--muted)}
+
+/* Textleser */
+.reader{font-family:var(--f-read);font-size:17px;line-height:1.75;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 22px 14px;max-width:100%}
+.reader p{position:relative;padding:12px 0 12px 0;border-bottom:1px dashed var(--line)}
+.reader p:last-child{border-bottom:0}
+.reader .pn{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-ui);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-right:8px;vertical-align:2px}
+.reader .pn b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:11px;letter-spacing:0}
+.marker .w{cursor:pointer;border-radius:3px;transition:background .12s}
+.marker .w:hover{background:color-mix(in srgb,var(--mark) 45%,transparent)}
+.marker .w.mk{background:var(--mark)}
+.marker .w.miss{text-decoration:line-through;text-decoration-color:var(--bad);text-decoration-thickness:2px}
+.marker .tgt .tag{display:none}
+.marker.sol-on .tgt{border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:1px 0}
+.marker.sol-on .tgt.c-kon{background:var(--hl-g)}
+.marker.sol-on .tgt.c-koh{background:var(--hl-b)}
+.marker.sol-on .tgt.c-rh{background:var(--hl-p)}
+.marker.sol-on .tgt .tag{display:inline;font-family:var(--f-ui);font-size:11.5px;font-weight:700;letter-spacing:.02em;color:var(--ink);background:var(--card);border:1px solid var(--line-strong);border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:2px;white-space:nowrap}
+.marker .tgt.hit .w.mk{background:var(--hl-g);outline:1px solid var(--ok)}
+.marker-tools{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:10px;font-size:14px;color:var(--muted)}
+.sw{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+
+/* Reihenfolge */
+.order{display:grid;gap:14px}
+.pool,.seq{display:grid;gap:7px}
+.seq{counter-reset:s;min-height:48px;border:1px dashed var(--line-strong);border-radius:8px;padding:8px}
+.seq:empty::before{content:"Hier entsteht deine Argumentationskette – klicke oben die Sätze in der richtigen Reihenfolge an.";color:var(--muted);font-size:14.5px;padding:6px}
+.chip{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:9px 12px;cursor:pointer;font-family:var(--f-read);font-size:15.5px;line-height:1.45}
+.seq .chip{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:10px;background:var(--card)}
+.seq .chip::before{content:counter(s);font-family:var(--f-ui);font-weight:700;color:var(--accent)}
+.seq .chip.ok{border-color:var(--ok);background:var(--ok-soft)}
+.seq .chip.no{border-color:var(--bad);background:var(--bad-soft)}
+.chip .role{grid-column:2;font-family:var(--f-ui);font-size:13px;font-weight:700;color:var(--accent)}
+
+/* Schreiben */
+textarea{width:100%;min-height:110px;border:1px solid var(--line-strong);border-radius:8px;background:var(--paper);padding:10px 12px;font-family:var(--f-read);font-size:16px;line-height:1.6;resize:vertical}
+textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.pair{display:grid;gap:8px}
+.pair .from{font-size:15px;color:var(--muted)}
+.pair .from b{color:var(--ink)}
+.pairs{display:grid;gap:18px}
+.starters{display:flex;flex-wrap:wrap;gap:6px;margin-block:8px}
+.starters button{border:1px dashed var(--line-strong);background:transparent;border-radius:999px;padding:3px 11px;font-size:13.5px;cursor:pointer;color:var(--muted)}
+.starters button:hover{border-style:solid;color:var(--ink)}
+.part{display:grid;gap:6px;padding-block:14px;border-bottom:1px solid var(--line)}
+.part:first-child{padding-top:0}
+.part h4{margin:0;font-family:var(--f-display);font-size:17px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.part h4 small{font-family:var(--f-ui);font-weight:400;color:var(--muted);font-size:13.5px}
+.part .meta{font-size:14.5px;color:var(--muted)}
+.part .wc{font-size:13px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.part .model{font-family:var(--f-read);font-size:15.5px;background:var(--accent-soft);border-radius:8px;padding:10px 14px}
+.part .model .sl{font-family:var(--f-ui);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.counter{position:sticky;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:12px 22px;display:grid;gap:6px}
+.counter .row{display:flex;justify-content:space-between;font-size:14.5px;font-variant-numeric:tabular-nums}
+.counter .row b{font-size:17px}
+.bar{position:relative;height:10px;border-radius:5px;background:var(--paper);border:1px solid var(--line)}
+.bar .zone{position:absolute;top:-1px;bottom:-1px;background:var(--ok-soft);border-inline:2px solid var(--ok)}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--ink);border-radius:5px;opacity:.75;transition:width .2s}
+.check{display:grid;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;cursor:pointer}
+.check input{margin-top:5px;accent-color:var(--accent);width:17px;height:17px}
+
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.twocol{grid-template-columns:1fr}}
+.infobox{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--paper);font-size:15.5px}
+.infobox h4{margin:0 0 6px;font-family:var(--f-display);font-size:16px}
+.infobox ul{margin:0;padding-left:18px}
+.infobox li+li{margin-top:3px}
+.infobox .quote{font-family:var(--f-read);font-style:italic}
+
+footer{padding-block:40px 60px;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">Mit spitzer <span>Feder</span></div>
+    <nav class="steps" id="stepnav" aria-label="Schritte">
+      <a href="#s1"><b>1</b><span class="lbl">Textsorte</span></a>
+      <a href="#s2"><b>2</b><span class="lbl">Aufgabe</span></a>
+      <a href="#s3"><b>3</b><span class="lbl">Aufbau</span></a>
+      <a href="#s4"><b>4</b><span class="lbl">Verknüpfen</span></a>
+      <a href="#s5"><b>5</b><span class="lbl">Stilmittel</span></a>
+      <a href="#s6"><b>6</b><span class="lbl">Argumente</span></a>
+      <a href="#s7"><b>7</b><span class="lbl">Dein Kommentar</span></a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Übungswerkstatt · Kommentar · Modul 3, A21–A25</div>
+      <h1>Mit spitzer <em>Feder</em></h1>
+      <p class="lead">Du nimmst einen Musterkommentar Schritt für Schritt auseinander: wie er aufgebaut ist, wie die Sätze verknüpft sind, mit welchen Stilmitteln er überzeugt. Am Ende schreibst du deinen eigenen Kommentar zu Abercrombie &amp; Fitch – mit 405 bis 495 Wörtern.</p>
+    </div>
+    <div class="clip" aria-hidden="true">
+      <div class="src">Musterkommentar · Abs. 3</div>
+      <span class="mk-demo g">Vielmehr</span> wird in der Werbung immer wieder betont, wie kostengünstig die beworbenen Produkte doch seien. <span class="mk-demo p">Nicht so die Firma Abercrombie &amp; Fitch.</span> Deren Chef sagt <span class="mk-demo">klipp und klar</span>, dass er an bestimmten gesellschaftlichen Gruppen als Kunden <span class="mk-demo">schlicht und einfach</span> nicht interessiert sei.
+    </div>
+  </div>
+
+  <div class="howto">
+    <div><strong>Erst probieren</strong>Jede Aufgabe kannst du selbst lösen und mit „Prüfen“ sofort kontrollieren.</div>
+    <div><strong>Dann nachsehen</strong>„Musterlösung“ zeigt die Lösung mit Erklärung, ein zweiter Klick blendet sie wieder aus.</div>
+    <div><strong>Neu starten</strong>„Zurücksetzen“ löscht deine Antworten, damit du die Aufgabe noch einmal machen kannst.</div>
+  </div>
+
+  <!-- ================= SCHRITT 1 ================= -->
+  <section class="step" id="s1">
+    <div class="step-head">
+      <div class="step-no">1</div>
+      <div>
+        <h2>Was ein Kommentar ist</h2>
+        <p>Bevor du den Mustertext untersuchst, musst du wissen, woran man einen guten Kommentar erkennt. Die Antworten findest du im Leitfaden und in der Info-Box „Der Kommentar verlangt“.</p>
+        <span class="ref">Leitfaden · Info-Box 4.2.2 · Im Klartext</span>
+      </div>
+    </div>
+
+    <div class="task" id="t1a">
+      <div class="task-body">
+        <h3><span class="tn">1.1</span>Fünf Fragen zur Textsorte</h3>
+        <p class="instr">Klicke die Antwort an, die du für richtig hältst. Du siehst sofort, ob sie stimmt, und bekommst eine kurze Erklärung.</p>
+        <div class="content"><div class="quiz" id="quiz1"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn sol" data-act="sol" data-task="t1a" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t1a">Zurücksetzen</button>
+        <span class="fb" id="t1a-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t1b">
+      <div class="task-body">
+        <h3><span class="tn">1.2</span>Operatoren den drei Ebenen zuordnen</h3>
+        <p class="instr">Ein Kommentar hat drei Anforderungsebenen. Ordne jedes Verb (jeden Operator) der richtigen Ebene zu. So erkennst du später in jeder Aufgabenstellung sofort, was von dir verlangt wird.</p>
+        <div class="content">
+          <div class="legend"><span><b>1</b> Reproduktion – Inhalt wiedergeben</span><span><b>2</b> Transfer – erklären, einordnen</span><span><b>3</b> Reflexion – Stellung nehmen, bewerten</span></div>
+          <div class="assign" id="ops"></div>
+        </div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t1b">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t1b" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t1b">Zurücksetzen</button>
+        <span class="fb" id="t1b-fb"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHRITT 2 ================= -->
+  <section class="step" id="s2">
+    <div class="step-head">
+      <div class="step-no">2</div>
+      <div>
+        <h2>Aufgabe und Textbeilage verstehen</h2>
+        <p>Der Musterkommentar antwortet auf die Aufgabe A24. Damit du beurteilen kannst, ob er gelungen ist, musst du wissen, was verlangt war und welche Informationen die Textbeilage von Steffen Fründt liefert.</p>
+        <span class="ref">A22 · A24 · Textbeilage „Die Welt“, 15.05.2013</span>
+      </div>
+    </div>
+
+    <div class="task" id="t2a">
+      <div class="task-body">
+        <h3><span class="tn">2.1</span>Die drei Arbeitsaufträge entschlüsseln</h3>
+        <p class="instr">Lies die Arbeitsaufträge aus A24 und bestimme, auf welcher Anforderungsebene jeder liegt.</p>
+        <div class="content"><div class="assign" id="auftraege"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t2a">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t2a" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t2a">Zurücksetzen</button>
+        <span class="fb" id="t2a-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t2b">
+      <div class="task-body">
+        <h3><span class="tn">2.2</span>Die Verkaufsstrategie von Abercrombie &amp; Fitch</h3>
+        <p class="instr">Welche Aussagen beschreiben die Verkaufsstrategie der Firma richtig? Hake alle zutreffenden an. Achtung: Einige Sätze stimmen nicht oder gehören zu den Reaktionen, nicht zur Strategie.</p>
+        <div class="content"><div class="multi" id="strategie"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t2b">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t2b" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t2b">Zurücksetzen</button>
+        <span class="fb" id="t2b-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t2c">
+      <div class="task-body">
+        <h3><span class="tn">2.3</span>Wörtlich gesagt: die Aussagen von Mike Jeffries</h3>
+        <p class="instr">In der Textbeilage stehen genau zwei wörtliche Aussagen des Firmenchefs. Finde sie. Die anderen Zitate stammen von anderen Personen.</p>
+        <div class="content"><div class="multi" id="zitate"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t2c">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t2c" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t2c">Zurücksetzen</button>
+        <span class="fb" id="t2c-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t2d">
+      <div class="task-body">
+        <h3><span class="tn">2.4</span>Die vier Reaktionen im Internet</h3>
+        <p class="instr">Die Textbeilage nennt vier Reaktionen. Ordne jede Beschreibung dem Ort zu, an dem sie stattgefunden hat.</p>
+        <div class="content"><div class="assign" id="reaktionen"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t2d">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t2d" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t2d">Zurücksetzen</button>
+        <span class="fb" id="t2d-fb"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHRITT 3 ================= -->
+  <section class="step" id="s3">
+    <div class="step-head">
+      <div class="step-no">3</div>
+      <div>
+        <h2>Den Aufbau des Mustertextes erkennen</h2>
+        <p>Jetzt kommt der Musterkommentar selbst. Lies ihn einmal ganz durch. Dann bestimmst du, welcher Absatz welchen Arbeitsauftrag erfüllt – genau das verlangen die ersten drei Punkte von A25.</p>
+        <span class="ref">A25 · Punkte 1–3</span>
+      </div>
+    </div>
+
+    <div class="task" id="t3text">
+      <div class="task-body">
+        <h3><span class="tn">Text</span>Der Musterkommentar (426 Wörter)</h3>
+        <div class="content"><div class="reader" id="reader-plain"></div></div>
+      </div>
+    </div>
+
+    <div class="task" id="t3a">
+      <div class="task-body">
+        <h3><span class="tn">3.1</span>Welcher Absatz leistet was?</h3>
+        <p class="instr">Wähle für jeden Absatz seine Aufgabe im Kommentar. Zwei Funktionen kommen je zweimal vor.</p>
+        <div class="content"><div class="assign" id="absaetze"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t3a">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t3a" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t3a">Zurücksetzen</button>
+        <span class="fb" id="t3a-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t3b">
+      <div class="task-body">
+        <h3><span class="tn">3.2</span>Genauer hingeschaut</h3>
+        <p class="instr">Drei Detailfragen zum Aufbau.</p>
+        <div class="content"><div class="quiz" id="quiz3"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn sol" data-act="sol" data-task="t3b" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t3b">Zurücksetzen</button>
+        <span class="fb" id="t3b-fb"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHRITT 4 ================= -->
+  <section class="step" id="s4">
+    <div class="step-head">
+      <div class="step-no">4</div>
+      <div>
+        <h2>Konnektoren und Kohäsionsmittel</h2>
+        <p>Ein Kommentar wirkt überzeugend, wenn die Gedanken sauber miteinander verbunden sind. <b>Konnektoren</b> zeigen die logische Beziehung (Grund, Gegensatz, Folge, Ergänzung). <b>Kohäsionsmittel</b> verweisen auf etwas, das schon gesagt wurde (Pronomen, „dies“, „damit“, Wiederaufnahme).</p>
+        <span class="ref">A25 · Punkt 4</span>
+      </div>
+    </div>
+
+    <div class="task" id="t4a">
+      <div class="task-body">
+        <h3><span class="tn">4.1</span>Markiere die Verknüpfungswörter</h3>
+        <p class="instr">Klicke im Text auf alle Wörter, die Sätze oder Gedanken verknüpfen. Ein zweiter Klick nimmt die Markierung zurück. Im Text stecken 23 solche Stellen – du musst pro Stelle nur ein Wort treffen.</p>
+        <div class="content">
+          <div class="marker-tools"><span><i class="sw" style="background:var(--hl-g)"></i>Konnektor (logische Beziehung)</span><span><i class="sw" style="background:var(--hl-b)"></i>Kohäsionsmittel (Verweis)</span><span>– Farben erscheinen in der Musterlösung</span></div>
+          <div class="reader marker" id="mk-kon"></div>
+        </div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t4a">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t4a" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t4a">Zurücksetzen</button>
+        <span class="fb" id="t4a-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t4b">
+      <div class="task-body">
+        <h3><span class="tn">4.2</span>Welche Beziehung stellt das Wort her?</h3>
+        <p class="instr">Bestimme für jeden Konnektor aus dem Mustertext, welche logische Beziehung er ausdrückt.</p>
+        <div class="content"><div class="assign" id="beziehung"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t4b">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t4b" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t4b">Zurücksetzen</button>
+        <span class="fb" id="t4b-fb"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHRITT 5 ================= -->
+  <section class="step" id="s5">
+    <div class="step-head">
+      <div class="step-no">5</div>
+      <div>
+        <h2>Rhetorische Mittel</h2>
+        <p>Anders als die sachliche Erörterung darf ein Kommentar zugespitzt, ironisch und bildhaft sein. Der Leitfaden nennt rhetorische Fragen, Ellipsen, kurze Sätze und pointierte Formulierungen. Such sie im Mustertext.</p>
+        <span class="ref">A25 · Punkt 5 · Leitfaden „Sprache“</span>
+      </div>
+    </div>
+
+    <div class="task" id="t5a">
+      <div class="task-body">
+        <h3><span class="tn">5.1</span>Markiere die rhetorischen Mittel</h3>
+        <p class="instr">Im Text sind 16 Stellen versteckt: rhetorische Frage, Ellipsen, Zwillingsformeln, Metaphern und Redewendungen, wertende Wörter, Ironie, Leserbezug und ein pointierter Schlusssatz. Klicke in jeder Stelle mindestens ein Wort an.</p>
+        <div class="content">
+          <div class="reader marker" id="mk-rh"></div>
+        </div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t5a">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t5a" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t5a">Zurücksetzen</button>
+        <span class="fb" id="t5a-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t5b">
+      <div class="task-body">
+        <h3><span class="tn">5.2</span>Beispiel und Fachbegriff</h3>
+        <p class="instr">Ordne jedem Beispiel aus dem Mustertext das passende Stilmittel zu.</p>
+        <div class="content"><div class="assign" id="stilmittel"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t5b">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t5b" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t5b">Zurücksetzen</button>
+        <span class="fb" id="t5b-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t5c">
+      <div class="task-body">
+        <h3><span class="tn">5.3</span>Vom neutralen Satz zum pointierten Satz</h3>
+        <p class="instr">Jetzt probierst du es selbst. Schreibe jeden sachlichen Satz so um, dass er wie in einem Kommentar klingt: zugespitzt, mit einem Stilmittel deiner Wahl. Es gibt viele richtige Lösungen.</p>
+        <div class="content"><div class="pairs" id="pointe"></div></div>
+        <div class="solbox" id="t5c-sol" hidden>
+          <div class="sl">Mögliche Lösungen</div>
+          <ul class="quote">
+            <li>Größe XL für Mädchen? Bei Abercrombie &amp; Fitch Fehlanzeige. <span style="font-family:var(--f-ui);color:var(--muted)">(rhetorische Frage + Ellipse)</span></li>
+            <li>Cool muss man sein, schlank sowieso – so schlicht ist das Weltbild von Mike Jeffries. <span style="font-family:var(--f-ui);color:var(--muted)">(Ellipse + wertendes Wort)</span></li>
+            <li>Die Antwort des Netzes ließ nicht lange auf sich warten, und sie war alles andere als cool. <span style="font-family:var(--f-ui);color:var(--muted)">(Ironie: das Lieblingswort des Chefs wird gegen ihn gewendet)</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn sol" data-act="sol" data-task="t5c" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t5c">Zurücksetzen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHRITT 6 ================= -->
+  <section class="step" id="s6">
+    <div class="step-head">
+      <div class="step-no">6</div>
+      <div>
+        <h2>Argumente und gelungene Formulierungen</h2>
+        <p>Der Schwerpunkt eines Kommentars liegt im letzten Teil. Dort darf es emotional werden, aber jede Meinung braucht eine Begründung. Hier untersuchst du, wie der Mustertext argumentiert und welche Formulierungen du übernehmen kannst.</p>
+        <span class="ref">A25 · Punkte 6 und 7 · Formulierungshilfen</span>
+      </div>
+    </div>
+
+    <div class="task" id="t6a">
+      <div class="task-body">
+        <h3><span class="tn">6.1</span>Die Argumentationskette im Schlussabsatz</h3>
+        <p class="instr">Die Sätze des letzten Absatzes sind durcheinandergeraten. Klicke sie in der richtigen Reihenfolge an. Achte auf die Verknüpfungswörter: Sie verraten dir, was wohin gehört. Ein Klick auf einen Satz in deiner Kette schickt ihn zurück.</p>
+        <div class="content"><div class="order" id="kette"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t6a">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t6a" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t6a">Zurücksetzen</button>
+        <span class="fb" id="t6a-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t6b">
+      <div class="task-body">
+        <h3><span class="tn">6.2</span>Welche Argumente überzeugen – und wo hakt es?</h3>
+        <p class="instr">Beurteile die Argumente des Mustertextes. Wähle zuerst bei jeder Aussage, ob sie stark oder schwächer begründet ist. Dann notiere unten in zwei, drei Sätzen, welches Argument dich am meisten überzeugt und warum.</p>
+        <div class="content">
+          <div class="assign" id="staerke"></div>
+          <div style="margin-top:16px">
+            <label for="t6b-txt" style="font-weight:700;font-size:15px">Mich überzeugt am meisten …</label>
+            <textarea id="t6b-txt" data-store="t6b-txt" placeholder="Besonders überzeugend finde ich das Argument, dass … , weil …"></textarea>
+          </div>
+        </div>
+        <div class="solbox" id="t6b-sol" hidden>
+          <div class="sl">Musterlösung und Denkanstoß</div>
+          <p>Am stärksten ist der <b>Widerspruch zur üblichen Werbung</b> (Abs. 2 und 3): Werbung verspricht allen Glück und betont günstige Preise, A&amp;F schließt dagegen offen Menschen aus. Dieser Kontrast macht die Arroganz der Firma sichtbar, ohne dass der Verfasser sie behaupten muss. Ebenfalls überzeugend sind die <b>konkreten Beispiele</b> aus dem Internet, weil sie belegbar sind.</p>
+          <p>Schwächer ist der Satz „Dies kann dazu führen, dass die Welt solidarischer wird“. Er ist eine Hoffnung ohne Beleg. Und hier lohnt ein kritischer Blick: Der Mustertext nennt die Twitter-Meldungen „am raffiniertesten“, obwohl sie den Chef wegen seines Aussehens verspotten. Damit bedienen sie genau die Logik, die sie kritisieren. Wer das in seinem eigenen Kommentar anspricht, zeigt echte Reflexion auf Ebene 3.</p>
+        </div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t6b">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t6b" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t6b">Zurücksetzen</button>
+        <span class="fb" id="t6b-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t6c">
+      <div class="task-body">
+        <h3><span class="tn">6.3</span>Formulierungshilfen sortieren</h3>
+        <p class="instr">Diese Wendungen aus dem Leitfaden kannst du in deinem eigenen Kommentar verwenden. Ordne sie ein: Gibst du damit den Text wieder (W), nimmst du Stellung (S) oder appellierst du (A)?</p>
+        <div class="content"><div class="assign" id="hilfen"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn primary" data-act="check" data-task="t6c">Prüfen</button>
+        <button type="button" class="btn sol" data-act="sol" data-task="t6c" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t6c">Zurücksetzen</button>
+        <span class="fb" id="t6c-fb"></span>
+      </div>
+    </div>
+
+    <div class="task" id="t6d">
+      <div class="task-body">
+        <h3><span class="tn">6.4</span>Formulierungen, die du übernehmen kannst</h3>
+        <p class="instr">Welche Wendungen aus dem Mustertext sind besonders gelungen? Suche dir drei heraus, die du selbst verwenden möchtest, und schreibe sie auf.</p>
+        <div class="content"><textarea id="t6d-txt" data-store="t6d-txt" placeholder="1. …&#10;2. …&#10;3. …"></textarea></div>
+        <div class="solbox" id="t6d-sol" hidden>
+          <div class="sl">Gute Kandidaten zum Übernehmen</div>
+          <ul>
+            <li><span class="quote">„…, wie Steffen Fründt in seinem Artikel … feststellt, in dem er sich mit … auseinandersetzt.“</span> – elegante Einbettung der Textbeilage</li>
+            <li><span class="quote">„Ist solch eine … nicht überraschend?“</span> – rhetorische Frage als Übergang von der Wiedergabe zur Meinung</li>
+            <li><span class="quote">„Es ist also nicht verwunderlich, dass …“</span> – Überleitung zu den Reaktionen</li>
+            <li><span class="quote">„In die gleiche Kerbe schlagen …“</span> – reiht ein weiteres Beispiel bildhaft an</li>
+            <li><span class="quote">„… mit ihren eigenen Waffen zu schlagen“</span> – treffendes Bild für die Kritik</li>
+            <li><span class="quote">„Es liegt also auch an uns …“</span> – Appell, der die Leser einbezieht</li>
+            <li><span class="quote">„Möglichkeiten dafür gibt es genug.“</span> – kurzer, pointierter Schlusssatz</li>
+          </ul>
+        </div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn sol" data-act="sol" data-task="t6d" aria-pressed="false">Musterlösung zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t6d">Zurücksetzen</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHRITT 7 ================= -->
+  <section class="step" id="s7">
+    <div class="step-head">
+      <div class="step-no">7</div>
+      <div>
+        <h2>Dein eigener Kommentar</h2>
+        <p>Jetzt schreibst du A24 selbst. Das Gerüst folgt dem Aufbau, den du in Schritt 3 erkannt hast. Die Satzanfänge fügst du mit einem Klick ein. Unter jedem Teil kannst du den passenden Abschnitt des Mustertextes zum Vergleich einblenden – am besten erst, wenn dein eigener Entwurf steht. Dein Text wird in diesem Browser zwischengespeichert.</p>
+        <span class="ref">A24 · A25 · Punkt 5 · 405–495 Wörter</span>
+      </div>
+    </div>
+
+    <div class="task" id="t7a">
+      <div class="task-body">
+        <h3><span class="tn">7.1</span>Schreibgerüst</h3>
+        <p class="instr"><b>Situation:</b> Du befasst dich im Deutschunterricht mit dem Thema „Werbung“ und sammelst Zeitungsartikel. Dabei stößt du auf die Berichte über die Negativkampagne gegen Abercrombie &amp; Fitch.</p>
+        <div class="content" id="gerust"></div>
+      </div>
+      <div class="counter" aria-live="polite">
+        <div class="row"><span>Gesamt: <b id="wc-total">0</b> Wörter</span><span id="wc-state">Ziel: 405–495 Wörter</span></div>
+        <div class="bar"><div class="zone" style="left:67.5%;width:15%"></div><div class="fill" id="wc-fill" style="width:0%"></div></div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn sol" data-act="sol" data-task="t7a" aria-pressed="false">Alle Musterabschnitte zeigen</button>
+        <button type="button" class="btn ghost" data-act="reset" data-task="t7a">Entwurf löschen</button>
+      </div>
+    </div>
+
+    <div class="task" id="t7b">
+      <div class="task-body">
+        <h3><span class="tn">7.2</span>Checkliste vor der Abgabe</h3>
+        <p class="instr">Geh deinen Text Punkt für Punkt durch, bevor du ihn abgibst.</p>
+        <div class="content check" id="checkliste"></div>
+      </div>
+    </div>
+
+    <div class="task" id="t7c">
+      <div class="task-body">
+        <h3><span class="tn">7.3</span>Vergleich mit dem Mustertext</h3>
+        <p class="instr">Lege deinen Text neben den Mustertext. Was hast du anders gelöst? Was machst du vielleicht sogar besser?</p>
+        <div class="content"><textarea id="t7c-txt" data-store="t7c-txt" placeholder="Im Unterschied zum Mustertext habe ich …"></textarea></div>
+        <div class="solbox" id="t7c-sol" hidden>
+          <div class="sl">Fragen, die dir beim Vergleich helfen</div>
+          <ul>
+            <li>Hast du Autor, Titel, Zeitung und Datum der Textbeilage genannt, so wie der Mustertext im ersten Absatz?</li>
+            <li>Hast du beide Zitate von Mike Jeffries erläutert? Der Mustertext umschreibt sie nur. Du kannst eines davon wörtlich zitieren und deuten, das wirkt oft genauer.</li>
+            <li>Hast du die Reaktionen <i>bewertet</i> oder nur aufgezählt? Der Mustertext bewertet mit „kreativen Methoden“ und „am raffiniertesten“.</li>
+            <li>Ist deine Position in einem Satz klar erkennbar?</li>
+            <li>Endet dein Text mit einem Appell und einem pointierten Schlusssatz, der auf das Thema zurückgreift?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="task-foot">
+        <button type="button" class="btn sol" data-act="sol" data-task="t7c" aria-pressed="false">Hilfen zeigen</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>Grundlage: Musterkommentar, Textbeilage „Schlankheits-Fanatiker beschwören Shitstorm herauf“ (Steffen Fründt, Die Welt, 15.05.2013), Leitfaden zu den Maturatextsorten und Aufgaben A21–A25, Modul 3 „Schriftliche Kompetenz“.</footer>
+</main>
+
+<script>
+/* ============ Mustertext ============ */
+const P = [
+"Die US-amerikanische Modefirma Abercrombie & Fitch verkauft teure Kleidungsstücke für eine elitäre, ausgewählte Schicht von Jugendlichen, die über das entsprechende Kleingeld verfügen und einem bestimmten Schönheitsideal entsprechen. Arme und übergewichtige Teenagerinnen und Teenager sind als Kundinnen und Kunden unerwünscht, wie Steffen Fründt in seinem Artikel „Schlankheitsfanatiker beschwören Shitstorm herauf“, erschienen am 15.05.2013 in der Wochenzeitung „Die Welt“ feststellt, in dem er sich mit Mode und Schlankheitswahn auseinandersetzt. Der Firmenchef von Abercrombie & Fitch gibt selbst auch unumwunden zu, dass seine Mode nur für „coole“ und erfolgreiche Jugendliche sei.",
+"Ist solch eine ungeniert zur Schau gestellte Diskriminierung derjenigen, die sich teure Klamotten nicht leisten können beziehungsweise die übergewichtig sind, nicht überraschend? Normalerweise suggeriert doch die Werbung, dass jeder durch den Kauf eines bestimmten Produktes erfolgreich und glücklich werden könne. Und je mehr Konsumentinnen und Konsumenten ein Produkt kaufen, desto größer der Gewinn für die Firma.",
+"Dass es Arme gibt, die sich nicht viel leisten können, wird üblicherweise ausgeblendet. Vielmehr wird in der Werbung immer wieder betont, wie kostengünstig die beworbenen Produkte doch seien. Nicht so die Firma Abercrombie & Fitch. Deren Chef sagt klipp und klar, dass er an bestimmten gesellschaftlichen Gruppen als Kunden schlicht und einfach nicht interessiert sei.",
+"Es ist also nicht verwunderlich, dass diese Arroganz im Internet mit kreativen Methoden kritisiert wird. So erschien auf YouTube ein Video, welches zeigt, wie ein Aktivist teure A&F-Kleidung an Obdachlose verteilt, um ihr das elitäre Image zu nehmen. In die gleiche Kerbe schlagen veröffentlichte Fotos von Anti-Models, die A&F-Kleidung tragen. Damit versuchen Kritiker und Kritikerinnen die Firma Abercrombie & Fitch mit ihren eigenen „Waffen“ zu schlagen. Die scheinbar heile und makellose Welt von Abercrombie & Fitch wird auch durch Kommentare von Facebook-Usern gestört. Sie posteten auf der Firmenseite ironische Kommentare.",
+"Am raffiniertesten waren wohl Meldungen auf Twitter, die den A&F-Chef mit seinen eigenen Waffen angriffen. Sie warfen ihm vor, selbst dem eigenen Schönheitsideal nicht zu entsprechen und „zu hässlich für seine Marke zu sein“. Was als schön, erfolgreich oder cool empfunden wird, ist eben sehr subjektiv.",
+"Die heftigen kritischen Reaktionen im Internet zeigen, dass wir als Konsumentinnen und Konsumenten mächtigen Modefirmen und deren Werbung nicht hilflos ausgeliefert sind. Denn soziale Medien ermöglichen uns heutzutage, weltweit und schnell zu reagieren, um gesellschaftliche Fehlentwicklungen aufzuzeigen und Benachteiligten zu helfen. So bleiben fragwürdige Äußerungen zum Beispiel eines arroganten Konzernchefs nicht unwidersprochen. Dies kann dazu führen, dass die Welt solidarischer wird. Es liegt also auch an uns Konsumenten und Konsumentinnen, uns mit unserem Kaufverhalten und kritischen Aktionen gegen fragwürdige Auswüchse der Modewelt zur Wehr zu setzen. Möglichkeiten dafür gibt es genug."
+];
+const ZL = ["Z. 1–9","Z. 10–15","Z. 15–20","Z. 20–28","Z. 28–32","Z. 33–41"];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const $ = id => document.getElementById(id);
+const tasks = {};
+function fb(id,msg,cls){const el=$(id+"-fb"); if(!el)return; el.textContent=msg||""; el.className="fb"+(cls?" "+cls:"");}
+function store(k,v){try{ if(v===undefined) return localStorage.getItem("msf-"+k); localStorage.setItem("msf-"+k,v);}catch(e){return null}}
+function shuffle(a,seed){a=a.slice();let s=seed||7;for(let i=a.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* plain reader */
+$("reader-plain").innerHTML = P.map((p,i)=>`<p><span class="pn"><b>${i+1}</b>${ZL[i]}</span>${esc(p)}</p>`).join("");
+
+/* ============ Bausteine ============ */
+function makeQuiz(el, qs, taskId){
+  el.innerHTML = qs.map((q,i)=>`<div class="q" data-i="${i}"><div class="qt">${i+1}. ${q.q}</div><div class="opts">${q.o.map((o,j)=>`<button type="button" data-j="${j}">${o}</button>`).join("")}</div><div class="ex" hidden>${q.ex}</div></div>`).join("");
+  el.addEventListener("click",e=>{
+    const b=e.target.closest(".opts button"); if(!b) return;
+    const qEl=b.closest(".q"), q=qs[+qEl.dataset.i], j=+b.dataset.j;
+    qEl.querySelectorAll(".opts button").forEach(x=>x.classList.remove("right","wrong"));
+    b.classList.add(j===q.a?"right":"wrong");
+    if(j!==q.a) qEl.querySelector(`[data-j="${q.a}"]`).classList.remove("right");
+    qEl.querySelector(".ex").hidden = j!==q.a;
+    if(j!==q.a){ qEl.querySelector(".ex").hidden=true; }
+    const done=[...el.querySelectorAll(".q")].filter(x=>x.querySelector(".right")).length;
+    fb(taskId, `${done} von ${qs.length} richtig beantwortet.`, done===qs.length?"good":"");
+  });
+  return {
+    solve(on){ el.querySelectorAll(".q").forEach(qEl=>{const q=qs[+qEl.dataset.i]; qEl.querySelectorAll(".opts button").forEach(x=>x.classList.remove("right","wrong")); if(on) qEl.querySelector(`[data-j="${q.a}"]`).classList.add("right"); qEl.querySelector(".ex").hidden=!on;}); },
+    reset(){ this.solve(false); fb(taskId,""); }
+  };
+}
+
+function makeAssign(el, items, opts, taskId, mode, textClass){
+  el.innerHTML = items.map((it,i)=>{
+    const ctrl = mode==="select"
+      ? `<select id="${el.id}-s${i}" aria-label="Zuordnung"><option value="">– auswählen –</option>${opts.map((o,j)=>`<option value="${j}">${o}</option>`).join("")}</select>`
+      : opts.map((o,j)=>`<button type="button" class="opt" data-j="${j}" aria-pressed="false">${o}</button>`).join("");
+    return `<div class="as-row" data-i="${i}"><div class="as-text ${textClass||""}">${it.t}</div><div class="as-ctrl">${ctrl}</div>${it.n?`<div class="as-note" hidden>${it.n}</div>`:""}</div>`;
+  }).join("");
+  const rows=[...el.querySelectorAll(".as-row")];
+  const val = r => mode==="select" ? r.querySelector("select").value : (r.dataset.v??"");
+  const setVal = (r,v)=>{ if(mode==="select") r.querySelector("select").value=v; else { r.dataset.v=v; r.querySelectorAll(".opt").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.j===String(v)))); } };
+  el.addEventListener("click",e=>{const b=e.target.closest(".opt"); if(!b)return; const r=b.closest(".as-row"); setVal(r,b.dataset.j); r.classList.remove("ok","no");});
+  el.addEventListener("change",e=>{const r=e.target.closest(".as-row"); if(r) r.classList.remove("ok","no");});
+  return {
+    check(){ let ok=0, open=0; rows.forEach((r,i)=>{const v=val(r); r.classList.remove("ok","no"); if(v===""){open++;return;} const good=+v===items[i].a; r.classList.add(good?"ok":"no"); if(good) ok++;});
+      fb(taskId, open ? `${ok} von ${items.length} richtig – ${open} noch offen.` : (ok===items.length?`Alles richtig: ${ok} von ${items.length}.`:`${ok} von ${items.length} richtig. Die rot markierten Zeilen kannst du noch ändern.`), ok===items.length?"good":(open?"":"meh")); },
+    solve(on){ rows.forEach((r,i)=>{ const n=r.querySelector(".as-note"); if(n) n.hidden=!on; if(on){ setVal(r,String(items[i].a)); r.classList.remove("no"); r.classList.add("ok"); } else r.classList.remove("ok","no"); }); if(!on) rows.forEach(r=>setVal(r,"")); fb(taskId,""); },
+    reset(){ this.solve(false); }
+  };
+}
+
+function makeMulti(el, items, taskId){
+  el.innerHTML = items.map((it,i)=>`<label data-i="${i}"><input type="checkbox" id="${el.id}-c${i}"><span>${it.t}</span>${it.n?`<span class="mnote" hidden>${it.n}</span>`:""}</label>`).join("");
+  const labs=[...el.querySelectorAll("label")];
+  el.addEventListener("change",e=>{const l=e.target.closest("label"); if(l) l.classList.remove("ok","no");});
+  return {
+    check(){ let right=0; labs.forEach((l,i)=>{const c=l.querySelector("input").checked; l.classList.remove("ok","no"); if(c===items[i].ok){ if(c) l.classList.add("ok"); right++; } else l.classList.add("no"); });
+      fb(taskId, right===items.length?"Genau richtig ausgewählt.":`${items.length-right} Aussage(n) noch falsch eingeschätzt – rot markiert.`, right===items.length?"good":"meh"); },
+    solve(on){ labs.forEach((l,i)=>{ const n=l.querySelector(".mnote"); if(n) n.hidden=!on; l.querySelector("input").checked = on ? items[i].ok : false; l.classList.remove("ok","no"); if(on) l.classList.add(items[i].ok?"ok":"no"); }); fb(taskId,""); },
+    reset(){ this.solve(false); }
+  };
+}
+
+function tokens(s){ return s.split(/(\s+)/).map(t=> (t===""||/^\s+$/.test(t)) ? t : `<span class="w">${esc(t)}</span>`).join(""); }
+function makeMarker(el, targets, taskId, listLabel){
+  el.innerHTML = P.map((para,pi)=>{
+    let pos=0, out="";
+    targets.forEach((x,i)=>{ if(x.p!==pi) return; const k=para.indexOf(x.t,pos); if(k<0){console.warn("nicht gefunden:",x.t); return;}
+      out += tokens(para.slice(pos,k)) + `<span class="tgt c-${x.c}" data-t="${i}">${tokens(x.t)}<span class="tag">${x.n}</span></span>`; pos=k+x.t.length; });
+    out += tokens(para.slice(pos));
+    return `<p><span class="pn"><b>${pi+1}</b>${ZL[pi]}</span>${out}</p>`;
+  }).join("");
+  el.addEventListener("click",e=>{const w=e.target.closest(".w"); if(!w)return; w.classList.toggle("mk"); w.classList.remove("miss"); el.querySelectorAll(".tgt.hit").forEach(t=>{ if(!t.querySelector(".mk")) t.classList.remove("hit"); });});
+  const tg=[...el.querySelectorAll(".tgt")];
+  return {
+    check(){ let found=0; tg.forEach(t=>{const h=!!t.querySelector(".mk"); t.classList.toggle("hit",h); if(h) found++;});
+      const wrong=[...el.querySelectorAll(".w.mk")].filter(w=>!w.closest(".tgt")); el.querySelectorAll(".w.miss").forEach(w=>w.classList.remove("miss")); wrong.forEach(w=>w.classList.add("miss"));
+      let m=`Du hast ${found} von ${tg.length} Stellen gefunden (grün umrandet).`; if(wrong.length) m+=` ${wrong.length} Markierung(en) treffen nichts – sie sind durchgestrichen.`; if(found===tg.length&&!wrong.length) m="Perfekt – alle Stellen gefunden, keine Fehlmarkierung.";
+      fb(taskId,m, found===tg.length&&!wrong.length?"good":""); },
+    solve(on){ el.classList.toggle("sol-on",on); fb(taskId, on?`Musterlösung: ${tg.length} ${listLabel}. Die Kästchen hinter den Stellen erklären sie.`:""); },
+    reset(){ el.classList.remove("sol-on"); el.querySelectorAll(".mk,.miss").forEach(w=>w.classList.remove("mk","miss")); tg.forEach(t=>t.classList.remove("hit")); fb(taskId,""); }
+  };
+}
+
+function makeOrder(el, items, taskId){
+  const order = shuffle(items.map((_,i)=>i), 11);
+  el.innerHTML = `<div class="pool" id="${el.id}-pool">${order.map(i=>`<button type="button" class="chip" data-i="${i}">${esc(items[i].t)}</button>`).join("")}</div><div class="seq" id="${el.id}-seq"></div>`;
+  const pool=$(el.id+"-pool"), seq=$(el.id+"-seq");
+  el.addEventListener("click",e=>{const c=e.target.closest(".chip"); if(!c)return; c.classList.remove("ok","no"); const r=c.querySelector(".role"); if(r) r.remove(); if(c.parentElement===pool) seq.appendChild(c); else { pool.appendChild(c); } });
+  return {
+    check(){ const cs=[...seq.children]; let ok=0; cs.forEach((c,k)=>{const g=+c.dataset.i===k; c.classList.toggle("ok",g); c.classList.toggle("no",!g); if(g) ok++;});
+      if(cs.length<items.length) fb(taskId,`${ok} Sätze stehen schon richtig – ${items.length-cs.length} fehlen noch in deiner Kette.`); else fb(taskId, ok===items.length?"Die Kette stimmt. Zeig dir die Musterlösung an, um die Funktion jedes Satzes zu sehen.":`${ok} von ${items.length} an der richtigen Stelle.`, ok===items.length?"good":"meh"); },
+    solve(on){ const all=[...el.querySelectorAll(".chip")]; if(on){ all.sort((a,b)=>a.dataset.i-b.dataset.i).forEach(c=>{ seq.appendChild(c); c.classList.add("ok"); c.classList.remove("no"); if(!c.querySelector(".role")) c.insertAdjacentHTML("beforeend",`<span class="role">${items[+c.dataset.i].r}</span>`); }); } else this.reset(); },
+    reset(){ order.forEach(i=>{const c=el.querySelector(`.chip[data-i="${i}"]`); c.classList.remove("ok","no"); const r=c.querySelector(".role"); if(r) r.remove(); pool.appendChild(c);}); fb(taskId,""); }
+  };
+}
+
+function proseTask(solId, textIds){
+  return { solve(on){ $(solId).hidden=!on; }, reset(){ $(solId).hidden=true; textIds.forEach(id=>{ $(id).value=""; store(id,""); }); } };
+}
+
+/* ============ SCHRITT 1 ============ */
+tasks.t1a = makeQuiz($("quiz1"), [
+  {q:"Was steht im Zentrum eines Kommentars?", o:["Eine möglichst vollständige Wiedergabe des Zeitungsartikels","Die persönliche, begründete Meinung der Schreiberin oder des Schreibers","Eine neutrale Abwägung von Pro und Contra ohne eigene Position"], a:1, ex:"„Im Zentrum der Textsorte Kommentar steht deine persönliche Meinung!“ Sie muss aber durch Argumente gestützt werden."},
+  {q:"Wodurch unterscheidet sich der Kommentar von der Erörterung?", o:["Er darf zugespitzt, ironisch oder sarkastisch sein und setzt gezielt Stilmittel ein","Er kommt ohne Argumente aus","Er ist immer kürzer als eine Erörterung"], a:0, ex:"Die Erörterung verlangt einen sachlicheren Stil. Der Kommentar darf pointiert, ironisch und bildhaft formuliert sein."},
+  {q:"Wie viele Wörter verlangt die Aufgabe A24?", o:["270–330","405–495","540–660"], a:1, ex:"Alle drei Längen kommen bei der Matura vor. Für A24 gilt: „Schreibe zwischen 405 und 495 Wörter.“"},
+  {q:"Wo liegt der Schwerpunkt eines Kommentars?", o:["In der Einleitung","In der Wiedergabe der Textbeilage","Im letzten Teil: in der Stellungnahme"], a:2, ex:"„Der Schwerpunkt in einem Kommentar liegt im letzten Teil der Arbeit. Hier bringst du deine persönliche Meinung ein.“ Er darf emotional sein, muss aber begründet werden."},
+  {q:"Welche Angaben gehören zur Vorstellung der Textbeilage?", o:["Nur der Titel","Autor/in, Titel, Erscheinungsort (Zeitung) und Datum, evtl. Kontext","Deine Meinung zum Artikel"], a:1, ex:"Laut „Im Klartext“: Vorstellung der Textbeilage mit Autorin/Autor, Titel, Erscheinungsort, evtl. Kontext. Das Datum gehört ebenfalls dazu."}
+], "t1a");
+
+tasks.t1b = makeAssign($("ops"), [
+  {t:"wiedergeben",a:0},{t:"erläutern",a:1},{t:"Stellung nehmen",a:2},{t:"beschreiben",a:0},{t:"vergleichen",a:1},
+  {t:"bewerten",a:2},{t:"benennen",a:0},{t:"charakterisieren",a:1},{t:"appellieren",a:2},{t:"erklären",a:1},{t:"darstellen",a:0},{t:"begründen",a:2}
+], ["1","2","3"], "t1b", "buttons");
+
+/* ============ SCHRITT 2 ============ */
+tasks.t2a = makeAssign($("auftraege"), [
+  {t:"<b>Beschreibe</b> die Verkaufsstrategie von Abercrombie &amp; Fitch.",a:0,n:"„Beschreiben“ ist ein Operator der Ebene 1: Du gibst wieder, was im Text steht."},
+  {t:"<b>Erläutere</b> die in der Textbeilage zitierten Aussagen des Firmenchefs Mike Jeffries.",a:1,n:"„Erläutern“ gehört zu Ebene 2: Du erklärst, was hinter den Aussagen steckt und was sie bedeuten."},
+  {t:"<b>Bewerte</b> die Reaktionen, die im Internet erfolgten. <b>Nimm</b> kritisch <b>Stellung</b> zum Thema.",a:2,n:"„Bewerten“ und „Stellung nehmen“ sind Ebene 3. Hier liegt der Schwerpunkt deines Kommentars."}
+], ["Ebene 1 · Reproduktion","Ebene 2 · Transfer","Ebene 3 · Reflexion"], "t2a", "select");
+
+tasks.t2b = makeMulti($("strategie"), [
+  {t:"In der Mädchenabteilung gibt es keine Kleidung in den Größen XL oder XXL.",ok:true,n:"Z. 13–15 der Textbeilage."},
+  {t:"In den Filialen arbeiten ausschließlich junge, schlanke und attraktive Mitarbeiter, bevorzugt mit Waschbrettbauch.",ok:true,n:"Z. 11–13."},
+  {t:"Die Firma setzt bewusst fülligere Models ein, um Essstörungen vorzubeugen.",ok:false,n:"Das tun laut Text andere Unternehmen (Z. 17–20). A&F grenzt sich davon ab."},
+  {t:"Kleidung mit Mängeln wird lieber verbrannt, als sie an weniger gut Betuchte weiterzugeben.",ok:true,n:"Z. 28–31. So will die Firma ihr exklusives Image schützen."},
+  {t:"Für Jungs gibt es große Größen, weil es „ja auch kräftig gebaute Sportler“ gibt.",ok:true,n:"Z. 16–17. Die Ausnahme zeigt, wie gezielt das Schönheitsideal gesteuert wird."},
+  {t:"Die Firma verteilt ihre Kleidung an Obdachlose.",ok:false,n:"Das macht der Aktivist Greg Karber als Protest (Z. 32–34) – eine Reaktion, keine Strategie."},
+  {t:"Die Marke soll nur von „coolen“, schönen und erfolgreichen Jugendlichen getragen werden.",ok:true,n:"Z. 1–4 und das Jeffries-Zitat. Das ist der Kern der Strategie: Exklusivität durch Ausgrenzung."}
+], "t2b");
+
+tasks.t2c = makeMulti($("zitate"), [
+  {t:"„In jeder Schule gibt es die coolen und beliebten Kids, und dann gibt es da noch die nicht so coolen Kids. Wir wollen die coolen Kids.“",ok:true,n:"Jeffries in einem Interview (Z. 5–8)."},
+  {t:"„Zusammen machen wir Abercrombie & Fitch zur weltweiten Nummer eins für Obdachlosen-Bekleidung!“",ok:false,n:"Das sagt Greg Karber in seinem Video (Z. 37–39)."},
+  {t:"„Sind wir ausgrenzend? Absolut!“",ok:true,n:"Jeffries (Z. 20–21). Er bekennt sich offen zur Diskriminierung als Markenkern."},
+  {t:"„Meine Lieblingsteams sind größer als eure Klamotten.“",ok:false,n:"Antwort eines Facebook-Nutzers (Z. 59)."},
+  {t:"„Zu fett für dieses Shirt“",ok:false,n:"Aufschrift auf den Pappschildern der Anti-Models (Z. 51–52)."}
+], "t2c");
+
+tasks.t2d = makeAssign($("reaktionen"), [
+  {t:"Ein Drehbuchautor verteilt A&F-Kleidung an die Ärmsten und ruft andere auf, es ihm gleichzutun.",a:0,n:"Greg Karbers Video, über 500.000 Mal angeschaut."},
+  {t:"Unter #fitchthehomeless mokieren sich Nutzer über das Äußere des Chefs: Er sei zu hässlich für seine eigene Marke.",a:1,n:"Twitter, Z. 40–45."},
+  {t:"Menschen, die nicht dem Schönheitsideal entsprechen, tragen A&F-Hemden und Pappschilder mit „Zu arm für dieses Shirt“.",a:2,n:"Fotos einer Fotografin im Netz, Z. 47–52."},
+  {t:"Auf die Werbung der Firma antworten Nutzer ironisch, etwa: „Gibt’s die auch in Übergrößen?“",a:3,n:"Facebook-Account der Firma, Z. 53–67."}
+], ["YouTube-Video","Twitter","Fotos im Netz","Facebook"], "t2d", "select");
+
+/* ============ SCHRITT 3 ============ */
+tasks.t3a = makeAssign($("absaetze"),
+  P.map((p,i)=>({t:`<b>Abs. ${i+1}</b> (${ZL[i]}): ${esc(p.split(" ").slice(0,14).join(" "))} …`, a:[0,1,1,2,2,3][i], n:[
+    "Ebene 1: Der Sachverhalt aus der Textbeilage wird dargestellt – mit Autor, Titel, Zeitung und Datum. Die Verkaufsstrategie ist in einem Satz zusammengefasst.",
+    "Ebene 2: Die rhetorische Frage leitet über. Der Verfasser erklärt, wie Werbung normalerweise funktioniert, damit die Aussagen des Chefs als Ausnahme sichtbar werden.",
+    "Ebene 2: Die Aussage des Chefs wird erläutert und durch den Kontrast („Nicht so …“) kritisch eingeordnet.",
+    "Ebene 3: Die Reaktionen werden wiedergegeben und zugleich bewertet („kreative Methoden“, „mit ihren eigenen Waffen“).",
+    "Ebene 3: Die Twitter-Meldungen werden als „am raffiniertesten“ bewertet – die Bewertung wird fortgesetzt.",
+    "Ebene 3: Eigene Position (Konsumenten sind nicht hilflos), Begründung, Appell und pointierter Schlusssatz."][i]})),
+  ["Sachverhalt darstellen (Auftrag 1)","Aussagen des Chefs erläutern (Auftrag 2)","Reaktionen im Internet bewerten (Auftrag 3)","Eigene Stellungnahme und Appell"], "t3a", "select", "read");
+
+tasks.t3b = makeQuiz($("quiz3"), [
+  {q:"Mit welchem Satz wechselt der Mustertext von der Wiedergabe zur eigenen Meinung?", o:["„Die US-amerikanische Modefirma Abercrombie & Fitch verkauft teure Kleidungsstücke …“","„Ist solch eine ungeniert zur Schau gestellte Diskriminierung … nicht überraschend?“","„Sie posteten auf der Firmenseite ironische Kommentare.“"], a:1, ex:"Die rhetorische Frage zu Beginn von Absatz 2 ist der Wendepunkt. Ab hier wertet der Verfasser – erkennbar schon an „ungeniert zur Schau gestellte Diskriminierung“."},
+  {q:"Welcher Satz leitet von den Aussagen des Chefs zu den Reaktionen im Internet über?", o:["„Es ist also nicht verwunderlich, dass diese Arroganz im Internet mit kreativen Methoden kritisiert wird.“","„Was als schön, erfolgreich oder cool empfunden wird, ist eben sehr subjektiv.“","„Möglichkeiten dafür gibt es genug.“"], a:0, ex:"„also“ zieht eine Folgerung aus Absatz 3, „diese Arroganz“ greift das Verhalten des Chefs wertend wieder auf. Ein Satz verbindet damit zwei Teile."},
+  {q:"Welche Wortanzahl hat der Mustertext – und passt sie zur Aufgabe?", o:["426 Wörter – passt (405–495)","326 Wörter – zu kurz","526 Wörter – zu lang"], a:0, ex:"Mit 426 Wörtern liegt der Mustertext im vorgegebenen Rahmen von 405–495 Wörtern."}
+], "t3b");
+
+/* ============ SCHRITT 4 ============ */
+const KON = [
+  {p:0,t:"wie Steffen Fründt",c:"kon",n:"Quelle / Vergleich"},
+  {p:0,t:"in dem er",c:"koh",n:"Relativpronomen → Artikel"},
+  {p:0,t:"Der Firmenchef",c:"koh",n:"Wiederaufnahme"},
+  {p:0,t:"selbst auch",c:"kon",n:"Ergänzung"},
+  {p:1,t:"Ist solch eine",c:"koh",n:"„solch“ verweist zurück"},
+  {p:1,t:"doch",c:"kon",n:"Gegensatz, Bekanntes"},
+  {p:1,t:"Und je mehr",c:"kon",n:"Verhältnis je … desto"},
+  {p:1,t:"desto",c:"kon",n:"Verhältnis je … desto"},
+  {p:2,t:"Vielmehr",c:"kon",n:"Gegensatz / Korrektur"},
+  {p:2,t:"Nicht so",c:"kon",n:"Gegensatz"},
+  {p:2,t:"Deren Chef",c:"koh",n:"„deren“ → A&F"},
+  {p:3,t:"also",c:"kon",n:"Folgerung"},
+  {p:3,t:"diese Arroganz",c:"koh",n:"„diese“ → Abs. 3"},
+  {p:3,t:"So erschien",c:"kon",n:"Beispiel"},
+  {p:3,t:"In die gleiche Kerbe",c:"kon",n:"Anreihung"},
+  {p:3,t:"Damit",c:"koh",n:"Pronominaladverb"},
+  {p:3,t:"auch durch",c:"kon",n:"Ergänzung"},
+  {p:3,t:"Sie posteten",c:"koh",n:"„Sie“ → Facebook-User"},
+  {p:4,t:"Sie warfen ihm",c:"koh",n:"Pronomen → Twitter / Chef"},
+  {p:5,t:"Denn",c:"kon",n:"Begründung"},
+  {p:5,t:"So bleiben",c:"kon",n:"Beispiel / Folge"},
+  {p:5,t:"Dies kann",c:"koh",n:"„Dies“ → ganzer Satz davor"},
+  {p:5,t:"also auch",c:"kon",n:"Folgerung"}
+];
+tasks.t4a = makeMarker($("mk-kon"), KON, "t4a", "Verknüpfungen (grün: Konnektor, blau: Kohäsionsmittel)");
+
+tasks.t4b = makeAssign($("beziehung"), [
+  {t:"„<b>Denn</b> soziale Medien ermöglichen uns heutzutage …“",a:0,n:"„denn“ leitet eine Begründung für den Satz davor ein."},
+  {t:"„Es ist <b>also</b> nicht verwunderlich, dass …“",a:1,n:"„also“ zieht eine Schlussfolgerung aus dem Vorhergehenden."},
+  {t:"„<b>Vielmehr</b> wird in der Werbung immer wieder betont …“",a:2,n:"„vielmehr“ stellt etwas richtig und setzt einen Gegensatz."},
+  {t:"„<b>So</b> erschien auf YouTube ein Video …“",a:3,n:"„so“ leitet hier ein konkretes Beispiel ein."},
+  {t:"„Der Firmenchef gibt <b>selbst auch</b> unumwunden zu …“",a:4,n:"„auch“ fügt eine weitere Information hinzu."},
+  {t:"„<b>Nicht so</b> die Firma Abercrombie &amp; Fitch.“",a:2,n:"Knapper Gegensatz zur üblichen Werbung – zugleich eine Ellipse."}
+], ["Begründung","Folgerung","Gegensatz","Beispiel","Ergänzung"], "t4b", "select", "read");
+
+/* ============ SCHRITT 5 ============ */
+const RH = [
+  {p:0,t:"das entsprechende Kleingeld",c:"rh",n:"Umgangssprache, ironisch"},
+  {p:1,t:"Ist solch eine ungeniert zur Schau gestellte Diskriminierung derjenigen, die sich teure Klamotten nicht leisten können beziehungsweise die übergewichtig sind, nicht überraschend?",c:"rh",n:"rhetorische Frage"},
+  {p:1,t:"Und je mehr Konsumentinnen und Konsumenten ein Produkt kaufen, desto größer der Gewinn für die Firma.",c:"rh",n:"Ellipse (Verb fehlt)"},
+  {p:2,t:"Nicht so die Firma Abercrombie & Fitch.",c:"rh",n:"Ellipse, kurzer Satz"},
+  {p:2,t:"klipp und klar",c:"rh",n:"Zwillingsformel"},
+  {p:2,t:"schlicht und einfach",c:"rh",n:"Zwillingsformel"},
+  {p:3,t:"diese Arroganz",c:"rh",n:"wertendes Wort"},
+  {p:3,t:"In die gleiche Kerbe schlagen",c:"rh",n:"Redewendung"},
+  {p:3,t:"mit ihren eigenen „Waffen“ zu schlagen",c:"rh",n:"Metapher"},
+  {p:3,t:"scheinbar heile und makellose Welt",c:"rh",n:"Ironie"},
+  {p:4,t:"Am raffiniertesten",c:"rh",n:"Superlativ, Wertung"},
+  {p:4,t:"mit seinen eigenen Waffen",c:"rh",n:"Metapher, wieder aufgegriffen"},
+  {p:5,t:"wir als Konsumentinnen und Konsumenten",c:"rh",n:"Leserbezug (wir)"},
+  {p:5,t:"nicht hilflos ausgeliefert",c:"rh",n:"Litotes (Verneinung)"},
+  {p:5,t:"eines arroganten Konzernchefs",c:"rh",n:"wertendes Adjektiv"},
+  {p:5,t:"Möglichkeiten dafür gibt es genug.",c:"rh",n:"pointierter Schlusssatz"}
+];
+tasks.t5a = makeMarker($("mk-rh"), RH, "t5a", "rhetorische Mittel");
+
+tasks.t5b = makeAssign($("stilmittel"), [
+  {t:"„Ist solch eine … Diskriminierung … nicht überraschend?“",a:0,n:"Eine Frage, auf die keine Antwort erwartet wird. Sie bringt die Leser zum Nachdenken und macht die Meinung des Verfassers deutlich."},
+  {t:"„Nicht so die Firma Abercrombie &amp; Fitch.“",a:1,n:"Das Verb fehlt. Der kurze, unvollständige Satz wirkt wie ein Schlag und hebt den Gegensatz hervor."},
+  {t:"„klipp und klar“, „schlicht und einfach“",a:2,n:"Zwei Wörter, fest verbunden. Sie klingen mündlich und verstärken die Aussage."},
+  {t:"„… die Firma mit ihren eigenen „Waffen“ zu schlagen“",a:3,n:"Kritik wird bildhaft als Kampf dargestellt. Die Anführungszeichen zeigen, dass es keine echten Waffen sind."},
+  {t:"„Die scheinbar heile und makellose Welt von Abercrombie &amp; Fitch …“",a:4,n:"Gemeint ist das Gegenteil: Die Welt ist nur scheinbar heil. Das Wort „makellos“ spielt auf das Schönheitsideal an."},
+  {t:"„Möglichkeiten dafür gibt es genug.“",a:5,n:"Ein kurzer, zugespitzter Schlusssatz, wie ihn der Leitfaden verlangt. Er bleibt im Gedächtnis."}
+], ["rhetorische Frage","Ellipse","Zwillingsformel","Metapher","Ironie","pointierter Schlusssatz"], "t5b", "select", "read");
+
+const POINTE = [
+  "Die Firma bietet für Mädchen keine Kleidung in großen Größen an.",
+  "Der Firmenchef sagt, dass er nur coole und schöne Kunden möchte.",
+  "Viele Menschen haben im Internet kritisch auf die Firma reagiert."
+];
+$("pointe").innerHTML = POINTE.map((s,i)=>`<div class="pair"><div class="from"><b>Sachlich:</b> ${s}</div><textarea id="pt-${i}" data-store="pt-${i}" aria-label="Pointierte Fassung ${i+1}" style="min-height:70px" placeholder="Pointiert: …"></textarea></div>`).join("");
+tasks.t5c = proseTask("t5c-sol", POINTE.map((_,i)=>"pt-"+i));
+
+/* ============ SCHRITT 6 ============ */
+tasks.t6a = makeOrder($("kette"), [
+  {t:"Die heftigen kritischen Reaktionen im Internet zeigen, dass wir als Konsumentinnen und Konsumenten mächtigen Modefirmen und deren Werbung nicht hilflos ausgeliefert sind.", r:"These – die eigene Position"},
+  {t:"Denn soziale Medien ermöglichen uns heutzutage, weltweit und schnell zu reagieren, um gesellschaftliche Fehlentwicklungen aufzuzeigen und Benachteiligten zu helfen.", r:"Begründung – erkennbar an „Denn“"},
+  {t:"So bleiben fragwürdige Äußerungen zum Beispiel eines arroganten Konzernchefs nicht unwidersprochen.", r:"Beispiel – Rückbezug auf A&F"},
+  {t:"Dies kann dazu führen, dass die Welt solidarischer wird.", r:"Folge – „Dies“ fasst das Vorige zusammen"},
+  {t:"Es liegt also auch an uns Konsumenten und Konsumentinnen, uns mit unserem Kaufverhalten und kritischen Aktionen gegen fragwürdige Auswüchse der Modewelt zur Wehr zu setzen.", r:"Appell – eingeleitet mit „also“"},
+  {t:"Möglichkeiten dafür gibt es genug.", r:"Pointierter Schlusssatz"}
+], "t6a");
+
+const st = makeAssign($("staerke"), [
+  {t:"Werbung verspricht normalerweise allen Glück und betont günstige Preise – A&amp;F schließt dagegen offen Menschen aus. (Abs. 2–3)",a:0,n:"Stark: Der Kontrast entlarvt die Firma, ohne dass der Verfasser übertreiben muss."},
+  {t:"Die Reaktionen im Internet (Video, Fotos, Facebook, Twitter) zeigen kreativen Widerstand. (Abs. 4–5)",a:0,n:"Stark: konkrete, belegbare Beispiele aus der Textbeilage."},
+  {t:"Die Twitter-Meldungen, die den Chef „zu hässlich für seine Marke“ nennen, waren „am raffiniertesten“. (Abs. 5)",a:1,n:"Angreifbar: Auch dieser Spott bewertet einen Menschen nach seinem Aussehen – also nach genau dem Maßstab, der kritisiert wird."},
+  {t:"Soziale Medien ermöglichen, weltweit und schnell auf Fehlentwicklungen zu reagieren. (Abs. 6)",a:0,n:"Stark: Die Behauptung wird durch die vorher genannten Beispiele gestützt."},
+  {t:"„Dies kann dazu führen, dass die Welt solidarischer wird.“ (Abs. 6)",a:1,n:"Schwächer: eine Hoffnung ohne Beleg. Das „kann“ macht sie vorsichtig, aber nicht überzeugender."}
+], ["stark","schwächer"], "t6b", "buttons", "read");
+tasks.t6b = { check(){ st.check(); }, solve(on){ st.solve(on); $("t6b-sol").hidden=!on; }, reset(){ st.reset(); $("t6b-sol").hidden=true; $("t6b-txt").value=""; store("t6b-txt",""); } };
+
+tasks.t6c = makeAssign($("hilfen"), [
+  {t:"Die Autorin/Der Autor weist darauf hin, dass …",a:0},
+  {t:"Ich finde es bedauerlich, dass …",a:1},
+  {t:"Ich ersuche Sie, die Augen nicht vor diesem Problem zu verschließen.",a:2},
+  {t:"Auffällig ist, dass …",a:0},
+  {t:"Grundsätzlich halte ich diese Haltung für richtig, aber …",a:1},
+  {t:"Diese Situation bedarf einer Änderung.",a:2},
+  {t:"Als problematisch erachte ich …",a:1},
+  {t:"Der Autor präsentiert eine Reihe von Argumenten …",a:0},
+  {t:"Ich würde mir wünschen, dass in Zusammenhang mit diesem Problem endlich etwas geschieht.",a:2},
+  {t:"Die Tatsachen sagen etwas anderes.",a:1}
+], ["W","S","A"], "t6c", "buttons", "read");
+
+tasks.t6d = proseTask("t6d-sol", ["t6d-txt"]);
+
+/* ============ SCHRITT 7 ============ */
+const PARTS = [
+  {h:"Einleitung und Sachverhalt", e:"Ebene 1 · ca. 90–110 Wörter", m:"Stelle die Textbeilage vor (Autor, Titel, Zeitung, Datum) und beschreibe die Verkaufsstrategie von A&F. Beginne gern mit einem direkten Einstieg: einem Zitat oder einer zugespitzten Behauptung.",
+   s:["„Wir wollen die coolen Kids.“ – ","Wie Steffen Fründt in seinem Artikel „Schlankheits-Fanatiker beschwören Shitstorm herauf“, erschienen am 15.05.2013 in der „Welt“, berichtet, ","Auffällig ist, dass "], mp:[0]},
+  {h:"Die Aussagen von Mike Jeffries erläutern", e:"Ebene 2 · ca. 100–120 Wörter", m:"Erkläre, was hinter den beiden Zitaten steckt. Was bedeutet „cool“ für ihn? Warum ist „Sind wir ausgrenzend? Absolut!“ für eine Werbestrategie ungewöhnlich?",
+   s:["Ist solch eine Haltung nicht überraschend? ","Normalerweise ","Mit dieser Aussage macht Jeffries deutlich, dass "], mp:[1,2]},
+  {h:"Die Reaktionen im Internet bewerten", e:"Ebene 3 · ca. 100–120 Wörter", m:"Nenne die Reaktionen und bewerte sie. Welche findest du gelungen, welche fragwürdig – und warum?",
+   s:["Es ist also nicht verwunderlich, dass ","Besonders wichtig erscheint mir ","Es scheint mir durchaus übertrieben, wenn "], mp:[3,4]},
+  {h:"Stellungnahme, Appell und Schlusssatz", e:"Ebene 3 · ca. 100–130 Wörter", m:"Formuliere deine Position klar, begründe sie, richte einen Appell an die Leser und ende mit einem pointierten Satz, der auf das Thema zurückgreift.",
+   s:["Meines Erachtens ","Ich gebe zu bedenken, dass ","Diese Situation bedarf einer Änderung. ","Es liegt also auch an uns, "], mp:[5]}
+];
+$("gerust").innerHTML = PARTS.map((pt,i)=>`
+  <div class="part">
+    <h4>${i+1}. ${pt.h} <small>${pt.e}</small></h4>
+    <div class="meta">${pt.m}</div>
+    <div class="starters">${pt.s.map(s=>`<button type="button" data-ins="w-${i}" data-txt="${esc(s).replace(/"/g,"&quot;")}">${esc(s.trim())} …</button>`).join("")}</div>
+    <textarea id="w-${i}" data-store="w-${i}" data-count="1" aria-label="${pt.h}" style="min-height:150px"></textarea>
+    <div class="wc" id="w-${i}-wc">0 Wörter</div>
+    <div><button type="button" class="btn sol" data-model="${i}" aria-pressed="false">Musterabschnitt zeigen</button></div>
+    <div class="model" id="model-${i}" hidden><div class="sl">Mustertext · ${pt.mp.map(k=>"Abs. "+(k+1)).join(" und ")}</div>${pt.mp.map(k=>`<p style="margin-top:6px">${esc(P[k])}</p>`).join("")}</div>
+  </div>`).join("");
+
+function words(s){ return (s.trim().match(/\S+/g)||[]).filter(w=>/[A-Za-zÄÖÜäöüß0-9]/.test(w)).length; }
+function updateCount(){
+  let tot=0; PARTS.forEach((_,i)=>{const n=words($("w-"+i).value); tot+=n; $("w-"+i+"-wc").textContent=n+" Wörter";});
+  $("wc-total").textContent=tot; $("wc-fill").style.width=Math.min(100,tot/600*100)+"%";
+  const s=$("wc-state"); s.textContent = tot<405 ? `Noch ${405-tot} Wörter bis zum Ziel (405–495)` : tot<=495 ? "Im Zielbereich – sehr gut!" : `${tot-495} Wörter zu viel – kürze etwas`;
+  s.style.color = tot>=405&&tot<=495 ? "var(--ok)" : (tot>495?"var(--bad)":"");
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-ins]"); if(b){ const ta=$(b.dataset.ins); const t=b.dataset.txt; const v=ta.value; ta.value = v + (v && !/\s$/.test(v) ? " " : "") + t; ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length); ta.dispatchEvent(new Event("input",{bubbles:true})); return; }
+  const m=e.target.closest("[data-model]"); if(m){ const box=$("model-"+m.dataset.model); box.hidden=!box.hidden; m.setAttribute("aria-pressed",String(!box.hidden)); m.textContent= box.hidden?"Musterabschnitt zeigen":"Musterabschnitt ausblenden"; }
+});
+tasks.t7a = {
+  solve(on){ document.querySelectorAll("[data-model]").forEach(m=>{ $("model-"+m.dataset.model).hidden=!on; m.setAttribute("aria-pressed",String(on)); m.textContent=on?"Musterabschnitt ausblenden":"Musterabschnitt zeigen"; }); },
+  reset(){ armed("t7a") && (PARTS.forEach((_,i)=>{ $("w-"+i).value=""; store("w-"+i,""); }), updateCount(), this.solve(false), (()=>{const s=document.querySelector('[data-act="sol"][data-task="t7a"]'); s.setAttribute("aria-pressed","false"); s.textContent="Alle Musterabschnitte zeigen";})()); }
+};
+let armedAt={};
+function armed(id){ const btn=document.querySelector(`[data-act="reset"][data-task="${id}"]`); const now=Date.now(); if(armedAt[id] && now-armedAt[id]<4000){ armedAt[id]=0; btn.textContent="Entwurf löschen"; return true; } armedAt[id]=now; btn.textContent="Wirklich löschen? Nochmal klicken"; setTimeout(()=>{ if(armedAt[id]===now){ armedAt[id]=0; btn.textContent="Entwurf löschen"; } },4000); return false; }
+
+const CHECK = [
+  "Ist die Basisinformation korrekt? (Autor, Titel, Zeitung, Datum, Sachverhalt)",
+  "Habe ich alle drei Arbeitsaufträge bearbeitet: beschreiben, erläutern, bewerten?",
+  "Habe ich meine Schreibabsicht deutlich gemacht?",
+  "Habe ich meine Meinung begründet?",
+  "Habe ich gezielt Stilmittel eingesetzt (rhetorische Frage, Ellipse, pointierte Formulierung)?",
+  "Ist mein Appell am Ende schlüssig?",
+  "Greift mein Schlusssatz das Thema oder den Titel pointiert auf?",
+  "Habe ich meinen Text auf sprachliche Unebenheiten, Wiederholungen, grammatikalische Hürden und Rechtschreibung überprüft?"
+];
+$("checkliste").innerHTML = CHECK.map((c,i)=>`<label><input type="checkbox" id="ck-${i}" data-store="ck-${i}"><span>${c}</span></label>`).join("");
+tasks.t7c = { solve(on){ $("t7c-sol").hidden=!on; }, reset(){} };
+
+/* ============ Speichern / Laden ============ */
+document.querySelectorAll("[data-store]").forEach(el=>{
+  const v=store(el.dataset.store); if(v!==null && v!==undefined){ if(el.type==="checkbox") el.checked=v==="1"; else el.value=v; }
+  el.addEventListener(el.type==="checkbox"?"change":"input",()=>{ store(el.dataset.store, el.type==="checkbox"?(el.checked?"1":"0"):el.value); if(el.dataset.count) updateCount(); });
+});
+updateCount();
+
+/* ============ Knöpfe ============ */
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]"); if(!b) return;
+  const t=tasks[b.dataset.task]; if(!t) return;
+  const act=b.dataset.act;
+  if(act==="check" && t.check) t.check();
+  if(act==="sol"){ const on=b.getAttribute("aria-pressed")!=="true"; b.setAttribute("aria-pressed",String(on)); const base=b.dataset.task==="t7a"?"Alle Musterabschnitte":(b.dataset.task==="t7c"?"Hilfen":"Musterlösung"); b.textContent= on? base+" ausblenden" : base+" zeigen"; t.solve(on); }
+  if(act==="reset"){ t.reset(); if(b.dataset.task!=="t7a" || !armedAt.t7a){ const s=document.querySelector(`[data-act="sol"][data-task="${b.dataset.task}"]`); if(s && b.dataset.task!=="t7a"){ s.setAttribute("aria-pressed","false"); s.textContent="Musterlösung zeigen"; } } }
+});
+
+/* ============ Navigation ============ */
+const links=[...document.querySelectorAll("#stepnav a")];
+const io=new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting){ links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+en.target.id)); const on=links.find(a=>a.classList.contains("on")); const nav=$("stepnav"); if(on && nav.scrollWidth>nav.clientWidth) nav.scrollLeft = on.offsetLeft - nav.clientWidth/2; } }); },{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section.step").forEach(s=>io.observe(s));
+</script>
+
+</body>
+</html>
