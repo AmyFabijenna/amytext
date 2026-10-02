@@ -6,166 +6,155 @@
 <title>Personenbeschreibung – Der Wort-Baukasten</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#fff7e8; --ink:#2a2750; --muted:#6a6790; --card:#ffffff; --line:#eadfc8;
-  --coral:#ff6b4a; --sun:#ffc533; --teal:#1f9c8a; --teal-soft:#e0f5f0; --teal-line:#8fd8c9; --teal-ink:#0e5d51;
-  --vio:#7a3fc4; --vio-soft:#f3e8ff; --vio-line:#c9a0f2; --vio-ink:#55208f;
+  --night:#0e1636; --panel:#1a2658; --panel2:#212f6a; --edge:#34468f; --cream:#f5ecd5; --muted:#aab4dc;
+  --ocher:#d9962b; --ocher2:#f0b955; --ocherd:#9c6513; --vio:#7a5fd6; --vio2:#4d3fa8; --vioedge:#a592f0; --terra:#c0603b;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.55;color:var(--ink);
-  background:var(--bg) radial-gradient(circle at 12% 18%,#ffe9b8 0 90px,transparent 91px),radial-gradient(circle at 92% 8%,#ffd9cf 0 120px,transparent 121px);background-attachment:fixed}
-h1,h2,h3{font-family:'Baloo 2','Nunito',sans-serif;line-height:1.15;margin:0}
+body{margin:0;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.55;color:var(--cream);
+  background:radial-gradient(900px 500px at 88% -5%,rgba(217,150,43,.22),transparent 60%),radial-gradient(800px 600px at 0% 25%,rgba(94,98,220,.26),transparent 60%),var(--night);background-attachment:fixed}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15;margin:0}
 button{font-family:inherit;font-size:inherit;color:inherit}
 .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+b{color:#fff6dd}
 
-/* Hero */
-.hero{background:linear-gradient(135deg,#ffd86b 0%,#ff9a76 100%);padding:28px 0 56px;border-radius:0 0 40px 40px;box-shadow:0 8px 24px rgba(255,120,80,.25)}
-.hero .faces{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:6px}
-.hero h1{font-size:clamp(2rem,5.5vw,3.2rem);font-weight:800;color:#3a1f5c}
-.hero p{margin:8px 0 0;font-size:1.1rem;max-width:640px}
+.hero{background:linear-gradient(170deg,#0b1230 0%,#1f2f73 55%,#8a5a1c 140%);padding:30px 0 60px;border-radius:0 0 40px 40px;border-bottom:3px solid var(--ocher);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.hero .faces{font-size:2.2rem;letter-spacing:.25rem;margin-bottom:6px}
+.hero h1{font-size:clamp(2rem,5.5vw,3.2rem);font-weight:800;color:var(--cream)}
+.hero h1 em{font-style:normal;color:var(--ocher2)}
+.hero p{margin:10px 0 0;font-size:1.1rem;max-width:660px;color:#dfe3f7}
 
-/* Nav */
-nav{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 3px 14px rgba(42,39,80,.12);margin-top:-30px;border-radius:20px;overflow:hidden}
-.navin{display:flex;gap:6px;padding:8px;overflow-x:auto;scrollbar-width:thin}
-.navin button{flex:0 0 auto;border:0;background:#f6efe0;padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
-.navin button.on{background:var(--coral);color:#fff;box-shadow:0 3px 0 #d94b2c}
-.navin button:hover:not(.on){background:#ffe6a8}
+nav{position:sticky;top:0;z-index:20;margin-top:-34px;border-radius:20px;overflow:hidden;background:rgba(10,16,41,.94);backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(0,0,0,.5);border:1.5px solid var(--edge);display:flex;align-items:center}
+.navin{display:flex;gap:6px;padding:8px;overflow-x:auto;flex:1;scrollbar-width:thin}
+.navin button{flex:0 0 auto;border:0;background:#1c2a62;padding:9px 15px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
+.navin button.on{background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1300;box-shadow:0 3px 0 var(--ocherd)}
+.navin button:hover:not(.on){background:#2a3a80}
+.resetbtn{flex:0 0 auto;margin:6px 8px;border:2px solid var(--terra);background:linear-gradient(180deg,#d56f47,#a94d2b);color:#fff;font-weight:800;border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.resetbtn:hover{filter:brightness(1.12)}
 
-/* Sections */
 main{padding:22px 0 120px}
 section.tab{display:none}
 section.tab.show{display:block}
-.sechead h2{font-size:1.9rem;color:#3a1f5c}
-.sechead p{color:var(--muted);margin:6px 0 10px;max-width:760px}
+.sechead h2{font-size:1.9rem;color:var(--ocher2)}
+.sechead p{color:var(--muted);margin:6px 0 10px;max-width:780px}
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
-.tools button,.btn{border:2px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-weight:700;cursor:pointer}
-.tools button:hover,.btn:hover{border-color:var(--coral)}
-.btn.primary{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 3px 0 #d94b2c}
-.btn.primary:hover{background:#ff7d5f}
-.cat{margin:26px 0 4px;font-size:1.25rem;color:var(--coral);display:flex;align-items:center;gap:10px}
-.cat::after{content:"";flex:1;height:3px;border-radius:3px;background:repeating-linear-gradient(90deg,#f3c9a8 0 8px,transparent 8px 14px)}
+.btn,.tools button{border:2px solid var(--edge);background:#1f2d6b;border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer}
+.btn:hover,.tools button:hover{border-color:var(--ocher2)}
+.btn.primary{background:linear-gradient(180deg,var(--ocher2),var(--ocher));border-color:var(--ocher2);color:#1b1300;box-shadow:0 3px 0 var(--ocherd)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.danger{background:linear-gradient(180deg,#d56f47,#a94d2b);border-color:var(--terra);color:#fff}
+.cat{margin:28px 0 4px;font-size:1.3rem;color:var(--ocher2);display:flex;align-items:center;gap:10px}
+.cat::after{content:"";flex:1;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--ocher),transparent)}
 
-/* Cards */
-.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px 20px;margin:16px 0;box-shadow:0 4px 0 var(--line)}
-.card h3{font-size:1.35rem;margin-bottom:8px;color:#3a1f5c}
-.grp{background:var(--card);border:2px solid var(--line);border-radius:20px;margin:12px 0;box-shadow:0 3px 0 var(--line);overflow:hidden}
+.card,.grp{background:var(--panel);border:1.5px solid var(--edge);border-radius:20px;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.card{padding:18px 20px;margin:16px 0}
+.card h3{font-size:1.35rem;margin-bottom:8px;color:var(--ocher2)}
+.card.light{background:#f2e6c8;color:#24204a;border-color:#d9b36a}
+.card.light h3{color:#7a4a08}
+.card.light b{color:#24204a}
+.grp{margin:12px 0;overflow:hidden}
 .grp>summary{display:flex;align-items:center;gap:12px;padding:12px 18px;cursor:pointer;list-style:none;font-weight:800;font-size:1.12rem}
 .grp>summary::-webkit-details-marker{display:none}
-.grp>summary::after{content:"▾";margin-left:auto;font-size:1.2rem;color:var(--coral);transition:transform .2s}
+.grp>summary::after{content:"▾";margin-left:auto;font-size:1.2rem;color:var(--ocher2);transition:transform .2s}
 .grp[open]>summary::after{transform:rotate(180deg)}
-.grp[open]>summary{background:linear-gradient(90deg,#fff3d6,#fff);border-bottom:2px solid var(--line)}
-.grp .ico{font-size:1.9rem;line-height:1}
-.grp .cnt{background:#f1ebff;color:var(--vio-ink);border-radius:999px;padding:1px 10px;font-size:.85rem;font-weight:800}
-.grp .cnt.has{background:var(--teal);color:#fff}
+.grp[open]>summary{background:linear-gradient(90deg,#2a3b86,#1a2658);border-bottom:1.5px solid var(--edge)}
+.grp .ico{font-size:1.8rem;line-height:1}
+.grp .gt{flex:0 1 auto}
+.pick{background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1300;border-radius:999px;padding:1px 12px;font-size:.88rem;font-weight:800;max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pick:empty{display:none}
+.grp.off>summary{opacity:.55}
 .gbody{padding:12px 18px 16px}
+.mode{font-size:.88rem;font-weight:800;color:var(--ocher2);margin:0 0 8px}
 .gnote{margin:0 0 10px;color:var(--muted);font-size:.97rem}
+.offmsg{background:#111a42;border:1.5px dashed var(--terra);border-radius:12px;padding:10px 14px;color:#ffd9c9;font-weight:700}
 .flash{animation:flash 1.6s ease}
-@keyframes flash{0%,60%{box-shadow:0 0 0 6px rgba(255,107,74,.55)}100%{box-shadow:0 3px 0 var(--line)}}
+@keyframes flash{0%,60%{box-shadow:0 0 0 6px rgba(240,185,85,.7)}100%{box-shadow:0 10px 24px rgba(0,0,0,.3)}}
 
-/* Frames */
-.frames{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px;padding:10px 12px;background:#fffbe9;border-radius:14px}
-.flbl{font-size:.88rem;font-weight:800;color:#a07a00;width:100%}
-.frame{background:#fff;border:2px dashed #f0c85a;border-radius:12px;padding:6px 12px;text-align:left;cursor:pointer;font-weight:600}
-.frame:hover{background:#fff1c2}
-.blank{display:inline-block;min-width:2.6em;border-bottom:3px solid var(--coral);margin:0 2px;height:1em;vertical-align:-2px}
-
-/* Chips */
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .sublbl{width:100%;font-size:.84rem;font-weight:800;letter-spacing:.03em;margin-top:6px}
-.sublbl.c{color:var(--teal-ink)}
-.sublbl.s{color:var(--vio-ink);margin-top:12px}
-.chip{border:2px solid;border-radius:999px;padding:5px 14px;font-weight:700;cursor:pointer;min-height:38px;transition:transform .1s,background .15s}
+.sublbl.c{color:var(--ocher2)}
+.sublbl.s{color:#c9bdfb;margin-top:12px}
+.chip{border:2px solid;border-radius:999px;padding:5px 14px;font-weight:700;cursor:pointer;min-height:38px;transition:transform .1s,filter .15s}
 .chip:hover{transform:translateY(-2px)}
 .chip:active{transform:scale(.96)}
-.chip.c{background:var(--teal-soft);border-color:var(--teal-line);color:var(--teal-ink)}
-.chip.s{background:var(--vio-soft);border-color:var(--vio-line);color:var(--vio-ink)}
-.chip.s::before{content:"✦ ";font-size:.8em}
-.chip.on.c{background:var(--teal);border-color:var(--teal);color:#fff}
-.chip.on.s{background:var(--vio);border-color:var(--vio);color:#fff}
-.chip.on::before{content:"✓ "}
-.chip.ins{border-radius:14px;text-align:left}
-.chip.ins::after{content:" ✎";opacity:.6}
-.chip:focus-visible,.frame:focus-visible,button:focus-visible,summary:focus-visible,.part:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
-.chip .ico-hint{font-size:.7em;opacity:.7}
+.chip.c{background:rgba(217,150,43,.16);border-color:#b57a1f;color:#ffe6ae}
+.chip.s{background:linear-gradient(180deg,#3a2f86,#2b2468);border-color:var(--vioedge);color:#e6defd}
+.chip.s::before{content:"✦ ";color:var(--ocher2);font-size:.8em}
+.chip.on.c{background:linear-gradient(180deg,var(--ocher2),var(--ocher));border-color:#ffd98a;color:#1b1300}
+.chip.on.s{background:linear-gradient(180deg,#8d70ee,#5a43c4);border-color:#d6caff;color:#fff}
+.chip.on::before{content:"✓ ";color:inherit}
+.chip.dis{opacity:.3;filter:grayscale(.9);border-style:dashed;cursor:not-allowed}
+.chip.dis:hover{transform:none}
+.chip:focus-visible,.sent:focus-visible,button:focus-visible,summary:focus-visible,.part:focus-visible{outline:3px solid var(--ocher2);outline-offset:2px}
 
-/* Legend */
+.sents{margin-top:16px;padding:12px 14px;background:#111a42;border-radius:16px;border:1.5px dashed #4a5ba8}
+.slbl{font-weight:800;color:var(--ocher2);margin-bottom:6px}
+.slbl small{display:block;font-weight:600;color:var(--muted);font-size:.86rem}
+.sent{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:#1b2762;border:1.5px solid #3a4d9c;border-radius:12px;padding:8px 12px;margin:6px 0;cursor:pointer;color:var(--cream);font-weight:600}
+.sent:hover{border-color:var(--ocher2)}
+.sent .box{flex:0 0 22px;height:22px;margin-top:2px;border:2px solid var(--ocher2);border-radius:6px;display:grid;place-items:center;font-weight:900;color:transparent;font-size:.9rem}
+.sent.on{background:linear-gradient(90deg,#e8b04a,#c88a22);color:#1b1300;border-color:#ffd98a}
+.sent.on .box{background:#1b1300;color:var(--ocher2);border-color:#1b1300}
+.sent.ghost{opacity:.65;cursor:default;border-style:dashed}
+.sent.ghost:hover{border-color:#3a4d9c}
+.blank{display:inline-block;min-width:2.6em;border-bottom:3px solid var(--ocher2);margin:0 2px;height:1em;vertical-align:-2px}
+
 .legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.legend>div{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px 14px}
-
-/* Start page layout */
+.legend>div{display:flex;gap:10px;align-items:center;background:#111a42;border:1.5px solid var(--edge);border-radius:16px;padding:8px 14px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
-.setup{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
-.setup label{font-weight:800}
-.setup input[type=text]{font:inherit;padding:9px 14px;border:2px solid var(--line);border-radius:12px;min-width:200px}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}.pick{max-width:34%}}
+.setup{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+.setup label.t{font-weight:800;display:block;font-size:.92rem;color:var(--ocher2)}
+.setup input[type=text],.setup input[type=number]{font:inherit;padding:9px 14px;background:#0f1740;color:var(--cream);border:1.5px solid var(--edge);border-radius:12px;min-width:170px}
+.setup input:focus{outline:none;border-color:var(--ocher2)}
+.setup input::placeholder{color:#6f7cb5}
 .radios{display:flex;gap:8px}
-.radios label{border:2px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer;background:#fff;font-weight:700}
+.radios label{border:2px solid var(--edge);border-radius:999px;padding:7px 16px;cursor:pointer;background:#1f2d6b;font-weight:800}
 .radios input{display:none}
-.radios input:checked+span{color:#fff}
-.radios label:has(input:checked){background:var(--coral);border-color:var(--coral);color:#fff}
+.radios label:has(input:checked){background:linear-gradient(180deg,var(--ocher2),var(--ocher));border-color:var(--ocher2);color:#1b1300}
 .steps{counter-reset:s;list-style:none;padding:0;margin:0}
 .steps li{counter-increment:s;display:flex;gap:12px;margin:10px 0;align-items:flex-start}
-.steps li::before{content:counter(s);flex:0 0 36px;height:36px;border-radius:50%;background:var(--sun);display:grid;place-items:center;font-weight:800;color:#5a3d00}
+.steps li::before{content:counter(s);flex:0 0 36px;height:36px;border-radius:50%;background:linear-gradient(180deg,var(--ocher2),var(--ocher));display:grid;place-items:center;font-weight:800;color:#1b1300}
 .facemap{max-width:560px;margin:0 auto;display:block;width:100%}
 .part{cursor:pointer}
-.part:hover,.part:focus{filter:drop-shadow(0 0 5px #ff6b4a)}
-.pill rect{fill:#fff;stroke:#ff9a76;stroke-width:2;rx:15}
-.pill text{font:800 13px 'Nunito',sans-serif;fill:#3a1f5c}
-.pill:hover rect{fill:#ffe6a8}
+.part:hover,.part:focus{filter:drop-shadow(0 0 5px #d9962b)}
+.pill rect{fill:#fff;stroke:#c8872a;stroke-width:2;rx:15}
+.pill text{font:800 13px 'Nunito',sans-serif;fill:#1c2a62}
+.pill:hover rect{fill:#f7dca0}
 .pill{cursor:pointer}
-.lead{stroke:#e8b9a4;stroke-width:2;stroke-dasharray:4 4}
-.bar{height:16px;background:#f1ebff;border-radius:999px;overflow:hidden;margin:8px 0}
-.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--vio));width:0;transition:width .4s}
-.lvl{font-family:'Baloo 2';font-size:1.4rem;color:var(--vio-ink)}
-.dice{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:10px 0}
-.die{background:#fffbe9;border:2px solid #f0c85a;border-radius:16px;padding:10px 12px}
-.die b{display:block;font-size:.9rem;color:#a07a00}
-.die .chip{margin:3px 3px 0 0;cursor:default;min-height:30px;padding:2px 11px}
-.die .chip:hover{transform:none}
-.ex p{margin:.6em 0}
-.ex .c{border-bottom:3px solid var(--teal-line);background:var(--teal-soft);padding:0 3px;border-radius:4px}
-.ex .s{border-bottom:3px solid var(--vio-line);background:var(--vio-soft);padding:0 3px;border-radius:4px}
+.lead{stroke:#b08a55;stroke-width:2;stroke-dasharray:4 4}
 .rule{display:flex;gap:10px;margin:8px 0}
 .rule .e{font-size:1.5rem}
-
-/* Table */
+.ex p{margin:.6em 0}
+.ex .c{border-bottom:3px solid var(--ocher);background:rgba(217,150,43,.25);padding:0 3px;border-radius:4px}
+.ex .s{border-bottom:3px solid var(--vioedge);background:rgba(122,95,214,.35);padding:0 3px;border-radius:4px}
 table.end{border-collapse:collapse;width:100%;font-size:.98rem}
-table.end th,table.end td{border:2px solid var(--line);padding:8px 10px;text-align:left}
-table.end th{background:#fff3d6}
-table.end b{color:var(--coral)}
+table.end th,table.end td{border:1.5px solid var(--edge);padding:8px 10px;text-align:left}
+table.end th{background:#26367a;color:var(--ocher2)}
+table.end b{color:var(--ocher2)}
 .tblwrap{overflow-x:auto}
 
-/* Text area */
-textarea{width:100%;min-height:340px;font:inherit;font-size:1.08rem;line-height:1.7;padding:16px;border:3px solid var(--line);border-radius:18px;resize:vertical;background:
- repeating-linear-gradient(#fff,#fff 28px,#f1e8d4 29px)}
-textarea:focus{outline:none;border-color:var(--coral)}
+textarea{width:100%;min-height:360px;font:inherit;font-size:1.08rem;line-height:1.7;padding:16px;border:3px solid var(--ocher);border-radius:18px;resize:vertical;color:#2a2108;background:repeating-linear-gradient(#f6ecd2,#f6ecd2 28px,#e6d5a8 29px)}
+textarea:focus{outline:none;border-color:var(--ocher2);box-shadow:0 0 0 4px rgba(240,185,85,.3)}
 .meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:8px 0;color:var(--muted);font-weight:700}
-.mine{display:flex;flex-wrap:wrap;gap:8px}
-.mychip{display:inline-flex;align-items:stretch}
-.mychip .chip{border-radius:999px 0 0 999px;border-right-width:0}
-.mychip .x{border:2px solid;border-radius:0 999px 999px 0;background:#fff;cursor:pointer;padding:0 10px;font-weight:800}
-.mychip.c .x{border-color:var(--teal-line);color:var(--teal-ink)}
-.mychip.s .x{border-color:var(--vio-line);color:var(--vio-ink)}
-.mychip.used .chip{opacity:.45;text-decoration:line-through}
-.mgrp{margin:10px 0 4px;font-weight:800}
 .check label{display:flex;gap:10px;align-items:flex-start;margin:6px 0;cursor:pointer}
-.check input{width:22px;height:22px;accent-color:var(--teal);margin-top:3px}
+.check input{width:22px;height:22px;accent-color:var(--ocher);margin-top:3px}
+.notice{background:#111a42;border:1.5px dashed var(--ocher);border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:700}
 
-/* Floating */
-#fab{position:fixed;right:16px;bottom:16px;z-index:30;border:0;background:var(--vio);color:#fff;border-radius:999px;padding:12px 18px;font-weight:800;box-shadow:0 6px 18px rgba(80,30,140,.4);cursor:pointer;font-size:1rem}
-#fab:hover{background:#8d52d9}
-#bubble{position:fixed;left:50%;bottom:78px;transform:translateX(-50%) translateY(20px);z-index:40;background:#2a2750;color:#fff;padding:10px 18px;border-radius:16px;max-width:min(560px,92vw);opacity:0;pointer-events:none;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,.3);text-align:center}
+#fab{position:fixed;right:16px;bottom:16px;z-index:30;border:2px solid #ffd98a;background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1300;border-radius:999px;padding:12px 18px;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.5);cursor:pointer;font-size:1rem}
+#fab:hover{filter:brightness(1.08)}
+#bubble{position:fixed;left:50%;bottom:78px;transform:translateX(-50%) translateY(20px);z-index:40;background:var(--cream);color:#1a1d45;padding:10px 18px;border-radius:16px;max-width:min(560px,92vw);opacity:0;pointer-events:none;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,.5);text-align:center;font-weight:700}
 #bubble.show{opacity:1;transform:translateX(-50%) translateY(0)}
-#bubble b{color:#ffd86b}
+#bubble b{color:#8a4a00}
 #printArea{display:none}
 @media print{
   body>*:not(#printArea){display:none!important}
   #printArea{display:block!important;font-size:14pt;line-height:1.8;white-space:pre-wrap;color:#000;background:#fff}
-  #printArea h1{font-size:20pt;margin-bottom:12pt}
+  #printArea h1{font-size:20pt;margin-bottom:12pt;color:#000}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -175,49 +164,52 @@ textarea:focus{outline:none;border-color:var(--coral)}
 <header class="hero">
   <div class="wrap">
     <div class="faces" aria-hidden="true">👦 👧 🧔 👵 🧑‍🦰 👓</div>
-    <h1>Der Wort-Baukasten für Personenbeschreibungen</h1>
-    <p>Stöbere in hunderten Wörtern, sammle deine Lieblinge, baue Sätze mit Bausteinen und schreib daraus deine eigene Beschreibung. Du musst nicht alles machen, aber du darfst alles ausprobieren.</p>
+    <h1>Der Wort-Baukasten für <em>Personenbeschreibungen</em></h1>
+    <p>Wähle Wörter, entdecke viele Wege, sie in Sätze zu packen, und lass daraus deinen eigenen Text entstehen. Nichts ist Pflicht, alles ist erlaubt.</p>
   </div>
 </header>
 
 <div class="wrap">
-  <nav aria-label="Bereiche"><div class="navin" id="navin"></div></nav>
+  <nav aria-label="Bereiche"><div class="navin" id="navin"></div><button type="button" class="resetbtn" id="btnReset">🔄 Neue Person</button></nav>
 
   <main>
-  <!-- ================= START ================= -->
   <section class="tab" id="sec-start">
     <div class="card">
       <h3>🎯 Wen beschreibst du?</h3>
       <div class="setup">
-        <div><label for="inName">Name der Person (kannst du auch leer lassen)</label><br><input type="text" id="inName" placeholder="z. B. Luca" maxlength="30" autocomplete="off"></div>
-        <div class="radios" role="radiogroup" aria-label="Junge oder Mädchen">
+        <div><label class="t" for="inName">Name</label><input type="text" id="inName" placeholder="z. B. Luca" maxlength="30" autocomplete="off"></div>
+        <div><label class="t" for="inRel">Wer ist das für dich?</label><input type="text" id="inRel" list="relList" placeholder="z. B. mein Freund" maxlength="30" autocomplete="off">
+          <datalist id="relList"><option value="mein Freund"><option value="meine Freundin"><option value="mein Bruder"><option value="meine Schwester"><option value="mein Opa"><option value="meine Oma"><option value="mein Papa"><option value="meine Mama"><option value="mein Nachbar"><option value="meine Nachbarin"><option value="mein Lehrer"><option value="meine Lehrerin"></datalist></div>
+        <div><label class="t" for="inAge">Alter</label><input type="number" id="inAge" min="1" max="120" placeholder="z. B. 11" style="min-width:90px;width:100px"></div>
+        <div class="radios" role="radiogroup" aria-label="er oder sie">
           <label><input type="radio" name="gen" value="m"><span>👦 er</span></label>
           <label><input type="radio" name="gen" value="w"><span>👧 sie</span></label>
         </div>
       </div>
-      <p style="margin:10px 0 0;color:var(--muted)">Alle Satzbausteine passen sich an: aus „Er hat …“ wird „Sie hat …“ und aus „Sein Gesicht“ wird „Ihr Gesicht“.</p>
+      <p style="margin:10px 0 0;color:var(--muted)">Alles passt sich an: aus „Er hat …“ wird „Sie hat …“, aus „Sein Gesicht“ wird „Ihr Gesicht“, und dein Name taucht in den Sätzen auf.</p>
     </div>
 
     <div class="grid2">
       <div class="card">
         <h3>🧭 So funktioniert dein Baukasten</h3>
         <ol class="steps">
-          <li><div><b>Stöbern &amp; sammeln:</b> Öffne eine Karte und tippe auf Wörter, die zu deiner Person passen. Sie bekommen ein ✓ und wandern in „Meine Wörter“.</div></li>
-          <li><div><b>Bausteine nutzen:</b> Die gelben 🧱-Baupläne und die ✎-Satzanfänge setzt du mit einem Tipp in deinen Text.</div></li>
-          <li><div><b>Schreiben:</b> Im Bereich „✍️ Mein Text“ fügst du alles zusammen, ergänzt die Lücken ___ und kontrollierst mit der Checkliste.</div></li>
+          <li><div><b>Wörter wählen:</b> Öffne eine Karte und tippe auf ein Wort. Bei vielen Karten passt nur ein Wort (nicht kurze und lange Haare zugleich). Was nicht zusammenpasst, wird grau.</div></li>
+          <li><div><b>Sätze ankreuzen:</b> Unter jeder Karte erscheinen mehrere Formulierungen mit deinem Wort. Hake an, welche du magst. Du darfst mehrere nehmen und so viele Möglichkeiten kennenlernen.</div></li>
+          <li><div><b>Text zusammenbauen:</b> Unter „✍️ Mein Text“ fügt ein Knopfdruck alle angekreuzten Sätze zu einem Text zusammen. Danach schreibst du ihn nach Lust und Laune um.</div></li>
         </ol>
       </div>
       <div class="card">
         <h3>🎨 Die Farben der Wörter</h3>
         <div class="legend">
-          <div><span class="chip c" style="cursor:default">freundlich</span><span><b>grün</b> = gängige Wörter, die jeder kennt</span></div>
-          <div><span class="chip s" style="cursor:default">gutmütig</span><span><b>violett ✦</b> = besondere Wörter für Profis</span></div>
+          <div><span class="chip c" style="cursor:default">freundlich</span><span><b>ocker</b> = gängige Wörter</span></div>
+          <div><span class="chip s" style="cursor:default">gutmütig</span><span><b>violett ✦</b> = besondere Wörter</span></div>
         </div>
-        <p style="margin:10px 0 0">Tippst du ein ✦-Wort an, erscheint unten eine kleine Erklärung. So lernst du neue Wörter gleich richtig zu verstehen. Ein Text mit einigen violetten Wörtern klingt besonders lebendig.</p>
+        <p style="margin:10px 0 0">Tippst du ein ✦-Wort an, erscheint unten eine kleine Erklärung. Ein Text mit einigen violetten Wörtern klingt besonders lebendig.</p>
+        <p style="margin:10px 0 0"><button type="button" class="btn primary" id="btnRoll">🎲 Zufallsperson würfeln</button></p>
       </div>
     </div>
 
-    <div class="card">
+<div class="card light">
       <h3>🗺️ Die Gesichts-Landkarte</h3>
       <p style="margin-top:0">Tippe auf einen Teil des Gesichts, dann springst du direkt zu den passenden Wörtern.</p>
       <svg class="facemap" viewBox="0 0 520 370" role="group" aria-label="Gesichts-Landkarte">
@@ -287,26 +279,7 @@ textarea:focus{outline:none;border-color:var(--coral)}
         <g class="pill" data-go="kinn" tabindex="0" role="button"><rect x="408" y="314" width="104" height="30"/><text x="460" y="334" text-anchor="middle">🫵 Kinn</text></g>
       </svg>
     </div>
-
-    <div class="grid2">
-      <div class="card">
-        <h3>🏆 Dein Wortschatz-Level</h3>
-        <div class="lvl" id="lvlName">Wort-Neuling 🌱</div>
-        <div class="bar" aria-hidden="true"><i id="lvlBar"></i></div>
-        <div id="lvlTxt" style="font-weight:700;color:var(--muted)"></div>
-      </div>
-      <div class="card">
-        <h3>🎲 Würfel-Person</h3>
-        <p style="margin:0">Du weißt nicht, wo du anfangen sollst? Würfle dir eine ausgedachte Person und beschreibe sie. Sie darf auch ganz verrückt sein.</p>
-        <div class="dice" id="dice"></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn primary" id="btnRoll" type="button">🎲 Würfeln!</button>
-          <button class="btn" id="btnRollAdd" type="button">🧺 Alle in meine Wörter</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
+<div class="card">
       <h3>📐 So ist eine Personenbeschreibung aufgebaut</h3>
       <div class="grid3">
         <div><b>1 · Einleitung</b><br>Wer ist die Person? Wie alt ist sie? Welchen ersten Eindruck macht sie? Ein bis zwei Sätze genügen.</div>
@@ -320,8 +293,7 @@ textarea:focus{outline:none;border-color:var(--coral)}
         <div class="rule"><span class="e">🔄</span><div><b>Verben abwechseln:</b> Neben „hat“ und „ist“ gibt es „trägt“, „wirkt“, „fällt auf“, „funkelt“, „umrahmt“ (siehe Bereich Formulieren).</div></div>
       </div>
     </div>
-
-    <details class="card ex">
+<details class="card ex">
       <summary style="cursor:pointer;font-weight:800;font-size:1.15rem">📖 Beispieltext ansehen (mit Farben)</summary>
       <p><span class="c">grün</span> = gängiges Wort, <span class="s">violett</span> = besonderes Wort</p>
       <p>Mein Freund Luca ist elf Jahre alt und geht mit mir in die erste Klasse eines Gymnasiums in Wien. Schon auf den ersten Blick fällt er durch seine <span class="s">wuschelige</span>, <span class="c">dunkelbraune</span> Haarpracht auf, die ihm oft in die Stirn fällt.</p>
@@ -331,15 +303,16 @@ textarea:focus{outline:none;border-color:var(--coral)}
     </details>
   </section>
 
-  <!-- ================= AUSSEHEN ================= -->
+  <section class="tab" id="sec-einl"></section>
   <section class="tab" id="sec-aussehen"></section>
   <section class="tab" id="sec-charakter"></section>
   <section class="tab" id="sec-hobby"></section>
-  <section class="tab" id="sec-mag"></section>
+  <section class="tab" id="sec-schluss"></section>
 
-  <!-- ================= FORMULIEREN ================= -->
-  <section class="tab" id="sec-form">
-    <div class="card" id="endCard">
+  <section class="tab" id="sec-extras">
+    <div class="sechead"><h2>🧰 Extras: Wörter zum Einfügen</h2><p>Hier liegen Verben, Übergänge, Ortswörter, Vergleiche und Häufigkeitswörter. Tippe ein Wort an, dann steht es dort in deinem Text, wo dein Cursor ist.</p>
+    <div class="tools"><button type="button" data-act="open">📂 Alle aufklappen</button><button type="button" data-act="close">📁 Alle zuklappen</button></div></div>
+<div class="card" id="endCard">
       <h3>🧩 Spickzettel: Welche Endung braucht das Wort?</h3>
       <p style="margin-top:0">Nach „hat“ steht der Akkusativ. Nach „ist“ bleibt das Wort ohne Endung. Schau dir die fettgedruckten Endungen an:</p>
       <div class="tblwrap"><table class="end">
@@ -349,19 +322,21 @@ textarea:focus{outline:none;border-color:var(--coral)}
         <tr><td>das Gesicht</td><td>Er hat ein rund<b>es</b> Gesicht.</td><td>Sein Gesicht ist rund.</td></tr>
         <tr><td>die Haare / Augen (viele)</td><td>Er hat lang<b>e</b> Haare und blau<b>e</b> Augen.</td><td>Seine Haare sind lang, seine Augen sind blau.</td></tr>
       </table></div>
-      <p style="margin:10px 0 0;color:var(--muted)">Dieselbe Regel gilt in den Baupländen: Steht vor der Lücke ein „einen / eine / ein“ oder ein „e“, passt du das Wort an.</p>
+      <p style="margin:10px 0 0;color:var(--muted)">Dieselbe Regel gilt in den Satzbausteinen: Steht vor der Lücke ein „einen / eine / ein“ oder ein „e“, passt du das Wort an.</p>
     </div>
+    <div id="extraGroups"></div>
   </section>
 
-  <!-- ================= MEIN TEXT ================= -->
   <section class="tab" id="sec-text">
-    <div class="sechead"><h2>✍️ Mein Text</h2><p>Hier schreibst du deine Personenbeschreibung. Alles, was du in den Bereichen mit ✎ oder 🧱 antippst, landet an der Stelle, an der dein Cursor steht. Ergänze die Lücken ___ mit deinen Wörtern.</p></div>
+    <div class="sechead"><h2>✍️ Mein Text</h2><p>Hier entsteht deine Personenbeschreibung. Mit einem Knopfdruck werden alle Sätze, die du in den Karten angekreuzt hast, zu einem Text. Den kannst du danach beliebig verändern.</p></div>
     <div class="card">
-      <h3>🧺 Meine Wörter</h3>
-      <p style="margin:0 0 6px;color:var(--muted)">Tippe auf ein Wort, um es in deinen Text zu setzen. Benutzte Wörter werden durchgestrichen. Mit × wirfst du ein Wort aus dem Korb.</p>
-      <div id="mine"></div>
+      <div id="buildInfo" class="notice"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary" type="button" id="btnBuild">✨ Text zusammenbauen</button>
+        <button class="btn danger" type="button" id="btnReset2">🔄 Neue Person beschreiben</button>
+      </div>
     </div>
-    <textarea id="ta" aria-label="Meine Personenbeschreibung" placeholder="Schreibe hier los … zum Beispiel mit einem Satzanfang aus dem Bereich „💬 Formulieren“."></textarea>
+    <textarea id="ta" aria-label="Meine Personenbeschreibung" placeholder="Hier steht gleich dein Text. Du kannst auch selbst losschreiben oder Sätze und Wörter aus den Extras einfügen."></textarea>
     <div class="meta"><span id="wc">0 Wörter</span><span id="sc">✦ 0 besondere Wörter</span></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px">
       <button class="btn" type="button" id="btnPara">↵ Neuer Absatz</button>
@@ -378,11 +353,12 @@ textarea:focus{outline:none;border-color:var(--coral)}
   </main>
 </div>
 
-<button id="fab" type="button" aria-label="Zu meinem Text und meinen Wörtern">🧺 <span id="fabN">0</span></button>
+<button id="fab" type="button" aria-label="Zu meinem Text">✍️ <span id="fabN">0</span> Sätze</button>
 <div id="bubble" role="status" aria-live="polite"></div>
 <div id="printArea"></div>
 
 <script>
+const OLD=(()=>{
 /* =====================================================================
    DATEN  –  "wort"            = gängiges Wort (grün)
              "*wort=Erklärung" = besonderes Wort (violett ✦)
@@ -668,276 +644,593 @@ const CHECKS=[
  'Ich habe Absätze gemacht und die Rechtschreibung kontrolliert.'
 ];
 
-/* =====================================================================
-   LOGIK
-   ===================================================================== */
+
+return {SECTIONS};})();
+/* ===== Karten-Definitionen, Teil 1: Vorbereitung, Einleitung-Wörter, Gestalt, Haare, Gesicht ===== */
+function parseRaw(raw){let s=false;if(raw[0]==='*'){s=true;raw=raw.slice(1);}const i=raw.indexOf('=');return i<0?{w:raw.trim(),h:'',s}:{w:raw.slice(0,i).trim(),h:raw.slice(i+1).trim(),s};}
+const LU={};
+Object.values(OLD.SECTIONS).forEach(s=>s.groups.forEach(g=>g.items.forEach(raw=>{const it=parseRaw(raw);if(!(it.w in LU))LU[it.w]=it;})));
+function parseW(str,def){
+  str=str.trim();let g=def||'m';const k=str.lastIndexOf('|');
+  if(k>0){g=str.slice(k+1);str=str.slice(0,k);}
+  const it=parseRaw(str);
+  if(str[0]==='*'||str.includes('='))return {w:it.w,h:it.h,s:it.s,g};
+  const b=LU[it.w];
+  return b?{w:b.w,h:b.h,s:b.s,g}:{w:it.w,h:'',s:false,g,unknown:true};
+}
+const CARDS=[],CBY={};
+function card(o){
+  const raw=Array.isArray(o.words)?o.words:(o.words||'').split(',');
+  o.words=raw.filter(x=>x.trim()).map(x=>parseW(x,o.gen));
+  o.kind=o.kind||'adj';o.mode=o.mode||'single';
+  CARDS.push(o);CBY[o.id]=o;
+}
+const OPP=[];
+function opp(a,b){OPP.push([a.split(','),b.split(',')]);}
+
+/* ---------- EINLEITUNG ---------- */
+card({id:'einl1',tab:'einl',p:'1',cat:'So fange ich an',icon:'🚪',title:'Einleitung – wen stelle ich vor?',kind:'free',
+ note:'Hier brauchst du kein Wort zu wählen. Hake einfach die Anfänge an, die dir gefallen.',
+ tpl:["Ich möchte dir {Wen} beschreiben.","Heute stelle ich dir {Wen} vor.","{Wer} ist ein Mensch, den ich sehr gut kenne.","Wenn ich an {Wen} denke, sehe ich sofort ein Bild vor mir.","In diesem Text beschreibe ich {Wen}.","{Wen} kenne ich schon lange.","Es gibt einen Menschen, den ich dir unbedingt vorstellen möchte: {Wen}.","Heute erzähle ich dir, wie {wer} aussieht und wie {er} ist.","Ich beschreibe heute {Wen}: Wie sieht {er} aus, und was macht {ihn} aus?","Stell dir einen Menschen vor, den ich sehr gern habe: {Wen}."]});
+card({id:'einl2',tab:'einl',p:'1',icon:'🎂',title:'Einleitung – wie alt?',kind:'free',
+ note:'Das Alter trägst du oben auf der Startseite ein. Ohne Eintrag bleibt eine Lücke ___ stehen.',
+ tpl:["{Wer} ist {age} Jahre alt.","{Wer} ist ungefähr {age} Jahre alt.","{Wer} ist {age} Jahre jung.","{Er} ist gerade {age} Jahre alt geworden.","{Er} hat vor Kurzem {sein}en {age}. Geburtstag gefeiert.","Mit {age} Jahren ist {er} schon ziemlich selbstständig."]});
+card({id:'alter',tab:'einl',p:'1',icon:'⏳',title:'Einleitung – jung oder alt?',kind:'adj',
+ words:'jung,alt,erwachsen,kindlich,jugendlich,betagt,rüstig,jung geblieben',
+ tpl:["{Er} ist {w}.","{Er} wirkt {w}.","{Er} ist ein {w:er} Mensch.","Auf mich wirkt {er} ziemlich {w}.","Mit {sein}er Art kommt {er} mir {w} vor."]});
+card({id:'eindruck',tab:'einl',p:'1',icon:'✨',title:'Einleitung – erster Eindruck',kind:'adj',
+ words:'sympathisch,nett,auffällig,unauffällig,gepflegt,ordentlich,freundlich,lustig,ernst,cool,unscheinbar,auffallend,einnehmend,imposant,stattlich,anmutig,liebenswert,markant,gewinnend,strahlend',
+ tpl:["Auf den ersten Blick wirkt {er} {w}.","{Er} macht einen {w:en} Eindruck.","{Er} sieht {w} aus.","Man bemerkt sofort, dass {er} {w} ist.","Schon beim ersten Treffen erscheint {er} {w}."]});
+
+/* ---------- AUSSEHEN: GESTALT ---------- */
+card({id:'groesse',tab:'aussehen',p:'2',cat:'Gestalt',icon:'📏',title:'Körpergröße',words:'groß,klein,mittelgroß,hochgewachsen,baumlang',
+ tpl:["{Er} ist {w}.","{Er} ist ziemlich {w}.","Von der Körpergröße her ist {er} {w}.","Neben den anderen wirkt {er} {w}.","Im Vergleich zu den anderen in der Klasse ist {er} {w}.","Was die Größe betrifft, ist {er} {w}."]});
+card({id:'bau',tab:'aussehen',p:'2',icon:'🧍',title:'Körperbau',
+ words:'schlank,dünn,kräftig,sportlich,rundlich,zierlich,schmächtig,hager,stämmig,untersetzt,athletisch,muskulös,drahtig,pummelig,grazil,gedrungen,durchtrainiert,spindeldürr,breitschultrig',
+ tpl:["{Er} ist {w} gebaut.","{Er} hat eine {w:e} Figur.","{Er} wirkt {w}.","Von der Statur her ist {er} {w}.","Auf den ersten Blick fällt {sein}e {w:e} Statur auf.","{Er} hat einen {w:en} Körperbau.","{Sein} Körper ist {w}."]});
+
+/* ---------- AUSSEHEN: HAARE ---------- */
+card({id:'glatze',tab:'aussehen',p:'2',cat:'Haare',icon:'🧑‍🦲',title:'Glatze? (dann gibt es keine Haare zu beschreiben)',kind:'toggle',words:'Glatze',
+ note:'Wenn du die Glatze wählst, werden alle Karten zu Haaren grau, denn wo keine Haare sind, kann man auch keine beschreiben.',
+ tpl:["{Er} hat eine Glatze.","{Sein} Kopf ist kahl.","Auf {sein}em Kopf wachsen keine Haare.","{Sein} Kopf glänzt in der Sonne.","{Er} trägt {sein}en Kopf ganz ohne Haare."]});
+card({id:'haarl',tab:'aussehen',p:'2',icon:'💇',title:'Haare – Länge',offIf:['glatze'],words:'kurz,halblang,schulterlang,kinnlang,hüftlang,lang,raspelkurz',
+ tpl:["{Er} hat {w:e} Haare.","{Sein}e Haare sind {w}.","Auffällig sind {sein}e {w:en} Haare.","{Er} trägt {sein}e Haare {w}.","{Er} hat eine {w:e} Haarpracht."]});
+card({id:'haard',tab:'aussehen',p:'2',icon:'🌿',title:'Haare – Fülle',offIf:['glatze'],words:'dicht,dünn,füllig,buschig,schütter,voll',
+ tpl:["{Sein}e Haare sind {w}.","{Er} hat {w:e} Haare.","{Er} hat einen {w:en} Haarwuchs.","Auf {sein}em Kopf wachsen {w:e} Haare."]});
+card({id:'haarf',tab:'aussehen',p:'2',icon:'〰️',title:'Haare – Form',offIf:['glatze'],
+ words:'glatt,gewellt,lockig,weich,struppig,fein,kraus,seidig,zottelig,strähnig,widerspenstig,wallend,wuschelig,ungebändigt,schimmernd,spröde,borstig',
+ tpl:["{Sein}e Haare sind {w}.","{Er} hat {w:e} Haare.","{Sein}e Haare wirken {w}.","Auf {sein}em Kopf sitzen {w:e} Haare.","Man sieht sofort {sein}e {w:en} Haare."]});
+card({id:'haarc',tab:'aussehen',p:'2',icon:'🎨',title:'Haare – Farbe',offIf:['glatze'],
+ words:'blond,braun,schwarz,rot,grau,weiß,dunkelblond,hellbraun,dunkelbraun,aschblond,rotblond,kastanienbraun,pechschwarz,rabenschwarz,platinblond,silbergrau,graumeliert,feuerrot,kupferrot,honigblond,strohblond,goldblond,schneeweiß',
+ tpl:["{Er} hat {w:e} Haare.","{Sein}e Haare sind {w}.","{Sein}e Haare schimmern {w}.","Die Farbe {sein}er Haare ist {w}.","Mit {sein}en {w:en} Haaren fällt {er} sofort auf."]});
+card({id:'frisur',tab:'aussehen',p:'2',icon:'💈',title:'Frisur',kind:'noun',offIf:['glatze'],
+ words:'Pferdeschwanz|m,Zopf|m,Zöpfe|p,Pony|m,Scheitel|m,Dutt|m,Haarknoten|m,Bürstenschnitt|m,Pagenkopf|m,Irokese|m,Stachelfrisur|f,Mittelscheitel|m,Seitenscheitel|m,Fransen|p,Flechtzopf|m,Wuschelkopf|m,Topfschnitt|m,Mähne|f,Undercut|m,Hochsteckfrisur|f,Dreadlocks|p',
+ tpl:["{Er} trägt {w:acc}.","Als Frisur hat {er} {w:acc}.","Auffällig ist {sein}e Frisur: {w:nom}.","{Er} hat sich für {w:acc} entschieden.","{Er} mag {w:acc}."]});
+
+/* ---------- AUSSEHEN: GESICHT ---------- */
+card({id:'gform',tab:'aussehen',p:'2',cat:'Gesicht',icon:'😊',title:'Gesichtsform',
+ words:'rund,oval,eckig,schmal,länglich,herzförmig,kantig,markant,pausbäckig,kindlich,ebenmäßig,breit,hager',
+ tpl:["{Sein} Gesicht ist {w}.","{Er} hat ein {w:es} Gesicht.","{Sein} {w:es} Gesicht fällt sofort auf.","Das Gesicht von {ihm} wirkt {w}.","Betrachtet man {sein} Gesicht genauer, erkennt man: Es ist {w}."]});
+card({id:'stirn',tab:'aussehen',p:'2',icon:'🧠',title:'Stirn',words:'hoch,niedrig,breit,schmal,glatt,gewölbt,zerfurcht,runzlig,fliehend,gerunzelt',
+ tpl:["{Er} hat eine {w:e} Stirn.","{Sein}e Stirn ist {w}.","Über {sein}en Augen liegt eine {w:e} Stirn.","{Sein}e {w:e} Stirn gibt {ihm} ein besonderes Aussehen.","Zuerst fällt {sein}e {w:e} Stirn auf."]});
+card({id:'brauen',tab:'aussehen',p:'2',icon:'🤨',title:'Augenbrauen',
+ words:'dicht,dünn,schmal,buschig,dunkel,hell,gerade,breit,geschwungen,hochgezogen,zusammengewachsen,markant,fein gezeichnet,gezupft,borstig,zerzaust,ausdrucksstark,schräg',
+ tpl:["{Sein}e Augenbrauen sind {w}.","{Er} hat {w:e} Augenbrauen.","Über {sein}en Augen wölben sich {w:e} Augenbrauen.","Unter der Stirn sitzen {w:e} Augenbrauen.","{Sein}e {w:en} Augenbrauen geben {ihm} einen besonderen Ausdruck.","{Sein}e Augenbrauen wirken {w}."]});
+card({id:'augenf',tab:'aussehen',p:'2',icon:'👀',title:'Augen – Farbe',
+ words:'blau,grün,braun,grau,schwarz,hellblau,dunkelbraun,himmelblau,graublau,grünlich,haselnussbraun,bernsteinfarben,honigbraun,schokobraun,meergrün,stahlblau,eisblau,kohlschwarz,flaschengrün,tannengrün,kastanienbraun',
+ tpl:["{Er} hat {w:e} Augen.","{Sein}e Augen sind {w}.","{Sein}e Augen leuchten {w}.","Aus {sein}em Gesicht blicken {w:e} Augen.","Auffällig sind {sein}e {w:en} Augen.","{Er} schaut mit {w:en} Augen in die Welt."]});
+card({id:'augenfo',tab:'aussehen',p:'2',icon:'👁️',title:'Augen – Form',
+ words:'groß,klein,rund,schmal,mandelförmig,tief liegend,hervorstehend,kullerrund,schräg,eng beieinander stehend,weit auseinander stehend',
+ tpl:["{Sein}e Augen sind {w}.","{Er} hat {w:e} Augen.","{Sein}e Augen wirken {w}.","Im Gesicht sitzen {w:e} Augen."]});
+card({id:'blick',tab:'aussehen',p:'2',icon:'💫',title:'Blick',
+ words:'freundlich,strahlend,müde,lebendig,traurig,fröhlich,funkelnd,stechend,verträumt,schelmisch,treuherzig,durchdringend,wachsam,listig,sanft,glänzend,sprühend,verschmitzt',
+ tpl:["{Sein} Blick ist {w}.","{Er} schaut {w}.","{Er} hat einen {w:en} Blick.","Auffällig ist {sein} {w:er} Blick.","Wenn {er} jemanden ansieht, wirkt {er} {w}."]});
+card({id:'sehhilfe',tab:'aussehen',p:'2',icon:'👓',title:'Brille & Co.',kind:'noun',gen:'f',words:'Brille,Nickelbrille,Hornbrille,Sonnenbrille,Lesebrille,Kontaktlinsen|p',
+ tpl:["{Er} trägt {w:acc}.","Ohne {w:acc} sieht {er} schlecht.","{Er} hat {w:acc}.","Was sofort auffällt: {w:nom}."]});
+card({id:'nase',tab:'aussehen',p:'2',icon:'👃',title:'Nase – Größe & Form',
+ words:'klein,groß,spitz,breit,schmal,gerade,krumm,lang,kurz,platt,markant,gerötet,schief,fein geschnitten',
+ tpl:["{Er} hat eine {w:e} Nase.","{Sein}e Nase ist {w}.","Mitten im Gesicht sitzt eine {w:e} Nase.","{Sein}e {w:e} Nase fällt sofort auf.","Die Nase von {ihm} wirkt {w}."]});
+card({id:'nasex',tab:'aussehen',p:'2',icon:'🐽',title:'Nase – besondere Namen',kind:'noun',gen:'f',
+ words:'Stupsnase,Hakennase,Adlernase,Knollennase,Kartoffelnase,Knubbelnase,Knopfnase,Himmelfahrtsnase,Höckernase,Spitznase',
+ tpl:["{Er} hat {w:acc}.","Mitten im Gesicht sitzt {w:nom}.","{Sein}e Nase ist eine richtige {w}.","Typisch für {ihn} ist {w:nom}."]});
+card({id:'ohren',tab:'aussehen',p:'2',icon:'👂',title:'Ohren',words:'klein,groß,spitz,abstehend,anliegend,rund,zierlich,fein geformt',
+ tpl:["{Sein}e Ohren sind {w}.","{Er} hat {w:e} Ohren.","Links und rechts am Kopf sitzen {w:e} Ohren.","Auffällig sind {sein}e {w:en} Ohren.","{Sein}e Ohren wirken {w}."]});
+card({id:'ohrx',tab:'aussehen',p:'2',icon:'🦻',title:'Ohren – besondere Namen',kind:'noun',gen:'p',words:'Segelohren,Henkelohren,Elfenohren',
+ tpl:["{Er} hat {w}.","{Sein}e {w} fallen sofort auf.","{Er} hat richtige {w}.","{Sein}e {w} sind {sein} Markenzeichen."]});
+card({id:'hautf',tab:'aussehen',p:'2',icon:'🧴',title:'Hautfarbe',words:'hell,dunkel,blass,rosig,braun,gebräunt,sonnengebräunt,olivfarben,bleich',
+ tpl:["{Er} hat eine {w:e} Haut.","{Sein}e Haut ist {w}.","Auffällig ist {sein}e {w:e} Haut.","{Er} hat eine {w:e} Gesichtsfarbe."]});
+card({id:'haut',tab:'aussehen',p:'2',icon:'🌸',title:'Haut – Beschaffenheit',words:'zart,glatt,faltig,makellos,wettergegerbt,pfirsichzart,sommersprossig,rau',
+ tpl:["{Sein}e Haut ist {w}.","{Er} hat eine {w:e} Haut.","Man sieht {sein}e {w:e} Haut schon von Weitem.","{Sein}e Haut wirkt {w}."]});
+card({id:'merk',tab:'aussehen',p:'2',icon:'🔎',title:'Besondere Merkmale',kind:'noun',mode:'multi',
+ words:'Sommersprossen|p,Grübchen|p,Narbe|f,Pickel|p,Muttermal|n,Leberfleck|m,Schönheitsfleck|m,Lachfältchen|p,Piercing|n,Sorgenfalten|p,Wangengrübchen|p,Kinngrübchen|n,Doppelkinn|n',
+ note:'Hier darfst du mehrere Merkmale wählen. Nur das Passende, nicht alles.',
+ tpl:["{Er} hat {w:acc}.","Im Gesicht trägt {er} {w:acc}.","Wer genauer hinsieht, entdeckt bei {ihm} {w:acc}.","Auf den zweiten Blick sieht man bei {ihm} {w:acc}."]});
+
+/* ===== Karten-Definitionen, Teil 2: Mund bis Kleidung + Ausschlussregeln fürs Aussehen ===== */
+card({id:'mund',tab:'aussehen',p:'2',icon:'👄',title:'Mund',words:'breit,klein,schmal,groß,geschwungen,fein gezeichnet,wulstig,zusammengepresst',
+ tpl:["{Er} hat einen {w:en} Mund.","{Sein} Mund ist {w}.","Unter der Nase sitzt ein {w:er} Mund.","{Sein} {w:er} Mund fällt auf.","Wenn {er} lacht, sieht man {sein}en {w:en} Mund."]});
+card({id:'lippen',tab:'aussehen',p:'2',icon:'💋',title:'Lippen',words:'voll,dünn,schmal,rot,rosig,trocken,aufgesprungen,zart,blass',
+ tpl:["{Sein}e Lippen sind {w}.","{Er} hat {w:e} Lippen.","Auffällig sind {sein}e {w:en} Lippen.","{Sein}e Lippen wirken {w}."]});
+card({id:'zaehne',tab:'aussehen',p:'2',icon:'🦷',title:'Zähne',words:'weiß,schief,gerade,groß,klein,gleichmäßig,strahlend weiß,makellos',
+ tpl:["{Sein}e Zähne sind {w}.","{Er} hat {w:e} Zähne.","Beim Lachen blitzen {w:e} Zähne auf.","{Sein}e {w:en} Zähne fallen beim Lachen auf."]});
+card({id:'zahnx',tab:'aussehen',p:'2',icon:'😁',title:'Zähne – Besonderes',kind:'noun',words:'Zahnlücke|f,Zahnspange|f,Hasenzähne|p,Goldzahn|m,Milchzähne|p',
+ tpl:["{Er} hat {w:acc}.","Beim Lachen sieht man {w:acc}.","{Er} zeigt beim Lächeln {w:acc}.","Typisch für {ihn}: {w:nom}."]});
+card({id:'laecheln',tab:'aussehen',p:'2',icon:'🙂',title:'Lächeln',words:'freundlich,breit,strahlend,schüchtern,verschmitzt,warmherzig,spöttisch,gewinnend,spitzbübisch,schelmisch,herzlich,ansteckend',
+ tpl:["{Er} hat ein {w:es} Lächeln.","{Sein} Lächeln ist {w}.","Um {sein}en Mund spielt ein {w:es} Lächeln.","Wenn {er} lächelt, sieht das {w} aus.","{Sein} {w:es} Lächeln macht gute Laune.","Man mag {sein} {w:es} Lächeln sofort."]});
+card({id:'lachen',tab:'aussehen',p:'2',icon:'😂',title:'Lachen',words:'laut,leise,herzlich,ansteckend,glucksend,dröhnend,kichernd,glockenhell,schallend',
+ tpl:["{Er} lacht {w}.","{Er} hat ein {w:es} Lachen.","{Sein} Lachen ist {w}.","Wenn {er} lacht, klingt das {w}."]});
+card({id:'kinn',tab:'aussehen',p:'2',icon:'🫵',title:'Kinn',words:'rund,spitz,eckig,kräftig,klein,breit,lang,markant,fliehend,energisch,vorgeschoben,zierlich',
+ tpl:["{Er} hat ein {w:es} Kinn.","{Sein} Kinn ist {w}.","Unter dem Mund sitzt ein {w:es} Kinn.","{Sein} {w:es} Kinn gibt {ihm} ein besonderes Aussehen."]});
+card({id:'bart',tab:'aussehen',p:'2',icon:'🧔',title:'Bart',kind:'noun',
+ words:'Bart|m,Vollbart|m,Schnurrbart|m,Spitzbart|m,Oberlippenbart|m,Backenbart|m,Walrossbart|m,Ziegenbart|m,Rauschebart|m,Menjoubärtchen|n,Dreitagebart|m,Kinnbart|m,Koteletten|p,Bartstoppeln|p',
+ note:'Ohne Bart überspringst du diese Karte einfach.',
+ tpl:["{Er} trägt {w:acc}.","{Er} hat sich {w:acc} wachsen lassen.","Im Gesicht fällt {sein}e Gesichtsbehaarung auf: {w:nom}.","{Er} hat {w:acc}."]});
+card({id:'bartz',tab:'aussehen',p:'2',icon:'✂️',title:'Bart – wie sieht er aus?',needs:['bart'],needMsg:'Wähle zuerst oben bei „Bart“ eine Bartart.',
+ words:'gepflegt,zottelig,dicht,struppig,grau,ungepflegt,kurz,lang,weich,buschig,borstig',
+ tpl:["{Sein} Bart ist {w}.","{Er} hat einen {w:en} Bart.","Auffällig ist {sein} {w:er} Bart.","{Sein} Bart wirkt {w}."]});
+
+/* ---------- KÖRPER ---------- */
+card({id:'hals',tab:'aussehen',p:'3',cat:'Körper & Auftreten',icon:'🦒',title:'Hals',words:'lang,kurz,dünn,kräftig',
+ tpl:["{Er} hat einen {w:en} Hals.","{Sein} Hals ist {w}.","{Sein} {w:er} Hals fällt auf.","Auf {sein}em {w:en} Hals sitzt der Kopf."]});
+card({id:'schultern',tab:'aussehen',p:'3',icon:'🤷',title:'Schultern',words:'breit,schmal,hängend,kräftig,eckig',
+ tpl:["{Sein}e Schultern sind {w}.","{Er} hat {w:e} Schultern.","{Sein}e {w:en} Schultern fallen auf.","Von hinten sieht man {sein}e {w:en} Schultern."]});
+card({id:'arme',tab:'aussehen',p:'3',icon:'💪',title:'Arme',words:'lang,kurz,kräftig,muskulös,dünn',
+ tpl:["{Sein}e Arme sind {w}.","{Er} hat {w:e} Arme.","Auffällig sind {sein}e {w:en} Arme."]});
+card({id:'haende',tab:'aussehen',p:'3',icon:'🖐️',title:'Hände',words:'groß,klein,schmal,kräftig,zart,warm,kalt,feingliedrig,schwielig,knochig,gepflegt',
+ tpl:["{Sein}e Hände sind {w}.","{Er} hat {w:e} Hände.","Auffällig sind {sein}e {w:en} Hände.","{Sein}e Hände fühlen sich {w} an."]});
+card({id:'beine',tab:'aussehen',p:'3',icon:'🦵',title:'Beine',words:'lang,kurz,dünn,kräftig,sportlich,durchtrainiert',
+ tpl:["{Sein}e Beine sind {w}.","{Er} hat {w:e} Beine.","Auffällig sind {sein}e {w:en} Beine."]});
+card({id:'haltung',tab:'aussehen',p:'3',icon:'🧘',title:'Haltung',words:'aufrecht,gerade,krumm,gebeugt,lässig,steif,entspannt,stolz,kerzengerade,gebückt,breitbeinig,schlaksig',
+ tpl:["{Er} hält sich {w}.","{Sein}e Haltung ist {w}.","{Er} steht {w} da.","{Er} sitzt {w} auf dem Stuhl."]});
+card({id:'gang',tab:'aussehen',p:'3',icon:'🚶',title:'Gang',
+ words:'schnell,langsam,leise,laut,sportlich,lässig,vorsichtig,hüpfend,schlurfend,federnd,watschelnd,humpelnd,stolzierend,bedächtig,tänzelnd,schwungvoll,flink,schleichend,trippelnd,stampfend',
+ tpl:["{Er} geht {w}.","{Sein} Gang ist {w}.","{Er} bewegt sich {w}.","Man erkennt {ihn} an {sein}em {w:en} Gang."]});
+card({id:'stimme',tab:'aussehen',p:'3',icon:'🗣️',title:'Stimme',
+ words:'laut,leise,tief,hoch,kräftig,ruhig,sanft,rau,heiser,piepsig,melodisch,näselnd,honigsüß,schrill,dröhnend',
+ tpl:["{Sein}e Stimme ist {w}.","{Er} hat eine {w:e} Stimme.","{Er} spricht {w}.","Wenn {er} spricht, hört man eine {w:e} Stimme."]});
+
+/* ---------- KLEIDUNG ---------- */
+card({id:'stil',tab:'aussehen',p:'3',cat:'Kleidung',icon:'🧥',title:'Kleidungsstil',
+ words:'sportlich,lässig,elegant,modisch,bunt,schlicht,gepflegt,ordentlich,fein,altmodisch,auffällig,ausgefallen,schick,salopp,trendig,farbenfroh,schlabberig,brav,geschmackvoll,schrill,dezent',
+ tpl:["{Er} ist {w} gekleidet.","{Sein} Kleidungsstil ist {w}.","{Er} trägt {w:e} Kleidung.","{Er} hat einen {w:en} Kleidungsstil.","Mit {sein}er {w:en} Kleidung fällt {er} auf."]});
+card({id:'kleid',tab:'aussehen',p:'3',icon:'👕',title:'Kleidungsstücke',kind:'noun',mode:'multi',
+ words:'Pullover|m,T-Shirt|n,Jacke|f,Hose|f,Jeans|f,Rock|m,Kleid|n,Hemd|n,Mütze|f,Schal|m,Turnschuhe|p,Kapuzenpulli|m,Weste|f,Jogginghose|f,Anorak|m,Sakko|n,Krawatte|f,Fliege|f,Latzhose|f,Strickjacke|f,Lederhose|f,Dirndl|n,Stiefel|p,Sandalen|p,Haube|f,Leiberl|n,Trainingsanzug|m,Regenjacke|f,Shorts|p,Leggings|p,Socken|p',
+ note:'Du kannst mehrere Teile wählen. Teile, die sich nicht zusammen tragen lassen (Rock und Hose, Mütze und Haube), schließen sich aus.',
+ tpl:["{Er} trägt {w:acc}.","Am liebsten trägt {er} {w:acc}.","Heute hat {er} {w:acc} an.","Auffällig ist {sein}e Kleidung: {w:nom}."]});
+card({id:'access',tab:'aussehen',p:'3',icon:'💍',title:'Schmuck & Accessoires',kind:'noun',mode:'multi',
+ words:'Kette|f,Armband|n,Uhr|f,Ring|m,Ohrringe|p,Anhänger|m,Haarspange|f,Gürtel|m,Stirnband|n,Brosche|f,Armbanduhr|f,Halstuch|n,Schleife|f,Kopftuch|n,Freundschaftsband|n,Kappe|f,Handschuhe|p',
+ tpl:["{Er} trägt {w:acc}.","Dazu trägt {er} {w:acc}.","Als Accessoire hat {er} {w:acc}."]});
+card({id:'dabei',tab:'aussehen',p:'3',icon:'🎒',title:'Was {er} immer dabeihat',kind:'noun',mode:'multi',
+ words:'Rucksack|m,Schultasche|f,Handy|n,Buch|n,Trinkflasche|f,Notizbuch|n,Kuscheltier|n,Skateboard|n,Fußball|m,Kopfhörer|p,Glücksbringer|m',
+ tpl:["{Er} hat immer {w:acc} dabei.","Ohne {w:acc} verlässt {er} das Haus nicht.","Im Alltag trägt {er} {w:acc} mit sich."]});
+
+/* ---------- AUSSCHLUSSREGELN (Aussehen) ---------- */
+opp('frisur:Pferdeschwanz,frisur:Zopf,frisur:Zöpfe,frisur:Flechtzopf,frisur:Dutt,frisur:Haarknoten,frisur:Mähne,frisur:Hochsteckfrisur','haarl:kurz,haarl:raspelkurz,haarl:kinnlang');
+opp('frisur:Bürstenschnitt,frisur:Stachelfrisur,frisur:Irokese,frisur:Topfschnitt','haarl:lang,haarl:schulterlang,haarl:hüftlang,haarl:halblang');
+opp('frisur:Pagenkopf','haarl:raspelkurz,haarl:lang,haarl:hüftlang,haarl:schulterlang');
+opp('frisur:Pagenkopf,frisur:Scheitel,frisur:Mittelscheitel,frisur:Seitenscheitel','haarf:lockig,haarf:kraus,haarf:wuschelig,haarf:ungebändigt,haarf:zottelig');
+opp('frisur:Wuschelkopf,frisur:Stachelfrisur','haarf:glatt,haarf:seidig');
+opp('frisur:Dreadlocks','haarf:glatt,haarf:seidig,haarl:kurz,haarl:raspelkurz');
+opp('haard:schütter,haard:dünn','frisur:Mähne,frisur:Wuschelkopf');
+opp('haarl:raspelkurz,haarl:kurz','haarf:wallend');
+opp('bau:stämmig,bau:untersetzt,bau:gedrungen','groesse:hochgewachsen,groesse:baumlang,groesse:groß');
+opp('bau:hager,bau:spindeldürr,bau:schmächtig','bau:muskulös');
+opp('nasex:Stupsnase,nasex:Knopfnase,nasex:Knubbelnase','nase:groß,nase:lang,nase:spitz,nase:krumm,nase:schief');
+opp('nasex:Hakennase,nasex:Adlernase,nasex:Spitznase','nase:klein,nase:platt,nase:gerade,nase:breit');
+opp('nasex:Knollennase,nasex:Kartoffelnase','nase:schmal,nase:spitz,nase:fein geschnitten');
+opp('ohrx:Segelohren,ohrx:Henkelohren','ohren:klein,ohren:anliegend,ohren:zierlich');
+opp('ohrx:Elfenohren','ohren:rund,ohren:anliegend');
+opp('haut:wettergegerbt,haut:faltig','alter:jung,alter:kindlich');
+opp('haut:pfirsichzart,haut:makellos','alter:betagt,hautf:bleich');
+opp('hautf:blass,hautf:bleich','hautf:gebräunt,hautf:sonnengebräunt,hautf:braun,hautf:dunkel,hautf:olivfarben');
+opp('merk:Pickel,merk:Narbe','haut:makellos');
+opp('merk:Doppelkinn','kinn:spitz,kinn:zierlich,kinn:eckig');
+opp('merk:Kinngrübchen','kinn:fliehend');
+opp('zahnx:Zahnlücke,zahnx:Hasenzähne','zaehne:makellos,zaehne:gerade,zaehne:gleichmäßig');
+opp('zahnx:Zahnspange','zaehne:schief');
+opp('mund:schmal,mund:klein','lippen:voll,lippen:zart');
+opp('mund:breit,mund:groß','lippen:schmal');
+opp('stimme:leise,stimme:sanft,stimme:ruhig','lachen:dröhnend,lachen:schallend,lachen:laut');
+opp('stimme:laut,stimme:dröhnend,stimme:schrill','lachen:leise,lachen:kichernd,lachen:glockenhell');
+opp('gang:schlurfend,gang:humpelnd,gang:schleichend','haltung:stolz,haltung:kerzengerade,haltung:aufrecht');
+opp('gang:stolzierend,gang:federnd','haltung:gebückt,haltung:gebeugt,haltung:steif');
+opp('gang:schnell,gang:flink,gang:hüpfend','haltung:steif');
+opp('stil:elegant,stil:fein,stil:schick','kleid:Jogginghose,kleid:Trainingsanzug,kleid:Kapuzenpulli,kleid:Leggings,kleid:Shorts');
+opp('stil:sportlich','kleid:Krawatte,kleid:Fliege,kleid:Sakko');
+opp('stil:schlicht,stil:dezent','stil:schrill');
+opp('kleid:Rock,kleid:Kleid,kleid:Dirndl','kleid:Hose,kleid:Jeans,kleid:Lederhose,kleid:Jogginghose,kleid:Latzhose,kleid:Shorts,kleid:Leggings,kleid:Trainingsanzug');
+opp('kleid:Turnschuhe','kleid:Stiefel,kleid:Sandalen');
+opp('kleid:Stiefel','kleid:Sandalen');
+opp('kleid:Mütze,access:Kappe','kleid:Haube');
+opp('kleid:Mütze','access:Kappe');
+opp('kleid:T-Shirt','kleid:Leiberl');
+opp('kleid:Shorts','kleid:Hose,kleid:Jeans,kleid:Jogginghose,kleid:Latzhose,kleid:Lederhose,kleid:Leggings');
+opp('access:Uhr','access:Armbanduhr');
+opp('access:Kopftuch,access:Stirnband','kleid:Mütze,kleid:Haube,access:Kappe');
+opp('sehhilfe:Sonnenbrille','sehhilfe:Lesebrille');
+
+/* ===== Karten-Definitionen, Teil 3: Charakter, Hobbys, Schluss + Gegensatz-Regeln ===== */
+function allOf(id){let r=[];Object.values(OLD.SECTIONS).forEach(s=>s.groups.forEach(g=>{if(g.id===id)r=g.items.slice();}));return r;}
+
+/* ---------- CHARAKTER ---------- */
+card({id:'umgang',tab:'charakter',p:'4',cat:'Wie ist die Person innen drin?',icon:'🤝',title:'Im Umgang mit anderen',mode:'multi',
+ words:'freundlich,nett,hilfsbereit,höflich,lieb,ehrlich,fair,großzügig,treu,zuverlässig,fürsorglich,offen,gutmütig,zuvorkommend,rücksichtsvoll,taktvoll,warmherzig,einfühlsam,verständnisvoll,loyal,aufrichtig,vertrauenswürdig,selbstlos,gastfreundlich,großmütig,wohlwollend,kameradschaftlich,umgänglich,kontaktfreudig,herzensgut,bescheiden,nachsichtig,tolerant,respektvoll,charmant,aufmerksam',
+ note:'Hier darfst du mehrere Wörter wählen. Gegensätze (zum Beispiel schüchtern und kontaktfreudig) schließen sich aus.',
+ tpl:["{Er} ist {w}.","{Er} ist ein {w:er} Mensch.","Im Umgang mit anderen ist {er} {w}.","Was mir an {ihm} gefällt: {Er} ist {w}.","Man kann {ihn} als {w:en} Menschen beschreiben.","Alle, die {ihn} kennen, finden {ihn} {w}.","Charakterlich ist {er} {w}.","Typisch für {ihn} ist, dass {er} {w} ist."]});
+card({id:'stimmung',tab:'charakter',p:'4',icon:'😄',title:'Stimmung & Temperament',mode:'multi',
+ words:'fröhlich,lustig,ruhig,schüchtern,mutig,neugierig,lebhaft,still,witzig,brav,munter,locker,cool,gelassen,traurig,wütend,nervös,humorvoll,temperamentvoll,ausgeglichen,geduldig,zurückhaltend,aufgeweckt,ausgelassen,verträumt,nachdenklich,sensibel,unerschrocken,tapfer,abenteuerlustig,selbstbewusst,optimistisch,heiter,quirlig,unternehmungslustig,schlagfertig,spontan,besonnen,zappelig,übermütig,unbekümmert,sanftmütig,euphorisch',
+ tpl:["{Er} ist meistens {w}.","{Er} wirkt {w}.","{Er} ist ein {w:er} Typ.","Von {sein}er Art her ist {er} {w}.","Wenn man {ihn} trifft, merkt man gleich: {Er} ist {w}.","{Er} ist von Natur aus {w}."]});
+card({id:'kopf',tab:'charakter',p:'4',icon:'🧠',title:'Kopf & Fleiß',mode:'multi',
+ words:'klug,schlau,fleißig,kreativ,ordentlich,pünktlich,ehrgeizig,aufmerksam,gescheit,lernfreudig,wach,intelligent,fantasievoll,ideenreich,begabt,geschickt,vielseitig,wissbegierig,konzentriert,gewissenhaft,sorgfältig,zielstrebig,ausdauernd,beharrlich,erfinderisch,belesen,scharfsinnig,vernünftig,verantwortungsbewusst,talentiert,clever',
+ tpl:["{Er} ist {w}.","In der Schule ist {er} {w}.","Beim Lernen und Arbeiten ist {er} {w}.","{Er} gilt bei uns als {w}.","Wenn es um Aufgaben geht, ist {er} {w}."]});
+card({id:'ecken',tab:'charakter',p:'4',icon:'🌶️',title:'Ecken & Kanten',mode:'multi',
+ note:'Niemand ist perfekt. Mit kleinen Schwächen wird eine Beschreibung lebendig und ehrlich. Wähle freundliche Wörter und schreib dazu, was dich daran zum Schmunzeln bringt.',
+ words:'frech,stur,ungeduldig,vergesslich,laut,chaotisch,faul,ängstlich,eigensinnig,empfindlich,trotzig,dickköpfig,vorlaut,eitel,launisch,unordentlich,schusselig,tollpatschig,zerstreut,naschhaft,nachtragend,jähzornig,angeberisch,bequem,naseweis,großspurig,schlampig,sprunghaft,quengelig,hitzköpfig,pingelig,dickschädelig,vorwitzig,geizig',
+ tpl:["Manchmal ist {er} ein bisschen {w}.","{Er} kann ziemlich {w} sein.","Eine kleine Schwäche von {ihm}: {Er} ist manchmal {w}.","Zu {sein}en Ecken und Kanten gehört: {Er} ist hin und wieder {w}.","Hin und wieder ist {er} {w}, aber das gehört zu {ihm}."]});
+card({id:'typen',tab:'charakter',p:'4',icon:'🗝️',title:'Typen mit Spitznamen',kind:'noun',mode:'multi',
+ note:'Das sind kleine Bilder für Menschen. Man sagt sie mit einem Augenzwinkern. Wähle ein oder zwei, die wirklich passen.',
+ words:'Spaßvogel|m,Leseratte|f,Sportskanone|f,Naschkatze|f,Wirbelwind|m,Frechdachs|m,Plaudertasche|f,Schlaumeier|m,Sturkopf|m,Träumer|m,Tausendsassa|m,Glückskind|n,Sonnenschein|m,Bücherwurm|m,Hasenfuß|m,Angsthase|m,Zappelphilipp|m,Rabauke|m,Dreikäsehoch|m,Seelentröster|m,Besserwisser|m,Tüftler|m,Schlitzohr|n,Lausbub|m,Schlafmütze|f,Streber|m,Glückspilz|m,Rechenkünstler|m',
+ tpl:["{Er} ist {w:nom}.","Man könnte {ihn} {w:acc} nennen.","Manche nennen {ihn} {w:acc}.","Für mich ist {er} {w:nom}.","{Er} ist {w:nom}, wie {er} im Buche steht."]});
+
+/* ---------- HOBBYS & ALLTAG ---------- */
+const INFT=["{Er} kann stundenlang {w}.","Am Wochenende möchte {er} am liebsten {w}.","Nach der Schule will {er} sofort {w}.","{Er} würde jeden Nachmittag {w}, wenn {er} dürfte.","Zu {sein}en Hobbys gehört: {w}."];
+card({id:'sport',tab:'hobby',p:'5',cat:'Freizeit',icon:'⚽',title:'Sport & Bewegung',kind:'inf',mode:'multi',words:allOf('sport'),tpl:INFT});
+card({id:'kreativ',tab:'hobby',p:'5',icon:'🎨',title:'Kreatives & Musik',kind:'inf',mode:'multi',words:allOf('kreativ'),tpl:INFT});
+card({id:'denk',tab:'hobby',p:'5',icon:'📚',title:'Drinnen & Denken',kind:'inf',mode:'multi',words:allOf('denk'),
+ tpl:["{Er} kann stundenlang {w}.","Wenn es regnet, will {er} am liebsten {w}.","Am Abend möchte {er} gern {w}.","{Er} würde jeden Nachmittag {w}, wenn {er} dürfte.","Zu {sein}en Hobbys gehört: {w}."]});
+card({id:'natur',tab:'hobby',p:'5',icon:'🌳',title:'Natur & Tiere',kind:'inf',mode:'multi',words:allOf('natur'),
+ tpl:["{Er} verbringt viel Zeit draußen und möchte am liebsten {w}.","Am Wochenende möchte {er} am liebsten {w}.","{Er} kann stundenlang {w}.","In den Ferien will {er} am liebsten {w}.","Zu {sein}en Hobbys gehört: {w}."]});
+card({id:'sammeln',tab:'hobby',p:'5',icon:'🧰',title:'Sammeln',kind:'noun',gen:'p',mode:'multi',words:allOf('sammeln'),
+ tpl:["{Er} sammelt {w}.","{Sein}e Sammlung besteht aus {w}.","Zu Hause hat {er} {w} gesammelt.","In {sein}en Regalen findet man {w}."]});
+card({id:'essen',tab:'hobby',p:'5',icon:'🍎',title:'Essen & Trinken',kind:'phrase',mode:'multi',words:allOf('essen'),
+ tpl:["{Sein} Lieblingsessen ist {w}.","{Er} isst für {sein} Leben gern {w}.","Auf dem Teller landet bei {ihm} am liebsten {w}.","Besonders gern mag {er} {w}."]});
+card({id:'gewohn',tab:'hobby',p:'5',cat:'Alltag',icon:'🌀',title:'Gewohnheiten & Eigenheiten',kind:'phrase',mode:'multi',words:allOf('gewohn'),
+ note:'Diese Wörter stehen schon in der Er-/Sie-Form und passen direkt hinter den Satzanfang.',
+ tpl:["{Er} {w}.","Typisch für {ihn}: {Er} {w}.","Man erkennt {ihn} daran: {Er} {w}.","Eine Eigenheit von {ihm}: {Er} {w}.","Wer {ihn} kennt, weiß: {Er} {w}."]});
+
+/* ---------- SCHLUSS ---------- */
+card({id:'mag1',tab:'schluss',p:'6',cat:'Was ich an {ihm} mag',icon:'💖',title:'Das mag ich an {ihm}',kind:'phrase',mode:'multi',words:allOf('mag1'),
+ tpl:["Ich mag {ihn}, weil {er} {w}.","Besonders gern habe ich {ihn}, weil {er} {w}.","Ich schätze {ihn} sehr, weil {er} {w}.","Mir gefällt an {ihm}, dass {er} {w}.","{Er} ist mir wichtig, weil {er} {w}."]});
+card({id:'besonders',tab:'schluss',p:'6',icon:'🌟',title:'Was {ihn} besonders macht',mode:'multi',words:allOf('besonders'),
+ tpl:["{Er} ist für mich {w}.","Für mich ist {er} ein {w:er} Mensch.","Ich finde {ihn} {w}.","Ich halte {ihn} für {w}."]});
+card({id:'wirk',tab:'schluss',p:'6',icon:'💭',title:'Wie wirkt {er} auf mich?',kind:'phrase',mode:'multi',words:allOf('wirk').filter(x=>!x.includes('___')),
+ tpl:["{Er} {w}.","Ich finde: {Er} {w}.","Wenn ich {ihn} ansehe, merke ich: {Er} {w}.","Ganz klar: {Er} {w}."]});
+card({id:'schluss1',tab:'schluss',p:'6',cat:'So höre ich auf',icon:'🏁',title:'Schluss – Abschlusssätze',kind:'free',
+ note:'Hake ein bis zwei Abschlusssätze an, die zu deinem Text passen.',
+ tpl:["Alles in allem ist {er} ein toller Mensch.","Deshalb mag ich {ihn} so gern.","Ich bin froh, dass ich {ihn} kenne.","Mit {ihm} wird mir nie langweilig.","Kurz gesagt: {Er} ist etwas ganz Besonderes für mich.","Zusammenfassend kann man sagen: {Er} ist ein Mensch, den man gernhaben muss.","Wenn ich {ihn} sehe, muss ich einfach lächeln.","Ich kann mir mein Leben ohne {ihn} kaum vorstellen.","Wer {ihn} kennt, schließt {ihn} schnell ins Herz.","Auch wer {ihn} nur kurz trifft, behält {ihn} in Erinnerung.","Das war meine Beschreibung. Ich hoffe, du kannst dir {ihn} jetzt gut vorstellen."]});
+
+/* ---------- GEGENSATZ-REGELN (Charakter, Hobbys) ---------- */
+opp('stimmung:ruhig,stimmung:gelassen,stimmung:ausgeglichen,stimmung:still,stimmung:besonnen,stimmung:sanftmütig,stimmung:geduldig','stimmung:lebhaft,stimmung:temperamentvoll,stimmung:zappelig,stimmung:quirlig,stimmung:ausgelassen,stimmung:übermütig,stimmung:euphorisch,stimmung:nervös,stimmung:wütend');
+opp('stimmung:schüchtern,stimmung:zurückhaltend','stimmung:selbstbewusst,stimmung:mutig,stimmung:unerschrocken,stimmung:abenteuerlustig,stimmung:schlagfertig,stimmung:unternehmungslustig,umgang:kontaktfreudig,typen:Rabauke');
+opp('stimmung:fröhlich,stimmung:lustig,stimmung:heiter,stimmung:optimistisch,stimmung:humorvoll,stimmung:munter,stimmung:unbekümmert,stimmung:euphorisch,typen:Sonnenschein,typen:Spaßvogel','stimmung:traurig,stimmung:wütend');
+opp('stimmung:locker,stimmung:cool,stimmung:unbekümmert','stimmung:nervös,stimmung:sensibel');
+opp('stimmung:still,stimmung:zurückhaltend','typen:Plaudertasche,typen:Wirbelwind,typen:Zappelphilipp');
+opp('stimmung:mutig,stimmung:unerschrocken,stimmung:tapfer,stimmung:abenteuerlustig,stimmung:selbstbewusst,ecken:ängstlich','typen:Hasenfuß,typen:Angsthase');
+opp('typen:Wirbelwind,typen:Zappelphilipp,typen:Rabauke','typen:Schlafmütze,typen:Träumer');
+opp('ecken:ungeduldig,ecken:jähzornig,ecken:hitzköpfig,ecken:launisch','stimmung:geduldig,stimmung:gelassen,stimmung:ausgeglichen,stimmung:besonnen,stimmung:sanftmütig');
+opp('ecken:chaotisch,ecken:unordentlich,ecken:schlampig,ecken:schusselig','kopf:ordentlich,kopf:gewissenhaft,kopf:sorgfältig,kopf:konzentriert');
+opp('ecken:faul,ecken:bequem,typen:Schlafmütze','kopf:fleißig,kopf:ehrgeizig,kopf:zielstrebig,kopf:ausdauernd,kopf:beharrlich,typen:Streber');
+opp('ecken:ängstlich','stimmung:mutig,stimmung:unerschrocken,stimmung:tapfer,stimmung:abenteuerlustig,stimmung:selbstbewusst');
+opp('ecken:vergesslich,ecken:zerstreut','kopf:aufmerksam,kopf:konzentriert,kopf:wach');
+opp('ecken:laut','stimmung:ruhig,stimmung:still,stimmung:zurückhaltend,stimmung:schüchtern');
+opp('ecken:frech,ecken:vorlaut,ecken:naseweis,ecken:vorwitzig,typen:Frechdachs,typen:Lausbub','umgang:höflich,umgang:taktvoll,umgang:respektvoll,umgang:zuvorkommend,stimmung:brav');
+opp('ecken:nachtragend','umgang:nachsichtig,umgang:großmütig,umgang:wohlwollend');
+opp('ecken:angeberisch,ecken:großspurig,ecken:eitel','umgang:bescheiden');
+opp('ecken:geizig','umgang:großzügig,umgang:großmütig,umgang:selbstlos');
+opp('ecken:sprunghaft','kopf:konzentriert,kopf:beharrlich');
+opp('ecken:launisch','stimmung:ausgeglichen,stimmung:gelassen');
+opp('ecken:unordentlich,ecken:chaotisch','kopf:ordentlich');
+opp('kopf:pünktlich','gewohn:kommt oft zu spät');
+opp('gewohn:kommt oft zu spät','gewohn:ist immer pünktlich');
+opp('gewohn:räumt gern auf','gewohn:verlegt ständig seine Sachen,gewohn:vergisst oft etwas,gewohn:lässt die Tür offen stehen');
+opp('gewohn:redet viel','stimmung:still');
+opp('stimmung:zurückhaltend','typen:Plaudertasche');
+
+
+/* ===================== APP ===================== */
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const KEY='personenbeschreibung-baukasten-v1';
-let state={name:'',g:'m',col:{},text:'',chk:{},tab:'start'};
-try{const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s) state=Object.assign(state,s);}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+const KEY='personenbeschreibung-baukasten-v2';
+const DEF=()=>({name:'',rel:'',age:'',g:'m',sel:{},tick:{},text:'',chk:{},tab:'start'});
+let S=DEF();
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)S=Object.assign(DEF(),s);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
-function parse(raw){let s=false;if(raw[0]==='*'){s=true;raw=raw.slice(1);}const i=raw.indexOf('=');return i<0?{w:raw.trim(),h:'',s}:{w:raw.slice(0,i).trim(),h:raw.slice(i+1).trim(),s};}
+const TABS=[['start','🏠 Start'],['einl','🚪 Einleitung'],['aussehen','🧍 Aussehen'],['charakter','💛 Charakter'],['hobby','🎈 Hobbys & Alltag'],['schluss','🏁 Schluss'],['extras','🧰 Extras'],['text','✍️ Mein Text']];
+const TABINFO={
+ einl:{t:'🚪 Einleitung – so fange ich an',i:'Wen stellst du vor, wie alt ist die Person, welchen ersten Eindruck macht sie? Wähle Wörter und hake die Sätze an, die dir gefallen.'},
+ aussehen:{t:'🧍 Aussehen – von oben nach unten',i:'Gestalt, Haare, Gesicht, Körper und Kleidung. Bei den meisten Karten passt nur ein Wort. Was nicht zusammenpasst, wird grau. Du darfst Karten überspringen.'},
+ charakter:{t:'💛 Charakter – wie ist die Person innen drin?',i:'Hier darfst du mehrere Wörter pro Karte wählen. Gegensätze schließen sich aus. Unter jeder Karte findest du viele Möglichkeiten, es zu sagen.'},
+ hobby:{t:'🎈 Hobbys & Alltag',i:'Was macht die Person gern? Was ist typisch für sie? Wähle Hobbys und Gewohnheiten und probiere verschiedene Formulierungen aus.'},
+ schluss:{t:'🏁 Schluss – was ich mag',i:'Warum magst du die Person? Wie wirkt sie auf dich? Und wie hörst du deinen Text rund ab?'}
+};
+const CHECKS=['Ich habe eine Einleitung geschrieben (Wer ist die Person? Wie alt? Erster Eindruck).','Ich beschreibe das Aussehen von oben nach unten.','__SPECIAL__','Ich habe abwechslungsreiche Verben verwendet (trägt, wirkt, fällt auf …).','Beim Charakter habe ich ein kleines Beispiel erzählt.','Mein Schluss sagt, wie die Person auf mich wirkt.','Alles steht im Präsens.','Ich habe Absätze gemacht und die Rechtschreibung kontrolliert.'];
+const EXTRA_IDS=['verben','uebergang','ort','bilder','haeuf'];
+const openSet=new Set(['einl1','groesse','glatze','umgang','sport','mag1']);
 
-const G={},ORDER=[];
-Object.entries(SECTIONS).forEach(([sk,sec])=>sec.groups.forEach(g=>{g.sec=sk;{const seen=new Set();g.parsed=g.items.map(parse).filter(it=>!seen.has(it.w)&&seen.add(it.w));}G[g.id]=g;ORDER.push(g);}));
-
+/* ---------- Sprache ---------- */
 function fill(s){
-  const m=state.g==='m',nm=(state.name||'').trim();
-  return s.replace(/\{(\w+)\}/g,(x,k)=>{
-    switch(k){
-      case 'Er':return m?'Er':'Sie';
-      case 'er':return m?'er':'sie';
-      case 'Sein':return m?'Sein':'Ihr';
-      case 'sein':return m?'sein':'ihr';
-      case 'ihn':return m?'ihn':'sie';
-      case 'ihm':return m?'ihm':'ihr';
-      case 'Wen':return nm||(m?'meinen Freund':'meine Freundin');
-      case 'Wer':return nm||(m?'Mein Freund':'Meine Freundin');
-      case 'wer':return nm||(m?'mein Freund':'meine Freundin');
-      case 'name':return nm||(m?'er':'sie');
-      default:return x;
-    }
-  });
+  const m=S.g==='m',nm=(S.name||'').trim();
+  const rel=(S.rel||'').trim()||(m?'mein Freund':'meine Freundin');
+  const relAcc=m?rel.replace(/^mein /i,'meinen '):rel;
+  const cap=x=>x.charAt(0).toUpperCase()+x.slice(1);
+  return s.replace(/\{(\w+)\}/g,(x,k)=>{switch(k){
+    case 'Er':return m?'Er':'Sie';case 'er':return m?'er':'sie';
+    case 'Sein':return m?'Sein':'Ihr';case 'sein':return m?'sein':'ihr';
+    case 'ihn':return m?'ihn':'sie';case 'ihm':return m?'ihm':'ihr';
+    case 'Wen':return nm||relAcc;case 'Wer':return nm||cap(rel);case 'wer':return nm||rel;
+    case 'age':return (S.age+'').trim()||'___';
+    default:return x;}});
+}
+function ending(a,e){
+  const parts=a.split(' ');let last=parts.pop();
+  if(last==='hoch')last='hoh';
+  else if(/[^aeiouäöüy]el$/.test(last))last=last.slice(0,-2)+'l';
+  last=last.endsWith('e')?last+e.slice(1):last+e;
+  return parts.concat(last).join(' ');
+}
+const ART={nom:{m:'ein',f:'eine',n:'ein',p:''},acc:{m:'einen',f:'eine',n:'ein',p:''},dat:{m:'einem',f:'einer',n:'einem',p:''},def:{m:'der',f:'die',n:'das',p:'die'}};
+function fmt(it,m){
+  if(!m||m==='bare')return it.w;
+  if(ART[m]){const a=ART[m][it.g]||'';return (a?a+' ':'')+it.w;}
+  return ending(it.w,m);
+}
+const joinList=a=>a.length<=1?(a[0]||''):a.slice(0,-1).join(', ')+' und '+a[a.length-1];
+function selItems(c){return (S.sel[c.id]||[]).map(w=>c.words.find(x=>x.w===w)).filter(Boolean);}
+function genSent(c,t,items){
+  let out=t;
+  if(c.kind!=='free'&&c.kind!=='toggle')out=t.replace(/\{w(?::(\w+))?\}/g,(x,m)=>items.length?joinList(items.map(it=>fmt(it,m))):'___');
+  out=fill(out);
+  return out.charAt(0).toUpperCase()+out.slice(1);
 }
 const blanks=h=>h.replace(/___/g,'<span class="blank"></span>');
-const openSet=new Set(['gesamt','haarl','umgang','sport','mag1','einl']);
+
+/* ---------- Regeln ---------- */
+function isSel(tok){const k=tok.indexOf(':');return (S.sel[tok.slice(0,k)]||[]).includes(tok.slice(k+1));}
+function wordBlock(cid,w){
+  const tok=cid+':'+w;
+  for(const [A,B] of OPP){
+    if(A.includes(tok)){const b=B.find(x=>x!==tok&&isSel(x));if(b)return b;}
+    if(B.includes(tok)){const a=A.find(x=>x!==tok&&isSel(x));if(a)return a;}
+  }
+  return null;
+}
+function offReason(c){
+  if(c.offIf){const id=c.offIf.find(i=>(S.sel[i]||[]).length);if(id)return 'Das passt nicht zu deiner Wahl „'+fill(S.sel[id][0])+'“. Nimm sie bei der Karte „'+fill(CBY[id].title)+'“ wieder weg, dann geht es hier weiter.';}
+  if(c.needs&&c.needs.some(i=>!(S.sel[i]||[]).length))return c.needMsg||'Wähle zuerst eine andere Karte.';
+  return '';
+}
+function ready(c){return c.kind==='free'||(S.sel[c.id]||[]).length>0;}
+function normalize(){CARDS.forEach(c=>{if(offReason(c)){S.sel[c.id]=[];S.tick[c.id]=[];}});}
+function countSents(){let n=0;CARDS.forEach(c=>{if(!offReason(c)&&ready(c))n+=(S.tick[c.id]||[]).filter(i=>c.tpl[i]).length;});return n;}
+function buildText(){
+  return ['1','2','3','4','5','6'].map(p=>{
+    const out=[];
+    CARDS.filter(c=>c.p===p).forEach(c=>{
+      if(offReason(c)||!ready(c))return;
+      const items=selItems(c);
+      (S.tick[c.id]||[]).slice().sort((a,b)=>a-b).forEach(i=>{if(c.tpl[i])out.push(genSent(c,c.tpl[i],items));});
+    });
+    return out.join(' ');
+  }).filter(Boolean).join('\n\n');
+}
 
 /* ---------- Rendering ---------- */
-function chipHtml(g,i){
-  const it=g.parsed[i],id=g.id+'::'+it.w,ins=g.mode==='insert';
-  const on=!ins&&state.col[id];
-  const label=esc(fill(it.w));
-  return `<button type="button" class="chip ${it.s?'s':'c'}${ins?' ins':''}${on?' on':''}" data-g="${g.id}" data-i="${i}"${ins?'':` aria-pressed="${on?'true':'false'}"`}${it.h?` title="${esc(it.h)}"`:''}>${label}</button>`;
-}
-function groupHtml(g){
-  const ins=g.mode==='insert';
-  const cm=[],sp=[];g.parsed.forEach((it,i)=>(it.s?sp:cm).push(i));
-  let h=`<details class="grp" id="grp-${g.id}" data-gid="${g.id}"${openSet.has(g.id)?' open':''}><summary><span class="ico" aria-hidden="true">${g.icon}</span><span class="gt">${esc(fill(g.title))}</span>${ins?'':`<span class="cnt" data-cnt="${g.id}"></span>`}</summary><div class="gbody">`;
-  if(g.note)h+=`<p class="gnote">${esc(fill(g.note))}</p>`;
-  if(g.frames&&g.frames.length){
-    h+=`<div class="frames"><span class="flbl">🧱 Bauplan – tippen = in deinen Text:</span>`+g.frames.map((f,i)=>`<button type="button" class="frame" data-g="${g.id}" data-f="${i}">${blanks(esc(fill(f)))}</button>`).join('')+`</div>`;
-  }
-  h+=`<div class="chips">`;
-  if(cm.length){h+=`<div class="sublbl c">● gängige ${ins?'Satzanfänge':'Wörter'}</div>`;cm.forEach(i=>h+=chipHtml(g,i));}
-  if(sp.length){h+=`<div class="sublbl s">✦ besondere ${ins?'Satzanfänge':'Wörter'}</div>`;sp.forEach(i=>h+=chipHtml(g,i));}
-  return h+`</div></div></details>`;
-}
-function renderSection(sk){
-  const sec=SECTIONS[sk],root=$('#sec-'+sk);
+function cardBody(c){
+  const off=offReason(c);
+  if(off)return `<div class="offmsg">🔒 ${esc(off)}</div>`;
   let h='';
-  if(sec.intro) h+=`<div class="sechead"><h2>${sec.title}</h2><p>${sec.intro}</p><div class="tools"><button type="button" data-act="open" data-sec="${sk}">📂 Alle aufklappen</button><button type="button" data-act="close" data-sec="${sk}">📁 Alle zuklappen</button></div></div>`;
-  else h+=`<div class="sechead"><h2>${sec.title}</h2><p>Hier findest du Satzanfänge, Verben, Übergänge und Vergleiche. Satzanfänge mit ✎ setzt ein Tipp direkt in deinen Text. Alles andere sammelst du wie gewohnt.</p><div class="tools"><button type="button" data-act="open" data-sec="${sk}">📂 Alle aufklappen</button><button type="button" data-act="close" data-sec="${sk}">📁 Alle zuklappen</button></div></div>`;
-  let lastCat=null;
-  const endCard=sk==='form'?$('#endCard'):null;
-  sec.groups.forEach(g=>{
-    if(g.cat&&g.cat!==lastCat){h+=`<h3 class="cat">${esc(g.cat)}</h3>`;lastCat=g.cat;}
-    h+=groupHtml(g);
-  });
-  if(sk==='form'){
-    const keep=endCard?endCard.outerHTML:'';
-    root.innerHTML=h.replace(/(<h3 class="cat">Wörter, die Texte besser machen)/,keep+'$1');
-  }else root.innerHTML=h;
-}
-function renderAll(){Object.keys(SECTIONS).forEach(renderSection);refresh();}
-
-/* ---------- Refresh / Zähler ---------- */
-function totals(){
-  let all=0,spAll=0;
-  ORDER.forEach(g=>{if(g.mode==='insert')return;g.parsed.forEach(it=>{all++;if(it.s)spAll++;});});
-  const ids=Object.keys(state.col).filter(k=>state.col[k]);
-  let sp=0;ids.forEach(id=>{const f=findById(id);if(f&&f.it.s)sp++;});
-  return {all,spAll,n:ids.length,sp};
-}
-function findById(id){
-  const k=id.indexOf('::'),gid=id.slice(0,k),w=id.slice(k+2),g=G[gid];if(!g)return null;
-  const it=g.parsed.find(x=>x.w===w);return it?{g,it}:null;
-}
-function refresh(){
-  $$('.chip[data-g]').forEach(c=>{
-    const g=G[c.dataset.g];if(!g||g.mode==='insert')return;
-    const it=g.parsed[+c.dataset.i],on=!!state.col[g.id+'::'+it.w];
-    c.classList.toggle('on',on);c.setAttribute('aria-pressed',on?'true':'false');
-  });
-  ORDER.forEach(g=>{
-    if(g.mode==='insert')return;
-    const el=$(`[data-cnt="${g.id}"]`);if(!el)return;
-    const n=g.parsed.filter(it=>state.col[g.id+'::'+it.w]).length;
-    el.textContent=n?`${n} ✓`:`${g.parsed.length}`;el.classList.toggle('has',n>0);
-  });
-  const t=totals();
-  $('#fabN').textContent=t.n;
-  let lv=LEVELS[0][1],next=LEVELS[1];
-  for(let i=0;i<LEVELS.length;i++){if(t.n>=LEVELS[i][0]){lv=LEVELS[i][1];next=LEVELS[i+1]||null;}}
-  $('#lvlName').textContent=lv;
-  const pct=next?Math.min(100,Math.round(100*t.n/next[0])):100;
-  $('#lvlBar').style.width=pct+'%';
-  $('#lvlTxt').textContent=`${t.n} Wörter gesammelt, davon ${t.sp} ✦ besondere`+(next?` · noch ${next[0]-t.n} bis „${next[1]}“`:' · höchste Stufe erreicht!');
-  renderMine();updateTextStats();
-}
-
-/* ---------- Meine Wörter ---------- */
-function renderMine(){
-  const box=$('#mine');
-  const ids=Object.keys(state.col).filter(k=>state.col[k]);
-  if(!ids.length){box.innerHTML='<p style="margin:0;color:var(--muted)">Noch leer. Gehe zu den Bereichen Aussehen, Charakter oder Hobbys und tippe auf Wörter, die dir gefallen.</p>';return;}
-  const low=(state.text||'').toLowerCase();
-  const byG={};ids.forEach(id=>{const f=findById(id);if(f)(byG[f.g.id]=byG[f.g.id]||[]).push(f);});
-  let h='';
-  ORDER.forEach(g=>{
-    const arr=byG[g.id];if(!arr)return;
-    h+=`<div class="mgrp">${g.icon} ${esc(fill(g.title))}</div><div class="mine">`;
-    arr.forEach(f=>{
-      const id=g.id+'::'+f.it.w,txt=fill(f.it.w);
-      const used=low.includes(txt.toLowerCase().replace(/\s*___\s*/g,'').trim())&&!/___/.test(txt);
-      h+=`<span class="mychip ${f.it.s?'s':'c'}${used?' used':''}"><button type="button" class="chip ${f.it.s?'s':'c'}" data-ins="${esc(id)}">${esc(txt)}</button><button type="button" class="x" data-rm="${esc(id)}" aria-label="${esc(txt)} entfernen">×</button></span>`;
-    });
+  if(c.note)h+=`<p class="gnote">${esc(fill(c.note))}</p>`;
+  if(c.kind!=='free'){
+    h+=`<p class="mode">${c.mode==='single'?'☝️ Du wählst 1 Wort.':'👆 Du darfst mehrere Wörter wählen.'}</p><div class="chips">`;
+    const cm=[],sp=[];c.words.forEach((it,i)=>(it.s?sp:cm).push(i));
+    const chip=i=>{
+      const it=c.words[i],on=(S.sel[c.id]||[]).includes(it.w),blk=on?null:wordBlock(c.id,it.w);
+      const ttl=blk?'Passt nicht zu: '+fill(blk.slice(blk.indexOf(':')+1)):it.h;
+      return `<button type="button" class="chip ${it.s?'s':'c'}${on?' on':''}${blk?' dis':''}" data-card="${c.id}" data-i="${i}" aria-pressed="${on}"${blk?' aria-disabled="true"':''}${ttl?` title="${esc(ttl)}"`:''}>${esc(fill(it.w))}</button>`;
+    };
+    if(cm.length){h+=`<div class="sublbl c">● gängige Wörter</div>`;cm.forEach(i=>h+=chip(i));}
+    if(sp.length){h+=`<div class="sublbl s">✦ besondere Wörter</div>`;sp.forEach(i=>h+=chip(i));}
     h+=`</div>`;
+  }
+  const items=selItems(c),rd=ready(c);
+  h+=`<div class="sents"><div class="slbl">💬 So kannst du es sagen<small>${rd?'Tippe an, was in deinen Text soll. Du darfst mehrere Formulierungen nehmen.':'Wähle oben ein Wort, dann stehen hier die Sätze mit deinem Wort. Ein Vorgeschmack:'}</small></div>`;
+  c.tpl.forEach((t,i)=>{
+    const on=rd&&(S.tick[c.id]||[]).includes(i);
+    h+=`<button type="button" class="sent${on?' on':''}${rd?'':' ghost'}" data-card="${c.id}" data-s="${i}" aria-pressed="${on}"><span class="box">✓</span><span>${blanks(esc(genSent(c,t,items)))}</span></button>`;
   });
-  box.innerHTML=h;
+  return h+`</div>`;
+}
+function renderTabs(){
+  ['einl','aussehen','charakter','hobby','schluss'].forEach(tk=>{
+    const info=TABINFO[tk];
+    let h=`<div class="sechead"><h2>${info.t}</h2><p>${info.i}</p><div class="tools"><button type="button" data-act="open" data-sec="${tk}">📂 Alle aufklappen</button><button type="button" data-act="close" data-sec="${tk}">📁 Alle zuklappen</button></div></div>`;
+    let last=null;
+    CARDS.filter(c=>c.tab===tk).forEach(c=>{
+      if(c.cat&&c.cat!==last){h+=`<h3 class="cat">${esc(fill(c.cat))}</h3>`;last=c.cat;}
+      h+=`<details class="grp" id="grp-${c.id}" data-id="${c.id}"${openSet.has(c.id)?' open':''}><summary><span class="ico" aria-hidden="true">${c.icon}</span><span class="gt">${esc(fill(c.title))}</span><span class="pick"></span></summary><div class="gbody"></div></details>`;
+    });
+    $('#sec-'+tk).innerHTML=h;
+  });
+  refreshAll();
+}
+function refreshAll(){
+  CARDS.forEach(c=>{
+    const el=$('#grp-'+c.id);if(!el)return;
+    const off=!!offReason(c);el.classList.toggle('off',off);
+    $('.gbody',el).innerHTML=cardBody(c);
+    const sel=S.sel[c.id]||[],nt=(S.tick[c.id]||[]).length;
+    let p='';
+    if(!off){p=c.kind==='free'?(nt?'✓ '+nt+(nt===1?' Satz':' Sätze'):''):(sel.length?'✓ '+sel.map(w=>fill(w)).join(', '):'');}
+    $('.pick',el).textContent=p;
+  });
+  updateStats();
+}
+function renderExtras(){
+  let h='';
+  EXTRA_IDS.forEach(id=>{
+    let g=null;Object.values(OLD.SECTIONS).forEach(s=>s.groups.forEach(x=>{if(x.id===id)g=x;}));
+    if(!g)return;
+    h+=`<details class="grp" id="grp-x-${id}" data-id="x-${id}"${openSet.has('x-'+id)?' open':''}><summary><span class="ico">${g.icon}</span><span class="gt">${esc(g.title)}</span></summary><div class="gbody">`;
+    if(g.note)h+=`<p class="gnote">${esc(g.note)}</p>`;
+    h+=`<div class="chips">`+g.items.map((raw,i)=>{const it=parseRaw(raw);return `<button type="button" class="chip ${it.s?'s':'c'}" data-x="${id}" data-i="${i}"${it.h?` title="${esc(it.h)}"`:''}>${esc(fill(it.w))}</button>`;}).join('')+`</div></div></details>`;
+  });
+  $('#extraGroups').innerHTML=h;
 }
 
-/* ---------- Text / Einfügen ---------- */
+/* ---------- Text ---------- */
 const ta=$('#ta');
-function insertText(txt,noSpace){
-  const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart,e=ta.selectionEnd==null?v.length:ta.selectionEnd;
-  const before=v.slice(0,s),after=v.slice(e);
-  let pre='';if(before&&!/[\s\n]$/.test(before))pre=' ';
-  const post=noSpace?'':(after&&!/^[\s\n.,;:!?]/.test(after)?' ':(after?'':' '));
-  const ins=pre+txt+post;
-  ta.value=before+ins+after;
-  const pos=(before+ins).length;ta.selectionStart=ta.selectionEnd=pos;
-  state.text=ta.value;save();updateTextStats();renderMine();
-  bubble('✔ In deinen Text eingefügt – schau bei „✍️ Mein Text“ nach.',2200);
+let spCount=0;
+function updateStats(){
+  const n=countSents();
+  $('#fabN').textContent=n;
+  $('#buildInfo').innerHTML=n?`Du hast <b>${n}</b> ${n===1?'Satz':'Sätze'} angekreuzt. Der Knopf fügt sie zu einem Text zusammen, geordnet nach Einleitung, Aussehen, Charakter, Hobbys und Schluss.`:'Du hast noch keine Sätze angekreuzt. Gehe zu den Karten, wähle Wörter und hake Sätze an. Oder würfle auf der Startseite eine Zufallsperson.';
+  updateTextStats();
 }
 function updateTextStats(){
   const t=ta.value||'';
   const wc=t.trim()?t.trim().split(/\s+/).length:0;
   $('#wc').textContent=wc+(wc===1?' Wort':' Wörter');
   const low=t.toLowerCase(),seen=new Set();
-  ORDER.forEach(g=>g.parsed.forEach(it=>{
-    if(!it.s||g.mode==='insert')return;
-    const w=it.w.toLowerCase();if(/[{}…]|___/.test(w)||w.length<4)return;
-    const stem=w.length>7?w.slice(0,w.length-2):w;
-    if(low.includes(stem))seen.add(w);
+  CARDS.forEach(c=>c.words.forEach(it=>{
+    if(!it.s)return;const w=it.w.toLowerCase();
+    if(/[{}…]|___/.test(w)||w.length<4)return;
+    if(low.includes(w.length>7?w.slice(0,w.length-2):w))seen.add(w);
   }));
-  $('#sc').textContent='✦ '+seen.size+(seen.size===1?' besonderes Wort':' besondere Wörter')+' in deinem Text';
-  state._sp=seen.size;
-  renderChecks();
-}
-function renderChecks(){
-  const box=$('#checks'),sp=state._sp||0;
-  box.innerHTML=CHECKS.map((c,i)=>{
-    if(c==='__SPECIAL__'){
-      const ok=sp>=5;
-      return `<label><input type="checkbox" disabled ${ok?'checked':''}><span>Ich habe mindestens 5 besondere ✦-Wörter benutzt. <b>(automatisch: ${sp} gefunden)</b></span></label>`;
-    }
-    return `<label><input type="checkbox" data-chk="${i}" ${state.chk[i]?'checked':''}><span>${c}</span></label>`;
+  spCount=seen.size;
+  $('#sc').textContent='✦ '+spCount+(spCount===1?' besonderes Wort':' besondere Wörter')+' in deinem Text';
+  $('#checks').innerHTML=CHECKS.map((c,i)=>{
+    if(c==='__SPECIAL__')return `<label><input type="checkbox" disabled ${spCount>=5?'checked':''}><span>Ich habe mindestens 5 besondere ✦-Wörter benutzt. <b>(automatisch: ${spCount} gefunden)</b></span></label>`;
+    return `<label><input type="checkbox" data-chk="${i}" ${S.chk[i]?'checked':''}><span>${c}</span></label>`;
   }).join('');
 }
+function insertText(txt){
+  const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart,e=ta.selectionEnd==null?v.length:ta.selectionEnd;
+  const before=v.slice(0,s),after=v.slice(e);
+  const pre=before&&!/[\s\n]$/.test(before)?' ':'';
+  const post=after&&!/^[\s\n.,;:!?]/.test(after)?' ':(after?'':' ');
+  const ins=pre+txt+post;
+  ta.value=before+ins+after;ta.selectionStart=ta.selectionEnd=(before+ins).length;
+  S.text=ta.value;save();updateTextStats();
+}
 
-/* ---------- Bubble ---------- */
+/* ---------- Bubble / Tabs ---------- */
 let bt;
 function bubble(html,ms){const b=$('#bubble');b.innerHTML=html;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),ms||3500);}
-
-/* ---------- Tabs / Navigation ---------- */
-function buildNav(){
-  $('#navin').innerHTML=TABS.map(([k,l])=>`<button type="button" data-tab="${k}">${l}</button>`).join('');
-}
 function showTab(k,noScroll){
-  state.tab=k;save();
+  S.tab=k;save();
   $$('section.tab').forEach(s=>s.classList.toggle('show',s.id==='sec-'+k));
   $$('#navin button').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
   if(!noScroll)window.scrollTo({top:0,behavior:'smooth'});
 }
-function goGroup(gid){
-  const g=G[gid];if(!g)return;
-  showTab(g.sec,true);openSet.add(gid);
-  const el=$('#grp-'+gid);if(!el)return;
+function goCard(id){
+  const c=CBY[id];if(!c)return;
+  showTab(c.tab,true);openSet.add(id);
+  const el=$('#grp-'+id);if(!el)return;
   el.open=true;
   setTimeout(()=>{el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');},60);
 }
 
-/* ---------- Würfel ---------- */
-let rolled=[];
-function pick(a){return a[Math.floor(Math.random()*a.length)];}
+/* ---------- Auswahl ---------- */
+function toggleWord(cid,i){
+  const c=CBY[cid];if(!c||offReason(c))return;
+  const it=c.words[i];
+  const blk=(S.sel[cid]||[]).includes(it.w)?null:wordBlock(cid,it.w);
+  if(blk){bubble('🚫 Das passt nicht zu <b>'+esc(fill(blk.slice(blk.indexOf(':')+1)))+'</b>. Nimm erst dieses Wort weg.',3200);return;}
+  let a=S.sel[cid]||[];
+  if(c.mode==='single')a=a[0]===it.w?[]:[it.w];
+  else a=a.includes(it.w)?a.filter(x=>x!==it.w):a.concat(it.w);
+  S.sel[cid]=a;
+  if(!a.length)S.tick[cid]=[];
+  else if(!(S.tick[cid]||[]).length)S.tick[cid]=[0];
+  normalize();save();refreshAll();
+  if(it.h)bubble((it.s?'✦ ':'')+'<b>'+esc(fill(it.w))+'</b> – '+esc(it.h),4200);
+}
+function toggleSent(cid,i){
+  const c=CBY[cid];if(!c)return;
+  if(!ready(c)){bubble('☝️ Wähle zuerst oben ein Wort.',2200);return;}
+  let t=S.tick[cid]||[];
+  t=t.includes(i)?t.filter(x=>x!==i):t.concat(i);
+  S.tick[cid]=t;save();refreshAll();
+}
 function roll(){
-  rolled=[];
-  const box=$('#dice');box.innerHTML='';
-  ROLL.forEach(([ic,title,gids])=>{
-    let items=[];
-    if(title==='Hobby'){const g=G[pick(gids)];items=[{g,i:Math.floor(Math.random()*g.parsed.length)}];}
-    else items=gids.map(id=>{const g=G[id];return {g,i:Math.floor(Math.random()*g.parsed.length)};});
-    rolled.push(...items);
-    box.insertAdjacentHTML('beforeend',`<div class="die"><b>${ic} ${title}</b>${items.map(x=>{const it=x.g.parsed[x.i];return `<span class="chip ${it.s?'s':'c'}" title="${esc(it.h)}">${esc(fill(it.w))}</span>`;}).join('')}</div>`);
+  if(Object.values(S.sel).some(a=>a&&a.length)&&!confirm('Die Zufallsperson ersetzt deine bisherige Auswahl. Okay?'))return;
+  S.sel={};S.tick={};
+  [['groesse',1],['bau',1],['haarl',1],['haard',1],['haarf',1],['haarc',1],['augenf',1],['blick',1],['nase',1],['mund',1],['laecheln',1],['umgang',2],['stimmung',2],['kopf',1],['sport',2],['kreativ',1]].forEach(([id,n])=>{
+    const c=CBY[id];if(offReason(c))return;
+    let tries=0,got=0;
+    while(got<n&&tries<80){tries++;const it=c.words[Math.floor(Math.random()*c.words.length)];
+      if(wordBlock(id,it.w)||(S.sel[id]||[]).includes(it.w))continue;
+      (S.sel[id]=S.sel[id]||[]).push(it.w);got++;}
+    if((S.sel[id]||[]).length)S.tick[id]=[0];
   });
+  S.tick.einl1=[0];S.tick.schluss1=[0];
+  normalize();save();refreshAll();
+  bubble('🎲 Deine Zufallsperson steht! Schau in den Karten nach und baue unter „✍️ Mein Text“ den Text zusammen.',4500);
+}
+function resetAll(){
+  if(!confirm('Alles zurücksetzen und eine neue Person beschreiben? Auswahl, Sätze und Text werden gelöscht.'))return;
+  const g=S.g;S=DEF();S.g=g;save();
+  ta.value='';$('#inName').value='';$('#inRel').value='';$('#inAge').value='';
+  renderTabs();updateTextStats();showTab('start');
+  bubble('🔄 Alles ist leer. Du kannst eine neue Person beschreiben!',3000);
 }
 
 /* ---------- Events ---------- */
 document.addEventListener('click',e=>{
   const t=e.target;
-  const tabBtn=t.closest('#navin button');if(tabBtn){showTab(tabBtn.dataset.tab);return;}
-  const go=t.closest('[data-go]');if(go){goGroup(go.dataset.go);return;}
+  const nb=t.closest('#navin button');if(nb){showTab(nb.dataset.tab);return;}
+  const go=t.closest('[data-go]');if(go){goCard(go.dataset.go);return;}
   const act=t.closest('[data-act]');
-  if(act){const sk=act.dataset.sec,open=act.dataset.act==='open';SECTIONS[sk].groups.forEach(g=>{open?openSet.add(g.id):openSet.delete(g.id);const el=$('#grp-'+g.id);if(el)el.open=open;});return;}
-  const fr=t.closest('.frame');
-  if(fr){const g=G[fr.dataset.g];insertText(fill(g.frames[+fr.dataset.f]));return;}
-  const ins=t.closest('[data-ins]');
-  if(ins){const f=findById(ins.dataset.ins);if(f)insertText(fill(f.it.w));return;}
-  const rm=t.closest('[data-rm]');
-  if(rm){delete state.col[rm.dataset.rm];save();refresh();return;}
-  const chip=t.closest('.chip[data-g]');
-  if(chip){
-    const g=G[chip.dataset.g],it=g.parsed[+chip.dataset.i];
-    if(it.h)bubble(`${it.s?'✦ ':''}<b>${esc(fill(it.w))}</b> – ${esc(it.h)}`,4500);
-    if(g.mode==='insert'){insertText(fill(it.w));return;}
-    const id=g.id+'::'+it.w;
-    if(state.col[id])delete state.col[id];else state.col[id]=true;
-    save();refresh();return;
-  }
+  if(act){const open=act.dataset.act==='open',sec=act.dataset.sec;
+    const ids=sec?CARDS.filter(c=>c.tab===sec).map(c=>c.id):EXTRA_IDS.map(x=>'x-'+x);
+    ids.forEach(id=>{open?openSet.add(id):openSet.delete(id);const el=$('#grp-'+id);if(el)el.open=open;});return;}
+  const sent=t.closest('.sent');
+  if(sent){const y=window.scrollY;toggleSent(sent.dataset.card,+sent.dataset.s);window.scrollTo(0,y);
+    const n=$(`.sent[data-card="${sent.dataset.card}"][data-s="${sent.dataset.s}"]`);if(n)n.focus({preventScroll:true});return;}
+  const chip=t.closest('.chip[data-card]');
+  if(chip){const y=window.scrollY;toggleWord(chip.dataset.card,+chip.dataset.i);window.scrollTo(0,y);
+    const n=$(`.chip[data-card="${chip.dataset.card}"][data-i="${chip.dataset.i}"]`);if(n)n.focus({preventScroll:true});return;}
+  const xc=t.closest('.chip[data-x]');
+  if(xc){let g=null;Object.values(OLD.SECTIONS).forEach(s=>s.groups.forEach(x=>{if(x.id===xc.dataset.x)g=x;}));
+    const it=parseRaw(g.items[+xc.dataset.i]);insertText(fill(it.w));
+    bubble('✔ „'+esc(fill(it.w))+'“ steht jetzt in deinem Text'+(it.h?' – '+esc(it.h):'')+'.',3200);return;}
 });
-document.addEventListener('keydown',e=>{
-  if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-go]')){e.preventDefault();goGroup(e.target.dataset.go);}
-});
-document.addEventListener('toggle',e=>{
-  const d=e.target;if(d.matches&&d.matches('details.grp')){d.open?openSet.add(d.dataset.gid):openSet.delete(d.dataset.gid);}
-},true);
-document.addEventListener('change',e=>{
-  if(e.target.dataset&&e.target.dataset.chk!==undefined){state.chk[e.target.dataset.chk]=e.target.checked;save();}
-});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-go]')){e.preventDefault();goCard(e.target.dataset.go);}});
+document.addEventListener('toggle',e=>{const d=e.target;if(d.matches&&d.matches('details.grp')){d.open?openSet.add(d.dataset.id):openSet.delete(d.dataset.id);}},true);
+document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.chk!==undefined){S.chk[e.target.dataset.chk]=e.target.checked;save();}});
 
 $('#fab').addEventListener('click',()=>showTab('text'));
 $('#btnRoll').addEventListener('click',roll);
-$('#btnRollAdd').addEventListener('click',()=>{
-  rolled.forEach(x=>{state.col[x.g.id+'::'+x.g.parsed[x.i].w]=true;});save();refresh();bubble('🧺 Die Würfel-Wörter sind jetzt in „Meine Wörter“.',2500);
+$('#btnReset').addEventListener('click',resetAll);
+$('#btnReset2').addEventListener('click',resetAll);
+$('#inName').addEventListener('input',e=>{S.name=e.target.value;save();refreshAll();});
+$('#inRel').addEventListener('input',e=>{S.rel=e.target.value;save();refreshAll();});
+$('#inAge').addEventListener('input',e=>{S.age=e.target.value;save();refreshAll();});
+$$('input[name=gen]').forEach(r=>r.addEventListener('change',()=>{S.g=r.value;save();renderTabs();renderExtras();}));
+$('#btnBuild').addEventListener('click',()=>{
+  const txt=buildText();
+  if(!txt){bubble('☝️ Hake zuerst in den Karten ein paar Sätze an.',3000);return;}
+  if(ta.value.trim()&&ta.value.trim()!==txt.trim()&&!confirm('Dein bisheriger Text wird durch den neuen Text ersetzt. Okay?'))return;
+  ta.value=txt;S.text=txt;save();updateTextStats();
+  bubble('✨ Dein Text ist fertig zusammengebaut. Du kannst ihn jetzt umschreiben!',3500);
 });
-$('#inName').addEventListener('input',e=>{state.name=e.target.value;save();renderAll();});
-$$('input[name=gen]').forEach(r=>r.addEventListener('change',()=>{state.g=r.value;save();renderAll();}));
-ta.addEventListener('input',()=>{state.text=ta.value;save();updateTextStats();renderMine();});
-$('#btnPara').addEventListener('click',()=>{const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart;ta.value=v.slice(0,s).replace(/[ \t]+$/,'')+'\n\n'+v.slice(ta.selectionEnd==null?s:ta.selectionEnd);ta.selectionStart=ta.selectionEnd=s+1;ta.focus();state.text=ta.value;save();updateTextStats();});
-$('#btnCopy').addEventListener('click',async()=>{
-  try{await navigator.clipboard.writeText(ta.value);bubble('📋 Text kopiert!',1800);}
-  catch(e){ta.select();document.execCommand('copy');bubble('📋 Text kopiert!',1800);}
-});
-$('#btnSave').addEventListener('click',()=>{
-  const blob=new Blob([ta.value],{type:'text/plain;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Meine-Personenbeschreibung.txt';document.body.appendChild(a);a.click();a.remove();
-});
-$('#btnPrint').addEventListener('click',()=>{
-  const p=$('#printArea');p.innerHTML='<h1>Meine Personenbeschreibung</h1>';
-  const d=document.createElement('div');d.textContent=ta.value;p.appendChild(d);window.print();
-});
-$('#btnClear').addEventListener('click',()=>{if(confirm('Wirklich den ganzen Text löschen?')){ta.value='';state.text='';save();updateTextStats();renderMine();}});
+ta.addEventListener('input',()=>{S.text=ta.value;save();updateTextStats();});
+$('#btnPara').addEventListener('click',()=>{const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart;ta.value=v.slice(0,s).replace(/[ \t]+$/,'')+'\n\n'+v.slice(ta.selectionEnd==null?s:ta.selectionEnd);ta.selectionStart=ta.selectionEnd=s+1;ta.focus();S.text=ta.value;save();updateTextStats();});
+$('#btnCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(ta.value);}catch(e){ta.select();document.execCommand('copy');}bubble('📋 Text kopiert!',1800);});
+$('#btnSave').addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ta.value],{type:'text/plain;charset=utf-8'}));a.download='Meine-Personenbeschreibung.txt';document.body.appendChild(a);a.click();a.remove();});
+$('#btnPrint').addEventListener('click',()=>{const p=$('#printArea');p.innerHTML='<h1>Meine Personenbeschreibung</h1>';const d=document.createElement('div');d.textContent=ta.value;p.appendChild(d);window.print();});
+$('#btnClear').addEventListener('click',()=>{if(confirm('Wirklich den ganzen Text löschen?')){ta.value='';S.text='';save();updateTextStats();}});
 
 /* ---------- Start ---------- */
-buildNav();
-$('#inName').value=state.name||'';
-$$('input[name=gen]').forEach(r=>r.checked=(r.value===state.g));
-ta.value=state.text||'';
-renderAll();roll();
-showTab(state.tab&&TABS.some(t=>t[0]===state.tab)?state.tab:'start',true);
+$('#navin').innerHTML=TABS.map(([k,l])=>`<button type="button" data-tab="${k}">${l}</button>`).join('');
+$('#inName').value=S.name||'';$('#inRel').value=S.rel||'';$('#inAge').value=S.age||'';
+$$('input[name=gen]').forEach(r=>r.checked=(r.value===S.g));
+ta.value=S.text||'';
+normalize();renderTabs();renderExtras();
+showTab(TABS.some(t=>t[0]===S.tab)?S.tab:'start',true);
+
 </script>
 </body>
 </html>
