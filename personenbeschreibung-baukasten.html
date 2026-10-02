@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personenbeschreibung – Der Wort-Baukasten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff7e8; --ink:#2a2750; --muted:#6a6790; --card:#ffffff; --line:#eadfc8;
+  --coral:#ff6b4a; --sun:#ffc533; --teal:#1f9c8a; --teal-soft:#e0f5f0; --teal-line:#8fd8c9; --teal-ink:#0e5d51;
+  --vio:#7a3fc4; --vio-soft:#f3e8ff; --vio-line:#c9a0f2; --vio-ink:#55208f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.55;color:var(--ink);
+  background:var(--bg) radial-gradient(circle at 12% 18%,#ffe9b8 0 90px,transparent 91px),radial-gradient(circle at 92% 8%,#ffd9cf 0 120px,transparent 121px);background-attachment:fixed}
+h1,h2,h3{font-family:'Baloo 2','Nunito',sans-serif;line-height:1.15;margin:0}
+button{font-family:inherit;font-size:inherit;color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#ffd86b 0%,#ff9a76 100%);padding:28px 0 56px;border-radius:0 0 40px 40px;box-shadow:0 8px 24px rgba(255,120,80,.25)}
+.hero .faces{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:6px}
+.hero h1{font-size:clamp(2rem,5.5vw,3.2rem);font-weight:800;color:#3a1f5c}
+.hero p{margin:8px 0 0;font-size:1.1rem;max-width:640px}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 3px 14px rgba(42,39,80,.12);margin-top:-30px;border-radius:20px;overflow:hidden}
+.navin{display:flex;gap:6px;padding:8px;overflow-x:auto;scrollbar-width:thin}
+.navin button{flex:0 0 auto;border:0;background:#f6efe0;padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
+.navin button.on{background:var(--coral);color:#fff;box-shadow:0 3px 0 #d94b2c}
+.navin button:hover:not(.on){background:#ffe6a8}
+
+/* Sections */
+main{padding:22px 0 120px}
+section.tab{display:none}
+section.tab.show{display:block}
+.sechead h2{font-size:1.9rem;color:#3a1f5c}
+.sechead p{color:var(--muted);margin:6px 0 10px;max-width:760px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.tools button,.btn{border:2px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-weight:700;cursor:pointer}
+.tools button:hover,.btn:hover{border-color:var(--coral)}
+.btn.primary{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 3px 0 #d94b2c}
+.btn.primary:hover{background:#ff7d5f}
+.cat{margin:26px 0 4px;font-size:1.25rem;color:var(--coral);display:flex;align-items:center;gap:10px}
+.cat::after{content:"";flex:1;height:3px;border-radius:3px;background:repeating-linear-gradient(90deg,#f3c9a8 0 8px,transparent 8px 14px)}
+
+/* Cards */
+.card{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:18px 20px;margin:16px 0;box-shadow:0 4px 0 var(--line)}
+.card h3{font-size:1.35rem;margin-bottom:8px;color:#3a1f5c}
+.grp{background:var(--card);border:2px solid var(--line);border-radius:20px;margin:12px 0;box-shadow:0 3px 0 var(--line);overflow:hidden}
+.grp>summary{display:flex;align-items:center;gap:12px;padding:12px 18px;cursor:pointer;list-style:none;font-weight:800;font-size:1.12rem}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary::after{content:"▾";margin-left:auto;font-size:1.2rem;color:var(--coral);transition:transform .2s}
+.grp[open]>summary::after{transform:rotate(180deg)}
+.grp[open]>summary{background:linear-gradient(90deg,#fff3d6,#fff);border-bottom:2px solid var(--line)}
+.grp .ico{font-size:1.9rem;line-height:1}
+.grp .cnt{background:#f1ebff;color:var(--vio-ink);border-radius:999px;padding:1px 10px;font-size:.85rem;font-weight:800}
+.grp .cnt.has{background:var(--teal);color:#fff}
+.gbody{padding:12px 18px 16px}
+.gnote{margin:0 0 10px;color:var(--muted);font-size:.97rem}
+.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,60%{box-shadow:0 0 0 6px rgba(255,107,74,.55)}100%{box-shadow:0 3px 0 var(--line)}}
+
+/* Frames */
+.frames{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px;padding:10px 12px;background:#fffbe9;border-radius:14px}
+.flbl{font-size:.88rem;font-weight:800;color:#a07a00;width:100%}
+.frame{background:#fff;border:2px dashed #f0c85a;border-radius:12px;padding:6px 12px;text-align:left;cursor:pointer;font-weight:600}
+.frame:hover{background:#fff1c2}
+.blank{display:inline-block;min-width:2.6em;border-bottom:3px solid var(--coral);margin:0 2px;height:1em;vertical-align:-2px}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.sublbl{width:100%;font-size:.84rem;font-weight:800;letter-spacing:.03em;margin-top:6px}
+.sublbl.c{color:var(--teal-ink)}
+.sublbl.s{color:var(--vio-ink);margin-top:12px}
+.chip{border:2px solid;border-radius:999px;padding:5px 14px;font-weight:700;cursor:pointer;min-height:38px;transition:transform .1s,background .15s}
+.chip:hover{transform:translateY(-2px)}
+.chip:active{transform:scale(.96)}
+.chip.c{background:var(--teal-soft);border-color:var(--teal-line);color:var(--teal-ink)}
+.chip.s{background:var(--vio-soft);border-color:var(--vio-line);color:var(--vio-ink)}
+.chip.s::before{content:"✦ ";font-size:.8em}
+.chip.on.c{background:var(--teal);border-color:var(--teal);color:#fff}
+.chip.on.s{background:var(--vio);border-color:var(--vio);color:#fff}
+.chip.on::before{content:"✓ "}
+.chip.ins{border-radius:14px;text-align:left}
+.chip.ins::after{content:" ✎";opacity:.6}
+.chip:focus-visible,.frame:focus-visible,button:focus-visible,summary:focus-visible,.part:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.chip .ico-hint{font-size:.7em;opacity:.7}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.legend>div{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px 14px}
+
+/* Start page layout */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+.setup{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.setup label{font-weight:800}
+.setup input[type=text]{font:inherit;padding:9px 14px;border:2px solid var(--line);border-radius:12px;min-width:200px}
+.radios{display:flex;gap:8px}
+.radios label{border:2px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer;background:#fff;font-weight:700}
+.radios input{display:none}
+.radios input:checked+span{color:#fff}
+.radios label:has(input:checked){background:var(--coral);border-color:var(--coral);color:#fff}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+.steps li::before{content:counter(s);flex:0 0 36px;height:36px;border-radius:50%;background:var(--sun);display:grid;place-items:center;font-weight:800;color:#5a3d00}
+.facemap{max-width:560px;margin:0 auto;display:block;width:100%}
+.part{cursor:pointer}
+.part:hover,.part:focus{filter:drop-shadow(0 0 5px #ff6b4a)}
+.pill rect{fill:#fff;stroke:#ff9a76;stroke-width:2;rx:15}
+.pill text{font:800 13px 'Nunito',sans-serif;fill:#3a1f5c}
+.pill:hover rect{fill:#ffe6a8}
+.pill{cursor:pointer}
+.lead{stroke:#e8b9a4;stroke-width:2;stroke-dasharray:4 4}
+.bar{height:16px;background:#f1ebff;border-radius:999px;overflow:hidden;margin:8px 0}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--vio));width:0;transition:width .4s}
+.lvl{font-family:'Baloo 2';font-size:1.4rem;color:var(--vio-ink)}
+.dice{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:10px 0}
+.die{background:#fffbe9;border:2px solid #f0c85a;border-radius:16px;padding:10px 12px}
+.die b{display:block;font-size:.9rem;color:#a07a00}
+.die .chip{margin:3px 3px 0 0;cursor:default;min-height:30px;padding:2px 11px}
+.die .chip:hover{transform:none}
+.ex p{margin:.6em 0}
+.ex .c{border-bottom:3px solid var(--teal-line);background:var(--teal-soft);padding:0 3px;border-radius:4px}
+.ex .s{border-bottom:3px solid var(--vio-line);background:var(--vio-soft);padding:0 3px;border-radius:4px}
+.rule{display:flex;gap:10px;margin:8px 0}
+.rule .e{font-size:1.5rem}
+
+/* Table */
+table.end{border-collapse:collapse;width:100%;font-size:.98rem}
+table.end th,table.end td{border:2px solid var(--line);padding:8px 10px;text-align:left}
+table.end th{background:#fff3d6}
+table.end b{color:var(--coral)}
+.tblwrap{overflow-x:auto}
+
+/* Text area */
+textarea{width:100%;min-height:340px;font:inherit;font-size:1.08rem;line-height:1.7;padding:16px;border:3px solid var(--line);border-radius:18px;resize:vertical;background:
+ repeating-linear-gradient(#fff,#fff 28px,#f1e8d4 29px)}
+textarea:focus{outline:none;border-color:var(--coral)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:8px 0;color:var(--muted);font-weight:700}
+.mine{display:flex;flex-wrap:wrap;gap:8px}
+.mychip{display:inline-flex;align-items:stretch}
+.mychip .chip{border-radius:999px 0 0 999px;border-right-width:0}
+.mychip .x{border:2px solid;border-radius:0 999px 999px 0;background:#fff;cursor:pointer;padding:0 10px;font-weight:800}
+.mychip.c .x{border-color:var(--teal-line);color:var(--teal-ink)}
+.mychip.s .x{border-color:var(--vio-line);color:var(--vio-ink)}
+.mychip.used .chip{opacity:.45;text-decoration:line-through}
+.mgrp{margin:10px 0 4px;font-weight:800}
+.check label{display:flex;gap:10px;align-items:flex-start;margin:6px 0;cursor:pointer}
+.check input{width:22px;height:22px;accent-color:var(--teal);margin-top:3px}
+
+/* Floating */
+#fab{position:fixed;right:16px;bottom:16px;z-index:30;border:0;background:var(--vio);color:#fff;border-radius:999px;padding:12px 18px;font-weight:800;box-shadow:0 6px 18px rgba(80,30,140,.4);cursor:pointer;font-size:1rem}
+#fab:hover{background:#8d52d9}
+#bubble{position:fixed;left:50%;bottom:78px;transform:translateX(-50%) translateY(20px);z-index:40;background:#2a2750;color:#fff;padding:10px 18px;border-radius:16px;max-width:min(560px,92vw);opacity:0;pointer-events:none;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,.3);text-align:center}
+#bubble.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#bubble b{color:#ffd86b}
+#printArea{display:none}
+@media print{
+  body>*:not(#printArea){display:none!important}
+  #printArea{display:block!important;font-size:14pt;line-height:1.8;white-space:pre-wrap;color:#000;background:#fff}
+  #printArea h1{font-size:20pt;margin-bottom:12pt}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="faces" aria-hidden="true">👦 👧 🧔 👵 🧑‍🦰 👓</div>
+    <h1>Der Wort-Baukasten für Personenbeschreibungen</h1>
+    <p>Stöbere in hunderten Wörtern, sammle deine Lieblinge, baue Sätze mit Bausteinen und schreib daraus deine eigene Beschreibung. Du musst nicht alles machen, aber du darfst alles ausprobieren.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav aria-label="Bereiche"><div class="navin" id="navin"></div></nav>
+
+  <main>
+  <!-- ================= START ================= -->
+  <section class="tab" id="sec-start">
+    <div class="card">
+      <h3>🎯 Wen beschreibst du?</h3>
+      <div class="setup">
+        <div><label for="inName">Name der Person (kannst du auch leer lassen)</label><br><input type="text" id="inName" placeholder="z. B. Luca" maxlength="30" autocomplete="off"></div>
+        <div class="radios" role="radiogroup" aria-label="Junge oder Mädchen">
+          <label><input type="radio" name="gen" value="m"><span>👦 er</span></label>
+          <label><input type="radio" name="gen" value="w"><span>👧 sie</span></label>
+        </div>
+      </div>
+      <p style="margin:10px 0 0;color:var(--muted)">Alle Satzbausteine passen sich an: aus „Er hat …“ wird „Sie hat …“ und aus „Sein Gesicht“ wird „Ihr Gesicht“.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>🧭 So funktioniert dein Baukasten</h3>
+        <ol class="steps">
+          <li><div><b>Stöbern &amp; sammeln:</b> Öffne eine Karte und tippe auf Wörter, die zu deiner Person passen. Sie bekommen ein ✓ und wandern in „Meine Wörter“.</div></li>
+          <li><div><b>Bausteine nutzen:</b> Die gelben 🧱-Baupläne und die ✎-Satzanfänge setzt du mit einem Tipp in deinen Text.</div></li>
+          <li><div><b>Schreiben:</b> Im Bereich „✍️ Mein Text“ fügst du alles zusammen, ergänzt die Lücken ___ und kontrollierst mit der Checkliste.</div></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>🎨 Die Farben der Wörter</h3>
+        <div class="legend">
+          <div><span class="chip c" style="cursor:default">freundlich</span><span><b>grün</b> = gängige Wörter, die jeder kennt</span></div>
+          <div><span class="chip s" style="cursor:default">gutmütig</span><span><b>violett ✦</b> = besondere Wörter für Profis</span></div>
+        </div>
+        <p style="margin:10px 0 0">Tippst du ein ✦-Wort an, erscheint unten eine kleine Erklärung. So lernst du neue Wörter gleich richtig zu verstehen. Ein Text mit einigen violetten Wörtern klingt besonders lebendig.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🗺️ Die Gesichts-Landkarte</h3>
+      <p style="margin-top:0">Tippe auf einen Teil des Gesichts, dann springst du direkt zu den passenden Wörtern.</p>
+      <svg class="facemap" viewBox="0 0 520 370" role="group" aria-label="Gesichts-Landkarte">
+        <!-- Leader lines -->
+        <g class="lead" fill="none">
+          <path d="M112 85 L205 100"/><path d="M112 140 L222 150"/><path d="M112 195 L222 176"/>
+          <path d="M112 250 L218 202"/><path d="M112 305 L254 238"/>
+          <path d="M408 90 L368 205"/><path d="M408 150 L322 244"/><path d="M408 210 L282 294"/>
+          <path d="M408 270 L270 276"/><path d="M408 330 L262 322"/>
+        </g>
+        <!-- Hair back -->
+        <ellipse cx="260" cy="115" rx="108" ry="78" fill="#6b4a2f"/>
+        <!-- ears -->
+        <g class="part" data-go="ohren" tabindex="0" role="button" aria-label="Ohren">
+          <ellipse cx="166" cy="212" rx="14" ry="26" fill="#f6c7a0"/><ellipse cx="354" cy="212" rx="14" ry="26" fill="#f6c7a0"/>
+        </g>
+        <!-- face -->
+        <g class="part" data-go="gform" tabindex="0" role="button" aria-label="Gesicht und Haut">
+          <ellipse cx="260" cy="208" rx="94" ry="118" fill="#ffe0c2"/>
+          <circle cx="205" cy="250" r="16" fill="#ffb7a5" opacity=".55"/><circle cx="315" cy="250" r="16" fill="#ffb7a5" opacity=".55"/>
+        </g>
+        <!-- hair front -->
+        <g class="part" data-go="haarl" tabindex="0" role="button" aria-label="Haare">
+          <path d="M166 170 Q172 92 260 90 Q348 92 354 170 Q318 122 260 130 Q202 122 166 170 Z" fill="#6b4a2f"/>
+        </g>
+        <!-- forehead -->
+        <g class="part" data-go="stirn" tabindex="0" role="button" aria-label="Stirn">
+          <rect x="205" y="132" width="110" height="28" rx="14" fill="#ffe0c2" stroke="#e7b996" stroke-dasharray="3 3"/>
+        </g>
+        <!-- brows -->
+        <g class="part" data-go="brauen" tabindex="0" role="button" aria-label="Augenbrauen">
+          <path d="M212 180 Q232 164 254 176" stroke="#4a3320" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M266 176 Q288 164 308 180" stroke="#4a3320" stroke-width="7" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- eyes -->
+        <g class="part" data-go="augenf" tabindex="0" role="button" aria-label="Augen">
+          <ellipse cx="233" cy="203" rx="17" ry="11" fill="#fff" stroke="#4a3320" stroke-width="2"/><circle cx="233" cy="203" r="7" fill="#2f7fb8"/><circle cx="231" cy="200" r="2.2" fill="#fff"/>
+          <ellipse cx="287" cy="203" rx="17" ry="11" fill="#fff" stroke="#4a3320" stroke-width="2"/><circle cx="287" cy="203" r="7" fill="#2f7fb8"/><circle cx="285" cy="200" r="2.2" fill="#fff"/>
+        </g>
+        <!-- nose -->
+        <g class="part" data-go="nase" tabindex="0" role="button" aria-label="Nase">
+          <path d="M260 208 Q249 244 257 250 Q268 256 274 248" stroke="#c98f6a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- beard / mustache -->
+        <g class="part" data-go="bart" tabindex="0" role="button" aria-label="Bart">
+          <path d="M230 274 Q246 258 260 270 Q274 258 290 274 Q274 284 260 279 Q246 284 230 274 Z" fill="#4a3320"/>
+        </g>
+        <!-- mouth -->
+        <g class="part" data-go="mund" tabindex="0" role="button" aria-label="Mund">
+          <path d="M238 296 Q260 316 282 296" stroke="#c0392b" stroke-width="6" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- chin -->
+        <g class="part" data-go="kinn" tabindex="0" role="button" aria-label="Kinn">
+          <path d="M232 322 Q260 338 288 322" stroke="#e7b996" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="2 8"/>
+          <rect x="236" y="314" width="48" height="22" fill="transparent"/>
+        </g>
+        <!-- Pills -->
+        <g class="pill" data-go="haarl" tabindex="0" role="button"><rect x="8" y="68" width="104" height="30"/><text x="60" y="88" text-anchor="middle">💇 Haare</text></g>
+        <g class="pill" data-go="stirn" tabindex="0" role="button"><rect x="8" y="124" width="104" height="30"/><text x="60" y="144" text-anchor="middle">🧠 Stirn</text></g>
+        <g class="pill" data-go="brauen" tabindex="0" role="button"><rect x="8" y="180" width="104" height="30"/><text x="60" y="200" text-anchor="middle">🤨 Brauen</text></g>
+        <g class="pill" data-go="augenf" tabindex="0" role="button"><rect x="8" y="236" width="104" height="30"/><text x="60" y="256" text-anchor="middle">👀 Augen</text></g>
+        <g class="pill" data-go="nase" tabindex="0" role="button"><rect x="8" y="290" width="104" height="30"/><text x="60" y="310" text-anchor="middle">👃 Nase</text></g>
+        <g class="pill" data-go="ohren" tabindex="0" role="button"><rect x="408" y="74" width="104" height="30"/><text x="460" y="94" text-anchor="middle">👂 Ohren</text></g>
+        <g class="pill" data-go="gform" tabindex="0" role="button"><rect x="408" y="134" width="104" height="30"/><text x="460" y="154" text-anchor="middle">😊 Gesicht</text></g>
+        <g class="pill" data-go="mund" tabindex="0" role="button"><rect x="408" y="194" width="104" height="30"/><text x="460" y="214" text-anchor="middle">👄 Mund</text></g>
+        <g class="pill" data-go="bart" tabindex="0" role="button"><rect x="408" y="254" width="104" height="30"/><text x="460" y="274" text-anchor="middle">🧔 Bart</text></g>
+        <g class="pill" data-go="kinn" tabindex="0" role="button"><rect x="408" y="314" width="104" height="30"/><text x="460" y="334" text-anchor="middle">🫵 Kinn</text></g>
+      </svg>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>🏆 Dein Wortschatz-Level</h3>
+        <div class="lvl" id="lvlName">Wort-Neuling 🌱</div>
+        <div class="bar" aria-hidden="true"><i id="lvlBar"></i></div>
+        <div id="lvlTxt" style="font-weight:700;color:var(--muted)"></div>
+      </div>
+      <div class="card">
+        <h3>🎲 Würfel-Person</h3>
+        <p style="margin:0">Du weißt nicht, wo du anfangen sollst? Würfle dir eine ausgedachte Person und beschreibe sie. Sie darf auch ganz verrückt sein.</p>
+        <div class="dice" id="dice"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn primary" id="btnRoll" type="button">🎲 Würfeln!</button>
+          <button class="btn" id="btnRollAdd" type="button">🧺 Alle in meine Wörter</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📐 So ist eine Personenbeschreibung aufgebaut</h3>
+      <div class="grid3">
+        <div><b>1 · Einleitung</b><br>Wer ist die Person? Wie alt ist sie? Welchen ersten Eindruck macht sie? Ein bis zwei Sätze genügen.</div>
+        <div><b>2 · Hauptteil</b><br>Zuerst das Aussehen, <b>von oben nach unten</b>: Gestalt, Haare, Gesicht, Körper, Kleidung. Danach Charakter, Hobbys und Gewohnheiten, am besten mit einem kleinen Beispiel.</div>
+        <div><b>3 · Schluss</b><br>Wie wirkt die Person auf dich? Was magst du besonders an ihr? Ein runder Abschluss in ein bis zwei Sätzen.</div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="rule"><span class="e">⏱️</span><div><b>Präsens:</b> Beschreibungen stehen in der Gegenwart („Er hat …“, „Sie trägt …“).</div></div>
+        <div class="rule"><span class="e">🔍</span><div><b>Genau hinschauen:</b> „Er hat schöne Haare“ sagt wenig. „Er hat glatte, kinnlange, dunkelblonde Haare“ zeigt ein Bild.</div></div>
+        <div class="rule"><span class="e">🎬</span><div><b>Beispiel erzählen:</b> Wer „hilfsbereit“ schreibt, erzählt gleich dazu, wie sich das zeigt.</div></div>
+        <div class="rule"><span class="e">🔄</span><div><b>Verben abwechseln:</b> Neben „hat“ und „ist“ gibt es „trägt“, „wirkt“, „fällt auf“, „funkelt“, „umrahmt“ (siehe Bereich Formulieren).</div></div>
+      </div>
+    </div>
+
+    <details class="card ex">
+      <summary style="cursor:pointer;font-weight:800;font-size:1.15rem">📖 Beispieltext ansehen (mit Farben)</summary>
+      <p><span class="c">grün</span> = gängiges Wort, <span class="s">violett</span> = besonderes Wort</p>
+      <p>Mein Freund Luca ist elf Jahre alt und geht mit mir in die erste Klasse eines Gymnasiums in Wien. Schon auf den ersten Blick fällt er durch seine <span class="s">wuschelige</span>, <span class="c">dunkelbraune</span> Haarpracht auf, die ihm oft in die Stirn fällt.</p>
+      <p>Unter den <span class="s">geschwungenen</span> Augenbrauen blitzen <span class="s">haselnussbraune</span> Augen, die <span class="s">schelmisch</span> funkeln. Mitten im Gesicht sitzt eine <span class="s">Stupsnase</span>, die mit ein paar <span class="c">Sommersprossen</span> verziert ist. Wenn Luca lacht, sieht man seine <span class="s">Zahnlücke</span>. Er ist <span class="c">schlank</span> und <span class="s">drahtig</span> und trägt am liebsten einen <span class="s">Kapuzenpullover</span> und <span class="c">Turnschuhe</span>.</p>
+      <p>Luca ist <span class="s">gutmütig</span> und <span class="c">hilfsbereit</span>. Als ich einmal meine Jause vergessen hatte, teilte er sofort sein Brot mit mir. Typisch für ihn ist, dass er beim Nachdenken mit dem Fuß wippt. In seiner Freizeit kann er stundenlang Fußball spielen oder Comics zeichnen.</p>
+      <p>Alles in allem ist Luca ein <span class="s">liebenswerter</span> Freund, mit dem mir nie langweilig wird.</p>
+    </details>
+  </section>
+
+  <!-- ================= AUSSEHEN ================= -->
+  <section class="tab" id="sec-aussehen"></section>
+  <section class="tab" id="sec-charakter"></section>
+  <section class="tab" id="sec-hobby"></section>
+  <section class="tab" id="sec-mag"></section>
+
+  <!-- ================= FORMULIEREN ================= -->
+  <section class="tab" id="sec-form">
+    <div class="card" id="endCard">
+      <h3>🧩 Spickzettel: Welche Endung braucht das Wort?</h3>
+      <p style="margin-top:0">Nach „hat“ steht der Akkusativ. Nach „ist“ bleibt das Wort ohne Endung. Schau dir die fettgedruckten Endungen an:</p>
+      <div class="tblwrap"><table class="end">
+        <tr><th>Wort</th><th>mit „hat“</th><th>mit „ist“ / „sind“</th></tr>
+        <tr><td>der Mund</td><td>Er hat einen breit<b>en</b> Mund.</td><td>Sein Mund ist breit.</td></tr>
+        <tr><td>die Nase</td><td>Er hat eine klein<b>e</b> Nase.</td><td>Seine Nase ist klein.</td></tr>
+        <tr><td>das Gesicht</td><td>Er hat ein rund<b>es</b> Gesicht.</td><td>Sein Gesicht ist rund.</td></tr>
+        <tr><td>die Haare / Augen (viele)</td><td>Er hat lang<b>e</b> Haare und blau<b>e</b> Augen.</td><td>Seine Haare sind lang, seine Augen sind blau.</td></tr>
+      </table></div>
+      <p style="margin:10px 0 0;color:var(--muted)">Dieselbe Regel gilt in den Baupländen: Steht vor der Lücke ein „einen / eine / ein“ oder ein „e“, passt du das Wort an.</p>
+    </div>
+  </section>
+
+  <!-- ================= MEIN TEXT ================= -->
+  <section class="tab" id="sec-text">
+    <div class="sechead"><h2>✍️ Mein Text</h2><p>Hier schreibst du deine Personenbeschreibung. Alles, was du in den Bereichen mit ✎ oder 🧱 antippst, landet an der Stelle, an der dein Cursor steht. Ergänze die Lücken ___ mit deinen Wörtern.</p></div>
+    <div class="card">
+      <h3>🧺 Meine Wörter</h3>
+      <p style="margin:0 0 6px;color:var(--muted)">Tippe auf ein Wort, um es in deinen Text zu setzen. Benutzte Wörter werden durchgestrichen. Mit × wirfst du ein Wort aus dem Korb.</p>
+      <div id="mine"></div>
+    </div>
+    <textarea id="ta" aria-label="Meine Personenbeschreibung" placeholder="Schreibe hier los … zum Beispiel mit einem Satzanfang aus dem Bereich „💬 Formulieren“."></textarea>
+    <div class="meta"><span id="wc">0 Wörter</span><span id="sc">✦ 0 besondere Wörter</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px">
+      <button class="btn" type="button" id="btnPara">↵ Neuer Absatz</button>
+      <button class="btn" type="button" id="btnCopy">📋 Kopieren</button>
+      <button class="btn" type="button" id="btnSave">💾 Als Datei speichern</button>
+      <button class="btn" type="button" id="btnPrint">🖨️ Drucken</button>
+      <button class="btn" type="button" id="btnClear">🗑️ Text löschen</button>
+    </div>
+    <div class="card check">
+      <h3>✅ Checkliste für deine Selbstkontrolle</h3>
+      <div id="checks"></div>
+    </div>
+  </section>
+  </main>
+</div>
+
+<button id="fab" type="button" aria-label="Zu meinem Text und meinen Wörtern">🧺 <span id="fabN">0</span></button>
+<div id="bubble" role="status" aria-live="polite"></div>
+<div id="printArea"></div>
+
+<script>
+/* =====================================================================
+   DATEN  –  "wort"            = gängiges Wort (grün)
+             "*wort=Erklärung" = besonderes Wort (violett ✦)
+             "wort=Erklärung"  = gängiges Wort mit Erklärung
+   Platzhalter: {Er} {er} {Sein} {sein} {ihn} {ihm} {Wen} {Wer} {wer} {name}
+   ===================================================================== */
+const TABS=[
+ ['start','🏠 Start'],['aussehen','🧍 Aussehen'],['charakter','💛 Charakter'],
+ ['hobby','🎈 Hobbys & Alltag'],['mag','💖 Was ich mag'],['form','💬 Formulieren'],['text','✍️ Mein Text']
+];
+
+const SECTIONS={
+aussehen:{
+ title:"🧍 Aussehen – von oben nach unten",
+ intro:"Hier findest du Wörter für alles, was man an einem Menschen sehen kann. Du kannst jede Karte öffnen, musst aber nicht alle benutzen. Am besten gehst du so vor, wie es auch im Text kommt: vom Kopf bis zu den Füßen.",
+ groups:[
+ {id:"gesamt",cat:"Der erste Eindruck",icon:"🧍",title:"Größe & Statur",
+  frames:["{Er} ist ___ und ___.","{Er} ist ungefähr ___ cm groß.","Mit {sein}er Größe wirkt {er} ___."],
+  items:["groß","klein","mittelgroß","schlank","dünn","kräftig","sportlich","dick","rundlich","zierlich",
+   "*hochgewachsen=sehr groß und schlank","*baumlang=sehr, sehr groß","*schmächtig=dünn und eher schwach wirkend","*hager=sehr dünn, mit hervortretenden Knochen","*spindeldürr=extrem dünn","*stämmig=nicht groß, aber kräftig und breit gebaut","*untersetzt=eher klein und breit","*gedrungen=kurz und kräftig","*pummelig=ein bisschen rundlich, oft niedlich gemeint","*wohlgenährt=etwas rundlich","*athletisch=gebaut wie ein Sportler","*durchtrainiert=sehr sportlich, mit festen Muskeln","*muskulös=mit starken Muskeln","*drahtig=schlank, aber zäh und flink","*grazil=zart und elegant","*breitschultrig=mit breiten Schultern","*rank=schlank und biegsam (rank und schlank)"]},
+ {id:"alter",icon:"🎂",title:"Alter",
+  frames:["{Er} ist ungefähr ___ Jahre alt.","{Er} wirkt ___ als {er} ist."],
+  items:["jung","alt","erwachsen","kindlich","gleichaltrig=gleich alt wie ich","älter","jünger",
+   "*jugendlich=wie ein Teenager","*betagt=sehr alt (höfliches Wort)","*rüstig=alt, aber noch fit und kräftig","*im besten Alter=erwachsen und voller Kraft","*jung geblieben=wirkt jünger, als man ist","*Anfang zwanzig=zwischen 20 und 23 Jahre alt","*Mitte vierzig=ungefähr 45 Jahre alt"]},
+ {id:"eindruck",icon:"✨",title:"Wie wirkt die Person auf den ersten Blick?",
+  frames:["Auf den ersten Blick wirkt {er} ___.","{Er} macht einen ___en Eindruck."],
+  items:["sympathisch","nett","auffällig","unauffällig","gepflegt","ordentlich","freundlich","lustig","ernst","cool",
+   "*unscheinbar=man bemerkt die Person kaum","*auffallend=zieht die Blicke auf sich","*einnehmend=gewinnt sofort Sympathie","*imposant=beeindruckend","*stattlich=groß und eindrucksvoll","*anmutig=elegant und lieblich","*liebenswert=man muss ihn oder sie einfach gernhaben","*markant=deutlich ausgeprägt, unverwechselbar","*gewinnend=sofort sympathisch","*strahlend=voll Freude und Licht"]},
+
+ {id:"haarl",cat:"Der Kopf",icon:"💇",title:"Haare – Länge",
+  frames:["{Er} hat ___e Haare.","{Sein}e Haare sind ___."],
+  items:["kurz","lang","halblang","schulterlang","kahl","Glatze=keine Haare auf dem Kopf",
+   "*raspelkurz=ganz kurz geschnitten","*kinnlang=reichen bis zum Kinn","*hüftlang=reichen bis zur Hüfte","*schütter=dünn, mit wenigen Haaren","*glatzköpfig=ohne Haare auf dem Kopf","*stufig=in Stufen geschnitten"]},
+ {id:"haarf",icon:"〰️",title:"Haare – Form & Beschaffenheit",
+  frames:["{Sein}e Haare sind ___ und ___.","{Er} hat ___e, ___e Haare."],
+  items:["glatt","gewellt","lockig","dick","dünn","dicht","weich","struppig","fein",
+   "*kraus=ganz kleine, enge Locken","*seidig=fein und glänzend","*zottelig=ungekämmt und wild","*strähnig=in einzelnen Strähnen, oft fettig","*widerspenstig=lässt sich nicht bändigen","*buschig=dicht und abstehend","*borstig=steif wie Borsten","*wallend=lang und in Wellen herabfallend","*wuschelig=weich und zerzaust","*ungebändigt=ganz frei und wild","*schimmernd=glänzt im Licht","*füllig=sehr voll","*spröde=trocken und brüchig"]},
+ {id:"haarc",icon:"🎨",title:"Haare – Farbe",
+  frames:["{Er} hat ___e Haare.","{Sein}e Haare haben die Farbe von ___."],
+  items:["blond","braun","schwarz","rot","grau","weiß","dunkelblond","hellbraun","dunkelbraun",
+   "*aschblond=blond mit grauem Ton","*rotblond=zwischen rot und blond","*kastanienbraun=warmes, rötliches Braun","*pechschwarz=tiefschwarz wie Pech","*rabenschwarz=schwarz wie ein Rabe","*platinblond=fast weißlich-blond","*silbergrau=grau mit silbrigem Glanz","*graumeliert=grau, gemischt mit dunklen Haaren","*feuerrot=leuchtend rot","*kupferrot=rot wie Kupfer","*honigblond=goldgelb","*strohblond=hellgelb wie Stroh","*goldblond=blond mit goldenem Schimmer","*schneeweiß=ganz weiß"]},
+ {id:"frisur",icon:"💈",title:"Frisur",
+  frames:["{Er} trägt einen ___.","{Sein}e Haare sind zu einem ___ gebunden."],
+  items:["Pferdeschwanz","Zopf","Zöpfe","Pony","Scheitel","Locken","Glatze","Haarband","Haarspange","Dutt=Haare oben zusammengebunden",
+   "*Bürstenschnitt=ganz kurz, die Haare stehen nach oben","*Pagenkopf=glatt und gerade bis zu den Ohren oder zum Kinn","*Irokese=nur ein Streifen Haare in der Mitte, hochgestellt","*Haarknoten","*Stachelfrisur=Haare stehen wie Stacheln hoch","*Mittelscheitel=Scheitel genau in der Mitte","*Seitenscheitel","*Fransen=kurze, lockere Stirnhaare","*Flechtzopf=geflochtener Zopf","*Wuschelkopf=zerzauste Haare","*Lockenkopf","*Topfschnitt=sieht aus, als hätte man einen Topf aufgesetzt","*Mähne=lange, volle Haare wie bei einem Löwen","*Undercut=oben lang, an den Seiten ganz kurz","*Hochsteckfrisur=Haare kunstvoll nach oben gesteckt","*Dreadlocks=viele dicke, verfilzte oder gedrehte Strähnen"]},
+ {id:"stirn",icon:"🧠",title:"Stirn",
+  frames:["{Er} hat eine ___e Stirn.","Auf {sein}er Stirn zeigen sich ___."],
+  items:["hoch","niedrig","breit","schmal","glatt","Falten",
+   "*gewölbt=nach außen gerundet","*zerfurcht=voller tiefer Falten","*runzlig=voller kleiner Falten","*Denkerstirn=hohe, breite Stirn","*fliehend=schräg nach hinten geneigt","*Sorgenfalten=Falten, die vom Sorgenmachen kommen","*Geheimratsecken=Haare gehen an den Seiten zurück","*gerunzelt=in Falten gezogen","*Stirnfransen=Haare, die in die Stirn fallen"]},
+ {id:"brauen",icon:"🤨",title:"Augenbrauen",
+  frames:["{Sein}e Augenbrauen sind ___ und ___.","Über {sein}en Augen wölben sich ___e Augenbrauen."],
+  items:["dicht","dünn","schmal","buschig","dunkel","hell","gerade","breit","lang",
+   "*geschwungen=in einem schönen Bogen","*hochgezogen=nach oben gehoben","*zusammengewachsen=in der Mitte verbunden","*markant=deutlich sichtbar","*fein gezeichnet=schmal und sehr ebenmäßig","*gezupft=schmal gemacht","*borstig=steif und struppig","*zerzaust=durcheinander","*ausdrucksstark=zeigen viele Gefühle","*kaum sichtbar=fast unsichtbar","*schräg=nach außen oder innen geneigt","*zusammengezogen=zornig oder besorgt nach unten gezogen"]},
+ {id:"augenf",icon:"👀",title:"Augen – Farbe",
+  frames:["{Er} hat ___e Augen.","{Sein}e Augen sind ___."],
+  items:["blau","grün","braun","grau","schwarz","hellblau","dunkelbraun",
+   "*himmelblau=blau wie der Himmel","*graublau","*grünlich=ein bisschen grün","*haselnussbraun=braun mit grün-gelben Tönen","*bernsteinfarben=goldbraun wie Bernstein","*honigbraun=warmes Gold-Braun","*schokobraun=dunkles, warmes Braun","*meergrün=grün wie das Meer","*stahlblau=kühles, hartes Blau","*eisblau=ganz helles, kaltes Blau","*kohlschwarz=tiefschwarz","*flaschengrün=dunkles Grün","*tannengrün=dunkles, kräftiges Grün","*kastanienbraun=rötliches Braun"]},
+ {id:"augenb",icon:"👁️",title:"Augen – Form & Blick",
+  frames:["{Sein}e Augen sind ___ und ___.","{Sein} Blick ist ___.","{Er} schaut ___."],
+  items:["groß","klein","rund","schmal","strahlend","freundlich","müde","lebendig","lange Wimpern","dichte Wimpern","Augenringe=dunkle Schatten unter den Augen","traurig","fröhlich",
+   "*mandelförmig=oval und an den Enden spitz","*tief liegend=weit hinten in der Augenhöhle","*hervorstehend=schauen ein Stück heraus","*Schlupflider=Haut hängt über das Auge","*Kulleraugen=große, runde Augen","*Knopfaugen=kleine, runde Augen","*eng beieinander stehend","*weit auseinander stehend","*funkelnd=blitzend wie Sterne","*stechend=sehr durchdringend","*verträumt=als würde man in Gedanken weit weg sein","*schelmisch=ein Blick, der Streiche verrät","*treuherzig=ehrlicher, lieber Blick","*durchdringend=scheint einen zu durchschauen","*wachsam=immer aufmerksam","*listig=schlau und ein bisschen hinterhältig","*sanft=weich und freundlich","*glänzend","*sprühend=voller Lebensfreude","*verschmitzt=schlau und lustig","*kullerrund"]},
+ {id:"brille",icon:"👓",title:"Brille",
+  frames:["{Er} trägt eine ___e Brille.","Auf {sein}er Nase sitzt eine ___e Brille."],
+  items:["Brille","Brillenträger=jemand, der eine Brille trägt","Sonnenbrille","rund","eckig","groß","klein","dunkel","bunt",
+   "*Nickelbrille=kleine, runde Brille mit dünnem Rand","*Hornbrille=Brille mit dickem, dunklem Rahmen","*randlos=ohne Rahmen","*Lesebrille=Brille zum Lesen","*Kontaktlinsen=kleine Gläser direkt auf dem Auge","*Brillengläser","*Brillenrand","*Fensterglas=Brille mit schmalem Glas (lustig gemeint)"]},
+ {id:"nase",icon:"👃",title:"Nase",
+  frames:["{Er} hat eine ___e Nase.","Mitten im Gesicht sitzt eine ___e Nase."],
+  items:["klein","groß","spitz","breit","schmal","gerade","krumm","lang","kurz","rot",
+   "*Stupsnase=kleine Nase, die nach oben zeigt","*Hakennase=nach unten gebogen wie ein Haken","*Adlernase=gebogen und kräftig wie ein Adlerschnabel","*Knollennase=dick und rundlich","*Kartoffelnase=groß und rund wie eine Kartoffel","*Knubbelnase=klein und rundlich","*Knopfnase=klein und rund wie ein Knopf","*platt=flach","*Höckernase=mit einem kleinen Höcker","*Himmelfahrtsnase=sehr stark nach oben gestülpt (lustig)","*markant=kräftig und auffällig","*fein geschnitten=zart und gerade","*gerötet=rot, zum Beispiel von der Kälte","*Spitznase","*schief=nicht gerade","*Nasenrücken=der Teil oben auf der Nase","*Nasenflügel=die beiden Seiten der Nase"]},
+ {id:"ohren",icon:"👂",title:"Ohren",
+  frames:["{Sein}e Ohren sind ___.","{Er} hat ___e Ohren."],
+  items:["klein","groß","spitz","abstehend","anliegend","Ohrring","Ohrringe","rund",
+   "*Segelohren=weit abstehend wie Segel","*Henkelohren=abstehend wie Henkel","*Elfenohren=spitz zulaufend","*Ohrläppchen=der weiche Teil unten am Ohr","*durchstochen=mit Loch für Ohrringe","*zierlich=klein und zart","*fein geformt","*angewachsene Ohrläppchen","*Hörgerät=kleines Gerät im oder hinter dem Ohr"]},
+ {id:"gform",icon:"😊",title:"Gesichtsform",
+  frames:["{Sein} Gesicht ist ___.","{Er} hat ein ___es Gesicht."],
+  items:["rund","oval","eckig","schmal","länglich","breit","freundlich","lieb","blass",
+   "*herzförmig=oben breit, unten schmal","*kantig=mit klaren Ecken","*markant=kräftig und auffällig","*pausbäckig=mit dicken Wangen","*Mondgesicht=so rund wie der Mond","*kindlich=wie das Gesicht eines Kindes","*ebenmäßig=alles passt harmonisch zusammen","*Babyface=ein Gesicht wie ein Baby","*hager=mit eingefallenen Wangen","*kleine Stupsnase","*fein geschnitten=zart und regelmäßig","*ausdrucksstark=man sieht jedes Gefühl"]},
+ {id:"haut",icon:"🧴",title:"Haut & Hautfarbe",
+  frames:["{Er} hat eine ___e Haut.","{Sein} Gesicht ist ___ und ___."],
+  items:["hell","dunkel","blass","rosig","braun","gebräunt","glatt","rot","zart",
+   "*sonnengebräunt=von der Sonne braun","*makellos=ohne Flecken oder Fehler","*wettergegerbt=von Sonne und Wind rau","*faltig=mit vielen Falten","*sommersprossig=voller Sommersprossen","*olivfarben=leicht grünlich-braun","*bleich=sehr blass","*rotwangig=mit roten Wangen","*porenfein","*pfirsichzart=so weich wie ein Pfirsich","*lederartig=fest und ledrig","*schimmernd"]},
+ {id:"merk",icon:"🔎",title:"Besondere Merkmale",
+  frames:["Besonders fallen {sein}e ___ auf.","Auf {sein}er Nase tanzen ein paar ___."],
+  items:["Sommersprossen","Grübchen","Narbe","Pickel","Falten","Muttermal","Piercing",
+   "*Lachfältchen=kleine Fältchen vom vielen Lachen","*Leberfleck=kleiner brauner Fleck auf der Haut","*Schönheitsfleck=auffälliger Fleck, der hübsch wirkt","*Wangengrübchen=kleine Dellen in den Wangen beim Lachen","*Zahnlücke=eine Lücke zwischen den Zähnen","*Narbe am Kinn","*Tätowierung=ein Bild, das in die Haut gestochen ist","*Hautfalten","*Kuhle=kleine Delle","*Pigmentfleck=ein dunkler Fleck auf der Haut"]},
+ {id:"mund",icon:"👄",title:"Mund & Lippen",
+  frames:["{Er} hat einen ___en Mund.","{Sein}e Lippen sind ___ und ___."],
+  items:["breit","klein","schmal","groß","voll","dünn","rot","rosig","trocken","lächelnd",
+   "*geschwungen=mit einem schönen Bogen","*Schmollmund=Lippen nach vorne geschoben wie beim Schmollen","*Kussmund=gespitzt wie zum Küssen","*aufgesprungen=trocken und rissig","*fein gezeichnet=zart und klar geformt","*Mundwinkel nach oben=zeigt gute Laune","*Mundwinkel nach unten=zeigt schlechte Laune","*wulstig=dick und rund","*Lippenstift=Farbe für die Lippen","*zusammengepresst=ganz fest geschlossen"]},
+ {id:"zaehne",icon:"🦷",title:"Zähne",
+  frames:["{Sein}e Zähne sind ___.","Beim Lachen sieht man {sein}e ___."],
+  items:["weiß","schief","gerade","groß","klein","Zahnspange","Zahnlücke=eine Lücke zwischen den Zähnen","gleichmäßig",
+   "*Hasenzähne=lange, vorstehende Vorderzähne","*Schneidezähne=die Zähne vorne","*strahlend weiß","*Milchzähne=die ersten Zähne eines Kindes","*Eckzähne=die spitzen Zähne","*makellos=ohne Fehler","*Goldzahn=ein Zahn aus Gold","*Zahnlücke=eine Lücke zwischen den Zähnen"]},
+ {id:"laecheln",icon:"😁",title:"Lächeln & Lachen",
+  frames:["Um {sein}en Mund spielt ein ___es Lächeln.","{Er} lacht ___."],
+  items:["freundlich","breit","strahlend","laut","leise","herzlich","ansteckend=man muss einfach mitlachen","schüchtern","herzlich",
+   "*verschmitzt=schlau und lustig","*warmherzig=voller Wärme","*spöttisch=ein Lächeln, das sich ein bisschen lustig macht","*gewinnend=sofort sympathisch","*spitzbübisch=frech und charmant","*glucksend=wie ein kleines Gluckern","*dröhnend=sehr laut und tief","*kichernd=leise und hell","*glockenhell=klar und hoch wie eine Glocke","*schallend=so laut, dass es hallt","*schelmisch","*Zahnpastalächeln=ein perfektes, strahlendes Lächeln"]},
+ {id:"kinn",icon:"🫵",title:"Kinn",
+  frames:["{Er} hat ein ___es Kinn.","{Sein} Kinn ist ___."],
+  items:["rund","spitz","eckig","kräftig","klein","breit","lang",
+   "*markant=kräftig und deutlich","*fliehend=schräg nach hinten","*Doppelkinn=eine zweite Hautfalte unter dem Kinn","*Kinngrübchen=eine kleine Delle im Kinn","*energisch=kräftig und entschlossen","*vorgeschoben=ragt nach vorne","*zierlich=klein und zart"]},
+ {id:"bart",icon:"🧔",title:"Bart",
+  frames:["{Er} trägt einen ___en Bart.","{Sein} Gesicht wird von einem ___en Bart umrahmt."],
+  items:["Bart","Schnurrbart","Vollbart","rasiert","glatt rasiert","Bartstoppeln","Dreitagebart=ein Bart, der nur ein paar Tage gewachsen ist","gepflegt","zottelig",
+   "*Oberlippenbart=Bart nur über dem Mund","*Spitzbart=Bart nur am Kinn, spitz zulaufend","*Backenbart=Bart an den Wangen","*Koteletten=Bart vor den Ohren, an den Wangen","*Walrossbart=riesiger, hängender Schnurrbart","*Menjoubärtchen=ganz dünner, schmaler Schnurrbart","*Flaum=die ersten weichen Barthaare","*Kinnbart=Bart nur am Kinn","*Ziegenbart=kleiner, spitzer Bart","*Rauschebart=langer, wallender Bart wie bei einem Weihnachtsmann","*Bartträger=jemand, der einen Bart trägt","*Stoppelbart"]},
+
+ {id:"hals",cat:"Der Körper",icon:"🦒",title:"Hals & Schultern",
+  frames:["{Er} hat einen ___en Hals.","{Sein}e Schultern sind ___."],
+  items:["lang","kurz","dünn","kräftig","breit","schmal","hängend",
+   "*Schwanenhals=lang und elegant","*Stiernacken=kurzer, sehr kräftiger Nacken","*Adamsapfel=die Beule vorne am Hals","*hängende Schultern=sieht müde oder traurig aus","*schmale Schultern","*breite Schultern=wirkt stark","*Nacken=der Hals von hinten"]},
+ {id:"haende",icon:"🖐️",title:"Arme & Hände",
+  frames:["{Sein}e Hände sind ___.","{Er} hat ___e Finger."],
+  items:["groß","klein","schmal","kräftig","zart","warm","kalt","lange Finger","kurze Finger","lange Arme","kurze Arme","bunte Fingernägel",
+   "*feingliedrig=schlanke, zarte Finger","*schwielig=raue Haut vom Arbeiten","*knochig=Knochen sind gut zu sehen","*Pranken=riesige Hände (umgangssprachlich)","*Pianistenhände=lange, schlanke Finger","*Wurstfinger=dicke Finger (lustig gemeint)","*gepflegte Hände","*abgekaute Nägel=Fingernägel, die man abgeknabbert hat","*sehnige Arme=Arme mit dünnen, festen Muskeln","*muskulöse Arme"]},
+ {id:"beine",icon:"🦵",title:"Beine & Füße",
+  frames:["{Er} hat ___e Beine.","{Sein}e Füße sind ___."],
+  items:["lang","kurz","dünn","kräftig","groß","klein","sportlich","schnell",
+   "*Storchenbeine=sehr lange, dünne Beine","*O-Beine=Beine, die nach außen gebogen sind","*X-Beine=Knie berühren sich, Füße stehen auseinander","*durchtrainiert=sportlich und fest","*Stelzen=sehr lange, dünne Beine (lustig)","*Plattfüße=Füße ohne Wölbung","*zierliche Füße","*Riesenfüße=sehr große Füße","*Haxen=österreichisch für Beine, umgangssprachlich"]},
+ {id:"haltung",icon:"🧘",title:"Haltung",
+  frames:["{Er} hält sich ___.","{Sein}e Haltung ist ___."],
+  items:["aufrecht","gerade","krumm","gebeugt","lässig","steif","entspannt","stolz","müde",
+   "*kerzengerade=ganz gerade wie eine Kerze","*gebückt=nach vorne gebeugt","*geduckt=klein gemacht","*breitbeinig=mit weit gespreizten Beinen","*Buckel=gekrümmter Rücken","*Hohlkreuz=stark nach innen gebogener Rücken","*stramm=aufrecht und fest","*schlaksig=lang, dünn und locker","*zusammengesunken=kraftlos nach vorne gefallen"]},
+ {id:"gang",icon:"🚶",title:"Gang & Bewegung",
+  frames:["{Er} geht ___.","{Sein} Gang ist ___."],
+  items:["schnell","langsam","leise","laut","sportlich","lässig","vorsichtig","hüpfend",
+   "*schlurfend=die Füße schleifen über den Boden","*federnd=mit leichten Sprüngen","*watschelnd=wie eine Ente","*humpelnd=mit einem Bein schonend","*stolzierend=stolz wie ein Pfau","*bedächtig=langsam und vorsichtig","*tänzelnd=wie beim Tanzen","*schwungvoll=voller Energie","*flink=schnell und geschickt","*schleichend=ganz leise und vorsichtig","*trippelnd=mit vielen kleinen Schritten","*stampfend=mit schweren Schritten","*zielstrebig=geht direkt auf etwas zu"]},
+
+ {id:"stil",cat:"Kleidung & Stil",icon:"🧥",title:"Stil & Eindruck der Kleidung",
+  frames:["{Er} ist ___ gekleidet.","{Sein} Kleidungsstil ist ___."],
+  items:["sportlich","lässig","elegant","modisch","bunt","schlicht","gepflegt","ordentlich","fein","dunkel","hell","kariert","gestreift","gepunktet",
+   "*altmodisch=wie früher","*auffällig=zieht Blicke an","*ausgefallen=besonders, ungewöhnlich","*schick=fein und modisch","*salopp=bequem, nicht streng","*trendig=ganz modern","*zerknittert=voller Falten","*ungepflegt=schmutzig oder schlampig","*farbenfroh=sehr bunt","*schlabberig=viel zu weit","*maßgeschneidert=genau für den Körper gemacht","*brav=ordentlich und unauffällig","*geschmackvoll=schön ausgesucht","*schrill=grell und sehr bunt","*dezent=zurückhaltend","*gewagt=mutig und besonders","*verwaschen=die Farbe ist ausgeblichen"]},
+ {id:"kleid",icon:"👕",title:"Kleidungsstücke",
+  frames:["{Er} trägt ___, ___ und ___.","Am liebsten trägt {er} ___."],
+  items:["T-Shirt","Pullover","Jacke","Hose","Jeans","Rock","Kleid","Hemd","Mütze","Schal","Schuhe","Turnschuhe","Socken","Kapuzenpulli","Shorts","Leggings",
+   "*Kapuzenpullover=Pullover mit Kapuze","*Weste=ärmellose Jacke","*Jogginghose=bequeme Sporthose","*Anorak=Jacke mit Kapuze","*Sakko=Jacke zu einem Anzug","*Krawatte=Stoffband um den Hals","*Fliege=kleine Schleife am Hals","*Latzhose=Hose mit Trägern","*Strickjacke=gestrickte Jacke","*Lederhose=Trachtenhose","*Dirndl=Trachtenkleid","*Janker=österreichische Trachtenjacke","*Stiefel","*Sandalen","*Haube=österreichisch für Mütze","*Leiberl=österreichisch für T-Shirt","*Schlapfen=österreichisch für Hausschuhe","*Gewand=österreichisch für Kleidung","*Trainingsanzug","*Regenjacke","*Pyjama","*Trenchcoat=langer Mantel"]},
+ {id:"access",icon:"💍",title:"Accessoires & Dinge, die man dabeihat",
+  frames:["Um den Hals trägt {er} ___.","{Er} hat immer ___ dabei."],
+  items:["Kette","Armband","Uhr","Ring","Ohrringe","Rucksack","Schultasche","Kappe","Handy","Handschuhe","Brille",
+   "*Anhänger=ein kleiner Schmuck an der Kette","*Haarspange","*Gürtel","*Stirnband","*Brosche=ein Schmuckstück zum Anstecken","*Armbanduhr","*Halstuch","*Schirmkappe=Kappe mit Schild","*Schleife","*Kopftuch","*Freundschaftsband=ein selbstgeknüpftes Armband","*Glücksbringer=etwas, das Glück bringen soll","*Brustbeutel=kleine Tasche, die man am Hals trägt"]}
+ ]},
+
+charakter:{
+ title:"💛 Charakter – wie ist die Person innen drin?",
+ intro:"Der Charakter ist das Besondere an einem Menschen. Hier gibt es viele Wörter zum Stöbern. Wähle die aus, die wirklich passen, und erzähle im Text gleich ein kleines Beispiel dazu.",
+ groups:[
+ {id:"umgang",icon:"🤝",title:"Im Umgang mit anderen",
+  frames:["{Er} ist ___ und ___.","{Er} ist ein ___er Mensch."],
+  items:["freundlich","nett","hilfsbereit","höflich","lieb","ehrlich","fair","großzügig","treu","zuverlässig","fürsorglich=kümmert sich um andere","witzig","offen","hilfreich",
+   "*gutmütig=hat ein gutes Herz und ärgert sich selten","*zuvorkommend=besonders freundlich und aufmerksam","*rücksichtsvoll=denkt an die anderen","*taktvoll=weiß, was man sagen darf und was nicht","*warmherzig=voller Wärme","*einfühlsam=spürt, wie es anderen geht","*verständnisvoll=versteht andere gut","*loyal=hält immer zu seinen Freunden","*aufrichtig=ganz ehrlich","*vertrauenswürdig=man kann ihm Geheimnisse anvertrauen","*selbstlos=denkt zuerst an die anderen","*gastfreundlich=freut sich über Besuch","*großmütig=verzeiht großzügig","*wohlwollend=meint es gut mit anderen","*kameradschaftlich=ein guter Kamerad","*umgänglich=mit ihm kommt man gut aus","*kontaktfreudig=lernt gern neue Leute kennen","*herzensgut=hat ein ganz gutes Herz","*bescheiden=macht kein großes Aufheben um sich","*nachsichtig=verzeiht schnell","*tolerant=lässt andere so sein, wie sie sind","*respektvoll=achtet andere","*charmant=bezaubernd und höflich","*hingebungsvoll=gibt sich mit ganzem Herzen","*aufmerksam=bemerkt, was andere brauchen"]},
+ {id:"stimmung",icon:"😄",title:"Stimmung & Temperament",
+  frames:["{Er} ist meistens ___.","{Er} wirkt ___ und ___."],
+  items:["fröhlich","lustig","ruhig","schüchtern","mutig","neugierig","lebhaft","still","witzig","brav","freundlich","munter","locker","cool","gelassen=ruhig, auch wenn viel los ist","traurig","wütend","nervös",
+   "*humorvoll=hat Sinn für Humor","*temperamentvoll=voller Energie, schnell begeistert","*ausgeglichen=immer ziemlich gleich gelaunt","*geduldig=kann gut warten","*zurückhaltend=hält sich eher im Hintergrund","*aufgeweckt=wach und munter","*ausgelassen=übermütig fröhlich","*verträumt=in Gedanken weit weg","*nachdenklich=denkt viel nach","*sensibel=feinfühlig, schnell berührt","*unerschrocken=hat keine Angst","*tapfer=mutig auch bei Schmerzen","*abenteuerlustig=liebt Neues und Spannendes","*selbstbewusst=weiß, was er oder sie kann","*optimistisch=sieht immer das Gute","*heiter=gut gelaunt und froh","*quirlig=immer in Bewegung","*unternehmungslustig=will immer etwas erleben","*schlagfertig=hat sofort eine Antwort","*spontan=macht Dinge ohne lange Planung","*besonnen=überlegt, bevor er oder sie handelt","*zappelig=kann nicht still sitzen","*übermütig=so froh, dass man Unsinn macht","*unbekümmert=ohne Sorgen","*sanftmütig=mild und freundlich","*euphorisch=außer sich vor Freude"]},
+ {id:"kopf",icon:"🧠",title:"Kopf & Fleiß",
+  frames:["{Er} ist ___ und ___.","In der Schule ist {er} ___."],
+  items:["klug","schlau","fleißig","kreativ","ordentlich","pünktlich","ehrgeizig","aufmerksam","gescheit=österreichisch für klug","neugierig","lernfreudig","gut organisiert","wach",
+   "*intelligent=hat einen scharfen Verstand","*fantasievoll=hat viel Fantasie","*ideenreich=hat immer neue Einfälle","*begabt=hat ein Talent","*geschickt=kann gut mit den Händen oder mit Worten","*vielseitig=kann vieles","*wissbegierig=will alles lernen und wissen","*konzentriert=ganz bei der Sache","*gewissenhaft=macht alles genau","*sorgfältig=arbeitet sauber","*zielstrebig=weiß, was er oder sie erreichen will","*ausdauernd=gibt nicht so schnell auf","*beharrlich=bleibt dran","*erfinderisch=denkt sich ständig Neues aus","*belesen=hat viele Bücher gelesen","*scharfsinnig=denkt blitzschnell","*vernünftig=denkt klar und verständig","*verantwortungsbewusst=übernimmt Pflichten","*talentiert","*lernbegierig=will unbedingt etwas lernen","*clever=schlau und geschickt","*logisch denkend"]},
+ {id:"ecken",icon:"🌶️",title:"Ecken & Kanten (Eigenheiten)",
+  note:"Niemand ist perfekt. Mit kleinen Schwächen wird eine Beschreibung lebendig und ehrlich. Wähle freundliche Wörter und schreib dazu, was dich daran eher zum Schmunzeln bringt.",
+  frames:["Manchmal ist {er} ein bisschen ___.","{Er} kann ziemlich ___ sein."],
+  items:["frech","stur","ungeduldig","vergesslich","laut","chaotisch","faul","zappelig","ängstlich","eigensinnig","schüchtern","müde","ungeduldig","empfindlich=ist schnell gekränkt","trotzig",
+   "*dickköpfig=will immer seinen Kopf durchsetzen","*vorlaut=redet, ohne gefragt zu werden","*eitel=schaut gern in den Spiegel","*launisch=die Stimmung wechselt schnell","*unordentlich","*schusselig=macht oft kleine Fehler aus Zerstreutheit","*tollpatschig=ungeschickt","*zerstreut=mit den Gedanken woanders","*naschhaft=isst gern Süßes","*nachtragend=verzeiht nicht leicht","*jähzornig=wird plötzlich sehr wütend","*angeberisch=prahlt gern","*bequem=mag keine Anstrengung","*naseweis=vorlaut und neugierig","*großspurig=tut sehr wichtig","*schlampig=arbeitet nicht genau","*sprunghaft=wechselt oft das Thema","*quengelig=jammert gern","*hitzköpfig=regt sich schnell auf","*pingelig=ganz übergenau","*dickschädelig=sehr stur","*ungeschickt","*vorwitzig=ein bisschen frech und neugierig"]},
+ {id:"typen",icon:"🗝️",title:"Wortschätze: Typen mit Spitznamen",
+  note:"Diese Wörter sind kleine Bilder für Menschen. Man sagt sie mit einem Augenzwinkern. Benutze sie sparsam, aber dann mit Freude.",
+  frames:["{Er} ist ein(e) richtige(r) ___.","Man könnte {ihn} einen ___ nennen."],
+  items:["Spaßvogel=macht gern Witze","Leseratte=liest ständig Bücher","Sportskanone=sehr gut im Sport","Naschkatze=isst gern Süßes",
+   "*Wirbelwind=sehr lebhaft und schnell","*Frechdachs=ein freches Kind, aber liebenswert","*Plaudertasche=redet gern und viel","*Schlaumeier=weiß alles, oder glaubt es","*Sturkopf=lässt sich nichts sagen","*Träumer=ist oft in Gedanken","*Tausendsassa=kann alles ein bisschen","*Glückskind=hat oft Glück","*Sonnenschein=macht alle froh","*Bücherwurm=liest für sein Leben gern","*Hasenfuß=ängstlich","*Angsthase=ängstlich","*Zappelphilipp=kann nicht still sitzen","*Rabauke=ein lauter, wilder Junge oder ein wildes Mädchen","*Dreikäsehoch=ein kleiner Junge (scherzhaft)","*Seelentröster=tröstet gern","*Besserwisser=weiß immer alles besser","*Tüftler=bastelt gern an Dingen","*Schlitzohr=listig, aber liebenswert","*Lausbub=ein frecher Junge","*Schlafmütze=schläft gern lang","*Sportsfreund=nett gemeinte Anrede","*Streber=lernt sehr viel (kann auch spöttisch sein)","*Glückspilz=hat viel Glück","*Rechenkünstler=rechnet blitzschnell","*Wirbelsturm=noch mehr als ein Wirbelwind"]},
+ {id:"stimme",icon:"🗣️",title:"Stimme & Sprechen",
+  frames:["{Sein}e Stimme ist ___.","{Er} spricht ___."],
+  items:["laut","leise","tief","hoch","freundlich","schnell","langsam","deutlich","klar","kräftig","ruhig",
+   "*sanft=weich und angenehm","*rau=nicht ganz glatt","*heiser=wie nach einer Erkältung","*dröhnend=sehr laut und tief","*piepsig=ganz hoch und dünn","*melodisch=klingt wie Musik","*näselnd=durch die Nase gesprochen","*wortkarg=sagt nur wenig","*redselig=redet viel","*flüsternd=ganz leise","*nuschelnd=undeutlich","*wienerisch=mit Wiener Dialekt","*stimmgewaltig=hat eine mächtige Stimme","*honigsüß=weich und süß","*schrill=hoch und durchdringend","*gedehnt=langgezogen"]}
+ ]},
+
+hobby:{
+ title:"🎈 Hobbys & Alltag",
+ intro:"Was macht die Person gern? Was ist typisch für sie? Hier sind Wörter für Freizeit, Gewohnheiten und kleine Eigenheiten, die eine Person besonders machen.",
+ groups:[
+ {id:"sport",icon:"⚽",title:"Sport & Bewegung",
+  frames:["{Er} kann stundenlang ___.","Am Wochenende möchte {er} am liebsten ___."],
+  items:["Fußball spielen","schwimmen","Rad fahren","laufen","turnen","tanzen","klettern","Ski fahren","Tennis spielen","Basketball spielen","Tischtennis spielen","Eis laufen","wandern","Judo machen","reiten","Volleyball spielen","Fahrrad fahren","Trampolin springen",
+   "*Leichtathletik machen=laufen, springen und werfen","*Skateboard fahren","*Parkour machen=über Hindernisse laufen und springen","*fechten=mit dem Degen kämpfen (Sport)","*bouldern=klettern ohne Seil, nicht sehr hoch","*rudern","*Handball spielen","*Eishockey spielen","*Geräteturnen machen","*Inlineskaten","*Badminton spielen","*Karate machen","*segeln","*Eiskunstlaufen","*Rhythmische Gymnastik machen","*Schi fahren=österreichische Schreibweise von Ski fahren"]},
+ {id:"kreativ",icon:"🎨",title:"Kreatives & Musik",
+  frames:["{Er} kann stundenlang ___.","In {sein}er Freizeit liebt {er} es, ___."],
+  items:["zeichnen","malen","basteln","singen","Klavier spielen","Gitarre spielen","Geige spielen","fotografieren","backen","kochen","Geschichten schreiben","nähen","mit LEGO bauen","Musik hören","Theater spielen","Videos drehen",
+   "*töpfern=mit Ton arbeiten","*komponieren=Musik erfinden","*Querflöte spielen","*Schlagzeug spielen","*stricken","*häkeln","*schnitzen=mit dem Messer aus Holz formen","*Gedichte schreiben","*Comics zeichnen","*Origami falten=Figuren aus Papier falten","*Trickfilme drehen","*programmieren=dem Computer Befehle geben","*tüfteln=an etwas herumbasteln, bis es funktioniert","*modellieren=aus Knete oder Ton formen","*sticken","*Songs schreiben","*improvisieren=ohne Plan spielen oder erfinden"]},
+ {id:"denk",icon:"📚",title:"Drinnen & Denken",
+  frames:["{Er} kann stundenlang ___.","Wenn es regnet, ___ {er} am liebsten."],
+  items:["lesen","Brettspiele spielen","Karten spielen","puzzeln","Videospiele spielen","Filme anschauen","Rätsel lösen","Comics lesen","fernsehen","am Computer arbeiten","Quiz spielen",
+   "*Schach spielen","*experimentieren=Dinge ausprobieren","*Rätsel knacken=eine schwierige Aufgabe lösen","*Sudoku lösen","*Podcasts hören","*Hörbücher hören","*schmökern=gemütlich in Büchern lesen","*Bücher verschlingen=sehr schnell und gern lesen","*Detektiv spielen","*Modelle bauen","*Geheimcodes erfinden"]},
+ {id:"natur",icon:"🌳",title:"Natur & Tiere",
+  frames:["{Er} verbringt viel Zeit ___.","Am liebsten ___ {er} draußen."],
+  items:["spazieren gehen","im Garten helfen","Tiere beobachten","mit dem Hund spazieren gehen","im Wald spielen","Tiere füttern","Blumen pflücken","in der Natur sein","ein Haustier haben",
+   "*Vögel beobachten","*angeln","*zelten=im Zelt schlafen","*bergsteigen=auf Berge steigen","*Schwammerl suchen=österreichisch für Pilze suchen","*Gemüse anbauen","*Sterne beobachten","*Käfer entdecken","*ein Lagerfeuer machen","*den Wald erkunden","*Pflanzen bestimmen=herausfinden, wie sie heißen","*Tierpfleger spielen","*Schmetterlinge fotografieren","*Pilze sammeln"]},
+ {id:"sammeln",icon:"🧰",title:"Sammeln",
+  frames:["{Er} sammelt ___.","{Sein}e Sammlung besteht aus ___."],
+  items:["Briefmarken","Münzen","Steine","Sticker","Spielkarten","Muscheln","Figuren","Postkarten","Bücher","Federn",
+   "*Mineralien=Gesteine und Kristalle","*Fossilien=versteinerte Tiere und Pflanzen","*Pickerl=österreichisch für Sticker","*Autogramme=Unterschriften von Berühmten","*Kronkorken=Metalldeckel von Flaschen","*Souvenirs=Erinnerungsstücke von Reisen","*Sammelkarten","*Zinnfiguren","*Kuriositäten=seltsame, besondere Dinge"]},
+ {id:"gewohn",icon:"🌀",title:"Gewohnheiten & Eigenheiten",
+  note:"Diese Wörter stehen schon in der Er-/Sie-Form. Sie passen direkt hinter „{Er}“.",
+  frames:["Typisch für {ihn} ist, dass {er} ___.","Wenn {er} nachdenkt, ___ {er}.","Jeden Tag ___ {er}."],
+  items:["summt gern","singt unter der Dusche","lacht viel","redet viel","kaut an Stiften","kommt oft zu spät","ist immer pünktlich","hat immer ein Buch dabei","hört gern Musik","träumt vor sich hin","kratzt sich am Kopf","trommelt mit den Fingern","wippt mit dem Fuß","isst gern Süßes","hat immer Hunger","lacht über jeden Witz","räumt gern auf","vergisst oft etwas",
+   "*knabbert an den Fingernägeln","*spielt mit den Haaren","*spricht mit den Händen=bewegt die Hände beim Reden","*zwinkert oft","*pfeift beim Gehen","*brummt vor sich hin","*gähnt ansteckend=wenn er gähnt, gähnen alle mit","*hüpft statt zu gehen","*trägt immer dieselbe Mütze","*rückt die Brille zurecht","*fuchtelt mit den Armen=bewegt sie wild","*kritzelt in die Hefte","*rollt mit den Augen","*schmunzelt=lächelt leise vor sich hin","*kichert los=muss plötzlich lachen","*nuschelt vor sich hin","*redet im Schlaf","*lässt die Tür offen stehen","*verlegt ständig seine Sachen","*tippt nervös mit dem Stift","*bohrt in der Nase=lustig oder peinlich","*zählt beim Gehen die Schritte"]},
+ {id:"essen",icon:"🍎",title:"Essen & Trinken",
+  frames:["{Sein} Lieblingsessen ist ___.","{Er} isst für sein Leben gern ___."],
+  items:["Nudeln","Pizza","Schnitzel","Eis","Schokolade","Obst","Gemüse","Suppe","Pommes","Kuchen","Pudding",
+   "*Palatschinken=österreichische dünne Pfannkuchen","*Kaiserschmarrn=zerrissener, süßer Pfannkuchen","*Apfelstrudel","*Knödel","*Topfenstrudel=Strudel mit Quarkfüllung","*Marillenknödel=Knödel mit Aprikosen","*Frittatensuppe=Suppe mit Pfannkuchenstreifen","*Wiener Schnitzel","*Sachertorte=berühmte Schokoladentorte aus Wien","*Powidltascherl=gefüllte Teigtaschen mit Pflaumenmus","*Leckermaul=jemand, der gern Süßes isst","*Feinschmecker=jemand, der gutes Essen liebt","*Jause=österreichisch für Zwischenmahlzeit"]},
+ {id:"haeuf",icon:"⏰",title:"Wann und wie oft?",
+  frames:["{Er} macht das ___.","___ {Er} ___."],
+  items:["immer","oft","manchmal","selten","nie","jeden Tag","jeden Morgen","am Wochenende","in den Ferien","meistens","nach der Schule","am Abend","fast immer","hin und wieder",
+   "*regelmäßig=immer wieder, zu festen Zeiten","*gelegentlich=ab und zu","*ständig=dauernd","*tagtäglich=jeden einzelnen Tag","*wochentags=von Montag bis Freitag","*allmorgendlich=jeden Morgen","*unaufhörlich=ohne Pause","*zuweilen=manchmal","*bisweilen=manchmal","*mitunter=manchmal","*zu jeder Gelegenheit","*in jeder freien Minute"]}
+ ]},
+
+mag:{
+ title:"💖 Was ich an der Person mag",
+ intro:"Hier sammelst du Gründe, warum du die Person magst, und Wörter dafür, wie sie auf dich wirkt. Das ist oft der schönste Teil im Schluss deiner Beschreibung.",
+ groups:[
+ {id:"mag1",icon:"💖",title:"Das mag ich an {ihm}",
+  frames:["Ich mag {ihn}, weil {er} ___.","Besonders gern habe ich {ihn}, wenn {er} ___."],
+  items:["mir zuhört","mich zum Lachen bringt","immer da ist, wenn ich {ihn} brauche","gern teilt","ehrlich zu mir ist","gute Ideen hat","mit mir spielt","mich tröstet","nie schlecht über andere redet","Geheimnisse bewahrt","mich nicht auslacht","mir hilft, wenn ich etwas nicht verstehe","immer gute Laune hat","mich einlädt",
+   "*mich versteht, ohne dass ich viel erklären muss","*in jeder Lage ruhig bleibt","*anderen Mut macht","*sich für Schwächere einsetzt","*mich zu Neuem ermutigt=mir Mut macht, etwas auszuprobieren","*auch an trüben Tagen gute Laune verbreitet","*die Welt mit Humor nimmt","*zu mir hält, auch wenn es schwierig wird","*seinen Fehlern mit einem Lächeln begegnet","*Streit schlichten kann=Streit beenden kann","*auf mich wartet, wenn ich langsamer bin","*sich Zeit für mich nimmt","*Gemeinsamkeiten findet=entdeckt, was uns verbindet","*Verständnis für meine Launen hat","*mir die Wahrheit sagt, auch wenn sie unangenehm ist"]},
+ {id:"besonders",icon:"🌟",title:"Was {ihn} besonders macht",
+  frames:["{Er} ist für mich ___.","{Er} ist ein ___er Mensch."],
+  items:["besonders","anders","einzigartig=es gibt niemanden wie ihn oder sie","wichtig","wertvoll","großartig","toll","lustig","spannend","mutig",
+   "*unverwechselbar=sofort zu erkennen","*vorbildlich=ein Vorbild","*bewundernswert=ich schaue zu ihm auf","*liebenswert=man muss ihn einfach gernhaben","*unersetzlich=niemand kann ihn ersetzen","*beeindruckend","*inspirierend=macht Lust, etwas Neues zu probieren","*vertraut=ich kenne ihn gut","*einmalig=es gibt ihn nur einmal","*unvergleichlich=mit niemandem zu vergleichen","*herzerwärmend=macht das Herz warm","*unverzichtbar=ich möchte ihn nicht missen","*ansteckend fröhlich"]},
+ {id:"wirk",icon:"💭",title:"Wie wirkt {er} auf mich?",
+  frames:["{Er} ___.","Auf mich ___ {er}."],
+  items:["wirkt freundlich","wirkt ruhig","wirkt mutig","wirkt klug","sieht sympathisch aus","macht gute Laune","lacht oft","strahlt Freude aus","erinnert mich an ___","sieht aus wie ___","macht einen netten Eindruck","scheint sehr nett zu sein",
+   "*strahlt Ruhe aus","*verbreitet gute Laune","*macht den Eindruck, ___ zu sein","*vermittelt Sicherheit=man fühlt sich bei ihm sicher","*hinterlässt einen bleibenden Eindruck=man vergisst ihn nicht","*wirkt auf mich wie ___","*gibt mir ein gutes Gefühl","*zieht alle in seinen Bann=fesselt alle","*lässt niemanden kalt=jeder reagiert auf ihn","*schafft eine fröhliche Stimmung","*strahlt Wärme aus"]}
+ ]},
+
+form:{
+ title:"💬 Formulieren",
+ intro:"",
+ groups:[
+ {id:"einl",cat:"Satzanfänge für deinen Text (tippen = einfügen)",mode:"insert",icon:"🚪",title:"Einleitung – so fange ich an",
+  items:["Ich möchte dir {Wen} beschreiben.","Heute stelle ich dir {Wen} vor.","{Wer} ist ___ Jahre alt und geht in die ___ Klasse.","{Wer} ist ein Mensch, den ich sehr gut kenne.","Wenn ich an {Wen} denke, sehe ich sofort ___ vor mir.",
+   "*Schon auf den ersten Blick fällt an {ihm} ___ auf.","*Stell dir einen Menschen vor, der ___.","*Wer {Wen} einmal getroffen hat, vergisst {ihn} nicht so schnell.","*Kaum betritt {er} den Raum, fällt sofort ___ auf.","*Man erkennt {ihn} schon von Weitem an ___."]},
+ {id:"hauptA",mode:"insert",icon:"🧍",title:"Hauptteil 1 – Aussehen",
+  items:["Zuerst fallen {sein}e ___ auf.","{Sein}e Haare sind ___.","Dann sehe ich {sein} Gesicht: ___.","Außerdem hat {er} ___.","Weiter unten trägt {er} ___.","{Er} trägt am liebsten ___.",
+   "*Betrachtet man {sein} Gesicht genauer, erkennt man ___.","*Besonders auffällig sind {sein}e ___.","*Unter {sein}er Stirn blitzen ___.","*Von Kopf bis Fuß wirkt {er} ___.","*Zu {sein}em Aussehen passt ___ besonders gut.","*{Sein}e Erscheinung wird von ___ geprägt.","*Ein unverwechselbares Merkmal von {ihm} ist ___."]},
+ {id:"hauptC",mode:"insert",icon:"💛",title:"Hauptteil 2 – Charakter & Gewohnheiten",
+  items:["{Er} ist ___ und ___.","Was ich an {ihm} mag, ist ___.","Wenn jemand Hilfe braucht, ___.","Ein Beispiel dafür: ___.","Typisch für {ihn} ist, dass {er} ___.","In {sein}er Freizeit ___ {er} gern.",
+   "*Man merkt sofort, dass {er} ___.","*{Er} zeigt das, indem {er} ___.","*Charakterlich zeichnet {ihn} vor allem ___ aus.","*Besonders schätze ich an {ihm}, dass ___.","*Mit {sein}er Art schafft {er} es, ___.","*Auch wenn {er} manchmal ___ ist, ___."]},
+ {id:"schluss",mode:"insert",icon:"🏁",title:"Schluss – so höre ich auf",
+  items:["Alles in allem ist {er} ___.","Deshalb mag ich {ihn} so gern.","Ich bin froh, dass ich {ihn} kenne.","Mit {ihm} wird mir nie langweilig.","Kurz gesagt: {Er} ist ___.",
+   "*Zusammenfassend kann man sagen: ___.","*Wenn ich {ihn} sehe, ___.","*Für mich ist {er} ein ganz besonderer Mensch.","*Wer {ihn} kennt, ___.","*Ich kann mir mein Leben ohne {ihn} kaum vorstellen.","*Auch wenn man {ihn} nur kurz trifft, bleibt {er} in Erinnerung."]},
+
+ {id:"verben",cat:"Wörter, die Texte besser machen (sammeln)",icon:"🔄",title:"Verben statt immer nur „hat“ und „ist“",
+  note:"Mit abwechslungsreichen Verben klingt dein Text gleich viel lebendiger. Tausche zum Beispiel „Er hat blaue Augen“ gegen „Blaue Augen blitzen unter seinen Brauen“.",
+  frames:["Unter {sein}en Brauen ___ ___e Augen.","Ein Lächeln ___ {sein}en Mund."],
+  items:["hat","ist","trägt","sieht aus","fällt auf","gehört dazu","bekommt",
+   "*besitzen=etwas haben, feiner ausgedrückt","*wirken=einen Eindruck machen","*zieren=schmücken und schöner machen","*umrahmen=rundherum einfassen","*funkeln=glitzern wie Sterne","*blitzen=kurz und hell glänzen","*leuchten","*strahlen","*ragen=nach oben oder aus etwas heraus stehen","*wallen=in Wellen fallen","*umspielen=leicht um etwas spielen (ein Lächeln umspielt den Mund)","*auszeichnen=besonders machen","*prägen=stark bestimmen","*abstehen=nach außen zeigen","*sitzen","*schimmern=sanft glänzen","*wachsen","*hängen","*fallen=Haare fallen über die Schultern","*gleichen=sehr ähnlich sein","*erinnern an","*sich abheben von=anders sein als","*thronen=wie ein König sitzen (die Nase thront im Gesicht)","*prangen=sehr auffällig sein","*glänzen"]},
+ {id:"uebergang",icon:"🔗",title:"Übergangswörter – damit der Text fließt",
+  frames:["___ fallen {sein}e ___ auf.","___ trägt {er} ___."],
+  items:["zuerst","dann","danach","außerdem","auch","und","aber","dazu","zum Schluss","manchmal","oft","deshalb","denn","weil","obwohl",
+   "*darüber hinaus=zusätzlich","*zudem=außerdem","*dazu kommt=noch etwas anderes","*im Gegensatz dazu=ganz anders","*dennoch=trotzdem","*während=gleichzeitig, oder auch im Gegensatz","*hingegen=dagegen","*schließlich=zum Schluss","*vor allem=besonders","*insbesondere=besonders","*sowohl … als auch=beides","*einerseits … andererseits=zwei Seiten","*genauer betrachtet","*auf den ersten Blick","*bei näherem Hinsehen=wenn man genau schaut","*nicht zuletzt=und das ist auch wichtig"]},
+ {id:"ort",icon:"📍",title:"Ortswörter – wo ist was?",
+  frames:["___ ___ {sein}er Stirn sitzen ___.","___ trägt {er} ___."],
+  items:["oben","unten","in der Mitte","auf","über","unter","neben","zwischen","links","rechts","vorne","hinten","ganz oben","ganz unten","im Gesicht",
+   "*oberhalb=weiter oben als","*unterhalb=weiter unten als","*seitlich=an der Seite","*rund um=ringsherum","*an den Schläfen=seitlich der Stirn","*im Nacken=hinten am Hals","*am Hinterkopf","*entlang=der Länge nach","*darunter","*darüber","*mittendrin","*am Rand"]},
+ {id:"bilder",icon:"🖼️",title:"Vergleiche – Bilder im Kopf",
+  note:"Ein guter Vergleich zeigt mit einem Bild, wie etwas aussieht oder wie jemand ist. Ein bis zwei Vergleiche pro Text reichen.",
+  frames:["{Er} ist ___.","{Sein}e Haare sind ___."],
+  items:["stark wie ein Bär","schnell wie der Wind","leise wie eine Maus","groß wie ein Baum","klug wie eine Eule","fleißig wie eine Biene","rot wie eine Tomate","flink wie ein Wiesel",
+   "*Augen wie Sterne=strahlen und glänzen","*Haut wie Porzellan=zart, blass, glatt","*Wangen rot wie Äpfel","*Stimme wie Honig=süß und weich","*ein Lächeln wie die Sonne=macht alles hell","*Wimpern wie Fächer=lang und dicht","*Zähne wie Perlen=weiß und gleichmäßig","*Ohren wie Segel=weit abstehend","*Haare wie Seide=fein und glänzend","*Hände wie Schaufeln=sehr groß","*Haare wie ein Vogelnest=wild und durcheinander","*schlau wie ein Fuchs","*eine Nase wie ein Knopf=klein und rund","*eine Stimme wie eine Glocke=hell und klar","*sanft wie ein Lamm","*stolz wie ein Pfau","*neugierig wie eine Katze"]}
+ ]}
+};
+
+/* Würfel-Zeilen: [Icon, Titel, [Gruppen-IDs, aus denen je ein Wort gewürfelt wird]] */
+const ROLL=[['🧍','Gestalt',['gesamt']],['💇','Haare',['haarl','haarf','haarc']],['👀','Augen',['augenf']],['👃','Nase',['nase']],['👄','Mund',['mund']],
+            ['💛','Charakter',['umgang','stimmung']],['🌶️','Ecken & Kanten',['ecken']],['🎈','Hobby',['sport','kreativ','denk','natur']]];
+
+const LEVELS=[[0,'Wort-Neuling 🌱'],[8,'Wort-Entdecker 🔍'],[25,'Wort-Sammler 🧺'],[50,'Wort-Forscher 🔬'],[90,'Wort-Profi 🎓'],[150,'Wort-Meister 👑']];
+
+const CHECKS=[
+ 'Ich habe eine Einleitung geschrieben (Wer ist die Person? Wie alt? Erster Eindruck).',
+ 'Ich beschreibe das Aussehen von oben nach unten.',
+ '__SPECIAL__',
+ 'Ich habe abwechslungsreiche Verben verwendet (trägt, wirkt, fällt auf …).',
+ 'Beim Charakter habe ich ein kleines Beispiel erzählt.',
+ 'Mein Schluss sagt, wie die Person auf mich wirkt.',
+ 'Alles steht im Präsens.',
+ 'Ich habe Absätze gemacht und die Rechtschreibung kontrolliert.'
+];
+
+/* =====================================================================
+   LOGIK
+   ===================================================================== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='personenbeschreibung-baukasten-v1';
+let state={name:'',g:'m',col:{},text:'',chk:{},tab:'start'};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s) state=Object.assign(state,s);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+
+function parse(raw){let s=false;if(raw[0]==='*'){s=true;raw=raw.slice(1);}const i=raw.indexOf('=');return i<0?{w:raw.trim(),h:'',s}:{w:raw.slice(0,i).trim(),h:raw.slice(i+1).trim(),s};}
+
+const G={},ORDER=[];
+Object.entries(SECTIONS).forEach(([sk,sec])=>sec.groups.forEach(g=>{g.sec=sk;{const seen=new Set();g.parsed=g.items.map(parse).filter(it=>!seen.has(it.w)&&seen.add(it.w));}G[g.id]=g;ORDER.push(g);}));
+
+function fill(s){
+  const m=state.g==='m',nm=(state.name||'').trim();
+  return s.replace(/\{(\w+)\}/g,(x,k)=>{
+    switch(k){
+      case 'Er':return m?'Er':'Sie';
+      case 'er':return m?'er':'sie';
+      case 'Sein':return m?'Sein':'Ihr';
+      case 'sein':return m?'sein':'ihr';
+      case 'ihn':return m?'ihn':'sie';
+      case 'ihm':return m?'ihm':'ihr';
+      case 'Wen':return nm||(m?'meinen Freund':'meine Freundin');
+      case 'Wer':return nm||(m?'Mein Freund':'Meine Freundin');
+      case 'wer':return nm||(m?'mein Freund':'meine Freundin');
+      case 'name':return nm||(m?'er':'sie');
+      default:return x;
+    }
+  });
+}
+const blanks=h=>h.replace(/___/g,'<span class="blank"></span>');
+const openSet=new Set(['gesamt','haarl','umgang','sport','mag1','einl']);
+
+/* ---------- Rendering ---------- */
+function chipHtml(g,i){
+  const it=g.parsed[i],id=g.id+'::'+it.w,ins=g.mode==='insert';
+  const on=!ins&&state.col[id];
+  const label=esc(fill(it.w));
+  return `<button type="button" class="chip ${it.s?'s':'c'}${ins?' ins':''}${on?' on':''}" data-g="${g.id}" data-i="${i}"${ins?'':` aria-pressed="${on?'true':'false'}"`}${it.h?` title="${esc(it.h)}"`:''}>${label}</button>`;
+}
+function groupHtml(g){
+  const ins=g.mode==='insert';
+  const cm=[],sp=[];g.parsed.forEach((it,i)=>(it.s?sp:cm).push(i));
+  let h=`<details class="grp" id="grp-${g.id}" data-gid="${g.id}"${openSet.has(g.id)?' open':''}><summary><span class="ico" aria-hidden="true">${g.icon}</span><span class="gt">${esc(fill(g.title))}</span>${ins?'':`<span class="cnt" data-cnt="${g.id}"></span>`}</summary><div class="gbody">`;
+  if(g.note)h+=`<p class="gnote">${esc(fill(g.note))}</p>`;
+  if(g.frames&&g.frames.length){
+    h+=`<div class="frames"><span class="flbl">🧱 Bauplan – tippen = in deinen Text:</span>`+g.frames.map((f,i)=>`<button type="button" class="frame" data-g="${g.id}" data-f="${i}">${blanks(esc(fill(f)))}</button>`).join('')+`</div>`;
+  }
+  h+=`<div class="chips">`;
+  if(cm.length){h+=`<div class="sublbl c">● gängige ${ins?'Satzanfänge':'Wörter'}</div>`;cm.forEach(i=>h+=chipHtml(g,i));}
+  if(sp.length){h+=`<div class="sublbl s">✦ besondere ${ins?'Satzanfänge':'Wörter'}</div>`;sp.forEach(i=>h+=chipHtml(g,i));}
+  return h+`</div></div></details>`;
+}
+function renderSection(sk){
+  const sec=SECTIONS[sk],root=$('#sec-'+sk);
+  let h='';
+  if(sec.intro) h+=`<div class="sechead"><h2>${sec.title}</h2><p>${sec.intro}</p><div class="tools"><button type="button" data-act="open" data-sec="${sk}">📂 Alle aufklappen</button><button type="button" data-act="close" data-sec="${sk}">📁 Alle zuklappen</button></div></div>`;
+  else h+=`<div class="sechead"><h2>${sec.title}</h2><p>Hier findest du Satzanfänge, Verben, Übergänge und Vergleiche. Satzanfänge mit ✎ setzt ein Tipp direkt in deinen Text. Alles andere sammelst du wie gewohnt.</p><div class="tools"><button type="button" data-act="open" data-sec="${sk}">📂 Alle aufklappen</button><button type="button" data-act="close" data-sec="${sk}">📁 Alle zuklappen</button></div></div>`;
+  let lastCat=null;
+  const endCard=sk==='form'?$('#endCard'):null;
+  sec.groups.forEach(g=>{
+    if(g.cat&&g.cat!==lastCat){h+=`<h3 class="cat">${esc(g.cat)}</h3>`;lastCat=g.cat;}
+    h+=groupHtml(g);
+  });
+  if(sk==='form'){
+    const keep=endCard?endCard.outerHTML:'';
+    root.innerHTML=h.replace(/(<h3 class="cat">Wörter, die Texte besser machen)/,keep+'$1');
+  }else root.innerHTML=h;
+}
+function renderAll(){Object.keys(SECTIONS).forEach(renderSection);refresh();}
+
+/* ---------- Refresh / Zähler ---------- */
+function totals(){
+  let all=0,spAll=0;
+  ORDER.forEach(g=>{if(g.mode==='insert')return;g.parsed.forEach(it=>{all++;if(it.s)spAll++;});});
+  const ids=Object.keys(state.col).filter(k=>state.col[k]);
+  let sp=0;ids.forEach(id=>{const f=findById(id);if(f&&f.it.s)sp++;});
+  return {all,spAll,n:ids.length,sp};
+}
+function findById(id){
+  const k=id.indexOf('::'),gid=id.slice(0,k),w=id.slice(k+2),g=G[gid];if(!g)return null;
+  const it=g.parsed.find(x=>x.w===w);return it?{g,it}:null;
+}
+function refresh(){
+  $$('.chip[data-g]').forEach(c=>{
+    const g=G[c.dataset.g];if(!g||g.mode==='insert')return;
+    const it=g.parsed[+c.dataset.i],on=!!state.col[g.id+'::'+it.w];
+    c.classList.toggle('on',on);c.setAttribute('aria-pressed',on?'true':'false');
+  });
+  ORDER.forEach(g=>{
+    if(g.mode==='insert')return;
+    const el=$(`[data-cnt="${g.id}"]`);if(!el)return;
+    const n=g.parsed.filter(it=>state.col[g.id+'::'+it.w]).length;
+    el.textContent=n?`${n} ✓`:`${g.parsed.length}`;el.classList.toggle('has',n>0);
+  });
+  const t=totals();
+  $('#fabN').textContent=t.n;
+  let lv=LEVELS[0][1],next=LEVELS[1];
+  for(let i=0;i<LEVELS.length;i++){if(t.n>=LEVELS[i][0]){lv=LEVELS[i][1];next=LEVELS[i+1]||null;}}
+  $('#lvlName').textContent=lv;
+  const pct=next?Math.min(100,Math.round(100*t.n/next[0])):100;
+  $('#lvlBar').style.width=pct+'%';
+  $('#lvlTxt').textContent=`${t.n} Wörter gesammelt, davon ${t.sp} ✦ besondere`+(next?` · noch ${next[0]-t.n} bis „${next[1]}“`:' · höchste Stufe erreicht!');
+  renderMine();updateTextStats();
+}
+
+/* ---------- Meine Wörter ---------- */
+function renderMine(){
+  const box=$('#mine');
+  const ids=Object.keys(state.col).filter(k=>state.col[k]);
+  if(!ids.length){box.innerHTML='<p style="margin:0;color:var(--muted)">Noch leer. Gehe zu den Bereichen Aussehen, Charakter oder Hobbys und tippe auf Wörter, die dir gefallen.</p>';return;}
+  const low=(state.text||'').toLowerCase();
+  const byG={};ids.forEach(id=>{const f=findById(id);if(f)(byG[f.g.id]=byG[f.g.id]||[]).push(f);});
+  let h='';
+  ORDER.forEach(g=>{
+    const arr=byG[g.id];if(!arr)return;
+    h+=`<div class="mgrp">${g.icon} ${esc(fill(g.title))}</div><div class="mine">`;
+    arr.forEach(f=>{
+      const id=g.id+'::'+f.it.w,txt=fill(f.it.w);
+      const used=low.includes(txt.toLowerCase().replace(/\s*___\s*/g,'').trim())&&!/___/.test(txt);
+      h+=`<span class="mychip ${f.it.s?'s':'c'}${used?' used':''}"><button type="button" class="chip ${f.it.s?'s':'c'}" data-ins="${esc(id)}">${esc(txt)}</button><button type="button" class="x" data-rm="${esc(id)}" aria-label="${esc(txt)} entfernen">×</button></span>`;
+    });
+    h+=`</div>`;
+  });
+  box.innerHTML=h;
+}
+
+/* ---------- Text / Einfügen ---------- */
+const ta=$('#ta');
+function insertText(txt,noSpace){
+  const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart,e=ta.selectionEnd==null?v.length:ta.selectionEnd;
+  const before=v.slice(0,s),after=v.slice(e);
+  let pre='';if(before&&!/[\s\n]$/.test(before))pre=' ';
+  const post=noSpace?'':(after&&!/^[\s\n.,;:!?]/.test(after)?' ':(after?'':' '));
+  const ins=pre+txt+post;
+  ta.value=before+ins+after;
+  const pos=(before+ins).length;ta.selectionStart=ta.selectionEnd=pos;
+  state.text=ta.value;save();updateTextStats();renderMine();
+  bubble('✔ In deinen Text eingefügt – schau bei „✍️ Mein Text“ nach.',2200);
+}
+function updateTextStats(){
+  const t=ta.value||'';
+  const wc=t.trim()?t.trim().split(/\s+/).length:0;
+  $('#wc').textContent=wc+(wc===1?' Wort':' Wörter');
+  const low=t.toLowerCase(),seen=new Set();
+  ORDER.forEach(g=>g.parsed.forEach(it=>{
+    if(!it.s||g.mode==='insert')return;
+    const w=it.w.toLowerCase();if(/[{}…]|___/.test(w)||w.length<4)return;
+    const stem=w.length>7?w.slice(0,w.length-2):w;
+    if(low.includes(stem))seen.add(w);
+  }));
+  $('#sc').textContent='✦ '+seen.size+(seen.size===1?' besonderes Wort':' besondere Wörter')+' in deinem Text';
+  state._sp=seen.size;
+  renderChecks();
+}
+function renderChecks(){
+  const box=$('#checks'),sp=state._sp||0;
+  box.innerHTML=CHECKS.map((c,i)=>{
+    if(c==='__SPECIAL__'){
+      const ok=sp>=5;
+      return `<label><input type="checkbox" disabled ${ok?'checked':''}><span>Ich habe mindestens 5 besondere ✦-Wörter benutzt. <b>(automatisch: ${sp} gefunden)</b></span></label>`;
+    }
+    return `<label><input type="checkbox" data-chk="${i}" ${state.chk[i]?'checked':''}><span>${c}</span></label>`;
+  }).join('');
+}
+
+/* ---------- Bubble ---------- */
+let bt;
+function bubble(html,ms){const b=$('#bubble');b.innerHTML=html;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),ms||3500);}
+
+/* ---------- Tabs / Navigation ---------- */
+function buildNav(){
+  $('#navin').innerHTML=TABS.map(([k,l])=>`<button type="button" data-tab="${k}">${l}</button>`).join('');
+}
+function showTab(k,noScroll){
+  state.tab=k;save();
+  $$('section.tab').forEach(s=>s.classList.toggle('show',s.id==='sec-'+k));
+  $$('#navin button').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
+  if(!noScroll)window.scrollTo({top:0,behavior:'smooth'});
+}
+function goGroup(gid){
+  const g=G[gid];if(!g)return;
+  showTab(g.sec,true);openSet.add(gid);
+  const el=$('#grp-'+gid);if(!el)return;
+  el.open=true;
+  setTimeout(()=>{el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');},60);
+}
+
+/* ---------- Würfel ---------- */
+let rolled=[];
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function roll(){
+  rolled=[];
+  const box=$('#dice');box.innerHTML='';
+  ROLL.forEach(([ic,title,gids])=>{
+    let items=[];
+    if(title==='Hobby'){const g=G[pick(gids)];items=[{g,i:Math.floor(Math.random()*g.parsed.length)}];}
+    else items=gids.map(id=>{const g=G[id];return {g,i:Math.floor(Math.random()*g.parsed.length)};});
+    rolled.push(...items);
+    box.insertAdjacentHTML('beforeend',`<div class="die"><b>${ic} ${title}</b>${items.map(x=>{const it=x.g.parsed[x.i];return `<span class="chip ${it.s?'s':'c'}" title="${esc(it.h)}">${esc(fill(it.w))}</span>`;}).join('')}</div>`);
+  });
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target;
+  const tabBtn=t.closest('#navin button');if(tabBtn){showTab(tabBtn.dataset.tab);return;}
+  const go=t.closest('[data-go]');if(go){goGroup(go.dataset.go);return;}
+  const act=t.closest('[data-act]');
+  if(act){const sk=act.dataset.sec,open=act.dataset.act==='open';SECTIONS[sk].groups.forEach(g=>{open?openSet.add(g.id):openSet.delete(g.id);const el=$('#grp-'+g.id);if(el)el.open=open;});return;}
+  const fr=t.closest('.frame');
+  if(fr){const g=G[fr.dataset.g];insertText(fill(g.frames[+fr.dataset.f]));return;}
+  const ins=t.closest('[data-ins]');
+  if(ins){const f=findById(ins.dataset.ins);if(f)insertText(fill(f.it.w));return;}
+  const rm=t.closest('[data-rm]');
+  if(rm){delete state.col[rm.dataset.rm];save();refresh();return;}
+  const chip=t.closest('.chip[data-g]');
+  if(chip){
+    const g=G[chip.dataset.g],it=g.parsed[+chip.dataset.i];
+    if(it.h)bubble(`${it.s?'✦ ':''}<b>${esc(fill(it.w))}</b> – ${esc(it.h)}`,4500);
+    if(g.mode==='insert'){insertText(fill(it.w));return;}
+    const id=g.id+'::'+it.w;
+    if(state.col[id])delete state.col[id];else state.col[id]=true;
+    save();refresh();return;
+  }
+});
+document.addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-go]')){e.preventDefault();goGroup(e.target.dataset.go);}
+});
+document.addEventListener('toggle',e=>{
+  const d=e.target;if(d.matches&&d.matches('details.grp')){d.open?openSet.add(d.dataset.gid):openSet.delete(d.dataset.gid);}
+},true);
+document.addEventListener('change',e=>{
+  if(e.target.dataset&&e.target.dataset.chk!==undefined){state.chk[e.target.dataset.chk]=e.target.checked;save();}
+});
+
+$('#fab').addEventListener('click',()=>showTab('text'));
+$('#btnRoll').addEventListener('click',roll);
+$('#btnRollAdd').addEventListener('click',()=>{
+  rolled.forEach(x=>{state.col[x.g.id+'::'+x.g.parsed[x.i].w]=true;});save();refresh();bubble('🧺 Die Würfel-Wörter sind jetzt in „Meine Wörter“.',2500);
+});
+$('#inName').addEventListener('input',e=>{state.name=e.target.value;save();renderAll();});
+$$('input[name=gen]').forEach(r=>r.addEventListener('change',()=>{state.g=r.value;save();renderAll();}));
+ta.addEventListener('input',()=>{state.text=ta.value;save();updateTextStats();renderMine();});
+$('#btnPara').addEventListener('click',()=>{const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart;ta.value=v.slice(0,s).replace(/[ \t]+$/,'')+'\n\n'+v.slice(ta.selectionEnd==null?s:ta.selectionEnd);ta.selectionStart=ta.selectionEnd=s+1;ta.focus();state.text=ta.value;save();updateTextStats();});
+$('#btnCopy').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(ta.value);bubble('📋 Text kopiert!',1800);}
+  catch(e){ta.select();document.execCommand('copy');bubble('📋 Text kopiert!',1800);}
+});
+$('#btnSave').addEventListener('click',()=>{
+  const blob=new Blob([ta.value],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Meine-Personenbeschreibung.txt';document.body.appendChild(a);a.click();a.remove();
+});
+$('#btnPrint').addEventListener('click',()=>{
+  const p=$('#printArea');p.innerHTML='<h1>Meine Personenbeschreibung</h1>';
+  const d=document.createElement('div');d.textContent=ta.value;p.appendChild(d);window.print();
+});
+$('#btnClear').addEventListener('click',()=>{if(confirm('Wirklich den ganzen Text löschen?')){ta.value='';state.text='';save();updateTextStats();renderMine();}});
+
+/* ---------- Start ---------- */
+buildNav();
+$('#inName').value=state.name||'';
+$$('input[name=gen]').forEach(r=>r.checked=(r.value===state.g));
+ta.value=state.text||'';
+renderAll();roll();
+showTab(state.tab&&TABS.some(t=>t[0]===state.tab)?state.tab:'start',true);
+</script>
+</body>
+</html>
