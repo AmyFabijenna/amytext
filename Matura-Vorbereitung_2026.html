@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mündliche Matura Deutsch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f2; --card:#ffffff; --ink:#22262e; --muted:#5d6472; --line:#e4ded4;
+  --accent:#9b2335; --accent-soft:#f6e6e8; --green:#2f6b4f; --green-soft:#e5f1ea;
+  --gold:#8a6a12; --gold-soft:#f8f0d9; --blue:#2b5a8a; --blue-soft:#e6eef7;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 6px 18px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181d; --card:#1f232a; --ink:#e9e6e0; --muted:#a3a9b5; --line:#343944;
+    --accent:#e2737f; --accent-soft:#3a2328; --green:#7cc39c; --green-soft:#1d3329;
+    --gold:#e0bd5c; --gold-soft:#352d17; --blue:#86b4e6; --blue-soft:#1c2a3a;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181d; --card:#1f232a; --ink:#e9e6e0; --muted:#a3a9b5; --line:#343944;
+  --accent:#e2737f; --accent-soft:#3a2328; --green:#7cc39c; --green-soft:#1d3329;
+  --gold:#e0bd5c; --gold-soft:#352d17; --blue:#86b4e6; --blue-soft:#1c2a3a; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+h1{font-size:clamp(1.7rem,4vw,2.5rem);margin:.2em 0 .3em}
+h2{font-size:1.6rem;margin:0 0 .6em;color:var(--accent)}
+h3{font-size:1.2rem;margin:1.4em 0 .5em}
+a{color:var(--accent)}
+header.hero{padding:40px 16px 28px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--accent-soft),var(--bg))}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+.hero p{max-width:760px;color:var(--muted);margin:.3em 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.85rem}
+nav.toc{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:.88rem;padding:6px 11px;border-radius:8px;border:1px solid var(--line);background:var(--card)}
+nav.toc a:hover{border-color:var(--accent)}
+section{padding:34px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0;box-shadow:var(--shadow)}
+.note{border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:10px;padding:12px 16px;margin:14px 0}
+.good{border-left:4px solid var(--green);background:var(--green-soft);border-radius:10px;padding:12px 16px;margin:14px 0}
+.teach{border-left:4px solid var(--blue);background:var(--blue-soft);border-radius:10px;padding:12px 16px;margin:14px 0}
+.teach strong.lbl,.note strong.lbl,.good strong.lbl{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th,td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}
+th{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+.timeline{display:grid;gap:10px}
+.step{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.step .t{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.step p{margin:.2em 0}
+.timer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.timer .display{font:700 2.4rem/1 "Source Serif 4",serif;font-variant-numeric:tabular-nums;min-width:130px}
+.timer .display.warn{color:var(--gold)} .timer .display.over{color:var(--accent)}
+button{font:inherit;font-size:.9rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:7px 13px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.script p{margin:.75em 0}
+.script .tag{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:2px}
+mark.neu{background:var(--green-soft);color:inherit;padding:0 2px;border-radius:3px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;transition:box-shadow .3s}
+.q.flash{box-shadow:0 0 0 3px var(--accent)}
+.q summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;gap:10px}
+.q summary::-webkit-details-marker{display:none}
+.q summary .n{color:var(--accent);font-variant-numeric:tabular-nums;min-width:30px}
+.q .body{padding:0 16px 14px 56px;color:var(--ink)}
+.q .body ul{margin:.3em 0;padding-left:1.1em}
+.q .kind{font-size:.75rem;color:var(--muted);font-weight:500;margin-left:auto;white-space:nowrap}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.raster td.c{text-align:center;width:62px}
+.raster input{width:18px;height:18px;accent-color:var(--accent)}
+.raster tr.head td{background:var(--accent-soft);font-weight:700}
+textarea{width:100%;min-height:70px;font:inherit;font-size:.92rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
+td[contenteditable]{background:var(--bg);outline:none;min-width:120px}
+td[contenteditable]:focus{box-shadow:inset 0 0 0 2px var(--accent)}
+.check li{list-style:none;margin:6px 0}
+.check{padding-left:0}
+footer{padding:40px 16px;color:var(--muted);font-size:.85rem;text-align:center}
+@media (max-width:640px){
+  .step{grid-template-columns:1fr;gap:4px}
+  .q .body{padding-left:16px}
+  .card{padding:16px}
+}
+@media print{
+  nav.toc,.timer,button{display:none!important}
+  details{display:block} details>*{display:block}
+  .q .body{display:block}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="chip" style="display:inline-block">Berufsreifeprüfung Deutsch · mündlich</div>
+    <h1>Generalprobe für Freitag</h1>
+    <p>Vorbereitungsstunde mit Tes am Dienstag, 6. Oktober 2026, 16:30 Uhr – Präsentation deiner schriftlichen Arbeit und Simulation des Diskussionsteils zum Themenpaket <strong>Arbeitswelt</strong>.</p>
+    <div class="meta">
+      <span class="chip">Prüfung: Freitag, 9. Oktober</span>
+      <span class="chip">Textanalyse: „Der Rücken tut weh. Das Herz auch“</span>
+      <span class="chip">Leserbrief: „Die Arbeitszeit als Generationenfrage?“</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#ablauf">1 · Ablauf</a>
+  <a href="#feedback">2 · Feedback Skript</a>
+  <a href="#skript">3 · Überarbeitete Präsentation</a>
+  <a href="#belege">4 · Belege &amp; Wirkung</a>
+  <a href="#leserbrief">5 · Leserbrief</a>
+  <a href="#diskussion">6 · Diskussion</a>
+  <a href="#redemittel">7 · Redemittel</a>
+  <a href="#raster">8 · Beurteilung</a>
+  <a href="#freitag">9 · Bis Freitag</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- 1 ABLAUF -->
+<section id="ablauf">
+  <h2>1 · Ablauf der Stunde</h2>
+  <p>Eine Stunde ist knapp, deshalb arbeiten wir genau an den beiden Dingen, die du dir gewünscht hast: Du hältst deine Präsentation einmal so, als wärst du schon in der Prüfung, und danach spielen wir den Diskussionsteil durch – mit Fragen zu deinem Themenpaket, zu beiden Textbeilagen und zu deiner schriftlichen Arbeit. Das Feedback orientiert sich direkt am Beurteilungsraster des WIFI, damit du weißt, worauf die Prüfer am Freitag achten.</p>
+
+  <div class="timer" id="timer">
+    <div class="display" id="tDisplay">10:00</div>
+    <button data-min="5">5 min</button>
+    <button data-min="8">8 min</button>
+    <button data-min="10">10 min</button>
+    <button data-min="15">15 min</button>
+    <button class="primary" id="tStart">Start</button>
+    <button id="tReset">Zurücksetzen</button>
+    <span style="color:var(--muted);font-size:.85rem">Stoppuhr für Präsentation und Diskussion (Kriterium 1.2: Zeitrahmen einhalten)</span>
+  </div>
+
+  <div class="timeline" style="margin-top:16px">
+    <div class="step"><div class="t">0–3 min</div><div><strong>Ankommen &amp; Rahmen klären</strong><p>Kurz klären, wie lange Präsentation und Diskussion am Freitag laut Kurs dauern und ob beide schriftlichen Texte präsentiert werden oder nur die Textanalyse. Danach die Stoppuhr auf diese Zeit stellen.</p></div></div>
+    <div class="step"><div class="t">3–13 min</div><div><strong>Präsentation unter Prüfungsbedingungen</strong><p>Tes präsentiert ohne Unterbrechung. Amy kreuzt parallel im <a href="#raster">Raster</a> an und notiert sprachliche Auffälligkeiten in der Tabelle „Korrektur / Kommentar“.</p></div></div>
+    <div class="step"><div class="t">13–22 min</div><div><strong>Feedback zur Präsentation</strong><p>Zuerst die Stärken, dann der wichtigste Hebel: konkrete Textbelege statt Beschreibung des eigenen Vorgehens (siehe <a href="#feedback">Abschnitt 2</a>). Gemeinsam zwei, drei Belege mit Wirkung einbauen und die betreffende Passage noch einmal sprechen lassen.</p></div></div>
+    <div class="step"><div class="t">22–45 min</div><div><strong>Diskussionssimulation</strong><p>Amy übernimmt die Rolle der Prüferin. Zuerst Fragen aus Tes’ eigenem Dokument, dann Fragen aus dem <a href="#diskussion">Katalog</a>, zum Schluss zwei bis drei spontane Provokationen (Kriterium 2.2). Antworten nicht unterbrechen, Notizen machen.</p></div></div>
+    <div class="step"><div class="t">45–55 min</div><div><strong>Feedback zur Diskussion</strong><p>Was hat überzeugt? Wo fehlte Begründung oder Beispiel? Gezielt die <a href="#redemittel">Redemittel</a> für Widerspruch, Zeitgewinn und Gedanken-Aufgreifen üben.</p></div></div>
+    <div class="step"><div class="t">55–60 min</div><div><strong>Abschluss</strong><p>Drei konkrete Aufgaben bis Freitag festlegen (<a href="#freitag">Abschnitt 9</a>), Mut zusprechen.</p></div></div>
+  </div>
+</section>
+
+<!-- 2 FEEDBACK -->
+<section id="feedback">
+  <h2>2 · Feedback zu deinem Präsentationsskript</h2>
+
+  <div class="good"><strong class="lbl">Das ist schon richtig gut</strong>
+  Dein Skript hat einen klaren roten Faden: Vorstellung, Themenpaket, Arbeitsaufträge, Einleitung, Hauptteil, Schluss und ein sauberer Abschluss. Du orientierst dich an den drei Arbeitsaufträgen, du kennst die Fachbegriffe (Sinnabschnitte, rhetorische Fragen, Metaphern, Intention) und du betonst, dass du sprachliche Mittel nicht nur benennst, sondern ihre Wirkung erklärst. Der Hinweis auf den Kontrast zwischen Studentenleben und Berufsleben ist eine starke, eigenständige Beobachtung. Auch dein persönlicher Einstieg mit dem Ziel „Medien und Design“ ist sympathisch und authentisch (Kriterium 1.3).</div>
+
+  <div class="note"><strong class="lbl">Der wichtigste Hebel bis Freitag</strong>
+  Im Moment erzählst du vor allem, <em>was du gemacht hast</em> („Ich habe … untersucht“, „Dabei habe ich … erklärt“). Die Prüfer hören dadurch, dass du analysiert hast, aber sie erfahren kaum, <em>was</em> du herausgefunden hast. Es fehlen die Inhaltszusammenfassung selbst, konkrete Textbeispiele mit ihrer Wirkung und die Intentionen in ausformulierter Form. Genau diese Inhalte bewerten die Kriterien 1.1 (sinnvolle Schwerpunkte), 3.4 (klar zu Sachverhalten äußern) und 3.5 (Aussagen eines Textes mit eigenen Worten sachlich richtig zusammenfassen). Die gute Nachricht: Die Struktur steht, du musst sie nur mit Inhalt füllen. Pro Analyseschritt reichen zwei bis drei Belege nach dem Muster <strong>Mittel → Beispiel → Wirkung</strong>.</div>
+
+  <h3>Einzelne Punkte im Skript</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Stelle im Skript</th><th>Verbesserung</th><th>Warum</th></tr>
+    <tr><td>„Berit Dießelkämper’s Kommentar“</td><td>„den Kommentar von Berit Dießelkämper“ oder „Berit Dießelkämpers Kommentar“</td><td>Im Deutschen steht beim Genitiv-s kein Apostroph (Ausnahme: Namen, die auf s, ß, x, z enden). Kriterium 3.6 Sprachnormen.</td></tr>
+    <tr><td>„Zunächst sollte ich den Inhalt … kurz wiedergeben.“</td><td>Nach dem Satz tatsächlich drei bis vier Sätze Inhalt sagen.</td><td>Ohne Inhaltswiedergabe fehlt ein ganzer Arbeitsauftrag in der Präsentation.</td></tr>
+    <tr><td>„in vier Sinnabschnitte gegliedert“</td><td>Die vier Abschnitte kurz benennen (je ein Satz).</td><td>Zeigt, dass du den Aufbau wirklich verstanden hast, und gibt den Prüfern Anknüpfungspunkte für Fragen.</td></tr>
+    <tr><td>„die auffällige Gestaltung des Titels“</td><td>Den Titel nennen und deuten: Rücken = Körper, Herz = Seele, Ellipse „Das Herz auch“.</td><td>Ein konkretes Beispiel wirkt viel kompetenter als eine Ankündigung.</td></tr>
+    <tr><td>„umgangssprachliche Ausdrücke, rhetorische Fragen, Ausrufesätze und Metaphern“</td><td>Zu jedem Mittel ein Beispiel aus dem Text plus Wirkung (siehe <a href="#belege">Abschnitt 4</a>).</td><td>Kriterium 3.4 Treffsicherheit; im Diskussionsteil wirst du sehr wahrscheinlich nach Beispielen gefragt.</td></tr>
+    <tr><td>„mögliche Intentionen der Autorin herausgearbeitet“</td><td>Die Intentionen konkret aufzählen: informieren, kritisieren, zum Nachdenken anregen, unterhalten.</td><td>Ein Arbeitsauftrag der Klausur, also ein Pflicht-Schwerpunkt.</td></tr>
+    <tr><td>viele Sätze mit „Dabei habe ich …“</td><td>Abwechseln: „Auffällig ist …“, „Besonders deutlich wird das …“, „Die Autorin setzt … ein, um …“</td><td>Mehr Variation in der Wortwahl (Kriterium 3.3) und lebendigerer Vortrag.</td></tr>
+    <tr><td>Schluss</td><td>Ein Satz eigene Meinung zum Text, bevor du dich bedankst.</td><td>Schafft eine Brücke zur Diskussion und zeigt Authentizität (1.3).</td></tr>
+  </table></div>
+
+  <div class="teach"><strong class="lbl">Vortragstechnik</strong>
+  Am Freitag möglichst nicht vom Blatt lesen. Besser sind Stichwortkarten: eine Karte pro Abschnitt, darauf nur Schlüsselwörter und die Zitate mit Zeilenangabe. Blickkontakt zu allen Prüfern, nach jedem großen Abschnitt eine kurze Pause, mit den Händen die Gliederung mitzeigen („erstens … zweitens …“). Das deckt die Kriterien 1.4 und 3.7 ab.</div>
+</section>
+
+<!-- 3 SKRIPT -->
+<section id="skript">
+  <h2>3 · Überarbeitete Präsentation (Vorschlag)</h2>
+  <p>Das ist deine Präsentation in deinem Aufbau, ergänzt um die fehlenden Inhalte. <mark class="neu">Grün markiert</mark> ist alles, was neu dazukommt. Übernimm, was zu dir passt, und formuliere um, wo es nicht nach dir klingt – am Freitag soll es deine Stimme sein. Falls deine vier Sinnabschnitte in der Klausur anders aussahen, nimm natürlich deine eigene Gliederung. Gesprochen dauert diese Fassung etwa sechs bis sieben Minuten.</p>
+
+  <div class="card script">
+    <p><span class="tag">Einstieg</span>Guten Tag! Mein Name ist Teslime Cankan, ich bin 25 Jahre alt und gebürtige Welserin. Die Teilprüfungen Englisch und Mathematik habe ich bereits positiv abgeschlossen, Deutsch ist meine dritte Teilprüfung. Nach der Matura möchte ich gerne im Bereich Medien und Design studieren. Die Matura ist für mich wichtig, weil sie mir diesen Weg und weitere Möglichkeiten für meine berufliche Zukunft eröffnet.</p>
+
+    <p><span class="tag">Themenpaket</span>Nun zu meiner schriftlichen Arbeit. Ich habe mich für das zweite Themenpaket mit dem Thema Arbeitswelt entschieden. Meine Arbeit besteht aus einer Textanalyse und einem Leserbrief. Ich möchte Ihnen nun meine Textanalyse zum Kommentar „Der Rücken tut weh. Das Herz auch“ von Berit Dießelkämper vorstellen. <mark class="neu">Der Text ist am 31. Mai 2021 in der Online-Ausgabe von Zeit Campus erschienen, einem Magazin, das sich vor allem an Studierende und junge Berufseinsteigerinnen und -einsteiger richtet.</mark></p>
+
+    <p><span class="tag">Arbeitsaufträge</span>Da es sich um eine Textanalyse handelt, habe ich mich an den drei Arbeitsaufträgen orientiert: Zunächst sollte ich den Inhalt des Kommentars kurz wiedergeben, danach den Aufbau und die sprachliche Gestaltung analysieren und abschließend mögliche Intentionen der Autorin ableiten.</p>
+
+    <p><span class="tag">Inhalt</span>In der Einleitung habe ich zunächst die wichtigsten Basisinformationen genannt und dann den Inhalt zusammengefasst. <mark class="neu">Die Autorin beschreibt darin ihren Einstieg ins Berufsleben. Als Schülerin und Studentin konnte sie sich ihre Zeit frei einteilen, jetzt ist ihr Tag in „Neun-bis-fünf“ und den Rest geteilt. Besonders schwer fällt ihr das Abschalten nach der Arbeit – weder Ratschläge aus dem Internet noch eine Meditationsapp helfen ihr wirklich. Sie ärgert sich darüber, dass ihr niemand vorher gesagt hat, wie anstrengend der Berufsalltag körperlich und seelisch ist. Am Ende stellt sie infrage, ob dieses Lebensmodell wirklich das beste ist, und verschiebt die Suche nach einer Lösung mit einem Augenzwinkern auf später.</mark></p>
+
+    <p><span class="tag">Aufbau</span>Im Hauptteil habe ich mich mit der formalen und sprachlichen Gestaltung beschäftigt. Den Text habe ich in vier Sinnabschnitte gegliedert. <mark class="neu">Im ersten Abschnitt beschreibt die Autorin den Übergang vom Studentenleben ins Berufsleben. Im zweiten geht es um ihr Hauptproblem, den Feierabend und die Frage, wie man abschaltet. Der dritte Abschnitt beginnt mit der Zwischenüberschrift „Warum sollte ich mir das eigentlich antun?“ – hier wird ihre Kritik am Arbeitsalltag deutlich, der fast nur aus Arbeiten, Erledigungen und Schlafen besteht. Im letzten Abschnitt stellt sie das ganze System infrage und denkt über ihre eigene Zukunft nach.</mark> So lässt sich die Entwicklung ihrer Gedanken gut nachvollziehen.</p>
+
+    <p><span class="tag">Titel</span>Auffällig ist schon der Titel. <mark class="neu">„Der Rücken tut weh. Das Herz auch“ besteht aus einem kurzen Hauptsatz und einer Ellipse. Der Rücken steht für die körperliche Belastung, das Herz für die seelische. Damit fasst der Titel das Thema des ganzen Textes bereits in einem Bild zusammen.</mark></p>
+
+    <p><span class="tag">Kontrast</span>Besonders berücksichtigt habe ich den Kontrast zwischen Studentenleben und Berufsleben, der gleich am Anfang deutlich wird. <mark class="neu">Die Autorin vergleicht den Berufseinstieg mit einer dunklen Wolke, die lange weit hinten am Himmel war und jetzt direkt über ihr steht. Diese Metapher zeigt sehr anschaulich, wie eine ferne Sorge plötzlich Realität wird. Dem stellt sie ihr früheres Leben gegenüber: mit einem Drink auf einer Erasmusparty, wo ihre einzige Sorge war, nicht in den Pool geschubst zu werden.</mark> Dadurch wird die Veränderung ihrer Lebenssituation besonders anschaulich.</p>
+
+    <p><span class="tag">Sprache</span><mark class="neu">Typisch für den Text ist die Umgangssprache, zum Beispiel „reinschubsen“, „halt“ oder „Ging dann irgendwie doch ganz schnell“. Zusammen mit Anglizismen wie „Meditationsapp“ oder „Walking Meditation“ wirkt der Text dadurch authentisch und nah an der jungen Zielgruppe. Mit rhetorischen Fragen wie „Warum sollte ich mir das eigentlich antun?“, die sogar zweimal vorkommt, oder „Das soll es jetzt also sein?“ bringt sie ihre Zweifel auf den Punkt und regt die Leserinnen und Leser zum Mitdenken an. Der Ausrufesatz „Bitte lass das nicht alles sein!“ zeigt ihre Verzweiflung über Ratschläge zur Selbstoptimierung wie Netzwerken oder Marathonlaufen.</mark></p>
+
+    <p><span class="tag">Ironie &amp; Bilder</span><mark class="neu">Eine große Rolle spielt auch die Ironie: Wenn sie die Arbeitswelt als das „angeblich bestmögliche Zeitverwendungskonzept“ der Menschheit bezeichnet, meint sie eigentlich das Gegenteil. Mit der Metapher vom „Hamsterleben“ beschreibt sie einen eintönigen Alltag, in dem man sich ständig dreht, aber nicht vorankommt. Und mit „Nennt mich Schneeflocke“ nimmt sie die Kritik vorweg, junge Menschen seien zu empfindlich – und nimmt sich dabei selbst ein bisschen auf die Schippe.</mark></p>
+
+    <p><span class="tag">Intentionen</span>Im Schlussteil meiner Textanalyse habe ich mögliche Intentionen der Autorin herausgearbeitet. <mark class="neu">Erstens möchte sie informieren: Sie zeigt, welche Schwierigkeiten beim Berufseinstieg auf junge Menschen zukommen – genau das, was ihr selbst niemand erzählt hat. Zweitens übt sie Kritik an der starren Trennung von Arbeit und Freizeit und an dem Druck, sogar die Freizeit noch produktiv zu nutzen. Drittens möchte sie zum Nachdenken über die eigenen Erwartungen an das Arbeitsleben anregen. Und schließlich unterhält sie durch ihre selbstironische, pointierte Art.</mark></p>
+
+    <p><span class="tag">Schluss</span>Insgesamt habe ich versucht, die Inhalts-, Struktur- und Sprachebene miteinander zu verbinden. <mark class="neu">Die vielen umgangssprachlichen und ironischen Mittel machen die Kritik der Autorin glaubwürdig und gleichzeitig unterhaltsam. Ich persönlich finde, dass der Text vielen jungen Menschen aus der Seele spricht, weil … <em>[ein Satz deiner eigenen Meinung]</em>.</mark> Damit bin ich am Ende meiner Präsentation angelangt. Ich danke Ihnen für Ihre Aufmerksamkeit.</p>
+  </div>
+</section>
+
+<!-- 4 BELEGE -->
+<section id="belege">
+  <h2>4 · Spickzettel: Belege und ihre Wirkung</h2>
+  <p>Diese Tabelle ist dein Vorrat für Präsentation und Diskussion. Präge dir fünf bis sechs Belege mit Zeilenangabe ein – wenn ein Prüfer fragt „Können Sie dafür ein Beispiel nennen?“, kannst du sofort liefern. Die Zeilenangaben beziehen sich auf die Textbeilage im Aufgabenheft.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Mittel</th><th>Beispiel</th><th>Zeile</th><th>Wirkung</th></tr>
+    <tr><td>Ellipse, Parallelismus im Titel</td><td>„Der Rücken tut weh. Das Herz auch“</td><td>Titel</td><td>körperliche und seelische Belastung in einem Bild; macht neugierig</td></tr>
+    <tr><td>Metapher</td><td>dunkle Wolke weit hinten am Himmel → Wolke direkt über mir</td><td>3–7, 14</td><td>ferne, diffuse Sorge wird plötzlich Realität</td></tr>
+    <tr><td>Kontrast</td><td>Drink auf der Erasmusparty, „nachts im Bett mit Bier“ ↔ „Neun-bis-fünf“</td><td>7–13, 32, 34</td><td>Freiheit des Studiums gegenüber geregeltem Berufsleben</td></tr>
+    <tr><td>Parenthese</td><td>„– die Nichtarbeitszeit –“</td><td>22–25</td><td>ironische Zuspitzung: Freizeit nur noch als Rest der Arbeit</td></tr>
+    <tr><td>Rhetorische Frage, Paradoxon</td><td>„Aber was mache ich bitte mit dieser Zeit, die ich all die Jahre nie hatte?“</td><td>36–38</td><td>Ratlosigkeit; Widerspruch, denn sie hatte früher mehr freie Zeit</td></tr>
+    <tr><td>Umgangssprache</td><td>„reinschubsen“, „Ging dann irgendwie doch ganz schnell“, „halt“</td><td>13–15, 49</td><td>Nähe, Authentizität, Sprache der Zielgruppe</td></tr>
+    <tr><td>Anglizismen</td><td>„Meditationsapp“, „Walking Meditation“, „slacklinen“</td><td>62–64, 202</td><td>Lebenswelt junger Menschen</td></tr>
+    <tr><td>Aufzählung + Ausrufesatz</td><td>„sich weiterbilden, netzwerken, Marathon laufen. Bitte lass das nicht alles sein!“</td><td>87–90</td><td>Kritik am Selbstoptimierungsdruck, Verzweiflung</td></tr>
+    <tr><td>Rhetorische Frage als Zwischenüberschrift (Wiederholung)</td><td>„Warum sollte ich mir das eigentlich antun?“</td><td>91–92, 137–138</td><td>Leitfrage des Textes, gliedert die Kritik</td></tr>
+    <tr><td>Metapher</td><td>niemand steht am Streckenrand, um sie zu beglückwünschen</td><td>111–113</td><td>Leben als Wettlauf; am Ziel fehlt die Anerkennung</td></tr>
+    <tr><td>Wiederholung</td><td>„funktionierenden und produzierenden Gesellschaft … funktionieren und produzieren“</td><td>115–118</td><td>Monotonie; Mensch wirkt wie eine Maschine</td></tr>
+    <tr><td>Hyperbel</td><td>„alles dauert ewig“</td><td>126</td><td>Gefühl der Überforderung</td></tr>
+    <tr><td>Paradoxon</td><td>Problem mit dem Feierabend gelöst: „Es gibt erst einmal keinen.“</td><td>165–167</td><td>bittere, ironische „Lösung“</td></tr>
+    <tr><td>Ellipse, Ironie</td><td>„Wie schön.“</td><td>170</td><td>Sarkasmus, meint das Gegenteil</td></tr>
+    <tr><td>Ironie, Euphemismus</td><td>„das angeblich bestmögliche Zeitverwendungskonzept“</td><td>174–176</td><td>Kritik am etablierten System von Arbeit</td></tr>
+    <tr><td>Metapher, Selbstironie</td><td>„Nennt mich Schneeflocke“</td><td>183</td><td>nimmt Vorwurf der Überempfindlichkeit vorweg</td></tr>
+    <tr><td>Klimax</td><td>„Freizeit, Unabhängigkeit und Selbstverwirklichung“</td><td>193–195</td><td>betont, was jungen Menschen wichtig ist</td></tr>
+    <tr><td>Metaphern</td><td>„Hamsterleben“; mit einem Bulli über die Anden slacklinen</td><td>198–202</td><td>eintöniger Alltag vs. übertriebener Ausstiegstraum</td></tr>
+  </table></div>
+
+  <h3>Textsorte Kommentar – falls danach gefragt wird</h3>
+  <p>Ein Kommentar ist eine meinungsbetonte journalistische Textsorte: Die Verfasserin bezieht subjektiv Stellung zu einem aktuellen Thema, meist in der Ich-Form, und versucht die Leserschaft zu überzeugen oder zum Nachdenken zu bringen. Dießelkämpers Text ist sehr persönlich und arbeitet stark mit Ironie und Übertreibung, er hat dadurch auch Züge einer Glosse oder Kolumne. Aufgebaut ist er aus Dachzeile („Berufseinstieg“), Titel, Lead („Der erste Job ist aufregend. Und anstrengend. Besonders der Feierabend!“), Einleitung, Hauptteil und Schluss.</p>
+</section>
+
+<!-- 5 LESERBRIEF -->
+<section id="leserbrief">
+  <h2>5 · Dein Leserbrief – Gerüst für Präsentation und Diskussion</h2>
+  <p>Auch wenn du in der Präsentation vor allem die Textanalyse vorstellst, können die Prüfer in der Diskussion jederzeit auf deinen Leserbrief eingehen. Halte deshalb diese Punkte griffbereit. Die eckigen Klammern füllst du mit dem, was du in der Klausur tatsächlich geschrieben hast.</p>
+
+  <div class="cols">
+    <div class="card">
+      <h3 style="margin-top:0">Basisinfos</h3>
+      <p>Anlass war der Beitrag <strong>„Die Arbeitszeit als Generationenfrage?“</strong> von Selina Thaler, erschienen am 6. Jänner 2022 in der Online-Ausgabe der Tageszeitung <em>Der Standard</em>. Adressaten: Redaktion und Leserschaft des Standard.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Arbeitsauftrag 1: Unterschiede</h3>
+      <p><strong>Ältere:</strong> Präsentismus (Anwesenheit im Büro gilt als Leistung), viele Überstunden, Status und Gehalt als Motivation, „man bleibt, solange der Chef bleibt“.</p>
+      <p><strong>Jüngere:</strong> 85 % wünschen flexible Arbeitszeiten, 30 Stunden oder weniger gelten als ideal, Teilzeit auch mit weniger Geld, Work-Life-Balance, Selbstverwirklichung, Sorge vor Burnout.</p>
+      <p><strong>Überraschung:</strong> Rund 80 % der Jungen wollen trotzdem die Erwartungen des Chefs übertreffen, fast zwei Drittel würden mehr arbeiten als nötig.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Arbeitsauftrag 2: Stellungnahme</h3>
+      <p>Ich habe Stellung genommen zu [z. B. flexiblen Arbeitszeiten / 30-Stunden-Woche / Work-Life-Balance]. Meine Position: [ich unterstütze / ich sehe kritisch, dass …], weil [Begründung], zum Beispiel [Beispiel aus Alltag, Branche, Erfahrung].</p>
+      <p>Mögliche Differenzierung: Was im Büro gut funktioniert, ist in Pflege, Handel oder Gastronomie schwerer umsetzbar.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Arbeitsauftrag 3: Mein Arbeitsleben</h3>
+      <p>Meine Vorstellungen: [z. B. kreative Arbeit im Bereich Medien und Design, flexible Zeiten, Projektarbeit, teilweise Homeoffice, Weiterbildung, Zeit für Familie und Hobbys]. Wichtig ist mir dabei: [Sinn / Sicherheit / Freiheit …].</p>
+    </div>
+  </div>
+
+  <div class="teach"><strong class="lbl">Brücke zwischen beiden Texten</strong>
+  Die Autorin des Kommentars ist geradezu ein Fallbeispiel für die „neue Welt“ aus dem Standard-Beitrag: Sie wünscht sich Freizeit, Unabhängigkeit und Selbstverwirklichung, stellt den Neun-bis-fünf-Alltag infrage, und ihre ältere Kollegin vertritt mit dem „Wachstumsschmerz“ die Haltung der Älteren („da muss man durch“). Diese Verbindung selbst anzusprechen, wirkt in der Diskussion sehr souverän (Kriterium 2.3: Gedanken aufgreifen und weiterentwickeln).</div>
+</section>
+
+<!-- 6 DISKUSSION -->
+<section id="diskussion">
+  <h2>6 · Diskussionssimulation</h2>
+  <p>Die Fragen aus deinem eigenen Dokument nehmen wir zuerst. Dieser Katalog ergänzt sie um Fragen, die Prüfer zu Themenpaket, Textbeilagen und schriftlicher Arbeit typischerweise stellen. Klick auf eine Frage, um das Antwortgerüst aufzudecken – in der Stunde bleibt es zu, bis du geantwortet hast.</p>
+
+  <div class="card">
+    <strong>Bauplan für jede Antwort (Kriterium 2.1 und 2.4)</strong>
+    <p style="margin:.4em 0 0"><strong>Standpunkt</strong> („Ich bin der Meinung, dass …“) → <strong>Begründung</strong> („weil …“) → <strong>Beispiel</strong> („Das sieht man zum Beispiel daran, dass …“ / Textbeleg) → <strong>Fazit</strong> („Deshalb finde ich …“). Bei Gegenargumenten: <strong>anerkennen</strong> („Da ist etwas Wahres dran …“) → <strong>einschränken</strong> („Allerdings …“) → <strong>eigene Position bekräftigen</strong>.</p>
+  </div>
+
+  <p><button class="primary" id="randomQ">Zufallsfrage ziehen</button> <button id="closeAll">Alle Antworten zuklappen</button></p>
+
+  <h3>A · Fragen zur Textanalyse</h3>
+  <div class="qs">
+    <details class="q"><summary><span class="n">A1</span>Warum handelt es sich bei diesem Text um einen Kommentar und nicht um einen Bericht?<span class="kind">Textsorte</span></summary><div class="body"><ul>
+      <li>Kommentar = meinungsbetont, subjektiv, Ich-Perspektive; Bericht = sachlich, neutral, informierend.</li>
+      <li>Die Autorin wertet ständig („Das soll es jetzt also sein?“) und erzählt aus eigener Erfahrung.</li>
+      <li>Zusätzlich Ironie und Übertreibung → Nähe zur Glosse/Kolumne.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">A2</span>Der Text ist voller Umgangssprache. Ist das für einen Kommentar nicht unseriös?<span class="kind">Gegenargument</span></summary><div class="body"><ul>
+      <li>Anerkennen: In einer Qualitätszeitung wirkt das zunächst ungewöhnlich.</li>
+      <li>Aber: Zielgruppe von Zeit Campus sind junge Menschen → Umgangssprache schafft Nähe und Glaubwürdigkeit.</li>
+      <li>Die Autorin mischt bewusst: daneben bildungssprachliche Wörter wie „diffus“, „Konditionen“, „absolvieren“ → zeigt Reflexion.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">A3</span>Welches sprachliche Mittel halten Sie für das wirkungsvollste – und warum?<span class="kind">eigene Wertung</span></summary><div class="body"><ul>
+      <li>Ein Mittel wählen und überzeugend begründen, z. B. die Wolken-Metapher: Sie begleitet den Einstieg, ist sofort verständlich und zeigt die Wende vom Studium zum Beruf.</li>
+      <li>Alternative: der Titel, weil er Körper und Seele verbindet und das Thema in fünf Wörtern zusammenfasst.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">A4</span>Wie endet der Text, und wie wirkt dieser Schluss auf Sie?<span class="kind">Aufbau</span></summary><div class="body"><ul>
+      <li>Sie will sich nicht mit 40 aus dem „Hamsterleben“ verabschieden müssen, verschiebt die Lösung aber „in ein halbes Jahr“.</li>
+      <li>Wirkung: ironische Pointe, offenes Ende; das Problem bleibt ungelöst – das wirkt ehrlich und realistisch.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">A5</span>Welche Rolle spielt die ältere Kollegin im Text?<span class="kind">Inhalt</span></summary><div class="body"><ul>
+      <li>Sie nennt es „Wachstumsschmerz“: Man gewöhne sich daran und wachse mit den Aufgaben.</li>
+      <li>Sie vertritt die Haltung der älteren Generation; die Autorin übernimmt diese Sicht nicht, sondern stellt sie infrage → Generationenkonflikt, Brücke zum Leserbrief.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">A6</span>Jammert die Autorin nicht einfach auf hohem Niveau?<span class="kind">Provokation</span></summary><div class="body"><ul>
+      <li>Anerkennen: Sie sagt selbst, dass es viel belastendere Dinge im Leben gibt.</li>
+      <li>Einschränken: Ihr Punkt ist berechtigt – der Übergang ins Berufsleben ist eine echte Umstellung, und niemand bereitet darauf vor.</li>
+      <li>Fazit: Durch die Selbstironie wirkt sie reflektiert und nicht weinerlich; sie spricht ein Gefühl aus, das viele kennen.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">A7</span>Wie sind Sie beim Analysieren vorgegangen?<span class="kind">Methode</span></summary><div class="body"><ul>
+      <li>Text zweimal gelesen, Sinnabschnitte markiert, sprachliche Mittel am Rand notiert.</li>
+      <li>Zu jedem Mittel die Frage gestellt: Was bewirkt es, und was hat das mit der Aussage des Textes zu tun?</li>
+      <li>Aus den Ergebnissen die Intentionen abgeleitet.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">A8</span>Was möchte die Autorin mit dem Text erreichen? Nennen Sie die wichtigste Intention.<span class="kind">Intention</span></summary><div class="body"><ul>
+      <li>Vier Intentionen kennen: informieren, kritisieren, zum Nachdenken anregen, unterhalten.</li>
+      <li>Eine als wichtigste begründen, z. B. Kritik an der starren Trennung von Arbeit und Freizeit – das zeigen die vielen ironischen Stellen.</li></ul></div></details>
+  </div>
+
+  <h3>B · Fragen zum Thema Arbeitswelt und zum Leserbrief</h3>
+  <div class="qs">
+    <details class="q"><summary><span class="n">B1</span>Welche Unterschiede zwischen Älteren und Jüngeren beschreibt der Standard-Beitrag?<span class="kind">Wiedergabe</span></summary><div class="body"><ul>
+      <li>Arbeitszeit: Vollzeit plus Überstunden ↔ flexible Teilzeit.</li>
+      <li>Arbeitsort: Anwesenheit im Büro ↔ hybrides Arbeiten.</li>
+      <li>Gehalt und Status ↔ Selbstverwirklichung und Ausgleich.</li>
+      <li>Gesundheit: Burnout-Gefahr ↔ Work-Life-Balance.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">B2</span>Bestätigt der Kommentar von Dießelkämper die Aussagen des Standard-Beitrags?<span class="kind">Textvergleich</span></summary><div class="body"><ul>
+      <li>Ja: Sie sagt selbst, dass Status und Erfolg für junge Menschen unwichtiger werden und Freizeit, Unabhängigkeit und Selbstverwirklichung wichtiger.</li>
+      <li>Auch die Kollegin passt zur „alten Welt“.</li>
+      <li>Interessant: Die Autorin arbeitet trotzdem sehr viel und beantwortet abends Mails – ähnlich wie die 80 %, die die Erwartungen des Chefs übertreffen wollen.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">B3</span>Ist eine 30-Stunden-Woche für alle realistisch?<span class="kind">Diskussion</span></summary><div class="body"><ul>
+      <li>Pro: mehr Erholung, weniger Burnout, oft gleiche Produktivität, neue Stellen können entstehen.</li>
+      <li>Contra: weniger Gehalt, Fachkräftemangel, in Pflege, Handel oder Gastronomie schwer umsetzbar.</li>
+      <li>Differenziertes Fazit: abhängig von Branche und Lebensphase → individuelle Modelle.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">B4</span>„Die Jungen wollen einfach nicht mehr arbeiten.“ Was sagen Sie dazu?<span class="kind">Provokation</span></summary><div class="body"><ul>
+      <li>Widersprechen mit Beleg: Laut Beitrag wollen rund 80 % der Jungen die Erwartungen des Chefs übertreffen, fast zwei Drittel würden mehr arbeiten als nötig.</li>
+      <li>Sie wollen anders arbeiten – flexibler, gesünder, sinnvoller.</li>
+      <li>Fazit: Arbeitsmoral ist vorhanden, die Ansprüche haben sich verändert.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">B5</span>Homeoffice – eher Vorteil oder Nachteil?<span class="kind">Diskussion</span></summary><div class="body"><ul>
+      <li>Vorteile: Flexibilität, kein Arbeitsweg, bessere Vereinbarkeit.</li>
+      <li>Nachteile: laut Beitrag seltener befördert, digitaler Präsentismus durch Dauererreichbarkeit; bei der Autorin verschwimmen Arbeit und Freizeit (sie arbeitet zu Hause am Computer).</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">B6</span>Wer ist dafür verantwortlich, junge Menschen auf das Berufsleben vorzubereiten?<span class="kind">Transfer</span></summary><div class="body"><ul>
+      <li>Die Autorin beklagt, dass ihr niemand die Wahrheit gesagt hat.</li>
+      <li>Schule (realistische Berufsorientierung), Arbeitgeber (gute Einschulung, Mentoring), aber auch Eigenverantwortung.</li></ul></div></details>
+  </div>
+
+  <h3>C · Persönliche Fragen und Transfer</h3>
+  <div class="qs">
+    <details class="q"><summary><span class="n">C1</span>Wie stellen Sie sich Ihr eigenes Arbeitsleben im Bereich Medien und Design vor?<span class="kind">persönlich</span></summary><div class="body"><ul>
+      <li>Konkret werden: welche Tätigkeit, welche Arbeitszeiten, wie viel Homeoffice, was dir wichtig ist.</li>
+      <li>Verknüpfen mit deinem Leserbrief (Arbeitsauftrag 3).</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">C2</span>Kann man Arbeit und Freizeit überhaupt trennen, wenn der Beruf gleichzeitig eine Leidenschaft ist?<span class="kind">Weiterdenken</span></summary><div class="body"><ul>
+      <li>Gerade in kreativen Berufen verschwimmt die Grenze – Ideen kommen nicht nur zwischen neun und fünf.</li>
+      <li>Chance (Sinn, Freude) und Risiko (Selbstausbeutung, nie abschalten wie bei der Autorin).</li>
+      <li>Fazit: bewusste Pausen und Grenzen setzen.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">C3</span>Welchen Rat würden Sie der Autorin geben?<span class="kind">Weiterdenken</span></summary><div class="body"><ul>
+      <li>Z. B. feste Feierabend-Rituale, Mails nach Dienstschluss nicht mehr lesen, Gespräch mit Vorgesetzten über flexible Modelle, sich Zeit für die Eingewöhnung geben.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">C4</span>Warum haben Sie sich für dieses Themenpaket entschieden?<span class="kind">persönlich</span></summary><div class="body"><ul>
+      <li>Ehrlich und persönlich antworten: Thema betrifft dich direkt, du stehst selbst vor einem beruflichen Neuanfang, die Texte haben dich angesprochen.</li></ul></div></details>
+
+    <details class="q"><summary><span class="n">C5</span>Wird künstliche Intelligenz die Arbeitswelt verändern – gerade im Design?<span class="kind">spontan</span></summary><div class="body"><ul>
+      <li>Chancen: Routinearbeiten werden schneller, neue Werkzeuge.</li>
+      <li>Risiken: Druck auf Kreativberufe, Fragen zu Urheberrecht.</li>
+      <li>Eigene Haltung: Menschliche Ideen, Geschmack und Gespür für Kunden bleiben wichtig.</li></ul></div></details>
+  </div>
+
+  <h3>D · Spontane Provokationen (Kriterium 2.2)</h3>
+  <p>Diese Sätze wirft die „Prüferin“ ohne Vorwarnung ein. Ziel ist eine ruhige, begründete Reaktion nach dem Muster anerkennen – einschränken – eigene Position.</p>
+  <div class="qs">
+    <details class="q"><summary><span class="n">D1</span>„Wer Karriere machen will, muss eben Überstunden machen.“<span class="kind">Provokation</span></summary><div class="body"><ul><li>Anerkennen: Laut Beitrag werden Sichtbare tatsächlich eher befördert. Einschränken: Dauerhafte Überstunden führen zu Burnout. Position: Leistung sollte an Ergebnissen gemessen werden.</li></ul></div></details>
+    <details class="q"><summary><span class="n">D2</span>„Teilzeit ist ein Luxus, den sich nicht jeder leisten kann.“<span class="kind">Provokation</span></summary><div class="body"><ul><li>Zustimmen, dass das Einkommen reichen muss; trotzdem sollte es die Möglichkeit geben; Lösung: flexible Modelle statt Entweder-oder.</li></ul></div></details>
+    <details class="q"><summary><span class="n">D3</span>„Die Generation Z besteht aus Schneeflocken.“<span class="kind">Provokation</span></summary><div class="body"><ul><li>Bezug zum Text: Die Autorin nimmt genau diesen Vorwurf selbstironisch vorweg. Position: Grenzen zu setzen ist kein Zeichen von Schwäche, sondern von Gesundheitsbewusstsein.</li></ul></div></details>
+    <details class="q"><summary><span class="n">D4</span>„Arbeit ist zum Geldverdienen da – den Sinn sucht man in der Freizeit.“<span class="kind">Provokation</span></summary><div class="body"><ul><li>Für manche stimmt das (die Autorin sieht die Gehaltsabrechnung als einzigen Grund). Aber wir verbringen einen Großteil des Lebens bei der Arbeit, deshalb ist Sinn dort ebenso wichtig.</li></ul></div></details>
+  </div>
+</section>
+
+<!-- 7 REDEMITTEL -->
+<section id="redemittel">
+  <h2>7 · Redemittel für die Diskussion</h2>
+  <div class="cols">
+    <div class="card"><h3 style="margin-top:0">Standpunkt begründen (2.1)</h3>
+      <p>Meiner Ansicht nach …<br>Ich bin davon überzeugt, dass …, weil …<br>Ein wichtiges Argument dafür ist …<br>Das zeigt sich zum Beispiel daran, dass …</p></div>
+    <div class="card"><h3 style="margin-top:0">Auf Gegenargumente reagieren (2.2)</h3>
+      <p>Da haben Sie in gewisser Weise recht, allerdings …<br>Das sehe ich etwas anders, denn …<br>Man darf dabei aber nicht vergessen, dass …<br>Das trifft vielleicht auf …, aber nicht auf … zu.</p></div>
+    <div class="card"><h3 style="margin-top:0">Gedanken aufgreifen (2.3)</h3>
+      <p>Um noch einmal auf … zurückzukommen …<br>Das erinnert mich an eine Stelle im Kommentar, wo …<br>Wenn man diesen Gedanken weiterdenkt, …<br>Das passt auch zu meinem Leserbrief, weil …</p></div>
+    <div class="card"><h3 style="margin-top:0">Zeit gewinnen &amp; nachfragen</h3>
+      <p>Das ist eine interessante Frage, darüber muss ich kurz nachdenken.<br>Darf ich die Frage noch einmal hören?<br>Meinen Sie damit eher … oder …?<br>Lassen Sie es mich so formulieren: …</p></div>
+    <div class="card"><h3 style="margin-top:0">Zusammenfassen &amp; abschließen (2.4)</h3>
+      <p>Zusammenfassend lässt sich sagen, dass …<br>Für mich ist entscheidend, dass …<br>Deshalb komme ich zu dem Schluss, dass …</p></div>
+  </div>
+</section>
+
+<!-- 8 RASTER -->
+<section id="raster">
+  <h2>8 · Beurteilung nach dem WIFI-Raster</h2>
+  <p>Während der Simulation hier ankreuzen. Die Spalten entsprechen dem Beurteilungsraster: <strong>1</strong> weit über das Wesentliche hinausgehend erfüllt · <strong>2</strong> über das Wesentliche hinausgehend erfüllt · <strong>3</strong> in den wesentlichen Bereichen zur Gänze erfüllt · <strong>4</strong> in den wesentlichen Bereichen überwiegend erfüllt · <strong>5</strong> in den wesentlichen Bereichen nur zum Teil erfüllt.</p>
+  <div class="tablewrap"><table class="raster" id="rasterTable">
+    <tr><th>Kriterium</th><th class="c">1</th><th class="c">2</th><th class="c">3</th><th class="c">4</th><th class="c">5</th></tr>
+  </table></div>
+  <h3>Notizen zu Präsentation und Diskussion</h3>
+  <textarea placeholder="Was war stark? Was üben wir noch?"></textarea>
+
+  <h3>Sprachliches Feedback</h3>
+  <div class="tablewrap"><table id="korr">
+    <tr><th>Korrektur</th><th>Kommentar</th></tr>
+    <tr><td contenteditable="true">den Kommentar von Berit Dießelkämper / Berit Dießelkämpers Kommentar</td><td contenteditable="true">kein Apostroph beim Genitiv-s (nur bei Namen auf s, ß, x, z)</td></tr>
+    <tr><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+    <tr><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+  </table></div>
+  <p><button id="addRow">Zeile hinzufügen</button></p>
+</section>
+
+<!-- 9 FREITAG -->
+<section id="freitag">
+  <h2>9 · Bis Freitag – und am Prüfungstag</h2>
+  <div class="cols">
+    <div class="card"><h3 style="margin-top:0">Deine drei Aufgaben</h3>
+      <ul class="check">
+        <li><label><input type="checkbox"> Präsentation mit Inhalt, konkreten Belegen und Intentionen ergänzen (Abschnitt 3)</label></li>
+        <li><label><input type="checkbox"> Stichwortkarten schreiben und die Präsentation zweimal laut mit Stoppuhr halten</label></li>
+        <li><label><input type="checkbox"> Fünf Belege mit Zeilenangabe und Wirkung auswendig können (Abschnitt 4)</label></li>
+        <li><label><input type="checkbox"> Den eigenen Leserbrief noch einmal lesen und die Platzhalter in Abschnitt 5 ausfüllen</label></li>
+        <li><label><input type="checkbox"> Drei Fragen aus dem Katalog laut beantworten, nach dem Muster Standpunkt – Begründung – Beispiel – Fazit</label></li>
+      </ul></div>
+    <div class="card"><h3 style="margin-top:0">Am Freitag</h3>
+      <p>Langsamer sprechen, als es sich anfühlt – Aufregung macht schnell. Wenn du eine Frage nicht sofort verstehst, frag nach; das ist erlaubt und wirkt souverän. Wenn dir ein Wort fehlt, umschreib es ruhig. Und vergiss nicht: Du hast die Klausur geschrieben, du kennst diese Texte besser als jede andere Person im Raum. Du gehst als Expertin für deine eigene Arbeit hinein.</p></div>
+  </div>
+  <div class="good" style="margin-top:18px"><strong class="lbl">Zum Schluss</strong>Englisch und Mathematik hast du schon geschafft. Deutsch ist dein Heimspiel: Du sprichst über einen Text, der genau deine Lebensphase beschreibt. Viel Erfolg, Tes – du kannst das!</div>
+</section>
+
+</main>
+<footer>Vorbereitung mündliche Berufsreifeprüfung Deutsch · Themenpaket Arbeitswelt · Herbsttermin 2026</footer>
+
+<script>
+// Timer
+(function(){
+  var total=600, left=600, iv=null;
+  var d=document.getElementById('tDisplay'), s=document.getElementById('tStart');
+  function fmt(x){var neg=x<0; x=Math.abs(x); return (neg?'+':'')+String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0');}
+  function draw(){d.textContent=fmt(left); d.className='display'+(left<0?' over':(left<=60?' warn':''));}
+  document.querySelectorAll('#timer [data-min]').forEach(function(b){b.addEventListener('click',function(){total=left=+b.dataset.min*60; stop(); draw();});});
+  function stop(){clearInterval(iv); iv=null; s.textContent='Start';}
+  s.addEventListener('click',function(){ if(iv){stop();return;} s.textContent='Pause'; iv=setInterval(function(){left--; draw();},1000);});
+  document.getElementById('tReset').addEventListener('click',function(){stop(); left=total; draw();});
+  draw();
+})();
+
+// Raster
+(function(){
+  var data=[
+    ['h','1 · Präsentation'],
+    ['1.1','Kann erkennbar strukturieren und sinnvolle Schwerpunkte setzen'],
+    ['1.2','Kann selbständig zeitlichen Rahmen setzen/einhalten'],
+    ['1.3','Kann kompetent, selbstsicher auftreten und Authentizität vermitteln'],
+    ['1.4','Kann Kontakt zu den Zuhörenden (Blicke, Gestik, Mimik) herstellen und Interesse wecken (Intonation, Lautstärke)'],
+    ['1.5','Je nach Aufgabenstellung: adäquater Medieneinsatz'],
+    ['h','2 · Diskursfähigkeit (Diskussion)'],
+    ['2.1','Kann den eigenen Standpunkt begründen und verteidigen'],
+    ['2.2','Kann auf Gegenargumente und spontane Fragen reagieren'],
+    ['2.3','Kann Gedanken, Ideen bzw. Anregungen aufgreifen und weiterentwickeln'],
+    ['2.4','Kann Informationen, Aussagen, Begründungen und Erklärungen in zusammenhängender/strukturierter Form wiedergeben'],
+    ['h','3 · Sprachkompetenz (Präsentation und Diskussion)'],
+    ['3.1','Kann sich fließend ausdrücken, ohne öfter deutlich erkennbar nach Worten suchen zu müssen'],
+    ['3.2','Kann Sprachregister (Deutlichkeit, Aussprache, Wortwahl) an die Situation anpassen'],
+    ['3.3','Kann sich spontan, flüssig und genau (Wortwahl, Wortschatz) ausdrücken'],
+    ['3.4','Kann sich klar (Treffsicherheit in der Wortwahl) und strukturiert zu Sachverhalten äußern'],
+    ['3.5','Kann Aussagen eines Textes mit eigenen Worten sachlich richtig und strukturiert zusammenfassen'],
+    ['3.6','Kennt Sprachnormen und kann diese anwenden'],
+    ['3.7','Kann Äußerungen durch nonverbale Ausdrucksmittel unterstützen']
+  ];
+  var t=document.getElementById('rasterTable');
+  data.forEach(function(r){
+    var tr=document.createElement('tr');
+    if(r[0]==='h'){tr.className='head'; tr.innerHTML='<td colspan="6">'+r[1]+'</td>';}
+    else{var h='<td><strong>'+r[0]+'</strong> '+r[1]+'</td>'; for(var i=1;i<=5;i++){h+='<td class="c"><input type="radio" name="k'+r[0]+'" aria-label="'+r[0]+' Stufe '+i+'"></td>';} tr.innerHTML=h;}
+    t.appendChild(tr);
+  });
+})();
+
+// Korrekturtabelle
+document.getElementById('addRow').addEventListener('click',function(){
+  var tr=document.createElement('tr'); tr.innerHTML='<td contenteditable="true"></td><td contenteditable="true"></td>';
+  document.getElementById('korr').appendChild(tr); tr.firstChild.focus();
+});
+
+// Zufallsfrage
+(function(){
+  var qs=[].slice.call(document.querySelectorAll('details.q')), used=[];
+  document.getElementById('randomQ').addEventListener('click',function(){
+    if(used.length===qs.length) used=[];
+    var pool=qs.filter(function(q){return used.indexOf(q)<0;});
+    var q=pool[Math.floor(Math.random()*pool.length)]; used.push(q);
+    qs.forEach(function(x){x.open=false; x.classList.remove('flash');});
+    q.scrollIntoView({behavior:'smooth',block:'center'}); q.classList.add('flash');
+    setTimeout(function(){q.classList.remove('flash');},2500);
+  });
+  document.getElementById('closeAll').addEventListener('click',function(){qs.forEach(function(x){x.open=false;});});
+})();
+</script>
+</body>
+</html>
