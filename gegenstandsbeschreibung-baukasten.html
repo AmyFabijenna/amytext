@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gegenstandsbeschreibung – Der Wort-Baukasten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0e1636; --panel:#1a2658; --panel2:#212f6a; --edge:#34468f; --cream:#f5ecd5; --muted:#aab4dc;
+  --ocher:#d9962b; --ocher2:#f0b955; --ocherd:#9c6513; --vio:#7a5fd6; --vio2:#4d3fa8; --vioedge:#a592f0; --terra:#c0603b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.55;color:var(--cream);
+  background:radial-gradient(900px 500px at 88% -5%,rgba(217,150,43,.22),transparent 60%),radial-gradient(800px 600px at 0% 25%,rgba(94,98,220,.26),transparent 60%),var(--night);background-attachment:fixed}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15;margin:0}
+button{font-family:inherit;font-size:inherit;color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+b{color:#fff6dd}
+
+.hero{background:linear-gradient(170deg,#0b1230 0%,#1f2f73 55%,#8a5a1c 140%);padding:30px 0 60px;border-radius:0 0 40px 40px;border-bottom:3px solid var(--ocher);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.hero .faces{font-size:2.2rem;letter-spacing:.25rem;margin-bottom:6px}
+.hero h1{font-size:clamp(1.45rem,6vw,3.2rem);font-weight:800;color:var(--cream)}
+.hero h1 em{font-style:normal;color:var(--ocher2)}
+.hero p{margin:10px 0 0;font-size:1.1rem;max-width:660px;color:#dfe3f7}
+
+nav{position:sticky;top:0;z-index:20;margin-top:-34px;border-radius:20px;overflow:hidden;background:rgba(10,16,41,.94);backdrop-filter:blur(8px);box-shadow:0 6px 20px rgba(0,0,0,.5);border:1.5px solid var(--edge);display:flex;align-items:center}
+.navin{display:flex;gap:6px;padding:8px;overflow-x:auto;flex:1;scrollbar-width:thin}
+.navin button{flex:0 0 auto;border:0;background:#1c2a62;padding:9px 15px;border-radius:999px;font-weight:800;cursor:pointer;white-space:nowrap}
+.navin button.on{background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1300;box-shadow:0 3px 0 var(--ocherd)}
+.navin button:hover:not(.on){background:#2a3a80}
+.resetbtn{flex:0 0 auto;margin:6px 8px;border:2px solid var(--terra);background:linear-gradient(180deg,#d56f47,#a94d2b);color:#fff;font-weight:800;border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.resetbtn:hover{filter:brightness(1.12)}
+
+main{padding:22px 0 120px}
+section.tab{display:none}
+section.tab.show{display:block}
+.sechead h2{font-size:1.9rem;color:var(--ocher2)}
+.sechead p{color:var(--muted);margin:6px 0 10px;max-width:780px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.btn,.tools button{border:2px solid var(--edge);background:#1f2d6b;border-radius:999px;padding:8px 16px;font-weight:800;cursor:pointer}
+.btn:hover,.tools button:hover{border-color:var(--ocher2)}
+.btn.primary{background:linear-gradient(180deg,var(--ocher2),var(--ocher));border-color:var(--ocher2);color:#1b1300;box-shadow:0 3px 0 var(--ocherd)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.danger{background:linear-gradient(180deg,#d56f47,#a94d2b);border-color:var(--terra);color:#fff}
+.cat{margin:28px 0 4px;font-size:1.3rem;color:var(--ocher2);display:flex;align-items:center;gap:10px}
+.cat::after{content:"";flex:1;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--ocher),transparent)}
+
+.card,.grp{background:var(--panel);border:1.5px solid var(--edge);border-radius:20px;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.card{padding:18px 20px;margin:16px 0}
+.card h3{font-size:1.35rem;margin-bottom:8px;color:var(--ocher2)}
+.card.light{background:#f2e6c8;color:#24204a;border-color:#d9b36a}
+.card.light h3{color:#7a4a08}
+.card.light b{color:#24204a}
+.grp{margin:12px 0;overflow:hidden}
+.grp>summary{display:flex;align-items:center;gap:12px;padding:12px 18px;cursor:pointer;list-style:none;font-weight:800;font-size:1.12rem}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary::after{content:"▾";margin-left:auto;font-size:1.2rem;color:var(--ocher2);transition:transform .2s}
+.grp[open]>summary::after{transform:rotate(180deg)}
+.grp[open]>summary{background:linear-gradient(90deg,#2a3b86,#1a2658);border-bottom:1.5px solid var(--edge)}
+.grp .ico{font-size:1.8rem;line-height:1}
+.grp .gt{flex:0 1 auto}
+.pick{background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1300;border-radius:999px;padding:1px 12px;font-size:.88rem;font-weight:800;max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pick:empty{display:none}
+.grp.off>summary{opacity:.55}
+.gbody{padding:12px 18px 16px}
+.mode{font-size:.88rem;font-weight:800;color:var(--ocher2);margin:0 0 8px}
+.gnote{margin:0 0 10px;color:var(--muted);font-size:.97rem}
+.offmsg{background:#111a42;border:1.5px dashed var(--terra);border-radius:12px;padding:10px 14px;color:#ffd9c9;font-weight:700}
+.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,60%{box-shadow:0 0 0 6px rgba(240,185,85,.7)}100%{box-shadow:0 10px 24px rgba(0,0,0,.3)}}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.sublbl{width:100%;font-size:.84rem;font-weight:800;letter-spacing:.03em;margin-top:6px}
+.sublbl.c{color:var(--ocher2)}
+.sublbl.s{color:#c9bdfb;margin-top:12px}
+.chip{border:2px solid;border-radius:999px;padding:5px 14px;font-weight:700;cursor:pointer;min-height:38px;transition:transform .1s,filter .15s}
+.chip:hover{transform:translateY(-2px)}
+.chip:active{transform:scale(.96)}
+.chip.c{background:rgba(217,150,43,.16);border-color:#b57a1f;color:#ffe6ae}
+.chip.s{background:linear-gradient(180deg,#3a2f86,#2b2468);border-color:var(--vioedge);color:#e6defd}
+.chip.s::before{content:"✦ ";color:var(--ocher2);font-size:.8em}
+.chip.on.c{background:linear-gradient(180deg,var(--ocher2),var(--ocher));border-color:#ffd98a;color:#1b1300}
+.chip.on.s{background:linear-gradient(180deg,#8d70ee,#5a43c4);border-color:#d6caff;color:#fff}
+.chip.on::before{content:"✓ ";color:inherit}
+.chip.dis{opacity:.3;filter:grayscale(.9);border-style:dashed;cursor:not-allowed}
+.chip.dis:hover{transform:none}
+.chip:focus-visible,.sent:focus-visible,button:focus-visible,summary:focus-visible,.part:focus-visible{outline:3px solid var(--ocher2);outline-offset:2px}
+
+.sents{margin-top:16px;padding:12px 14px;background:#111a42;border-radius:16px;border:1.5px dashed #4a5ba8}
+.slbl{font-weight:800;color:var(--ocher2);margin-bottom:6px}
+.slbl small{display:block;font-weight:600;color:var(--muted);font-size:.86rem}
+.sent{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:#1b2762;border:1.5px solid #3a4d9c;border-radius:12px;padding:8px 12px;margin:6px 0;cursor:pointer;color:var(--cream);font-weight:600}
+.sent:hover{border-color:var(--ocher2)}
+.sent .box{flex:0 0 22px;height:22px;margin-top:2px;border:2px solid var(--ocher2);border-radius:6px;display:grid;place-items:center;font-weight:900;color:transparent;font-size:.9rem}
+.sent.on{background:linear-gradient(90deg,#e8b04a,#c88a22);color:#1b1300;border-color:#ffd98a}
+.sent.on .box{background:#1b1300;color:var(--ocher2);border-color:#1b1300}
+.sent.ghost{opacity:.65;cursor:default;border-style:dashed}
+.sent.ghost:hover{border-color:#3a4d9c}
+.blank{display:inline-block;min-width:2.6em;border-bottom:3px solid var(--ocher2);margin:0 2px;height:1em;vertical-align:-2px}
+
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.legend>div{display:flex;gap:10px;align-items:center;background:#111a42;border:1.5px solid var(--edge);border-radius:16px;padding:8px 14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}.pick{max-width:34%}}
+.setup{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+.setup label.t{font-weight:800;display:block;font-size:.92rem;color:var(--ocher2)}
+.setup input[type=text],.setup input[type=number]{font:inherit;padding:9px 14px;background:#0f1740;color:var(--cream);border:1.5px solid var(--edge);border-radius:12px;min-width:170px}
+.setup input:focus{outline:none;border-color:var(--ocher2)}
+.setup input::placeholder{color:#6f7cb5}
+.radios{display:flex;gap:8px}
+.radios label{border:2px solid var(--edge);border-radius:999px;padding:7px 16px;cursor:pointer;background:#1f2d6b;font-weight:800}
+.radios input{display:none}
+.radios label:has(input:checked){background:linear-gradient(180deg,var(--ocher2),var(--ocher));border-color:var(--ocher2);color:#1b1300}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+.steps li::before{content:counter(s);flex:0 0 36px;height:36px;border-radius:50%;background:linear-gradient(180deg,var(--ocher2),var(--ocher));display:grid;place-items:center;font-weight:800;color:#1b1300}
+.facemap{max-width:560px;margin:0 auto;display:block;width:100%}
+.part{cursor:pointer}
+.part:hover,.part:focus{filter:drop-shadow(0 0 5px #d9962b)}
+.pill rect{fill:#fff;stroke:#c8872a;stroke-width:2;rx:15}
+.pill text{font:800 13px 'Nunito',sans-serif;fill:#1c2a62}
+.pill:hover rect{fill:#f7dca0}
+.pill{cursor:pointer}
+.lead{stroke:#b08a55;stroke-width:2;stroke-dasharray:4 4}
+.rule{display:flex;gap:10px;margin:8px 0}
+.rule .e{font-size:1.5rem}
+.ex p{margin:.6em 0}
+.ex .c{border-bottom:3px solid var(--ocher);background:rgba(217,150,43,.25);padding:0 3px;border-radius:4px}
+.ex .s{border-bottom:3px solid var(--vioedge);background:rgba(122,95,214,.35);padding:0 3px;border-radius:4px}
+table.end{border-collapse:collapse;width:100%;font-size:.98rem}
+table.end th,table.end td{border:1.5px solid var(--edge);padding:8px 10px;text-align:left}
+table.end th{background:#26367a;color:var(--ocher2)}
+table.end b{color:var(--ocher2)}
+.tblwrap{overflow-x:auto}
+
+textarea{width:100%;min-height:360px;font:inherit;font-size:1.08rem;line-height:1.7;padding:16px;border:3px solid var(--ocher);border-radius:18px;resize:vertical;color:#2a2108;background:repeating-linear-gradient(#f6ecd2,#f6ecd2 28px,#e6d5a8 29px)}
+textarea:focus{outline:none;border-color:var(--ocher2);box-shadow:0 0 0 4px rgba(240,185,85,.3)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:8px 0;color:var(--muted);font-weight:700}
+.check label{display:flex;gap:10px;align-items:flex-start;margin:6px 0;cursor:pointer}
+.check input{width:22px;height:22px;accent-color:var(--ocher);margin-top:3px}
+.notice{background:#111a42;border:1.5px dashed var(--ocher);border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:700}
+
+#fab{position:fixed;right:16px;bottom:16px;z-index:30;border:2px solid #ffd98a;background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1300;border-radius:999px;padding:12px 18px;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.5);cursor:pointer;font-size:1rem}
+#fab:hover{filter:brightness(1.08)}
+#bubble{position:fixed;left:50%;bottom:78px;transform:translateX(-50%) translateY(20px);z-index:40;background:var(--cream);color:#1a1d45;padding:10px 18px;border-radius:16px;max-width:min(560px,92vw);opacity:0;pointer-events:none;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,.5);text-align:center;font-weight:700}
+#bubble.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#bubble b{color:#8a4a00}
+#printArea{display:none}
+@media print{
+  body>*:not(#printArea){display:none!important}
+  #printArea{display:block!important;font-size:14pt;line-height:1.8;white-space:pre-wrap;color:#000;background:#fff}
+  #printArea h1{font-size:20pt;margin-bottom:12pt;color:#000}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+@media(max-width:760px){nav{flex-wrap:wrap}.navin{flex:1 1 100%}.resetbtn{flex:1 1 100%;margin:0 8px 8px;padding:7px 14px}}
+.navin button{padding:9px 12px}
+.navin{gap:4px}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick .chip{min-height:40px}
+#bl{color:var(--ocher2)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="faces" aria-hidden="true">🎒 ✏️ 🧸 📱 🚲 ⌚</div>
+    <h1>Der Wort-Baukasten für <em>Gegenstandsbeschreibungen</em></h1>
+    <p>Wähle einen Gegenstand, entdecke viele Wörter und viele Wege, ihn in Sätze zu packen, und lass daraus deinen eigenen Text entstehen. Nichts ist Pflicht, alles ist erlaubt.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav aria-label="Bereiche"><div class="navin" id="navin"></div><button type="button" class="resetbtn" id="btnReset" title="Alles zurücksetzen und einen neuen Gegenstand beschreiben">🔄 Neu starten</button></nav>
+
+  <main>
+  <section class="tab" id="sec-start">
+    <div class="card">
+      <h3>🎯 Welchen Gegenstand beschreibst du?</h3>
+      <div class="setup">
+        <div><label class="t" for="inName">Name des Gegenstands</label><input type="text" id="inName" placeholder="z. B. Rucksack" maxlength="30" autocomplete="off"></div>
+        <div>
+          <span class="t" style="font-weight:800;display:block;font-size:.92rem;color:var(--ocher2)">Welcher Artikel?</span>
+          <div class="radios" role="radiogroup" aria-label="der, die oder das">
+            <label><input type="radio" name="gen" value="m"><span>der</span></label>
+            <label><input type="radio" name="gen" value="f"><span>die</span></label>
+            <label><input type="radio" name="gen" value="n"><span>das</span></label>
+          </div>
+        </div>
+      </div>
+      <p style="margin:14px 0 6px;font-weight:800;color:var(--ocher2)">Oder tippe auf einen Vorschlag:</p>
+      <div class="quick" id="quick"></div>
+      <p style="margin:12px 0 0;color:var(--muted)">Alle Sätze passen sich an: aus „Er besteht aus Stoff“ wird „Sie besteht aus Stoff“ oder „Es besteht aus Stoff“, und aus „Sein Henkel“ wird „Ihr Henkel“. Die passende Teile-Karte (zum Beispiel für Taschen oder für Fahrzeuge) öffnet sich von allein.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>🧭 So funktioniert dein Baukasten</h3>
+        <ol class="steps">
+          <li><div><b>Wörter wählen:</b> Öffne eine Karte und tippe auf ein Wort. Bei vielen Karten passt nur ein Wort (ein Gegenstand ist nicht gleichzeitig rund und eckig). Was nicht zusammenpasst, wird grau.</div></li>
+          <li><div><b>Sätze ankreuzen:</b> Unter jeder Karte stehen mehrere Formulierungen mit deinem Wort. Hake an, welche du magst. Du darfst mehrere nehmen und so viele Möglichkeiten kennenlernen.</div></li>
+          <li><div><b>Text zusammenbauen:</b> Unter „✍️ Mein Text“ fügt ein Knopfdruck alle angekreuzten Sätze zu einem Text zusammen. Danach schreibst du ihn nach Lust und Laune um.</div></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>🎨 Die Farben der Wörter</h3>
+        <div class="legend">
+          <div><span class="chip c" style="cursor:default">handlich</span><span><b>ocker</b> = gängige Wörter</span></div>
+          <div><span class="chip s" style="cursor:default">filigran</span><span><b>violett ✦</b> = besondere Wörter</span></div>
+        </div>
+        <p style="margin:10px 0 0">Tippst du ein ✦-Wort an, erscheint unten eine kleine Erklärung. Ein Text mit einigen violetten Wörtern klingt genau und lebendig.</p>
+        <p style="margin:10px 0 0"><button type="button" class="btn primary" id="btnRoll">🎲 Zufalls-Gegenstand würfeln</button></p>
+      </div>
+    </div>
+
+    <div class="card light">
+      <h3>🗺️ Die Gegenstands-Landkarte</h3>
+      <p style="margin-top:0">Tippe auf einen Bereich, dann springst du direkt zu den passenden Wörtern.</p>
+      <svg class="facemap" viewBox="0 0 520 330" role="group" aria-label="Gegenstands-Landkarte">
+        <g class="lead" fill="none">
+          <path d="M120 55 L192 100"/><path d="M120 115 L172 118"/><path d="M120 175 L190 170"/><path d="M120 235 L190 215"/><path d="M120 295 L215 245"/>
+          <path d="M400 55 L290 86"/><path d="M400 115 L350 124"/><path d="M400 175 L335 168"/><path d="M400 235 L318 205"/><path d="M400 295 L305 250"/>
+        </g>
+        <ellipse cx="260" cy="284" rx="112" ry="16" fill="#1a1a40" opacity=".15"/>
+        <g class="part" data-go="formadj" tabindex="0" role="button" aria-label="Form"><polygon points="260,60 355,108 260,156 165,108" fill="#f0c978" stroke="#8a5a14" stroke-width="2"/></g>
+        <g class="part" data-go="material" tabindex="0" role="button" aria-label="Material"><polygon points="165,108 260,156 260,270 165,222" fill="#c88a22" stroke="#8a5a14" stroke-width="2"/></g>
+        <g class="part" data-go="hauptf" tabindex="0" role="button" aria-label="Farbe"><polygon points="260,156 355,108 355,222 260,270" fill="#6f4a12" stroke="#8a5a14" stroke-width="2"/></g>
+        <g class="part" data-go="tbehaelter" tabindex="0" role="button" aria-label="Teile">
+          <path d="M232 94 Q260 66 288 94" stroke="#3a2a10" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M180 138 L248 172" stroke="#fff6dd" stroke-width="3" stroke-dasharray="5 4" fill="none"/>
+          <circle cx="248" cy="172" r="6" fill="#fff6dd" stroke="#3a2a10" stroke-width="2"/>
+          <circle cx="308" cy="198" r="10" fill="#ffd98a" stroke="#3a2a10" stroke-width="2"/>
+        </g>
+        <g class="pill" data-go="groesse" tabindex="0" role="button"><rect x="8" y="40" width="112" height="30"/><text x="64" y="60" text-anchor="middle">📏 Größe</text></g>
+        <g class="pill" data-go="formadj" tabindex="0" role="button"><rect x="8" y="100" width="112" height="30"/><text x="64" y="120" text-anchor="middle">🔷 Form</text></g>
+        <g class="pill" data-go="material" tabindex="0" role="button"><rect x="8" y="160" width="112" height="30"/><text x="64" y="180" text-anchor="middle">🧱 Material</text></g>
+        <g class="pill" data-go="hauptf" tabindex="0" role="button"><rect x="8" y="220" width="112" height="30"/><text x="64" y="240" text-anchor="middle">🎨 Farbe</text></g>
+        <g class="pill" data-go="ob" tabindex="0" role="button"><rect x="8" y="280" width="112" height="30"/><text x="64" y="300" text-anchor="middle">✋ Oberfläche</text></g>
+        <g class="pill" data-go="tbehaelter" tabindex="0" role="button"><rect x="400" y="40" width="112" height="30"/><text x="456" y="60" text-anchor="middle">🔩 Teile</text></g>
+        <g class="pill" data-go="zweck1" tabindex="0" role="button"><rect x="400" y="100" width="112" height="30"/><text x="456" y="120" text-anchor="middle">🛠️ Wozu?</text></g>
+        <g class="pill" data-go="benutzer" tabindex="0" role="button"><rect x="400" y="160" width="112" height="30"/><text x="456" y="180" text-anchor="middle">👥 Wer?</text></g>
+        <g class="pill" data-go="besonders" tabindex="0" role="button"><rect x="400" y="220" width="112" height="30"/><text x="456" y="240" text-anchor="middle">⭐ Besonderes</text></g>
+        <g class="pill" data-go="zustand" tabindex="0" role="button"><rect x="400" y="280" width="112" height="30"/><text x="456" y="300" text-anchor="middle">🕰️ Zustand</text></g>
+      </svg>
+    </div>
+
+    <div class="card">
+      <h3>📐 So ist eine Gegenstandsbeschreibung aufgebaut</h3>
+      <div class="grid3">
+        <div><b>1 · Einleitung</b><br>Was ist es (Oberbegriff)? Wem gehört der Gegenstand, woher hast du ihn? Wozu dient er? Ein bis zwei Sätze genügen.</div>
+        <div><b>2 · Hauptteil</b><br>In fester Reihenfolge, zum Beispiel <b>von außen nach innen</b> oder <b>von oben nach unten</b>: Größe und Form, Material und Farbe, Teile und Aufbau, Gebrauch und Besonderes.</div>
+        <div><b>3 · Schluss</b><br>Was bedeutet dir der Gegenstand? Warum magst du ihn? Hier darf deine Meinung stehen, im Hauptteil bleibst du sachlich.</div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="rule"><span class="e">⏱️</span><div><b>Präsens:</b> Beschreibungen stehen in der Gegenwart („Der Rucksack besteht aus Stoff“).</div></div>
+        <div class="rule"><span class="e">🔍</span><div><b>Genau statt „schön“:</b> „Der Rucksack ist schön“ sagt wenig. „Der Rucksack ist dunkelblau und hat leuchtend gelbe Reißverschlüsse“ zeigt ein Bild.</div></div>
+        <div class="rule"><span class="e">📏</span><div><b>Zahlen helfen:</b> Länge, Breite, Höhe und Gewicht machen die Beschreibung exakt. Auch ein Vergleich hilft („so groß wie eine Faust“).</div></div>
+        <div class="rule"><span class="e">🧭</span><div><b>Feste Reihenfolge:</b> So kann man sich den Gegenstand genau vorstellen, auch ohne ihn zu sehen.</div></div>
+        <div class="rule"><span class="e">🔄</span><div><b>Verben abwechseln:</b> Neben „ist“ und „hat“ gibt es „besteht aus“, „befindet sich“, „verfügt über“, „ist ausgestattet mit“ (siehe Bereich Extras).</div></div>
+      </div>
+    </div>
+
+    <details class="card ex">
+      <summary style="cursor:pointer;font-weight:800;font-size:1.15rem">📖 Beispieltext ansehen (mit Farben)</summary>
+      <p><span class="c">ocker</span> = gängiges Wort, <span class="s">violett</span> = besonderes Wort</p>
+      <p>Ich möchte dir mein Federpennal beschreiben. Es ist ein <span class="s">Behältnis</span> für Stifte und gehört zu meinen wichtigsten Schulsachen. Ich habe es zum Schulbeginn von meiner Oma geschenkt bekommen.</p>
+      <p>Das Federpennal ist <span class="c">länglich</span> und <span class="s">flach</span>. Es ist ungefähr 22 Zentimeter lang, 8 Zentimeter breit und 5 Zentimeter hoch. Es besteht aus <span class="c">festem</span> Stoff und fühlt sich <span class="s">leicht rau</span> an. Die Grundfarbe ist <span class="c">dunkelblau</span>, dazu kommen <span class="c">gelbe</span> Streifen.</p>
+      <p>An der Oberseite befindet sich ein <span class="s">Reißverschluss</span>, der sich bis zu den Seiten zieht. Daran hängt ein kleiner <span class="c">Anhänger</span> in Form eines Fußballs. Im Inneren hat das Federpennal zwei <span class="s">Gummischlaufen</span>, in denen die Buntstifte stecken, und ein <span class="c">Fach</span> für den Spitzer und den Radiergummi.</p>
+      <p>Ich verwende es <span class="c">täglich</span> in der Schule, um Stifte <span class="s">aufzubewahren</span> und mitzunehmen. Es ist <span class="s">robust</span> und <span class="s">strapazierfähig</span>. Das Besondere ist, dass die gelben Streifen im Dunkeln leuchten.</p>
+      <p>Ich mag mein Federpennal, weil es mich durch das ganze Schuljahr begleitet und von meiner Oma stammt. Alles in allem ist es für mich ein <span class="s">unverzichtbarer</span> Begleiter.</p>
+    </details>
+  </section>
+
+  <section class="tab" id="sec-einl"></section>
+  <section class="tab" id="sec-aeusseres"></section>
+  <section class="tab" id="sec-teile"></section>
+  <section class="tab" id="sec-gebrauch"></section>
+  <section class="tab" id="sec-besonders"></section>
+  <section class="tab" id="sec-schluss"></section>
+
+  <section class="tab" id="sec-extras">
+    <div class="sechead"><h2>🧰 Extras: Wörter zum Einfügen</h2><p>Hier liegen Verben, Ortswörter, Übergänge, Maßangaben, Vergleiche und Fachwörter. Tippe ein Wort an, dann steht es dort in deinem Text, wo dein Cursor ist.</p>
+    <div class="tools"><button type="button" data-act="open">📂 Alle aufklappen</button><button type="button" data-act="close">📁 Alle zuklappen</button></div></div>
+    <div class="card" id="endCard">
+      <h3>🧩 Spickzettel: Welche Endung braucht das Wort?</h3>
+      <p style="margin-top:0">Nach „hat“ steht der Akkusativ. Nach „ist“ bleibt das Wort ohne Endung. Schau dir die fettgedruckten Endungen an:</p>
+      <div class="tblwrap"><table class="end">
+        <tr><th>Wort</th><th>mit „hat“</th><th>mit „ist“</th></tr>
+        <tr><td>der Henkel</td><td>Der Rucksack hat einen stabil<b>en</b> Henkel.</td><td>Der Henkel ist stabil.</td></tr>
+        <tr><td>die Klappe</td><td>Er hat eine groß<b>e</b> Klappe.</td><td>Die Klappe ist groß.</td></tr>
+        <tr><td>das Fach</td><td>Er hat ein geräumig<b>es</b> Fach.</td><td>Das Fach ist geräumig.</td></tr>
+        <tr><td>die Gummischlaufen (viele)</td><td>Er hat elastisch<b>e</b> Gummischlaufen.</td><td>Die Gummischlaufen sind elastisch.</td></tr>
+      </table></div>
+      <p style="margin:10px 0 0;color:var(--muted)">Das Material steht meist ohne Artikel: „aus Holz“, „aus Kunststoff“, „aus Stoff und Leder“.</p>
+    </div>
+    <div id="extraGroups"></div>
+  </section>
+
+  <section class="tab" id="sec-text">
+    <div class="sechead"><h2>✍️ Mein Text</h2><p>Hier entsteht deine Gegenstandsbeschreibung. Mit einem Knopfdruck werden alle Sätze, die du in den Karten angekreuzt hast, zu einem Text. Den kannst du danach beliebig verändern.</p></div>
+    <div class="card">
+      <div id="buildInfo" class="notice"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary" type="button" id="btnBuild">✨ Text zusammenbauen</button>
+        <button class="btn danger" type="button" id="btnReset2">🔄 Neuen Gegenstand beschreiben</button>
+      </div>
+    </div>
+    <textarea id="ta" aria-label="Meine Gegenstandsbeschreibung" placeholder="Hier steht gleich dein Text. Du kannst auch selbst losschreiben oder Sätze und Wörter aus den Extras einfügen."></textarea>
+    <div class="meta"><span id="wc">0 Wörter</span><span id="sc">✦ 0 besondere Wörter</span><span id="bl"></span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px">
+      <button class="btn" type="button" id="btnPara">↵ Neuer Absatz</button>
+      <button class="btn" type="button" id="btnCopy">📋 Kopieren</button>
+      <button class="btn" type="button" id="btnSave">💾 Als Datei speichern</button>
+      <button class="btn" type="button" id="btnPrint">🖨️ Drucken</button>
+      <button class="btn" type="button" id="btnClear">🗑️ Text löschen</button>
+    </div>
+    <div class="card check">
+      <h3>✅ Checkliste für deine Selbstkontrolle</h3>
+      <div id="checks"></div>
+    </div>
+  </section>
+  </main>
+</div>
+
+<button id="fab" type="button" aria-label="Zu meinem Text">✍️ <span id="fabN">0</span> Sätze</button>
+<div id="bubble" role="status" aria-live="polite"></div>
+<div id="printArea"></div>
+
+<script>
+/* ===== Gegenstands-Baukasten: Kern, Vorschläge, Einleitung, Äußeres ===== */
+/* Wortlisten: Trennzeichen ";"  ·  *Wort=Erklärung = besonders (violett)  ·  Nomen: Wort|m  |f  |n  |p (Mehrzahl) */
+function parseRaw(raw){let s=false;raw=raw.trim();if(raw[0]==='*'){s=true;raw=raw.slice(1);}const i=raw.indexOf('=');return i<0?{w:raw.trim(),h:'',s}:{w:raw.slice(0,i).trim(),h:raw.slice(i+1).trim(),s};}
+function parseW(str,def){
+  str=str.trim();let s=false;if(str[0]==='*'){s=true;str=str.slice(1);}
+  let g=def||'m',h='',m=str.match(/\|([mfnp])$/);
+  if(m){g=m[1];str=str.slice(0,-2);}
+  const i=str.indexOf('=');if(i>=0){h=str.slice(i+1).trim();str=str.slice(0,i);}
+  m=str.match(/\|([mfnp])$/);if(m){g=m[1];str=str.slice(0,-2);}
+  return {w:str.trim(),h,s,g};
+}
+const CARDS=[],CBY={};
+function card(o){
+  const raw=Array.isArray(o.words)?o.words:(o.words||'').split(';');
+  o.words=raw.filter(x=>x.trim()).map(x=>parseW(x,o.gen));
+  o.kind=o.kind||'adj';o.mode=o.mode||'single';
+  CARDS.push(o);CBY[o.id]=o;
+}
+const OPP=[];
+function opp(a,b){OPP.push([a.split(','),b.split(',')]);}
+
+/* ---------- Vorschläge für die Startseite ---------- */
+const QUICK=[
+ {n:'Rucksack',g:'m',e:'🎒',t:'tbehaelter',mat:['Stoff','Kunststoff'],z:['tragen','transportieren','aufbewahren']},
+ {n:'Schultasche',g:'f',e:'👜',t:'tbehaelter',mat:['Stoff','Leder'],z:['tragen','transportieren','aufbewahren']},
+ {n:'Federpennal',g:'n',e:'✏️',t:'tbehaelter',mat:['Stoff','Kunststoff'],z:['aufbewahren','ordnen','transportieren']},
+ {n:'Jausenbox',g:'f',e:'🥪',t:'tbehaelter',mat:['Kunststoff'],z:['aufbewahren','transportieren','schützen']},
+ {n:'Trinkflasche',g:'f',e:'🥤',t:'tbehaelter',mat:['Kunststoff','Edelstahl'],z:['trinken','transportieren','aufbewahren']},
+ {n:'Fahrrad',g:'n',e:'🚲',t:'tfahr',mat:['Metall','Gummi'],z:['fahren','transportieren']},
+ {n:'Skateboard',g:'n',e:'🛹',t:'tfahr',mat:['Holz','Kunststoff'],z:['fahren','spielen']},
+ {n:'Roller',g:'m',e:'🛴',t:'tfahr',mat:['Metall','Gummi'],z:['fahren','transportieren']},
+ {n:'Fußball',g:'m',e:'⚽',t:'tfahr',mat:['Kunstleder','Gummi'],z:['spielen']},
+ {n:'Handy',g:'n',e:'📱',t:'ttechnik',mat:['Glas','Metall'],z:['telefonieren','fotografieren','hören']},
+ {n:'Armbanduhr',g:'f',e:'⌚',t:'ttechnik',mat:['Metall','Glas'],z:['messen']},
+ {n:'Taschenlampe',g:'f',e:'🔦',t:'ttechnik',mat:['Kunststoff','Metall'],z:['leuchten']},
+ {n:'Kugelschreiber',g:'m',e:'🖊️',t:'tschreib',mat:['Kunststoff','Metall'],z:['schreiben']},
+ {n:'Lineal',g:'n',e:'📏',t:'tschreib',mat:['Kunststoff','Holz'],z:['messen','zeichnen']},
+ {n:'Heft',g:'n',e:'📓',t:'tschreib',mat:['Papier','Karton'],z:['schreiben','zeichnen']},
+ {n:'Lieblingsbuch',g:'n',e:'📖',t:'tschreib',mat:['Papier','Karton'],z:['lesen']},
+ {n:'Teddybär',g:'m',e:'🧸',t:'tspiel',mat:['Plüsch','Stoff'],z:['kuscheln','spielen']},
+ {n:'Puppe',g:'f',e:'🪆',t:'tspiel',mat:['Kunststoff','Stoff'],z:['spielen']},
+ {n:'Tasse',g:'f',e:'☕',t:'thaus',mat:['Keramik','Porzellan'],z:['trinken']},
+ {n:'Regenschirm',g:'m',e:'☂️',t:'thaus',mat:['Stoff','Metall'],z:['schützen']},
+ {n:'Schlüsselanhänger',g:'m',e:'🔑',t:'thaus',mat:['Metall','Kunststoff'],z:['sammeln']},
+ {n:'Mütze',g:'f',e:'🧢',t:'tkleid',mat:['Wolle','Baumwolle'],z:['wärmen','schützen']},
+ {n:'Kerze',g:'f',e:'🕯️',t:'tmoebel',mat:['Wachs'],z:['leuchten','dekorieren']},
+ {n:'Stuhl',g:'m',e:'🪑',t:'tmoebel',mat:['Holz','Metall'],z:['sitzen']},
+ {n:'Lampe',g:'f',e:'💡',t:'tmoebel',mat:['Metall','Glas'],z:['leuchten']}
+];
+
+/* ================= EINLEITUNG (Absatz 1) ================= */
+card({id:'einl1',tab:'einl',p:'1',cat:'So fange ich an',icon:'🚪',title:'Einleitung – so beginne ich',kind:'free',
+ note:'Hier brauchst du kein Wort zu wählen. Hake einfach die Anfänge an, die dir gefallen.',
+ tpl:["Ich möchte dir {meinen} {Name} beschreiben.","Heute beschreibe ich dir {meinen} {Name}.","In diesem Text stelle ich dir {meinen} {Name} vor.","Wenn ich an {meinen} {Name} denke, sehe ich sofort jede Einzelheit vor mir.","Du hast bestimmt schon einmal {einen} {Name} gesehen, aber {mein} {Name} ist etwas Besonderes.","Stell dir {einen} {Name} vor: Genau {den} will ich dir jetzt beschreiben.","Ein Gegenstand, den ich fast jeden Tag benutze, ist {mein} {Name}.","Auf den ersten Blick sieht {mein} {Name} ganz gewöhnlich aus, doch {er} hat einiges zu bieten.","Ich beschreibe heute {meinen} {Name}, weil {er} mir besonders wichtig ist.","Kennst du {meinen} {Name}? Dann lass dich überraschen, denn jetzt beschreibe ich {ihn} ganz genau."]});
+card({id:'oberbegriff',tab:'einl',p:'1',icon:'🏷️',title:'Was für ein Ding ist es? (Oberbegriff)',kind:'noun',
+ words:'Behälter|m;Gebrauchsgegenstand|m;Haushaltsgegenstand|m;Schreibgerät|n;Schulsache|f;Spielzeug|n;Kuscheltier|n;Sportgerät|n;Fahrzeug|n;Transportmittel|n;Werkzeug|n;Musikinstrument|n;Kleidungsstück|n;Schmuckstück|n;Möbelstück|n;Elektrogerät|n;Messgerät|n;Zeichengerät|n;*Behältnis|n=etwas zum Aufbewahren;*Utensil|n=ein Gegenstand, den man für etwas braucht;*Accessoire|n=schmückendes Zubehör;*Erinnerungsstück|n=ein Ding, das an etwas Schönes erinnert;*Glücksbringer|m=ein Ding, das Glück bringen soll;*Sammlerstück|n=ein Ding, das man sammelt;*Hilfsmittel|n=etwas, das beim Arbeiten hilft;*Fortbewegungsmittel|n=etwas, mit dem man sich vorwärtsbewegt;*Zubehör|n=Teile, die zu etwas dazugehören',
+ tpl:["{Der} {Name} ist {w:nom}.","Bei {meinem} {Name} handelt es sich um {w:acc}.","Man bezeichnet {ihn} als {w:bare}.","Genauer gesagt ist {er} {w:nom}.","Eigentlich ist {er} nichts anderes als {w:nom}.","{Er} gehört zu den Dingen, die man als {w:bare} bezeichnet."]});
+card({id:'herkunft',tab:'einl',p:'1',icon:'🎁',title:'Woher habe ich ihn?',kind:'phrase',
+ words:'zum Geburtstag bekommen;zu Weihnachten geschenkt bekommen;zum Schulbeginn geschenkt bekommen;von meiner Oma geschenkt bekommen;von meinem Opa geschenkt bekommen;von meinen Eltern bekommen;von einer Freundin geschenkt bekommen;von meinem Bruder übernommen;von meiner Schwester übernommen;im Urlaub gekauft;auf einem Flohmarkt gekauft;in einem Geschäft selbst ausgesucht;selbst gebastelt;selbst gebaut;bei einem Wettbewerb gewonnen;als Erinnerungsstück bekommen;von meiner Tante geerbt;zufällig gefunden',
+ tpl:["Ich habe {ihn} {w}.","{Mein} {Name} hat eine kleine Geschichte: Ich habe {ihn} {w}.","Die Geschichte dahinter: Ich habe {ihn} {w}.","Wie ich dazu gekommen bin? Ich habe {ihn} {w}.","Ganz einfach erklärt: Ich habe {ihn} {w}."]});
+card({id:'seit',tab:'einl',p:'1',icon:'📅',title:'Seit wann habe ich ihn?',kind:'free',
+ note:'Trage die Zahlen selbst ein. Die Lücke ___ ersetzt du später im Text.',
+ tpl:["Ich habe {ihn} jetzt seit ___ Jahren.","{Er} begleitet mich schon seit ___.","Seit ___ gehört {er} mir.","{Er} ist schon ungefähr ___ Jahre alt.","Ich benutze {ihn} seit der ___. Schulstufe.","Gekauft wurde {er} vor ungefähr ___ Jahren."]});
+card({id:'eindruck',tab:'einl',p:'1',icon:'✨',title:'Erster Eindruck',
+ words:'gewöhnlich;unscheinbar;auffällig;schlicht;praktisch;nützlich;hübsch;solide;stabil;modern;altmodisch;neu;gepflegt;*edel=hochwertig und schön;*schnörkellos=einfach, ohne Verzierungen;*ansprechend=gefällt auf Anhieb;*wertig=wirkt hochwertig;*zweckmäßig=genau auf den Zweck ausgerichtet;*verspielt=mit vielen kleinen Verzierungen;*geschmackvoll=schön ausgesucht;*eigenwillig=ungewöhnlich im Aussehen;*kunstvoll=mit viel Können gemacht;*prunkvoll=sehr reich verziert;*unverwüstlich=hält fast alles aus',
+ tpl:["Auf den ersten Blick wirkt {er} {w}.","{Er} macht einen {w:en} Eindruck.","{Er} sieht {w} aus.","Äußerlich ist {er} {w}.","Mein erster Gedanke: {Er} wirkt {w}."]});
+opp('eindruck:schlicht,eindruck:schnörkellos,eindruck:gewöhnlich,eindruck:unscheinbar','eindruck:prunkvoll,eindruck:verspielt,eindruck:auffällig');
+opp('eindruck:modern','eindruck:altmodisch');
+opp('eindruck:neu','eindruck:altmodisch');
+
+/* ================= ÄUSSERES (Absatz 2) ================= */
+card({id:'groesse',tab:'aeusseres',p:'2',cat:'Größe & Maße',icon:'📏',title:'Größe',
+ words:'klein;groß;mittelgroß;winzig;riesig;handlich;*zierlich=klein und fein;*kompakt=klein und platzsparend;*sperrig=groß und unhandlich;*gewaltig=riesig groß;*überschaubar=nicht groß;*klitzeklein=ganz, ganz klein;*handtellergroß=so groß wie eine Handfläche;*faustgroß=so groß wie eine Faust;*platzsparend=braucht wenig Platz',
+ tpl:["{Er} ist {w}.","{Er} wirkt {w}.","Von der Größe her ist {er} {w}.","Im Vergleich zu anderen Dingen ist {er} {w}.","Man würde {ihn} als {w} bezeichnen.","Ich finde {ihn} {w}."]});
+card({id:'abmess',tab:'aeusseres',p:'2',icon:'↔️',title:'Abmessungen (lang, breit, hoch …)',mode:'multi',
+ words:'lang;kurz;breit;schmal;hoch;niedrig;flach;dick;dünn;tief;*langgestreckt=sehr lang und schmal;*schlank=lang und dünn;*wuchtig=breit und schwer wirkend;*gedrungen=kurz und kräftig;*klobig=dick und unförmig;*filigran=sehr fein und dünn gebaut',
+ note:'Du darfst mehrere Wörter wählen, aber Gegensätze wie „lang“ und „kurz“ schließen sich aus.',
+ tpl:["{Er} ist {w}.","{Er} wirkt {w}.","{Er} ist ziemlich {w}.","Auffällig ist, dass {er} {w} ist.","Von der Seite betrachtet ist {er} {w}.","Man sieht sofort, dass {er} {w} ist."]});
+opp('abmess:lang,abmess:langgestreckt','abmess:kurz,abmess:gedrungen');
+opp('abmess:breit,abmess:wuchtig,abmess:klobig,abmess:dick','abmess:schmal,abmess:filigran,abmess:dünn,abmess:schlank');
+opp('abmess:hoch','abmess:niedrig,abmess:flach');
+opp('abmess:flach','abmess:tief,abmess:dick');
+opp('abmess:wuchtig,abmess:klobig','abmess:filigran,abmess:schlank');
+opp('abmess:langgestreckt,abmess:schlank','abmess:gedrungen,abmess:wuchtig,abmess:klobig');
+card({id:'masse',tab:'aeusseres',p:'2',icon:'📐',title:'Maße mit Zahlen',kind:'free',
+ note:'Miss deinen Gegenstand nach! Trage die Zahlen später an den Lücken ___ ein.',
+ tpl:["{Er} ist ungefähr ___ cm lang.","{Er} ist ___ cm breit und ___ cm hoch.","{Er} misst ___ cm in der Länge, ___ cm in der Breite und ___ cm in der Höhe.","{Er} hat einen Durchmesser von ___ cm.","{Er} ist etwa so lang wie ___.","{Er} ist ungefähr so groß wie ___.","{Er} wiegt ungefähr ___ Gramm.","Mit ___ cm Länge ist {er} ungefähr so lang wie ___."]});
+card({id:'gewicht',tab:'aeusseres',p:'2',icon:'⚖️',title:'Gewicht',
+ words:'leicht;schwer;mittelschwer;federleicht;*bleischwer=sehr, sehr schwer;*gewichtig=schwer und bedeutend',
+ tpl:["{Er} ist {w}.","Vom Gewicht her ist {er} {w}.","{Er} fühlt sich {w} an.","In der Hand liegt {er} {w}.","Beim Hochheben merkt man: {Er} ist {w}."]});
+opp('groesse:winzig,groesse:klitzeklein,groesse:handtellergroß,groesse:faustgroß,groesse:zierlich','gewicht:schwer,gewicht:bleischwer,gewicht:gewichtig');
+opp('groesse:riesig,groesse:gewaltig','gewicht:federleicht');
+
+card({id:'formgr',tab:'aeusseres',p:'2',cat:'Form',icon:'🧊',title:'Form – wie sieht er aus? (Vergleich)',kind:'noun',
+ words:'Quader|m;Würfel|m;Zylinder|m;Kugel|f;Kegel|m;Scheibe|f;Rechteck|n;Quadrat|n;Kreis|m;Oval|n;Dreieck|n;Ei|n;Stab|m;Rolle|f;Röhre|f;Kasten|m;Schachtel|f;Platte|f;Halbkugel|f;Ring|m;*Prisma|n=ein Körper mit dreieckiger Grundfläche;*Pyramide|f=unten viereckig, oben spitz;*Trapez|n=Viereck mit zwei parallelen Seiten;*Rhombus|m=Viereck mit vier gleich langen Seiten (Raute);*Ellipse|f=gedrücktes Oval;Halbkreis|m;*Spirale|f=eine sich windende Linie',
+ tpl:["{Er} sieht aus wie {w:nom}.","{Er} erinnert an {w:acc}.","{Er} ähnelt {w:dat}.","Die Grundform ist {w:nom}.","Vereinfacht gesagt, ist {er} {w:nom}."]});
+card({id:'formadj',tab:'aeusseres',p:'2',icon:'🔷',title:'Form – Eigenschaftswörter',
+ words:'rund;eckig;oval;quadratisch;rechteckig;länglich;flach;gewölbt;gebogen;geschwungen;spitz;abgerundet;gerade;schief;kantig;symmetrisch;kugelförmig;zylinderförmig;würfelförmig;keilförmig;kegelförmig;herzförmig;sternförmig;*tropfenförmig=wie ein Wassertropfen;*bauchig=in der Mitte dick und gewölbt;*gezackt=mit spitzen Zacken;*wellenförmig=hin und her geschwungen;*unregelmäßig=nicht gleichmäßig geformt;*stromlinienförmig=glatt, damit nichts bremst;*abgeflacht=oben oder unten platt gedrückt;*zugespitzt=nach vorne spitz zulaufend;*konisch=nach oben schmäler werdend;halbrund',
+ tpl:["{Er} ist {w}.","{Er} hat eine {w:e} Form.","Die Form ist {w}.","{Sein}e Form wirkt {w}.","Von oben betrachtet ist {er} {w}.","Von der Form her ist {er} {w}.","Auffällig ist {sein}e {w:e} Form."]});
+opp('formgr:Kugel,formgr:Kreis,formgr:Ring,formgr:Scheibe,formgr:Ei,formgr:Oval,formgr:Ellipse,formgr:Halbkugel,formgr:Halbkreis','formadj:eckig,formadj:quadratisch,formadj:rechteckig,formadj:kantig,formadj:würfelförmig,formadj:keilförmig,formadj:spitz,formadj:gezackt,formadj:sternförmig');
+opp('formgr:Quader,formgr:Würfel,formgr:Kasten,formgr:Schachtel,formgr:Rechteck,formgr:Quadrat,formgr:Platte,formgr:Dreieck,formgr:Trapez,formgr:Rhombus,formgr:Prisma,formgr:Pyramide','formadj:rund,formadj:oval,formadj:kugelförmig,formadj:zylinderförmig,formadj:tropfenförmig,formadj:halbrund,formadj:herzförmig,formadj:kegelförmig,formadj:wellenförmig');
+opp('formadj:gerade','formadj:gebogen,formadj:geschwungen,formadj:schief,formadj:wellenförmig');
+opp('formadj:symmetrisch','formadj:schief,formadj:unregelmäßig');
+
+card({id:'material',tab:'aeusseres',p:'2',cat:'Material & Oberfläche',icon:'🧱',title:'Material',kind:'bare',mode:'multi',
+ words:'Holz;Metall;Kunststoff;Plastik;Glas;Stoff;Leder;Papier;Karton;Pappe;Gummi;Stein;Keramik;Porzellan;Wolle;Baumwolle;Plüsch;Nylon;Stahl;Eisen;Aluminium;Silikon;Filz;Kork;Bambus;Ton;Kupfer;Messing;Wachs;*Polyester=eine Kunstfaser;*Segeltuch=ein fester, dichter Stoff;*Kunstleder=Leder aus Kunststoff;*Schaumstoff=weiches, luftiges Material;*Fleece=weicher, warmer Kunststoffstoff;*Edelstahl=rostfreier Stahl;*Acryl=ein glasklarer Kunststoff;*Neopren=dehnbarer, wasserdichter Stoff;*Jeansstoff=fester Baumwollstoff;*Zinn=weiches, silbriges Metall;*Pergament=feines, durchscheinendes Papier;*Kristall=besonders klares Glas',
+ note:'Du darfst mehrere Materialien wählen, denn viele Dinge bestehen aus Holz und Metall oder aus Stoff und Kunststoff.',
+ tpl:["{Der} {Name} besteht aus {w}.","{Er} ist aus {w} gemacht.","{Er} ist aus {w} gefertigt.","Das Material ist {w}.","{Er} wurde aus {w} hergestellt.","Man erkennt sofort, dass {er} aus {w} besteht.","Hergestellt wurde {er} aus {w}."]});
+card({id:'ob',tab:'aeusseres',p:'2',icon:'🔆',title:'Oberfläche (so sieht sie aus)',
+ words:'glatt;rau;glänzend;matt;uneben;glitzernd;schimmernd;lackiert;poliert;gebürstet;glasiert;genoppt;geriffelt;gerillt;rutschfest;beschichtet;gummiert;samtig;wasserabweisend;*spiegelglatt=so glatt, dass man sich darin spiegelt;*gemasert=mit feinen Linien, wie sie im Holz wachsen;*seidenmatt=leicht glänzend;*hochglänzend=stark glänzend;*rissig=mit feinen Sprüngen;*porös=mit vielen kleinen Löchern;*griffig=gut zu greifen;*aufgeraut=absichtlich rau gemacht',
+ tpl:["{Sein}e Oberfläche ist {w}.","{Er} hat eine {w:e} Oberfläche.","Die Oberfläche wirkt {w}.","Außen ist {er} {w}.","Auffällig ist {sein}e {w:e} Oberfläche.","Die Außenseite ist {w}."]});
+card({id:'anf',tab:'aeusseres',p:'2',icon:'✋',title:'Wie fühlt er sich an?',
+ words:'weich;hart;kalt;warm;kuschelig;flauschig;samtig;kratzig;klebrig;glitschig;seidig;biegsam;elastisch;fest;zart;*geschmeidig=weich und biegsam;*anschmiegsam=schmiegt sich an;*spröde=trocken und brüchig;*handschmeichlerisch=liegt angenehm in der Hand;*pelzig=wie ein Fell;*gummiartig=wie Gummi;*stachelig=mit kleinen Spitzen;*piksig=sticht ein wenig',
+ tpl:["{Er} fühlt sich {w} an.","Wenn man {ihn} anfasst, spürt man: {Er} ist {w}.","Beim Anfassen fühlt {er} sich {w} an.","{Sein}e Oberfläche fühlt sich {w} an.","In der Hand ist {er} {w}.","Man merkt sofort, dass {er} {w} ist."]});
+opp('material:Metall,material:Stahl,material:Eisen,material:Edelstahl,material:Aluminium,material:Kupfer,material:Messing,material:Stein,material:Glas,material:Kristall,material:Keramik,material:Porzellan,material:Ton,material:Zinn','anf:weich,anf:kuschelig,anf:flauschig,anf:samtig,anf:pelzig,anf:anschmiegsam');
+opp('material:Plüsch,material:Fleece,material:Schaumstoff,material:Wolle,material:Filz','anf:hart,anf:kalt,anf:spröde');
+opp('ob:glatt,ob:spiegelglatt,ob:poliert,ob:glänzend,ob:hochglänzend','anf:kratzig,anf:piksig,anf:stachelig');
+opp('ob:rau,ob:aufgeraut,ob:uneben','anf:seidig,anf:samtig');
+opp('ob:samtig','anf:hart,anf:kratzig,anf:spröde');
+
+const COLORS='rot;blau;grün;gelb;orange;violett;lila;rosa;pink;braun;schwarz;weiß;grau;beige;türkis;silber;gold;hellblau;dunkelblau;hellgrün;dunkelgrün;hellgrau;dunkelgrau;*himmelblau=blau wie der Himmel;*marineblau=sehr dunkles Blau;*königsblau=kräftiges, tiefes Blau;*knallrot=leuchtend rot;*weinrot=dunkles Rot;*kirschrot=wie eine reife Kirsche;*bordeauxrot=sehr dunkles Weinrot;*signalrot=auffallend leuchtend rot;*tannengrün=dunkles, kräftiges Grün;*olivgrün=gelbliches, dunkles Grün;*moosgrün=gedecktes Grün;*neongrün=grell leuchtendes Grün;*smaragdgrün=edles, tiefes Grün;*zitronengelb=hell und frisch gelb;*senfgelb=dunkles, erdiges Gelb;*terrakotta=rötliches Braun wie gebrannter Ton;*kupferfarben=rötlich glänzend;*bronzefarben=dunkelgolden;*perlmuttfarben=zart schimmernd;*cremefarben=helles Gelblich-Weiß;*elfenbeinfarben=gelbliches Weiß;*kohlschwarz=tiefschwarz;*schneeweiß=ganz weiß;*anthrazit=sehr dunkles Grau;*taubengrau=helles, weiches Grau;*lavendelfarben=helles Violett;*flieder=helles Violett;*petrol=dunkles Blaugrün;*khaki=graubraun-grün;*korallenrot=Rot mit Orange;*schokobraun=dunkles, warmes Braun;*nussbraun=mittleres Braun';
+card({id:'hauptf',tab:'aeusseres',p:'2',cat:'Farbe & Muster',icon:'🎨',title:'Hauptfarbe',words:COLORS,
+ tpl:["{Er} ist {w}.","{Sein}e Farbe ist {w}.","{Er} hat eine {w:e} Farbe.","Die Hauptfarbe ist {w}.","{Er} sieht {w} aus.","Von außen ist {er} {w}.","Auffällig ist {sein}e {w:e} Farbe.","{Er} ist überwiegend {w}."]});
+card({id:'nebenf',tab:'aeusseres',p:'2',icon:'🖍️',title:'Weitere Farben (Streifen, Details …)',mode:'multi',needs:['hauptf'],needMsg:'Wähle zuerst eine Hauptfarbe, dann kannst du hier weitere Farben dazunehmen.',words:COLORS,
+ tpl:["Einzelne Teile sind {w}.","Manche Details sind {w}.","Dazu kommen {w:e} Akzente.","Zusätzlich gibt es {w:e} Stellen.","Als Kontrast wurden {w:e} Details gewählt.","Außerdem ist {er} teilweise {w}."]});
+card({id:'muster',tab:'aeusseres',p:'2',icon:'🔳',title:'Muster',
+ words:'einfarbig;gestreift;kariert;gepunktet;getupft;geblümt;gemustert;bunt;mehrfarbig;zweifarbig;dreifarbig;gesprenkelt;marmoriert;verziert;bedruckt;bemalt;*schillernd=wechselt die Farbe im Licht;*gemasert=mit Linien wie im Holz;*kunterbunt=ganz bunt;*buntscheckig=mit ganz vielen Farben;*ornamentiert=mit Verzierungen;*verschnörkelt=mit vielen geschwungenen Verzierungen;glitzernd;leuchtend',
+ tpl:["{Er} ist {w}.","Optisch wirkt {er} {w}.","Das Muster: {Er} ist {w}.","{Er} sieht {w} aus.","Auf den ersten Blick erkennt man: {Er} ist {w}."]});
+card({id:'sinne',tab:'aeusseres',p:'2',icon:'👃',title:'Geruch & Geräusche',kind:'phrase',mode:'multi',
+ words:'riecht nach Leder;riecht nach Gummi;riecht nach Plastik;riecht nach frischem Holz;duftet nach Vanille;riecht neu;riecht gar nicht;klappert beim Gehen;klappert leise;klingelt laut;quietscht ein bisschen;knistert beim Anfassen;rasselt beim Schütteln;klickt beim Schließen;summt leise;macht kaum Geräusche;klingt hell;klingt dumpf;*knarrt beim Öffnen=macht ein altes Holzgeräusch;*surrt leise=macht ein gleichmäßiges, leises Geräusch;*tickt gleichmäßig=macht regelmäßig leise Geräusche wie eine Uhr;*duftet angenehm=riecht gut',
+ note:'Nicht jeder Gegenstand riecht oder klingt. Überspringe diese Karte einfach, wenn dir nichts einfällt.',
+ tpl:["{Er} {w}.","Typisch für {ihn} ist: {Er} {w}.","Wenn man {ihn} benutzt, merkt man, dass {er} {w}.","Man erkennt {ihn} auch daran, dass {er} {w}."]});
+opp('muster:einfarbig','nebenf:'+COLORS.split(';').map(x=>parseRaw(x).w).join(',nebenf:'));
+COLORS.split(';').forEach(x=>{const w=parseRaw(x).w;opp('hauptf:'+w,'nebenf:'+w);});
+
+/* ===== Teile & Aufbau (3), Gebrauch (4), Besonderes (5) ===== */
+const T_TEILE=["{Der} {Name} hat {w:acc}.","{Er} besitzt {w:acc}.","{Er} ist mit {w:dat} ausgestattet.","{Er} verfügt über {w:acc}.","Außerdem gibt es {w:acc}.","{Am} {Name} findet man {w:acc}.","Bei genauem Hinsehen entdeckt man {w:acc}.","{Er} ist mit {w:dat} versehen."];
+const TNOTE='Wähle die Teile, die dein Gegenstand wirklich hat. Du darfst mehrere nehmen. Passt die Gruppe nicht, probiere die nächste Teile-Karte.';
+
+card({id:'tbehaelter',tab:'teile',p:'3',cat:'Teile des Gegenstands (öffne die passende Gruppe)',icon:'🎒',title:'Teile: Taschen, Behälter & Dosen',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Reißverschluss|m;Henkel|m;Tragegriff|m;Schulterriemen|p;Außentasche|f;Innentasche|f;Seitentasche|f;Hauptfach|n;Vorderfach|n;Netztasche|f;Fach|n;Klappe|f;Deckel|m;Verschluss|m;Klettverschluss|m;Druckknopf|m;Schnalle|f;Schlaufe|f;Gummiband|n;Boden|m;Futter|n;Rückenpolster|n;Brustgurt|m;Reflektor|m;Schraubverschluss|m;Namensschild|n;Anhänger|m;Kordel|f;*Spannriemen|p=Riemen, die den Inhalt festhalten;*Bügelverschluss|m=Verschluss mit einem Metallbügel;*Karabiner|m=Haken zum Einklinken;*Ösen|p=kleine Metallringe in Löchern;*Steppnaht|f=eine feste, sichtbare Naht;*Unterteilung|f=Trennwand im Inneren;*Trageschlaufe=Schlaufe zum Tragen|f;*Sicherheitsverschluss=Verschluss, der nicht von selbst aufgeht|m'});
+card({id:'tfahr',tab:'teile',p:'3',icon:'🚲',title:'Teile: Fahrzeuge & Sportgeräte',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Rahmen|m;Lenker|m;Sattel|m;Pedale|p;Kette|f;Rad|n;Räder|p;Reifen|p;Speichen|p;Bremse|f;Klingel|f;Licht|n;Schutzblech|n;Gepäckträger|m;Ständer|m;Gangschaltung|f;Ventil|n;Griff|m;Trittbrett|n;Deck|n;Achse|f;Rolle|f;Netz|n;Naht|f;Schnürung|f;Sohle|f;*Federgabel|f=Gabel, die Stöße abfedert;*Kettenblatt|n=großes Zahnrad bei den Pedalen;*Nabe|f=die Mitte des Rades;*Rückstrahler|m=reflektiert das Licht von Autos;*Dynamo|m=erzeugt Strom fürs Licht;*Felge|f=Metallring des Rades;*Ritzel|n=kleines Zahnrad hinten;*Bremshebel|m=Hebel am Lenker;*Mantel|m=äußere Hülle des Reifens;*Schlauch|m=Luftschlauch im Reifen;*Gummigriff=Griff aus weichem Gummi|m'});
+card({id:'ttechnik',tab:'teile',p:'3',icon:'📱',title:'Teile: Geräte & Technik',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Bildschirm|m;Display|n;Taste|f;Knopf|m;Schalter|m;Lautsprecher|m;Kamera|f;Akku|m;Batterie|f;Batteriefach|n;Kabel|n;Stecker|m;Ladebuchse|f;Antenne|f;Gehäuse|n;Zeiger|m;Ziffernblatt|n;Armband|n;Glas|n;Krone|f;Lampe|f;Glühbirne|f;Linse|f;Mikrofon|n;Speicherkarte|f;Tastatur|f;Regler|m;*Sensor|m=misst etwas;*Touchscreen|m=Bildschirm, den man mit dem Finger bedient;*Leuchtdiode|f=kleine, helle Lampe (LED);*Uhrwerk|n=das Innenleben einer Uhr;*Schnittstelle|f=Anschluss für andere Geräte;*Solarzelle|f=gewinnt Strom aus Licht;*Drehknopf=Knopf, den man dreht|m;*Kopfhöreranschluss=Buchse für Kopfhörer|m'});
+card({id:'tschreib',tab:'teile',p:'3',icon:'✏️',title:'Teile: Schreib- & Schulsachen',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Mine|f;Spitze|f;Schaft|m;Kappe|f;Clip|m;Radiergummi|m;Feder|f;Tintenpatrone|f;Druckknopf|m;Skala|f;Zentimeterstriche|p;Klinge|f;Spitzer|m;Behälter|m;Deckel|m;Umschlag|m;Seite|f;Heftklammer|f;Rücken|m;Rand|m;Einband|m;Lesebändchen|n;Ecke|f;Gummiband|n;Etikett|n;Deckblatt|n;Kugel|f;Hülle|f;Lasche|f;*Gradeinteilung|f=Striche mit Zahlen zum Messen von Winkeln;*Falz|m=der Knick in der Mitte;*Griffzone|f=die Stelle, an der man hält;*Lineatur|f=die Linien im Heft;Kästchen|p;*Schreibspitze=Spitze, mit der man schreibt|f'});
+card({id:'tspiel',tab:'teile',p:'3',icon:'🧸',title:'Teile: Spielzeug & Kuscheltiere',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Kopf|m;Körper|m;Arme|p;Beine|p;Ohren|p;Augen|p;Nase|f;Schnauze|f;Fell|n;Schwanz|m;Pfoten|p;Schleife|f;Füllung|f;Naht|f;Etikett|n;Knopfaugen|p;Mütze|f;Kleidung|f;Haare|p;Räder|p;Bausteine|p;Anleitung|f;Verpackung|f;Spielfiguren|p;Würfel|m;Spielbrett|n;*Schnurrhaare|p=die langen Haare an der Schnauze;*Stimmbox|f=ein eingebauter Tongeber;*Glasaugen=Augen aus Glas|p;*Noppen|p=kleine Erhebungen auf Bausteinen;*Gelenke|p=bewegliche Verbindungen;*Steckverbindung=Teile, die man zusammensteckt|f;*Aufziehschlüssel|m=damit zieht man das Spielzeug auf;Stoffherz|n'});
+card({id:'thaus',tab:'teile',p:'3',icon:'☕',title:'Teile: Haushalt & Alltag',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Henkel|m;Rand|m;Boden|m;Deckel|m;Griff|m;Klinge|f;Schneide|f;Schraube|f;Bügel|m;Schirmstock|m;Spannstäbe|p;Bespannung|f;Knopf|m;Öse|f;Schlüsselbart|m;Schlüsselring|m;Anhänger|m;Ausguss|m;Tülle|f;Fuß|m;Schirm|m;Gestell|n;Ständer|m;Aufhängung|f;Kordel|f;Gummiring|m;Gewinde|n;Haken|m;*Verschlusskappe=Kappe zum Verschließen|f;*Scharnier|n=bewegliche Verbindung (wie bei einer Tür);*Gelenk|n=bewegliche Verbindung;*Dichtung|f=verhindert, dass etwas ausläuft;*Sprühkopf=Teil, aus dem die Flüssigkeit spritzt|m;*Fassung|f=Halterung für eine Glühbirne;Tragegriff|m'});
+card({id:'tkleid',tab:'teile',p:'3',icon:'🧢',title:'Teile: Kleidung & Schmuck',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Kragen|m;Ärmel|p;Kapuze|f;Tasche|f;Saum|m;Naht|f;Knopf|m;Reißverschluss|m;Gürtel|m;Bündchen|n;Sohle|f;Absatz|m;Zunge|f;Schnürsenkel|p;Schirm|m;Bommel|m;Kette|f;Anhänger|m;Verschluss|m;Perle|f;Stein|m;Gravur|f;Futter|n;Klettverschluss|m;*Fassung|f=Halterung für einen Stein;*Glied|n=ein Teil einer Kette;*Krempe|f=der Rand eines Huts;*Stulpe|f=umgeschlagener Rand;*Applikation|f=aufgenähtes Bild;*Stickerei|f=mit Faden gestickte Verzierung;*Gummizug|m=elastisches Band'});
+card({id:'tmoebel',tab:'teile',p:'3',icon:'🕯️',title:'Teile: Möbel & Dekoration',kind:'noun',mode:'multi',note:TNOTE,tpl:T_TEILE,
+ words:'Sitzfläche|f;Lehne|f;Beine|p;Platte|f;Schublade|f;Tür|f;Regalbrett|n;Griff|m;Fuß|m;Schirm|m;Sockel|m;Ständer|m;Rahmen|m;Glasscheibe|f;Docht|m;Wachs|n;Henkel|m;Hals|m;Bauch|m;Standfläche|f;Kante|f;Ecke|f;Rückwand|f;Polster|n;Armlehne|f;Quaste|f;Verzierung|f;*Mündung|f=die Öffnung einer Vase;*Pendel|n=schwingt hin und her;*Zierleiste|f=schmückender Streifen;*Beschlag|m=Metallteil an Möbeln;*Scharnier|n=bewegliche Verbindung;*Schnitzerei|f=ins Holz geschnitzte Verzierung;*Fassung|f=Halterung für eine Glühbirne'});
+
+card({id:'aufbau',tab:'teile',p:'3',cat:'Aufbau: Wo ist was?',icon:'🧭',title:'Aufbau und Lage der Teile',kind:'free',
+ note:'Mit diesen Satzgerüsten beschreibst du, wo etwas sitzt. Die Lücken ___ füllst du später mit deinen Teilen. Wörter wie „oben“ oder „im Inneren“ findest du im Bereich Extras.',
+ tpl:["Von oben nach unten betrachtet sieht man zuerst ___, dann ___ und zuletzt ___.","Auf der Oberseite befindet sich ___.","An der Unterseite gibt es ___.","Auf der Vorderseite ist ___ angebracht.","Auf der Rückseite sieht man ___.","Links und rechts befinden sich ___.","Im Inneren findet man ___.","Außen sind ___ zu sehen.","In der Mitte sitzt ___.","Am oberen Rand ist ___, am unteren Ende ___.","Von außen nach innen betrachtet kommt zuerst ___, danach ___.","Zwischen ___ und ___ befindet sich ___.","Neben ___ liegt ___."]});
+card({id:'teilfrei',tab:'teile',p:'3',icon:'🔬',title:'Ein Teil genauer beschreiben',kind:'free',
+ note:'Wähle ein wichtiges Teil und beschreibe es genau. Diese Satzgerüste helfen dir dabei.',
+ tpl:["Der ___ besteht aus ___ und ist ___ cm lang.","Die ___ ist ___ und ___.","Der ___ lässt sich ___.","Am ___ hängt ___.","Das ___ schützt ___ vor ___.","Mit dem ___ kann man ___.","Der ___ hält ___ zusammen.","Jeder ___ ist ___ und ___.","Das ___ ist so groß wie ___."]});
+
+/* ================= GEBRAUCH (Absatz 4) ================= */
+card({id:'zweck1',tab:'gebrauch',p:'4',cat:'Wozu und wie?',icon:'🛠️',title:'Wozu dient er? (ein Wort)',kind:'inf',mode:'multi',
+ words:'schreiben;zeichnen;malen;lesen;rechnen;messen;tragen;aufbewahren;transportieren;ordnen;sammeln;schützen;spielen;kuscheln;fahren;basteln;kochen;trinken;essen;hören;telefonieren;fotografieren;leuchten;wärmen;schneiden;kleben;verpacken;sitzen;*dekorieren=verschönern;*musizieren=Musik machen;*konstruieren=etwas aufbauen;*entspannen=zur Ruhe kommen;*verstauen=Dinge platzsparend unterbringen',
+ tpl:["{Der} {Name} dient zum {w:N}.","Man benutzt {ihn} zum {w:N}.","{Er} wird zum {w:N} verwendet.","{Er} ist zum {w:N} gedacht.","Mit {ihm} kann man {w}.","{Er} hilft beim {w:N}.","Hauptsächlich verwendet man {ihn} zum {w:N}.","{Er} eignet sich gut zum {w:N}.","Dafür ist {er} gemacht: zum {w:N}."]});
+card({id:'zweck2',tab:'gebrauch',p:'4',icon:'🎯',title:'Wozu dient er? (mit „um … zu“)',kind:'phrase',mode:'multi',
+ note:'Hier lernst du den Satzbau mit „um … zu“. Das „zu“ steht direkt vor dem letzten Verb.',
+ words:'Stifte aufzubewahren;Hefte und Bücher zu transportieren;Sachen zu ordnen;die Jause mitzunehmen;Getränke kühl zu halten;Dinge vor Nässe zu schützen;schneller unterwegs zu sein;die Uhrzeit abzulesen;Nachrichten zu schreiben;Musik zu hören;Fotos zu machen;im Dunkeln etwas zu sehen;sich warm zu halten;Wasser zu trinken;Geschenke zu verpacken;*Messungen durchzuführen=etwas genau messen;*Erinnerungen aufzubewahren=Erinnerungen behalten;*Ordnung zu halten=alles an seinem Platz lassen;*sich zu verkleiden=eine andere Rolle anzuziehen',
+ tpl:["Man benutzt {ihn}, um {w}.","{Er} dient dazu, {w}.","Wir verwenden {ihn}, um {w}.","Ich nehme {ihn} mit, um {w}.","{Er} ist dafür da, {w}.","Wozu man {ihn} braucht? Um {w}."]});
+card({id:'handhab',tab:'gebrauch',p:'4',icon:'🤲',title:'Wie benutzt man ihn?',kind:'inf',mode:'multi',
+ words:'öffnen;schließen;aufklappen;zusammenklappen;aufschrauben;zuschrauben;tragen;umhängen;aufsetzen;abnehmen;anziehen;aufziehen;einschalten;ausschalten;aufladen;festhalten;drehen;drücken;schieben;ziehen;stapeln;falten;verstellen;waschen;zerlegen;zusammenbauen;befüllen;leeren;mitnehmen;*ausklappen=nach außen klappen;*einklappen=nach innen klappen;*ausfahren=nach außen schieben;*justieren=genau einstellen;*arretieren=feststellen, damit er hält;*entriegeln=den Verschluss lösen;*verriegeln=den Verschluss schließen;*verstauen=platzsparend unterbringen',
+ tpl:["Man kann {ihn} {w}.","Ganz leicht lässt {er} sich {w}.","Mit einem Handgriff kann man {ihn} {w}.","{Er} lässt sich {w}.","Wenn man will, kann man {ihn} {w}.","Praktisch: Man kann {ihn} {w}.","Dank {sein}er Bauweise lässt {er} sich {w}."]});
+opp('handhab:öffnen,handhab:aufklappen,handhab:aufschrauben,handhab:ausklappen,handhab:entriegeln,handhab:befüllen','handhab:schließen,handhab:zusammenklappen,handhab:zuschrauben,handhab:einklappen,handhab:verriegeln,handhab:leeren');
+opp('handhab:einschalten','handhab:ausschalten');
+opp('handhab:aufsetzen,handhab:anziehen','handhab:abnehmen');
+card({id:'benutzer',tab:'gebrauch',p:'4',icon:'👥',title:'Wer benutzt ihn?',kind:'phrase',mode:'multi',
+ words:'Kinder;Schüler;Schülerinnen und Schüler;Jugendliche;Erwachsene;Sportler;Musiker;Künstler;Wanderer;Radfahrer;Bastler;Lehrer;Handwerker;Leseratten;Sammler;Eltern;Großeltern;*Tüftler=Menschen, die gern herumprobieren;*Entdecker=Menschen, die Neues finden;*Abenteurer=Menschen, die gern Spannendes erleben;*Forscher=Menschen, die etwas genau untersuchen;*Hobbyfotografen=Menschen, die zum Spaß fotografieren',
+ tpl:["Besonders {w} benutzen {ihn}.","{w} verwenden {ihn} gern.","Für {w} ist {er} besonders nützlich.","Gedacht ist {er} vor allem für {w}.","{w} brauchen {ihn} oft."]});
+card({id:'ort',tab:'gebrauch',p:'4',icon:'📍',title:'Wo benutzt man ihn?',kind:'phrase',mode:'multi',
+ words:'in der Schule;zu Hause;im Garten;im Freien;auf dem Schulweg;im Unterricht;unterwegs;im Urlaub;beim Sport;im Zimmer;in der Küche;bei jedem Wetter;*im Alltag=an ganz normalen Tagen;*überall=an jedem Ort;*in Innenräumen=drinnen, in Räumen',
+ tpl:["Man benutzt {ihn} {w}.","Verwendet wird {er} meistens {w}.","{w} ist {er} besonders nützlich.","Ich nehme {ihn} {w} mit."]});
+card({id:'zeit',tab:'gebrauch',p:'4',icon:'🕒',title:'Wann benutzt man ihn?',kind:'phrase',mode:'multi',
+ words:'täglich;jeden Tag;am Wochenende;in den Ferien;jeden Morgen;am Abend;im Sommer;im Winter;nach der Schule;manchmal;oft;selten;*tagtäglich=jeden einzelnen Tag;*regelmäßig=immer wieder;*bei Bedarf=wenn man ihn braucht;*vorzugsweise=am liebsten',
+ tpl:["Man benutzt {ihn} {w}.","Ich verwende {ihn} {w}.","Gebraucht wird {er} {w}.","{w} kommt {er} zum Einsatz."]});
+opp('zeit:täglich,zeit:jeden Tag,zeit:tagtäglich,zeit:oft','zeit:selten,zeit:manchmal');
+opp('zeit:im Sommer','zeit:im Winter');
+opp('zeit:selten','zeit:regelmäßig,zeit:tagtäglich');
+
+/* ================= BESONDERES (Absatz 5) ================= */
+card({id:'eig',tab:'besonders',p:'5',cat:'Eigenschaften & Zustand',icon:'💎',title:'Eigenschaften',mode:'multi',
+ words:'robust;stabil;praktisch;nützlich;wertvoll;zerbrechlich;wasserfest;wetterfest;strapazierfähig;modern;altmodisch;bequem;platzsparend;beliebt;teuer;billig;einzigartig;selten;hübsch;zuverlässig;sicher;*widerstandsfähig=hält viel aus;*unverwüstlich=nicht kaputt zu kriegen;*empfindlich=geht leicht kaputt;*fragil=zart und leicht zerbrechlich;*wasserdicht=lässt kein Wasser durch;*kostbar=sehr wertvoll;*vielseitig=für vieles zu gebrauchen;*funktional=gut für den Zweck gemacht;*ergonomisch=gut für den Körper geformt;*langlebig=hält viele Jahre;*pflegeleicht=macht wenig Arbeit;*hochwertig=von bester Qualität;*antik=sehr alt und wertvoll;*originell=ideenreich und ungewöhnlich;*handgefertigt=von Hand gemacht;*individuell=nur dieses eine Mal so vorhanden',
+ tpl:["{Er} ist {w}.","{Er} ist außerdem {w}.","Besonders {w} ist {er}.","Man kann sagen, dass {er} {w} ist.","{Er} gilt als {w}.","Für mich ist {er} {w}.","Positiv fällt auf, dass {er} {w} ist.","Bei genauerem Hinsehen merkt man, dass {er} {w} ist."]});
+opp('eig:robust,eig:stabil,eig:strapazierfähig,eig:widerstandsfähig,eig:unverwüstlich,eig:langlebig','eig:zerbrechlich,eig:empfindlich,eig:fragil');
+opp('eig:modern','eig:altmodisch,eig:antik');
+opp('eig:wertvoll,eig:kostbar,eig:hochwertig,eig:teuer','eig:billig');
+opp('eig:wasserfest,eig:wasserdicht,eig:wetterfest','eig:empfindlich');
+opp('eig:unverwüstlich,eig:wasserdicht','eig:fragil');
+card({id:'zustand',tab:'besonders',p:'5',icon:'🕰️',title:'In welchem Zustand ist er?',
+ words:'neu;neuwertig;gut erhalten;gebraucht;alt;abgenutzt;zerkratzt;verbeult;verschmutzt;fleckig;kaputt;repariert;makellos;unbeschädigt;ausgeblichen;rostig;abgegriffen;angestoßen;*tadellos=ohne Fehler;*unversehrt=ohne Schaden;*intakt=in Ordnung, nicht kaputt;*ramponiert=stark beschädigt;*zerschlissen=durch langes Benutzen kaputt;*schäbig=alt und abgenutzt;*ausgefranst=Fäden hängen heraus;*verwittert=von Wind und Wetter alt geworden;*lädiert=leicht beschädigt;*abgewetzt=an einigen Stellen dünn geworden;*fabrikneu=ganz frisch aus der Fabrik;*funktionstüchtig=funktioniert gut;*angeschlagen=leicht beschädigt',
+ tpl:["{Er} ist {w}.","Zurzeit ist {er} {w}.","Man sieht {ihm} an, dass {er} {w} ist.","{Sein} Zustand: {w}.","Insgesamt macht {er} einen {w:en} Eindruck.","Schon beim ersten Blick sieht man: {Er} ist {w}."]});
+opp('zustand:kaputt,zustand:zerschlissen,zustand:schäbig','eig:zuverlässig,eig:praktisch,eig:nützlich,eig:robust,eig:stabil,eig:hochwertig');
+opp('zustand:neu,zustand:neuwertig,zustand:fabrikneu','eig:antik');
+opp('zustand:neu,zustand:neuwertig,zustand:fabrikneu','eindruck:altmodisch');
+card({id:'besonders',tab:'besonders',p:'5',cat:'Das Besondere',icon:'⭐',title:'Das Besondere an ihm',kind:'phrase',mode:'multi',
+ note:'Was macht deinen Gegenstand einzigartig? Die Wörter passen in Sätze mit „dass“.',
+ words:'ein Geheimfach hat;im Dunkeln leuchtet;sich zusammenklappen lässt;wasserdicht ist;mir Glück bringt;einen Namen eingraviert hat;ein Unikat ist;von Hand gemacht wurde;nicht kaputtgeht;sich leicht verstauen lässt;einen lustigen Anhänger hat;immer gut riecht;viel Platz bietet;mich überallhin begleitet;mit meinem Namen beschriftet ist;besonders leise ist;ganz allein von mir gestaltet wurde;*ein Einzelstück ist=es gibt ihn nur einmal;*sich dem Körper anpasst=er passt sich der Form des Körpers an;*über viele Jahre hält=er bleibt lange brauchbar;einen Aufdruck mit meinem Lieblingsmotiv hat;*aus recyceltem Material besteht=aus wiederverwerteten Stoffen;*sich in der Größe verstellen lässt=man kann ihn größer oder kleiner stellen',
+ tpl:["Das Besondere an {ihm} ist, dass {er} {w}.","Auffällig ist, dass {er} {w}.","Praktisch ist, dass {er} {w}.","Eine Besonderheit ist, dass {er} {w}.","Man sollte wissen, dass {er} {w}.","Ein Vorteil ist, dass {er} {w}.","Toll finde ich, dass {er} {w}.","Nicht jeder weiß, dass {er} {w}."]});
+
+/* ===== Schluss (6), Extras ===== */
+card({id:'mag1',tab:'schluss',p:'6',cat:'Was er mir bedeutet',icon:'💖',title:'Das mag ich an {ihm}',kind:'phrase',mode:'multi',
+ note:'Die Wörter passen in Sätze mit „weil“ und „dass“. Das Verb steht dann am Ende.',
+ words:'so praktisch ist;mich an schöne Zeiten erinnert;mir Glück bringt;mich jeden Tag begleitet;immer dabei ist;so schön aussieht;von meiner Oma stammt;mir viel Freude macht;mir beim Lernen hilft;einfach zu verwenden ist;so gut zu mir passt;etwas ganz Besonderes ist;nie kaputtgeht;so viel Platz bietet;mich zum Lachen bringt;mich tröstet;*mir ein Gefühl von Geborgenheit gibt=ich fühle mich beschützt;mich an unsere Urlaube erinnert;*unersetzlich für mich geworden ist=ich könnte ihn nicht ersetzen;*mich auf Schritt und Tritt begleitet=überallhin mitkommt;*ein Stück Heimat für mich ist=er erinnert mich an mein Zuhause;*mir Sicherheit gibt=ich fühle mich geschützt',
+ tpl:["Ich mag {ihn}, weil {er} {w}.","Besonders gern habe ich {ihn}, weil {er} {w}.","Ich schätze {ihn} sehr, weil {er} {w}.","Mir gefällt an {ihm}, dass {er} {w}.","{Er} ist mir wichtig, weil {er} {w}.","Ich möchte {ihn} nie hergeben, weil {er} {w}."]});
+card({id:'bedeutung',tab:'schluss',p:'6',icon:'🌟',title:'Was bedeutet er mir?',mode:'multi',
+ words:'wichtig;wertvoll;unersetzlich;unverzichtbar;kostbar;einzigartig;vertraut;besonders;toll;großartig;zuverlässig;*unbezahlbar=so wertvoll, dass man ihn mit Geld nicht aufwiegen kann;*unentbehrlich=ohne ihn geht es nicht;*liebgewonnen=mit der Zeit ans Herz gewachsen',
+ tpl:["{Er} ist mir {w}.","Für mich ist {er} {w}.","Ich finde {ihn} {w}.","{Er} ist für mich {w}.","Mir ist {er} besonders {w}.","Wenn ich {ihn} ansehe, weiß ich: {Er} ist {w}."]});
+card({id:'schluss1',tab:'schluss',p:'6',cat:'So höre ich auf',icon:'🏁',title:'Schluss – Abschlusssätze',kind:'free',
+ note:'Hake ein bis zwei Abschlusssätze an, die zu deinem Text passen.',
+ tpl:["Alles in allem ist {er} mein wichtigster Begleiter im Alltag.","Deshalb ist {mein} {Name} für mich unverzichtbar.","Ich bin froh, dass ich {ihn} habe.","Ohne {ihn} würde mir etwas fehlen.","Ich würde {ihn} gegen nichts eintauschen.","Zusammenfassend kann man sagen: {Mein} {Name} ist ein treuer Begleiter, den ich nicht mehr hergeben möchte.","Das war meine Beschreibung. Ich hoffe, du kannst dir {meinen} {Name} jetzt gut vorstellen.","Wenn ich {ihn} sehe, muss ich einfach lächeln.","Ich werde {ihn} bestimmt noch lange behalten."]});
+opp('mag1:nie kaputtgeht','zustand:kaputt,zustand:zerschlissen');
+opp('mag1:so schön aussieht','zustand:schäbig,zustand:ramponiert');
+
+/* ---------- Extras: Wörter zum Einfügen ---------- */
+const EXTRAS=[
+ {id:'verben',icon:'🔄',title:'Verben statt „ist“ und „hat“',note:'Mit abwechslungsreichen Verben klingt dein Text lebendig. Tausche zum Beispiel „Er hat einen Henkel“ gegen „Am oberen Ende befindet sich ein Henkel“.',
+  items:['besteht aus','ist ausgestattet mit','sieht aus','wirkt','besitzt','gehört dazu','dient als','dient zum','wird benutzt','wird verwendet','kommt zum Einsatz','passt in','*verfügt über=hat zur Verfügung','*setzt sich zusammen aus=besteht aus mehreren Teilen','*befindet sich=ist an einem bestimmten Ort','*fällt auf=sieht man sofort','*erinnert an=sieht aus wie','*ähnelt=sieht ähnlich aus wie','*umschließt=ist rundherum um etwas','*umgibt=liegt rundherum','*bedeckt=liegt darüber','*verbindet=hält zwei Teile zusammen','*hält zusammen','*ragt heraus=steht nach außen hervor','*steht hervor','*schützt','*ermöglicht=macht möglich','*erleichtert=macht einfacher','*glänzt','*funkelt=glitzert hell','*schimmert=glänzt sanft','*glitzert','*lässt sich öffnen','*ist versehen mit','*ist angebracht=ist befestigt','*ist befestigt an','*ist verstärkt mit=ist besonders fest gemacht mit']},
+ {id:'ort',icon:'📍',title:'Ortswörter – wo ist was?',note:'Diese Wörter sagen genau, wo ein Teil sitzt. Wähle sie für die Beschreibung von oben nach unten oder von außen nach innen.',
+  items:['oben','unten','in der Mitte','auf','über','unter','neben','zwischen','links','rechts','vorne','hinten','innen','außen','ganz oben','ganz unten','an der Seite','auf der Vorderseite','auf der Rückseite','in der Ecke','am Rand','*oberhalb=weiter oben als','*unterhalb=weiter unten als','*seitlich=an der Seite','*rundherum=ringsum','*im Inneren','*auf der Außenseite','*an der Oberseite','*an der Unterseite','*am oberen Ende','*am unteren Ende','*am Rand entlang','*mittendrin','*diagonal=schräg über Eck','*quer=von einer Seite zur anderen','*waagrecht=so wie der Horizont','*senkrecht=so wie ein Pfahl','*schräg','*parallel zu=gleichlaufend mit','*gegenüber','*dahinter','*davor','*darunter','*darüber']},
+ {id:'uebergang',icon:'🔗',title:'Übergangswörter – damit der Text fließt',
+  items:['zuerst','dann','danach','außerdem','auch','und','aber','dazu','zum Schluss','manchmal','oft','deshalb','denn','weil','obwohl','*darüber hinaus=zusätzlich','*zudem=außerdem','*dazu kommt=noch etwas anderes','*im Gegensatz dazu','*dennoch=trotzdem','*hingegen=dagegen','*schließlich=am Ende','*vor allem=besonders','*insbesondere=besonders','*sowohl … als auch=beides','*einerseits … andererseits=zwei Seiten','*auf den ersten Blick','*bei näherem Hinsehen=wenn man genau schaut','*nicht zuletzt=und das ist auch wichtig','*kurz gesagt','*im Großen und Ganzen=insgesamt','*im Einzelnen=Stück für Stück','*genauer gesagt','*beispielsweise=zum Beispiel','*nämlich','*folglich=deshalb']},
+ {id:'mass',icon:'📏',title:'Maße, Mengen & Zahlenwörter',note:'Mit Zahlen wird die Beschreibung genau. Mit „ungefähr“ und „etwa“ darfst du auch schätzen.',
+  items:['Millimeter','Zentimeter','Meter','Gramm','Kilogramm','Liter','Länge','Breite','Höhe','Tiefe','Gewicht','ungefähr','etwa','circa','knapp','gut','rund','mindestens','höchstens','*Durchmesser=die Strecke quer durch die Mitte eines Kreises','*Umfang=die Länge der Linie rundherum','*Dicke=wie dick etwas ist','*Stärke=wie dick eine Schicht ist','*Fassungsvermögen=wie viel hineinpasst','*Rauminhalt=wie viel Platz drin ist','*Volumen=der Rauminhalt','*Millimeterarbeit=sehr genaue Arbeit','*zwei bis drei=eine ungefähre Zahl']},
+ {id:'bilder',icon:'🖼️',title:'Vergleiche – Bilder im Kopf',note:'Ein guter Vergleich zeigt mit einem Bild, wie etwas aussieht oder sich anfühlt. Ein bis zwei Vergleiche pro Text reichen.',
+  items:['so leicht wie eine Feder','so hart wie Stein','so glatt wie ein Spiegel','so bunt wie ein Regenbogen','so schwarz wie die Nacht','so scharf wie ein Messer','so rund wie ein Ball','so weich wie Watte','so dünn wie Papier','so groß wie eine Faust','*so schwer wie Blei','*so kalt wie Eis','*so zart wie Seide','*so glänzend wie Gold','*so klein wie eine Streichholzschachtel','*so lang wie ein Unterarm','*so leise wie eine Maus','*so robust wie ein Panzer','*so bunt wie ein Papagei','*wie neu','*so fest wie ein Fels','*so kratzig wie Stroh']},
+ {id:'fachw',icon:'⚙️',title:'Fachwörter für Teile & Bauweise',note:'Mit diesen Wörtern klingst du wie ein Profi. Die Erklärungen siehst du beim Antippen.',
+  items:['Gehäuse','Verschluss','Naht','Futter','Feder','Rahmen','Gestell','Achse','Halterung','*Gewinde=Rillen zum Schrauben','*Scharnier=bewegliche Verbindung (zum Beispiel bei Türen)','*Gelenk=bewegliche Verbindung','*Mechanismus=das Zusammenspiel der beweglichen Teile','*Konstruktion=wie etwas gebaut ist','*Bauweise=die Art, wie etwas gebaut ist','*Beschichtung=eine dünne Schicht außen','*Dichtung=verhindert, dass etwas ausläuft','*Hebel=Stab zum Bewegen von etwas','*Zahnrad=Rad mit Zähnen','*Griffmulde=Vertiefung zum Greifen','*Sicherung=schützt vor Unfällen oder Verlust','*Aufhängung=damit hängt man etwas auf','*Verstrebung=Stütze, die etwas fest macht','*Profil=Rillenmuster, zum Beispiel am Reifen','*Dämpfung=macht Stöße weicher','*Federung=nimmt Stöße auf']}
+];
+
+
+/* ===================== APP ===================== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='gegenstandsbeschreibung-baukasten-v1';
+const DEF=()=>({name:'',g:'m',sel:{},tick:{},text:'',chk:{},tab:'start'});
+let S=DEF();
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)S=Object.assign(DEF(),s);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+const TABS=[['start','🏠 Start'],['einl','🚪 Einleitung'],['aeusseres','🔷 Äußeres'],['teile','🔩 Teile'],['gebrauch','🛠️ Gebrauch'],['besonders','⭐ Besonderes'],['schluss','🏁 Schluss'],['extras','🧰 Extras'],['text','✍️ Mein Text']];
+const TABINFO={
+ einl:{t:'🚪 Einleitung – so fange ich an',i:'Was ist es, woher hast du ihn, seit wann gehört er dir? Wähle Wörter und hake die Sätze an, die dir gefallen.'},
+ aeusseres:{t:'🔷 Äußeres – Größe, Form, Material, Farbe',i:'Hier beschreibst du, wie der Gegenstand von außen aussieht und sich anfühlt. Bei den meisten Karten passt nur ein Wort, denn rund und eckig zugleich geht nicht. Was nicht zusammenpasst, wird grau.'},
+ teile:{t:'🔩 Teile & Aufbau',i:'Aus welchen Teilen besteht dein Gegenstand, und wo sitzen sie? Öffne die Gruppe, die zu deinem Gegenstand passt, und wähle die Teile aus.'},
+ gebrauch:{t:'🛠️ Gebrauch – wozu, wie, wer, wo, wann?',i:'Hier erklärst du, wofür man den Gegenstand braucht und wie man ihn benutzt. Probiere verschiedene Formulierungen aus.'},
+ besonders:{t:'⭐ Besonderes – Eigenschaften & Zustand',i:'Wie ist der Gegenstand beschaffen, in welchem Zustand ist er, und was macht ihn einzigartig?'},
+ schluss:{t:'🏁 Schluss – was er mir bedeutet',i:'Warum magst du den Gegenstand? Was bedeutet er dir? Hier darf deine Meinung stehen, und du beendest deinen Text rund.'}
+};
+const CHECKS=['Ich habe eine Einleitung geschrieben (Was ist es? Woher habe ich ihn? Wozu dient er?).','Ich beschreibe in fester Reihenfolge (von außen nach innen oder von oben nach unten).','__SPECIAL__','Ich habe genaue Wörter benutzt statt „schön“ und „toll“ (zum Beispiel „glänzend“, „handlich“).','Ich habe abwechslungsreiche Verben verwendet (besteht aus, befindet sich, verfügt über …).','Ich habe Maße oder Größenangaben genannt.','Mein Schluss sagt, was mir der Gegenstand bedeutet.','Alles steht im Präsens.','Ich habe Absätze gemacht, alle Lücken ___ ausgefüllt und die Rechtschreibung kontrolliert.'];
+const openSet=new Set(['einl1','groesse','material','zweck1','eig','mag1']);
+
+/* ---------- Sprache ---------- */
+const GI={m:0,f:1,n:2};
+const FM={der:['der','die','das'],den:['den','die','das'],dem:['dem','der','dem'],ein:['ein','eine','ein'],einen:['einen','eine','ein'],einem:['einem','einer','einem'],er:['er','sie','es'],ihn:['ihn','sie','es'],ihm:['ihm','ihr','ihm'],sein:['sein','ihr','sein'],mein:['mein','meine','mein'],meinen:['meinen','meine','mein'],meinem:['meinem','meiner','meinem'],am:['am','an der','am'],im:['im','in der','im'],zum:['zum','zur','zum'],vom:['vom','von der','vom'],beim:['beim','bei der','beim']};
+const cap=x=>x.charAt(0).toUpperCase()+x.slice(1);
+function objName(){return cap((S.name||'').trim())||'Gegenstand';}
+function fill(s){
+  const gi=GI[S.g]!==undefined?GI[S.g]:0;
+  return s.replace(/\{(\w+)\}/g,(x,k)=>{
+    if(k==='Name')return objName();
+    const low=k.charAt(0).toLowerCase()+k.slice(1);
+    if(FM[low]){const r=FM[low][gi];return k.charAt(0)!==low.charAt(0)?cap(r):r;}
+    return x;});
+}
+const UNDECL=new Set(['lila','rosa','pink','beige','türkis','khaki','petrol','orange','bordeaux','creme','flieder','anthrazit','terrakotta','gold','silber']);
+function ending(a,e){
+  const parts=a.split(' ');let last=parts.pop();
+  if(UNDECL.has(last))return a;
+  if(last==='hoch')last='hoh';
+  else if(last==='teuer')last='teur';
+  else if(/[^aeiouäöüy]el$/.test(last))last=last.slice(0,-2)+'l';
+  last=last.endsWith('e')?last+e.slice(1):last+e;
+  return parts.concat(last).join(' ');
+}
+const ART={nom:{m:'ein',f:'eine',n:'ein',p:''},acc:{m:'einen',f:'eine',n:'ein',p:''},dat:{m:'einem',f:'einer',n:'einem',p:''}};
+function fmt(it,m){
+  if(!m||m==='bare')return it.w;
+  if(m==='N')return cap(it.w);
+  if(m==='obj'){return ending(it.w,{m:'er',f:'e',n:'es'}[S.g]||'er');}
+  if(m==='objacc'){return ending(it.w,{m:'en',f:'e',n:'es'}[S.g]||'en');}
+  if(ART[m]){
+    let w=it.w;
+    if(m==='dat'&&it.g==='p'&&!/[ns]$/.test(w))w+='n';
+    const a=ART[m][it.g]||'';return (a?a+' ':'')+w;
+  }
+  return ending(it.w,m);
+}
+const joinList=a=>a.length<=1?(a[0]||''):a.slice(0,-1).join(', ')+' und '+a[a.length-1];
+function selItems(c){return (S.sel[c.id]||[]).map(w=>c.words.find(x=>x.w===w)).filter(Boolean);}
+function genSent(c,t,items){
+  let out=t;
+  if(c.kind!=='free')out=t.replace(/\{w(?::(\w+))?\}/g,(x,m)=>items.length?joinList(items.map(it=>fmt(it,m))):'___');
+  out=fill(out).replace(/\s{2,}/g,' ');
+  return out.charAt(0).toUpperCase()+out.slice(1);
+}
+const blanks=h=>h.replace(/___/g,'<span class="blank"></span>');
+
+/* ---------- Regeln ---------- */
+function isSel(tok){const k=tok.indexOf(':');return (S.sel[tok.slice(0,k)]||[]).includes(tok.slice(k+1));}
+function wordBlock(cid,w){
+  const tok=cid+':'+w;
+  for(const [A,B] of OPP){
+    if(A.includes(tok)){const b=B.find(x=>x!==tok&&isSel(x));if(b)return b;}
+    if(B.includes(tok)){const a=A.find(x=>x!==tok&&isSel(x));if(a)return a;}
+  }
+  return null;
+}
+function offReason(c){
+  if(c.offIf){const id=c.offIf.find(i=>(S.sel[i]||[]).length);if(id)return 'Das passt nicht zu deiner Wahl „'+fill(S.sel[id][0])+'“. Nimm sie bei der Karte „'+fill(CBY[id].title)+'“ wieder weg, dann geht es hier weiter.';}
+  if(c.needs&&c.needs.some(i=>!(S.sel[i]||[]).length))return c.needMsg||'Wähle zuerst eine andere Karte.';
+  return '';
+}
+function ready(c){return c.kind==='free'||(S.sel[c.id]||[]).length>0;}
+function normalize(){CARDS.forEach(c=>{if(offReason(c)){S.sel[c.id]=[];S.tick[c.id]=[];}});}
+function countSents(){let n=0;CARDS.forEach(c=>{if(!offReason(c)&&ready(c))n+=(S.tick[c.id]||[]).filter(i=>c.tpl[i]).length;});return n;}
+function buildText(){
+  return ['1','2','3','4','5','6'].map(p=>{
+    const out=[];
+    CARDS.filter(c=>c.p===p).forEach(c=>{
+      if(offReason(c)||!ready(c))return;
+      const items=selItems(c);
+      (S.tick[c.id]||[]).slice().sort((a,b)=>a-b).forEach(i=>{if(c.tpl[i])out.push(genSent(c,c.tpl[i],items));});
+    });
+    return out.join(' ');
+  }).filter(Boolean).join('\n\n');
+}
+
+/* ---------- Rendering ---------- */
+function cardBody(c){
+  const off=offReason(c);
+  if(off)return `<div class="offmsg">🔒 ${esc(off)}</div>`;
+  let h='';
+  if(c.note)h+=`<p class="gnote">${esc(fill(c.note))}</p>`;
+  if(c.kind!=='free'){
+    h+=`<p class="mode">${c.mode==='single'?'☝️ Du wählst 1 Wort.':'👆 Du darfst mehrere Wörter wählen.'}</p><div class="chips">`;
+    const cm=[],sp=[];c.words.forEach((it,i)=>(it.s?sp:cm).push(i));
+    const chip=i=>{
+      const it=c.words[i],on=(S.sel[c.id]||[]).includes(it.w),blk=on?null:wordBlock(c.id,it.w);
+      const ttl=blk?'Passt nicht zu: '+fill(blk.slice(blk.indexOf(':')+1)):it.h;
+      return `<button type="button" class="chip ${it.s?'s':'c'}${on?' on':''}${blk?' dis':''}" data-card="${c.id}" data-i="${i}" aria-pressed="${on}"${blk?' aria-disabled="true"':''}${ttl?` title="${esc(ttl)}"`:''}>${esc(fill(it.w))}</button>`;
+    };
+    if(cm.length){h+=`<div class="sublbl c">● gängige Wörter</div>`;cm.forEach(i=>h+=chip(i));}
+    if(sp.length){h+=`<div class="sublbl s">✦ besondere Wörter</div>`;sp.forEach(i=>h+=chip(i));}
+    h+=`</div>`;
+  }
+  const items=selItems(c),rd=ready(c);
+  h+=`<div class="sents"><div class="slbl">💬 So kannst du es sagen<small>${rd?'Tippe an, was in deinen Text soll. Du darfst mehrere Formulierungen nehmen.':'Wähle oben ein Wort, dann stehen hier die Sätze mit deinem Wort. Ein Vorgeschmack:'}</small></div>`;
+  c.tpl.forEach((t,i)=>{
+    const on=rd&&(S.tick[c.id]||[]).includes(i);
+    h+=`<button type="button" class="sent${on?' on':''}${rd?'':' ghost'}" data-card="${c.id}" data-s="${i}" aria-pressed="${on}"><span class="box">✓</span><span>${blanks(esc(genSent(c,t,items)))}</span></button>`;
+  });
+  return h+`</div>`;
+}
+function renderTabs(){
+  ['einl','aeusseres','teile','gebrauch','besonders','schluss'].forEach(tk=>{
+    const info=TABINFO[tk];
+    let h=`<div class="sechead"><h2>${info.t}</h2><p>${info.i}</p><div class="tools"><button type="button" data-act="open" data-sec="${tk}">📂 Alle aufklappen</button><button type="button" data-act="close" data-sec="${tk}">📁 Alle zuklappen</button></div></div>`;
+    let last=null;
+    CARDS.filter(c=>c.tab===tk).forEach(c=>{
+      if(c.cat&&c.cat!==last){h+=`<h3 class="cat">${esc(fill(c.cat))}</h3>`;last=c.cat;}
+      h+=`<details class="grp" id="grp-${c.id}" data-id="${c.id}"${openSet.has(c.id)?' open':''}><summary><span class="ico" aria-hidden="true">${c.icon}</span><span class="gt">${esc(fill(c.title))}</span><span class="pick"></span></summary><div class="gbody"></div></details>`;
+    });
+    $('#sec-'+tk).innerHTML=h;
+  });
+  refreshAll();
+}
+function refreshAll(){
+  CARDS.forEach(c=>{
+    const el=$('#grp-'+c.id);if(!el)return;
+    const off=!!offReason(c);el.classList.toggle('off',off);
+    $('.gbody',el).innerHTML=cardBody(c);
+    const sel=S.sel[c.id]||[],nt=(S.tick[c.id]||[]).length;
+    let p='';
+    if(!off){p=c.kind==='free'?(nt?'✓ '+nt+(nt===1?' Satz':' Sätze'):''):(sel.length?'✓ '+sel.map(w=>fill(w)).join(', '):'');}
+    $('.pick',el).textContent=p;
+  });
+  updateStats();
+}
+function renderExtras(){
+  let h='';
+  EXTRAS.forEach(g=>{
+    h+=`<details class="grp" id="grp-x-${g.id}" data-id="x-${g.id}"${openSet.has('x-'+g.id)?' open':''}><summary><span class="ico">${g.icon}</span><span class="gt">${esc(g.title)}</span></summary><div class="gbody">`;
+    if(g.note)h+=`<p class="gnote">${esc(g.note)}</p>`;
+    h+=`<div class="chips">`+g.items.map((raw,i)=>{const it=parseRaw(raw);return `<button type="button" class="chip ${it.s?'s':'c'}" data-x="${g.id}" data-i="${i}"${it.h?` title="${esc(it.h)}"`:''}>${esc(it.w)}</button>`;}).join('')+`</div></div></details>`;
+  });
+  $('#extraGroups').innerHTML=h;
+}
+function renderQuick(){
+  const art={m:'der',f:'die',n:'das'};
+  $('#quick').innerHTML=QUICK.map((q,i)=>`<button type="button" class="chip c qpick${(S.name||'').trim().toLowerCase()===q.n.toLowerCase()?' on':''}" data-q="${i}">${q.e} ${art[q.g]} ${q.n}</button>`).join('');
+}
+
+/* ---------- Text ---------- */
+const ta=$('#ta');
+let spCount=0;
+function updateStats(){
+  const n=countSents();
+  $('#fabN').textContent=n;
+  $('#buildInfo').innerHTML=n?`Du hast <b>${n}</b> ${n===1?'Satz':'Sätze'} angekreuzt. Der Knopf fügt sie zu einem Text zusammen, geordnet nach Einleitung, Äußerem, Teilen, Gebrauch, Besonderem und Schluss.`:'Du hast noch keine Sätze angekreuzt. Gehe zu den Karten, wähle Wörter und hake Sätze an. Oder würfle auf der Startseite einen Zufalls-Gegenstand.';
+  updateTextStats();
+}
+function updateTextStats(){
+  const t=ta.value||'';
+  const wc=t.trim()?t.trim().split(/\s+/).length:0;
+  $('#wc').textContent=wc+(wc===1?' Wort':' Wörter');
+  const low=t.toLowerCase(),seen=new Set();
+  CARDS.forEach(c=>c.words.forEach(it=>{
+    if(!it.s)return;const w=it.w.toLowerCase();
+    if(/[{}…]|___/.test(w)||w.length<4)return;
+    if(low.includes(w.length>7?w.slice(0,w.length-2):w))seen.add(w);
+  }));
+  spCount=seen.size;{const nb=(t.match(/_{3,}/g)||[]).length;const el=$('#bl');if(el)el.textContent=nb?'⚠️ '+nb+(nb===1?' Lücke':' Lücken')+' zum Ausfüllen (___)':'';}
+  $('#sc').textContent='✦ '+spCount+(spCount===1?' besonderes Wort':' besondere Wörter')+' in deinem Text';
+  $('#checks').innerHTML=CHECKS.map((c,i)=>{
+    if(c==='__SPECIAL__')return `<label><input type="checkbox" disabled ${spCount>=5?'checked':''}><span>Ich habe mindestens 5 besondere ✦-Wörter benutzt. <b>(automatisch: ${spCount} gefunden)</b></span></label>`;
+    return `<label><input type="checkbox" data-chk="${i}" ${S.chk[i]?'checked':''}><span>${c}</span></label>`;
+  }).join('');
+}
+function insertText(txt){
+  const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart,e=ta.selectionEnd==null?v.length:ta.selectionEnd;
+  const before=v.slice(0,s),after=v.slice(e);
+  const pre=before&&!/[\s\n]$/.test(before)?' ':'';
+  const post=after&&!/^[\s\n.,;:!?]/.test(after)?' ':(after?'':' ');
+  const ins=pre+txt+post;
+  ta.value=before+ins+after;ta.selectionStart=ta.selectionEnd=(before+ins).length;
+  S.text=ta.value;save();updateTextStats();
+}
+
+/* ---------- Bubble / Tabs ---------- */
+let bt;
+function bubble(html,ms){const b=$('#bubble');b.innerHTML=html;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),ms||3500);}
+function showTab(k,noScroll){
+  S.tab=k;save();
+  $$('section.tab').forEach(s=>s.classList.toggle('show',s.id==='sec-'+k));
+  $$('#navin button').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
+  if(!noScroll)window.scrollTo({top:0,behavior:'smooth'});
+}
+function goCard(id){
+  const c=CBY[id];if(!c)return;
+  showTab(c.tab,true);openSet.add(id);
+  const el=$('#grp-'+id);if(!el)return;
+  el.open=true;
+  setTimeout(()=>{el.scrollIntoView({behavior:'smooth',block:'start'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');},60);
+}
+
+/* ---------- Auswahl ---------- */
+function toggleWord(cid,i){
+  const c=CBY[cid];if(!c||offReason(c))return;
+  const it=c.words[i];
+  const blk=(S.sel[cid]||[]).includes(it.w)?null:wordBlock(cid,it.w);
+  if(blk){bubble('🚫 Das passt nicht zu <b>'+esc(fill(blk.slice(blk.indexOf(':')+1)))+'</b>. Nimm erst dieses Wort weg.',3200);return;}
+  let a=S.sel[cid]||[];
+  if(c.mode==='single')a=a[0]===it.w?[]:[it.w];
+  else a=a.includes(it.w)?a.filter(x=>x!==it.w):a.concat(it.w);
+  S.sel[cid]=a;
+  if(!a.length)S.tick[cid]=[];
+  else if(!(S.tick[cid]||[]).length)S.tick[cid]=[0];
+  normalize();save();refreshAll();
+  if(it.h)bubble((it.s?'✦ ':'')+'<b>'+esc(fill(it.w))+'</b> – '+esc(it.h),4200);
+}
+function toggleSent(cid,i){
+  const c=CBY[cid];if(!c)return;
+  if(!ready(c)){bubble('☝️ Wähle zuerst oben ein Wort.',2200);return;}
+  let t=S.tick[cid]||[];
+  t=t.includes(i)?t.filter(x=>x!==i):t.concat(i);
+  S.tick[cid]=t;save();refreshAll();
+}
+function setObject(q,fromRoll){
+  S.name=q.n;S.g=q.g;
+  $('#inName').value=q.n;
+  $$('input[name=gen]').forEach(r=>r.checked=(r.value===S.g));
+  if(q.t&&!fromRoll)openSet.add(q.t);
+  save();renderQuick();renderTabs();renderExtras();
+  if(!fromRoll)bubble('✔ <b>'+(q.g==='m'?'der':q.g==='f'?'die':'das')+' '+esc(q.n)+'</b> ist gewählt. Die passende Teile-Karte findest du unter „🔩 Teile“.',4200);
+}
+function roll(){
+  if(Object.values(S.sel).some(a=>a&&a.length)&&!confirm('Der Zufalls-Gegenstand ersetzt deine bisherige Auswahl. Okay?'))return;
+  S.sel={};S.tick={};
+  const q=QUICK[Math.floor(Math.random()*QUICK.length)];
+  S.name=q.n;S.g=q.g;
+  const pick=(id,n,pool)=>{
+    const c=CBY[id];if(!c||offReason(c))return;
+    const ws=pool?c.words.filter(w=>pool.includes(w.w)):c.words;if(!ws.length)return;
+    let tries=0,got=0;
+    while(got<n&&tries<150){tries++;const it=ws[Math.floor(Math.random()*ws.length)];
+      if((S.sel[id]||[]).includes(it.w)||wordBlock(id,it.w))continue;
+      (S.sel[id]=S.sel[id]||[]).push(it.w);got++;}
+    if((S.sel[id]||[]).length)S.tick[id]=[Math.floor(Math.random()*c.tpl.length)];
+  };
+  pick('eindruck',1);pick('oberbegriff',1);pick('herkunft',1);
+  pick('groesse',1);pick('abmess',2);pick('gewicht',1);pick('formadj',1);pick('material',1,q.mat);pick('ob',1);pick('anf',1);
+  pick('hauptf',1);pick('nebenf',1);pick('muster',1);
+  pick(q.t,3);
+  pick('zweck1',2,q.z);pick('benutzer',2);pick('ort',1);pick('zeit',1);
+  pick('eig',2);pick('zustand',1);pick('besonders',1);
+  pick('mag1',2);pick('bedeutung',1);
+  S.tick.einl1=[0,3];S.tick.seit=[0];S.tick.schluss1=[0,5];
+  normalize();save();
+  $('#inName').value=S.name;$$('input[name=gen]').forEach(r=>r.checked=(r.value===S.g));
+  renderQuick();renderTabs();renderExtras();
+  bubble('🎲 Dein Zufalls-Gegenstand: <b>'+esc(q.n)+'</b>. Schau in die Karten oder baue gleich unter „✍️ Mein Text“ den Text zusammen.',5000);
+}
+function resetAll(){
+  if(!confirm('Alles zurücksetzen und einen neuen Gegenstand beschreiben? Auswahl, Sätze und Text werden gelöscht.'))return;
+  S=DEF();save();
+  ta.value='';$('#inName').value='';
+  $$('input[name=gen]').forEach(r=>r.checked=(r.value==='m'));
+  renderQuick();renderTabs();renderExtras();updateTextStats();showTab('start');
+  bubble('🔄 Alles ist leer. Du kannst einen neuen Gegenstand beschreiben!',3000);
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target;
+  const nb=t.closest('#navin button');if(nb){showTab(nb.dataset.tab);return;}
+  const go=t.closest('[data-go]');if(go){goCard(go.dataset.go);return;}
+  const qp=t.closest('[data-q]');if(qp){setObject(QUICK[+qp.dataset.q]);return;}
+  const act=t.closest('[data-act]');
+  if(act){const open=act.dataset.act==='open',sec=act.dataset.sec;
+    const ids=sec?CARDS.filter(c=>c.tab===sec).map(c=>c.id):EXTRAS.map(x=>'x-'+x.id);
+    ids.forEach(id=>{open?openSet.add(id):openSet.delete(id);const el=$('#grp-'+id);if(el)el.open=open;});return;}
+  const sent=t.closest('.sent');
+  if(sent){const y=window.scrollY;toggleSent(sent.dataset.card,+sent.dataset.s);window.scrollTo(0,y);
+    const n=$(`.sent[data-card="${sent.dataset.card}"][data-s="${sent.dataset.s}"]`);if(n)n.focus({preventScroll:true});return;}
+  const chip=t.closest('.chip[data-card]');
+  if(chip){const y=window.scrollY;toggleWord(chip.dataset.card,+chip.dataset.i);window.scrollTo(0,y);
+    const n=$(`.chip[data-card="${chip.dataset.card}"][data-i="${chip.dataset.i}"]`);if(n)n.focus({preventScroll:true});return;}
+  const xc=t.closest('.chip[data-x]');
+  if(xc){const g=EXTRAS.find(x=>x.id===xc.dataset.x);const it=parseRaw(g.items[+xc.dataset.i]);insertText(it.w);
+    bubble('✔ „'+esc(it.w)+'“ steht jetzt in deinem Text'+(it.h?' – '+esc(it.h):'')+'.',3200);return;}
+});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-go]')){e.preventDefault();goCard(e.target.dataset.go);}});
+document.addEventListener('toggle',e=>{const d=e.target;if(d.matches&&d.matches('details.grp')){d.open?openSet.add(d.dataset.id):openSet.delete(d.dataset.id);}},true);
+document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.chk!==undefined){S.chk[e.target.dataset.chk]=e.target.checked;save();}});
+
+$('#fab').addEventListener('click',()=>showTab('text'));
+$('#btnRoll').addEventListener('click',roll);
+$('#btnReset').addEventListener('click',resetAll);
+$('#btnReset2').addEventListener('click',resetAll);
+$('#inName').addEventListener('input',e=>{
+  S.name=e.target.value;
+  const q=QUICK.find(x=>x.n.toLowerCase()===S.name.trim().toLowerCase());
+  if(q){S.g=q.g;$$('input[name=gen]').forEach(r=>r.checked=(r.value===S.g));}
+  save();renderQuick();refreshAll();
+});
+$$('input[name=gen]').forEach(r=>r.addEventListener('change',()=>{S.g=r.value;save();renderTabs();renderExtras();}));
+$('#btnBuild').addEventListener('click',()=>{
+  const txt=buildText();
+  if(!txt){bubble('☝️ Hake zuerst in den Karten ein paar Sätze an.',3000);return;}
+  if(ta.value.trim()&&ta.value.trim()!==txt.trim()&&!confirm('Dein bisheriger Text wird durch den neuen Text ersetzt. Okay?'))return;
+  ta.value=txt;S.text=txt;save();updateTextStats();
+  bubble('✨ Dein Text ist fertig zusammengebaut. Du kannst ihn jetzt umschreiben!',3500);
+});
+ta.addEventListener('input',()=>{S.text=ta.value;save();updateTextStats();});
+$('#btnPara').addEventListener('click',()=>{const v=ta.value,s=ta.selectionStart==null?v.length:ta.selectionStart;ta.value=v.slice(0,s).replace(/[ \t]+$/,'')+'\n\n'+v.slice(ta.selectionEnd==null?s:ta.selectionEnd);ta.selectionStart=ta.selectionEnd=s+1;ta.focus();S.text=ta.value;save();updateTextStats();});
+$('#btnCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(ta.value);}catch(e){ta.select();document.execCommand('copy');}bubble('📋 Text kopiert!',1800);});
+$('#btnSave').addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ta.value],{type:'text/plain;charset=utf-8'}));a.download='Meine-Gegenstandsbeschreibung.txt';document.body.appendChild(a);a.click();a.remove();});
+$('#btnPrint').addEventListener('click',()=>{const p=$('#printArea');p.innerHTML='<h1>Meine Gegenstandsbeschreibung</h1>';const d=document.createElement('div');d.textContent=ta.value;p.appendChild(d);window.print();});
+$('#btnClear').addEventListener('click',()=>{if(confirm('Wirklich den ganzen Text löschen?')){ta.value='';S.text='';save();updateTextStats();}});
+
+/* ---------- Start ---------- */
+$('#navin').innerHTML=TABS.map(([k,l])=>`<button type="button" data-tab="${k}">${l}</button>`).join('');
+$('#inName').value=S.name||'';
+$$('input[name=gen]').forEach(r=>r.checked=(r.value===S.g));
+ta.value=S.text||'';
+normalize();renderQuick();renderTabs();renderExtras();
+showTab(TABS.some(t=>t[0]===S.tab)?S.tab:'start',true);
+
+</script>
+</body>
+</html>
