@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeitungsbericht – Der Bericht-Baukasten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0e1636; --panel:#1a2658; --panel2:#212f6a; --edge:#34468f; --cream:#f5ecd5; --muted:#aab4dc;
+  --ocher:#d9962b; --ocher2:#f0b955; --ocherd:#9c6513; --vio:#7a5fd6; --vio2:#4d3fa8; --vioedge:#a592f0;
+  --terra:#c0603b; --ok:#6cc79a; --paper:#f3ead3; --ink:#1f1b14;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.55;color:var(--cream);
+  background:radial-gradient(900px 500px at 88% -5%,#2b3a86 0,transparent 60%),radial-gradient(700px 520px at -10% 35%,#3a2a6e 0,transparent 55%),linear-gradient(180deg,#0e1636,#121b44 60%,#0e1636);
+  background-attachment:fixed;min-height:100vh}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.2;margin:0 0 .45em}
+h2{font-size:1.6rem} h3{font-size:1.2rem}
+a{color:var(--ocher2)}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:30;background:rgba(14,22,54,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--edge)}
+.topline{display:flex;align-items:center;gap:8px;padding:10px 0 6px;flex-wrap:wrap}
+.brand{font-family:'Fraunces',serif;font-weight:800;font-size:1.12rem;flex:1;min-width:190px}
+.brand small{display:block;font-family:'Nunito',sans-serif;font-weight:600;color:var(--muted);font-size:.8rem}
+.btn{border:0;border-radius:999px;padding:9px 16px;font:inherit;font-weight:800;cursor:pointer;color:#1b1206;background:linear-gradient(180deg,var(--ocher2),var(--ocher));box-shadow:0 2px 0 var(--ocherd)}
+.btn:active{transform:translateY(1px)}
+.btn.reset{background:linear-gradient(180deg,#d9744d,var(--terra));color:#fff;box-shadow:0 2px 0 #7d3a20}
+.btn.ghost{background:transparent;color:var(--cream);border:1.5px solid var(--edge);box-shadow:none}
+.btn.vio{background:linear-gradient(180deg,#9a82f0,var(--vio));color:#fff;box-shadow:0 2px 0 var(--vio2)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:thin}
+.tab{flex:0 0 auto;border:1.5px solid var(--edge);background:var(--panel);color:var(--cream);border-radius:12px;padding:7px 12px;font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;white-space:nowrap}
+.tab.on{background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1206;border-color:var(--ocher2)}
+.tab .cnt{display:inline-block;min-width:20px;padding:0 6px;margin-left:5px;border-radius:999px;background:var(--vio);color:#fff;font-size:.75rem;text-align:center}
+main{padding:22px 0 90px}
+section.page{display:none}
+section.page.on{display:block}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--edge);border-radius:18px;padding:18px;margin:0 0 18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.card.locked{opacity:.6}
+.chead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.chead h3{margin:0;flex:1;min-width:200px}
+.badge{font-size:.75rem;font-weight:800;padding:3px 10px;border-radius:999px;border:1px solid var(--edge);color:var(--muted);white-space:nowrap}
+.badge.done{border-color:var(--ok);color:var(--ok)}
+.hint{color:var(--muted);font-size:.95rem;margin:.3em 0 .8em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.chip{border-radius:999px;padding:7px 14px;border:1.5px solid var(--ocherd);background:rgba(217,150,43,.13);color:var(--cream);font:inherit;font-weight:700;font-size:.95rem;cursor:pointer;text-align:left}
+.chip.x{border-color:var(--vio);background:rgba(122,95,214,.17)}
+.chip.x::before{content:'✦ ';color:var(--vioedge)}
+.chip.on{background:linear-gradient(180deg,var(--ocher2),var(--ocher));color:#1b1206;border-color:var(--ocher2)}
+.chip.x.on{background:linear-gradient(180deg,#9a82f0,var(--vio));color:#fff;border-color:var(--vioedge)}
+.chip.x.on::before{color:#fff}
+.chip.lock{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.slabel{font-weight:800;font-size:.92rem;color:var(--ocher2);margin:12px 0 4px}
+.sent{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.03);margin:6px 0;cursor:pointer}
+.sent:hover{border-color:var(--ocherd)}
+.sent .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--muted);flex:0 0 auto;margin-top:3px}
+.sent.on{border-color:var(--ocher2);background:rgba(240,185,85,.14)}
+.sent.on .dot{border-color:var(--ocher2);background:radial-gradient(circle,var(--ocher2) 45%,transparent 52%)}
+.sent.dis{opacity:.5;cursor:not-allowed}
+.sent .txt{flex:1}
+.tag{display:inline-block;font-size:.7rem;font-weight:800;padding:1px 8px;border-radius:999px;background:var(--vio2);color:#fff;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.gap{color:var(--ocher2);font-weight:800}
+.lockmsg{background:rgba(192,96,59,.18);border:1px solid var(--terra);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:.95rem}
+.tip{border-left:4px solid var(--vio);background:rgba(122,95,214,.13);padding:10px 14px;border-radius:0 12px 12px 0;margin:10px 0;font-size:.95rem}
+.tip b{color:var(--vioedge)}
+.note{color:var(--muted);font-size:.9rem;font-style:italic;margin:8px 0 0}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:6px;flex-wrap:wrap}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin:6px 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+label.f{display:block;font-weight:800;font-size:.92rem;margin:0 0 4px;color:var(--ocher2)}
+input[type=text],select{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:1.5px solid var(--edge);background:#0b1230;color:var(--cream)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.fallline{margin-top:12px;padding:10px 14px;border-radius:12px;background:rgba(240,185,85,.1);border:1px dashed var(--ocherd);font-weight:700}
+textarea{width:100%;min-height:340px;border-radius:14px;border:1.5px solid var(--edge);background:#0b1230;color:var(--cream);font:inherit;padding:14px;line-height:1.6;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.check{display:flex;gap:8px;align-items:center;font-weight:700}
+.wlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}
+.w{padding:8px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.03);font-weight:700}
+.w.ok{border-color:var(--ok);color:var(--ok)}
+.w small{display:block;font-weight:600;color:var(--muted);font-size:.8rem}
+.paper{background:var(--paper);color:var(--ink);border-radius:6px;padding:22px 20px;font-family:Georgia,'Times New Roman',serif;box-shadow:0 10px 30px rgba(0,0,0,.4);margin-top:10px}
+.paper .mast{border-bottom:3px double var(--ink);font-family:'Fraunces',serif;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;padding-bottom:6px;margin-bottom:14px;display:flex;justify-content:space-between;gap:10px}
+.paper h2{font-family:'Fraunces',serif;font-size:1.65rem;color:var(--ink);margin-bottom:.5em}
+.paper p{margin:0 0 .8em;text-align:justify;hyphens:auto;line-height:1.55}
+.paper p.lead{font-weight:700}
+.paper .empty{color:#7a705c;font-style:italic}
+.res{margin:6px 0;padding:8px 12px;border-radius:10px;font-size:.95rem}
+.res.good{background:rgba(108,199,154,.14);border:1px solid var(--ok)}
+.res.warn{background:rgba(192,96,59,.16);border:1px solid var(--terra)}
+.res.info{background:rgba(122,95,214,.13);border:1px solid var(--vio)}
+.pyr{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.pyr div{border-radius:10px;padding:9px 12px;text-align:center;font-weight:700;font-size:.95rem}
+.pyr .p1{width:100%;background:linear-gradient(90deg,var(--ocher),var(--ocher2));color:#1b1206}
+.pyr .p2{width:88%;background:rgba(240,185,85,.35)}
+.pyr .p3{width:72%;background:rgba(122,95,214,.4)}
+.pyr .p4{width:54%;background:rgba(122,95,214,.22)}
+.pyr small{display:block;font-weight:600;font-size:.82rem;opacity:.9}
+table.k{border-collapse:collapse;width:100%;margin:8px 0;font-size:.95rem}
+table.k th,table.k td{border:1px solid var(--edge);padding:7px 10px;text-align:left}
+table.k th{background:rgba(240,185,85,.15);color:var(--ocher2)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:5px;width:28px;height:28px;border-radius:50%;background:var(--ocher);color:#1b1206;font-weight:800;display:flex;align-items:center;justify-content:center}
+.hero{padding:6px 0 4px}
+.hero h1{font-size:2rem}
+.hero h1 em{font-style:normal;color:var(--ocher2)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#0b1230;border:1.5px solid var(--ocher);padding:10px 16px;border-radius:12px;z-index:60;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92vw;font-weight:700}
+.toast.on{opacity:1}
+@media (max-width:600px){.card{padding:14px}.hero h1{font-size:1.6rem}.paper{padding:16px 14px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="topline">
+      <div class="brand">📰 Der Bericht-Baukasten<small>Zeitungsbericht über eine Straftat · 7. Schulstufe</small></div>
+      <button class="btn vio" id="btnRandom" title="Würfelt einen ganzen Fall zusammen">🎲 Zufallsfall</button>
+      <button class="btn reset" id="btnReset" title="Alles zurücksetzen">🔄 Neuer Fall</button>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- START -->
+<section class="page" data-page="0">
+  <div class="hero">
+    <h1>Schreib deinen eigenen <em>Zeitungsbericht</em></h1>
+    <p>In diesem Baukasten erfindest du einen Fall, zum Beispiel einen Fahrraddiebstahl oder einen Einbruch, und lernst dabei viele Formulierungen kennen, mit denen echte Journalistinnen und Journalisten über Straftaten berichten. Am Ende setzt sich aus deinen Entscheidungen ein ganzer Bericht zusammen, den du frei weiterbearbeiten kannst.</p>
+  </div>
+
+  <div class="card">
+    <h3>🧭 So arbeitest du mit dem Baukasten</h3>
+    <ol class="steps">
+      <li><b>Lege den Fall fest</b> (Seite ①): Was ist passiert, wo, wann, wer ist betroffen und wer war es?</li>
+      <li><b>Wähle auf jeder Karte zuerst ein Wort</b>, dann erscheinen darunter mehrere Formulierungen. Davon suchst du dir <b>genau eine</b> aus, die dir am besten gefällt. Du musst nicht jede Karte verwenden.</li>
+      <li><b>Wörter, die nicht zusammenpassen</b>, werden automatisch durchgestrichen. Tipp sie an, dann erfährst du, warum.</li>
+      <li><b>Schlagzeile und Vorspann</b> (Seite ⑤) schreibst du zum Schluss, so machen es auch die Profis.</li>
+      <li>Unter <b>✍️ Mein Text</b> baust du alles zusammen, überarbeitest es und siehst, wie dein Bericht in der Zeitung aussehen würde.</li>
+    </ol>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--ocher)"></i> gängige Wörter</span>
+      <span><i class="sw" style="background:var(--vio)"></i> ✦ besondere, gehobene Wörter</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔻 Der Aufbau: die umgedrehte Pyramide</h3>
+    <p class="hint">Ein Zeitungsbericht beginnt mit dem Wichtigsten. Je weiter unten, desto mehr Einzelheiten. Wer nur die ersten zwei Sätze liest, soll trotzdem schon Bescheid wissen.</p>
+    <div class="pyr">
+      <div class="p1">Schlagzeile<small>kurz, sachlich, macht neugierig</small></div>
+      <div class="p2">Vorspann (Lead)<small>Wer? Was? Wann? Wo? in ein bis zwei Sätzen</small></div>
+      <div class="p3">Hauptteil<small>Wie? Warum? Folgen? Zeugen, Täterbeschreibung</small></div>
+      <div class="p4">Schluss<small>Stand der Ermittlungen, Aufruf, Tipp</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📌 Was einen guten Bericht ausmacht</h3>
+    <div class="tip"><b>Sachlich bleiben:</b> keine eigene Meinung, keine Gefühlswörter wie „schrecklich“ oder „gemein“, keine Ich-Form. Du berichtest nur, was passiert ist.</div>
+    <div class="tip"><b>Die richtige Zeit:</b> Der Hauptteil steht im <b>Präteritum</b> (stahl, flüchtete, beobachtete). Der Vorspann darf auch im Perfekt stehen (hat gestohlen). Was schon <i>vor</i> der Tat passiert war, steht im <b>Plusquamperfekt</b> (hatte abgesperrt).</div>
+    <div class="tip"><b>Fremde Aussagen:</b> Was Zeugen oder die Polizei sagen, gibst du in der <b>indirekten Rede mit Konjunktiv I</b> wieder: „Die Zeugin gab an, sie <b>habe</b> einen Knall gehört.“ Ab und zu darf auch ein wörtliches Zitat vorkommen.</div>
+    <div class="tip"><b>Keine echten Namen:</b> Zeitungen schreiben „ein 14-jähriger Schüler“ oder „eine 78-jährige Pensionistin“, aber nie den vollen Namen.</div>
+    <div class="tip"><b>Nichts erfinden, was man nicht weiß:</b> Ist der Täter unbekannt, dann schreibst du genau das. Das <b>Passiv</b> hilft dir dabei: „Das Fahrrad <b>wurde gestohlen</b>.“</div>
+  </div>
+
+  <div class="card">
+    <h3>📖 Ein Beispielbericht</h3>
+    <div class="paper">
+      <div class="mast"><span>Lokales</span><span>Polizeibericht</span></div>
+      <h2>Handtasche entrissen</h2>
+      <p class="lead">Linz. Ein unbekannter Täter hat am Montagnachmittag einer 79-jährigen Pensionistin auf einem Gehsteig die Handtasche entrissen. Die Frau blieb unverletzt.</p>
+      <p>Die Pensionistin war gerade vom Einkaufen gekommen. Gegen 15 Uhr näherte sich ihr der Täter von hinten und riss ihr die Tasche von der Schulter. Darin befanden sich eine Geldbörse mit rund 120 Euro, ihr Handy und die Wohnungsschlüssel. Anschließend flüchtete der Mann zu Fuß in unbekannte Richtung.</p>
+      <p>Eine Passantin beobachtete den Vorfall. Sie gab an, der Täter sei etwa 25 Jahre alt und schlank gewesen und habe eine dunkle Kapuzenjacke getragen. Die Pensionistin erlitt einen Schock.</p>
+      <p>Ein Polizeisprecher erklärte, man werte derzeit Videoaufnahmen aus. Hinweise nimmt jede Polizeiinspektion entgegen.</p>
+    </div>
+  </div>
+  <div class="nav"><span></span><button class="btn" data-go="1">Los geht's: ① Der Fall →</button></div>
+</section>
+
+<!-- FALL -->
+<section class="page" data-page="1">
+  <h2>① Der Fall</h2>
+  <p class="hint">Hier legst du die Grunddaten fest. Sie werden später in vielen Sätzen automatisch eingesetzt.</p>
+  <div class="card">
+    <div class="chead"><h3>🚨 Was ist passiert?</h3><span class="badge">nur eins</span></div>
+    <p class="hint">Wenn du die Tat wechselst, werden deine bisherigen Wahlen zurückgesetzt, weil viele Wörter und Sätze zu einer bestimmten Tat gehören.</p>
+    <div class="chips" id="tatChips"></div>
+  </div>
+  <div class="card">
+    <div class="chead"><h3>🗓️ Wann und in welcher Stadt?</h3></div>
+    <div class="grid2">
+      <div><label class="f" for="fStadt">Stadt</label><input type="text" id="fStadt" placeholder="z. B. Graz"></div>
+      <div><label class="f" for="fTag">Wochentag</label><select id="fTag"></select></div>
+      <div><label class="f" for="fUhr">Uhrzeit (freiwillig)</label><input type="text" id="fUhr" placeholder="z. B. 15.30"></div>
+    </div>
+    <label class="f" style="margin-top:12px">Tageszeit</label>
+    <div class="chips" id="tzChips"></div>
+    <div class="fallline" id="fallLine"></div>
+  </div>
+  <div id="cards1"></div>
+  <div class="nav"><button class="btn ghost" data-go="0">← Start</button><button class="btn" data-go="2">Weiter: ② Tathergang →</button></div>
+</section>
+
+<section class="page" data-page="2">
+  <h2>② Der Tathergang</h2>
+  <p class="hint">Jetzt erzählst du, wie die Tat abgelaufen ist, Schritt für Schritt und ganz sachlich.</p>
+  <div id="cards2"></div>
+  <div class="nav"><button class="btn ghost" data-go="1">← ① Der Fall</button><button class="btn" data-go="3">Weiter: ③ Zeugen →</button></div>
+</section>
+
+<section class="page" data-page="3">
+  <h2>③ Zeugen und Täterbeschreibung</h2>
+  <p class="hint">Wer hat etwas bemerkt, und was sagt diese Person? Hier übst du die indirekte Rede.</p>
+  <div id="cards3"></div>
+  <div class="nav"><button class="btn ghost" data-go="2">← ② Tathergang</button><button class="btn" data-go="4">Weiter: ④ Polizei & Schluss →</button></div>
+</section>
+
+<section class="page" data-page="4">
+  <h2>④ Polizei und Schluss</h2>
+  <p class="hint">Der Schluss sagt, wie es weitergeht: Was weiß die Polizei, ist der Täter gefasst, und worauf sollen die Leserinnen und Leser achten?</p>
+  <div id="cards4"></div>
+  <div class="nav"><button class="btn ghost" data-go="3">← ③ Zeugen</button><button class="btn" data-go="5">Weiter: ⑤ Schlagzeile & Vorspann →</button></div>
+</section>
+
+<section class="page" data-page="5">
+  <h2>⑤ Schlagzeile und Vorspann</h2>
+  <p class="hint">Jetzt, wo du den ganzen Fall kennst, fasst du ihn oben im Bericht zusammen. Die Formulierungen passen sich an alles an, was du vorher gewählt hast.</p>
+  <div id="cards5"></div>
+  <div class="nav"><button class="btn ghost" data-go="4">← ④ Polizei & Schluss</button><button class="btn" data-go="6">Weiter: ✍️ Mein Text →</button></div>
+</section>
+
+<!-- TEXT -->
+<section class="page" data-page="6">
+  <h2>✍️ Mein Bericht</h2>
+  <div class="card">
+    <h3>❓ Die W-Fragen</h3>
+    <p class="hint">Ein Bericht beantwortet die W-Fragen. Grün heißt: Diese Frage ist in deinen gewählten Sätzen beantwortet.</p>
+    <div class="wlist" id="wlist"></div>
+  </div>
+  <div class="card">
+    <h3>🧩 Text zusammenbauen und überarbeiten</h3>
+    <p class="hint">„Text zusammenbauen“ setzt alle gewählten Formulierungen in der richtigen Reihenfolge zusammen: Schlagzeile, Vorspann, Hauptteil, Schluss. Danach kannst du alles frei umschreiben. Wörter aus dem 🧰 Werkzeugkasten werden dort eingefügt, wo dein Cursor zuletzt war.</p>
+    <div class="row">
+      <button class="btn" id="btnBuild">🧩 Text zusammenbauen</button>
+      <label class="check"><input type="checkbox" id="chkOrt"> Ortsmarke am Anfang (z. B. „Graz.“)</label>
+      <button class="btn ghost" id="btnCopy">📋 Kopieren</button>
+    </div>
+    <textarea id="txt" placeholder="Hier erscheint dein Bericht. Du kannst auch ganz frei schreiben."></textarea>
+  </div>
+  <div class="card">
+    <h3>🔍 Bericht-Check</h3>
+    <div id="checks"></div>
+  </div>
+  <div class="card">
+    <h3>📰 So sieht dein Bericht in der Zeitung aus</h3>
+    <div class="paper" id="paper"></div>
+  </div>
+  <div class="nav"><button class="btn ghost" data-go="5">← ⑤ Schlagzeile & Vorspann</button><button class="btn" data-go="7">🧰 Werkzeugkasten →</button></div>
+</section>
+
+<!-- WERKZEUG -->
+<section class="page" data-page="7">
+  <h2>🧰 Werkzeugkasten</h2>
+  <p class="hint">Tipp ein Wort an, dann wird es in deinen Text unter ✍️ Mein Text eingefügt, genau dort, wo dein Cursor zuletzt stand.</p>
+  <div id="tools"></div>
+  <div class="card">
+    <h3>🗣️ Konjunktiv I: So gibst du fremde Aussagen wieder</h3>
+    <p class="hint">Direkte Rede: „Ich <b>habe</b> einen Knall gehört.“ → Indirekte Rede: Sie sagte, sie <b>habe</b> einen Knall gehört.</p>
+    <table class="k">
+      <tr><th>Infinitiv</th><th>er / sie / es (Konj. I)</th><th>Beispiel</th></tr>
+      <tr><td>sein</td><td>sei</td><td>Er sagte, er <b>sei</b> erschrocken.</td></tr>
+      <tr><td>haben</td><td>habe</td><td>Sie gab an, sie <b>habe</b> nichts bemerkt.</td></tr>
+      <tr><td>werden</td><td>werde</td><td>Die Polizei sagte, der Fall <b>werde</b> geprüft.</td></tr>
+      <tr><td>können</td><td>könne</td><td>Er meinte, er <b>könne</b> den Täter beschreiben.</td></tr>
+      <tr><td>geben</td><td>gebe</td><td>Es hieß, es <b>gebe</b> erste Spuren.</td></tr>
+      <tr><td>wissen</td><td>wisse</td><td>Sie sagte, sie <b>wisse</b> nichts davon.</td></tr>
+    </table>
+    <div class="tip"><b>Ersatzform:</b> Klingt der Konjunktiv I genau wie die normale Form (sie <i>laufen</i> → sie <i>laufen</i>), nimmst du den Konjunktiv II: Die Polizei sagte, die Ermittlungen <b>liefen</b> auf Hochtouren. Ähnliche Fälle <b>hätten</b> sich gehäuft.</div>
+  </div>
+  <div class="card">
+    <h3>🚫 Das gehört nicht in einen Bericht</h3>
+    <div class="tip"><b>Ich- und Wir-Form</b> (außer in wörtlichen Zitaten): „Ich finde …“, „Wir hoffen …“</div>
+    <div class="tip"><b>Wertungen und Gefühle:</b> schrecklich, gemein, leider, zum Glück, unglaublich</div>
+    <div class="tip"><b>Umgangssprache:</b> voll, krass, urcool, megaschnell</div>
+    <div class="tip"><b>Spannung wie in einer Erzählung:</b> „Plötzlich!!!“, Ausrufezeichen, wörtliche Gedanken</div>
+    <div class="tip"><b>Erfundene Vermutungen:</b> Warum der Täter es getan hat, weiß man meist nicht. Dann lässt du es weg oder schreibst „Das Motiv ist unklar.“</div>
+  </div>
+  <div class="nav"><button class="btn ghost" data-go="6">← ✍️ Mein Text</button><span></span></div>
+</section>
+
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== Hilfsfunktionen ===== */
+const $=s=>document.querySelector(s);
+const FLAGKEYS=new Set(['pl','x','von','unklar','zIsO','k2','for','ss','pass','dass','dRest','part','einer','einerA']);
+const GAP=new Proxy({},{get(t,k){
+  if(k===Symbol.toPrimitive)return()=>'___';
+  if(typeof k==='symbol')return undefined;
+  if(k==='__gap')return true;
+  if(FLAGKEYS.has(k))return undefined;
+  return '___';}});
+const isGap=w=>!!(w&&w.__gap===true);
+const cap=s=>{s=String(s);return s?s.charAt(0).toUpperCase()+s.slice(1):s;};
+const J=(...a)=>a.filter(x=>x!==''&&x!=null&&x!==undefined).join(' ');
+const vv=(T,a,b)=>T&&T.pl===true?b:a;
+const list=arr=>{arr=arr.filter(Boolean);if(!arr.length)return'___';if(arr.length===1)return arr[0];return arr.slice(0,-1).join(', ')+' und '+arr[arr.length-1];};
+const val=(x,c)=>typeof x==='function'?x(c):x;
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const tidy=s=>String(s).replace(/\s+/g,' ').replace(/\s+([.,:])/g,'$1').trim();
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+
+/* ===== Personen-Baustein ===== */
+function P(id,label,g,nom,akk,dat,gen,k,kA,kD,opt){
+  const sein=g==='f'?'ihr':'sein';
+  return Object.assign({id,label,g,nom,akk:akk||nom,dat,gen:gen||dat,k,kA:kA||k,kD,
+    p:g==='f'?'sie':(g==='n'?'es':'er'),pd:g==='f'?'ihr':'ihm',
+    sein,seine:sein+'e',seinen:sein+'en',seinem:sein+'em',seiner:sein+'er',seines:sein+'es'},opt||{});
+}
+const PERS=[
+  P('schueler','14-jähriger Schüler','m','ein 14-jähriger Schüler','einen 14-jährigen Schüler','einem 14-jährigen Schüler','eines 14-jährigen Schülers','der Schüler','den Schüler','dem Schüler'),
+  P('schuelerin','13-jährige Schülerin','f','eine 13-jährige Schülerin',null,'einer 13-jährigen Schülerin',null,'die Schülerin',null,'der Schülerin'),
+  P('pensionistin','78-jährige Pensionistin','f','eine 78-jährige Pensionistin',null,'einer 78-jährigen Pensionistin',null,'die Pensionistin',null,'der Pensionistin'),
+  P('pensionist','81-jähriger Pensionist','m','ein 81-jähriger Pensionist','einen 81-jährigen Pensionisten','einem 81-jährigen Pensionisten','eines 81-jährigen Pensionisten','der Pensionist','den Pensionisten','dem Pensionisten'),
+  P('studentin','24-jährige Studentin','f','eine 24-jährige Studentin',null,'einer 24-jährigen Studentin',null,'die Studentin',null,'der Studentin'),
+  P('vater','45-jähriger Familienvater','m','ein 45-jähriger Familienvater','einen 45-jährigen Familienvater','einem 45-jährigen Familienvater','eines 45-jährigen Familienvaters','der Familienvater','den Familienvater','dem Familienvater'),
+  P('pflegerin','36-jährige Krankenpflegerin','f','eine 36-jährige Krankenpflegerin',null,'einer 36-jährigen Krankenpflegerin',null,'die Krankenpflegerin',null,'der Krankenpflegerin',{x:true}),
+  P('touristin','Touristin aus Deutschland','f','eine Touristin aus Deutschland',null,'einer Touristin aus Deutschland',null,'die Touristin',null,'der Touristin',{x:true,for:['fahrrad','tasche','raub','auto']}),
+  P('familie','vierköpfige Familie','f','eine vierköpfige Familie',null,'einer vierköpfigen Familie',null,'die Familie',null,'der Familie',{for:['wohnung','auto']})
+];
+const GESCH=[
+  P('supermarkt','Supermarkt','m','ein Supermarkt','einen Supermarkt','einem Supermarkt','eines Supermarkts','der Supermarkt','den Supermarkt','dem Supermarkt'),
+  P('drogerie','Drogerie','f','eine Drogerie',null,'einer Drogerie',null,'die Drogerie',null,'der Drogerie'),
+  P('elektro','Elektronikgeschäft','n','ein Elektronikgeschäft','ein Elektronikgeschäft','einem Elektronikgeschäft','eines Elektronikgeschäfts','das Elektronikgeschäft','das Elektronikgeschäft','dem Elektronikgeschäft'),
+  P('baeckerei','Bäckerei','f','eine Bäckerei',null,'einer Bäckerei',null,'die Bäckerei',null,'der Bäckerei'),
+  P('sport','Sportgeschäft','n','ein Sportgeschäft','ein Sportgeschäft','einem Sportgeschäft','eines Sportgeschäfts','das Sportgeschäft','das Sportgeschäft','dem Sportgeschäft'),
+  P('juwelier','Juweliergeschäft','n','ein Juweliergeschäft','ein Juweliergeschäft','einem Juweliergeschäft','eines Juweliergeschäfts','das Juweliergeschäft','das Juweliergeschäft','dem Juweliergeschäft',{x:true,for:['geschaeft']}),
+  P('tankstelle','Tankstelle','f','eine Tankstelle',null,'einer Tankstelle',null,'die Tankstelle',null,'der Tankstelle',{x:true})
+];
+const VAND=[
+  P('schule','Mittelschule','f','eine Mittelschule',null,'einer Mittelschule',null,'die Schule',null,'der Schule'),
+  P('verein','Sportverein','m','ein Sportverein','einen Sportverein','einem Sportverein','eines Sportvereins','der Verein','den Verein','dem Verein'),
+  P('jugendzentrum','Jugendzentrum','n','ein Jugendzentrum','ein Jugendzentrum','einem Jugendzentrum','eines Jugendzentrums','das Jugendzentrum','das Jugendzentrum','dem Jugendzentrum'),
+  P('anrainer','52-jähriger Anrainer','m','ein 52-jähriger Anrainer','einen 52-jährigen Anrainer','einem 52-jährigen Anrainer','eines 52-jährigen Anrainers','der Anrainer','den Anrainer','dem Anrainer'),
+  P('pfarre','Pfarre','f','eine Pfarre',null,'einer Pfarre',null,'die Pfarre',null,'der Pfarre',{x:true})
+];
+const POOLS={pers:PERS,gesch:GESCH,vand:VAND};
+
+const TAETER=[
+  {id:'einer',label:'ein unbekannter Täter',g:'m',nom:'ein unbekannter Täter',akk:'einen unbekannten Täter',dat:'einem unbekannten Täter',k:'der Täter',kA:'den Täter',kD:'dem Täter'},
+  {id:'frau',label:'eine unbekannte Täterin',g:'f',nom:'eine unbekannte Täterin',akk:'eine unbekannte Täterin',dat:'einer unbekannten Täterin',k:'die Täterin',kA:'die Täterin',kD:'der Täterin'},
+  {id:'zwei',label:'zwei unbekannte Täter',g:'pl',pl:true,nom:'zwei unbekannte Täter',akk:'zwei unbekannte Täter',dat:'zwei unbekannten Tätern',k:'die beiden Täter',kA:'die beiden Täter',kD:'den beiden Tätern',einer:'einer der beiden Täter',einerA:'einen der beiden Täter'},
+  {id:'jugend',label:'ein Jugendlicher',g:'m',nom:'ein Jugendlicher',akk:'einen Jugendlichen',dat:'einem Jugendlichen',k:'der Jugendliche',kA:'den Jugendlichen',kD:'dem Jugendlichen'},
+  {id:'jugendl3',label:'drei Jugendliche',g:'pl',pl:true,nom:'drei Jugendliche',akk:'drei Jugendliche',dat:'drei Jugendlichen',k:'die Jugendlichen',kA:'die Jugendlichen',kD:'den Jugendlichen',einer:'einer der Jugendlichen',einerA:'einen der Jugendlichen'},
+  {id:'mann30',label:'ein etwa 30-jähriger Mann',g:'m',nom:'ein etwa 30-jähriger Mann',akk:'einen etwa 30-jährigen Mann',dat:'einem etwa 30-jährigen Mann',k:'der Mann',kA:'den Mann',kD:'dem Mann'},
+  {id:'maskiert',label:'ein maskierter Täter',g:'m',x:true,nom:'ein maskierter Täter',akk:'einen maskierten Täter',dat:'einem maskierten Täter',k:'der Maskierte',kA:'den Maskierten',kD:'dem Maskierten'},
+  {id:'unbekannte',label:'Unbekannte (Anzahl unklar)',g:'pl',pl:true,x:true,nom:'Unbekannte',akk:'Unbekannte',dat:'Unbekannten',k:'die Unbekannten',kA:'die Unbekannten',kD:'den Unbekannten',einer:'einer der Unbekannten',einerA:'einen der Unbekannten'}
+];
+
+/* ===== Wort-Bausteine ===== */
+const ORT=(id,label,inn,o)=>Object.assign({id,label,in:inn},o||{});
+const VG=(id,label,vs,vp,rest,part,pass,x)=>({id,label,vs,vp,rest,part:part||'',pass:pass||null,x:!!x});
+const PQ=(id,label,aux,rest,pp,x)=>({id,label,aux,rest,pp,x:!!x});
+const SS=(id,label,ss,x)=>({id,label,ss,x:!!x});
+const B=(id,label,nom,akk,dat,pl,x)=>({id,label,nom,akk,dat,pl:!!pl,x:!!x});
+const TIP=(id,label,rat,x)=>({id,label,x:!!x,ss:()=>[`Die Polizei rät, ${rat}.`,`Die Exekutive empfiehlt, ${rat}.`,`Ein Polizeisprecher appellierte an die Bevölkerung, ${rat}.`]});
+
+/* ===== Die Tatarten ===== */
+const TATEN={
+fahrrad:{label:'Fahrraddiebstahl',emoji:'🚲',pool:'pers',kind:'beute',verletzt:false,
+  d:{nom:'ein Fahrraddiebstahl',dat:'einem Fahrraddiebstahl',gen:'eines Fahrraddiebstahls'},
+  tatorte:[ORT('supermarkt','vor einem Supermarkt','vor einem Supermarkt'),ORT('schule','vor einer Schule','vor einer Schule'),ORT('bahnhof','am Hauptbahnhof','am Hauptbahnhof'),ORT('innenhof','im Innenhof eines Wohnhauses','im Innenhof eines Wohnhauses'),ORT('fitness','vor einem Fitnessstudio','vor einem Fitnessstudio'),ORT('keller','im Fahrradkeller einer Wohnanlage','im Fahrradkeller einer Wohnanlage',{x:true})],
+  vorg:[PQ('abgesperrt','Rad ordentlich abgesperrt','hatte',c=>`${c.O.sein} Fahrrad ordnungsgemäß`,'abgesperrt'),PQ('kurzweg','nur kurz weg gewesen','war','nur für wenige Minuten einkaufen','gegangen'),PQ('neu','Rad war ganz neu','hatte',c=>`${c.O.sein} Rad erst vor wenigen Wochen`,'gekauft',true),PQ('kabel','nur ein dünnes Kabelschloss','hatte',c=>`${c.O.sein} Rad nur mit einem dünnen Kabelschloss`,'gesichert',true)],
+  vorgehen:[VG('bolzen','Schloss mit Bolzenschneider geknackt','knackte','knackten','das Schloss mit einem Bolzenschneider','','Das Schloss wurde mit einem Bolzenschneider geknackt.'),VG('zwick','Kabelschloss durchgezwickt','zwickte','zwickten','das Kabelschloss','durch','Das Kabelschloss wurde einfach durchgezwickt.'),VG('getragen','abgesperrtes Rad weggetragen','trug','trugen','das abgesperrte Rad kurzerhand','davon','Das abgesperrte Rad wurde kurzerhand davongetragen.',true),VG('aufsteigen','auf das unversperrte Rad gestiegen','schwang sich','schwangen sich','auf das unversperrte Rad','',null),VG('montiert','Teile abmontiert','montierte','montierten','zuerst den Sattel und das Vorderrad','ab','Zuerst wurden der Sattel und das Vorderrad abmontiert.',true)],
+  beute:[B('ebike','E-Bike','ein E-Bike','ein E-Bike','einem E-Bike'),B('mtb','Mountainbike','ein Mountainbike','ein Mountainbike','einem Mountainbike'),B('city','Citybike','ein Citybike','ein Citybike','einem Citybike'),B('rennrad','Rennrad','ein Rennrad','ein Rennrad','einem Rennrad',false,true),B('helm','Fahrradhelm','ein Fahrradhelm','einen Fahrradhelm','einem Fahrradhelm'),B('ftasche','Fahrradtasche','eine Fahrradtasche','eine Fahrradtasche','einer Fahrradtasche')],
+  tipps:[TIP('buegel','Bügelschloss verwenden','Fahrräder immer mit einem stabilen Bügelschloss an einem fest verankerten Gegenstand anzusperren'),TIP('codieren','Rad codieren lassen','das eigene Fahrrad registrieren und codieren zu lassen',true)],
+  headlines:c=>['Fahrrad trotz Schloss gestohlen',`Fahrraddieb schlug in ${c.stadt} zu`,'Bolzenschneider im Einsatz: Rad weg','Fahrraddiebe wieder unterwegs'],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'stahl','stahlen')} ${c.when} ${c.wo} das Fahrrad ${c.O.gen}.`,''],[`${cap(c.when)} wurde ${c.wo} das Fahrrad ${c.O.gen} gestohlen.`,'Passiv']]
+},
+tasche:{label:'Taschendiebstahl',emoji:'👛',pool:'pers',kind:'beute',verletzt:true,
+  d:{nom:'ein Taschendiebstahl',dat:'einem Taschendiebstahl',gen:'eines Taschendiebstahls'},
+  tatorte:[ORT('bim','in einer Straßenbahn','in einer Straßenbahn'),ORT('bus','in einem Linienbus','in einem Linienbus'),ORT('markt','auf einem Bauernmarkt','auf einem Bauernmarkt'),ORT('ekz','in einem Einkaufszentrum','in einem Einkaufszentrum'),ORT('cafe','in einem Kaffeehaus','in einem Kaffeehaus'),ORT('advent','auf einem Adventmarkt','auf einem Adventmarkt',{x:true})],
+  vorg:[PQ('rucksack','Geldbörse im Rucksack','hatte',c=>`${c.O.seine} Geldbörse im Rucksack`,'verstaut'),PQ('jacke','Handy in der Jackentasche','hatte',c=>`${c.O.sein} Handy in die Jackentasche`,'gesteckt'),SS('gedraenge','dichtes Gedränge',()=>['Zur Tatzeit herrschte dichtes Gedränge.','Zu diesem Zeitpunkt war besonders viel los.','Es herrschte reger Betrieb.'])],
+  vorgehen:[VG('ablenk','mit einer Frage abgelenkt','lenkte','lenkten',c=>`${c.O.kA} mit einer Frage nach dem Weg`,'ab',c=>`${cap(c.O.k)} wurde mit einer Frage nach dem Weg abgelenkt.`),VG('rempel','scheinbar zufällig angerempelt','rempelte','rempelten',c=>`${c.O.kA} scheinbar zufällig`,'an',c=>`${cap(c.O.k)} wurde scheinbar zufällig angerempelt.`),VG('griff','unbemerkt in die Tasche gegriffen','griff','griffen',c=>`unbemerkt in ${c.O.seine} Tasche`,'',null),VG('zipp','Reißverschluss geöffnet','öffnete','öffneten',c=>`blitzschnell den Reißverschluss ${c.O.seines} Rucksacks`,'','Blitzschnell wurde der Reißverschluss des Rucksacks geöffnet.',true)],
+  beute:[B('geld','Geldbörse','eine Geldbörse','eine Geldbörse','einer Geldbörse'),B('handy','Handy','ein Handy','ein Handy','einem Handy'),B('karte','Bankomatkarte','eine Bankomatkarte','eine Bankomatkarte','einer Bankomatkarte'),B('bar','Bargeld','rund 150 Euro Bargeld','rund 150 Euro Bargeld','rund 150 Euro Bargeld',true),B('ausweis','Ausweis','ein Ausweis','einen Ausweis','einem Ausweis'),B('schl','Schlüsselbund','ein Schlüsselbund','einen Schlüsselbund','einem Schlüsselbund',false,true)],
+  tipps:[TIP('innen','Wertsachen am Körper tragen','Wertsachen immer in den Innentaschen der Kleidung zu tragen'),TIP('vorne','Rucksack nach vorne','Rucksäcke im Gedränge vor dem Körper zu tragen',true)],
+  headlines:c=>['Taschendieb schlug im Gedränge zu',`Langfinger in ${c.stadt} unterwegs`,'Geldbörse unbemerkt gestohlen','Vorsicht vor Taschendieben'],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'bestahl','bestahlen')} ${c.when} ${c.wo} ${c.O.akk}.`,'']]
+},
+wohnung:{label:'Wohnungseinbruch',emoji:'🏠',pool:'pers',kind:'beute',verletzt:false,
+  d:{nom:'ein Wohnungseinbruch',dat:'einem Wohnungseinbruch',gen:'eines Wohnungseinbruchs'},
+  tatorte:[ORT('mehr','in einem Mehrparteienhaus','in einem Mehrparteienhaus'),ORT('efh','in einem Einfamilienhaus','in einem Einfamilienhaus'),ORT('siedlung','in einer Wohnsiedlung','in einer Wohnsiedlung'),ORT('altbau','in einem Gründerzeithaus','in einem Gründerzeithaus',{x:true}),ORT('dach','in einer Dachgeschoßwohnung','in einer Dachgeschoßwohnung',{x:true})],
+  vorg:[PQ('urlaub','eine Woche auf Urlaub','war','für eine Woche auf Urlaub','gefahren'),PQ('einkauf','nur kurz einkaufen','war','nur kurz einkaufen','gegangen'),PQ('fenster','Fenster gekippt gelassen','hatte','das Küchenfenster gekippt','gelassen')],
+  vorgehen:[VG('tuer','Wohnungstür aufgebrochen','brach','brachen','die Wohnungstür mit einem Schraubenzieher','auf','Die Wohnungstür wurde mit einem Schraubenzieher aufgebrochen.'),VG('fenster','durch das Fenster eingestiegen','stieg','stiegen','über ein gekipptes Fenster in die Wohnung','ein',null),VG('terrasse','Terrassentür aufgehebelt','hebelte','hebelten','die Terrassentür','auf','Die Terrassentür wurde aufgehebelt.'),VG('schluessel','mit Nachschlüssel aufgesperrt','sperrte','sperrten','die Tür offenbar mit einem Nachschlüssel','auf','Die Tür wurde offenbar mit einem Nachschlüssel aufgesperrt.',true)],
+  beute:[B('schmuck','Schmuck','Schmuck','Schmuck','Schmuck'),B('bar','Bargeld','Bargeld','Bargeld','Bargeld'),B('laptop','Laptop','ein Laptop','einen Laptop','einem Laptop'),B('uhr','Armbanduhr','eine wertvolle Armbanduhr','eine wertvolle Armbanduhr','einer wertvollen Armbanduhr'),B('konsole','Spielkonsole','eine Spielkonsole','eine Spielkonsole','einer Spielkonsole'),B('tablet','Tablet','ein Tablet','ein Tablet','einem Tablet'),B('gold','Goldmünzen','mehrere Goldmünzen','mehrere Goldmünzen','mehreren Goldmünzen',true,true)],
+  tipps:[TIP('zu','Fenster schließen','Fenster und Türen auch bei kurzer Abwesenheit immer zu schließen'),TIP('nachbarn','Nachbarn einbinden','bei längerer Abwesenheit Nachbarn zu bitten, den Postkasten zu leeren',true)],
+  headlines:c=>['Einbrecher durchwühlten Wohnung','Ungebetene Gäste in der Wohnung','Einbrecher nutzten Abwesenheit','Wertsachen aus Wohnung gestohlen'],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'brach','brachen')} ${c.when} ${c.wo} in die Wohnung ${c.O.gen} ein.`,''],[`${cap(c.when)} wurde ${c.wo} in die Wohnung ${c.O.gen} eingebrochen.`,'Passiv']]
+},
+geschaeft:{label:'Geschäftseinbruch',emoji:'🏪',pool:'gesch',kind:'beute',verletzt:false,
+  d:{nom:'ein Einbruch',dat:'einem Einbruch',gen:'eines Einbruchs'},
+  tatorte:[ORT('innenstadt','in der Innenstadt','in der Innenstadt',{von:true}),ORT('ekz','in einem Einkaufszentrum','in einem Einkaufszentrum'),ORT('hauptstr','an einer belebten Hauptstraße','an einer belebten Hauptstraße'),ORT('gewerbe','in einem Gewerbegebiet','in einem Gewerbegebiet'),ORT('bahnhof','im Bahnhofsviertel','im Bahnhofsviertel',{von:true,x:true})],
+  vorg:[SS('geschlossen','Geschäft war schon zu',c=>[`${cap(c.O.k)} war zur Tatzeit bereits geschlossen.`,'Zur Tatzeit befand sich niemand mehr im Geschäft.','Das Personal hatte das Geschäft bereits am Abend zugesperrt.']),PQ('renoviert','erst renoviert','war','erst vor kurzem','renoviert worden'),PQ('alarm','keine Alarmanlage','war','nicht mit einer Alarmanlage','ausgestattet',true)],
+  vorgehen:[VG('scheibe','Auslagenscheibe eingeschlagen','schlug','schlugen','die Auslagenscheibe','ein','Die Auslagenscheibe wurde eingeschlagen.'),VG('hinten','Hintertür aufgebrochen','brach','brachen','die Hintertür','auf','Die Hintertür wurde aufgebrochen.'),VG('kassa','Registrierkassa aufgebrochen','brach','brachen','die Registrierkassa','auf','Die Registrierkassa wurde aufgebrochen.'),VG('dach','über das Dach eingestiegen','gelangte','gelangten','über das Dach ins Innere','',null,true)],
+  beute:[B('kassa','Bargeld aus der Kassa','das Bargeld aus der Kassa','das Bargeld aus der Kassa','dem Bargeld aus der Kassa'),B('zig','Zigaretten','mehrere Stangen Zigaretten','mehrere Stangen Zigaretten','mehreren Stangen Zigaretten',true),B('handys','neue Handys','mehrere neue Handys','mehrere neue Handys','mehreren neuen Handys',true),B('laptops','zwei Laptops','zwei Laptops','zwei Laptops','zwei Laptops',true),B('schmuck','Schmuck','Schmuck im Wert von mehreren tausend Euro','Schmuck im Wert von mehreren tausend Euro','Schmuck im Wert von mehreren tausend Euro',false,true)],
+  tipps:[TIP('kassa','Kassa leeren','über Nacht kein Bargeld in der Kassa zu lassen'),TIP('alarm','Alarmanlage einbauen','Geschäftsräume mit Alarmanlage und Videokamera zu sichern',true)],
+  headlines:c=>['Nächtlicher Einbruch in Geschäft','Scheibe eingeschlagen, Kassa geplündert',`Einbrecher in ${c.stadt} am Werk`,`Einbruch: ${cap(c.O.label)} betroffen`],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'brach','brachen')} ${c.when} in ${c.O.akk} ${c.wo} ein.`,'']]
+},
+laden:{label:'Ladendiebstahl',emoji:'🛒',pool:'gesch',kind:'beute',verletzt:false,
+  d:{nom:'ein Ladendiebstahl',dat:'einem Ladendiebstahl',gen:'eines Ladendiebstahls'},
+  tatorte:[ORT('innenstadt','in der Innenstadt','in der Innenstadt',{von:true}),ORT('ekz','in einem Einkaufszentrum','in einem Einkaufszentrum'),ORT('bahnhof','im Hauptbahnhof','im Hauptbahnhof'),ORT('fmz','in einem Fachmarktzentrum','in einem Fachmarktzentrum',{x:true})],
+  vorg:[SS('voll','Geschäft war gut besucht',()=>['Das Geschäft war zur Tatzeit gut besucht.','Im Geschäft herrschte reger Betrieb.','Zur Tatzeit befanden sich zahlreiche Kundinnen und Kunden im Geschäft.']),SS('unauff','Täter wirkte unauffällig',c=>[J(cap(c.T.k),vv(c.T,'schlenderte','schlenderten'),'zunächst unauffällig durch die Regale')+'.',J(cap(c.T.k),vv(c.T,'verhielt','verhielten'),'sich zunächst völlig unauffällig')+'.',J('Zunächst',vv(c.T,'fiel','fielen'),c.T.k,'niemandem auf')+'.']),SS('schluss','kurz vor Ladenschluss',()=>['Es war kurz vor Ladenschluss.','Das Geschäft stand kurz vor der Schließung.','Die Tat ereignete sich wenige Minuten vor Geschäftsschluss.'],true)],
+  vorgehen:[VG('rucksack','Waren in den Rucksack gesteckt','steckte','steckten','mehrere Waren in einen mitgebrachten Rucksack','','Mehrere Waren wurden in einen Rucksack gesteckt.'),VG('jacke','Ware unter der Jacke versteckt','ließ','ließen','die Ware unter der Jacke','verschwinden',null),VG('etikett','Sicherungsetiketten entfernt','entfernte','entfernten','die Sicherungsetiketten','','Die Sicherungsetiketten wurden entfernt.',true),VG('kassa','an der Kassa vorbeigegangen','ging','gingen','mit der Ware an der Kassa','vorbei',null)],
+  beute:[B('kosmetik','Kosmetikartikel','Kosmetikartikel','Kosmetikartikel','Kosmetikartikeln',true),B('parfum','Parfum','ein teures Parfum','ein teures Parfum','einem teuren Parfum'),B('kopfh','Kopfhörer','kabellose Kopfhörer','kabellose Kopfhörer','kabellosen Kopfhörern',true),B('lebensm','Lebensmittel','Lebensmittel','Lebensmittel','Lebensmitteln',true),B('alk','Alkohol','mehrere Flaschen Alkohol','mehrere Flaschen Alkohol','mehreren Flaschen Alkohol',true),B('schuhe','Markenschuhe','ein Paar Markenschuhe','ein Paar Markenschuhe','einem Paar Markenschuhe',false,true)],
+  tipps:[TIP('personal','Personal informieren','verdächtige Beobachtungen sofort dem Personal zu melden'),TIP('zivil','Zivilcourage, aber sicher','Zivilcourage zu zeigen, sich dabei aber nie selbst in Gefahr zu bringen',true)],
+  headlines:c=>['Ladendieb ließ Waren mitgehen',`Diebstahl in ${c.O.label==='___'?'___':c.O.label}`,`Ladendieb in ${c.stadt} unterwegs`,'Teure Beute aus dem Geschäft'],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'ließ','ließen')} ${c.when} in ${c.O.dat} ${c.wo} Waren mitgehen.`,'']]
+},
+raub:{label:'Handtaschenraub',emoji:'👜',pool:'pers',kind:'beute',verletzt:true,
+  d:{nom:'ein Handtaschenraub',dat:'einem Handtaschenraub',gen:'eines Handtaschenraubs'},
+  tatorte:[ORT('park','in einem Park','in einem Park'),ORT('halte','an einer Bushaltestelle','an einer Bushaltestelle'),ORT('unterf','in einer Unterführung','in einer Unterführung'),ORT('gehsteig','auf einem Gehsteig','auf einem Gehsteig'),ORT('parkplatz','auf einem Parkplatz','auf einem Parkplatz'),ORT('gasse','in einer schmalen Seitengasse','in einer schmalen Seitengasse',{x:true})],
+  vorg:[PQ('heimweg','auf dem Heimweg','war','gerade auf dem Heimweg','gewesen'),PQ('einkauf','aus dem Supermarkt gekommen','war','gerade aus einem Supermarkt','gekommen'),PQ('bank','vorher Geld abgehoben','hatte','kurz zuvor Geld bei einer Bank','abgehoben',true)],
+  vorgehen:[VG('riss','Tasche von der Schulter gerissen','riss','rissen',c=>`${c.O.kD} die Handtasche von der Schulter`,'',c=>`${cap(c.O.kD)} wurde die Handtasche von der Schulter gerissen.`),VG('hinten','von hinten genähert','näherte sich','näherten sich',c=>`${c.O.kD} von hinten`,'',null),VG('stoss','zu Boden gestoßen','stieß','stießen',c=>`${c.O.kA} zu Boden`,'',c=>`${cap(c.O.k)} wurde zu Boden gestoßen.`),VG('schnitt','Riemen durchgeschnitten','schnitt','schnitten',c=>`den Riemen ${c.O.seiner} Tasche`,'durch','Der Riemen der Tasche wurde durchgeschnitten.',true)],
+  beute:[B('htasche','Handtasche','eine Handtasche','eine Handtasche','einer Handtasche'),B('geld','Geldbörse','eine Geldbörse','eine Geldbörse','einer Geldbörse'),B('handy','Handy','ein Handy','ein Handy','einem Handy'),B('bar','Bargeld','rund 200 Euro Bargeld','rund 200 Euro Bargeld','rund 200 Euro Bargeld',true),B('schl','Wohnungsschlüssel','die Wohnungsschlüssel','die Wohnungsschlüssel','den Wohnungsschlüsseln',true),B('doku','Dokumente','sämtliche Dokumente','sämtliche Dokumente','sämtlichen Dokumenten',true,true)],
+  tipps:[TIP('wand','Tasche zur Hauswand tragen','Taschen immer auf der von der Fahrbahn abgewandten Seite zu tragen'),TIP('wehren','nicht wehren, um Hilfe rufen','sich im Ernstfall nicht zu wehren, sondern laut um Hilfe zu rufen',true)],
+  headlines:c=>[`${cap(c.O.label)} beraubt`,'Handtasche entrissen',`Raubüberfall in ${c.stadt}`,'Überfall auf offener Straße'],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'überfiel','überfielen')} ${c.when} ${c.wo} ${c.O.akk}.`,''],[`${cap(c.T.nom)} ${vv(c.T,'entriss','entrissen')} ${c.when} ${c.wo} ${c.O.dat} die Handtasche.`,'']]
+},
+auto:{label:'Autoeinbruch',emoji:'🚗',pool:'pers',kind:'beute',verletzt:false,
+  d:{nom:'ein Autoeinbruch',dat:'einem Autoeinbruch',gen:'eines Autoeinbruchs'},
+  tatorte:[ORT('parkplatz','auf einem Parkplatz','auf einem Parkplatz'),ORT('tiefgarage','in einer Tiefgarage','in einer Tiefgarage'),ORT('wohnstr','in einer Wohnstraße','in einer Wohnstraße'),ORT('freibad','vor einem Freibad','vor einem Freibad'),ORT('pr','auf einem Park-and-ride-Parkplatz','auf einem Park-and-ride-Parkplatz',{x:true})],
+  vorg:[PQ('kurz','Auto nur kurz abgestellt','hatte',c=>`${c.O.sein} Auto nur für kurze Zeit`,'abgestellt'),PQ('tasche','Tasche sichtbar liegen gelassen','hatte',c=>`${c.O.seine} Tasche gut sichtbar am Beifahrersitz`,'liegen gelassen'),PQ('offen','Absperren vergessen','hatte','vergessen, das Auto abzusperren','',true)],
+  vorgehen:[VG('scheibe','Seitenscheibe eingeschlagen','schlug','schlugen','die Seitenscheibe','ein','Die Seitenscheibe wurde eingeschlagen.'),VG('tuer','unversperrte Tür geöffnet','öffnete','öffneten','die unversperrte Fahrertür','',null),VG('schloss','Türschloss geknackt','knackte','knackten','das Türschloss','','Das Türschloss wurde geknackt.'),VG('funk','Funkschloss überlistet','überlistete','überlisteten','das Funkschloss mit einem elektronischen Gerät','','Das Funkschloss wurde mit einem elektronischen Gerät überlistet.',true)],
+  beute:[B('navi','Navigationsgerät','ein Navigationsgerät','ein Navigationsgerät','einem Navigationsgerät'),B('laptop','Laptop','ein Laptop','einen Laptop','einem Laptop'),B('sport','Sporttasche','eine Sporttasche','eine Sporttasche','einer Sporttasche'),B('brille','Sonnenbrille','eine teure Sonnenbrille','eine teure Sonnenbrille','einer teuren Sonnenbrille'),B('htasche','Handtasche','eine Handtasche','eine Handtasche','einer Handtasche'),B('werkzeug','Werkzeugkoffer','mehrere Werkzeugkoffer','mehrere Werkzeugkoffer','mehreren Werkzeugkoffern',true,true)],
+  tipps:[TIP('liegen','nichts sichtbar liegen lassen','keine Wertsachen sichtbar im Auto liegen zu lassen'),TIP('absperren','immer absperren','das Fahrzeug auch bei kurzem Verlassen immer abzusperren')],
+  headlines:c=>['Autoscheibe eingeschlagen',`Autoknacker in ${c.stadt} unterwegs`,'Einbruch in geparktes Auto','Wertsachen aus Auto gestohlen'],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'brach','brachen')} ${c.when} ${c.wo} in das Auto ${c.O.gen} ein.`,'']]
+},
+vandal:{label:'Sachbeschädigung',emoji:'🎨',pool:'vand',kind:'schaden',verletzt:false,
+  d:{nom:'eine Sachbeschädigung',dat:'einer Sachbeschädigung',gen:'einer Sachbeschädigung'},
+  tatorte:[ORT('schulgel','auf einem Schulgelände','auf einem Schulgelände'),ORT('park','in einem Park','in einem Park'),ORT('spiel','auf einem Spielplatz','auf einem Spielplatz'),ORT('halte','bei einer Bushaltestelle','bei einer Bushaltestelle'),ORT('sportpl','auf einem Sportplatz','auf einem Sportplatz'),ORT('unterf','in einer Fußgängerunterführung','in einer Fußgängerunterführung',{x:true})],
+  vorg:[PQ('renoviert','erst im Sommer renoviert','war','erst im Sommer','renoviert worden'),SS('morgen','erst am Morgen entdeckt',()=>['Erst am nächsten Morgen wurde das Ausmaß der Zerstörung sichtbar.','Die Schäden wurden erst am Morgen entdeckt.','Am nächsten Morgen bot sich ein Bild der Verwüstung.']),SS('wieder','schon öfter betroffen',c=>[`Es ist bereits das dritte Mal in diesem Jahr, dass ${c.O.k} betroffen ist.`,`${cap(c.O.k)} war schon mehrmals Ziel von Vandalen.`,`Bereits im Frühjahr hatte es ${c.O.kA} getroffen.`],true)],
+  vorgehen:[VG('graffiti','mit Graffiti besprüht','besprühte','besprühten','die frisch gestrichene Fassade mit Graffiti','','Die frisch gestrichene Fassade wurde mit Graffiti besprüht.'),VG('scheiben','Scheiben eingeworfen','warf','warfen','mehrere Fensterscheiben mit Steinen','ein','Mehrere Fensterscheiben wurden mit Steinen eingeworfen.'),VG('mist','Mistkübel angezündet','zündete','zündeten','einen Mistkübel','an','Ein Mistkübel wurde angezündet.'),VG('baenke','Sitzbänke beschädigt','beschädigte','beschädigten','mehrere Sitzbänke mutwillig','','Mehrere Sitzbänke wurden mutwillig beschädigt.'),VG('spiegel','Außenspiegel abgetreten','trat','traten','die Außenspiegel geparkter Autos','ab','Die Außenspiegel geparkter Autos wurden abgetreten.',true)],
+  beute:[B('fassade','Fassade','die Fassade','die Fassade','der Fassade'),B('scheiben','Fensterscheiben','mehrere Fensterscheiben','mehrere Fensterscheiben','mehreren Fensterscheiben',true),B('baenke','Sitzbänke','zwei Sitzbänke','zwei Sitzbänke','zwei Sitzbänken',true),B('spielg','Spielgeräte','mehrere Spielgeräte','mehrere Spielgeräte','mehreren Spielgeräten',true),B('mist','Mistkübel','ein Mistkübel','einen Mistkübel','einem Mistkübel'),B('tuer','Eingangstür','die Eingangstür','die Eingangstür','der Eingangstür'),B('warte','Wartehäuschen','ein Wartehäuschen','ein Wartehäuschen','einem Wartehäuschen',false,true)],
+  tipps:[TIP('notruf','sofort Notruf 133','verdächtige Beobachtungen in der Nacht sofort unter dem Notruf 133 zu melden'),TIP('rasch','Graffiti rasch entfernen','Graffiti möglichst rasch entfernen zu lassen, um Nachahmer abzuschrecken',true)],
+  headlines:c=>['Vandalen wüteten','Mutwillige Zerstörung','Hoher Schaden durch Vandalen',`Graffiti-Sprayer in ${c.stadt} am Werk`],
+  leads:c=>[[`${cap(c.T.nom)} ${vv(c.T,'beschädigte','beschädigten')} ${c.when} ${c.wo} das Eigentum ${c.O.gen}.`,''],[`${cap(c.T.nom)} ${vv(c.T,'richtete','richteten')} ${c.when} ${c.wo} erheblichen Schaden an.`,'']]
+}};
+const TATKEYS=Object.keys(TATEN);
+
+/* ===== Allgemeine Wortlisten ===== */
+const HOEHE=[
+  {id:'h300',label:'rund 300 Euro',akk:'rund 300 Euro',dat:'rund 300 Euro'},
+  {id:'h100',label:'mehrere hundert Euro',akk:'mehrere hundert Euro',dat:'mehreren hundert Euro'},
+  {id:'h2000',label:'rund 2.000 Euro',akk:'rund 2.000 Euro',dat:'rund 2.000 Euro'},
+  {id:'h1000',label:'mehrere tausend Euro',akk:'mehrere tausend Euro',dat:'mehreren tausend Euro'},
+  {id:'h5',label:'fünfstelliger Betrag',akk:'einen fünfstelligen Eurobetrag',dat:'einem fünfstelligen Eurobetrag',x:true},
+  {id:'unklar',label:'noch unklar',unklar:true}
+];
+const FLUCHT=[
+  {id:'fuss',label:'zu Fuß geflüchtet',vs:'flüchtete',vp:'flüchteten',rest:'zu Fuß in unbekannte Richtung',part:''},
+  {id:'rad',label:'mit einem Fahrrad geflüchtet',vs:'flüchtete',vp:'flüchteten',rest:'mit einem Fahrrad',part:'',not:['fahrrad']},
+  {id:'gestrad',label:'mit dem gestohlenen Rad davon',vs:'fuhr',vp:'fuhren',rest:'mit dem gestohlenen Rad',part:'davon',for:['fahrrad']},
+  {id:'auto',label:'mit einem Auto geflüchtet',vs:'flüchtete',vp:'flüchteten',rest:'in einem dunklen Auto',part:''},
+  {id:'roller',label:'mit einem Motorroller geflüchtet',vs:'flüchtete',vp:'flüchteten',rest:'auf einem Motorroller',part:''},
+  {id:'unbemerkt',label:'unerkannt entkommen',vs:'konnte',vp:'konnten',rest:'unerkannt',part:'entkommen'},
+  {id:'gefasst',label:'von Passanten festgehalten',vs:'wurde',vp:'wurden',rest:'von Passanten bis zum Eintreffen der Polizei',part:'festgehalten',x:true}
+];
+const VERLETZT=[
+  SS('niemand','niemand verletzt',c=>['Verletzt wurde niemand.','Zu Schaden kam dabei niemand.',`${cap(c.O.k)} blieb unverletzt.`]),
+  SS('leicht','leicht verletzt',c=>[`${cap(c.O.k)} wurde leicht verletzt.`,`Dabei erlitt ${c.O.k} leichte Verletzungen.`,`${cap(c.O.k)} musste mit leichten Verletzungen ins Krankenhaus gebracht werden.`]),
+  SS('schock','unter Schock',c=>[`${cap(c.O.k)} erlitt einen Schock.`,`${cap(c.O.k)} blieb unverletzt, stand aber unter Schock.`,`${cap(c.O.k)} wurde vom Roten Kreuz betreut.`],true)
+];
+const BEOB=[
+  Object.assign(SS('zeugin','eine Zeugin',c=>['Eine Zeugin beobachtete den Vorfall und verständigte sofort die Polizei.','Eine aufmerksame Zeugin bemerkte den Vorfall und wählte den Notruf.',`Eine Zeugin wurde auf ${c.T.kA} aufmerksam und alarmierte die Polizei.`]),{zk:'die Zeugin',zp:'sie'}),
+  Object.assign(SS('passant','ein Passant',c=>['Ein Passant beobachtete die Tat und rief die Polizei.','Ein Passant wurde Zeuge des Vorfalls und alarmierte die Polizei.',`Ein Passant konnte ${c.T.kA} noch kurz sehen.`]),{zk:'der Passant',zp:'er',for:['fahrrad','tasche','raub','auto','vandal','laden']}),
+  Object.assign(SS('nachbar','ein Nachbar',c=>['Ein Nachbar hörte verdächtige Geräusche und verständigte die Polizei.','Ein Nachbar wurde durch Lärm auf den Vorfall aufmerksam.',`Ein Nachbar bemerkte ${c.T.kA} und rief die Polizei.`]),{zk:'der Nachbar',zp:'er',for:['wohnung','auto','fahrrad']}),
+  Object.assign(SS('anrainer','ein Anrainer',()=>['Ein Anrainer hörte verdächtige Geräusche und verständigte die Polizei.','Ein Anrainer wurde durch Lärm auf den Vorfall aufmerksam.','Ein aufmerksamer Anrainer alarmierte die Polizei.']),{zk:'der Anrainer',zp:'er',for:['geschaeft','vandal']}),
+  Object.assign(SS('mitarbeiterin','eine Mitarbeiterin (am Morgen)',()=>['Eine Mitarbeiterin entdeckte den Einbruch am nächsten Morgen.','Der Einbruch fiel einer Mitarbeiterin bei Geschäftsöffnung auf.','Als eine Mitarbeiterin am Morgen aufsperrte, bemerkte sie sofort die Schäden.']),{zk:'die Mitarbeiterin',zp:'sie',for:['geschaeft']}),
+  Object.assign(SS('verkaeuferin','eine Verkäuferin',c=>['Eine Verkäuferin bemerkte den Diebstahl und verständigte die Polizei.','Einer Verkäuferin fiel der Diebstahl sofort auf.',`Eine Verkäuferin beobachtete ${c.T.kA} und rief die Polizei.`]),{zk:'die Verkäuferin',zp:'sie',for:['laden']}),
+  Object.assign(SS('detektiv','ein Ladendetektiv',c=>['Ein Ladendetektiv beobachtete den Diebstahl über die Überwachungsmonitore.',`Ein Ladendetektiv stellte ${c.T.kA} beim Ausgang zur Rede.`,'Der Diebstahl fiel einem Ladendetektiv auf.'],true),{zk:'der Ladendetektiv',zp:'er',for:['laden']}),
+  Object.assign(SS('opfer','das Opfer selbst',c=>[`${cap(c.O.k)} rief sofort laut um Hilfe.`,`${cap(c.O.k)} verständigte unmittelbar danach die Polizei.`,`${cap(c.O.k)} erstattete noch am selben Tag Anzeige.`]),{zIsO:true,for:['raub']}),
+  Object.assign(SS('rueck','Opfer merkt es erst später',c=>[`${cap(c.O.k)} bemerkte den Diebstahl erst einige Zeit später.`,`${cap(c.O.k)} erstattete umgehend Anzeige bei der Polizei.`,`Erst später fiel ${c.O.kD} der Diebstahl auf.`]),{zIsO:true,for:['fahrrad','auto','tasche']}),
+  Object.assign(SS('heim','Bewohner kommen heim',c=>[`${cap(c.O.k)} entdeckte den Einbruch erst bei ${c.O.seiner} Rückkehr.`,`Als ${c.O.k} nach Hause kam, bot sich ein Bild der Verwüstung.`,`Erst bei der Heimkehr bemerkte ${c.O.k} das Durcheinander.`]),{zIsO:true,for:['wohnung']}),
+  SS('kamera','eine Überwachungskamera',()=>['Eine Überwachungskamera zeichnete die Tat auf.','Die Tat wurde von einer Überwachungskamera gefilmt.','Videoaufnahmen einer Überwachungskamera zeigen den Tathergang.']),
+  SS('niemand','niemand',()=>['Zeugen gibt es bislang keine.','Beobachtet wurde die Tat offenbar von niemandem.','Die Tat blieb zunächst unbemerkt.'])
+];
+const AUSSAGE=[
+  {id:'knall',label:'einen Knall gehört',aux:'habe',rest:'plötzlich einen lauten Knall gehört',for:['wohnung','geschaeft','auto','vandal']},
+  {id:'weg',label:'jemanden davonlaufen sehen',aux:'habe',rest:'gesehen, wie jemand davonlief',dass:'gesehen habe, wie jemand davonlief'},
+  {id:'verd',label:'vorher jemanden bemerkt',aux:'habe',rest:'schon vorher eine verdächtige Person in der Nähe bemerkt'},
+  {id:'erschr',label:'furchtbar erschrocken',aux:'sei',rest:'furchtbar erschrocken'},
+  {id:'pol',label:'sofort die Polizei gerufen',aux:'habe',rest:'sofort die Polizei verständigt'},
+  {id:'nichts',label:'sich nichts dabei gedacht',aux:'habe',rest:'sich zunächst nichts dabei gedacht',dRest:'mir zunächst nichts dabei gedacht'},
+  {id:'hinter',label:'dem Täter nachgelaufen',aux:'sei',rest:'dem Täter noch hinterhergelaufen',x:true},
+  {id:'ruck',label:'einen Ruck gespürt',aux:'habe',rest:'nur einen heftigen Ruck an der Schulter gespürt',for:['raub']},
+  {id:'ueberr',label:'völlig überrumpelt',aux:'sei',rest:'völlig überrumpelt worden',for:['raub','tasche'],x:true},
+  {id:'chaos',label:'sofort das Durcheinander gesehen',aux:'habe',rest:'beim Aufsperren sofort das Durcheinander bemerkt',for:['geschaeft','wohnung']}
+];
+const STATUR=[
+  {id:'gross',label:'1,85 m groß',a:'etwa 1,85 Meter groß'},{id:'mittel',label:'1,75 m groß',a:'etwa 1,75 Meter groß'},{id:'klein',label:'1,60 m groß',a:'etwa 1,60 Meter groß'},
+  {id:'schlank',label:'schlank',a:'schlank'},{id:'kraeftig',label:'kräftig',a:'kräftig'},{id:'zierlich',label:'zierlich',a:'zierlich',x:true},
+  {id:'alter16',label:'etwa 16 Jahre',a:'etwa 16 Jahre alt'},{id:'alter20',label:'20 bis 25 Jahre',a:'zwischen 20 und 25 Jahre alt'},{id:'alter30',label:'30 bis 35 Jahre',a:'etwa 30 bis 35 Jahre alt'},{id:'alter50',label:'um die 50',a:'um die 50 Jahre alt',x:true},
+  {id:'dunkel',label:'dunkelhaarig',a:'dunkelhaarig'},{id:'blond',label:'blond',a:'blond'},{id:'glatze',label:'glatzköpfig',a:'glatzköpfig',x:true},{id:'baertig',label:'bärtig',a:'bärtig',x:true}
+];
+const KLEIDUNG=[
+  {id:'kapuze',label:'dunkle Kapuzenjacke',akk:'eine dunkle Kapuzenjacke',dat:'einer dunklen Kapuzenjacke'},
+  {id:'leder',label:'braune Lederjacke',akk:'eine braune Lederjacke',dat:'einer braunen Lederjacke',x:true},
+  {id:'jeans',label:'Jeans',akk:'eine Jeans',dat:'einer Jeans'},
+  {id:'trainings',label:'grauer Trainingsanzug',akk:'einen grauen Trainingsanzug',dat:'einem grauen Trainingsanzug'},
+  {id:'kappe',label:'Baseballkappe',akk:'eine Baseballkappe',dat:'einer Baseballkappe'},
+  {id:'haube',label:'Wollhaube',akk:'eine Wollhaube',dat:'einer Wollhaube'},
+  {id:'sturm',label:'Sturmhaube',akk:'eine Sturmhaube',dat:'einer Sturmhaube',x:true},
+  {id:'rucksack',label:'schwarzer Rucksack',akk:'einen schwarzen Rucksack',dat:'einem schwarzen Rucksack'},
+  {id:'sneakers',label:'weiße Sneakers',akk:'weiße Sneakers',dat:'weißen Sneakers'},
+  {id:'brille',label:'Sonnenbrille',akk:'eine Sonnenbrille',dat:'einer Sonnenbrille'}
+];
+const POLIZEI=[
+  {id:'ermitt',label:'Ermittlungen laufen',k1:'die Ermittlungen liefen auf Hochtouren',dass:'die Ermittlungen auf Hochtouren liefen',dir:'Die Ermittlungen laufen auf Hochtouren',k2:true},
+  {id:'video',label:'Videoaufnahmen werden ausgewertet',k1:'man werte derzeit Videoaufnahmen aus',dass:'man derzeit Videoaufnahmen auswerte',dir:'Wir werten derzeit Videoaufnahmen aus'},
+  {id:'spuren',label:'erste Spuren',k1:'es gebe bereits erste Spuren',dass:'es bereits erste Spuren gebe',dir:'Es gibt bereits erste Spuren'},
+  {id:'spusi',label:'Spurensicherung war da',k1:'die Spurensicherung sei bereits vor Ort gewesen',dass:'die Spurensicherung bereits vor Ort gewesen sei',dir:'Die Spurensicherung war bereits vor Ort'},
+  {id:'serie',label:'ähnliche Fälle gehäuft',k1:'ähnliche Fälle hätten sich zuletzt gehäuft',dass:'sich ähnliche Fälle zuletzt gehäuft hätten',dir:'Ähnliche Fälle haben sich zuletzt gehäuft',k2:true,x:true},
+  {id:'zusammen',label:'Zusammenhang wird geprüft',k1:'ein Zusammenhang mit weiteren Fällen werde geprüft',dass:'ein Zusammenhang mit weiteren Fällen geprüft werde',dir:'Ein Zusammenhang mit weiteren Fällen wird geprüft',x:true}
+];
+const STATUS=[
+  SS('fluechtig','noch flüchtig',c=>[`Von ${c.T.kD} fehlt bislang jede Spur.`,J(cap(c.T.k),vv(c.T,'ist','sind'),'weiterhin flüchtig')+'.',`Die Fahndung nach ${c.T.kD} verlief bisher ohne Erfolg.`]),
+  SS('festgenommen','festgenommen',c=>[J(cap(c.T.k),vv(c.T,'konnte','konnten'),'wenig später festgenommen werden')+'.',`Eine Funkstreife nahm ${c.T.kA} noch in der Nähe des Tatorts fest.`,J(cap(c.T.k),vv(c.T,'wird','werden'),'auf freiem Fuß angezeigt')+'.']),
+  SS('ausgeforscht','ausgeforscht',c=>[J('Dank eines Hinweises',vv(c.T,'konnte','konnten'),c.T.k,'inzwischen ausgeforscht werden')+'.',J(cap(c.T.k),vv(c.T,'wurde','wurden'),'mittlerweile ausgeforscht und',vv(c.T,'zeigte','zeigten'),'sich geständig')+'.',J('Inzwischen',vv(c.T,'ist','sind'),c.T.k,'ausgeforscht')+'.'],true),
+  SS('unklar','noch völlig unklar',()=>['Wer hinter der Tat steckt, ist noch völlig unklar.','Die Hintergründe der Tat sind derzeit noch unklar.','Die Ermittlungen stehen noch ganz am Anfang.'])
+];
+const HINWEISE=SS('hinweise','um Hinweise bitten',()=>['Die Polizei bittet um Hinweise unter der Telefonnummer 059133.','Hinweise nimmt jede Polizeiinspektion entgegen.','Wer etwas Verdächtiges beobachtet hat, wird gebeten, sich bei der Polizei zu melden.']);
+
+/* ===== Ausschlussregeln ===== */
+const RULES=[];
+function rule(a,bs,why){(Array.isArray(a)?a:[a]).forEach(x=>bs.forEach(y=>RULES.push([x,y,why])));}
+function pairwise(card,ids,why){for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++)RULES.push([card+':'+ids[i],card+':'+ids[j],why]);}
+const TSPEC=['taeter:frau','taeter:zwei','taeter:jugend','taeter:jugendl3','taeter:mann30','taeter:maskiert'];
+const BLIND=['beob:niemand','beob:rueck','beob:heim','beob:mitarbeiterin'];
+rule(BLIND,TSPEC,'Wenn niemand den Täter gesehen hat, weiß man nicht, wer es war oder wie viele es waren. Passend sind dann „ein unbekannter Täter“ oder „Unbekannte“.');
+rule(BLIND,['flucht:fuss','flucht:rad','flucht:gestrad','flucht:auto','flucht:roller','flucht:gefasst'],'Wenn niemand die Tat gesehen hat, weiß man nicht, wie der Täter geflüchtet ist. Passend ist dann „unerkannt entkommen“.');
+rule('flucht:gefasst',['status:fluechtig','status:ausgeforscht','status:unklar'],'Wenn Passanten den Täter festgehalten haben, ist er gefasst und nicht mehr auf der Flucht.');
+rule('flucht:unbemerkt',['status:festgenommen'],'„Unerkannt entkommen“ und gleich festgenommen passt nicht zusammen. Wähle „ausgeforscht“, wenn er später gefunden wurde.');
+rule('status:festgenommen',['aufruf:hinweise'],'Der Täter ist schon festgenommen, deshalb sucht die Polizei nicht mehr nach Hinweisen. Wähle lieber einen Tipp.');
+rule('vorgehen:stoss',['verletzt:niemand'],'Wer zu Boden gestoßen wurde, ist meist zumindest leicht verletzt oder geschockt.');
+rule(['vorg:abgesperrt','vorg:kabel'],['vorgehen:aufsteigen'],'Das Rad war abgesperrt, also konnte niemand einfach auf ein unversperrtes Rad steigen.');
+rule('vorg:offen',['vorgehen:scheibe','vorgehen:schloss','vorgehen:funk'],'Das Auto war gar nicht abgesperrt, also musste nichts aufgebrochen werden.');
+pairwise('beute',['ebike','mtb','city','rennrad'],'Es wurde nur ein Fahrrad gestohlen, also nur eine Fahrradart wählen.');
+pairwise('statur',['gross','mittel','klein'],'Ein Mensch hat nur eine Größe.');
+pairwise('statur',['alter16','alter20','alter30','alter50'],'Ein Mensch hat nur ein Alter.');
+pairwise('statur',['dunkel','blond','glatze'],'Haarfarbe und Glatze schließen sich gegenseitig aus.');
+rule('statur:kraeftig',['statur:schlank','statur:zierlich'],'Kräftig und schlank oder zierlich passt nicht zusammen.');
+rule(['taeter:jugend','taeter:jugendl3'],['statur:alter20','statur:alter30','statur:alter50'],'Jugendliche sind noch keine 20 Jahre alt.');
+rule('taeter:mann30',['statur:alter16','statur:alter20','statur:alter50'],'Du hast schon „ein etwa 30-jähriger Mann“ gewählt.');
+rule('taeter:maskiert',['statur:dunkel','statur:blond','statur:glatze','statur:baertig'],'Bei einem maskierten Täter sieht man Haare und Bart nicht.');
+rule('taeter:frau',['statur:baertig'],'Du hast eine Täterin gewählt.');
+rule('kleidung:sturm',['statur:dunkel','statur:blond','statur:glatze','statur:baertig'],'Unter einer Sturmhaube sieht man Haare und Bart nicht.');
+rule(['taeter:jugend','taeter:jugendl3'],['statur:glatze'],'Eine Glatze ist bei Jugendlichen sehr ungewöhnlich – wähle lieber eine Haarfarbe.');
+rule('kleidung:kapuze',['kleidung:leder'],'Man trägt nur eine Jacke.');
+rule('kleidung:jeans',['kleidung:trainings'],'Jeans und Trainingsanzug trägt man nicht gleichzeitig.');
+pairwise('kleidung',['kappe','haube','sturm'],'Man trägt nur eine Kopfbedeckung.');
+const NONVICTIM=['beob:zeugin','beob:passant','beob:nachbar','beob:anrainer','beob:mitarbeiterin','beob:verkaeuferin','beob:detektiv'];
+rule(NONVICTIM,['aussage:ruck','aussage:ueberr'],'Das kann nur das Opfer selbst gespürt haben.');
+rule(['beob:mitarbeiterin','beob:heim','beob:rueck'],['aussage:knall','aussage:weg','aussage:verd','aussage:hinter'],'Diese Person war bei der Tat gar nicht dabei.');
+rule('beob:rueck',['aussage:ruck'],'Das Opfer hat die Tat erst später bemerkt.');
+rule(['beob:zeugin','beob:passant','beob:nachbar','beob:anrainer','beob:verkaeuferin','beob:detektiv','beob:opfer','beob:rueck'],['aussage:chaos'],'Das kann nur jemand sagen, der danach aufgesperrt hat und hineingekommen ist.');
+
+/* ===== Karten ===== */
+const TIP_PQ='<b>Plusquamperfekt:</b> Was schon <i>vor</i> der Tat passiert war, steht in der Vorvergangenheit: hatte abgesperrt, war gegangen.';
+const TIP_K1='<b>Indirekte Rede:</b> Zeitungen geben Aussagen meist im <b>Konjunktiv I</b> wieder (sie habe, er sei). So zeigt man, dass man nur weitergibt, was jemand gesagt hat. Ein wörtliches Zitat mit „…“ ist ab und zu auch erlaubt.';
+const CARDS=[
+ {id:'tatort',tab:1,emoji:'📍',title:'Wo genau ist es passiert?',mode:'single',noSent:true,hint:'Der Tatort kommt in deinen Vorspann, zusammen mit der Stadt von oben.',words:t=>t.tatorte},
+ {id:'opfer',tab:1,emoji:'🙍',title:'Wer ist betroffen?',mode:'single',noSent:true,hint:'Echte Zeitungen nennen keine vollen Namen. Man schreibt zum Beispiel „ein 14-jähriger Schüler“.',words:t=>POOLS[t.pool]},
+ {id:'taeter',tab:1,emoji:'🕵️',title:'Wer war der Täter?',mode:'single',noSent:true,hint:'Weiß man nichts über den Täter, nimmt man „ein unbekannter Täter“ oder „Unbekannte“.',words:()=>TAETER},
+ {id:'vorg',tab:2,para:2,emoji:'⏪',title:'Was war vor der Tat?',mode:'single',hint:'Erzähl kurz, wie die Lage vor der Tat war.',tip:TIP_PQ,words:t=>t.vorg,tpl:tplVorg},
+ {id:'vorgehen',tab:2,para:2,emoji:'🛠️',title:'Wie ging der Täter vor?',mode:'single',hint:'Das ist das „Wie?“ deines Berichts.',tip:'<b>Passiv:</b> Weiß man nicht genau, wer etwas getan hat, oder ist die Handlung wichtiger als die Person, nimmt man das Passiv: „Die Scheibe <b>wurde eingeschlagen</b>.“',words:t=>t.vorgehen,tpl:tplVorgehen},
+ {id:'beute',tab:2,para:2,emoji:'💰',title:t=>t.kind==='schaden'?'Was wurde beschädigt?':'Was wurde gestohlen?',mode:'multi',hint:'Hier darfst du mehrere Dinge wählen. Sie kommen alle in einen einzigen Satz.',words:t=>t.beute,tpl:tplBeute},
+ {id:'hoehe',tab:2,para:2,emoji:'🧾',title:'Wie hoch ist der Schaden?',mode:'single',hint:'Zahlen machen einen Bericht genau.',words:()=>HOEHE,tpl:tplHoehe},
+ {id:'flucht',tab:2,para:2,emoji:'🏃',title:'Was passierte nach der Tat?',mode:'single',hint:'Ist der Täter geflüchtet, oder wurde er festgehalten?',words:()=>FLUCHT,tpl:tplFlucht},
+ {id:'verletzt',tab:2,para:2,emoji:'🩹',title:'Wurde jemand verletzt?',mode:'single',show:t=>t.verletzt,hint:'Folgen für das Opfer gehören in jeden Bericht über einen Überfall.',words:()=>VERLETZT},
+ {id:'beob',tab:3,para:3,emoji:'👀',title:'Wer hat etwas bemerkt?',mode:'single',hint:'Deine Wahl hier entscheidet, welche Aussagen und Täterbeschreibungen möglich sind.',words:()=>BEOB},
+ {id:'aussage',tab:3,para:3,emoji:'🗣️',title:'Was sagt diese Person aus?',mode:'single',hint:'Gib die Aussage wieder, ohne sie zu bewerten.',tip:TIP_K1,words:()=>AUSSAGE,tpl:tplAussage,lock:lockAussage},
+ {id:'statur',tab:3,para:3,emoji:'📏',title:'Täterbeschreibung: Aussehen',mode:'multi',hint:'Mehrere Merkmale sind möglich. Was sich widerspricht, wird gesperrt.',tip:'Täterbeschreibungen stehen oft im <b>Präsens</b>, weil der Täter ja immer noch so aussieht: „Der Gesuchte <b>ist</b> etwa 1,80 Meter groß.“',words:()=>STATUR,tpl:tplStatur,lock:lockBeschr},
+ {id:'kleidung',tab:3,para:3,emoji:'🧥',title:'Täterbeschreibung: Kleidung',mode:'multi',hint:'Mehrere Kleidungsstücke sind möglich.',words:()=>KLEIDUNG,tpl:tplKleidung,lock:lockBeschr},
+ {id:'polizei',tab:4,para:4,emoji:'👮',title:'Was sagt die Polizei?',mode:'single',hint:'Auch Aussagen der Polizei gibst du in der indirekten Rede wieder.',tip:'<b>Ersatzform:</b> Wenn der Konjunktiv I genauso klingt wie die normale Form (sie laufen), nimmt man den Konjunktiv II (sie liefen, sie hätten).',words:()=>POLIZEI,tpl:tplPolizei},
+ {id:'status',tab:4,para:4,emoji:'🔎',title:'Wie steht es um den Täter?',mode:'single',hint:'Der aktuelle Stand gehört an den Schluss.',words:()=>STATUS},
+ {id:'aufruf',tab:4,para:4,emoji:'📢',title:'Aufruf oder Tipp der Polizei',mode:'single',hint:'Ein Bericht endet oft mit einer Bitte um Hinweise oder einem Ratschlag.',words:t=>[HINWEISE].concat(t.tipps)},
+ {id:'headline',tab:5,emoji:'📰',title:'Die Schlagzeile',mode:'none',hint:'Kurz, sachlich und neugierig machend. Oft ohne vollständigen Satz, zum Beispiel „Fahrrad gestohlen“.',tpl:tplHeadline},
+ {id:'lead',tab:5,emoji:'✨',title:'Der Vorspann (Lead)',mode:'none',hint:'Der wichtigste Satz deines Berichts: Er beantwortet Wer? Was? Wann? Wo? Fehlt noch etwas, erscheint eine Lücke ___ – dann wähle es auf Seite ① aus.',tpl:tplLead}
+];
+const CARD=Object.fromEntries(CARDS.map(c=>[c.id,c]));
+const PARA={2:['vorg','vorgehen','beute','hoehe','flucht','verletzt'],3:['beob','aussage','statur','kleidung'],4:['polizei','status','aufruf']};
+
+/* ===== Satzvorlagen ===== */
+function tplVorg(c,w){
+  const S=c.O.k;
+  return [J(cap(S),w.aux,val(w.rest,c),w.pp)+'.',J('Zuvor',w.aux,S,val(w.rest,c),w.pp)+'.',J('Kurz vor der Tat',w.aux,S,val(w.rest,c),w.pp)+'.',J('Wie die Polizei berichtet,',w.aux,S,val(w.rest,c),w.pp)+'.'];
+}
+function tplVorgehen(c,w){
+  const v=vv(c.T,w.vs,w.vp),r=val(w.rest,c),p=w.part||'';
+  const out=[J(cap(c.T.k),v,r,p)+'.',J('Zunächst',v,c.T.k,r,p)+'.',J('Laut Polizei',v,c.T.k,r,p)+'.',J('Offenbar',v,c.T.k,r,p)+'.'];
+  if(!isGap(w)&&w.pass)out.push([val(w.pass,c),'Passiv']);
+  return out;
+}
+function tplBeute(c,arr){
+  const pl=arr.length>1||arr.some(x=>x.pl),wv=pl?'wurden':'wurde';
+  const N=list(arr.map(x=>x.nom)),A=list(arr.map(x=>x.akk)),D=list(arr.map(x=>x.dat));
+  if(c.tat.kind==='schaden')return[[`Beschädigt ${wv} ${N}.`,'Passiv'],J(cap(c.T.k),vv(c.T,'beschädigte','beschädigten'),A)+'.',`Betroffen ${pl?'sind':'ist'} ${N}.`,[`In Mitleidenschaft gezogen ${wv} ${N}.`,'gehoben']];
+  return[[`Gestohlen ${wv} ${N}.`,'Passiv'],J(cap(c.T.k),vv(c.T,'erbeutete','erbeuteten'),A)+'.',`Mit ${D} ${vv(c.T,'machte','machten')} sich ${c.T.k} aus dem Staub.`,J(cap(c.T.k),vv(c.T,'ließ','ließen'),A,'mitgehen')+'.',[`Die Beute: ${N}.`,'Nominalstil']];
+}
+function tplHoehe(c,w){
+  if(w.unklar)return['Die genaue Schadenshöhe ist noch unklar.','Wie hoch der Schaden ist, steht noch nicht fest.',['Die Schadenshöhe wird derzeit noch erhoben.','Passiv']];
+  return[`Der Schaden beläuft sich auf ${w.akk}.`,`Die Polizei beziffert den Schaden mit ${w.dat}.`,[`Der Gesamtschaden wird auf ${w.akk} geschätzt.`,'Passiv'],`Es entstand ein Schaden von ${w.dat}.`];
+}
+function tplFlucht(c,w){
+  const v=vv(c.T,w.vs,w.vp);
+  return[J('Anschließend',v,c.T.k,w.rest,w.part)+'.',J(cap(c.T.k),v,w.rest,w.part)+'.',J('Kurz darauf',v,c.T.k,w.rest,w.part)+'.',J('Nach der Tat',v,c.T.k,w.rest,w.part)+'.'];
+}
+function tplAussage(c,w){
+  const Z=c.Z,dAux=w.aux==='sei'?'bin':'habe',dass=w.dass||J(w.rest,w.aux);
+  return[[`${cap(Z.k)} gab an, ${Z.p} ${w.aux} ${w.rest}.`,'Konj. I'],[`${cap(Z.k)} erzählte der Polizei, dass ${Z.p} ${dass}.`,'dass-Satz'],[`Wie ${Z.k} berichtete, ${w.aux} ${Z.p} ${w.rest}.`,'Konj. I'],[`${cap(Z.k)} sagte aus, ${Z.p} ${w.aux} ${w.rest}.`,'Konj. I'],[`„Ich ${dAux} ${w.dRest||w.rest}“, schilderte ${Z.k}.`,'direkte Rede']];
+}
+function tplStatur(c,arr){
+  const T=c.T,L=list(arr.map(x=>x.a));
+  const S1=T.pl?T.einer:(T.g==='f'?'die Gesuchte':'der Gesuchte'),S2=T.pl?T.einer:T.k,S2A=T.pl?T.einerA:T.kA;
+  return[`${cap(S1)} ist ${L}.`,`Laut Beschreibung ist ${S2} ${L}.`,[`${cap(S2)} wird als ${L} beschrieben.`,'Passiv'],`Die Polizei beschreibt ${S2A} als ${L}.`];
+}
+function tplKleidung(c,arr){
+  const T=c.T,S2=T.pl?T.einer:T.k,A=list(arr.map(x=>x.akk)),D=list(arr.map(x=>x.dat));
+  return[`${cap(S2)} trug ${A}.`,`Zur Tatzeit trug ${S2} ${A}.`,`Bekleidet war ${S2} mit ${D}.`,`Zeugen zufolge trug ${S2} ${A}.`];
+}
+function tplPolizei(c,w){
+  const t=w.k2?'Konj. II als Ersatz':'Konj. I';
+  return[[`Ein Polizeisprecher erklärte, ${w.k1}.`,t],[`Die Polizei teilte mit, dass ${w.dass}.`,'dass-Satz'],[`Eine Polizeisprecherin betonte, ${w.k1}.`,t],[`„${w.dir}“, sagte ein Sprecher der Polizei.`,'direkte Rede']];
+}
+function tplHeadline(c){
+  const st=S.sel.status;
+  const flex=st==='festgenommen'?'Täter rasch gefasst':(st==='ausgeforscht'?'Täter ausgeforscht':'Polizei sucht Zeugen');
+  return c.tat.headlines(c).concat([`${c.tat.label} in ${c.stadt}`,flex]);
+}
+function tplLead(c){
+  return[[`${cap(c.when)} ist es ${c.wo} zu ${c.tat.d.dat} gekommen.`,'Perfekt'],`${cap(c.when)} wurde ${c.O.nom} ${c.wo} Opfer ${c.tat.d.gen}.`,`${cap(c.tat.d.nom)} beschäftigte ${c.when} die Polizei in ${c.stadt}.`,`${cap(c.when)} ereignete sich ${c.wo} ${c.tat.d.nom}.`].concat(c.tat.leads(c));
+}
+function lockAussage(c){
+  const b=S.sel.beob;
+  if(!b)return'Wähle zuerst oben bei „Wer hat etwas bemerkt?“ eine Person aus.';
+  if(b==='kamera')return'Eine Kamera kann nichts aussagen. Wähle oben einen Menschen, wenn du eine Aussage einbauen willst.';
+  if(b==='niemand')return'Ohne Zeugen gibt es keine Aussage.';
+  return null;
+}
+function lockBeschr(c){
+  const b=S.sel.beob;
+  if(!b)return'Wähle zuerst oben bei „Wer hat etwas bemerkt?“ aus, wer den Täter gesehen haben könnte.';
+  if(['niemand','rueck','heim','mitarbeiterin'].includes(b))return'Niemand hat den Täter gesehen, deshalb gibt es keine Täterbeschreibung.';
+  return null;
+}
+
+/* ===== Zustand ===== */
+const TAGE=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
+const TZ=[['vormittag','Vormittag'],['mittag','Mittag'],['nachmittag','Nachmittag'],['abend','Abend'],['nacht','Nacht']];
+const KEY='bericht-baukasten-7';
+function fresh(){return{f:{tat:'fahrrad',stadt:'Graz',tag:'Dienstag',tz:'nachmittag',uhr:''},sel:{},pick:{},text:'',built:'',orts:false,page:0};}
+let S=fresh();
+try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);if(o&&o.f&&TATEN[o.f.tat])S=Object.assign(fresh(),o);}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+function tat(){return TATEN[S.f.tat];}
+function wordsOf(card){
+  const t=tat();
+  return (card.words?card.words(t):[]).filter(w=>(!w.for||w.for.includes(S.f.tat))&&(!w.not||!w.not.includes(S.f.tat)));
+}
+function cardVisible(card){return !card.show||card.show(tat());}
+function cardLock(card){return card.lock?card.lock():null;}
+function cardActive(card){return cardVisible(card)&&!cardLock(card);}
+function selWord(id){
+  const card=CARD[id];if(!card||!cardVisible(card))return GAP;
+  const v=S.sel[id];if(!v||Array.isArray(v))return GAP;
+  return wordsOf(card).find(w=>w.id===v)||GAP;
+}
+function selMulti(id){
+  const card=CARD[id];const v=S.sel[id];
+  if(!Array.isArray(v))return[];
+  const ws=wordsOf(card);return v.map(x=>ws.find(w=>w.id===x)).filter(Boolean);
+}
+function whenStr(){
+  const f=S.f;if(!f.tag)return'___';
+  let s=f.tz==='nacht'?`in der Nacht auf ${TAGE[(TAGE.indexOf(f.tag)+1)%7]}`:`am ${f.tag}${f.tz||''}`;
+  const u=(f.uhr||'').replace(/\s*uhr\s*$/i,'').trim();
+  if(u)s+=` gegen ${u} Uhr`;
+  return s;
+}
+function ctx(){
+  const c={tat:tat(),stadt:(S.f.stadt||'').trim()||'___',when:whenStr()};
+  c.O=selWord('opfer');c.T=selWord('taeter');c.ort=selWord('tatort');
+  c.wo=isGap(c.ort)?`___ in ${c.stadt}`:(c.ort.von?`${c.ort.in} von ${c.stadt}`:`${c.ort.in} in ${c.stadt}`);
+  const b=selWord('beob');
+  c.Z=isGap(b)||!(b.zk||b.zIsO)?GAP:(b.zIsO?{k:c.O.k,p:c.O.p}:{k:b.zk,p:b.zp});
+  return c;
+}
+/* Sätze einer Karte: Liste von {t, tag} */
+function sentences(card,c){
+  c=c||ctx();
+  let raw=[];
+  if(card.mode==='none')raw=card.tpl(c);
+  else if(card.mode==='multi')raw=card.tpl(c,selMulti(card.id));
+  else{
+    const w=selWord(card.id);
+    if(!isGap(w)&&w.ss)raw=w.ss(c);
+    else if(card.tpl)raw=card.tpl(c,w);
+    else raw=[];
+  }
+  return raw.map(r=>Array.isArray(r)?{t:tidy(r[0]),tag:r[1]||''}:{t:tidy(r),tag:''});
+}
+function hasWord(card){
+  if(card.mode==='none')return true;
+  if(card.mode==='multi')return selMulti(card.id).length>0;
+  return !isGap(selWord(card.id));
+}
+function isSelected(ref){
+  const[cid,wid]=ref.split(':');const card=CARD[cid];
+  if(!card||!cardActive(card))return false;
+  const v=S.sel[cid];
+  if(Array.isArray(v))return v.includes(wid)&&wordsOf(card).some(w=>w.id===wid);
+  return v===wid&&wordsOf(card).some(w=>w.id===wid);
+}
+function wordLock(cid,wid){
+  const me=cid+':'+wid;
+  for(const[a,b,why]of RULES){
+    if(a===me&&isSelected(b)&&!sameSingle(me,b))return why;
+    if(b===me&&isSelected(a)&&!sameSingle(me,a))return why;
+  }
+  return null;
+}
+function sameSingle(a,b){const ca=a.split(':')[0];return ca===b.split(':')[0]&&CARD[ca].mode==='single';}
+function pickedSentence(card,c){
+  if(!cardActive(card))return null;
+  const i=S.pick[card.id];if(i==null)return null;
+  if(!hasWord(card))return null;
+  const s=sentences(card,c);return s[i]?s[i].t:null;
+}
+
+/* ===== Rendering ===== */
+const PAGES=['🏁 Start','① Der Fall','② Tathergang','③ Zeugen','④ Polizei & Schluss','⑤ Schlagzeile','✍️ Mein Text','🧰 Werkzeug'];
+function renderTabs(){
+  const cnt={};CARDS.forEach(cd=>{if(S.pick[cd.id]!=null&&cardActive(cd)&&hasWord(cd))cnt[cd.tab]=(cnt[cd.tab]||0)+1;});
+  $('#tabs').innerHTML=PAGES.map((p,i)=>`<button class="tab${S.page===i?' on':''}" data-go="${i}">${p}${cnt[i]?`<span class="cnt">${cnt[i]}</span>`:''}</button>`).join('');
+}
+function cardHTML(card,c){
+  const t=tat();
+  const title=typeof card.title==='function'?card.title(t):card.title;
+  const lock=cardLock(card);
+  const picked=S.pick[card.id]!=null&&!lock&&hasWord(card);
+  let badge=card.mode==='single'?'nur ein Wort':card.mode==='multi'?'mehrere Wörter möglich':'';
+  let h=`<div class="card${lock?' locked':''}" id="card-${card.id}"><div class="chead"><h3>${card.emoji} ${esc(title)}</h3>`;
+  if(badge)h+=`<span class="badge">${badge}</span>`;
+  if(!card.noSent)h+=`<span class="badge${picked?' done':''}">${picked?'✓ im Text':'noch kein Satz'}</span>`;
+  h+=`</div>`;
+  if(card.hint)h+=`<p class="hint">${esc(card.hint)}</p>`;
+  if(lock)h+=`<div class="lockmsg">🔒 ${esc(lock)}</div>`;
+  if(card.mode!=='none'){
+    const cur=S.sel[card.id];
+    h+=`<div class="chips">`+wordsOf(card).map(w=>{
+      const on=Array.isArray(cur)?cur.includes(w.id):cur===w.id;
+      const wl=lock?null:wordLock(card.id,w.id);
+      return `<button class="chip${w.x?' x':''}${on?' on':''}${(wl&&!on)?' lock':''}" data-card="${card.id}" data-word="${w.id}"${wl?` title="${esc(wl)}"`:''}>${esc(w.label)}</button>`;
+    }).join('')+`</div>`;
+  }
+  if(card.tip)h+=`<div class="tip">${card.tip}</div>`;
+  if(card.noSent){h+=`<p class="note">Diese Angabe wird automatisch in deine Sätze eingesetzt.</p></div>`;return h;}
+  if(lock){h+=`</div>`;return h;}
+  const ready=hasWord(card);
+  const w=card.mode==='single'?selWord(card.id):null;
+  if(card.mode==='single'&&!ready&&!card.tpl){
+    h+=`<p class="note">Wähle zuerst oben ein Wort, dann erscheinen hier die passenden Formulierungen.</p></div>`;return h;
+  }
+  const ss=sentences(card,c);
+  h+=`<div class="slabel">${ready?'Wähle <u>eine</u> Formulierung für deinen Text:':'Vorschau – wähle zuerst oben ein Wort:'}</div>`;
+  h+=ss.map((s,i)=>{
+    const on=S.pick[card.id]===i&&ready;
+    const txt=esc(s.t).replace(/___/g,'<span class="gap">___</span>');
+    return `<div class="sent${on?' on':''}${ready?'':' dis'}" data-card="${card.id}" data-sent="${i}"><span class="dot"></span><span class="txt">${txt}${s.tag?`<span class="tag">${esc(s.tag)}</span>`:''}</span></div>`;
+  }).join('');
+  h+=`</div>`;
+  return h;
+}
+function renderCards(tab){
+  const box=$('#cards'+tab);if(!box)return;
+  const c=ctx();
+  box.innerHTML=CARDS.filter(cd=>cd.tab===tab&&cardVisible(cd)).map(cd=>cardHTML(cd,c)).join('');
+}
+function renderFall(){
+  $('#tatChips').innerHTML=TATKEYS.map(k=>`<button class="chip${S.f.tat===k?' on':''}" data-tat="${k}">${TATEN[k].emoji} ${TATEN[k].label}</button>`).join('');
+  $('#tzChips').innerHTML=`<button class="chip${!S.f.tz?' on':''}" data-tz="">egal</button>`+TZ.map(([k,l])=>`<button class="chip${S.f.tz===k?' on':''}" data-tz="${k}">${l}</button>`).join('');
+  $('#fStadt').value=S.f.stadt;$('#fUhr').value=S.f.uhr;
+  $('#fTag').innerHTML=TAGE.map(d=>`<option${S.f.tag===d?' selected':''}>${d}</option>`).join('');
+  updateFallLine();
+}
+function updateFallLine(){
+  const c=ctx();
+  $('#fallLine').innerHTML=`Dein Fall: ${esc(c.tat.emoji+' '+c.tat.label)} · ${esc(c.stadt)} · ${esc(c.when)}`;
+}
+function render(){
+  renderTabs();
+  document.querySelectorAll('section.page').forEach(s=>s.classList.toggle('on',+s.dataset.page===S.page));
+  if(S.page===1)renderFall();
+  if(S.page>=1&&S.page<=5)renderCards(S.page);
+  if(S.page===6)renderText();
+  if(S.page===7)renderTools();
+}
+
+/* ===== Text ===== */
+function buildText(){
+  const c=ctx();
+  const g=id=>pickedSentence(CARD[id],c);
+  const out=[];
+  const hl=g('headline');if(hl)out.push(hl);
+  let lead=g('lead');
+  if(lead&&S.orts&&c.stadt!=='___')lead=`${c.stadt}. ${lead}`;
+  if(lead)out.push(lead);
+  [2,3,4].forEach(p=>{const s=PARA[p].map(g).filter(Boolean);if(s.length)out.push(s.join(' '));});
+  return out.join('\n\n');
+}
+function wStatus(){
+  const has=id=>S.pick[id]!=null&&cardActive(CARD[id])&&hasWord(CARD[id]);
+  const lead=has('lead');
+  return[
+    ['Wer?','Opfer und Täter',lead&&!!S.sel.opfer&&!!S.sel.taeter],
+    ['Was?','die Tat',lead],
+    ['Wann?','Tag und Tageszeit',lead&&!!S.f.tag],
+    ['Wo?','Stadt und Tatort',lead&&!!S.sel.tatort&&!!S.f.stadt.trim()],
+    ['Wie?','Vorgehen des Täters',has('vorgehen')],
+    ['Welche Folgen?','Beute, Schaden, Verletzte',has('beute')||has('hoehe')||has('verletzt')],
+    ['Warum?','meist unbekannt – nicht erfinden!',null]
+  ];
+}
+function renderText(){
+  $('#wlist').innerHTML=wStatus().map(([q,d,ok])=>`<div class="w${ok?' ok':''}">${ok?'✓':(ok===null?'ℹ️':'○')} ${q}<small>${d}</small></div>`).join('');
+  const ta=$('#txt');if(document.activeElement!==ta)ta.value=S.text;
+  $('#chkOrt').checked=!!S.orts;
+  renderChecks();renderPaper();
+}
+function renderPaper(){
+  const paras=S.text.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+  if(!paras.length){$('#paper').innerHTML=`<div class="mast"><span>Lokales</span><span>Polizeibericht</span></div><p class="empty">Hier erscheint dein Bericht, sobald du ihn zusammengebaut oder geschrieben hast.</p>`;return;}
+  let h=`<div class="mast"><span>Lokales</span><span>Polizeibericht</span></div>`;
+  const first=paras[0];
+  const short=!/[.!?]$/.test(first)&&first.length<90;
+  let rest=paras;
+  if(short){h+=`<h2>${esc(first)}</h2>`;rest=paras.slice(1);}
+  rest.forEach((p,i)=>{h+=`<p${i===0?' class="lead"':''}>${esc(p).replace(/\n/g,' ')}</p>`;});
+  $('#paper').innerHTML=h;
+}
+function renderChecks(){
+  const t=S.text||'';const out=[];
+  if(!t.trim()){$('#checks').innerHTML=`<div class="res info">Sobald dein Text dasteht, prüft der Check ein paar typische Bericht-Regeln für dich.</div>`;return;}
+  const words=(t.match(/[A-Za-zÄÖÜäöüß0-9-]+/g)||[]).length;
+  out.push(`<div class="res info">📏 Dein Bericht hat <b>${words}</b> Wörter. Wie lang er sein soll, sagt dir deine Lehrerin oder dein Lehrer.</div>`);
+  if(t.includes('___'))out.push(`<div class="res warn">🕳️ Im Text gibt es noch Lücken (___). Wähle die fehlenden Angaben aus oder schreib sie selbst hinein.</div>`);
+  const noQ=t.replace(/„[^“]*“/g,' ').replace(/"[^"]*"/g,' ');
+  const bad=['ich','mir','mich','mein','meine','wir','uns','leider','schrecklich','furchtbar','gemein','super','toll','voll','krass','unglaublich','zum Glück','urcool','arm','arme','armen'];
+  const found=bad.filter(b=>new RegExp('(^|[^A-Za-zÄÖÜäöüß])'+b+'(?=[^A-Za-zÄÖÜäöüß]|$)','i').test(noQ));
+  if(found.length)out.push(`<div class="res warn">🙈 Diese Wörter klingen nach Meinung, Gefühl oder Ich-Form: <b>${found.map(esc).join(', ')}</b>. Bleib sachlich (außer in wörtlichen Zitaten).</div>`);
+  else out.push(`<div class="res good">✓ Keine wertenden Wörter oder Ich-Form gefunden. Schön sachlich!</div>`);
+  if(/!/.test(noQ))out.push(`<div class="res warn">❗ Ausrufezeichen gehören nicht in einen sachlichen Bericht.</div>`);
+  if(/\b(habe|sei|seien|werde|könne|gebe|wisse|hätten|liefen)\b/.test(t))out.push(`<div class="res good">✓ Du verwendest die indirekte Rede (Konjunktiv). Genau so machen es Zeitungen.</div>`);
+  else out.push(`<div class="res info">🗣️ Noch keine indirekte Rede gefunden. Baue eine Zeugen- oder Polizeiaussage ein (Seite ③ oder ④).</div>`);
+  const paras=t.split(/\n\s*\n/).filter(x=>x.trim()).length;
+  if(paras<3)out.push(`<div class="res info">🧱 Ein Bericht hat meist mehrere Absätze: Schlagzeile, Vorspann, Hauptteil, Schluss. Trenne sie mit einer Leerzeile.</div>`);
+  $('#checks').innerHTML=out.join('');
+}
+
+/* ===== Werkzeugkasten ===== */
+const TOOLS=[
+  ['🗣️ Verben des Sagens',[['sagte'],['berichtete'],['erzählte'],['erklärte'],['gab an'],['schilderte',1],['betonte',1],['bestätigte',1],['sagte aus',1],['teilte mit',1],['gab zu Protokoll',1],['beteuerte',1]]],
+  ['⏱️ Zeit und Übergänge',[['zunächst'],['anschließend'],['kurz darauf'],['wenig später'],['danach'],['daraufhin',1],['unmittelbar danach',1],['im Anschluss',1],['schließlich'],['inzwischen'],['gegen 14 Uhr'],['zur Tatzeit',1]]],
+  ['👮 Wörter aus der Polizeiarbeit',[['die Anzeige'],['Anzeige erstatten'],['der Tatort'],['der Tatverdächtige',1],['die Fahndung',1],['die Ermittlungen'],['das Diebesgut',1],['die Beute'],['der Sachschaden'],['die Spurensicherung',1],['die Funkstreife',1],['die Polizeiinspektion'],['festnehmen'],['ausforschen',1]]],
+  ['🔗 Satzverbindungen',[['Laut Polizei'],['Nach Angaben der Polizei',1],['Wie die Polizei mitteilte,',1],['Zeugen zufolge',1],['Dabei'],['Offenbar'],['Vermutlich'],['Nach ersten Erkenntnissen',1]]]
+];
+function renderTools(){
+  $('#tools').innerHTML=TOOLS.map(([t,ws])=>`<div class="card"><h3>${t}</h3><div class="chips">${ws.map(([w,x])=>`<button class="chip${x?' x':''}" data-ins="${esc(w)}">${esc(w)}</button>`).join('')}</div></div>`).join('');
+}
+let caret=null;
+function insertWord(w){
+  let t=S.text||'';const pos=caret==null?t.length:Math.min(caret,t.length);
+  const before=t.slice(0,pos),after=t.slice(pos);
+  const sp1=before&&!/\s$/.test(before)?' ':'',sp2=after&&!/^[\s.,]/.test(after)?' ':'';
+  S.text=before+sp1+w+sp2+after;caret=(before+sp1+w).length;save();
+  toast(`„${w}“ eingefügt – schau unter ✍️ Mein Text.`);
+}
+
+/* ===== Aktionen ===== */
+let tt;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2600);}
+function go(p){S.page=p;save();render();window.scrollTo({top:0,behavior:'smooth'});}
+function clickWord(cid,wid){
+  const card=CARD[cid];
+  const lock=cardLock(card);if(lock){toast(lock);return;}
+  const cur=S.sel[cid];
+  const on=Array.isArray(cur)?cur.includes(wid):cur===wid;
+  if(!on){const wl=wordLock(cid,wid);if(wl){toast('🔒 '+wl);return;}}
+  const w=wordsOf(card).find(x=>x.id===wid);
+  if(card.mode==='single'){
+    const prev=wordsOf(card).find(x=>x.id===cur);
+    S.sel[cid]=on?undefined:wid;
+    if(!S.sel[cid])delete S.sel[cid];
+    if((prev&&prev.ss)||(w&&w.ss)||on)delete S.pick[cid];
+  }else{
+    let arr=Array.isArray(cur)?cur.slice():[];
+    arr=on?arr.filter(x=>x!==wid):arr.concat(wid);
+    if(arr.length)S.sel[cid]=arr;else{delete S.sel[cid];delete S.pick[cid];}
+  }
+  save();render();
+}
+function clickSent(cid,i){
+  const card=CARD[cid];
+  if(cardLock(card))return;
+  if(!hasWord(card)){toast('Wähle zuerst oben ein Wort.');return;}
+  S.pick[cid]=S.pick[cid]===i?undefined:i;
+  if(S.pick[cid]===undefined)delete S.pick[cid];
+  save();render();
+}
+function setTat(k){
+  if(k===S.f.tat)return;
+  const any=Object.keys(S.sel).some(x=>x!=='taeter')||Object.keys(S.pick).length;
+  if(any&&!confirm('Wenn du die Tat wechselst, werden deine bisherigen Wahlen zurückgesetzt (der Täter bleibt). Weiter?'))return;
+  const t=S.sel.taeter;S.f.tat=k;S.sel={};S.pick={};if(t)S.sel.taeter=t;
+  save();render();
+}
+function resetAll(){
+  if(!confirm('Alles zurücksetzen und einen neuen Fall beginnen? Dein Text wird dabei gelöscht.'))return;
+  S=fresh();S.page=1;save();render();toast('Neuer Fall – leg los!');
+}
+function randomCase(){
+  if((Object.keys(S.pick).length||S.text.trim())&&!confirm('Einen Zufallsfall würfeln? Deine bisherigen Wahlen werden ersetzt.'))return;
+  const page=S.page;S=fresh();S.page=page;
+  S.f.tat=rnd(TATKEYS);S.f.stadt=rnd(['Graz','Wien','Linz','Salzburg','Klagenfurt','Innsbruck','St. Pölten','Bregenz','Eisenstadt']);
+  S.f.tag=rnd(TAGE);S.f.tz=rnd(TZ)[0];
+  const order=['tatort','opfer','taeter','beob','vorg','vorgehen','beute','hoehe','flucht','verletzt','aussage','statur','kleidung','polizei','status','aufruf','headline','lead'];
+  order.forEach(id=>{
+    const card=CARD[id];if(!cardActive(card))return;
+    if(card.mode==='single'){
+      const av=wordsOf(card).filter(w=>!wordLock(id,w.id));if(!av.length)return;
+      S.sel[id]=rnd(av).id;
+    }else if(card.mode==='multi'){
+      const n=1+Math.floor(Math.random()*3);S.sel[id]=[];
+      for(let k=0;k<n;k++){const av=wordsOf(card).filter(w=>!S.sel[id].includes(w.id)&&!wordLock(id,w.id));if(!av.length)break;S.sel[id].push(rnd(av).id);}
+      if(!S.sel[id].length)delete S.sel[id];
+    }
+    if(!card.noSent&&hasWord(card)){const n=sentences(card).length;if(n)S.pick[id]=Math.floor(Math.random()*n);}
+  });
+  S.text=buildText();S.built=S.text;
+  save();render();toast('🎲 Ein Fall wurde gewürfelt – schau ihn dir an und ändere, was du willst.');
+}
+
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(g){go(+g.dataset.go);return;}
+  const tk=e.target.closest('[data-tat]');if(tk){setTat(tk.dataset.tat);return;}
+  const tz=e.target.closest('[data-tz]');if(tz){S.f.tz=tz.dataset.tz;save();renderFall();renderCards(1);return;}
+  const ins=e.target.closest('[data-ins]');if(ins){insertWord(ins.dataset.ins);return;}
+  const w=e.target.closest('[data-word]');if(w){clickWord(w.dataset.card,w.dataset.word);return;}
+  const s=e.target.closest('[data-sent]');if(s){clickSent(s.dataset.card,+s.dataset.sent);return;}
+});
+$('#btnReset').onclick=resetAll;
+$('#btnRandom').onclick=randomCase;
+$('#fStadt').addEventListener('input',e=>{S.f.stadt=e.target.value;save();updateFallLine();});
+$('#fUhr').addEventListener('input',e=>{S.f.uhr=e.target.value;save();updateFallLine();});
+$('#fTag').addEventListener('change',e=>{S.f.tag=e.target.value;save();updateFallLine();});
+$('#btnBuild').onclick=()=>{
+  const nt=buildText();
+  if(!nt){toast('Du hast noch keine Formulierungen gewählt.');return;}
+  if(S.text.trim()&&S.text!==S.built&&!confirm('Dein Text wurde von dir verändert. Soll er durch den neu zusammengebauten Text ersetzt werden?'))return;
+  S.text=nt;S.built=nt;save();renderText();toast('🧩 Dein Bericht ist zusammengebaut.');
+};
+$('#chkOrt').onchange=e=>{S.orts=e.target.checked;save();};
+const ta=$('#txt');
+ta.addEventListener('input',()=>{S.text=ta.value;caret=ta.selectionStart;save();renderChecks();renderPaper();});
+['click','keyup','blur'].forEach(ev=>ta.addEventListener(ev,()=>{caret=ta.selectionStart;}));
+$('#btnCopy').onclick=()=>{
+  const t=S.text||'';if(!t){toast('Noch kein Text zum Kopieren.');return;}
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('📋 Kopiert!')).catch(()=>{ta.select();try{document.execCommand('copy');toast('📋 Kopiert!');}catch(e){toast('Bitte markiere den Text und kopiere ihn selbst.');}});
+};
+render();
+</script>
+</body>
+</html>
