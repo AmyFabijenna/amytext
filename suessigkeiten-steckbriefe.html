@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Süßigkeiten-Steckbriefe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: Kopf mit Absatz-Legende → Reiter → Auswahlraster → Ansicht (Steckbrief | Vergleich | Merkmal). Farben = Absätze der Angabe. */
+:root{
+  --bg:#F6F5FA; --surface:#FFFFFF; --fg:#1F1C2C; --muted:#615C74; --line:#E2DFEC; --accent:#B0245F; --accent-fg:#FFFFFF;
+  --g-a1:#2B5FB8; --t-a1:#E3ECFB;
+  --g-grund:#9A5800; --t-grund:#FCEFD9;
+  --g-mat:#2E7D4A; --t-mat:#E1F2E6;
+  --g-teile:#6B47B8; --t-teile:#ECE5F9;
+  --g-bes:#B0245F; --t-bes:#FBE3EC;
+  --g-a3:#157A80; --t-a3:#DDF1F2;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#16141E; --surface:#201D2A; --fg:#ECE9F5; --muted:#A7A2BA; --line:#34304A; --accent:#F07AA8; --accent-fg:#1A1020;
+  --g-a1:#8FB3F5; --t-a1:#1E2A45; --g-grund:#F0B45A; --t-grund:#3A2C14; --g-mat:#7CCB97; --t-mat:#173323;
+  --g-teile:#B9A0F2; --t-teile:#2B2245; --g-bes:#F07AA8; --t-bes:#3E1A2A; --g-a3:#6CCFD4; --t-a3:#12383A;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#16141E; --surface:#201D2A; --fg:#ECE9F5; --muted:#A7A2BA; --line:#34304A; --accent:#F07AA8; --accent-fg:#1A1020;
+  --g-a1:#8FB3F5; --t-a1:#1E2A45; --g-grund:#F0B45A; --t-grund:#3A2C14; --g-mat:#7CCB97; --t-mat:#173323;
+  --g-teile:#B9A0F2; --t-teile:#2B2245; --g-bes:#F07AA8; --t-bes:#3E1A2A; --g-a3:#6CCFD4; --t-a3:#12383A;
+  color-scheme:dark }
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Kopf */
+.top{padding-block:28px 18px}
+.eyebrow{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(28px,4.5vw,42px);font-weight:750;margin-top:6px}
+h1 span{color:var(--accent)}
+.lead{color:var(--muted);max-width:68ch;margin:10px 0 0}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.lg{display:flex;align-items:center;gap:8px;padding:6px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13.5px}
+.lg b{display:inline-block;width:11px;height:11px;border-radius:3px;flex:none}
+.lg small{color:var(--muted);font-weight:700;letter-spacing:.03em}
+
+/* Reiter */
+.tabs{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+.tab{background:none;border:0;padding:12px 14px 11px;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--fg)}
+
+main{padding-block:20px 48px;display:grid;gap:22px}
+
+/* Auswahl */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.search{margin-left:auto;min-width:0;flex:0 1 220px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px}
+.hint{font-size:14px;color:var(--muted);margin:10px 0 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px;margin-top:12px}
+.sw{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:9px 12px;cursor:pointer;min-width:0}
+.sw strong{font-size:15px;line-height:1.25}
+.sw span{font-size:12.5px;color:var(--muted)}
+.sw:hover{border-color:var(--muted)}
+.sw[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.sw[aria-pressed="true"] strong{color:var(--accent)}
+.sw .n{font-variant-numeric:tabular-nums}
+
+/* Steckbrief */
+.head{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:baseline}
+.head h2{font-size:clamp(24px,3.4vw,32px);font-weight:750}
+.kat{font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--t-a1);color:var(--g-a1)}
+.ers{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;font-size:14px}
+.ers em{font-style:normal;color:var(--muted);margin-right:4px}
+.ers span{border:1px dashed var(--line);border-radius:6px;padding:2px 8px;background:var(--surface)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;margin-top:16px;align-items:start}
+@media (max-width:860px){.split{grid-template-columns:minmax(0,1fr)}}
+.props{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.ghead{display:flex;align-items:center;gap:8px;padding:10px 14px 6px;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gc)}
+.ghead::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--gc)}
+.ghead:not(:first-child){border-top:1px solid var(--line);margin-top:4px}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;padding:7px 14px 7px 11px;border-left:3px solid transparent;cursor:pointer;font-size:15px}
+.row .l{color:var(--muted);font-weight:700;font-size:13.5px;padding-top:1px}
+.row:hover,.row.on{background:var(--tc);border-left-color:var(--gc)}
+@media (max-width:480px){.row{grid-template-columns:minmax(0,1fr);gap:0}}
+
+.textcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;position:sticky;top:calc(env(safe-area-inset-top, 0px) + 58px)}
+@media (max-width:860px){.textcard{position:static}}
+.textcard .cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted);margin-bottom:12px}
+.textcard h3{font-size:21px;font-weight:750;margin-bottom:14px}
+.textcard p{margin:0 0 1.1em;max-width:68ch;line-height:1.75}
+.textcard p:last-of-type{margin-bottom:0}
+.s{border-radius:4px;transition:opacity .15s,background .15s}
+.colored .s{background:var(--tc);box-shadow:inset 0 -2px 0 var(--gc);padding:1px 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.s{cursor:pointer}
+.focusing .s{opacity:.3}
+.focusing .s.on{opacity:1;background:var(--tc);box-shadow:inset 0 -2px 0 var(--gc)}
+.toggle{display:flex;align-items:center;gap:6px;cursor:pointer}
+.pnum{display:block;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+@media (prefers-reduced-motion:reduce){.s{transition:none}}
+
+/* Tabellen */
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+thead th{font-family:var(--display);font-size:16px;font-weight:750;background:var(--surface);position:sticky;top:0}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+.cmp th[scope="row"]{position:sticky;left:0;background:var(--surface);min-width:130px;max-width:150px;font-size:13px;color:var(--gc);border-right:1px solid var(--line);box-shadow:inset 3px 0 0 var(--gc)}
+.cmp td{min-width:190px}
+.cmp tr.gstart th,.cmp tr.gstart td{border-top:2px solid var(--line)}
+.cmp tr:hover td{background:var(--tc)}
+.mk td:first-child{width:200px}
+.mk td:first-child button{background:none;border:0;padding:0;font-weight:700;cursor:pointer;text-align:left;color:var(--fg);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.mk td:first-child small{display:block;color:var(--muted);font-size:12.5px}
+.propchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.pc{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.pc b{width:9px;height:9px;border-radius:3px;background:var(--gc)}
+.pc[aria-pressed="true"]{background:var(--tc);border-color:var(--gc);font-weight:700}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.foot{font-size:13px;color:var(--muted);max-width:75ch}
+
+.g-a1{--gc:var(--g-a1);--tc:var(--t-a1)} .g-grund{--gc:var(--g-grund);--tc:var(--t-grund)}
+.g-mat{--gc:var(--g-mat);--tc:var(--t-mat)} .g-teile{--gc:var(--g-teile);--tc:var(--t-teile)}
+.g-bes{--gc:var(--g-bes);--tc:var(--t-bes)} .g-a3{--gc:var(--g-a3);--tc:var(--t-a3)}
+</style>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="eyebrow">Gegenstandsbeschreibung · 5. Schulstufe</div>
+  <h1>Süßigkeiten-<span>Steckbriefe</span></h1>
+  <p class="lead">Jede Süßigkeit mit allen Merkmalen aus der Angabe und einem Mustertext von ca. 150 Wörtern. Die Farben zeigen, in welchen Absatz ein Merkmal gehört. Tippe auf ein Merkmal, und im Mustertext leuchtet der passende Satz auf.</p>
+  <div class="legend" id="legend"></div>
+</div></header>
+
+<nav class="tabs" aria-label="Ansicht"><div class="wrap" role="tablist">
+  <button class="tab" role="tab" id="t-steck" aria-selected="true">Steckbrief</button>
+  <button class="tab" role="tab" id="t-vergl" aria-selected="false">Vergleichen</button>
+  <button class="tab" role="tab" id="t-merk" aria-selected="false">Ein Merkmal, alle Süßigkeiten</button>
+</div></nav>
+
+<main class="wrap">
+  <section aria-label="Süßigkeiten auswählen">
+    <div class="filters" id="filters"></div>
+    <p class="hint" id="hint"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+  <section id="view"></section>
+  <p class="foot">Größen- und Gewichtsangaben sind Richtwerte. Bei einer echten Packung gilt das Gewicht, das auf der Verpackung steht.</p>
+</main>
+
+<script>
+const GROUPS={
+  a1:{n:"Absatz 1",d:"Benennung, Eckdaten, Zweck"},
+  grund:{n:"Absatz 2",d:"Grundmerkmale"},
+  mat:{n:"Absatz 2",d:"Material und Beschaffenheit"},
+  teile:{n:"Absatz 2",d:"Einzelteile und Lage"},
+  bes:{n:"Absatz 2",d:"Besonderheiten, Sinne"},
+  a3:{n:"Absatz 3",d:"Gesamteindruck, Nutzen"}
+};
+const TAGG={ben:"a1",zweck:"a1",gr:"grund",gew:"grund",form:"grund",farbe:"grund",mat:"mat",teile:"teile",verp:"teile",sinn:"bes",bes:"bes",eindr:"a3",bed:"a3"};
+const PROPS=[
+  {k:"kat",l:"Kategorie",tag:"ben"},{k:"her",l:"Hersteller",tag:"ben"},{k:"zweck",l:"Verwendungszweck",tag:"zweck"},
+  {k:"gr",l:"Größe",tag:"gr"},{k:"gew",l:"Gewicht",tag:"gew"},{k:"form",l:"Form",tag:"form"},{k:"farbe",l:"Farbe",tag:"farbe"},
+  {k:"mat",l:"Material / Zutaten",tag:"mat"},
+  {k:"teile",l:"Einzelteile und deren Lage",tag:"teile"},{k:"verp",l:"Verpackung",tag:"verp"},
+  {k:"kons",l:"Konsistenz / Gefühl",tag:"sinn"},{k:"gesch",l:"Geschmack",tag:"sinn"},{k:"geruch",l:"Geruch",tag:"sinn"},{k:"bes",l:"Besonderheit",tag:"bes"},
+  {k:"eindr",l:"Gesamteindruck",tag:"eindr"},{k:"bed",l:"Nutzen / Bedeutung",tag:"bed"}
+];
+const GRP=["Schokolade","Schokoriegel","Waffel","Pralinen","Fruchtgummi & Lakritze","Zuckerl & Dragees","Schokolinsen"];
+
+const S=[
+{id:"goldbaeren",name:"Haribo Goldbären",grp:"Fruchtgummi & Lakritze",ers:["das Fruchtgummi","der Gummibär","der Bär","die Süßigkeit","die Nascherei"],
+f:{kat:"Fruchtgummi",her:"Haribo (Deutschland)",zweck:"Nascherei für zwischendurch",gr:"ca. 2 cm hoch, 1 cm breit",gew:"ca. 2 g pro Bär; Sackerl ca. 200 g",form:"Bär mit Kopf, Ohren, Bauch, Armen und Beinen",farbe:"Rot, Orange, Gelb, Grün, Weiß; durchscheinend",mat:"Zucker, Glukosesirup, Gelatine, Fruchtsaft; glänzend, durchscheinend",teile:"oben Kopf mit zwei Ohren, darunter Bauch, seitlich Arme, unten zwei Beine; Gesicht vorne als Vertiefungen",verp:"Plastiksackerl mit großem goldgelbem Bären",kons:"weich, elastisch, glatt, etwas klebrig",gesch:"süß-fruchtig, jede Farbe eine andere Frucht",geruch:"süßlich-fruchtig",bes:"nimmt nach dem Zusammendrücken wieder seine Form an",eindr:"bunt, verspielt",bed:"eine der bekanntesten Süßigkeiten im deutschsprachigen Raum"},
+t:["{ben}Haribo Goldbären sind Fruchtgummis in Bärenform. {ben}Hergestellt werden sie von der Firma Haribo, verkauft werden sie in Sackerln zu etwa 200 Gramm. {zweck}Die Süßigkeit dient als Nascherei für zwischendurch.",
+"{gr gew}Ein einzelner Bär ist ungefähr zwei Zentimeter hoch, einen Zentimeter breit und wiegt rund zwei Gramm. {farbe}Es gibt ihn in Rot, Orange, Gelb, Grün und Weiß. {mat}Das Fruchtgummi besteht aus Zucker, Glukosesirup, Gelatine und Fruchtsaft. {mat}Es ist durchscheinend und glänzt leicht. {teile form}Oben sitzt ein runder Kopf mit zwei halbrunden Ohren, darunter schließt der rundliche Bauch an. {teile}Seitlich liegen die Arme eng am Körper, unten befinden sich zwei kurze Beine. {teile}Auf der Vorderseite sind Augen, Nase und Mund als feine Vertiefungen erkennbar. {bes}Drückt man einen Bären zusammen, nimmt er danach wieder seine Form an. {sinn}Die Konsistenz ist weich und elastisch, die Oberfläche glatt und etwas klebrig. {sinn}Jede Farbe schmeckt nach einer anderen Frucht und riecht süßlich-fruchtig.",
+"{eindr}Insgesamt wirken die kleinen Bären bunt und verspielt. {bed}Seit Jahrzehnten gehören sie zu den bekanntesten Süßigkeiten im deutschsprachigen Raum."]},
+
+{id:"kinderschoko",name:"Kinder Schokolade",grp:"Schokoriegel",ers:["der Schokoladenriegel","der Riegel","die Süßigkeit","die Jause"],
+f:{kat:"Gefüllter Schokoladenriegel",her:"Ferrero (Italien)",zweck:"kleine Jause",gr:"ca. 10 cm lang, 2 cm breit, knapp 1 cm dick",gew:"12,5 g pro Riegel",form:"flacher Quader mit abgerundeten Kanten",farbe:"außen hellbraun, innen weiß",mat:"Milchschokolade, Milchcreme",teile:"Oberseite in vier Stücke geteilt; außen Schokoladenhülle, genau in der Mitte weiße Füllung",verp:"einzeln in Folie, mehrere Riegel in Kartonschachtel",kons:"Schokolade fest, Füllung weich und cremig",gesch:"süß, milchig",geruch:"nach Schokolade",bes:"„kinder“ auf jedem Stück eingeprägt; heller Kern sichtbar beim Abbrechen",eindr:"schlicht, handlich",bed:"gut zum Mitnehmen, weil portioniert"},
+t:["{ben}Kinder Schokolade ist ein gefüllter Schokoladenriegel der Firma Ferrero. {ben verp}Mehrere einzeln verpackte Riegel werden gemeinsam in einer Kartonschachtel verkauft. {zweck}Die Süßigkeit wird vor allem als kleine Jause gegessen.",
+"{gr gew}Ein Riegel ist etwa zehn Zentimeter lang, zwei Zentimeter breit, knapp einen Zentimeter dick und wiegt 12,5 Gramm. {form}Er hat die Form eines flachen Quaders mit abgerundeten Kanten. {teile bes}Die Oberseite ist durch Rillen in vier gleich große Stücke geteilt, auf denen jeweils der Schriftzug „kinder“ eingeprägt ist. {teile farbe}Außen umgibt eine hellbraune Hülle aus Milchschokolade den Riegel vollständig. {teile mat}Im Inneren, genau in der Mitte, liegt eine weiße Füllung aus Milchcreme. {teile}Bricht man ein Stück ab, ist der helle Kern deutlich zu sehen. {sinn}Die Schokolade ist fest, die Füllung weich und cremig. {sinn}Der Riegel schmeckt süß und milchig und riecht nach Schokolade.",
+"{eindr}Insgesamt wirkt die Süßigkeit schlicht und handlich. {bed}Wegen der portionierten Riegel eignet sie sich gut zum Mitnehmen."]},
+
+{id:"ueberraschungsei",name:"Kinder Überraschungsei",grp:"Schokolade",ers:["das Schokoladenei","das Ei","die Süßigkeit","das Geschenk"],
+f:{kat:"Hohles Schokoladenei mit Spielzeug",her:"Ferrero (Italien)",zweck:"Süßigkeit und kleines Geschenk",gr:"ca. 6 cm hoch, 4 cm breit",gew:"20 g",form:"Hühnerei",farbe:"außen braun, innen weiß; Kapsel gelb",mat:"Milchschokolade, weiße Schicht; Kapsel aus Plastik",teile:"Schale aus zwei Schichten (außen braun, innen weiß); Naht in der Mitte; innen hohl mit gelber Kapsel",verp:"rot-weiße Alufolie",kons:"dünne Schale, zerbricht leicht",gesch:"süß, milchig",geruch:"nach Schokolade",bes:"Spielzeug oder Bastelteil in der Kapsel",eindr:"geheimnisvoll",bed:"die Überraschung macht es bei Kindern beliebt"},
+t:["{ben}Das Kinder Überraschungsei ist ein hohles Schokoladenei mit einem Spielzeug im Inneren. {ben}Es wird von der Firma Ferrero hergestellt und einzeln verkauft. {zweck}Es dient zugleich als Süßigkeit und als kleines Geschenk.",
+"{gr gew}Das Ei ist etwa sechs Zentimeter hoch, vier Zentimeter breit und wiegt 20 Gramm. {form verp}Es hat die Form eines Hühnereis und ist in eine rot-weiße Alufolie gewickelt. {teile mat}Die Schale besteht aus zwei Schichten: Außen liegt braune Milchschokolade, innen eine dünne weiße Schicht. {teile}Entlang der Mitte verläuft eine feine Naht, an der die beiden Hälften zusammengefügt sind. {teile}Im hohlen Inneren befindet sich eine gelbe, ovale Plastikkapsel, die sich in zwei Teile öffnen lässt. {bes}Darin liegt ein kleines Spielzeug oder ein Bastelteil. {sinn}Die Schale ist dünn und zerbricht leicht. {sinn}Sie schmeckt süß und milchig und duftet nach Schokolade.",
+"{eindr}Insgesamt wirkt das Ei geheimnisvoll, weil der Inhalt verborgen bleibt. {bed}Gerade diese Überraschung macht die Süßigkeit bei Kindern so beliebt."]},
+
+{id:"milka",name:"Milka Alpenmilch",grp:"Schokolade",ers:["die Tafelschokolade","die Tafel","die Schokolade","die Süßigkeit"],
+f:{kat:"Tafelschokolade",her:"Milka",zweck:"pur essen oder zum Backen",gr:"ca. 17 × 8 cm, 1 cm dick",gew:"100 g",form:"rechteckige Tafel",farbe:"hellbraun; Verpackung lila",mat:"Zucker, Kakaobutter, Milchpulver, Kakaomasse",teile:"viele gleich große Stücke in Reihen neben- und untereinander; Rillen dazwischen; Unterseite glatt",verp:"lila Hülle mit Kuh, darunter Alufolie",kons:"fest, schmilzt in der warmen Hand",gesch:"mild, süß, cremig",geruch:"nach Milchschokolade",bes:"„Milka“ auf jedem Stück eingeprägt",eindr:"durch die lila Farbe unverwechselbar",bed:"eine der bekanntesten Schokoladen Europas"},
+t:["{ben}Die Milka Alpenmilch-Schokolade ist eine Tafelschokolade der Firma Milka. {ben gew}Sie wird in Tafeln zu 100 Gramm verkauft. {zweck}Man isst sie pur oder verwendet sie zum Backen.",
+"{gr form}Die Tafel ist rechteckig, etwa 17 Zentimeter lang, acht Zentimeter breit und einen Zentimeter dick. {verp}Außen steckt sie in einer lila Hülle, auf der eine lila-weiß gefleckte Kuh auf einer Almwiese abgebildet ist. {verp}Darunter umschließt eine Alufolie die Schokolade. {mat farbe}Die hellbraune Milchschokolade besteht aus Zucker, Kakaobutter, Milchpulver und Kakaomasse. {teile}Ihre Oberseite ist in viele gleich große Stücke geteilt, die in Reihen neben- und untereinander liegen. {teile}Zwischen ihnen verlaufen tiefe Rillen, an denen sich die Tafel leicht brechen lässt. {bes}Auf jedem Stück ist der Name „Milka“ eingeprägt, die Unterseite ist glatt. {sinn}Die Schokolade ist fest, schmilzt aber in der warmen Hand. {sinn}Sie schmeckt mild, süß und cremig.",
+"{eindr}Insgesamt wirkt die Tafel durch die lila Farbe unverwechselbar. {bed}Sie zählt zu den bekanntesten Schokoladen Europas."]},
+
+{id:"nussini",name:"Milka Nussini",grp:"Waffel",ers:["der Waffelriegel","der Riegel","die Waffel","die Süßigkeit","die Jause"],
+f:{kat:"Waffelriegel mit Haselnusscreme",her:"Milka",zweck:"Jause, Süßigkeit für zwischendurch",gr:"ca. 10 cm lang, 3 cm breit, 2 cm hoch",gew:"31,5 g",form:"länglicher Riegel, Oberseite gewölbt und uneben",farbe:"hellbraun mit hellen Nussstückchen; Packung lila",mat:"Waffel, Haselnusscreme, Milchschokolade, gehackte Haselnüsse",teile:"innen mehrere dünne Waffelschichten, dazwischen Haselnusscreme; außen Schokolade rundherum; oben Haselnussstückchen",verp:"lila Folie mit weißer Schrift",kons:"Waffel knusprig, Creme weich, Nussstückchen knackig",gesch:"süß, nussig, schokoladig",geruch:"nach Haselnuss und Schokolade",bes:"gehackte Haselnüsse auf der Oberseite",eindr:"rustikal durch die unebene Nussoberfläche",bed:"beliebte Jause, besonders in Österreich"},
+t:["{ben}Milka Nussini ist ein Waffelriegel mit Haselnusscreme der Firma Milka. {ben verp gew}Er wird einzeln in einer lila Folie zu 31,5 Gramm verkauft. {zweck}Viele Kinder essen ihn als Jause oder als Süßigkeit für zwischendurch.",
+"{gr}Der Riegel ist etwa zehn Zentimeter lang, drei Zentimeter breit und zwei Zentimeter hoch. {form}Er ist länglich, seine Oberseite ist leicht gewölbt und uneben. {verp}Auf der lila Verpackung stehen die Namen „Milka“ und „Nussini“ in weißen Buchstaben. {teile mat}Im Inneren liegen mehrere dünne Waffelschichten übereinander, zwischen denen sich eine Haselnusscreme befindet. {teile mat}Außen umhüllt Milchschokolade die Waffel vollständig. {teile bes}Auf der Oberseite stecken gehackte Haselnüsse in der Schokolade. {farbe}Dadurch erscheint der hellbraune Riegel mit vielen hellen Punkten gesprenkelt. {sinn}Die Waffel ist knusprig, die Creme weich und die Nussstückchen sind knackig. {sinn}Der Riegel schmeckt süß, nussig und schokoladig und riecht nach Haselnuss.",
+"{eindr}Insgesamt wirkt die Süßigkeit durch die unebene Nussoberfläche rustikal. {bed}Besonders in Österreich ist sie eine beliebte Jause."]},
+
+{id:"manner",name:"Manner Schnitten",grp:"Waffel",ers:["die Waffelschnitte","die Schnitte","das Gebäck","die Jause"],
+f:{kat:"Waffelschnitte mit Haselnusscreme",her:"Manner (Wien)",zweck:"Jause",gr:"ca. 5 × 2 cm, 1 cm hoch",gew:"ca. 7 g pro Schnitte",form:"kleiner Quader",farbe:"hellbraune Waffel, braune Creme; Packung rosa",mat:"Waffel aus Mehl; Creme aus Haselnüssen, Zucker, Kakao",teile:"Schichten genau übereinander: oben und unten Waffelblatt, dazwischen abwechselnd Waffel und Creme",verp:"rosa Packung mit Stephansdom-Logo",kons:"Waffel trocken und knusprig, Creme weich",gesch:"süß, nussig",geruch:"nach Haselnuss",bes:"feines Gittermuster auf Ober- und Unterseite",eindr:"ordentlich durch regelmäßige Streifen",bed:"gilt als typisch wienerisch"},
+t:["{ben}Manner Schnitten sind Waffelschnitten mit Haselnusscreme. {ben verp}Sie stammen von der Wiener Firma Manner und werden in rosa Packungen mit mehreren Schnitten verkauft. {zweck}Das Gebäck dient vor allem als Jause.",
+"{gr gew}Eine Schnitte ist etwa fünf Zentimeter lang, zwei Zentimeter breit, einen Zentimeter hoch und wiegt ungefähr sieben Gramm. {form}Sie hat die Form eines kleinen Quaders. {teile}Von der Seite betrachtet erkennt man mehrere Schichten, die genau übereinanderliegen. {teile farbe}Oben und unten befindet sich jeweils ein hellbraunes Waffelblatt, dazwischen wechseln sich dünne Waffeln und braune Cremeschichten ab. {mat}Die Waffelblätter bestehen aus Mehl, die Creme aus Haselnüssen, Zucker und Kakao. {bes}Auf der Ober- und Unterseite ist ein feines Gittermuster zu sehen. {sinn}Die Waffeln sind trocken und knusprig, die Creme ist weich. {sinn}Das Gebäck schmeckt süß und nussig und riecht nach Haselnuss.",
+"{eindr}Insgesamt wirkt die Schnitte durch die regelmäßigen Streifen sehr ordentlich. {bed}Mit dem Stephansdom als Logo gilt sie als typisch wienerisch."]},
+
+{id:"mozartkugel",name:"Mozartkugel",grp:"Pralinen",ers:["die Praline","die Kugel","die Süßigkeit","das Mitbringsel"],
+f:{kat:"Praline",her:"mehrere Firmen (Salzburg)",zweck:"Geschenk, Mitbringsel",gr:"ca. 3 cm Durchmesser",gew:"ca. 15 g",form:"Kugel",farbe:"dunkelbraun; Kern grün",mat:"dunkle Schokolade, Nougat, Marzipan, Pistazien",teile:"drei Schichten wie bei einer Zwiebel: außen Schokolade, darunter Nougat, in der Mitte grüner Kern",verp:"glänzende Alufolie mit Mozart-Porträt",kons:"Überzug fest, Nougat weich, Kern zäh",gesch:"Schokolade, Nuss, Marzipan",geruch:"nach Schokolade und Marzipan",bes:"im Querschnitt drei Ringe",eindr:"edel, traditionsreich",bed:"bekanntes Süßwaren-Souvenir Österreichs"},
+t:["{ben}Die Mozartkugel ist eine runde Praline aus Salzburg. {ben}Sie ist nach dem Komponisten Wolfgang Amadeus Mozart benannt und wird von mehreren Firmen hergestellt. {zweck}Häufig wird sie als Geschenk oder Mitbringsel gekauft.",
+"{gr gew}Die Kugel hat einen Durchmesser von etwa drei Zentimetern und wiegt ungefähr 15 Gramm. {verp}Sie steckt in einer glänzenden Alufolie mit einem Porträt Mozarts. {teile}Die Praline besteht aus drei Schichten, die wie bei einer Zwiebel ineinanderliegen. {teile mat}Außen ist sie mit dunkler Schokolade überzogen, darunter folgt eine Schicht aus hellbraunem Nougat. {teile mat}Genau in der Mitte befindet sich ein grüner Kern aus Marzipan und Pistazien. {bes}Im Querschnitt erscheinen die Schichten als drei Ringe. {farbe}Die Oberfläche ist glatt und dunkelbraun. {sinn}Der Überzug ist fest, der Nougat weich und der Kern zäh. {sinn}Die Süßigkeit schmeckt nach Schokolade, Nuss und Marzipan.",
+"{eindr}Insgesamt wirkt die Praline edel und traditionsreich. {bed}Sie gilt als eines der bekanntesten Süßwaren-Souvenirs Österreichs."]},
+
+{id:"toblerone",name:"Toblerone",grp:"Schokolade",ers:["die Milchschokolade","der Schokoladenriegel","der Riegel","die Süßigkeit"],
+f:{kat:"Milchschokolade mit Nougat",her:"Toblerone (Schweiz)",zweck:"pur essen, verschenken",gr:"ca. 21 cm lang",gew:"100 g",form:"lang, dreieckiger Querschnitt, Zacken",farbe:"hellbraun; Schachtel gelb mit roter Schrift",mat:"Milchschokolade mit Honig- und Mandelnougat",teile:"auf einem flachen Boden viele Zacken in einer Reihe; Einschnitte dazwischen; unten verbunden",verp:"dreieckige Kartonschachtel, innen Silberfolie",kons:"fest, leicht körnig",gesch:"süß nach Honig und Mandeln",geruch:"nach Schokolade und Honig",bes:"Nougatstückchen als helle Punkte an der Bruchkante",eindr:"ungewöhnlich durch die Zackenform",bed:"weltweit sofort erkennbar"},
+t:["{ben}Toblerone ist eine Milchschokolade aus der Schweiz. {ben verp gew}Sie wird in einer dreieckigen Kartonschachtel zu 100 Gramm verkauft. {zweck}Man isst sie pur oder verschenkt sie.",
+"{gr form}Der Riegel ist etwa 21 Zentimeter lang und hat einen dreieckigen Querschnitt, genau wie die gelbe Schachtel mit der roten Aufschrift. {verp}Innen ist die Schokolade in silberne Folie gewickelt. {teile form}Auf einem langen, flachen Boden stehen viele dreieckige Zacken in einer Reihe, die wie kleine Berge aussehen. {teile}Zwischen den Zacken befinden sich tiefe Einschnitte, sodass sich jede Zacke einzeln abbrechen lässt. {teile}Unten sind alle Teile durch den Boden verbunden. {mat farbe}Die hellbraune Milchschokolade enthält kleine Stückchen aus Honig- und Mandelnougat. {bes}Diese sind an der Bruchkante als helle Punkte erkennbar. {sinn}Die Schokolade ist fest und leicht körnig. {sinn}Sie schmeckt süß nach Honig und Mandeln.",
+"{eindr}Insgesamt wirkt die Süßigkeit durch ihre Zackenform ungewöhnlich. {bed}Diese Form macht sie auf der ganzen Welt sofort erkennbar."]},
+
+{id:"twix",name:"Twix",grp:"Schokoriegel",ers:["der Schokoladenriegel","der Riegel","die Süßigkeit"],
+f:{kat:"Schokoladenriegel mit Keks und Karamell",her:"Mars",zweck:"Süßigkeit für unterwegs",gr:"ca. 10 cm lang, 2 cm breit, 1,5 cm hoch",gew:"25 g pro Riegel; Packung 50 g",form:"rechteckig, abgerundete Kanten, Oberseite gewölbt",farbe:"braun; Packung gold mit roter Schrift",mat:"Keks, Karamell, Milchschokolade",teile:"unten Keks, darüber Karamell, außen Schokolade rundherum; zwei Riegel nebeneinander",verp:"goldfarbene Folie",kons:"Keks knusprig, Karamell weich und zäh, Schokolade fest",gesch:"süß, leicht salzig, buttrig",geruch:"nach Karamell und Schokolade",bes:"Karamell zieht beim Abbeißen Fäden",eindr:"abwechslungsreich durch knusprig und weich",bed:"zwei Riegel in einer Packung"},
+t:["{ben}Twix ist ein Schokoladenriegel mit Keks und Karamell. {ben verp gew}In einer goldfarbenen Packung zu 50 Gramm liegen zwei Riegel nebeneinander. {zweck}Die Süßigkeit wird gern unterwegs gegessen.",
+"{gr gew}Jeder Riegel ist ungefähr zehn Zentimeter lang, zwei Zentimeter breit, eineinhalb Zentimeter hoch und wiegt 25 Gramm. {form}Er ist rechteckig mit abgerundeten Kanten, die Oberseite ist leicht gewölbt. {teile}Der Riegel besteht aus drei Schichten. {teile mat}Ganz unten liegt ein heller, knuspriger Keks als Grundlage. {teile mat farbe}Darüber befindet sich eine Schicht aus goldbraunem Karamell. {teile mat}Außen umhüllt eine dünne Schicht Milchschokolade sowohl den Keks als auch das Karamell. {sinn bes}Die Schokolade ist fest, das Karamell weich und zäh, sodass es beim Abbeißen Fäden zieht. {sinn}Der Keks bricht mit einem leisen Knacken. {sinn}Twix schmeckt süß, leicht salzig und buttrig.",
+"{eindr}Insgesamt wirkt der Riegel durch die Mischung aus knusprig und weich abwechslungsreich. {bed}Kennzeichnend ist die Packung mit zwei Riegeln."]},
+
+{id:"bueno",name:"Kinder Bueno",grp:"Waffel",ers:["die Waffel-Süßigkeit","der Riegel","die Waffel","die Jause"],
+f:{kat:"Gefüllte Waffel mit Schokoladenüberzug",her:"Ferrero (Italien)",zweck:"Süßigkeit oder kleine Jause",gr:"ca. 10 cm lang, 2 cm breit, 1,5 cm hoch",gew:"Packung 43 g (2 Riegel)",form:"länglich, wellige Oberseite",farbe:"hellbraun, dunkle Streifen",mat:"Waffel, Haselnusscreme, Milchschokolade",teile:"außen Waffel, innen hohl mit Creme gefüllt; darüber Schokolade; ganz oben dunkle Streifen",verp:"weiß-rote Folie, Kartonstreifen",kons:"Waffel luftig und knusprig, Füllung weich und cremig",gesch:"süß, nussig",geruch:"nach Haselnuss",bes:"dunkle Schokostreifen im Zickzack",eindr:"verziert durch Wellen und Streifen",bed:"Streifen sind das Erkennungsmerkmal"},
+t:["{ben}Kinder Bueno ist eine gefüllte Waffel-Süßigkeit der Firma Ferrero. {ben gew}Eine Packung zu 43 Gramm enthält zwei Riegel. {zweck}Man isst sie als Süßigkeit oder kleine Jause.",
+"{gr}Ein Riegel ist etwa zehn Zentimeter lang, zwei Zentimeter breit und eineinhalb Zentimeter hoch. {form}Seine Oberseite hat mehrere Wölbungen und wirkt dadurch wellig. {bes farbe}Quer darüber verlaufen dünne Streifen aus dunkler Schokolade im Zickzackmuster. {teile mat}Außen befindet sich eine dünne, hellbraune Waffel, die innen hohl ist. {teile mat}Dieser Hohlraum ist vollständig mit einer hellen Haselnusscreme gefüllt. {teile}Über der Waffel liegt ein Überzug aus Milchschokolade, ganz oben die dunklen Streifen. {teile}Im Querschnitt sieht man die Creme in der Mitte, rundherum umgeben von der Waffel. {sinn}Die Waffel ist luftig und knusprig, die Füllung weich und cremig. {sinn}Die Süßigkeit schmeckt süß und nussig.",
+"{eindr}Insgesamt wirkt der Riegel durch die Wellen und Streifen verziert. {bed}Die dunklen Streifen sind sein auffälligstes Merkmal."]},
+
+{id:"hanuta",name:"Hanuta",grp:"Waffel",ers:["die Waffelschnitte","die Schnitte","die Waffel","die Jause"],
+f:{kat:"Waffelschnitte mit Haselnusscreme",her:"Ferrero (Italien)",zweck:"Jause für die Schule",gr:"ca. 7 × 7 cm, gut 1 cm dick",gew:"22 g",form:"fast quadratisch, abgerundete Ecken",farbe:"hellbraune Waffel, braune Creme",mat:"Waffel, Haselnuss-Schokoladencreme, gehackte Haselnüsse",teile:"oben und unten Waffelplatte, dazwischen dicke Cremeschicht bis knapp an die Ränder",verp:"einzeln in Folie, mehrere in Kartonpackung",kons:"Waffel trocken und knusprig, Creme weich und dicht",gesch:"süß, nussig",geruch:"nach gerösteten Haselnüssen",bes:"Muster aus kleinen, erhabenen Quadraten",eindr:"flach, handlich",bed:"passt gut in die Schultasche"},
+t:["{ben}Hanuta ist eine Waffelschnitte mit Haselnusscreme. {ben}Der Name steht für „Haselnusstafel“. {ben verp}Jede Schnitte ist einzeln verpackt, mehrere werden gemeinsam in einer Kartonpackung verkauft. {zweck}Viele Kinder nehmen sie als Jause mit.",
+"{gr gew form}Eine Schnitte ist fast quadratisch, etwa sieben Zentimeter lang und breit, gut einen Zentimeter dick und wiegt 22 Gramm. {form}Die Ecken sind leicht abgerundet. {teile}Sie besteht aus drei Schichten, die genau übereinanderliegen. {teile bes}Oben und unten befindet sich jeweils eine dünne, hellbraune Waffelplatte mit einem Muster aus kleinen, erhabenen Quadraten. {teile mat}Dazwischen liegt eine dicke Schicht aus brauner Haselnuss-Schokoladencreme mit Stückchen gehackter Haselnüsse. {teile}Die Füllung reicht bis knapp an die Ränder. {sinn}Die Waffeln sind trocken und knusprig, die Creme ist weich und dicht. {sinn}Die Schnitte schmeckt süß und nussig und riecht nach gerösteten Haselnüssen.",
+"{eindr}Insgesamt wirkt die Waffel flach und handlich. {bed}Sie lässt sich gut in einer Schultasche transportieren."]},
+
+{id:"mms",name:"M&M's",grp:"Schokolinsen",ers:["die Schokolinse","die Linse","die Süßigkeit"],
+f:{kat:"Schokolinsen mit Zuckerhülle",her:"Mars",zweck:"Nascherei, Kuchenverzierung",gr:"ca. 1 cm Durchmesser",gew:"knapp 1 g pro Linse",form:"rund, flach, in der Mitte gewölbt",farbe:"Rot, Gelb, Blau, Grün, Orange, Braun",mat:"Milchschokolade, gefärbter Zucker",teile:"außen harte Zuckerhülle, innen Schokoladenkern",verp:"braunes Plastiksackerl mit Figuren",kons:"Hülle knackt, Kern weich",gesch:"süß, schokoladig",geruch:"schwach nach Schokolade",bes:"weißes „m“ auf einer Seite",eindr:"bunt, fröhlich",bed:"das „m“ macht sie unverwechselbar"},
+t:["{ben}M&M's sind kleine Schokolinsen mit einer bunten Zuckerhülle. {ben verp}Sie werden in braunen Sackerln verkauft, in denen viele Linsen in verschiedenen Farben liegen. {zweck}Die Süßigkeit dient als Nascherei und zum Verzieren von Kuchen.",
+"{gr gew}Eine Linse hat einen Durchmesser von etwa einem Zentimeter und wiegt knapp ein Gramm. {form}Sie ist rund, flach und in der Mitte leicht gewölbt. {farbe mat}Die glatte, glänzende Oberfläche gibt es in Rot, Gelb, Blau, Grün, Orange und Braun. {bes}Auf einer Seite ist ein kleines weißes „m“ aufgedruckt, die andere Seite ist leer. {teile}Jede Linse besteht aus zwei Teilen. {teile mat}Außen umschließt eine harte, dünne Hülle aus gefärbtem Zucker den Kern vollständig. {teile mat}Innen liegt ein Kern aus Milchschokolade. {sinn}Beim Zerbeißen knackt zuerst die Hülle, danach kommt die weiche Schokolade zum Vorschein. {sinn}Die Linsen schmecken süß und schokoladig.",
+"{eindr}Insgesamt wirken die Linsen bunt und fröhlich. {bed}Das aufgedruckte „m“ macht sie unverwechselbar."]},
+
+{id:"smarties",name:"Smarties",grp:"Schokolinsen",ers:["die Schokolinse","die Linse","die Süßigkeit","die Dekoration"],
+f:{kat:"Schokolinsen mit Zuckerhülle",her:"Nestlé (Schweiz)",zweck:"Nascherei, Verzierung von Torten und Muffins",gr:"ca. 1,5 cm Durchmesser",gew:"ca. 1 g pro Linse; Röhre 38 g",form:"rund, flach, beidseitig gewölbt",farbe:"Rot, Orange, Gelb, Grün, Blau, Lila, Rosa, Braun",mat:"Milchschokolade, Zuckerhülle",teile:"innen Schokoladenkern, rundherum dünne Zuckerhülle",verp:"Kartonröhre mit Deckel",kons:"Hülle knackig, Kern weich",gesch:"süß nach Schokolade",geruch:"schwach nach Schokolade",bes:"kein Aufdruck; klappern in der Röhre",eindr:"farbenfroh, verspielt",bed:"beliebt als Dekoration für Geburtstagskuchen"},
+t:["{ben}Smarties sind bunte Schokolinsen der Firma Nestlé. {ben verp gew}Sie werden in einer Röhre aus Karton mit 38 Gramm Inhalt verkauft. {zweck}Man isst sie als Nascherei oder verziert damit Torten und Muffins.",
+"{gr gew}Eine Linse hat einen Durchmesser von etwa eineinhalb Zentimetern und wiegt rund ein Gramm. {form}Sie ist rund, flach und beidseitig leicht gewölbt. {mat bes}Die Oberfläche ist glatt und matt, ein Aufdruck fehlt. {farbe}Die Farben reichen von Rot, Orange und Gelb über Grün und Blau bis zu Lila, Rosa und Braun. {teile mat}Im Inneren befindet sich ein Kern aus Milchschokolade. {teile mat}Um ihn herum liegt eine dünne, knackige Zuckerhülle, die die Schokolade vor dem Schmelzen schützt. {verp bes}In der Röhre liegen die Linsen bunt gemischt, beim Schütteln klappern sie hörbar. {sinn}Beim Zerbeißen knackt die Hülle, der Kern ist weich. {sinn}Die Linsen schmecken süß nach Schokolade.",
+"{eindr}Insgesamt wirken Smarties farbenfroh und verspielt. {bed}Besonders als Dekoration für Geburtstagskuchen sind sie beliebt."]},
+
+{id:"chupachups",name:"Chupa Chups",grp:"Zuckerl & Dragees",ers:["der Lutscher","das Zuckerl","die Kugel","die Süßigkeit"],
+f:{kat:"Lutscher (Hartzuckerl am Stiel)",her:"Chupa Chups (Spanien)",zweck:"langsam lutschen",gr:"Kugel wie eine Murmel; Stiel ca. 10 cm",gew:"ca. 12 g",form:"Kugel auf einem Stiel",farbe:"je nach Sorte; Stiel weiß",mat:"harter Zucker, Aromen; Stiel aus Plastik",teile:"Kugel am oberen Ende des Stiels; Stiel steckt in der Mitte der Unterseite",verp:"bunte Folie, unten um den Stiel gedreht; gelbes Blütenlogo oben",kons:"hart, glatt, glänzend",gesch:"z. B. Erdbeere, Cola, Orange",geruch:"fruchtig",bes:"Kugel wird beim Lutschen langsam kleiner",eindr:"einfach, praktisch",bed:"Finger bleiben durch den Stiel sauber"},
+t:["{ben}Ein Chupa Chups ist ein Lutscher, also ein hartes Zuckerl an einem Stiel. {ben gew}Er stammt ursprünglich aus Spanien und wiegt etwa zwölf Gramm. {zweck}Man lutscht ihn langsam über längere Zeit.",
+"{teile}Der Lutscher besteht aus einer Kugel und einem Stiel. {gr farbe mat}Der Stiel ist ungefähr zehn Zentimeter lang, dünn, weiß und aus Plastik. {teile gr}An seinem oberen Ende sitzt die Kugel, die etwa so groß wie eine Murmel ist. {teile}Der Stiel steckt genau in der Mitte ihrer Unterseite. {verp}Umhüllt ist die Kugel von einer bunten Plastikfolie, die unten um den Stiel gedreht ist. {verp}Oben auf der Folie befindet sich ein Logo in Form einer gelben Blüte mit roter Schrift. {mat sinn}Die Kugel besteht aus hartem Zucker und Aromen und hat eine glatte, glänzende Oberfläche. {farbe sinn}Farbe und Geschmack hängen von der Sorte ab, zum Beispiel Erdbeere, Cola oder Orange. {bes}Beim Lutschen wird die Kugel langsam kleiner.",
+"{eindr}Insgesamt wirkt der Lutscher einfach und praktisch. {bed}Durch den Stiel bleiben die Finger sauber."]},
+
+{id:"tictac",name:"Tic Tac",grp:"Zuckerl & Dragees",ers:["die Pastille","das Zuckerl","die Dose"],
+f:{kat:"Pastillen (kleine Hartzuckerl)",her:"Ferrero (Italien)",zweck:"frischer Atem",gr:"Pastille ca. 0,5 cm; Dose 7 × 4 × 1,5 cm",gew:"ca. 0,5 g pro Pastille; Dose 18 g",form:"oval, leicht gewölbt",farbe:"meist weiß, auch orange oder grün",mat:"Zucker, Aromen; Dose aus Plastik",teile:"oben Klappdeckel mit Scharnier, darunter schmale Öffnung; Pastillen liegen lose übereinander",verp:"durchsichtige Plastikdose",kons:"hart, glatt, glänzend",gesch:"Minze: frisch",geruch:"kühl, minzig",bes:"durch die Öffnung passt immer nur eine Pastille",eindr:"klein, praktisch",bed:"passt in jede Hosentasche"},
+t:["{ben}Tic Tac sind kleine, harte Pastillen der Firma Ferrero. {ben verp gew}Sie werden in einer durchsichtigen Plastikdose mit 18 Gramm Inhalt verkauft. {zweck}Man nimmt sie vor allem für frischen Atem.",
+"{gr}Die Dose ist etwa sieben Zentimeter hoch, vier Zentimeter breit und eineinhalb Zentimeter tief. {teile}Oben befindet sich ein farbiger Klappdeckel, der mit einem kleinen Scharnier befestigt ist. {teile bes}Darunter liegt eine schmale Öffnung, durch die immer nur eine Pastille passt. {gr gew}Die Pastillen sind etwa einen halben Zentimeter lang und wiegen jeweils ein halbes Gramm. {form mat}Sie sind oval, leicht gewölbt und haben eine harte, glänzende Oberfläche. {mat}Sie bestehen hauptsächlich aus Zucker und Aromen. {farbe}Die meisten Sorten sind weiß, manche orange oder grün. {teile}In der Dose liegen die Pastillen lose übereinander und klappern beim Schütteln. {sinn}Die Sorte Minze schmeckt frisch und riecht kühl.",
+"{eindr}Insgesamt wirkt die Dose klein und praktisch. {bed}Sie passt in jede Hosentasche."]},
+
+{id:"rocher",name:"Ferrero Rocher",grp:"Pralinen",ers:["die Praline","die Kugel","die Haselnusspraline","das Geschenk"],
+f:{kat:"Haselnusspraline",her:"Ferrero (Italien)",zweck:"Geschenk zu besonderen Anlässen",gr:"ca. 3 cm Durchmesser",gew:"12,5 g",form:"Kugel mit unebener Oberfläche",farbe:"braun; Folie golden",mat:"Milchschokolade, gehackte Haselnüsse, Waffel, Haselnusscreme, ganze Haselnuss",teile:"außen Schokolade mit Nussstückchen, darunter Waffelkugel, darin Creme, in der Mitte ganze Haselnuss",verp:"goldene Folie, braunes Papierförmchen, durchsichtige Schachtel",kons:"außen knusprig, innen cremig",gesch:"süß, kräftig nach Haselnuss",geruch:"nach gerösteten Nüssen",bes:"ganze Haselnuss im Kern",eindr:"festlich, wertvoll",bed:"die Nuss im Kern ist das Markenzeichen"},
+t:["{ben}Ferrero Rocher ist eine runde Haselnusspraline der Firma Ferrero. {ben verp}Mehrere Pralinen werden gemeinsam in einer durchsichtigen Schachtel verkauft. {zweck}Man verschenkt sie häufig zu besonderen Anlässen.",
+"{gr gew}Die Kugel hat einen Durchmesser von etwa drei Zentimetern und wiegt 12,5 Gramm. {verp}Sie steckt in einer goldenen Folie und sitzt in einem braunen Papierförmchen mit gewelltem Rand. {form mat}Die Oberfläche ist uneben und körnig. {teile}Die Praline besteht aus mehreren Schichten, die ineinanderliegen. {teile mat}Außen befindet sich Milchschokolade mit gehackten Haselnüssen. {teile mat}Darunter liegt eine dünne, knusprige Waffelkugel, die mit weicher Haselnusscreme gefüllt ist. {teile bes}Genau in der Mitte steckt eine ganze, geröstete Haselnuss. {teile}Im Querschnitt sieht man von außen nach innen Schokolade, Waffel, Creme und Nuss. {sinn}Die Praline ist außen knusprig und innen cremig. {sinn}Sie schmeckt süß und kräftig nach Haselnuss.",
+"{eindr}Insgesamt wirkt die Praline durch die goldene Folie festlich und wertvoll. {bed}Die ganze Nuss im Kern ist ihr Markenzeichen."]},
+
+{id:"raffaello",name:"Raffaello",grp:"Pralinen",ers:["die Praline","die Kokospraline","die Kugel","das Geschenk"],
+f:{kat:"Kokospraline",her:"Ferrero (Italien)",zweck:"Geschenk",gr:"ca. 2,5 cm Durchmesser",gew:"10 g",form:"Kugel",farbe:"weiß",mat:"Kokosraspeln, Waffel, Milch-Kokos-Creme, Mandel",teile:"außen Kokosraspeln auf Creme, darunter Waffelkugel, darin Creme, im Zentrum ganze Mandel",verp:"durchsichtige Folie mit gedrehten Enden; weiße Schachtel",kons:"leicht, luftig; rau, flockig",gesch:"süß nach Kokos und Mandel",geruch:"nach Kokosnuss",bes:"ganz weiß, ohne Schokolade",eindr:"zart, hell",bed:"unterscheidet sich deutlich von Schokoladenpralinen"},
+t:["{ben}Raffaello ist eine kleine, weiße Kokospraline der Firma Ferrero. {ben verp}Sie wird in Schachteln mit mehreren Stück verkauft. {zweck}Häufig dient sie als Geschenk.",
+"{gr gew}Die Kugel hat einen Durchmesser von etwa zweieinhalb Zentimetern und wiegt zehn Gramm. {verp}Jede Praline ist in eine durchsichtige Folie gewickelt, deren Enden auf beiden Seiten gedreht sind. {farbe mat}Sie ist vollständig weiß, die Oberfläche ist rau und flockig. {teile mat}Ganz außen haften feine Kokosraspeln an einer dünnen Cremeschicht. {teile}Darunter befindet sich eine knusprige Waffelkugel, die innen hohl ist. {teile mat}Dieser Hohlraum ist mit einer weißen Creme aus Milch und Kokos gefüllt. {teile}Im Zentrum steckt eine ganze, geschälte Mandel. {bes}Im Querschnitt erkennt man von außen nach innen Kokos, Waffel, Creme und Mandel. {sinn}Die Praline ist leicht und luftig. {sinn}Sie schmeckt süß nach Kokos und Mandel und duftet nach Kokosnuss.",
+"{eindr}Insgesamt wirkt die Praline durch ihre weiße Farbe zart und hell. {bed}Dadurch unterscheidet sie sich deutlich von Schokoladenpralinen."]},
+
+{id:"lakritz",name:"Haribo Lakritzschnecke",grp:"Fruchtgummi & Lakritze",ers:["die Schnecke","die Lakritze","das Lakritzband","die Süßigkeit"],
+f:{kat:"Lakritze",her:"Haribo (Deutschland)",zweck:"Nascherei",gr:"ca. 4 cm Durchmesser, 0,5 cm dick",gew:"ca. 12 g",form:"flache Spirale",farbe:"schwarz; Knopf rosa, gelb, blau oder weiß",mat:"Zucker, Mehl, Süßholzsaft",teile:"Band beginnt in der Mitte, windet sich nach außen; Zuckerknopf genau in der Mitte; außen kleiner Zipfel",verp:"bunt bedrucktes Plastiksackerl",kons:"weich, zäh, biegsam",gesch:"süß und würzig",geruch:"nach Lakritze",bes:"lässt sich abrollen, ohne zu reißen",eindr:"auffällig: bunter Knopf auf schwarzem Grund",bed:"das Abrollen macht das Essen zu einem Spiel"},
+t:["{ben}Die Lakritzschnecke ist eine Süßigkeit aus Lakritze. {ben verp}Sie wird von der Firma Haribo hergestellt und in Sackerln mit mehreren Schnecken verkauft. {zweck}Man isst sie als Nascherei.",
+"{gr gew}Eine Schnecke hat einen Durchmesser von etwa vier Zentimetern, ist einen halben Zentimeter dick und wiegt ungefähr zwölf Gramm. {form teile}Sie besteht aus einem langen, schmalen Lakritzband, das spiralförmig aufgerollt ist. {teile}Das Band beginnt in der Mitte und windet sich in mehreren eng aneinanderliegenden Runden nach außen. {teile}Am äußeren Rand endet es mit einem kleinen Zipfel. {teile farbe}Genau in der Mitte der Spirale sitzt ein kleiner, runder Zuckerknopf in Rosa, Gelb, Blau oder Weiß. {mat}Das Band besteht aus Zucker, Mehl und Süßholzsaft. {farbe bes}Es ist schwarz, glänzend und biegsam und lässt sich abrollen, ohne zu reißen. {sinn}Die Konsistenz ist weich und zäh. {sinn}Lakritze schmeckt süß und zugleich würzig.",
+"{eindr}Insgesamt wirkt die Schnecke durch den bunten Knopf auf schwarzem Grund auffällig. {bed}Das Abrollen macht das Essen zu einem Spiel."]},
+
+{id:"pez",name:"Pez-Spender",grp:"Zuckerl & Dragees",ers:["der Spender","der Behälter","das Zuckerl","die Figur"],
+f:{kat:"Zuckerlspender mit Zuckerl",her:"Pez (Österreich)",zweck:"Zuckerl aufbewahren und einzeln entnehmen; Sammelobjekt",gr:"ca. 10 cm hoch, 2 cm breit",gew:"ca. 20 g",form:"schmaler Schaft mit Figurenkopf",farbe:"bunt; Schaft meist einfarbig",mat:"Kunststoff; Zuckerl aus Zucker",teile:"oben Figurenkopf mit Gelenk, darunter Schaft mit Griffflächen; innen Feder, Zuckerl übereinander",verp:"Zuckerl in Papierrolle zum Nachfüllen",kons:"Zuckerl hart",gesch:"süß, fruchtig",geruch:"fruchtig",bes:"Kopf zurückklappen → oberstes Zuckerl schiebt sich heraus",eindr:"wie ein kleines Spielzeug",bed:"bei Sammlern beliebt"},
+t:["{ben}Ein Pez-Spender ist ein kleiner Behälter, aus dem man Pez-Zuckerl einzeln entnimmt. {ben}Es gibt ihn mit sehr vielen verschiedenen Figurenköpfen. {zweck}Er dient zum Aufbewahren der Zuckerl und wird gern gesammelt.",
+"{gr gew}Der Spender ist etwa zehn Zentimeter hoch, zwei Zentimeter breit und wiegt rund 20 Gramm. {mat teile}Er besteht aus Kunststoff und setzt sich aus Kopf und Schaft zusammen. {teile farbe}Oben sitzt der bunt bemalte Figurenkopf, der mit einem Gelenk am Schaft befestigt ist und sich nach hinten klappen lässt. {teile form}Darunter schließt der schmale, rechteckige Schaft an. {teile}Seitlich befinden sich Griffflächen mit Rillen, innen drückt eine Feder die Zuckerl nach oben. {gr sinn}Die Zuckerl sind etwa einen Zentimeter lang, rechteckig, hart und liegen übereinander im Schaft. {bes}Klappt man den Kopf zurück, schiebt sich das oberste Zuckerl heraus. {sinn}Die Zuckerl schmecken süß und fruchtig.",
+"{eindr}Insgesamt wirkt der Spender wie ein kleines Spielzeug. {bed}Gerade deshalb ist er bei Sammlern beliebt."]},
+
+{id:"nimm2",name:"Nimm2",grp:"Zuckerl & Dragees",ers:["das Fruchtzuckerl","das Zuckerl","das Bonbon","die Süßigkeit"],
+f:{kat:"Hartes Fruchtzuckerl mit flüssiger Füllung",her:"Storck (Deutschland)",zweck:"Nascherei",gr:"ca. 2 × 1,5 cm",gew:"ca. 4 g",form:"leicht oval, seitlich abgeflacht",farbe:"orange, gelb oder rot; durchscheinend",mat:"harter Zucker; Füllung aus Fruchtsaft",teile:"außen feste Zuckerhülle, in der Mitte Hohlraum mit flüssiger Füllung",verp:"einzeln in Folie mit gedrehten Enden; Sackerl",kons:"hart, glatt, glänzend; innen flüssig",gesch:"süß-fruchtig, z. B. Orange, Zitrone",geruch:"fruchtig",bes:"Füllung tritt beim Lutschen aus",eindr:"frisch durch leuchtende Farben",bed:"flüssige Füllung als Besonderheit"},
+t:["{ben}Nimm2 sind harte Fruchtzuckerl mit flüssiger Füllung. {ben verp}Sie werden in Sackerln mit vielen einzeln verpackten Zuckerln verkauft. {zweck}Man lutscht sie als Nascherei.",
+"{gr gew}Ein Zuckerl ist etwa zwei Zentimeter lang, eineinhalb Zentimeter breit und wiegt rund vier Gramm. {form}Es ist leicht oval und an den Seiten etwas abgeflacht. {verp}Umhüllt ist es von einer durchsichtigen, bunt bedruckten Folie, deren Enden links und rechts gedreht sind. {mat sinn}Die Oberfläche ist hart, glatt und glänzend. {farbe}Das Zuckerl ist durchscheinend und je nach Sorte orange, gelb oder rot. {teile}Es besteht aus zwei Teilen. {teile mat}Außen bildet harter Zucker eine feste Hülle. {teile mat}Sie umschließt einen Hohlraum in der Mitte, in dem sich eine flüssige Füllung aus Fruchtsaft befindet. {bes}Beim Lutschen wird die Hülle dünner, bis die Füllung austritt. {sinn}Das Zuckerl schmeckt süß und fruchtig, etwa nach Orange oder Zitrone.",
+"{eindr}Insgesamt wirkt das Zuckerl durch die leuchtenden Farben frisch. {bed}Die flüssige Füllung ist seine Besonderheit."]},
+
+{id:"mentos",name:"Mentos",grp:"Zuckerl & Dragees",ers:["das Kaudragee","das Dragee","die Rolle","die Süßigkeit"],
+f:{kat:"Kaudragee",her:"Perfetti Van Melle",zweck:"Nascherei, frischer Atem",gr:"Dragee ca. 1,5 cm; Rolle 8 cm lang",gew:"knapp 3 g pro Dragee; Rolle 38 g",form:"rund, flach, beidseitig gewölbt",farbe:"Mint weiß, Fruchtsorten bunt",mat:"harte Zuckerhülle, weicher Kauteig",teile:"Dragees senkrecht hintereinander in der Rolle; außen harte Hülle, innen weicher Kern",verp:"Papierrolle mit Aufreißlasche",kons:"Hülle knackt, Kern zäh und kaubar",gesch:"Minze frisch; Frucht z. B. Erdbeere, Orange",geruch:"minzig oder fruchtig",bes:"Gegensatz harte Hülle und weicher Kern",eindr:"schlicht, unauffällig",bed:"der Gegensatz macht es besonders"},
+t:["{ben}Mentos sind Kaudragees mit harter Hülle und weichem Kern. {ben verp gew}Sie werden in einer Papierrolle mit 38 Gramm Inhalt verkauft. {zweck}Man isst sie zwischendurch oder für frischen Atem.",
+"{gr}Die Rolle ist etwa acht Zentimeter lang und hat einen Durchmesser von zwei Zentimetern. {teile}Im Inneren liegen die Dragees senkrecht hintereinander, eines dicht am anderen. {gr gew}Ein Dragee hat einen Durchmesser von etwa eineinhalb Zentimetern und wiegt knapp drei Gramm. {form}Es ist rund, flach und beidseitig leicht gewölbt. {mat}Die Oberfläche ist glatt, aber leicht uneben. {teile}Das Dragee besteht aus zwei Schichten. {teile mat}Außen umgibt eine dünne, harte Zuckerhülle einen weichen, zähen Kern. {sinn bes}Beim Zerbeißen knackt zuerst die Hülle, danach lässt sich der Kern kauen. {farbe sinn}Die Sorte Minze ist weiß und schmeckt frisch, Fruchtsorten sind bunt und schmecken nach Erdbeere oder Orange.",
+"{eindr}Insgesamt wirkt das Dragee schlicht und unauffällig. {bed}Der Gegensatz zwischen harter Hülle und weichem Kern macht es besonders."]},
+
+{id:"kitkat",name:"Kit Kat",grp:"Waffel",ers:["der Waffelriegel","der Riegel","die Waffel","die Süßigkeit"],
+f:{kat:"Waffelriegel mit Schokoladenüberzug",her:"Nestlé (Schweiz)",zweck:"kleine Pause zwischendurch",gr:"Riegel ca. 9 cm lang, 1,5 cm breit",gew:"ca. 10 g pro Riegel; Packung 41,5 g",form:"schmaler Quader, wie ein Finger",farbe:"hellbraun; Packung rot mit weißer Schrift",mat:"Waffel, Kakaocreme, Milchschokolade",teile:"vier Riegel parallel nebeneinander, unten verbunden; innen mehrere Waffelschichten mit Creme dazwischen; außen Schokolade",verp:"rote Folie mit weißem Schriftzug",kons:"Waffel luftig und knusprig, Schokolade fest",gesch:"süß nach Schokolade und Waffel",geruch:"nach Schokolade",bes:"Name auf jedem Riegel eingeprägt; deutliches Knacken beim Abbrechen",eindr:"leicht, schlank",bed:"typisch ist das Abbrechen einzelner Riegel"},
+t:["{ben}Kit Kat ist ein Waffelriegel mit Schokoladenüberzug der Firma Nestlé. {ben gew}Eine Packung zu 41,5 Gramm enthält vier schmale Riegel, die unten miteinander verbunden sind. {zweck}Die Süßigkeit wird gern als kleine Pause zwischendurch gegessen.",
+"{gr gew}Ein einzelner Riegel ist etwa neun Zentimeter lang, eineinhalb Zentimeter breit und wiegt ungefähr zehn Gramm. {form}Er hat die Form eines schmalen Quaders, der wie ein Finger aussieht. {verp}Die Packung besteht aus einer roten Folie mit weißem Schriftzug. {teile}Die vier Riegel liegen parallel nebeneinander und sind unten durch eine dünne Schokoladenschicht verbunden. {teile mat}Innen befinden sich mehrere dünne Waffelschichten, zwischen denen eine Creme aus Kakao liegt. {teile mat farbe}Außen umhüllt hellbraune Milchschokolade die Waffel vollständig. {bes}Auf der Oberseite jedes Riegels ist der Name „KitKat“ eingeprägt. {sinn}Die Waffel ist luftig und knusprig, die Schokolade fest. {sinn}Der Riegel schmeckt süß nach Schokolade und Waffel.",
+"{eindr}Insgesamt wirkt der Riegel leicht und schlank. {bed}Typisch ist das Abbrechen der einzelnen Riegel, das ein deutliches Knacken erzeugt."]},
+
+{id:"snickers",name:"Snickers",grp:"Schokoriegel",ers:["der Schokoladenriegel","der Riegel","die Süßigkeit"],
+f:{kat:"Schokoladenriegel mit Erdnüssen",her:"Mars",zweck:"sättigende Süßigkeit für unterwegs",gr:"ca. 12 cm lang, 2,5 cm breit, 2 cm hoch",gew:"50 g",form:"länglich, rechteckig, Oberseite gewölbt und wellig",farbe:"braun; Folie braun mit blauer Schrift",mat:"Nougat, Karamell, Erdnüsse, Milchschokolade",teile:"unten heller Nougat, darüber Karamell mit ganzen Erdnüssen, außen Schokolade rundherum",verp:"braune Folie mit blauem Schriftzug",kons:"Nougat weich, Karamell zäh, Erdnüsse knackig",gesch:"süß, leicht salzig, nach Erdnuss",geruch:"nach gerösteten Erdnüssen",bes:"ganze Erdnüsse im Karamell",eindr:"kompakt, schwer",bed:"gilt als besonders sättigend"},
+t:["{ben}Snickers ist ein Schokoladenriegel mit Erdnüssen der Firma Mars. {ben gew}Er wird einzeln in einer Packung zu 50 Gramm verkauft. {zweck}Viele Menschen essen ihn als sättigende Süßigkeit für unterwegs.",
+"{gr}Der Riegel ist etwa zwölf Zentimeter lang, zweieinhalb Zentimeter breit und zwei Zentimeter hoch. {form}Er ist länglich und rechteckig, die Oberseite ist leicht gewölbt und wellig. {verp}Die Folie ist braun, der Name „Snickers“ steht in blauen Buchstaben darauf. {teile}Der Riegel besteht aus mehreren Schichten. {teile mat}Ganz unten liegt ein heller Nougat aus Zucker und Erdnüssen. {teile mat bes}Darüber befindet sich eine Schicht aus Karamell, in der ganze, geröstete Erdnüsse stecken. {teile mat}Außen umhüllt Milchschokolade den gesamten Riegel. {sinn}Der Nougat ist weich, das Karamell zäh und die Erdnüsse sind knackig. {sinn}Snickers schmeckt süß, leicht salzig und kräftig nach Erdnuss.",
+"{eindr}Insgesamt wirkt der Riegel kompakt und schwer. {bed}Wegen der Erdnüsse gilt er als besonders sättigend."]},
+
+{id:"mars",name:"Mars",grp:"Schokoriegel",ers:["der Schokoladenriegel","der Riegel","die Süßigkeit"],
+f:{kat:"Schokoladenriegel mit Karamell",her:"Mars",zweck:"Süßigkeit für unterwegs",gr:"ca. 12 cm lang, 2,5 cm breit, 2 cm hoch",gew:"51 g",form:"länglich, rechteckig, Oberseite gewölbt",farbe:"braun; Folie schwarz mit roter Schrift",mat:"Malz-Nougat, Karamell, Milchschokolade",teile:"unten heller Nougat, darüber Karamell, außen Schokolade rundherum",verp:"schwarze Folie, rote Schrift mit goldenem Rand",kons:"Nougat weich und schaumig, Karamell zäh",gesch:"sehr süß nach Karamell und Malz",geruch:"nach Karamell",bes:"Wellenmuster auf der Oberseite",eindr:"kräftig, gehaltvoll",bed:"einer der ältesten Schokoriegel, weltweit bekannt"},
+t:["{ben}Mars ist ein Schokoladenriegel mit Karamell der Firma Mars. {ben gew}Er wird einzeln in einer Packung zu 51 Gramm verkauft. {zweck}Viele Menschen essen ihn als Süßigkeit für unterwegs.",
+"{gr}Der Riegel ist etwa zwölf Zentimeter lang, zweieinhalb Zentimeter breit und zwei Zentimeter hoch. {form}Er ist länglich und rechteckig, die Oberseite ist leicht gewölbt. {verp}Die Folie ist schwarz, der Name „Mars“ steht in roten Buchstaben mit goldenem Rand darauf. {teile}Der Riegel besteht aus drei Teilen. {teile mat}Unten liegt ein heller, luftiger Nougat mit Malzgeschmack. {teile mat farbe}Darüber befindet sich eine Schicht aus goldbraunem Karamell. {teile mat}Außen umhüllt Milchschokolade beide Schichten vollständig. {bes}Auf der Oberseite ist ein Wellenmuster zu sehen. {sinn}Der Nougat ist weich und schaumig, das Karamell zäh. {sinn}Mars schmeckt sehr süß nach Karamell und Malz.",
+"{eindr}Insgesamt wirkt der Riegel kräftig und gehaltvoll. {bed}Er gehört zu den ältesten Schokoriegeln und ist weltweit bekannt."]},
+
+{id:"bounty",name:"Bounty",grp:"Schokoriegel",ers:["der Schokoladenriegel","der Kokosriegel","der Riegel","die Süßigkeit"],
+f:{kat:"Schokoladenriegel mit Kokosfüllung",her:"Mars",zweck:"Nascherei",gr:"ca. 8 cm lang, 3 cm breit, 1,5 cm hoch",gew:"Packung 57 g (2 Riegel)",form:"länglich, Kanten und Enden abgerundet",farbe:"außen braun, innen schneeweiß",mat:"Kokosraspeln, Zucker, Glukosesirup, Milchschokolade",teile:"weißer Kokoskern innen, außen vollständig mit Schokolade überzogen; zwei Riegel nebeneinander",verp:"blaue Folie mit Palmen und Kokosnüssen",kons:"Füllung feucht, weich, faserig",gesch:"süß, intensiv nach Kokos",geruch:"exotisch, nach Kokos",bes:"Wellenmuster oben; Kontrast braun–weiß",eindr:"urlaubshaft",bed:"Kokosfüllung unterscheidet ihn von anderen Riegeln"},
+t:["{ben}Bounty ist ein Schokoladenriegel mit Kokosfüllung der Firma Mars. {ben gew}In einer Packung zu 57 Gramm liegen zwei Riegel nebeneinander. {zweck}Die Süßigkeit wird als Nascherei gegessen.",
+"{gr}Jeder Riegel ist etwa acht Zentimeter lang, drei Zentimeter breit und eineinhalb Zentimeter hoch. {form}Er ist länglich, die Kanten und Enden sind abgerundet. {verp}Die Milchschokoladen-Sorte steckt in einer blauen Folie mit Palmen und Kokosnüssen. {teile mat}Im Inneren befindet sich ein weißer Kern aus Kokosraspeln, Zucker und Glukosesirup. {teile mat}Außen ist dieser Kern vollständig mit Milchschokolade überzogen. {bes}Auf der Oberseite verläuft ein feines Wellenmuster aus Schokolade. {farbe}Beim Durchbeißen erkennt man den Gegensatz zwischen der braunen Hülle und dem schneeweißen Inneren. {sinn}Die Füllung ist feucht, weich und faserig. {sinn}Der Riegel schmeckt süß und intensiv nach Kokos und riecht exotisch.",
+"{eindr}Insgesamt wirkt die Süßigkeit durch die Verpackung urlaubshaft. {bed}Die Kokosfüllung unterscheidet sie deutlich von anderen Schokoriegeln."]},
+
+{id:"rittersport",name:"Ritter Sport Alpenmilch",grp:"Schokolade",ers:["die Tafelschokolade","die Tafel","die Schokolade","das Quadrat"],
+f:{kat:"Tafelschokolade",her:"Ritter (Deutschland)",zweck:"Nascherei",gr:"ca. 10 × 10 cm, knapp 1 cm dick",gew:"100 g",form:"quadratisch",farbe:"hellbraun; Verpackung hellblau",mat:"Zucker, Milchpulver, Kakaobutter, Kakaomasse",teile:"16 Quadrate in vier Reihen zu je vier Stücken; Rillen dazwischen",verp:"feste Folie mit Knick zum Aufbrechen",kons:"fest, bricht mit hellem Knacken",gesch:"mild, süß, milchig",geruch:"nach Milchschokolade",bes:"Verpackung lässt sich in der Mitte aufknicken",eindr:"ordentlich, kompakt",bed:"die quadratische Form ist das Markenzeichen"},
+t:["{ben}Ritter Sport Alpenmilch ist eine quadratische Tafelschokolade der Firma Ritter aus Deutschland. {ben gew}Sie wird in Tafeln zu 100 Gramm verkauft. {zweck}Man isst sie pur als Nascherei.",
+"{gr form}Die Tafel ist quadratisch, etwa zehn Zentimeter lang und breit und knapp einen Zentimeter dick. {verp}Die Verpackung ist hellblau und besteht aus einer festen Folie. {verp bes}Sie hat einen eingebauten Knick, sodass man sie in der Mitte aufbrechen kann, ohne die Folie aufzureißen. {mat farbe}Die Schokolade ist hellbraun und besteht aus Zucker, Milchpulver, Kakaobutter und Kakaomasse. {teile}Die Oberseite ist in sechzehn gleich große Quadrate eingeteilt, die in vier Reihen zu je vier Stücken angeordnet sind. {teile}Zwischen ihnen verlaufen Rillen zum Abbrechen. {sinn}Die Schokolade ist fest und bricht mit einem hellen Knacken. {sinn}Sie schmeckt mild, süß und milchig.",
+"{eindr}Insgesamt wirkt die Tafel durch die quadratische Form ordentlich und kompakt. {bed}Diese Form ist das Markenzeichen der Schokolade."]},
+
+{id:"lindor",name:"Lindt Lindor Kugel",grp:"Pralinen",ers:["die Praline","die Kugel","die Schokoladenkugel","das Geschenk"],
+f:{kat:"Gefüllte Schokoladenpraline",her:"Lindt (Schweiz)",zweck:"Nascherei, kleines Geschenk",gr:"ca. 3 cm Durchmesser",gew:"ca. 12 g",form:"glatte, regelmäßige Kugel",farbe:"hellbraun; Folie rot",mat:"Milchschokolade, Schokoladenfüllung",teile:"außen dünne Schokoladenschale, innen Füllung, die den ganzen Hohlraum ausfüllt",verp:"glänzende rote Folie mit gedrehten Enden",kons:"Schale bricht, Füllung zerläuft cremig",gesch:"süß, schokoladig",geruch:"nach Milchschokolade",bes:"Füllung schmilzt schon bei Körperwärme",eindr:"festlich",bed:"die zartschmelzende Füllung ist das Markenzeichen"},
+t:["{ben}Die Lindor-Kugel ist eine gefüllte Schokoladenpraline der Schweizer Firma Lindt. {ben verp}Die Kugeln werden in Sackerln oder Schachteln verkauft. {zweck}Sie dienen als Nascherei oder als kleines Geschenk.",
+"{gr gew}Eine Kugel hat einen Durchmesser von etwa drei Zentimetern und wiegt rund zwölf Gramm. {verp farbe}Sie ist in eine glänzende rote Folie gewickelt, deren Enden auf beiden Seiten gedreht sind. {form}Ausgepackt zeigt sich eine glatte, regelmäßige Kugel. {teile mat}Außen bildet Milchschokolade eine dünne, feste Schale. {teile mat}Im Inneren befindet sich eine weiche Schokoladenfüllung, die den ganzen Hohlraum ausfüllt. {bes}Die Füllung schmilzt schon bei Körperwärme. {sinn}Beim Hineinbeißen bricht die Schale, und die Füllung zerläuft cremig im Mund. {sinn}Die Kugel schmeckt süß und schokoladig und duftet nach Milchschokolade.",
+"{eindr}Insgesamt wirkt die Praline durch die glänzende Folie festlich. {bed}Die zartschmelzende Füllung ist ihr bekanntestes Merkmal."]},
+
+{id:"happycola",name:"Haribo Happy Cola",grp:"Fruchtgummi & Lakritze",ers:["das Fruchtgummi","das Fläschchen","die Colaflasche","die Süßigkeit"],
+f:{kat:"Fruchtgummi",her:"Haribo (Deutschland)",zweck:"Nascherei",gr:"ca. 3 cm hoch, 1,5 cm breit",gew:"ca. 3 g pro Stück",form:"flache Flasche mit breitem Bauch und schmalem Hals",farbe:"zweifarbig: unten dunkelbraun, oben heller",mat:"Zucker, Glukosesirup, Gelatine, Aromen",teile:"unten rundlicher Flaschenbauch, darüber verengt sich die Flasche zum Hals",verp:"bunt bedrucktes Plastiksackerl",kons:"glatt, glänzend, weich und zäh",gesch:"süß nach Cola",geruch:"nach Cola",bes:"flach, nicht rund wie eine echte Flasche",eindr:"wie verkleinerte Getränkeflaschen",bed:"verbindet Getränkegeschmack mit Süßigkeit"},
+t:["{ben}Haribo Happy Cola sind Fruchtgummis in der Form kleiner Colaflaschen. {ben verp}Sie werden von der Firma Haribo hergestellt und in Sackerln verkauft. {zweck}Die Süßigkeit dient als Nascherei für zwischendurch.",
+"{gr gew}Ein Fläschchen ist etwa drei Zentimeter hoch, eineinhalb Zentimeter breit und wiegt rund drei Gramm. {form}Es hat die Form einer Getränkeflasche mit breitem Bauch und schmalem Hals. {teile}Unten befindet sich der rundliche Flaschenbauch, darüber verengt sich die Flasche zum Hals. {farbe}Das Fruchtgummi ist zweifarbig: Der untere Teil ist dunkelbraun, der obere Teil heller. {mat}Es besteht aus Zucker, Glukosesirup, Gelatine und Aromen. {bes}Die Fläschchen sind flach und nicht rund wie eine echte Flasche. {sinn}Die Oberfläche ist glatt und glänzend, die Konsistenz weich und zäh. {sinn}Die Fläschchen schmecken süß nach Cola und riechen auch so.",
+"{eindr}Insgesamt wirken die Fläschchen wie verkleinerte Getränkeflaschen. {bed}Sie verbinden den Geschmack eines Getränks mit einer Süßigkeit."]},
+
+{id:"werthers",name:"Werther's Original",grp:"Zuckerl & Dragees",ers:["das Karamellbonbon","das Bonbon","das Zuckerl","die Süßigkeit"],
+f:{kat:"Karamellbonbon (Hartzuckerl)",her:"Storck (Deutschland)",zweck:"langsam lutschen",gr:"ca. 2 × 1,5 cm",gew:"ca. 5 g",form:"oval, flach, abgerundete Ränder",farbe:"goldbraun, leicht durchscheinend",mat:"Zucker, Glukosesirup, Sahne, Butter",teile:"durch und durch gleich, ohne Füllung oder Kern",verp:"einzeln in goldfarbener Folie mit gedrehten Enden; Sackerl",kons:"hart, glatt, glänzend",gesch:"süß nach Sahne und Karamell",geruch:"buttrig",bes:"einfaches Bonbon ohne Füllung",eindr:"schlicht, klassisch",bed:"wird oft mit Großeltern und Kindheit verbunden"},
+t:["{ben}Werther's Original ist ein Karamellbonbon der deutschen Firma Storck. {ben verp}Die Bonbons werden einzeln verpackt in Sackerln verkauft. {zweck}Man lutscht sie langsam als Süßigkeit für zwischendurch.",
+"{gr gew}Ein Bonbon ist etwa zwei Zentimeter lang, eineinhalb Zentimeter breit und wiegt rund fünf Gramm. {form}Es ist oval, flach und an den Rändern abgerundet. {farbe mat}Die Farbe ist goldbraun, das Bonbon ist leicht durchscheinend. {mat}Es besteht aus Zucker, Glukosesirup, Sahne und Butter. {verp}Jedes Bonbon steckt in einer goldfarbenen Folie, deren Enden links und rechts gedreht sind. {teile bes}Das Bonbon ist durch und durch gleich, es hat weder Füllung noch Kern. {sinn}Die Oberfläche ist hart, glatt und glänzend. {sinn}Es schmeckt süß nach Sahne und Karamell und riecht buttrig.",
+"{eindr}Insgesamt wirkt das Bonbon schlicht und klassisch. {bed}Viele Menschen verbinden den Karamellgeschmack mit ihren Großeltern und ihrer Kindheit."]}
+];
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const byId=Object.fromEntries(S.map(x=>[x.id,x]));
+const st={tab:"steck",cur:"goldbaeren",cmp:["goldbaeren","kinderschoko","mozartkugel"],prop:"teile",grp:"Alle",q:"",colored:true,active:null};
+
+function legend(){ $("#legend").innerHTML=Object.entries(GROUPS).map(([k,g])=>`<span class="lg g-${k}"><b style="background:var(--gc)"></b><small>${g.n}</small>${g.d}</span>`).join(""); }
+function visible(){ const q=st.q.trim().toLowerCase(); return S.filter(x=>(st.grp==="Alle"||x.grp===st.grp)&&(!q||(x.name+" "+x.f.kat).toLowerCase().includes(q))); }
+
+function filters(){
+  $("#filters").innerHTML=["Alle",...GRP].map(g=>`<button class="chip" data-g="${esc(g)}" aria-pressed="${st.grp===g}">${esc(g)}</button>`).join("")+
+   `<input class="search" id="q" type="search" placeholder="Süßigkeit suchen …" aria-label="Süßigkeit suchen" value="${esc(st.q)}">`;
+  $("#filters").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{st.grp=b.dataset.g;render()});
+  const q=$("#q"); q.oninput=()=>{st.q=q.value;renderGrid();if(st.tab==="merk")renderView()};
+}
+function renderGrid(){
+  const v=visible(); const g=$("#grid");
+  g.hidden=st.tab==="merk";
+  $("#hint").textContent= st.tab==="steck"?"Tippe auf eine Süßigkeit, um ihren Steckbrief und Mustertext zu sehen.":
+    st.tab==="vergl"?`Wähle zwei bis vier Süßigkeiten zum Vergleichen (gewählt: ${st.cmp.length}).`:"Wähle oben ein Merkmal. Die Kategorien filtern die Liste.";
+  g.innerHTML=v.length?v.map(x=>{const on=st.tab==="vergl"?st.cmp.includes(x.id):st.cur===x.id;
+    return `<button class="sw" data-id="${x.id}" aria-pressed="${on}"><strong>${esc(x.name)}</strong><span>${esc(x.f.kat)}</span></button>`}).join(""):`<div class="empty">Keine Süßigkeit gefunden.</div>`;
+  g.querySelectorAll(".sw").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.id;
+    if(st.tab==="vergl"){ if(st.cmp.includes(id)) st.cmp=st.cmp.filter(i=>i!==id); else { st.cmp.push(id); if(st.cmp.length>4) st.cmp.shift(); } }
+    else { st.cur=id; st.active=null; }
+    renderGrid(); renderView();
+  });
+}
+function textHTML(x){
+  return x.t.map((p,i)=>{const parts=p.split(/\{([a-z ]+)\}/); let h="";
+    for(let j=1;j<parts.length;j+=2){const tags=parts[j].trim(); const g=TAGG[tags.split(" ")[0]];
+      h+=`<span class="s g-${g}" data-tags="${tags}">${esc(parts[j+1].trim())}</span> `;}
+    return `<p><span class="pnum">Absatz ${i+1}</span>${h.trim()}</p>`;}).join("");
+}
+function words(x){return x.t.join(" ").replace(/\{[a-z ]+\}/g,"").trim().split(/\s+/).length+x.name.split(/\s+/).length}
+function renderSteck(){
+  const x=byId[st.cur]; let rows=""; let last="";
+  PROPS.forEach(p=>{const g=TAGG[p.tag]; if(g!==last){rows+=`<div class="ghead g-${g}">${GROUPS[g].n} · ${GROUPS[g].d}</div>`; last=g;}
+    rows+=`<div class="row g-${g}" tabindex="0" data-tag="${p.tag}"><span class="l">${p.l}</span><span>${esc(x.f[p.k])}</span></div>`;});
+  $("#view").innerHTML=`<div class="head"><h2>${esc(x.name)}</h2><span class="kat">${esc(x.f.kat)}</span></div>
+   <div class="ers"><em>Ersatzwörter:</em>${x.ers.map(e=>`<span>${esc(e)}</span>`).join("")}</div>
+   <div class="split"><div class="props" id="props">${rows}</div>
+   <article class="textcard" aria-label="Mustertext">
+     <div class="cap"><span>Mustertext · ${words(x)} Wörter · 3 Absätze</span>
+     <label class="toggle"><input type="checkbox" id="col" ${st.colored?"checked":""}> Farben im Text</label></div>
+     <h3>${esc(x.name)}</h3><div id="txt" class="${st.colored?"colored":""}">${textHTML(x)}</div></article></div>`;
+  $("#col").onchange=e=>{st.colored=e.target.checked;$("#txt").classList.toggle("colored",st.colored)};
+  const setActive=tag=>{st.active=tag; const txt=$("#txt");
+    txt.classList.toggle("focusing",!!tag);
+    txt.querySelectorAll(".s").forEach(s=>s.classList.toggle("on",!!tag&&s.dataset.tags.split(" ").includes(tag)));
+    document.querySelectorAll("#props .row").forEach(r=>r.classList.toggle("on",!!tag&&r.dataset.tag===tag));};
+  document.querySelectorAll("#props .row").forEach(r=>{
+    r.onmouseenter=()=>setActive(r.dataset.tag); r.onfocus=()=>setActive(r.dataset.tag);
+    r.onclick=()=>setActive(st.active===r.dataset.tag?null:r.dataset.tag);});
+  $("#props").onmouseleave=()=>setActive(null);
+  $("#txt").querySelectorAll(".s").forEach(s=>s.onclick=()=>{const t=s.dataset.tags.split(" ")[0]; setActive(st.active===t?null:t);});
+}
+function renderVergl(){
+  const xs=st.cmp.map(i=>byId[i]);
+  if(!xs.length){$("#view").innerHTML=`<div class="empty">Noch nichts gewählt. Tippe oben auf zwei bis vier Süßigkeiten.</div>`;return;}
+  let last="",body="";
+  PROPS.forEach(p=>{const g=TAGG[p.tag]; const cls=`g-${g}${g!==last?" gstart":""}`; last=g;
+    body+=`<tr class="${cls}"><th scope="row">${p.l}</th>${xs.map(x=>`<td>${esc(x.f[p.k])}</td>`).join("")}</tr>`;});
+  $("#view").innerHTML=`<div class="tablewrap"><table class="cmp"><thead><tr><th scope="col">Merkmal</th>${xs.map(x=>`<th scope="col">${esc(x.name)}</th>`).join("")}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+function renderMerk(){
+  const p=PROPS.find(p=>p.k===st.prop); const g=TAGG[p.tag]; const v=visible();
+  $("#view").innerHTML=`<div class="propchips">${PROPS.map(q=>`<button class="pc g-${TAGG[q.tag]}" data-k="${q.k}" aria-pressed="${q.k===st.prop}"><b></b>${q.l}</button>`).join("")}</div>
+   <div class="tablewrap g-${g}"><table class="mk"><thead><tr><th scope="col">Süßigkeit</th><th scope="col" style="color:var(--gc)">${p.l}</th></tr></thead><tbody>
+   ${v.map(x=>`<tr><td><button data-id="${x.id}">${esc(x.name)}</button><small>${esc(x.f.kat)}</small></td><td>${esc(x.f[p.k])}</td></tr>`).join("")||`<tr><td colspan="2" class="empty">Keine Süßigkeit gefunden.</td></tr>`}
+   </tbody></table></div>`;
+  $("#view").querySelectorAll(".pc").forEach(b=>b.onclick=()=>{st.prop=b.dataset.k;renderMerk()});
+  $("#view").querySelectorAll(".mk td button").forEach(b=>b.onclick=()=>{st.cur=b.dataset.id;setTab("steck");window.scrollTo({top:0});});
+}
+function renderView(){ ({steck:renderSteck,vergl:renderVergl,merk:renderMerk})[st.tab](); }
+function setTab(t){st.tab=t; ["steck","vergl","merk"].forEach(k=>$("#t-"+k).setAttribute("aria-selected",k===t)); render();}
+function render(){filters();renderGrid();renderView();}
+["steck","vergl","merk"].forEach(k=>$("#t-"+k).onclick=()=>setTab(k));
+const h=location.hash.slice(1); if(byId[h]) st.cur=h;
+legend(); render();
+</script>
+
+</body>
+</html>
