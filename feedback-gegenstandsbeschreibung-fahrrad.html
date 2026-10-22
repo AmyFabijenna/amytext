@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schularbeit Fahrrad – Feedback-Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ee; --card:#ffffff; --ink:#1f2933; --muted:#5b6670; --line:#e3ded2;
+  --accent:#2f6f8f; --accent-soft:#e3eff5; --ok:#2e7d4f; --ok-soft:#e2f3e8;
+  --bad:#b23b3b; --bad-soft:#fbe6e6; --gold:#c98a12; --gold-soft:#fdf2da;
+  --verb:#2f6f8f; --adj:#8a4fb0; --con:#c25e14;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16191d; --card:#20252b; --ink:#e8ecef; --muted:#a3adb6; --line:#333b44;
+    --accent:#7cc0e0; --accent-soft:#1d3440; --ok:#6fd39a; --ok-soft:#173326;
+    --bad:#f08a8a; --bad-soft:#3a1f22; --gold:#f2c25b; --gold-soft:#3a3020;
+    --verb:#7cc0e0; --adj:#c9a0e6; --con:#f3a467;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16191d; --card:#20252b; --ink:#e8ecef; --muted:#a3adb6; --line:#333b44;
+  --accent:#7cc0e0; --accent-soft:#1d3440; --ok:#6fd39a; --ok-soft:#173326;
+  --bad:#f08a8a; --bad-soft:#3a1f22; --gold:#f2c25b; --gold-soft:#3a3020;
+  --verb:#7cc0e0; --adj:#c9a0e6; --con:#f3a467;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:17px;line-height:1.55}
+.wrap{max-width:820px;margin:0 auto;padding:20px 16px 60px}
+header h1{font-size:1.7rem;margin:.2em 0 .1em;line-height:1.2}
+header p{color:var(--muted);margin:.3em 0}
+.score{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:4px 12px;font-weight:700;font-size:.9rem}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav a{font-size:.85rem;text-decoration:none;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--card)}
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 8px;margin:18px 0}
+section h2{margin:.1em 0 .3em;font-size:1.3rem}
+.intro{color:var(--muted);margin-top:0}
+.tip{background:var(--gold-soft);border-left:4px solid var(--gold);border-radius:8px;padding:10px 14px;margin:12px 0}
+.tip b{color:var(--gold)}
+.praise li{margin:.25em 0}
+.item{border-top:1px dashed var(--line);padding:14px 0}
+.item:first-of-type{border-top:none}
+.q{font-weight:600;margin-bottom:8px}
+.gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--accent);text-align:center;padding:0 4px;color:var(--accent)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts.stack{flex-direction:column}
+button.opt{font:inherit;font-size:.98rem;text-align:left;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer;transition:.15s}
+button.opt:hover{border-color:var(--accent)}
+button.opt.ok{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);font-weight:700}
+button.opt.bad{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);text-decoration:line-through}
+button.opt:disabled{cursor:default}
+.ex{display:none;margin-top:8px;font-size:.95rem;background:var(--accent-soft);border-radius:8px;padding:8px 12px}
+.ex.show{display:block}
+.ex.wrong{background:var(--bad-soft)}
+.pair{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0}
+.before{color:var(--bad)}
+.before::before{content:"Vorher: ";font-weight:800}
+.after{display:none;color:var(--ok);margin-top:6px}
+.after::before{content:"Vorschlag: ";font-weight:800}
+.after.show{display:block}
+.why{display:none;color:var(--muted);font-size:.93rem;margin-top:4px}
+.why.show{display:block}
+button.reveal{font:inherit;font-size:.9rem;margin-top:8px;border:none;background:var(--accent);color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+:root[data-theme="dark"] button.reveal{color:#10151a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.reveal{color:#10151a}}
+.box{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+.box span{border-radius:8px;padding:3px 9px;font-size:.92rem;border:1px solid var(--line)}
+.box.v span{color:var(--verb)} .box.a span{color:var(--adj)} .box.c span{color:var(--con)}
+.legend span{font-weight:700;margin-right:12px}
+.model p{margin:.6em 0}
+.model .v{color:var(--verb);font-weight:700}
+.model .a{color:var(--adj);font-weight:700}
+.model .c{color:var(--con);font-weight:700}
+.model h3{text-align:center;margin:.2em 0}
+.hidden{display:none}
+label.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+label.chk input{width:20px;height:20px;margin-top:3px;flex:none}
+.doneMsg{font-weight:700;color:var(--ok);margin:6px 0 12px;min-height:1em}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+td,th{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+@media (max-width:520px){body{font-size:16px} section{padding:14px 14px 6px} header h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>🚲 Deine Schularbeit: „Gut“ – und jetzt wird’s noch besser!</h1>
+  <p>Hier übst du genau das, was dein Lehrer dir mitgegeben hat: weniger Wiederholungen, mehr Verbindungswörter, abwechslungsreiche Verben und Adjektive, genaues Hinschauen – und die zwei kleinen Fehler, die nie wieder passieren sollen.</p>
+</header>
+
+<div class="score">
+  <span class="pill" id="scoreAll">0 / 0 richtig</span>
+  <nav>
+    <a href="#lob">Lob</a><a href="#s1">1 Fehler</a><a href="#s2">2 Verben</a><a href="#s3">3 Verbinden</a><a href="#s4">4 Adjektive</a><a href="#s5">5 Hinschauen</a><a href="#s6">6 Fachwörter</a><a href="#s7">7 Lage</a><a href="#s8">8 Sätze</a><a href="#s9">9 Mustertext</a><a href="#s10">Hausübung</a>
+  </nav>
+</div>
+
+<section id="lob">
+  <h2>⭐ Das ist dir richtig gut gelungen</h2>
+  <ul class="praise">
+    <li>Du hast fast keine Fehler gemacht – dein Lehrer schreibt, die Fehlerzahl ist <b>erfreulich gering</b>. Bei den Normen hast du die Bestnote!</li>
+    <li>Du hast die <b>Textsorte</b> getroffen, eine <b>Überschrift</b> gesetzt, in <b>Absätzen</b> geschrieben und mit 152 Wörtern den <b>Umfang</b> genau erfüllt.</li>
+    <li>Du schreibst <b>sachlich</b>, ohne „ich“ und ohne „cool“, und durchgehend im <b>Präsens</b>.</li>
+    <li>Du verwendest schon <b>Ersatzwörter</b> wie „Zweirad“ und „Fahrzeug“ – genau so vermeidet man Wiederholungen.</li>
+  </ul>
+  <div class="tip"><b>Dein Auftrag für die nächste Schularbeit</b> (vom Lehrer): Schenke <b>Adjektiven und Verben</b> deine Aufmerksamkeit – und verbinde deine Sätze mit Wörtern wie <i>dabei, daneben, deshalb, unten …</i></div>
+</section>
+
+<section id="s1">
+  <h2>1 · Fehler-Werkstatt</h2>
+  <p class="intro">Diese Stellen hat dein Lehrer angestrichen oder sie fallen beim genauen Lesen auf. Wähle die richtige Form.</p>
+  <div class="tip"><b>Merke:</b> das Pedal → <b>die Pedale</b> (Mehrzahl!) → die Pedale <b>sind</b>. Du hattest zuerst „sind“ geschrieben und es dann ausgebessert – dein erster Gedanke war richtig! Frag dich immer: <i>Ein Ding oder mehrere?</i></div>
+  <div class="items" data-set="s1"></div>
+</section>
+
+<section id="s2">
+  <h2>2 · Weg mit „ist“ und „hat“!</h2>
+  <p class="intro">In deinem Text kommen „ist“ und „hat“ sehr oft vor, zum Beispiel: <i>„Der Rahmen <u>hat</u> die Form eines Dreiecks und <u>hat</u> die Farbe Blau …“</i>. Hier sind bessere Verben – die Wörter rund um die Lücke verraten dir, welches passt.</p>
+  <div class="box v"><span>sich befinden</span><span>liegen</span><span>sitzen</span><span>angebracht sein</span><span>verfügen über</span><span>ausgestattet sein mit</span><span>bestehen aus</span><span>gefertigt sein aus</span><span>wiegen</span><span>messen</span><span>sich eignen für</span><span>dienen zu</span><span>ermöglichen</span><span>verzieren</span><span>abfedern</span><span>verbinden</span><span>fehlen</span></div>
+  <div class="items" data-set="s2"></div>
+</section>
+
+<section id="s3">
+  <h2>3 · Sätze verbinden</h2>
+  <p class="intro">Dein Lehrer wünscht sich mehr <b>Zusammenhang</b>. Verbindungswörter machen aus einer Liste von Sätzen einen richtigen Text – und dein Satzbau wird automatisch abwechslungsreicher.</p>
+  <div class="box c"><span>dabei</span><span>daneben</span><span>darüber</span><span>darunter</span><span>daran</span><span>deshalb</span><span>dadurch</span><span>außerdem</span><span>vorne</span><span>hinten</span><span>oben</span><span>unten</span><span>in der Mitte</span><span>von dort</span><span>insgesamt</span></div>
+  <div class="items" data-set="s3"></div>
+</section>
+
+<section id="s4">
+  <h2>4 · Adjektive mit Wirkung</h2>
+  <p class="intro">Adjektive machen deine Beschreibung genau. Teil A: Was beschreibt das Adjektiv? Teil B: die richtige Endung.</p>
+  <div class="box a"><span>dreieckig</span><span>gerade</span><span>gebogen</span><span>schmal</span><span>breit</span><span>weiß lackiert</span><span>knallrot</span><span>dunkelblau</span><span>mattschwarz</span><span>griffig</span><span>glatt</span><span>gepolstert</span><span>grob</span><span>leicht</span><span>stabil</span><span>robust</span><span>sportlich</span><span>modern</span></div>
+  <div class="items" data-set="s4"></div>
+</section>
+
+<section id="s5">
+  <h2>5 · Genau hinschauen</h2>
+  <p class="intro">Dein Lehrer schreibt: <i>„Eine Klingel sehe ich nicht.“</i> und <i>„Inhaltlich hätte mich noch die Bereifung interessiert.“</i> Schau dir das Mountainbike auf der Schularbeit (Thema B) noch einmal genau an: richtig oder falsch?</p>
+  <div class="items" data-set="s5"></div>
+  <div class="tip"><b>Wichtig:</b> Alle Angaben aus der Aufgabe gehören in den Text! Bei Thema B waren das: 27,5 Zoll, Fahrergröße ab 145 cm, 13 kg und <b>11 Gänge</b> – die Gänge und die Fahrergröße haben in deinem Text gefehlt.</div>
+</section>
+
+<section id="s6">
+  <h2>6 · Fachwörter fürs Fahrrad</h2>
+  <p class="intro">„Textsorte: Fachsprache“ – hier sammelst du die richtigen Namen für die Teile.</p>
+  <div class="items" data-set="s6"></div>
+</section>
+
+<section id="s7">
+  <h2>7 · Wo genau ist was?</h2>
+  <p class="intro">In der Beschreibung muss die <b>Lage</b> der Teile stimmen. Achtung: Die Räder sind beim Fahrrad nicht links und rechts, sondern <b>vorne und hinten</b>!</p>
+  <div class="items" data-set="s7"></div>
+</section>
+
+<section id="s8">
+  <h2>8 · Satz-Werkstatt: deine Sätze, neu gebaut</h2>
+  <p class="intro">Lies den Satz, überleg dir laut eine bessere Version – und vergleiche dann mit dem Vorschlag. Es gibt immer mehrere gute Lösungen!</p>
+  <div id="pairs"></div>
+</section>
+
+<section id="s9">
+  <h2>9 · So könnte die Beschreibung aussehen</h2>
+  <p class="intro">Ein Mustertext zu Thema B, genau nach dem Aufbau, den ihr gelernt habt. Versuch zuerst, selbst an alles zu denken – dann aufdecken.</p>
+  <p class="legend"><span style="color:var(--verb)">■ starke Verben</span><span style="color:var(--adj)">■ Adjektive</span><span style="color:var(--con)">■ Verbindungs- und Lagewörter</span></p>
+  <button class="reveal" id="modelBtn">Mustertext aufdecken</button>
+  <div class="model hidden" id="model">
+    <h3>Das Mountainbike</h3>
+    <p>Bei dem beschriebenen Gegenstand <span class="v">handelt</span> es sich um ein Mountainbike mit 27,5-Zoll-Laufrädern. Es <span class="v">eignet sich</span> für Jugendliche und Erwachsene ab einer Körpergröße von 145 Zentimetern. Man <span class="v">verwendet</span> es <span class="c">vor allem</span> für Ausflüge ins Gelände.</p>
+    <p>Das <span class="a">sportliche</span> Rad <span class="v">wiegt</span> nur 13 Kilogramm. Sein <span class="a">dreieckiger</span> Rahmen <span class="v">besteht aus</span> Aluminium. Er ist <span class="a">weiß lackiert</span> und mit <span class="a">blauen</span> und <span class="a">roten</span> Mustern <span class="v">verziert</span>. <span class="c">Nur</span> Griffe, Sattel und Reifen sind <span class="a">weich</span>. <span class="c">Vorne</span> <span class="v">befindet sich</span> eine <span class="a">schwarze</span> Federgabel, die Stöße <span class="v">abfedert</span>. <span class="c">Darüber</span> <span class="v">sitzt</span> der <span class="a">gerade</span> Lenker mit <span class="a">griffigen</span> Gummigriffen und zwei Bremshebeln. Beide Laufräder <span class="v">verfügen über</span> Scheibenbremsen und <span class="a">breite</span> Reifen mit <span class="a">grobem</span> Profil. <span class="c">Unten in der Mitte</span> <span class="v">liegen</span> die Pedale. <span class="c">Am Hinterrad</span> <span class="v">ermöglicht</span> eine Kettenschaltung elf Gänge. <span class="c">Oben</span> auf der Sattelstütze <span class="v">sitzt</span> ein <span class="a">schmaler</span>, <span class="a">gepolsterter</span> Sattel. Klingel, Gepäckträger und Schutzbleche <span class="v">fehlen</span>. Das Rad <span class="v">riecht</span> leicht nach Gummi und Metall.</p>
+    <p><span class="c">Insgesamt</span> <span class="v">wirkt</span> das Mountainbike <span class="a">leicht</span>, <span class="a">modern</span> und <span class="a">robust</span>. <span class="c">Dank</span> der Federung und der elf Gänge <span class="v">meistert</span> es auch <span class="a">holprige</span> Waldwege.</p>
+    <div class="tip"><b>Schau mal:</b> Kein einziges „hat“ mehr – und trotzdem stehen alle Informationen drin. Zähl nach, wie viele verschiedene Verben der Text verwendet!</div>
+  </div>
+</section>
+
+<section id="s10">
+  <h2>🏠 Hausübung</h2>
+  <p class="intro">Geschrieben wird zu Hause. Wähle eine Aufgabe:</p>
+  <p><b>A)</b> Schreib deine Schularbeit neu – mit allen Verbesserungen von heute. <br><b>B)</b> Beschreibe das rosa Fahrrad (Thema C: 26 Zoll, Fahrergröße ab 130 cm, 15 kg, 7 Gänge) in ca. 150 Wörtern.</p>
+  <p>Hak beim Überarbeiten ab, was du geschafft hast:</p>
+  <div id="checks"></div>
+  <div class="doneMsg" id="checkMsg"></div>
+</section>
+</div>
+
+<script>
+const DATA = {
+s1:[
+ {q:"Die Pedale ___ unter dem Sattel. (Präsens)", o:["sind","ist","seid"], a:0, e:"„Die Pedale“ ist Mehrzahl (das Pedal – die Pedale), also: sie <b>sind</b>. „seid“ gehört zu „ihr“: ihr seid."},
+ {q:"Das Mountainbike ist gut ___ für Ausflüge.", o:["geeignet","geignet","geeingnet"], a:0, e:"Im Wort steckt „eignen“ – davor kommt „ge-“: ge + eignet = <b>geeignet</b>, mit zwei e."},
+ {q:"Das Zweirad ist hart, außer ___ Griffen und den Reifen.", o:["den","die","denn"], a:0, e:"Nach <b>außer</b> steht der Dativ: außer <b>den</b> Griffen, außer dem Sattel."},
+ {q:"Welcher Satz ist richtig?", o:["Das Fahrrad ist ungefähr 1,50 Meter lang.","Das Fahrrad ist ungefähr 1,50 lang.","Das Fahrrad ist ungefähr 1,50 Meters lang."], a:0, stack:true, e:"Zu jeder Zahl gehört eine <b>Maßeinheit</b>: 1,50 Meter (oder 1,50 m). „Meter“ bekommt kein -s."},
+ {q:"Das Fahrrad ist ein Mountainbike. ___ eignet sich für Waldwege. (Ersatzwort für „das Fahrrad“)", o:["Es","Er","Sie"], a:0, e:"<b>das</b> Fahrrad → <b>es</b>. (der Rahmen → er, die Kette → sie)"},
+ {q:"Welcher Satz ist richtig gebaut?", o:["Der Rahmen besteht aus Aluminium, die Reifen bestehen aus Gummi.","Das Fahrrad besteht aus Aluminium, Metall und die Räder aus Gummi.","Das Fahrrad besteht aus Aluminium, Metall, Räder und Gummi."], a:0, stack:true, e:"Jeder Teil bekommt sein eigenes Verb. Und: Aluminium <i>ist</i> ein Metall – „Aluminium und Metall“ ist doppelt."},
+ {q:"Die Speichen verbinden die Nabe ___ der Felge.", o:["mit","zu","an"], a:0, e:"etwas <b>mit</b> etwas verbinden."},
+ {q:"Der Sattel ___ auf der Sattelstütze. (Präsens)", o:["sitzt","setzt","sitzen"], a:0, e:"<b>sitzen</b> = sich an einem Ort befinden (der Sattel sitzt). <b>setzen</b> = etwas irgendwohin tun (ich setze mich). Und: der Sattel = einer → sitzt."}
+],
+s2:[
+ {q:"Das Mountainbike ___ über elf Gänge.", o:["verfügt","besitzt","hat"], a:0, e:"Das kleine Wort <b>über</b> verrät es: verfügen <b>über</b>."},
+ {q:"Das Rad ist ___ Scheibenbremsen ausgestattet.", o:["mit","von","aus"], a:0, e:"ausgestattet sein <b>mit</b>."},
+ {q:"Der Rahmen ___ aus Aluminium.", o:["besteht","verfügt","befindet"], a:0, e:"bestehen <b>aus</b> + Material."},
+ {q:"Am Lenker ___ sich zwei Bremshebel.", o:["befinden","sind","haben"], a:0, e:"Das <b>sich</b> passt nur zu „befinden“: sich befinden = da sein."},
+ {q:"Das Rad ___ 13 Kilogramm.", o:["wiegt","misst","dauert"], a:0, e:"Gewicht → <b>wiegen</b>. Länge, Höhe, Durchmesser → <b>messen</b>."},
+ {q:"Die Laufräder ___ 27,5 Zoll.", o:["messen","wiegen","dauern"], a:0, e:"Zoll ist ein Längenmaß → <b>messen</b>."},
+ {q:"Die Federgabel ___ Stöße auf holprigen Wegen ab.", o:["federt","schaltet","lenkt"], a:0, e:"Die Federgabel <b>federt</b> Stöße <b>ab</b> – darum heißt sie so."},
+ {q:"Die Griffe sind ___ weichem Gummi gefertigt.", o:["aus","mit","von"], a:0, e:"gefertigt <b>aus</b> + Material (wie: bestehen aus)."},
+ {q:"Das Rad ___ sich für Fahrerinnen und Fahrer ab 145 cm.", o:["eignet","gehört","passiert"], a:0, e:"sich <b>eignen</b> für = passend sein für."},
+ {q:"Am Hinterrad ___ eine Kettenschaltung elf Gänge.", o:["ermöglicht","verhindert","vergisst"], a:0, e:"Die Schaltung macht die Gänge möglich → <b>ermöglicht</b>."},
+ {q:"Blaue und rote Muster ___ den weißen Rahmen. (Präsens)", o:["verzieren","verziert","verzierst"], a:0, e:"Die Muster = mehrere → sie <b>verzieren</b>."},
+ {q:"Klingel, Gepäckträger und Schutzbleche ___. (Präsens)", o:["fehlen","fehlt","fehle"], a:0, e:"Statt „Es hat keine Klingel“ kannst du sagen: … <b>fehlen</b>. Mehrere Dinge → fehlen."}
+],
+s3:[
+ {q:"Die Reifen haben ein grobes Profil. ___ rutschen sie auf Waldwegen nicht weg.", o:["Deshalb","Trotzdem","Obwohl"], a:0, e:"Das Profil ist der <b>Grund</b> → deshalb."},
+ {q:"Das Rad hat elf Gänge. ___ kann man auch steile Berge hinauffahren.", o:["Dadurch","Trotzdem","Obwohl"], a:0, e:"Die Gänge machen es möglich → <b>dadurch</b>."},
+ {q:"Das Mountainbike ist sehr leicht. ___ ist es aber stabil.", o:["Dabei","Deshalb","Weil"], a:0, e:"<b>Dabei</b> = gleichzeitig. Leicht <i>und</i> trotzdem stabil – das ist kein Grund, also nicht „deshalb“."},
+ {q:"Der Lenker ist gerade und schwarz. ___ befinden sich zwei Bremshebel.", o:["Daran","Darin","Dagegen"], a:0, e:"Die Bremshebel sind <b>am</b> Lenker befestigt → daran."},
+ {q:"___ dem Sattel befindet sich die Sattelstütze.", o:["Unter","Über","Hinter"], a:0, e:"Die Sattelstütze trägt den Sattel, sie ist <b>unter</b> ihm."},
+ {q:"Unten in der Mitte liegen die Pedale. ___ läuft die Kette zum Hinterrad.", o:["Von dort","Deshalb","Trotzdem"], a:0, e:"Ein Ort-Wort verbindet: <b>von dort</b> geht es weiter."},
+ {q:"Vorne befindet sich die Federgabel, ___ das Vorderrad hält.", o:["die","der","das"], a:0, e:"<b>die</b> Federgabel → die (sie hält das Vorderrad)."},
+ {q:"Welcher Satz beginnt NICHT mit dem Subjekt – und bringt so Abwechslung?", o:["Vorne befindet sich eine Federgabel.","Die Federgabel befindet sich vorne.","Eine Federgabel ist vorne."], a:0, stack:true, e:"Beginne Sätze auch mal mit einer Ortsangabe: <b>Vorne … Oben … In der Mitte …</b> Dann klingt der Text nicht wie eine Liste."},
+ {q:"Welches Wort passt am Anfang des Schlussabsatzes?", o:["Insgesamt","Außerdem","Darunter"], a:0, e:"Für den Gesamteindruck: <b>Insgesamt</b> wirkt das Rad …"}
+],
+s4:[
+ {q:"Teil A · „dreieckig“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:1, nos:true, e:"dreieckig = <b>Form</b>."},
+ {q:"Teil A · „griffig“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:2, nos:true, e:"griffig = wie es sich anfühlt → <b>Oberfläche</b>."},
+ {q:"Teil A · „knallrot“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:0, nos:true, e:"knallrot = <b>Farbe</b>, aber viel genauer als nur „rot“."},
+ {q:"Teil A · „sportlich“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:3, nos:true, e:"sportlich = wie das Rad wirkt → <b>Gesamteindruck</b> (passt in den Schlussabsatz)."},
+ {q:"Teil A · „gebogen“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:1, nos:true, e:"gebogen = <b>Form</b>."},
+ {q:"Teil A · „gepolstert“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:2, nos:true, e:"gepolstert = weich beim Draufsitzen → <b>Oberfläche</b>."},
+ {q:"Teil A · „mattschwarz“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:0, nos:true, e:"mattschwarz = <b>Farbe</b>."},
+ {q:"Teil A · „modern“ beschreibt …", o:["die Farbe","die Form","die Oberfläche","den Gesamteindruck"], a:3, nos:true, e:"modern = <b>Gesamteindruck</b>."},
+ {q:"Teil B · Das Rad besitzt einen ___ Rahmen. (weiß)", o:["weißen","weiße","weißer"], a:0, e:"der Rahmen → <b>einen weißen</b> Rahmen (wen? Akkusativ)."},
+ {q:"Teil B · Die Reifen haben ein ___ Profil. (grob)", o:["grobes","grober","groben"], a:0, e:"das Profil → <b>ein grobes</b> Profil."},
+ {q:"Teil B · Man sitzt auf einem ___ Sattel. (schmal)", o:["schmalen","schmaler","schmales"], a:0, e:"auf <b>einem</b> (wo? Dativ) → einem <b>schmalen</b> Sattel."},
+ {q:"Teil B · Der Lenker hat zwei ___ Griffe. (weich)", o:["weiche","weichen","weicher"], a:0, e:"zwei Griffe, ohne Artikel davor → <b>weiche</b> Griffe."},
+ {q:"Teil B · Vorne befindet sich eine ___ Federgabel. (schwarz)", o:["schwarze","schwarzen","schwarzer"], a:0, e:"die Federgabel → <b>eine schwarze</b> Federgabel."},
+ {q:"Teil B · Mit den ___ Reifen fährt man sicher. (breit)", o:["breiten","breite","breiter"], a:0, e:"mit <b>den</b> … → immer <b>-en</b>: den breiten Reifen."}
+],
+s5:[
+ {q:"Das Rad hat eine Klingel.", o:["richtig","falsch"], a:1, nos:true, e:"Auf dem Bild ist <b>keine</b> Klingel zu sehen. Beschreibe nur, was wirklich da ist!"},
+ {q:"Das Rad hat vorne eine Federgabel.", o:["richtig","falsch"], a:0, nos:true, e:"Ja – die dicke Gabel vorne federt Stöße ab. Typisch für ein Mountainbike!"},
+ {q:"Das Rad hat Scheibenbremsen.", o:["richtig","falsch"], a:0, nos:true, e:"Ja – die runden Metallscheiben in der Mitte der Räder sind Bremsscheiben."},
+ {q:"Die Reifen sind schmal und glatt.", o:["richtig","falsch"], a:1, nos:true, e:"Nein – sie sind <b>breit</b> und haben ein <b>grobes Profil</b> (Stollen). Das ist die „Bereifung“, nach der dein Lehrer fragt."},
+ {q:"Das Rad hat einen Gepäckträger.", o:["richtig","falsch"], a:1, nos:true, e:"Richtig erkannt – das hattest du auch geschrieben!"},
+ {q:"Das Rad ist für Fahrer ab 130 cm geeignet.", o:["richtig","falsch"], a:1, nos:true, e:"130 cm gehören zum rosa Rad (Thema C). Das Mountainbike: <b>ab 145 cm</b>."},
+ {q:"Das Rad hat 11 Gänge.", o:["richtig","falsch"], a:0, nos:true, e:"Ja, das steht in der Angabe – und gehört unbedingt in den Text."},
+ {q:"Es handelt sich um ein Mountainbike.", o:["richtig","falsch"], a:0, nos:true, e:"Ja! Nenne die genaue Art gleich im ersten Satz. „Fahrzeug“ allein ist zu allgemein – auch ein Auto ist ein Fahrzeug."},
+ {q:"Das Rad hat Schutzbleche über den Reifen.", o:["richtig","falsch"], a:1, nos:true, e:"Nein – das rosa Rad hat welche, das Mountainbike nicht."},
+ {q:"Der Rahmen ist hauptsächlich weiß.", o:["richtig","falsch"], a:0, nos:true, e:"Ja – Blau und Rot sind nur Muster darauf. Beschreibe zuerst die Hauptfarbe, dann die Verzierung."}
+],
+s6:[
+ {q:"Die gefederte Gabel vorne, in der das Vorderrad steckt, heißt …", o:["Federgabel","Sattelstütze","Kurbel"], a:0, e:"<b>die Federgabel</b>"},
+ {q:"Die runde Metallscheibe am Rad, an der gebremst wird, heißt …", o:["Scheibenbremse","Felge","Nabe"], a:0, e:"<b>die Scheibenbremse</b>"},
+ {q:"Die dünnen Drähte zwischen Mitte und Rand des Rades heißen …", o:["Speichen","Stollen","Pedale"], a:0, e:"<b>die Speichen</b> (in deinem Text hast du sie schon beschrieben – jetzt kennst du auch die Teile, die sie verbinden)."},
+ {q:"Der Metallring, auf dem der Reifen sitzt, heißt …", o:["Felge","Lenker","Kette"], a:0, e:"<b>die Felge</b>"},
+ {q:"Das Rohr, das den Sattel trägt, heißt …", o:["Sattelstütze","Sattelständer","Gepäckträger"], a:0, e:"<b>die Sattelstütze</b> (nicht „Sattelständer“ – ein Ständer ist das, womit das Rad steht)."},
+ {q:"Das Teil am Hinterrad, mit dem man die Gänge wechselt, heißt …", o:["Kettenschaltung","Klingel","Federgabel"], a:0, e:"<b>die Kettenschaltung</b>"},
+ {q:"Das Muster mit den Noppen auf dem Reifen heißt …", o:["Profil","Rahmen","Speiche"], a:0, e:"<b>das Profil</b> – grob bei Mountainbikes, damit sie im Gelände nicht rutschen."},
+ {q:"Die Hebel am Lenker, mit denen man bremst, heißen …", o:["Bremshebel","Pedale","Griffe"], a:0, e:"<b>die Bremshebel</b>"}
+],
+s7:[
+ {q:"Wo befindet sich die Federgabel?", o:["vorne","hinten","oben am Sattel"], a:0, e:"<b>Vorne</b> – sie hält das Vorderrad."},
+ {q:"Wo liegen die Pedale?", o:["unten in der Mitte","vorne am Lenker","hinten am Rad"], a:0, e:"<b>Unten in der Mitte</b> des Rahmens."},
+ {q:"Wo befinden sich die beiden Laufräder?", o:["vorne und hinten","links und rechts","oben und unten"], a:0, e:"<b>Vorne und hinten.</b> Links und rechts wäre ein Auto oder ein Rollstuhl!"},
+ {q:"Die Kettenschaltung sitzt ___ Hinterrad.", o:["am","im","ans"], a:0, e:"<b>am</b> (= an dem) Hinterrad – wo? Dativ."},
+ {q:"Der Sattel sitzt ___ der Sattelstütze.", o:["auf","unter","neben"], a:0, e:"<b>auf</b> der Sattelstütze – ganz oben."},
+ {q:"Die Bremshebel befinden sich ___ Lenker.", o:["am","im","beim"], a:0, e:"<b>am</b> Lenker."}
+]
+};
+
+const PAIRS = [
+ {b:"Das beschriebene Fahrrad ist ein 27,5-Zoll-Rad. Dies gehört zur Kategorie der Fahrzeuge und ist für den Schulweg und Ausflüge nützlich.", a:"Bei dem beschriebenen Gegenstand handelt es sich um ein Mountainbike mit 27,5-Zoll-Laufrädern. Es eignet sich für Ausflüge ins Gelände.", w:"Gleich die genaue Art nennen (Mountainbike), „Es“ statt „Dies“ – und zweimal „ist“ ersetzt."},
+ {b:"Der Rahmen hat die Form eines Dreiecks und hat die Farbe Blau, Rot, Weiß und Schwarz.", a:"Der dreieckige Rahmen ist weiß lackiert und mit blauen und roten Mustern verziert.", w:"Aus „hat die Form eines Dreiecks“ wird ein Adjektiv: dreieckig. Zuerst die Hauptfarbe, dann die Verzierung."},
+ {b:"Die Griffe sind weich und aus Gummi. Der Sattel ist dünn und gepolstert.", a:"Die Griffe sind aus weichem Gummi gefertigt. Oben auf der Sattelstütze sitzt ein schmaler, gepolsterter Sattel.", w:"Neue Verben (gefertigt, sitzt) und eine Ortsangabe am Satzanfang."},
+ {b:"Das Fahrrad hat eine Kette, Pedale, zwei Räder, einen Sattel, einen Sattelständer und einen Rahmen.", a:"Unten in der Mitte liegen die Pedale. Von dort läuft die Kette zum Hinterrad, wo eine Kettenschaltung elf Gänge ermöglicht.", w:"Eine reine Aufzählung ist eine Liste, keine Beschreibung. Besser: jedes Teil mit seiner Lage – und die Teile, die schon beschrieben wurden, nicht noch einmal aufzählen."},
+ {b:"Die Pedale ist unter dem Sattel. Die Reifen sind links und rechts, die Klingel ist auf dem Lenker.", a:"Die Pedale sind unten in der Mitte. Die beiden Laufräder befinden sich vorne und hinten.", w:"Mehrzahl → sind. Räder sind vorne und hinten. Und die Klingel weglassen – es gibt keine."},
+ {b:"Das Zweirad ist hart außer die Griffe und die Räder, weil sie aus Gummi bestehen.", a:"Bis auf die Griffe und die Reifen fühlt sich das Zweirad hart an.", w:"„außer“ + Dativ (außer den Griffen) – oder elegant: „bis auf …“. Dass Griffe und Reifen aus Gummi sind, stand schon vorher: das ist die inhaltliche Wiederholung, die dein Lehrer meint."},
+ {b:"Insgesamt wirkt das Fahrrad sehr praktisch und ist gut geeignet für Ausflüge.", a:"Insgesamt wirkt das Mountainbike leicht, modern und robust. Dank der Federung und der elf Gänge meistert es auch holprige Waldwege.", w:"Der Schluss war schon gut! Mit mehreren Adjektiven und einer Begründung wird er noch stärker."}
+];
+
+const CHECKS = [
+ "Im ersten Satz steht die genaue Art des Rades (z. B. Mountainbike, Stadtrad).",
+ "Alle Angaben aus der Aufgabe sind drin: Zoll, Fahrergröße, Gewicht, Gänge.",
+ "Ich beschreibe nur, was auf dem Bild wirklich zu sehen ist.",
+ "Ich habe die Bereifung beschrieben (breit/schmal, Profil).",
+ "Jedes Teil hat seine Lage: vorne, hinten, oben, unten, in der Mitte.",
+ "Ich habe jede Information nur einmal geschrieben.",
+ "Höchstens zweimal „ist“ und höchstens einmal „hat“ – sonst starke Verben.",
+ "Mindestens fünf Verbindungswörter (dabei, darüber, deshalb, außerdem …).",
+ "Meine Sätze beginnen nicht alle mit „Das Fahrrad …“ oder „Der …“.",
+ "Bei Farbe, Form und Oberfläche stehen genaue Adjektive.",
+ "Mehrzahl geprüft: die Pedale sind, die Reifen sind …",
+ "Nach „außer“ und „mit“ steht der Dativ.",
+ "Ungefähr 150 Wörter – Wortanzahl angegeben."
+];
+
+let total=0, correct=0;
+function updScore(){document.getElementById('scoreAll').textContent=correct+" / "+total+" richtig";}
+function shuffle(arr){const a=arr.map((x,i)=>[x,i]);for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+document.querySelectorAll('.items').forEach(box=>{
+  const set=DATA[box.dataset.set];
+  set.forEach(it=>{
+    total++;
+    const d=document.createElement('div');d.className='item';
+    const q=document.createElement('div');q.className='q';
+    q.innerHTML=it.q.replace('___','<span class="gap">&nbsp;</span>');
+    d.appendChild(q);
+    const opts=document.createElement('div');opts.className='opts'+(it.stack?' stack':'');
+    const ex=document.createElement('div');ex.className='ex';
+    let tried=false, done=false;
+    const order= it.nos ? it.o.map((x,i)=>[x,i]) : shuffle(it.o);
+    order.forEach(([txt,idx])=>{
+      const b=document.createElement('button');b.className='opt';b.textContent=txt;
+      b.onclick=()=>{
+        if(done)return;
+        if(idx===it.a){
+          done=true;b.classList.add('ok');
+          if(!tried){correct++;updScore();}
+          const g=q.querySelector('.gap'); if(g){g.textContent=txt;}
+          ex.className='ex show';ex.innerHTML='✔ '+it.e;
+          opts.querySelectorAll('button').forEach(x=>x.disabled=true);
+        }else{
+          tried=true;b.classList.add('bad');b.disabled=true;
+          ex.className='ex show wrong';ex.innerHTML='Noch nicht – versuch es noch einmal!';
+        }
+      };
+      opts.appendChild(b);
+    });
+    d.appendChild(opts);d.appendChild(ex);box.appendChild(d);
+  });
+});
+updScore();
+
+const pw=document.getElementById('pairs');
+PAIRS.forEach(p=>{
+  const d=document.createElement('div');d.className='pair';
+  d.innerHTML='<div class="before">'+p.b+'</div><div class="after">'+p.a+'</div><div class="why">💡 '+p.w+'</div>';
+  const btn=document.createElement('button');btn.className='reveal';btn.textContent='Vorschlag zeigen';
+  btn.onclick=()=>{d.querySelector('.after').classList.add('show');d.querySelector('.why').classList.add('show');btn.remove();};
+  d.appendChild(btn);pw.appendChild(d);
+});
+
+document.getElementById('modelBtn').onclick=function(){document.getElementById('model').classList.remove('hidden');this.remove();};
+
+const cw=document.getElementById('checks');
+CHECKS.forEach(c=>{
+  const l=document.createElement('label');l.className='chk';
+  l.innerHTML='<input type="checkbox"><span>'+c+'</span>';cw.appendChild(l);
+});
+cw.addEventListener('change',()=>{
+  const all=cw.querySelectorAll('input').length, on=cw.querySelectorAll('input:checked').length;
+  document.getElementById('checkMsg').textContent= on===all ? '🎉 Alles erledigt – diese Beschreibung ist richtig stark!' : on+' von '+all+' geschafft';
+});
+</script>
+</body>
+</html>
