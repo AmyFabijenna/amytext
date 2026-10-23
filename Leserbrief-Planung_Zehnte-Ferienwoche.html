@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Die zehnte Ferienwoche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7; --paper:#fffdf8; --ink:#2b2622; --muted:#6b6259; --line:#e3d9c8;
+  --accent:#c2562b; --accent-soft:#f6e1d6; --accent-ink:#8c3a18;
+  --blue:#2f6690; --blue-soft:#dcebf5;
+  --ok:#2e7d4f; --ok-soft:#dff1e5; --bad:#b3362e; --bad-soft:#f8dedb; --mid:#a86b00; --mid-soft:#fbefd2;
+  --beh:#ffe08a; --beg:#bfe3c6; --bsp:#c9dcf5; --geg:#e7cdee; --app:#f7c6b3; --ref:#e9e2d4; --anl:#d6efef;
+  --shadow:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1a17; --paper:#26221e; --ink:#eee6da; --muted:#b2a796; --line:#3d3630;
+    --accent:#e47b4f; --accent-soft:#3e2a20; --accent-ink:#f2a07c;
+    --blue:#7fb3da; --blue-soft:#1f3242;
+    --ok:#6cc58f; --ok-soft:#1e3528; --bad:#ec7f76; --bad-soft:#3e2220; --mid:#e2b04f; --mid-soft:#3a2f17;
+    --beh:#6b5a17; --beg:#2c5a37; --bsp:#2c4566; --geg:#523a5c; --app:#6a3a28; --ref:#3e3a33; --anl:#244848;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#1d1a17; --paper:#26221e; --ink:#eee6da; --muted:#b2a796; --line:#3d3630;
+    --accent:#e47b4f; --accent-soft:#3e2a20; --accent-ink:#f2a07c;
+    --blue:#7fb3da; --blue-soft:#1f3242;
+    --ok:#6cc58f; --ok-soft:#1e3528; --bad:#ec7f76; --bad-soft:#3e2220; --mid:#e2b04f; --mid-soft:#3a2f17;
+    --beh:#6b5a17; --beg:#2c5a37; --bsp:#2c4566; --geg:#523a5c; --app:#6a3a28; --ref:#3e3a33; --anl:#244848;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:"Literata",Georgia,serif;line-height:1.25}
+a{color:var(--blue)}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+
+/* Hero */
+header.hero{padding:44px 0 26px}
+.hero .kicker{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+.hero h1{font-size:clamp(2rem,6vw,3rem);margin:.2em 0 .3em}
+.hero p{font-size:1.08rem;max-width:62ch;margin:.4em 0}
+.stamp{display:inline-block;border:2px dashed var(--accent);color:var(--accent-ink);padding:2px 10px;border-radius:6px;font-weight:700;transform:rotate(-2deg);margin-top:10px;font-size:.9rem}
+
+/* Nav */
+nav.steps{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.steps .inner{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:900px;margin:0 auto;scrollbar-width:thin}
+nav.steps a{flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:.86rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper);white-space:nowrap}
+nav.steps a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+nav.steps a.done::after{content:" ✓";color:var(--ok);font-weight:700}
+nav.steps a.active.done::after{color:#fff}
+
+/* Sections */
+section.step{padding:34px 0 10px}
+.step-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.step-num{font-family:"Literata",serif;font-size:2.4rem;color:var(--accent);font-weight:700;line-height:1}
+.step-head h2{margin:0;font-size:1.65rem}
+.lead{color:var(--muted);margin:.2em 0 1em;max-width:68ch}
+
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.box h3{margin:.1em 0 .5em;font-size:1.18rem}
+.info{border-left:5px solid var(--blue)}
+.tip{border-left:5px solid var(--accent);background:linear-gradient(0deg,var(--paper),var(--paper))}
+.tip .tag,.info .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;margin-bottom:6px}
+.info .tag{background:var(--blue-soft);color:var(--blue)}
+.tip .tag{background:var(--accent-soft);color:var(--accent-ink)}
+table.t{width:100%;border-collapse:collapse;font-size:.95rem}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 8px;vertical-align:top;text-align:left}
+table.t th{font-family:"Literata",serif;background:var(--accent-soft);color:var(--accent-ink)}
+.tablewrap{overflow-x:auto}
+ul.clean{padding-left:1.2em;margin:.3em 0}
+ul.clean li{margin:.25em 0}
+.kbd{font-family:ui-monospace,Menlo,monospace;background:var(--ref);padding:0 5px;border-radius:4px;font-size:.92em}
+
+/* Tasks */
+.task{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px 14px;margin:20px 0;box-shadow:var(--shadow);position:relative}
+.task.isdone{border-color:var(--ok)}
+.task > h3{margin:0 0 4px;font-size:1.12rem;display:flex;gap:10px;align-items:baseline}
+.task > h3 .badge{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.75rem;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;flex:0 0 auto}
+.task > p.instr{margin:.2em 0 .9em;color:var(--muted)}
+.q{padding:10px 0;border-top:1px dashed var(--line)}
+.q:first-child{border-top:0}
+.qt{margin:0 0 6px}
+.qn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);font-size:.8rem;font-weight:700;margin-right:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts.col{flex-direction:column}
+button{font:inherit;cursor:pointer}
+.opt{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:7px 12px;text-align:left;font-size:.95rem;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{font-size:.92rem;margin-top:6px;padding:6px 10px;border-radius:8px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}
+.fb.bad{background:var(--bad-soft);color:var(--bad)}
+.fb.neutral{background:var(--blue-soft);color:var(--blue)}
+.row{display:grid;grid-template-columns:1fr;gap:6px;padding:10px 0;border-top:1px dashed var(--line)}
+.row:first-child{border-top:0}
+.row .txt{font-style:normal}
+.row.right .txt{color:var(--ok)}
+.row.wrong .txt{color:var(--bad)}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cat{font-size:.85rem;padding:4px 10px}
+.gapline{padding:9px 0;border-top:1px dashed var(--line)}
+.gapline:first-child{border-top:0}
+select.gap{font:inherit;font-size:.95rem;padding:3px 6px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);max-width:100%}
+select.gap.right{border-color:var(--ok);background:var(--ok-soft)}
+select.gap.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.order{list-style:none;padding:0;margin:0}
+.order li{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;margin:6px 0}
+.order li .pos{font-weight:700;color:var(--accent-ink);width:22px;flex:0 0 auto}
+.order li .lbl{flex:1}
+.order li.right{border-color:var(--ok);background:var(--ok-soft)}
+.order li.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.mv{border:1px solid var(--line);background:var(--paper);border-radius:7px;width:34px;height:30px;color:var(--ink)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.btn{border:0;border-radius:9px;padding:8px 14px;font-weight:700;font-size:.92rem}
+.btn.p{background:var(--accent);color:#fff}
+.btn.s{background:var(--blue-soft);color:var(--blue)}
+.btn.g{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.res{font-weight:700;font-size:.92rem}
+.res.ok{color:var(--ok)} .res.mid{color:var(--mid)}
+textarea,input.inp{width:100%;font:inherit;font-size:.97rem;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus,input.inp:focus{outline:none;border-color:var(--blue)}
+.field{margin:10px 0}
+.field label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}
+.field .hint{font-weight:400;color:var(--muted);font-size:.86rem}
+.sol{display:none;margin-top:6px;background:var(--ok-soft);border-left:4px solid var(--ok);border-radius:8px;padding:8px 12px;font-size:.94rem}
+.sol.show{display:block}
+.sol b{color:var(--ok)}
+
+/* Lupe */
+.letter{font-family:"Literata",Georgia,serif;font-size:1.02rem;line-height:1.75;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.seg{cursor:pointer;border-radius:4px;padding:1px 2px;transition:background .15s}
+.seg:hover{background:var(--ref)}
+.seg.mark{background:var(--mid-soft);outline:2px solid var(--mid)}
+.seg.found{background:var(--ok-soft);outline:2px solid var(--ok)}
+.seg.missed{background:var(--bad-soft);outline:2px dashed var(--bad)}
+.seg.falsealarm{background:var(--bad-soft);outline:2px solid var(--bad)}
+.lupe-fb{margin-top:10px;font-size:.93rem}
+.lupe-fb div{padding:5px 0;border-top:1px dashed var(--line)}
+
+/* Musterbriefe */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tab{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font-size:.92rem;color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px;font-size:.82rem}
+.legend span{padding:2px 8px;border-radius:5px;color:var(--ink)}
+.lg-beh{background:var(--beh)} .lg-beg{background:var(--beg)} .lg-bsp{background:var(--bsp)} .lg-geg{background:var(--geg)} .lg-app{background:var(--app)} .lg-ref{background:var(--ref)} .lg-anl{background:var(--anl)}
+.mletter{display:none}
+.mletter.on{display:block}
+.mletter .meta{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.88rem;color:var(--muted);margin-bottom:8px}
+.mletter p{margin:.65em 0}
+.mletter p[data-label]{position:relative}
+.show-labels .mletter p[data-label]::before{content:attr(data-label);display:block;font-family:"Atkinson Hyperlegible",sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:2px}
+.show-marks .m-beh{background:var(--beh)} .show-marks .m-beg{background:var(--beg)} .show-marks .m-bsp{background:var(--bsp)}
+.show-marks .m-geg{background:var(--geg)} .show-marks .m-app{background:var(--app)} .show-marks .m-ref{background:var(--ref)} .show-marks .m-anl{background:var(--anl)}
+.wc{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.85rem;color:var(--muted)}
+
+/* Werkstatt */
+.ws-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:860px){.ws-grid{grid-template-columns:1.15fr .85fr}}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.chip{border:1px dashed var(--accent);background:transparent;color:var(--accent-ink);border-radius:999px;padding:2px 9px;font-size:.8rem}
+.chip:hover{background:var(--accent-soft)}
+.meter{position:sticky;top:64px}
+.count{font-family:"Literata",serif;font-size:2rem;font-weight:700}
+.count.ok{color:var(--ok)} .count.low{color:var(--mid)} .count.high{color:var(--bad)}
+.gauge{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:4px 0 10px;position:relative}
+.gauge i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.gauge::after{content:"";position:absolute;left:calc(270/400*100%);width:calc(60/400*100%);top:0;bottom:0;background:color-mix(in srgb,var(--ok) 30%,transparent)}
+.checks{list-style:none;padding:0;margin:0;font-size:.9rem}
+.checks li{padding:4px 0 4px 26px;position:relative}
+.checks li::before{content:"○";position:absolute;left:4px;color:var(--muted)}
+.checks li.y::before{content:"✓";color:var(--ok);font-weight:700}
+.checks li.n::before{content:"!";color:var(--mid);font-weight:700}
+.preview{white-space:pre-wrap;font-family:"Literata",serif;font-size:.95rem;max-height:420px;overflow:auto}
+.auftraege{background:var(--accent-soft);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.95rem}
+.auftraege b{color:var(--accent-ink)}
+
+/* Checkliste */
+.cl label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-top:1px dashed var(--line);cursor:pointer}
+.cl label:first-of-type{border-top:0}
+.cl input{margin-top:5px;accent-color:var(--ok);width:18px;height:18px;flex:0 0 auto}
+.timeline{display:grid;gap:8px}
+.tl{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start}
+.tl .when{font-weight:700;color:var(--accent-ink);font-family:"Literata",serif}
+details.kern{margin:10px 0;border:1px solid var(--line);border-radius:10px;padding:8px 14px;background:var(--bg)}
+details.kern summary{cursor:pointer;font-weight:700}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem;text-align:center}
+@media print{nav.steps,.bar,.chips,.toggles,.tabs,.btn{display:none!important}.task,.box{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Leserbrief-Planung · A 29 · Feriendiskussion</div>
+    <h1>Die zehnte Ferienwoche</h1>
+    <p>Hier bereitest du den Leserbrief zum Beitrag „Die zehnte Ferienwoche“ genau so vor, wie es dein Buch beim Flugreisen-Text zeigt: Schreibauftrag zerlegen, Text erschließen, Ideen sammeln, Argumente nach dem 3-B-Schema bauen, Einleitung vorbereiten, Schreibplan erstellen und schließlich schreiben.</p>
+    <p>Bei jeder Übung kannst du prüfen, die Lösung ansehen und zurücksetzen. Deine Eingaben bleiben in diesem Browser gespeichert.</p>
+    <span class="stamp">Du bist die Expertin ✉</span>
+  </div>
+</header>
+
+<nav class="steps" aria-label="Stationen"><div class="inner" id="navInner">
+  <a href="#s1">1 Auftrag</a>
+  <a href="#s2">2 Text</a>
+  <a href="#s3">3 Placemat</a>
+  <a href="#s4">4 Argumente</a>
+  <a href="#s5">5 Einleitung</a>
+  <a href="#s6">6 Woche gestalten</a>
+  <a href="#s7">7 Appell</a>
+  <a href="#s8">8 Schreibplan</a>
+  <a href="#s9">9 Musterbriefe</a>
+  <a href="#s10">10 Dein Brief</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ================= 1 ================= -->
+<section class="step" id="s1">
+  <div class="step-head"><span class="step-num">1</span><h2>Den Schreibauftrag zerlegen</h2></div>
+  <p class="lead">Bevor du den Text liest, schaust du dir genau an, was die Aufgabe von dir will. Wer hier sorgfältig ist, vergisst später keinen Arbeitsauftrag.</p>
+
+  <div class="box info">
+    <span class="tag">A 29 · Schreibauftrag</span>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Was?</th><th>Was steht in der Aufgabe?</th><th>Was heißt das für dich?</th></tr>
+      <tr><td><b>Thema</b></td><td>Feriendiskussion</td><td>Es geht um die letzte Schulwoche vor dem Zeugnistag.</td></tr>
+      <tr><td><b>Situation / Rolle</b></td><td>Als Schülerin bist du von der Diskussion direkt betroffen und stolperst beim Zeitunglesen über den Beitrag.</td><td>Du schreibst aus deiner eigenen Erfahrung. Das ist gleichzeitig dein <b>Schreibanlass</b>.</td></tr>
+      <tr><td><b>Ziel</b></td><td>Ansichten und Erfahrungen mit der Leserschaft teilen</td><td>Persönlich, aber begründet und sachlich.</td></tr>
+      <tr><td><b>Ausgangstext</b></td><td>„Die zehnte Ferienwoche“ von Mirjam Marits, Online-Ausgabe der Tageszeitung <i>Die Presse</i>, 1. Juli 2022</td><td>Diese Angaben gehören in deine Einleitung.</td></tr>
+      <tr><td><b>Arbeitsauftrag 1</b></td><td><b>Beschreibe</b> knapp eine typische letzte Schulwoche.</td><td>kurz und sachlich: Wie läuft sie ab?</td></tr>
+      <tr><td><b>Arbeitsauftrag 2</b></td><td><b>Erkläre</b> die Wichtigkeit solch gemeinsamer Aktivitäten.</td><td>Warum sind Ausflüge, Picknick, Feste usw. wichtig? → Argumente im 3-B-Schema</td></tr>
+      <tr><td><b>Arbeitsauftrag 3</b></td><td><b>Gestalte</b> einen Entwurf der perfekten Abschlusswoche.</td><td>eigener, konkreter Plan, zum Beispiel Tag für Tag</td></tr>
+      <tr><td><b>Arbeitsauftrag 4</b></td><td><b>Appelliere</b> an Schulleitungen sowie Lehrerinnen und Lehrer.</td><td>Appell an genau diese Gruppe, in der Höflichkeitsform</td></tr>
+      <tr><td><b>Länge</b></td><td>270–330 Wörter, Absätze mit Leerzeilen</td><td>Jeder Arbeitsauftrag bekommt einen eigenen Absatz.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="task" data-task="p1mc">
+    <h3><span class="badge">Quiz</span>Hast du den Auftrag verstanden?</h3>
+    <p class="instr">Wähle jeweils die richtige Antwort.</p>
+  </div>
+
+  <div class="task" data-task="p1auftr">
+    <h3><span class="badge">Zuordnen</span>Welcher Satz gehört zu welchem Arbeitsauftrag?</h3>
+    <p class="instr">Hier siehst du Sätze aus einem fertigen Leserbrief. Ordne jeden Satz dem Arbeitsauftrag zu, den er erfüllt.</p>
+  </div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="step" id="s2">
+  <div class="step-head"><span class="step-num">2</span><h2>Den Text erschließen</h2></div>
+  <p class="lead">Lies den Beitrag in deinem Buch zweimal. Beim zweiten Lesen markierst du, was die Autorin über die letzte Schulwoche sagt und wie sie dazu steht.</p>
+
+  <div class="box tip">
+    <span class="tag">Gut zu wissen</span>
+    <p>Dieser Text ist kein sachlicher Bericht, sondern eine persönliche, humorvolle Kolumne. Die Autorin schreibt als Mutter über ihr Kind und erzählt mit einem Augenzwinkern, wie sehr die letzte Schulwoche schon den Ferien gleicht. Klassische Argumente nach dem 3-B-Schema findest du darin kaum. Umso wichtiger sind <b>deine eigenen</b> Argumente: Der Text liefert dir vor allem Anknüpfungspunkte und Beispiele.</p>
+    <p style="margin-bottom:0"><b>Anknüpfungspunkte für deinen Brief:</b> keine Hausübungen und Tests mehr · Programm wie Schwimmen, Picknick, Museumsbesuch · Picknickdecke und Federballschläger statt Schultasche · Freundinnen und Freunde sieht man oft erst im Herbst wieder · die Autorin wäre selbst gern wieder Schulkind · der Titel: Neun Wochen Sommerferien plus eine „geheime“ zehnte.</p>
+  </div>
+
+  <div class="task" data-task="p2order">
+    <h3><span class="badge">Ordnen</span>In welcher Reihenfolge kommt das im Text vor?</h3>
+    <p class="instr">Bring die Inhalte in die Reihenfolge des Beitrags. So entsteht gleichzeitig eine Stichwortliste zu den Absätzen (wie in A 25).</p>
+  </div>
+
+  <div class="task" data-task="p2rf">
+    <h3><span class="badge">Richtig/Falsch</span>Steht das so im Beitrag?</h3>
+    <p class="instr">Entscheide bei jeder Aussage, ob sie dem Text entspricht.</p>
+  </div>
+
+  <div class="task" data-task="p2haltung">
+    <h3><span class="badge">Quiz</span>Haltung, Textsorte, Titel</h3>
+    <p class="instr">Diese Fragen helfen dir, im Leserbrief passend an den Beitrag anzuknüpfen.</p>
+  </div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="step" id="s3">
+  <div class="step-head"><span class="step-num">3</span><h2>Ideen sammeln mit dem Placemat</h2></div>
+  <p class="lead">Wie im Buch (A 21) sammelst du Ideen aus verschiedenen Blickwinkeln. Hier übernimmst du alle vier Felder selbst: Wie sehen Schülerinnen und Schüler, Lehrkräfte, Eltern und die Schulleitung die letzte Schulwoche?</p>
+
+  <div class="box" style="text-align:center">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:560px;margin:0 auto;font-size:.92rem">
+      <div style="background:var(--beh);border-radius:10px;padding:10px">Schülerinnen und Schüler</div>
+      <div style="background:var(--beg);border-radius:10px;padding:10px">Lehrerinnen und Lehrer</div>
+      <div style="grid-column:1/3;background:var(--accent);color:#fff;border-radius:10px;padding:12px;font-weight:700">Mitte: Wie soll die letzte Schulwoche aussehen?</div>
+      <div style="background:var(--bsp);border-radius:10px;padding:10px">Eltern</div>
+      <div style="background:var(--app);border-radius:10px;padding:10px">Schulleitung</div>
+    </div>
+  </div>
+
+  <div class="task" data-task="p3placemat">
+    <h3><span class="badge">A 21</span>Fülle die vier Felder</h3>
+    <p class="instr">Notiere zu jeder Perspektive zwei bis drei Stichworte: Was wünscht sich diese Gruppe? Was befürchtet sie? Danach vergleichst du mit den Vorschlägen.</p>
+  </div>
+
+  <div class="task" data-task="p3ideen">
+    <h3><span class="badge">Zuordnen</span>Wofür spricht dieser Gedanke?</h3>
+    <p class="instr">Spricht der Gedanke für gemeinsame Aktivitäten in der letzten Woche oder für normalen Unterricht bis zum Schluss? Die Gegenseite brauchst du später, um sie zu entkräften.</p>
+  </div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="step" id="s4">
+  <div class="step-head"><span class="step-num">4</span><h2>Argumente nach dem 3-B-Schema</h2></div>
+  <p class="lead">Arbeitsauftrag 2 verlangt, dass du die Wichtigkeit gemeinsamer Aktivitäten erklärst. Dafür brauchst du zwei bis drei vollständige Argumente: Behauptung, Begründung, Beispiel.</p>
+
+  <div class="task" data-task="p4class">
+    <h3><span class="badge">A 24</span>Behauptung, Begründung oder Beispiel?</h3>
+    <p class="instr">Drei Argumente wurden zerlegt. Bestimme bei jedem Teil, welcher Baustein es ist – so wie du im Buch die Textbeilage in drei Farben markierst.</p>
+  </div>
+
+  <div class="task" data-task="p4a22">
+    <h3><span class="badge">A 22</span>Formuliere vier schlüssige Argumente</h3>
+    <p class="instr">Zu jeder Behauptung schreibst du eine Begründung und ein Beispiel aus deinem eigenen Schulalltag. Eigene Beispiele sind immer stärker als erfundene.</p>
+  </div>
+
+  <div class="task" data-task="p4gegen">
+    <h3><span class="badge">Profi</span>Gegenargumente entkräften</h3>
+    <p class="instr">Nimm ein Gegenargument vorweg und widerlege es: Zwar …, doch … · Natürlich …; trotzdem … · Kritiker mögen einwenden, … Dem ist jedoch entgegenzuhalten, …</p>
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="step" id="s5">
+  <div class="step-head"><span class="step-num">5</span><h2>Die Einleitung vorbereiten</h2></div>
+  <p class="lead">Wie in A 23 sammelst du zuerst die Informationen aus der Aufgabenstellung und baust sie dann in die Einleitung ein.</p>
+
+  <div class="task" data-task="p5table">
+    <h3><span class="badge">A 23</span>Die Einleitungstabelle</h3>
+    <p class="instr">Fülle die Tabelle aus und vergleiche dann mit der Musterlösung.</p>
+  </div>
+
+  <div class="task" data-task="p5gaps">
+    <h3><span class="badge">A 23 a</span>Baue die Einleitung zusammen</h3>
+    <p class="instr">Wähle jeweils die Angabe, die zu diesem Schreibauftrag passt.</p>
+  </div>
+
+  <div class="task" data-task="p5betreff">
+    <h3><span class="badge">Quiz</span>Betreff und Überleitung</h3>
+    <p class="instr">Wähle die beste Lösung.</p>
+  </div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="step" id="s6">
+  <div class="step-head"><span class="step-num">6</span><h2>Die perfekte Abschlusswoche gestalten</h2></div>
+  <p class="lead">Arbeitsauftrag 3 ist dein kreativer Teil. Ein starker Entwurf ist konkret, realistisch und passt zu deinen Argumenten aus Arbeitsauftrag 2.</p>
+
+  <div class="box tip">
+    <span class="tag">So wird der Entwurf stark</span>
+    <p style="margin-bottom:0">Ordne deine Ideen nach Wochentagen, damit der Plan anschaulich wird. Hänge an zwei, drei Programmpunkte einen kurzen Grund an („…, damit auch die Eltern sehen, was wir gelernt haben“). So verbindest du Arbeitsauftrag 3 mit Arbeitsauftrag 2. Und vergiss nicht: Freitag ist Zeugnistag.</p>
+  </div>
+
+  <div class="task" data-task="p6real">
+    <h3><span class="badge">Zuordnen</span>Realistisch oder nicht?</h3>
+    <p class="instr">Welche Ideen eignen sich für einen glaubwürdigen Entwurf, der an einer echten Schule umsetzbar ist?</p>
+  </div>
+
+  <div class="task" data-task="p6woche">
+    <h3><span class="badge">Gestalten</span>Deine Woche von Montag bis Freitag</h3>
+    <p class="instr">Trag für jeden Tag einen Programmpunkt ein, wenn möglich mit einem kurzen Grund.</p>
+  </div>
+</section>
+
+<!-- ================= 7 ================= -->
+<section class="step" id="s7">
+  <div class="step-head"><span class="step-num">7</span><h2>Der Appell an Lehrkräfte und Schulleitungen</h2></div>
+  <p class="lead">Der Appell muss sich an genau die Menschen richten, die im Arbeitsauftrag stehen, und er muss aus deinen Argumenten folgen.</p>
+
+  <div class="box info">
+    <span class="tag">Passende Anreden im Schluss</span>
+    <p style="margin-bottom:0"><i>Liebe Schulleiterinnen und Schulleiter, liebe Lehrerinnen und Lehrer, … · Sehr geehrte Damen und Herren in den Schulleitungen, … · Ich wende mich besonders an Sie, liebe Lehrkräfte: …</i></p>
+  </div>
+
+  <div class="task" data-task="p7passt">
+    <h3><span class="badge">Stil-Check</span>Passt dieser Appell zum Arbeitsauftrag?</h3>
+    <p class="instr">Achte auf die richtige Zielgruppe und einen höflichen, sachlichen Ton.</p>
+  </div>
+
+  <div class="task" data-task="p7formen">
+    <h3><span class="badge">Lückentext</span>Appellformen richtig bilden</h3>
+    <p class="instr">Die gesuchte Form steht jeweils in Klammern. Wähle die richtige Variante.</p>
+  </div>
+
+  <div class="task" data-task="p7frei">
+    <h3><span class="badge">Schreiben</span>Drei Appelle, drei Formen</h3>
+    <p class="instr">Formuliere deinen Appell an Lehrkräfte und Schulleitungen in drei verschiedenen Formen.</p>
+  </div>
+</section>
+
+<!-- ================= 8 ================= -->
+<section class="step" id="s8">
+  <div class="step-head"><span class="step-num">8</span><h2>Der Schreibplan in Stichworten</h2></div>
+  <p class="lead">Jetzt fasst du alles zu einem Schreibplan zusammen, wie in A 25: ein Stichwortblock pro Absatz. Mit diesem Plan schreibst du den Brief in der Schularbeit fast wie von selbst.</p>
+
+  <div class="task" data-task="p8plan">
+    <h3><span class="badge">A 25</span>Stichwörter zu jedem Absatz</h3>
+    <p class="instr">Nur Stichworte, keine ganzen Sätze. Vergleiche danach mit dem Vorschlag.</p>
+  </div>
+</section>
+
+<!-- ================= 9 ================= -->
+<section class="step" id="s9">
+  <div class="step-head"><span class="step-num">9</span><h2>Zwei Musterbriefe</h2></div>
+  <p class="lead">Zwei Varianten zeigen dir, dass man denselben Auftrag ganz unterschiedlich lösen kann. Lass dir die Bausteine einfärben und die Arbeitsaufträge anzeigen.</p>
+
+  <div class="box" id="musterBox">
+    <div class="tabs" id="mTabs">
+      <button class="tab on" data-m="m1" type="button">Variante A</button>
+      <button class="tab" data-m="m2" type="button">Variante B</button>
+    </div>
+    <div class="toggles">
+      <button class="btn s" id="tgMarks" type="button">Bausteine einfärben</button>
+      <button class="btn s" id="tgLabels" type="button">Arbeitsaufträge anzeigen</button>
+    </div>
+    <div class="legend" id="mLegend" hidden>
+      <span class="lg-ref">Bezug zum Text</span><span class="lg-anl">Schreibanlass</span><span class="lg-beh">Behauptung</span><span class="lg-beg">Begründung</span><span class="lg-bsp">Beispiel/Beweis</span><span class="lg-geg">Gegenargument entkräftet</span><span class="lg-app">Appell</span>
+    </div>
+
+    <div class="mletter letter on" id="m1">
+      <div class="meta">Variante A · sachlich-engagiert · <span class="wc"></span></div>
+      <p><b>Betreff: Die letzte Schulwoche – zu wertvoll zum Absitzen</b></p>
+      <p>Sehr geehrtes Redaktionsteam der Presse!</p>
+      <p data-label="Einleitung"><span class="m-ref">Mit großem Vergnügen habe ich den Beitrag „Die zehnte Ferienwoche“ von Mirjam Marits gelesen, der am 1. Juli 2022 in der Online-Ausgabe der Tageszeitung „Die Presse“ erschienen ist. Die Autorin beschreibt darin, dass die letzte Woche vor dem Zeugnistag eigentlich schon eine geheime Ferienwoche ist.</span> <span class="m-anl">Als Schülerin bin ich von diesem Thema direkt betroffen und möchte meine Erfahrungen gerne mit Ihnen teilen.</span></p>
+      <p data-label="Hauptteil · Auftrag 1: knapp beschreiben">Bei uns sieht die letzte Woche meist so aus: Die Noten stehen fest, Tests gibt es keine mehr, und manche Stunden werden mit Filmen oder Spielen gefüllt. Oft wirkt das aber eher wie Warten als wie ein gemeinsamer Abschluss, denn viele haben innerlich schon abgeschaltet, und die letzten gemeinsamen Tage verstreichen einfach ungenutzt.</p>
+      <p data-label="Hauptteil · Auftrag 2: Wichtigkeit erklären"><span class="m-beh">Dabei sind gemeinsame Aktivitäten gerade am Schuljahresende besonders wichtig.</span> <span class="m-beg">Nach Monaten voller Prüfungsstress hat die Klasse endlich Zeit füreinander, ohne Notendruck.</span> <span class="m-bsp">Wer zusammen wandert, kocht oder ein Fest vorbereitet, lernt die anderen von einer neuen Seite kennen.</span> <span class="m-beg">Solche Erlebnisse stärken die Klassengemeinschaft, zumal man sich danach zwei Monate lang kaum sieht.</span></p>
+      <p data-label="Hauptteil · Auftrag 3: Entwurf gestalten">Meine perfekte Abschlusswoche würde so aussehen: Am Montag planen wir in Gruppen ein Abschlussfest. Am Dienstag folgt ein Wandertag, am Mittwoch ein Projekttag, an dem jede Klasse etwas für die Schulgemeinschaft gestaltet, etwa ein Beet im Schulhof. Am Donnerstag feiern wir mit Eltern und Lehrkräften, und am Freitag gibt es nach der Zeugnisverteilung ein gemeinsames Frühstück.</p>
+      <p data-label="Schluss · Auftrag 4: Appell"><span class="m-app">Ich bitte Sie daher, liebe Schulleiterinnen und Schulleiter, liebe Lehrerinnen und Lehrer: Nutzen Sie die letzte Woche bewusst! Planen Sie gemeinsam mit den Klassen ein Programm, das verbindet, statt die Zeit einfach verstreichen zu lassen. Dann wird die zehnte Ferienwoche zur schönsten Woche des Jahres.</span></p>
+      <p>Mit freundlichen Grüßen<br>[Vorname Nachname]</p>
+    </div>
+
+    <div class="mletter letter" id="m2">
+      <div class="meta">Variante B · mit Gegenargument und Mitbestimmung · <span class="wc"></span></div>
+      <p><b>Betreff: Gemeinsam statt gelangweilt!</b></p>
+      <p>Sehr geehrte Frau Marits, sehr geehrtes Redaktionsteam!</p>
+      <p data-label="Einleitung"><span class="m-ref">Ihr Beitrag „Die zehnte Ferienwoche“, der am 1. Juli 2022 in der Online-Ausgabe der Tageszeitung „Die Presse“ erschienen ist, hat mich zum Schmunzeln gebracht. Sie beschreiben darin mit viel Humor, wie sehr sich die letzte Schulwoche schon nach Ferien anfühlt.</span> <span class="m-anl">Da ich diese Woche als Schülerin jedes Jahr selbst erlebe, möchte ich Ihnen meine Sicht darauf schildern.</span></p>
+      <p data-label="Hauptteil · Auftrag 1: knapp beschreiben">Auch bei uns ist die letzte Woche anders als der Rest des Jahres: Die Schularbeiten sind geschrieben, die Noten eingetragen, und viele Lehrkräfte zeigen Filme oder lassen uns Karten spielen. Manche Klassen machen einen Ausflug, andere sitzen die Stunden einfach ab.</p>
+      <p data-label="Hauptteil · Auftrag 2: Wichtigkeit erklären"><span class="m-beh">Ich bin überzeugt, dass gemeinsame Aktivitäten in dieser Zeit besonders wertvoll sind.</span> <span class="m-beg">Ein ganzes Jahr lang erleben wir einander fast nur im Unterricht, wo jede und jeder für die eigenen Noten arbeitet.</span> <span class="m-bsp">Erst beim Picknick im Park merkt man zum Beispiel, wie witzig eine sonst stille Mitschülerin sein kann.</span> <span class="m-beg">Solche Erlebnisse schweißen eine Klasse zusammen, und davon profitiert auch der Unterricht im nächsten Herbst.</span> <span class="m-geg">Zwar meinen manche, diese Woche sei verlorene Unterrichtszeit, doch auch bei einem Museumsbesuch oder einem Projekt lernt man viel, nur auf andere Weise.</span></p>
+      <p data-label="Hauptteil · Auftrag 3: Entwurf gestalten">Wie könnte die perfekte Abschlusswoche aussehen? Am Montag gestalten wir einen Fotorückblick auf das Schuljahr. Dienstag ist Wandertag, Mittwoch Sporttag mit Spielen zwischen den Klassen. Am Donnerstag zeigen wir den Eltern bei einem kleinen Schulfest, was wir erarbeitet haben, und am Freitag gibt es nach der Zeugnisverteilung ein Abschiedsfrühstück.</p>
+      <p data-label="Schluss · Auftrag 4: Appell"><span class="m-app">Liebe Schulleiterinnen und Schulleiter, liebe Lehrerinnen und Lehrer: Lassen Sie die letzte Woche nicht einfach verstreichen! Planen Sie sie gemeinsam mit uns, denn wir haben viele Ideen. Dann wird aus der geheimen zehnten Ferienwoche eine Woche, an die sich alle gern erinnern.</span></p>
+      <p>Mit freundlichen Grüßen<br>[Vorname Nachname]</p>
+    </div>
+  </div>
+
+  <div class="task" data-task="p9vergleich">
+    <h3><span class="badge">Quiz</span>Die beiden Varianten vergleichen</h3>
+    <p class="instr">Beantworte die Fragen mithilfe der Musterbriefe.</p>
+  </div>
+</section>
+
+<!-- ================= 10 ================= -->
+<section class="step" id="s10">
+  <div class="step-head"><span class="step-num">10</span><h2>Dein Leserbrief</h2></div>
+  <p class="lead">Jetzt schreibst du deinen eigenen Brief zu A 29 – als Hausübung, mit deinem Schreibplan aus Station 8 daneben. Die Redemittel unter den Feldern fügst du mit einem Klick ein, rechts siehst du live Wortanzahl und Check.</p>
+
+  <div class="box">
+    <div class="tabs" id="wsTabs"></div>
+    <div class="auftraege" id="wsAuftraege"></div>
+    <div class="ws-grid">
+      <div id="wsFields"></div>
+      <div>
+        <div class="box meter" style="margin-top:0">
+          <div class="wc">Wörter im ganzen Brief</div>
+          <div class="count" id="wsCount">0</div>
+          <div class="gauge"><i id="wsGauge"></i></div>
+          <div class="wc" id="wsCountHint">Ziel: 270–330 Wörter</div>
+          <h3 style="margin-top:14px;font-size:1rem">Automatischer Check</h3>
+          <ul class="checks" id="wsChecks"></ul>
+          <p class="wc" style="margin-top:8px">Der Check sucht nur nach Signalwörtern. Ob deine Argumente überzeugen, prüfst du mit der Checkliste unten.</p>
+          <div class="bar">
+            <button class="btn p" id="wsCopy" type="button">Brief kopieren</button>
+            <button class="btn g" id="wsClear" type="button">Leeren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin-top:18px">Vorschau</h3>
+    <div class="letter preview" id="wsPreview"></div>
+  </div>
+
+  <div class="box cl" id="checklist">
+    <h3>Checkliste für die Überarbeitung</h3>
+    <p class="wc" style="margin-top:-6px">Hake ab, was dein Brief schon erfüllt. Die Häkchen bleiben gespeichert.</p>
+  </div>
+
+  <div class="box tip">
+    <span class="tag">Zum Schluss</span>
+    <p style="margin-bottom:0">Bei diesem Thema bist du die Expertin: Niemand weiß besser als du, wie sich die letzte Schulwoche anfühlt. Genau diese Erfahrung macht deinen Leserbrief glaubwürdig. Schreib so, als würdest du deiner Direktorin höflich, aber mit Überzeugung einen guten Vorschlag machen. Viel Erfolg! ✉</p>
+  </div>
+</section>
+
+</main>
+<footer>Die zehnte Ferienwoche · Leserbrief-Planung</footer>
+
+<script>
+/* ---------- Speicher ---------- */
+const S={get(k,d){try{const v=localStorage.getItem('lbferien_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+         set(k,v){try{localStorage.setItem('lbferien_'+k,JSON.stringify(v))}catch(e){}}};
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e}
+function shuffleSeed(arr,seed){const a=arr.slice();let s=seed;for(let i=a.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function setFb(fb,cls,html){fb.className='fb show '+cls;fb.innerHTML=html}
+function hideFb(fb){fb.className='fb';fb.innerHTML=''}
+
+/* ---------- Aufgaben-Daten ---------- */
+const TASKS={
+p1mc:{type:'mc',items:[
+ {q:'Aus welcher Rolle schreibst du den Leserbrief?',o:['als Mutter eines Schulkindes','als Schülerin, die selbst direkt betroffen ist','als Lehrerin','als Journalistin der Presse'],a:1,e:'So steht es in der Situation. Deine eigene Erfahrung als Schülerin ist dein Schreibanlass und macht dich glaubwürdig.'},
+ {q:'An wen richtest du den Appell?',o:['an die Eltern','an die Mitschülerinnen und Mitschüler','an Schulleitungen sowie Lehrerinnen und Lehrer','an die Autorin Mirjam Marits'],a:2,e:'Genau diese Gruppe nennt Arbeitsauftrag 4. Ein Appell an die falsche Gruppe erfüllt den Auftrag nicht.'},
+ {q:'Wie ausführlich soll Arbeitsauftrag 1 („Beschreibe knapp …“) sein?',o:['wenige Sätze, sachlich','der längste Absatz des Briefs','nur ein einziges Wort','eine ausführliche Erzählung deiner letzten Schulwoche im Präteritum'],a:0,e:'„Knapp“ heißt: ein kurzer Absatz mit zwei bis vier Sätzen.'},
+ {q:'Wie viele Absätze brauchst du mindestens für die vier Arbeitsaufträge, wenn jeder Auftrag einen eigenen Absatz bekommt?',o:['zwei','drei','vier','acht'],a:2,e:'Vier Aufträge, vier Absätze – dazu kommen noch die Einleitung, die Anrede und die Grußformel.'},
+ {q:'Was ist mit „solch gemeinsamer Aktivitäten“ in Arbeitsauftrag 2 gemeint?',o:['Unternehmungen wie Ausflüge, Schwimmen, Picknick oder Feste, die eine Klasse in der letzten Woche gemeinsam macht','Hausübungen, die man zu zweit erledigt','der Familienurlaub in den Sommerferien','Gruppenarbeiten bei Schularbeiten'],a:0,e:'Der Ausgangstext nennt Schwimmen, Picknick und Museumsbesuche – das sind die „gemeinsamen Aktivitäten“.'},
+ {q:'Was erwartet „Gestalte einen Entwurf der perfekten Abschlusswoche“?',o:['eine Wiedergabe dessen, was die Autorin vorschlägt','einen eigenen, konkreten Plan, zum Beispiel Tag für Tag','eine Liste mit Kritikpunkten an Lehrkräften','eine Zusammenfassung des Artikels'],a:1,e:'Gestalten heißt: Du entwickelst selbst etwas – je konkreter, desto überzeugender.'}
+]},
+p1auftr:{type:'classify',cats:['AA 1: beschreiben','AA 2: erklären','AA 3: gestalten','AA 4: appellieren'],items:[
+ {t:'Bei uns stehen in der letzten Woche die Noten fest, und Tests gibt es keine mehr.',c:0},
+ {t:'Oft werden die Stunden mit Filmen oder Spielen gefüllt.',c:0},
+ {t:'Gemeinsame Erlebnisse stärken die Klassengemeinschaft, weil man einander ohne Notendruck begegnet.',c:1},
+ {t:'Wer zusammen ein Fest vorbereitet, lernt die anderen von einer neuen Seite kennen.',c:1},
+ {t:'Am Dienstag findet ein Wandertag statt, am Mittwoch ein Sporttag zwischen den Klassen.',c:2},
+ {t:'Den Abschluss bildet am Freitag ein gemeinsames Frühstück nach der Zeugnisverteilung.',c:2},
+ {t:'Planen Sie die letzte Woche gemeinsam mit den Klassen!',c:3},
+ {t:'Ich bitte Sie, liebe Lehrerinnen und Lehrer, die Zeit bewusst zu nutzen.',c:3}
+]},
+p2order:{type:'order',seed:5,items:[
+ 'Im Osten Österreichs haben die Ferien offiziell begonnen, inoffiziell aber schon eine Woche früher.',
+ 'Die Autorin meint, die letzte Schulwoche sei vielleicht die beste Woche des Jahres.',
+ 'Das Kind verlässt das Haus mit Picknickdecke, Federballschlägern und Spritzpistole statt mit der Schultasche.',
+ 'Für den Heimweg bekommt das Kind täglich Geld für ein Eis mit den Freundinnen.',
+ 'Zu Hause wird die Schlafenszeit nach hinten verschoben, und es gibt fast täglich Eis.',
+ 'Vieles wird auf die scheinbar endlosen Sommerferien verschoben.',
+ 'Die Autorin wünscht allen schöne Ferien und eine schöne geheime zehnte Ferienwoche.'
+]},
+p2rf:{type:'classify',cats:['richtig','falsch'],items:[
+ {t:'Die Autorin schreibt aus der Sicht einer Mutter.',c:0,e:'Sie erzählt von „dem Kind“ und von der Stimmung „daheim“.'},
+ {t:'Die Autorin schreibt aus der Sicht einer Lehrerin.',c:1,e:'Sie schreibt als Elternteil, nicht als Lehrkraft.'},
+ {t:'In der letzten Woche stehen Programmpunkte wie Schwimmen, Picknick oder Museumsbesuch auf dem Plan.',c:0},
+ {t:'Die Autorin fordert, dass in der letzten Woche wieder Tests geschrieben werden.',c:1,e:'Sie findet die Woche ohne Tests „wunderbar“.'},
+ {t:'Das Kind darf länger aufbleiben, um auf dem Balkon zu lesen.',c:0},
+ {t:'Das Kind selbst nennt die Woche „sehr ungesund“.',c:0,e:'Wegen des fast täglichen Eises.'},
+ {t:'Die Schulfreundinnen sieht das Kind in den Sommerferien jeden Tag.',c:1,e:'Viele sieht man großteils erst im Herbst wieder.'},
+ {t:'Die Autorin wäre in dieser Woche als Erwachsene gern selbst wieder Schulkind.',c:0}
+]},
+p2haltung:{type:'mc',items:[
+ {q:'Wie steht die Autorin zur letzten Schulwoche?',o:['empört und verärgert','positiv und mit einem Augenzwinkern','neutral, ohne jede Meinung','besorgt wegen der verlorenen Lernzeit'],a:1,e:'Sie findet die Woche „ganz wunderbar“ und schreibt humorvoll darüber.'},
+ {q:'Welcher Textsorte ähnelt der Beitrag am meisten?',o:['einer persönlichen, humorvollen Kolumne','einem sachlichen Unfallbericht','einem Interview','einer Gebrauchsanweisung'],a:0,e:'Persönliche Erlebnisse, Humor, Ich-Perspektive – typisch für eine Kolumne oder Glosse.'},
+ {q:'Was bedeutet der Titel „Die zehnte Ferienwoche“?',o:['Die Sommerferien wurden offiziell um eine Woche verlängert.','Die neun Wochen Sommerferien bekommen durch die letzte Schulwoche „heimlich“ eine zehnte dazu.','Es ist die zehnte Woche des Schuljahres.','Im ganzen Schuljahr gibt es genau zehn Ferienwochen.'],a:1,e:'Offiziell ist noch Schule, gefühlt aber schon Ferien – daher „geheime“ zehnte Woche.'},
+ {q:'Wie knüpfst du in deinem Leserbrief am besten an den Beitrag an?',o:['Ich erzähle den Text Satz für Satz nach.','Ich gehe gar nicht auf den Text ein.','Ich greife die Beobachtung der Autorin auf und zeige, wie man diese Woche gemeinsam noch besser nutzen könnte.','Ich mache mich über die Autorin lustig.'],a:2,e:'Zustimmen, ergänzen, weiterdenken – so entsteht ein eigener Standpunkt mit Bezug zum Text.'}
+]},
+p3placemat:{type:'free',fields:[
+ {l:'Feld 1: Schülerinnen und Schüler',ph:'Was wünschen sie sich? Was stört sie?',s:'Erholung nach dem Notenstress · Zeit mit Freundinnen und Freunden · Ausflüge statt Absitzen · Mitbestimmung beim Programm · Langeweile, wenn nur Filme laufen'},
+ {l:'Feld 2: Lehrerinnen und Lehrer',ph:'',s:'Klasse einmal anders erleben · Beziehung stärken · Organisationsaufwand und Aufsichtspflicht · eventuell noch Stoff abschließen · auch selbst müde nach dem Schuljahr'},
+ {l:'Feld 3: Eltern',ph:'',s:'Kinder sollen gern zur Schule gehen · Sicherheit bei Ausflügen · Kosten für Eintritte und Fahrten · Einladung zum Schulfest freut sie'},
+ {l:'Feld 4: Schulleitung',ph:'',s:'gutes Schulklima · Ruf der Schule · Schulgemeinschaft über Klassen hinweg stärken · Rahmen und Budget für Projekte schaffen · Unterrichtspflicht bis zum letzten Tag'}
+]},
+p3ideen:{type:'classify',cats:['spricht für gemeinsame Aktivitäten','spricht für normalen Unterricht'],items:[
+ {t:'Die Noten stehen zu diesem Zeitpunkt bereits fest.',c:0},
+ {t:'Ohne Prüfungsdruck lernt man einander von einer neuen Seite kennen.',c:0},
+ {t:'Manche Lehrpläne sind noch nicht vollständig durchgenommen.',c:1},
+ {t:'Gemeinsame Erlebnisse stärken die Klassengemeinschaft für das nächste Schuljahr.',c:0},
+ {t:'Unterrichtszeit ist wertvoll und sollte bis zum letzten Tag genützt werden.',c:1},
+ {t:'Nach einem langen Schuljahr brauchen alle Abwechslung und Erholung.',c:0},
+ {t:'Wer bis zum Schluss Stoff wiederholt, startet im Herbst mit besserem Wissen.',c:1},
+ {t:'Bei Ausflügen und Projekten lernt man ebenfalls, nur auf andere Weise.',c:0}
+]},
+p4class:{type:'classify',cats:['Behauptung','Begründung','Beispiel/Beweis'],items:[
+ {t:'Gemeinsame Aktivitäten stärken die Klassengemeinschaft,',c:0},
+ {t:'weil man einander ohne Notendruck begegnet.',c:1},
+ {t:'Bei unserem Wandertag haben zum Beispiel zwei Mitschülerinnen, die sonst kaum miteinander sprechen, den ganzen Weg zusammen gelacht.',c:2},
+ {t:'Ein gemeinsamer Abschluss macht das Schuljahr rund,',c:0},
+ {t:'denn nach Monaten voller Stress braucht es einen bewussten, schönen Schlusspunkt.',c:1},
+ {t:'So erinnern sich viele noch Jahre später an ein Abschlussfest, aber kaum an eine einzelne Unterrichtsstunde.',c:2},
+ {t:'Auch bei Ausflügen lernen wir viel,',c:0},
+ {t:'da wir Wissen dort mit allen Sinnen erleben.',c:1},
+ {t:'Bei einem Museumsbesuch etwa bleibt Geschichte viel besser hängen als beim Lesen im Schulbuch.',c:2}
+]},
+p4a22:{type:'free',fields:[
+ {l:'Behauptung 1: Gemeinsame Aktivitäten stärken die Klassengemeinschaft.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Ohne Noten- und Prüfungsdruck begegnet man einander offener und entspannter. <b>Beispiel:</b> Beim gemeinsamen Picknick kommen oft Mitschülerinnen ins Gespräch, die im Unterricht nie nebeneinandersitzen.'},
+ {l:'Behauptung 2: Ein gemeinsamer Abschluss ist wichtig für die Erholung.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Nach einem anstrengenden Schuljahr hilft ein bewusster, schöner Schlusspunkt, abzuschalten und Kraft zu tanken. <b>Beispiel:</b> Ein Badetag oder eine Wanderung nach der letzten Schularbeit fühlt sich an wie ein gemeinsames Durchatmen.'},
+ {l:'Behauptung 3: Auch außerhalb des Klassenzimmers lernt man viel.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Wer etwas selbst erlebt, behält es besser als Stoff aus dem Buch. <b>Beispiel:</b> Bei einem Museumsbesuch oder im Tiergarten werden Inhalte aus Geschichte oder Biologie plötzlich anschaulich.'},
+ {l:'Behauptung 4: Schülerinnen und Schüler sollten die letzte Woche mitplanen dürfen.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Wer mitentscheidet, macht motivierter mit und übernimmt Verantwortung. <b>Beispiel:</b> Wenn eine Klasse ihr Abschlussfest selbst organisiert, lernt sie nebenbei planen, Aufgaben verteilen und im Team arbeiten.'}
+]},
+p4gegen:{type:'free',fields:[
+ {l:'Gegenargument: „Die letzte Woche ist verlorene Unterrichtszeit.“',ph:'Zwar …, doch …',s:'Zwar fehlt in dieser Woche klassischer Unterricht, doch die Noten stehen ohnehin fest, und die Motivation ist gering. Bei Projekten und Ausflügen lernen wir dagegen mit Begeisterung, nur eben auf andere Weise.'},
+ {l:'Gegenargument: „Ausflüge kosten Geld und machen den Lehrkräften viel Arbeit.“',ph:'Natürlich …; trotzdem …',s:'Natürlich bedeuten Ausflüge Aufwand; trotzdem gibt es viele Aktivitäten, die kaum etwas kosten, etwa eine Wanderung, ein Picknick im Park oder ein Sporttag im Schulhof. Wenn die Klassen beim Planen mithelfen, werden die Lehrkräfte außerdem entlastet.'}
+]},
+p5table:{type:'free',fields:[
+ {l:'Absenderin',ph:'',s:'Vorname Nachname (eventuell mit Adresse). Bei der Schularbeit optional.'},
+ {l:'Empfänger',ph:'',s:'die Redaktion der Tageszeitung „Die Presse“'},
+ {l:'Ort, Datum',ph:'',s:'[dein Ort], am [Datum der Schularbeit]'},
+ {l:'Betreff',ph:'',s:'z. B. Die letzte Schulwoche – zu wertvoll zum Absitzen / Gemeinsam statt gelangweilt!'},
+ {l:'Adressat/in',ph:'',s:'Sehr geehrtes Redaktionsteam! (auch möglich: Sehr geehrte Frau Marits!) – geschrieben für die Leserschaft der Presse'},
+ {l:'Titel des Textes',ph:'',s:'„Die zehnte Ferienwoche“ von Mirjam Marits'},
+ {l:'Erscheinungsdatum',ph:'',s:'1. Juli 2022, Online-Ausgabe der Tageszeitung „Die Presse“'},
+ {l:'Schreibanlass',ph:'',s:'Als Schülerin erlebe ich die letzte Schulwoche jedes Jahr selbst und bin daher direkt betroffen.'},
+ {l:'Thema',ph:'',s:'die letzte Schulwoche vor dem Zeugnistag, die sich schon wie Ferien anfühlt – und wie man sie sinnvoll gemeinsam gestalten kann'}
+]},
+p5gaps:{type:'gaps',items:[
+ {t:'Mit großem Interesse habe ich den Beitrag „Die zehnte Ferienwoche“ von Mirjam Marits gelesen, der am 1. Juli 2022 in der Online-Ausgabe der {Tageszeitung „Die Presse“|Wochenzeitung „NÖN“|„Wiener Zeitung“} erschienen ist.'},
+ {t:'Die Autorin beschreibt darin, dass die letzte Schulwoche {eigentlich schon eine geheime Ferienwoche ist|offiziell verlängert werden sollte|zu viele Tests enthält}.'},
+ {t:'Als {Schülerin|Lehrerin|Mutter} bin ich von diesem Thema direkt betroffen.',e:'So steht es in der Situation der Aufgabenstellung.'},
+ {t:'In den folgenden Zeilen möchte ich Ihnen meine {Erfahrungen und Ansichten|Urlaubspläne für den Sommer|Beschwerden über die Autorin} dazu schildern.',e:'Die Aufgabe sagt: Ansichten und Erfahrungen mit der Leserschaft teilen.'}
+]},
+p5betreff:{type:'mc',items:[
+ {q:'Welcher Betreff passt am besten?',o:['Betreff: Leserbrief zu einem Artikel','Betreff: Die letzte Schulwoche – zu wertvoll zum Absitzen','Betreff: Hallo Presse!','Betreff: Ein Text, den ich in der Zeitung gelesen habe und zu dem ich etwas sagen möchte'],a:1,e:'Kurz, thematisch, mit einer Andeutung deiner Position.'},
+ {q:'Welcher Satz leitet von der Einleitung zum Hauptteil über?',o:['Mit freundlichen Grüßen','In den folgenden Zeilen möchte ich Ihnen meine Erfahrungen und Gedanken dazu schildern.','Planen Sie die Woche gemeinsam mit uns!','Am Dienstag ist Wandertag.'],a:1,e:'Die Überleitung kündigt an, was jetzt kommt.'},
+ {q:'Welcher erste Satz für Arbeitsauftrag 1 passt am besten?',o:['Bei uns sieht die letzte Schulwoche meistens so aus: …','Letztes Jahr ging ich am Montag zur Schule, dann sah ich einen Film, dann ging ich heim.','Die letzte Schulwoche ist der Grund, warum ich Schule hasse.','Planen Sie die letzte Woche besser!'],a:0,e:'Sachlich, beschreibend, im Präsens – und ohne Präteritum-Erzählkette.'}
+]},
+p6real:{type:'classify',cats:['realistisch','unrealistisch'],items:[
+ {t:'Wandertag in die nähere Umgebung',c:0},
+ {t:'Flug mit der ganzen Schule ans Meer',c:1,e:'viel zu teuer und organisatorisch nicht machbar'},
+ {t:'Projekttag: ein Beet im Schulhof anlegen',c:0},
+ {t:'Sporttag mit Spielen zwischen den Klassen',c:0},
+ {t:'Eine Woche ohne Lehrkräfte allein in der Schule übernachten',c:1,e:'Aufsichtspflicht – das wäre nicht erlaubt'},
+ {t:'Fotorückblick auf das Schuljahr gestalten',c:0},
+ {t:'Jeden Tag Eis für alle auf Kosten der Schule',c:1,e:'Nett gemeint, aber kein glaubwürdiger Vorschlag an eine Schulleitung'},
+ {t:'Kleines Schulfest, zu dem die Eltern eingeladen werden',c:0}
+]},
+p6woche:{type:'free',fields:[
+ {l:'Montag',ph:'',s:'In Gruppen das Abschlussfest planen und Aufgaben verteilen – damit alle mitbestimmen können.'},
+ {l:'Dienstag',ph:'',s:'Wandertag in die Umgebung mit Picknick.'},
+ {l:'Mittwoch',ph:'',s:'Projekttag: Jede Klasse gestaltet etwas für die Schulgemeinschaft, etwa ein Beet im Schulhof oder eine Fotowand.'},
+ {l:'Donnerstag',ph:'',s:'Schulfest mit Eltern und Lehrkräften, bei dem die Klassen zeigen, was sie im Jahr erarbeitet haben.'},
+ {l:'Freitag',ph:'',s:'Zeugnisverteilung und gemeinsames Abschiedsfrühstück.'}
+]},
+p7passt:{type:'classify',cats:['passt','passt nicht'],items:[
+ {t:'Ich bitte Sie, liebe Lehrerinnen und Lehrer, die letzte Woche gemeinsam mit uns zu planen.',c:0},
+ {t:'Liebe Mitschülerinnen und Mitschüler, genießt einfach die freie Zeit!',c:1,e:'falsche Zielgruppe: Der Auftrag nennt Schulleitungen und Lehrkräfte'},
+ {t:'Sehr geehrte Schulleiterinnen und Schulleiter, geben Sie den Klassen die Möglichkeit, ihre Abschlusswoche mitzugestalten!',c:0},
+ {t:'Ihr Lehrer seid echt faul, wenn ihr nur Filme zeigt!',c:1,e:'beleidigend, ohne Höflichkeitsform'},
+ {t:'Lassen Sie uns gemeinsam eine Woche gestalten, an die sich alle gern erinnern!',c:0},
+ {t:'Liebe Eltern, kauft euren Kindern jeden Tag ein Eis!',c:1,e:'falsche Zielgruppe und kein Bezug zu deinen Argumenten'},
+ {t:'Genug Filme geschaut – gestalten wir die letzte Woche gemeinsam!',c:0}
+]},
+p7formen:{type:'gaps',items:[
+ {t:'(Imperativ, Höflichkeitsform) {Planen Sie|Plant Sie|Plane Sie} die letzte Woche gemeinsam mit den Klassen!'},
+ {t:'(Verb der Aufforderung, Präsens) Ich {bitte|bat|gebeten} Sie, die Zeit bewusst zu nutzen.'},
+ {t:'(Infinitiv mit zu) Diese Woche ist sinnvoll {zu gestalten|gestalten|gestaltet}!'},
+ {t:'(Futur I) Sie {werden|wurden|würden} sehen, wie sehr die Klassengemeinschaft davon profitiert!'},
+ {t:'(Partizip Perfekt) Genug {gewartet|warten|wartet}!'},
+ {t:'(Modalverb, Präsens) Die letzte Woche {darf|durfte|gedurft} nicht einfach verstreichen.'}
+]},
+p7frei:{type:'free',fields:[
+ {l:'Appell mit Imperativ',ph:'',s:'Liebe Lehrerinnen und Lehrer, nutzen Sie die letzte Woche bewusst und planen Sie sie gemeinsam mit uns!'},
+ {l:'Appell mit einem Verb der Aufforderung',ph:'',s:'Ich bitte Sie, liebe Schulleiterinnen und Schulleiter, den Klassen Raum für eigene Projekte zu geben.'},
+ {l:'Kurzer, einprägsamer Schlusssatz',ph:'',s:'Genug Filme geschaut – machen wir die zehnte Ferienwoche zur schönsten Woche des Jahres!'}
+]},
+p8plan:{type:'free',fields:[
+ {l:'Betreff und Anrede',ph:'',s:'Die letzte Schulwoche – zu wertvoll zum Absitzen · Sehr geehrtes Redaktionsteam!'},
+ {l:'Einleitung',ph:'Bezug · Schreibanlass · Überleitung',s:'„Die zehnte Ferienwoche“, Mirjam Marits, Presse online, 1. 7. 2022 · Thema: letzte Woche = geheime Ferienwoche · ich als Schülerin direkt betroffen · Überleitung'},
+ {l:'Absatz AA 1: typische letzte Woche',ph:'',s:'Noten fix · keine Tests · Filme, Spiele · manche Klassen Ausflug · oft Warten statt Abschluss'},
+ {l:'Absatz AA 2: Wichtigkeit gemeinsamer Aktivitäten',ph:'',s:'B: stärkt Klassengemeinschaft · B: ohne Notendruck · B: Picknick, Wandertag – Mitschüler neu kennenlernen · Gegenargument „verlorene Zeit“ → auch dort lernt man'},
+ {l:'Absatz AA 3: perfekte Abschlusswoche',ph:'',s:'Mo Fest planen · Di Wandertag · Mi Projekttag (Beet) · Do Schulfest mit Eltern · Fr Zeugnis + Frühstück'},
+ {l:'Schluss AA 4: Appell',ph:'',s:'an Schulleitungen und Lehrkräfte · „Ich bitte Sie …“ · „Planen Sie gemeinsam mit uns!“ · Schlusssatz mit Bezug zum Titel'},
+ {l:'Grußformel',ph:'',s:'Mit freundlichen Grüßen · Name'}
+]},
+p9vergleich:{type:'mc',items:[
+ {q:'Wen spricht Variante B in der Anrede zusätzlich zur Redaktion an?',o:['die Schulleitung','die Autorin Frau Marits','die Eltern','niemanden'],a:1,e:'„Sehr geehrte Frau Marits, sehr geehrtes Redaktionsteam!“ – auch die Verfasserin darf angesprochen werden.'},
+ {q:'Wo entkräftet Variante B ein Gegenargument?',o:['in der Einleitung','im Absatz zu Arbeitsauftrag 2','im Entwurf der Woche','in der Grußformel'],a:1,e:'„Zwar meinen manche, diese Woche sei verlorene Unterrichtszeit, doch …“'},
+ {q:'Welches Begründungswort verwendet Variante A in „…, zumal man sich danach zwei Monate lang kaum sieht“?',o:['eine unterordnende Konjunktion für einen zusätzlichen Grund','ein Kausaladverb','eine Präposition','einen Imperativ'],a:0,e:'zumal = unterordnend, Verb am Ende, fügt einen weiteren Grund hinzu.'},
+ {q:'Was haben beide Schlüsse gemeinsam?',o:['Sie richten sich an Schulleitungen und Lehrkräfte und greifen den Titel des Beitrags noch einmal auf.','Sie richten sich an die Eltern.','Sie enthalten kein Rufzeichen.','Sie fassen nur den Artikel zusammen.'],a:0,e:'Richtige Zielgruppe plus Rückbezug auf die „zehnte Ferienwoche“ – ein runder Abschluss.'}
+]}
+};
+
+/* ---------- Renderer ---------- */
+const R={};
+R.mc=function(body,cfg,st,save){
+  st.sel=st.sel||{};
+  const qs=cfg.items.map((it,i)=>{
+    const q=el('div','q');q.append(el('p','qt',`<span class="qn">${i+1}</span>${it.q}`));
+    const ops=el('div','opts col');const fb=el('div','fb');
+    const btns=it.o.map((o,j)=>{const b=el('button','opt',o);b.type='button';
+      if(st.sel[i]===j)b.classList.add('sel');
+      b.onclick=()=>{st.sel[i]=j;save();btns.forEach((x,k)=>{x.classList.toggle('sel',k===j);x.classList.remove('right','wrong')});hideFb(fb)};
+      ops.append(b);return b});
+    q.append(ops,fb);body.append(q);return {btns,fb,it};
+  });
+  return{
+    check(){let r=0;qs.forEach(({btns,fb,it},i)=>{const s=st.sel[i];btns.forEach(b=>b.classList.remove('right','wrong'));
+      if(s===undefined){setFb(fb,'neutral','Noch nicht beantwortet.');return}
+      if(s===it.a){r++;btns[s].classList.add('right');setFb(fb,'ok','✓ Richtig! '+(it.e||''))}
+      else{btns[s].classList.add('wrong');setFb(fb,'bad','✗ Leider nicht. Versuch es noch einmal oder sieh dir die Lösung an.')}});return[r,qs.length]},
+    solve(){qs.forEach(({btns,fb,it},i)=>{btns.forEach((b,k)=>{b.classList.remove('sel','wrong');b.classList.toggle('right',k===it.a)});st.sel[i]=it.a;setFb(fb,'ok',it.e||'')});save()},
+    reset(){qs.forEach(({btns,fb})=>{btns.forEach(b=>b.classList.remove('sel','right','wrong'));hideFb(fb)})}
+  };
+};
+R.classify=function(body,cfg,st,save){
+  st.sel=st.sel||{};
+  const rows=cfg.items.map((it,i)=>{
+    const row=el('div','row');row.append(el('div','txt',`<span class="qn">${i+1}</span>${it.t}`));
+    const cats=el('div','cats');const fb=el('div','fb');
+    const btns=cfg.cats.map((c,j)=>{const b=el('button','opt cat',c);b.type='button';if(st.sel[i]===j)b.classList.add('sel');
+      b.onclick=()=>{st.sel[i]=j;save();btns.forEach((x,k)=>{x.classList.toggle('sel',k===j);x.classList.remove('right','wrong')});row.classList.remove('right','wrong');hideFb(fb)};
+      cats.append(b);return b});
+    row.append(cats,fb);body.append(row);return{row,btns,fb,it};
+  });
+  return{
+    check(){let r=0;rows.forEach(({row,btns,fb,it},i)=>{const s=st.sel[i];btns.forEach(b=>b.classList.remove('right','wrong'));row.classList.remove('right','wrong');hideFb(fb);
+      if(s===undefined)return;
+      if(s===it.c){r++;btns[s].classList.add('right');row.classList.add('right');if(it.e)setFb(fb,'ok','✓ '+it.e)}
+      else{btns[s].classList.add('wrong');row.classList.add('wrong')}});return[r,rows.length]},
+    solve(){rows.forEach(({row,btns,fb,it},i)=>{btns.forEach((b,k)=>{b.classList.remove('sel','wrong');b.classList.toggle('right',k===it.c)});row.classList.remove('wrong');row.classList.add('right');st.sel[i]=it.c;if(it.e)setFb(fb,'ok',it.e)});save()},
+    reset(){rows.forEach(({row,btns,fb})=>{btns.forEach(b=>b.classList.remove('sel','right','wrong'));row.classList.remove('right','wrong');hideFb(fb)})}
+  };
+};
+R.gaps=function(body,cfg,st,save){
+  st.sel=st.sel||{};const sels=[];
+  cfg.items.forEach((it,i)=>{
+    const line=el('div','gapline');let n=0;
+    const html=it.t.replace(/\{([^}]+)\}/g,(m,inner)=>{const opts=inner.split('|');const id=i+'_'+(n++);
+      const sorted=opts.slice().sort((a,b)=>a.localeCompare(b,'de'));
+      return `<select class="gap" data-id="${id}" data-a="${encodeURIComponent(opts[0])}"><option value="">…</option>${sorted.map(o=>`<option value="${encodeURIComponent(o)}">${o}</option>`).join('')}</select>`});
+    line.innerHTML=`<span class="qn">${i+1}</span>`+html;
+    const fb=el('div','fb');line.append(fb);body.append(line);
+    line.querySelectorAll('select').forEach(s=>{if(st.sel[s.dataset.id])s.value=st.sel[s.dataset.id];
+      s.onchange=()=>{st.sel[s.dataset.id]=s.value;save();s.classList.remove('right','wrong');hideFb(fb)};sels.push({s,fb,it})});
+  });
+  return{
+    check(){let r=0;const bad=new Set();sels.forEach(({s,fb,it})=>{s.classList.remove('right','wrong');if(!s.value){return}
+      if(s.value===s.dataset.a){r++;s.classList.add('right')}else{s.classList.add('wrong');bad.add(fb)}});
+      sels.forEach(({fb})=>{if(bad.has(fb))setFb(fb,'bad','✗ Hier stimmt etwas noch nicht.');else hideFb(fb)});return[r,sels.length]},
+    solve(){sels.forEach(({s,fb,it})=>{s.value=s.dataset.a;st.sel[s.dataset.id]=s.value;s.classList.remove('wrong');s.classList.add('right');if(it.e)setFb(fb,'ok',it.e)});save()},
+    reset(){sels.forEach(({s,fb})=>{s.value='';s.classList.remove('right','wrong');hideFb(fb)})}
+  };
+};
+R.match=function(body,cfg,st,save){
+  const defs=shuffleSeed(cfg.items.map(x=>x.a),11);
+  const g={t:cfg.items.map(it=>it.t+': {'+[it.a].concat(defs.filter(d=>d!==it.a)).join('|')+'}')};
+  // Darstellung als Auswahl-Liste je Operator
+  st.sel=st.sel||{};const sels=[];
+  cfg.items.forEach((it,i)=>{
+    const line=el('div','gapline');
+    line.innerHTML=`<span class="qn">${i+1}</span><b>${it.t}</b><br>`;
+    const s=el('select','gap');s.dataset.a=it.a;s.style.marginTop='6px';s.style.width='100%';
+    s.innerHTML='<option value="">… Bedeutung wählen</option>'+defs.map(d=>`<option>${d}</option>`).join('');
+    if(st.sel[i])s.value=st.sel[i];
+    s.onchange=()=>{st.sel[i]=s.value;save();s.classList.remove('right','wrong')};
+    line.append(s);body.append(line);sels.push(s);
+  });
+  return{
+    check(){let r=0;sels.forEach(s=>{s.classList.remove('right','wrong');if(!s.value)return;if(s.value===s.dataset.a){r++;s.classList.add('right')}else s.classList.add('wrong')});return[r,sels.length]},
+    solve(){sels.forEach((s,i)=>{s.value=s.dataset.a;st.sel[i]=s.value;s.classList.remove('wrong');s.classList.add('right')});save()},
+    reset(){sels.forEach(s=>{s.value='';s.classList.remove('right','wrong')})}
+  };
+};
+R.order=function(body,cfg,st,save){
+  const correct=cfg.items;let cur=st.order&&st.order.length===correct.length?st.order.slice():null;
+  if(!cur){cur=shuffleSeed(correct.map((_,i)=>i),cfg.seed||3);if(cur.every((v,i)=>v===i))cur.reverse()}
+  const ul=el('ol','order');body.append(ul);
+  function draw(marks){ul.innerHTML='';cur.forEach((idx,pos)=>{const li=el('li');li.append(el('span','pos',(pos+1)+'.'),el('span','lbl',correct[idx]));
+    const up=el('button','mv','↑');up.type='button';up.disabled=pos===0;up.onclick=()=>{[cur[pos-1],cur[pos]]=[cur[pos],cur[pos-1]];st.order=cur;save();draw()};
+    const dn=el('button','mv','↓');dn.type='button';dn.disabled=pos===cur.length-1;dn.onclick=()=>{[cur[pos+1],cur[pos]]=[cur[pos],cur[pos+1]];st.order=cur;save();draw()};
+    li.append(up,dn);if(marks)li.classList.add(idx===pos?'right':'wrong');ul.append(li)})}
+  draw();
+  return{
+    check(){draw(true);return[cur.filter((v,i)=>v===i).length,cur.length]},
+    solve(){cur=correct.map((_,i)=>i);st.order=cur;save();draw(true)},
+    reset(){cur=shuffleSeed(correct.map((_,i)=>i),cfg.seed||3);if(cur.every((v,i)=>v===i))cur.reverse();draw()}
+  };
+};
+R.multi=function(body,cfg,st,save){
+  st.sel=st.sel||{};const ops=el('div','opts col');const fb=el('div','fb');
+  const btns=cfg.opts.map((o,i)=>{const b=el('button','opt',o.t);b.type='button';if(st.sel[i])b.classList.add('sel');
+    b.onclick=()=>{st.sel[i]=!st.sel[i];save();b.classList.toggle('sel',!!st.sel[i]);btns.forEach(x=>x.classList.remove('right','wrong'));hideFb(fb)};ops.append(b);return b});
+  body.append(ops,fb);
+  const explain=()=>cfg.opts.map(o=>o.e?`<div>${o.ok?'✓':'✗'} <i>${o.t}</i> – ${o.e}</div>`:'').join('');
+  return{
+    check(){let r=0;cfg.opts.forEach((o,i)=>{const s=!!st.sel[i];btns[i].classList.remove('right','wrong');
+      if(s===o.ok){r++;if(s)btns[i].classList.add('right')}else btns[i].classList.add('wrong')});
+      setFb(fb,r===cfg.opts.length?'ok':'bad',r===cfg.opts.length?'✓ Alles richtig!':'Rot markiert ist entweder eine unpassende Anrede, die du gewählt hast, oder eine passende, die dir noch fehlt.');return[r,cfg.opts.length]},
+    solve(){cfg.opts.forEach((o,i)=>{st.sel[i]=o.ok;btns[i].classList.toggle('sel',o.ok);btns[i].classList.remove('wrong');btns[i].classList.toggle('right',o.ok)});save();setFb(fb,'ok',explain())},
+    reset(){btns.forEach(b=>b.classList.remove('sel','right','wrong'));hideFb(fb)}
+  };
+};
+R.free=function(body,cfg,st,save){
+  st.v=st.v||{};const sols=[];const tas=[];
+  cfg.fields.forEach((f,i)=>{const d=el('div','field');d.append(el('label','',`<span class="qn">${i+1}</span>${f.l}`));
+    const ta=el('textarea');ta.rows=f.rows||3;ta.placeholder=f.ph||'';ta.value=st.v[i]||'';ta.oninput=()=>{st.v[i]=ta.value;save()};
+    const so=el('div','sol','<b>Vorschlag:</b> '+f.s);d.append(ta,so);body.append(d);sols.push(so);tas.push(ta)});
+  let shown=false;
+  return{solveLabel:'Musterlösung zeigen',
+    solve(btn){shown=!shown;sols.forEach(s=>s.classList.toggle('show',shown));if(btn)btn.textContent=shown?'Musterlösung ausblenden':'Musterlösung zeigen'},
+    reset(){if(tas.some(t=>t.value)&&!confirm('Deine Texte in dieser Übung löschen?'))return false;tas.forEach(t=>t.value='');shown=false;sols.forEach(s=>s.classList.remove('show'))}
+  };
+};
+R.lupe=function(body,cfg,st,save){
+  st.m=st.m||{};const wrap=el('div','letter');const fbBox=el('div','lupe-fb');
+  const spans=cfg.segs.map((sg,i)=>{const sp=el('span','seg',sg.t);if(st.m[i])sp.classList.add('mark');
+    sp.onclick=()=>{st.m[i]=!st.m[i];save();sp.className='seg'+(st.m[i]?' mark':'');fbBox.innerHTML=''};
+    wrap.append(sp,document.createTextNode(i===0||i===cfg.segs.length-2?'\n':' '));return sp});
+  wrap.style.whiteSpace='pre-line';body.append(wrap,fbBox);
+  const nErr=cfg.segs.filter(s=>s.err).length;
+  return{
+    check(){let found=0,fa=0;const lines=[];cfg.segs.forEach((sg,i)=>{const m=!!st.m[i];const sp=spans[i];sp.className='seg';
+      if(m&&sg.err){found++;sp.classList.add('found');lines.push(`<div>✓ <i>${sg.t}</i> – ${sg.e}</div>`)}
+      else if(m&&!sg.err){fa++;sp.classList.add('falsealarm');lines.push(`<div>✗ <i>${sg.t}</i> – Diese Stelle ist in Ordnung.</div>`)}});
+      fbBox.innerHTML=`<p><b>${found} von ${nErr} Fehlern gefunden</b>${fa?`, ${fa} Stelle(n) zu viel markiert`:''}.${found<nErr?' Es fehlen noch Fehler – such weiter!':''}</p>`+lines.join('');
+      return[Math.max(0,found-fa),nErr]},
+    solve(){const lines=[];cfg.segs.forEach((sg,i)=>{const sp=spans[i];sp.className='seg';
+      if(sg.err){sp.classList.add(st.m[i]?'found':'missed');st.m[i]=true;lines.push(`<div>• <i>${sg.t}</i> – ${sg.e}</div>`)}
+      else if(st.m[i]){sp.classList.add('falsealarm');st.m[i]=false}});save();
+      fbBox.innerHTML='<p><b>Die sechs Fehler:</b></p>'+lines.join('')},
+    reset(){spans.forEach(s=>s.className='seg');fbBox.innerHTML=''}
+  };
+};
+
+/* ---------- Aufgaben aufbauen ---------- */
+let DONE=S.get('done',{});
+document.querySelectorAll('.task').forEach(t=>{
+  const id=t.dataset.task,cfg=TASKS[id];if(!cfg||!R[cfg.type])return;
+  const st=S.get('t_'+id,{});const save=()=>S.set('t_'+id,st);
+  const body=el('div','tbody');t.append(body);
+  const api=R[cfg.type](body,cfg,st,save);
+  const bar=el('div','bar');const res=el('span','res');
+  const mk=(txt,cls,fn)=>{const b=el('button','btn '+cls,txt);b.type='button';b.onclick=()=>fn(b);bar.append(b);return b};
+  if(api.check)mk('Prüfen','p',()=>{const[r,n]=api.check();res.textContent=`${r} von ${n} richtig`+(r===n?' – großartig!':'');res.className='res '+(r===n?'ok':'mid');
+    if(r===n){DONE[id]=1;S.set('done',DONE);t.classList.add('isdone');updateNav()}});
+  mk(api.solveLabel||'Lösung zeigen','s',b=>{api.solve(b);if(api.check)res.textContent=''});
+  mk('Zurücksetzen','g',()=>{if(api.reset()===false)return;Object.keys(st).forEach(k=>delete st[k]);save();res.textContent='';delete DONE[id];S.set('done',DONE);t.classList.remove('isdone');updateNav()});
+  bar.append(res);t.append(bar);
+  if(DONE[id])t.classList.add('isdone');
+});
+
+/* ---------- Navigation ---------- */
+const navLinks=[...document.querySelectorAll('nav.steps a')];
+function updateNav(){navLinks.forEach(a=>{const sec=document.querySelector(a.getAttribute('href'));if(!sec)return;
+  const ts=[...sec.querySelectorAll('.task')].filter(t=>TASKS[t.dataset.task]&&TASKS[t.dataset.task].type!=='free');
+  a.classList.toggle('done',ts.length>0&&ts.every(t=>DONE[t.dataset.task]))})}
+updateNav();
+if('IntersectionObserver' in window){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('active',on);if(on)a.scrollIntoView({block:'nearest',inline:'center'})})}})},{rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('section.step').forEach(s=>obs.observe(s));
+}
+
+/* ---------- Wörter zählen ---------- */
+function countWords(s){const m=s.replace(/[–—]/g,' ').match(/[A-Za-zÄÖÜäöüßéèáàCO₂0-9][^\s]*/g);return m?m.length:0}
+
+/* ---------- Musterbriefe ---------- */
+const mBox=document.getElementById('musterBox');
+document.querySelectorAll('.mletter').forEach(m=>{const clone=m.cloneNode(true);clone.querySelector('.meta').remove();
+  m.querySelector('.wc').textContent=countWords(clone.textContent)+' Wörter'});
+document.querySelectorAll('#mTabs .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#mTabs .tab').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.mletter').forEach(m=>m.classList.toggle('on',m.id===b.dataset.m))});
+document.getElementById('tgMarks').onclick=e=>{const on=mBox.classList.toggle('show-marks');e.target.textContent=on?'Einfärbung ausblenden':'Bausteine einfärben';document.getElementById('mLegend').hidden=!on};
+document.getElementById('tgLabels').onclick=e=>{const on=mBox.classList.toggle('show-labels');e.target.textContent=on?'Arbeitsaufträge ausblenden':'Arbeitsaufträge anzeigen'};
+
+/* ---------- Schreibwerkstatt ---------- */
+const TOPICS={
+ ferien:{name:'A 29 · Letzte Schulwoche',autor:'Marits',auftraege:'<b>A 29 · Thema: Feriendiskussion.</b> Als Schülerin bist du direkt betroffen. Text: „Die zehnte Ferienwoche“ von Mirjam Marits, Die Presse Online, 1. Juli 2022.<br>• <b>Beschreibe</b> knapp eine typische letzte Schulwoche.<br>• <b>Erkläre</b> die Wichtigkeit solch gemeinsamer Aktivitäten.<br>• <b>Gestalte</b> einen Entwurf der perfekten Abschlusswoche.<br>• <b>Appelliere</b> an Schulleitungen sowie Lehrerinnen und Lehrer.'}
+};
+const FIELDS=[
+ {k:'notiz',l:'Notizen & Schreibplan',h:'Stichworte zu jedem Absatz (wird nicht mitgezählt)',rows:3,count:false,chips:[]},
+ {k:'betreff',l:'Betreff',h:'kurz und treffend',rows:1,chips:['Betreff: ']},
+ {k:'anrede',l:'Anrede',h:'',rows:1,chips:['Sehr geehrtes Redaktionsteam!','Sehr geehrte Damen und Herren!','Liebe Leserinnen und Leser!']},
+ {k:'einl',l:'Einleitung',h:'Bezug zum Text · Schreibanlass · Überleitung',rows:5,chips:['Mit großem Interesse habe ich Ihren Beitrag „“ von  gelesen, der am  in der Online-Ausgabe der  erschienen ist. ','Darin geht es um ','Da , hat mich das Thema sofort angesprochen. ','In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.']},
+ {k:'h1',l:'Hauptteil – Absatz 1',h:'Arbeitsauftrag 1 bzw. erstes Argument (3-B-Schema)',rows:5,chips:['Ich bin der Ansicht, dass ','Wie die Autorin/der Autor richtig feststellt, ',', denn ',', da ','So ','Zum Beispiel ']},
+ {k:'h2',l:'Hauptteil – Absatz 2',h:'nächster Arbeitsauftrag / Argument',rows:5,chips:['Ein weiteres Argument ist, dass ','Außerdem darf nicht vergessen werden, dass ',', deshalb ',', zumal ','Meine Erfahrungen entsprechen dieser Darstellung, denn ']},
+ {k:'h3',l:'Hauptteil – Absatz 3',h:'weiterer Auftrag oder Gegenargument entkräften',rows:5,chips:['Zwar behaupten manche, dass , doch ','Kritiker mögen einwenden, dass . Dem ist jedoch entgegenzuhalten, dass ','Hinzu kommt, dass ']},
+ {k:'h4',l:'Hauptteil – Absatz 4 (optional)',h:'z. B. bei vier Arbeitsaufträgen',rows:4,chips:['Besonders wichtig erscheint mir, dass ','Meine Vorstellung sähe so aus: ']},
+ {k:'schluss',l:'Schluss mit Appell',h:'an die richtige Zielgruppe!',rows:4,chips:['Ich fordere Sie daher auf, ','Ich bitte Sie, ','Lassen Sie uns gemeinsam ','Tun wir es  zuliebe!','Genug diskutiert – handeln wir!']},
+ {k:'gruss',l:'Grußformel und Name',h:'',rows:2,chips:['Mit freundlichen Grüßen\n']}
+];
+let wsTopic=S.get('ws_topic','ferien');let WS=S.get('ws_data',{});
+const tabsEl=document.getElementById('wsTabs'),fieldsEl=document.getElementById('wsFields');
+Object.entries(TOPICS).forEach(([k,t])=>{const b=el('button','tab',t.name);b.type='button';b.dataset.k=k;b.onclick=()=>{wsTopic=k;S.set('ws_topic',k);buildWS()};tabsEl.append(b)});
+function insertAt(ta,txt){const s=ta.selectionStart??ta.value.length,e=ta.selectionEnd??ta.value.length;ta.value=ta.value.slice(0,s)+txt+ta.value.slice(e);ta.focus();const p=s+txt.length;try{ta.setSelectionRange(p,p)}catch(x){}ta.dispatchEvent(new Event('input'))}
+function buildWS(){
+  tabsEl.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.k===wsTopic));
+  document.getElementById('wsAuftraege').innerHTML=TOPICS[wsTopic].auftraege;
+  WS[wsTopic]=WS[wsTopic]||{};const d=WS[wsTopic];fieldsEl.innerHTML='';
+  FIELDS.forEach(f=>{const box=el('div','field');box.append(el('label','',f.l+(f.h?` <span class="hint">· ${f.h}</span>`:'')));
+    const ta=el('textarea');ta.rows=f.rows;ta.value=d[f.k]||'';ta.dataset.k=f.k;
+    ta.oninput=()=>{d[f.k]=ta.value;S.set('ws_data',WS);updateWS()};box.append(ta);
+    if(f.chips.length){const c=el('div','chips');f.chips.forEach(ch=>{const b=el('button','chip',ch.replace('\n','↵').trim()||ch);b.type='button';b.onclick=()=>insertAt(ta,ch);c.append(b)});box.append(c)}
+    fieldsEl.append(box)});
+  updateWS();
+}
+function letterText(){const d=WS[wsTopic]||{};return FIELDS.filter(f=>f.count!==false).map(f=>(d[f.k]||'').trim()).filter(Boolean).join('\n\n')}
+function updateWS(){
+  const d=WS[wsTopic]||{};const txt=letterText();const n=countWords(txt);
+  const c=document.getElementById('wsCount');c.textContent=n;c.className='count '+(n<270?'low':n>330?'high':'ok');
+  document.getElementById('wsGauge').style.width=Math.min(100,n/400*100)+'%';
+  document.getElementById('wsCountHint').textContent=n<270?`Ziel: 270–330 Wörter · noch ${270-n} bis zum Minimum`:n>330?`${n-330} Wörter zu viel – kürze etwas`:'Im Zielbereich – sehr gut!';
+  document.getElementById('wsPreview').textContent=txt||'Hier erscheint dein Leserbrief, sobald du zu schreiben beginnst.';
+  const low=txt.toLowerCase();const body=[d.einl,d.h1,d.h2,d.h3,d.h4].join(' ').toLowerCase();const sch=(d.schluss||'').toLowerCase();
+  const kaus=(body.match(/\b(denn|weil|da|deshalb|daher|deswegen|nämlich|zumal|somit|aufgrund|wegen|infolge|mangels)\b/g)||[]).length;
+  const aut=TOPICS[wsTopic].autor;
+  const checks=[
+    [/\S/.test(d.betreff||''),'Betreff vorhanden'],
+    [/(sehr geehrte|liebe )/.test((d.anrede||'').toLowerCase()),'Höfliche Anrede'],
+    [/[„"“]/.test(d.einl||'')&&/\d{4}/.test(d.einl||''),'Einleitung nennt Titel (in Anführungszeichen) und Jahr'],
+    [aut?(d.einl||'').includes(aut):/\S/.test(d.einl||''),aut?'Verfasser/in des Textes genannt':'Einleitung geschrieben'],
+    [/\b(da|weil)\b/.test((d.einl||'').toLowerCase())||/betroffen|angesprochen|neugierig/.test((d.einl||'').toLowerCase()),'Schreibanlass erkennbar'],
+    [kaus>=4,`Mindestens 4 Begründungswörter im Text (derzeit ${kaus})`],
+    [/(zum beispiel|beispielsweise|etwa|so kann|so findet|so kommt|erfahrung)/.test(body),'Beispiel-Signal vorhanden'],
+    [/(zwar|kritiker|einwenden|entgegenzuhalten|natürlich)/.test(body),'Gegenargument angesprochen'],
+    [/!/.test(d.schluss||'')&&/(sie|wir|ihr)/.test(sch),'Appell im Schluss (mit Rufzeichen)'],
+    [/grüß/.test((d.gruss||'').toLowerCase()),'Grußformel'],
+    [!/\b(hallo|hi|voll|halt|lg|tschüss|cool|krass|oida)\b/.test(low),'Keine Umgangssprache gefunden'],
+    [!/\b(du|dich|dir|dein)\b/.test(low),'Höflichkeitsform (kein „du“)'],
+    [n>=270&&n<=330,'Wortanzahl 270–330']
+  ];
+  const ul=document.getElementById('wsChecks');ul.innerHTML='';checks.forEach(([ok,t])=>{ul.append(el('li',txt?(ok?'y':'n'):'',t))});
+}
+document.getElementById('wsCopy').onclick=()=>{const t=letterText();const done=()=>{const b=document.getElementById('wsCopy');b.textContent='Kopiert ✓';setTimeout(()=>b.textContent='Brief kopieren',1600)};
+  if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,()=>fallbackCopy(t,done));else fallbackCopy(t,done)};
+function fallbackCopy(t,cb){const ta=el('textarea');ta.value=t;document.body.append(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();cb()}
+document.getElementById('wsClear').onclick=()=>{if(!confirm('Den Brief zu diesem Thema wirklich löschen?'))return;WS[wsTopic]={};S.set('ws_data',WS);buildWS()};
+buildWS();
+
+/* ---------- Checkliste ---------- */
+const CL=[
+ ['Inhalt','Ich habe alle Arbeitsaufträge erfüllt, jeden in einem eigenen Absatz.'],
+ ['Inhalt','Die Einleitung nennt Titel, Verfasser/in, Zeitung, Erscheinungsdatum und das Thema.'],
+ ['Inhalt','Mein Schreibanlass passt zur Situation in der Aufgabenstellung.'],
+ ['Inhalt','Meine Position ist klar erkennbar, ich habe mich für eine Sichtweise entschieden.'],
+ ['Inhalt','Meine Argumente folgen dem 3-B-Schema (Behauptung, Begründung, Beispiel).'],
+ ['Inhalt','Ich nehme mehrmals Bezug auf den Ausgangstext.'],
+ ['Inhalt','Ich habe mindestens ein Gegenargument angesprochen und entkräftet.'],
+ ['Inhalt','Mein Appell ist schlüssig und richtet sich an die Gruppe aus dem Arbeitsauftrag.'],
+ ['Aufbau','Betreff, Anrede, Einleitung, Hauptteil, Schluss, Grußformel und Name sind vorhanden.'],
+ ['Aufbau','Zwischen den Absätzen stehen Leerzeilen.'],
+ ['Aufbau','Überleitungen verbinden die Absätze (Außerdem …, Ein weiteres Argument …).'],
+ ['Stil','Ich verwende durchgehend die Höflichkeitsform (Sie, Ihnen, Ihr großgeschrieben).'],
+ ['Stil','Der Ton ist engagiert, aber sachlich: keine Beleidigungen, keine Umgangssprache.'],
+ ['Stil','Ich bleibe im Tempussystem des Präsens (Perfekt statt Präteritum-Erzählungen).'],
+ ['Stil','Meine Satzanfänge sind abwechslungsreich.'],
+ ['Sprache','Nach weil/da/dass steht das Verb am Ende, nach deshalb/daher direkt danach.'],
+ ['Sprache','Ich habe jedes dass/das überprüft.'],
+ ['Sprache','Vor weil, da, dass und zumal steht ein Komma.'],
+ ['Sprache','Der Text hat 270–330 Wörter.']
+];
+const clState=S.get('cl',{});const clBox=document.getElementById('checklist');let lastCat='';
+CL.forEach(([cat,t],i)=>{if(cat!==lastCat){clBox.append(el('h3','',cat==='Sprache'?'Sprachrichtigkeit':cat));lastCat=cat}
+  const lab=el('label');const cb=el('input');cb.type='checkbox';cb.checked=!!clState[i];cb.onchange=()=>{clState[i]=cb.checked;S.set('cl',clState)};
+  lab.append(cb,el('span','',t));clBox.append(lab)});
+</script>
+</body>
+</html>
