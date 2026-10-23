@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post an die Redaktion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7; --paper:#fffdf8; --ink:#2b2622; --muted:#6b6259; --line:#e3d9c8;
+  --accent:#c2562b; --accent-soft:#f6e1d6; --accent-ink:#8c3a18;
+  --blue:#2f6690; --blue-soft:#dcebf5;
+  --ok:#2e7d4f; --ok-soft:#dff1e5; --bad:#b3362e; --bad-soft:#f8dedb; --mid:#a86b00; --mid-soft:#fbefd2;
+  --beh:#ffe08a; --beg:#bfe3c6; --bsp:#c9dcf5; --geg:#e7cdee; --app:#f7c6b3; --ref:#e9e2d4; --anl:#d6efef;
+  --shadow:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1a17; --paper:#26221e; --ink:#eee6da; --muted:#b2a796; --line:#3d3630;
+    --accent:#e47b4f; --accent-soft:#3e2a20; --accent-ink:#f2a07c;
+    --blue:#7fb3da; --blue-soft:#1f3242;
+    --ok:#6cc58f; --ok-soft:#1e3528; --bad:#ec7f76; --bad-soft:#3e2220; --mid:#e2b04f; --mid-soft:#3a2f17;
+    --beh:#6b5a17; --beg:#2c5a37; --bsp:#2c4566; --geg:#523a5c; --app:#6a3a28; --ref:#3e3a33; --anl:#244848;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#1d1a17; --paper:#26221e; --ink:#eee6da; --muted:#b2a796; --line:#3d3630;
+    --accent:#e47b4f; --accent-soft:#3e2a20; --accent-ink:#f2a07c;
+    --blue:#7fb3da; --blue-soft:#1f3242;
+    --ok:#6cc58f; --ok-soft:#1e3528; --bad:#ec7f76; --bad-soft:#3e2220; --mid:#e2b04f; --mid-soft:#3a2f17;
+    --beh:#6b5a17; --beg:#2c5a37; --bsp:#2c4566; --geg:#523a5c; --app:#6a3a28; --ref:#3e3a33; --anl:#244848;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:"Literata",Georgia,serif;line-height:1.25}
+a{color:var(--blue)}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+
+/* Hero */
+header.hero{padding:44px 0 26px}
+.hero .kicker{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+.hero h1{font-size:clamp(2rem,6vw,3rem);margin:.2em 0 .3em}
+.hero p{font-size:1.08rem;max-width:62ch;margin:.4em 0}
+.stamp{display:inline-block;border:2px dashed var(--accent);color:var(--accent-ink);padding:2px 10px;border-radius:6px;font-weight:700;transform:rotate(-2deg);margin-top:10px;font-size:.9rem}
+
+/* Nav */
+nav.steps{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.steps .inner{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:900px;margin:0 auto;scrollbar-width:thin}
+nav.steps a{flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:.86rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper);white-space:nowrap}
+nav.steps a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+nav.steps a.done::after{content:" ✓";color:var(--ok);font-weight:700}
+nav.steps a.active.done::after{color:#fff}
+
+/* Sections */
+section.step{padding:34px 0 10px}
+.step-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.step-num{font-family:"Literata",serif;font-size:2.4rem;color:var(--accent);font-weight:700;line-height:1}
+.step-head h2{margin:0;font-size:1.65rem}
+.lead{color:var(--muted);margin:.2em 0 1em;max-width:68ch}
+
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.box h3{margin:.1em 0 .5em;font-size:1.18rem}
+.info{border-left:5px solid var(--blue)}
+.tip{border-left:5px solid var(--accent);background:linear-gradient(0deg,var(--paper),var(--paper))}
+.tip .tag,.info .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;margin-bottom:6px}
+.info .tag{background:var(--blue-soft);color:var(--blue)}
+.tip .tag{background:var(--accent-soft);color:var(--accent-ink)}
+table.t{width:100%;border-collapse:collapse;font-size:.95rem}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 8px;vertical-align:top;text-align:left}
+table.t th{font-family:"Literata",serif;background:var(--accent-soft);color:var(--accent-ink)}
+.tablewrap{overflow-x:auto}
+ul.clean{padding-left:1.2em;margin:.3em 0}
+ul.clean li{margin:.25em 0}
+.kbd{font-family:ui-monospace,Menlo,monospace;background:var(--ref);padding:0 5px;border-radius:4px;font-size:.92em}
+
+/* Tasks */
+.task{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px 14px;margin:20px 0;box-shadow:var(--shadow);position:relative}
+.task.isdone{border-color:var(--ok)}
+.task > h3{margin:0 0 4px;font-size:1.12rem;display:flex;gap:10px;align-items:baseline}
+.task > h3 .badge{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.75rem;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;flex:0 0 auto}
+.task > p.instr{margin:.2em 0 .9em;color:var(--muted)}
+.q{padding:10px 0;border-top:1px dashed var(--line)}
+.q:first-child{border-top:0}
+.qt{margin:0 0 6px}
+.qn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);font-size:.8rem;font-weight:700;margin-right:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts.col{flex-direction:column}
+button{font:inherit;cursor:pointer}
+.opt{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:7px 12px;text-align:left;font-size:.95rem;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{font-size:.92rem;margin-top:6px;padding:6px 10px;border-radius:8px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}
+.fb.bad{background:var(--bad-soft);color:var(--bad)}
+.fb.neutral{background:var(--blue-soft);color:var(--blue)}
+.row{display:grid;grid-template-columns:1fr;gap:6px;padding:10px 0;border-top:1px dashed var(--line)}
+.row:first-child{border-top:0}
+.row .txt{font-style:normal}
+.row.right .txt{color:var(--ok)}
+.row.wrong .txt{color:var(--bad)}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cat{font-size:.85rem;padding:4px 10px}
+.gapline{padding:9px 0;border-top:1px dashed var(--line)}
+.gapline:first-child{border-top:0}
+select.gap{font:inherit;font-size:.95rem;padding:3px 6px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);max-width:100%}
+select.gap.right{border-color:var(--ok);background:var(--ok-soft)}
+select.gap.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.order{list-style:none;padding:0;margin:0}
+.order li{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;margin:6px 0}
+.order li .pos{font-weight:700;color:var(--accent-ink);width:22px;flex:0 0 auto}
+.order li .lbl{flex:1}
+.order li.right{border-color:var(--ok);background:var(--ok-soft)}
+.order li.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.mv{border:1px solid var(--line);background:var(--paper);border-radius:7px;width:34px;height:30px;color:var(--ink)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.btn{border:0;border-radius:9px;padding:8px 14px;font-weight:700;font-size:.92rem}
+.btn.p{background:var(--accent);color:#fff}
+.btn.s{background:var(--blue-soft);color:var(--blue)}
+.btn.g{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.res{font-weight:700;font-size:.92rem}
+.res.ok{color:var(--ok)} .res.mid{color:var(--mid)}
+textarea,input.inp{width:100%;font:inherit;font-size:.97rem;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus,input.inp:focus{outline:none;border-color:var(--blue)}
+.field{margin:10px 0}
+.field label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}
+.field .hint{font-weight:400;color:var(--muted);font-size:.86rem}
+.sol{display:none;margin-top:6px;background:var(--ok-soft);border-left:4px solid var(--ok);border-radius:8px;padding:8px 12px;font-size:.94rem}
+.sol.show{display:block}
+.sol b{color:var(--ok)}
+
+/* Lupe */
+.letter{font-family:"Literata",Georgia,serif;font-size:1.02rem;line-height:1.75;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.seg{cursor:pointer;border-radius:4px;padding:1px 2px;transition:background .15s}
+.seg:hover{background:var(--ref)}
+.seg.mark{background:var(--mid-soft);outline:2px solid var(--mid)}
+.seg.found{background:var(--ok-soft);outline:2px solid var(--ok)}
+.seg.missed{background:var(--bad-soft);outline:2px dashed var(--bad)}
+.seg.falsealarm{background:var(--bad-soft);outline:2px solid var(--bad)}
+.lupe-fb{margin-top:10px;font-size:.93rem}
+.lupe-fb div{padding:5px 0;border-top:1px dashed var(--line)}
+
+/* Musterbriefe */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tab{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font-size:.92rem;color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px;font-size:.82rem}
+.legend span{padding:2px 8px;border-radius:5px;color:var(--ink)}
+.lg-beh{background:var(--beh)} .lg-beg{background:var(--beg)} .lg-bsp{background:var(--bsp)} .lg-geg{background:var(--geg)} .lg-app{background:var(--app)} .lg-ref{background:var(--ref)} .lg-anl{background:var(--anl)}
+.mletter{display:none}
+.mletter.on{display:block}
+.mletter .meta{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.88rem;color:var(--muted);margin-bottom:8px}
+.mletter p{margin:.65em 0}
+.mletter p[data-label]{position:relative}
+.show-labels .mletter p[data-label]::before{content:attr(data-label);display:block;font-family:"Atkinson Hyperlegible",sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:2px}
+.show-marks .m-beh{background:var(--beh)} .show-marks .m-beg{background:var(--beg)} .show-marks .m-bsp{background:var(--bsp)}
+.show-marks .m-geg{background:var(--geg)} .show-marks .m-app{background:var(--app)} .show-marks .m-ref{background:var(--ref)} .show-marks .m-anl{background:var(--anl)}
+.wc{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.85rem;color:var(--muted)}
+
+/* Werkstatt */
+.ws-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:860px){.ws-grid{grid-template-columns:1.15fr .85fr}}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.chip{border:1px dashed var(--accent);background:transparent;color:var(--accent-ink);border-radius:999px;padding:2px 9px;font-size:.8rem}
+.chip:hover{background:var(--accent-soft)}
+.meter{position:sticky;top:64px}
+.count{font-family:"Literata",serif;font-size:2rem;font-weight:700}
+.count.ok{color:var(--ok)} .count.low{color:var(--mid)} .count.high{color:var(--bad)}
+.gauge{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:4px 0 10px;position:relative}
+.gauge i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.gauge::after{content:"";position:absolute;left:calc(270/400*100%);width:calc(60/400*100%);top:0;bottom:0;background:color-mix(in srgb,var(--ok) 30%,transparent)}
+.checks{list-style:none;padding:0;margin:0;font-size:.9rem}
+.checks li{padding:4px 0 4px 26px;position:relative}
+.checks li::before{content:"○";position:absolute;left:4px;color:var(--muted)}
+.checks li.y::before{content:"✓";color:var(--ok);font-weight:700}
+.checks li.n::before{content:"!";color:var(--mid);font-weight:700}
+.preview{white-space:pre-wrap;font-family:"Literata",serif;font-size:.95rem;max-height:420px;overflow:auto}
+.auftraege{background:var(--accent-soft);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.95rem}
+.auftraege b{color:var(--accent-ink)}
+
+/* Checkliste */
+.cl label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-top:1px dashed var(--line);cursor:pointer}
+.cl label:first-of-type{border-top:0}
+.cl input{margin-top:5px;accent-color:var(--ok);width:18px;height:18px;flex:0 0 auto}
+.timeline{display:grid;gap:8px}
+.tl{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start}
+.tl .when{font-weight:700;color:var(--accent-ink);font-family:"Literata",serif}
+details.kern{margin:10px 0;border:1px solid var(--line);border-radius:10px;padding:8px 14px;background:var(--bg)}
+details.kern summary{cursor:pointer;font-weight:700}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem;text-align:center}
+@media print{nav.steps,.bar,.chips,.toggles,.tabs,.btn{display:none!important}.task,.box{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Schularbeitstraining · 9. Schulstufe</div>
+    <h1>Post an die Redaktion</h1>
+    <p>Hier trainierst du Schritt für Schritt alles, was ein überzeugender Leserbrief braucht: vom Aufbau über das 3-B-Schema und starke Begründungen bis zum Appell, der wirklich wirkt. Am Ende schreibst du deinen eigenen Brief und prüfst ihn mit der Checkliste.</p>
+    <p>Arbeite die Stationen der Reihe nach durch. Bei jeder Übung kannst du deine Antworten prüfen, die Lösung ansehen und alles wieder zurücksetzen. Deine Eingaben bleiben in diesem Browser gespeichert.</p>
+    <span class="stamp">Du schaffst das ✉</span>
+  </div>
+</header>
+
+<nav class="steps" aria-label="Stationen"><div class="inner" id="navInner">
+  <a href="#s1">1 Textsorte</a>
+  <a href="#s2">2 Aufbau</a>
+  <a href="#s3">3 Ausgangstexte</a>
+  <a href="#s4">4 Einleitung</a>
+  <a href="#s5">5 3-B-Schema</a>
+  <a href="#s6">6 Begründen</a>
+  <a href="#s7">7 Appell</a>
+  <a href="#s8">8 Stil & Sprache</a>
+  <a href="#s9">9 Fehlerlupe</a>
+  <a href="#s10">10 Musterbriefe</a>
+  <a href="#s11">11 Schreibwerkstatt</a>
+  <a href="#s12">12 Schularbeit-Fit</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ================= 1 ================= -->
+<section class="step" id="s1">
+  <div class="step-head"><span class="step-num">1</span><h2>Was ist ein Leserbrief?</h2></div>
+  <p class="lead">Bevor du schreibst, musst du genau wissen, was die Textsorte von dir verlangt und woran deine Lehrerin oder dein Lehrer die Schularbeit misst.</p>
+
+  <div class="box info">
+    <span class="tag">Das Wichtigste</span>
+    <p>Der Leserbrief ist eine <b>argumentative</b> und <b>appellative</b> Textsorte. Du reagierst damit auf einen Zeitungsbeitrag, den du gelesen hast, greifst sein Thema auf und äußerst deine <b>eigene Meinung</b>: Du kannst widersprechen, kritisieren, bestärken oder ergänzen. Deine Position begründest du mit <b>Argumenten</b>, und am Schluss forderst du die Leserschaft mit einem <b>Appell</b> zu einem bestimmten Verhalten auf.</p>
+    <p>Wichtig: Deine Meinung muss klar erkennbar sein, du darfst werten („Ärgerlich ist, dass …“) und du sollst sogar Fakten ergänzen, die im Ausgangstext nicht vorkommen. Ein Leserbrief ist also keine Zusammenfassung, sondern ein engagierter, aber sachlicher Beitrag zur öffentlichen Diskussion.</p>
+  </div>
+
+  <div class="box">
+    <h3>So wird deine Schularbeit beurteilt</h3>
+    <p>Bei Schreibaufträgen im Stil der Reifeprüfung wird in vier Bereichen bewertet. Wenn du sie kennst, weißt du, worauf du achten musst:</p>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Bereich</th><th>Was das für deinen Leserbrief heißt</th></tr>
+      <tr><td><b>Inhalt</b></td><td>Alle Arbeitsaufträge sind erfüllt, der Bezug zum Ausgangstext ist klar, deine Argumente sind überzeugend und mit Beispielen gestützt.</td></tr>
+      <tr><td><b>Textstruktur</b></td><td>Betreff, Anrede, Einleitung, Hauptteil, Schluss mit Appell und Grußformel; Absätze mit Leerzeilen; ein roter Faden mit guten Überleitungen.</td></tr>
+      <tr><td><b>Stil und Ausdruck</b></td><td>Sachlich-engagierter Ton, Höflichkeitsform, abwechslungsreicher Wortschatz, passende Begründungswörter, keine Umgangssprache.</td></tr>
+      <tr><td><b>Normative Sprachrichtigkeit</b></td><td>Rechtschreibung, Grammatik und Zeichensetzung (z. B. <i>dass/das</i>, Kommas vor <i>weil, da, dass</i>, großgeschriebenes <i>Sie/Ihnen</i>).</td></tr>
+    </table></div>
+  </div>
+
+  <div class="task" data-task="t1quiz">
+    <h3><span class="badge">Quiz</span>Wie gut kennst du die Textsorte?</h3>
+    <p class="instr">Wähle jeweils die richtige Antwort aus.</p>
+  </div>
+
+  <div class="box info">
+    <span class="tag">Operatoren</span>
+    <p>Die Arbeitsaufträge beginnen immer mit einem <b>Operator</b>, einem Verb, das dir genau sagt, was du tun sollst. Typisch für den Leserbrief sind <i>wiedergeben, erläutern, (kritisch) Stellung nehmen</i> und <i>appellieren</i>; in den Aufgaben deines Buches kommen auch <i>erklären, beschreiben</i> und <i>gestalten</i> vor. Jeder Arbeitsauftrag bekommt in deinem Brief mindestens einen eigenen Absatz.</p>
+  </div>
+
+  <div class="task" data-task="t1op">
+    <h3><span class="badge">Zuordnen</span>Was verlangt welcher Operator?</h3>
+    <p class="instr">Wähle zu jedem Operator die passende Bedeutung aus. Jede Bedeutung passt genau einmal.</p>
+  </div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="step" id="s2">
+  <div class="step-head"><span class="step-num">2</span><h2>Der Aufbau</h2></div>
+  <p class="lead">Ein Leserbrief folgt einem festen Bauplan. Wenn du ihn im Schlaf kannst, bleibt in der Schularbeit viel mehr Energie für gute Argumente.</p>
+
+  <div class="box">
+    <h3>Der Bauplan im Überblick</h3>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Teil</th><th>Inhalt</th><th>Beispiel</th></tr>
+      <tr><td><b>Briefkopf</b> (optional)</td><td>Absender, Empfänger (Redaktion), Ort und Datum. Bei der Schularbeit nach Reifeprüfungsart nicht notwendig.</td><td><i>Wien, am 28. Februar 2024</i></td></tr>
+      <tr><td><b>Einleitung</b></td><td>Betreff (hervorgehoben), Anrede, eventuell Ersuchen um Abdruck, Bezug zum Ausgangstext (Titel, Verfasser/in, Zeitung, Datum, Thema), Schreibanlass (deine Betroffenheit), Überleitung</td><td><i>Betreff: Flugreisen – ja oder nein?<br>Sehr geehrtes Redaktionsteam!<br>Mit Interesse habe ich den Beitrag … gelesen.</i></td></tr>
+      <tr><td><b>Hauptteil</b></td><td>Alle Arbeitsaufträge erfüllen; immer wieder Bezug auf den Ausgangstext; eigene Position mit Argumenten nach dem 3-B-Schema; Leserschaft in eine Richtung „lenken“</td><td><i>Meiner Ansicht nach ist es absolut vermeidbar, kurze Strecken in Europa zu fliegen, da …</i></td></tr>
+      <tr><td><b>Schluss</b></td><td>Schlussappell, (Lösungs-)Vorschlag oder Kompromiss, eventuell Ausblick</td><td><i>Ich rufe Sie dazu auf, … Tun wir es der Umwelt zuliebe!</i></td></tr>
+      <tr><td><b>Schlussformel</b></td><td>Grußformel, Unterschrift, Name (eventuell kurze Angabe zur Person)</td><td><i>Mit freundlichen Grüßen<br>Vorname Nachname</i></td></tr>
+    </table></div>
+    <p style="margin-top:10px"><b>Sprachliche Besonderheiten:</b> Argumente nach dem 3-B-Schema, appellative Sprache und das Tempussystem des Präsens (Präsens, Perfekt, Futur I, im Aktiv und im Passiv). <b>Länge:</b> 270–330 Wörter.</p>
+  </div>
+
+  <div class="task" data-task="t2order">
+    <h3><span class="badge">Ordnen</span>Bring die Bausteine in die richtige Reihenfolge</h3>
+    <p class="instr">Verschiebe die Bausteine mit den Pfeilen, bis der Bauplan stimmt.</p>
+  </div>
+
+  <div class="task" data-task="t2class">
+    <h3><span class="badge">Zuordnen</span>Einleitung, Hauptteil oder Schluss?</h3>
+    <p class="instr">Wo steht dieser Satz in einem Leserbrief? Klicke den passenden Teil an.</p>
+  </div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="step" id="s3">
+  <div class="step-head"><span class="step-num">3</span><h2>Ausgangstext und Arbeitsaufträge knacken</h2></div>
+  <p class="lead">Dein Brief steht und fällt damit, dass du den Ausgangstext genau verstehst und jeden Arbeitsauftrag richtig deutest. Hier übst du das an den drei Schreibaufträgen aus deinem Buch.</p>
+
+  <div class="box tip">
+    <span class="tag">Lesestrategie</span>
+    <p>Lies zuerst die Aufgabenstellung und markiere die Operatoren. Lies dann den Text zweimal: beim ersten Mal, um das Thema zu erfassen, beim zweiten Mal mit dem Stift in der Hand. Markiere in drei Farben <b>Behauptungen</b>, <b>Begründungen</b> und <b>Beispiele</b> und notiere am Rand in Stichworten, was dich überzeugt und wo du widersprechen möchtest. Genau diese Randnotizen werden später deine Argumente.</p>
+  </div>
+
+  <h3 style="margin-top:26px">Text A: „Sollen wir für das Klima auf das Fliegen verzichten?“</h3>
+  <details class="kern"><summary>Kerninhalte in Stichworten (zum Nachschlagen)</summary>
+    <p><b>Pro Verzicht</b> (Johannes Wahlmüller, Klima- und Energiesprecher von GLOBAL 2000): Fliegen ist heute für viele selbstverständlich, obwohl es die klimaschädlichste Art zu reisen ist. Nach dem Urlaub wird oft über Verspätungen, Schlangen und versteckte Gebühren geschimpft. Man sollte sich fragen, was man vom Urlaub eigentlich will, denn Erholung und Erlebnisse gibt es auch in der Nähe; viele Ziele erreicht man mit Bahn und Bus. Sanfter Tourismus wie Rad- und Wanderurlaub wird beliebter.</p>
+    <p><b>Kontra Verzicht</b> (Peter Kleemann, Unternehmenssprecher der Flughafen Wien AG): Die Luftfahrt verursacht nur einen geringen Teil der CO₂-Emissionen. Mobilität ist ein Grundbedürfnis. Durch das CORSIA-Abkommen darf die Luftfahrt seit 2020 nur noch CO₂-neutral wachsen; der Flughafen Wien arbeitet seit Jänner 2023 CO₂-neutral; ab 2025 werden alternative Treibstoffe beigemischt.</p>
+  </details>
+  <div class="task" data-task="t3flug">
+    <h3><span class="badge">Zuordnen</span>Wer sagt das – Pro oder Kontra?</h3>
+    <p class="instr">Ordne jede Aussage der Position zu, die sie im Text vertritt.</p>
+  </div>
+
+  <h3 style="margin-top:26px">Text B: „Offene Bücherschränke: Nostalgiefaktor Buch“</h3>
+  <details class="kern"><summary>Kerninhalte in Stichworten (zum Nachschlagen)</summary>
+    <p>Bericht von Niklas Hintermayer, Wiener Zeitung, 13. Februar 2017. In Wien gibt es zu diesem Zeitpunkt zehn offene Bücherschränke, weitere sind geplant. Die Regel: Wer Bücher übrig hat, stellt sie hinein, wer etwas Interessantes findet, nimmt es mit – ein zeitversetzter Tauschhandel. Der erste Schrank steht seit Anfang 2010 an der Ecke Westbahnstraße/Zieglergasse im 7. Bezirk. Initiator ist der Künstler Frank Gassner, der sich gegen die zunehmende Kommerzialisierung des öffentlichen Raums wendet. Probleme: Manche Schränke werden ausgeräumt und die Bücher weiterverkauft. Ein Schrank in der Josefstadt wurde 2013 von der Bezirksvertretung errichtet und ist nach Kategorien sortiert. Gassner ärgert sich vor allem über die Bezirkspolitik.</p>
+  </details>
+  <div class="task" data-task="t3buch">
+    <h3><span class="badge">Richtig/Falsch</span>Steht das so im Bericht?</h3>
+    <p class="instr">Entscheide bei jeder Aussage, ob sie dem Text entspricht.</p>
+  </div>
+
+  <h3 style="margin-top:26px">Text C: „Die zehnte Ferienwoche“</h3>
+  <details class="kern"><summary>Kerninhalte in Stichworten (zum Nachschlagen)</summary>
+    <p>Beitrag von Mirjam Marits, Die Presse, 1. Juli 2022. Die Autorin meint mit einem Augenzwinkern, dass die letzte Schulwoche vor dem Zeugnistag eigentlich schon eine zehnte Ferienwoche ist: keine Hausübungen und Tests mehr, dafür Schwimmen, Picknick und Museumsbesuche. Sie findet das wunderbar; als Erwachsene wäre sie in dieser Woche selbst gern wieder Schulkind. Auch zu Hause zieht Ferienstimmung ein: spätere Schlafenszeit, fast täglich Eis. Am Ende wünscht sie allen schöne Ferien und eine schöne geheime zehnte Ferienwoche.</p>
+  </details>
+  <div class="task" data-task="t3ferien">
+    <h3><span class="badge">Richtig/Falsch</span>Steht das so im Beitrag?</h3>
+    <p class="instr">Entscheide bei jeder Aussage, ob sie dem Text entspricht.</p>
+  </div>
+
+  <div class="task" data-task="t3auftr">
+    <h3><span class="badge">Quiz</span>Was will der Arbeitsauftrag wirklich von dir?</h3>
+    <p class="instr">Viele verlieren Punkte, weil sie einen Auftrag falsch deuten oder vergessen. Wähle jeweils die richtige Deutung.</p>
+  </div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="step" id="s4">
+  <div class="step-head"><span class="step-num">4</span><h2>Die Einleitung</h2></div>
+  <p class="lead">Die Einleitung ist der Teil, den du am besten vorbereiten kannst, denn sie folgt fast immer demselben Muster. Mit diesem Gerüst bist du in fünf Minuten fertig.</p>
+
+  <div class="box info">
+    <span class="tag">Gerüst zum Auswendiglernen</span>
+    <p class="letter" style="margin:6px 0">Betreff: <i>[kurz, treffend, gern zugespitzt]</i><br><br>
+    Sehr geehrtes Redaktionsteam!<br><br>
+    Mit großem Interesse habe ich Ihren Beitrag „<i>[Titel]</i>“ von <i>[Vorname Nachname]</i> gelesen, der am <i>[Datum]</i> in der Online-Ausgabe der <i>[Zeitung]</i> erschienen ist. Darin geht es um <i>[Thema in einem Satz]</i>. Da <i>[dein Schreibanlass aus der Situation]</i>, hat mich das Thema sofort angesprochen. In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.</p>
+    <p>Abwechslung für den ersten Satz: <i>„Ihr Beitrag … hat mich zum Nachdenken gebracht.“ · „Mit Freude/Verwunderung/Sorge habe ich … gelesen.“ · „Als Schülerin bin ich von dem Thema, das … in ihrem Artikel … aufgreift, direkt betroffen.“</i></p>
+  </div>
+
+  <div class="task" data-task="t4gaps">
+    <h3><span class="badge">Lückentext</span>Welche Angaben gehören zu welchem Text?</h3>
+    <p class="instr">Setze die richtigen Angaben in die drei Einleitungen ein. Achtung: Die falschen Auswahlmöglichkeiten stammen aus den anderen Texten.</p>
+  </div>
+
+  <div class="task" data-task="t4betreff">
+    <h3><span class="badge">Quiz</span>Betreff, Anrede, Schreibanlass</h3>
+    <p class="instr">Wähle jeweils die beste Lösung.</p>
+  </div>
+
+  <div class="task" data-task="t4anrede">
+    <h3><span class="badge">Mehrfachauswahl</span>Welche Anreden passen in einen Leserbrief?</h3>
+    <p class="instr">Markiere alle passenden Anreden. Es sind mehrere richtig.</p>
+  </div>
+
+  <div class="task" data-task="t4table">
+    <h3><span class="badge">A 23</span>Die Einleitungstabelle zum Flugreisen-Text</h3>
+    <p class="instr">Fülle die Tabelle aus deinem Buch hier aus. Danach kannst du deine Angaben mit der Musterlösung vergleichen.</p>
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="step" id="s5">
+  <div class="step-head"><span class="step-num">5</span><h2>Argumentieren mit dem 3-B-Schema</h2></div>
+  <p class="lead">Eine Meinung allein überzeugt niemanden. Erst wenn du sie begründest und mit einem Beispiel belegst, wird daraus ein Argument.</p>
+
+  <div class="box info">
+    <span class="tag">3-B-Schema</span>
+    <p><span style="background:var(--beh);padding:0 4px;border-radius:4px"><b>Behauptung</b></span> – <i>Was meinst du?</i> Es ist wichtig, den Fleischkonsum zu reduzieren,</p>
+    <p><span style="background:var(--beg);padding:0 4px;border-radius:4px"><b>Begründung</b></span> – <i>Warum?</i> da viele Ressourcen unnötigerweise für die Fleischproduktion verschwendet werden.</p>
+    <p><span style="background:var(--bsp);padding:0 4px;border-radius:4px"><b>Beispiel/Beweis</b></span> – <i>Woran sieht man das?</i> Die Fläche, die für den Anbau von Futtermitteln verwendet wird, könnte ein Vielfaches an Menschen ernähren, wenn die Pflanzen direkt als Nahrungsmittel dienten.</p>
+    <p style="margin-bottom:0">Typische Signalwörter für Beispiele: <i>So …, zum Beispiel, beispielsweise, etwa, wie der Artikel zeigt …, meine Erfahrung bestätigt das, denn …</i></p>
+  </div>
+
+  <div class="task" data-task="t5class">
+    <h3><span class="badge">Zuordnen</span>Behauptung, Begründung oder Beispiel?</h3>
+    <p class="instr">Hier wurden drei Argumente in ihre Teile zerlegt und vermischt. Bestimme, welcher Teil jeweils vorliegt.</p>
+  </div>
+
+  <div class="task" data-task="t5fehlt">
+    <h3><span class="badge">Quiz</span>Was fehlt dem Argument?</h3>
+    <p class="instr">Jedes dieser Argumente ist unvollständig. Welcher Baustein fehlt?</p>
+  </div>
+
+  <div class="task" data-task="t5a15">
+    <h3><span class="badge">A 15</span>Ergänze Begründung und Beispiel</h3>
+    <p class="instr">Mach aus jeder Behauptung ein vollständiges Argument. Schreib zuerst selbst, dann vergleiche mit dem Vorschlag.</p>
+  </div>
+
+  <div class="box tip">
+    <span class="tag">Profi-Trick: Gegenargument entkräften</span>
+    <p>Besonders überzeugend wirkt dein Brief, wenn du ein Gegenargument selbst ansprichst und es dann widerlegst. So zeigst du, dass du die andere Seite kennst und trotzdem gute Gründe hast. Das Muster lautet: <b>Gegenargument nennen → teilweise anerkennen → entkräften → zurück zur eigenen Position.</b></p>
+    <p style="margin-bottom:0"><i>„Zwar behaupten manche, dass …, doch …“ · „Kritiker mögen einwenden, dass … Dem ist jedoch entgegenzuhalten, dass …“ · „Natürlich stimmt es, dass …; trotzdem …“ · „Dieses Argument greift allerdings zu kurz, denn …“</i></p>
+  </div>
+
+  <div class="task" data-task="t5gegen">
+    <h3><span class="badge">Schreiben</span>Entkräfte das Gegenargument</h3>
+    <p class="instr">Schreibe zu jedem Gegenargument zwei bis drei Sätze nach dem Muster oben.</p>
+  </div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="step" id="s6">
+  <div class="step-head"><span class="step-num">6</span><h2>Sprachliche Mittel für Begründungen</h2></div>
+  <p class="lead">Begründungswörter verbinden deine Gedanken. Entscheidend ist, wohin danach das Verb wandert.</p>
+
+  <div class="box">
+    <h3>Die vier Gruppen auf einen Blick</h3>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Gruppe</th><th>Wörter</th><th>Wo steht das Verb?</th><th>Beispiel</th></tr>
+      <tr><td>Nebenordnende Konjunktion</td><td>denn</td><td>normale Hauptsatzstellung, Verb an 2. Stelle</td><td>Tiergärten sollten verboten sein, <b>denn</b> es <u>handelt</u> sich um keine artgerechte Haltung.</td></tr>
+      <tr><td>Kausaladverb (im Satz)</td><td>nämlich</td><td>steht im Satz, nach dem Verb</td><td>Tiergärten sollten verboten sein, es <u>handelt</u> sich <b>nämlich</b> um keine artgerechte Haltung.</td></tr>
+      <tr><td>Kausaladverbien (Folge)</td><td>deshalb, daher, deswegen, somit, aus diesem Grund</td><td>Verb <b>direkt danach</b></td><td>Tiere werden nicht artgerecht gehalten, <b>deshalb</b> <u>sollten</u> Tiergärten verboten sein.</td></tr>
+      <tr><td>Unterordnende Konjunktion</td><td>weil, da, zumal (= zusätzlicher Grund)</td><td>Verb <b>am Ende</b> des Nebensatzes</td><td>Tiergärten sollten verboten sein, <b>da</b> keine artgerechte Haltung <u>stattfindet</u>.</td></tr>
+      <tr><td>Präposition + Nomen</td><td>wegen, aufgrund, infolge, mangels (+ Genitiv), aus (+ Nomen ohne Artikel), dank</td><td>kein eigener Satz, nur ein Nomen</td><td><b>Aufgrund</b> des geringen Platzes … · <b>Aus</b> Platzmangel …</td></tr>
+    </table></div>
+  </div>
+
+  <div class="task" data-task="t6gaps">
+    <h3><span class="badge">Lückentext</span>Welches Wort passt hier?</h3>
+    <p class="instr">Achte auf die Stellung des Verbs – sie verrät dir das richtige Wort. Bei jeder Lücke ist genau eine Möglichkeit richtig.</p>
+  </div>
+
+  <div class="task" data-task="t6satz">
+    <h3><span class="badge">Quiz</span>Welcher Satz ist richtig gebaut?</h3>
+    <p class="instr">Nur eine Variante hat die richtige Wortstellung.</p>
+  </div>
+
+  <div class="task" data-task="t6a18">
+    <h3><span class="badge">A 18</span>Verbinde zu Begründungssätzen</h3>
+    <p class="instr">Verbinde die beiden Sätze mit einer Konjunktion oder einem Kausaladverb. Für Profis: Formuliere den Inhalt dabei in eigenen Worten um (paraphrasieren).</p>
+  </div>
+</section>
+
+<!-- ================= 7 ================= -->
+<section class="step" id="s7">
+  <div class="step-head"><span class="step-num">7</span><h2>Der Appell</h2></div>
+  <p class="lead">Der Appell ist der Höhepunkt deines Briefs: Hier forderst du deine Leserinnen und Leser auf, etwas zu tun. Er muss zu deinen Argumenten passen und die richtigen Menschen ansprechen.</p>
+
+  <div class="box info">
+    <span class="tag">Sechs Wege zum Appell</span>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Form</th><th>Beispiel</th></tr>
+      <tr><td>Imperativ</td><td>Handeln Sie bitte! · Lassen Sie uns gemeinsam …!</td></tr>
+      <tr><td>Modalverben</td><td>Sie sollten/müssen … · Sie dürfen nicht …</td></tr>
+      <tr><td>Verben der Aufforderung</td><td>Ich fordere Sie auf, … · Ich bitte Sie, … · Ich rufe Sie dazu auf, …</td></tr>
+      <tr><td>Aussagesätze im Präsens, Futur oder Konjunktiv</td><td>Sie werden die Auswirkungen noch bemerken! · Möge es die nächste Generation besser haben!</td></tr>
+      <tr><td>Partizip Perfekt</td><td>Genug diskutiert! Zu wenig überlegt!</td></tr>
+      <tr><td>Infinitiv mit <i>zu</i></td><td>Dieser Forderung ist nachzukommen! Diese Alternative ist zu berücksichtigen!</td></tr>
+    </table></div>
+    <p style="margin-bottom:0">Ein starker Schluss kombiniert meist zwei oder drei Formen: eine höfliche Aufforderung, einen konkreten Vorschlag und einen kurzen, einprägsamen Schlusssatz mit Rufzeichen.</p>
+  </div>
+
+  <div class="task" data-task="t7class">
+    <h3><span class="badge">Zuordnen</span>Welche Appellform steckt in diesem Satz?</h3>
+    <p class="instr">Bestimme die sprachliche Form jedes Appells.</p>
+  </div>
+
+  <div class="task" data-task="t7sie">
+    <h3><span class="badge">Lückentext</span>Von „du“ zu „Sie“: die Höflichkeitsform</h3>
+    <p class="instr">Im Leserbrief sprichst du die Leserschaft mit „Sie“ an. Wähle die richtige Höflichkeitsform des Imperativs.</p>
+  </div>
+
+  <div class="task" data-task="t7schluessig">
+    <h3><span class="badge">Quiz</span>Welcher Appell ist schlüssig?</h3>
+    <p class="instr">„Schlüssig“ heißt: Der Appell folgt logisch aus deinen Argumenten und spricht die Menschen an, die im Arbeitsauftrag genannt sind.</p>
+  </div>
+
+  <div class="task" data-task="t7a16">
+    <h3><span class="badge">A 16</span>Appelle zu den Bildern</h3>
+    <p class="instr">Formuliere zu jedem Bild aus deinem Buch einen Appell in der Höflichkeitsform. Probiere dabei verschiedene Appellformen aus.</p>
+  </div>
+</section>
+
+<!-- ================= 8 ================= -->
+<section class="step" id="s8">
+  <div class="step-head"><span class="step-num">8</span><h2>Stil, Redemittel und Sprachrichtigkeit</h2></div>
+  <p class="lead">Ein Leserbrief darf engagiert und leidenschaftlich sein, aber immer höflich und sachlich. Mit den richtigen Redemitteln klingt dein Text sofort professionell.</p>
+
+  <div class="task" data-task="t8sort">
+    <h3><span class="badge">Zuordnen</span>Redemittel sortieren</h3>
+    <p class="instr">Wofür verwendest du diese Wendung? Ordne sie der passenden Funktion zu. Diese Liste ist gleichzeitig dein Wortschatz für die Schularbeit.</p>
+  </div>
+
+  <div class="task" data-task="t8stil">
+    <h3><span class="badge">Stil-Check</span>Passt dieser Satz in einen Leserbrief?</h3>
+    <p class="instr">Entscheide, ob der Satz stilistisch in einen Leserbrief passt.</p>
+  </div>
+
+  <div class="box tip">
+    <span class="tag">Tempus</span>
+    <p style="margin-bottom:0">Ein Leserbrief steht im <b>Tempussystem des Präsens</b>: Für die Gegenwart verwendest du das Präsens, für Vergangenes das <b>Perfekt</b> („Ich habe gelesen“, „Der Artikel ist erschienen“), für die Zukunft das Futur I („Sie werden sehen …“). Vermeide Erzählketten im Präteritum wie „Ich fand … und brachte …“. Bei <i>sein</i>, <i>haben</i> und den Modalverben ist das Präteritum („war“, „hatte“, „konnte“) aber völlig in Ordnung.</p>
+  </div>
+
+  <div class="task" data-task="t8sprache">
+    <h3><span class="badge">Lückentext</span>Tempus, dass/das, Höflichkeitsform, Komma</h3>
+    <p class="instr">Diese Punkte zählen bei der Sprachrichtigkeit besonders. Wähle jeweils die richtige Form.</p>
+  </div>
+</section>
+
+<!-- ================= 9 ================= -->
+<section class="step" id="s9">
+  <div class="step-head"><span class="step-num">9</span><h2>Fehlerlupe</h2></div>
+  <p class="lead">Jetzt wirst du zur Lehrerin: In diesem Leserbrief zum Bücherschrank-Text stecken sechs typische Fehler aus Schularbeiten. Findest du sie alle?</p>
+
+  <div class="task" data-task="t9lupe">
+    <h3><span class="badge">Suchen</span>Klicke alle fehlerhaften Stellen an</h3>
+    <p class="instr">Klicke auf eine Stelle, um sie zu markieren, und noch einmal, um die Markierung aufzuheben. Dann prüfe. Vorsicht: Nicht jede Stelle ist falsch.</p>
+  </div>
+
+  <div class="task" data-task="t9neu">
+    <h3><span class="badge">Überarbeiten</span>Verbessere die fehlerhaften Stellen</h3>
+    <p class="instr">Schreib die sechs Stellen so um, dass sie in einen gelungenen Leserbrief passen.</p>
+  </div>
+</section>
+
+<!-- ================= 10 ================= -->
+<section class="step" id="s10">
+  <div class="step-head"><span class="step-num">10</span><h2>Musterbriefe</h2></div>
+  <p class="lead">So kann ein gelungener Leserbrief zu jedem der drei Schreibaufträge aussehen. Lass dir die Bausteine einfärben und die Arbeitsaufträge anzeigen, dann siehst du genau, wie der Brief gebaut ist. Übernimm Wendungen, nicht ganze Sätze.</p>
+
+  <div class="box" id="musterBox">
+    <div class="tabs" id="mTabs">
+      <button class="tab on" data-m="m1" type="button">A 19 · Flugreisen</button>
+      <button class="tab" data-m="m2" type="button">A 30 · Bücherschränke</button>
+      <button class="tab" data-m="m3" type="button">A 29 · Letzte Schulwoche</button>
+    </div>
+    <div class="toggles">
+      <button class="btn s" id="tgMarks" type="button">Bausteine einfärben</button>
+      <button class="btn s" id="tgLabels" type="button">Arbeitsaufträge anzeigen</button>
+    </div>
+    <div class="legend" id="mLegend" hidden>
+      <span class="lg-ref">Bezug zum Text</span><span class="lg-anl">Schreibanlass</span><span class="lg-beh">Behauptung</span><span class="lg-beg">Begründung</span><span class="lg-bsp">Beispiel/Beweis</span><span class="lg-geg">Gegenargument entkräftet</span><span class="lg-app">Appell</span>
+    </div>
+
+    <div class="mletter letter on" id="m1">
+      <div class="meta">Arbeitsaufträge: Erkläre das Thema und deine eigene Betroffenheit · Erläutere deinen Standpunkt zur Vertretbarkeit von Flugreisen · Appelliere an die Leserschaft · <span class="wc"></span></div>
+      <p><b>Betreff: Kurzstrecken gehören auf die Schiene!</b></p>
+      <p>Sehr geehrtes Redaktionsteam!</p>
+      <p data-label="Einleitung · Auftrag 1: Thema und Betroffenheit"><span class="m-ref">Mit großem Interesse habe ich Ihren Beitrag „Sollen wir für das Klima auf das Fliegen verzichten?“ von Natalie Schmidt gelesen, der am 23. Juni 2023 in der Online-Ausgabe der NÖN erschienen ist. Darin diskutieren Johannes Wahlmüller von GLOBAL 2000 und Peter Kleemann vom Flughafen Wien, ob Urlaubsflüge in Zeiten der Klimakrise noch vertretbar sind.</span> <span class="m-anl">Da meine Familie gerade den Sommerurlaub plant und wieder über einen Flug nachdenkt, hat mich das Thema sofort angesprochen.</span> In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.</p>
+      <p data-label="Hauptteil · Auftrag 2: Standpunkt, Argument 1"><span class="m-beh">Ich bin der Ansicht, dass wir nicht völlig auf das Fliegen verzichten müssen, Kurzstrecken innerhalb Europas aber vermeiden sollten.</span> <span class="m-beg">Wie Herr Wahlmüller betont, ist das Flugzeug nämlich die klimaschädlichste Art zu reisen, während sich viele Ziele bequem mit Bahn oder Bus erreichen lassen.</span> <span class="m-bsp">So kommt man etwa von Wien mit dem Nachtzug problemlos nach Paris und spart sich dabei sogar eine Hotelnacht.</span></p>
+      <p data-label="Hauptteil · Auftrag 2: Gegenargument entkräften"><span class="m-geg">Herr Kleemann wendet zwar ein, die Luftfahrt sei nur ein geringer Verursacher von CO₂-Emissionen und arbeite mit dem CORSIA-Abkommen und alternativen Treibstoffen an ihrer Klimabilanz. Diese Bemühungen sind erfreulich, doch sie wirken erst mittelfristig. Das Klima kann aber nicht warten, deshalb zählt jede Entscheidung, die wir schon heute treffen.</span></p>
+      <p data-label="Hauptteil · Auftrag 2: Standpunkt, Argument 2"><span class="m-beh">Außerdem darf nicht vergessen werden, dass eine Reise mehr ist als ihr Ziel.</span> <span class="m-beg">Wer mit dem Zug fährt, erlebt Landschaften, kommt mit Menschen ins Gespräch und entkommt dem hektischen „immer schneller, immer weiter“.</span> <span class="m-bsp">Meine Erfahrungen bestätigen das, denn unsere letzte Bahnreise an den Gardasee war viel entspannter als jeder Flug mit langen Schlangen bei der Gepäckkontrolle.</span></p>
+      <p data-label="Schluss · Auftrag 3: Appell an die Leserschaft"><span class="m-app">Ich fordere Sie daher auf: Prüfen Sie bei Ihrer nächsten Urlaubsplanung zuerst die Zugverbindungen! Steigen Sie nur dann ins Flugzeug, wenn es wirklich keine sinnvolle Alternative gibt. Tun wir es der Umwelt zuliebe!</span></p>
+      <p>Mit freundlichen Grüßen<br>[Vorname Nachname]</p>
+    </div>
+
+    <div class="mletter letter" id="m2">
+      <div class="meta">Arbeitsaufträge: Erkläre das Konzept der offenen Bücherschränke · Nimm Stellung zur Möglichkeit, Gebrauchsgegenstände einer weiteren sinnvollen Nutzung zuzuführen · Formuliere einen schlüssigen Appell · <span class="wc"></span></div>
+      <p><b>Betreff: Nehmen, geben, weiterlesen – Bücherschränke für alle!</b></p>
+      <p>Sehr geehrtes Redaktionsteam der Wiener Zeitung!</p>
+      <p data-label="Einleitung"><span class="m-ref">Mit großem Interesse habe ich den Bericht „Offene Bücherschränke: Nostalgiefaktor Buch“ von Niklas Hintermayer gelesen, der am 13. Februar 2017 in der Online-Ausgabe Ihrer Zeitung erschienen ist.</span> <span class="m-anl">Da vor Kurzem auch in meiner Wohngegend ein offener Bücherschrank aufgestellt worden ist, hat mich das Thema sofort neugierig gemacht.</span> Als begeisterte Leserin möchte ich Ihnen und allen anderen Bücherwürmern meine Gedanken dazu mitteilen.</p>
+      <p data-label="Hauptteil · Auftrag 1: Konzept erklären">Das Konzept der offenen Bücherschränke ist denkbar einfach: Wer Bücher übrig hat, stellt sie hinein, und wer etwas Spannendes entdeckt, nimmt es kostenlos mit. Es gibt weder eine Anmeldung noch eine Leihfrist, denn das System beruht ganz auf Vertrauen und fairem Tausch. <span class="m-ref">Wie der Bericht zeigt, ist der erste Wiener Bücherschrank bereits Anfang 2010 im 7. Bezirk eröffnet worden und gehört seither fest zum Grätzl.</span></p>
+      <p data-label="Hauptteil · Auftrag 2: Stellung nehmen"><span class="m-beh">Ich bin davon überzeugt, dass es sinnvoll ist, Gebrauchsgegenstände weiterzugeben, statt sie wegzuwerfen.</span> <span class="m-beg">Für jedes neue Produkt werden nämlich Rohstoffe und Energie verbraucht.</span> <span class="m-bsp">Ein Buch, das zehn Menschen lesen, schont daher die Umwelt deutlich mehr als zehn neu gekaufte Exemplare. Dasselbe gilt für Kleidung, Spielzeug oder Geschirr, die etwa bei Tauschbörsen ein zweites Leben bekommen.</span></p>
+      <p data-label="Hauptteil · Auftrag 2: Gegenargument entkräften"><span class="m-geg">Zwar berichtet der Artikel, dass manche Schränke ausgeräumt und die Bücher weiterverkauft werden. Doch solche Einzelfälle sprechen nicht gegen die Idee, sondern zeigen, wie wichtig gegenseitiger Respekt ist.</span> <span class="m-beh">Außerdem bringen Bücherschränke Menschen zusammen,</span> <span class="m-beg">denn beim Stöbern kommt man leicht mit Nachbarinnen und Nachbarn ins Gespräch.</span></p>
+      <p data-label="Schluss · Auftrag 3: schlüssiger Appell"><span class="m-app">Ich rufe daher alle Leseratten auf: Nutzen Sie die Bücherschränke in Ihrer Umgebung und bringen Sie Bücher, die Ihnen selbst Freude gemacht haben! Nehmen Sie nur, was Sie wirklich lesen möchten. Denn nur wenn wir fair tauschen, bleibt der Schrank für alle eine Schatzkiste.</span></p>
+      <p>Mit freundlichen Grüßen<br>[Vorname Nachname]</p>
+    </div>
+
+    <div class="mletter letter" id="m3">
+      <div class="meta">Arbeitsaufträge: Beschreibe knapp eine typische letzte Schulwoche · Erkläre die Wichtigkeit solch gemeinsamer Aktivitäten · Gestalte einen Entwurf der perfekten Abschlusswoche · Appelliere an Schulleitungen sowie Lehrerinnen und Lehrer · <span class="wc"></span></div>
+      <p><b>Betreff: Die letzte Schulwoche – zu wertvoll zum Absitzen</b></p>
+      <p>Sehr geehrtes Redaktionsteam der Presse!</p>
+      <p data-label="Einleitung"><span class="m-ref">Mit großem Vergnügen habe ich den Beitrag „Die zehnte Ferienwoche“ von Mirjam Marits gelesen, der am 1. Juli 2022 in der Online-Ausgabe der Tageszeitung „Die Presse“ erschienen ist. Die Autorin beschreibt darin, dass die letzte Woche vor dem Zeugnistag eigentlich schon eine geheime Ferienwoche ist.</span> <span class="m-anl">Als Schülerin bin ich von diesem Thema direkt betroffen und möchte meine Erfahrungen gerne mit Ihnen teilen.</span></p>
+      <p data-label="Hauptteil · Auftrag 1: knapp beschreiben">Bei uns sieht die letzte Woche meist so aus: Die Noten stehen fest, Tests gibt es keine mehr, und manche Stunden werden mit Filmen oder Spielen gefüllt. Oft wirkt das aber eher wie Warten als wie ein gemeinsamer Abschluss, denn viele haben innerlich schon abgeschaltet, und die letzten gemeinsamen Tage verstreichen einfach ungenutzt.</p>
+      <p data-label="Hauptteil · Auftrag 2: Wichtigkeit erklären"><span class="m-beh">Dabei sind gemeinsame Aktivitäten gerade am Schuljahresende besonders wichtig.</span> <span class="m-beg">Nach Monaten voller Prüfungsstress hat die Klasse endlich Zeit füreinander, ohne Notendruck.</span> <span class="m-bsp">Wer zusammen wandert, kocht oder ein Fest vorbereitet, lernt die anderen von einer neuen Seite kennen.</span> <span class="m-beg">Solche Erlebnisse stärken die Klassengemeinschaft, zumal man sich danach zwei Monate lang kaum sieht.</span></p>
+      <p data-label="Hauptteil · Auftrag 3: Entwurf gestalten">Meine perfekte Abschlusswoche würde so aussehen: Am Montag planen wir in Gruppen ein Abschlussfest. Am Dienstag folgt ein Wandertag, am Mittwoch ein Projekttag, an dem jede Klasse etwas für die Schulgemeinschaft gestaltet, etwa ein Beet im Schulhof. Am Donnerstag feiern wir mit Eltern und Lehrkräften, und am Freitag gibt es nach der Zeugnisverteilung ein gemeinsames Frühstück.</p>
+      <p data-label="Schluss · Auftrag 4: Appell an Schulleitungen und Lehrkräfte"><span class="m-app">Ich bitte Sie daher, liebe Schulleiterinnen und Schulleiter, liebe Lehrerinnen und Lehrer: Nutzen Sie die letzte Woche bewusst! Planen Sie gemeinsam mit den Klassen ein Programm, das verbindet, statt die Zeit einfach verstreichen zu lassen. Dann wird die zehnte Ferienwoche zur schönsten Woche des Jahres.</span></p>
+      <p>Mit freundlichen Grüßen<br>[Vorname Nachname]</p>
+    </div>
+  </div>
+
+  <div class="task" data-task="t10analyse">
+    <h3><span class="badge">Quiz</span>Den Musterbriefen auf die Spur kommen</h3>
+    <p class="instr">Beantworte die Fragen mithilfe der Musterbriefe oben.</p>
+  </div>
+</section>
+
+<!-- ================= 11 ================= -->
+<section class="step" id="s11">
+  <div class="step-head"><span class="step-num">11</span><h2>Schreibwerkstatt</h2></div>
+  <p class="lead">Jetzt bist du dran. Wähle einen Schreibauftrag und schreib deinen Leserbrief Baustein für Baustein. Die Redemittel unter den Feldern fügst du mit einem Klick ein. Rechts siehst du live, wie viele Wörter du hast und was dein Brief schon erfüllt. Das ist deine Hausübung, also nimm dir Zeit dafür.</p>
+
+  <div class="box">
+    <div class="tabs" id="wsTabs"></div>
+    <div class="auftraege" id="wsAuftraege"></div>
+    <div class="ws-grid">
+      <div id="wsFields"></div>
+      <div>
+        <div class="box meter" style="margin-top:0">
+          <div class="wc">Wörter im ganzen Brief</div>
+          <div class="count" id="wsCount">0</div>
+          <div class="gauge"><i id="wsGauge"></i></div>
+          <div class="wc" id="wsCountHint">Ziel: 270–330 Wörter</div>
+          <h3 style="margin-top:14px;font-size:1rem">Automatischer Check</h3>
+          <ul class="checks" id="wsChecks"></ul>
+          <p class="wc" style="margin-top:8px">Der Check sucht nur nach Signalwörtern. Ob deine Argumente überzeugen, beurteilst du mit der Checkliste in Station 12.</p>
+          <div class="bar">
+            <button class="btn p" id="wsCopy" type="button">Brief kopieren</button>
+            <button class="btn g" id="wsClear" type="button">Leeren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin-top:18px">Vorschau</h3>
+    <div class="letter preview" id="wsPreview"></div>
+  </div>
+</section>
+
+<!-- ================= 12 ================= -->
+<section class="step" id="s12">
+  <div class="step-head"><span class="step-num">12</span><h2>Fit für die Schularbeit</h2></div>
+  <p class="lead">Mit einem klaren Zeitplan und einer Checkliste für die letzten Minuten holst du am Schularbeitstag das Beste aus dir heraus.</p>
+
+  <div class="box">
+    <h3>Zeitplan für eine Schularbeit von 100 Minuten</h3>
+    <p class="wc" style="margin-top:-6px">Dauert deine Schularbeit länger oder kürzer, verschiebst du die Abschnitte einfach anteilig.</p>
+    <div class="timeline">
+      <div class="tl"><span class="when">0–10 min</span><span>Aufgabenstellung genau lesen: Situation, Zeitung, Titel, Autor/in, Datum und vor allem die <b>Operatoren</b> markieren. Nummeriere die Arbeitsaufträge.</span></div>
+      <div class="tl"><span class="when">10–25 min</span><span>Ausgangstext zweimal lesen, Behauptung, Begründung und Beispiel farbig markieren, Randnotizen machen.</span></div>
+      <div class="tl"><span class="when">25–35 min</span><span>Schreibplan: ein Stichwortblock pro Absatz (Einleitung · je Arbeitsauftrag ein Absatz · Gegenargument · Appell). Entscheide dich für <b>eine</b> klare Position.</span></div>
+      <div class="tl"><span class="when">35–80 min</span><span>Schreiben. Beginne mit dem auswendig gelernten Einleitungsgerüst, damit du schnell in den Fluss kommst. Leerzeilen zwischen den Absätzen!</span></div>
+      <div class="tl"><span class="when">80–95 min</span><span>Überarbeiten mit der Checkliste unten, Satz für Satz: Fehlerwörter (dass/das, Sie/Ihnen), Kommas, Verbstellung nach <i>weil/denn/deshalb</i>.</span></div>
+      <div class="tl"><span class="when">95–100 min</span><span>Wörter zählen (Zeilen × Wörter pro Zeile geht schnell) und die Zahl unter den Text schreiben, falls das bei euch üblich ist.</span></div>
+    </div>
+  </div>
+
+  <div class="box cl" id="checklist">
+    <h3>Checkliste für die Überarbeitung</h3>
+    <p class="wc" style="margin-top:-6px">Hake ab, was dein Übungsbrief schon erfüllt. Die Häkchen bleiben gespeichert.</p>
+  </div>
+
+  <div class="box">
+    <h3>Spickzettel für den Kopf</h3>
+    <p><b>Einleitung:</b> Mit großem Interesse habe ich Ihren Beitrag „…“ von … gelesen, der am … in … erschienen ist. · Da …, hat mich das Thema sofort angesprochen. · In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.</p>
+    <p><b>Meinung:</b> Ich bin der Ansicht/davon überzeugt, dass … · Meiner Meinung nach … · Es ist absolut notwendig, dass … · Ärgerlich/Erfreulich finde ich, dass …</p>
+    <p><b>Argumente verknüpfen:</b> Zunächst … · Ein weiteres Argument ist … · Außerdem darf nicht vergessen werden, dass … · Hinzu kommt, dass … · Besonders wichtig erscheint mir …</p>
+    <p><b>Bezug zum Text:</b> Wie die Autorin/der Autor richtig feststellt, … · Im Beitrag wird erwähnt, dass … · Meine Erfahrungen entsprechen dieser Darstellung, denn …</p>
+    <p><b>Gegenargument:</b> Zwar behaupten manche, …, doch … · Kritiker mögen einwenden, dass … Dem ist jedoch entgegenzuhalten, dass …</p>
+    <p style="margin-bottom:0"><b>Appell:</b> Ich fordere Sie daher auf, … · Ich bitte Sie, … · Lassen Sie uns gemeinsam …! · Genug diskutiert – handeln wir! · Tun wir es … zuliebe!</p>
+  </div>
+
+  <div class="box tip">
+    <span class="tag">Zum Schluss</span>
+    <p style="margin-bottom:0">Du hast jetzt alles, was ein guter Leserbrief braucht: einen festen Bauplan, eine Einleitung, die du auswendig kannst, Argumente nach dem 3-B-Schema, sichere Begründungswörter und einen Appell mit Schwung. Vertrau darauf, dass du eine eigene Meinung hast, die es wert ist, gehört zu werden. Genau das ist der Kern eines Leserbriefs. Viel Erfolg bei der Schularbeit! ✉</p>
+  </div>
+</section>
+
+</main>
+<footer>Post an die Redaktion · Leserbrief-Training</footer>
+
+<script>
+/* ---------- Speicher ---------- */
+const S={get(k,d){try{const v=localStorage.getItem('lbtrain_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+         set(k,v){try{localStorage.setItem('lbtrain_'+k,JSON.stringify(v))}catch(e){}}};
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e}
+function shuffleSeed(arr,seed){const a=arr.slice();let s=seed;for(let i=a.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function setFb(fb,cls,html){fb.className='fb show '+cls;fb.innerHTML=html}
+function hideFb(fb){fb.className='fb';fb.innerHTML=''}
+
+/* ---------- Aufgaben-Daten ---------- */
+const TASKS={
+t1quiz:{type:'mc',items:[
+ {q:'Worauf reagierst du mit einem Leserbrief?',o:['auf ein Buch, das du gelesen hast','auf einen Beitrag in einer Zeitung oder Zeitschrift','auf eine Werbeanzeige','auf eine private Nachricht'],a:1,e:'Ein Leserbrief bezieht sich immer auf einen konkreten Zeitungs- oder Zeitschriftenbeitrag, den du im Brief auch genau nennst.'},
+ {q:'Welche beiden Funktionen hat der Leserbrief?',o:['informierend und neutral','erzählend und unterhaltend','argumentativ und appellativ','beschreibend und sachlich'],a:2,e:'Du argumentierst für deine Meinung und forderst die Leserschaft zu einem Verhalten auf.'},
+ {q:'Muss bei einer Schularbeit nach Reifeprüfungsart ein Briefkopf mit Adressen dabei sein?',o:['Ja, sonst fehlt ein Pflichtteil.','Nein, der Briefkopf ist optional.','Nein, er ist sogar verboten.','Nur wenn die Zeitung aus Wien ist.'],a:1,e:'Laut deinem Buch ist der Briefkopf bei der standardisierten Reifeprüfung nicht notwendig. Betreff, Anrede und Grußformel brauchst du aber sehr wohl.'},
+ {q:'Welche Zeitformen gehören zum Leserbrief?',o:['Präsens, Perfekt und Futur I','Präteritum und Plusquamperfekt','nur Futur II','ausschließlich Konjunktiv I'],a:0,e:'Der Leserbrief steht im Tempussystem des Präsens: Präsens, Perfekt und Futur I, im Aktiv und im Passiv.'},
+ {q:'Wie lang soll dein Leserbrief sein?',o:['150–200 Wörter','405–495 Wörter','270–330 Wörter','mindestens 500 Wörter'],a:2,e:'270–330 Wörter. 405–495 Wörter ist die Länge bei der Reifeprüfung für die längere Textsorte – nicht verwechseln!'},
+ {q:'Was gehört NICHT in die Einleitung?',o:['Titel, Verfasser/in und Erscheinungsdatum des Textes','der Schreibanlass','die Anrede','ausführliche Argumente mit Beispielen'],a:3,e:'Argumente mit Beispielen gehören in den Hauptteil. Die Einleitung stellt nur den Bezug her und zeigt, warum du schreibst.'},
+ {q:'Wie viele Arbeitsaufträge musst du bearbeiten?',o:['den wichtigsten','mindestens zwei','alle','die, zu denen du eine Meinung hast'],a:2,e:'Alle! Ein vergessener Arbeitsauftrag kostet viele Punkte beim Inhalt.'},
+ {q:'Wie markierst du laut Aufgabenstellung die Absätze?',o:['mit Leerzeilen','mit Überschriften','mit Spiegelstrichen','gar nicht'],a:0,e:'In jeder Aufgabenstellung steht: „Markiere Absätze mittels Leerzeilen.“'},
+ {q:'Darfst du Fakten ergänzen, die nicht im Ausgangstext stehen?',o:['Nein, das ist verboten.','Ja, das ist sogar erwünscht.','Nur mit Quellenangabe in Fußnoten.','Nur im Betreff.'],a:1,e:'Ergänzungen aus deinem Wissen und deiner Erfahrung machen deine Argumente stärker.'},
+ {q:'Wen möchtest du mit deinem Leserbrief überzeugen?',o:['nur die Autorin oder den Autor des Artikels','vor allem die Leserschaft der Zeitung','deine Deutschlehrerin oder deinen Deutschlehrer','die Druckerei'],a:1,e:'Der Brief geht an die Redaktion, aber du schreibst für alle, die die Zeitung lesen. Deshalb richtet sich auch der Appell meist an die Leserschaft (oder an die Gruppe, die im Arbeitsauftrag genannt wird).'}
+]},
+t1op:{type:'match',items:[
+ {t:'wiedergeben',a:'Inhalte eines Textes knapp in eigenen Worten darstellen'},
+ {t:'beschreiben',a:'sachlich und genau darstellen, wie etwas ist oder abläuft, ohne zu werten'},
+ {t:'erklären',a:'verständlich machen, wie etwas funktioniert und warum es so ist'},
+ {t:'erläutern',a:'einen Standpunkt oder Sachverhalt ausführlich darlegen und mit Beispielen veranschaulichen'},
+ {t:'Stellung nehmen',a:'die eigene Meinung zu einer Frage begründet darlegen'},
+ {t:'gestalten',a:'einen eigenen, konkreten Entwurf oder Vorschlag kreativ entwickeln'},
+ {t:'appellieren',a:'die Leserinnen und Leser zu einem bestimmten Handeln auffordern'}
+]},
+t2order:{type:'order',seed:7,items:['Briefkopf (optional): Ort und Datum','Betreff','Anrede','Bezug zum Ausgangstext: Titel, Verfasser/in, Zeitung, Datum, Thema','Schreibanlass: deine Betroffenheit','Überleitung zum Hauptteil','Hauptteil: Argumente nach dem 3-B-Schema zu allen Arbeitsaufträgen','Schlussappell','Grußformel und Name']},
+t2class:{type:'classify',cats:['Einleitung','Hauptteil','Schluss'],items:[
+ {t:'Mit Interesse habe ich Ihren Beitrag in der Online-Ausgabe der NÖN vom 23. Juni 2023 gelesen.',c:0},
+ {t:'Ich ersuche um Veröffentlichung meines Leserbriefes.',c:0},
+ {t:'Da ich selbst bald mit meiner Klasse auf Sprachreise fliege, hat mich das Thema sofort angesprochen.',c:0},
+ {t:'In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.',c:0},
+ {t:'Erstens spricht für den Verzicht, dass Bahnreisen deutlich weniger CO₂ verursachen.',c:1},
+ {t:'So kann man etwa von Wien nach Paris problemlos mit dem Nachtzug reisen.',c:1},
+ {t:'Zwar betont Herr Kleemann, dass die Luftfahrt CO₂-neutral wachsen will, doch das hilft dem Klima erst in einigen Jahren.',c:1},
+ {t:'Ich fordere Sie daher auf, bei Ihrer nächsten Reiseplanung zuerst die Zugverbindungen zu prüfen!',c:2},
+ {t:'Tun wir es der Umwelt zuliebe!',c:2},
+ {t:'Mit freundlichen Grüßen',c:2}
+]},
+t3flug:{type:'classify',cats:['Pro Verzicht (Wahlmüller)','Kontra Verzicht (Kleemann)'],items:[
+ {t:'Fliegen ist die klimaschädlichste Art zu reisen.',c:0},
+ {t:'Mobilität ist ein menschliches Grundbedürfnis.',c:1},
+ {t:'Viele weiter entfernte Ziele lassen sich häufig per Bahn und Bus erreichen.',c:0},
+ {t:'Die Luftfahrt ist ein sehr geringer Verursacher von CO₂-Emissionen.',c:1},
+ {t:'Rad- und Wanderurlaube werden immer beliebter.',c:0},
+ {t:'Der Flughafen Wien arbeitet seit Jänner 2023 CO₂-neutral.',c:1},
+ {t:'Man sollte sich fragen, was man eigentlich vom Urlaub will.',c:0},
+ {t:'Ab 2025 werden dem Kerosin alternative Treibstoffe beigemischt.',c:1}
+]},
+t3buch:{type:'classify',cats:['richtig','falsch'],items:[
+ {t:'Der erste Wiener Bücherschrank wurde Anfang 2010 an der Ecke Westbahnstraße/Zieglergasse eröffnet.',c:0},
+ {t:'Wer ein Buch aus dem Schrank nimmt, muss sich vorher anmelden.',c:1,e:'Es gibt keine Anmeldung: Wer Bücher hat, gibt sie hinein, wer etwas Interessantes findet, nimmt es mit.'},
+ {t:'Der Initiator Frank Gassner ist Künstler.',c:0},
+ {t:'Zum Zeitpunkt des Berichts gibt es in Wien zehn offene Bücherschränke.',c:0},
+ {t:'Alle Wiener Bücherschränke sind nach Kategorien wie Krimis und Kinderliteratur sortiert.',c:1,e:'Nur der Schrank in der Josefstadt wird als sortiert beschrieben, im Gegensatz zum Schrank in Neubau.'},
+ {t:'Manche Schränke werden ausgeräumt und die Bücher weiterverkauft.',c:0},
+ {t:'Gassner ärgert sich vor allem über die Menschen, die Bücher verkaufen.',c:1,e:'Das stört ihn wenig. Aufregen tut ihn die Bezirkspolitik.'},
+ {t:'Der Schrank in der Josefstadt wurde 2013 von der Bezirksvertretung errichtet.',c:0}
+]},
+t3ferien:{type:'classify',cats:['richtig','falsch'],items:[
+ {t:'In der letzten Schulwoche gibt es laut Autorin kaum noch Hausübungen oder Tests.',c:0},
+ {t:'Die Autorin ärgert sich über die verlorene Unterrichtszeit.',c:1,e:'Im Gegenteil: Sie findet diese Woche wunderbar und wäre selbst gern wieder Schulkind.'},
+ {t:'Das Kind bekommt Geld mit, um mit Freundinnen ein Eis zu essen.',c:0},
+ {t:'Die Familie hat die Eismaschine schon im Frühling wieder in Betrieb genommen.',c:1,e:'Die Eismaschine ist noch immer nicht „aus dem Winterschlaf geweckt“ – das wird auf die Ferien verschoben.'},
+ {t:'Auch zu Hause gibt es Ferienstimmung, etwa eine spätere Schlafenszeit.',c:0},
+ {t:'Am Ende wünscht die Autorin allen eine schöne geheime zehnte Ferienwoche.',c:0}
+]},
+t3auftr:{type:'mc',items:[
+ {q:'A 29: „Beschreibe knapp eine typische letzte Schulwoche.“ Was musst du tun?',o:['ausführlich für oder gegen die letzte Schulwoche argumentieren','sachlich und kurz darstellen, wie eine letzte Schulwoche abläuft','den Artikel von Mirjam Marits zusammenfassen','Lehrkräfte zum Handeln auffordern'],a:1,e:'„Knapp beschreiben“ heißt: wenige Sätze, sachlich, ohne lange Bewertung. Das ist ein kurzer Absatz.'},
+ {q:'A 29: „Gestalte einen Entwurf der perfekten Abschlusswoche.“ Was wird erwartet?',o:['ein eigener, konkreter und kreativer Plan, zum Beispiel Tag für Tag','eine Aufzählung der Nachteile der letzten Schulwoche','eine Wiedergabe dessen, was die Autorin vorschlägt','eine Beschreibung deiner letzten Ferien'],a:0,e:'Gestalten heißt: Du entwickelst selbst etwas. Je konkreter, desto besser.'},
+ {q:'A 29: An wen richtet sich dein Appell?',o:['an die Eltern','an die Mitschülerinnen und Mitschüler','an Schulleitungen sowie Lehrerinnen und Lehrer','an die Autorin'],a:2,e:'Genau so steht es im Arbeitsauftrag. Wer den Appell an die falsche Gruppe richtet, erfüllt den Auftrag nicht.'},
+ {q:'A 30: „Erkläre das Konzept der offenen Bücherschränke.“ Was gehört in diesen Absatz?',o:['wie die Schränke funktionieren und welche Idee dahintersteckt','deine Meinung zu Flohmärkten','eine Liste deiner Lieblingsbücher','der Appell an die Leserschaft'],a:0,e:'Erklären: Funktionsweise (geben und nehmen, kostenlos, ohne Anmeldung) und Idee (Tausch, Gemeinschaft, öffentlicher Raum ohne Kommerz).'},
+ {q:'A 30: „Nimm Stellung zur Möglichkeit, Gebrauchsgegenstände einer weiteren sinnvollen Nutzung zuzuführen.“ Worum geht es?',o:['nur um Bücher','um deine begründete Meinung dazu, gebrauchte Dinge allgemein weiterzugeben und weiterzuverwenden','um die Frage, wer die Bücherschränke bezahlt','um eine Beschreibung des Bücherschranks in der Zieglergasse'],a:1,e:'Hier sollst du über die Bücher hinausdenken: Kleidung, Spielzeug, Möbel, Tauschbörsen, Flohmärkte, Reparieren statt Wegwerfen.'},
+ {q:'A 19: „Erläutere deinen Standpunkt zur Vertretbarkeit von Flugreisen im Allgemeinen.“ Was ist entscheidend?',o:['dass du beide Positionen nur neutral wiedergibst','dass du eine klare eigene Position ausführlich begründest und mit Beispielen veranschaulichst','dass du deinen letzten Urlaub erzählst','dass du möglichst viele Zahlen nennst'],a:1,e:'Erläutern verlangt Ausführlichkeit und Beispiele. Und: Entscheide dich für eine Sichtweise.'}
+]},
+t4gaps:{type:'gaps',items:[
+ {t:'<b>A 19:</b> Mit großem Interesse habe ich Ihren Beitrag {„Sollen wir für das Klima auf das Fliegen verzichten?“|„Die zehnte Ferienwoche“|„Offene Bücherschränke: Nostalgiefaktor Buch“} von {Natalie Schmidt|Mirjam Marits|Niklas Hintermayer} gelesen, der am {23. Juni 2023|1. Juli 2022|13. Februar 2017} in der Online-Ausgabe der {„Niederösterreichischen Nachrichten“|„Presse“|„Wiener Zeitung“} erschienen ist.'},
+ {t:'<b>A 30:</b> Mit großem Interesse habe ich den Bericht {„Offene Bücherschränke: Nostalgiefaktor Buch“|„Die zehnte Ferienwoche“|„Sollen wir für das Klima auf das Fliegen verzichten?“} von {Niklas Hintermayer|Natalie Schmidt|Mirjam Marits} gelesen, der am {13. Februar 2017|23. Juni 2023|1. Juli 2022} in der Online-Ausgabe der {„Wiener Zeitung“|„Presse“|„NÖN“} erschienen ist.'},
+ {t:'<b>A 29:</b> Mit großem Vergnügen habe ich den Beitrag {„Die zehnte Ferienwoche“|„Offene Bücherschränke: Nostalgiefaktor Buch“|„Sollen wir für das Klima auf das Fliegen verzichten?“} von {Mirjam Marits|Niklas Hintermayer|Natalie Schmidt} gelesen, der am {1. Juli 2022|13. Februar 2017|23. Juni 2023} in der Online-Ausgabe der Tageszeitung {„Die Presse“|„Wiener Zeitung“|„NÖN“} erschienen ist.'}
+]},
+t4betreff:{type:'mc',items:[
+ {q:'Welcher Betreff passt am besten zum Leserbrief über offene Bücherschränke?',o:['Betreff: Leserbrief','Betreff: Offene Bücherschränke – Tauschen statt wegwerfen!','Betreff: Mein Text zu dem Artikel, den ich in der Zeitung über Bücher gelesen habe','Betreff: Hallo!'],a:1,e:'Ein guter Betreff ist kurz, nennt das Thema und darf deine Position schon andeuten.'},
+ {q:'Situation A 30: Du hast von einem neuen Bücherschrank in deiner Wohngegend gehört. Welcher Schreibanlass passt?',o:['Ich musste diesen Artikel im Deutschunterricht lesen.','Seit Kurzem steht auch in meiner Wohngegend ein offener Bücherschrank, was mich sofort neugierig gemacht hat.','Mir war langweilig, deshalb schreibe ich Ihnen.','Ich arbeite seit vielen Jahren als Bibliothekarin.'],a:1,e:'Der Schreibanlass kommt aus der Situation in der Aufgabenstellung. Die Schularbeit selbst ist nie der Anlass!'},
+ {q:'Situation A 29: Du bist als Schülerin direkt betroffen. Welcher Schreibanlass passt?',o:['Als Schülerin erlebe ich die letzte Schulwoche jedes Jahr selbst und möchte meine Erfahrungen teilen.','Ich habe keine Meinung zu diesem Thema, möchte aber trotzdem schreiben.','Meine Lehrerin hat mir aufgetragen, einen Leserbrief zu schreiben.','Ich lese die Presse jeden Tag beim Frühstück.'],a:0,e:'Die direkte Betroffenheit als Schülerin ist dein Anlass – und gleichzeitig deine Glaubwürdigkeit.'},
+ {q:'Welcher Satz eignet sich als Überleitung von der Einleitung zum Hauptteil?',o:['Mit freundlichen Grüßen','In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.','Tun wir es der Umwelt zuliebe!','Sehr geehrtes Redaktionsteam!'],a:1,e:'Die Überleitung kündigt an, dass jetzt deine Meinung folgt.'}
+]},
+t4anrede:{type:'multi',opts:[
+ {t:'Sehr geehrtes Redaktionsteam!',ok:true},
+ {t:'Hallo Leute!',ok:false,e:'zu umgangssprachlich'},
+ {t:'Sehr geehrte Damen und Herren!',ok:true},
+ {t:'Liebe Leserinnen und Leser!',ok:true},
+ {t:'Hi Redaktion,',ok:false,e:'zu salopp'},
+ {t:'Sehr geehrte Frau Marits!',ok:true,e:'Auch die Verfasserin oder der Verfasser darf angesprochen werden.'},
+ {t:'Servus!',ok:false,e:'Gruß unter Bekannten, nicht für einen öffentlichen Brief'}
+]},
+t4table:{type:'free',fields:[
+ {l:'Absenderin/Absender',ph:'z. B. Vorname Nachname, Adresse (optional)',s:'Dein Vor- und Nachname, eventuell Adresse. Bei der Schularbeit optional.'},
+ {l:'Empfängerin/Empfänger',ph:'Wer bekommt den Brief?',s:'die Redaktion der „Niederösterreichischen Nachrichten“ (NÖN)'},
+ {l:'Ort, Datum',ph:'',s:'[dein Ort], am [Datum der Schularbeit]'},
+ {l:'Betreff',ph:'',s:'Flugreisen – ja oder nein? (oder zugespitzt: Kurzstrecken gehören auf die Schiene!)'},
+ {l:'Adressatin/Adressat',ph:'Wen sprichst du an?',s:'Sehr geehrtes Redaktionsteam! – geschrieben für die Leserschaft der NÖN'},
+ {l:'Titel des Textes',ph:'',s:'„Sollen wir für das Klima auf das Fliegen verzichten?“ von Natalie Schmidt (Pro: Johannes Wahlmüller, Kontra: Peter Kleemann)'},
+ {l:'Erscheinungsdatum',ph:'',s:'23. Juni 2023, Online-Ausgabe der NÖN'},
+ {l:'Schreibanlass',ph:'',s:'z. B. Die Familie oder die Klasse plant eine Reise, und es steht die Frage im Raum, ob geflogen wird.'},
+ {l:'Thema',ph:'',s:'Sind Flugreisen in Zeiten der Klimakrise noch vertretbar?'}
+]},
+t5class:{type:'classify',cats:['Behauptung','Begründung','Beispiel/Beweis'],items:[
+ {t:'Handys sollten im Unterricht ausgeschaltet bleiben,',c:0},
+ {t:'da ständige Benachrichtigungen die Konzentration stören.',c:1},
+ {t:'So schaut man bei jedem Aufleuchten des Bildschirms reflexartig hin und verliert den Faden.',c:2},
+ {t:'Offene Bücherschränke bereichern jedes Grätzl,',c:0},
+ {t:'denn sie machen Lesen für alle kostenlos zugänglich.',c:1},
+ {t:'Im Schrank in der Zieglergasse findet man beispielsweise Bücher, die es in keiner Buchhandlung mehr gibt.',c:2},
+ {t:'Gemeinsame Ausflüge in der letzten Schulwoche sind wertvoll,',c:0},
+ {t:'weil die Klassengemeinschaft dabei ohne Notendruck wachsen kann.',c:1},
+ {t:'Bei unserem Wandertag im Juni haben zum Beispiel Mitschüler miteinander gelacht, die sonst kaum ein Wort wechseln.',c:2}
+]},
+t5fehlt:{type:'mc',items:[
+ {q:'„Kurzstreckenflüge sollten verboten werden. Ein Flug von Wien nach Salzburg dauert keine Stunde, mit dem Zug ist man in gut zweieinhalb Stunden dort.“',o:['die Behauptung','die Begründung','das Beispiel'],a:1,e:'Es fehlt das „Warum?“ – etwa: „…, da sie im Verhältnis zur kurzen Strecke besonders viel CO₂ verursachen.“'},
+ {q:'„Bücherschränke sind eine großartige Idee, weil sie Ressourcen sparen.“',o:['die Behauptung','die Begründung','das Beispiel'],a:2,e:'Behauptung und Begründung sind da, aber kein Beleg. Etwa: „Ein Buch, das zehn Menschen lesen, muss nicht zehnmal gedruckt werden.“'},
+ {q:'„… denn viele Schülerinnen und Schüler sitzen in dieser Woche nur noch Stunden ab. In meiner Klasse haben wir letztes Jahr an drei Tagen hintereinander Filme geschaut.“',o:['die Behauptung','die Begründung','das Beispiel'],a:0,e:'Wofür wird hier argumentiert? Es fehlt die These, etwa: „Die letzte Schulwoche sollte sinnvoller gestaltet werden, …“'},
+ {q:'„Bahnfahren ist besser.“',o:['nur die Behauptung ist da – Begründung und Beispiel fehlen','nur das Beispiel fehlt','nichts, das Argument ist vollständig'],a:0,e:'Ein einzelner Satz wie dieser ist nur eine Meinung. Besser für wen? Warum? Woran sieht man das?'}
+]},
+t5a15:{type:'free',fields:[
+ {l:'Das Tragen von Jogginghosen sollte in der Schule verboten sein.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Die Schule ist ein Arbeitsplatz, und angemessene Kleidung drückt Respekt und eine konzentrierte Arbeitshaltung aus. <b>Beispiel:</b> Auch in vielen Berufen gibt es Kleidervorschriften, etwa in Banken oder Hotels; wer sich früh daran gewöhnt, tut sich später leichter.'},
+ {l:'Das Tragen von Jogginghosen sollte in der Schule erlaubt sein.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Bequeme Kleidung fördert das Wohlbefinden und damit die Konzentration. <b>Beispiel:</b> Wer sechs Stunden still sitzt, fühlt sich in einer weichen Hose wohler als in einer engen Jeans und kann sich so besser auf den Unterricht einlassen.'},
+ {l:'Es ist ausreichend, lediglich Englisch als Fremdsprache in der Schule zu lernen.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Englisch ist die weltweite Verkehrssprache in Wirtschaft, Wissenschaft und Internet. <b>Beispiel:</b> Auf Reisen und in internationalen Firmen kann man sich fast überall auf Englisch verständigen.'},
+ {l:'In der Schule sollten mehrere Fremdsprachen angeboten werden.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Jede weitere Sprache öffnet Türen zu anderen Kulturen und verbessert die Berufschancen. <b>Beispiel:</b> Wer in Österreich neben Englisch auch Italienisch oder eine Sprache der Nachbarländer spricht, hat etwa im Tourismus oder im Handel klare Vorteile.'}
+]},
+t5gegen:{type:'free',fields:[
+ {l:'Gegenargument: „Die Luftfahrt verursacht ohnehin nur einen kleinen Teil der Emissionen.“',ph:'Zwar …, doch …',s:'Zwar verursacht die Luftfahrt insgesamt nur einen Teil der Emissionen, doch für die einzelne Reise ist das Flugzeug laut Herrn Wahlmüller das klimaschädlichste Verkehrsmittel. Wer auf einen Kurzstreckenflug verzichtet, kann also persönlich besonders viel bewirken.'},
+ {l:'Gegenargument: „Bücherschränke bringen nichts, weil sie ohnehin ausgeräumt werden.“',ph:'Kritiker mögen einwenden, … Dem ist jedoch entgegenzuhalten, …',s:'Kritiker mögen einwenden, dass manche Schränke ausgeräumt werden. Dem ist jedoch entgegenzuhalten, dass es sich um Einzelfälle handelt und die Schränke laut Bericht schnell wieder aufgefüllt werden. Die große Mehrheit nutzt das Angebot also fair.'},
+ {l:'Gegenargument: „In der letzten Schulwoche sollte noch normal unterrichtet werden, sonst ist sie verschwendet.“',ph:'Natürlich …; trotzdem …',s:'Natürlich ist Unterrichtszeit wertvoll; trotzdem sind die Noten zu diesem Zeitpunkt bereits fixiert, und die Motivation ist entsprechend gering. Gemeinsame Projekte nützen diese Zeit deshalb viel sinnvoller, weil man dabei ebenfalls lernt, nur auf andere Weise.'}
+]},
+t6gaps:{type:'gaps',items:[
+ {t:'Viele Menschen fahren mit dem Zug, {weil|denn|deshalb} sie dem Klima helfen wollen.',e:'Verb am Ende → unterordnende Konjunktion: weil.'},
+ {t:'Viele Menschen fahren mit dem Zug, {denn|weil|deshalb} sie wollen dem Klima helfen.',e:'Verb an 2. Stelle nach dem Subjekt → denn.'},
+ {t:'Der Zug verursacht weniger CO₂, {deshalb|denn|weil} fahren viele lieber mit der Bahn.',e:'Verb direkt nach dem Bindewort → Kausaladverb: deshalb.'},
+ {t:'{Wegen|Weil|Denn} des hohen CO₂-Ausstoßes sollten Kurzstreckenflüge vermieden werden.',e:'Danach folgt ein Nomen im Genitiv, kein Satz → Präposition: wegen.'},
+ {t:'{Aus|Weil|Denn} Platzmangel können die Tiere keine weiten Streifzüge unternehmen.',e:'Nomen ohne Artikel → aus.'},
+ {t:'Offene Bücherschränke sind beliebt, {da|denn|deshalb} man dort kostenlos Bücher findet.',e:'Verb am Ende → da.'},
+ {t:'Viele lieben Bücherschränke. Man findet dort {nämlich|weil|denn} oft Bücher, die es in keiner Buchhandlung mehr gibt.',e:'Das Wort steht mitten im Satz nach dem Verb → nämlich.'},
+ {t:'Die letzte Schulwoche sollte gemeinsam gestaltet werden, {zumal|deshalb|denn} sich viele erst im Herbst wiedersehen.',e:'Verb am Ende und ein zusätzlicher Grund → zumal.'},
+ {t:'Ausflüge stärken die Klassengemeinschaft, {daher|weil|denn} sollten sie in jeder letzten Schulwoche stattfinden.',e:'Verb direkt danach → daher.'},
+ {t:'{Mangels|Wegen|Aufgrund} ausreichender Sprachkenntnisse kam es zu Missverständnissen mit der Gastfamilie.',e:'Die Kenntnisse fehlen → mangels („weil es … nicht gibt“).'},
+ {t:'Die Reise wurde abgesagt, {da|deshalb|nämlich} es nicht genügend Anmeldungen gegeben hat.',e:'Verb am Ende → da.'},
+ {t:'Er hat sich intensiv auf die Schularbeit vorbereitet, {somit|weil|denn} hat er die gute Note verdient.',e:'Verb direkt danach und eine Folge → somit.'}
+]},
+t6satz:{type:'mc',items:[
+ {q:'Welcher Satz ist richtig?',o:['Ich fahre mit dem Zug, weil ist er bequemer.','Ich fahre mit dem Zug, weil er bequemer ist.','Ich fahre mit dem Zug, weil er ist bequemer.'],a:1,e:'Nach weil steht das Verb am Ende.'},
+ {q:'Welcher Satz ist richtig?',o:['Bücher sind teuer, deshalb tauschen viele sie lieber.','Bücher sind teuer, deshalb viele tauschen sie lieber.','Bücher sind teuer, deshalb viele sie lieber tauschen.'],a:0,e:'Nach deshalb kommt sofort das Verb.'},
+ {q:'Welcher Satz ist richtig?',o:['Ausflüge sind wichtig, denn stärken sie die Gemeinschaft.','Ausflüge sind wichtig, denn sie die Gemeinschaft stärken.','Ausflüge sind wichtig, denn sie stärken die Gemeinschaft.'],a:2,e:'Nach denn folgt ein ganz normaler Hauptsatz: Subjekt, dann Verb.'},
+ {q:'Welcher Satz ist richtig?',o:['Aufgrund dem schlechten Wetter fiel der Ausflug aus.','Aufgrund des schlechten Wetters ist der Ausflug ausgefallen.','Aufgrund das schlechte Wetter ist der Ausflug ausgefallen.'],a:1,e:'Aufgrund verlangt den Genitiv: des schlechten Wetters. (Im Leserbrief außerdem Perfekt statt Präteritum.)'}
+]},
+t6a18:{type:'free',fields:[
+ {l:'Tiergärten sind tierfeindlich. Tiere werden regelmäßig gefüttert und verlernen ihr natürliches Verhalten.',ph:'…, weil … / …, denn … / Da …',s:'Tiergärten sind tierfeindlich, weil die Tiere regelmäßig gefüttert werden und dadurch ihr natürliches Verhalten verlernen.<br><b>Paraphrase:</b> Da Zootiere ihr Futter stets vorgesetzt bekommen, verlieren sie ihre natürlichen Instinkte – deshalb halte ich Tiergärten für tierfeindlich.'},
+ {l:'Die Lebewesen haben nicht ausreichend Platz. Sie verhalten sich seltsam.',ph:'…, deshalb … / Aufgrund …',s:'Die Lebewesen haben nicht ausreichend Platz, deshalb verhalten sie sich seltsam.<br><b>Paraphrase:</b> Aufgrund der beengten Gehege zeigen viele Tiere auffällige Verhaltensweisen.'},
+ {l:'In Gefangenschaft geborene Tiere können nicht in die Wildnis ausgesetzt werden. Sie sind in der freien Wildbahn ohne Hilfe des Menschen nicht überlebensfähig.',ph:'…, da … / …, denn …',s:'In Gefangenschaft geborene Tiere können nicht in die Wildnis ausgesetzt werden, da sie in der freien Wildbahn ohne Hilfe des Menschen nicht überleben könnten.<br><b>Paraphrase:</b> Wer im Zoo zur Welt kommt, bleibt meist ein Leben lang dort, denn ohne menschliche Versorgung hätte er in der Natur kaum eine Chance.'}
+]},
+t7class:{type:'classify',cats:['Imperativ','Modalverb','Verb der Aufforderung','Aussagesatz (Futur/Konjunktiv)','Partizip Perfekt','Infinitiv mit zu'],items:[
+ {t:'Nehmen Sie beim Einkaufen eine Stofftasche mit!',c:0},
+ {t:'Sie sollten kurze Strecken mit der Bahn zurücklegen.',c:1},
+ {t:'Ich bitte Sie um Ihre Unterstützung.',c:2},
+ {t:'Möge die nächste Generation es besser haben!',c:3},
+ {t:'Genug geredet!',c:4},
+ {t:'Diese Idee ist unbedingt umzusetzen!',c:5},
+ {t:'Probieren Sie es einfach aus!',c:0},
+ {t:'Wir dürfen nicht länger wegsehen.',c:1},
+ {t:'Ich fordere mehr Bücherschränke für alle Bezirke.',c:2},
+ {t:'Sie werden den Unterschied schon bald bemerken!',c:3},
+ {t:'Lange genug gewartet!',c:4},
+ {t:'Der Bücherschrank ist mit Respekt zu behandeln!',c:5}
+]},
+t7sie:{type:'gaps',items:[
+ {t:'Nimm den Zug! → {Nehmen Sie|Nimmst Sie|Nehme Sie} den Zug!'},
+ {t:'Sei mutig! → {Seien Sie|Sind Sie|Sei Sie} mutig!'},
+ {t:'Lies mehr Bücher! → {Lesen Sie|Liest Sie|Lies Sie} mehr Bücher!'},
+ {t:'Gib deine Bücher weiter! → {Geben Sie|Gibt Sie|Gib Sie} Ihre Bücher weiter!'},
+ {t:'Hilf mit! → {Helfen Sie|Hilft Sie|Hilf Sie} mit!'},
+ {t:'Denk an die Umwelt! → {Denken Sie|Denkst Sie|Denkt Sie} an die Umwelt!'}
+]},
+t7schluessig:{type:'mc',items:[
+ {q:'Dein Hauptteil zu A 30 argumentiert, dass Weitergeben Ressourcen spart und Menschen verbindet. Welcher Appell ist schlüssig?',o:['Kaufen Sie mehr neue Bücher, um die Buchhandlungen zu unterstützen!','Bringen Sie Bücher, die Sie gelesen haben, in den nächsten Bücherschrank, und geben Sie auch anderen Dingen ein zweites Leben!','Lesen Sie weniger, dann gibt es auch weniger Müll!','Schreiben Sie an die Bezirksvorstehung, dass Bücherschränke abgebaut werden sollen!'],a:1,e:'Der Appell setzt genau das um, wofür du argumentiert hast, und ist konkret.'},
+ {q:'A 29 verlangt einen Appell an Schulleitungen und Lehrkräfte. Welcher passt?',o:['Liebe Mitschülerinnen und Mitschüler, genießt die letzte Woche!','Liebe Eltern, gebt euren Kindern mehr Taschengeld für Eis!','Ich bitte Sie, liebe Schulleiterinnen und Schulleiter, liebe Lehrerinnen und Lehrer: Planen Sie die letzte Woche gemeinsam mit den Klassen!','Liebe Frau Marits, schreiben Sie bitte mehr Artikel!'],a:2,e:'Richtige Zielgruppe, Höflichkeitsform und eine konkrete Aufforderung.'},
+ {q:'Dein Brief zu A 19 vertritt: Kurzstrecken ja mit dem Zug, Fernreisen nur in Ausnahmen mit dem Flugzeug. Welcher Schluss ist schlüssig?',o:['Fliegen Sie, so oft Sie können – das Leben ist kurz!','Verzichten Sie ab sofort auf jede Art von Urlaub!','Prüfen Sie vor jeder Reise zuerst die Zugverbindungen und steigen Sie nur ins Flugzeug, wenn es keine sinnvolle Alternative gibt!','Die Klimakrise ist nicht mein Problem.'],a:2,e:'Der Appell spiegelt genau deine differenzierte Position wider.'}
+]},
+t7a16:{type:'free',fields:[
+ {l:'Bild 1: Stofftaschen und ein Einkaufsnetz mit Gemüse',ph:'',s:'Verzichten Sie auf Plastiksackerl und nehmen Sie beim Einkaufen Ihre eigene Stofftasche mit!'},
+ {l:'Bild 2: Ein Zug fährt durch die Berge',ph:'',s:'Steigen Sie für Ihre nächste Reise in den Zug – die Aussicht gibt es gratis dazu!'},
+ {l:'Bild 3: Eine Person raucht neben einem Kinderspielplatz',ph:'',s:'Bitte rauchen Sie nicht in der Nähe spielender Kinder! Kinder haben ein Recht auf saubere Luft.'},
+ {l:'Bild 4: Junge Frauen tauschen Kleidung und Accessoires',ph:'',s:'Tauschen Sie Kleidung, statt ständig Neues zu kaufen – Ihr Kleiderschrank und die Umwelt werden es Ihnen danken!'}
+]},
+t8sort:{type:'classify',cats:['Einleitung','Meinung & Wertung','Argumente verknüpfen','Gegenargument entkräften','Appell'],items:[
+ {t:'Mit großem Interesse habe ich Ihren Beitrag … gelesen.',c:0},
+ {t:'Ihr Artikel hat mich sofort angesprochen, denn …',c:0},
+ {t:'Ich bin der Ansicht, dass …',c:1},
+ {t:'Ärgerlich finde ich, dass …',c:1},
+ {t:'Ein weiteres Argument ist …',c:2},
+ {t:'Außerdem darf nicht vergessen werden, dass …',c:2},
+ {t:'Zwar behaupten manche, dass …, doch …',c:3},
+ {t:'Dem ist jedoch entgegenzuhalten, dass …',c:3},
+ {t:'Ich fordere Sie daher auf, …',c:4},
+ {t:'Lassen Sie uns gemeinsam …!',c:4}
+]},
+t8stil:{type:'classify',cats:['passt','passt nicht'],items:[
+ {t:'Ich halte die Aussage von Herrn Kleemann für wenig überzeugend, denn …',c:0},
+ {t:'Der Typ vom Flughafen hat ja überhaupt keine Ahnung!',c:1,e:'abwertend und umgangssprachlich – kritisiere die Aussage, nicht die Person'},
+ {t:'Ärgerlich finde ich, dass Bücherschränke manchmal ausgeräumt werden.',c:0},
+ {t:'Bücherschränke sind halt irgendwie voll cool.',c:1,e:'„halt“, „irgendwie“, „voll cool“ sind Jugendsprache'},
+ {t:'Alle, die fliegen, sind Umweltsünder und sollten sich schämen!',c:1,e:'Pauschalurteil und beleidigend – das schadet deiner Glaubwürdigkeit'},
+ {t:'Es ist absolut notwendig, dass wir unser Reiseverhalten überdenken.',c:0},
+ {t:'Wie die Autorin treffend beschreibt, gleicht die letzte Schulwoche schon den Ferien.',c:0},
+ {t:'LG und tschüss!',c:1,e:'Abkürzungen und lockere Grüße gehören in Chatnachrichten'},
+ {t:'Gestern fuhr ich mit dem Zug nach Salzburg, dann ging ich ins Museum und danach aß ich ein Eis.',c:1,e:'reine Erzählung im Präteritum ohne Argument'}
+]},
+t8sprache:{type:'gaps',items:[
+ {t:'Ich {habe|hatte} Ihren Beitrag mit großem Interesse gelesen.',e:'Perfekt mit „habe“ – Tempussystem des Präsens.'},
+ {t:'Der Artikel {ist|war gewesen} am 23. Juni 2023 erschienen.',e:'Perfekt: ist erschienen.'},
+ {t:'Bücherschränke {werden|wurden} hoffentlich bald in jedem Bezirk stehen.',e:'Futur I für die Zukunft.'},
+ {t:'Ich bin davon überzeugt, {dass|das} Bücherschränke Menschen verbinden.',e:'Konjunktion nach „überzeugt“ → dass. Probe: „dieses/welches“ passt nicht.'},
+ {t:'Das Buch, {das|dass} ich im Schrank gefunden habe, war ein echter Schatz.',e:'Relativpronomen → das. Probe: „welches“ passt.'},
+ {t:'Ich danke {Ihnen|ihnen} für Ihren spannenden Beitrag.',e:'Höflichkeitsform immer groß: Sie, Ihnen, Ihr.'},
+ {t:'Liebe Leserinnen und Leser, ich bitte {Sie|sie} um Ihre Unterstützung.',e:'Anrede in der Höflichkeitsform → groß.'},
+ {t:'Der Zug ist bequem{,|(kein Komma)} weil man unterwegs lesen kann.',e:'Vor weil, da, dass steht immer ein Komma.'},
+ {t:'Ich fahre gern mit dem Zug{(kein Komma)|,} und lese dabei ein Buch.',e:'„und“ verbindet hier zwei Prädikate desselben Subjekts → kein Komma.'}
+]},
+t9lupe:{type:'lupe',segs:[
+ {t:'Hallo liebe Zeitung,',err:true,e:'Unpassende Anrede. Besser: „Sehr geehrtes Redaktionsteam der Wiener Zeitung!“'},
+ {t:'ich habe einen Text über Bücherschränke gelesen.',err:true,e:'Der Bezug zum Ausgangstext fehlt: Titel, Verfasser, Zeitung und Datum müssen genannt werden.'},
+ {t:'Seit Kurzem steht auch in meiner Gasse ein offener Bücherschrank, deshalb hat mich das Thema sofort angesprochen.',err:false},
+ {t:'Das Konzept ist einfach: Wer ein Buch übrig hat, stellt es hinein, und wer etwas Spannendes findet, nimmt es mit.',err:false},
+ {t:'Bücherschränke sind gut.',err:true,e:'Eine nackte Behauptung ohne Begründung und Beispiel – kein vollständiges Argument.'},
+ {t:'Letzten Sommer fand ich dort ein altes Kochbuch und brachte es meiner Oma.',err:true,e:'Präteritum-Erzählung. Im Leserbrief: „Letzten Sommer habe ich dort … gefunden“ – und mit einer Aussage verbinden, die das Beispiel stützt.'},
+ {t:'Außerdem schont es die Umwelt, Dinge weiterzuverwenden, da für jedes neue Produkt Rohstoffe und Energie verbraucht werden.',err:false},
+ {t:'Die Leute, die Bücher rausnehmen und am Flohmarkt verkaufen, sind einfach nur asozial.',err:true,e:'Beleidigend und unsachlich. Sachlich wäre: „Es ist bedauerlich, dass manche Schränke ausgeräumt werden.“'},
+ {t:'Zwar werden manche Schränke ausgeräumt, doch das ändert nichts daran, dass die meisten Menschen das Angebot fair nutzen.',err:false},
+ {t:'Ich bin der Ansicht, dass es in jedem Bezirk solche Tauschplätze geben sollte.',err:false},
+ {t:'Das war\'s von mir.',err:true,e:'Kein Appell, dafür ein umgangssprachlicher Schluss. Es braucht eine klare Aufforderung an die Leserschaft.'},
+ {t:'Mit freundlichen Grüßen',err:false}
+]},
+t9neu:{type:'free',fields:[
+ {l:'Anrede',ph:'',s:'Sehr geehrtes Redaktionsteam der Wiener Zeitung!'},
+ {l:'Bezug zum Ausgangstext',ph:'',s:'Mit großem Interesse habe ich den Bericht „Offene Bücherschränke: Nostalgiefaktor Buch“ von Niklas Hintermayer gelesen, der am 13. Februar 2017 in der Online-Ausgabe Ihrer Zeitung erschienen ist.'},
+ {l:'„Bücherschränke sind gut.“',ph:'Behauptung + Begründung + Beispiel',s:'Bücherschränke bereichern jede Nachbarschaft, denn sie machen Lesen für alle kostenlos zugänglich. So findet man dort oft Bücher, die es in keiner Buchhandlung mehr gibt.'},
+ {l:'Präteritum-Beispiel',ph:'',s:'Ich selbst habe dort letzten Sommer ein altes Kochbuch gefunden, über das sich meine Oma sehr gefreut hat – ein Schatz, der sonst vielleicht im Altpapier gelandet wäre.'},
+ {l:'Beleidigung',ph:'',s:'Bedauerlich ist allerdings, dass manche Schränke ausgeräumt und die Bücher weiterverkauft werden.'},
+ {l:'Schluss',ph:'',s:'Ich rufe Sie daher auf: Bringen Sie gelesene Bücher in den nächsten Bücherschrank und nehmen Sie nur, was Sie wirklich lesen möchten! Lassen Sie uns diese Schatzkisten gemeinsam bewahren!'}
+]},
+t10analyse:{type:'mc',items:[
+ {q:'Wie viele Absätze hat der Hauptteil des Flugreisen-Briefs?',o:['einen','zwei','drei','fünf'],a:2,e:'Argument 1 – Gegenargument entkräftet – Argument 2.'},
+ {q:'Welches Begründungswort steht im Bücherschrank-Brief in „Für jedes neue Produkt werden nämlich Rohstoffe … verbraucht“?',o:['ein Kausaladverb im Satz','eine unterordnende Konjunktion','eine Präposition','ein Imperativ'],a:0,e:'„nämlich“ steht mitten im Satz nach dem Verb.'},
+ {q:'Warum hat der Brief zur letzten Schulwoche einen eigenen Absatz mit Montag bis Freitag?',o:['weil er besonders lang sein muss','weil der Arbeitsauftrag „Gestalte einen Entwurf der perfekten Abschlusswoche“ einen konkreten Plan verlangt','weil die Autorin das so vorschlägt','weil Wochentage immer in einen Leserbrief gehören'],a:1,e:'Jeder Arbeitsauftrag bekommt seinen eigenen Absatz.'},
+ {q:'Welche Appellformen kombiniert der Schluss des Flugreisen-Briefs?',o:['nur Partizip Perfekt','Verb der Aufforderung, Imperativ und eine Aufforderung mit „wir“','nur Modalverben','Infinitiv mit zu und Konjunktiv'],a:1,e:'„Ich fordere Sie … auf“ – „Prüfen Sie …! Steigen Sie …“ – „Tun wir es …!“'}
+]}
+};
+
+/* ---------- Renderer ---------- */
+const R={};
+R.mc=function(body,cfg,st,save){
+  st.sel=st.sel||{};
+  const qs=cfg.items.map((it,i)=>{
+    const q=el('div','q');q.append(el('p','qt',`<span class="qn">${i+1}</span>${it.q}`));
+    const ops=el('div','opts col');const fb=el('div','fb');
+    const btns=it.o.map((o,j)=>{const b=el('button','opt',o);b.type='button';
+      if(st.sel[i]===j)b.classList.add('sel');
+      b.onclick=()=>{st.sel[i]=j;save();btns.forEach((x,k)=>{x.classList.toggle('sel',k===j);x.classList.remove('right','wrong')});hideFb(fb)};
+      ops.append(b);return b});
+    q.append(ops,fb);body.append(q);return {btns,fb,it};
+  });
+  return{
+    check(){let r=0;qs.forEach(({btns,fb,it},i)=>{const s=st.sel[i];btns.forEach(b=>b.classList.remove('right','wrong'));
+      if(s===undefined){setFb(fb,'neutral','Noch nicht beantwortet.');return}
+      if(s===it.a){r++;btns[s].classList.add('right');setFb(fb,'ok','✓ Richtig! '+(it.e||''))}
+      else{btns[s].classList.add('wrong');setFb(fb,'bad','✗ Leider nicht. Versuch es noch einmal oder sieh dir die Lösung an.')}});return[r,qs.length]},
+    solve(){qs.forEach(({btns,fb,it},i)=>{btns.forEach((b,k)=>{b.classList.remove('sel','wrong');b.classList.toggle('right',k===it.a)});st.sel[i]=it.a;setFb(fb,'ok',it.e||'')});save()},
+    reset(){qs.forEach(({btns,fb})=>{btns.forEach(b=>b.classList.remove('sel','right','wrong'));hideFb(fb)})}
+  };
+};
+R.classify=function(body,cfg,st,save){
+  st.sel=st.sel||{};
+  const rows=cfg.items.map((it,i)=>{
+    const row=el('div','row');row.append(el('div','txt',`<span class="qn">${i+1}</span>${it.t}`));
+    const cats=el('div','cats');const fb=el('div','fb');
+    const btns=cfg.cats.map((c,j)=>{const b=el('button','opt cat',c);b.type='button';if(st.sel[i]===j)b.classList.add('sel');
+      b.onclick=()=>{st.sel[i]=j;save();btns.forEach((x,k)=>{x.classList.toggle('sel',k===j);x.classList.remove('right','wrong')});row.classList.remove('right','wrong');hideFb(fb)};
+      cats.append(b);return b});
+    row.append(cats,fb);body.append(row);return{row,btns,fb,it};
+  });
+  return{
+    check(){let r=0;rows.forEach(({row,btns,fb,it},i)=>{const s=st.sel[i];btns.forEach(b=>b.classList.remove('right','wrong'));row.classList.remove('right','wrong');hideFb(fb);
+      if(s===undefined)return;
+      if(s===it.c){r++;btns[s].classList.add('right');row.classList.add('right');if(it.e)setFb(fb,'ok','✓ '+it.e)}
+      else{btns[s].classList.add('wrong');row.classList.add('wrong')}});return[r,rows.length]},
+    solve(){rows.forEach(({row,btns,fb,it},i)=>{btns.forEach((b,k)=>{b.classList.remove('sel','wrong');b.classList.toggle('right',k===it.c)});row.classList.remove('wrong');row.classList.add('right');st.sel[i]=it.c;if(it.e)setFb(fb,'ok',it.e)});save()},
+    reset(){rows.forEach(({row,btns,fb})=>{btns.forEach(b=>b.classList.remove('sel','right','wrong'));row.classList.remove('right','wrong');hideFb(fb)})}
+  };
+};
+R.gaps=function(body,cfg,st,save){
+  st.sel=st.sel||{};const sels=[];
+  cfg.items.forEach((it,i)=>{
+    const line=el('div','gapline');let n=0;
+    const html=it.t.replace(/\{([^}]+)\}/g,(m,inner)=>{const opts=inner.split('|');const id=i+'_'+(n++);
+      const sorted=opts.slice().sort((a,b)=>a.localeCompare(b,'de'));
+      return `<select class="gap" data-id="${id}" data-a="${encodeURIComponent(opts[0])}"><option value="">…</option>${sorted.map(o=>`<option value="${encodeURIComponent(o)}">${o}</option>`).join('')}</select>`});
+    line.innerHTML=`<span class="qn">${i+1}</span>`+html;
+    const fb=el('div','fb');line.append(fb);body.append(line);
+    line.querySelectorAll('select').forEach(s=>{if(st.sel[s.dataset.id])s.value=st.sel[s.dataset.id];
+      s.onchange=()=>{st.sel[s.dataset.id]=s.value;save();s.classList.remove('right','wrong');hideFb(fb)};sels.push({s,fb,it})});
+  });
+  return{
+    check(){let r=0;const bad=new Set();sels.forEach(({s,fb,it})=>{s.classList.remove('right','wrong');if(!s.value){return}
+      if(s.value===s.dataset.a){r++;s.classList.add('right')}else{s.classList.add('wrong');bad.add(fb)}});
+      sels.forEach(({fb})=>{if(bad.has(fb))setFb(fb,'bad','✗ Hier stimmt etwas noch nicht.');else hideFb(fb)});return[r,sels.length]},
+    solve(){sels.forEach(({s,fb,it})=>{s.value=s.dataset.a;st.sel[s.dataset.id]=s.value;s.classList.remove('wrong');s.classList.add('right');if(it.e)setFb(fb,'ok',it.e)});save()},
+    reset(){sels.forEach(({s,fb})=>{s.value='';s.classList.remove('right','wrong');hideFb(fb)})}
+  };
+};
+R.match=function(body,cfg,st,save){
+  const defs=shuffleSeed(cfg.items.map(x=>x.a),11);
+  const g={t:cfg.items.map(it=>it.t+': {'+[it.a].concat(defs.filter(d=>d!==it.a)).join('|')+'}')};
+  // Darstellung als Auswahl-Liste je Operator
+  st.sel=st.sel||{};const sels=[];
+  cfg.items.forEach((it,i)=>{
+    const line=el('div','gapline');
+    line.innerHTML=`<span class="qn">${i+1}</span><b>${it.t}</b><br>`;
+    const s=el('select','gap');s.dataset.a=it.a;s.style.marginTop='6px';s.style.width='100%';
+    s.innerHTML='<option value="">… Bedeutung wählen</option>'+defs.map(d=>`<option>${d}</option>`).join('');
+    if(st.sel[i])s.value=st.sel[i];
+    s.onchange=()=>{st.sel[i]=s.value;save();s.classList.remove('right','wrong')};
+    line.append(s);body.append(line);sels.push(s);
+  });
+  return{
+    check(){let r=0;sels.forEach(s=>{s.classList.remove('right','wrong');if(!s.value)return;if(s.value===s.dataset.a){r++;s.classList.add('right')}else s.classList.add('wrong')});return[r,sels.length]},
+    solve(){sels.forEach((s,i)=>{s.value=s.dataset.a;st.sel[i]=s.value;s.classList.remove('wrong');s.classList.add('right')});save()},
+    reset(){sels.forEach(s=>{s.value='';s.classList.remove('right','wrong')})}
+  };
+};
+R.order=function(body,cfg,st,save){
+  const correct=cfg.items;let cur=st.order&&st.order.length===correct.length?st.order.slice():null;
+  if(!cur){cur=shuffleSeed(correct.map((_,i)=>i),cfg.seed||3);if(cur.every((v,i)=>v===i))cur.reverse()}
+  const ul=el('ol','order');body.append(ul);
+  function draw(marks){ul.innerHTML='';cur.forEach((idx,pos)=>{const li=el('li');li.append(el('span','pos',(pos+1)+'.'),el('span','lbl',correct[idx]));
+    const up=el('button','mv','↑');up.type='button';up.disabled=pos===0;up.onclick=()=>{[cur[pos-1],cur[pos]]=[cur[pos],cur[pos-1]];st.order=cur;save();draw()};
+    const dn=el('button','mv','↓');dn.type='button';dn.disabled=pos===cur.length-1;dn.onclick=()=>{[cur[pos+1],cur[pos]]=[cur[pos],cur[pos+1]];st.order=cur;save();draw()};
+    li.append(up,dn);if(marks)li.classList.add(idx===pos?'right':'wrong');ul.append(li)})}
+  draw();
+  return{
+    check(){draw(true);return[cur.filter((v,i)=>v===i).length,cur.length]},
+    solve(){cur=correct.map((_,i)=>i);st.order=cur;save();draw(true)},
+    reset(){cur=shuffleSeed(correct.map((_,i)=>i),cfg.seed||3);if(cur.every((v,i)=>v===i))cur.reverse();draw()}
+  };
+};
+R.multi=function(body,cfg,st,save){
+  st.sel=st.sel||{};const ops=el('div','opts col');const fb=el('div','fb');
+  const btns=cfg.opts.map((o,i)=>{const b=el('button','opt',o.t);b.type='button';if(st.sel[i])b.classList.add('sel');
+    b.onclick=()=>{st.sel[i]=!st.sel[i];save();b.classList.toggle('sel',!!st.sel[i]);btns.forEach(x=>x.classList.remove('right','wrong'));hideFb(fb)};ops.append(b);return b});
+  body.append(ops,fb);
+  const explain=()=>cfg.opts.map(o=>o.e?`<div>${o.ok?'✓':'✗'} <i>${o.t}</i> – ${o.e}</div>`:'').join('');
+  return{
+    check(){let r=0;cfg.opts.forEach((o,i)=>{const s=!!st.sel[i];btns[i].classList.remove('right','wrong');
+      if(s===o.ok){r++;if(s)btns[i].classList.add('right')}else btns[i].classList.add('wrong')});
+      setFb(fb,r===cfg.opts.length?'ok':'bad',r===cfg.opts.length?'✓ Alles richtig!':'Rot markiert ist entweder eine unpassende Anrede, die du gewählt hast, oder eine passende, die dir noch fehlt.');return[r,cfg.opts.length]},
+    solve(){cfg.opts.forEach((o,i)=>{st.sel[i]=o.ok;btns[i].classList.toggle('sel',o.ok);btns[i].classList.remove('wrong');btns[i].classList.toggle('right',o.ok)});save();setFb(fb,'ok',explain())},
+    reset(){btns.forEach(b=>b.classList.remove('sel','right','wrong'));hideFb(fb)}
+  };
+};
+R.free=function(body,cfg,st,save){
+  st.v=st.v||{};const sols=[];const tas=[];
+  cfg.fields.forEach((f,i)=>{const d=el('div','field');d.append(el('label','',`<span class="qn">${i+1}</span>${f.l}`));
+    const ta=el('textarea');ta.rows=f.rows||3;ta.placeholder=f.ph||'';ta.value=st.v[i]||'';ta.oninput=()=>{st.v[i]=ta.value;save()};
+    const so=el('div','sol','<b>Vorschlag:</b> '+f.s);d.append(ta,so);body.append(d);sols.push(so);tas.push(ta)});
+  let shown=false;
+  return{solveLabel:'Musterlösung zeigen',
+    solve(btn){shown=!shown;sols.forEach(s=>s.classList.toggle('show',shown));if(btn)btn.textContent=shown?'Musterlösung ausblenden':'Musterlösung zeigen'},
+    reset(){if(tas.some(t=>t.value)&&!confirm('Deine Texte in dieser Übung löschen?'))return false;tas.forEach(t=>t.value='');shown=false;sols.forEach(s=>s.classList.remove('show'))}
+  };
+};
+R.lupe=function(body,cfg,st,save){
+  st.m=st.m||{};const wrap=el('div','letter');const fbBox=el('div','lupe-fb');
+  const spans=cfg.segs.map((sg,i)=>{const sp=el('span','seg',sg.t);if(st.m[i])sp.classList.add('mark');
+    sp.onclick=()=>{st.m[i]=!st.m[i];save();sp.className='seg'+(st.m[i]?' mark':'');fbBox.innerHTML=''};
+    wrap.append(sp,document.createTextNode(i===0||i===cfg.segs.length-2?'\n':' '));return sp});
+  wrap.style.whiteSpace='pre-line';body.append(wrap,fbBox);
+  const nErr=cfg.segs.filter(s=>s.err).length;
+  return{
+    check(){let found=0,fa=0;const lines=[];cfg.segs.forEach((sg,i)=>{const m=!!st.m[i];const sp=spans[i];sp.className='seg';
+      if(m&&sg.err){found++;sp.classList.add('found');lines.push(`<div>✓ <i>${sg.t}</i> – ${sg.e}</div>`)}
+      else if(m&&!sg.err){fa++;sp.classList.add('falsealarm');lines.push(`<div>✗ <i>${sg.t}</i> – Diese Stelle ist in Ordnung.</div>`)}});
+      fbBox.innerHTML=`<p><b>${found} von ${nErr} Fehlern gefunden</b>${fa?`, ${fa} Stelle(n) zu viel markiert`:''}.${found<nErr?' Es fehlen noch Fehler – such weiter!':''}</p>`+lines.join('');
+      return[Math.max(0,found-fa),nErr]},
+    solve(){const lines=[];cfg.segs.forEach((sg,i)=>{const sp=spans[i];sp.className='seg';
+      if(sg.err){sp.classList.add(st.m[i]?'found':'missed');st.m[i]=true;lines.push(`<div>• <i>${sg.t}</i> – ${sg.e}</div>`)}
+      else if(st.m[i]){sp.classList.add('falsealarm');st.m[i]=false}});save();
+      fbBox.innerHTML='<p><b>Die sechs Fehler:</b></p>'+lines.join('')},
+    reset(){spans.forEach(s=>s.className='seg');fbBox.innerHTML=''}
+  };
+};
+
+/* ---------- Aufgaben aufbauen ---------- */
+let DONE=S.get('done',{});
+document.querySelectorAll('.task').forEach(t=>{
+  const id=t.dataset.task,cfg=TASKS[id];if(!cfg||!R[cfg.type])return;
+  const st=S.get('t_'+id,{});const save=()=>S.set('t_'+id,st);
+  const body=el('div','tbody');t.append(body);
+  const api=R[cfg.type](body,cfg,st,save);
+  const bar=el('div','bar');const res=el('span','res');
+  const mk=(txt,cls,fn)=>{const b=el('button','btn '+cls,txt);b.type='button';b.onclick=()=>fn(b);bar.append(b);return b};
+  if(api.check)mk('Prüfen','p',()=>{const[r,n]=api.check();res.textContent=`${r} von ${n} richtig`+(r===n?' – großartig!':'');res.className='res '+(r===n?'ok':'mid');
+    if(r===n){DONE[id]=1;S.set('done',DONE);t.classList.add('isdone');updateNav()}});
+  mk(api.solveLabel||'Lösung zeigen','s',b=>{api.solve(b);if(api.check)res.textContent=''});
+  mk('Zurücksetzen','g',()=>{if(api.reset()===false)return;Object.keys(st).forEach(k=>delete st[k]);save();res.textContent='';delete DONE[id];S.set('done',DONE);t.classList.remove('isdone');updateNav()});
+  bar.append(res);t.append(bar);
+  if(DONE[id])t.classList.add('isdone');
+});
+
+/* ---------- Navigation ---------- */
+const navLinks=[...document.querySelectorAll('nav.steps a')];
+function updateNav(){navLinks.forEach(a=>{const sec=document.querySelector(a.getAttribute('href'));if(!sec)return;
+  const ts=[...sec.querySelectorAll('.task')].filter(t=>TASKS[t.dataset.task]&&TASKS[t.dataset.task].type!=='free');
+  a.classList.toggle('done',ts.length>0&&ts.every(t=>DONE[t.dataset.task]))})}
+updateNav();
+if('IntersectionObserver' in window){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('active',on);if(on)a.scrollIntoView({block:'nearest',inline:'center'})})}})},{rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('section.step').forEach(s=>obs.observe(s));
+}
+
+/* ---------- Wörter zählen ---------- */
+function countWords(s){const m=s.replace(/[–—]/g,' ').match(/[A-Za-zÄÖÜäöüßéèáàCO₂0-9][^\s]*/g);return m?m.length:0}
+
+/* ---------- Musterbriefe ---------- */
+const mBox=document.getElementById('musterBox');
+document.querySelectorAll('.mletter').forEach(m=>{const clone=m.cloneNode(true);clone.querySelector('.meta').remove();
+  m.querySelector('.wc').textContent=countWords(clone.textContent)+' Wörter'});
+document.querySelectorAll('#mTabs .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#mTabs .tab').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.mletter').forEach(m=>m.classList.toggle('on',m.id===b.dataset.m))});
+document.getElementById('tgMarks').onclick=e=>{const on=mBox.classList.toggle('show-marks');e.target.textContent=on?'Einfärbung ausblenden':'Bausteine einfärben';document.getElementById('mLegend').hidden=!on};
+document.getElementById('tgLabels').onclick=e=>{const on=mBox.classList.toggle('show-labels');e.target.textContent=on?'Arbeitsaufträge ausblenden':'Arbeitsaufträge anzeigen'};
+
+/* ---------- Schreibwerkstatt ---------- */
+const TOPICS={
+ flug:{name:'A 19 · Flugreisen',autor:'Schmidt',auftraege:'<b>A 19 · Thema: Mobilität und Umwelt.</b> Du liest einen Beitrag zum Thema Flugreisen und reagierst mit einem Leserbrief. Text: „Sollen wir für das Klima auf das Fliegen verzichten?“ von Natalie Schmidt, NÖN Online, 23. Juni 2023.<br>• <b>Erkläre</b> das Thema und deine eigene Betroffenheit.<br>• <b>Erläutere</b> deinen Standpunkt zur Vertretbarkeit von Flugreisen im Allgemeinen.<br>• <b>Appelliere</b> im Sinne deiner Anliegen an die Leserschaft.'},
+ buch:{name:'A 30 · Bücherschränke',autor:'Hintermayer',auftraege:'<b>A 30 · Thema: Bücher.</b> Du hast von einem neuen Bücherschrank in deiner Wohngegend gehört und schreibst für andere Leseratten und Bücherwürmer. Text: „Offene Bücherschränke: Nostalgiefaktor Buch“ von Niklas Hintermayer, Wiener Zeitung Online, 13. Februar 2017.<br>• <b>Erkläre</b> das Konzept der offenen Bücherschränke.<br>• <b>Nimm Stellung</b> zur Möglichkeit, Gebrauchsgegenstände einer weiteren sinnvollen Nutzung zuzuführen.<br>• <b>Formuliere</b> einen schlüssigen Appell.'},
+ ferien:{name:'A 29 · Letzte Schulwoche',autor:'Marits',auftraege:'<b>A 29 · Thema: Feriendiskussion.</b> Als Schülerin bist du direkt betroffen. Text: „Die zehnte Ferienwoche“ von Mirjam Marits, Die Presse Online, 1. Juli 2022.<br>• <b>Beschreibe</b> knapp eine typische letzte Schulwoche.<br>• <b>Erkläre</b> die Wichtigkeit solch gemeinsamer Aktivitäten.<br>• <b>Gestalte</b> einen Entwurf der perfekten Abschlusswoche.<br>• <b>Appelliere</b> an Schulleitungen sowie Lehrerinnen und Lehrer.'},
+ frei:{name:'Eigenes Thema',autor:null,auftraege:'<b>Eigenes Thema:</b> Trag hier zum Beispiel den Schreibauftrag ein, den du zur Übung von deiner Lehrerin oder deinem Lehrer bekommst. Schreib die Arbeitsaufträge zuerst ins Feld „Notizen“, damit du keinen vergisst.'}
+};
+const FIELDS=[
+ {k:'notiz',l:'Notizen & Schreibplan',h:'Stichworte zu jedem Absatz (wird nicht mitgezählt)',rows:3,count:false,chips:[]},
+ {k:'betreff',l:'Betreff',h:'kurz und treffend',rows:1,chips:['Betreff: ']},
+ {k:'anrede',l:'Anrede',h:'',rows:1,chips:['Sehr geehrtes Redaktionsteam!','Sehr geehrte Damen und Herren!','Liebe Leserinnen und Leser!']},
+ {k:'einl',l:'Einleitung',h:'Bezug zum Text · Schreibanlass · Überleitung',rows:5,chips:['Mit großem Interesse habe ich Ihren Beitrag „“ von  gelesen, der am  in der Online-Ausgabe der  erschienen ist. ','Darin geht es um ','Da , hat mich das Thema sofort angesprochen. ','In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.']},
+ {k:'h1',l:'Hauptteil – Absatz 1',h:'Arbeitsauftrag 1 bzw. erstes Argument (3-B-Schema)',rows:5,chips:['Ich bin der Ansicht, dass ','Wie die Autorin/der Autor richtig feststellt, ',', denn ',', da ','So ','Zum Beispiel ']},
+ {k:'h2',l:'Hauptteil – Absatz 2',h:'nächster Arbeitsauftrag / Argument',rows:5,chips:['Ein weiteres Argument ist, dass ','Außerdem darf nicht vergessen werden, dass ',', deshalb ',', zumal ','Meine Erfahrungen entsprechen dieser Darstellung, denn ']},
+ {k:'h3',l:'Hauptteil – Absatz 3',h:'weiterer Auftrag oder Gegenargument entkräften',rows:5,chips:['Zwar behaupten manche, dass , doch ','Kritiker mögen einwenden, dass . Dem ist jedoch entgegenzuhalten, dass ','Hinzu kommt, dass ']},
+ {k:'h4',l:'Hauptteil – Absatz 4 (optional)',h:'z. B. bei vier Arbeitsaufträgen',rows:4,chips:['Besonders wichtig erscheint mir, dass ','Meine Vorstellung sähe so aus: ']},
+ {k:'schluss',l:'Schluss mit Appell',h:'an die richtige Zielgruppe!',rows:4,chips:['Ich fordere Sie daher auf, ','Ich bitte Sie, ','Lassen Sie uns gemeinsam ','Tun wir es  zuliebe!','Genug diskutiert – handeln wir!']},
+ {k:'gruss',l:'Grußformel und Name',h:'',rows:2,chips:['Mit freundlichen Grüßen\n']}
+];
+let wsTopic=S.get('ws_topic','flug');let WS=S.get('ws_data',{});
+const tabsEl=document.getElementById('wsTabs'),fieldsEl=document.getElementById('wsFields');
+Object.entries(TOPICS).forEach(([k,t])=>{const b=el('button','tab',t.name);b.type='button';b.dataset.k=k;b.onclick=()=>{wsTopic=k;S.set('ws_topic',k);buildWS()};tabsEl.append(b)});
+function insertAt(ta,txt){const s=ta.selectionStart??ta.value.length,e=ta.selectionEnd??ta.value.length;ta.value=ta.value.slice(0,s)+txt+ta.value.slice(e);ta.focus();const p=s+txt.length;try{ta.setSelectionRange(p,p)}catch(x){}ta.dispatchEvent(new Event('input'))}
+function buildWS(){
+  tabsEl.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.k===wsTopic));
+  document.getElementById('wsAuftraege').innerHTML=TOPICS[wsTopic].auftraege;
+  WS[wsTopic]=WS[wsTopic]||{};const d=WS[wsTopic];fieldsEl.innerHTML='';
+  FIELDS.forEach(f=>{const box=el('div','field');box.append(el('label','',f.l+(f.h?` <span class="hint">· ${f.h}</span>`:'')));
+    const ta=el('textarea');ta.rows=f.rows;ta.value=d[f.k]||'';ta.dataset.k=f.k;
+    ta.oninput=()=>{d[f.k]=ta.value;S.set('ws_data',WS);updateWS()};box.append(ta);
+    if(f.chips.length){const c=el('div','chips');f.chips.forEach(ch=>{const b=el('button','chip',ch.replace('\n','↵').trim()||ch);b.type='button';b.onclick=()=>insertAt(ta,ch);c.append(b)});box.append(c)}
+    fieldsEl.append(box)});
+  updateWS();
+}
+function letterText(){const d=WS[wsTopic]||{};return FIELDS.filter(f=>f.count!==false).map(f=>(d[f.k]||'').trim()).filter(Boolean).join('\n\n')}
+function updateWS(){
+  const d=WS[wsTopic]||{};const txt=letterText();const n=countWords(txt);
+  const c=document.getElementById('wsCount');c.textContent=n;c.className='count '+(n<270?'low':n>330?'high':'ok');
+  document.getElementById('wsGauge').style.width=Math.min(100,n/400*100)+'%';
+  document.getElementById('wsCountHint').textContent=n<270?`Ziel: 270–330 Wörter · noch ${270-n} bis zum Minimum`:n>330?`${n-330} Wörter zu viel – kürze etwas`:'Im Zielbereich – sehr gut!';
+  document.getElementById('wsPreview').textContent=txt||'Hier erscheint dein Leserbrief, sobald du zu schreiben beginnst.';
+  const low=txt.toLowerCase();const body=[d.einl,d.h1,d.h2,d.h3,d.h4].join(' ').toLowerCase();const sch=(d.schluss||'').toLowerCase();
+  const kaus=(body.match(/\b(denn|weil|da|deshalb|daher|deswegen|nämlich|zumal|somit|aufgrund|wegen|infolge|mangels)\b/g)||[]).length;
+  const aut=TOPICS[wsTopic].autor;
+  const checks=[
+    [/\S/.test(d.betreff||''),'Betreff vorhanden'],
+    [/(sehr geehrte|liebe )/.test((d.anrede||'').toLowerCase()),'Höfliche Anrede'],
+    [/[„"“]/.test(d.einl||'')&&/\d{4}/.test(d.einl||''),'Einleitung nennt Titel (in Anführungszeichen) und Jahr'],
+    [aut?(d.einl||'').includes(aut):/\S/.test(d.einl||''),aut?'Verfasser/in des Textes genannt':'Einleitung geschrieben'],
+    [/\b(da|weil)\b/.test((d.einl||'').toLowerCase())||/betroffen|angesprochen|neugierig/.test((d.einl||'').toLowerCase()),'Schreibanlass erkennbar'],
+    [kaus>=4,`Mindestens 4 Begründungswörter im Text (derzeit ${kaus})`],
+    [/(zum beispiel|beispielsweise|etwa|so kann|so findet|so kommt|erfahrung)/.test(body),'Beispiel-Signal vorhanden'],
+    [/(zwar|kritiker|einwenden|entgegenzuhalten|natürlich)/.test(body),'Gegenargument angesprochen'],
+    [/!/.test(d.schluss||'')&&/(sie|wir|ihr)/.test(sch),'Appell im Schluss (mit Rufzeichen)'],
+    [/grüß/.test((d.gruss||'').toLowerCase()),'Grußformel'],
+    [!/\b(hallo|hi|voll|halt|lg|tschüss|cool|krass|oida)\b/.test(low),'Keine Umgangssprache gefunden'],
+    [!/\b(du|dich|dir|dein)\b/.test(low),'Höflichkeitsform (kein „du“)'],
+    [n>=270&&n<=330,'Wortanzahl 270–330']
+  ];
+  const ul=document.getElementById('wsChecks');ul.innerHTML='';checks.forEach(([ok,t])=>{ul.append(el('li',txt?(ok?'y':'n'):'',t))});
+}
+document.getElementById('wsCopy').onclick=()=>{const t=letterText();const done=()=>{const b=document.getElementById('wsCopy');b.textContent='Kopiert ✓';setTimeout(()=>b.textContent='Brief kopieren',1600)};
+  if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,()=>fallbackCopy(t,done));else fallbackCopy(t,done)};
+function fallbackCopy(t,cb){const ta=el('textarea');ta.value=t;document.body.append(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();cb()}
+document.getElementById('wsClear').onclick=()=>{if(!confirm('Den Brief zu diesem Thema wirklich löschen?'))return;WS[wsTopic]={};S.set('ws_data',WS);buildWS()};
+buildWS();
+
+/* ---------- Checkliste ---------- */
+const CL=[
+ ['Inhalt','Ich habe alle Arbeitsaufträge erfüllt, jeden in einem eigenen Absatz.'],
+ ['Inhalt','Die Einleitung nennt Titel, Verfasser/in, Zeitung, Erscheinungsdatum und das Thema.'],
+ ['Inhalt','Mein Schreibanlass passt zur Situation in der Aufgabenstellung.'],
+ ['Inhalt','Meine Position ist klar erkennbar, ich habe mich für eine Sichtweise entschieden.'],
+ ['Inhalt','Meine Argumente folgen dem 3-B-Schema (Behauptung, Begründung, Beispiel).'],
+ ['Inhalt','Ich nehme mehrmals Bezug auf den Ausgangstext.'],
+ ['Inhalt','Ich habe mindestens ein Gegenargument angesprochen und entkräftet.'],
+ ['Inhalt','Mein Appell ist schlüssig und richtet sich an die Gruppe aus dem Arbeitsauftrag.'],
+ ['Aufbau','Betreff, Anrede, Einleitung, Hauptteil, Schluss, Grußformel und Name sind vorhanden.'],
+ ['Aufbau','Zwischen den Absätzen stehen Leerzeilen.'],
+ ['Aufbau','Überleitungen verbinden die Absätze (Außerdem …, Ein weiteres Argument …).'],
+ ['Stil','Ich verwende durchgehend die Höflichkeitsform (Sie, Ihnen, Ihr großgeschrieben).'],
+ ['Stil','Der Ton ist engagiert, aber sachlich: keine Beleidigungen, keine Umgangssprache.'],
+ ['Stil','Ich bleibe im Tempussystem des Präsens (Perfekt statt Präteritum-Erzählungen).'],
+ ['Stil','Meine Satzanfänge sind abwechslungsreich.'],
+ ['Sprache','Nach weil/da/dass steht das Verb am Ende, nach deshalb/daher direkt danach.'],
+ ['Sprache','Ich habe jedes dass/das überprüft.'],
+ ['Sprache','Vor weil, da, dass und zumal steht ein Komma.'],
+ ['Sprache','Der Text hat 270–330 Wörter.']
+];
+const clState=S.get('cl',{});const clBox=document.getElementById('checklist');let lastCat='';
+CL.forEach(([cat,t],i)=>{if(cat!==lastCat){clBox.append(el('h3','',cat==='Sprache'?'Sprachrichtigkeit':cat));lastCat=cat}
+  const lab=el('label');const cb=el('input');cb.type='checkbox';cb.checked=!!clState[i];cb.onchange=()=>{clState[i]=cb.checked;S.set('cl',clState)};
+  lab.append(cb,el('span','',t));clBox.append(lab)});
+</script>
+</body>
+</html>
