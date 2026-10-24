@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zusammenfassung trainieren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f4ee; --card:#ffffff; --ink:#22212b; --muted:#6a6774; --line:#e4dfd4;
+  --accent:#2f6f6a; --accent-soft:#dcefeb; --warm:#c8743c; --warm-soft:#f8e6d6;
+  --ok:#2e7d4f; --ok-soft:#dff1e5; --bad:#b4423a; --bad-soft:#f8e0dd;
+  --red:#c94a4a; --green:#3f8f55; --blue:#3d6fb4;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 6px 20px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16161b; --card:#202028; --ink:#ecebf1; --muted:#a3a1ad; --line:#33323d;
+    --accent:#6cc2b9; --accent-soft:#1f3936; --warm:#e39a62; --warm-soft:#3a2a1e;
+    --ok:#6fd096; --ok-soft:#1d3527; --bad:#f08b82; --bad-soft:#3d2422;
+    --red:#ef7b7b; --green:#7ccc8f; --blue:#86aef0;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16161b; --card:#202028; --ink:#ecebf1; --muted:#a3a1ad; --line:#33323d;
+  --accent:#6cc2b9; --accent-soft:#1f3936; --warm:#e39a62; --warm-soft:#3a2a1e;
+  --ok:#6fd096; --ok-soft:#1d3527; --bad:#f08b82; --bad-soft:#3d2422;
+  --red:#ef7b7b; --green:#7ccc8f; --blue:#86aef0;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 80px}
+header.hero{padding:44px 0 20px}
+.kicker{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin:.3rem 0 .8rem}
+h2{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:1.5rem;line-height:1.25;margin:0 0 .4rem}
+h3{font-size:1.05rem;margin:1.2rem 0 .3rem}
+p{margin:.5rem 0}
+.lead{font-size:1.1rem;color:var(--muted)}
+.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -16px;padding:10px 16px}
+.bar-inner{max-width:860px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.score{font-weight:700}
+.progress{flex:1;min-width:140px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 6px}
+nav.toc a{font-size:.88rem;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:4px 10px;border-radius:99px}
+nav.toc a:hover{border-color:var(--accent)}
+section.part{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px 22px;margin:22px 0}
+.part-num{display:inline-block;font-size:.8rem;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:2px 10px;border-radius:99px;margin-bottom:8px}
+.tip{background:var(--warm-soft);border-left:4px solid var(--warm);padding:12px 14px;border-radius:8px;margin:14px 0}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:12px}
+.tool{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--bg)}
+.tool b{display:block;margin-bottom:2px}
+.item{border-top:1px solid var(--line);padding:16px 0}
+.item:first-of-type{border-top:none}
+.q{font-weight:600;margin-bottom:8px}
+.q .n{color:var(--muted);font-weight:700;margin-right:6px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opts.row{flex-direction:row;flex-wrap:wrap}
+button.opt{font:inherit;text-align:left;cursor:pointer;background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:9px 13px;transition:border-color .15s,background .15s}
+button.opt:hover:not(:disabled){border-color:var(--accent)}
+button.opt:disabled{cursor:default}
+button.opt.correct{background:var(--ok-soft);border-color:var(--ok)}
+button.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+button.opt.dim{opacity:.55}
+.fb{display:none;margin-top:10px;padding:10px 13px;border-radius:10px;font-size:.96rem}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft)}
+.fb.no{background:var(--bad-soft)}
+.fb strong{display:block}
+.sec-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:14px;border-top:1px dashed var(--line)}
+.sec-score{font-weight:700}
+button.ghost{font:inherit;cursor:pointer;background:transparent;color:var(--accent);border:1.5px solid var(--accent);border-radius:99px;padding:6px 14px}
+button.solid{font:inherit;cursor:pointer;background:var(--accent);color:var(--bg);border:none;border-radius:99px;padding:8px 16px;font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;font-size:.9rem}
+.legend span{border:1px solid var(--line);border-radius:8px;padding:3px 9px;background:var(--bg)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+textarea{width:100%;min-height:200px;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--accent)}
+textarea.small{min-height:110px}
+.counter{font-weight:700;margin:6px 0}
+.counter.in{color:var(--ok)} .counter.out{color:var(--bad)}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent);flex-shrink:0}
+table.op{width:100%;border-collapse:collapse;margin:10px 0;font-size:.95rem}
+table.op th,table.op td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.op th{color:var(--muted);font-weight:600}
+.final{text-align:center}
+footer{color:var(--muted);font-size:.85rem;text-align:center;margin-top:30px}
+@media (max-width:560px){section.part{padding:20px 16px}body{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Deutsch · 9. Schulstufe · Textsorte Zusammenfassung</div>
+  <h1>Steht das wirklich im Text?</h1>
+  <p class="lead">Training zur Textbeilage „Wie man eine Sprache rettet“ (Philip Pramer, Der Standard, 15. Juni 2021). Hier übst du genau das, worauf es bei einer Zusammenfassung ankommt: genau lesen, Textaussage und eigene Deutung auseinanderhalten, Zahlen richtig beziehen, sachlich formulieren und die indirekte Rede sicher verwenden.</p>
+</header>
+
+<div class="bar"><div class="bar-inner">
+  <span class="score" id="totalScore">0 / 0 Punkte</span>
+  <div class="progress"><span id="totalBar"></span></div>
+  <span id="totalDone" style="color:var(--muted);font-size:.9rem">0 % bearbeitet</span>
+</div></div>
+
+<nav class="toc" id="toc"></nav>
+
+<section class="part" id="start">
+  <span class="part-num">Bevor du startest</span>
+  <h2>Dein Werkzeugkasten</h2>
+  <p>Eine Zusammenfassung ist eine verkleinerte, aber genaue Kopie des Originaltextes. Jeder Satz, den du schreibst, muss sich auf eine Stelle im Text zurückführen lassen. Deine eigenen Gedanken sind wertvoll, sie haben in dieser Textsorte nur einen anderen Platz.</p>
+  <div class="tools">
+    <div class="tool"><b>1 · Operatoren klären</b>Bevor du liest: Was genau verlangt „nennen“, „erläutern“, „beschreiben“?</div>
+    <div class="tool"><b>2 · Eine Farbe pro Auftrag</b>Markiere nur, was wirklich zu einem Arbeitsauftrag gehört, in dessen Farbe.</div>
+    <div class="tool"><b>3 · Stichworte aus dem Text</b>Am Rand stehen Wörter, die (fast) wörtlich im Text vorkommen, keine Deutungen.</div>
+    <div class="tool"><b>4 · Meinungsparkplatz</b>Alles, was dich bewegt, kommt auf einen eigenen Zettel. So geht nichts verloren und nichts rutscht in die Zusammenfassung.</div>
+    <div class="tool"><b>5 · Zahl + Bezugswort</b>Nie nur „43 %“ notieren, sondern „43 % von 6000 bedroht“.</div>
+    <div class="tool"><b>6 · Fingertest</b>Zu jedem deiner Sätze zeigst du auf die Textstelle. Keine Stelle? Satz streichen oder korrigieren.</div>
+  </div>
+</section>
+
+<div id="parts"></div>
+
+<section class="part" id="hausuebung">
+  <span class="part-num">Teil 8 · Hausübung</span>
+  <h2>Deine neue Fassung</h2>
+  <p>Schreib die Zusammenfassung zu Hause noch einmal neu, mit allem, was du hier geübt hast. Die Vorgaben bleiben gleich: 270 bis 330 Wörter, Absätze mit Leerzeilen, drei Arbeitsaufträge.</p>
+  <table class="op">
+    <tr><th><span class="dot" style="background:var(--red)"></span>Auftrag 1</th><td><b>Nenne</b> Tendenzen hinsichtlich des Sprachensterbens.</td></tr>
+    <tr><th><span class="dot" style="background:var(--green)"></span>Auftrag 2</th><td><b>Erläutere</b> den Begriff Sprachenaktivismus und damit einhergehende Entwicklungen.</td></tr>
+    <tr><th><span class="dot" style="background:var(--blue)"></span>Auftrag 3</th><td><b>Beschreibe</b> sowohl die negative als auch die positive Rolle des Internets in diesem Kontext.</td></tr>
+  </table>
+
+  <h3>Meinungsparkplatz</h3>
+  <p style="color:var(--muted);font-size:.95rem">Was denkst du über das Thema? Schreib es hier hin, dann ist es aus dem Kopf und bleibt trotzdem erhalten.</p>
+  <textarea class="small" id="parkplatz" placeholder="Meine eigenen Gedanken zum Thema …"></textarea>
+
+  <h3>Deine Zusammenfassung</h3>
+  <textarea id="draft" placeholder="Der Bericht „Wie man eine Sprache rettet“ von Philip Pramer erschien am …"></textarea>
+  <div class="counter" id="counter">0 Wörter</div>
+  <button class="ghost" id="copyBtn" type="button">Text kopieren</button>
+
+  <h3>Checkliste vor dem Abgeben</h3>
+  <div class="check" id="checklist"></div>
+</section>
+
+<section class="part final" id="ende">
+  <h2>Geschafft!</h2>
+  <p id="finalMsg">Bearbeite die Teile oben, dann erscheint hier deine Auswertung.</p>
+  <button class="solid" id="resetAll" type="button">Alles zurücksetzen</button>
+</section>
+
+<footer>Übungsmaterial zur Textsorte Zusammenfassung · Textbeilage: derstandard.at, 15. Juni 2021</footer>
+</div>
+
+<script>
+// ---------- Daten ----------
+var PARTS = [
+{
+  id:"operatoren", title:"Operatoren und Begriffe", type:"mc",
+  intro:"Wer den Arbeitsauftrag falsch versteht, sucht im Text nach den falschen Dingen. Kläre zuerst, was die Wörter in der Angabe genau bedeuten.",
+  items:[
+    {q:"Was bedeutet das Wort „Tendenz“ im Arbeitsauftrag „Nenne Tendenzen hinsichtlich des Sprachensterbens“?",
+     o:["eine Entwicklungsrichtung, ein Trend: was mehr, weniger, schneller oder langsamer wird","eine Absicht oder ein Bestreben von Menschen, die etwas erreichen wollen","die persönliche Meinung des Autors zum Sprachensterben"], c:0,
+     e:"Eine Tendenz ist eine Entwicklung, die sich beobachten oder messen lässt. Gesucht waren also Aussagen wie: 43 Prozent der Sprachen sind bedroht, bis Ende des Jahrhunderts könnte die Hälfte verschwinden, das Sterben hat sich seit 2000 verlangsamt."},
+    {q:"Was verlangt der Operator „nennen“?",
+     o:["Informationen knapp aufzählen, ohne sie ausführlich zu erklären","einen Begriff erklären und mit Beispielen veranschaulichen","Informationen beurteilen und eine Meinung dazu äußern"], c:0,
+     e:"„Nennen“ ist der einfachste Operator: knapp und genau aufzählen, was der Text sagt."},
+    {q:"Was verlangt der Operator „erläutern“?",
+     o:["etwas erklären und mit Beispielen aus dem Text veranschaulichen","nur den Namen eines Begriffs erwähnen","eigene Vorschläge zur Lösung eines Problems machen"], c:0,
+     e:"Beim Auftrag „Erläutere den Begriff Sprachenaktivismus“ musst du sagen, was das ist (Menschen aktiv dabei unterstützen, ihre Sprache lebendig zu halten) und wie es aussieht (sensibilisieren, Rettungsprojekte unterstützen, Lernmaterial bereitstellen)."},
+    {q:"Was verlangt der Operator „beschreiben“?",
+     o:["sachlich darstellen, wie etwas ist oder abläuft","beurteilen, ob etwas gut oder schlecht ist","eine Geschichte dazu erzählen"], c:0,
+     e:"Beschreiben heißt sachlich wiedergeben. Bewertende Wörter wie „leider“ oder „zum Glück“ gehören nicht dazu."},
+    {q:"Welche Aussage über die Textsorte Zusammenfassung stimmt?",
+     o:["Sie gibt nur Aussagen des Originaltextes wieder, in eigenen Worten und sachlich.","Sie gibt die Aussagen des Textes wieder und ergänzt sie um die eigene Bewertung.","Sie besteht hauptsächlich aus wörtlichen Zitaten des Originaltextes."], c:0,
+     e:"In einer Zusammenfassung steht weder deine Meinung noch eine Sammlung von Zitaten. Sie gibt den Inhalt sachlich und in eigenen Worten wieder."},
+    {q:"In welcher Zeitform schreibst du eine Zusammenfassung?",
+     o:["im Präsens","im Präteritum","im Perfekt"], c:0,
+     e:"Die Zusammenfassung steht im Präsens: „Der Autor erläutert …“, „Anschließend beschreibt er …“. Nur die Einleitung kann das Erscheinungsdatum im Präteritum nennen („erschien am …“)."}
+  ]
+},
+{
+  id:"textcheck", title:"Steht das im Text?", type:"cat",
+  intro:"Das ist die wichtigste Fähigkeit beim Zusammenfassen. Entscheide bei jeder Aussage: Steht sie so im Text, sagt der Text das Gegenteil, oder kommt sie im Text gar nicht vor (eigene Deutung oder Erfindung)?",
+  cats:["steht im Text","widerspricht dem Text","steht nicht im Text"],
+  items:[
+    {q:"Aramäisch, Burunge und Burgenlandkroatisch gehören zu den bedrohten Sprachen.", c:0,
+     e:"Richtig erfasst. Der Text nennt diese drei Sprachen „ganz im Gegensatz“ zum Deutschen, das nicht gefährdet ist. Sie stehen also auf der Seite der bedrohten Sprachen."},
+    {q:"Wer Burgenlandkroatisch spricht, läuft kaum Gefahr, seine Sprache zu verlieren.", c:1,
+     e:"Das Gegenteil steht im Text. „Ganz im Gegensatz“ bezieht sich auf Deutsch: Deutsch ist sicher, Burgenlandkroatisch ist bedroht. Achte auf solche Gegensatz-Signale."},
+    {q:"Laut UNESCO sind alle rund 6000 Sprachen der Welt vom Aussterben bedroht.", c:1,
+     e:"Von den rund 6000 Sprachen sind laut UNESCO etwa 43 Prozent bedroht, also nicht alle. Die Zahl 6000 ist die Gesamtzahl."},
+    {q:"Sprachaktivistinnen und Sprachaktivisten führen einen Kampf gegen den Untergang der Kulturen.", c:2,
+     e:"Das Wort „Kampf“ kommt im Text nicht vor, ebenso wenig der „Untergang der Kulturen“. Das ist ein eigenes Bild. Im Text ist von Initiativen, Rettungsprojekten und Sensibilisierung die Rede."},
+    {q:"Wikitongues hat erkannt, dass bloßes Dokumentieren das Sprachensterben nicht stoppen kann.", c:0,
+     e:"Genau das steht im Text: Das rein museale Konservieren könne das Sprachensterben nicht stoppen. Deshalb ist die Organisation auf Aktivismus umgeschwenkt."},
+    {q:"Wikitongues ist überzeugt, dass sich Sprachverlust grundsätzlich nicht aufhalten lässt.", c:1,
+     e:"Der Text sagt das Gegenteil: Initiativen wie Wikitongues wurden gegründet, um den Sprachverlust zu stoppen. Nur das Dokumentieren allein reicht dafür nicht. Ein fehlendes Wort („allein“, „nur“) kann eine Aussage umdrehen."},
+    {q:"Tcherneshoff hält Sprachverlust für eine natürliche Entwicklung.", c:1,
+     e:"Sie sagt, viele Menschen glaubten das, in Wirklichkeit sei Sprachverlust aber eine Folge einer Politik der Assimilierung. Wer eine Meinung anderer zitiert, vertritt sie damit nicht selbst."},
+    {q:"Seit der Jahrtausendwende sterben Sprachen langsamer aus als Ende der 1990er-Jahre.", c:0,
+     e:"Richtig: Ende der 90er-Jahre starb alle 14 Tage eine Sprache, heute alle zwei bis drei Monate. Eine wichtige Tendenz, die man leicht übersieht."},
+    {q:"Eine isländische Kommission hat für Wörter wie „Podcast“ eigene isländische Begriffe festgelegt.", c:0,
+     e:"Genau. Island will dadurch die Sprache in der digitalen, englischsprachigen Welt am Puls der Zeit halten."},
+    {q:"NLP ist eine Organisation, die afrikanische Sprachen übersetzt.", c:1,
+     e:"NLP (Natural Language Processing) ist eine Technologie, die Fußnote erklärt sie. Das Projekt, das NLP für afrikanische Sprachen nutzt, heißt Masakhane."},
+    {q:"Wenn alle Menschen Englisch sprächen, gäbe es weniger Kriege auf der Welt.", c:2,
+     e:"Davon ist im Text nirgends die Rede. Solche Gedanken gehören auf den Meinungsparkplatz."},
+    {q:"Sprachen sterben vor allem, weil Jugendliche ihre Muttersprache altmodisch finden.", c:2,
+     e:"Diese Erklärung kommt im Text nicht vor. Der Text nennt Assimilierungspolitik, Kolonialzeit, Klimakrise und Technologie als Ursachen."},
+    {q:"Rund 60 Prozent aller Webseiten im Internet sind auf Englisch verfasst.", c:0,
+     e:"Richtig. 90 Prozent aller Webseiten sind in nur zehn Sprachen verfasst, allein 60 Prozent auf Englisch."}
+  ]
+},
+{
+  id:"zahlen", title:"Zahlen, Namen und Bezüge", type:"mc",
+  intro:"Zahlen und Namen sind die Stellen, an denen in einer Zusammenfassung am schnellsten Fehler passieren. Wähle jeweils den richtigen Bezug.",
+  items:[
+    {q:"Worauf bezieht sich im Text die Zahl „43 Prozent“?",
+     o:["auf den Anteil der rund 6000 Sprachen, die vom Aussterben bedroht sind","auf die Wahrscheinlichkeit, mit der eine einzelne Sprache ausstirbt","auf den Anteil der europäischen Sprachen an allen bedrohten Sprachen"], c:0,
+     e:"Von rund 6000 Sprachen sind etwa 43 Prozent bedroht. Notiere Zahlen immer mit ihrem Bezugswort."},
+    {q:"Was hat es mit der Zahl „50 Sprachen“ auf sich?",
+     o:["Schon heute spricht die Hälfte der Weltbevölkerung nur 50 Sprachen.","Jedes Jahr sterben weltweit 50 Sprachen aus.","In Europa sind 50 Sprachen vom Aussterben bedroht."], c:0,
+     e:"Rund 50 Prozent der Weltbevölkerung sprechen nur 50 Sprachen. Bei den europäischen Sprachen nennt der Text „über 20“."},
+    {q:"Was beschreibt die Angabe „alle 14 Tage“?",
+     o:["Ende der 1990er-Jahre starb in diesem Abstand eine Sprache aus.","So oft stirbt heute eine Sprache aus.","So oft nimmt Wikitongues eine neue Sprache auf."], c:0,
+     e:"Ende der 90er-Jahre alle 14 Tage, heute alle zwei bis drei Monate. Das Sprachensterben hat sich also verlangsamt."},
+    {q:"Was besagt die Zahl „95 Prozent“?",
+     o:["Ein ungarischer Linguist glaubt, dass so viele Sprachen den Übergang ins digitale Zeitalter nicht schaffen werden.","So viele Webseiten sind in nur zehn Sprachen verfasst.","So viele isländische Kinder verbringen ihre Zeit in einer englischsprachigen digitalen Welt."], c:0,
+     e:"Das ist die düsterste Prognose im Text. Die 90 Prozent beziehen sich dagegen auf die Webseiten in zehn Sprachen."},
+    {q:"Welche Formulierung gibt die Prognose zum Ende des Jahrhunderts korrekt wieder?",
+     o:["Manche Linguisten halten es für möglich, dass bis Ende des Jahrhunderts die Hälfte der Sprachen verschwunden ist.","Viele Experten behaupten, dass nach diesem Jahrhundert 50 Prozent aller Sprachen nicht mehr existieren werden.","Alle Linguisten sind sich einig, dass bis Ende des Jahrhunderts die Hälfte der Sprachen verschwindet."], c:0,
+     e:"Im Text steht „manche Linguisten“ und „könnte“. Aus einer vorsichtigen Prognose darf in der Zusammenfassung keine sichere Behauptung werden."},
+    {q:"Wer ist Kristen Tcherneshoff?",
+     o:["die Programmdirektorin der Organisation Wikitongues","der Autor des Berichts","ein ungarischer Linguist"], c:0,
+     e:"Stell Personen beim ersten Auftreten kurz vor: „Kristen Tcherneshoff, Programmdirektorin bei Wikitongues“. Und: Sie ist eine Frau, also „sie“."},
+    {q:"Was ist Masakhane?",
+     o:["ein Projekt, das KI-Übersetzungsprogramme für afrikanische Sprachen entwickelt","die isländische Sprachkommission","eine App von Google zum Sprachenlernen"], c:0,
+     e:"Masakhane wurde von zwei südafrikanischen Informatikerinnen gegründet und nutzt NLP für afrikanische Sprachen."},
+    {q:"Was kann die App Woolaroo?",
+     o:["Sie zeigt mithilfe von Bilderkennung Wörter gefährdeter Sprachen an, sogar mit Aussprache.","Sie übersetzt Webseiten automatisch ins Isländische.","Sie zeichnet Sprachaufnahmen für Wikitongues auf."], c:0,
+     e:"Woolaroo ist eine App von Google. Man hält das Smartphone auf einen Gegenstand und sieht das Wort in einer gefährdeten Sprache."},
+    {q:"Welche Sprachen nennt der Text als Beispiele dafür, dass ausgestorbene Sprachen wiederbelebt werden können?",
+     o:["Myaamia und Kornisch","Aramäisch und Burunge","Isländisch und Burgenlandkroatisch"], c:0,
+     e:"Myaamia (Daryl Baldwin) und Kornisch (heute wieder rund 300 fließende Sprecherinnen und Sprecher) galten als ausgestorben und wurden wiederbelebt."}
+  ]
+},
+{
+  id:"zuordnung", title:"Welcher Arbeitsauftrag?", type:"cat",
+  intro:"Jede Information gehört in einen bestimmten Teil deiner Zusammenfassung. Ordne zu: Auftrag 1 (Tendenzen des Sprachensterbens), Auftrag 2 (Sprachenaktivismus und damit verbundene Entwicklungen) oder Auftrag 3 (Rolle des Internets).",
+  cats:["Auftrag 1 · Tendenzen","Auftrag 2 · Sprachenaktivismus","Auftrag 3 · Internet"],
+  items:[
+    {q:"Rund 43 Prozent der Sprachen weltweit sind vom Aussterben bedroht.", c:0, e:"Eine messbare Entwicklung des Sprachensterbens, also Auftrag 1."},
+    {q:"Bis Ende des Jahrhunderts könnte die Hälfte der Sprachen verschwunden sein.", c:0, e:"Eine Prognose zur Entwicklung des Sprachensterbens, also Auftrag 1."},
+    {q:"Die Hälfte der Weltbevölkerung spricht nur 50 Sprachen.", c:0, e:"Zeigt, wie stark sich die Sprecherinnen und Sprecher auf wenige Sprachen konzentrieren: Auftrag 1."},
+    {q:"Wikitongues hilft indigenen Gruppen, Rettungsprojekte zu organisieren.", c:1, e:"Eine konkrete Tätigkeit von Sprachenaktivismus: Auftrag 2."},
+    {q:"Kinder, die in ihrer Muttersprache unterrichtet werden, haben mehr Selbstbewusstsein.", c:1, e:"Gehört zu den Vorteilen der Sprachenvielfalt, die Tcherneshoff aufzählt, also Auftrag 2."},
+    {q:"Sprachverlust ist eine Folge einer Politik der Assimilierung.", c:1, e:"Eine Entwicklung im Denken, die mit dem Sprachenaktivismus einhergeht: Auftrag 2."},
+    {q:"Rund 90 Prozent der Webseiten sind in nur zehn Sprachen verfasst.", c:2, e:"Negative Rolle des Internets: Auftrag 3."},
+    {q:"Amazons Alexa reagiert nur auf acht Sprachen.", c:2, e:"Negative Rolle der Technologie: Auftrag 3."},
+    {q:"Masakhane entwickelt KI-Übersetzungsprogramme für afrikanische Sprachen.", c:2, e:"Positive Rolle der Technologie: Auftrag 3. In deiner Schularbeit stand diese Information beim Sprachenaktivismus."},
+    {q:"Island lässt isländische Begriffe für Anglizismen wie „Emoji“ festlegen.", c:2, e:"Islands Reaktion auf die englischsprachige digitale Welt: Auftrag 3."}
+  ]
+},
+{
+  id:"sachlich", title:"Sachlich statt wertend", type:"mc",
+  intro:"Wertende Wörter schleichen sich leicht ein, besonders wenn dich ein Thema bewegt. Wähle jeweils die Formulierung, die in eine Zusammenfassung passt.",
+  items:[
+    {q:"Welcher Satz passt in eine Zusammenfassung?",
+     o:["Deshalb setzen sich Initiativen wie Wikitongues dafür ein, den Sprachverlust zu stoppen.","Deshalb kämpfen mutige Menschen verzweifelt um ihre Kulturen.","Deshalb ist es höchste Zeit, dass endlich alle etwas tun."], c:0,
+     e:"Die anderen Sätze enthalten Bilder und Wertungen („mutig“, „verzweifelt“, „höchste Zeit“), die nicht aus dem Text stammen."},
+    {q:"Welcher Satz gibt den Zusammenhang von Klimakrise und Sprachverlust sachlich und genau wieder?",
+     o:["Dürren und Naturkatastrophen machen Gebiete unbewohnbar, dadurch werden Sprachgemeinschaften auseinandergerissen.","Krisen lassen ganze Kulturen einstürzen.","Der Klimawandel zerstört auf grausame Weise die Sprachen der Welt."], c:0,
+     e:"Nur der erste Satz nennt die Ursachen (Dürren, Naturkatastrophen), die Folge (Flucht) und den Bezug zur Sprache (Sprachgemeinschaften)."},
+    {q:"Welcher Satz beschreibt Übersetzungsprogramme sachlich?",
+     o:["Übersetzungsprogramme wie Google Übersetzer gehören inzwischen fest zum Alltag.","Zum Glück gibt es heute Google Übersetzer.","Google Übersetzer hat einen tollen positiven Einfluss."], c:0,
+     e:"„Zum Glück“ und „toll“ sind Wertungen. Außerdem fehlt beim dritten Satz, worauf der Einfluss positiv ist."},
+    {q:"Welcher Satz gibt die negative Rolle der Technologie korrekt wieder?",
+     o:["Laut dem Autor trägt die Technologie eine gewisse Mitschuld am Sprachensterben.","Das Internet ist der größte Feind kleiner Sprachen.","Leider sind die Technologiekonzerne schuld am Sprachensterben."], c:0,
+     e:"Im Text steht „gewisse Mitschuld“. Tcherneshoff betont sogar, die Technologie sei nicht allein verantwortlich."},
+    {q:"Welcher Satz eignet sich für die Einleitung?",
+     o:["Der Bericht befasst sich mit dem Sprachensterben, dem Sprachenaktivismus und der Rolle des Internets.","Der Bericht zeigt erschreckend, wie schlimm es um viele Sprachen steht.","Ein wirklich interessanter Bericht über ein sehr wichtiges Thema."], c:0,
+     e:"Die Einleitung nennt sachlich das Thema. „Erschreckend“ oder „wirklich interessant“ sind deine Eindrücke."},
+    {q:"Welcher Satz gibt die Aussage über Demenz vorsichtig genug wieder?",
+     o:["Sprachen zu lernen soll laut Studien Demenz entgegenwirken.","Eine Studie beweist, dass Mehrsprachige vor Demenz geschützt sind.","Wer mehrere Sprachen spricht, bekommt keine Demenz."], c:0,
+     e:"Im Text steht „soll entgegenwirken“. „Beweist“ und „bekommt keine“ machen daraus eine viel stärkere Aussage."}
+  ]
+},
+{
+  id:"konjunktiv", title:"Indirekte Rede im Konjunktiv", type:"mc",
+  intro:"Wähle die Form der indirekten Rede. Regel: Verwende den Konjunktiv I. Nur wenn der Konjunktiv I genauso aussieht wie der Indikativ (z. B. „sie haben“), nimmst du den Konjunktiv II bzw. die Form mit „würden“.",
+  items:[
+    {q:"Der Autor erklärt, es ___ viele Wörter, die man nur noch selten hört.", o:["gebe","gäbe","gibt"], c:0,
+     e:"„es gebe“ ist Konjunktiv I und unterscheidet sich vom Indikativ „es gibt“. Also brauchst du keinen Konjunktiv II. Diesen Fehler hattest du in der Schularbeit mehrmals."},
+    {q:"Laut UNESCO ___ rund 43 Prozent der Sprachen bedroht.", o:["seien","wären","sind"], c:0,
+     e:"„seien“ ist Konjunktiv I von „sein“ und eindeutig erkennbar."},
+    {q:"Tcherneshoff betont, Sprachverlust ___ eine Folge politischer Assimilierung.", o:["sei","wäre","ist"], c:0,
+     e:"Konjunktiv I: „er/sie/es sei“."},
+    {q:"Viele Menschen, so Tcherneshoff, ___ Sprachverlust für eine natürliche Entwicklung.", o:["hielten","halten","halte"], c:0,
+     e:"Der Konjunktiv I „sie halten“ sieht genauso aus wie der Indikativ. Deshalb weichst du auf den Konjunktiv II „hielten“ aus. „halte“ wäre Singular."},
+    {q:"Der Autor berichtet, Island ___ Millionen in die Rettung seiner Sprache.", o:["investiere","investierte","investiert"], c:0,
+     e:"„Island investiere“: Konjunktiv I, 3. Person Singular."},
+    {q:"Studien ___ gezeigt, dass muttersprachlicher Unterricht Kinder stärkt, heißt es im Text.", o:["hätten","haben","habe"], c:0,
+     e:"„sie haben“ ist im Konjunktiv I gleich wie im Indikativ, deshalb „hätten“. „habe“ wäre Singular, „Studien“ ist aber Plural."},
+    {q:"Ein Linguist glaubt, 95 Prozent der Sprachen ___ den Übergang ins digitale Zeitalter nicht schaffen.", o:["würden","werden","werde"], c:0,
+     e:"„sie werden“ ist im Konjunktiv I gleich wie im Indikativ, deshalb „würden“."},
+    {q:"Wikitongues ___ indigenen Gruppen bei Rettungsprojekten, schreibt der Autor.", o:["helfe","hilft","hülfe"], c:0,
+     e:"„helfe“ ist Konjunktiv I. „hülfe“ ist ein veralteter Konjunktiv II, der hier nicht nötig ist."},
+    {q:"Der Verfasser ergänzt, Alexa ___ nur auf acht Sprachen.", o:["höre","hörte","hört"], c:0,
+     e:"„höre“: Konjunktiv I, 3. Person Singular. Dein Satz in der Schularbeit („Alexa oder Siri sind …“) stand im Indikativ."}
+  ]
+},
+{
+  id:"sprache", title:"Fehler-Detektivin", type:"mc",
+  intro:"Diese Sätze erinnern an Stellen aus deiner Schularbeit. Wähle jeweils die sprachlich richtige Version.",
+  items:[
+    {q:"Welcher Satz ist richtig geschrieben?", o:["Als Erstes erklärt der Verfasser, dass manche Wörter selten werden.","Als erstes erklärt der Verfasser, dass manche Wörter selten werden.","Als erstens erklärt der Verfasser, dass manche Wörter selten werden."], c:0,
+     e:"„Als Erstes“ ist ein substantiviertes Zahlwort und wird großgeschrieben."},
+    {q:"Welcher Ausdruck ist richtig?", o:["Viele Sprachen sind vom Aussterben bedroht.","Viele Sprachen sind bedroht zu sterben.","Viele Sprachen haben eine Chance, auszusterben."], c:0,
+     e:"Die feste Wendung lautet „vom Aussterben bedroht“. „Chance“ klingt positiv und passt deshalb nicht."},
+    {q:"Welche Schreibung ist richtig?", o:["eine 43-prozentige Gefahr","eine 43 prozentige Gefahr","eine 43prozentige Gefahr"], c:0,
+     e:"Zusammensetzungen aus Ziffer und Wort schreibt man mit Bindestrich: 43-prozentig, 10-jährig."},
+    {q:"Welcher Satz ist richtig?", o:["Das Internet spielt dabei eine wichtige Rolle.","Das Internet macht dabei eine wichtige Rolle.","Das Internet gibt dabei eine wichtige Rolle."], c:0,
+     e:"Feste Wendung: eine Rolle spielen."},
+    {q:"Welcher Satz ist richtig?", o:["Das zeigt eine Studie, die von einer Universität durchgeführt wurde.","Das zeigt eine Studie, die von eine Universität durchgeführt wurde.","Das zeigt eine Studie, die von einen Universität durchgeführt wurde."], c:0,
+     e:"Nach „von“ steht immer der Dativ: von einer Universität, von einer Studie."},
+    {q:"Welche Schreibweise ist richtig?", o:["Webseiten, existieren, Sprachensterben","Websiden, exestieren, Sprachsterben","Webseiten, exestieren, Sprachensterben"], c:0,
+     e:"Fachbegriffe übernimmst du genau aus dem Text: „Sprachensterben“. Und: existieren mit i."},
+    {q:"Welcher Satz stellt die Person richtig vor?", o:["Kristen Tcherneshoff, Programmdirektorin bei Wikitongues, betont, …","Tcherneshoff betont, …","Er betont, …"], c:0,
+     e:"Beim ersten Auftreten nennst du Vor- und Nachnamen und die Funktion. Danach reicht „Tcherneshoff“ oder „sie“."}
+  ]
+}
+];
+
+var CHECKS = [
+  "Die Einleitung nennt Titel, Autor (Philip Pramer), Datum, Medium und das Thema.",
+  "Ich habe zu jedem Satz die passende Stelle im Text gefunden (Fingertest).",
+  "Zahlen stehen immer mit ihrem Bezugswort da (43 Prozent wovon?).",
+  "Vorsichtswörter aus dem Text sind erhalten (könnte, manche, soll, laut).",
+  "Der Begriff Sprachenaktivismus ist erklärt, nicht nur genannt.",
+  "Bei Auftrag 3 stehen sowohl negative als auch positive Seiten.",
+  "Jede Person ist beim ersten Auftreten vorgestellt.",
+  "Keine wertenden Wörter (leider, zum Glück, toll, Kampf, grausam).",
+  "Redewiedergabe steht im Konjunktiv I (oder Ersatzform).",
+  "Die Zusammenfassung steht im Präsens.",
+  "270 bis 330 Wörter, Absätze mit Leerzeilen markiert."
+];
+
+// ---------- Logik ----------
+var state = {}; // id -> {answers:{idx:correct?}}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+function renderPart(p, idx){
+  var sec = el("section","part"); sec.id = p.id;
+  sec.appendChild(el("span","part-num","Teil "+(idx+1)));
+  sec.appendChild(el("h2",null,p.title));
+  sec.appendChild(el("p",null,p.intro));
+  if(p.type==="cat"){
+    var lg = el("div","legend"); p.cats.forEach(function(c){lg.appendChild(el("span",null,c));}); sec.appendChild(lg);
+  }
+  var list = el("div"); sec.appendChild(list);
+  var foot = el("div","sec-foot");
+  var sc = el("span","sec-score"); foot.appendChild(sc);
+  var rb = el("button","ghost","Teil wiederholen"); rb.type="button"; foot.appendChild(rb);
+  sec.appendChild(foot);
+
+  function build(){
+    state[p.id] = {answers:{}};
+    list.innerHTML="";
+    p.items.forEach(function(it,i){
+      var box = el("div","item");
+      box.appendChild(el("div","q",'<span class="n">'+(i+1)+'.</span>'+it.q));
+      var opts = el("div", p.type==="cat" ? "opts row":"opts");
+      var choices = p.type==="cat" ? p.cats.map(function(c,k){return {t:c,k:k};}) : shuffle(it.o.map(function(t,k){return {t:t,k:k};}));
+      var fb = el("div","fb");
+      var buttons=[];
+      choices.forEach(function(ch){
+        var b = el("button","opt",ch.t); b.type="button";
+        b.addEventListener("click",function(){
+          if(state[p.id].answers[i]!==undefined) return;
+          var ok = ch.k===it.c;
+          state[p.id].answers[i]=ok;
+          buttons.forEach(function(bb){bb.disabled=true; if(bb._k===it.c) bb.classList.add("correct"); else if(bb!==b) bb.classList.add("dim");});
+          if(!ok) b.classList.add("wrong");
+          fb.className = "fb show "+(ok?"ok":"no");
+          fb.innerHTML = "<strong>"+(ok?pick(["Genau!","Richtig!","Sehr gut gelesen!","Stimmt!"]):pick(["Noch nicht ganz.","Schau noch einmal genau hin.","Knapp daneben."]))+"</strong>"+it.e;
+          update();
+        });
+        b._k = ch.k; buttons.push(b); opts.appendChild(b);
+      });
+      box.appendChild(opts); box.appendChild(fb); list.appendChild(box);
+    });
+    update();
+  }
+  rb.addEventListener("click",build);
+  sec._score = function(){var a=state[p.id].answers,r=0,d=0;for(var k in a){d++;if(a[k])r++;}sc.textContent=r+" / "+p.items.length+" richtig"+(d<p.items.length?" · "+(p.items.length-d)+" offen":"");return {r:r,d:d,t:p.items.length};};
+  build();
+  return sec;
+}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+
+var secs=[];
+function update(){
+  var R=0,D=0,T=0;
+  secs.forEach(function(s){if(!s._score)return;var x=s._score();R+=x.r;D+=x.d;T+=x.t;});
+  document.getElementById("totalScore").textContent = R+" / "+T+" Punkte";
+  var pct = T?Math.round(D/T*100):0;
+  document.getElementById("totalBar").style.width = pct+"%";
+  document.getElementById("totalDone").textContent = pct+" % bearbeitet";
+  var fm = document.getElementById("finalMsg");
+  if(D<T){fm.textContent="Du hast "+D+" von "+T+" Aufgaben bearbeitet. Weiter so!";}
+  else{
+    var q=R/T;
+    fm.innerHTML = "<b>"+R+" von "+T+" Punkten.</b> "+(q>=.9?"Hervorragend! Du liest jetzt wie eine Profi-Protokollantin. Zeit für die Hausübung.":q>=.7?"Sehr gut! Schau dir die Erklärungen bei den falschen Antworten noch einmal an, dann bist du bereit für die Hausübung.":"Ein guter Anfang. Wiederhole die Teile mit den meisten Fehlern, genau dort liegt dein größter Lernschritt.");
+  }
+}
+
+var partsWrap = document.getElementById("parts");
+PARTS.forEach(function(p,i){var s=renderPart(p,i);secs.push(s);partsWrap.appendChild(s);});
+update();
+
+// Inhaltsverzeichnis
+var toc=document.getElementById("toc");
+[["start","Werkzeugkasten"]].concat(PARTS.map(function(p,i){return [p.id,(i+1)+" · "+p.title];})).concat([["hausuebung","8 · Hausübung"]]).forEach(function(x){
+  var a=el("a",null,x[1]); a.href="#"+x[0]; toc.appendChild(a);
+});
+
+// Hausübung
+function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function load(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+var draft=document.getElementById("draft"), park=document.getElementById("parkplatz"), counter=document.getElementById("counter");
+function count(){
+  var n = draft.value.trim()? draft.value.trim().split(/\s+/).length : 0;
+  counter.textContent = n+" Wörter"+(n===0?"":(n<270?" · noch "+(270-n)+" bis zum Minimum":n>330?" · "+(n-330)+" zu viel":" · im vorgegebenen Rahmen"));
+  counter.className = "counter "+(n>=270&&n<=330?"in":(n?"out":""));
+}
+draft.value = load("zf-sprache-draft")||""; park.value = load("zf-sprache-park")||"";
+draft.addEventListener("input",function(){store("zf-sprache-draft",draft.value);count();});
+park.addEventListener("input",function(){store("zf-sprache-park",park.value);});
+count();
+document.getElementById("copyBtn").addEventListener("click",function(){
+  var b=this;
+  function done(){b.textContent="Kopiert!";setTimeout(function(){b.textContent="Text kopieren";},1500);}
+  if(navigator.clipboard){navigator.clipboard.writeText(draft.value).then(done,function(){draft.select();document.execCommand("copy");done();});}
+  else{draft.select();document.execCommand("copy");done();}
+});
+var cl=document.getElementById("checklist");
+CHECKS.forEach(function(t,i){
+  var l=el("label"); var cb=document.createElement("input"); cb.type="checkbox";
+  cb.checked = load("zf-sprache-c"+i)==="1";
+  cb.addEventListener("change",function(){store("zf-sprache-c"+i,cb.checked?"1":"0");});
+  l.appendChild(cb); l.appendChild(el("span",null,t)); cl.appendChild(l);
+});
+
+document.getElementById("resetAll").addEventListener("click",function(){
+  if(!confirm("Alle Antworten zurücksetzen? Dein Text in der Hausübung bleibt erhalten.")) return;
+  partsWrap.innerHTML=""; secs=[];
+  PARTS.forEach(function(p,i){var s=renderPart(p,i);secs.push(s);partsWrap.appendChild(s);});
+  update(); window.scrollTo({top:0,behavior:"smooth"});
+});
+</script>
+</body>
+</html>
