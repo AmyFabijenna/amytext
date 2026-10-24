@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Du oder Sie?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7; --paper:#fffdf8; --ink:#2b2622; --muted:#6b6259; --line:#e3d9c8;
+  --accent:#c2562b; --accent-soft:#f6e1d6; --accent-ink:#8c3a18;
+  --blue:#2f6690; --blue-soft:#dcebf5;
+  --ok:#2e7d4f; --ok-soft:#dff1e5; --bad:#b3362e; --bad-soft:#f8dedb; --mid:#a86b00; --mid-soft:#fbefd2;
+  --beh:#ffe08a; --beg:#bfe3c6; --bsp:#c9dcf5; --geg:#e7cdee; --app:#f7c6b3; --ref:#e9e2d4; --anl:#d6efef;
+  --shadow:0 1px 2px rgba(60,40,20,.06),0 6px 18px rgba(60,40,20,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1a17; --paper:#26221e; --ink:#eee6da; --muted:#b2a796; --line:#3d3630;
+    --accent:#e47b4f; --accent-soft:#3e2a20; --accent-ink:#f2a07c;
+    --blue:#7fb3da; --blue-soft:#1f3242;
+    --ok:#6cc58f; --ok-soft:#1e3528; --bad:#ec7f76; --bad-soft:#3e2220; --mid:#e2b04f; --mid-soft:#3a2f17;
+    --beh:#6b5a17; --beg:#2c5a37; --bsp:#2c4566; --geg:#523a5c; --app:#6a3a28; --ref:#3e3a33; --anl:#244848;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#1d1a17; --paper:#26221e; --ink:#eee6da; --muted:#b2a796; --line:#3d3630;
+    --accent:#e47b4f; --accent-soft:#3e2a20; --accent-ink:#f2a07c;
+    --blue:#7fb3da; --blue-soft:#1f3242;
+    --ok:#6cc58f; --ok-soft:#1e3528; --bad:#ec7f76; --bad-soft:#3e2220; --mid:#e2b04f; --mid-soft:#3a2f17;
+    --beh:#6b5a17; --beg:#2c5a37; --bsp:#2c4566; --geg:#523a5c; --app:#6a3a28; --ref:#3e3a33; --anl:#244848;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:"Literata",Georgia,serif;line-height:1.25}
+a{color:var(--blue)}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+
+/* Hero */
+header.hero{padding:44px 0 26px}
+.hero .kicker{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+.hero h1{font-size:clamp(2rem,6vw,3rem);margin:.2em 0 .3em}
+.hero p{font-size:1.08rem;max-width:62ch;margin:.4em 0}
+.stamp{display:inline-block;border:2px dashed var(--accent);color:var(--accent-ink);padding:2px 10px;border-radius:6px;font-weight:700;transform:rotate(-2deg);margin-top:10px;font-size:.9rem}
+
+/* Nav */
+nav.steps{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.steps .inner{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:900px;margin:0 auto;scrollbar-width:thin}
+nav.steps a{flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:.86rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper);white-space:nowrap}
+nav.steps a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+nav.steps a.done::after{content:" ✓";color:var(--ok);font-weight:700}
+nav.steps a.active.done::after{color:#fff}
+
+/* Sections */
+section.step{padding:34px 0 10px}
+.step-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.step-num{font-family:"Literata",serif;font-size:2.4rem;color:var(--accent);font-weight:700;line-height:1}
+.step-head h2{margin:0;font-size:1.65rem}
+.lead{color:var(--muted);margin:.2em 0 1em;max-width:68ch}
+
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.box h3{margin:.1em 0 .5em;font-size:1.18rem}
+.info{border-left:5px solid var(--blue)}
+.tip{border-left:5px solid var(--accent);background:linear-gradient(0deg,var(--paper),var(--paper))}
+.tip .tag,.info .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:5px;margin-bottom:6px}
+.info .tag{background:var(--blue-soft);color:var(--blue)}
+.tip .tag{background:var(--accent-soft);color:var(--accent-ink)}
+table.t{width:100%;border-collapse:collapse;font-size:.95rem}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 8px;vertical-align:top;text-align:left}
+table.t th{font-family:"Literata",serif;background:var(--accent-soft);color:var(--accent-ink)}
+.tablewrap{overflow-x:auto}
+ul.clean{padding-left:1.2em;margin:.3em 0}
+ul.clean li{margin:.25em 0}
+.kbd{font-family:ui-monospace,Menlo,monospace;background:var(--ref);padding:0 5px;border-radius:4px;font-size:.92em}
+
+/* Tasks */
+.task{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px 14px;margin:20px 0;box-shadow:var(--shadow);position:relative}
+.task.isdone{border-color:var(--ok)}
+.task > h3{margin:0 0 4px;font-size:1.12rem;display:flex;gap:10px;align-items:baseline}
+.task > h3 .badge{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.75rem;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;flex:0 0 auto}
+.task > p.instr{margin:.2em 0 .9em;color:var(--muted)}
+.q{padding:10px 0;border-top:1px dashed var(--line)}
+.q:first-child{border-top:0}
+.qt{margin:0 0 6px}
+.qn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);font-size:.8rem;font-weight:700;margin-right:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts.col{flex-direction:column}
+button{font:inherit;cursor:pointer}
+.opt{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:7px 12px;text-align:left;font-size:.95rem;line-height:1.4}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{font-size:.92rem;margin-top:6px;padding:6px 10px;border-radius:8px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}
+.fb.bad{background:var(--bad-soft);color:var(--bad)}
+.fb.neutral{background:var(--blue-soft);color:var(--blue)}
+.row{display:grid;grid-template-columns:1fr;gap:6px;padding:10px 0;border-top:1px dashed var(--line)}
+.row:first-child{border-top:0}
+.row .txt{font-style:normal}
+.row.right .txt{color:var(--ok)}
+.row.wrong .txt{color:var(--bad)}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cat{font-size:.85rem;padding:4px 10px}
+.gapline{padding:9px 0;border-top:1px dashed var(--line)}
+.gapline:first-child{border-top:0}
+select.gap{font:inherit;font-size:.95rem;padding:3px 6px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);max-width:100%}
+select.gap.right{border-color:var(--ok);background:var(--ok-soft)}
+select.gap.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.order{list-style:none;padding:0;margin:0}
+.order li{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;margin:6px 0}
+.order li .pos{font-weight:700;color:var(--accent-ink);width:22px;flex:0 0 auto}
+.order li .lbl{flex:1}
+.order li.right{border-color:var(--ok);background:var(--ok-soft)}
+.order li.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.mv{border:1px solid var(--line);background:var(--paper);border-radius:7px;width:34px;height:30px;color:var(--ink)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.btn{border:0;border-radius:9px;padding:8px 14px;font-weight:700;font-size:.92rem}
+.btn.p{background:var(--accent);color:#fff}
+.btn.s{background:var(--blue-soft);color:var(--blue)}
+.btn.g{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.res{font-weight:700;font-size:.92rem}
+.res.ok{color:var(--ok)} .res.mid{color:var(--mid)}
+textarea,input.inp{width:100%;font:inherit;font-size:.97rem;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus,input.inp:focus{outline:none;border-color:var(--blue)}
+.field{margin:10px 0}
+.field label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}
+.field .hint{font-weight:400;color:var(--muted);font-size:.86rem}
+.sol{display:none;margin-top:6px;background:var(--ok-soft);border-left:4px solid var(--ok);border-radius:8px;padding:8px 12px;font-size:.94rem}
+.sol.show{display:block}
+.sol b{color:var(--ok)}
+
+/* Lupe */
+.letter{font-family:"Literata",Georgia,serif;font-size:1.02rem;line-height:1.75;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.seg{cursor:pointer;border-radius:4px;padding:1px 2px;transition:background .15s}
+.seg:hover{background:var(--ref)}
+.seg.mark{background:var(--mid-soft);outline:2px solid var(--mid)}
+.seg.found{background:var(--ok-soft);outline:2px solid var(--ok)}
+.seg.missed{background:var(--bad-soft);outline:2px dashed var(--bad)}
+.seg.falsealarm{background:var(--bad-soft);outline:2px solid var(--bad)}
+.lupe-fb{margin-top:10px;font-size:.93rem}
+.lupe-fb div{padding:5px 0;border-top:1px dashed var(--line)}
+
+/* Musterbriefe */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tab{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font-size:.92rem;color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px;font-size:.82rem}
+.legend span{padding:2px 8px;border-radius:5px;color:var(--ink)}
+.lg-beh{background:var(--beh)} .lg-beg{background:var(--beg)} .lg-bsp{background:var(--bsp)} .lg-geg{background:var(--geg)} .lg-app{background:var(--app)} .lg-ref{background:var(--ref)} .lg-anl{background:var(--anl)}
+.mletter{display:none}
+.mletter.on{display:block}
+.mletter .meta{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.88rem;color:var(--muted);margin-bottom:8px}
+.mletter p{margin:.65em 0}
+.mletter p[data-label]{position:relative}
+.show-labels .mletter p[data-label]::before{content:attr(data-label);display:block;font-family:"Atkinson Hyperlegible",sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:2px}
+.show-marks .m-beh{background:var(--beh)} .show-marks .m-beg{background:var(--beg)} .show-marks .m-bsp{background:var(--bsp)}
+.show-marks .m-geg{background:var(--geg)} .show-marks .m-app{background:var(--app)} .show-marks .m-ref{background:var(--ref)} .show-marks .m-anl{background:var(--anl)}
+.wc{font-family:"Atkinson Hyperlegible",sans-serif;font-size:.85rem;color:var(--muted)}
+
+/* Werkstatt */
+.ws-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:860px){.ws-grid{grid-template-columns:1.15fr .85fr}}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.chip{border:1px dashed var(--accent);background:transparent;color:var(--accent-ink);border-radius:999px;padding:2px 9px;font-size:.8rem}
+.chip:hover{background:var(--accent-soft)}
+.meter{position:sticky;top:64px}
+.count{font-family:"Literata",serif;font-size:2rem;font-weight:700}
+.count.ok{color:var(--ok)} .count.low{color:var(--mid)} .count.high{color:var(--bad)}
+.gauge{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin:4px 0 10px;position:relative}
+.gauge i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.gauge::after{content:"";position:absolute;left:calc(270/400*100%);width:calc(60/400*100%);top:0;bottom:0;background:color-mix(in srgb,var(--ok) 30%,transparent)}
+.checks{list-style:none;padding:0;margin:0;font-size:.9rem}
+.checks li{padding:4px 0 4px 26px;position:relative}
+.checks li::before{content:"○";position:absolute;left:4px;color:var(--muted)}
+.checks li.y::before{content:"✓";color:var(--ok);font-weight:700}
+.checks li.n::before{content:"!";color:var(--mid);font-weight:700}
+.preview{white-space:pre-wrap;font-family:"Literata",serif;font-size:.95rem;max-height:420px;overflow:auto}
+.auftraege{background:var(--accent-soft);border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.95rem}
+.auftraege b{color:var(--accent-ink)}
+
+/* Checkliste */
+.cl label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-top:1px dashed var(--line);cursor:pointer}
+.cl label:first-of-type{border-top:0}
+.cl input{margin-top:5px;accent-color:var(--ok);width:18px;height:18px;flex:0 0 auto}
+.timeline{display:grid;gap:8px}
+.tl{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start}
+.tl .when{font-weight:700;color:var(--accent-ink);font-family:"Literata",serif}
+details.kern{margin:10px 0;border:1px solid var(--line);border-radius:10px;padding:8px 14px;background:var(--bg)}
+details.kern summary{cursor:pointer;font-weight:700}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem;text-align:center}
+@media print{nav.steps,.bar,.chips,.toggles,.tabs,.btn{display:none!important}.task,.box{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Leserbrief-Planung · Thema: Anrede in der Schule</div>
+    <h1>Du oder Sie?</h1>
+    <p>Hier bereitest du einen Leserbrief zum Beitrag „‚Du, Frau Lehrerin?‘: Deshalb ist das Duzen an Schweizer Schulen kein Thema“ vor – Schritt für Schritt, wie es dein Buch beim Flugreisen-Text zeigt.</p>
+    <p>Bei jeder Übung kannst du prüfen, die Lösung ansehen und zurücksetzen. Deine Eingaben bleiben in diesem Browser gespeichert.</p>
+    <span class="stamp">Deine Meinung zählt ✉</span>
+  </div>
+</header>
+
+<nav class="steps" aria-label="Stationen"><div class="inner" id="navInner">
+  <a href="#s1">1 Auftrag</a>
+  <a href="#s2">2 Text</a>
+  <a href="#s3">3 Placemat</a>
+  <a href="#s4">4 Argumente</a>
+  <a href="#s5">5 Einleitung</a>
+  <a href="#s6">6 Appell</a>
+  <a href="#s7">7 Schreibplan</a>
+  <a href="#s8">8 Musterbriefe</a>
+  <a href="#s9">9 Dein Brief</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="step" id="s1">
+  <div class="step-head"><span class="step-num">1</span><h2>Den Schreibauftrag zerlegen</h2></div>
+  <p class="lead">Im Buch steht zu diesem Text ein Erörterungsauftrag. Hier bereitest du ihn als <b>Leserbrief</b> vor – mit Arbeitsaufträgen, wie sie bei der Schularbeit typischerweise kommen.</p>
+  <div class="box info">
+    <span class="tag">Schreibauftrag: Verfasse einen Leserbrief.</span>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Was?</th><th>Aufgabe</th><th>Was heißt das für dich?</th></tr>
+      <tr><td><b>Thema</b></td><td>Anrede in der Schule</td><td>Duzen oder Siezen von Lehrerinnen und Lehrern</td></tr>
+      <tr><td><b>Situation</b></td><td>Als Schülerin bist du von der Frage, wie man Lehrkräfte anspricht, direkt betroffen. Beim Surfen stößt du auf einen Beitrag dazu und möchtest deine Meinung mit der Leserschaft teilen.</td><td>Deine Erfahrung aus Volksschule und Gymnasium ist dein <b>Schreibanlass</b>.</td></tr>
+      <tr><td><b>Ausgangstext</b></td><td>„‚Du, Frau Lehrerin?‘: Deshalb ist das Duzen an Schweizer Schulen kein Thema“, Redaktion (red.), FM1Today, 9. Jänner 2022</td><td>Kein Autorenname, nur „Redaktion“ – so nennst du es auch in der Einleitung.</td></tr>
+      <tr><td><b>Arbeitsauftrag 1</b></td><td><b>Erkläre</b> das Thema der im Text aufgeworfenen Diskussion und deine eigene Betroffenheit.</td><td>Worum geht es? Wer sagt was? Warum betrifft es dich?</td></tr>
+      <tr><td><b>Arbeitsauftrag 2</b></td><td><b>Erörtere</b> Vor- und Nachteile des Siezens im Alltag und in der Schule.</td><td>beide Seiten mit Argumenten nach dem 3-B-Schema</td></tr>
+      <tr><td><b>Arbeitsauftrag 3</b></td><td><b>Nimm Stellung</b> zur Frage, ob Schülerinnen und Schüler ihre Lehrkräfte duzen sollten.</td><td>klare eigene Position, begründet</td></tr>
+      <tr><td><b>Arbeitsauftrag 4</b></td><td><b>Appelliere</b> an die Leserschaft.</td><td>Schlussappell in der Höflichkeitsform</td></tr>
+      <tr><td><b>Länge</b></td><td>270–330 Wörter, Absätze mit Leerzeilen</td><td>Bei vier Aufträgen musst du knapp und präzise formulieren.</td></tr>
+    </table></div>
+  </div>
+  <div class="task" data-task="d1mc"><h3><span class="badge">Quiz</span>Hast du den Auftrag verstanden?</h3><p class="instr">Wähle jeweils die richtige Antwort.</p></div>
+  <div class="task" data-task="d1auftr"><h3><span class="badge">Zuordnen</span>Welcher Satz gehört zu welchem Arbeitsauftrag?</h3><p class="instr">Ordne die Sätze aus einem fertigen Leserbrief zu.</p></div>
+</section>
+
+<section class="step" id="s2">
+  <div class="step-head"><span class="step-num">2</span><h2>Den Text erschließen</h2></div>
+  <p class="lead">Lies den Beitrag in deinem Buch zweimal und markiere die Argumente in drei Farben (Behauptung, Begründung, Beispiel).</p>
+  <details class="kern" open><summary>Kerninhalte in Stichworten</summary>
+    <p><b>Ausgangslage:</b> Für frisch eingeschulte Kinder ist das Siezen ungewohnt. In Schweden, Norwegen und Finnland dürfen Kinder ihre Lehrpersonen duzen. Laut einem Bericht der BZ soll das auch in Berlin eingeführt werden – man erhofft sich weniger Distanz, mehr Vertrauen und bessere Noten.</p>
+    <p><b>Schweizer Sicht:</b> Franziska Peterhans, Zentralsekretärin des Dachverbands Lehrerinnen und Lehrer Schweiz, meint, das Duzen sei an Schweizer Schulen kein Thema und gehöre nicht zur dortigen Kultur. Es sei gesellschaftliche Konvention, dass Erwachsene – also auch Lehrpersonen – gesiezt werden.</p>
+    <p><b>Vertrauen:</b> Damit Kinder gut lernen, müssen sie sich wohlfühlen. Das hängt stark von der Beziehung zur Lehrperson ab: Kinder brauchen Verlässlichkeit und Empathie. Diese Faktoren sind laut Peterhans wichtiger als die Anrede. Eine klare Rollenverteilung mache Beziehungen sicherer und oft besser.</p>
+    <p><b>Ausblick:</b> Dass bald geduzt wird, hält sie für unwahrscheinlich – Gesellschaft und Sprache entwickeln sich aber ständig weiter.</p>
+  </details>
+  <div class="task" data-task="d2rf"><h3><span class="badge">Richtig/Falsch</span>Steht das so im Beitrag?</h3><p class="instr">Entscheide bei jeder Aussage, ob sie dem Text entspricht.</p></div>
+  <div class="task" data-task="d2wer"><h3><span class="badge">Zuordnen</span>Für das Duzen oder für das Siezen?</h3><p class="instr">Welche Position stützt jede Aussage aus dem Text?</p></div>
+</section>
+
+<section class="step" id="s3">
+  <div class="step-head"><span class="step-num">3</span><h2>Ideen sammeln mit dem Placemat</h2></div>
+  <p class="lead">Sammle Gedanken aus vier Blickwinkeln, bevor du dich für eine Position entscheidest.</p>
+  <div class="box" style="text-align:center">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:560px;margin:0 auto;font-size:.92rem">
+      <div style="background:var(--beh);border-radius:10px;padding:10px">Siezen im Alltag</div>
+      <div style="background:var(--beg);border-radius:10px;padding:10px">Siezen in der Schule</div>
+      <div style="grid-column:1/3;background:var(--accent);color:#fff;border-radius:10px;padding:12px;font-weight:700">Mitte: Sollen Schülerinnen und Schüler ihre Lehrkräfte duzen?</div>
+      <div style="background:var(--bsp);border-radius:10px;padding:10px">Sicht der Lehrkräfte</div>
+      <div style="background:var(--app);border-radius:10px;padding:10px">Meine Erfahrungen</div>
+    </div>
+  </div>
+  <div class="task" data-task="d3placemat"><h3><span class="badge">A 21</span>Fülle die vier Felder</h3><p class="instr">Zwei bis drei Stichworte pro Feld, dann mit den Vorschlägen vergleichen.</p></div>
+  <div class="task" data-task="d3vornach"><h3><span class="badge">Zuordnen</span>Vorteil oder Nachteil des Siezens?</h3><p class="instr">Arbeitsauftrag 2 verlangt beide Seiten. Sortiere die Gedanken.</p></div>
+</section>
+
+<section class="step" id="s4">
+  <div class="step-head"><span class="step-num">4</span><h2>Argumente nach dem 3-B-Schema</h2></div>
+  <p class="lead">Für Arbeitsauftrag 2 und 3 brauchst du vollständige Argumente. Entscheide dich am Ende für <b>eine</b> Sichtweise.</p>
+  <div class="task" data-task="d4class"><h3><span class="badge">A 24</span>Behauptung, Begründung oder Beispiel?</h3><p class="instr">Bestimme jeden Baustein.</p></div>
+  <div class="task" data-task="d4a22"><h3><span class="badge">A 22</span>Formuliere vier Argumente</h3><p class="instr">Ergänze Begründung und Beispiel, am besten aus deinem eigenen Schulalltag.</p></div>
+  <div class="task" data-task="d4gegen"><h3><span class="badge">Profi</span>Gegenargumente entkräften</h3><p class="instr">Zwar …, doch … · Natürlich …; trotzdem … · Dem ist jedoch entgegenzuhalten, …</p></div>
+</section>
+
+<section class="step" id="s5">
+  <div class="step-head"><span class="step-num">5</span><h2>Die Einleitung vorbereiten</h2></div>
+  <p class="lead">Wie in A 23: zuerst die Angaben sammeln, dann einbauen.</p>
+  <div class="task" data-task="d5table"><h3><span class="badge">A 23</span>Die Einleitungstabelle</h3><p class="instr">Fülle die Tabelle aus und vergleiche mit der Musterlösung.</p></div>
+  <div class="task" data-task="d5gaps"><h3><span class="badge">A 23 a</span>Baue die Einleitung zusammen</h3><p class="instr">Wähle jeweils die passende Angabe.</p></div>
+  <div class="task" data-task="d5betreff"><h3><span class="badge">Quiz</span>Betreff, Schreibanlass, Überleitung</h3><p class="instr">Wähle die beste Lösung.</p></div>
+</section>
+
+<section class="step" id="s6">
+  <div class="step-head"><span class="step-num">6</span><h2>Der Appell</h2></div>
+  <p class="lead">Dein Appell richtet sich an die Leserschaft – Eltern, Lehrkräfte, Schülerinnen und Schüler, die die Zeitung lesen. Er muss zu deiner Position passen.</p>
+  <div class="task" data-task="d6schluessig"><h3><span class="badge">Quiz</span>Welcher Appell ist schlüssig?</h3><p class="instr">Der Appell folgt logisch aus der Position.</p></div>
+  <div class="task" data-task="d6formen"><h3><span class="badge">Lückentext</span>Appellformen richtig bilden</h3><p class="instr">Die gesuchte Form steht in Klammern.</p></div>
+  <div class="task" data-task="d6frei"><h3><span class="badge">Schreiben</span>Dein Appell in drei Formen</h3><p class="instr">Formuliere passend zu deiner Position.</p></div>
+</section>
+
+<section class="step" id="s7">
+  <div class="step-head"><span class="step-num">7</span><h2>Der Schreibplan in Stichworten</h2></div>
+  <p class="lead">Ein Stichwortblock pro Absatz, wie in A 25.</p>
+  <div class="task" data-task="d7plan"><h3><span class="badge">A 25</span>Stichwörter zu jedem Absatz</h3><p class="instr">Nur Stichworte. Danach vergleichen.</p></div>
+</section>
+
+<section class="step" id="s8">
+  <div class="step-head"><span class="step-num">8</span><h2>Zwei Musterbriefe</h2></div>
+  <p class="lead">Du darfst für das Siezen oder für das Duzen argumentieren – Hauptsache, du entscheidest dich klar. Hier sind beide Richtungen.</p>
+  <div class="box" id="musterBox">
+    <div class="tabs" id="mTabs">
+      <button class="tab on" data-m="m1" type="button">Variante A · für das Siezen</button>
+      <button class="tab" data-m="m2" type="button">Variante B · für das Duzen</button>
+    </div>
+    <div class="toggles">
+      <button class="btn s" id="tgMarks" type="button">Bausteine einfärben</button>
+      <button class="btn s" id="tgLabels" type="button">Arbeitsaufträge anzeigen</button>
+    </div>
+    <div class="legend" id="mLegend" hidden>
+      <span class="lg-ref">Bezug zum Text</span><span class="lg-anl">Schreibanlass</span><span class="lg-beh">Behauptung</span><span class="lg-beg">Begründung</span><span class="lg-bsp">Beispiel/Beweis</span><span class="lg-geg">Gegenargument entkräftet</span><span class="lg-app">Appell</span>
+    </div>
+
+    <div class="mletter letter on" id="m1">
+      <div class="meta">Variante A · Position: Siezen beibehalten · <span class="wc"></span></div>
+      <p><b>Betreff: Respekt beginnt bei der Anrede</b></p>
+      <p>Sehr geehrtes Redaktionsteam!</p>
+      <p data-label="Einleitung · Auftrag 1: Thema und Betroffenheit"><span class="m-ref">Mit großem Interesse habe ich Ihren Beitrag „‚Du, Frau Lehrerin?‘: Deshalb ist das Duzen an Schweizer Schulen kein Thema“ gelesen, der am 9. Jänner 2022 auf FM1Today erschienen ist. Darin geht es um die Frage, ob Kinder ihre Lehrkräfte duzen sollten, wie es in Skandinavien üblich ist und in Berlin geplant wird.</span> <span class="m-anl">Da ich als Schülerin täglich mit dieser Anrede zu tun habe, möchte ich Ihnen meine Sicht darlegen.</span></p>
+      <p data-label="Hauptteil · Auftrag 2: Vorteile des Siezens"><span class="m-beh">Das Siezen hat sowohl im Alltag als auch in der Schule klare Vorteile.</span> <span class="m-beg">Es drückt Respekt aus und macht deutlich, wer welche Rolle hat.</span> <span class="m-bsp">So sieze ich auch Ärztinnen oder Verkäufer, ohne dass unser Verhältnis deshalb kühl wäre.</span> <span class="m-beg">Im Alltag hilft die Sie-Form außerdem, Fremden höflich und ohne Missverständnisse zu begegnen, etwa am Amt oder bei einem Vorstellungsgespräch.</span> <span class="m-beg">Wie Franziska Peterhans vom Schweizer Lehrerverband betont, macht eine klare Rollenverteilung Beziehungen sicherer.</span></p>
+      <p data-label="Hauptteil · Auftrag 2: Nachteile des Siezens"><span class="m-geg">Natürlich kann das Sie besonders für Schulanfänger Distanz schaffen. Doch Vertrauen entsteht nicht durch ein Wort, sondern dadurch, dass Lehrkräfte verlässlich und einfühlsam sind. Gerade das betont auch Frau Peterhans: Kinder brauchen Verlässlichkeit und Empathie, die Anrede ist dabei zweitrangig.</span></p>
+      <p data-label="Hauptteil · Auftrag 3: Stellungnahme"><span class="m-beh">Ich bin daher der Ansicht, dass wir ab dem Gymnasium beim Siezen bleiben sollten.</span> <span class="m-bsp">Meine liebste Lehrerin sieze ich, und trotzdem kann ich mit jedem Problem zu ihr kommen.</span> <span class="m-beg">Außerdem bereitet das Sie uns auf die Arbeitswelt vor, in der man Vorgesetzte und Kundschaft meist ebenfalls siezt.</span></p>
+      <p data-label="Schluss · Auftrag 4: Appell"><span class="m-app">Ich bitte Sie deshalb: Messen Sie die Nähe zwischen Lehrkräften und Kindern nicht an der Anrede, sondern daran, wie viel Zeit und Verständnis füreinander bleibt! Setzen Sie sich für gute Beziehungen in der Schule ein – mit Respekt, in Sie-Form.</span></p>
+      <p>Mit freundlichen Grüßen<br>[Vorname Nachname]</p>
+    </div>
+
+    <div class="mletter letter" id="m2">
+      <div class="meta">Variante B · Position: Duzen ermöglichen · <span class="wc"></span></div>
+      <p><b>Betreff: Ein Du für mehr Vertrauen</b></p>
+      <p>Sehr geehrtes Redaktionsteam!</p>
+      <p data-label="Einleitung · Auftrag 1: Thema und Betroffenheit"><span class="m-ref">Ihr Beitrag „‚Du, Frau Lehrerin?‘: Deshalb ist das Duzen an Schweizer Schulen kein Thema“, der am 9. Jänner 2022 auf FM1Today erschienen ist, hat mich zum Nachdenken gebracht. Er berichtet, dass Kinder in Skandinavien ihre Lehrkräfte duzen und Berlin das ebenfalls plant, während man in der Schweiz am Sie festhält.</span> <span class="m-anl">Als Schülerin habe ich beides erlebt und möchte Ihnen meine Meinung schildern.</span></p>
+      <p data-label="Hauptteil · Auftrag 2: Vor- und Nachteile des Siezens"><span class="m-geg">Zwar hat das Siezen Vorteile: Es zeigt Respekt und klare Rollen, im Alltag gegenüber Fremden ist es selbstverständlich. Doch gerade in der Schule kann es eine unnötige Mauer bauen. Kleine Kinder empfinden die Sie-Form oft als fremd, und manche Lehrkräfte wirken dadurch strenger, als sie eigentlich sind.</span> <span class="m-beg">Wer seine Lehrerin siezt, traut sich oft nicht, Schwächen oder Sorgen anzusprechen.</span></p>
+      <p data-label="Hauptteil · Auftrag 3: Stellungnahme"><span class="m-beh">Ich bin davon überzeugt, dass Schulen das Duzen erlauben sollten.</span> <span class="m-beg">Denn Kinder lernen nur gut, wenn sie sich wohlfühlen und Vertrauen haben, wie auch Frau Peterhans betont.</span> <span class="m-bsp">In der Volksschule habe ich meine Lehrerin geduzt, und nie hätte jemand den Respekt vor ihr verloren. Auch in vielen Sportvereinen duzen Kinder ihre Trainerinnen und folgen ihnen trotzdem aufs Wort.</span> <span class="m-beg">Respekt zeigt sich also im Verhalten, nicht in der Grammatik.</span></p>
+      <p data-label="Hauptteil · Gegenargument">Natürlich darf das Du nicht dazu führen, dass Grenzen verschwimmen. Klare Regeln bleiben deshalb wichtig. Doch wer seine Lehrkräfte schätzt, wird ihnen auch mit einem Du höflich begegnen, und genau dieses Vertrauen brauchen wir, um mutig Fragen zu stellen.</p>
+      <p data-label="Schluss · Auftrag 4: Appell"><span class="m-app">Ich fordere Sie, liebe Leserinnen und Leser, daher auf: Seien Sie offen für das Du in der Schule! Fragen Sie Ihre Kinder, wie sie sich dabei fühlen würden. Vielleicht ist das kleine Wort der Anfang einer großen Vertrauensbasis.</span></p>
+      <p>Mit freundlichen Grüßen<br>[Vorname Nachname]</p>
+    </div>
+  </div>
+  <div class="task" data-task="d8vergleich"><h3><span class="badge">Quiz</span>Die beiden Varianten vergleichen</h3><p class="instr">Beantworte die Fragen mithilfe der Musterbriefe.</p></div>
+</section>
+
+<section class="step" id="s9">
+  <div class="step-head"><span class="step-num">9</span><h2>Dein Leserbrief</h2></div>
+  <p class="lead">Schreib deinen Brief als Hausübung, mit dem Schreibplan aus Station 7 daneben.</p>
+  <div class="box">
+    <div class="tabs" id="wsTabs"></div>
+    <div class="auftraege" id="wsAuftraege"></div>
+    <div class="ws-grid">
+      <div id="wsFields"></div>
+      <div>
+        <div class="box meter" style="margin-top:0">
+          <div class="wc">Wörter im ganzen Brief</div>
+          <div class="count" id="wsCount">0</div>
+          <div class="gauge"><i id="wsGauge"></i></div>
+          <div class="wc" id="wsCountHint">Ziel: 270–330 Wörter</div>
+          <h3 style="margin-top:14px;font-size:1rem">Automatischer Check</h3>
+          <ul class="checks" id="wsChecks"></ul>
+          <div class="bar">
+            <button class="btn p" id="wsCopy" type="button">Brief kopieren</button>
+            <button class="btn g" id="wsClear" type="button">Leeren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 style="margin-top:18px">Vorschau</h3>
+    <div class="letter preview" id="wsPreview"></div>
+  </div>
+  <div class="box cl" id="checklist">
+    <h3>Checkliste für die Überarbeitung</h3>
+    <p class="wc" style="margin-top:-6px">Die Häkchen bleiben gespeichert.</p>
+  </div>
+</section>
+
+</main>
+<footer>Du oder Sie? · Leserbrief-Planung</footer>
+
+<script>
+/* ---------- Speicher ---------- */
+const S={get(k,d){try{const v=localStorage.getItem('lbdusie_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+         set(k,v){try{localStorage.setItem('lbdusie_'+k,JSON.stringify(v))}catch(e){}}};
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e}
+function shuffleSeed(arr,seed){const a=arr.slice();let s=seed;for(let i=a.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function setFb(fb,cls,html){fb.className='fb show '+cls;fb.innerHTML=html}
+function hideFb(fb){fb.className='fb';fb.innerHTML=''}
+
+/* ---------- Aufgaben-Daten ---------- */
+const TASKS={
+d1mc:{type:'mc',items:[
+ {q:'Wer hat den Beitrag verfasst?',o:['Franziska Peterhans','die Redaktion (red.) von FM1Today','die BZ Berlin','ein Lehrer aus Schweden'],a:1,e:'Frau Peterhans wird im Text zitiert, geschrieben hat ihn die Redaktion. In der Einleitung: „Ihr Beitrag …, erschienen am 9. Jänner 2022 auf FM1Today“.'},
+ {q:'Was verlangt „Erörtere Vor- und Nachteile des Siezens“?',o:['nur die Vorteile aufzählen','beide Seiten abwägen und mit Argumenten belegen','den Text zusammenfassen','die Leserschaft auffordern'],a:1,e:'Erörtern heißt: Pro und Kontra gegeneinander abwägen.'},
+ {q:'Was verlangt „Nimm Stellung“?',o:['eine klare, begründete eigene Meinung','eine neutrale Darstellung ohne Meinung','eine Nacherzählung','nur Fragen stellen'],a:0,e:'Entscheide dich für eine Sichtweise und begründe sie.'},
+ {q:'Wo musst du beim Erörtern an zwei Bereiche denken?',o:['im Alltag und in der Schule','in Österreich und Deutschland','in Mathematik und Deutsch','bei Eltern und Großeltern'],a:0,e:'Der Auftrag nennt ausdrücklich Alltag und Schule.'},
+ {q:'Welcher Schreibanlass passt zur Situation?',o:['Als Schülerin habe ich täglich mit der Anrede von Lehrkräften zu tun.','Ich musste den Text in Deutsch lesen.','Ich wohne in der Schweiz.','Mir war langweilig.'],a:0,e:'Der Anlass kommt aus der Situation – nie aus der Schularbeit selbst.'}
+]},
+d1auftr:{type:'classify',cats:['AA 1: Thema erklären','AA 2: Vor-/Nachteile','AA 3: Stellung nehmen','AA 4: Appell'],items:[
+ {t:'Darin geht es um die Frage, ob Kinder ihre Lehrkräfte duzen dürfen sollten.',c:0},
+ {t:'Da ich als Schülerin täglich damit zu tun habe, hat mich das Thema angesprochen.',c:0},
+ {t:'Ein Vorteil des Siezens ist, dass es Respekt und klare Rollen ausdrückt.',c:1},
+ {t:'Ein Nachteil ist, dass das Sie besonders für kleine Kinder Distanz schaffen kann.',c:1},
+ {t:'Ich bin der Ansicht, dass wir ab dem Gymnasium beim Siezen bleiben sollten.',c:2},
+ {t:'Meiner Meinung nach sollten Schulen das Duzen erlauben.',c:2},
+ {t:'Seien Sie offen für neue Formen der Anrede!',c:3},
+ {t:'Ich bitte Sie, Nähe nicht an der Anrede zu messen!',c:3}
+]},
+d2rf:{type:'classify',cats:['richtig','falsch'],items:[
+ {t:'In Schweden, Norwegen und Finnland dürfen Kinder ihre Lehrpersonen duzen.',c:0},
+ {t:'In Berlin soll das Duzen laut einem Bericht ebenfalls eingeführt werden.',c:0},
+ {t:'Man erhofft sich davon weniger Distanz, mehr Vertrauen und bessere Noten.',c:0},
+ {t:'An Schweizer Schulen wird das Duzen derzeit heftig diskutiert.',c:1,e:'Laut Peterhans ist es dort kaum ein Thema.'},
+ {t:'Franziska Peterhans ist Zentralsekretärin des Dachverbands Lehrerinnen und Lehrer Schweiz.',c:0},
+ {t:'Peterhans meint, die Anrede sei der wichtigste Faktor für gutes Lernen.',c:1,e:'Sie hält Verlässlichkeit, Empathie und Wohlbefinden für wichtiger.'},
+ {t:'Laut Peterhans macht eine klare Rollenverteilung Beziehungen sicherer.',c:0},
+ {t:'Peterhans schließt aus, dass sich die Anrede jemals ändert.',c:1,e:'Sie hält es für unwahrscheinlich, sagt aber, dass sich Sprache und Gesellschaft weiterentwickeln.'}
+]},
+d2wer:{type:'classify',cats:['stützt das Duzen','stützt das Siezen'],items:[
+ {t:'Für frisch eingeschulte Kinder ist das Siezen ungewohnt.',c:0},
+ {t:'Man erhofft sich weniger Distanz und mehr Vertrauen.',c:0},
+ {t:'Es ist gesellschaftliche Konvention, Erwachsene zu siezen.',c:1},
+ {t:'Eine klare Rollenverteilung macht Beziehungen sicherer.',c:1},
+ {t:'In skandinavischen Ländern ist das Du an Schulen üblich.',c:0},
+ {t:'Das Duzen gehört nicht zur Schweizer Kultur.',c:1}
+]},
+d3placemat:{type:'free',fields:[
+ {l:'Siezen im Alltag',ph:'',s:'Höflichkeit gegenüber Fremden · Ärztin, Polizei, Verkauf · Bewerbung, Arbeitswelt · im Internet und in Firmen oft Du'},
+ {l:'Siezen in der Schule',ph:'',s:'Respekt, klare Rollen · Vorbereitung auf das Berufsleben · Distanz, Hemmung bei Fragen · Volksschule oft „Frau Lehrerin“ mit Du'},
+ {l:'Sicht der Lehrkräfte',ph:'',s:'Autorität, Grenzen · Gleichbehandlung aller · Nähe zu Kindern wichtig · Angst vor respektlosem Ton'},
+ {l:'Meine Erfahrungen',ph:'',s:'Volksschule geduzt · Gymnasium gesiezt · Trainerin im Verein geduzt · wann fühle ich mich wohl?'}
+]},
+d3vornach:{type:'classify',cats:['Vorteil des Siezens','Nachteil des Siezens'],items:[
+ {t:'Es drückt Respekt gegenüber Erwachsenen aus.',c:0},
+ {t:'Es kann Distanz schaffen und Hemmungen auslösen.',c:1},
+ {t:'Es macht die Rollen in der Klasse klar.',c:0},
+ {t:'Kleine Kinder finden die Sie-Form oft schwierig und ungewohnt.',c:1},
+ {t:'Es bereitet auf die Höflichkeitsformen im Berufsleben vor.',c:0},
+ {t:'Es kann wirken, als stünden Lehrkräfte über den Schülerinnen und Schülern.',c:1}
+]},
+d4class:{type:'classify',cats:['Behauptung','Begründung','Beispiel/Beweis'],items:[
+ {t:'Das Siezen schafft klare Rollen in der Klasse,',c:0},
+ {t:'denn alle wissen, wer für Ordnung und Bewertung verantwortlich ist.',c:1},
+ {t:'So fällt es Lehrkräften beispielsweise leichter, bei Streit konsequent einzugreifen.',c:2},
+ {t:'Das Duzen kann Vertrauen fördern,',c:0},
+ {t:'weil sich Kinder mit einer vertrauten Anrede eher trauen, Sorgen anzusprechen.',c:1},
+ {t:'In vielen Sportvereinen etwa duzen Kinder ihre Trainerin und erzählen ihr offen von Problemen.',c:2}
+]},
+d4a22:{type:'free',fields:[
+ {l:'Das Siezen drückt Respekt aus.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Die Sie-Form zeigt, dass man das Gegenüber als erwachsene Person mit besonderer Verantwortung anerkennt. <b>Beispiel:</b> Auch Ärztinnen, Polizisten oder Vorgesetzte siezen wir selbstverständlich.'},
+ {l:'Das Siezen bereitet auf die Arbeitswelt vor.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Wer früh übt, die Höflichkeitsform sicher zu verwenden, tut sich später leichter. <b>Beispiel:</b> Bei Bewerbungsgesprächen oder im Kundenkontakt wird meist gesiezt.'},
+ {l:'Das Duzen baut Hemmungen ab.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Eine vertraute Anrede senkt die Schwelle, Fragen zu stellen oder Fehler zuzugeben. <b>Beispiel:</b> In der Volksschule fragen viele Kinder ihre Lehrerin ganz offen um Hilfe.'},
+ {l:'Respekt hängt nicht von der Anrede ab.',ph:'Begründung … Beispiel …',s:'<b>Begründung:</b> Respekt zeigt sich im Verhalten, im Zuhören und im Umgangston. <b>Beispiel:</b> In Skandinavien duzen Kinder ihre Lehrkräfte, ohne dass dort Chaos im Unterricht herrscht.'}
+]},
+d4gegen:{type:'free',fields:[
+ {l:'(für Siezen) Gegenargument: „Das Sie schafft Distanz.“',ph:'Zwar …, doch …',s:'Zwar kann das Sie zunächst distanziert wirken, doch Vertrauen entsteht vor allem durch Verlässlichkeit und Einfühlungsvermögen, wie Frau Peterhans betont – nicht durch ein einzelnes Wort.'},
+ {l:'(für Duzen) Gegenargument: „Mit dem Du geht der Respekt verloren.“',ph:'Natürlich …; trotzdem …',s:'Natürlich braucht es auch mit dem Du klare Regeln; trotzdem zeigt sich Respekt im Verhalten. In Volksschulen und Sportvereinen wird geduzt, und dennoch folgen die Kinder ihren Lehrkräften und Trainerinnen.'}
+]},
+d5table:{type:'free',fields:[
+ {l:'Empfänger',ph:'',s:'die Redaktion von FM1Today'},
+ {l:'Ort, Datum',ph:'',s:'[dein Ort], am [Datum der Schularbeit]'},
+ {l:'Betreff',ph:'',s:'z. B. Respekt beginnt bei der Anrede / Ein Du für mehr Vertrauen'},
+ {l:'Adressat/in',ph:'',s:'Sehr geehrtes Redaktionsteam! – geschrieben für die Leserschaft'},
+ {l:'Titel des Textes',ph:'',s:'„‚Du, Frau Lehrerin?‘: Deshalb ist das Duzen an Schweizer Schulen kein Thema“'},
+ {l:'Verfasser/in, Erscheinungsdatum',ph:'',s:'Redaktion (red.), FM1Today, 9. Jänner 2022'},
+ {l:'Schreibanlass',ph:'',s:'Als Schülerin habe ich täglich mit der Anrede von Lehrkräften zu tun.'},
+ {l:'Thema',ph:'',s:'Sollen Schülerinnen und Schüler ihre Lehrkräfte duzen oder siezen?'}
+]},
+d5gaps:{type:'gaps',items:[
+ {t:'Mit großem Interesse habe ich Ihren Beitrag „‚Du, Frau Lehrerin?‘: Deshalb ist das Duzen an Schweizer Schulen kein Thema“ gelesen, der am {9. Jänner 2022|1. Juli 2022|23. Juni 2023} auf {FM1Today|„Die Presse“|NÖN} erschienen ist.'},
+ {t:'Darin geht es um die Frage, ob Kinder ihre Lehrkräfte {duzen|loben|benoten} sollten.'},
+ {t:'Während das Du in {Skandinavien|der Schweiz|Österreich} schon üblich ist, hält man in der Schweiz am Sie fest.'},
+ {t:'Da ich als {Schülerin|Lehrerin|Zentralsekretärin} täglich damit zu tun habe, hat mich das Thema sofort angesprochen.'}
+]},
+d5betreff:{type:'mc',items:[
+ {q:'Welcher Betreff passt am besten?',o:['Betreff: Duzen','Betreff: Respekt beginnt bei der Anrede','Betreff: Hallo!','Betreff: Mein Leserbrief zu dem Text über Schweizer Schulen, den ich gelesen habe'],a:1,e:'Kurz, thematisch, mit angedeuteter Position.'},
+ {q:'Welche Anrede passt?',o:['Hallo Leute!','Sehr geehrtes Redaktionsteam!','Liebe Frau Peterhans, du hast recht!','Servus FM1!'],a:1,e:'Höflich und an die Redaktion gerichtet.'},
+ {q:'Welcher Satz leitet zum Hauptteil über?',o:['Mit freundlichen Grüßen','In den folgenden Zeilen möchte ich Ihnen meine Sicht darlegen.','Seien Sie offen für das Du!','Peterhans ist Zentralsekretärin.'],a:1,e:'Die Überleitung kündigt deine Meinung an.'}
+]},
+d6schluessig:{type:'mc',items:[
+ {q:'Dein Brief spricht sich für das Siezen aus. Welcher Appell ist schlüssig?',o:['Führen Sie sofort das Du an allen Schulen ein!','Messen Sie Nähe nicht an der Anrede, sondern an Verlässlichkeit und Zeit füreinander!','Duzen Sie ab jetzt alle Fremden!','Schaffen Sie die Schule ab!'],a:1,e:'Der Appell folgt aus der Siez-Position.'},
+ {q:'Dein Brief spricht sich für das Duzen aus. Welcher Appell ist schlüssig?',o:['Bleiben Sie unbedingt beim Sie!','Seien Sie offen für das Du in der Schule und fragen Sie die Kinder, wie sie sich dabei fühlen!','Siezen Sie auch Ihre Kinder!','Lesen Sie keine Zeitung mehr!'],a:1,e:'Passend zur Duz-Position und konkret.'}
+]},
+d6formen:{type:'gaps',items:[
+ {t:'(Imperativ, Höflichkeitsform) {Seien Sie|Sind Sie|Sei Sie} offen für Neues!'},
+ {t:'(Verb der Aufforderung, Präsens) Ich {fordere|forderte|gefordert} Sie auf, darüber nachzudenken.'},
+ {t:'(Infinitiv mit zu) Diese Frage ist offen {zu diskutieren|diskutieren|diskutiert}!'},
+ {t:'(Futur I) Sie {werden|wurden|würden} sehen, dass Respekt nicht an einem Wort hängt!'},
+ {t:'(Partizip Perfekt) Genug {geredet|reden|redet}!'}
+]},
+d6frei:{type:'free',fields:[
+ {l:'Appell mit Imperativ',ph:'',s:'(Siezen) Setzen Sie sich für respektvolle Beziehungen in der Schule ein! / (Duzen) Seien Sie offen für das Du in der Schule!'},
+ {l:'Appell mit Verb der Aufforderung',ph:'',s:'Ich bitte Sie, die Anrede nicht wichtiger zu nehmen als das Vertrauen zwischen Kindern und Lehrkräften.'},
+ {l:'Kurzer Schlusssatz',ph:'',s:'Respekt beginnt im Herzen – und nicht erst beim Sie. / Ein kleines Du kann viel Vertrauen schenken!'}
+]},
+d7plan:{type:'free',fields:[
+ {l:'Einleitung (AA 1)',ph:'',s:'Titel · red., FM1Today, 9. 1. 2022 · Thema: Duzen von Lehrkräften · Skandinavien/Berlin vs. Schweiz · ich als Schülerin betroffen'},
+ {l:'AA 2: Vorteile des Siezens',ph:'',s:'Respekt · klare Rollen (Peterhans) · Vorbereitung auf Beruf · Alltag: Ärztin, Polizei'},
+ {l:'AA 2: Nachteile des Siezens',ph:'',s:'Distanz · Hemmungen bei Sorgen · für Volksschulkinder ungewohnt'},
+ {l:'AA 3: Stellungnahme',ph:'',s:'Position klar · 2 Argumente im 3-B-Schema · eigenes Beispiel · Gegenargument entkräften'},
+ {l:'AA 4: Appell',ph:'',s:'an die Leserschaft · Imperativ + Aufforderungsverb · einprägsamer Schlusssatz'}
+]},
+d8vergleich:{type:'mc',items:[
+ {q:'Wie gehen beide Varianten mit der Gegenseite um?',o:['Sie ignorieren sie.','Sie erkennen sie kurz an und entkräften sie dann.','Sie beleidigen sie.','Sie schreiben nur über die Gegenseite.'],a:1,e:'Zwar/Natürlich …, doch … – so wirkt die eigene Position souverän.'},
+ {q:'Welche Person aus dem Text wird in beiden Briefen aufgegriffen?',o:['Franziska Peterhans','Mirjam Marits','Natalie Schmidt','niemand'],a:0,e:'Beide stützen sich auf ihre Aussagen – einmal zustimmend, einmal für die eigene Position umgedeutet.'},
+ {q:'Was zeigt Variante B mit „Respekt zeigt sich im Verhalten, nicht in der Grammatik“?',o:['eine Schlussfolgerung aus Beispielen','den Betreff','die Grußformel','einen Bezug zum Erscheinungsdatum'],a:0,e:'Aus Volksschule und Sportverein wird eine allgemeine Begründung abgeleitet.'}
+]}
+};
+
+/* ---------- Renderer ---------- */
+const R={};
+R.mc=function(body,cfg,st,save){
+  st.sel=st.sel||{};
+  const qs=cfg.items.map((it,i)=>{
+    const q=el('div','q');q.append(el('p','qt',`<span class="qn">${i+1}</span>${it.q}`));
+    const ops=el('div','opts col');const fb=el('div','fb');
+    const btns=it.o.map((o,j)=>{const b=el('button','opt',o);b.type='button';
+      if(st.sel[i]===j)b.classList.add('sel');
+      b.onclick=()=>{st.sel[i]=j;save();btns.forEach((x,k)=>{x.classList.toggle('sel',k===j);x.classList.remove('right','wrong')});hideFb(fb)};
+      ops.append(b);return b});
+    q.append(ops,fb);body.append(q);return {btns,fb,it};
+  });
+  return{
+    check(){let r=0;qs.forEach(({btns,fb,it},i)=>{const s=st.sel[i];btns.forEach(b=>b.classList.remove('right','wrong'));
+      if(s===undefined){setFb(fb,'neutral','Noch nicht beantwortet.');return}
+      if(s===it.a){r++;btns[s].classList.add('right');setFb(fb,'ok','✓ Richtig! '+(it.e||''))}
+      else{btns[s].classList.add('wrong');setFb(fb,'bad','✗ Leider nicht. Versuch es noch einmal oder sieh dir die Lösung an.')}});return[r,qs.length]},
+    solve(){qs.forEach(({btns,fb,it},i)=>{btns.forEach((b,k)=>{b.classList.remove('sel','wrong');b.classList.toggle('right',k===it.a)});st.sel[i]=it.a;setFb(fb,'ok',it.e||'')});save()},
+    reset(){qs.forEach(({btns,fb})=>{btns.forEach(b=>b.classList.remove('sel','right','wrong'));hideFb(fb)})}
+  };
+};
+R.classify=function(body,cfg,st,save){
+  st.sel=st.sel||{};
+  const rows=cfg.items.map((it,i)=>{
+    const row=el('div','row');row.append(el('div','txt',`<span class="qn">${i+1}</span>${it.t}`));
+    const cats=el('div','cats');const fb=el('div','fb');
+    const btns=cfg.cats.map((c,j)=>{const b=el('button','opt cat',c);b.type='button';if(st.sel[i]===j)b.classList.add('sel');
+      b.onclick=()=>{st.sel[i]=j;save();btns.forEach((x,k)=>{x.classList.toggle('sel',k===j);x.classList.remove('right','wrong')});row.classList.remove('right','wrong');hideFb(fb)};
+      cats.append(b);return b});
+    row.append(cats,fb);body.append(row);return{row,btns,fb,it};
+  });
+  return{
+    check(){let r=0;rows.forEach(({row,btns,fb,it},i)=>{const s=st.sel[i];btns.forEach(b=>b.classList.remove('right','wrong'));row.classList.remove('right','wrong');hideFb(fb);
+      if(s===undefined)return;
+      if(s===it.c){r++;btns[s].classList.add('right');row.classList.add('right');if(it.e)setFb(fb,'ok','✓ '+it.e)}
+      else{btns[s].classList.add('wrong');row.classList.add('wrong')}});return[r,rows.length]},
+    solve(){rows.forEach(({row,btns,fb,it},i)=>{btns.forEach((b,k)=>{b.classList.remove('sel','wrong');b.classList.toggle('right',k===it.c)});row.classList.remove('wrong');row.classList.add('right');st.sel[i]=it.c;if(it.e)setFb(fb,'ok',it.e)});save()},
+    reset(){rows.forEach(({row,btns,fb})=>{btns.forEach(b=>b.classList.remove('sel','right','wrong'));row.classList.remove('right','wrong');hideFb(fb)})}
+  };
+};
+R.gaps=function(body,cfg,st,save){
+  st.sel=st.sel||{};const sels=[];
+  cfg.items.forEach((it,i)=>{
+    const line=el('div','gapline');let n=0;
+    const html=it.t.replace(/\{([^}]+)\}/g,(m,inner)=>{const opts=inner.split('|');const id=i+'_'+(n++);
+      const sorted=opts.slice().sort((a,b)=>a.localeCompare(b,'de'));
+      return `<select class="gap" data-id="${id}" data-a="${encodeURIComponent(opts[0])}"><option value="">…</option>${sorted.map(o=>`<option value="${encodeURIComponent(o)}">${o}</option>`).join('')}</select>`});
+    line.innerHTML=`<span class="qn">${i+1}</span>`+html;
+    const fb=el('div','fb');line.append(fb);body.append(line);
+    line.querySelectorAll('select').forEach(s=>{if(st.sel[s.dataset.id])s.value=st.sel[s.dataset.id];
+      s.onchange=()=>{st.sel[s.dataset.id]=s.value;save();s.classList.remove('right','wrong');hideFb(fb)};sels.push({s,fb,it})});
+  });
+  return{
+    check(){let r=0;const bad=new Set();sels.forEach(({s,fb,it})=>{s.classList.remove('right','wrong');if(!s.value){return}
+      if(s.value===s.dataset.a){r++;s.classList.add('right')}else{s.classList.add('wrong');bad.add(fb)}});
+      sels.forEach(({fb})=>{if(bad.has(fb))setFb(fb,'bad','✗ Hier stimmt etwas noch nicht.');else hideFb(fb)});return[r,sels.length]},
+    solve(){sels.forEach(({s,fb,it})=>{s.value=s.dataset.a;st.sel[s.dataset.id]=s.value;s.classList.remove('wrong');s.classList.add('right');if(it.e)setFb(fb,'ok',it.e)});save()},
+    reset(){sels.forEach(({s,fb})=>{s.value='';s.classList.remove('right','wrong');hideFb(fb)})}
+  };
+};
+R.match=function(body,cfg,st,save){
+  const defs=shuffleSeed(cfg.items.map(x=>x.a),11);
+  const g={t:cfg.items.map(it=>it.t+': {'+[it.a].concat(defs.filter(d=>d!==it.a)).join('|')+'}')};
+  // Darstellung als Auswahl-Liste je Operator
+  st.sel=st.sel||{};const sels=[];
+  cfg.items.forEach((it,i)=>{
+    const line=el('div','gapline');
+    line.innerHTML=`<span class="qn">${i+1}</span><b>${it.t}</b><br>`;
+    const s=el('select','gap');s.dataset.a=it.a;s.style.marginTop='6px';s.style.width='100%';
+    s.innerHTML='<option value="">… Bedeutung wählen</option>'+defs.map(d=>`<option>${d}</option>`).join('');
+    if(st.sel[i])s.value=st.sel[i];
+    s.onchange=()=>{st.sel[i]=s.value;save();s.classList.remove('right','wrong')};
+    line.append(s);body.append(line);sels.push(s);
+  });
+  return{
+    check(){let r=0;sels.forEach(s=>{s.classList.remove('right','wrong');if(!s.value)return;if(s.value===s.dataset.a){r++;s.classList.add('right')}else s.classList.add('wrong')});return[r,sels.length]},
+    solve(){sels.forEach((s,i)=>{s.value=s.dataset.a;st.sel[i]=s.value;s.classList.remove('wrong');s.classList.add('right')});save()},
+    reset(){sels.forEach(s=>{s.value='';s.classList.remove('right','wrong')})}
+  };
+};
+R.order=function(body,cfg,st,save){
+  const correct=cfg.items;let cur=st.order&&st.order.length===correct.length?st.order.slice():null;
+  if(!cur){cur=shuffleSeed(correct.map((_,i)=>i),cfg.seed||3);if(cur.every((v,i)=>v===i))cur.reverse()}
+  const ul=el('ol','order');body.append(ul);
+  function draw(marks){ul.innerHTML='';cur.forEach((idx,pos)=>{const li=el('li');li.append(el('span','pos',(pos+1)+'.'),el('span','lbl',correct[idx]));
+    const up=el('button','mv','↑');up.type='button';up.disabled=pos===0;up.onclick=()=>{[cur[pos-1],cur[pos]]=[cur[pos],cur[pos-1]];st.order=cur;save();draw()};
+    const dn=el('button','mv','↓');dn.type='button';dn.disabled=pos===cur.length-1;dn.onclick=()=>{[cur[pos+1],cur[pos]]=[cur[pos],cur[pos+1]];st.order=cur;save();draw()};
+    li.append(up,dn);if(marks)li.classList.add(idx===pos?'right':'wrong');ul.append(li)})}
+  draw();
+  return{
+    check(){draw(true);return[cur.filter((v,i)=>v===i).length,cur.length]},
+    solve(){cur=correct.map((_,i)=>i);st.order=cur;save();draw(true)},
+    reset(){cur=shuffleSeed(correct.map((_,i)=>i),cfg.seed||3);if(cur.every((v,i)=>v===i))cur.reverse();draw()}
+  };
+};
+R.multi=function(body,cfg,st,save){
+  st.sel=st.sel||{};const ops=el('div','opts col');const fb=el('div','fb');
+  const btns=cfg.opts.map((o,i)=>{const b=el('button','opt',o.t);b.type='button';if(st.sel[i])b.classList.add('sel');
+    b.onclick=()=>{st.sel[i]=!st.sel[i];save();b.classList.toggle('sel',!!st.sel[i]);btns.forEach(x=>x.classList.remove('right','wrong'));hideFb(fb)};ops.append(b);return b});
+  body.append(ops,fb);
+  const explain=()=>cfg.opts.map(o=>o.e?`<div>${o.ok?'✓':'✗'} <i>${o.t}</i> – ${o.e}</div>`:'').join('');
+  return{
+    check(){let r=0;cfg.opts.forEach((o,i)=>{const s=!!st.sel[i];btns[i].classList.remove('right','wrong');
+      if(s===o.ok){r++;if(s)btns[i].classList.add('right')}else btns[i].classList.add('wrong')});
+      setFb(fb,r===cfg.opts.length?'ok':'bad',r===cfg.opts.length?'✓ Alles richtig!':'Rot markiert ist entweder eine unpassende Anrede, die du gewählt hast, oder eine passende, die dir noch fehlt.');return[r,cfg.opts.length]},
+    solve(){cfg.opts.forEach((o,i)=>{st.sel[i]=o.ok;btns[i].classList.toggle('sel',o.ok);btns[i].classList.remove('wrong');btns[i].classList.toggle('right',o.ok)});save();setFb(fb,'ok',explain())},
+    reset(){btns.forEach(b=>b.classList.remove('sel','right','wrong'));hideFb(fb)}
+  };
+};
+R.free=function(body,cfg,st,save){
+  st.v=st.v||{};const sols=[];const tas=[];
+  cfg.fields.forEach((f,i)=>{const d=el('div','field');d.append(el('label','',`<span class="qn">${i+1}</span>${f.l}`));
+    const ta=el('textarea');ta.rows=f.rows||3;ta.placeholder=f.ph||'';ta.value=st.v[i]||'';ta.oninput=()=>{st.v[i]=ta.value;save()};
+    const so=el('div','sol','<b>Vorschlag:</b> '+f.s);d.append(ta,so);body.append(d);sols.push(so);tas.push(ta)});
+  let shown=false;
+  return{solveLabel:'Musterlösung zeigen',
+    solve(btn){shown=!shown;sols.forEach(s=>s.classList.toggle('show',shown));if(btn)btn.textContent=shown?'Musterlösung ausblenden':'Musterlösung zeigen'},
+    reset(){if(tas.some(t=>t.value)&&!confirm('Deine Texte in dieser Übung löschen?'))return false;tas.forEach(t=>t.value='');shown=false;sols.forEach(s=>s.classList.remove('show'))}
+  };
+};
+R.lupe=function(body,cfg,st,save){
+  st.m=st.m||{};const wrap=el('div','letter');const fbBox=el('div','lupe-fb');
+  const spans=cfg.segs.map((sg,i)=>{const sp=el('span','seg',sg.t);if(st.m[i])sp.classList.add('mark');
+    sp.onclick=()=>{st.m[i]=!st.m[i];save();sp.className='seg'+(st.m[i]?' mark':'');fbBox.innerHTML=''};
+    wrap.append(sp,document.createTextNode(i===0||i===cfg.segs.length-2?'\n':' '));return sp});
+  wrap.style.whiteSpace='pre-line';body.append(wrap,fbBox);
+  const nErr=cfg.segs.filter(s=>s.err).length;
+  return{
+    check(){let found=0,fa=0;const lines=[];cfg.segs.forEach((sg,i)=>{const m=!!st.m[i];const sp=spans[i];sp.className='seg';
+      if(m&&sg.err){found++;sp.classList.add('found');lines.push(`<div>✓ <i>${sg.t}</i> – ${sg.e}</div>`)}
+      else if(m&&!sg.err){fa++;sp.classList.add('falsealarm');lines.push(`<div>✗ <i>${sg.t}</i> – Diese Stelle ist in Ordnung.</div>`)}});
+      fbBox.innerHTML=`<p><b>${found} von ${nErr} Fehlern gefunden</b>${fa?`, ${fa} Stelle(n) zu viel markiert`:''}.${found<nErr?' Es fehlen noch Fehler – such weiter!':''}</p>`+lines.join('');
+      return[Math.max(0,found-fa),nErr]},
+    solve(){const lines=[];cfg.segs.forEach((sg,i)=>{const sp=spans[i];sp.className='seg';
+      if(sg.err){sp.classList.add(st.m[i]?'found':'missed');st.m[i]=true;lines.push(`<div>• <i>${sg.t}</i> – ${sg.e}</div>`)}
+      else if(st.m[i]){sp.classList.add('falsealarm');st.m[i]=false}});save();
+      fbBox.innerHTML='<p><b>Die sechs Fehler:</b></p>'+lines.join('')},
+    reset(){spans.forEach(s=>s.className='seg');fbBox.innerHTML=''}
+  };
+};
+
+/* ---------- Aufgaben aufbauen ---------- */
+let DONE=S.get('done',{});
+document.querySelectorAll('.task').forEach(t=>{
+  const id=t.dataset.task,cfg=TASKS[id];if(!cfg||!R[cfg.type])return;
+  const st=S.get('t_'+id,{});const save=()=>S.set('t_'+id,st);
+  const body=el('div','tbody');t.append(body);
+  const api=R[cfg.type](body,cfg,st,save);
+  const bar=el('div','bar');const res=el('span','res');
+  const mk=(txt,cls,fn)=>{const b=el('button','btn '+cls,txt);b.type='button';b.onclick=()=>fn(b);bar.append(b);return b};
+  if(api.check)mk('Prüfen','p',()=>{const[r,n]=api.check();res.textContent=`${r} von ${n} richtig`+(r===n?' – großartig!':'');res.className='res '+(r===n?'ok':'mid');
+    if(r===n){DONE[id]=1;S.set('done',DONE);t.classList.add('isdone');updateNav()}});
+  mk(api.solveLabel||'Lösung zeigen','s',b=>{api.solve(b);if(api.check)res.textContent=''});
+  mk('Zurücksetzen','g',()=>{if(api.reset()===false)return;Object.keys(st).forEach(k=>delete st[k]);save();res.textContent='';delete DONE[id];S.set('done',DONE);t.classList.remove('isdone');updateNav()});
+  bar.append(res);t.append(bar);
+  if(DONE[id])t.classList.add('isdone');
+});
+
+/* ---------- Navigation ---------- */
+const navLinks=[...document.querySelectorAll('nav.steps a')];
+function updateNav(){navLinks.forEach(a=>{const sec=document.querySelector(a.getAttribute('href'));if(!sec)return;
+  const ts=[...sec.querySelectorAll('.task')].filter(t=>TASKS[t.dataset.task]&&TASKS[t.dataset.task].type!=='free');
+  a.classList.toggle('done',ts.length>0&&ts.every(t=>DONE[t.dataset.task]))})}
+updateNav();
+if('IntersectionObserver' in window){
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>{const on=a.getAttribute('href')==='#'+e.target.id;a.classList.toggle('active',on);if(on)a.scrollIntoView({block:'nearest',inline:'center'})})}})},{rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('section.step').forEach(s=>obs.observe(s));
+}
+
+/* ---------- Wörter zählen ---------- */
+function countWords(s){const m=s.replace(/[–—]/g,' ').match(/[A-Za-zÄÖÜäöüßéèáàCO₂0-9][^\s]*/g);return m?m.length:0}
+
+/* ---------- Musterbriefe ---------- */
+const mBox=document.getElementById('musterBox');
+document.querySelectorAll('.mletter').forEach(m=>{const clone=m.cloneNode(true);clone.querySelector('.meta').remove();
+  m.querySelector('.wc').textContent=countWords(clone.textContent)+' Wörter'});
+document.querySelectorAll('#mTabs .tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('#mTabs .tab').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.mletter').forEach(m=>m.classList.toggle('on',m.id===b.dataset.m))});
+document.getElementById('tgMarks').onclick=e=>{const on=mBox.classList.toggle('show-marks');e.target.textContent=on?'Einfärbung ausblenden':'Bausteine einfärben';document.getElementById('mLegend').hidden=!on};
+document.getElementById('tgLabels').onclick=e=>{const on=mBox.classList.toggle('show-labels');e.target.textContent=on?'Arbeitsaufträge ausblenden':'Arbeitsaufträge anzeigen'};
+
+/* ---------- Schreibwerkstatt ---------- */
+const TOPICS={
+ dusie:{name:'Du oder Sie?',autor:'FM1Today',auftraege:'<b>Thema: Anrede in der Schule.</b> Text: „‚Du, Frau Lehrerin?‘: Deshalb ist das Duzen an Schweizer Schulen kein Thema“, Redaktion, FM1Today, 9. Jänner 2022.<br>• <b>Erkläre</b> das Thema der Diskussion und deine eigene Betroffenheit.<br>• <b>Erörtere</b> Vor- und Nachteile des Siezens im Alltag und in der Schule.<br>• <b>Nimm Stellung</b> zur Frage, ob Schülerinnen und Schüler ihre Lehrkräfte duzen sollten.<br>• <b>Appelliere</b> an die Leserschaft.'}
+};
+const FIELDS=[
+ {k:'notiz',l:'Notizen & Schreibplan',h:'Stichworte zu jedem Absatz (wird nicht mitgezählt)',rows:3,count:false,chips:[]},
+ {k:'betreff',l:'Betreff',h:'kurz und treffend',rows:1,chips:['Betreff: ']},
+ {k:'anrede',l:'Anrede',h:'',rows:1,chips:['Sehr geehrtes Redaktionsteam!','Sehr geehrte Damen und Herren!','Liebe Leserinnen und Leser!']},
+ {k:'einl',l:'Einleitung',h:'Bezug zum Text · Schreibanlass · Überleitung',rows:5,chips:['Mit großem Interesse habe ich Ihren Beitrag „“ von  gelesen, der am  in der Online-Ausgabe der  erschienen ist. ','Darin geht es um ','Da , hat mich das Thema sofort angesprochen. ','In den folgenden Zeilen möchte ich Ihnen meine Meinung dazu darlegen.']},
+ {k:'h1',l:'Hauptteil – Absatz 1',h:'Arbeitsauftrag 1 bzw. erstes Argument (3-B-Schema)',rows:5,chips:['Ich bin der Ansicht, dass ','Wie die Autorin/der Autor richtig feststellt, ',', denn ',', da ','So ','Zum Beispiel ']},
+ {k:'h2',l:'Hauptteil – Absatz 2',h:'nächster Arbeitsauftrag / Argument',rows:5,chips:['Ein weiteres Argument ist, dass ','Außerdem darf nicht vergessen werden, dass ',', deshalb ',', zumal ','Meine Erfahrungen entsprechen dieser Darstellung, denn ']},
+ {k:'h3',l:'Hauptteil – Absatz 3',h:'weiterer Auftrag oder Gegenargument entkräften',rows:5,chips:['Zwar behaupten manche, dass , doch ','Kritiker mögen einwenden, dass . Dem ist jedoch entgegenzuhalten, dass ','Hinzu kommt, dass ']},
+ {k:'h4',l:'Hauptteil – Absatz 4 (optional)',h:'z. B. bei vier Arbeitsaufträgen',rows:4,chips:['Besonders wichtig erscheint mir, dass ','Meine Vorstellung sähe so aus: ']},
+ {k:'schluss',l:'Schluss mit Appell',h:'an die richtige Zielgruppe!',rows:4,chips:['Ich fordere Sie daher auf, ','Ich bitte Sie, ','Lassen Sie uns gemeinsam ','Tun wir es  zuliebe!','Genug diskutiert – handeln wir!']},
+ {k:'gruss',l:'Grußformel und Name',h:'',rows:2,chips:['Mit freundlichen Grüßen\n']}
+];
+let wsTopic=S.get('ws_topic','dusie');let WS=S.get('ws_data',{});
+const tabsEl=document.getElementById('wsTabs'),fieldsEl=document.getElementById('wsFields');
+Object.entries(TOPICS).forEach(([k,t])=>{const b=el('button','tab',t.name);b.type='button';b.dataset.k=k;b.onclick=()=>{wsTopic=k;S.set('ws_topic',k);buildWS()};tabsEl.append(b)});
+function insertAt(ta,txt){const s=ta.selectionStart??ta.value.length,e=ta.selectionEnd??ta.value.length;ta.value=ta.value.slice(0,s)+txt+ta.value.slice(e);ta.focus();const p=s+txt.length;try{ta.setSelectionRange(p,p)}catch(x){}ta.dispatchEvent(new Event('input'))}
+function buildWS(){
+  tabsEl.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.k===wsTopic));
+  document.getElementById('wsAuftraege').innerHTML=TOPICS[wsTopic].auftraege;
+  WS[wsTopic]=WS[wsTopic]||{};const d=WS[wsTopic];fieldsEl.innerHTML='';
+  FIELDS.forEach(f=>{const box=el('div','field');box.append(el('label','',f.l+(f.h?` <span class="hint">· ${f.h}</span>`:'')));
+    const ta=el('textarea');ta.rows=f.rows;ta.value=d[f.k]||'';ta.dataset.k=f.k;
+    ta.oninput=()=>{d[f.k]=ta.value;S.set('ws_data',WS);updateWS()};box.append(ta);
+    if(f.chips.length){const c=el('div','chips');f.chips.forEach(ch=>{const b=el('button','chip',ch.replace('\n','↵').trim()||ch);b.type='button';b.onclick=()=>insertAt(ta,ch);c.append(b)});box.append(c)}
+    fieldsEl.append(box)});
+  updateWS();
+}
+function letterText(){const d=WS[wsTopic]||{};return FIELDS.filter(f=>f.count!==false).map(f=>(d[f.k]||'').trim()).filter(Boolean).join('\n\n')}
+function updateWS(){
+  const d=WS[wsTopic]||{};const txt=letterText();const n=countWords(txt);
+  const c=document.getElementById('wsCount');c.textContent=n;c.className='count '+(n<270?'low':n>330?'high':'ok');
+  document.getElementById('wsGauge').style.width=Math.min(100,n/400*100)+'%';
+  document.getElementById('wsCountHint').textContent=n<270?`Ziel: 270–330 Wörter · noch ${270-n} bis zum Minimum`:n>330?`${n-330} Wörter zu viel – kürze etwas`:'Im Zielbereich – sehr gut!';
+  document.getElementById('wsPreview').textContent=txt||'Hier erscheint dein Leserbrief, sobald du zu schreiben beginnst.';
+  const low=txt.toLowerCase();const body=[d.einl,d.h1,d.h2,d.h3,d.h4].join(' ').toLowerCase();const sch=(d.schluss||'').toLowerCase();
+  const kaus=(body.match(/\b(denn|weil|da|deshalb|daher|deswegen|nämlich|zumal|somit|aufgrund|wegen|infolge|mangels)\b/g)||[]).length;
+  const aut=TOPICS[wsTopic].autor;
+  const checks=[
+    [/\S/.test(d.betreff||''),'Betreff vorhanden'],
+    [/(sehr geehrte|liebe )/.test((d.anrede||'').toLowerCase()),'Höfliche Anrede'],
+    [/[„"“]/.test(d.einl||'')&&/\d{4}/.test(d.einl||''),'Einleitung nennt Titel (in Anführungszeichen) und Jahr'],
+    [aut?(d.einl||'').includes(aut):/\S/.test(d.einl||''),aut?'Verfasser/in des Textes genannt':'Einleitung geschrieben'],
+    [/\b(da|weil)\b/.test((d.einl||'').toLowerCase())||/betroffen|angesprochen|neugierig/.test((d.einl||'').toLowerCase()),'Schreibanlass erkennbar'],
+    [kaus>=4,`Mindestens 4 Begründungswörter im Text (derzeit ${kaus})`],
+    [/(zum beispiel|beispielsweise|etwa|so kann|so findet|so kommt|erfahrung)/.test(body),'Beispiel-Signal vorhanden'],
+    [/(zwar|kritiker|einwenden|entgegenzuhalten|natürlich)/.test(body),'Gegenargument angesprochen'],
+    [/!/.test(d.schluss||'')&&/(sie|wir|ihr)/.test(sch),'Appell im Schluss (mit Rufzeichen)'],
+    [/grüß/.test((d.gruss||'').toLowerCase()),'Grußformel'],
+    [!/\b(hallo|hi|voll|halt|lg|tschüss|cool|krass|oida)\b/.test(low),'Keine Umgangssprache gefunden'],
+    [!/\b(du|dich|dir|dein)\b/.test(low),'Höflichkeitsform (kein „du“)'],
+    [n>=270&&n<=330,'Wortanzahl 270–330']
+  ];
+  const ul=document.getElementById('wsChecks');ul.innerHTML='';checks.forEach(([ok,t])=>{ul.append(el('li',txt?(ok?'y':'n'):'',t))});
+}
+document.getElementById('wsCopy').onclick=()=>{const t=letterText();const done=()=>{const b=document.getElementById('wsCopy');b.textContent='Kopiert ✓';setTimeout(()=>b.textContent='Brief kopieren',1600)};
+  if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,()=>fallbackCopy(t,done));else fallbackCopy(t,done)};
+function fallbackCopy(t,cb){const ta=el('textarea');ta.value=t;document.body.append(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();cb()}
+document.getElementById('wsClear').onclick=()=>{if(!confirm('Den Brief zu diesem Thema wirklich löschen?'))return;WS[wsTopic]={};S.set('ws_data',WS);buildWS()};
+buildWS();
+
+/* ---------- Checkliste ---------- */
+const CL=[
+ ['Inhalt','Ich habe alle Arbeitsaufträge erfüllt, jeden in einem eigenen Absatz.'],
+ ['Inhalt','Die Einleitung nennt Titel, Verfasser/in, Zeitung, Erscheinungsdatum und das Thema.'],
+ ['Inhalt','Mein Schreibanlass passt zur Situation in der Aufgabenstellung.'],
+ ['Inhalt','Meine Position ist klar erkennbar, ich habe mich für eine Sichtweise entschieden.'],
+ ['Inhalt','Meine Argumente folgen dem 3-B-Schema (Behauptung, Begründung, Beispiel).'],
+ ['Inhalt','Ich nehme mehrmals Bezug auf den Ausgangstext.'],
+ ['Inhalt','Ich habe mindestens ein Gegenargument angesprochen und entkräftet.'],
+ ['Inhalt','Mein Appell ist schlüssig und richtet sich an die Gruppe aus dem Arbeitsauftrag.'],
+ ['Aufbau','Betreff, Anrede, Einleitung, Hauptteil, Schluss, Grußformel und Name sind vorhanden.'],
+ ['Aufbau','Zwischen den Absätzen stehen Leerzeilen.'],
+ ['Aufbau','Überleitungen verbinden die Absätze (Außerdem …, Ein weiteres Argument …).'],
+ ['Stil','Ich verwende durchgehend die Höflichkeitsform (Sie, Ihnen, Ihr großgeschrieben).'],
+ ['Stil','Der Ton ist engagiert, aber sachlich: keine Beleidigungen, keine Umgangssprache.'],
+ ['Stil','Ich bleibe im Tempussystem des Präsens (Perfekt statt Präteritum-Erzählungen).'],
+ ['Stil','Meine Satzanfänge sind abwechslungsreich.'],
+ ['Sprache','Nach weil/da/dass steht das Verb am Ende, nach deshalb/daher direkt danach.'],
+ ['Sprache','Ich habe jedes dass/das überprüft.'],
+ ['Sprache','Vor weil, da, dass und zumal steht ein Komma.'],
+ ['Sprache','Der Text hat 270–330 Wörter.']
+];
+const clState=S.get('cl',{});const clBox=document.getElementById('checklist');let lastCat='';
+CL.forEach(([cat,t],i)=>{if(cat!==lastCat){clBox.append(el('h3','',cat==='Sprache'?'Sprachrichtigkeit':cat));lastCat=cat}
+  const lab=el('label');const cb=el('input');cb.type='checkbox';cb.checked=!!clState[i];cb.onchange=()=>{clState[i]=cb.checked;S.set('cl',clState)};
+  lab.append(cb,el('span','',t));clBox.append(lab)});
+</script>
+</body>
+</html>
