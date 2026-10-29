@@ -1,0 +1,55 @@
+name: Passwortschutz amytext
+
+# Läuft bei jedem Hochladen ins Repository (und auf Knopfdruck unter "Actions").
+# Fügt jeder HTML-Datei auf der obersten Ebene (außer index.html), die noch keinen
+# Passwortschutz hat, die Zeile <script src="passwort.js"></script> in den <head> ein.
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  schuetzen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Passwort-Zeile in alle Seiten einfügen
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+          # Dateien, die OFFEN bleiben sollen (weitere Dateinamen hier ergänzen):
+          offen = {"index.html"}
+          zeile = '<script src="passwort.js"></script>'
+          geaendert = 0
+          for datei in sorted(pathlib.Path(".").glob("*.html")):
+              if datei.name in offen:
+                  continue
+              text = datei.read_text(encoding="utf-8", errors="surrogateescape")
+              if "passwort.js" in text:
+                  continue
+              neu, anzahl = re.subn(r"(<head\b[^>]*>)", r"\1\n" + zeile, text, count=1, flags=re.I)
+              if anzahl == 0:
+                  neu, anzahl = re.subn(r"(<html\b[^>]*>)", r"\1\n<head>" + zeile + "</head>", text, count=1, flags=re.I)
+              if anzahl == 0:
+                  neu = zeile + "\n" + text
+              datei.write_text(neu, encoding="utf-8", errors="surrogateescape")
+              geaendert += 1
+              print("geschützt:", datei)
+          print(f"Fertig – {geaendert} Datei(en) neu geschützt.")
+          PY
+
+      - name: Änderungen speichern
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "Passwortschutz"
+            git config user.email "actions@users.noreply.github.com"
+            git add -A -- '*.html'
+            git commit -m "Passwortschutz für neue Seiten ergänzt"
+            git push
+          else
+            echo "Alle Seiten sind bereits geschützt."
+          fi
