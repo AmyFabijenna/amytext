@@ -1,8 +1,8 @@
-name: Passwortschutz interdaf
+name: Passwortschutz amytext
 
 # Läuft bei jedem Hochladen ins Repository (und auf Knopfdruck unter "Actions").
-# Fügt jeder HTML-Datei im Ordner daf/interdaf, die noch keinen Passwortschutz hat,
-# die Zeile <script src="/daf/interdaf/passwort.js"></script> in den <head> ein.
+# Fügt jeder HTML-Datei auf der obersten Ebene (außer index.html), die noch keinen
+# Passwortschutz hat, die Zeile <script src="passwort.js"></script> in den <head> ein.
 
 on:
   push:
@@ -17,16 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Passwort-Zeile in alle Übungen einfügen
+      - name: Passwort-Zeile in alle Seiten einfügen
         run: |
           python3 - <<'PY'
           import pathlib, re
-          ordner = pathlib.Path("daf/interdaf")
-          # Dateien, die OFFEN bleiben sollen (Dateinamen hier eintragen, z. B. "uebungen.html"):
-          offen = set()
-          zeile = '<script src="/daf/interdaf/passwort.js"></script>'
+          # Dateien, die OFFEN bleiben sollen (weitere Dateinamen hier ergänzen):
+          offen = {"index.html"}
+          zeile = '<script src="passwort.js"></script>'
           geaendert = 0
-          for datei in sorted(ordner.rglob("*.html")):
+          for datei in sorted(pathlib.Path(".").glob("*.html")):
               if datei.name in offen:
                   continue
               text = datei.read_text(encoding="utf-8", errors="surrogateescape")
@@ -48,9 +47,9 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "Passwortschutz"
             git config user.email "actions@users.noreply.github.com"
-            git add -A daf/interdaf
-            git commit -m "Passwortschutz für neue Übungen ergänzt"
+            git add -A -- '*.html'
+            git commit -m "Passwortschutz für neue Seiten ergänzt"
             git push
           else
-            echo "Alle Übungen sind bereits geschützt."
+            echo "Alle Seiten sind bereits geschützt."
           fi
