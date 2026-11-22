@@ -348,54 +348,6 @@
                 display: block;
             }
         }
-        
-        /* Zusätzliche Styles für Payment-System */
-        .payment-status {
-            padding: 8px 20px;
-            font-size: 0.8em;
-            background: rgba(39, 174, 96, 0.2);
-            color: #27ae60;
-            margin: 5px 20px;
-            border-radius: 5px;
-            text-align: center;
-            display: none;
-        }
-        
-        .nav-item.locked {
-            opacity: 0.6;
-            position: relative;
-        }
-        
-        .nav-item.locked::after {
-            content: "🔒";
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
     </style>
 </head>
 <body>
@@ -420,17 +372,12 @@
 
 
         <div class="nav-menu">
-            <!-- Payment Status -->
-            <div id="paymentStatus" class="payment-status">
-                <span>✓ Premium aktiv</span>
-            </div>
-
             <div class="nav-section">
                 <div class="nav-section-title">Grundlagen</div>
                 <div class="nav-item">
                     <a href="#" class="nav-link active" onclick="loadContent('willkommen')">Willkommen</a>
                 </div>
-                <div class="nav-item locked">
+                <div class="nav-item">
                     <a href="#" class="nav-link" onclick="loadContent('eroerterung-grundlagen')">Textgebundene Erörterung</a>
                 </div>
             </div>
@@ -560,183 +507,6 @@
     </main>
 
 <script>
-// ===== PAYMENT SYSTEM =====
-class PaymentSystem {
-    constructor() {
-        this.accessData = null;
-        this.loadAccessData();
-        // UI erst nach DOM ready initialisieren
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.initPaymentUI());
-        } else {
-            this.initPaymentUI();
-        }
-    }
-
-    loadAccessData() {
-        const saved = localStorage.getItem('maturaPaymentAccess');
-        if (saved) {
-            this.accessData = JSON.parse(saved);
-            console.log('Geladene Zugangsdaten:', this.accessData);
-        }
-    }
-
-    saveAccessData() {
-        if (this.accessData) {
-            localStorage.setItem('maturaPaymentAccess', JSON.stringify(this.accessData));
-        }
-    }
-
-    hasActiveAccess() {
-        if (!this.accessData || !this.accessData.granted) {
-            console.log('Keine Zugangsdaten vorhanden');
-            return false;
-        }
-        const hasAccess = Date.now() < this.accessData.until;
-        console.log('Zugang aktiv?', hasAccess, 'Ablaufdatum:', new Date(this.accessData.until));
-        return hasAccess;
-    }
-
-    grantAccess(days = 365) {
-        const code = 'MAT' + Math.floor(10000 + Math.random() * 90000);
-        
-        this.accessData = {
-            granted: true,
-            until: Date.now() + (days * 24 * 60 * 60 * 1000),
-            code: code,
-            grantedAt: new Date().toISOString()
-        };
-        
-        this.saveAccessData();
-        this.updatePaymentUI();
-        console.log('Zugang gewährt mit Code:', code);
-        return code;
-    }
-
-    initPaymentUI() {
-        console.log('Initialisiere Payment UI');
-        const navMenu = document.querySelector('.nav-menu');
-        if (!navMenu) {
-            console.error('Nav-Menu nicht gefunden');
-            return;
-        }
-
-        const paymentSection = document.createElement('div');
-        paymentSection.className = 'nav-section';
-        paymentSection.innerHTML = `
-            <div class="nav-section-title">Zugang</div>
-            <div class="nav-item">
-                <a href="#" class="nav-link" onclick="paymentSystem.togglePaymentModal()">
-                    🔓 Premium-Zugang
-                </a>
-            </div>
-        `;
-        navMenu.insertBefore(paymentSection, navMenu.firstChild);
-        
-        this.updatePaymentUI();
-    }
-
-    updatePaymentUI() {
-        const statusElement = document.getElementById('paymentStatus');
-        const hasAccess = this.hasActiveAccess();
-        
-        if (statusElement) {
-            statusElement.style.display = hasAccess ? 'block' : 'none';
-        }
-        
-        this.toggleNavigationAccess(hasAccess);
-    }
-
-    toggleNavigationAccess(hasAccess) {
-        const allNavItems = document.querySelectorAll('.nav-item');
-        allNavItems.forEach(item => {
-            const link = item.querySelector('.nav-link');
-            if (link && link.getAttribute('onclick')) {
-                const onclickContent = link.getAttribute('onclick');
-                const match = onclickContent.match(/loadContent\('([^']+)'\)/);
-                if (match && match[1] !== 'willkommen') {
-                    if (hasAccess) {
-                        item.classList.remove('locked');
-                        item.title = '';
-                        link.style.pointerEvents = 'auto';
-                        link.style.opacity = '1';
-                    } else {
-                        item.classList.add('locked');
-                        item.title = 'Premium-Zugang erforderlich';
-                        link.style.pointerEvents = 'none';
-                        link.style.opacity = '0.6';
-                    }
-                }
-            }
-        });
-    }
-
-    togglePaymentModal() {
-        if (this.hasActiveAccess()) {
-            alert('✅ Ihr Premium-Zugang ist aktiv!');
-            return;
-        }
-
-        const modal = document.createElement('div');
-        modal.className = 'modal-overlay';
-        
-        modal.innerHTML = `
-              <div class="modal-content">
-                        <h3 style="color: #2c3e50; margin-bottom: 20px;">🔓 Premium-Zugang freischalten</h3>
-                        <p>Vollständiger Zugang zu allen Inhalten für <strong>€19,99</strong> (6 Monate)</p>
-                        
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                            <strong>Bankverbindung:</strong><br>
-                            Empfänger: Amy Lang<br>
-                            IBAN: AT76 1919 0001 3958 2230<br>
-                            Verwendungszweck: <span id="paymentCodeDisplay">-</span>
-                        </div>
-
-                        <input type="email" id="paymentEmail" placeholder="amylan@ik.me" 
-                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
-
-                        <button onclick="paymentSystem.processPayment()" 
-                                style="background: #27ae60; color: white; border: none; padding: 12px 20px; 
-                                       border-radius: 5px; width: 100%; cursor: pointer; font-size: 16px;">
-                            🔓 Zugang sofort freischalten
-                        </button>
-                        
-                        <button onclick="paymentSystem.closeModal()" 
-                                style="background: #95a5a6; color: white; border: none; padding: 10px; 
-                                       margin-top: 10px; border-radius: 5px; width: 100%; cursor: pointer;">
-                            Schließen
-                        </button>
-                    </div>
-        `;
-        
-        document.body.appendChild(modal);
-        document.getElementById('paymentCodeDisplay').textContent = this.grantAccess(365);
-    }
-
-    closeModal() {
-        const modal = document.querySelector('.modal-overlay');
-        if (modal) {
-            modal.remove();
-        }
-    }
-
-    processPayment() {
-        const email = document.getElementById('paymentEmail').value;
-        if (!email || !email.includes('@')) {
-            alert('Bitte gültige E-Mail eingeben');
-            return;
-        }
-
-        const code = document.getElementById('paymentCodeDisplay').textContent;
-        alert(`✅ Zugang freigeschaltet!\n\nVerwendungszweck: ${code}\nZugang aktiv für 12 Monate`);
-        
-        this.closeModal();
-        this.updatePaymentUI();
-        
-        loadContent('willkommen');
-    }
-}
-
 // ===== KORRIGIERTE loadContent FUNCTION =====
 async function loadContent(page, event = null) {
     console.log('Lade Seite:', page);
@@ -758,13 +528,6 @@ async function loadContent(page, event = null) {
         }
     }
     
-    // Bezahlschranke für alle Seiten außer Willkommen
-    if (page !== 'willkommen' && !paymentSystem.hasActiveAccess()) {
-        console.log('Zugang verweigert für:', page);
-        paymentSystem.togglePaymentModal();
-        return;
-    }
-
     // Remove active class from all nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
@@ -874,15 +637,9 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Payment System initialisieren (nach DOM ready)
-let paymentSystem;
-
 // Initial load - show welcome page
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM vollständig geladen');
-    
-    // Payment System initialisieren
-    paymentSystem = new PaymentSystem();
     
     // Set welcome as default active
     const welcomeLink = document.querySelector('.nav-link[onclick*="loadContent(\'willkommen\')"]');
