@@ -507,6 +507,46 @@
     </main>
 
 <script>
+// ===== EINGEBAUTE WILLKOMMENSSEITE =====
+const WILLKOMMEN_HTML = `
+    <div class="welcome-section">
+        <h2>Willkommen zum Deutschmatura-Handbuch!</h2>
+        <p>Diese umfassende Lernplattform begleitet Sie durch alle wichtigen Themen der Deutschmatura. Wählen Sie ein Thema aus dem Menü, um zu beginnen.</p>
+    </div>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Textanalyse</h3>
+            <p>Grundlagen, Stilmittel und Rhetorik, Argumentations- und Sprachanalyse – Schritt für Schritt erklärt.</p>
+            <a href="#" class="feature-link" onclick="loadContent('textanalyse-grundlagen'); return false;">Loslegen →</a>
+        </div>
+        <div class="feature-card">
+            <h3>Textinterpretation</h3>
+            <p>Wie man literarische Texte deutet und in ihre Epoche einordnet.</p>
+            <a href="#" class="feature-link" onclick="loadContent('textinterpretation'); return false;">Loslegen →</a>
+        </div>
+        <div class="feature-card">
+            <h3>Textsorten</h3>
+            <p>Lyrik, Prosa, Drama und Sachtexte gezielt analysieren.</p>
+            <a href="#" class="feature-link" onclick="loadContent('textsorten-uebersicht'); return false;">Loslegen →</a>
+        </div>
+        <div class="feature-card">
+            <h3>Formulierungshilfen</h3>
+            <p>Bausteine für Einleitung, Schluss, Analyse und Interpretation sowie die wichtigsten Fachbegriffe.</p>
+            <a href="#" class="feature-link" onclick="loadContent('formulierungen-einleitung'); return false;">Loslegen →</a>
+        </div>
+        <div class="feature-card">
+            <h3>Übungen</h3>
+            <p>Stilmittel, Analyse, Erörterung und Interpretation trainieren.</p>
+            <a href="#" class="feature-link" onclick="loadContent('uebungen-stilmittel'); return false;">Loslegen →</a>
+        </div>
+        <div class="feature-card">
+            <h3>Prüfungsvorbereitung</h3>
+            <p>Zeitmanagement, Überarbeitung, Checklisten und typische Fehler vor der Matura.</p>
+            <a href="#" class="feature-link" onclick="loadContent('zeitmanagement'); return false;">Loslegen →</a>
+        </div>
+    </div>
+`;
+
 // ===== KORRIGIERTE loadContent FUNCTION =====
 async function loadContent(page, event = null) {
     console.log('Lade Seite:', page);
@@ -544,6 +584,12 @@ async function loadContent(page, event = null) {
         }
     }
     
+    // Willkommensseite ist direkt eingebaut (keine externe Datei nötig)
+    if (page === 'willkommen') {
+        contentBody.innerHTML = WILLKOMMEN_HTML;
+        return;
+    }
+
     // Show loading message
     contentBody.innerHTML = `
         <div class="loading-indicator">
